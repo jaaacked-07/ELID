@@ -9,454 +9,115 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@200;300;400;500;600&family=Great+Vibes:wght@400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --rose-gold: #b76e79;
-      --champagne: #f7e7ce;
-      --deep-plum: #2d1b2e;
-      --soft-mauve: #c9a0b0;
-      --ivory: #faf6f0;
-      --off-white: #f5f0e8;
-      --light-beige: #e8dcc8;
+      --rose-gold: #b76e79; --champagne: #f7e7ce; --deep-plum: #2d1b2e;
+      --soft-mauve: #c9a0b0; --ivory: #faf6f0; --off-white: #f5f0e8; --light-beige: #e8dcc8;
     }
-
     * { box-sizing: border-box; }
     html, body { height: 100%; }
-    body { 
-      font-family: 'Raleway', sans-serif;
-      background: var(--deep-plum);
-      overflow-x: hidden;
-    }
-
-    body.light-mode {
-      background: linear-gradient(135deg, var(--off-white) 0%, var(--light-beige) 100%);
-    }
-
+    body { font-family: 'Raleway', sans-serif; background: var(--deep-plum); overflow-x: hidden; }
+    body.light-mode { background: linear-gradient(135deg, var(--off-white) 0%, var(--light-beige) 100%); }
     .font-cormorant { font-family: 'Cormorant Garamond', serif; }
     .font-script { font-family: 'Great Vibes', cursive; }
+    .letter-highlight { color: var(--rose-gold); font-weight: 500; }
 
-    canvas#bg-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
+    canvas#bg-canvas { position: fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+    body.light-mode #bg-canvas { opacity: 0.3; }
 
-    body.light-mode #bg-canvas {
-      opacity: 0.3;
-    }
+    .glass { background: rgba(45,27,46,0.35); backdrop-filter: blur(24px); border: 1px solid rgba(183,110,121,0.15); }
+    body.light-mode .glass { background: rgba(255,255,255,0.7); border: 1px solid rgba(183,110,121,0.2); }
 
-    .glass {
-      background: rgba(45, 27, 46, 0.35);
-      backdrop-filter: blur(24px);
-      border: 1px solid rgba(183, 110, 121, 0.15);
-    }
+    @keyframes scaleInGentle { 0%{opacity:0;transform:scale(0.94)} 100%{opacity:1;transform:scale(1)} }
+    .view-transition { animation: scaleInGentle 0.55s cubic-bezier(0.34,1.3,0.64,1) both; }
 
-    body.light-mode .glass {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(183, 110, 121, 0.2);
-    }
-
-    .letter-highlight {
-      color: var(--rose-gold);
-      font-weight: 500;
-    }
-
-    /* Animações */
-    @keyframes scaleInGentle {
-      0% { opacity: 0; transform: scale(0.94); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    .view-transition {
-      animation: scaleInGentle 0.55s cubic-bezier(0.34, 1.3, 0.64, 1) both;
-    }
-
-    /* Botões */
-    .btn-premium {
-      background: linear-gradient(135deg, var(--rose-gold), var(--soft-mauve));
-      transition: all 0.3s cubic-bezier(0.34, 1.3, 0.64, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-premium:hover {
-      box-shadow: 0 0 30px rgba(183, 110, 121, 0.5), 0 8px 16px rgba(183, 110, 121, 0.25);
-      transform: translateY(-2px) scale(1.015);
-    }
-
-    .btn-premium:active {
-      transform: translateY(0) scale(0.99);
-    }
-
-    /* Cards especialidades */
     .specialty-card {
-      background: rgba(183, 110, 121, 0.08);
-      border: 1px solid rgba(183, 110, 121, 0.2);
-      border-radius: 16px;
-      padding: 28px;
-      transition: all 0.4s cubic-bezier(0.34, 1.3, 0.64, 1);
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
+      background: rgba(183,110,121,0.08); border: 1px solid rgba(183,110,121,0.2);
+      border-radius: 16px; padding: 28px;
+      transition: all 0.4s cubic-bezier(0.34,1.3,0.64,1);
+      cursor: pointer; position: relative; overflow: hidden;
     }
-
     .specialty-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(247, 231, 206, 0) 0%, rgba(183, 110, 121, 0.08) 100%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
+      content:''; position:absolute; top:0; left:0; width:100%; height:100%;
+      background: linear-gradient(135deg, rgba(247,231,206,0) 0%, rgba(183,110,121,0.08) 100%);
+      opacity:0; transition:opacity 0.4s ease;
     }
-
-    .specialty-card:hover::before {
-      opacity: 1;
-    }
-
+    .specialty-card:hover::before { opacity:1; }
     .specialty-card:hover {
       transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(183, 110, 121, 0.25),
-                  0 0 30px rgba(183, 110, 121, 0.15);
-      border-color: rgba(183, 110, 121, 0.35);
-      background: rgba(183, 110, 121, 0.12);
+      box-shadow: 0 20px 40px rgba(183,110,121,0.25), 0 0 30px rgba(183,110,121,0.15);
+      border-color: rgba(183,110,121,0.35);
+      background: rgba(183,110,121,0.12);
     }
+    body.light-mode .specialty-card { background: rgba(183,110,121,0.06); border: 1px solid rgba(183,110,121,0.25); }
+    body.light-mode .specialty-card:hover { background: rgba(183,110,121,0.12); border-color: rgba(183,110,121,0.4); }
 
-    body.light-mode .specialty-card {
-      background: rgba(183, 110, 121, 0.06);
-      border: 1px solid rgba(183, 110, 121, 0.25);
-    }
+    .card-content { position: relative; z-index: 1; }
+    .card-icon { font-size:48px; margin-bottom:16px; display:block; color:var(--rose-gold); }
+    .card-icon svg { width:48px; height:48px; stroke:currentColor; color:var(--rose-gold); }
+    .card-title { font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:300; letter-spacing:0.1em; color:var(--ivory); margin-bottom:8px; }
+    body.light-mode .card-title { color:var(--deep-plum); }
+    .card-subtitle { font-size:12px; letter-spacing:0.15em; color:rgba(201,160,176,0.7); text-transform:uppercase; margin-bottom:12px; }
+    body.light-mode .card-subtitle { color:rgba(120,80,100,0.7); }
 
-    body.light-mode .specialty-card:hover {
-      background: rgba(183, 110, 121, 0.12);
-      border-color: rgba(183, 110, 121, 0.4);
-    }
+    .progress-bar { width:100%; height:4px; background:rgba(183,110,121,0.2); border-radius:2px; overflow:hidden; margin-top:16px; }
+    .progress-fill { height:100%; background:linear-gradient(90deg,var(--rose-gold),var(--soft-mauve)); border-radius:2px; transition:width 0.6s cubic-bezier(0.34,1.3,0.64,1); }
+    .card-stats { display:flex; gap:12px; margin-top:12px; font-size:11px; color:rgba(201,160,176,0.6); }
+    body.light-mode .card-stats { color:rgba(120,80,100,0.6); }
+    .stat-item { display:flex; align-items:center; gap:4px; }
+    .stat-dot { width:4px; height:4px; background:var(--rose-gold); border-radius:50%; }
 
-    .card-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .card-icon {
-      font-size: 48px;
-      margin-bottom: 16px;
-      display: block;
-      color: var(--rose-gold);
-    }
-
-    .card-icon svg {
-      width: 48px;
-      height: 48px;
-      stroke: currentColor;
-      color: var(--rose-gold);
-    }
-
-    body.light-mode .card-icon svg {
-      color: var(--rose-gold);
-    }
-
-    .card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--ivory);
-      margin-bottom: 8px;
-    }
-
-    body.light-mode .card-title {
-      color: var(--deep-plum);
-    }
-
-    .card-subtitle {
-      font-size: 12px;
-      letter-spacing: 0.15em;
-      color: rgba(201, 160, 176, 0.7);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    body.light-mode .card-subtitle {
-      color: rgba(120, 80, 100, 0.7);
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 4px;
-      background: rgba(183, 110, 121, 0.2);
-      border-radius: 2px;
-      overflow: hidden;
-      margin-top: 16px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--rose-gold), var(--soft-mauve));
-      border-radius: 2px;
-      transition: width 0.6s cubic-bezier(0.34, 1.3, 0.64, 1);
-    }
-
-    .card-stats {
-      display: flex;
-      gap: 12px;
-      margin-top: 12px;
-      font-size: 11px;
-      color: rgba(201, 160, 176, 0.6);
-    }
-
-    body.light-mode .card-stats {
-      color: rgba(120, 80, 100, 0.6);
-    }
-
-    .stat-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .stat-dot {
-      width: 4px;
-      height: 4px;
-      background: var(--rose-gold);
-      border-radius: 50%;
-    }
-
-    /* Header */
-    .header {
-      position: relative;
-      z-index: 10;
-      padding: 32px 24px;
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .header-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 42px;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      color: var(--ivory);
-      margin-bottom: 12px;
-    }
-
-    body.light-mode .header-logo {
-      color: var(--deep-plum);
-    }
-
-    .header-subtitle {
-      font-size: 13px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(201, 160, 176, 0.7);
-    }
-
-    body.light-mode .header-subtitle {
-      color: rgba(120, 80, 100, 0.7);
-    }
-
-    /* Top bar */
     .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 64px;
-      background: rgba(45, 27, 46, 0.4);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(183, 110, 121, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 32px;
-      z-index: 50;
+      position:fixed; top:0; left:0; right:0; height:64px;
+      background:rgba(45,27,46,0.4); backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(183,110,121,0.1);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 32px; z-index:50;
     }
-
-    body.light-mode .topbar {
-      background: rgba(255, 255, 255, 0.6);
-      border-bottom-color: rgba(183, 110, 121, 0.15);
-    }
-
-    .topbar-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--ivory);
-    }
-
-    body.light-mode .topbar-title {
-      color: var(--deep-plum);
-    }
-
-    .topbar-controls {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
-
+    body.light-mode .topbar { background:rgba(255,255,255,0.6); border-bottom-color:rgba(183,110,121,0.15); }
+    .topbar-title { font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:300; letter-spacing:0.1em; color:var(--ivory); }
+    body.light-mode .topbar-title { color:var(--deep-plum); }
+    .topbar-controls { display:flex; gap:16px; align-items:center; }
     .btn-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(183, 110, 121, 0.12);
-      border: 1px solid rgba(183, 110, 121, 0.2);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--rose-gold);
-      transition: all 0.3s ease;
+      width:40px; height:40px; border-radius:50%; background:rgba(183,110,121,0.12);
+      border:1px solid rgba(183,110,121,0.2); cursor:pointer; display:flex; align-items:center;
+      justify-content:center; color:var(--rose-gold); transition:all 0.3s ease;
     }
+    .btn-icon:hover { background:rgba(183,110,121,0.25); box-shadow:0 0 15px rgba(183,110,121,0.2); transform:scale(1.08); }
+    body.light-mode .btn-icon { background:rgba(183,110,121,0.08); }
 
-    .btn-icon:hover {
-      background: rgba(183, 110, 121, 0.25);
-      box-shadow: 0 0 15px rgba(183, 110, 121, 0.2);
-      transform: scale(1.08);
-    }
+    .container { position:relative; z-index:10; max-width:1200px; margin:0 auto; padding:80px 32px 60px; }
 
-    body.light-mode .btn-icon {
-      background: rgba(183, 110, 121, 0.08);
-    }
+    .grid-specialties { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-bottom:60px; }
+    @media(max-width:1200px) { .grid-specialties { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:768px) { .grid-specialties { grid-template-columns:1fr; } .container { padding:80px 20px 60px; } .topbar { padding:0 20px; } }
 
-    /* Container */
-    .container {
-      position: relative;
-      z-index: 10;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 32px 60px;
-    }
+    .section-title { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; letter-spacing:0.1em; color:var(--ivory); margin-bottom:40px; text-align:center; }
+    body.light-mode .section-title { color:var(--deep-plum); }
 
-    /* Grid */
-    .grid-specialties {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      margin-bottom: 60px;
-    }
-
-    @media (max-width: 1200px) {
-      .grid-specialties {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .grid-specialties {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Section title */
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--ivory);
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-    body.light-mode .section-title {
-      color: var(--deep-plum);
-    }
-
-    /* Stats section */
     .stats-section {
-      background: rgba(45, 27, 46, 0.3);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(183, 110, 121, 0.15);
-      border-radius: 20px;
-      padding: 40px;
-      margin-bottom: 60px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 32px;
+      background:rgba(45,27,46,0.3); backdrop-filter:blur(20px);
+      border:1px solid rgba(183,110,121,0.15); border-radius:20px; padding:40px; margin-bottom:60px;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:32px;
     }
+    body.light-mode .stats-section { background:rgba(255,255,255,0.5); border:1px solid rgba(183,110,121,0.2); }
+    .stat-block { text-align:center; }
+    .stat-number { font-size:48px; font-weight:300; color:var(--rose-gold); margin-bottom:8px; }
+    .stat-label { font-size:13px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(201,160,176,0.7); }
+    body.light-mode .stat-label { color:rgba(120,80,100,0.7); }
 
-    body.light-mode .stats-section {
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid rgba(183, 110, 121, 0.2);
-    }
+    .footer { position:relative; z-index:10; text-align:center; padding:40px 32px; border-top:1px solid rgba(183,110,121,0.1); color:rgba(201,160,176,0.5); font-size:12px; letter-spacing:0.1em; }
+    body.light-mode .footer { border-top-color:rgba(183,110,121,0.2); color:rgba(120,80,100,0.6); }
 
-    .stat-block {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 48px;
-      font-weight: 300;
-      color: var(--rose-gold);
-      margin-bottom: 8px;
-    }
-
-    .stat-label {
-      font-size: 13px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(201, 160, 176, 0.7);
-    }
-
-    body.light-mode .stat-label {
-      color: rgba(120, 80, 100, 0.7);
-    }
-
-    /* Footer */
-    .footer {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      padding: 40px 32px;
-      border-top: 1px solid rgba(183, 110, 121, 0.1);
-      color: rgba(201, 160, 176, 0.5);
-      font-size: 12px;
-      letter-spacing: 0.1em;
-    }
-
-    body.light-mode .footer {
-      border-top-color: rgba(183, 110, 121, 0.2);
-      color: rgba(120, 80, 100, 0.6);
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 80px 20px 60px;
-      }
-
-      .grid-specialties {
-        grid-template-columns: 1fr;
-      }
-
-      .topbar {
-        padding: 0 20px;
-      }
-
-      .section-title {
-        font-size: 24px;
-      }
-
-      .header {
-        padding: 24px 16px;
-      }
-
-      .header-logo {
-        font-size: 32px;
-      }
-    }
+    a { text-decoration: none; }
   </style>
 </head>
 <body class="h-full">
   <canvas id="bg-canvas"></canvas>
 
-  <!-- Topbar -->
   <div class="topbar">
     <div class="topbar-title"><span class="letter-highlight">B</span>iblioteca</div>
     <div class="topbar-controls">
-      <button class="btn-icon" id="btn-theme" title="Alternar modo claro/escuro">
-        <svg id="icon-theme" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <button class="btn-icon" id="btn-theme" title="Modo claro/escuro">
+        <svg id="icon-theme" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
           <path d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zM4.22 4.22a1 1 0 011.415 0l1.414 1.415a1 1 0 01-1.414 1.414L4.22 5.636a1 1 0 010-1.414zM2 10a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4.22 15.78a1 1 0 010-1.415l1.414-1.414a1 1 0 111.414 1.414l-1.414 1.415a1 1 0 01-1.414 0zM10 18a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1zm6-6a4 4 0 11-8 0 4 4 0 018 0z"/>
         </svg>
       </button>
@@ -470,109 +131,90 @@
     </div>
   </div>
 
-  <!-- Main Content -->
   <div class="container view-transition">
-    <!-- Header -->
-    <div class="header">
-      <div class="header-logo"><span class="letter-highlight">E</span>LI<span class="letter-highlight">D</span></div>
-      <div class="header-subtitle">Sua Jornada Rumo à Residência Médica</div>
-      <div style="font-family: 'Great Vibes', cursive; font-size: 1.05rem; color: rgba(201, 160, 176, 0.7); letter-spacing: 0.05em; margin-top: 12px;">Inspirado em <span class="letter-highlight" style="font-style:normal; font-weight: 500;">E</span>lisabete <span class="letter-highlight" style="font-style:normal; font-weight: 500;">D</span>elfini</div>
+    <div class="header" style="position:relative;z-index:10;padding:32px 24px;text-align:center;margin-bottom:40px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;letter-spacing:0.15em;color:var(--ivory);margin-bottom:12px;">
+        <span class="letter-highlight">E</span>LI<span class="letter-highlight">D</span>
+      </div>
+      <div style="font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,160,176,0.7);">Sua Jornada Rumo à Residência Médica</div>
+      <div style="font-family:'Great Vibes',cursive;font-size:1.05rem;color:rgba(201,160,176,0.7);letter-spacing:0.05em;margin-top:12px;">
+        Inspirado em <span class="letter-highlight" style="font-style:normal;font-weight:500;">E</span>lisabete <span class="letter-highlight" style="font-style:normal;font-weight:500;">D</span>elfini
+      </div>
     </div>
 
-    <!-- Stats Section -->
     <div class="stats-section">
-      <div class="stat-block">
-        <div class="stat-number">1,247</div>
-        <div class="stat-label">Questões</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-number">42h</div>
-        <div class="stat-label">Estudadas</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-number">87%</div>
-        <div class="stat-label">Aproveitamento</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-number">12</div>
-        <div class="stat-label">Especialidades</div>
-      </div>
+      <div class="stat-block"><div class="stat-number">1,247</div><div class="stat-label">Questões</div></div>
+      <div class="stat-block"><div class="stat-number">42h</div><div class="stat-label">Estudadas</div></div>
+      <div class="stat-block"><div class="stat-number">87%</div><div class="stat-label">Aproveitamento</div></div>
+      <div class="stat-block"><div class="stat-number">8</div><div class="stat-label">Especialidades</div></div>
     </div>
 
-    <!-- Specialties Section -->
-    <div class="section-title">Especialidades Médicas</div>
-
-    <!-- Plataformas Disponíveis -->
-    <div style="margin-bottom: 80px;">
-      <div style="text-align: center; margin-bottom: 30px;">
-        <p style="font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(201, 160, 176, 0.7); margin-bottom: 8px;">Plataformas de Estudos</p>
-        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--ivory); letter-spacing: 0.1em;">Cursos Disponíveis</h3>
+    <!-- PLATAFORMAS DISPONÍVEIS -->
+    <div style="margin-bottom:80px;">
+      <div style="text-align:center;margin-bottom:30px;">
+        <p style="font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(201,160,176,0.7);margin-bottom:8px;">Plataformas de Estudos</p>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--ivory);letter-spacing:0.1em;">Cursos Disponíveis</h3>
       </div>
 
-      <div class="grid-specialties" style="margin-bottom: 60px;">
+      <div class="grid-specialties">
         <!-- Neurologia -->
-        <a href="#neurologia" style="text-decoration: none; cursor: pointer;">
-          <div class="specialty-card" style="border-color: rgba(183, 110, 121, 0.35); background: rgba(183, 110, 121, 0.1);">
+        <a href="../plataformas/neurologia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
             <div class="card-content">
               <div class="card-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
                   <path d="M24 8C15 8 10 13 10 22C10 32 24 40 24 40C24 40 38 32 38 22C38 13 33 8 24 8Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   <circle cx="24" cy="22" r="4" fill="currentColor"/>
                 </svg>
               </div>
               <div class="card-title">Neurologia</div>
               <div class="card-subtitle">Sistema Nervoso Central</div>
-              <div style="margin-top: 12px; font-size: 12px; color: rgba(183, 110, 121, 0.8); letter-spacing: 0.08em;">✓ Disponível</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
             </div>
           </div>
         </a>
 
         <!-- Ginecologia -->
-        <a href="#ginecologia" style="text-decoration: none; cursor: pointer;">
-          <div class="specialty-card" style="border-color: rgba(183, 110, 121, 0.35); background: rgba(183, 110, 121, 0.1);">
+        <a href="../plataformas/ginecologia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
             <div class="card-content">
               <div class="card-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="18" cy="14" r="6" stroke="currentColor" stroke-width="1.5"/>
-                  <path d="M18 22V32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                  <path d="M14 26H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                  <circle cx="32" cy="18" r="6" stroke="currentColor" stroke-width="1.5"/>
-                  <path d="M32 26V36M28 30H36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="14" r="8" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M24 22V34M18 28H30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
               </div>
               <div class="card-title">Ginecologia</div>
               <div class="card-subtitle">Saúde Feminina</div>
-              <div style="margin-top: 12px; font-size: 12px; color: rgba(183, 110, 121, 0.8); letter-spacing: 0.08em;">✓ Disponível</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
             </div>
           </div>
         </a>
 
         <!-- Obstetrícia -->
-        <a href="#obstetricia" style="text-decoration: none; cursor: pointer;">
-          <div class="specialty-card" style="border-color: rgba(183, 110, 121, 0.35); background: rgba(183, 110, 121, 0.1);">
+        <a href="../plataformas/obstetricia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
             <div class="card-content">
               <div class="card-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="18" cy="14" r="6" stroke="currentColor" stroke-width="1.5"/>
-                  <path d="M18 22V32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                  <path d="M14 26H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                  <circle cx="32" cy="18" r="6" stroke="currentColor" stroke-width="1.5"/>
-                  <path d="M32 26V36M28 30H36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <ellipse cx="24" cy="26" rx="12" ry="14" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="24" cy="26" r="5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M24 12V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
               </div>
               <div class="card-title">Obstetrícia</div>
               <div class="card-subtitle">Gravidez & Parto</div>
-              <div style="margin-top: 12px; font-size: 12px; color: rgba(183, 110, 121, 0.8); letter-spacing: 0.08em;">✓ Disponível</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
             </div>
           </div>
         </a>
 
         <!-- Cirurgia -->
-        <a href="#cirurgia" style="text-decoration: none; cursor: pointer;">
-          <div class="specialty-card" style="border-color: rgba(183, 110, 121, 0.35); background: rgba(183, 110, 121, 0.1);">
+        <a href="../plataformas/cirurgia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
             <div class="card-content">
               <div class="card-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
                   <path d="M14 20L12 22L18 28L12 34L14 36L22 28L14 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M34 20L36 22L30 28L36 34L34 36L26 28L34 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M22 14V42M22 14L28 20M22 14L16 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -580,17 +222,17 @@
               </div>
               <div class="card-title">Cirurgia Geral</div>
               <div class="card-subtitle">Procedimentos</div>
-              <div style="margin-top: 12px; font-size: 12px; color: rgba(183, 110, 121, 0.8); letter-spacing: 0.08em;">✓ Disponível</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
             </div>
           </div>
         </a>
 
         <!-- Pediatria -->
-        <a href="#pediatria" style="text-decoration: none; cursor: pointer;">
-          <div class="specialty-card" style="border-color: rgba(183, 110, 121, 0.35); background: rgba(183, 110, 121, 0.1);">
+        <a href="../plataformas/pediatria/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
             <div class="card-content">
               <div class="card-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
                   <circle cx="24" cy="14" r="5" stroke="currentColor" stroke-width="1.5"/>
                   <path d="M24 20V28L20 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M24 28L28 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -600,405 +242,137 @@
               </div>
               <div class="card-title">Pediatria</div>
               <div class="card-subtitle">Medicina Infantil</div>
-              <div style="margin-top: 12px; font-size: 12px; color: rgba(201, 160, 176, 0.7); letter-spacing: 0.08em;">⏳ Em Andamento</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(201,160,176,0.7);letter-spacing:0.08em;">⏳ Em Andamento</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Pneumologia -->
+        <a href="../plataformas/pneumologia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <path d="M24 10V24M24 24C24 24 14 20 10 28C6 36 12 42 18 40C22 38 24 34 24 34C24 34 26 38 30 40C36 42 42 36 38 28C34 20 24 24 24 24Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Pneumologia</div>
+              <div class="card-subtitle">Sistema Respiratório</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Preventiva -->
+        <a href="../plataformas/preventiva/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <path d="M24 10C20 6 14 8 14 14C14 20 24 32 24 32C24 32 34 20 34 14C34 8 28 6 24 10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                  <path d="M10 36H38" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M14 40H34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Med. Preventiva</div>
+              <div class="card-subtitle">Saúde Coletiva</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Semiologia -->
+        <a href="../plataformas/semiologia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="20" r="8" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M16 20C16 20 12 22 12 28C12 34 18 36 24 36C30 36 36 34 36 28C36 22 32 20 32 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M20 20V16M28 20V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Semiologia</div>
+              <div class="card-subtitle">Propedêutica Médica</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
             </div>
           </div>
         </a>
       </div>
     </div>
-
-    <div class="section-title" style="margin-bottom: 0;">Todas as Especialidades</div>
-      <!-- Psychiatry -->
-      <div class="specialty-card">
-        <div class="card-content">
-          <div class="card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="24" cy="12" r="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M24 20V28M18 24H30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M14 32C14 28.5 18.5 26 24 26C29.5 26 34 28.5 34 32V38H14V32Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="card-title">Psiquiatria</div>
-          <div class="card-subtitle">Transtornos Mentais</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 92%;"></div>
-          </div>
-          <div class="card-stats">
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>238 questões</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>92% progresso</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Obstetrics -->
-      <div class="specialty-card">
-        <div class="card-content">
-          <div class="card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="18" cy="14" r="6" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M18 22V32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M14 26H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="32" cy="18" r="6" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M32 26V36M28 30H36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="card-title">Obstetrícia</div>
-          <div class="card-subtitle">Ginecologia & Obstetrícia</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 78%;"></div>
-          </div>
-          <div class="card-stats">
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>185 questões</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>78% progresso</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Neurology -->
-      <div class="specialty-card">
-        <div class="card-content">
-          <div class="card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M24 8C15 8 10 13 10 22C10 32 24 40 24 40C24 40 38 32 38 22C38 13 33 8 24 8Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="24" cy="22" r="4" fill="currentColor"/>
-            </svg>
-          </div>
-          <div class="card-title">Neurologia</div>
-          <div class="card-subtitle">Doenças do Sistema Nervoso</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 85%;"></div>
-          </div>
-          <div class="card-stats">
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>156 questões</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>85% progresso</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Cardiology -->
-      <div class="specialty-card">
-        <div class="card-content">
-          <div class="card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M24 10C20 6 14 8 14 14C14 20 24 32 24 32C24 32 34 20 34 14C34 8 28 6 24 10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-              <path d="M24 24C24 24 28 28 32 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="card-title">Cardiologia</div>
-          <div class="card-subtitle">Doenças Cardiovasculares</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 72%;"></div>
-          </div>
-          <div class="card-stats">
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>142 questões</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>72% progresso</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Internal Medicine -->
-      <div class="specialty-card">
-        <div class="card-content">
-          <div class="card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 14H36C37.1 14 38 14.9 38 16V34C38 35.1 37.1 36 36 36H12C10.9 36 10 35.1 10 34V16C10 14.9 10.9 14 12 14Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-              <path d="M24 20V30M19 25H29" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="card-title">Clínica Médica</div>
-          <div class="card-subtitle">Doenças Internas</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 88%;"></div>
-          </div>
-          <div class="card-stats">
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>267 questões</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>88% progresso</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Surgery -->
-      <div class="specialty-card">
-        <div class="card-content">
-          <div class="card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 20L12 22L18 28L12 34L14 36L22 28L14 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M34 20L36 22L30 28L36 34L34 36L26 28L34 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M22 14V42M22 14L28 20M22 14L16 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="card-title">Cirurgia Geral</div>
-          <div class="card-subtitle">Procedimentos Cirúrgicos</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 65%;"></div>
-          </div>
-          <div class="card-stats">
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>198 questões</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>65% progresso</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pediatrics -->
-      <div class="specialty-card">
-        <div class="card-content">
-          <div class="card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="24" cy="14" r="5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M24 20V28L20 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M24 28L28 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="8" cy="36" r="3" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="40" cy="36" r="3" stroke="currentColor" stroke-width="1.5"/>
-            </svg>
-          </div>
-          <div class="card-title">Pediatria</div>
-          <div class="card-subtitle">Medicina da Criança</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 81%;"></div>
-          </div>
-          <div class="card-stats">
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>164 questões</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>81% progresso</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Orthopedics -->
-      <div class="specialty-card">
-        <div class="card-content">
-          <div class="card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 22L16 20L20 24L18 26L14 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M20 24L30 14C31.4 12.6 33.6 12.6 35 14C36.4 15.4 36.4 17.6 35 19L25 29" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M25 29L20 34L15 29C13 27 13 24 15 22L20 27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="card-title">Ortopedia</div>
-          <div class="card-subtitle">Sistema Osteomuscular</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 74%;"></div>
-          </div>
-          <div class="card-stats">
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>128 questões</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>74% progresso</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dermatology -->
-      <div class="specialty-card">
-        <div class="card-content">
-          <div class="card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16 14C12 14 10 18 10 22C10 28 14 34 24 38C34 34 38 28 38 22C38 18 36 14 32 14C28 14 24 18 24 18C24 18 20 14 16 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="20" cy="24" r="2" fill="currentColor"/>
-              <circle cx="28" cy="24" r="2" fill="currentColor"/>
-              <circle cx="24" cy="28" r="2" fill="currentColor"/>
-            </svg>
-          </div>
-          <div class="card-title">Dermatologia</div>
-          <div class="card-subtitle">Doenças da Pele</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 58%;"></div>
-          </div>
-          <div class="card-stats">
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>95 questões</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>58% progresso</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Gastroenterology -->
-      <div class="specialty-card">
-        <div class="card-content">
-          <div class="card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="18" cy="20" r="4" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M22 20H32C33.1 20 34 20.9 34 22V32C34 33.1 33.1 34 32 34H16C14.9 34 14 33.1 14 32V22C14 20.9 14.9 20 16 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M22 24H32M22 28H32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="card-title">Gastroenterologia</div>
-          <div class="card-subtitle">Trato Digestivo</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 71%;"></div>
-          </div>
-          <div class="card-stats">
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>134 questões</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>71% progresso</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Oncology -->
-      <div class="specialty-card">
-        <div class="card-content">
-          <div class="card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="24" cy="24" r="10" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="24" cy="24" r="2" fill="currentColor"/>
-              <path d="M24 8V6M24 42V40M40 24H42M6 24H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="card-title">Oncologia</div>
-          <div class="card-subtitle">Doenças Neoplásicas</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 68%;"></div>
-          </div>
-          <div class="card-stats">
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>110 questões</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-dot"></span>
-              <span>68% progresso</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <!-- Footer -->
   <div class="footer">
     <p>Desenvolvido por Jackeline Delfini</p>
-    <p style="margin-top: 8px; font-size: 11px;">© 2025 ELID — Ensino Legitimado para Internos em Desenvolvimento</p>
+    <p style="margin-top:8px;font-size:11px;">© 2025 ELID — Ensino Legitimado para Internos em Desenvolvimento</p>
   </div>
 
-  <script>
-    // Background Canvas - Partículas
-    const canvas = document.getElementById('bg-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let w, h;
+  <!-- Firebase Auth (verificar login) -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
-    function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
+    const firebaseConfig = {
+      apiKey: "AIzaSyAKN3qsYIc3pel81vl8WEAH6Ob4oR-icAM",
+      authDomain: "jackeline-study-platform.firebaseapp.com",
+      projectId: "jackeline-study-platform",
+      storageBucket: "jackeline-study-platform.firebasestorage.app",
+      messagingSenderId: "574246127117",
+      appId: "1:574246127117:web:29eedab81ea4251b23f744"
+    };
 
-    for (let i = 0; i < 60; i++) {
-      particles.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.15,
-        vy: (Math.random() - 0.5) * 0.1,
-        r: Math.random() * 1.2 + 0.4,
-        alpha: Math.random() * 0.3 + 0.08
-      });
-    }
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-    function drawBg() {
-      ctx.clearRect(0, 0, w, h);
-
-      // Aurora leve
-      const t = Date.now() * 0.0003;
-      const grd = ctx.createRadialGradient(w * 0.5 + Math.sin(t) * 100, h * 0.3, 50, w * 0.5, h * 0.5, h * 0.8);
-      grd.addColorStop(0, 'rgba(183,110,121,0.04)');
-      grd.addColorStop(0.5, 'rgba(45,27,46,0)');
-      grd.addColorStop(1, 'rgba(45,27,46,0)');
-      ctx.fillStyle = grd;
-      ctx.fillRect(0, 0, w, h);
-
-      // Partículas
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = w;
-        if (p.x > w) p.x = 0;
-        if (p.y < 0) p.y = h;
-        if (p.y > h) p.y = 0;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(247, 231, 206, ${p.alpha})`;
-        ctx.fill();
-      });
-
-      requestAnimationFrame(drawBg);
-    }
-    drawBg();
-
-    // Modo claro/escuro
-    document.getElementById('btn-theme').addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      const iconTheme = document.getElementById('icon-theme');
-      if (document.body.classList.contains('light-mode')) {
-        iconTheme.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-      } else {
-        iconTheme.innerHTML = '<path d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zM4.22 4.22a1 1 0 011.415 0l1.414 1.415a1 1 0 01-1.414 1.414L4.22 5.636a1 1 0 010-1.414zM2 10a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4.22 15.78a1 1 0 010-1.415l1.414-1.414a1 1 0 111.414 1.414l-1.414 1.415a1 1 0 01-1.414 0zM10 18a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1zm6-6a4 4 0 11-8 0 4 4 0 018 0z"/>';
+    // Se não estiver logada, manda para landing
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = '../landing-page/';
       }
     });
 
     // Logout
-    document.getElementById('btn-logout').addEventListener('click', () => {
+    document.getElementById('btn-logout').addEventListener('click', async () => {
       if (confirm('Tem certeza que deseja sair?')) {
-        window.location.href = '/';
+        await signOut(auth);
+        window.location.href = '../landing-page/';
       }
+    });
+  </script>
+
+  <script>
+    // Canvas
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [], w, h;
+    function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+    resize(); window.addEventListener('resize', resize);
+    for (let i = 0; i < 60; i++) {
+      particles.push({ x: Math.random()*w, y: Math.random()*h, vx:(Math.random()-0.5)*0.15, vy:(Math.random()-0.5)*0.1, r:Math.random()*1.2+0.4, alpha:Math.random()*0.3+0.08 });
+    }
+    function drawBg() {
+      ctx.clearRect(0,0,w,h);
+      const t = Date.now()*0.0003;
+      const grd = ctx.createRadialGradient(w*0.5+Math.sin(t)*100,h*0.3,50,w*0.5,h*0.5,h*0.8);
+      grd.addColorStop(0,'rgba(183,110,121,0.04)'); grd.addColorStop(0.5,'rgba(45,27,46,0)'); grd.addColorStop(1,'rgba(45,27,46,0)');
+      ctx.fillStyle=grd; ctx.fillRect(0,0,w,h);
+      particles.forEach(p => {
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<0)p.x=w; if(p.x>w)p.x=0; if(p.y<0)p.y=h; if(p.y>h)p.y=0;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(247,231,206,${p.alpha})`; ctx.fill();
+      });
+      requestAnimationFrame(drawBg);
+    }
+    drawBg();
+
+    // Tema
+    document.getElementById('btn-theme').addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const icon = document.getElementById('icon-theme');
+      icon.innerHTML = document.body.classList.contains('light-mode')
+        ? '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>'
+        : '<path d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zM4.22 4.22a1 1 0 011.415 0l1.414 1.415a1 1 0 01-1.414 1.414L4.22 5.636a1 1 0 010-1.414zM2 10a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4.22 15.78a1 1 0 010-1.415l1.414-1.414a1 1 0 111.414 1.414l-1.414 1.415a1 1 0 01-1.414 0zM10 18a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1zm6-6a4 4 0 11-8 0 4 4 0 018 0z"/>';
     });
 
     lucide.createIcons();
