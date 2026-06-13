@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Propedêutica · Atlas Interativo de Semiologia · ELID</title>
+<style>
+:root{
+  --bg:#080d17; --bg2:#0c1322; --surface:#121b2d; --surface2:#18233a;
+  --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.04);
+  --ink:#e9eef7; --ink2:#c2ccdd; --muted:#7e8eaa; --faint:#54637e;
+  --vital:#34d39a;      /* verde monitor / normal */
+  --alert:#f87a6a;      /* coral / patológico */
+  --gold:#f0b860;       /* destaque high-yield */
+  --azure:#5aa9ff;      /* técnica */
+  --violet:#a98bff;     /* extra */
+  --shadow:0 18px 50px -22px rgba(0,0,0,.8);
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+  --r:18px;
+}
+html[data-theme="light"]{
+  --bg:#eef1f7; --bg2:#e6eaf3; --surface:#ffffff; --surface2:#f4f6fb;
+  --line:rgba(16,28,48,.10); --line2:rgba(16,28,48,.05);
+  --ink:#101a2c; --ink2:#2b3a52; --muted:#5d6c87; --faint:#8696b0;
+  --vital:#0f9d6e; --alert:#dd4f3e; --gold:#bf8514; --azure:#1f6fd6; --violet:#7c5cdb;
+  --shadow:0 18px 44px -24px rgba(20,40,80,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:radial-gradient(1200px 700px at 80% -10%, rgba(52,211,154,.07), transparent 60%),
+             radial-gradient(900px 600px at -10% 10%, rgba(90,169,255,.06), transparent 55%),
+             var(--bg);
+  color:var(--ink); font-family:var(--font); line-height:1.62;
+  -webkit-font-smoothing:antialiased; padding-bottom:90px; overflow-x:hidden;
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- HEADER ---------- */
+header.top{
+  position:relative; padding:clamp(34px,7vw,72px) 20px 30px; text-align:center;
+  border-bottom:1px solid var(--line); overflow:hidden;
+}
+.ecg-band{position:absolute;inset:auto 0 0 0;height:120px;opacity:.5;pointer-events:none;
+  -webkit-mask-image:linear-gradient(transparent,#000 60%);mask-image:linear-gradient(transparent,#000 60%)}
+.ecg-band svg{display:block;width:200%;height:100%;animation:slide 9s linear infinite}
+@keyframes slide{to{transform:translateX(-50%)}}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--vital);display:inline-flex;gap:9px;align-items:center;
+  border:1px solid var(--line);padding:7px 15px;border-radius:100px;background:var(--surface)}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--vital);box-shadow:0 0 10px var(--vital);
+  animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
+header.top h1{font-size:clamp(2.1rem,7vw,3.7rem);font-weight:800;letter-spacing:-.03em;
+  line-height:1.02;margin:20px 0 12px}
+header.top h1 .thin{font-weight:300;color:var(--ink2)}
+header.top p.sub{color:var(--muted);max-width:620px;margin:0 auto;font-size:1.04rem}
+.brand-tag{margin-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--faint);text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav.sys{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.sys-scroll{display:flex;gap:8px;overflow-x:auto;padding:12px 16px;max-width:1080px;margin:0 auto;
+  scrollbar-width:none}
+.sys-scroll::-webkit-scrollbar{display:none}
+.sys-btn{flex:0 0 auto;display:flex;align-items:center;gap:9px;padding:9px 15px;border-radius:100px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink2);font-weight:600;font-size:.9rem;
+  cursor:pointer;transition:.22s;white-space:nowrap}
+.sys-btn svg{width:18px;height:18px}
+.sys-btn:hover{border-color:color-mix(in srgb,var(--vital) 50%,var(--line));color:var(--ink);transform:translateY(-1px)}
+.sys-btn.active{background:var(--vital);color:#05140e;border-color:var(--vital)}
+html[data-theme="light"] .sys-btn.active{color:#fff}
+.sys-btn.active svg{color:inherit}
+
+/* ---------- LAYOUT ---------- */
+main{max-width:1080px;margin:0 auto;padding:34px 18px 60px}
+.sys-panel{display:none;animation:fade .4s ease both}
+.sys-panel.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.sys-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:8px}
+.sys-head .ic{flex:0 0 auto;width:54px;height:54px;border-radius:15px;display:grid;place-items:center;
+  background:linear-gradient(160deg,var(--surface2),var(--surface));border:1px solid var(--line)}
+.sys-head .ic svg{width:30px;height:30px}
+.sys-head h2{font-size:clamp(1.5rem,4.5vw,2.15rem);font-weight:800;letter-spacing:-.025em;line-height:1.08}
+.sys-head .lead{color:var(--muted);font-size:.98rem;margin-top:4px;max-width:640px}
+
+/* sequência IPPA */
+.seq-rail{display:flex;gap:7px;flex-wrap:wrap;margin:22px 0 30px}
+.seq-pill{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);border-radius:8px;padding:6px 11px;background:var(--surface)}
+.seq-pill b{color:var(--vital)}
+
+/* etapa */
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:22px 22px 8px;margin-bottom:18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.step::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--vital);opacity:.7}
+.step-head{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.step-num{flex:0 0 auto;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+  font-family:var(--mono);font-weight:700;font-size:1.05rem;background:var(--surface2);
+  border:1px solid var(--line);color:var(--vital)}
+.step-head h3{font-size:1.18rem;font-weight:700;letter-spacing:-.01em}
+.step-head .tag{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--faint);border:1px solid var(--line);padding:4px 9px;border-radius:7px}
+.tecnica{color:var(--ink2);font-size:.97rem;margin:10px 0 16px;padding-left:56px}
+@media(max-width:560px){.tecnica{padding-left:0}}
+
+/* achados */
+.achados{display:grid;gap:9px;padding-bottom:16px}
+.ach{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;
+  background:var(--surface2);border:1px solid var(--line2)}
+.ach .mk{flex:0 0 auto;width:9px;height:9px;border-radius:50%;margin-top:7px}
+.ach.normal .mk{background:var(--vital);box-shadow:0 0 8px color-mix(in srgb,var(--vital) 60%,transparent)}
+.ach.alt .mk{background:var(--alert);box-shadow:0 0 8px color-mix(in srgb,var(--alert) 60%,transparent)}
+.ach .lab{font-weight:700;font-size:.96rem}
+.ach .lab small{display:block;font-weight:500;color:var(--muted);font-size:.88rem;margin-top:2px;line-height:1.5}
+.ach .badge{margin-left:auto;flex:0 0 auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;padding:3px 8px;border-radius:6px;align-self:flex-start;margin-top:2px}
+.ach.normal .badge{color:var(--vital);background:color-mix(in srgb,var(--vital) 14%,transparent)}
+.ach.alt .badge{color:var(--alert);background:color-mix(in srgb,var(--alert) 14%,transparent)}
+
+/* dica high-yield */
+.hy{display:flex;gap:12px;padding:14px 16px;border-radius:12px;margin:6px 0 18px;
+  background:color-mix(in srgb,var(--gold) 9%,var(--surface));border:1px solid color-mix(in srgb,var(--gold) 30%,var(--line))}
+.hy .star{flex:0 0 auto;color:var(--gold);font-size:1.1rem;line-height:1.5}
+.hy p{font-size:.93rem;color:var(--ink2)}
+.hy b{color:var(--gold)}
+
+/* tabela comparativa */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:6px 0 24px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.9rem}
+caption{text-align:left;padding:14px 16px 4px;font-weight:700;font-size:1.02rem;color:var(--ink)}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line2);vertical-align:top}
+thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);background:var(--surface2);position:sticky;top:0}
+tbody th{font-weight:700;color:var(--ink);background:var(--surface2)}
+td .pos{color:var(--alert);font-weight:600}
+td .neg{color:var(--vital);font-weight:600}
+
+/* bloco interativo (som/svg) */
+.interactive{background:linear-gradient(165deg,var(--surface2),var(--surface));
+  border:1px solid var(--line);border-radius:var(--r);padding:22px;margin:6px 0 22px;box-shadow:var(--shadow)}
+.int-title{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem;margin-bottom:4px}
+.int-title .live{font-family:var(--mono);font-size:10px;letter-spacing:.15em;color:var(--vital);
+  border:1px solid color-mix(in srgb,var(--vital) 40%,var(--line));padding:3px 8px;border-radius:6px;text-transform:uppercase}
+.int-sub{color:var(--muted);font-size:.9rem;margin-bottom:18px}
+
+/* sound chips */
+.sound-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:10px}
+.snd{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:13px;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);transition:.2s;text-align:left;color:inherit;font-family:inherit}
+.snd:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--azure) 50%,var(--line))}
+.snd.playing{border-color:var(--vital);box-shadow:0 0 0 1px var(--vital),0 0 22px -6px var(--vital)}
+.snd .row1{display:flex;align-items:center;gap:8px}
+.snd .play{width:30px;height:30px;flex:0 0 auto;border-radius:9px;display:grid;place-items:center;
+  background:var(--surface2);border:1px solid var(--line);color:var(--vital)}
+.snd.playing .play{background:var(--vital);color:#05140e}
+.snd .nm{font-weight:700;font-size:.95rem;line-height:1.2}
+.snd .dz{font-size:.82rem;color:var(--muted);line-height:1.45}
+.snd .ph{height:26px;margin-top:2px}
+.snd.alt .play{color:var(--alert)}
+.snd.alt.playing{border-color:var(--alert);box-shadow:0 0 0 1px var(--alert),0 0 22px -6px var(--alert)}
+.snd.alt.playing .play{background:var(--alert);color:#1a0807}
+
+/* torax interativo (svg) */
+.thorax-wrap{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start}
+.thorax-svg{flex:1 1 300px;min-width:260px}
+.thorax-svg svg{width:100%;height:auto;display:block}
+.foco-info{flex:1 1 220px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-height:160px}
+.foco-info .ttl{font-weight:800;font-size:1.05rem;color:var(--vital);margin-bottom:2px}
+.foco-info .loc{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.foco-info p{font-size:.92rem;color:var(--ink2)}
+.foco-info .hint{color:var(--faint);font-size:.86rem;font-style:italic}
+.foco-dot{cursor:pointer;transition:.18s}
+.foco-dot:hover{filter:brightness(1.3)}
+.foco-dot.sel circle.core{fill:var(--vital)}
+
+/* botão geral */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:11px;cursor:pointer;
+  font-weight:700;font-size:.9rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);transition:.2s}
+.btn:hover{transform:translateY(-1px);border-color:var(--vital)}
+.btn.primary{background:var(--vital);color:#05140e;border-color:var(--vital)}
+.btn.stop{background:var(--alert);color:#1a0807;border-color:var(--alert)}
+
+/* quiz */
+.quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow)}
+.q-num{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--vital);text-transform:uppercase}
+.q-txt{font-weight:700;font-size:1.1rem;margin:6px 0 14px;line-height:1.4}
+.opt{display:block;width:100%;text-align:left;padding:13px 15px;border-radius:12px;margin-bottom:9px;cursor:pointer;
+  background:var(--surface2);border:1px solid var(--line);color:var(--ink2);font-size:.95rem;font-family:inherit;transition:.18s}
+.opt:hover{border-color:var(--azure);color:var(--ink)}
+.opt.correct{border-color:var(--vital);background:color-mix(in srgb,var(--vital) 14%,var(--surface2));color:var(--ink)}
+.opt.wrong{border-color:var(--alert);background:color-mix(in srgb,var(--alert) 12%,var(--surface2))}
+.q-exp{margin-top:10px;padding:13px 15px;border-radius:12px;font-size:.9rem;color:var(--ink2);
+  background:color-mix(in srgb,var(--azure) 8%,var(--surface2));border:1px solid color-mix(in srgb,var(--azure) 25%,var(--line));display:none}
+.q-exp.show{display:block}
+.q-foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.q-score{font-family:var(--mono);font-size:.85rem;color:var(--muted)}
+
+.section-label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--faint);margin:30px 0 12px;display:flex;align-items:center;gap:12px}
+.section-label::after{content:"";flex:1;height:1px;background:var(--line)}
+
+footer{max-width:1080px;margin:30px auto 0;padding:26px 18px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:.85rem;text-align:center}
+footer .mono{font-family:var(--mono);letter-spacing:.1em;color:var(--muted)}
+
+/* theme toggle + audio fab */
+.fab-row{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;gap:10px;align-items:center}
+.fab{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);color:var(--ink)}
+.fab svg{width:22px;height:22px}
+.fab.stopall{background:var(--alert);color:#1a0807;border-color:var(--alert);display:none}
+.fab.stopall.show{display:grid}
+
+/* ---- fisiopatologia (mecanismo) ---- */
+.mech{display:flex;gap:14px;background:linear-gradient(160deg,color-mix(in srgb,var(--violet) 8%,var(--surface)),var(--surface));
+  border:1px solid color-mix(in srgb,var(--violet) 22%,var(--line));border-radius:var(--r);padding:18px 20px;margin-bottom:14px}
+.mech .mic{flex:0 0 auto;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  background:color-mix(in srgb,var(--violet) 16%,transparent);color:var(--violet);font-weight:800;font-family:var(--mono)}
+.mech h4{font-size:1.02rem;font-weight:700;margin-bottom:4px;letter-spacing:-.01em}
+.mech p{font-size:.93rem;color:var(--ink2)}
+.mech b{color:var(--violet)}
+
+/* ---- manobras ---- */
+.man-intro{color:var(--muted);font-size:.97rem;margin:2px 0 22px;max-width:680px}
+.man-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:10px}
+.man-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  box-shadow:var(--shadow);display:flex;flex-direction:column}
+.man-fig{background:linear-gradient(165deg,var(--surface2),var(--surface));border-bottom:1px solid var(--line);padding:10px}
+.man-fig svg{display:block;width:100%;height:auto;border-radius:10px}
+.man-body{padding:16px 18px 18px}
+.man-body .mtag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--azure)}
+.man-body h3{font-size:1.12rem;font-weight:700;margin:3px 0 6px;letter-spacing:-.01em}
+.man-body .ind{font-size:.88rem;color:var(--muted);margin-bottom:12px}
+.man-steps{list-style:none;counter-reset:ms;display:grid;gap:8px;margin-bottom:12px}
+.man-steps li{counter-increment:ms;position:relative;padding-left:30px;font-size:.92rem;color:var(--ink2);line-height:1.5}
+.man-steps li::before{content:counter(ms);position:absolute;left:0;top:0;width:21px;height:21px;border-radius:7px;
+  display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:700;
+  background:var(--surface2);border:1px solid var(--line);color:var(--vital)}
+.man-res{font-size:.9rem;border-radius:11px;padding:11px 13px;margin-bottom:10px;
+  background:color-mix(in srgb,var(--vital) 8%,var(--surface2));border:1px solid color-mix(in srgb,var(--vital) 22%,var(--line))}
+.man-res b{color:var(--vital)}
+.man-why{font-size:.9rem;border-radius:11px;padding:11px 13px;
+  background:color-mix(in srgb,var(--violet) 9%,var(--surface2));border:1px solid color-mix(in srgb,var(--violet) 24%,var(--line));color:var(--ink2)}
+.man-why b{color:var(--violet)}
+.fig-lbl{font-family:var(--mono);font-size:9px;fill:var(--muted);letter-spacing:.04em}
+.fig-cap{font-family:var(--mono);font-size:8.5px;fill:var(--faint)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="ecg-band" aria-hidden="true">
+    <svg viewBox="0 0 800 120" preserveAspectRatio="none">
+      <path d="M0 60 H120 l8 -4 6 8 8 -40 6 70 7 -34 8 0 H320 l8 -4 6 8 8 -40 6 70 7 -34 8 0 H540 l8 -4 6 8 8 -40 6 70 7 -34 8 0 H760"
+        fill="none" stroke="var(--vital)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <span class="eyebrow"><span class="dot"></span> Propedêutica Clínica</span>
+  <h1>Atlas Interativo de<br><span class="thin">Semiologia & Exame Físico</span></h1>
+  <p class="sub">Exame físico dos principais sistemas, passo a passo, com os achados normais e patológicos — diagramas em SVG e <b style="color:var(--vital)">sons reais sintetizados</b> de ausculta. Toque para ouvir.</p>
+  <div class="brand-tag">ELID · Ensino Legitimado para Internos em Desenvolvimento</div>
+</header>
+
+<nav class="sys"><div class="sys-scroll" id="navScroll"></div></nav>
+
+<main id="main"></main>
+
+<footer>
+  <p class="mono">PROPEDÊUTICA · v1.0</p>
+  <p style="margin-top:6px">Material de estudo para internato e residência (ENARE · Revalida · bancas estaduais). Sons sintetizados com fins didáticos — não substituem a ausculta real à beira-leito.</p>
+</footer>
+
+<div class="fab-row">
+  <div class="fab stopall" id="stopAll" title="Parar todos os sons" role="button" tabindex="0">
+    <svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+  </div>
+  <div class="fab" id="themeToggle" title="Alternar tema" role="button" tabindex="0">
+    <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   MOTOR DE ÁUDIO — síntese de sons de ausculta (Web Audio API)
+   ========================================================= */
+let ctx=null, master=null, NOISE=null, activeStops=[], playingEl=null;
+function audio(){
+  if(!ctx){
+    ctx=new (window.AudioContext||window.webkitAudioContext)();
+    master=ctx.createGain(); master.gain.value=0.9; master.connect(ctx.destination);
+    const len=ctx.sampleRate*2, b=ctx.createBuffer(1,len,ctx.sampleRate), d=b.getChannelData(0);
+    for(let i=0;i<len;i++) d[i]=Math.random()*2-1;
+    NOISE=b;
+  }
+  if(ctx.state==='suspended') ctx.resume();
+  return ctx;
+}
+function stopAllSounds(){
+  activeStops.forEach(fn=>{try{fn()}catch(e){}});
+  activeStops=[];
+  if(playingEl){playingEl.classList.remove('playing'); playingEl=null;}
+  document.querySelectorAll('.snd.playing').forEach(e=>e.classList.remove('playing'));
+  document.getElementById('stopAll').classList.remove('show');
+}
+// bulha cardíaca: thump tonal grave com decaimento
+function heartTone(t,f0,dur,peak){
+  const o=ctx.createOscillator(),o2=ctx.createOscillator(),g=ctx.createGain(),lp=ctx.createBiquadFilter();
+  lp.type='lowpass'; lp.frequency.value=170; lp.Q.value=.7;
+  o.type='sine'; o.frequency.setValueAtTime(f0,t); o.frequency.exponentialRampToValueAtTime(f0*0.5,t+dur);
+  o2.type='triangle'; o2.frequency.setValueAtTime(f0*0.5,t); o2.frequency.exponentialRampToValueAtTime(f0*0.4,t+dur);
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(peak,t+0.014);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g); o2.connect(g); g.connect(lp); lp.connect(master);
+  o.start(t);o2.start(t);o.stop(t+dur+0.05);o2.stop(t+dur+0.05);
+}
+// ruído filtrado (sopros, respiração, adventícios)
+function noiseEnv(t,dur,opt){
+  const s=ctx.createBufferSource(); s.buffer=NOISE; s.loop=true;
+  const f=ctx.createBiquadFilter(); f.type=opt.ftype||'bandpass'; f.frequency.value=opt.freq||300; f.Q.value=opt.q||1;
+  const g=ctx.createGain(); const peak=opt.peak||0.18;
+  const a=opt.attack!=null?opt.attack:dur*0.45, h=opt.hold!=null?opt.hold:0;
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.linearRampToValueAtTime(peak,t+a);
+  if(h) g.gain.setValueAtTime(peak,t+a+h);
+  g.gain.linearRampToValueAtTime(0.0001,t+dur);
+  s.connect(f); f.connect(g); g.connect(master);
+  s.start(t); s.stop(t+dur+0.02);
+}
+// tom musical contínuo (sibilo/estridor/ronco)
+function musical(t,dur,opt){
+  const o=ctx.createOscillator(),g=ctx.createGain(),f=ctx.createBiquadFilter();
+  o.type=opt.wave||'sine'; o.frequency.setValueAtTime(opt.f0,t);
+  if(opt.f1) o.frequency.linearRampToValueAtTime(opt.f1,t+dur);
+  // vibrato
+  const lfo=ctx.createOscillator(),lg=ctx.createGain();
+  lfo.frequency.value=opt.vib||6; lg.gain.value=opt.vibDepth||8;
+  lfo.connect(lg); lg.connect(o.frequency);
+  f.type='lowpass'; f.frequency.value=opt.lp||2000;
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.linearRampToValueAtTime(opt.peak||0.14,t+0.08);
+  g.gain.setValueAtTime(opt.peak||0.14,t+dur-0.12);
+  g.gain.linearRampToValueAtTime(0.0001,t+dur);
+  o.connect(f);f.connect(g);g.connect(master);
+  o.start(t);lfo.start(t);o.stop(t+dur+0.05);lfo.stop(t+dur+0.05);
+}
+// crepitações: rajada de micro-estalidos
+function crackles(t,dur,n,freq,len,peak){
+  for(let i=0;i<n;i++){
+    const tt=t+(dur*(i/n))+(Math.random()*dur*0.04);
+    noiseEnv(tt,len,{freq:freq+Math.random()*120,q:2.2,peak:peak*(0.6+Math.random()*0.4),ftype:'bandpass',attack:len*0.25});
+  }
+}
+// agenda N ciclos de uma função builder(t0, period)
+function loopCycles(builder, period, n){
+  audio();
+  const start=ctx.currentTime+0.06; let alive=true;
+  for(let i=0;i<n;i++) builder(start+i*period, period);
+  const total=n*period+0.3;
+  const to=setTimeout(()=>{ if(playingEl){playingEl.classList.remove('playing');playingEl=null;}
+    document.getElementById('stopAll').classList.remove('show'); }, total*1000);
+  activeStops.push(()=>{alive=false;clearTimeout(to);try{master.gain.setValueAtTime(0,ctx.currentTime);
+    master.gain.linearRampToValueAtTime(0.9,ctx.currentTime+0.25)}catch(e){}});
+  return total;
+}
+
+/* ---- definições dos sons cardíacos (período = 1 ciclo) ---- */
+const HEART={
+  normal:(P)=>{const sys=P*0.36;return (t)=>{heartTone(t,55,0.12,0.6); heartTone(t+sys,48,0.10,0.5);};},
+  desdobB2:(P)=>{const sys=P*0.36;return (t)=>{heartTone(t,55,0.12,0.6);
+    heartTone(t+sys,50,0.07,0.42); heartTone(t+sys+0.045,46,0.07,0.4);};}, // A2-P2
+  b3:(P)=>{const sys=P*0.36;return (t)=>{heartTone(t,55,0.12,0.6); heartTone(t+sys,48,0.10,0.5);
+    heartTone(t+sys+0.16,40,0.10,0.32);};}, // galope protodiastólico
+  b4:(P)=>{const sys=P*0.36;return (t)=>{heartTone(t-0.13,40,0.09,0.3); heartTone(t,55,0.12,0.6);
+    heartTone(t+sys,48,0.10,0.5);};}, // pré-sistólico
+  soproSis:(P)=>{const sys=P*0.36;return (t)=>{heartTone(t,55,0.11,0.55);
+    noiseEnv(t+0.04,sys-0.05,{freq:260,q:0.9,peak:0.16,attack:(sys-0.05)*0.5}); // diamante
+    heartTone(t+sys,48,0.10,0.5);};},
+  soproDia:(P)=>{const sys=P*0.36,dia=P-sys;return (t)=>{heartTone(t,55,0.11,0.55);
+    heartTone(t+sys,50,0.09,0.5);
+    noiseEnv(t+sys+0.04,dia*0.7,{freq:320,q:0.8,peak:0.13,attack:0.02});};}, // decrescendo
+  atrito:(P)=>{const sys=P*0.36;return (t)=>{
+    noiseEnv(t,0.10,{freq:200,q:0.6,peak:0.15,ftype:'bandpass',attack:0.02});       // sistólico
+    noiseEnv(t+sys,0.10,{freq:200,q:0.6,peak:0.13,attack:0.02});                    // diastólico inicial
+    noiseEnv(t+P*0.78,0.09,{freq:200,q:0.6,peak:0.12,attack:0.02});                 // pré-sistólico (trifásico)
+    heartTone(t,52,0.08,0.25);heartTone(t+sys,48,0.07,0.2);};}
+};
+/* ---- sons respiratórios (período = 1 ciclo respiratório) ---- */
+const LUNG={
+  vesicular:(P)=>{const insp=P*0.42;return (t)=>{
+    noiseEnv(t,insp,{freq:330,q:0.7,peak:0.12,attack:insp*0.55});
+    noiseEnv(t+insp+0.04,insp*0.6,{freq:300,q:0.7,peak:0.05,attack:0.04});};},
+  broncovesic:(P)=>{const insp=P*0.42;return (t)=>{
+    noiseEnv(t,insp,{freq:480,q:0.9,peak:0.14,attack:insp*0.4});
+    noiseEnv(t+insp+0.02,insp*0.8,{freq:520,q:0.9,peak:0.12,attack:0.04});};}, // I≈E, tubário
+  crepFina:(P)=>{const insp=P*0.42;return (t)=>{
+    noiseEnv(t,insp,{freq:330,q:0.7,peak:0.08,attack:insp*0.55});
+    crackles(t+insp*0.55,insp*0.42,16,650,0.006,0.10);};}, // teleinspiratórias, finas
+  crepGrossa:(P)=>{const insp=P*0.42;return (t)=>{
+    noiseEnv(t,insp,{freq:300,q:0.7,peak:0.07,attack:insp*0.55});
+    crackles(t+insp*0.15,insp*0.7,8,240,0.018,0.16);
+    crackles(t+insp+0.05,insp*0.4,4,240,0.018,0.12);};},
+  sibilos:(P)=>{const insp=P*0.42;return (t)=>{
+    noiseEnv(t,insp,{freq:330,q:0.7,peak:0.06,attack:insp*0.55});
+    musical(t+insp,P-insp-0.1,{f0:430,f1:380,wave:'sine',peak:0.13,vib:7,vibDepth:14,lp:2200}); // expiratório
+    musical(t+insp+0.05,P-insp-0.2,{f0:620,f1:560,wave:'sine',peak:0.07,vib:5,vibDepth:10,lp:2600});};},
+  roncos:(P)=>{const insp=P*0.42;return (t)=>{
+    musical(t,insp,{f0:150,f1:130,wave:'sawtooth',peak:0.10,vib:9,vibDepth:18,lp:600});
+    musical(t+insp+0.05,P*0.5,{f0:140,f1:120,wave:'sawtooth',peak:0.09,vib:10,vibDepth:20,lp:600});};},
+  atritoPl:(P)=>{const insp=P*0.42;return (t)=>{
+    crackles(t+insp*0.2,insp*0.7,7,180,0.03,0.16);   // inspiração: rangido
+    crackles(t+insp+0.05,insp*0.6,6,180,0.03,0.14);};}, // expiração (bifásico, "couro novo")
+  estridor:(P)=>{const insp=P*0.42;return (t)=>{
+    musical(t,insp,{f0:560,f1:600,wave:'sine',peak:0.16,vib:4,vibDepth:8,lp:2400}); // inspiratório, agudo
+    noiseEnv(t+insp+0.05,insp*0.5,{freq:300,q:0.7,peak:0.03,attack:0.05});};}
+};
+function playSound(el,group,key,period,n){
+  audio();
+  if(el.classList.contains('playing')){stopAllSounds();return;}
+  stopAllSounds();
+  el.classList.add('playing'); playingEl=el;
+  document.getElementById('stopAll').classList.add('show');
+  const start=()=>{
+    const builder=(group==='heart'?HEART:LUNG)[key](period);
+    loopCycles(builder,period,n);
+  };
+  // garante que o contexto esteja "running" antes de agendar (resolve o
+  // bug do 1º toque em celulares, onde o relógio do áudio ainda não andou)
+  if(ctx.state==='running'){ start(); }
+  else { ctx.resume().then(start).catch(start); setTimeout(()=>{ if(ctx.state==='running'&&playingEl===el&&!activeStops.length) start(); },120); }
+}
+
+/* =========================================================
+   ÍCONES
+   ========================================================= */
+const ICO={
+  geral:'<path d="M5 4v6a5 5 0 0 0 10 0V4M5 4H3M15 4h2M10 19a4 4 0 0 0 8 0v-2M18 13a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>',
+  cv:'<path d="M12 21s-7-4.6-9.5-8.3C.8 9.9 2.3 6 5.7 6c2 0 3.3 1.2 4.3 2.6C11 7.2 12.3 6 14.3 6c3.4 0 4.9 3.9 3.2 6.7C19 16.4 12 21 12 21z"/>',
+  resp:'<path d="M12 3v9M8 12c-2 0-3 2-3 5 0 2 .6 4 2.6 4S10.5 18 10.5 16v-2c0-1.2-.7-2-2.5-2zM16 12c2 0 3 2 3 5 0 2-.6 4-2.6 4S13.5 18 13.5 16v-2c0-1.2.7-2 2.5-2z"/>',
+  abd:'<path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 3v18M3 12h18"/>',
+  neuro:'<path d="M9.5 3.5A2.5 2.5 0 0 0 6 5.5 3 3 0 0 0 4 11a3 3 0 0 0 1 4 2.5 2.5 0 0 0 4.5 1.5V3.5zM14.5 3.5A2.5 2.5 0 0 1 18 5.5 3 3 0 0 1 20 11a3 3 0 0 1-1 4 2.5 2.5 0 0 1-4.5 1.5V3.5zM9.5 9h5M9.5 14h5"/>',
+  quiz:'<path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z"/>',
+  manobras:'<path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-.5V4a1.5 1.5 0 0 1 3 0v6m0-1.5V6a1.5 1.5 0 0 1 3 0v7a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-4.8-2.4L4 17a1.6 1.6 0 0 1 2.5-2L9 17"/>'
+};
+
+/* =========================================================
+   CONTEÚDO DOS SISTEMAS
+   ========================================================= */
+const SISTEMAS=[
+{
+  id:'geral', nome:'Geral', ico:ICO.geral,
+  titulo:'Exame Geral & Ectoscopia',
+  lead:'A inspeção que começa no “bom dia”. O olhar panorâmico (ectoscopia) e os sinais vitais orientam toda a hipótese sindrômica antes de tocar o paciente.',
+  seq:['Inspeção geral','Sinais vitais','Pele & mucosas','Linfonodos / edema'],
+  etapas:[
+    {n:'01',titulo:'Estado geral & nível de consciência',tag:'Inspeção',
+     tecnica:'Observação à distância: postura, atitude no leito, fácies, biotipo, fala e contato. Avalie o nível de consciência (alerta → torporoso → comatoso) e gradue pela Escala de Coma de Glasgow (ocular 4 + verbal 5 + motor 6).',
+     achados:[
+       {tipo:'normal',lab:'BEG, lúcido e orientado (LOTE)',desc:'Bom estado geral, ativo, contactuante, orientado no tempo e espaço. Glasgow 15.',badge:'Normal'},
+       {tipo:'alt',lab:'REG / MEG',desc:'Regular ou mau estado geral — prostração, apatia, fácies de sofrimento sugerem gravidade.',badge:'Alterado'},
+       {tipo:'alt',lab:'Fácies características',desc:'Hipocrática (sepse/peritonite), mixedematosa, basedowiana, cushingoide, leonina (hanseníase), parkinsoniana, em “lua cheia”.',badge:'Atenção'}
+     ],
+     hy:'Glasgow ≤ 8 = indicação clássica de via aérea definitiva (intubação). Some sempre os 3 componentes e descreva-os: <b>O+V+M</b>.'},
+    {n:'02',titulo:'Sinais vitais',tag:'Mensuração',
+     tecnica:'Aferição sistemática: PA (manguito adequado, ao nível do coração), FC (pulso radial 1 min), FR (discreta, 1 min), temperatura axilar, SatO₂ e o “5º sinal”: a dor (EVA 0–10).',
+     achados:[
+       {tipo:'normal',lab:'Parâmetros de referência (adulto)',desc:'PA <130×85 · FC 60–100 bpm · FR 12–20 irpm · Tax 36–37,3 °C · SatO₂ ≥95%.',badge:'Normal'},
+       {tipo:'alt',lab:'Tríade do choque',desc:'Taquicardia + hipotensão + má perfusão (TEC >3s). Hipotensão é sinal TARDIO — fique atento à taquicardia precoce.',badge:'Grave'},
+       {tipo:'alt',lab:'Padrões respiratórios',desc:'Kussmaul (acidose metabólica), Cheyne-Stokes (IC/AVC), Biot (lesão de tronco).',badge:'Alterado'}
+     ]},
+    {n:'03',titulo:'Pele, mucosas & perfusão',tag:'Inspeção / Palpação',
+     tecnica:'Avalie coloração, hidratação, turgor, temperatura e enchimento capilar (TEC — comprima o leito ungueal 5s e cronometre o retorno). Inspecione mucosas (conjuntiva, oral).',
+     achados:[
+       {tipo:'normal',lab:'Corado, hidratado, anictérico, acianótico',desc:'Mucosas róseas, turgor preservado, TEC <3s, extremidades aquecidas.',badge:'Normal'},
+       {tipo:'alt',lab:'Palidez / icterícia / cianose',desc:'Descorado (anemia), ictérico (graduar em cruzes; pesquisar na esclera), cianose central (lábios/língua) vs periférica (extremidades).',badge:'Alterado'},
+       {tipo:'alt',lab:'Sinais de desidratação',desc:'Turgor diminuído, mucosas secas, olhos encovados, TEC lentificado.',badge:'Alterado'}
+     ],
+     hy:'Icterícia torna-se clinicamente visível com <b>bilirrubina &gt; 2–2,5 mg/dL</b>. Procure primeiro na esclera, sob luz natural.'},
+    {n:'04',titulo:'Linfonodos & edema',tag:'Palpação',
+     tecnica:'Palpe cadeias (cervicais, supraclaviculares, axilares, inguinais) avaliando tamanho, consistência, mobilidade e dor. Pesquise edema comprimindo região pré-tibial/maleolar contra plano ósseo (cacifo/godet).',
+     achados:[
+       {tipo:'normal',lab:'Linfonodos não palpáveis; sem edemas',desc:'Ausência de linfonodomegalias; membros sem edema.',badge:'Normal'},
+       {tipo:'alt',lab:'Linfonodo suspeito de malignidade',desc:'Endurecido, aderido, indolor, >2cm. Supraclavicular esquerdo = nódulo de Virchow (neoplasia abdominal).',badge:'Atenção'},
+       {tipo:'alt',lab:'Edema com cacifo',desc:'Gradue em cruzes (+ a ++++). Frio/simétrico/ascendente sugere causa sistêmica (IC, renal, hepática); quente/assimétrico sugere inflamatório/TVP.',badge:'Alterado'}
+     ]}
+  ],
+  tabelas:[]
+},
+
+{
+  id:'cv', nome:'Cardiovascular', ico:ICO.cv,
+  titulo:'Aparelho Cardiovascular',
+  lead:'O precórdio em quatro tempos. A ausculta dos focos resolve a maior parte das questões valvares — e aqui você pode <b>ouvir</b> cada bulha, sopro e galope.',
+  seq:['Inspeção','Palpação','Percussão','Ausculta'],
+  etapas:[
+    {n:'01',titulo:'Inspeção do precórdio',tag:'Inspeção',
+     tecnica:'Paciente em decúbito dorsal a 30–45°, tórax desnudo, luz tangencial. Observe abaulamentos, retrações, o ictus visível e a turgência jugular (TJ) a 45°.',
+     achados:[
+       {tipo:'normal',lab:'Precórdio sem abaulamentos; TJ ausente',desc:'Ictus pode ou não ser visível. Sem estase jugular patológica a 45°.',badge:'Normal'},
+       {tipo:'alt',lab:'Turgência jugular patológica',desc:'Estase a 45° indica ↑ pressão venosa central — IC direita, tamponamento, hipervolemia.',badge:'Alterado'},
+       {tipo:'alt',lab:'Abaulamento precordial',desc:'Sugere cardiopatia de longa data com início na infância (sobrecarga de VD).',badge:'Alterado'}
+     ]},
+    {n:'02',titulo:'Palpação — ictus cordis & frêmitos',tag:'Palpação',
+     tecnica:'Localize o ictus (choque da ponta) com a face palmar e polpas digitais. Avalie localização, extensão, intensidade e mobilidade. Pesquise frêmitos (sopros palpáveis) nos focos.',
+     achados:[
+       {tipo:'normal',lab:'Ictus no 4º–5º EIC, linha hemiclavicular E',desc:'Extensão ≤ 2 polpas digitais (~2 cm), impulsivo e não sustentado.',badge:'Normal'},
+       {tipo:'alt',lab:'Ictus desviado / difuso',desc:'Desvio para baixo e lateral + extensão >2–3 polpas = cardiomegalia / dilatação de VE.',badge:'Alterado'},
+       {tipo:'alt',lab:'Frêmito catáreo',desc:'Sopro palpável (≥ Levine IV/VI). Sistólico em foco aórtico → estenose aórtica importante.',badge:'Alterado'}
+     ],
+     hy:'O ictus desviado para baixo/lateral e “em cúpula” sugere sobrecarga de <b>volume</b> (ex.: insuficiência aórtica/mitral); sustentado e localizado sugere sobrecarga de <b>pressão</b> (estenose aórtica, HAS).'},
+    {n:'03',titulo:'Percussão',tag:'Percussão',
+     tecnica:'Pouco utilizada na prática atual (substituída pelo ictus e imagem). Historicamente delimitava a área de macicez cardíaca.',
+     achados:[
+       {tipo:'normal',lab:'Macicez cardíaca dentro dos limites',desc:'Método de baixa acurácia; o ictus à palpação é mais fidedigno para cardiomegalia.',badge:'Limitado'}
+     ]},
+    {n:'04',titulo:'Ausculta — focos, bulhas e sopros',tag:'Ausculta',interactive:'heart',
+     tecnica:'Ausculte os 4 focos com diafragma (sons agudos: B1, B2, sopros) e campânula (sons graves: B3, B4, ruflar da estenose mitral). Manobras: decúbito lateral E (foco mitral), sentado inclinado à frente em apneia expiratória (foco aórtico).',
+     achados:[
+       {tipo:'normal',lab:'B1 e B2 normofonéticas, ritmo regular em 2 tempos',desc:'B1 = fechamento mitral+tricúspide (início da sístole). B2 = fechamento aórtico+pulmonar (início da diástole), com desdobramento fisiológico na inspiração.',badge:'Normal'},
+       {tipo:'alt',lab:'Sopro sistólico',desc:'Entre B1 e B2. Ejeção (estenose aórtica/pulmonar) vs regurgitação (insuficiência mitral/tricúspide, CIV). Gradue por Levine (I–VI).',badge:'Alterado'},
+       {tipo:'alt',lab:'Sopro diastólico',desc:'Entre B2 e B1. Sempre patológico: insuficiência aórtica/pulmonar (aspirativo, decrescendo) ou estenose mitral/tricúspide (ruflar).',badge:'Alterado'},
+       {tipo:'alt',lab:'B3 (galope ventricular)',desc:'Protodiastólica, grave. Sobrecarga de volume / disfunção sistólica (IC). Pode ser fisiológica em jovens.',badge:'Alterado'},
+       {tipo:'alt',lab:'B4 (galope atrial)',desc:'Pré-sistólica. Ventrículo pouco complacente (HVE, isquemia, estenose aórtica). Nunca em FA.',badge:'Alterado'},
+       {tipo:'alt',lab:'Atrito pericárdico',desc:'Som áspero, em “couro novo”, tri-fásico, que NÃO desaparece em apneia. Pericardite.',badge:'Alterado'}
+     ],
+     hy:'Mnemônico dos focos: <b>“APTM”</b> de cima para baixo — Aórtico (2º EICD), Pulmonar (2º EICE), Tricúspide (base do apêndice xifoide), Mitral (5º EIC, hemiclavicular E). Manobras dinâmicas: a maioria dos sopros ↑ com a inspiração se forem de câmaras D; sopros E ↑ na expiração.'}
+  ],
+  fisiopatologia:[
+   {t:'Por que existem B1 e B2',p:'O som não vem do “bater” das valvas, mas da <b>desaceleração súbita do sangue</b> e da vibração das estruturas quando uma valva se fecha. B1 = fechamento mitral + tricúspide, no início da sístole, quando a pressão ventricular supera a atrial. B2 = fechamento aórtico + pulmonar, no início da diástole, quando a pressão nas grandes artérias supera a do ventrículo que relaxa.'},
+   {t:'Por que B2 se desdobra na inspiração',p:'Na inspiração a pressão intratorácica fica negativa e <b>aumenta o retorno venoso ao VD</b>, prolongando sua ejeção → P2 atrasa. Ao mesmo tempo o retorno ao VE cai um pouco → A2 antecipa. As duas componentes se separam e o desdobramento fica audível. Desdobramento <b>fixo</b> sugere CIA; <b>paradoxal</b>, BRE ou estenose aórtica.'},
+   {t:'Por que surge B3 (galope ventricular)',p:'Na protodiástole há enchimento ventricular rápido. Num ventrículo <b>dilatado e sobrecarregado de volume</b>, a parede freia bruscamente essa coluna de sangue, gerando vibração grave. É fisiológica em jovens (parede muito complacente) e patológica na insuficiência cardíaca.'},
+   {t:'Por que surge B4 (galope atrial)',p:'Na telediástole, a <b>contração atrial</b> empurra sangue contra um ventrículo rígido e pouco complacente (HVE, isquemia, estenose aórtica), gerando vibração pré-sistólica. Por depender da sístole atrial, <b>nunca há B4 na fibrilação atrial</b>.'},
+   {t:'Por que um sopro aparece',p:'Sopro é <b>fluxo turbulento</b>. Surge quando o sangue atravessa um orifício estreito (estenose), reflui por uma valva incompetente (regurgitação) ou quando o fluxo está muito aumentado. A intensidade acompanha o gradiente de pressão. Sistólico (B1–B2): estenose de semilunar ou regurgitação de AV. Diastólico (B2–B1): regurgitação de semilunar ou estenose de AV.'},
+   {t:'Por que as manobras mudam o sopro',p:'Tudo é <b>pré-carga e pós-carga</b>. ↑retorno venoso (inspirar, agachar, elevar pernas) intensifica quase todos os sopros — exceto CMH e prolapso mitral, que <i>diminuem</i>. Valsalva e ficar de pé ↓retorno venoso → reduzem a maioria e <b>aumentam</b> CMH e prolapso. Handgrip ↑pós-carga → intensifica regurgitações (IM, IAo, CIV) e reduz EAo/CMH.'},
+   {t:'Por que o pulso muda nas valvopatias',p:'Na estenose aórtica a obstrução fixa reduz e atrasa a ejeção → <b>pulso parvus et tardus</b> (pequeno e lento). Na insuficiência aórtica há grande volume sistólico seguido de escape diastólico pela valva incompetente → ascensão e colapso rápidos: <b>pulso em martelo d’água (Corrigan)</b> e PA divergente.'},
+   {t:'Por que a jugular se ingurgita',p:'A veia jugular é uma “coluna” que reflete a <b>pressão do átrio direito</b>. Quando a pressão de enchimento direita sobe (IC direita, tamponamento), a coluna se eleva → turgência a 45°. No refluxo hepatojugular, comprimir o fígado aumenta o retorno venoso; um VD que não acomoda esse volume mantém a jugular cheia → sinal positivo.'}
+  ],
+  tabelas:[
+   {caption:'Principais sopros valvares — onde irradia e como reconhecer',
+    head:['Valvopatia','Tipo de sopro','Foco / irradiação','Pista clínica'],
+    rows:[
+     ['Estenose aórtica','Sistólico ejetivo (crescendo-decrescendo)','Foco aórtico → carótidas','Pulso parvus et tardus; síncope, angina, dispneia'],
+     ['Insuficiência aórtica','Diastólico aspirativo, decrescendo','Borda esternal E → foco aórtico acessório','Pulso em martelo d’água; PA divergente'],
+     ['Estenose mitral','Ruflar diastólico + reforço pré-sistólico','Foco mitral (campânula, decúbito lat. E)','Hiperfonese de B1; estalido de abertura'],
+     ['Insuficiência mitral','Holossistólico, em jato','Foco mitral → axila','Sopro que “engole” a B1; B3 frequente']
+    ]}
+  ]
+},
+
+{
+  id:'resp', nome:'Respiratório', ico:ICO.resp,
+  titulo:'Aparelho Respiratório',
+  lead:'IPPA do tórax. A combinação de frêmito, percussão e ausculta monta a síndrome (consolidação, derrame, pneumotórax) — ouça cada som adventício abaixo.',
+  seq:['Inspeção','Palpação','Percussão','Ausculta'],
+  etapas:[
+    {n:'01',titulo:'Inspeção',tag:'Inspeção',
+     tecnica:'Conte a FR sem o paciente perceber. Observe o tipo respiratório, ritmo, uso de musculatura acessória, tiragem, expansibilidade e a forma do tórax.',
+     achados:[
+       {tipo:'normal',lab:'Eupneico, expansibilidade simétrica',desc:'FR 12–20 irpm, sem esforço, tórax atípico (normal), tempos inspiratório/expiratório preservados.',badge:'Normal'},
+       {tipo:'alt',lab:'Sinais de esforço',desc:'Taquipneia, tiragem intercostal/subdiafragmática, batimento de asa de nariz, uso de ECM — insuficiência respiratória.',badge:'Grave'},
+       {tipo:'alt',lab:'Deformidades torácicas',desc:'Tórax em tonel (DPOC), pectus excavatum/carinatum, cifoescoliose.',badge:'Alterado'}
+     ]},
+    {n:'02',titulo:'Palpação — expansibilidade & FTV',tag:'Palpação',
+     tecnica:'Avalie a expansibilidade (mãos espalmadas no dorso, polegares na coluna) e o frêmito toracovocal (FTV) — peça ao paciente para dizer “trinta e três” enquanto palpa simetricamente.',
+     achados:[
+       {tipo:'normal',lab:'FTV simétrico e expansibilidade preservada',desc:'Vibração transmitida igualmente nos dois hemitórax.',badge:'Normal'},
+       {tipo:'alt',lab:'FTV aumentado',desc:'↑ transmissão por meio sólido → consolidação (pneumonia).',badge:'Alterado'},
+       {tipo:'alt',lab:'FTV diminuído / abolido',desc:'Ar ou líquido interpondo-se → derrame pleural, pneumotórax, atelectasia obstrutiva, DPOC.',badge:'Alterado'}
+     ],
+     hy:'Regra de ouro: o que <b>“afasta”</b> o pulmão da parede (ar ou líquido — pneumotórax, derrame) diminui o FTV; o que <b>“solidifica”</b> o pulmão (consolidação com brônquio pérvio) aumenta o FTV.'},
+    {n:'03',titulo:'Percussão',tag:'Percussão',
+     tecnica:'Dedo-plexor sobre dedo-pleximetro, percussão comparativa entre hemitórax. Identifique a transição dos sons.',
+     achados:[
+       {tipo:'normal',lab:'Som claro pulmonar (atimpânico)',desc:'Ressonância normal do parênquima aerado.',badge:'Normal'},
+       {tipo:'alt',lab:'Macicez / submacicez',desc:'Som “abafado” → líquido (derrame) ou consolidação volumosa.',badge:'Alterado'},
+       {tipo:'alt',lab:'Hipertimpanismo',desc:'Som “oco”, hiper-ressonante → pneumotórax ou enfisema/hiperinsuflação.',badge:'Alterado'}
+     ]},
+    {n:'04',titulo:'Ausculta — murmúrio & adventícios',tag:'Ausculta',interactive:'lung',
+     tecnica:'Diafragma, percurso comparativo e simétrico, ápice → base. Peça respiração ampla pela boca. Avalie o murmúrio vesicular, sons adventícios e a ausculta da voz (broncofonia, pectorilóquia, egofonia).',
+     achados:[
+       {tipo:'normal',lab:'Murmúrio vesicular fisiológico, sem RA',desc:'Suave, predominante na inspiração; ausência de ruídos adventícios.',badge:'Normal'},
+       {tipo:'alt',lab:'Estertores finos (crepitantes)',desc:'Teleinspiratórios, em “velcro/fita adesiva”. Acometimento alveolar: PNM, EAP, fibrose.',badge:'Alterado'},
+       {tipo:'alt',lab:'Estertores grossos (bolhosos)',desc:'Início da inspiração, modificam com a tosse. Secreção em vias aéreas maiores: bronquiectasia, bronquite.',badge:'Alterado'},
+       {tipo:'alt',lab:'Sibilos',desc:'Musicais, agudos, expiratórios → obstrução de pequenas vias (asma, DPOC, broncoespasmo).',badge:'Alterado'},
+       {tipo:'alt',lab:'Roncos',desc:'Graves, “roncar”, secreção em grandes vias; modificam com a tosse.',badge:'Alterado'},
+       {tipo:'alt',lab:'Atrito pleural',desc:'Áspero, bifásico (“pisar na neve”), não muda com a tosse — pleurite.',badge:'Alterado'},
+       {tipo:'alt',lab:'Estridor',desc:'Inspiratório, agudo, audível sem estetoscópio → obstrução de via aérea ALTA (emergência).',badge:'Grave'}
+     ],
+     hy:'Murmúrio vesicular <b>abolido + percussão maciça + FTV reduzido</b> = derrame pleural. Já <b>abolido + percussão timpânica + FTV reduzido</b> = pneumotórax. A percussão é o que diferencia os dois!'}
+  ],
+  tabelas:[
+   {caption:'Diagnóstico diferencial das síndromes pleuropulmonares (achados ao exame)',
+    head:['Síndrome','Inspeção/Expansão','FTV','Percussão','Ausculta'],
+    rows:[
+     ['Consolidação (PNM)','<span class="neg">Reduzida no lado</span>','<span class="pos">Aumentado</span>','<span class="pos">Maciça</span>','Estertores finos, sopro tubário, broncofonia'],
+     ['Derrame pleural','<span class="neg">Reduzida</span>','<span class="neg">Reduzido</span>','<span class="pos">Maciça</span>','MV abolido; egofonia no limite superior'],
+     ['Pneumotórax','<span class="neg">Reduzida</span>','<span class="neg">Reduzido</span>','<span class="pos">Timpânica</span>','MV abolido'],
+     ['Atelectasia (obstrutiva)','<span class="neg">Reduzida</span>','<span class="neg">Reduzido</span>','<span class="pos">Maciça</span>','MV reduzido/abolido; desvio do mediastino para o lado'],
+     ['Asma / DPOC (crise)','Tórax hiperinsuflado','Normal/reduzido','<span class="pos">Hipertimpânica</span>','Sibilos difusos, expiração prolongada']
+    ]}
+  ]
+},
+
+{
+  id:'abd', nome:'Abdome', ico:ICO.abd,
+  titulo:'Abdome',
+  lead:'Atenção à ordem: aqui é I-A-P-P. A ausculta vem ANTES da percussão e palpação, para não alterar os ruídos hidroaéreos.',
+  seq:['Inspeção','Ausculta','Percussão','Palpação'],
+  etapas:[
+    {n:'01',titulo:'Inspeção',tag:'Inspeção',
+     tecnica:'Paciente em decúbito dorsal, abdome exposto, joelhos semifletidos. Observe forma, simetria, cicatrizes, abaulamentos, circulação colateral, peristalse visível e a presença de hérnias.',
+     achados:[
+       {tipo:'normal',lab:'Abdome plano (ou globoso), simétrico',desc:'Cicatriz umbilical centrada, sem abaulamentos, sem circulação colateral.',badge:'Normal'},
+       {tipo:'alt',lab:'Distensão / abaulamentos',desc:'Globoso por ascite, obstrução, organomegalia ou gravidez. Localizado pode indicar massa/hérnia.',badge:'Alterado'},
+       {tipo:'alt',lab:'Circulação colateral',desc:'“Cabeça de medusa” (hipertensão porta); padrão sugere o sistema venoso desviado.',badge:'Alterado'}
+     ]},
+    {n:'02',titulo:'Ausculta',tag:'Ausculta',
+     tecnica:'ANTES de tocar o abdome. Diafragma sobre os quadrantes por até 1–2 min antes de concluir ausência de RHA. Pesquise também sopros (aorta, renais).',
+     achados:[
+       {tipo:'normal',lab:'Ruídos hidroaéreos presentes e normoativos',desc:'5–34 ruídos/min, timbre e frequência preservados.',badge:'Normal'},
+       {tipo:'alt',lab:'RHA aumentados (timbre metálico)',desc:'Luta peristáltica — obstrução intestinal mecânica inicial.',badge:'Alterado'},
+       {tipo:'alt',lab:'RHA ausentes / silêncio abdominal',desc:'Íleo paralítico, peritonite, obstrução tardia. Defina após auscultar ≥2 min.',badge:'Grave'}
+     ]},
+    {n:'03',titulo:'Percussão',tag:'Percussão',
+     tecnica:'Timpanismo difuso é o padrão (gás nas alças). Pesquise macicez (vísceras, líquido, massas), o espaço de Traube, a hepatimetria e sinais de ascite (macicez móvel, piparote). Punho-percussão lombar (Giordano).',
+     achados:[
+       {tipo:'normal',lab:'Timpanismo predominante; Traube livre',desc:'Hepatimetria ~6–12 cm na linha hemiclavicular D. Giordano negativo.',badge:'Normal'},
+       {tipo:'alt',lab:'Macicez móvel de decúbito / piparote +',desc:'Ascite — líquido livre na cavidade.',badge:'Alterado'},
+       {tipo:'alt',lab:'Giordano positivo',desc:'Dor à punho-percussão lombar → pielonefrite / litíase obstruída.',badge:'Alterado'}
+     ]},
+    {n:'04',titulo:'Palpação — superficial, profunda & sinais',tag:'Palpação',
+     tecnica:'Superficial (tensão, dor, massas superficiais) e depois profunda (vísceras, massas). Comece longe do ponto doloroso. Pesquise descompressão brusca (Blumberg) e sinais especiais.',
+     achados:[
+       {tipo:'normal',lab:'Flácido, indolor, sem massas ou megalias',desc:'Sem defesa, fígado e baço não palpáveis abaixo dos rebordos.',badge:'Normal'},
+       {tipo:'alt',lab:'Irritação peritoneal',desc:'Defesa/rigidez + descompressão dolorosa (Blumberg +) — abdome agudo inflamatório/perfurativo.',badge:'Grave'},
+       {tipo:'alt',lab:'Visceromegalias',desc:'Hepatomegalia (descrever em cm do RCD, borda, consistência), esplenomegalia (manobra de Schuster/Castell).',badge:'Alterado'}
+     ],
+     hy:'Sinais clássicos: <b>Murphy</b> (parada inspiratória à palpação do HD → colecistite) · <b>Blumberg/McBurney</b> (FID → apendicite) · <b>Rovsing</b> (dor na FID ao comprimir FIE) · <b>psoas/obturador</b> (apendicite retrocecal/pélvica).'}
+  ],
+  tabelas:[
+   {caption:'Sinais semiológicos do abdome agudo',
+    head:['Sinal','Como pesquisar','Sugere'],
+    rows:[
+     ['Murphy','Palpa HD na inspiração profunda → parada súbita por dor','Colecistite aguda'],
+     ['Blumberg','Dor à descompressão brusca da FID','Irritação peritoneal / apendicite'],
+     ['Rovsing','Dor referida na FID ao comprimir a FIE','Apendicite'],
+     ['Giordano','Punho-percussão da loja renal dolorosa','Pielonefrite / cólica obstrutiva'],
+     ['Jobert','Desaparecimento da macicez hepática (timpanismo)','Pneumoperitônio (víscera perfurada)']
+    ]}
+  ]
+},
+
+{
+  id:'neuro', nome:'Neurológico', ico:ICO.neuro,
+  titulo:'Exame Neurológico',
+  lead:'O exame que localiza a lesão. Sete domínios sistemáticos: consciência, meninges, pares cranianos, motor, reflexos, sensibilidade e coordenação/marcha.',
+  seq:['Consciência','Meninges','Pares cranianos','Motor / Reflexos','Sensibilidade','Coordenação'],
+  etapas:[
+    {n:'01',titulo:'Consciência & funções superiores',tag:'Avaliação',
+     tecnica:'Nível (Glasgow) e conteúdo da consciência: orientação têmporo-espacial, atenção, memória, linguagem (afasia?), praxia e gnosia.',
+     achados:[
+       {tipo:'normal',lab:'Vigil, orientado, linguagem preservada',desc:'Glasgow 15, sem afasia/apraxia/negligência.',badge:'Normal'},
+       {tipo:'alt',lab:'Rebaixamento / afasia',desc:'Afasia de Broca (expressão), de Wernicke (compreensão); negligência sugere lesão de hemisfério não dominante.',badge:'Alterado'}
+     ]},
+    {n:'02',titulo:'Sinais meníngeos',tag:'Manobras',
+     tecnica:'Pesquise rigidez de nuca (flexão passiva do pescoço), sinal de Kernig (extensão do joelho com quadril fletido gera dor/resistência) e Brudzinski (flexão do pescoço → flexão involuntária dos joelhos).',
+     achados:[
+       {tipo:'normal',lab:'Sem rigidez de nuca; Kernig/Brudzinski negativos',desc:'Pescoço flexível, sem dor à manobra.',badge:'Normal'},
+       {tipo:'alt',lab:'Síndrome de irritação meníngea',desc:'Rigidez de nuca + Kernig/Brudzinski positivos → meningite, hemorragia subaracnóidea.',badge:'Grave'}
+     ]},
+    {n:'03',titulo:'Pares cranianos (I–XII)',tag:'Exame',
+     tecnica:'Avalie de forma dirigida: olfato (I), acuidade/campo/fundo de olho (II), motricidade ocular e pupilas (III, IV, VI), sensibilidade facial e mastigação (V), mímica (VII), audição/equilíbrio (VIII), deglutição/véu (IX, X), trapézio/ECM (XI) e língua (XII).',
+     achados:[
+       {tipo:'normal',lab:'Pares cranianos sem déficits',desc:'Pupilas isocóricas fotorreagentes, oculomotricidade plena, face simétrica.',badge:'Normal'},
+       {tipo:'alt',lab:'Paralisia facial',desc:'Central (poupa fronte — AVC) vs periférica (toda a hemiface — paralisia de Bell).',badge:'Alterado'},
+       {tipo:'alt',lab:'Anisocoria / déficit de campo',desc:'Pupila dilatada fixa (herniação/III par), hemianopsias localizam a via óptica.',badge:'Alterado'}
+     ]},
+    {n:'04',titulo:'Sistema motor & reflexos',tag:'Exame',
+     tecnica:'Força (escala MRC 0–5), tônus (espástico/flácido), trofismo. Reflexos profundos (graduação 0 a 4+: bicipital, tricipital, patelar, aquileu), superficiais (cutâneo-plantar) e patológicos.',
+     achados:[
+       {tipo:'normal',lab:'Força grau V, tônus e reflexos normais (2+)',desc:'Cutâneo-plantar em flexão; sem movimentos involuntários.',badge:'Normal'},
+       {tipo:'alt',lab:'Síndrome do 1º neurônio (piramidal)',desc:'Espasticidade, hiperreflexia, Babinski (extensão do hálux), clônus, fraqueza.',badge:'Alterado'},
+       {tipo:'alt',lab:'Síndrome do 2º neurônio',desc:'Flacidez, hipo/arreflexia, atrofia, fasciculações.',badge:'Alterado'}
+     ],
+     hy:'Escala de força MRC: <b>0</b> sem contração · <b>1</b> esboço · <b>2</b> move sem vencer gravidade · <b>3</b> vence gravidade · <b>4</b> vence resistência parcial · <b>5</b> força normal.'},
+    {n:'05',titulo:'Sensibilidade',tag:'Exame',
+     tecnica:'Teste superficial (tátil, térmica, dolorosa) e profunda (vibratória com diapasão 128 Hz, proprioceptiva). Mapeie por dermátomos e compare lados.',
+     achados:[
+       {tipo:'normal',lab:'Sensibilidades preservadas e simétricas',desc:'Sem nível sensitivo, sem dissociação.',badge:'Normal'},
+       {tipo:'alt',lab:'Nível sensitivo / dissociação',desc:'Nível sugere lesão medular; dissociação (perde dor/temperatura, preserva tato/vibração) sugere lesão do trato espinotalâmico.',badge:'Alterado'}
+     ]},
+    {n:'06',titulo:'Coordenação, equilíbrio & marcha',tag:'Manobras',
+     tecnica:'Index-nariz e calcanhar-joelho (dismetria), diadococinesia, Romberg (equilíbrio com olhos fechados) e observe a marcha.',
+     achados:[
+       {tipo:'normal',lab:'Coordenação preservada; marcha atípica (normal)',desc:'Sem dismetria, Romberg negativo, marcha com base e passos normais.',badge:'Normal'},
+       {tipo:'alt',lab:'Síndrome cerebelar',desc:'Dismetria, disdiadococinesia, ataxia, nistagmo, Romberg que não piora com olhos fechados.',badge:'Alterado'},
+       {tipo:'alt',lab:'Marchas características',desc:'Ceifante (AVC), parkinsoniana (em bloco), escarvante (lesão de fibular), atáxica/talonante (cordão posterior).',badge:'Alterado'}
+     ],
+     hy:'<b>Romberg positivo</b> = paciente cai/oscila ao fechar os olhos → déficit proprioceptivo (cordão posterior) ou vestibular. Na ataxia cerebelar pura ele já oscila de olhos abertos.'}
+  ],
+  fisiopatologia:[
+   {t:'Por que o Babinski é positivo',p:'A extensão do hálux é um <b>reflexo primitivo</b> presente no bebê e normalmente <i>inibido</i> pelo trato corticoespinhal maduro. Quando há lesão do 1º neurônio (via piramidal), essa inibição se perde e o reflexo é “liberado” → hálux em extensão. No adulto sadio a resposta é flexora.'},
+   {t:'Por que 1º neurônio dá hiper e 2º dá hiporreflexia',p:'O trato corticoespinhal exerce <b>controle inibitório</b> sobre o arco reflexo medular. Lesão <b>acima</b> (1º neurônio) remove essa inibição → hiperreflexia, espasticidade, clônus e Babinski. Lesão do <b>2º neurônio</b> (corno anterior, raiz ou nervo) interrompe o próprio arco → arreflexia, flacidez, atrofia e fasciculações.'},
+   {t:'Por que aparece clônus',p:'Sem a inibição supraespinhal, o arco reflexo fica <b>hiperexcitável</b>: um estiramento muscular mantido dispara contrações rítmicas e repetidas, em vez de uma única resposta. É o mesmo mecanismo da hiperreflexia, levado ao extremo.'},
+   {t:'Por que o Romberg fica positivo',p:'O equilíbrio em pé depende de três entradas: <b>visão, sistema vestibular e propriocepção</b>. De olhos abertos, a visão compensa as outras. Ao fechar os olhos, se a propriocepção (cordão posterior) ou o vestíbulo estiverem lesados, falta referência e o paciente oscila/cai. Na ataxia <b>cerebelar</b>, ele já oscila de olhos abertos — por isso o teste é dito negativo nesse caso.'},
+   {t:'Por que o cerebelo causa dismetria',p:'O cerebelo regula a <b>amplitude e o “freio” (timing)</b> do movimento. Sem ele, falha a correção fina da trajetória → o dedo ultrapassa o alvo (dismetria), surge tremor que piora ao chegar perto do alvo (tremor de intenção) e os movimentos alternados se decompõem (disdiadococinesia).'},
+   {t:'Por que os sinais meníngeos doem',p:'A inflamação das meninges e das raízes torna o <b>estiramento doloroso</b>. Flexionar o pescoço (rigidez de nuca, Brudzinski) ou estender o joelho com o quadril fletido (Kernig) traciona essas raízes inflamadas → resistência reflexa e dor que limitam o movimento.'},
+   {t:'Por que a paralisia facial central poupa a fronte',p:'A parte do núcleo do facial que move a <b>fronte recebe inervação cortical bilateral</b>; a que move a face inferior recebe só do hemisfério contralateral. Numa lesão central (AVC), o lado intacto ainda supre a fronte → ela é poupada. Na lesão periférica (nervo/núcleo, p. ex. Bell), <b>toda a hemiface</b> é acometida.'},
+   {t:'Por que existe dissociação sensitiva',p:'As vias se separam na medula: <b>dor e temperatura</b> cruzam e sobem pelo trato espinotalâmico (anterolateral); <b>tato fino, vibração e propriocepção</b> sobem ipsilaterais pelo cordão posterior. Lesões seletivas (siringomielia, Brown-Séquard) atingem uma via e poupam a outra → perde-se uma modalidade mantendo a outra.'}
+  ],
+  tabelas:[]
+}
+];
+
+/* =========================================================
+   SONS CATALOGADOS
+   ========================================================= */
+const CARDIAC_SOUNDS=[
+ {key:'normal',nm:'B1 e B2 normais',dz:'Ritmo regular em 2 tempos — “lub-dub”.',alt:false},
+ {key:'desdobB2',nm:'Desdobramento de B2',dz:'A2 e P2 audíveis (inspiração).',alt:false},
+ {key:'soproSis',nm:'Sopro sistólico',dz:'Entre B1 e B2 — ex.: estenose aórtica.',alt:true},
+ {key:'soproDia',nm:'Sopro diastólico',dz:'Entre B2 e B1 — ex.: insuf. aórtica.',alt:true},
+ {key:'b3',nm:'B3 · galope ventricular',dz:'Protodiastólica, grave (IC).',alt:true},
+ {key:'b4',nm:'B4 · galope atrial',dz:'Pré-sistólica (ventrículo rígido).',alt:true},
+ {key:'atrito',nm:'Atrito pericárdico',dz:'Áspero, trifásico (pericardite).',alt:true}
+];
+const LUNG_SOUNDS=[
+ {key:'vesicular',nm:'Murmúrio vesicular',dz:'Som pulmonar normal, suave.',alt:false},
+ {key:'broncovesic',nm:'Sopro tubário',dz:'Som brônquico sobre consolidação.',alt:true},
+ {key:'crepFina',nm:'Estertores finos',dz:'Teleinspiratórios, em “velcro”.',alt:true},
+ {key:'crepGrossa',nm:'Estertores grossos',dz:'Bolhosos; mudam com a tosse.',alt:true},
+ {key:'sibilos',nm:'Sibilos',dz:'Musicais, agudos, expiratórios.',alt:true},
+ {key:'roncos',nm:'Roncos',dz:'Graves; secreção em vias maiores.',alt:true},
+ {key:'atritoPl',nm:'Atrito pleural',dz:'Áspero, bifásico (pleurite).',alt:true},
+ {key:'estridor',nm:'Estridor',dz:'Inspiratório, agudo (via aérea alta).',alt:true}
+];
+const PERIODS={heart:0.857, lung:3.6};   // s por ciclo
+const NCYC={heart:7, lung:3};
+const PLAY_SVG='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+const STOP_SVG='<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>';
+
+function phono(group,alt){
+  const col=alt?'var(--alert)':'var(--vital)';
+  if(group==='heart')
+    return `<svg viewBox="0 0 120 26" width="100%" height="26" preserveAspectRatio="none"><path d="M0 13 H22 l3 -9 3 9 H46 l4 -6 4 6 H78 l3 -9 3 9 H102 l4 -6 4 6 H120" fill="none" stroke="${col}" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+  return `<svg viewBox="0 0 120 26" width="100%" height="26" preserveAspectRatio="none"><path d="M0 13 q8 -9 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0" fill="none" stroke="${col}" stroke-width="1.6"/></svg>`;
+}
+function soundChip(group,s){
+  return `<button class="snd ${s.alt?'alt':''}" data-group="${group}" data-key="${s.key}">
+    <div class="row1"><span class="play">${PLAY_SVG}</span><span class="nm">${s.nm}</span></div>
+    <div class="dz">${s.dz}</div><div class="ph">${phono(group,s.alt)}</div></button>`;
+}
+
+/* tórax interativo */
+const FOCOS={
+ aortico:{ttl:'Foco Aórtico',loc:'2º EIC · borda esternal direita',p:'Melhor ausculta da valva aórtica. Sopro sistólico ejetivo que irradia para as carótidas sugere estenose aórtica.'},
+ pulmonar:{ttl:'Foco Pulmonar',loc:'2º EIC · borda esternal esquerda',p:'Valva pulmonar. Avalia o desdobramento fisiológico de B2 (A2–P2 na inspiração) e sopros da via de saída do VD.'},
+ tricuspide:{ttl:'Foco Tricúspide',loc:'Base do apêndice xifoide',p:'Valva tricúspide. Sopros aqui aumentam tipicamente com a inspiração (manobra de Rivero-Carvallo).'},
+ mitral:{ttl:'Foco Mitral (ápice)',loc:'5º EIC · linha hemiclavicular esquerda',p:'Onde melhor se ouvem B1, B3/B4 (campânula) e o sopro da insuficiência mitral, que irradia para a axila.'}
+};
+const THORAX_SVG=`<svg viewBox="0 0 300 320" role="img" aria-label="Tórax com focos de ausculta">
+  <defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="var(--surface2)"/><stop offset="1" stop-color="var(--surface)"/></linearGradient></defs>
+  <path d="M60 58 C60 38 92 34 112 38 C132 42 168 42 188 38 C208 34 240 38 240 58 L232 248 C230 284 204 300 150 300 C96 300 70 284 68 248 Z"
+    fill="url(#tg)" stroke="var(--line)" stroke-width="1.5"/>
+  <line x1="150" y1="66" x2="150" y2="206" stroke="var(--line)" stroke-width="2"/>
+  <path d="M96 96 q54 16 108 0 M92 126 q58 18 116 0 M92 158 q58 18 116 0 M96 190 q54 16 108 0"
+    fill="none" stroke="var(--line2)" stroke-width="1.4"/>
+  <g class="foco-dot" data-foco="aortico"><circle cx="118" cy="108" r="16" fill="var(--azure)" opacity=".18"/>
+    <circle class="core" cx="118" cy="108" r="8" fill="var(--azure)"/><text x="118" y="111.5" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">Ao</text></g>
+  <g class="foco-dot" data-foco="pulmonar"><circle cx="182" cy="108" r="16" fill="var(--violet)" opacity=".18"/>
+    <circle class="core" cx="182" cy="108" r="8" fill="var(--violet)"/><text x="182" y="111.5" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">P</text></g>
+  <g class="foco-dot" data-foco="tricuspide"><circle cx="140" cy="200" r="16" fill="var(--gold)" opacity=".18"/>
+    <circle class="core" cx="140" cy="200" r="8" fill="var(--gold)"/><text x="140" y="203.5" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">T</text></g>
+  <g class="foco-dot" data-foco="mitral"><circle cx="194" cy="224" r="16" fill="var(--vital)" opacity=".18"/>
+    <circle class="core" cx="194" cy="224" r="8" fill="var(--vital)"/><text x="194" y="227.5" text-anchor="middle" font-size="9" font-weight="700" fill="#05140e">M</text></g>
+</svg>`;
+function cardiacInteractive(){
+ return `<div class="interactive">
+   <div class="int-title">Tórax & focos de ausculta <span class="live">● ao vivo</span></div>
+   <div class="int-sub">Toque em cada foco para ver onde e o que auscultar. Depois ouça os fenômenos. <b style="color:var(--gold)">No iPhone, desative o modo silencioso</b> e suba o volume de mídia.</div>
+   <div class="thorax-wrap"><div class="thorax-svg">${THORAX_SVG}</div>
+   <div class="foco-info" id="focoInfo"><div class="ttl">Focos de ausculta</div><div class="loc">toque em um ponto</div>
+     <p class="hint">Cada cor marca um foco valvar. Selecione para ler a dica clínica.</p></div></div>
+   <div class="section-label">Ouça os fenômenos cardíacos</div>
+   <div class="sound-grid">${CARDIAC_SOUNDS.map(s=>soundChip('heart',s)).join('')}</div></div>`;
+}
+function lungInteractive(){
+ return `<div class="interactive">
+   <div class="int-title">Sons respiratórios <span class="live">● ao vivo</span></div>
+   <div class="int-sub">Murmúrio vesicular normal e os principais ruídos adventícios, sintetizados para comparação.</div>
+   <div class="sound-grid">${LUNG_SOUNDS.map(s=>soundChip('lung',s)).join('')}</div></div>`;
+}
+
+/* =========================================================
+   QUIZ estilo banca
+   ========================================================= */
+const QUIZ=[
+ {q:'Em qual local se localiza o foco mitral para ausculta?',
+  o:['2º EIC, borda esternal direita','2º EIC, borda esternal esquerda','Base do apêndice xifoide','5º EIC, linha hemiclavicular esquerda'],
+  c:3,e:'O foco mitral (ápice) fica no 5º espaço intercostal, na linha hemiclavicular esquerda — onde melhor se ouve B1 e o sopro da insuficiência mitral.'},
+ {q:'Paciente com murmúrio vesicular abolido em hemitórax. O que diferencia derrame pleural de pneumotórax ao exame físico?',
+  o:['O frêmito toracovocal','A percussão (maciça vs timpânica)','A inspeção','A ausculta da voz'],
+  c:1,e:'Ambos têm MV abolido e FTV reduzido. A percussão decide: maciça no derrame (líquido) e timpânica no pneumotórax (ar).'},
+ {q:'A presença de B3 (terceira bulha) em um adulto sugere classicamente:',
+  o:['Ventrículo pouco complacente (HVE)','Sobrecarga de volume / disfunção sistólica (IC)','Pericardite','Estenose mitral'],
+  c:1,e:'A B3 (galope protodiastólico) reflete sobrecarga de volume e disfunção sistólica — marcador de insuficiência cardíaca. A B4 é que se associa a ventrículo rígido.'},
+ {q:'Qual a sequência CORRETA do exame do abdome?',
+  o:['Inspeção → Palpação → Percussão → Ausculta','Inspeção → Ausculta → Percussão → Palpação','Ausculta → Inspeção → Palpação → Percussão','Palpação → Percussão → Ausculta → Inspeção'],
+  c:1,e:'No abdome a ausculta vem ANTES de percussão e palpação, pois manipular o abdome altera os ruídos hidroaéreos.'},
+ {q:'Frêmito toracovocal AUMENTADO em uma região do tórax sugere:',
+  o:['Derrame pleural','Pneumotórax','Consolidação (pneumonia)','Enfisema'],
+  c:2,e:'O meio sólido da consolidação transmite melhor a vibração → FTV aumentado, com sopro tubário e estertores finos. Ar/líquido interpostos reduzem o FTV.'},
+ {q:'Sinal de Murphy positivo orienta o diagnóstico de:',
+  o:['Apendicite','Colecistite aguda','Pielonefrite','Pancreatite'],
+  c:1,e:'Murphy = parada inspiratória súbita por dor à palpação do hipocôndrio direito → colecistite aguda. Apendicite tem Blumberg/McBurney na FID.'}
+];
+function renderQuiz(){
+ let h=`<section class="sys-panel" id="panel-quiz" role="tabpanel">
+   <div class="sys-head"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICO.quiz}</svg></div>
+   <div><h2>Auto-teste</h2><div class="lead">Seis questões no estilo das bancas para fixar os achados. Toque na alternativa para ver o gabarito comentado.</div></div></div>
+   <div class="q-foot" style="margin:0 0 18px"><span class="q-score" id="qScore">Acertos: 0 / ${QUIZ.length}</span></div>`;
+ QUIZ.forEach((q,i)=>{
+   h+=`<div class="quiz-card" style="margin-bottom:16px" data-qi="${i}"><div class="q-num">Questão ${i+1}</div><div class="q-txt">${q.q}</div>`;
+   q.o.forEach((o,j)=>{ h+=`<button class="opt" data-qi="${i}" data-oi="${j}">${o}</button>`; });
+   h+=`<div class="q-exp" id="exp-${i}"><b>Gabarito:</b> ${q.e}</div></div>`;
+ });
+ h+=`</section>`; return h;
+}
+let qAnswered={}, qScore=0;
+
+/* =========================================================
+   RENDER + NAVEGAÇÃO
+   ========================================================= */
+function renderPanel(sys){
+ let h=`<section class="sys-panel" id="panel-${sys.id}" role="tabpanel">
+   <div class="sys-head"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${sys.ico}</svg></div>
+   <div><h2>${sys.titulo}</h2><div class="lead">${sys.lead}</div></div></div>
+   <div class="seq-rail">`+sys.seq.map((s,i)=>`<span class="seq-pill"><b>${i+1}</b> ${s}</span>`).join('')+`</div>`;
+ sys.etapas.forEach(e=>{
+   h+=`<div class="step"><div class="step-head"><div class="step-num">${e.n}</div><h3>${e.titulo}</h3><span class="tag">${e.tag}</span></div>
+       <p class="tecnica">${e.tecnica}</p>
+       <div class="achados">`+e.achados.map(a=>`<div class="ach ${a.tipo==='normal'?'normal':'alt'}"><span class="mk"></span><div class="lab">${a.lab}<small>${a.desc}</small></div><span class="badge">${a.badge}</span></div>`).join('')+`</div>`;
+   if(e.hy) h+=`<div class="hy"><span class="star">★</span><p>${e.hy}</p></div>`;
+   if(e.interactive==='heart') h+=cardiacInteractive();
+   if(e.interactive==='lung') h+=lungInteractive();
+   h+=`</div>`;
+ });
+ sys.tabelas.forEach(t=>{
+   h+=`<div class="tbl-wrap"><table><caption>${t.caption}</caption><thead><tr>`+t.head.map(x=>`<th>${x}</th>`).join('')+`</tr></thead><tbody>`;
+   t.rows.forEach(r=>{ h+=`<tr>`+r.map((c,i)=> i===0?`<th>${c}</th>`:`<td>${c}</td>`).join('')+`</tr>`; });
+   h+=`</tbody></table></div>`;
+ });
+ if(sys.fisiopatologia){
+   h+=`<div class="section-label">Por que acontece — a fisiologia dos achados</div>`;
+   sys.fisiopatologia.forEach(m=>{ h+=`<div class="mech"><div class="mic">∴</div><div><h4>${m.t}</h4><p>${m.p}</p></div></div>`; });
+ }
+ h+=`</section>`; return h;
+}
+/* =========================================================
+   ILUSTRAÇÕES DAS MANOBRAS (SVG)
+   ========================================================= */
+const FIG={
+ pa:`<svg viewBox="0 0 260 150"><rect x="16" y="74" width="180" height="32" rx="16" fill="var(--surface2)" stroke="var(--line)" stroke-width="1.5"/><rect x="56" y="62" width="76" height="56" rx="8" fill="color-mix(in srgb,var(--azure) 20%,var(--surface))" stroke="var(--azure)" stroke-width="2"/><path d="M132 66 q40 -22 58 -6" fill="none" stroke="var(--muted)" stroke-width="2"/><circle cx="202" cy="44" r="17" fill="var(--surface)" stroke="var(--azure)" stroke-width="2"/><line x1="202" y1="44" x2="210" y2="34" stroke="var(--azure)" stroke-width="2.5" stroke-linecap="round"/><circle cx="150" cy="106" r="8" fill="var(--vital)"/><circle cx="150" cy="106" r="3" fill="var(--surface)"/><text class="fig-lbl" x="94" y="52" text-anchor="middle">manguito ~80% do braço</text><text class="fig-lbl" x="150" y="134" text-anchor="middle">estetoscópio na artéria braquial</text></svg>`,
+ tj:`<svg viewBox="0 0 260 150"><line x1="30" y1="120" x2="230" y2="120" stroke="var(--line)" stroke-width="1.5"/><path d="M40 120 L150 60" stroke="var(--surface2)" stroke-width="22" stroke-linecap="round"/><circle cx="168" cy="50" r="20" fill="var(--surface2)" stroke="var(--line)" stroke-width="1.5"/><path d="M152 64 q16 -2 24 -16" fill="none" stroke="var(--alert)" stroke-width="4" stroke-linecap="round"/><path d="M40 120 q14 8 26 -2" fill="none" stroke="var(--muted)" stroke-width="1.5"/><text class="fig-lbl" x="58" y="112">45°</text><text class="fig-lbl" x="150" y="92">jugular ingurgitada</text><text class="fig-cap" x="130" y="138" text-anchor="middle">decúbito a 45°, luz tangencial</text></svg>`,
+ ictus:`<svg viewBox="0 0 260 150"><path d="M86 24 C86 14 110 12 124 16 C138 20 150 20 164 16 C178 12 200 14 200 26 L194 124 C193 138 174 144 143 144 C112 144 89 138 88 124 Z" fill="var(--surface2)" stroke="var(--line)" stroke-width="1.5"/><line x1="143" y1="30" x2="143" y2="110" stroke="var(--line)" stroke-width="1.5"/><circle cx="166" cy="104" r="9" fill="var(--vital)"/><circle cx="166" cy="104" r="14" fill="none" stroke="var(--vital)" stroke-width="1.5" opacity=".5"/><g stroke="var(--azure)" stroke-width="3" stroke-linecap="round"><line x1="186" y1="96" x2="172" y2="102"/><line x1="188" y1="104" x2="174" y2="106"/><line x1="186" y1="112" x2="173" y2="110"/></g><text class="fig-lbl" x="120" y="92" text-anchor="end">5º EIC</text><text class="fig-cap" x="143" y="138" text-anchor="middle">linha hemiclavicular esquerda</text></svg>`,
+ valsalva:`<svg viewBox="0 0 260 150"><circle cx="80" cy="60" r="26" fill="var(--surface2)" stroke="var(--line)" stroke-width="1.5"/><circle cx="74" cy="56" r="3" fill="var(--ink2)"/><path d="M64 72 q12 8 24 0" fill="none" stroke="var(--ink2)" stroke-width="2.5" stroke-linecap="round"/><path d="M104 64 q24 -2 40 0" fill="none" stroke="var(--gold)" stroke-width="3" stroke-dasharray="3 4"/><path d="M142 60 l10 4 -10 4z" fill="var(--gold)"/><text class="fig-lbl" x="118" y="50" text-anchor="middle">esforço expiratório</text><g stroke="var(--alert)" stroke-width="2.5" stroke-linecap="round"><line x1="80" y1="98" x2="80" y2="124"/></g><path d="M80 124 l-5 -10 10 0z" fill="var(--alert)"/><text class="fig-lbl" x="118" y="118" text-anchor="middle">↓ retorno venoso</text><text class="fig-cap" x="130" y="140" text-anchor="middle">sopro da maioria diminui · CMH/prolapso aumentam</text></svg>`,
+ handgrip:`<svg viewBox="0 0 260 150"><path d="M70 60 q20 -4 40 0 l0 36 q0 18 -22 18 q-24 0 -24 -22 z" fill="var(--surface2)" stroke="var(--line)" stroke-width="1.5"/><g stroke="var(--ink2)" stroke-width="5" stroke-linecap="round"><line x1="74" y1="58" x2="100" y2="54"/><line x1="76" y1="68" x2="104" y2="66"/><line x1="76" y1="80" x2="104" y2="80"/></g><path d="M130 70 q30 -4 56 0" fill="none" stroke="var(--alert)" stroke-width="3" stroke-dasharray="3 4"/><path d="M184 66 l10 4 -10 4z" fill="var(--alert)"/><text class="fig-lbl" x="158" y="56" text-anchor="middle">↑ pós-carga</text><text class="fig-cap" x="130" y="138" text-anchor="middle">preensão sustentada 20–30 s</text></svg>`,
+ pulsos:`<svg viewBox="0 0 260 150"><line x1="20" y1="30" x2="20" y2="120" stroke="var(--line)" stroke-width="1.5"/><line x1="20" y1="120" x2="240" y2="120" stroke="var(--line)" stroke-width="1.5"/><path d="M20 110 q14 -22 30 -22 q20 0 34 24" fill="none" stroke="var(--azure)" stroke-width="2.5"/><path d="M118 110 q4 -52 14 -52 q8 0 8 6 q0 30 30 56" fill="none" stroke="var(--alert)" stroke-width="2.5"/><text class="fig-lbl" x="52" y="78" text-anchor="middle">parvus et tardus</text><text class="fig-lbl" x="150" y="46" text-anchor="middle">martelo d’água</text><text class="fig-cap" x="52" y="136" text-anchor="middle">estenose Ao</text><text class="fig-cap" x="160" y="136" text-anchor="middle">insuf. Ao</text></svg>`,
+ glasgow:`<svg viewBox="0 0 260 150"><g><circle cx="56" cy="56" r="22" fill="var(--surface2)" stroke="var(--azure)" stroke-width="2"/><path d="M44 56 q12 -12 24 0 q-12 12 -24 0z" fill="none" stroke="var(--azure)" stroke-width="2"/><circle cx="56" cy="56" r="4" fill="var(--azure)"/><text class="fig-lbl" x="56" y="92" text-anchor="middle">ocular /4</text></g><g><circle cx="130" cy="56" r="22" fill="var(--surface2)" stroke="var(--gold)" stroke-width="2"/><path d="M118 60 q12 10 24 0" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round"/><text class="fig-lbl" x="130" y="92" text-anchor="middle">verbal /5</text></g><g><circle cx="204" cy="56" r="22" fill="var(--surface2)" stroke="var(--vital)" stroke-width="2"/><path d="M196 50 v12 m6 -16 v16 m6 -14 v12" stroke="var(--vital)" stroke-width="3" stroke-linecap="round"/><text class="fig-lbl" x="204" y="92" text-anchor="middle">motor /6</text></g><text class="fig-cap" x="130" y="124" text-anchor="middle">some os três · 15 = normal · ≤8 = via aérea</text></svg>`,
+ nuca:`<svg viewBox="0 0 260 150"><line x1="40" y1="118" x2="200" y2="118" stroke="var(--line)" stroke-width="1.5"/><line x1="60" y1="118" x2="150" y2="118" stroke="var(--surface2)" stroke-width="20" stroke-linecap="round"/><circle cx="170" cy="96" r="20" fill="var(--surface2)" stroke="var(--line)" stroke-width="1.5"/><path d="M150 100 q10 18 -6 22" fill="none" stroke="var(--alert)" stroke-width="3"/><path d="M168 78 q20 -16 36 4" fill="none" stroke="var(--azure)" stroke-width="2.5" stroke-dasharray="4 3"/><path d="M204 86 l2 -11 -10 5z" fill="var(--azure)"/><text class="fig-lbl" x="196" y="62" text-anchor="middle">flexão do pescoço</text><text class="fig-lbl" x="120" y="138" text-anchor="middle">resistência / dor = rigidez</text></svg>`,
+ kernig:`<svg viewBox="0 0 260 150"><line x1="20" y1="120" x2="120" y2="120" stroke="var(--surface2)" stroke-width="20" stroke-linecap="round"/><circle cx="20" cy="116" r="9" fill="var(--surface2)" stroke="var(--line)"/><line x1="120" y1="120" x2="140" y2="64" stroke="var(--ink2)" stroke-width="8" stroke-linecap="round"/><line x1="140" y1="64" x2="196" y2="78" stroke="var(--ink2)" stroke-width="8" stroke-linecap="round"/><path d="M160 60 q24 -6 40 8" fill="none" stroke="var(--azure)" stroke-width="2.5" stroke-dasharray="4 3"/><path d="M200 68 l2 -11 -10 5z" fill="var(--azure)"/><path d="M150 70 q-8 -8 -2 -16" fill="none" stroke="var(--alert)" stroke-width="3"/><text class="fig-lbl" x="206" y="56" text-anchor="middle">extensão do joelho</text><text class="fig-cap" x="120" y="140" text-anchor="middle">quadril e joelho a 90° → estende</text></svg>`,
+ brudzinski:`<svg viewBox="0 0 260 150"><line x1="40" y1="110" x2="180" y2="110" stroke="var(--surface2)" stroke-width="18" stroke-linecap="round"/><circle cx="186" cy="92" r="16" fill="var(--surface2)" stroke="var(--line)"/><path d="M186 76 q14 -12 26 2" fill="none" stroke="var(--azure)" stroke-width="2.5" stroke-dasharray="4 3"/><path d="M212 80 l1 -10 -9 5z" fill="var(--azure)"/><path d="M70 110 q-2 -24 18 -28 q18 -2 14 14" fill="none" stroke="var(--alert)" stroke-width="6" stroke-linecap="round"/><path d="M96 86 l9 -6 -1 11z" fill="var(--alert)"/><text class="fig-lbl" x="204" y="64" text-anchor="middle">flexão do pescoço</text><text class="fig-lbl" x="60" y="70">joelhos sobem</text><text class="fig-cap" x="130" y="138" text-anchor="middle">flexão reflexa dos MMII</text></svg>`,
+ deficit:`<svg viewBox="0 0 260 150"><line x1="20" y1="120" x2="240" y2="120" stroke="var(--line)" stroke-width="1.5"/><g stroke="var(--vital)" stroke-width="7" stroke-linecap="round"><line x1="60" y1="120" x2="78" y2="70"/><line x1="78" y1="70" x2="108" y2="70"/></g><g stroke="var(--alert)" stroke-width="7" stroke-linecap="round"><line x1="150" y1="120" x2="166" y2="88"/><line x1="166" y1="88" x2="196" y2="100"/></g><path d="M196 96 q8 14 0 22" fill="none" stroke="var(--alert)" stroke-width="2.5" stroke-dasharray="4 3"/><path d="M196 118 l5 -9 -10 1z" fill="var(--alert)"/><text class="fig-lbl" x="84" y="58" text-anchor="middle">sustenta</text><text class="fig-lbl" x="180" y="78" text-anchor="middle">cai (parético)</text><text class="fig-cap" x="130" y="140" text-anchor="middle">Mingazzini — MMII a 90°</text></svg>`,
+ reflexo:`<svg viewBox="0 0 260 150"><line x1="30" y1="60" x2="120" y2="60" stroke="var(--ink2)" stroke-width="8" stroke-linecap="round"/><line x1="120" y1="60" x2="150" y2="120" stroke="var(--ink2)" stroke-width="8" stroke-linecap="round"/><circle cx="120" cy="60" r="9" fill="var(--surface2)" stroke="var(--line)"/><path d="M150 120 q40 4 56 -16" fill="none" stroke="var(--vital)" stroke-width="2.5" stroke-dasharray="4 3"/><path d="M206 104 l3 11 -11 -3z" fill="var(--vital)"/><line x1="126" y1="86" x2="138" y2="78" stroke="var(--alert)" stroke-width="3" stroke-linecap="round"/><polygon points="138,72 150,76 142,84" fill="var(--alert)"/><text class="fig-lbl" x="132" y="100">percussão do tendão</text><text class="fig-lbl" x="200" y="92" text-anchor="middle">perna estende</text></svg>`,
+ babinski:`<svg viewBox="0 0 260 150"><path d="M24 96 q70 26 150 6" fill="none" stroke="var(--ink2)" stroke-width="3" stroke-linecap="round"/><path d="M22 96 q-10 -16 8 -26" fill="none" stroke="var(--ink2)" stroke-width="3" stroke-linecap="round"/><g stroke="var(--ink2)" stroke-width="3" stroke-linecap="round"><line x1="176" y1="100" x2="198" y2="98"/><line x1="174" y1="106" x2="196" y2="107"/><line x1="170" y1="112" x2="188" y2="116"/></g><line x1="178" y1="94" x2="208" y2="62" stroke="var(--alert)" stroke-width="5" stroke-linecap="round"/><polygon points="200,56 214,54 206,68" fill="var(--alert)"/><path d="M44 112 q60 26 116 8" fill="none" stroke="var(--azure)" stroke-width="2" stroke-dasharray="4 3"/><polygon points="158,124 170,118 166,130" fill="var(--azure)"/><text class="fig-lbl" x="84" y="138" text-anchor="middle">estímulo borda lateral →</text><text class="fig-lbl" x="206" y="48" text-anchor="middle">hálux estende</text></svg>`,
+ indexnariz:`<svg viewBox="0 0 260 150"><circle cx="60" cy="60" r="22" fill="var(--surface2)" stroke="var(--line)" stroke-width="1.5"/><circle cx="60" cy="64" r="3" fill="var(--ink2)"/><line x1="80" y1="74" x2="150" y2="100" stroke="var(--ink2)" stroke-width="7" stroke-linecap="round"/><line x1="150" y1="100" x2="76" y2="62" stroke="var(--ink2)" stroke-width="7" stroke-linecap="round"/><path d="M150 100 q24 -30 -70 -38" fill="none" stroke="var(--vital)" stroke-width="2" stroke-dasharray="4 3"/><circle cx="210" cy="70" r="6" fill="var(--azure)"/><line x1="80" y1="62" x2="200" y2="68" stroke="var(--azure)" stroke-width="2" stroke-dasharray="4 3"/><text class="fig-lbl" x="210" y="92" text-anchor="middle">dedo-alvo</text><text class="fig-cap" x="120" y="140" text-anchor="middle">nariz → alvo, repetido</text></svg>`,
+ romberg:`<svg viewBox="0 0 260 150"><line x1="60" y1="128" x2="200" y2="128" stroke="var(--line)" stroke-width="1.5"/><circle cx="130" cy="42" r="18" fill="var(--surface2)" stroke="var(--line)" stroke-width="1.5"/><path d="M122 40 l8 6 M138 40 l-8 6" stroke="var(--ink2)" stroke-width="2" stroke-linecap="round"/><line x1="130" y1="60" x2="130" y2="104" stroke="var(--ink2)" stroke-width="8" stroke-linecap="round"/><line x1="130" y1="72" x2="108" y2="96" stroke="var(--ink2)" stroke-width="6" stroke-linecap="round"/><line x1="130" y1="72" x2="152" y2="96" stroke="var(--ink2)" stroke-width="6" stroke-linecap="round"/><line x1="130" y1="104" x2="124" y2="128" stroke="var(--ink2)" stroke-width="6" stroke-linecap="round"/><line x1="130" y1="104" x2="136" y2="128" stroke="var(--ink2)" stroke-width="6" stroke-linecap="round"/><path d="M104 50 q-16 -6 0 -12 M156 50 q16 -6 0 -12" fill="none" stroke="var(--alert)" stroke-width="2.5"/><text class="fig-lbl" x="130" y="22" text-anchor="middle">olhos fechados → oscila</text><text class="fig-cap" x="130" y="146" text-anchor="middle">pés juntos · ampare o paciente</text></svg>`,
+ marcha:`<svg viewBox="0 0 260 150"><g fill="var(--surface2)" stroke="var(--vital)" stroke-width="1.8"><ellipse cx="44" cy="100" rx="12" ry="20"/><ellipse cx="84" cy="70" rx="12" ry="20"/><ellipse cx="124" cy="100" rx="12" ry="20"/><ellipse cx="164" cy="70" rx="12" ry="20"/><ellipse cx="204" cy="100" rx="12" ry="20"/></g><path d="M44 100 Q64 85 84 70 T124 100 T164 70 T204 100" fill="none" stroke="var(--azure)" stroke-width="1.5" stroke-dasharray="4 3"/><text class="fig-cap" x="130" y="138" text-anchor="middle">livre · ponta · calcanhar · tandem</text></svg>`
+};
+
+/* =========================================================
+   MANOBRAS — passo a passo
+   ========================================================= */
+const MANOBRAS=[
+ {sis:'Cardiovascular', itens:[
+  {nome:'Aferição da pressão arterial',fig:'pa',ind:'Medida indireta da PA pelo método auscultatório.',
+   passos:['Paciente sentado, em repouso 5 min, dorso apoiado, pernas descruzadas, braço à altura do coração.','Use o manguito cuja câmara cubra ~80% da circunferência e 40% da largura do braço.','Palpe a artéria braquial e insufle 30 mmHg acima do desaparecimento do pulso radial (evita o hiato auscultatório).','Posicione o diafragma sobre a braquial e desinsufle 2–3 mmHg/s.','1º som de Korotkoff = sistólica; desaparecimento (fase V) = diastólica.'],
+   res:'Normal <130×85 mmHg. Manguito pequeno ou braço abaixo do coração superestimam a PA.',
+   porque:'Os sons de Korotkoff são fluxo turbulento que só existe enquanto a pressão do manguito fica entre a sistólica e a diastólica; abaixo da diastólica o fluxo volta a ser laminar e silencia.'},
+  {nome:'Turgência jugular & refluxo hepatojugular',fig:'tj',ind:'Estima a pressão venosa central / coração direito.',
+   passos:['Decúbito a 45°, cabeça levemente girada para o lado oposto, luz tangencial.','Identifique o pulso venoso jugular interno (difuso, bifásico, varia com respiração e posição).','Meça a altura da coluna em relação ao ângulo de Louis.','Para o refluxo, comprima firmemente o hipocôndrio direito por 10–15 s e observe a jugular.'],
+   res:'Estase a 45° = ↑pressão venosa central. Refluxo positivo se a coluna sobe e se mantém durante a compressão.',
+   porque:'A jugular é uma coluna que reflete a pressão do átrio direito; um VD que não acomoda o aumento de retorno (IC direita) mantém a coluna elevada.'},
+  {nome:'Localização do ictus cordis',fig:'ictus',ind:'Estima o tamanho e a posição do coração.',
+   passos:['Decúbito dorsal a 30–45°.','Localize o ponto de maior impulso com a face palmar e depois com as polpas digitais.','Se preciso, vire em decúbito lateral esquerdo (anote que essa posição desvia o ictus).','Avalie localização, extensão (nº de polpas), intensidade e duração.'],
+   res:'Normal no 4º–5º EIC, linha hemiclavicular esquerda, ≤2 polpas. Desviado para baixo/lateral e difuso = cardiomegalia.',
+   porque:'A dilatação/hipertrofia do VE empurra a ponta para baixo e para fora; sobrecarga de pressão dá ictus sustentado, de volume dá ictus amplo.'},
+  {nome:'Posições e foco para ausculta',ind:'Realça sons específicos aproximando a estrutura da parede.',
+   passos:['Sentado, inclinado para frente, em apneia expiratória → realça a insuficiência aórtica.','Decúbito lateral esquerdo, campânula no ápice → realça B3, B4 e o ruflar da estenose mitral.','Diafragma para sons agudos (B1, B2, regurgitações); campânula (pressão leve) para graves (B3, B4, ruflar).'],
+   res:'A posição correta direciona o jato sonoro para o estetoscópio e o foco certo capta a valva de interesse.',
+   porque:'Sons graves exigem pouca pressão na campânula; pressionar demais a transforma em diafragma e os elimina.'},
+  {nome:'Manobra de Rivero-Carvallo',ind:'Identifica sopros de câmaras direitas.',
+   passos:['Ausculte o foco tricúspide.','Peça uma inspiração profunda e sustentada.','Compare a intensidade do sopro entre inspiração e expiração.'],
+   res:'Sopro que AUMENTA na inspiração é de câmaras direitas (insuf./estenose tricúspide, sopros pulmonares).',
+   porque:'A inspiração aumenta o retorno venoso ao coração direito, elevando o fluxo pela valva acometida.'},
+  {nome:'Manobra de Valsalva',fig:'valsalva',ind:'Diferencia sopros pela queda da pré-carga.',
+   passos:['Peça expiração forçada contra a via fechada (soprar contra a mão/glote) por 10–15 s.','Ausculte durante a fase de esforço, quando o retorno venoso cai.'],
+   res:'A maioria dos sopros DIMINUI; aumentam o da cardiomiopatia hipertrófica (CMH) e o do prolapso mitral.',
+   porque:'O esforço ↑pressão intratorácica e ↓retorno venoso → menos volume no VE. Na CMH, menos volume estreita a via de saída e intensifica o sopro.'},
+  {nome:'Handgrip (preensão sustentada)',fig:'handgrip',ind:'Diferencia sopros pelo aumento da pós-carga.',
+   passos:['Peça preensão palmar máxima e sustentada por 20–30 s.','Ausculte durante a contração isométrica.'],
+   res:'Aumentam os sopros de REGURGITAÇÃO (insuf. mitral, aórtica, CIV); diminuem EAo e CMH.',
+   porque:'A contração isométrica ↑resistência vascular periférica (pós-carga), favorecendo o refluxo pelas valvas incompetentes.'},
+  {nome:'Agachar e levantar',ind:'Variação combinada de pré e pós-carga — ótimo para isolar CMH/prolapso.',
+   passos:['Agachar: ↑retorno venoso e ↑pós-carga → intensifica a maioria dos sopros.','Levantar bruscamente: ↓pré-carga → reduz a maioria.'],
+   res:'CMH e prolapso mitral se comportam de forma OPOSTA: aumentam ao levantar e diminuem ao agachar.',
+   porque:'Mesma lógica de pré-carga: menos volume no VE piora a obstrução dinâmica da CMH e antecipa o prolapso.'},
+  {nome:'Avaliação dos pulsos arteriais',fig:'pulsos',ind:'Caracteriza a onda de pulso.',
+   passos:['Palpe radial e carotídeo (nunca os dois carotídeos ao mesmo tempo).','Avalie amplitude, velocidade de ascensão, simetria e ritmo.','Correlacione com a ausculta cardíaca.'],
+   res:'Parvus et tardus (pequeno, lento) = estenose aórtica. Martelo d’água/Corrigan (amplo, em colapso) = insuficiência aórtica.',
+   porque:'A obstrução fixa reduz e atrasa a ejeção; já a regurgitação aórtica gera grande volume sistólico com escape diastólico rápido.'}
+ ]},
+ {sis:'Neurológico', itens:[
+  {nome:'Escala de Coma de Glasgow',fig:'glasgow',ind:'Quantifica o nível de consciência.',
+   passos:['Abertura ocular: 4 espontânea · 3 ao chamado · 2 à dor · 1 nenhuma.','Resposta verbal: 5 orientado · 4 confuso · 3 palavras · 2 sons · 1 nenhuma.','Resposta motora: 6 obedece · 5 localiza · 4 retira · 3 flexão anormal · 2 extensão · 1 nenhuma.','Some os três e descreva os componentes (ex.: O3 V4 M5 = 12).'],
+   res:'15 = normal; ≤8 indica via aérea definitiva (em geral intubação).',
+   porque:'Cada eixo testa uma via funcional distinta; a resposta motora é o componente de maior valor prognóstico.'},
+  {nome:'Rigidez de nuca',fig:'nuca',ind:'Pesquisa irritação meníngea.',
+   passos:['Decúbito dorsal, paciente relaxado.','Flexione passivamente o pescoço, levando o queixo ao tórax.'],
+   res:'Positiva quando há resistência involuntária e dor que limitam a flexão.',
+   porque:'A flexão traciona meninges e raízes inflamadas, disparando contração reflexa de defesa.'},
+  {nome:'Sinal de Kernig',fig:'kernig',ind:'Pesquisa irritação meníngea.',
+   passos:['Decúbito dorsal; flexione quadril e joelho a 90°.','Tente estender o joelho mantendo o quadril fletido.'],
+   res:'Positivo se houver resistência/dor que impede a extensão.',
+   porque:'A extensão estira as raízes lombossacras já irritadas pela inflamação meníngea.'},
+  {nome:'Sinal de Brudzinski',fig:'brudzinski',ind:'Pesquisa irritação meníngea.',
+   passos:['Decúbito dorsal; flexione passivamente o pescoço.','Observe os membros inferiores.'],
+   res:'Positivo se houver flexão involuntária de quadris e joelhos.',
+   porque:'A tração das raízes pela flexão cervical provoca flexão reflexa dos MMII para aliviar o estiramento.'},
+  {nome:'Força & manobras deficitárias',fig:'deficit',ind:'Detecta paresia sutil (déficit piramidal).',
+   passos:['Gradue a força pela escala MRC (0–5) em cada grupo muscular.','Mingazzini (MMII): em decúbito, quadris e joelhos a 90°; observe se um lado cai.','Manobra dos braços estendidos (Barré): braços para frente, palmas para cima, olhos fechados; o lado parético prona e cai.'],
+   res:'Queda ou pronação de um lado indica déficit piramidal mesmo com força aparentemente normal.',
+   porque:'A via piramidal mantém o tônus antigravitário fino; sua lesão leve já não sustenta a postura contra a gravidade.'},
+  {nome:'Reflexos profundos (miotáticos)',fig:'reflexo',ind:'Avalia o arco reflexo e a via piramidal.',
+   passos:['Membro relaxado e levemente estirado; percuta o tendão (bicipital, tricipital, braquiorradial, patelar, aquileu).','Compare sempre os dois lados.','Se ausentes, reforce com a manobra de Jendrassik (puxar as mãos entrelaçadas).'],
+   res:'Gradue de 0 (ausente) a 4+ (exaltado, com clônus). Normal = 2+.',
+   porque:'A percussão estira o fuso muscular e dispara contração reflexa monossináptica. Hiperreflexia = perda da inibição piramidal (1º neurônio); arreflexia = lesão do arco (2º neurônio).'},
+  {nome:'Reflexo cutâneo-plantar / Babinski',fig:'babinski',ind:'Pesquisa lesão da via piramidal.',
+   passos:['Com objeto rombo, estimule a borda lateral da planta, do calcâneo até a base dos dedos.','Observe a resposta do hálux.'],
+   res:'Normal = flexão plantar do hálux. Babinski = extensão do hálux (± abertura em leque) → lesão piramidal.',
+   porque:'É um reflexo primitivo normalmente inibido pelo trato corticoespinhal; sua liberação sinaliza lesão do 1º neurônio.'},
+  {nome:'Pesquisa de clônus',ind:'Sinal de hiperexcitabilidade (1º neurônio).',
+   passos:['Dorsiflexione brusca e mantidamente o tornozelo (clônus aquileu), ou empurre a patela para baixo.','Mantenha o estiramento e observe.'],
+   res:'Contrações rítmicas e repetidas = clônus.',
+   porque:'Sem a inibição supraespinhal, o estiramento mantido dispara ciclos repetidos do reflexo de estiramento.'},
+  {nome:'Index-nariz',fig:'indexnariz',ind:'Coordenação apendicular dos MMSS.',
+   passos:['Peça para tocar o próprio nariz e depois o dedo do examinador, repetidamente.','Mude a posição do dedo-alvo a cada repetição.'],
+   res:'Dismetria (erra/ultrapassa o alvo) e tremor que piora ao chegar perto = disfunção cerebelar.',
+   porque:'O cerebelo calibra a amplitude e o “freio” do movimento; sua lesão impede a correção fina da trajetória.'},
+  {nome:'Calcanhar-joelho',ind:'Coordenação apendicular dos MMII.',
+   passos:['Em decúbito, peça para pôr o calcanhar no joelho oposto.','Deslize o calcanhar pela crista da tíbia até o tornozelo.'],
+   res:'Deslize irregular/atáxico indica incoordenação (cerebelar ou proprioceptiva).',
+   porque:'Integra cerebelo e propriocepção; a perda de qualquer um desorganiza o movimento dirigido.'},
+  {nome:'Diadococinesia',ind:'Movimentos alternados rápidos.',
+   passos:['Peça pronação/supinação rápida das mãos sobre a coxa, ou bater alternando palma e dorso.','Observe ritmo e regularidade.'],
+   res:'Lentidão e desorganização = disdiadococinesia (lesão cerebelar).',
+   porque:'O cerebelo coordena o timing da alternância agonista/antagonista; sua falha decompõe o movimento.'},
+  {nome:'Romberg',fig:'romberg',ind:'Distingue ataxia sensitiva de cerebelar.',
+   passos:['Paciente em pé, pés juntos, braços ao lado, primeiro de olhos abertos.','Peça para fechar os olhos e observe ~30 s (fique ao lado para amparar).'],
+   res:'Positivo se oscila/cai só ao fechar os olhos → déficit proprioceptivo (cordão posterior) ou vestibular.',
+   porque:'Sem a visão para compensar, falta de propriocepção/vestíbulo desestabiliza. Na ataxia cerebelar pura, já oscila de olhos abertos.'},
+  {nome:'Avaliação da marcha',fig:'marcha',ind:'Integra força, coordenação e propriocepção.',
+   passos:['Observe a marcha livre, depois na ponta dos pés, nos calcanhares e em tandem (pé ante pé).'],
+   res:'Padrões: ceifante (AVC), parkinsoniana (em bloco/festinante), escarvante (pé caído), talonante (cordão posterior), ebriosa (cerebelar).',
+   porque:'Cada padrão reflete o sistema lesado — piramidal, extrapiramidal, periférico, sensitivo ou cerebelar.'}
+ ]},
+ {sis:'Abdome', itens:[
+  {nome:'Sinal de Murphy',ind:'Pesquisa colecistite aguda.',
+   passos:['Palpe o ponto cístico (rebordo costal direito, linha hemiclavicular).','Peça inspiração profunda durante a palpação.'],
+   res:'Positivo = parada súbita da inspiração por dor.',
+   porque:'A vesícula inflamada desce na inspiração e toca os dedos, interrompendo o movimento por dor.'},
+  {nome:'Sinal de Blumberg',ind:'Pesquisa irritação peritoneal.',
+   passos:['Comprima profundamente a fossa ilíaca direita.','Solte de forma brusca e observe a reação.'],
+   res:'Dor à descompressão brusca = positivo.',
+   porque:'O peritônio parietal inflamado dói mais ao recuar bruscamente do que à compressão lenta.'},
+  {nome:'Sinal de Rovsing',ind:'Apoia o diagnóstico de apendicite.',
+   passos:['Comprima a fossa ilíaca esquerda em direção à direita.'],
+   res:'Dor referida na fossa ilíaca direita = positivo.',
+   porque:'O deslocamento de gás distende o ceco e estimula o apêndice inflamado.'},
+  {nome:'Pesquisa de ascite (piparote)',ind:'Detecta líquido livre volumoso.',
+   passos:['Um assistente apoia a borda da mão na linha média do abdome.','Percuta (“piparote”) um flanco e sinta a onda chegar no flanco oposto.'],
+   res:'Onda líquida palpável = ascite volumosa. Complemente com macicez móvel de decúbito.',
+   porque:'O líquido livre transmite a onda mecânica; a mão central bloqueia a transmissão pela parede/gordura.'},
+  {nome:'Sinal de Giordano',ind:'Pesquisa acometimento renal.',
+   passos:['Punho-percussão suave da loja renal (ângulo costovertebral).'],
+   res:'Dor = positivo (pielonefrite, litíase obstruída).',
+   porque:'A vibração sobre o rim inflamado/distendido reproduz a dor de origem renal.'},
+  {nome:'Sinal de Jobert',ind:'Pesquisa pneumoperitônio.',
+   passos:['Percuta a área de macicez hepática habitual.'],
+   res:'Timpanismo onde deveria haver macicez = positivo (víscera perfurada).',
+   porque:'O ar livre na cavidade se interpõe entre o fígado e a parede, abolindo a macicez.'}
+ ]},
+ {sis:'Respiratório', itens:[
+  {nome:'Expansibilidade torácica',ind:'Avalia a simetria da ventilação.',
+   passos:['Mãos espalmadas no dorso, polegares próximos à coluna.','Peça inspiração profunda e observe a abertura simétrica dos polegares.'],
+   res:'Reduzida no lado acometido (derrame, consolidação, pneumotórax, atelectasia).',
+   porque:'Qualquer processo que ocupe espaço ou reduza a complacência limita a expansão daquele hemitórax.'},
+  {nome:'Frêmito toracovocal (FTV)',ind:'Avalia a transmissão da vibração da voz.',
+   passos:['Palme simetricamente os hemitórax com a borda ulnar ou a palma.','Peça ao paciente para repetir “trinta e três”.'],
+   res:'Aumentado na consolidação; reduzido/abolido em derrame, pneumotórax e atelectasia obstrutiva.',
+   porque:'O meio sólido transmite melhor a vibração (↑FTV); ar ou líquido interpostos a dissipam (↓FTV).'},
+  {nome:'Ausculta da voz',ind:'Confirma consolidação vs derrame.',
+   passos:['Ausculte enquanto o paciente diz “trinta e três”.','Pesquise broncofonia, pectorilóquia (afônica) e egofonia.'],
+   res:'Broncofonia/pectorilóquia mais nítidas em consolidação; egofonia (som “é” vira “a”) no limite superior do derrame.',
+   porque:'O parênquima consolidado conduz melhor as frequências da voz; a lâmina de líquido filtra e distorce o som.'}
+ ]}
+];
+function renderManobras(){
+ let h=`<section class="sys-panel" id="panel-manobras" role="tabpanel">
+   <div class="sys-head"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICO.manobras}</svg></div>
+   <div><h2>Manobras — passo a passo</h2><div class="lead">Cada manobra com a técnica numerada, a ilustração da execução e a interpretação. Nas de coração e neuro, o bloco roxo explica <b>por que</b> o resultado acontece.</div></div></div>`;
+ MANOBRAS.forEach(g=>{
+   h+=`<div class="section-label">${g.sis}</div><div class="man-grid">`;
+   g.itens.forEach(m=>{
+     h+=`<div class="man-card">`;
+     if(m.fig&&FIG[m.fig]) h+=`<div class="man-fig">${FIG[m.fig]}</div>`;
+     h+=`<div class="man-body"><div class="mtag">${g.sis}</div><h3>${m.nome}</h3><div class="ind">${m.ind}</div>
+         <ol class="man-steps">`+m.passos.map(p=>`<li>${p}</li>`).join('')+`</ol>
+         <div class="man-res"><b>Resultado:</b> ${m.res}</div>`;
+     if(m.porque) h+=`<div class="man-why"><b>Por quê:</b> ${m.porque}</div>`;
+     h+=`</div></div>`;
+   });
+   h+=`</div>`;
+ });
+ h+=`</section>`; return h;
+}
+
+// montar nav + main
+const navEl=document.getElementById('navScroll'), mainEl=document.getElementById('main');
+let navHTML='', mainHTML='';
+SISTEMAS.forEach((s,i)=>{
+ navHTML+=`<button class="sys-btn ${i===0?'active':''}" data-target="${s.id}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${s.ico}</svg>${s.nome}</button>`;
+ mainHTML+=renderPanel(s);
+});
+navHTML+=`<button class="sys-btn" data-target="manobras"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICO.manobras}</svg>Manobras</button>`;
+mainHTML+=renderManobras();
+navHTML+=`<button class="sys-btn" data-target="quiz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICO.quiz}</svg>Auto-teste</button>`;
+mainHTML+=renderQuiz();
+navEl.innerHTML=navHTML; mainEl.innerHTML=mainHTML;
+document.getElementById('panel-'+SISTEMAS[0].id).classList.add('show');
+
+function switchTo(id){
+ stopAllSounds();
+ document.querySelectorAll('.sys-panel').forEach(p=>p.classList.remove('show'));
+ document.getElementById('panel-'+id).classList.add('show');
+ document.querySelectorAll('.sys-btn').forEach(b=>b.classList.toggle('active', b.dataset.target===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+navEl.addEventListener('click',e=>{const b=e.target.closest('.sys-btn'); if(b) switchTo(b.dataset.target);});
+
+/* interações dentro do main (sons, focos, quiz) */
+mainEl.addEventListener('click',e=>{
+ const snd=e.target.closest('.snd');
+ if(snd){
+   const playing=snd.classList.contains('playing');
+   const grp=snd.dataset.group;
+   playSound(snd,grp,snd.dataset.key,PERIODS[grp],NCYC[grp]);
+   document.querySelectorAll('.snd .play').forEach(p=>p.innerHTML=PLAY_SVG);
+   if(!playing) snd.querySelector('.play').innerHTML=STOP_SVG;
+   return;
+ }
+ const foco=e.target.closest('.foco-dot');
+ if(foco){
+   document.querySelectorAll('.foco-dot').forEach(f=>f.classList.remove('sel'));
+   foco.classList.add('sel');
+   const d=FOCOS[foco.dataset.foco], box=document.getElementById('focoInfo');
+   if(box) box.innerHTML=`<div class="ttl">${d.ttl}</div><div class="loc">${d.loc}</div><p>${d.p}</p>`;
+   return;
+ }
+ const opt=e.target.closest('.opt');
+ if(opt){
+   const qi=+opt.dataset.qi, oi=+opt.dataset.oi;
+   if(qAnswered[qi]!==undefined) return;
+   qAnswered[qi]=oi;
+   const correct=QUIZ[qi].c;
+   const card=opt.closest('.quiz-card');
+   card.querySelectorAll('.opt').forEach((b,j)=>{ b.style.pointerEvents='none';
+     if(j===correct) b.classList.add('correct');
+     else if(j===oi) b.classList.add('wrong'); });
+   document.getElementById('exp-'+qi).classList.add('show');
+   if(oi===correct) qScore++;
+   document.getElementById('qScore').textContent=`Acertos: ${qScore} / ${QUIZ.length}`;
+ }
+});
+
+// reset dos ícones de play quando tudo para
+const _stop=stopAllSounds;
+stopAllSounds=function(){ _stop(); document.querySelectorAll('.snd .play').forEach(p=>p.innerHTML=PLAY_SVG); };
+document.getElementById('stopAll').addEventListener('click',stopAllSounds);
+
+/* tema */
+const sun='<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+const moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
+const tIcon=document.getElementById('themeIcon');
+function applyTheme(t){ document.documentElement.setAttribute('data-theme',t); tIcon.innerHTML=t==='dark'?sun:moon; }
+applyTheme('dark');
+document.getElementById('themeToggle').addEventListener('click',()=>{
+ applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
+});
+// acessibilidade teclado nos fabs
+document.querySelectorAll('.fab').forEach(f=>f.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f.click();}}));
+
+/* destrava o áudio no primeiro toque/clique em qualquer lugar (iOS/Android) */
+function unlockAudio(){
+  try{
+    audio();
+    const b=ctx.createBuffer(1,1,22050), s=ctx.createBufferSource();
+    s.buffer=b; s.connect(master); s.start(0);
+    if(ctx.state!=='running') ctx.resume();
+  }catch(e){}
+}
+['pointerdown','touchstart','mousedown','keydown'].forEach(ev=>
+  document.addEventListener(ev,unlockAudio,{once:true,passive:true}));
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELID</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&amp;family=Raleway:wght@200;300;400;500;600&amp;family=Great+Vibes:wght@400&amp;family=Cormorant:ital,wght@0,300;0,400;1,300&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rose-gold: #b76e79;
+      --champagne: #f7e7ce;
+      --deep-plum: #2d1b2e;
+      --soft-mauve: #c9a0b0;
+      --ivory: #faf6f0;
+    }
+    body { font-family: 'Raleway', sans-serif; }
+    .font-cormorant { font-family: 'Cormorant Garamond', serif; }
+    .font-script { font-family: 'Great Vibes', cursive; }
+
+    canvas#bg-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .glass {
+      background: rgba(45, 27, 46, 0.4);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(183, 110, 121, 0.15);
+    }
+
+    .letter-highlight {
+      color: var(--rose-gold);
+      font-weight: 500;
+    }
+
+    /* ===== Animações ===== */
+    /* transições entre páginas com scale */
+    @keyframes scaleInGentle {
+      0%   { opacity: 0; transform: scale(0.94); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    
+    /* toasts deslizam da esquerda */
+    @keyframes slideInFromLeft {
+      0%   { opacity: 0; transform: translateX(-40px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    .view-transition {
+      animation: scaleInGentle 0.55s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+    }
+
+    /* ===== Botões: ripple bouncy + hover glow ===== */
+    .btn-access {
+      background: linear-gradient(135deg, var(--rose-gold), var(--soft-mauve));
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-access::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      transform: translate(-50%, -50%);
+      transition: width 0.55s cubic-bezier(0.22, 1.2, 0.36, 1), height 0.55s cubic-bezier(0.22, 1.2, 0.36, 1), opacity 0.6s ease;
+      opacity: 0;
+    }
+    .btn-access:active::before {
+      width: 400px;
+      height: 400px;
+      opacity: 1;
+    }
+    .btn-access:hover {
+      box-shadow: 0 0 35px rgba(183, 110, 121, 0.55), 0 10px 22px rgba(183, 110, 121, 0.3);
+      transform: translateY(-3px) scale(1.015);
+    }
+    .btn-access:active {
+      transform: translateY(0) scale(0.99);
+    }
+
+    /* ===== Inputs: focus shimmer ===== */
+    .input-field {
+      background: rgba(250, 246, 240, 0.05);
+      border: 1px solid rgba(183, 110, 121, 0.3);
+      color: var(--ivory);
+      transition: border-color 0.35s ease, box-shadow 0.45s ease, background 0.35s ease;
+    }
+    .input-field:focus {
+      outline: none;
+      border-color: var(--rose-gold);
+      box-shadow: 0 0 0 1px rgba(183,110,121,0.4),
+                  inset 0 0 14px rgba(183,110,121,0.18),
+                  0 0 18px rgba(183,110,121,0.25);
+      background: rgba(250, 246, 240, 0.08);
+    }
+    .input-field::placeholder { color: rgba(250, 246, 240, 0.35); }
+
+    /* ===== Toasts ===== */
+    .toast {
+      position: fixed; bottom: 2rem; left: 2rem;
+      padding: 0.75rem 1.5rem; border-radius: 10px; z-index: 100;
+      animation: slideInFromLeft 0.4s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .toast-error { background: rgba(180, 60, 60, 0.92); color: #fff; }
+    .toast-success { background: rgba(110, 160, 110, 0.9); color: #fff; }
+
+    #gate-view, #auth-view, #platform-view {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    /* ===== Modo claro (somente plataformas) ===== */
+    #platform-view.light-mode .glass {
+      background: rgba(250, 246, 240, 0.82);
+      border: 1px solid rgba(183, 110, 121, 0.25);
+    }
+    #platform-view.light-mode .pv-title { color: var(--deep-plum) !important; }
+    #platform-view.light-mode .pv-card {
+      background: rgba(183,110,121,0.08) !important;
+      border: 1px solid rgba(183,110,121,0.3) !important;
+    }
+    #platform-view.light-mode .pv-card p { color: #4a2d3f !important; }
+    #platform-view.light-mode .pv-muted { color: rgba(120, 80, 100, 0.7) !important; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ <script src="/_sdk/telemetry_sdk.js"></script></head>
+ <body class="h-full overflow-auto" style="background: var(--deep-plum);">
+  <canvas id="bg-canvas"></canvas>
+  <div id="app" class="relative z-10 h-full flex items-center justify-center p-6">
+   <!-- Landing View -->
+   <div id="landing-view" class="text-center max-w-lg w-full">
+    <div class="mb-4">
+     <span class="text-xs tracking-[0.4em] uppercase" style="color: var(--soft-mauve); font-weight: 300; word-spacing: 0.5em;">Acesso Restrito</span>
+    </div><!-- ELID Logo -->
+    <h1 class="font-cormorant text-7xl md:text-8xl font-light tracking-wide mb-4" style="color: var(--ivory);"><span class="letter-highlight">E</span>LI<span class="letter-highlight">D</span></h1>
+    <p id="subtitle" class="text-sm tracking-[0.15em] uppercase font-light mb-3 leading-relaxed" style="color: var(--soft-mauve); word-spacing: 0.35em;"><span class="letter-highlight">E</span>nsino <span class="letter-highlight">L</span>egitimado para <span class="letter-highlight">I</span>nternos em <span class="letter-highlight">D</span>esenvolvimento</p>
+    <p class="text-xs tracking-[0.3em] uppercase font-light mb-8" style="color: rgba(201,160,176,0.65); word-spacing: 0.25em;">para a residência médica</p>
+    <p class="font-script mb-12" style="color: rgba(201, 160, 176, 0.7); font-size: 1.1rem; letter-spacing: 0.05em;">Inspirado em <span class="letter-highlight" style="font-style:normal; font-weight: 500;">E</span>lisabete <span class="letter-highlight" style="font-style:normal; font-weight: 500;">D</span>elfini</p><button id="btn-enter" class="btn-access px-12 py-3 rounded-full text-sm tracking-widest uppercase text-white font-light"> Acessar Plataformas </button>
+   </div><!-- Gate View (código de acesso) -->
+   <div id="gate-view" class="hidden text-center max-w-sm w-full view-transition">
+    <div class="glass rounded-2xl p-8">
+     <h2 class="font-cormorant text-3xl font-light mb-1" style="color: var(--ivory);"><span class="letter-highlight">E</span>LI<span class="letter-highlight">D</span></h2>
+     <p class="text-xs tracking-wider mb-6" style="color: var(--soft-mauve);">Código de Acesso</p>
+     <div class="space-y-4">
+      <input id="input-gate" type="password" placeholder="Insira o código" class="input-field w-full px-4 py-3 rounded-lg text-sm text-center tracking-widest">
+      <div id="gate-error" class="hidden text-xs" style="color: var(--rose-gold);"></div><button id="btn-gate" class="btn-access w-full py-3 rounded-lg text-sm tracking-widest uppercase text-white font-light"> Validar </button>
+     </div>
+     <div class="mt-6 pt-6 border-t border-opacity-10" style="border-color: var(--rose-gold);">
+      <p class="text-xs font-light" style="color: rgba(201,160,176,0.4);">Desenvolvido por Jackeline Delfini</p>
+     </div><button id="btn-gate-back" class="mt-4 text-xs tracking-wider" style="color: rgba(201,160,176,0.5);">← Voltar</button>
+    </div>
+   </div><!-- Auth View (login email + senha) -->
+   <div id="auth-view" class="hidden text-center max-w-sm w-full view-transition">
+    <div class="glass rounded-2xl p-8">
+     <h2 class="font-cormorant text-3xl font-light mb-1" style="color: var(--ivory);"><span class="letter-highlight">E</span>LI<span class="letter-highlight">D</span></h2>
+     <p class="text-xs tracking-wider mb-6" style="color: var(--soft-mauve);">Identificação</p>
+     <div id="auth-form" class="space-y-4">
+      <input id="input-user" type="email" placeholder="E-mail" class="input-field w-full px-4 py-3 rounded-lg text-sm"> <input id="input-pass" type="password" placeholder="Senha" class="input-field w-full px-4 py-3 rounded-lg text-sm">
+      <div id="auth-error" class="hidden text-xs" style="color: var(--rose-gold);"></div><button id="btn-auth" class="btn-access w-full py-3 rounded-lg text-sm tracking-widest uppercase text-white font-light"> <span id="btn-auth-text">Entrar</span> <span id="btn-auth-loading" class="hidden">...</span> </button>
+      <p id="toggle-mode" class="text-xs cursor-pointer mt-2" style="color: var(--soft-mauve);">Criar conta</p>
+     </div>
+     <div class="mt-6 pt-6 border-t border-opacity-10" style="border-color: var(--rose-gold);">
+      <p class="text-xs font-light" style="color: rgba(201,160,176,0.4);">Desenvolvido por Jackeline Delfini</p>
+     </div><button id="btn-back" class="mt-4 text-xs tracking-wider" style="color: rgba(201,160,176,0.5);">← Voltar</button>
+    </div>
+   </div><!-- Platform View -->
+   <div id="platform-view" class="hidden text-center max-w-md w-full view-transition">
+    <div class="glass rounded-2xl p-8 relative">
+     <button id="btn-theme" class="absolute top-4 right-4 text-xs p-2 rounded-full" style="color: var(--soft-mauve); background: rgba(183,110,121,0.12);" title="Alternar modo claro/escuro"><i data-lucide="sun" class="w-4 h-4"></i></button>
+     <h2 class="pv-title font-cormorant text-3xl font-light mb-6" style="color: var(--ivory);">Plataformas</h2>
+     <div class="space-y-3 mb-8">
+      <div class="pv-card p-4 rounded-lg" style="background: rgba(183,110,121,0.1); border: 1px solid rgba(183,110,121,0.2);">
+       <p class="text-sm" style="color: var(--ivory);">📚 Banco de Questões</p>
+      </div>
+      <div class="pv-card p-4 rounded-lg" style="background: rgba(183,110,121,0.1); border: 1px solid rgba(183,110,121,0.2);">
+       <p class="text-sm" style="color: var(--ivory);">🧠 Revisão Estratégica</p>
+      </div>
+      <div class="pv-card p-4 rounded-lg" style="background: rgba(183,110,121,0.1); border: 1px solid rgba(183,110,121,0.2);">
+       <p class="text-sm" style="color: var(--ivory);">📋 Simulados</p>
+      </div>
+     </div><button id="btn-logout" class="text-xs tracking-wider" style="color: var(--soft-mauve);">Sair</button>
+     <p class="pv-muted mt-6 text-xs font-light" style="color: rgba(201,160,176,0.4);">Desenvolvido por Jackeline Delfini</p>
+    </div>
+   </div>
+  </div><!-- Toast container -->
+  <div id="toast-container"></div>
+  <script>
+    // ===== Background canvas: bastão de Asclépio (vara + serpente + asas) =====
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let w, h;
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    for (let i = 0; i < 40; i++) {
+      particles.push({
+        x: Math.random() * 2000, y: Math.random() * 2000,
+        vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.15,
+        r: Math.random() * 1.5 + 0.5, alpha: Math.random() * 0.4 + 0.1
+      });
+    }
+
+    function drawAsclepius(t) {
+      // Bastão de Asclépio vertical - SIMPLES E ELEGANTE (sem 3D)
+      const cx = w * 0.86;
+      const top = h * 0.08;
+      const bottom = h * 0.92;
+      const len = bottom - top;
+
+      ctx.save();
+      ctx.globalAlpha = 0.2;
+
+      // --- VARA CENTRAL - sem sombra, gradiente simples ---
+      const staffGrad = ctx.createLinearGradient(cx - 8, top, cx + 8, bottom);
+      staffGrad.addColorStop(0, 'rgba(247,231,206,0.85)');
+      staffGrad.addColorStop(0.5, 'rgba(201,160,176,0.9)');
+      staffGrad.addColorStop(1, 'rgba(247,231,206,0.85)');
+
+      ctx.strokeStyle = staffGrad;
+      ctx.lineWidth = 5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(cx, top);
+      ctx.lineTo(cx, bottom);
+      ctx.stroke();
+
+      // --- POMO NO TOPO (simples) ---
+      const pomRadius = 7;
+      ctx.fillStyle = 'rgba(247,231,206,0.88)';
+      ctx.beginPath();
+      ctx.arc(cx, top - 5, pomRadius, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Contorno sutilíssimo
+      ctx.strokeStyle = 'rgba(201,160,176,0.4)';
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.arc(cx, top - 5, pomRadius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // --- SERPENTE ELEGANTE (sem 3D) ---
+      const serpCoils = 6;
+      const amp = 38;
+      const breathe = Math.sin(t * 0.85) * 3;
+
+      const serpGrad = ctx.createLinearGradient(cx - amp, top, cx + amp, bottom);
+      serpGrad.addColorStop(0, 'rgba(201,160,176,0.88)');
+      serpGrad.addColorStop(0.5, 'rgba(183,110,121,0.92)');
+      serpGrad.addColorStop(1, 'rgba(201,160,176,0.88)');
+
+      ctx.strokeStyle = serpGrad;
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+
+      for (let i = 0; i <= len; i += 1.2) {
+        const p = i / len;
+        const phase = p * Math.PI * 2 * serpCoils + t * 1.25;
+        const taper = 0.35 + 0.65 * Math.sin(p * Math.PI);
+        const x = cx + Math.sin(phase) * (amp + breathe) * taper;
+        const y = top + i;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Escamas simples
+      ctx.fillStyle = 'rgba(247,231,206,0.25)';
+      for (let i = 15; i <= len; i += 18) {
+        const p = i / len;
+        const phase = p * Math.PI * 2 * serpCoils + t * 1.25;
+        const taper = 0.35 + 0.65 * Math.sin(p * Math.PI);
+        const x = cx + Math.sin(phase) * (amp + breathe) * taper;
+        const y = top + i;
+
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(phase + Math.PI / 2);
+        ctx.fillRect(-1.4, -1, 2.8, 2);
+        ctx.restore();
+      }
+
+      // --- CABEÇA DA SERPENTE ---
+      const headP = 0.015;
+      const headPhase = headP * Math.PI * 2 * serpCoils + t * 1.25;
+      const headTaper = 0.35 + 0.65 * Math.sin(headP * Math.PI);
+      const headX = cx + Math.sin(headPhase) * (amp + breathe) * headTaper;
+      const headY = top + 8;
+
+      // Cabeça simples
+      ctx.fillStyle = 'rgba(201,160,176,0.92)';
+      ctx.beginPath();
+      ctx.moveTo(headX + 7, headY);
+      ctx.lineTo(headX - 3, headY - 6);
+      ctx.lineTo(headX - 3, headY + 6);
+      ctx.closePath();
+      ctx.fill();
+
+      // Olho simples
+      ctx.fillStyle = 'rgba(247,231,206,0.8)';
+      ctx.beginPath();
+      ctx.arc(headX - 0.5, headY - 1.5, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(45,27,46,0.9)';
+      ctx.beginPath();
+      ctx.arc(headX - 0.5, headY - 1.5, 0.7, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Língua bífida animada (simples)
+      ctx.strokeStyle = 'rgba(201,160,176,0.8)';
+      ctx.lineWidth = 1.2;
+      ctx.lineCap = 'round';
+      const tongue = 6 + Math.sin(t * 4.2) * 2.5;
+      const tongueAngle = Math.sin(t * 3) * 0.35;
+
+      ctx.beginPath();
+      ctx.moveTo(headX + 7, headY);
+      ctx.lineTo(headX + 6 + tongue, headY - 2.5 + tongueAngle);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(headX + 7, headY);
+      ctx.lineTo(headX + 6 + tongue, headY + 2.5 - tongueAngle);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    function drawBg() {
+      ctx.clearRect(0, 0, w, h);
+      const t = Date.now() * 0.0008;
+
+      // Aurora
+      const ta = Date.now() * 0.0003;
+      const grd = ctx.createRadialGradient(w*0.5 + Math.sin(ta)*100, h*0.3, 50, w*0.5, h*0.5, h*0.8);
+      grd.addColorStop(0, 'rgba(183,110,121,0.06)');
+      grd.addColorStop(0.5, 'rgba(45,27,46,0)');
+      grd.addColorStop(1, 'rgba(45,27,46,0)');
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, w, h);
+
+      // Bastão de Asclépio
+      drawAsclepius(t);
+
+      // Particles
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(247, 231, 206, ${p.alpha})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(drawBg);
+    }
+    drawBg();
+
+    // ===== App Logic =====
+    const ACCESS_CODE = 'RUMOARESIDENCIA0707!';
+
+    let currentUsers = [];
+    let isLoginMode = true;
+    let loggedIn = false;
+    let gatePassed = false;
+
+    const landingView = document.getElementById('landing-view');
+    const gateView = document.getElementById('gate-view');
+    const authView = document.getElementById('auth-view');
+    const platformView = document.getElementById('platform-view');
+
+    function showView(view) {
+      [landingView, gateView, authView, platformView].forEach(v => {
+        v.classList.add('hidden');
+        v.style.opacity = '0';
+        v.style.transform = 'translateY(10px)';
+      });
+      view.classList.remove('hidden');
+      setTimeout(() => {
+        view.style.opacity = '1';
+        view.style.transform = 'translateY(0)';
+      }, 10);
+    }
+
+    function showToast(msg, type) {
+      const el = document.createElement('div');
+      el.className = `toast toast-${type}`;
+      el.textContent = msg;
+      document.getElementById('toast-container').appendChild(el);
+      setTimeout(() => el.remove(), 3000);
+    }
+
+    function simpleHash(str) {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = ((hash << 5) - hash) + str.charCodeAt(i);
+        hash |= 0;
+      }
+      return hash.toString(36);
+    }
+
+    // Landing -> Gate
+    document.getElementById('btn-enter').addEventListener('click', () => showView(gateView));
+
+    // Gate
+    document.getElementById('btn-gate-back').addEventListener('click', () => showView(landingView));
+    function validateGate() {
+      const code = document.getElementById('input-gate').value.trim();
+      const errEl = document.getElementById('gate-error');
+      errEl.classList.add('hidden');
+      if (code === ACCESS_CODE) {
+        gatePassed = true;
+        showToast('Acesso liberado', 'success');
+        showView(authView);
+      } else {
+        errEl.textContent = 'Código incorreto';
+        errEl.classList.remove('hidden');
+      }
+    }
+    document.getElementById('btn-gate').addEventListener('click', validateGate);
+    document.getElementById('input-gate').addEventListener('keydown', (e) => { if (e.key === 'Enter') validateGate(); });
+
+    // Auth navigation
+    document.getElementById('btn-back').addEventListener('click', () => showView(gateView));
+    document.getElementById('btn-logout').addEventListener('click', () => { loggedIn = false; showView(landingView); });
+
+    document.getElementById('toggle-mode').addEventListener('click', () => {
+      isLoginMode = !isLoginMode;
+      document.getElementById('toggle-mode').textContent = isLoginMode ? 'Criar conta' : 'Já tenho conta';
+      document.getElementById('btn-auth-text').textContent = isLoginMode ? 'Entrar' : 'Criar Conta';
+    });
+
+    document.getElementById('btn-auth').addEventListener('click', async () => {
+      const user = document.getElementById('input-user').value.trim();
+      const pass = document.getElementById('input-pass').value.trim();
+      const errEl = document.getElementById('auth-error');
+      errEl.classList.add('hidden');
+
+      if (!user || !pass) { errEl.textContent = 'Preencha todos os campos'; errEl.classList.remove('hidden'); return; }
+
+      const btn = document.getElementById('btn-auth');
+      btn.disabled = true;
+      document.getElementById('btn-auth-text').classList.add('hidden');
+      document.getElementById('btn-auth-loading').classList.remove('hidden');
+
+      const hashed = simpleHash(pass);
+
+      if (isLoginMode) {
+        const found = currentUsers.find(u => u.username === user && u.password_hash === hashed);
+        if (found) {
+          loggedIn = true;
+          showView(platformView);
+        } else {
+          errEl.textContent = 'E-mail ou senha incorretos'; errEl.classList.remove('hidden');
+        }
+      } else {
+        if (currentUsers.length >= 999) { showToast('Limite atingido', 'error'); }
+        else if (currentUsers.find(u => u.username === user)) { errEl.textContent = 'Usuário já existe'; errEl.classList.remove('hidden'); }
+        else {
+          const res = await window.dataSdk.create({ username: user, password_hash: hashed, created_at: new Date().toISOString() });
+          if (res.isOk) { showToast('Conta criada! Faça login.', 'success'); isLoginMode = true; document.getElementById('toggle-mode').textContent = 'Criar conta'; document.getElementById('btn-auth-text').textContent = 'Entrar'; }
+          else { errEl.textContent = 'Erro ao criar conta'; errEl.classList.remove('hidden'); }
+        }
+      }
+
+      btn.disabled = false;
+      document.getElementById('btn-auth-text').classList.remove('hidden');
+      document.getElementById('btn-auth-loading').classList.add('hidden');
+    });
+
+    // ===== Modo claro (somente plataformas) =====
+    document.getElementById('btn-theme').addEventListener('click', () => {
+      const isLight = platformView.classList.toggle('light-mode');
+      const icon = document.querySelector('#btn-theme i');
+      icon.setAttribute('data-lucide', isLight ? 'moon' : 'sun');
+      lucide.createIcons();
+    });
+
+    // Data SDK
+    const dataHandler = { onDataChanged(data) { currentUsers = data; } };
+    window.dataSdk.init(dataHandler);
+
+    // Element SDK
+    const defaultConfig = {
+      background_color: '#2d1b2e',
+      surface_color: 'rgba(45,27,46,0.4)',
+      text_color: '#faf6f0',
+      primary_action: '#b76e79',
+      secondary_action: '#c9a0b0',
+      font_family: 'Cormorant Garamond',
+      font_size: 16,
+      subtitle_text: 'Ensino Legitimado para Internos em Desenvolvimento'
+    };
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => {
+        document.body.style.background = config.background_color || defaultConfig.background_color;
+        const subtitle = document.getElementById('subtitle');
+        // Destaca as iniciais E-L-I-D dentro do subtítulo, preservando o texto configurável
+        if (subtitle) {
+          const raw = config.subtitle_text || defaultConfig.subtitle_text;
+          let used = { E:false, L:false, I:false, D:false };
+          subtitle.innerHTML = raw.replace(/[A-Za-zÀ-ÿ]/g, (ch) => {
+            const up = ch.toUpperCase();
+            if ((up === 'E' || up === 'L' || up === 'I' || up === 'D') && !used[up]) {
+              used[up] = true;
+              return `<span class="letter-highlight">${ch}</span>`;
+            }
+            return ch;
+          });
+        }
+
+        const font = config.font_family || defaultConfig.font_family;
+        document.querySelectorAll('.font-cormorant').forEach(el => { el.style.fontFamily = `${font}, serif`; });
+
+        const size = config.font_size || defaultConfig.font_size;
+        const subtitle_el = document.getElementById('subtitle');
+        if (subtitle_el) subtitle_el.style.fontSize = `${size * 0.85}px`;
+      },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+          { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => config.primary_action || defaultConfig.primary_action, set: (v) => { config.primary_action = v; window.elementSdk.setConfig({ primary_action: v }); } },
+          { get: () => config.secondary_action || defaultConfig.secondary_action, set: (v) => { config.secondary_action = v; window.elementSdk.setConfig({ secondary_action: v }); } }
+        ],
+        borderables: [],
+        fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+        fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ['subtitle_text', config.subtitle_text || defaultConfig.subtitle_text]
+      ])
+    });
+
+    lucide.createIcons();
+  </script>
+ </body>
+</html>

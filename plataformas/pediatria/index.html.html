@@ -1,0 +1,2190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>PedAtlas · by Jackeline Delfini</title>
+<meta name="description" content="Plataforma de estudos de Pediatria para residência médica — ENARE, Revalida, PSU-MG, SES-RJ, UERJ, UFRJ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Baloo+2:wght@400;500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+/* =================== TOKENS / TEMAS =================== */
+:root{
+  --rosa:#ff6fa5; --rosa-2:#ff9ec4; --rosa-soft:#ffd6e7;
+  --azul:#4aa6e8; --azul-2:#7cc6f3; --azul-soft:#cfeaff;
+  --dourado:#f2b84b; --dourado-2:#ffd470;
+  --lilas:#b58bd6; --lilas-2:#d2b3ec; --lilas-soft:#ece1f7;
+  --verde:#4cc38a; --vermelho:#ef5a6f; --amarelo:#f5c84b;
+  --r-sm:10px; --r:16px; --r-lg:24px; --r-xl:32px;
+  --shadow:0 10px 30px rgba(120,70,140,.12);
+  --shadow-lg:0 24px 60px rgba(120,70,140,.20);
+  --font-title:'Pacifico',cursive;
+  --font-head:'Baloo 2',system-ui,sans-serif;
+  --font-body:'Nunito',system-ui,sans-serif;
+  --t:.28s cubic-bezier(.2,.8,.2,1);
+}
+:root, [data-theme="light"]{
+  --bg-1:#fff0f6; --bg-2:#e9f4ff; --bg-3:#f3ecff; --bg-4:#fff7e6;
+  --ink:#43314e; --ink-soft:#6b5876; --ink-faint:#9a86a6;
+  --card:rgba(255,255,255,.66); --card-solid:#ffffff;
+  --card-bd:rgba(255,255,255,.85); --line:rgba(120,70,140,.14);
+  --glass:rgba(255,255,255,.55); --glass-bd:rgba(255,255,255,.7);
+  --chip:rgba(255,255,255,.7);
+  --code-bg:#fff3f8;
+}
+[data-theme="dark"]{
+  --bg-1:#2a1b35; --bg-2:#1a2740; --bg-3:#241a3a; --bg-4:#2e2238;
+  --ink:#f4ecf7; --ink-soft:#c8b9d4; --ink-faint:#9a86a6;
+  --card:rgba(45,32,58,.62); --card-solid:#2c2138;
+  --card-bd:rgba(255,255,255,.10); --line:rgba(255,255,255,.10);
+  --glass:rgba(40,28,54,.55); --glass-bd:rgba(255,255,255,.12);
+  --chip:rgba(255,255,255,.08);
+  --code-bg:#23192f;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --shadow-lg:0 24px 60px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:var(--font-body); color:var(--ink); line-height:1.55;
+  background:
+    radial-gradient(1100px 700px at 8% -8%, var(--bg-1), transparent 60%),
+    radial-gradient(1000px 700px at 105% 5%, var(--bg-2), transparent 55%),
+    radial-gradient(1200px 900px at 50% 115%, var(--bg-3), transparent 60%),
+    linear-gradient(160deg, var(--bg-4), var(--bg-1) 40%, var(--bg-2) 100%);
+  background-attachment:fixed; min-height:100vh;
+  -webkit-font-smoothing:antialiased; transition:background .4s ease,color var(--t);
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.5;
+  background-image:radial-gradient(rgba(255,255,255,.5) 1px, transparent 1px);
+  background-size:22px 22px; mask-image:radial-gradient(circle at 50% 30%, #000, transparent 80%);
+}
+a{color:var(--azul);text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--rosa-2);color:#fff}
+/* scrollbar */
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-thumb{background:var(--lilas-2);border-radius:20px;border:3px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-track{background:transparent}
+
+/* =================== UTIL =================== */
+.hidden{display:none!important}
+.glass{background:var(--glass);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border:1px solid var(--glass-bd)}
+.center{display:flex;align-items:center;justify-content:center}
+.grad-text{background:linear-gradient(100deg,var(--rosa),var(--lilas) 45%,var(--azul));-webkit-background-clip:text;background-clip:text;color:transparent}
+.pill{display:inline-flex;align-items:center;gap:.4em;padding:.28em .7em;border-radius:999px;font-weight:700;font-size:.78rem}
+
+/* =================== GATE & AUTH =================== */
+.overlay{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px}
+.gate-card{width:min(440px,94vw);border-radius:var(--r-xl);padding:38px 30px;box-shadow:var(--shadow-lg);text-align:center;position:relative;overflow:hidden}
+.gate-card::after{content:"";position:absolute;inset:0;background:linear-gradient(140deg,rgba(255,111,165,.12),rgba(181,139,214,.12));pointer-events:none}
+.gate-logo{font-family:var(--font-title);font-size:2.7rem;line-height:1;margin-bottom:6px}
+.gate-sub{color:var(--ink-soft);font-weight:600;margin-bottom:26px}
+.field{position:relative;margin:14px 0;text-align:left}
+.field label{font-size:.78rem;font-weight:800;color:var(--ink-soft);margin-left:6px}
+.field input{width:100%;margin-top:5px;padding:14px 16px;border-radius:var(--r);border:1.5px solid var(--line);background:var(--card-solid);color:var(--ink);font-size:1rem;font-family:inherit;transition:border var(--t),box-shadow var(--t)}
+.field input:focus{outline:none;border-color:var(--rosa);box-shadow:0 0 0 4px var(--rosa-soft)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;padding:13px 22px;border-radius:999px;font-weight:800;font-family:var(--font-head);transition:transform var(--t),box-shadow var(--t),background var(--t);font-size:1rem}
+.btn-primary{background:linear-gradient(100deg,var(--rosa),var(--lilas));color:#fff;box-shadow:0 8px 22px rgba(255,111,165,.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(255,111,165,.5)}
+.btn-ghost{background:var(--chip);color:var(--ink)}
+.btn-ghost:hover{background:var(--lilas-soft)}
+.btn-block{width:100%}
+.btn:active{transform:translateY(0) scale(.98)}
+.auth-tabs{display:flex;gap:6px;background:var(--chip);padding:5px;border-radius:999px;margin-bottom:18px}
+.auth-tabs button{flex:1;padding:9px;border-radius:999px;font-weight:800;color:var(--ink-soft);font-family:var(--font-head)}
+.auth-tabs button.active{background:var(--card-solid);color:var(--rosa);box-shadow:var(--shadow)}
+.msg{font-size:.85rem;font-weight:700;margin-top:10px;min-height:1.1em}
+.msg.err{color:var(--vermelho)} .msg.ok{color:var(--verde)}
+.gate-foot{margin-top:20px;font-size:.74rem;color:var(--ink-faint);font-weight:700}
+
+/* =================== APP SHELL =================== */
+#app{position:relative;z-index:1;min-height:100vh;display:grid;grid-template-columns:248px 1fr;grid-template-rows:auto 1fr}
+.topbar{grid-column:1/-1;display:flex;align-items:center;gap:14px;padding:12px 20px;position:sticky;top:0;z-index:30;box-shadow:var(--shadow)}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-title);font-size:1.5rem}
+.brand .logo-badge{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--rosa),var(--dourado));box-shadow:0 6px 16px rgba(255,111,165,.4);font-size:1.2rem}
+.top-spacer{flex:1}
+.top-stat{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;font-weight:800;font-size:.85rem;background:var(--chip)}
+.icon-btn{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:var(--chip);font-size:1.1rem;transition:transform var(--t),background var(--t)}
+.icon-btn:hover{transform:translateY(-2px);background:var(--lilas-soft)}
+.menu-toggle{display:none}
+
+.sidebar{padding:18px 12px;display:flex;flex-direction:column;gap:4px;position:sticky;top:70px;align-self:start;height:calc(100vh - 70px);overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--r);font-weight:700;color:var(--ink-soft);transition:all var(--t);position:relative}
+.nav-item .ni-ic{font-size:1.2rem;width:24px;text-align:center}
+.nav-item:hover{background:var(--chip);color:var(--ink)}
+.nav-item.active{background:linear-gradient(100deg,var(--rosa),var(--lilas));color:#fff;box-shadow:0 8px 20px rgba(181,139,214,.4)}
+.nav-sep{font-size:.7rem;font-weight:800;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em;margin:14px 10px 4px}
+
+.main{padding:26px 30px 80px;overflow-x:hidden}
+.view{animation:fadeUp .5s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.page-head{margin-bottom:22px}
+.page-head h1{font-family:var(--font-head);font-weight:800;font-size:2rem;display:flex;align-items:center;gap:12px}
+.page-head p{color:var(--ink-soft);font-weight:600;margin-top:2px}
+
+/* cards */
+.card{background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--card-bd);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:18px}
+.g-auto{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.g-2{grid-template-columns:1fr 1fr}
+.g-3{grid-template-columns:repeat(3,1fr)}
+
+/* dashboard hero */
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;margin-bottom:22px}
+.hero-welcome h2{font-family:var(--font-head);font-size:1.7rem;font-weight:800}
+.hero-welcome .lead{color:var(--ink-soft);font-weight:600;max-width:46ch;margin:8px 0 18px}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap}
+.statbox{flex:1;min-width:120px;padding:16px;border-radius:var(--r);background:var(--card-solid);border:1px solid var(--line);text-align:center}
+.statbox .v{font-family:var(--font-head);font-weight:800;font-size:1.7rem;line-height:1}
+.statbox .l{font-size:.75rem;color:var(--ink-soft);font-weight:700;margin-top:3px}
+
+/* child dashboard card */
+.child-card{background:linear-gradient(150deg,rgba(255,111,165,.16),rgba(181,139,214,.16),rgba(74,166,232,.14));border:1px solid var(--card-bd);border-radius:var(--r-lg);padding:20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.child-top{display:flex;align-items:center;gap:14px}
+.avatar{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;font-size:2.6rem;background:radial-gradient(circle at 40% 30%,#fff,var(--rosa-soft));box-shadow:inset 0 -6px 14px rgba(255,111,165,.25),0 8px 20px rgba(255,111,165,.3);flex-shrink:0;position:relative}
+.avatar .stage-tag{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);font-size:.62rem;font-weight:800;background:var(--card-solid);padding:2px 7px;border-radius:999px;white-space:nowrap;box-shadow:var(--shadow);color:var(--ink-soft)}
+.child-name{font-family:var(--font-head);font-weight:800;font-size:1.3rem}
+.child-meta{font-size:.85rem;color:var(--ink-soft);font-weight:700}
+.mini-bars{margin-top:14px;display:flex;flex-direction:column;gap:9px}
+.mbar{font-size:.78rem;font-weight:700}
+.mbar .lab{display:flex;justify-content:space-between;margin-bottom:3px}
+.track{height:9px;border-radius:999px;background:var(--chip);overflow:hidden}
+.fill{height:100%;border-radius:999px;transition:width .8s cubic-bezier(.2,.9,.2,1)}
+.fill.vac{background:linear-gradient(90deg,var(--azul),var(--azul-2))}
+.fill.dev{background:linear-gradient(90deg,var(--lilas),var(--rosa-2))}
+.fill.gen{background:linear-gradient(90deg,var(--dourado),var(--rosa))}
+.next-goal{margin-top:14px;padding:12px;border-radius:var(--r);background:var(--card-solid);border:1px dashed var(--rosa-2);font-size:.82rem;font-weight:700}
+.next-goal b{color:var(--rosa)}
+
+/* progress ring */
+.ring-wrap{display:flex;align-items:center;gap:16px}
+.ring{--p:0;width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--rosa) calc(var(--p)*1%),var(--chip) 0);position:relative}
+.ring::before{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--card-solid)}
+.ring span{position:relative;font-family:var(--font-head);font-weight:800;font-size:1.3rem}
+
+/* modules / temas */
+.tema-block{margin-bottom:26px}
+.tema-title{font-family:var(--font-head);font-weight:800;font-size:1.25rem;display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.tema-title .tnum{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;color:#fff;font-size:.9rem;background:linear-gradient(135deg,var(--lilas),var(--azul))}
+.mat-card{cursor:pointer;border-radius:var(--r-lg);padding:18px;background:var(--card);border:1px solid var(--card-bd);box-shadow:var(--shadow);transition:transform var(--t),box-shadow var(--t),border var(--t);position:relative;overflow:hidden}
+.mat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--rosa-2)}
+.mat-card .mc-ic{font-size:1.8rem}
+.mat-card h3{font-family:var(--font-head);font-weight:800;font-size:1.08rem;margin:8px 0 4px}
+.mat-card p{font-size:.82rem;color:var(--ink-soft);font-weight:600}
+.mat-card .mc-prog{margin-top:12px;height:7px;border-radius:999px;background:var(--chip);overflow:hidden}
+.mat-card .mc-prog i{display:block;height:100%;background:linear-gradient(90deg,var(--rosa),var(--lilas));border-radius:999px}
+.mc-badge{position:absolute;top:14px;right:14px;font-size:.68rem;font-weight:800;padding:3px 9px;border-radius:999px;background:var(--chip);color:var(--ink-soft)}
+
+/* matéria view + tabs */
+.mat-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.back-btn{padding:9px 14px;border-radius:999px;background:var(--chip);font-weight:800;font-size:.85rem}
+.back-btn:hover{background:var(--lilas-soft)}
+.tabs{display:flex;gap:7px;overflow-x:auto;padding-bottom:10px;margin-bottom:16px;scrollbar-width:thin}
+.tab{white-space:nowrap;padding:9px 15px;border-radius:999px;font-weight:800;font-size:.84rem;background:var(--chip);color:var(--ink-soft);transition:all var(--t);flex-shrink:0}
+.tab:hover{background:var(--lilas-soft);color:var(--ink)}
+.tab.active{background:linear-gradient(100deg,var(--rosa),var(--lilas));color:#fff;box-shadow:0 6px 16px rgba(181,139,214,.4)}
+.tab-body{animation:fadeUp .4s both}
+
+/* content typography */
+.content h2{font-family:var(--font-head);font-weight:800;font-size:1.4rem;margin:18px 0 8px;color:var(--ink)}
+.content h3{font-family:var(--font-head);font-weight:700;font-size:1.13rem;margin:16px 0 6px;color:var(--rosa)}
+.content h4{font-weight:800;font-size:1rem;margin:12px 0 4px;color:var(--azul)}
+.content p{margin:8px 0}
+.content ul,.content ol{margin:8px 0 8px 22px}
+.content li{margin:5px 0}
+.content b,.content strong{color:var(--ink);font-weight:800}
+.content .blue{color:var(--azul);font-weight:800}
+.content .red{color:var(--vermelho);font-weight:800}
+.content .gold{color:#d99a17;font-weight:800}
+.content table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.88rem;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.content th{background:linear-gradient(100deg,var(--lilas),var(--azul));color:#fff;padding:10px;text-align:left;font-family:var(--font-head)}
+.content td{padding:9px 10px;border-top:1px solid var(--line);background:var(--card-solid)}
+.content tr:nth-child(even) td{background:var(--card)}
+.callout{border-radius:var(--r);padding:14px 16px;margin:14px 0;border-left:5px solid;display:flex;gap:10px;align-items:flex-start;font-weight:600}
+.callout .ci{font-size:1.3rem;flex-shrink:0}
+.callout.peg{background:linear-gradient(100deg,rgba(239,90,111,.12),transparent);border-color:var(--vermelho)}
+.callout.tip{background:linear-gradient(100deg,rgba(76,195,138,.12),transparent);border-color:var(--verde)}
+.callout.info{background:linear-gradient(100deg,rgba(74,166,232,.12),transparent);border-color:var(--azul)}
+.callout.mne{background:linear-gradient(100deg,rgba(242,184,75,.16),transparent);border-color:var(--dourado)}
+.callout.high{background:linear-gradient(100deg,rgba(181,139,214,.16),transparent);border-color:var(--lilas)}
+.svg-box{margin:16px 0;border-radius:var(--r-lg);padding:14px;background:#1c1330;border:1px solid rgba(255,255,255,.08);overflow:auto}
+.svg-box .cap{color:#cdbce0;font-size:.78rem;font-weight:700;text-align:center;margin-top:8px;font-family:var(--font-head)}
+.svg-box svg{display:block;margin:0 auto;max-width:100%;height:auto}
+
+/* questoes */
+.q-card{background:var(--card-solid);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;margin:14px 0;box-shadow:var(--shadow)}
+.q-stem{font-weight:700;margin-bottom:12px}
+.q-meta{font-size:.72rem;font-weight:800;color:var(--lilas);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:11px 14px;border-radius:var(--r);border:1.5px solid var(--line);margin:7px 0;cursor:pointer;transition:all var(--t);font-weight:600;background:var(--card)}
+.opt:hover{border-color:var(--lilas-2);background:var(--lilas-soft)}
+.opt .key{font-weight:800;color:var(--lilas)}
+.opt.correct{border-color:var(--verde);background:rgba(76,195,138,.14)}
+.opt.wrong{border-color:var(--vermelho);background:rgba(239,90,111,.12)}
+.opt.disabled{pointer-events:none}
+.q-expl{margin-top:12px;padding:14px;border-radius:var(--r);background:var(--lilas-soft);font-weight:600;font-size:.9rem;display:none}
+.q-expl.show{display:block;animation:fadeUp .3s both}
+
+/* flashcards */
+.fc-scene{perspective:1400px;margin:16px auto;max-width:560px}
+.fc{position:relative;width:100%;min-height:230px;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.3,.8,.3,1);cursor:pointer}
+.fc.flip{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r-lg);padding:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:var(--shadow-lg);overflow:auto}
+.fc-front{background:linear-gradient(150deg,var(--card-solid),var(--lilas-soft))}
+.fc-back{background:linear-gradient(150deg,var(--card-solid),var(--azul-soft));transform:rotateY(180deg)}
+.fc-tag{font-size:.7rem;font-weight:800;color:var(--lilas);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.fc-q{font-weight:800;font-size:1.1rem;font-family:var(--font-head)}
+.fc-a{font-weight:600}
+.fc-hint{position:absolute;bottom:10px;font-size:.7rem;color:var(--ink-faint);font-weight:700}
+.fc-srs{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.srs-btn{padding:9px 16px;border-radius:999px;font-weight:800;font-size:.82rem;color:#fff}
+.srs-1{background:var(--vermelho)} .srs-2{background:var(--dourado)} .srs-3{background:var(--azul)} .srs-4{background:var(--verde)}
+.cloze{background:var(--dourado-2);color:#6b4d00;padding:1px 8px;border-radius:6px;font-weight:800}
+.occ-rect{fill:var(--lilas);opacity:.95;cursor:pointer}
+
+/* caderneta */
+.cad-grid{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start}
+.cad-child{position:sticky;top:84px}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-age{position:relative;padding:6px 0 18px 30px;border-left:3px solid var(--lilas-2);margin-left:8px}
+.tl-age::before{content:"";position:absolute;left:-9px;top:8px;width:15px;height:15px;border-radius:50%;background:var(--lilas);border:3px solid var(--card-solid);box-shadow:var(--shadow)}
+.tl-age.done::before{background:var(--verde)}
+.tl-age.locked{opacity:.55}
+.tl-age h4{font-family:var(--font-head);font-weight:800;color:var(--rosa)}
+.item-chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;margin:5px 6px 0 0;font-weight:700;font-size:.82rem;cursor:pointer;background:var(--card-solid);border:1px solid var(--line);transition:all var(--t)}
+.item-chip:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--rosa-2)}
+.item-chip.vac{border-left:4px solid var(--azul)}
+.item-chip.dev{border-left:4px solid var(--lilas)}
+.item-chip.locked{opacity:.5;background:var(--chip)}
+
+/* achievements */
+.ach{display:flex;align-items:center;gap:14px;padding:14px;border-radius:var(--r);background:var(--card-solid);border:1px solid var(--line);transition:all var(--t)}
+.ach.locked{opacity:.45;filter:grayscale(.6)}
+.ach .ic{font-size:2rem;width:54px;height:54px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--dourado-2),var(--rosa-2));flex-shrink:0}
+.ach h4{font-family:var(--font-head);font-weight:800}
+.ach p{font-size:.8rem;color:var(--ink-soft);font-weight:600}
+
+/* checklist domínio */
+.chk{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:var(--r);background:var(--card-solid);border:1px solid var(--line);margin:8px 0;cursor:pointer;transition:all var(--t);font-weight:600}
+.chk:hover{border-color:var(--lilas-2)}
+.chk .box{width:24px;height:24px;border-radius:8px;border:2px solid var(--lilas-2);flex-shrink:0;display:grid;place-items:center;font-size:.9rem;transition:all var(--t)}
+.chk.on .box{background:var(--verde);border-color:var(--verde);color:#fff}
+.chk.on{background:rgba(76,195,138,.08)}
+
+/* notes & textareas */
+.notes-area{width:100%;min-height:260px;border-radius:var(--r);border:1.5px solid var(--line);background:var(--card-solid);color:var(--ink);padding:16px;font-family:inherit;font-size:.95rem;resize:vertical}
+.notes-area:focus{outline:none;border-color:var(--rosa)}
+
+/* modal */
+.modal-bg{position:fixed;inset:0;z-index:70;background:rgba(40,20,55,.5);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:18px;animation:fadeUp .25s both}
+.modal{width:min(560px,96vw);max-height:88vh;overflow-y:auto;border-radius:var(--r-xl);padding:26px;background:var(--card-solid);box-shadow:var(--shadow-lg);border:1px solid var(--card-bd)}
+.modal h3{font-family:var(--font-head);font-weight:800;font-size:1.3rem;margin-bottom:6px}
+.modal .x{position:sticky;float:right;top:0;width:36px;height:36px;border-radius:50%;background:var(--chip);font-size:1.1rem;font-weight:800}
+.mini-card{padding:10px 0;border-top:1px solid var(--line);font-size:.92rem}
+.mini-card .k{font-weight:800;color:var(--lilas);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+
+/* toast */
+#toasts{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:90;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
+.toast{padding:12px 20px;border-radius:999px;font-weight:800;color:#fff;box-shadow:var(--shadow-lg);animation:toastIn .4s both,toastOut .4s 2.6s both;background:linear-gradient(100deg,var(--rosa),var(--lilas))}
+.toast.xp{background:linear-gradient(100deg,var(--dourado),var(--rosa))}
+.toast.ach{background:linear-gradient(100deg,var(--lilas),var(--azul))}
+@keyframes toastIn{from{opacity:0;transform:translateY(20px) scale(.9)}to{opacity:1}}
+@keyframes toastOut{to{opacity:0;transform:translateY(-10px)}}
+@keyframes grow{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.pop-grow{animation:grow .7s cubic-bezier(.2,1.4,.4,1) both}
+
+/* form builder (flashcard creator) */
+.fc-editor{border:1.5px solid var(--line);border-radius:var(--r);background:var(--card-solid);min-height:90px;padding:12px;font-size:.95rem;outline:none}
+.fc-editor:focus{border-color:var(--rosa)}
+.fc-toolbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.tool{width:34px;height:34px;border-radius:9px;background:var(--chip);font-weight:800;display:grid;place-items:center}
+.tool:hover{background:var(--lilas-soft)}
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.seg button{padding:8px 13px;border-radius:999px;background:var(--chip);font-weight:800;font-size:.82rem}
+.seg button.active{background:var(--rosa);color:#fff}
+.input,select.input{width:100%;padding:12px 14px;border-radius:var(--r);border:1.5px solid var(--line);background:var(--card-solid);color:var(--ink);font-family:inherit;font-size:.95rem}
+.input:focus{outline:none;border-color:var(--rosa)}
+.label{font-weight:800;font-size:.8rem;color:var(--ink-soft);margin:12px 0 4px;display:block}
+
+/* responsive */
+@media(max-width:920px){
+  #app{grid-template-columns:1fr}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;z-index:50;background:var(--card-solid);height:100vh;transform:translateX(-105%);transition:transform var(--t);box-shadow:var(--shadow-lg)}
+  .sidebar.open{transform:none}
+  .menu-toggle{display:grid}
+  .hero,.cad-grid,.g-2,.g-3{grid-template-columns:1fr}
+  .cad-child{position:static}
+  .main{padding:18px 14px 80px}
+  .page-head h1{font-size:1.5rem}
+  .sb-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:45}
+}
+@media(max-width:520px){
+  .stat-row{flex-direction:column}
+  .gate-logo{font-size:2.2rem}
+}
+</style>
+</head>
+<body data-theme="light">
+
+<!-- ============ GATE (senha de acesso) ============ -->
+<div id="gate" class="overlay">
+  <div class="gate-card glass">
+    <div class="gate-logo grad-text">PedAtlas</div>
+    <div class="gate-sub">by Jackeline Delfini · Pediatria para Residência</div>
+    <div class="field">
+      <label>Senha de acesso</label>
+      <input id="gateInput" type="password" placeholder="Digite a senha da plataforma" autocomplete="off">
+    </div>
+    <button class="btn btn-primary btn-block" id="gateBtn">Entrar 🍼</button>
+    <div class="msg" id="gateMsg"></div>
+    <div class="gate-foot">ENARE · Revalida · PSU-MG · SES-RJ · UERJ · UFRJ</div>
+  </div>
+</div>
+
+<!-- ============ AUTH ============ -->
+<div id="authScreen" class="overlay hidden">
+  <div class="gate-card glass">
+    <div class="gate-logo grad-text">PedAtlas</div>
+    <div class="gate-sub" id="authSub">Crie sua conta ou entre para sincronizar</div>
+    <div class="auth-tabs">
+      <button id="tabLogin" class="active">Entrar</button>
+      <button id="tabSignup">Criar conta</button>
+    </div>
+    <div class="field"><label>E-mail</label><input id="authEmail" type="email" placeholder="seuemail@exemplo.com"></div>
+    <div class="field"><label>Senha</label><input id="authPass" type="password" placeholder="mínimo 6 caracteres"></div>
+    <button class="btn btn-primary btn-block" id="authBtn">Entrar</button>
+    <button class="btn btn-ghost btn-block" id="authOffline" style="margin-top:8px">Usar offline (sem conta)</button>
+    <div class="msg" id="authMsg"></div>
+    <div class="gate-foot" id="fbStatus">Verificando conexão…</div>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app" class="hidden">
+  <!-- topbar -->
+  <header class="topbar glass">
+    <button class="icon-btn menu-toggle" id="menuToggle">☰</button>
+    <div class="brand"><span class="logo-badge">🧸</span><span class="grad-text">PedAtlas</span></div>
+    <div class="top-spacer"></div>
+    <div class="top-stat" id="topXP" title="Experiência">⭐ <span id="xpVal">0</span> XP</div>
+    <div class="top-stat" id="topStreak" title="Sequência de dias">🔥 <span id="streakVal">0</span></div>
+    <button class="icon-btn" id="themeBtn" title="Tema claro/escuro">🌙</button>
+    <button class="icon-btn" id="logoutBtn" title="Sair">⏻</button>
+  </header>
+
+  <!-- sidebar -->
+  <aside class="sidebar glass" id="sidebar">
+    <div class="nav-sep">Principal</div>
+    <div class="nav-item active" data-view="dash"><span class="ni-ic">🏠</span> Início</div>
+    <div class="nav-item" data-view="study"><span class="ni-ic">☀️</span> Estudo do Dia</div>
+    <div class="nav-item" data-view="modules"><span class="ni-ic">📚</span> Módulos</div>
+    <div class="nav-sep">Gamificação</div>
+    <div class="nav-item" data-view="caderneta"><span class="ni-ic">👶</span> Caderneta da Criança</div>
+    <div class="nav-item" data-view="achievements"><span class="ni-ic">🏆</span> Conquistas</div>
+    <div class="nav-sep">Ferramentas</div>
+    <div class="nav-item" data-view="flashcards"><span class="ni-ic">🎴</span> Meus Flashcards</div>
+    <div class="nav-item" data-view="settings"><span class="ni-ic">⚙️</span> Configurações</div>
+    <div style="flex:1"></div>
+    <div style="font-size:.72rem;color:var(--ink-faint);font-weight:700;text-align:center;padding:10px">Feito com 💗 por<br><b>Jackeline Delfini</b></div>
+  </aside>
+
+  <!-- main -->
+  <main class="main" id="main"></main>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toasts"></div>
+<style>
+/* ===== Estilos complementares (markup do motor de render) ===== */
+.muted{color:var(--ink-faint);font-size:.92rem}
+.credit{text-align:center;color:var(--ink-faint);font-weight:700;margin:28px 0 8px}
+.btn-sm{padding:7px 14px;font-size:.85rem}
+.btn-danger{background:linear-gradient(135deg,var(--vermelho),#ff8aa0);color:#fff}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--lilas-soft);color:var(--lilas);font-size:.72rem;font-weight:800;vertical-align:middle}
+
+/* hero */
+.hero{display:flex;align-items:center;gap:18px;padding:26px 28px;border-radius:var(--r-lg);margin-bottom:18px;
+  background:linear-gradient(120deg,rgba(255,111,165,.16),rgba(74,166,232,.14) 60%,rgba(181,139,214,.16));border:1px solid var(--glass-bd)}
+.hero-txt h1{font-family:var(--font-title);font-size:2rem;margin:0 0 6px;background:linear-gradient(90deg,var(--rosa),var(--lilas),var(--azul));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-txt p{color:var(--ink-soft);margin:0 0 14px;max-width:60ch}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+/* child card */
+.child-card{display:flex;gap:20px;align-items:center;padding:20px 22px;border-radius:var(--r-lg);margin-bottom:18px;box-shadow:var(--shadow)}
+.cc-avatar{position:relative;width:96px;height:96px;flex:none;display:grid;place-items:center}
+.cc-emoji{font-size:2.8rem;z-index:2;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+.cc-ring{position:absolute;inset:0}
+.cc-ring svg{width:96px;height:96px;transform:rotate(-90deg)}
+.cc-ring .ring-bg{fill:none;stroke:var(--chip);stroke-width:6}
+.cc-ring .ring-fg{fill:none;stroke:url(#gpg);stroke:var(--rosa);stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset .6s}
+.cc-body{flex:1;min-width:0}
+.cc-name{font-family:var(--font-head);font-weight:800;font-size:1.3rem;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cc-stage{font-size:.72rem;background:var(--azul-soft);color:var(--azul);padding:2px 10px;border-radius:999px;font-weight:800}
+.cc-age{color:var(--ink-soft);font-weight:700;margin:4px 0 10px}
+.cc-bars{display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
+.ccb{display:grid;grid-template-columns:140px 1fr 44px;align-items:center;gap:10px;font-size:.82rem;font-weight:700;color:var(--ink-soft)}
+.ccb .bar{height:9px;border-radius:999px;background:var(--chip);overflow:hidden}
+.ccb .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--rosa),var(--azul))}
+.ccb b{text-align:right;color:var(--ink)}
+.cc-next{font-size:.86rem;color:var(--ink-soft);background:var(--chip);padding:8px 12px;border-radius:var(--r-sm)}
+.cc-next b{color:var(--dourado)}
+
+/* stat grid */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.stat-card{padding:16px;border-radius:var(--r);text-align:center}
+.sc-ic{font-size:1.6rem}
+.sc-v{font-family:var(--font-head);font-weight:800;font-size:1.5rem;color:var(--ink);line-height:1.1}
+.sc-l{font-size:.78rem;color:var(--ink-faint);font-weight:700}
+
+/* panels / dash */
+.panel{padding:18px 20px;border-radius:var(--r-lg);margin-bottom:16px}
+.panel h3{font-family:var(--font-head);font-weight:800;margin:0 0 12px;color:var(--ink)}
+.panel.danger{border:1px solid rgba(239,90,111,.4)}
+.dash-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.resume-row{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r-sm);cursor:pointer;transition:var(--t);font-size:.92rem}
+.resume-row:hover{background:var(--chip)}
+.resume-row b{color:var(--ink)}
+.resume-row span{color:var(--ink-faint);font-size:.8rem;margin-left:auto}
+.ach-mini{display:flex;align-items:center;gap:8px;padding:7px 0;color:var(--ink-soft);font-weight:700}
+
+/* page head + tema/módulos */
+.tema-block{margin-bottom:24px}
+.tema-h{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.tema-ic{font-size:1.8rem;width:52px;height:52px;display:grid;place-items:center;border-radius:var(--r);background:var(--chip);flex:none}
+.tema-h h2{font-family:var(--font-head);font-weight:800;font-size:1.15rem;margin:0;color:var(--ink)}
+.tema-done{margin-left:auto;color:var(--verde);font-weight:800;font-size:.85rem}
+.mat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.mat-card .mc-t{font-family:var(--font-head);font-weight:800;color:var(--ink);margin-top:6px}
+.mat-card .mc-sub{font-size:.82rem;color:var(--ink-faint);margin-top:3px;min-height:34px}
+.mat-card .mc-foot{margin-top:10px;font-weight:800;font-size:.82rem;color:var(--rosa)}
+.mat-card.done{border-color:rgba(76,195,138,.5)}
+.mat-card.done .mc-foot{color:var(--verde)}
+.mat-card.locked{opacity:.62;cursor:default}
+.mat-card.locked .mc-foot{color:var(--ink-faint)}
+
+/* matéria view */
+.mat-top{margin-bottom:14px}
+.mat-title{font-family:var(--font-title);font-size:1.7rem;margin:10px 0 2px;color:var(--ink)}
+.mtabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:14px;scrollbar-width:thin}
+.mtab{white-space:nowrap;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--chip);color:var(--ink-soft);font-weight:800;font-size:.85rem;cursor:pointer;transition:var(--t)}
+.mtab:hover{color:var(--ink)}
+.mtab.active{background:linear-gradient(135deg,var(--rosa),var(--lilas));color:#fff;border-color:transparent}
+.mcontent{animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* questões */
+.q-card{padding:18px 20px;border-radius:var(--r);margin-bottom:14px}
+.q-banca{font-size:.74rem;font-weight:800;color:var(--lilas);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.q-stem{font-weight:700;color:var(--ink);margin-bottom:12px;line-height:1.5}
+.q-opts{display:flex;flex-direction:column;gap:8px}
+.q-opt{text-align:left;padding:11px 14px;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:600;cursor:pointer;transition:var(--t);font-family:inherit}
+.q-opt:hover:not(:disabled){border-color:var(--rosa)}
+.q-opt.right{background:rgba(76,195,138,.18);border-color:var(--verde);color:var(--ink);font-weight:800}
+.q-opt.wrong{background:rgba(239,90,111,.16);border-color:var(--vermelho)}
+.q-opt:disabled{cursor:default}
+.q-expl{display:none;margin-top:12px;padding:13px 15px;border-radius:var(--r-sm);background:var(--azul-soft);color:var(--ink);line-height:1.55;border-left:4px solid var(--azul)}
+[data-theme="dark"] .q-expl{background:rgba(74,166,232,.14)}
+.q-expl.show{display:block;animation:fade .3s}
+
+/* flashcards (estudo) */
+.fc-wrap{margin-bottom:16px;transition:var(--t)}
+.fc-wrap.fc-done{opacity:0;transform:scale(.96)}
+.fc3d{perspective:1400px;cursor:pointer}
+.fc-card{position:relative;transform-style:preserve-3d;transition:transform .5s;min-height:150px}
+.fc-card.flip{transform:rotateY(180deg)}
+.fc-f,.fc-b{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);padding:22px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow)}
+.fc-f{background:linear-gradient(135deg,rgba(255,111,165,.14),rgba(181,139,214,.14));border:1px solid var(--glass-bd)}
+.fc-b{background:linear-gradient(135deg,rgba(74,166,232,.16),rgba(124,198,243,.12));border:1px solid var(--glass-bd);transform:rotateY(180deg)}
+.fc-card{min-height:160px}
+.fc-wrap .fc3d{position:relative;min-height:160px}
+.fc-body{color:var(--ink);font-weight:700;line-height:1.5;font-size:1.02rem;text-align:center}
+.fc-body img{max-width:100%;border-radius:var(--r-sm);margin:6px 0}
+.fc-tag{position:absolute;top:12px;left:14px;font-size:.7rem;font-weight:800;color:var(--rosa);background:var(--card);padding:2px 9px;border-radius:999px}
+.fc-src{position:absolute;bottom:10px;right:14px;font-size:.68rem;color:var(--ink-faint);font-weight:700}
+.cloze{background:var(--dourado-2);color:#7a5a00;padding:1px 8px;border-radius:6px;font-weight:800}
+.occ{position:relative;display:inline-block}
+.occ img{max-width:100%}
+.occ-mask{position:absolute;inset:0;display:grid;place-items:center;background:rgba(43,29,56,.82);color:#fff;font-size:2rem;font-weight:800;border-radius:var(--r-sm)}
+.srs{display:flex;gap:8px;margin-top:12px;justify-content:center;flex-wrap:wrap}
+.srs-b{padding:9px 16px;border-radius:999px;border:none;font-weight:800;cursor:pointer;color:#fff;font-family:inherit;font-size:.85rem}
+.srs-b.again{background:var(--vermelho)}.srs-b.hard{background:var(--dourado)}.srs-b.good{background:var(--azul)}.srs-b.easy{background:var(--verde)}
+
+/* casos */
+.caso{padding:18px 20px;border-radius:var(--r);margin-bottom:14px}
+.caso h3{font-family:var(--font-head);color:var(--ink);margin:0 0 8px}
+.caso-stem{color:var(--ink-soft);line-height:1.6;margin-bottom:12px;font-style:italic}
+.caso-q{margin-bottom:8px}
+.caso-toggle{width:100%;text-align:left;padding:11px 14px;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--chip);color:var(--ink);font-weight:800;cursor:pointer;font-family:inherit}
+.caso-toggle:hover{border-color:var(--rosa)}
+.caso-a{display:none;padding:12px 15px;margin-top:6px;border-radius:var(--r-sm);background:var(--azul-soft);color:var(--ink);line-height:1.55;border-left:4px solid var(--azul)}
+[data-theme="dark"] .caso-a{background:rgba(74,166,232,.14)}
+.caso-a.open{display:block;animation:fade .3s}
+
+/* checklist + barra */
+.check-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.check-row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--card);cursor:pointer;transition:var(--t)}
+.check-row:hover{border-color:var(--rosa)}
+.check-row.on{background:rgba(76,195,138,.14);border-color:var(--verde)}
+.check-row input{width:20px;height:20px;accent-color:var(--verde);flex:none}
+.check-row span{color:var(--ink);font-weight:700}
+.prog-line{display:flex;align-items:center;gap:12px}
+.prog-line .bar{flex:1;height:12px;border-radius:999px;background:var(--chip);overflow:hidden}
+.prog-line .bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--verde),var(--azul));transition:width .5s}
+.prog-line span{font-weight:800;color:var(--ink)}
+
+/* caderneta */
+.cad-curve{overflow:hidden}
+.vac-timeline{display:flex;flex-direction:column;gap:12px}
+.vac-age{padding:12px 14px;border-radius:var(--r);border:1px solid var(--line);background:var(--card)}
+.vac-age.locked{opacity:.6}
+.vac-age-h{font-family:var(--font-head);font-weight:800;color:var(--ink);margin-bottom:8px}
+.vac-row{display:flex;gap:8px;flex-wrap:wrap}
+.vac-chip{padding:8px 13px;border-radius:999px;border:1px solid var(--rosa);background:var(--rosa-soft);color:#a83a6b;font-weight:800;font-size:.82rem;cursor:pointer;transition:var(--t);font-family:inherit}
+[data-theme="dark"] .vac-chip{background:rgba(255,111,165,.16);color:var(--rosa-2)}
+.vac-chip:hover{transform:translateY(-2px)}
+.vac-chip.dim{opacity:.7}
+.marco-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.marco-card{text-align:left;padding:13px 15px;border-radius:var(--r);border:1px solid var(--line);background:var(--card);cursor:pointer;transition:var(--t);font-family:inherit}
+.marco-card:hover{border-color:var(--lilas);transform:translateY(-2px)}
+.marco-card.done{background:rgba(242,184,75,.14);border-color:var(--dourado)}
+.mk-ic{font-size:1.2rem}
+.mk-t{font-weight:800;color:var(--ink);font-size:.9rem;margin:3px 0}
+.mk-age{font-size:.76rem;color:var(--ink-faint);font-weight:700}
+.vac-detail p{margin:7px 0;color:var(--ink);line-height:1.5}
+.vac-detail b{color:var(--ink)}
+
+/* conquistas */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.ach-card{padding:18px;border-radius:var(--r-lg);text-align:center;transition:var(--t)}
+.ach-card.off{opacity:.55;filter:grayscale(.5)}
+.ach-card.on{border:1px solid var(--dourado)}
+.ach-ic{font-size:2.2rem}
+.ach-t{font-family:var(--font-head);font-weight:800;color:var(--ink);margin:6px 0 4px}
+.ach-d{font-size:.8rem;color:var(--ink-faint);font-weight:600}
+.ach-date{margin-top:8px;font-size:.74rem;font-weight:800;color:var(--verde)}
+
+/* meus flashcards */
+.my-fc{display:flex;flex-direction:column;gap:10px}
+.myfc-row{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:var(--r)}
+.myfc-type{font-weight:800;color:var(--lilas);font-size:.8rem;white-space:nowrap}
+.myfc-prev{flex:1;min-width:0;display:flex;flex-direction:column}
+.myfc-prev b{color:var(--ink);font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.myfc-prev span{color:var(--ink-faint);font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.myfc-act{display:flex;gap:6px}
+
+/* editor */
+.ed-tools{display:flex;gap:6px;margin-bottom:6px}
+.ed-tools button{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--chip);cursor:pointer;font-weight:800;color:var(--ink)}
+.ed-tools button:hover{border-color:var(--rosa)}
+.ed-area{min-height:80px;padding:11px 13px;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--card-solid);color:var(--ink);line-height:1.5;outline:none}
+.ed-area:focus{border-color:var(--rosa)}
+.ed-area img{max-width:100%;border-radius:6px}
+.ed-img{max-width:100%;max-height:200px;border-radius:var(--r-sm);margin-top:6px}
+.ed-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+
+/* select / seg / field reforço */
+.field select{width:100%;padding:11px 13px;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--card-solid);color:var(--ink);font-family:inherit;font-weight:700}
+.seg{display:flex;gap:8px}
+.seg-b{flex:1;padding:11px;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--chip);color:var(--ink-soft);font-weight:800;cursor:pointer;font-family:inherit;transition:var(--t)}
+.seg-b.on{background:linear-gradient(135deg,var(--rosa),var(--lilas));color:#fff;border-color:transparent}
+
+/* modal */
+.modal-bg{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(30,18,42,.55);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .18s}
+.modal-bg.open{opacity:1;pointer-events:auto}
+.modal-box{position:relative;width:100%;max-width:480px;max-height:88vh;overflow:auto;border-radius:var(--r-lg);padding:26px;box-shadow:var(--shadow-lg);animation:pop .25s}
+.modal-box.wide{max-width:620px}
+.modal-box h2{font-family:var(--font-title);color:var(--ink);margin:0 0 14px;font-size:1.5rem}
+@keyframes pop{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+.modal-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:none;background:var(--chip);color:var(--ink);font-weight:800;cursor:pointer}
+
+/* toast + celebrate */
+.toast.win{background:linear-gradient(135deg,var(--verde),var(--azul));color:#fff}
+.toast.err{background:var(--vermelho);color:#fff}
+.celebrate{position:fixed;top:14%;left:50%;transform:translateX(-50%);font-size:4rem;z-index:300;pointer-events:none;animation:celeb 1.4s ease-out forwards}
+@keyframes celeb{0%{opacity:0;transform:translateX(-50%) scale(.3)}25%{opacity:1;transform:translateX(-50%) scale(1.2)}100%{opacity:0;transform:translateX(-50%) scale(1.6) translateY(-40px)}}
+
+/* responsivo */
+@media(max-width:920px){.dash-2col{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(2,1fr)}.ccb{grid-template-columns:120px 1fr 40px}}
+@media(max-width:520px){.hero{flex-direction:column;text-align:center}.child-card{flex-direction:column;text-align:center}.ccb{grid-template-columns:1fr;gap:3px}.ccb b{text-align:left}}
+</style>
+
+<script>
+/* =====================================================================
+   PedAtlas by Jackeline Delfini — single-file, classic script
+   Funciona offline (file://) e online (GitHub Pages). Firebase opcional.
+   ===================================================================== */
+(function(){
+"use strict";
+
+/* ---------- CONFIG ---------- */
+var firebaseConfig = {
+  apiKey: "AIzaSyAKN3qsYIc3pel81vl8WEAH6Ob4oR-icAM",
+  authDomain: "jackeline-study-platform.firebaseapp.com",
+  projectId: "jackeline-study-platform",
+  storageBucket: "jackeline-study-platform.firebasestorage.app",
+  messagingSenderId: "574246127117",
+  appId: "1:574246127117:web:29eedab81ea4251b23f744"
+};
+var PLATFORM_ID = "PedAtlas by Jackeline Delfini";
+var ACCESS_PASSWORD = "REVALIDA22528129";
+var LS_PREFIX = "pedatlas_v1_";
+
+/* ---------- STATE ---------- */
+var FB = { ready:false, app:null, auth:null, db:null, user:null, mode:"local" };
+var STATE = {
+  xp:0, streak:0, lastDay:null,
+  child:{ name:"", sex:"f", setup:false },
+  progress:{},        // materiaId -> {dominio:[], notes:"", done:bool}
+  flashcards:[],      // user-created
+  fcReviews:{},       // cardId -> {ease, interval, due, reps}
+  qSeen:{},           // questionId -> bool answered
+  achievements:{},    // achId -> unlockedTimestamp
+  dailySeed:null
+};
+var SAVE_TIMER=null;
+
+/* ---------- UTILS ---------- */
+function $(s,el){return (el||document).querySelector(s);}
+function $all(s,el){return Array.prototype.slice.call((el||document).querySelectorAll(s));}
+function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+function todayStr(){var d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();}
+function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function clamp(n,a,b){return Math.max(a,Math.min(b,n));}
+function uid(){return "fc"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+
+function toast(msg,type){
+  var t=el("div","toast"+(type?" "+type:""),msg);
+  $("#toasts").appendChild(t);
+  setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t);},3100);
+}
+
+/* ---------- STORAGE ABSTRACTION ---------- */
+function lsKey(){return LS_PREFIX + (FB.user?FB.user.uid:"local");}
+function saveLocal(){ try{ localStorage.setItem(lsKey(), JSON.stringify(STATE)); }catch(e){} }
+function loadLocal(){
+  try{ var raw=localStorage.getItem(lsKey()); if(raw){ var d=JSON.parse(raw); mergeState(d);} }catch(e){}
+}
+function mergeState(d){
+  if(!d)return;
+  for(var k in d){ if(d.hasOwnProperty(k)) STATE[k]=d[k]; }
+}
+function save(){
+  saveLocal();
+  if(FB.mode==="firebase" && FB.user && FB.db){
+    if(SAVE_TIMER)clearTimeout(SAVE_TIMER);
+    SAVE_TIMER=setTimeout(function(){
+      try{
+        FB.db.collection("users").doc(FB.user.uid)
+          .collection("platforms").doc(PLATFORM_ID)
+          .collection("data").doc("main")
+          .set(STATE).catch(function(){});
+      }catch(e){}
+    },900);
+  }
+}
+function cloudLoad(cb){
+  if(FB.mode!=="firebase"||!FB.user||!FB.db){ loadLocal(); cb&&cb(); return; }
+  try{
+    FB.db.collection("users").doc(FB.user.uid)
+      .collection("platforms").doc(PLATFORM_ID)
+      .collection("data").doc("main").get()
+      .then(function(doc){
+        if(doc.exists){ mergeState(doc.data()); saveLocal(); }
+        else { loadLocal(); }
+        cb&&cb();
+      }).catch(function(){ loadLocal(); cb&&cb(); });
+  }catch(e){ loadLocal(); cb&&cb(); }
+}
+
+/* ---------- FIREBASE DYNAMIC INJECTION (não-bloqueante) ---------- */
+function loadScript(src){
+  return new Promise(function(res,rej){
+    var s=document.createElement("script");
+    s.src=src; s.async=true;
+    s.onload=function(){res();}; s.onerror=function(){rej();};
+    document.head.appendChild(s);
+  });
+}
+function initFirebase(){
+  var base="https://www.gstatic.com/firebasejs/10.12.2/";
+  // se sem rede, isto falha e seguimos em modo local — SEM travar a página
+  return loadScript(base+"firebase-app-compat.js")
+    .then(function(){ return loadScript(base+"firebase-auth-compat.js"); })
+    .then(function(){ return loadScript(base+"firebase-firestore-compat.js"); })
+    .then(function(){
+      if(!window.firebase) throw new Error("no firebase");
+      FB.app=firebase.initializeApp(firebaseConfig);
+      FB.auth=firebase.auth();
+      FB.db=firebase.firestore();
+      FB.ready=true;
+      return true;
+    });
+}
+
+/* ===== (escopo continua aberto — demais blocos definidos abaixo) ===== */
+
+/* =====================================================================
+   GAMIFICAÇÃO — "Caderneta Virtual da Criança"
+   Bancos de dados centralizados (PNI / SBP / Ministério da Saúde)
+   Atualizável sem mexer no motor.
+   ===================================================================== */
+
+/* ---- Regras de XP ---- */
+var XP_RULES={ aula:20, resumo:15, questao:5, acerto:10, caso:25, criarFc:3, revisarFc:2, modulo:100 };
+
+/* ---- Mapa XP -> idade (meses) ---- */
+var AGE_XP=[[0,0],[40,1],[90,2],[150,3],[220,4],[300,5],[390,6],[520,9],[700,12],
+  [900,15],[1200,18],[1600,24],[2100,36],[2700,48],[3400,60],[4300,84],[5400,120],
+  [6800,144],[8500,168]];
+function xpToAgeMonths(xp){
+  var m=0;
+  for(var i=0;i<AGE_XP.length;i++){ if(xp>=AGE_XP[i][0]) m=AGE_XP[i][1]; }
+  return m;
+}
+function xpForNextAge(xp){
+  for(var i=0;i<AGE_XP.length;i++){ if(AGE_XP[i][0]>xp) return AGE_XP[i]; }
+  return null;
+}
+function fmtAge(m){
+  if(m<1) return "Recém-nascido";
+  if(m<24){ return m+(m===1?" mês":" meses"); }
+  var y=Math.floor(m/12), mo=m%12;
+  return y+(y===1?" ano":" anos")+(mo?(" e "+mo+(mo===1?" mês":" meses")):"");
+}
+
+/* ---- Estágios do avatar ---- */
+var STAGES=[
+  {min:0,max:0,emoji:"👶",label:"Recém-nascido"},
+  {min:1,max:23,emoji:"🍼",label:"Lactente"},
+  {min:24,max:47,emoji:"🚶",label:"Primeira infância"},
+  {min:48,max:83,emoji:"🎒",label:"Pré-escolar"},
+  {min:84,max:131,emoji:"📚",label:"Escolar"},
+  {min:132,max:999,emoji:"📱",label:"Adolescente"}
+];
+function stageFor(m){ for(var i=0;i<STAGES.length;i++){ if(m>=STAGES[i].min&&m<=STAGES[i].max) return STAGES[i]; } return STAGES[STAGES.length-1]; }
+
+/* ---- Curva P50 aproximada (OMS) ---- */
+var GROWTH=[ [0,3.3,49],[1,4.3,54],[2,5.5,58],[3,6.3,61],[4,7.0,63],[5,7.6,65],[6,7.9,67],
+  [9,8.9,72],[12,9.6,76],[15,10.3,79],[18,10.9,82],[24,12.2,87],[36,14.3,96],[48,16.3,103],
+  [60,18.3,110],[84,22.5,122],[120,32,138],[144,40,150],[168,52,164] ];
+function growthFor(m){
+  var p=GROWTH[0],n=GROWTH[GROWTH.length-1];
+  for(var i=0;i<GROWTH.length-1;i++){ if(m>=GROWTH[i][0]&&m<=GROWTH[i+1][0]){p=GROWTH[i];n=GROWTH[i+1];break;} if(m>=GROWTH[GROWTH.length-1][0]){p=n=GROWTH[GROWTH.length-1];} }
+  var span=n[0]-p[0]||1, t=(m-p[0])/span;
+  return { peso:(p[1]+(n[1]-p[1])*t).toFixed(1), altura:Math.round(p[2]+(n[2]-p[2])*t) };
+}
+
+/* ---- BANCO DE VACINAS (PNI 2024/2025) ---- */
+var VACINAS=[
+ {age:"Ao nascer",m:0,items:[
+   {n:"BCG",tipo:"Atenuada (bacilo Calmette-Guérin)",prot:"Formas graves de tuberculose (meníngea e miliar)",esq:"Dose única, intradérmica no deltoide direito",next:"—",res:"Aplicada o quanto antes; cicatriz não obrigatória para considerar vacinado. RN ≥2 kg.",exam:"Não revacinar por ausência de cicatriz (conduta atual). Contraindicada em imunodeprimidos graves e RN de mãe HIV+ com sintomas."},
+   {n:"Hepatite B",tipo:"Recombinante (inativada)",prot:"Vírus da hepatite B",esq:"1ª dose ao nascer (idealmente nas primeiras 12-24h); demais doses na Pentavalente (2/4/6m)",next:"Pentavalente 2m",res:"Monovalente isolada SÓ ao nascer.",exam:"RN de mãe HBsAg+: HB + imunoglobulina (HBIG) em sítios diferentes nas primeiras 12-24h."}
+ ]},
+ {age:"2 meses",m:2,items:[
+   {n:"Pentavalente (1ª)",tipo:"Combinada: DTP (toxoide/inativada) + Hib (conjugada) + HepB (recombinante)",prot:"Difteria, tétano, coqueluche, Haemophilus influenzae b, hepatite B",esq:"3 doses: 2, 4 e 6 meses",next:"2ª dose aos 4m",res:"Substitui a HepB monovalente a partir dos 2m.",exam:"Reforços de difteria/tétano/coqueluche feitos com DTP aos 15m e 4 anos."},
+   {n:"VIP (1ª)",tipo:"Inativada (Salk, injetável)",prot:"Poliomielite (tipos 1,2,3)",esq:"3 doses: 2, 4 e 6 meses",next:"2ª dose aos 4m",res:"Reforços aos 15m e 4 anos.",exam:"Atualização 2024/2025: transição para esquema integralmente com VIP (substituindo a VOP oral nos reforços)."},
+   {n:"Pneumocócica 10-valente (1ª)",tipo:"Conjugada",prot:"Doença pneumocócica invasiva, pneumonia, OMA por 10 sorotipos",esq:"2 doses (2 e 4m) + reforço aos 12m",next:"2ª dose aos 4m",res:"Esquema 2+1.",exam:"Principal causa de pneumonia bacteriana e OMA na infância: pneumococo."},
+   {n:"Rotavírus (VORH, 1ª)",tipo:"Atenuada (oral)",prot:"Gastroenterite grave por rotavírus",esq:"2 doses (2 e 4m)",next:"2ª dose aos 4m",res:"Limite rígido de idade!",exam:"1ª dose até 3m15d; 2ª dose até 7m29d. Não repetir se regurgitar. Atenção a invaginação intestinal (raro)."}
+ ]},
+ {age:"3 meses",m:3,items:[
+   {n:"Meningocócica C (1ª)",tipo:"Conjugada",prot:"Doença meningocócica invasiva por meningococo C (meningite e meningococcemia)",esq:"2 doses (3 e 5m) + reforço aos 12m",next:"2ª dose aos 5m",res:"Conjugada gera memória imunológica.",exam:"Reforço aos 12m e dose de adolescente (ACWY 11-14a)."}
+ ]},
+ {age:"4 meses",m:4,items:[
+   {n:"Pentavalente (2ª)",tipo:"Combinada",prot:"Difteria, tétano, coqueluche, Hib, hepatite B",esq:"2ª de 3 doses",next:"3ª dose aos 6m",res:"",exam:""},
+   {n:"VIP (2ª)",tipo:"Inativada",prot:"Poliomielite",esq:"2ª de 3 doses",next:"3ª dose aos 6m",res:"",exam:""},
+   {n:"Pneumocócica 10 (2ª)",tipo:"Conjugada",prot:"Pneumococo",esq:"2ª dose; reforço aos 12m",next:"Reforço aos 12m",res:"",exam:""},
+   {n:"Rotavírus (2ª)",tipo:"Atenuada oral",prot:"Rotavírus",esq:"Última dose (limite 7m29d)",next:"—",res:"Esquema completo.",exam:"Não há 3ª dose no PNI."}
+ ]},
+ {age:"5 meses",m:5,items:[
+   {n:"Meningocócica C (2ª)",tipo:"Conjugada",prot:"Meningococo C",esq:"2ª dose; reforço aos 12m",next:"Reforço aos 12m",res:"",exam:""}
+ ]},
+ {age:"6 meses",m:6,items:[
+   {n:"Pentavalente (3ª)",tipo:"Combinada",prot:"Difteria, tétano, coqueluche, Hib, hepatite B",esq:"Última dose do esquema básico",next:"Reforço DTP aos 15m",res:"",exam:""},
+   {n:"VIP (3ª)",tipo:"Inativada",prot:"Poliomielite",esq:"Última dose básica",next:"Reforços 15m e 4a",res:"",exam:""},
+   {n:"Influenza",tipo:"Inativada (campanha)",prot:"Influenza sazonal",esq:"A partir de 6m; <9 anos na 1ª vez: 2 doses (intervalo 30 dias)",next:"Anual",res:"Anual.",exam:"<9 anos virgens = 2 doses na primeira imunização."},
+   {n:"COVID-19",tipo:"Conforme atualização do MS",prot:"SARS-CoV-2",esq:"Doses conforme nota técnica vigente (grupos prioritários)",next:"Conforme MS",res:"Calendário dinâmico.",exam:"Checar nota técnica vigente — alvo de atualização frequente."}
+ ]},
+ {age:"9 meses",m:9,items:[
+   {n:"Febre amarela",tipo:"Atenuada",prot:"Febre amarela",esq:"Dose aos 9m + reforço aos 4 anos",next:"Reforço aos 4a",res:"Atenuada — cuidado em imunodeprimidos.",exam:"Contraindicada <6m e em imunossupressão; cuidado em gestantes/lactantes."}
+ ]},
+ {age:"12 meses",m:12,items:[
+   {n:"Tríplice viral (SCR, 1ª)",tipo:"Atenuada",prot:"Sarampo, caxumba, rubéola",esq:"1ª aos 12m; 2ª (tetra viral) aos 15m",next:"Tetra viral 15m",res:"",exam:"Bloqueio em surto de sarampo: pode-se antecipar dose aos 6m (dose 'zero', não conta no esquema)."},
+   {n:"Pneumocócica 10 (reforço)",tipo:"Conjugada",prot:"Pneumococo",esq:"Reforço (esquema 2+1 completo)",next:"—",res:"",exam:""},
+   {n:"Meningocócica C (reforço)",tipo:"Conjugada",prot:"Meningococo C",esq:"Reforço",next:"ACWY adolescente",res:"",exam:""}
+ ]},
+ {age:"15 meses",m:15,items:[
+   {n:"DTP (1º reforço)",tipo:"Tríplice bacteriana (toxoide/inativada)",prot:"Difteria, tétano, coqueluche",esq:"1º reforço (2º aos 4a)",next:"2º reforço aos 4a",res:"",exam:""},
+   {n:"Poliomielite (1º reforço)",tipo:"VIP (transição 2024/25; antes VOP oral)",prot:"Poliomielite",esq:"1º reforço",next:"2º reforço aos 4a",res:"",exam:"Atualização: reforços migrando de VOP→VIP."},
+   {n:"Hepatite A",tipo:"Inativada",prot:"Vírus da hepatite A",esq:"Dose única (PNI: 15m)",next:"—",res:"",exam:""},
+   {n:"Tetra viral (SCRV)",tipo:"Atenuada",prot:"Sarampo, caxumba, rubéola e varicela",esq:"Corresponde à 2ª dose de tríplice viral + 1ª varicela",next:"Varicela 4a",res:"",exam:""}
+ ]},
+ {age:"4 anos",m:48,items:[
+   {n:"DTP (2º reforço)",tipo:"Tríplice bacteriana",prot:"Difteria, tétano, coqueluche",esq:"2º e último reforço com DTP",next:"dT a cada 10a",res:"",exam:"Após 7 anos: usar dT (dupla adulto) nos reforços."},
+   {n:"Poliomielite (2º reforço)",tipo:"VIP (transição; antes VOP)",prot:"Poliomielite",esq:"Último reforço",next:"—",res:"",exam:""},
+   {n:"Febre amarela (reforço)",tipo:"Atenuada",prot:"Febre amarela",esq:"Reforço único aos 4a",next:"—",res:"",exam:""},
+   {n:"Varicela (2ª dose)",tipo:"Atenuada",prot:"Varicela",esq:"2ª dose",next:"—",res:"",exam:""}
+ ]},
+ {age:"9–14 anos",m:120,items:[
+   {n:"HPV quadrivalente",tipo:"Recombinante (VLP)",prot:"HPV 6,11,16,18 (câncer de colo, verrugas)",esq:"Dose única (esquema 2024) para 9–14 anos, meninas e meninos",next:"—",res:"Atualização 2024: dose única.",exam:"Imunossuprimidos/HIV: 3 doses (0-2-6m)."},
+   {n:"Meningocócica ACWY",tipo:"Conjugada",prot:"Meningococo A,C,W,Y",esq:"Dose única / reforço 11–14 anos",next:"—",res:"",exam:"Reforço do adolescente substitui/complementa a MenC da infância."}
+ ]}
+];
+
+/* ---- BANCO DE MARCOS (SBP / Caderneta da Criança) ---- */
+var MARCOS=[
+ {m:0,n:"Reflexos primitivos presentes",dom:"Reflexos",exp:"RN",note:"Moro, sucção, preensão palmar/plantar, marcha reflexa. Fixa brevemente a face."},
+ {m:1,n:"Eleva a cabeça em pronação",dom:"Motor grosso",exp:"1 mês",note:"Em decúbito ventral, levanta o queixo momentaneamente."},
+ {m:2,n:"Sorriso social",dom:"Social",exp:"2 meses",note:"Marco social clássico. Segue objeto até a linha média. Vocaliza (sons guturais)."},
+ {m:3,n:"Sustenta a cabeça",dom:"Motor grosso",exp:"3 meses",note:"Sustentação cefálica firme. Mãos mais abertas. Segue objeto 180°. Ri alto."},
+ {m:4,n:"Preensão voluntária / leva à boca",dom:"Motor fino",exp:"4 meses",note:"Pega objetos ativamente. Rola de ventral para lateral. Localiza sons."},
+ {m:6,n:"Senta com apoio / transfere objetos",dom:"Motor",exp:"6 meses",note:"Início do sentar; passa objeto de uma mão à outra. Balbucia (dada/baba). Vira para o som."},
+ {m:8,n:"Senta sem apoio",dom:"Motor grosso",exp:"6–8 meses",note:"Marco motor grosso importante. Estranha pessoas (ansiedade de separação)."},
+ {m:9,n:"Engatinha / pinça inferior",dom:"Motor",exp:"8–10 meses",note:"Duplica sílabas, reage ao 'não', faz adeus. Permanência do objeto."},
+ {m:10,n:"Fica de pé com apoio",dom:"Motor grosso",exp:"9–10 meses",note:"Puxa-se para ficar de pé apoiado em móveis."},
+ {m:12,n:"Anda com apoio / primeiras palavras",dom:"Motor + linguagem",exp:"12 meses",note:"Primeiros passos com apoio; pinça fina (polegar-indicador); fala 1–2 palavras com sentido (mamã, papá); aponta."},
+ {m:15,n:"Anda sozinho",dom:"Motor grosso",exp:"12–15 meses",note:"Marcha independente. Rabisca. 3–6 palavras. Torre de 2 cubos."},
+ {m:18,n:"Corre / 10–20 palavras",dom:"Motor + linguagem",exp:"18 meses",note:"Corre, sobe escada com apoio, aponta partes do corpo, come com colher."},
+ {m:24,n:"Frases de 2 palavras",dom:"Linguagem",exp:"24 meses",note:"Junta 2 palavras, chuta bola, sobe/desce escadas, torre de 6 cubos. ~50% da fala compreensível."},
+ {m:36,n:"Pedala triciclo / frases",dom:"Motor + linguagem",exp:"3 anos",note:"Veste-se com ajuda, copia círculo, conta até 3, fala compreensível por estranhos."},
+ {m:48,n:"Pula em um pé / copia cruz",dom:"Motor + cognitivo",exp:"4 anos",note:"Conta história, sabe o próprio sexo, desenha figura humana simples."},
+ {m:60,n:"Pula corda / copia quadrado",dom:"Motor + cognitivo",exp:"5 anos",note:"Amarra cadarço (início), reconhece cores/letras, desenho com mais detalhes."}
+];
+
+/* ---- SINAIS DE ALERTA (red flags) — usados na Caderneta ---- */
+var ALERTA=[
+ "Não sustenta a cabeça aos 3-4 meses",
+ "Não senta sem apoio aos 9 meses",
+ "Não anda aos 18 meses",
+ "Ausência de sorriso social aos 3 meses",
+ "Não balbucia aos 9 meses / sem palavras aos 18 meses",
+ "Perda de marcos já adquiridos (regressão) — investigar SEMPRE"
+];
+
+/* ---- CONQUISTAS ---- */
+var ACHIEVEMENTS=[
+ {id:"primeiro_passo",ic:"🦶",t:"Primeiro Passo",d:"Complete sua primeira atividade",cond:function(){return STATE.xp>0;}},
+ {id:"pediatra_mirim",ic:"🩺",t:"Pediatra Mirim",d:"Alcance 500 XP (criança aos 9 meses)",cond:function(){return STATE.xp>=500;}},
+ {id:"calendario",ic:"💉",t:"Calendário Vacinal Completo",d:"Desbloqueie todas as vacinas do 1º ano",cond:function(){return xpToAgeMonths(STATE.xp)>=12;}},
+ {id:"dev_adequado",ic:"🧠",t:"Desenvolvimento Adequado",d:"Atinja todos os marcos até 12 meses",cond:function(){return xpToAgeMonths(STATE.xp)>=12;}},
+ {id:"streak7",ic:"🔥",t:"Sequência de Ferro",d:"Estude 7 dias seguidos",cond:function(){return STATE.streak>=7;}},
+ {id:"mestre_puericultura",ic:"📒",t:"Mestre da Puericultura",d:"Conclua o Tema 1 e 2",cond:function(){return temaConcluido(0)&&temaConcluido(1);}},
+ {id:"futuro_pediatra",ic:"👨‍⚕️",t:"Futuro Pediatra",d:"Alcance 3000 XP (criança na 1ª infância)",cond:function(){return STATE.xp>=3000;}},
+ {id:"pediatra_expert",ic:"🏅",t:"Pediatra Expert",d:"Alcance 6000 XP (criança escolar)",cond:function(){return STATE.xp>=6000;}}
+];
+
+/* =====================================================================
+   CONTEÚDO — Registro de Temas e Matérias
+   TEMAS = roadmap (página Módulos). MAT = conteúdo completo por matéria.
+   ===================================================================== */
+var MAT={};
+function reg(o){ MAT[o.id]=o; }
+
+var TEMAS=[
+ {ic:"🌱",t:"Crescimento e Desenvolvimento",mats:[
+   {id:"dnpm",ic:"🧠",t:"Desenvolvimento Neuropsicomotor",sub:"Marcos motor/linguagem/social, alerta",ready:true},
+   {id:"cresc",ic:"📏",t:"Avaliação do Crescimento & Curvas OMS",sub:"Peso, estatura, PC, percentis/escore-Z",ready:true},
+   {id:"puberdade",ic:"🌷",t:"Puberdade",sub:"Normal, precoce, atrasada · central x periférica",ready:true}
+ ]},
+ {ic:"🍼",t:"Puericultura",mats:[
+   {id:"consultas",ic:"🗓️",t:"Consultas & Triagens",sub:"Calendário de puericultura",ready:false},
+   {id:"aleitamento",ic:"🤱",t:"Aleitamento Materno",sub:"Tipos, técnica, contraindicações",ready:false},
+   {id:"alimentar",ic:"🥄",t:"Introdução Alimentar",sub:"6 meses, esquema, erros",ready:false},
+   {id:"suplem",ic:"💊",t:"Suplementação & Prevenção",sub:"Ferro, vitamina D/K, orientações",ready:false}
+ ]},
+ {ic:"💉",t:"Imunização",mats:[
+   {id:"pni",ic:"📅",t:"Calendário Vacinal do PNI",sub:"Esquema básico e reforços",ready:false},
+   {id:"vac-esp",ic:"⭐",t:"Vacinas Especiais & Situações",sub:"CRIE, prematuro, imunossuprimido",ready:false},
+   {id:"eventos",ic:"⚠️",t:"Eventos Adversos & Atraso",sub:"ESAVI e atualização de esquema",ready:false}
+ ]},
+ {ic:"🧫",t:"Infecções Congênitas",mats:[
+   {id:"sifilis",ic:"🦠",t:"Sífilis Congênita",sub:"Critérios, VDRL, tratamento",ready:false},
+   {id:"storch",ic:"🧬",t:"Toxo · Rubéola · CMV · Herpes",sub:"STORCH detalhado",ready:false},
+   {id:"zika-hiv",ic:"🍼",t:"Zika & HIV",sub:"Microcefalia e transmissão vertical",ready:false}
+ ]},
+ {ic:"🫁",t:"Infecções Respiratórias",mats:[
+   {id:"vas",ic:"👃",t:"Vias Aéreas Superiores",sub:"IVAS, OMA, faringite, sinusite",ready:false},
+   {id:"crupe",ic:"🗣️",t:"Crupe & Epiglotite",sub:"VA intermediária",ready:false},
+   {id:"pneumonia",ic:"🫁",t:"Pneumonia & Bronquiolite",sub:"VA inferior",ready:false}
+ ]},
+ {ic:"🌬️",t:"Asma",mats:[
+   {id:"asma",ic:"💨",t:"Asma na Infância",sub:"Resgate, manutenção, por idade",ready:false}
+ ]},
+ {ic:"👶",t:"Neonatologia",mats:[
+   {id:"reanimacao",ic:"🫀",t:"Reanimação Neonatal",sub:"Fluxograma SBP/AAP",ready:false},
+   {id:"ictericia",ic:"💛",t:"Icterícia Neonatal",sub:"Fisiológica x patológica, fototerapia",ready:false},
+   {id:"sepse-nn",ic:"🌡️",t:"Sepse & Prematuridade",sub:"Precoce x tardia",ready:false},
+   {id:"triagem",ic:"🩸",t:"Triagens & Hipoglicemia",sub:"Testes do pezinho/orelhinha/coraçãozinho",ready:false}
+ ]},
+ {ic:"💧",t:"Diarreia e Desidratação",mats:[
+   {id:"desidratacao",ic:"🚰",t:"Avaliação & Planos A/B/C",sub:"Classificação e conduta",ready:false},
+   {id:"tro",ic:"🧮",t:"TRO & Cálculos",sub:"Reidratação passo a passo",ready:false}
+ ]},
+ {ic:"🚨",t:"Emergências Pediátricas",mats:[
+   {id:"pcr",ic:"🫁",t:"PCR & Choque",sub:"PALS pediátrico",ready:false},
+   {id:"engasgo",ic:"🆘",t:"Engasgo & Trauma",sub:"OVACE e atendimento",ready:false},
+   {id:"convulsao",ic:"⚡",t:"Convulsão & Estado de Mal",sub:"Manejo escalonado",ready:false}
+ ]},
+ {ic:"🥗",t:"Nutrição",mats:[
+   {id:"desnutricao",ic:"📉",t:"Desnutrição",sub:"Marasmo, kwashiorkor, manejo",ready:false},
+   {id:"obesidade",ic:"⚖️",t:"Obesidade",sub:"Diagnóstico e abordagem",ready:false},
+   {id:"micronutri",ic:"🧪",t:"Micronutrientes",sub:"Ferro, vit. A/D, zinco",ready:false}
+ ]},
+ {ic:"❤️",t:"Cardiologia",mats:[
+   {id:"sopros",ic:"🔊",t:"Sopros",sub:"Inocente x patológico",ready:false},
+   {id:"cardiopatias",ic:"🫀",t:"Cardiopatias Congênitas",sub:"Fallot, CIA, CIV, PCA",ready:false}
+ ]},
+ {ic:"🩸",t:"Hematologia",mats:[
+   {id:"anemias-ped",ic:"🩸",t:"Anemias",sub:"Ferropriva, falciforme, talassemia",ready:false},
+   {id:"pti",ic:"🟣",t:"PTI",sub:"Púrpura trombocitopênica imune",ready:false}
+ ]},
+ {ic:"🔴",t:"Doenças Exantemáticas",mats:[
+   {id:"exantematicas",ic:"🌡️",t:"Exantemáticas Clássicas",sub:"Sarampo, rubéola, eritema, súbito, varicela, escarlatina",ready:false}
+ ]},
+ {ic:"🍽️",t:"Gastroenterologia",mats:[
+   {id:"gastro-ped",ic:"🤢",t:"DRGE · Constipação · Celíaca",sub:"+ Dor abdominal recorrente",ready:false}
+ ]},
+ {ic:"🧴",t:"Dermatologia",mats:[
+   {id:"derma-ped",ic:"🧴",t:"Dermatite, Impetigo, Escabiose",sub:"+ Molusco contagioso",ready:false}
+ ]},
+ {ic:"🫘",t:"Nefrologia",mats:[
+   {id:"nefro-ped",ic:"💧",t:"Síndromes Nefrótica/Nefrítica",sub:"+ GNPE",ready:false}
+ ]},
+ {ic:"🧬",t:"Genética",mats:[
+   {id:"genetica",ic:"🧬",t:"Down · Turner · Klinefelter",sub:"Principais cromossomopatias",ready:false}
+ ]},
+ {ic:"🎗️",t:"Oncologia",mats:[
+   {id:"onco-ped",ic:"🎗️",t:"Leucemias & Tumores Sólidos",sub:"+ Tumores abdominais",ready:false}
+ ]}
+];
+function temaConcluido(idx){
+  var t=TEMAS[idx]; if(!t)return false;
+  for(var i=0;i<t.mats.length;i++){ var m=t.mats[i]; if(m.ready){ var p=STATE.progress[m.id]; if(!p||!p.done)return false; } }
+  return true;
+}
+
+/* ================= MATÉRIA 1.1 — DNPM ================= */
+reg({ id:"dnpm", temaIc:"🌱", t:"Desenvolvimento Neuropsicomotor", sub:"Marcos, domínios e sinais de alerta",
+ teoria:[
+  '<h2>🧠 Desenvolvimento Neuropsicomotor (DNPM)</h2>',
+  '<p>Imagine o cérebro do bebê como uma <b>casa em construção</b>: primeiro vêm os alicerces (controle do tronco e cabeça), depois as paredes (movimentos amplos), e só no fim os acabamentos finos (pinça, fala elaborada). Por isso o desenvolvimento segue duas grandes <b class="blue">leis</b>:</p>',
+  '<ul><li><b>Lei céfalo-caudal:</b> controla primeiro a <b>cabeça</b> → tronco → membros. (Sustenta a cabeça antes de sentar; senta antes de andar.)</li>',
+  '<li><b>Lei próximo-distal:</b> controla primeiro o que está perto do <b>centro do corpo</b> (ombro/braço) → depois a periferia (mão/dedos). Por isso a preensão grosseira (4m) vem antes da pinça fina (9–12m).</li></ul>',
+  '<div class="callout info"><span class="ci">💡</span><div>O desenvolvimento é <b>contínuo</b>, em <b>sequência fixa</b>, mas com <b>ritmo variável</b> entre crianças. O que importa é a <b>sequência</b> e os <b>limites superiores</b> (idade-limite para cada marco).</div></div>',
+
+  '<h3>Os 4 domínios avaliados</h3>',
+  '<table><tr><th>Domínio</th><th>O que avalia</th><th>Exemplo</th></tr>',
+  '<tr><td><b>Motor grosso</b></td><td>Grandes grupos musculares, postura</td><td>Sustentar cabeça, sentar, andar</td></tr>',
+  '<tr><td><b>Motor fino / adaptativo</b></td><td>Mãos, coordenação olho-mão</td><td>Preensão, pinça, empilhar cubos</td></tr>',
+  '<tr><td><b>Linguagem</b></td><td>Comunicação receptiva e expressiva</td><td>Balbucio, primeiras palavras, frases</td></tr>',
+  '<tr><td><b>Pessoal-social</b></td><td>Interação, autocuidado</td><td>Sorriso social, dar adeus, vestir-se</td></tr></table>',
+
+  '<div class="svg-box">'+
+  '<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Linha do tempo dos marcos do desenvolvimento">'+
+   '<defs><linearGradient id="tlg" x1="0" x2="1"><stop offset="0" stop-color="#ff8fb1"/><stop offset="0.5" stop-color="#c9a8e8"/><stop offset="1" stop-color="#7cc6f3"/></linearGradient></defs>'+
+   '<line x1="40" y1="150" x2="720" y2="150" stroke="url(#tlg)" stroke-width="6" stroke-linecap="round"/>'+
+   ['2m|sorriso|85|up','4m|rola/preensão|180|down','6m|senta c/ apoio|275|up','9m|engatinha|370|down','12m|anda c/ apoio|465|up','15m|anda só|560|down','18m|corre|645|up','24m|2 palavras|705|down']
+     .map(function(s){var p=s.split('|');var x=+p[2];var up=p[3]==='up';var ty=up?95:205;var cy=up?120:180;
+       return '<circle cx="'+x+'" cy="150" r="9" fill="#fff" stroke="#b58bd6" stroke-width="3"/>'+
+       '<line x1="'+x+'" y1="150" x2="'+x+'" y2="'+cy+'" stroke="#c9a8e8" stroke-width="2"/>'+
+       '<text x="'+x+'" y="'+(up?ty-12:ty+14)+'" fill="#ffd470" font-size="15" font-weight="700" text-anchor="middle">'+p[0]+'</text>'+
+       '<text x="'+x+'" y="'+ty+'" fill="#e9def5" font-size="11" text-anchor="middle">'+p[1]+'</text>';}).join('')+
+  '</svg><div class="cap">Linha do tempo dos principais marcos (esquema didático)</div></div>',
+
+  '<h3>Marcos por idade — o essencial de prova</h3>',
+  '<table><tr><th>Idade</th><th>Motor grosso</th><th>Motor fino</th><th>Linguagem</th><th>Social</th></tr>',
+  '<tr><td><b>2m</b></td><td>Sustenta cabeça parcial</td><td>Mãos fechadas</td><td>Sons guturais</td><td><b class="gold">Sorriso social</b></td></tr>',
+  '<tr><td><b>4m</b></td><td>Rola, sustenta cabeça</td><td>Preensão voluntária</td><td>Gargalha</td><td>Reconhece cuidador</td></tr>',
+  '<tr><td><b>6m</b></td><td>Senta com apoio</td><td>Transfere objetos</td><td><b>Balbucia</b> (dada/baba)</td><td>Estranha (início)</td></tr>',
+  '<tr><td><b>9m</b></td><td>Senta sem apoio / engatinha</td><td><b>Pinça inferior</b></td><td>Duplica sílabas, "não"</td><td>Dá adeus, ansiedade separação</td></tr>',
+  '<tr><td><b>12m</b></td><td>Anda com apoio</td><td><b>Pinça fina</b></td><td>1–2 palavras com sentido</td><td>Aponta o que quer</td></tr>',
+  '<tr><td><b>18m</b></td><td>Corre, sobe escada c/ apoio</td><td>Torre de 3–4 cubos</td><td>10–20 palavras</td><td>Come com colher</td></tr>',
+  '<tr><td><b>24m</b></td><td>Sobe/desce escada, chuta bola</td><td>Torre de 6 cubos</td><td><b class="red">Frases de 2 palavras</b></td><td>Brinca ao lado de outros</td></tr>',
+  '<tr><td><b>3a</b></td><td>Pedala triciclo</td><td>Copia círculo</td><td>Fala compreensível p/ estranhos</td><td>Veste-se com ajuda</td></tr>',
+  '<tr><td><b>4a</b></td><td>Pula em 1 pé</td><td>Copia cruz (+)</td><td>Conta histórias</td><td>Brinca em grupo</td></tr></table>',
+
+  '<div class="callout mne"><span class="ci">🧠</span><div><b>Mnemônico do "senta sem apoio aos 6, anda aos 12":</b> dobrando os meses você "sobe um andar" no desenvolvimento motor: 6m senta → 9m engatinha → 12m anda apoiado → 15m anda só.</div></div>',
+
+  '<h3>Sinais de alerta (red flags)</h3>',
+  '<p>O mais cobrado: reconhecer <b class="red">atraso</b> e, principalmente, <b class="red">regressão</b> (perda de marco já adquirido) — esta SEMPRE é patológica e exige investigação (erros inatos do metabolismo, doenças neurodegenerativas).</p>',
+  '<ul>'+ALERTA.map(function(a){return '<li>🚩 '+a+'</li>';}).join('')+'</ul>',
+  '<div class="callout peg"><span class="ci">⚠️</span><div><b>Pegadinha clássica:</b> prematuro deve ter a idade <b>corrigida</b> até os 2 anos. Ex.: RN de 32 sem (8 sem antes do termo) com 6 meses cronológicos → avaliar como <b>4 meses</b> de idade corrigida.</div></div>'
+ ].join(''),
+
+ scores:[
+  '<h2>🎯 Instrumentos de avaliação do DNPM</h2>',
+  '<h3>Teste de Denver II</h3>',
+  '<p>Triagem (não é diagnóstico) que avalia 4 áreas: <b>pessoal-social, motor fino-adaptativo, linguagem e motor grosso</b> de 0 a 6 anos.</p>',
+  '<table><tr><th>Classificação</th><th>Interpretação</th></tr>',
+  '<tr><td><b>Normal</b></td><td>Nenhum atraso, no máximo 1 cautela</td></tr>',
+  '<tr><td><b>Suspeito</b></td><td>≥2 cautelas e/ou ≥1 atraso</td></tr>',
+  '<tr><td><b>Não testável</b></td><td>Recusa em itens que cruzam a faixa etária</td></tr></table>',
+  '<div class="callout info"><span class="ci">📌</span><div>"Atraso" = falha em item que <b>90%</b> das crianças daquela idade já realizam. "Cautela" = falha em item realizado por 75–90%.</div></div>',
+  '<h3>Instrumento de Vigilância — Caderneta da Criança (MS)</h3>',
+  '<p>Na prática do SUS, usa-se a <b>vigilância do desenvolvimento</b> da Caderneta: marcos esperados por faixa com classificação em <b>desenvolvimento adequado / com alerta / provável atraso</b>. É a referência prática mais cobrada nas bancas brasileiras (ENARE/Revalida).</p>',
+  '<table><tr><th>Resultado</th><th>Conduta</th></tr>',
+  '<tr><td>Adequado</td><td>Orientar e manter acompanhamento de rotina</td></tr>',
+  '<tr><td>Alerta (ausência de marco da faixa anterior)</td><td>Orientar estimulação e <b>reavaliar em 30 dias</b></td></tr>',
+  '<tr><td>Provável atraso (ausência de marco + perímetro alterado)</td><td><b>Encaminhar</b> para avaliação especializada</td></tr></table>'
+ ].join(''),
+
+ questoes:[
+  {id:"dnpm-q1",banca:"ENARE (estilo)",stem:"Lactente de 9 meses, nascido a termo, em consulta de puericultura. Qual achado é considerado <b>NORMAL</b> para a idade?",
+   opts:["Anda sem apoio","Senta sem apoio e faz pinça inferior","Fala frases de duas palavras","Pula em um pé"],
+   correct:1, expl:"Aos 9 meses esperamos: <b>sentar sem apoio</b>, engatinhar, <b>pinça inferior</b>, duplicar sílabas e fazer adeus. Andar sem apoio (12–15m), frases de 2 palavras (24m) e pular em 1 pé (4a) são marcos mais tardios."},
+  {id:"dnpm-q2",banca:"Revalida (estilo)",stem:"Criança de 18 meses que <b>andava</b> e <b>falava 15 palavras</b> aos 15 meses, mas há 1 mês deixou de andar e parou de falar. Conduta?",
+   opts:["Tranquilizar: é variação normal do ritmo","Reavaliar em 6 meses","Investigar imediatamente — regressão é sinal de alarme","Solicitar apenas hemograma"],
+   correct:2, expl:"<b>Regressão</b> (perda de marcos já adquiridos) é SEMPRE patológica e exige <b>investigação imediata</b> (doenças neurodegenerativas, erros inatos do metabolismo). Nunca atribuir a 'variação normal'."},
+  {id:"dnpm-q3",banca:"PSU-MG (estilo)",stem:"Prematuro de 32 semanas, atualmente com 6 meses de idade cronológica. Para avaliar o DNPM, a idade corrigida é:",
+   opts:["6 meses","5 meses","4 meses","2 meses"],
+   correct:2, expl:"Idade corrigida = idade cronológica − (semanas que faltaram para 40). 40−32 = 8 semanas = 2 meses. 6m − 2m = <b>4 meses</b>. Corrige-se até os 2 anos."},
+  {id:"dnpm-q4",banca:"SES-RJ (estilo)",stem:"Qual é o marco do desenvolvimento <b>social</b> mais precoce e classicamente avaliado aos 2 meses?",
+   opts:["Estranhamento","Sorriso social","Brincar simbólico","Acenar adeus"],
+   correct:1, expl:"O <b>sorriso social</b> (resposta ao estímulo social, ~2 meses) é o marco social precoce clássico. Estranhar surge ~6–8m, adeus ~9m, brincar simbólico após 18–24m."}
+ ],
+
+ flashcards:[
+  {id:"dnpm-f1",tipo:"qa",tag:"Marcos",front:"Qual marco social clássico dos 2 meses?",back:"<b>Sorriso social</b> (resposta a estímulo social)."},
+  {id:"dnpm-f2",tipo:"qa",tag:"Marcos",front:"Idade esperada para sentar sem apoio?",back:"<b>6–8 meses</b> (média ~8m)."},
+  {id:"dnpm-f3",tipo:"cloze",tag:"Leis",front:"As duas leis do desenvolvimento são {{c1::céfalo-caudal}} e {{c2::próximo-distal}}.",back:"Céfalo-caudal (cabeça→pés) e próximo-distal (centro→periferia)."},
+  {id:"dnpm-f4",tipo:"vf",tag:"Alerta",front:"Regressão de marcos pode ser variação normal do ritmo.",back:"<b>FALSO.</b> Regressão é SEMPRE patológica — investigar."},
+  {id:"dnpm-f5",tipo:"qa",tag:"Linguagem",front:"Quando se esperam frases de 2 palavras?",back:"<b>24 meses</b> (2 anos)."},
+  {id:"dnpm-f6",tipo:"qa",tag:"Prematuro",front:"Até que idade se corrige a idade do prematuro?",back:"Até os <b>2 anos</b> de idade cronológica."}
+ ],
+
+ casos:[
+  {titulo:"Caso 1 — Atraso de marcha",
+   caso:"Pré-escolar de 18 meses trazido pela mãe porque 'ainda não anda sozinho'. Nascido a termo. Senta sem apoio desde os 7m, engatinha, fica de pé com apoio, dá alguns passos segurando no móvel. Fala 6 palavras. Interage bem, aponta.",
+   perguntas:[
+     {q:"O desenvolvimento está dentro do esperado?",a:"Sim. A marcha independente pode surgir até os <b>15–18 meses</b> (alguns até 18m). A criança já anda com apoio, senta, engatinha, tem linguagem e social adequados — sequência preservada."},
+     {q:"Quando esse atraso de marcha viraria sinal de alerta?",a:"Se <b>não andar sozinha aos 18 meses</b> (limite), associada a outros atrasos, hipotonia, ou perda de marcos. Aí investigar (ex.: distrofias, paralisia cerebral)."},
+     {q:"Conduta agora?",a:"Tranquilizar, orientar estimulação e <b>reavaliar</b>; vigilância na próxima consulta. Avaliar perímetro cefálico e exame neurológico."}
+   ]},
+  {titulo:"Caso 2 — Não interage",
+   caso:"Menino de 24 meses. Anda e corre bem. Não forma frases, usa ~5 palavras, não aponta para mostrar interesse, evita contato visual, alinha brinquedos repetidamente.",
+   perguntas:[
+     {q:"Quais red flags estão presentes?",a:"Atraso de linguagem (esperado frases de 2 palavras aos 24m), <b>ausência de apontar protodeclarativo</b>, pouco contato visual, comportamento repetitivo — sinais de alerta para <b>Transtorno do Espectro Autista (TEA)</b>."},
+     {q:"Conduta?",a:"Aplicar instrumento de rastreio (ex.: M-CHAT), avaliação audiológica e <b>encaminhar</b> para avaliação especializada (neuropediatria). Intervenção precoce melhora prognóstico."}
+   ]}
+ ],
+
+ fluxoDx:[
+  '<h2>🔀 Fluxograma diagnóstico — vigilância do DNPM</h2>',
+  '<div class="svg-box"><svg viewBox="0 0 720 470" xmlns="http://www.w3.org/2000/svg">'+
+   '<defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#c9a8e8"/></marker></defs>'+
+   '<rect x="250" y="20" width="220" height="48" rx="12" fill="#b58bd6"/><text x="360" y="49" fill="#fff" font-size="15" font-weight="700" text-anchor="middle">Consulta de puericultura</text>'+
+   '<line x1="360" y1="68" x2="360" y2="98" stroke="#c9a8e8" stroke-width="2.5" marker-end="url(#ar)"/>'+
+   '<rect x="230" y="100" width="260" height="48" rx="12" fill="#4aa6e8"/><text x="360" y="129" fill="#fff" font-size="14" text-anchor="middle">Aplicar marcos da faixa etária</text>'+
+   '<line x1="360" y1="148" x2="360" y2="178" stroke="#c9a8e8" stroke-width="2.5" marker-end="url(#ar)"/>'+
+   '<polygon points="360,178 470,220 360,262 250,220" fill="#f2b84b"/><text x="360" y="216" fill="#3a2a00" font-size="13" font-weight="700" text-anchor="middle">Marcos da faixa</text><text x="360" y="232" fill="#3a2a00" font-size="13" font-weight="700" text-anchor="middle">presentes?</text>'+
+   '<line x1="250" y1="220" x2="120" y2="220" stroke="#c9a8e8" stroke-width="2.5" marker-end="url(#ar)"/><text x="180" y="210" fill="#ffd470" font-size="12" font-weight="700">NÃO</text>'+
+   '<line x1="470" y1="220" x2="600" y2="220" stroke="#c9a8e8" stroke-width="2.5" marker-end="url(#ar)"/><text x="520" y="210" fill="#7cc6f3" font-size="12" font-weight="700">SIM</text>'+
+   '<rect x="20" y="196" width="100" height="48" rx="12" fill="#ef5a6f"/><text x="70" y="218" fill="#fff" font-size="12" text-anchor="middle">Falta marco</text><text x="70" y="234" fill="#fff" font-size="12" text-anchor="middle">da faixa?</text>'+
+   '<rect x="560" y="196" width="140" height="48" rx="12" fill="#4cc38a"/><text x="630" y="218" fill="#fff" font-size="12" text-anchor="middle">Adequado:</text><text x="630" y="234" fill="#fff" font-size="12" text-anchor="middle">rotina + orientar</text>'+
+   '<line x1="70" y1="244" x2="70" y2="300" stroke="#c9a8e8" stroke-width="2.5" marker-end="url(#ar)"/>'+
+   '<rect x="10" y="302" width="200" height="64" rx="12" fill="#2a1b35" stroke="#c9a8e8"/><text x="110" y="328" fill="#ffd470" font-size="12" font-weight="700" text-anchor="middle">ALERTA</text><text x="110" y="346" fill="#e9def5" font-size="11" text-anchor="middle">Estimular + reavaliar 30d</text>'+
+   '<rect x="260" y="302" width="220" height="64" rx="12" fill="#2a1b35" stroke="#ef5a6f"/><text x="370" y="322" fill="#ef5a6f" font-size="12" font-weight="700" text-anchor="middle">PROVÁVEL ATRASO</text><text x="370" y="340" fill="#e9def5" font-size="11" text-anchor="middle">Atraso + PC alterado / regressão</text><text x="370" y="356" fill="#e9def5" font-size="11" text-anchor="middle">→ ENCAMINHAR</text>'+
+   '<line x1="360" y1="262" x2="370" y2="302" stroke="#ef5a6f" stroke-width="2.5" marker-end="url(#ar)" stroke-dasharray="5 4"/><text x="395" y="288" fill="#ef5a6f" font-size="11">se grave/regressão</text>'+
+   '<rect x="240" y="400" width="240" height="50" rx="12" fill="#b58bd6"/><text x="360" y="421" fill="#fff" font-size="12" text-anchor="middle">Avaliação especializada</text><text x="360" y="438" fill="#fff" font-size="11" text-anchor="middle">(neuropediatria, fono, audiometria)</text>'+
+   '<line x1="370" y1="366" x2="360" y2="400" stroke="#c9a8e8" stroke-width="2.5" marker-end="url(#ar)"/>'+
+  '</svg><div class="cap">Vigilância do desenvolvimento — Caderneta da Criança (MS)</div></div>'
+ ].join(''),
+
+ fluxoConduta:[
+  '<h2>🧭 Fluxograma de conduta</h2>',
+  '<table><tr><th>Situação</th><th>Conduta</th></tr>',
+  '<tr><td>Desenvolvimento adequado</td><td>Elogiar, orientar estímulos, manter calendário de consultas</td></tr>',
+  '<tr><td>Alerta (ausência de marco da faixa anterior, sem outros sinais)</td><td>Orientar estimulação dirigida + <b>reavaliar em 30 dias</b></td></tr>',
+  '<tr><td>Persistência do alerta ou novos achados</td><td>Encaminhar para avaliação especializada</td></tr>',
+  '<tr><td>Provável atraso (atraso + perímetro cefálico alterado)</td><td><b>Encaminhar</b> diretamente</td></tr>',
+  '<tr><td>Regressão de marcos</td><td><b>Investigação imediata</b> (neuropediatria; pensar EIM/neurodegenerativo)</td></tr>',
+  '<tr><td>Sinais de TEA (não aponta, sem contato visual, repetitivo)</td><td>M-CHAT + audiometria + encaminhamento</td></tr></table>',
+  '<div class="callout tip"><span class="ci">✅</span><div>Em prova: diante de <b>atraso isolado leve</b> em criança hígida → <b>orientar e reavaliar</b>. Diante de <b>regressão</b> ou <b>múltiplos atrasos</b> → <b>encaminhar/investigar</b>.</div></div>'
+ ].join(''),
+
+ mapa:[
+  '<h2>🧠 Mapa mental — DNPM</h2>',
+  '<div class="svg-box"><svg viewBox="0 0 740 420" xmlns="http://www.w3.org/2000/svg">'+
+   '<ellipse cx="370" cy="210" rx="95" ry="48" fill="#b58bd6"/><text x="370" y="205" fill="#fff" font-size="17" font-weight="700" text-anchor="middle">DNPM</text><text x="370" y="225" fill="#ece1f7" font-size="11" text-anchor="middle">4 domínios</text>'+
+   ['Motor grosso|150|70|#ff6fa5','Motor fino|580|70|#4aa6e8','Linguagem|150|350|#f2b84b','Social|580|350|#4cc38a','Leis|370|55|#7cc6f3','Alerta|370|365|#ef5a6f']
+     .map(function(s){var p=s.split('|');var x=+p[1],y=+p[2];return '<line x1="370" y1="210" x2="'+x+'" y2="'+y+'" stroke="#5b4a6b" stroke-width="2"/><rect x="'+(x-78)+'" y="'+(y-20)+'" width="156" height="40" rx="11" fill="'+p[3]+'"/><text x="'+x+'" y="'+(y+5)+'" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">'+p[0]+'</text>';}).join('')+
+   '<text x="150" y="105" fill="#e9def5" font-size="10" text-anchor="middle">sustenta→senta→anda</text>'+
+   '<text x="580" y="105" fill="#e9def5" font-size="10" text-anchor="middle">preensão→pinça</text>'+
+   '<text x="150" y="318" fill="#e9def5" font-size="10" text-anchor="middle">balbucio→palavras→frases</text>'+
+   '<text x="580" y="318" fill="#e9def5" font-size="10" text-anchor="middle">sorriso→estranha→adeus</text>'+
+   '<text x="370" y="30" fill="#e9def5" font-size="10" text-anchor="middle">céfalo-caudal · próximo-distal</text>'+
+   '<text x="370" y="395" fill="#e9def5" font-size="10" text-anchor="middle">regressão = SEMPRE patológico</text>'+
+  '</svg><div class="cap">Síntese visual dos domínios e conceitos-chave</div></div>'
+ ].join(''),
+
+ vespera:[
+  '<h2>⏰ Revisão de véspera — DNPM</h2>',
+  '<div class="callout high"><span class="ci">⚡</span><div><b>Em 60 segundos:</b> Sorriso social 2m · Sustenta cabeça 3m · Rola/preensão 4m · Senta c/ apoio 6m · Senta sem apoio + pinça inferior 9m · Anda c/ apoio + pinça fina 12m · Anda só 15m · Corre 18m · Frases de 2 palavras 24m.</div></div>',
+  '<ul><li>2 leis: <b>céfalo-caudal</b> e <b>próximo-distal</b>.</li>',
+  '<li><b>Regressão</b> = investigar SEMPRE.</li>',
+  '<li>Prematuro: corrigir idade até <b>2 anos</b>.</li>',
+  '<li>Denver II: <b>suspeito</b> = ≥2 cautelas e/ou ≥1 atraso.</li>',
+  '<li>TEA: não aponta + sem contato visual + repetitivo → M-CHAT + encaminhar.</li></ul>'
+ ].join(''),
+
+ dicas:[
+  '<h2>💡 Dicas & Pegadinhas</h2>',
+  '<div class="callout peg"><span class="ci">⚠️</span><div>Banca adora trocar <b>idade cronológica × corrigida</b> no prematuro. Sempre corrija até 2 anos.</div></div>',
+  '<div class="callout peg"><span class="ci">⚠️</span><div>"Anda sozinho" tem janela ampla (12–15, até 18m). Não confundir <b>atraso isolado de marcha</b> em criança hígida com patologia.</div></div>',
+  '<div class="callout peg"><span class="ci">⚠️</span><div><b>Sentar SEM apoio</b> (≈6–8m) ≠ <b>sentar COM apoio</b> (≈6m). Leia o enunciado!</div></div>',
+  '<div class="callout mne"><span class="ci">🧠</span><div><b>"Apontar protodeclarativo"</b> (apontar para compartilhar interesse, ~12m) é marco social/comunicativo cuja ausência aos 18–24m é red flag para TEA.</div></div>',
+  '<div class="callout tip"><span class="ci">✅</span><div>Marcos de prova favoritos: <b>sorriso social (2m), sentar sem apoio (6–8m), pinça (9–12m), frases de 2 palavras (24m)</b>.</div></div>'
+ ].join(''),
+
+ dominio:[
+  "Sei as duas leis (céfalo-caudal e próximo-distal) e dou exemplos",
+  "Memorizei os marcos motor/fino/linguagem/social de 2m a 4 anos",
+  "Reconheço os sinais de alerta e sei que regressão = investigar",
+  "Sei calcular idade corrigida do prematuro",
+  "Conheço a classificação do Denver II (normal/suspeito)",
+  "Sei a conduta da vigilância MS (adequado/alerta/atraso)",
+  "Identifico red flags de TEA e sei a conduta (M-CHAT, encaminhar)"
+ ]
+});
+
+/* ================= MATÉRIA 1.2 — CRESCIMENTO ================= */
+reg({ id:"cresc", temaIc:"🌱", t:"Avaliação do Crescimento & Curvas OMS", sub:"Índices, escore-Z/percentil, baixa estatura",
+ teoria:[
+  '<h2>📏 Avaliação do Crescimento</h2>',
+  '<p>Crescer é, na prática, <b>ganhar massa e tamanho ao longo do tempo</b>. O pediatra é como um detetive que acompanha a <b>trajetória</b> da criança no gráfico: mais importante que um ponto isolado é a <b>tendência</b> (a criança "anda no seu canal" de percentil?).</p>',
+  '<h3>O que medir</h3>',
+  '<table><tr><th>Medida</th><th>Quando</th><th>Avalia</th></tr>',
+  '<tr><td><b>Peso</b></td><td>Toda consulta</td><td>Estado nutricional agudo</td></tr>',
+  '<tr><td><b>Comprimento/Estatura</b></td><td>Toda consulta (deitado &lt;2a; em pé ≥2a)</td><td>Crescimento linear (crônico)</td></tr>',
+  '<tr><td><b>Perímetro cefálico (PC)</b></td><td>Até 2 anos</td><td>Crescimento cerebral (micro/macrocefalia)</td></tr>',
+  '<tr><td><b>IMC</b></td><td>Rotina (sobretudo &gt;2a)</td><td>Sobrepeso/obesidade x magreza</td></tr></table>',
+
+  '<h3>Ganhos esperados (decorar!)</h3>',
+  '<table><tr><th>Parâmetro</th><th>Valor de prova</th></tr>',
+  '<tr><td>Peso — 1º trimestre</td><td>~<b>700 g/mês</b> (≈25–30 g/dia)</td></tr>',
+  '<tr><td>Peso — 2º trimestre</td><td>~600 g/mês</td></tr>',
+  '<tr><td>Peso — 3º trimestre</td><td>~500 g/mês</td></tr>',
+  '<tr><td>Peso — 4º trimestre</td><td>~300–400 g/mês</td></tr>',
+  '<tr><td>Duplica o peso de nascimento</td><td>~<b>4–5 meses</b></td></tr>',
+  '<tr><td>Triplica o peso de nascimento</td><td>~<b>12 meses</b></td></tr>',
+  '<tr><td>Quadruplica o peso</td><td>~24 meses</td></tr>',
+  '<tr><td>Estatura — 1º ano</td><td>~<b>25 cm</b> (≈50→75 cm)</td></tr>',
+  '<tr><td>Estatura — 2º ano</td><td>~12 cm</td></tr>',
+  '<tr><td>Estatura — pré-escolar/escolar</td><td>~5–7 cm/ano</td></tr>',
+  '<tr><td>PC ao nascer</td><td>~34–35 cm</td></tr>',
+  '<tr><td>PC — 1º ano</td><td>cresce ~<b>12 cm</b> (≈47 cm aos 12m)</td></tr></table>',
+  '<div class="callout mne"><span class="ci">🧠</span><div><b>PC mensal:</b> 1º tri +2 cm/mês · 2º tri +1 cm/mês · 2º semestre +0,5 cm/mês.</div></div>',
+
+  '<h3>Curvas e padrões da OMS</h3>',
+  '<p>O Brasil adota as <b>curvas da OMS</b> (Caderneta da Criança): <b>padrão</b> (0–5 anos, multicêntrico) e <b>referência</b> (5–19 anos). A posição é lida em <b>percentil</b> ou <b>escore-Z</b>.</p>',
+  '<div class="svg-box"><svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg">'+
+   '<rect x="55" y="20" width="600" height="280" fill="#231833" rx="8"/>'+
+   '<line x1="55" y1="300" x2="655" y2="300" stroke="#7a6a8c" stroke-width="2"/><line x1="55" y1="20" x2="55" y2="300" stroke="#7a6a8c" stroke-width="2"/>'+
+   '<text x="355" y="335" fill="#cdbce0" font-size="13" text-anchor="middle">Idade →</text>'+
+   '<text x="20" y="160" fill="#cdbce0" font-size="13" transform="rotate(-90 20 160)" text-anchor="middle">Peso/Estatura →</text>'+
+   '<path d="M55,250 C200,210 420,150 655,90" stroke="#4cc38a" stroke-width="3" fill="none"/>'+
+   '<path d="M55,275 C200,245 420,200 655,150" stroke="#7cc6f3" stroke-width="3" fill="none"/>'+
+   '<path d="M55,225 C200,175 420,105 655,40" stroke="#7cc6f3" stroke-width="3" fill="none"/>'+
+   '<path d="M55,290 C200,275 420,250 655,215" stroke="#ef5a6f" stroke-width="2.5" fill="none" stroke-dasharray="6 4"/>'+
+   '<path d="M55,205 C200,140 420,60 655,15" stroke="#ef5a6f" stroke-width="2.5" fill="none" stroke-dasharray="6 4"/>'+
+   '<text x="660" y="92" fill="#4cc38a" font-size="12" font-weight="700">P50 (Z 0)</text>'+
+   '<text x="615" y="148" fill="#7cc6f3" font-size="11">P3 (Z-2)</text>'+
+   '<text x="615" y="38" fill="#7cc6f3" font-size="11">P97 (Z+2)</text>'+
+   '<text x="600" y="213" fill="#ef5a6f" font-size="11">Z-3</text>'+
+   '<text x="600" y="13" fill="#ef5a6f" font-size="11">Z+3</text>'+
+   '<circle cx="300" cy="200" r="6" fill="#ffd470"/><text x="300" y="190" fill="#ffd470" font-size="11" text-anchor="middle">criança "no canal"</text>'+
+  '</svg><div class="cap">Curvas de percentil/escore-Z (esquema). O importante é a TRAJETÓRIA no canal.</div></div>',
+
+  '<h3>Escore-Z × percentil × classificação</h3>',
+  '<table><tr><th>Escore-Z</th><th>Percentil ≈</th></tr><tr><td>0</td><td>P50</td></tr><tr><td>+2 / −2</td><td>P97 / P3</td></tr><tr><td>+3 / −3</td><td>~P99,9 / P0,1</td></tr></table>',
+  '<h4>Peso/estatura ou IMC/idade — &lt;5 anos</h4>',
+  '<table><tr><th>Faixa (Z)</th><th>Classificação</th></tr>',
+  '<tr><td>&gt; +3</td><td><b class="red">Obesidade</b></td></tr>',
+  '<tr><td>+2 a +3</td><td>Sobrepeso</td></tr>',
+  '<tr><td>+1 a +2</td><td>Risco de sobrepeso</td></tr>',
+  '<tr><td>−2 a +1</td><td><b class="blue">Eutrofia</b></td></tr>',
+  '<tr><td>−3 a &lt;−2</td><td>Magreza</td></tr>',
+  '<tr><td>&lt; −3</td><td><b class="red">Magreza acentuada</b></td></tr></table>',
+  '<h4>IMC/idade — 5 a 19 anos</h4>',
+  '<table><tr><th>Faixa (Z)</th><th>Classificação</th></tr>',
+  '<tr><td>&gt; +2</td><td>Obesidade</td></tr>',
+  '<tr><td>+1 a +2</td><td>Sobrepeso</td></tr>',
+  '<tr><td>−2 a +1</td><td>Eutrofia</td></tr>',
+  '<tr><td>&lt; −2</td><td>Magreza</td></tr></table>',
+  '<h4>Estatura/idade (qualquer idade)</h4>',
+  '<table><tr><th>Faixa (Z)</th><th>Classificação</th></tr>',
+  '<tr><td>≥ −2</td><td>Estatura adequada</td></tr>',
+  '<tr><td>&lt; −2</td><td><b class="red">Baixa estatura</b></td></tr>',
+  '<tr><td>&lt; −3</td><td>Muito baixa estatura</td></tr></table>',
+
+  '<h3>Estatura-alvo (canal familiar)</h3>',
+  '<div class="callout info"><span class="ci">📐</span><div><b>Meninos:</b> (altura do pai + altura da mãe + 13)/2.<br><b>Meninas:</b> (altura do pai + altura da mãe − 13)/2.<br>Margem do canal: ± ~8,5 cm.</div></div>',
+
+  '<h3>Velocidade de crescimento (VC)</h3>',
+  '<p>É o parâmetro <b>mais sensível</b> para detectar problema endócrino precoce. Após os 2 anos, VC &lt; ~5 cm/ano é suspeita. <b class="red">Cruzar canais de percentil para baixo</b> = sinal de alarme (investigar).</p>'
+ ].join(''),
+
+ scores:[
+  '<h2>🎯 Investigação da baixa estatura</h2>',
+  '<h3>Variantes do normal × patológico</h3>',
+  '<table><tr><th></th><th>Baixa estatura familiar</th><th>Retardo constitucional</th><th>Patológica</th></tr>',
+  '<tr><td><b>Alvo genético</b></td><td>Baixo</td><td>Normal</td><td>Normal</td></tr>',
+  '<tr><td><b>Idade óssea</b></td><td>= cronológica</td><td><b>Atrasada</b> (= altura)</td><td>Variável</td></tr>',
+  '<tr><td><b>Velocidade de crescimento</b></td><td>Normal</td><td>Normal (lenta na fase)</td><td><b class="red">Baixa</b></td></tr>',
+  '<tr><td><b>Puberdade</b></td><td>Normal</td><td><b>Atrasada</b></td><td>Variável</td></tr>',
+  '<tr><td><b>História familiar</b></td><td>Pais baixos</td><td>"Maturador tardio" na família</td><td>±</td></tr></table>',
+  '<div class="callout tip"><span class="ci">✅</span><div>Nas <b>variantes normais</b> a VC é <b>normal</b> (criança cresce paralela à curva). Na <b>patológica</b>, a VC cai e a criança <b>cruza canais para baixo</b>.</div></div>',
+  '<h3>Causas patológicas — proporção</h3>',
+  '<table><tr><th>Desproporcionada</th><th>Proporcionada</th></tr>',
+  '<tr><td>Displasias ósseas (ex.: acondroplasia), raquitismo</td><td>Pré-natal: CIUR, genéticas/Turner, infecções. Pós-natal: desnutrição, doenças crônicas, endócrinas (hipotireoidismo, def. GH, Cushing)</td></tr></table>',
+  '<div class="callout peg"><span class="ci">⚠️</span><div><b>Menina baixa + pescoço alado + tórax em escudo + atraso puberal + ↑gonadotrofinas</b> → pensar <b>Síndrome de Turner (45,X)</b>. Sempre cariótipo em menina com baixa estatura inexplicada!</div></div>'
+ ].join(''),
+
+ questoes:[
+  {id:"cresc-q1",banca:"Revalida (estilo)",stem:"Lactente que nasceu com 3,2 kg. Qual peso aproximado é esperado aos 4–5 meses?",
+   opts:["~4,5 kg","~6,4 kg (dobro)","~9,6 kg (triplo)","~12 kg"],
+   correct:1, expl:"O peso de nascimento <b>duplica por volta de 4–5 meses</b> (≈6,4 kg), triplica aos 12 meses (≈9,6 kg) e quadruplica aos 24 meses."},
+  {id:"cresc-q2",banca:"ENARE (estilo)",stem:"Criança de 3 anos com IMC/idade em escore-Z +2,5. Classificação (curva OMS &lt;5a)?",
+   opts:["Eutrofia","Risco de sobrepeso","Sobrepeso","Obesidade"],
+   correct:2, expl:"Para &lt;5 anos: +1 a +2 = risco de sobrepeso; <b>+2 a +3 = sobrepeso</b>; &gt;+3 = obesidade. Z +2,5 → sobrepeso. (Para 5–19a, +2 já seria obesidade.)"},
+  {id:"cresc-q3",banca:"UFRJ (estilo)",stem:"Menino de 8 anos, estatura no P10, velocidade de crescimento normal, idade óssea = cronológica, pais baixos. Diagnóstico mais provável?",
+   opts:["Deficiência de GH","Hipotireoidismo","Baixa estatura familiar","Retardo constitucional do crescimento"],
+   correct:2, expl:"Alvo genético baixo + <b>VC normal</b> + idade óssea = cronológica + pais baixos = <b>baixa estatura familiar</b> (variante do normal). No retardo constitucional a idade óssea estaria <b>atrasada</b> e haveria atraso puberal."},
+  {id:"cresc-q4",banca:"SES-RJ (estilo)",stem:"Qual é o parâmetro mais sensível para detecção precoce de causa endócrina de baixa estatura?",
+   opts:["Peso absoluto","Perímetro cefálico","Velocidade de crescimento","IMC"],
+   correct:2, expl:"A <b>velocidade de crescimento</b> (cm/ano) é o parâmetro mais sensível. Queda de VC com cruzamento de canais para baixo é o principal alarme."}
+ ],
+
+ flashcards:[
+  {id:"cresc-f1",tipo:"qa",tag:"Peso",front:"Quando o peso de nascimento triplica?",back:"Aos <b>12 meses</b> (duplica 4–5m, quadruplica 24m)."},
+  {id:"cresc-f2",tipo:"qa",tag:"PC",front:"Quanto cresce o perímetro cefálico no 1º ano?",back:"~<b>12 cm</b> (de ~35 para ~47 cm)."},
+  {id:"cresc-f3",tipo:"cloze",tag:"Z-score",front:"Escore-Z 0 ≈ percentil {{c1::50}}; Z −2 ≈ P{{c2::3}}.",back:"Z 0 = P50; Z −2 = P3; Z +2 = P97."},
+  {id:"cresc-f4",tipo:"qa",tag:"Alvo",front:"Fórmula da estatura-alvo para meninas?",back:"(altura pai + altura mãe − 13) / 2."},
+  {id:"cresc-f5",tipo:"vf",tag:"Estatura",front:"Estatura/idade com escore-Z −2,5 indica baixa estatura.",back:"<b>VERDADEIRO.</b> &lt; −2 = baixa estatura; &lt; −3 = muito baixa."},
+  {id:"cresc-f6",tipo:"qa",tag:"Turner",front:"Menina baixa + pescoço alado + atraso puberal → pensar em?",back:"<b>Síndrome de Turner (45,X)</b> — pedir cariótipo."}
+ ],
+
+ casos:[
+  {titulo:"Caso 1 — Cruzou o canal",
+   caso:"Menina de 6 anos vinha no P50 de estatura desde o nascimento. Nos últimos 18 meses caiu para o P10, com velocidade de crescimento de 3 cm/ano. Ganho de peso preservado (no P50). Pele seca, constipação, sonolência.",
+   perguntas:[
+     {q:"Qual o achado mais preocupante?",a:"O <b>cruzamento de canais para baixo</b> com <b>velocidade de crescimento baixa</b> (3 cm/ano, esperado ~6) — sinal de causa <b>adquirida/endócrina</b>, não familiar."},
+     {q:"Hipótese e investigação?",a:"Desaceleração linear com peso preservado + sinais (pele seca, constipação, sonolência) sugerem <b>hipotireoidismo adquirido</b>. Solicitar <b>TSH e T4 livre</b>, idade óssea (atrasada)."},
+     {q:"Por que não é baixa estatura familiar?",a:"Na familiar a criança cresce <b>paralela</b> à curva (VC normal) e os pais são baixos. Aqui houve <b>queda de canal</b> — sempre patológico."}
+   ]}
+ ],
+
+ fluxoDx:[
+  '<h2>🔀 Fluxograma — investigação de baixa estatura</h2>',
+  '<div class="svg-box"><svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg">'+
+   '<defs><marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#c9a8e8"/></marker></defs>'+
+   '<rect x="250" y="16" width="220" height="46" rx="12" fill="#b58bd6"/><text x="360" y="44" fill="#fff" font-size="14" text-anchor="middle">Estatura &lt; −2 Z (baixa)</text>'+
+   '<line x1="360" y1="62" x2="360" y2="90" stroke="#c9a8e8" stroke-width="2.5" marker-end="url(#ar2)"/>'+
+   '<polygon points="360,90 480,130 360,170 240,130" fill="#f2b84b"/><text x="360" y="126" fill="#3a2a00" font-size="12" font-weight="700" text-anchor="middle">Velocidade de</text><text x="360" y="142" fill="#3a2a00" font-size="12" font-weight="700" text-anchor="middle">crescimento normal?</text>'+
+   '<line x1="480" y1="130" x2="600" y2="130" stroke="#c9a8e8" stroke-width="2.5" marker-end="url(#ar2)"/><text x="540" y="120" fill="#7cc6f3" font-size="11" font-weight="700">SIM</text>'+
+   '<line x1="240" y1="130" x2="120" y2="130" stroke="#c9a8e8" stroke-width="2.5" marker-end="url(#ar2)"/><text x="170" y="120" fill="#ffd470" font-size="11" font-weight="700">NÃO</text>'+
+   '<rect x="560" y="106" width="150" height="70" rx="12" fill="#4cc38a"/><text x="635" y="132" fill="#fff" font-size="11" text-anchor="middle">Variante normal</text><text x="635" y="150" fill="#fff" font-size="10" text-anchor="middle">familiar / constitucional</text><text x="635" y="166" fill="#fff" font-size="10" text-anchor="middle">(idade óssea decide)</text>'+
+   '<rect x="20" y="106" width="200" height="70" rx="12" fill="#ef5a6f"/><text x="120" y="132" fill="#fff" font-size="11" text-anchor="middle">PATOLÓGICO</text><text x="120" y="150" fill="#fff" font-size="10" text-anchor="middle">VC baixa / cruza canal</text><text x="120" y="166" fill="#fff" font-size="10" text-anchor="middle">→ investigar</text>'+
+   '<line x1="120" y1="176" x2="120" y2="210" stroke="#c9a8e8" stroke-width="2.5" marker-end="url(#ar2)"/>'+
+   '<rect x="20" y="212" width="200" height="60" rx="12" fill="#4aa6e8"/><text x="120" y="236" fill="#fff" font-size="11" text-anchor="middle">Proporcionada?</text><text x="120" y="254" fill="#fff" font-size="10" text-anchor="middle">avaliar segmentos</text>'+
+   '<rect x="20" y="300" width="200" height="56" rx="12" fill="#2a1b35" stroke="#7cc6f3"/><text x="120" y="322" fill="#7cc6f3" font-size="10" text-anchor="middle">Proporcionada: endócrino</text><text x="120" y="338" fill="#e9def5" font-size="9" text-anchor="middle">TSH/T4L, IGF-1, cortisol, cariótipo</text>'+
+   '<rect x="250" y="300" width="200" height="56" rx="12" fill="#2a1b35" stroke="#ef5a6f"/><text x="350" y="322" fill="#ef5a6f" font-size="10" text-anchor="middle">Desproporcionada</text><text x="350" y="338" fill="#e9def5" font-size="9" text-anchor="middle">displasias ósseas, raquitismo</text>'+
+   '<line x1="120" y1="272" x2="120" y2="300" stroke="#c9a8e8" stroke-width="2.5" marker-end="url(#ar2)"/>'+
+   '<line x1="170" y1="272" x2="330" y2="300" stroke="#c9a8e8" stroke-width="2" marker-end="url(#ar2)" stroke-dasharray="4 4"/>'+
+   '<rect x="500" y="300" width="210" height="56" rx="12" fill="#b58bd6"/><text x="605" y="322" fill="#fff" font-size="10" text-anchor="middle">Exames básicos sempre:</text><text x="605" y="338" fill="#fff" font-size="9" text-anchor="middle">hemograma, TSH, idade óssea, rastreio celíaco</text>'+
+  '</svg><div class="cap">Roteiro de investigação da baixa estatura</div></div>'
+ ].join(''),
+
+ fluxoConduta:[
+  '<h2>🧭 Fluxograma de conduta</h2>',
+  '<table><tr><th>Cenário</th><th>Conduta</th></tr>',
+  '<tr><td>Estatura adequada, VC normal</td><td>Manter acompanhamento de rotina</td></tr>',
+  '<tr><td>Baixa estatura + VC normal + idade óssea = cronológica + pais baixos</td><td>Baixa estatura familiar → tranquilizar e seguir</td></tr>',
+  '<tr><td>Baixa estatura + idade óssea atrasada + atraso puberal + HF de maturador tardio</td><td>Retardo constitucional → observar (bom prognóstico)</td></tr>',
+  '<tr><td>VC baixa / cruzamento de canal para baixo</td><td><b>Investigar</b> (TSH/T4L, IGF-1, cariótipo em meninas, rastreio celíaco) e encaminhar</td></tr>',
+  '<tr><td>Baixa estatura desproporcionada</td><td>Avaliar displasia óssea (radiografias, genética)</td></tr></table>'
+ ].join(''),
+
+ mapa:[
+  '<h2>🧠 Mapa mental — Crescimento</h2>',
+  '<div class="svg-box"><svg viewBox="0 0 740 400" xmlns="http://www.w3.org/2000/svg">'+
+   '<ellipse cx="370" cy="200" rx="100" ry="46" fill="#4aa6e8"/><text x="370" y="196" fill="#fff" font-size="16" font-weight="700" text-anchor="middle">CRESCIMENTO</text><text x="370" y="216" fill="#cfeaff" font-size="11" text-anchor="middle">trajetória &gt; ponto</text>'+
+   ['Medidas|160|70|#ff6fa5|peso/estatura/PC/IMC','Ganhos|580|70|#f2b84b|dobra 4-5m, triplica 12m','Z-score|160|330|#b58bd6|0=P50 · ±2=P3/P97','Baixa estatura|580|330|#ef5a6f|VC + idade óssea']
+     .map(function(s){var p=s.split('|');var x=+p[1],y=+p[2];return '<line x1="370" y1="200" x2="'+x+'" y2="'+y+'" stroke="#5b4a6b" stroke-width="2"/><rect x="'+(x-90)+'" y="'+(y-22)+'" width="180" height="44" rx="11" fill="'+p[3]+'"/><text x="'+x+'" y="'+(y-2)+'" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">'+p[0]+'</text><text x="'+x+'" y="'+(y+14)+'" fill="#fff" font-size="9" text-anchor="middle">'+p[4]+'</text>';}).join('')+
+  '</svg><div class="cap">Síntese: medir, comparar com a curva, interpretar a tendência</div></div>'
+ ].join(''),
+
+ vespera:[
+  '<h2>⏰ Revisão de véspera — Crescimento</h2>',
+  '<div class="callout high"><span class="ci">⚡</span><div><b>Pesos:</b> dobra 4–5m · triplica 12m · quadruplica 24m. <b>Estatura:</b> +25 cm 1º ano · +12 cm 2º ano. <b>PC:</b> +12 cm no 1º ano.</div></div>',
+  '<ul><li>Z 0 = P50; ±2 Z = P97/P3.</li>',
+  '<li>&lt;5a sobrepeso = Z +2 a +3; obesidade &gt;+3. 5–19a sobrepeso +1 a +2; obesidade &gt;+2.</li>',
+  '<li>Baixa estatura = E/I &lt; −2 Z.</li>',
+  '<li><b>VC</b> é o parâmetro mais sensível; cruzar canal p/ baixo = alarme.</li>',
+  '<li>Variante normal: VC normal. Patológico: VC baixa.</li>',
+  '<li>Menina baixa inexplicada → cariótipo (Turner).</li></ul>'
+ ].join(''),
+
+ dicas:[
+  '<h2>💡 Dicas & Pegadinhas</h2>',
+  '<div class="callout peg"><span class="ci">⚠️</span><div>Os <b>cortes de IMC mudam</b> entre &lt;5 anos e 5–19 anos. Ler a idade antes de classificar!</div></div>',
+  '<div class="callout peg"><span class="ci">⚠️</span><div><b>Um ponto isolado</b> baixo não diagnostica nada — é a <b>trajetória</b>/VC que importa.</div></div>',
+  '<div class="callout mne"><span class="ci">🧠</span><div><b>Familiar:</b> Família baixa, idade óssea Fiel (=cronológica). <b>Constitucional:</b> Cresce atrasado mas reCupera (idade óssea atrasada, puberdade tardia).</div></div>',
+  '<div class="callout tip"><span class="ci">✅</span><div>Peso preservado + estatura caindo = pensar <b>endócrino</b> (hipotireoidismo, def. GH). Peso e estatura caindo juntos = pensar <b>nutricional/doença crônica</b>.</div></div>'
+ ].join(''),
+
+ dominio:[
+  "Sei o que medir e com que frequência (peso, estatura, PC, IMC)",
+  "Decorei os ganhos de peso/estatura/PC esperados",
+  "Sei converter escore-Z em percentil",
+  "Classifico estado nutricional por faixa etária (cortes corretos)",
+  "Calculo estatura-alvo (canal familiar)",
+  "Diferencio variante normal de baixa estatura patológica pela VC e idade óssea",
+  "Lembro de pedir cariótipo em menina com baixa estatura inexplicada"
+ ]
+});
+
+reg({ id:"puberdade", temaIc:"🌱", t:"Puberdade Normal & Patológica", sub:"Tanner, puberdade precoce e atrasada",
+ teoria:[
+  '<h2>🌸 Puberdade — do botão mamário ao adulto</h2>',
+  '<p>Pense na puberdade como o <b>despertar</b> de um sistema que estava "dormindo" desde a vida fetal: o eixo <b class="blue">hipotálamo–hipófise–gônada</b>. O hipotálamo volta a liberar <b>GnRH em pulsos</b> → hipófise solta <b>LH e FSH</b> → ovários/testículos produzem <b>estrogênio/testosterona</b>. O resultado é o aparecimento dos caracteres sexuais secundários, o estirão e, por fim, a capacidade reprodutiva.</p>',
+  '<div class="callout info"><span class="ci">💡</span><div>Antes da puberdade o eixo está <b>freado</b> (baixa sensibilidade do gonadostato + inibição do SNC). A puberdade é a <b>"desinibição"</b> desse eixo.</div></div>',
+
+  '<h3>A sequência (a ordem é a chave das questões!)</h3>',
+  '<table><tr><th>Sexo</th><th>1º sinal</th><th>Sequência típica</th></tr>',
+  '<tr><td><b>Menina</b></td><td><b>Telarca</b> (broto mamário, ~8–13a)</td><td>Telarca → pubarca → <b>estirão</b> → <b>menarca</b></td></tr>',
+  '<tr><td><b>Menino</b></td><td><b>Aumento testicular</b> (≥4 mL / ≥2,5 cm, ~9–14a)</td><td>↑Testículos → pubarca/pênis → estirão (mais tardio)</td></tr></table>',
+  '<div class="callout mne"><span class="ci">🧠</span><div><b>Menina começa por fora (mama), menino começa por dentro (testículo).</b> O 1º sinal feminino se vê; o masculino precisa medir (orquidômetro de Prader ≥4 mL).</div></div>',
+  '<div class="callout peg"><span class="ci">⚠️</span><div>O <b>estirão</b> da menina é <b>precoce</b> (no meio da puberdade, antes da menarca). O do menino é <b>tardio</b> (Tanner G4). Por isso meninas "disparam" na altura antes e meninos as ultrapassam depois.</div></div>',
+
+  '<h3>Estágios de Tanner</h3>',
+  '<div class="svg-box">'+
+  '<svg viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Estágios de Tanner esquemáticos">'+
+  '<style>.tl{fill:#ffd6e8;font:600 13px Nunito,sans-serif}.tn{fill:#bda7e0;font:700 15px Nunito,sans-serif}.tx{fill:#cfe6ff;font:12px Nunito,sans-serif}</style>'+
+  '<text x="380" y="24" text-anchor="middle" class="tn">Tanner — Mama (M) e Pelos pubianos (P)</text>'+
+  ['M1/P1','M2/P2','M3/P3','M4/P4','M5/P5'].map(function(s,i){var x=40+i*145;return '<g>'+
+    '<circle cx="'+(x+50)+'" cy="110" r="'+(18+i*8)+'" fill="none" stroke="#ff6fa5" stroke-width="2.5"/>'+
+    '<circle cx="'+(x+50)+'" cy="110" r="'+(4+i*3)+'" fill="#ff6fa5"/>'+
+    '<text x="'+(x+50)+'" y="180" text-anchor="middle" class="tl">'+s+'</text>'+
+    '<text x="'+(x+50)+'" y="200" text-anchor="middle" class="tx">'+['Pré-puberal','Broto','Crescimento','Aréola elevada','Adulto'][i]+'</text>'+
+  '</g>';}).join('')+
+  '</svg></div>',
+  '<table><tr><th>Estágio</th><th>Mama (menina)</th><th>Genital (menino)</th><th>Pelos pubianos</th></tr>',
+  '<tr><td><b>1</b></td><td>Pré-puberal</td><td>Testículo &lt;4 mL</td><td>Ausentes</td></tr>',
+  '<tr><td><b>2</b></td><td><b>Broto mamário</b></td><td><b>Testículo ≥4 mL</b>, escroto fino/rugoso</td><td>Esparsos, lisos</td></tr>',
+  '<tr><td><b>3</b></td><td>Mama e aréola crescem juntas</td><td>↑Pênis (comprimento), ↑testículo</td><td>Mais escuros, encaracolados</td></tr>',
+  '<tr><td><b>4</b></td><td>Aréola/papila formam 2º montículo</td><td>↑Pênis (largura), glande</td><td>Tipo adulto, área menor</td></tr>',
+  '<tr><td><b>5</b></td><td>Mama adulta (aréola recua)</td><td>Adulto</td><td>Adulto, raiz das coxas</td></tr></table>',
+
+  '<h3>O eixo e os marcos cronológicos</h3>',
+  '<ul><li><b>Menarca:</b> ocorre ~2–2,5 anos após a telarca, em geral <b>Tanner M4</b>, após o pico do estirão. Idade média no Brasil ~12–12,5a.</li>',
+  '<li>Após a menarca, a menina ainda cresce em média <b>4–6 cm</b> (o estirão já passou).</li>',
+  '<li><b>Adrenarca</b> (pubarca por androgênios adrenais) pode ser independente da gonadarca — por isso pelos sozinhos nem sempre significam ativação do eixo gonadal.</li></ul>',
+  '<div class="callout tip"><span class="ci">✅</span><div>Sinais <b>estrogênicos</b> (mama, mucosa vaginal, útero) = ovário/eixo ativo. Sinais apenas <b>androgênicos</b> (pelos, acne, odor) = pensar em adrenal/adrenarca isolada.</div></div>'
+ ].join(''),
+
+ scores:[
+  '<h2>🎯 Definições & Critérios</h2>',
+  '<div class="callout high"><span class="ci">⚡</span><div><b>Limites de idade (decorar!):</b><br>• <b>Puberdade precoce:</b> caracteres antes de <b>8 anos</b> (menina) ou <b>9 anos</b> (menino).<br>• <b>Puberdade atrasada:</b> ausência de telarca aos <b>13a</b> (menina) ou de aumento testicular aos <b>14a</b> (menino); ou menarca ausente aos <b>15–16a</b> (atraso da menarca).</div></div>',
+  '<h3>Precoce: central × periférica</h3>',
+  '<table><tr><th></th><th>Central (verdadeira / GnRH-dependente)</th><th>Periférica (pseudopuberdade / GnRH-independente)</th></tr>',
+  '<tr><td><b>Origem</b></td><td>Ativação precoce do <b>eixo</b> H-H-G</td><td>Esteroides fora do eixo (gônada/adrenal/exógeno)</td></tr>',
+  '<tr><td><b>LH/FSH</b></td><td><b>Elevados</b> (LH responde ao GnRH/análogo)</td><td><b>Suprimidos</b> (baixos)</td></tr>',
+  '<tr><td><b>Sequência</b></td><td><b>Isossexual e ordenada</b> (igual à normal)</td><td>Pode ser <b>desordenada</b> ou isossexual/heterossexual</td></tr>',
+  '<tr><td><b>Causas</b></td><td>Idiopática (maioria nas <b>meninas</b>); lesão SNC (hamartoma — clássico), tumor — mais provável em <b>meninos</b></td><td>Cistos/tumores ovário/testículo, HAC, McCune-Albright, hipotireoidismo grave, esteroides exógenos</td></tr>',
+  '<tr><td><b>Tratamento</b></td><td><b>Análogo de GnRH</b> (ex.: leuprolida)</td><td>Tratar a <b>causa</b> de base</td></tr></table>',
+  '<div class="callout peg"><span class="ci">⚠️</span><div><b>Pegadinha:</b> puberdade precoce <b>central em menino</b> tem alta chance de causa orgânica (tumor SNC) → <b>RM de crânio sempre</b>. Em menina, costuma ser idiopática, mas RM ainda é indicada especialmente se &lt;6a ou sinais neurológicos.</div></div>',
+  '<h3>Variantes benignas (não são puberdade precoce verdadeira)</h3>',
+  '<ul><li><b>Telarca precoce isolada:</b> só broto mamário, sem estirão, sem avanço de idade óssea, sem progressão. Comum &lt;2a. Conduta: observar.</li>',
+  '<li><b>Pubarca/adrenarca precoce isolada:</b> só pelos/odor, sem outros sinais. Investigar se progressão rápida (HAC não clássica).</li>',
+  '<li><b>Menarca precoce isolada:</b> rara, diagnóstico de exclusão.</li></ul>',
+  '<h3>Atrasada</h3>',
+  '<table><tr><th>Tipo</th><th>LH/FSH</th><th>Exemplos</th></tr>',
+  '<tr><td><b>Hipogonadismo hipogonadotrófico</b> (central)</td><td><b>Baixos</b></td><td>Atraso constitucional (mais comum, "destravador" tardio), Kallmann (+anosmia), pan-hipopituitarismo, doença crônica/desnutrição</td></tr>',
+  '<tr><td><b>Hipogonadismo hipergonadotrófico</b> (gonadal)</td><td><b>Altos</b></td><td><b>Turner</b> (45,X — menina), <b>Klinefelter</b> (47,XXY — menino), falência gonadal</td></tr></table>',
+  '<div class="callout mne"><span class="ci">🧠</span><div><b>Gonadotrofinas ALTAS = problema na gônada</b> (ela não responde, então a hipófise "grita" mandando mais LH/FSH). <b>BAIXAS = problema central</b> (hipotálamo/hipófise).</div></div>'
+ ].join(''),
+
+ questoes:[
+  {id:"pub-q1",banca:"ENARE (estilo)",stem:"Menina de 7 anos com broto mamário bilateral há 4 meses, aceleração da velocidade de crescimento e idade óssea avançada. Qual o primeiro sinal que classicamente inicia a puberdade feminina e qual a principal hipótese?",
+   opts:["Pubarca; adrenarca precoce isolada","Telarca; puberdade precoce central","Menarca; puberdade precoce periférica","Estirão; variante normal"],
+   correct:1, expl:"O 1º sinal puberal na menina é a <b>telarca</b>. Surgindo antes dos <b>8 anos</b> com estirão e avanço de idade óssea = <b>puberdade precoce</b>; sequência ordenada e isossexual aponta para <b>central</b> (idiopática é a mais comum na menina). Confirmar com LH (basal/pós-GnRH) e solicitar RM de crânio."},
+  {id:"pub-q2",banca:"Revalida (estilo)",stem:"Menino de 7 anos com aumento testicular, pelos pubianos e estirão. LH elevado com resposta puberal ao teste do GnRH. Qual exame é IMPRESCINDÍVEL?",
+   opts:["Cariótipo","RM de crânio (sela túrcica)","Cintilografia óssea","Dosagem de 17-OH-progesterona"],
+   correct:1, expl:"Puberdade precoce <b>central no menino</b> tem alta probabilidade de <b>causa orgânica do SNC</b> (ex.: hamartoma, glioma). <b>RM de crânio</b> é obrigatória. 17-OHP seria útil se suspeita de causa periférica/HAC (LH estaria suprimido)."},
+  {id:"pub-q3",banca:"UFRJ (estilo)",stem:"Adolescente de 14 anos, sexo feminino, baixa estatura, pescoço alado, tórax em escudo e ausência de telarca. Gonadotrofinas elevadas. Diagnóstico mais provável?",
+   opts:["Atraso constitucional","Síndrome de Kallmann","Síndrome de Turner","Síndrome de McCune-Albright"],
+   correct:2, expl:"Fenótipo (baixa estatura, pterígio cervical, tórax em escudo) + <b>puberdade atrasada com FSH/LH altos</b> (hipogonadismo <b>hiper</b>gonadotrófico) = <b>Turner (45,X)</b>. Confirmar com <b>cariótipo</b>. Kallmann teria gonadotrofinas baixas + anosmia."},
+  {id:"pub-q4",banca:"SES-RJ (estilo)",stem:"Menino de 14 anos e 6 meses, sem sinais de puberdade, mas com história familiar de 'desenvolvimento tardio' no pai. Estatura baixa para a idade, porém idade óssea atrasada compatível com a estatura. Conduta inicial mais adequada?",
+   opts:["Iniciar testosterona em altas doses imediatamente","Tranquilizar, acompanhar — provável atraso constitucional","Solicitar RM de crânio com urgência","Encaminhar para cirurgia"],
+   correct:1, expl:"Quadro clássico de <b>atraso constitucional do crescimento e da puberdade</b> (a causa mais comum de puberdade atrasada, frequentemente familiar): idade óssea atrasada, prognóstico de estatura normal. Conduta é <b>observação/acompanhamento</b>; em casos selecionados, curso curto de testosterona apenas para 'destravar' e aliviar impacto psicossocial."},
+  {id:"pub-q5",banca:"UERJ (estilo)",stem:"Lactente de 18 meses com broto mamário bilateral discreto, SEM pelos, SEM aceleração do crescimento, idade óssea normal e sem progressão em 6 meses. Conduta?",
+   opts:["Análogo de GnRH","Investigar tumor de ovário","Observação e reavaliação — telarca precoce isolada","RM de crânio imediata"],
+   correct:2, expl:"<b>Telarca precoce isolada</b>: broto mamário sem estirão, sem avanço de idade óssea e sem progressão. É <b>benigna e autolimitada</b>. Conduta: <b>observar e reavaliar</b>, sem tratamento."}
+ ],
+
+ flashcards:[
+  {id:"pub-f1",tipo:"qa",tag:"Sequência",front:"Qual o 1º sinal da puberdade na menina e no menino?",back:"Menina: <b>telarca</b> (broto mamário). Menino: <b>aumento testicular</b> (≥4 mL)."},
+  {id:"pub-f2",tipo:"cloze",tag:"Limites",front:"Puberdade precoce: antes de {{c1::8}} anos na menina e {{c2::9}} anos no menino.",back:"8 anos (♀) / 9 anos (♂)."},
+  {id:"pub-f3",tipo:"qa",tag:"Tanner",front:"Em que estágio de Tanner costuma ocorrer a menarca?",back:"<b>M4</b>, após o pico do estirão (~2 anos após a telarca)."},
+  {id:"pub-f4",tipo:"vf",tag:"Precoce",front:"Na puberdade precoce periférica, LH e FSH estão elevados.",back:"<b>FALSO.</b> Na periférica as gonadotrofinas estão <b>suprimidas</b>; elevadas é na central."},
+  {id:"pub-f5",tipo:"qa",tag:"Atrasada",front:"Gonadotrofinas ALTAS na puberdade atrasada indicam problema onde?",back:"Na <b>gônada</b> (hipogonadismo hipergonadotrófico): Turner, Klinefelter."},
+  {id:"pub-f6",tipo:"qa",tag:"Conduta",front:"Tratamento da puberdade precoce central?",back:"<b>Análogo de GnRH</b> (ex.: leuprolida) para frear o eixo."},
+  {id:"pub-f7",tipo:"vf",tag:"Menino",front:"Puberdade precoce central em menino geralmente é idiopática.",back:"<b>FALSO.</b> No menino é frequentemente <b>orgânica</b> (SNC) → RM de crânio obrigatória. Idiopática é mais comum na menina."}
+ ],
+
+ casos:[
+  {titulo:"Caso 1 — Broto mamário aos 6 anos",
+   caso:"Menina de 6 anos e 8 meses levada por broto mamário bilateral há 5 meses, com leve aceleração do crescimento (mãe diz que 'as calças ficaram curtas rápido'). Pelos pubianos esparsos. Idade óssea avançada em 2 anos. LH basal puberal.",
+   perguntas:[
+     {q:"Qual a classificação?",a:"<b>Puberdade precoce central</b> (caracteres antes dos 8a, sequência ordenada, LH puberal, idade óssea avançada, aceleração do crescimento)."},
+     {q:"Quais exames solicitar?",a:"<b>LH/FSH</b> (basal e/ou pós-estímulo com GnRH), <b>estradiol</b>, <b>idade óssea</b> (Rx mão e punho), <b>RM de crânio</b> (afastar lesão do SNC — sempre no menino e em meninas, sobretudo &lt;6a ou com sinais neurológicos), USG pélvica (útero/ovários estimulados)."},
+     {q:"Por que tratar e com o quê?",a:"Para preservar a <b>estatura final</b> (o avanço da idade óssea fecha as epífises precocemente) e pelo impacto psicossocial. Tratamento: <b>análogo de GnRH</b> de depósito até idade puberal apropriada."}
+   ]},
+  {titulo:"Caso 2 — Amenorreia primária e baixa estatura",
+   caso:"Menina de 15 anos, nunca menstruou, mamas Tanner 1, estatura no P3, escoliose leve, múltiplos nevos, sopro cardíaco. Gonadotrofinas (FSH/LH) elevadas.",
+   perguntas:[
+     {q:"Qual a principal hipótese e o exame confirmatório?",a:"<b>Síndrome de Turner (45,X)</b> — baixa estatura + infantilismo sexual + gonadotrofinas altas (disgenesia gonadal → hipogonadismo hipergonadotrófico). Confirmar com <b>cariótipo</b>."},
+     {q:"Que comorbidade cardíaca rastrear?",a:"<b>Coarctação da aorta</b> e valva aórtica bicúspide (sopro!) — solicitar avaliação cardiológica/ecocardiograma. Rastrear também tireoidite, rim em ferradura, perda auditiva."},
+     {q:"Linhas gerais do tratamento?",a:"<b>GH</b> para estatura e <b>indução puberal com estrogênio</b> (depois estro-progestativo) no tempo adequado, além de seguimento multidisciplinar."}
+   ]}
+ ],
+
+ fluxoDx:[
+  '<h2>🔀 Fluxograma — Puberdade precoce</h2>',
+  '<div class="svg-box">'+
+  '<svg viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fluxograma diagnóstico de puberdade precoce">'+
+  '<style>.b{fill:#2a1d40;stroke:#b58bd6;stroke-width:2;rx:12}.t{fill:#f3e9ff;font:600 13px Nunito,sans-serif}.y{fill:#ffd6e8;font:700 12px Nunito,sans-serif}.ln{stroke:#7a6aa0;stroke-width:2;fill:none;marker-end:url(#ar)}</style>'+
+  '<defs><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 z" fill="#7a6aa0"/></marker></defs>'+
+  '<rect class="b" x="250" y="14" width="260" height="46" rx="12"/><text x="380" y="34" text-anchor="middle" class="t">Caracteres 2ários antes de</text><text x="380" y="52" text-anchor="middle" class="t">8a (♀) / 9a (♂)</text>'+
+  '<path class="ln" d="M380,60 L380,92"/>'+
+  '<rect class="b" x="250" y="92" width="260" height="40" rx="12"/><text x="380" y="117" text-anchor="middle" class="t">Dosar LH (basal / pós-GnRH)</text>'+
+  '<path class="ln" d="M380,132 L200,176"/><path class="ln" d="M380,132 L560,176"/>'+
+  '<rect class="b" x="70" y="176" width="260" height="40" rx="12"/><text x="200" y="201" text-anchor="middle" class="y">LH elevado → CENTRAL</text>'+
+  '<rect class="b" x="430" y="176" width="260" height="40" rx="12"/><text x="560" y="201" text-anchor="middle" class="y">LH suprimido → PERIFÉRICA</text>'+
+  '<path class="ln" d="M200,216 L200,260"/><path class="ln" d="M560,216 L560,260"/>'+
+  '<rect class="b" x="60" y="260" width="280" height="58" rx="12"/><text x="200" y="284" text-anchor="middle" class="t">RM de crânio (sempre ♂;</text><text x="200" y="302" text-anchor="middle" class="t">♀ se &lt;6a/sinais SNC) + idade óssea</text>'+
+  '<rect class="b" x="420" y="260" width="280" height="58" rx="12"/><text x="560" y="284" text-anchor="middle" class="t">Esteroides/USG gônada, 17-OHP,</text><text x="560" y="302" text-anchor="middle" class="t">TSH, McCune-Albright?</text>'+
+  '<path class="ln" d="M200,318 L200,360"/><path class="ln" d="M560,318 L560,360"/>'+
+  '<rect class="b" x="70" y="360" width="260" height="40" rx="12"/><text x="200" y="385" text-anchor="middle" class="y">Tratar: análogo de GnRH</text>'+
+  '<rect class="b" x="430" y="360" width="260" height="40" rx="12"/><text x="560" y="385" text-anchor="middle" class="y">Tratar a causa de base</text>'+
+  '</svg></div>',
+  '<div class="callout tip"><span class="ci">✅</span><div>Antes de tudo, separe a <b>puberdade precoce verdadeira</b> (com estirão + avanço de idade óssea + progressão) das <b>variantes benignas isoladas</b> (telarca/pubarca isolada, sem progressão).</div></div>'
+ ].join(''),
+
+ fluxoConduta:[
+  '<h2>🧭 Fluxograma de conduta</h2>',
+  '<table><tr><th>Cenário</th><th>Conduta</th></tr>',
+  '<tr><td>Telarca/pubarca <b>isolada</b>, sem progressão, IO normal</td><td><b>Observar</b> e reavaliar em 3–6 meses. Sem tratamento.</td></tr>',
+  '<tr><td>Precoce <b>central</b> confirmada</td><td><b>Análogo de GnRH</b> de depósito; tratar lesão SNC se houver. Monitorar VC e IO.</td></tr>',
+  '<tr><td>Precoce <b>periférica</b></td><td>Tratar a causa: ressecar tumor/cisto, corticoide na HAC, levotiroxina no hipotireoidismo, suspender esteroide exógeno.</td></tr>',
+  '<tr><td>Atraso <b>constitucional</b> (♂, IO atrasada, história familiar)</td><td><b>Observação</b>; curso curto de testosterona em casos selecionados.</td></tr>',
+  '<tr><td>Hipogonadismo <b>hipergonadotrófico</b> (Turner/Klinefelter)</td><td>Confirmar <b>cariótipo</b>; indução puberal hormonal + manejo multidisciplinar (GH na Turner).</td></tr>',
+  '<tr><td>Hipogonadismo <b>hipogonadotrófico</b> permanente (ex.: Kallmann)</td><td>Reposição hormonal sexual; investigar causa central.</td></tr></table>'
+ ].join(''),
+
+ mapa:[
+  '<h2>🧠 Mapa mental — Puberdade</h2>',
+  '<div class="svg-box">'+
+  '<svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa mental de puberdade">'+
+  '<style>.c{fill:#ff6fa5}.c2{fill:#4aa6e8}.c3{fill:#b58bd6}.c4{fill:#f2b84b}.wt{fill:#1b1230;font:700 13px Nunito,sans-serif}.wl{fill:#eee;font:12px Nunito,sans-serif}.ed{stroke:#7a6aa0;stroke-width:2}</style>'+
+  '<line class="ed" x1="380" y1="180" x2="180" y2="70"/><line class="ed" x1="380" y1="180" x2="580" y2="70"/><line class="ed" x1="380" y1="180" x2="180" y2="290"/><line class="ed" x1="380" y1="180" x2="580" y2="290"/>'+
+  '<circle cx="380" cy="180" r="56" class="c3"/><text x="380" y="178" text-anchor="middle" class="wt">PUBERDADE</text><text x="380" y="196" text-anchor="middle" class="wt">eixo H-H-G</text>'+
+  '<circle cx="180" cy="70" r="48" class="c"/><text x="180" y="66" text-anchor="middle" class="wt">SEQUÊNCIA</text><text x="180" y="84" text-anchor="middle" class="wl">♀telarca ♂testículo</text>'+
+  '<circle cx="580" cy="70" r="48" class="c2"/><text x="580" y="66" text-anchor="middle" class="wt">TANNER</text><text x="580" y="84" text-anchor="middle" class="wl">1→5 mama/genital</text>'+
+  '<circle cx="180" cy="290" r="50" class="c4"/><text x="180" y="286" text-anchor="middle" class="wt">PRECOCE</text><text x="180" y="304" text-anchor="middle" class="wl">central×periférica</text>'+
+  '<circle cx="580" cy="290" r="50" class="c2"/><text x="580" y="286" text-anchor="middle" class="wt">ATRASADA</text><text x="580" y="304" text-anchor="middle" class="wl">hipo×hiper-gonado</text>'+
+  '</svg></div>'
+ ].join(''),
+
+ vespera:[
+  '<h2>⏰ Revisão de véspera — Puberdade</h2>',
+  '<div class="callout high"><span class="ci">⚡</span><div><b>1º sinal:</b> ♀ telarca · ♂ testículo ≥4 mL. <b>Precoce:</b> &lt;8a (♀) / &lt;9a (♂). <b>Atrasada:</b> sem telarca 13a (♀) / sem ↑testículo 14a (♂).</div></div>',
+  '<ul><li>Menarca: <b>Tanner M4</b>, ~2a após telarca; cresce +4–6 cm depois.</li>',
+  '<li>Estirão: <b>precoce</b> na menina, <b>tardio</b> (G4) no menino.</li>',
+  '<li>Central → LH <b>alto</b> → análogo de <b>GnRH</b>. Periférica → LH <b>baixo</b> → tratar causa.</li>',
+  '<li>♂ central = RM de crânio (orgânica!). ♀ central = idiopática (mais comum).</li>',
+  '<li>Atraso: gonadotrofina <b>alta</b> = gônada (Turner/Klinefelter); <b>baixa</b> = central (constitucional/Kallmann).</li>',
+  '<li>Telarca/pubarca isolada sem progressão = <b>observar</b>.</li></ul>'
+ ].join(''),
+
+ dicas:[
+  '<h2>💡 Dicas & Pegadinhas</h2>',
+  '<div class="callout peg"><span class="ci">⚠️</span><div>Idade óssea <b>avançada</b> = puberdade precoce verdadeira (esteroides sexuais aceleram a maturação). Idade óssea <b>atrasada</b> compatível com a estatura = atraso constitucional.</div></div>',
+  '<div class="callout peg"><span class="ci">⚠️</span><div>Não confunda <b>adrenarca</b> (pelos/odor por androgênio adrenal) com puberdade verdadeira (gonadarca). Pelos isolados ≠ ativação do eixo gonadal.</div></div>',
+  '<div class="callout mne"><span class="ci">🧠</span><div><b>"Menino precoce, mente no crânio"</b> — sempre RM. <b>"Gonadotrofina alta, gônada falha"</b> — Turner/Klinefelter.</div></div>',
+  '<div class="callout tip"><span class="ci">✅</span><div>McCune-Albright: tríade <b>puberdade precoce periférica + manchas café-com-leite + displasia fibrosa óssea</b>. Hipotireoidismo grave também pode causar precocidade (Van Wyk-Grumbach).</div></div>'
+ ].join(''),
+
+ dominio:[
+  "Sei o 1º sinal puberal em cada sexo e a sequência completa",
+  "Decorei os limites de idade para precoce e atrasada",
+  "Domino os estágios de Tanner (mama, genital, pelos)",
+  "Diferencio puberdade precoce central de periférica (LH, conduta)",
+  "Sei quando pedir RM de crânio (sempre no menino)",
+  "Diferencio hipogonadismo hiper × hipogonadotrófico na puberdade atrasada",
+  "Reconheço as variantes benignas isoladas (telarca/pubarca/menarca)"
+ ]
+});
+
+/* =====================================================================
+   MOTOR DE RENDERIZAÇÃO E LÓGICA (chunk D)
+   ===================================================================== */
+
+/* ---- Abas das matérias ---- */
+var TABS=[
+  {k:"teoria",ic:"📖",t:"Teoria"},
+  {k:"scores",ic:"🎯",t:"Scores/Critérios"},
+  {k:"questoes",ic:"❓",t:"Questões"},
+  {k:"flashcards",ic:"🎴",t:"Flashcards"},
+  {k:"casos",ic:"🩺",t:"Casos"},
+  {k:"fluxoDx",ic:"🔀",t:"Fluxo Dx"},
+  {k:"fluxoConduta",ic:"🧭",t:"Fluxo Conduta"},
+  {k:"mapa",ic:"🧠",t:"Mapa mental"},
+  {k:"vespera",ic:"⏰",t:"Véspera"},
+  {k:"dicas",ic:"💡",t:"Dicas"},
+  {k:"dominio",ic:"✅",t:"Domínio"},
+  {k:"anotacoes",ic:"📝",t:"Anotações"}
+];
+
+/* ---- PRNG determinístico (seed diária) ---- */
+function hashStr(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
+function seededShuffle(arr,seed){var r=mulberry32(hashStr(seed)),a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ---- Coleta de conteúdo das matérias prontas ---- */
+function readyMaterias(){var out=[];for(var i=0;i<TEMAS.length;i++){for(var j=0;j<TEMAS[i].mats.length;j++){var mm=TEMAS[i].mats[j];if(mm.ready&&MAT[mm.id])out.push(MAT[mm.id]);}}return out;}
+function allNativeQuestions(){var q=[];readyMaterias().forEach(function(m){(m.questoes||[]).forEach(function(o){q.push({mat:m,q:o});});});return q;}
+function allNativeFlashcards(){var f=[];readyMaterias().forEach(function(m){(m.flashcards||[]).forEach(function(o){var c=Object.assign({},o);c._src=m.t;f.push(c);});});return f;}
+function allFlashcards(){ return allNativeFlashcards().concat(STATE.flashcards.map(function(c){var d=Object.assign({},c);d._src="Meu card";return d;})); }
+function findCard(id){var all=allFlashcards();for(var i=0;i<all.length;i++)if(all[i].id===id)return all[i];return null;}
+
+/* ---- XP / Streak / Conquistas ---- */
+function refreshTop(){ var x=$("#xpVal"),s=$("#streakVal"); if(x)x.textContent=STATE.xp; if(s)s.textContent=STATE.streak; }
+function bumpStreak(){
+  var t=todayStr();
+  if(STATE.lastDay===t)return;
+  var y=new Date(); y.setDate(y.getDate()-1);
+  var ys=y.getFullYear()+"-"+(y.getMonth()+1)+"-"+y.getDate();
+  STATE.streak = (STATE.lastDay===ys)? (STATE.streak+1) : 1;
+  STATE.lastDay=t;
+}
+function award(type,times){
+  times=times||1;
+  var before=xpToAgeMonths(STATE.xp);
+  var gain=(XP_RULES[type]||0)*times;
+  if(gain>0){ STATE.xp+=gain; }
+  bumpStreak();
+  var after=xpToAgeMonths(STATE.xp);
+  if(after>before){ celebrate("🎉 A criança cresceu! Agora tem "+fmtAge(after)+"."); }
+  checkAchievements();
+  refreshTop();
+  save();
+  if(gain>0) toast("+"+gain+" XP "+(type==="acerto"?"✅":"⭐"));
+}
+function checkAchievements(){
+  ACHIEVEMENTS.forEach(function(a){
+    if(!STATE.achievements[a.id] && a.cond()){
+      STATE.achievements[a.id]=Date.now();
+      celebrate("🏆 Conquista desbloqueada: "+a.t+"!");
+    }
+  });
+}
+function celebrate(msg){
+  toast(msg,"win");
+  var fx=el("div","celebrate","🎊");
+  document.body.appendChild(fx);
+  setTimeout(function(){if(fx.parentNode)fx.parentNode.removeChild(fx);},1400);
+}
+
+/* ---- SRS (estilo Anki, SM-2 simplificado) ---- */
+function nowDay(){return Math.floor(Date.now()/86400000);}
+function srsState(id){ return STATE.fcReviews[id]||{ease:2.5,interval:0,due:nowDay(),reps:0}; }
+function srsDue(id){ var s=STATE.fcReviews[id]; if(!s)return true; return s.due<=nowDay(); }
+function srsGrade(id,g){
+  var s=srsState(id);
+  if(g===0){ s.ease=Math.max(1.3,s.ease-0.2); s.interval=0; s.reps=0; s.due=nowDay(); }
+  else if(g===1){ s.ease=Math.max(1.3,s.ease-0.15); s.interval=Math.max(1,Math.round((s.interval||1)*1.2)); s.reps++; s.due=nowDay()+s.interval; }
+  else if(g===2){ s.interval=(s.reps===0)?1:(s.reps===1?3:Math.round(s.interval*s.ease)); s.reps++; s.due=nowDay()+s.interval; }
+  else { s.ease=s.ease+0.15; s.interval=Math.round((s.interval||1)*s.ease*1.3)+1; s.reps++; s.due=nowDay()+s.interval; }
+  STATE.fcReviews[id]=s;
+  award("revisarFc");
+}
+
+/* ---- Imagem: compressão ---- */
+function compressImage(file,cb){
+  var rd=new FileReader();
+  rd.onload=function(){
+    var img=new Image();
+    img.onload=function(){
+      var max=820,w=img.width,h=img.height;
+      if(w>max||h>max){ if(w>h){h=Math.round(h*max/w);w=max;}else{w=Math.round(w*max/h);h=max;} }
+      var c=document.createElement("canvas");c.width=w;c.height=h;
+      c.getContext("2d").drawImage(img,0,0,w,h);
+      cb(c.toDataURL("image/jpeg",0.72));
+    };
+    img.src=rd.result;
+  };
+  rd.readAsDataURL(file);
+}
+
+/* ---- Modal ---- */
+function modal(html,opts){
+  opts=opts||{};
+  var root=$("#modalRoot");
+  root.innerHTML="";
+  var bg=el("div","modal-bg");
+  var box=el("div","modal-box glass"+(opts.wide?" wide":""));
+  box.innerHTML='<button class="modal-x" aria-label="Fechar">✕</button>'+html;
+  bg.appendChild(box); root.appendChild(bg);
+  bg.classList.add("open");
+  function close(){ bg.classList.remove("open"); setTimeout(function(){root.innerHTML="";},180); if(opts.onClose)opts.onClose(); }
+  $(".modal-x",box).onclick=close;
+  bg.onclick=function(e){ if(e.target===bg)close(); };
+  if(opts.onOpen)opts.onOpen(box,close);
+  return {box:box,close:close};
+}
+
+/* ---- Navegação ---- */
+var CURRENT={view:"dash",mat:null,tab:"teoria"};
+function nav(view){
+  CURRENT.view=view;
+  $all(".nav-item").forEach(function(n){ n.classList.toggle("active",n.getAttribute("data-view")===view); });
+  $("#sidebar").classList.remove("open");
+  render();
+}
+function render(){
+  var m=$("#main"); if(!m)return;
+  if(CURRENT.view==="dash")return renderDash(m);
+  if(CURRENT.view==="study")return renderStudy(m);
+  if(CURRENT.view==="modules")return renderModules(m);
+  if(CURRENT.view==="materia")return renderMateria(m);
+  if(CURRENT.view==="caderneta")return renderCaderneta(m);
+  if(CURRENT.view==="achievements")return renderAchievements(m);
+  if(CURRENT.view==="flashcards")return renderFlashcards(m);
+  if(CURRENT.view==="settings")return renderSettings(m);
+}
+
+/* ---- Card fixo da criança (reutilizável) ---- */
+function childCardHTML(){
+  var m=xpToAgeMonths(STATE.xp), st=stageFor(m), g=growthFor(m), nx=xpForNextAge(STATE.xp);
+  var vacCount=0,vacTotal=0; VACINAS.forEach(function(v){ v.items.forEach(function(){vacTotal++; if(v.m<=m)vacCount++;}); });
+  var marcoAtt=0; MARCOS.forEach(function(k){ if(k.m<=m)marcoAtt++; });
+  var vacPct=Math.round(vacCount/vacTotal*100), devPct=Math.round(marcoAtt/MARCOS.length*100);
+  var toGo=nx?(nx[0]-STATE.xp):0;
+  var nm=STATE.child.name||"Seu paciente";
+  return '<div class="child-card glass">'+
+    '<div class="cc-avatar"><div class="cc-emoji">'+st.emoji+'</div><div class="cc-ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" class="ring-bg"/><circle cx="40" cy="40" r="34" class="ring-fg" style="stroke-dasharray:'+(2*Math.PI*34)+';stroke-dashoffset:'+(2*Math.PI*34*(1-(toGo&&nx?clamp((STATE.xp-(AGE_XP[Math.max(0,findAgeIdx()-1)][0]))/((nx[0]-(AGE_XP[Math.max(0,findAgeIdx()-1)][0]))||1),0,1):1)))+'"/></svg></div></div>'+
+    '<div class="cc-body"><div class="cc-name">'+esc(nm)+' <span class="cc-stage">'+st.label+'</span></div>'+
+    '<div class="cc-age">📅 '+fmtAge(m)+' &nbsp;·&nbsp; ⚖️ '+g.peso+' kg &nbsp;·&nbsp; 📏 '+g.altura+' cm</div>'+
+    '<div class="cc-bars">'+
+      '<div class="ccb"><span>💉 Vacinas</span><div class="bar"><i style="width:'+vacPct+'%"></i></div><b>'+vacPct+'%</b></div>'+
+      '<div class="ccb"><span>🧠 Desenvolvimento</span><div class="bar"><i style="width:'+devPct+'%"></i></div><b>'+devPct+'%</b></div>'+
+    '</div>'+
+    '<div class="cc-next">'+(nx?('⭐ Faltam <b>'+toGo+' XP</b> para '+fmtAge(nx[1])):'🏆 Desenvolvimento completo!')+'</div>'+
+    '</div></div>';
+}
+function findAgeIdx(){ var idx=0; for(var i=0;i<AGE_XP.length;i++){ if(STATE.xp>=AGE_XP[i][0]) idx=i; } return idx; }
+
+/* ---- DASHBOARD ---- */
+function renderDash(m){
+  var done=0,total=0; readyMaterias().forEach(function(){total++;}); 
+  for(var k in STATE.progress){ if(STATE.progress[k]&&STATE.progress[k].done)done++; }
+  var nQ=allNativeQuestions().length, nF=allFlashcards().length, dueF=allFlashcards().filter(function(c){return srsDue(c.id);}).length;
+  m.innerHTML=
+   '<div class="hero glass">'+
+     '<div class="hero-txt"><h1 class="display">Olá'+(STATE.child.name?", futura pediatra":"")+'! 🍼</h1>'+
+     '<p>Bem-vinda ao <b>PedAtlas</b> — sua caderneta de estudos cresce junto com seu paciente virtual. Estude, acerte questões e veja a criança evoluir do berço à adolescência.</p>'+
+     '<div class="hero-actions"><button class="btn btn-primary" id="goStudy">☀️ Estudo do Dia</button> <button class="btn btn-ghost" id="goMod">📚 Ver Módulos</button></div></div>'+
+   '</div>'+
+   childCardHTML()+
+   '<div class="stat-grid">'+
+     statCard("⭐",STATE.xp,"XP total")+
+     statCard("🔥",STATE.streak,"dias seguidos")+
+     statCard("📚",done+"/"+total,"matérias concluídas")+
+     statCard("🎴",dueF,"flashcards p/ revisar")+
+   '</div>'+
+   '<div class="dash-2col">'+
+     '<div class="panel glass"><h3>🎯 Continue de onde parou</h3><div id="resumeList"></div></div>'+
+     '<div class="panel glass"><h3>🏆 Últimas conquistas</h3><div id="achMini"></div></div>'+
+   '</div>';
+  $("#goStudy").onclick=function(){nav("study");};
+  $("#goMod").onclick=function(){nav("modules");};
+  var rl=$("#resumeList"); var rms=readyMaterias().slice(0,4);
+  rl.innerHTML = rms.map(function(mm){var p=STATE.progress[mm.id]; var st=p&&p.done?"✅":"▶️"; return '<div class="resume-row" data-id="'+mm.id+'">'+st+' <b>'+esc(mm.t)+'</b><span>'+esc(mm.sub||"")+'</span></div>';}).join('') || '<p class="muted">Abra um módulo para começar.</p>';
+  $all(".resume-row",rl).forEach(function(r){ r.onclick=function(){ openMateria(r.getAttribute("data-id")); }; });
+  var am=$("#achMini"); var un=ACHIEVEMENTS.filter(function(a){return STATE.achievements[a.id];});
+  am.innerHTML = un.length? un.slice(-4).map(function(a){return '<div class="ach-mini">'+a.ic+' <b>'+a.t+'</b></div>';}).join('') : '<p class="muted">Estude para desbloquear conquistas! 🌟</p>';
+}
+function statCard(ic,v,l){ return '<div class="stat-card glass"><div class="sc-ic">'+ic+'</div><div class="sc-v">'+v+'</div><div class="sc-l">'+l+'</div></div>'; }
+
+/* ---- ESTUDO DO DIA ---- */
+function renderStudy(m){
+  var seed=todayStr();
+  STATE.dailySeed=seed;
+  var qs=seededShuffle(allNativeQuestions(),seed+"q").slice(0,5);
+  var due=allFlashcards().filter(function(c){return srsDue(c.id);});
+  var pool=due.length?due:allFlashcards();
+  var fcs=seededShuffle(pool,seed+"f").slice(0,10);
+  m.innerHTML=
+   '<div class="page-head"><h1 class="display">☀️ Estudo do Dia</h1><p class="muted">Renova todo dia. Hoje: '+qs.length+' questões e '+fcs.length+' flashcards.</p></div>'+
+   childCardHTML()+
+   '<div class="panel glass"><h3>❓ Questões de hoje</h3><div id="dayQ"></div></div>'+
+   '<div class="panel glass"><h3>🎴 Flashcards de hoje '+(due.length?'<span class="pill">'+due.length+' para revisar</span>':'')+'</h3><div id="dayF"></div></div>';
+  renderQuestions($("#dayQ"),qs);
+  renderFlashStudy($("#dayF"),fcs);
+}
+
+/* ---- MÓDULOS ---- */
+function renderModules(m){
+  var html='<div class="page-head"><h1 class="display">📚 Módulos</h1><p class="muted">'+readyMaterias().length+' matérias prontas · conteúdo crescendo a cada atualização.</p></div>';
+  TEMAS.forEach(function(t,ti){
+    var ready=t.mats.filter(function(x){return x.ready;}).length;
+    html+='<div class="tema-block"><div class="tema-h"><span class="tema-ic">'+t.ic+'</span><div><h2>'+esc(t.t)+'</h2><span class="muted">'+ready+'/'+t.mats.length+' disponível'+(ready!==1?"is":"")+'</span></div>'+(temaConcluido(ti)?'<span class="tema-done">✅ Concluído</span>':'')+'</div><div class="mat-grid">';
+    t.mats.forEach(function(mm){
+      var p=STATE.progress[mm.id], done=p&&p.done;
+      if(mm.ready){
+        html+='<div class="mat-card glass'+(done?' done':'')+'" data-id="'+mm.id+'"><div class="mc-ic">'+mm.ic+'</div><div class="mc-t">'+esc(mm.t)+'</div><div class="mc-sub">'+esc(mm.sub||"")+'</div><div class="mc-foot">'+(done?'✅ Concluída':'Abrir →')+'</div></div>';
+      }else{
+        html+='<div class="mat-card glass locked"><div class="mc-ic">'+mm.ic+'</div><div class="mc-t">'+esc(mm.t)+'</div><div class="mc-sub">'+esc(mm.sub||"")+'</div><div class="mc-foot">🔒 Em breve</div></div>';
+      }
+    });
+    html+='</div></div>';
+  });
+  m.innerHTML=html;
+  $all(".mat-card[data-id]").forEach(function(c){ c.onclick=function(){ openMateria(c.getAttribute("data-id")); }; });
+}
+function openMateria(id){ CURRENT.view="materia"; CURRENT.mat=id; CURRENT.tab="teoria"; $all(".nav-item").forEach(function(n){n.classList.remove("active");}); render(); window.scrollTo(0,0); }
+
+/* ---- MATÉRIA (abas) ---- */
+function renderMateria(m){
+  var mat=MAT[CURRENT.mat]; if(!mat){nav("modules");return;}
+  if(!STATE.progress[mat.id]) STATE.progress[mat.id]={dominio:[],notes:"",done:false};
+  var tabsHtml=TABS.map(function(t){return '<button class="mtab'+(t.k===CURRENT.tab?' active':'')+'" data-k="'+t.k+'">'+t.ic+' '+t.t+'</button>';}).join('');
+  m.innerHTML=
+   '<div class="mat-top"><button class="btn btn-ghost btn-sm" id="backMod">← Módulos</button>'+
+   '<h1 class="display mat-title">'+mat.temaIc+' '+esc(mat.t)+'</h1><p class="muted">'+esc(mat.sub||"")+'</p></div>'+
+   '<div class="mtabs">'+tabsHtml+'</div>'+
+   '<div class="mcontent content" id="mContent"></div>';
+  $("#backMod").onclick=function(){nav("modules");};
+  $all(".mtab").forEach(function(b){ b.onclick=function(){ CURRENT.tab=b.getAttribute("data-k"); $all(".mtab").forEach(function(x){x.classList.remove("active");}); b.classList.add("active"); renderTab(mat); var sc=$("#mContent"); if(sc)sc.scrollIntoView({behavior:"smooth",block:"nearest"}); }; });
+  renderTab(mat);
+}
+function renderTab(mat){
+  var c=$("#mContent"); if(!c)return; var k=CURRENT.tab;
+  if(k==="questoes"){ c.innerHTML='<h2>❓ Questões comentadas</h2>'; var box=el("div"); c.appendChild(box); renderQuestions(box,(mat.questoes||[]).map(function(q){return {mat:mat,q:q};})); awardOnceView(mat.id,"q"); return; }
+  if(k==="flashcards"){ c.innerHTML='<h2>🎴 Flashcards</h2>'; var b2=el("div"); c.appendChild(b2); renderFlashStudy(b2,(mat.flashcards||[]).map(function(x){var d=Object.assign({},x);d._src=mat.t;return d;})); return; }
+  if(k==="casos"){ c.innerHTML=renderCasos(mat); awardOnceView(mat.id,"caso"); return; }
+  if(k==="dominio"){ renderDominio(c,mat); return; }
+  if(k==="anotacoes"){ renderNotes(c,mat); return; }
+  // abas de conteúdo HTML puro
+  var html=mat[k];
+  c.innerHTML = html || '<p class="muted">Conteúdo em preparação.</p>';
+  if(k==="teoria"){ awardOnceView(mat.id,"aula"); }
+  if(k==="vespera"||k==="dicas"||k==="scores"||k==="mapa"){ awardOnceView(mat.id,"resumo"); }
+}
+/* premiar 1ª visita de certas abas por matéria (sem inflar) */
+function awardOnceView(matId,key){
+  STATE.progress[matId]=STATE.progress[matId]||{dominio:[],notes:"",done:false};
+  STATE.progress[matId]._seen=STATE.progress[matId]._seen||{};
+  if(STATE.progress[matId]._seen[key])return;
+  STATE.progress[matId]._seen[key]=1;
+  if(key==="aula")award("aula"); else if(key==="resumo")award("resumo"); else if(key==="caso")award("caso"); else save();
+}
+
+function renderCasos(mat){
+  var h='<h2>🩺 Casos clínicos</h2>';
+  (mat.casos||[]).forEach(function(cs,i){
+    h+='<div class="caso glass"><h3>'+esc(cs.titulo)+'</h3><p class="caso-stem">'+cs.caso+'</p>';
+    (cs.perguntas||[]).forEach(function(p,j){
+      h+='<div class="caso-q"><button class="caso-toggle" data-t="cs'+i+'_'+j+'">❔ '+p.q+'</button><div class="caso-a" id="cs'+i+'_'+j+'">'+p.a+'</div></div>';
+    });
+    h+='</div>';
+  });
+  setTimeout(function(){ $all(".caso-toggle").forEach(function(b){ b.onclick=function(){ var a=$("#"+b.getAttribute("data-t")); a.classList.toggle("open"); }; }); },0);
+  return h;
+}
+
+/* ---- QUESTÕES interativas ---- */
+function renderQuestions(box,list){
+  if(!list.length){ box.innerHTML='<p class="muted">Sem questões nesta seção.</p>'; return; }
+  box.innerHTML="";
+  list.forEach(function(item){
+    var q=item.q, mat=item.mat;
+    var card=el("div","q-card glass");
+    var optsH=q.opts.map(function(o,i){return '<button class="q-opt" data-i="'+i+'">'+String.fromCharCode(65+i)+') '+o+'</button>';}).join('');
+    card.innerHTML='<div class="q-banca">'+esc(q.banca||"")+'</div><div class="q-stem">'+q.stem+'</div><div class="q-opts">'+optsH+'</div><div class="q-expl">'+q.expl+'</div>';
+    box.appendChild(card);
+    var answered=false;
+    $all(".q-opt",card).forEach(function(b){
+      b.onclick=function(){
+        if(answered)return; answered=true;
+        var i=+b.getAttribute("data-i"), correct=(i===q.correct);
+        $all(".q-opt",card).forEach(function(x,xi){ if(xi===q.correct)x.classList.add("right"); else if(xi===i)x.classList.add("wrong"); x.disabled=true; });
+        $(".q-expl",card).classList.add("show");
+        if(!STATE.qSeen[q.id]){ STATE.qSeen[q.id]=true; award("questao"); }
+        if(correct) award("acerto");
+      };
+    });
+  });
+}
+
+/* ---- FLASHCARDS estudo (flip + SRS) ---- */
+function renderFlashStudy(box,cards){
+  if(!cards.length){ box.innerHTML='<p class="muted">Nenhum flashcard aqui ainda.</p>'; return; }
+  box.innerHTML="";
+  cards.forEach(function(c){
+    var wrap=el("div","fc-wrap");
+    var front=fcFace(c,true), back=fcFace(c,false);
+    wrap.innerHTML='<div class="fc3d"><div class="fc-card"><div class="fc-f">'+front+'</div><div class="fc-b">'+back+'</div></div></div>'+
+      '<div class="srs" style="display:none">'+
+        '<button class="srs-b again" data-g="0">Errei</button>'+
+        '<button class="srs-b hard" data-g="1">Difícil</button>'+
+        '<button class="srs-b good" data-g="2">Bom</button>'+
+        '<button class="srs-b easy" data-g="3">Fácil</button>'+
+      '</div>';
+    box.appendChild(wrap);
+    var inner=$(".fc-card",wrap), srs=$(".srs",wrap), flipped=false;
+    $(".fc3d",wrap).onclick=function(e){ if(e.target.closest(".srs"))return; flipped=!flipped; inner.classList.toggle("flip",flipped); srs.style.display=flipped?"flex":"none"; };
+    $all(".srs-b",wrap).forEach(function(b){ b.onclick=function(ev){ ev.stopPropagation(); srsGrade(c.id,+b.getAttribute("data-g")); wrap.classList.add("fc-done"); setTimeout(function(){ wrap.style.display="none"; },300); }; });
+  });
+}
+function fcFace(c,isFront){
+  var tag=c.tag?('<span class="fc-tag">'+esc(c.tag)+'</span>'):'';
+  var src=c._src?('<span class="fc-src">'+esc(c._src)+'</span>'):'';
+  if(c.tipo==="cloze"){
+    if(isFront){ return tag+'<div class="fc-body">'+c.front.replace(/\{\{c\d+::(.*?)\}\}/g,'<span class="cloze">[ ... ]</span>')+'</div>'+src; }
+    return '<div class="fc-body">'+c.back+'</div>';
+  }
+  if(c.tipo==="occlusion"){
+    if(isFront){ return tag+'<div class="fc-body">'+(c.img?'<div class="occ"><img src="'+c.img+'"><span class="occ-mask">?</span></div>':'')+(c.front?'<p>'+c.front+'</p>':'')+'</div>'+src; }
+    return '<div class="fc-body">'+(c.img?'<img src="'+c.img+'">':'')+'<p>'+(c.back||"")+'</p></div>';
+  }
+  // qa / vf
+  if(isFront) return tag+'<div class="fc-body">'+(c.imgF?'<img src="'+c.imgF+'">':'')+(c.front||"")+'</div>'+src;
+  return '<div class="fc-body">'+(c.imgB?'<img src="'+c.imgB+'">':'')+(c.back||"")+'</div>';
+}
+
+/* ---- DOMÍNIO (checklist) ---- */
+function renderDominio(c,mat){
+  var p=STATE.progress[mat.id]; p.dominio=p.dominio||[];
+  var items=mat.dominio||[];
+  c.innerHTML='<h2>✅ Domínio do tema</h2><p class="muted">Marque o que você já domina. Ao concluir tudo, ganha +100 XP e o módulo é marcado como concluído.</p><div class="check-list" id="ckl"></div><div class="prog-line"><div class="bar"><i id="cklBar"></i></div><span id="cklPct"></span></div>';
+  var box=$("#ckl");
+  items.forEach(function(it,i){
+    var on=p.dominio.indexOf(i)>=0;
+    var row=el("label","check-row"+(on?" on":""));
+    row.innerHTML='<input type="checkbox" '+(on?"checked":"")+'><span>'+esc(it)+'</span>';
+    box.appendChild(row);
+    $("input",row).onchange=function(e){
+      var idx=p.dominio.indexOf(i);
+      if(e.target.checked){ if(idx<0)p.dominio.push(i); row.classList.add("on"); }
+      else { if(idx>=0)p.dominio.splice(idx,1); row.classList.remove("on"); }
+      updateDominio(mat,items.length);
+    };
+  });
+  updateDominio(mat,items.length,true);
+}
+function updateDominio(mat,total,silent){
+  var p=STATE.progress[mat.id]; var n=p.dominio.length;
+  var pct=total?Math.round(n/total*100):0;
+  var bar=$("#cklBar"),pc=$("#cklPct"); if(bar)bar.style.width=pct+"%"; if(pc)pc.textContent=pct+"%";
+  if(n>=total && total>0 && !p.done){ p.done=true; award("modulo"); celebrate("🎓 Módulo concluído: "+mat.t+"!"); }
+  else if(n<total && p.done){ p.done=false; }
+  if(!silent) save();
+}
+
+/* ---- ANOTAÇÕES ---- */
+function renderNotes(c,mat){
+  var p=STATE.progress[mat.id];
+  c.innerHTML='<h2>📝 Minhas anotações</h2><p class="muted">Salvas automaticamente neste dispositivo'+(FB.mode==="firebase"?" e na nuvem":"")+'.</p><textarea id="notesArea" class="notes-area" placeholder="Escreva aqui suas anotações, mnemônicos, dúvidas...">'+esc(p.notes||"")+'</textarea><div class="muted" id="notesSaved" style="margin-top:6px"></div>';
+  var ta=$("#notesArea"),sv=$("#notesSaved"),tmr=null;
+  ta.oninput=function(){ p.notes=ta.value; if(tmr)clearTimeout(tmr); tmr=setTimeout(function(){ save(); sv.textContent="✅ Salvo "+new Date().toLocaleTimeString(); },500); };
+}
+
+/* ---- CADERNETA ---- */
+function renderCaderneta(m){
+  var months=xpToAgeMonths(STATE.xp), st=stageFor(months), g=growthFor(months);
+  m.innerHTML=
+   '<div class="page-head"><h1 class="display">👶 Caderneta Virtual da Criança</h1><p class="muted">Seu paciente cresce conforme você estuda. Dados de vacinas (PNI) e marcos (SBP) reais e atualizados.</p></div>'+
+   childCardHTML()+
+   '<div class="cad-curve panel glass"><h3>📈 Curva de crescimento (P50 OMS)</h3>'+growthSVG(months)+'</div>'+
+   '<div class="panel glass"><h3>💉 Calendário vacinal</h3><p class="muted">Clique em uma vacina para ver detalhes e relevância para prova.</p><div class="vac-timeline" id="vacTL"></div></div>'+
+   '<div class="panel glass"><h3>🧠 Marcos do desenvolvimento</h3><div class="marco-grid" id="marcoG"></div></div>';
+  // vacinas
+  var tl=$("#vacTL");
+  VACINAS.forEach(function(v){
+    var open=v.m<=months;
+    var grp=el("div","vac-age"+(open?" open":" locked"));
+    grp.innerHTML='<div class="vac-age-h">'+(open?"✅":"🔒")+' '+v.age+'</div>';
+    var row=el("div","vac-row");
+    v.items.forEach(function(it){
+      var chip=el("button","vac-chip"+(open?"":" dim"));
+      chip.innerHTML='💉 '+esc(it.n);
+      chip.onclick=function(){ vacModal(it,v.age,open); };
+      row.appendChild(chip);
+    });
+    grp.appendChild(row); tl.appendChild(grp);
+  });
+  // marcos
+  var mg=$("#marcoG");
+  MARCOS.forEach(function(k){
+    var done=k.m<=months;
+    var card=el("button","marco-card"+(done?" done":""));
+    card.innerHTML='<div class="mk-ic">'+(done?"⭐":"○")+'</div><div class="mk-t">'+esc(k.n)+'</div><div class="mk-age">'+k.exp+'</div>';
+    card.onclick=function(){ marcoModal(k,done); };
+    mg.appendChild(card);
+  });
+}
+function vacModal(it,age,open){
+  modal('<h2 class="display">💉 '+esc(it.n)+'</h2>'+
+    '<div class="vac-detail">'+
+    '<p><b>📅 Idade:</b> '+esc(age)+(open?'':' <span class="pill">ainda bloqueada</span>')+'</p>'+
+    '<p><b>🛡️ Protege contra:</b> '+esc(it.prot)+'</p>'+
+    '<p><b>🧪 Tipo:</b> '+esc(it.tipo)+'</p>'+
+    '<p><b>💠 Esquema:</b> '+esc(it.esq)+'</p>'+
+    '<p><b>➡️ Próxima dose:</b> '+esc(it.next)+'</p>'+
+    (it.res?'<div class="callout info"><span class="ci">💡</span><div>'+esc(it.res)+'</div></div>':'')+
+    (it.exam?'<div class="callout high"><span class="ci">⚡</span><div><b>Para a prova:</b> '+esc(it.exam)+'</div></div>':'')+
+    '</div>',{wide:true});
+}
+function marcoModal(k,done){
+  modal('<h2 class="display">'+(done?"⭐":"○")+' '+esc(k.n)+'</h2>'+
+    '<div class="vac-detail"><p><b>📅 Idade esperada:</b> '+esc(k.exp)+'</p><p><b>🧩 Domínio:</b> '+esc(k.dom)+'</p>'+
+    '<div class="callout info"><span class="ci">💡</span><div>'+esc(k.note)+'</div></div>'+
+    (done?'<p class="muted">✅ Já alcançado pelo seu paciente.</p>':'<p class="muted">🔒 Continue estudando para o seu paciente alcançar este marco.</p>')+'</div>');
+}
+function growthSVG(months){
+  var W=680,H=240,pad=34;
+  var maxM=168, maxKg=60;
+  function px(m){return pad+(m/maxM)*(W-2*pad);}
+  function py(kg){return H-pad-(kg/maxKg)*(H-2*pad);}
+  var path=GROWTH.map(function(p,i){return (i?"L":"M")+px(p[0]).toFixed(0)+","+py(p[1]).toFixed(0);}).join(" ");
+  var cur=growthFor(months);
+  return '<div class="svg-box"><svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Curva de crescimento peso x idade">'+
+    '<line x1="'+pad+'" y1="'+(H-pad)+'" x2="'+(W-pad)+'" y2="'+(H-pad)+'" stroke="#7a6aa0"/>'+
+    '<line x1="'+pad+'" y1="'+pad+'" x2="'+pad+'" y2="'+(H-pad)+'" stroke="#7a6aa0"/>'+
+    '<path d="'+path+'" fill="none" stroke="url(#gpg)" stroke-width="3"/>'+
+    '<defs><linearGradient id="gpg" x1="0" x2="1"><stop offset="0" stop-color="#ff8fb1"/><stop offset="1" stop-color="#7cc6f3"/></linearGradient></defs>'+
+    '<circle cx="'+px(Math.min(months,maxM)).toFixed(0)+'" cy="'+py(Math.min(cur.peso,maxKg)).toFixed(0)+'" r="7" fill="#f2b84b" stroke="#fff" stroke-width="2"/>'+
+    '<text x="'+px(Math.min(months,maxM)).toFixed(0)+'" y="'+(py(Math.min(cur.peso,maxKg))-12).toFixed(0)+'" fill="#ffd6e8" font="700 12px Nunito" text-anchor="middle" style="font:700 12px Nunito,sans-serif">'+fmtAge(months)+'</text>'+
+    '<text x="'+(W/2)+'" y="'+(H-6)+'" text-anchor="middle" fill="#cfe6ff" style="font:12px Nunito,sans-serif">Idade →</text>'+
+    '<text x="12" y="'+(H/2)+'" transform="rotate(-90 12 '+(H/2)+')" text-anchor="middle" fill="#cfe6ff" style="font:12px Nunito,sans-serif">Peso (kg)</text>'+
+    '</svg></div>';
+}
+
+/* ---- CONQUISTAS ---- */
+function renderAchievements(m){
+  var html='<div class="page-head"><h1 class="display">🏆 Conquistas</h1><p class="muted">'+Object.keys(STATE.achievements).length+'/'+ACHIEVEMENTS.length+' desbloqueadas.</p></div><div class="ach-grid">';
+  ACHIEVEMENTS.forEach(function(a){
+    var on=!!STATE.achievements[a.id];
+    html+='<div class="ach-card glass'+(on?" on":" off")+'"><div class="ach-ic">'+(on?a.ic:"🔒")+'</div><div class="ach-t">'+esc(a.t)+'</div><div class="ach-d">'+esc(a.d)+'</div>'+(on?'<div class="ach-date">Desbloqueada ✓</div>':'')+'</div>';
+  });
+  html+='</div>'; m.innerHTML=html;
+}
+
+/* ---- MEUS FLASHCARDS (gerenciador) ---- */
+function renderFlashcards(m){
+  m.innerHTML='<div class="page-head"><h1 class="display">🎴 Meus Flashcards</h1><p class="muted">Crie cards com texto formatado e imagens. Entram no Estudo do Dia junto com os nativos (repetição espaçada).</p><button class="btn btn-primary" id="newFc">+ Novo flashcard</button></div><div class="my-fc" id="myFc"></div>';
+  $("#newFc").onclick=function(){ fcEditor(null); };
+  var box=$("#myFc");
+  if(!STATE.flashcards.length){ box.innerHTML='<p class="muted">Você ainda não criou flashcards. Clique em <b>+ Novo flashcard</b>.</p>'; return; }
+  box.innerHTML="";
+  STATE.flashcards.forEach(function(c){
+    var row=el("div","myfc-row glass");
+    row.innerHTML='<div class="myfc-type">'+fcTypeLabel(c.tipo)+'</div><div class="myfc-prev"><b>'+strip(c.front||c.img&&"[imagem]"||"")+'</b><span>'+strip(c.back||"")+'</span></div><div class="myfc-act"><button class="icon-btn" data-a="edit">✏️</button><button class="icon-btn" data-a="del">🗑️</button></div>';
+    box.appendChild(row);
+    $('[data-a="edit"]',row).onclick=function(){ fcEditor(c); };
+    $('[data-a="del"]',row).onclick=function(){ if(confirm("Excluir este flashcard?")){ STATE.flashcards=STATE.flashcards.filter(function(x){return x.id!==c.id;}); delete STATE.fcReviews[c.id]; save(); renderFlashcards(m); } };
+  });
+}
+function fcTypeLabel(t){ return t==="cloze"?"🧩 Cloze":t==="occlusion"?"🖼️ Oclusão":t==="vf"?"⚖️ V/F":"💬 P&R"; }
+function strip(h){ var d=el("div",null,h); var t=d.textContent||""; return esc(t.slice(0,90)); }
+
+function fcEditor(card){
+  var isNew=!card; card=card||{id:uid(),tipo:"qa",tag:"",front:"",back:"",img:"",imgF:"",imgB:""};
+  var typeOpts=[["qa","💬 Pergunta e Resposta"],["cloze","🧩 Cloze (lacuna)"],["vf","⚖️ Verdadeiro/Falso"],["occlusion","🖼️ Oclusão de imagem"]]
+    .map(function(o){return '<option value="'+o[0]+'"'+(card.tipo===o[0]?" selected":"")+'>'+o[1]+'</option>';}).join('');
+  var html='<h2 class="display">'+(isNew?"Novo":"Editar")+' flashcard</h2>'+
+    '<div class="field"><label>Tipo</label><select id="fcType">'+typeOpts+'</select></div>'+
+    '<div class="field"><label>Etiqueta (tag)</label><input id="fcTag" value="'+esc(card.tag||"")+'" placeholder="Ex.: Vacinas, Marcos..."></div>'+
+    '<div id="fcDyn"></div>'+
+    '<div class="ed-actions"><button class="btn btn-ghost" id="fcCancel">Cancelar</button><button class="btn btn-primary" id="fcSave">💾 Salvar</button></div>';
+  var ref=modal(html,{wide:true});
+  var box=ref.box;
+  function toolbar(target){
+    return '<div class="ed-tools" data-for="'+target+'">'+
+      '<button data-cmd="bold" title="Negrito"><b>N</b></button>'+
+      '<button data-cmd="blue" title="Azul" style="color:#4aa6e8">A</button>'+
+      '<button data-cmd="red" title="Vermelho" style="color:#e85d6f">A</button>'+
+      '<button data-cmd="black" title="Padrão">A</button>'+
+      '<button data-cmd="img" title="Inserir imagem">🖼️</button>'+
+    '</div>';
+  }
+  function buildDyn(){
+    var t=$("#fcType",box).value, dyn=$("#fcDyn",box);
+    if(t==="cloze"){
+      dyn.innerHTML='<div class="field"><label>Texto com lacuna — use {{c1::resposta}}</label>'+toolbar("front")+'<div class="ed-area" id="edFront" contenteditable="true">'+(card.front||"")+'</div></div>'+
+        '<div class="field"><label>Explicação (verso)</label>'+toolbar("back")+'<div class="ed-area" id="edBack" contenteditable="true">'+(card.back||"")+'</div></div>';
+    } else if(t==="occlusion"){
+      dyn.innerHTML='<div class="field"><label>Imagem</label><div id="occImgWrap">'+(card.img?'<img src="'+card.img+'" class="ed-img">':'<span class="muted">Nenhuma imagem</span>')+'</div><button class="btn btn-ghost btn-sm" id="occUp">📤 Enviar imagem</button> <span class="muted">ou cole (Ctrl+V) na área abaixo</span></div>'+
+        '<div class="field"><label>Dica na frente (opcional)</label>'+toolbar("front")+'<div class="ed-area" id="edFront" contenteditable="true">'+(card.front||"")+'</div></div>'+
+        '<div class="field"><label>Resposta (verso)</label>'+toolbar("back")+'<div class="ed-area" id="edBack" contenteditable="true">'+(card.back||"")+'</div></div>';
+    } else {
+      dyn.innerHTML='<div class="field"><label>Frente'+(t==="vf"?" (afirmação)":"")+'</label>'+toolbar("front")+'<div class="ed-area" id="edFront" contenteditable="true">'+(card.front||"")+'</div></div>'+
+        '<div class="field"><label>Verso'+(t==="vf"?" (Verdadeiro/Falso + porquê)":" (resposta)")+'</label>'+toolbar("back")+'<div class="ed-area" id="edBack" contenteditable="true">'+(card.back||"")+'</div></div>';
+    }
+    wireTools();
+  }
+  function wireTools(){
+    $all(".ed-tools",box).forEach(function(tb){
+      var target=tb.getAttribute("data-for");
+      $all("button",tb).forEach(function(b){
+        b.onclick=function(){
+          var cmd=b.getAttribute("data-cmd"), area=$("#ed"+(target==="front"?"Front":"Back"),box);
+          area.focus();
+          if(cmd==="bold")document.execCommand("bold");
+          else if(cmd==="blue")document.execCommand("foreColor",false,"#4aa6e8");
+          else if(cmd==="red")document.execCommand("foreColor",false,"#e85d6f");
+          else if(cmd==="black")document.execCommand("foreColor",false,"#222");
+          else if(cmd==="img"){ pickImg(function(d){ document.execCommand("insertImage",false,d); }); }
+        };
+      });
+    });
+    // colar imagem
+    ["edFront","edBack"].forEach(function(idd){
+      var a=$("#"+idd,box); if(!a)return;
+      a.addEventListener("paste",function(e){
+        var items=(e.clipboardData||{}).items||[];
+        for(var i=0;i<items.length;i++){ if(items[i].type.indexOf("image")===0){ e.preventDefault(); compressImage(items[i].getAsFile(),function(d){ document.execCommand("insertImage",false,d); }); } }
+      });
+    });
+    var occUp=$("#occUp",box);
+    if(occUp)occUp.onclick=function(){ pickImg(function(d){ card.img=d; $("#occImgWrap",box).innerHTML='<img src="'+d+'" class="ed-img">'; }); };
+  }
+  function pickImg(cb){ var inp=el("input"); inp.type="file"; inp.accept="image/*"; inp.onchange=function(){ if(inp.files[0])compressImage(inp.files[0],cb); }; inp.click(); }
+  $("#fcType",box).onchange=buildDyn;
+  buildDyn();
+  $("#fcCancel",box).onclick=ref.close;
+  $("#fcSave",box).onclick=function(){
+    card.tipo=$("#fcType",box).value;
+    card.tag=$("#fcTag",box).value.trim();
+    var f=$("#edFront",box), b=$("#edBack",box);
+    card.front=f?f.innerHTML.trim():"";
+    card.back=b?b.innerHTML.trim():"";
+    if(!card.front && !card.img && !card.back){ toast("Preencha ao menos a frente.","err"); return; }
+    var idx=-1; for(var i=0;i<STATE.flashcards.length;i++)if(STATE.flashcards[i].id===card.id)idx=i;
+    if(idx>=0)STATE.flashcards[idx]=card; else { STATE.flashcards.push(card); award("criarFc"); }
+    save(); ref.close(); renderFlashcards($("#main"));
+  };
+}
+
+/* ---- CONFIGURAÇÕES ---- */
+function renderSettings(m){
+  m.innerHTML='<div class="page-head"><h1 class="display">⚙️ Configurações</h1></div>'+
+   '<div class="panel glass"><h3>👶 Meu paciente virtual</h3>'+
+     '<div class="field"><label>Nome da criança</label><input id="setName" value="'+esc(STATE.child.name||"")+'" placeholder="Ex.: Bento, Alice..."></div>'+
+     '<div class="field"><label>Sexo</label><div class="seg"><button class="seg-b'+(STATE.child.sex==="f"?" on":"")+'" data-s="f">👧 Feminino</button><button class="seg-b'+(STATE.child.sex==="m"?" on":"")+'" data-s="m">👦 Masculino</button></div></div>'+
+     '<button class="btn btn-primary" id="setSave">Salvar</button></div>'+
+   '<div class="panel glass"><h3>🎨 Aparência</h3><button class="btn btn-ghost" id="setTheme">Alternar tema claro/escuro</button></div>'+
+   '<div class="panel glass"><h3>☁️ Conta</h3><p class="muted">Modo atual: <b>'+(FB.mode==="firebase"?"Conta na nuvem ("+(FB.user&&FB.user.email||"")+")":"Offline (apenas neste dispositivo)")+'</b></p><button class="btn btn-ghost" id="setLogout">Sair / trocar conta</button></div>'+
+   '<div class="panel glass danger"><h3>⚠️ Zona de risco</h3><p class="muted">Reinicia XP, progresso e flashcards deste perfil (não afeta o conteúdo das matérias).</p><button class="btn btn-danger" id="setReset">Reiniciar meu progresso</button></div>'+
+   '<p class="credit">PedAtlas · feito com 💗 por <b>Jackeline Delfini</b></p>';
+  var sex=STATE.child.sex;
+  $all(".seg-b").forEach(function(b){ b.onclick=function(){ sex=b.getAttribute("data-s"); $all(".seg-b").forEach(function(x){x.classList.remove("on");}); b.classList.add("on"); }; });
+  $("#setSave").onclick=function(){ STATE.child.name=$("#setName").value.trim(); STATE.child.sex=sex; STATE.child.setup=true; save(); toast("Salvo! 🍼","win"); refreshTop(); };
+  $("#setTheme").onclick=toggleTheme;
+  $("#setLogout").onclick=doLogout;
+  $("#setReset").onclick=function(){ if(confirm("Tem certeza? Isso apaga seu progresso, XP e flashcards.")){ STATE.xp=0;STATE.streak=0;STATE.lastDay=null;STATE.progress={};STATE.flashcards=[];STATE.fcReviews={};STATE.qSeen={};STATE.achievements={}; save(); toast("Progresso reiniciado."); nav("dash"); } };
+}
+
+/* ---- Tema ---- */
+function applyTheme(t){ document.documentElement.setAttribute("data-theme",t); try{localStorage.setItem(LS_PREFIX+"theme",t);}catch(e){} var b=$("#themeBtn"); if(b)b.textContent=(t==="light"?"🌙":"☀️"); }
+function toggleTheme(){ var cur=document.documentElement.getAttribute("data-theme")||"dark"; applyTheme(cur==="dark"?"light":"dark"); }
+
+/* ---- Setup inicial da criança ---- */
+function childSetup(then){
+  var html='<h2 class="display">👶 Bem-vinda ao PedAtlas!</h2><p>Vamos criar seu <b>paciente virtual</b>. Ele vai crescer do berço à adolescência conforme você estuda — ganhando vacinas e marcos do desenvolvimento reais.</p>'+
+    '<div class="field"><label>Nome da criança</label><input id="csName" placeholder="Ex.: Bento, Alice..."></div>'+
+    '<div class="field"><label>Sexo</label><div class="seg"><button class="seg-b on" data-s="f">👧 Feminino</button><button class="seg-b" data-s="m">👦 Masculino</button></div></div>'+
+    '<button class="btn btn-primary btn-block" id="csGo">Começar a estudar 🚀</button>';
+  var ref=modal(html,{});
+  var sex="f";
+  $all(".seg-b",ref.box).forEach(function(b){ b.onclick=function(){ sex=b.getAttribute("data-s"); $all(".seg-b",ref.box).forEach(function(x){x.classList.remove("on");}); b.classList.add("on"); }; });
+  $("#csGo",ref.box).onclick=function(){ STATE.child.name=($("#csName",ref.box).value||"").trim()||"Meu paciente"; STATE.child.sex=sex; STATE.child.setup=true; save(); ref.close(); then&&then(); };
+}
+
+/* ---- Auth / Gate / Init ---- */
+function showApp(){
+  $("#gate").classList.add("hidden");
+  $("#authScreen").classList.add("hidden");
+  $("#app").classList.remove("hidden");
+  refreshTop();
+  if(!STATE.child.setup){ childSetup(function(){ nav("dash"); }); }
+  else nav("dash");
+}
+function doLogout(){
+  if(FB.mode==="firebase"&&FB.auth){ try{FB.auth.signOut();}catch(e){} }
+  FB.user=null; FB.mode="local";
+  location.reload();
+}
+function wireAuthUI(){
+  var mode="login";
+  $("#tabLogin").onclick=function(){mode="login";$("#tabLogin").classList.add("active");$("#tabSignup").classList.remove("active");$("#authBtn").textContent="Entrar";$("#authSub").textContent="Entre para sincronizar seu progresso";};
+  $("#tabSignup").onclick=function(){mode="signup";$("#tabSignup").classList.add("active");$("#tabLogin").classList.remove("active");$("#authBtn").textContent="Criar conta";$("#authSub").textContent="Crie sua conta para sincronizar na nuvem";};
+  $("#authBtn").onclick=function(){
+    var em=$("#authEmail").value.trim(), pw=$("#authPass").value;
+    if(!FB.ready||!FB.auth){ $("#authMsg").textContent="Sem conexão com a nuvem — use o modo offline."; return; }
+    if(!em||pw.length<6){ $("#authMsg").textContent="Informe e-mail e senha (mín. 6 caracteres)."; return; }
+    $("#authMsg").textContent="Processando…";
+    var p=(mode==="signup")?FB.auth.createUserWithEmailAndPassword(em,pw):FB.auth.signInWithEmailAndPassword(em,pw);
+    p.then(function(cred){ FB.user=cred.user; FB.mode="firebase"; cloudLoad(function(){ showApp(); }); })
+     .catch(function(e){ $("#authMsg").textContent=fbErr(e); });
+  };
+  $("#authOffline").onclick=function(){ FB.mode="local"; FB.user=null; loadLocal(); showApp(); };
+}
+function fbErr(e){
+  var c=e&&e.code||"";
+  if(c.indexOf("email-already")>=0)return "E-mail já cadastrado — tente entrar.";
+  if(c.indexOf("wrong-password")>=0||c.indexOf("invalid-cred")>=0)return "E-mail ou senha incorretos.";
+  if(c.indexOf("user-not-found")>=0)return "Conta não encontrada — crie uma conta.";
+  if(c.indexOf("invalid-email")>=0)return "E-mail inválido.";
+  if(c.indexOf("network")>=0)return "Falha de rede — tente o modo offline.";
+  return "Não foi possível. Tente o modo offline.";
+}
+function wireGate(){
+  function tryGate(){
+    if($("#gateInput").value===ACCESS_PASSWORD){
+      $("#gate").classList.add("hidden");
+      $("#authScreen").classList.remove("hidden");
+    } else { $("#gateMsg").textContent="Senha incorreta. Tente novamente."; }
+  }
+  $("#gateBtn").onclick=tryGate;
+  $("#gateInput").addEventListener("keydown",function(e){ if(e.key==="Enter")tryGate(); });
+  $("#authPass").addEventListener("keydown",function(e){ if(e.key==="Enter")$("#authBtn").click(); });
+}
+function wireShell(){
+  $all(".nav-item").forEach(function(n){ n.onclick=function(){ var v=n.getAttribute("data-view"); CURRENT.mat=null; nav(v); }; });
+  $("#menuToggle").onclick=function(){ $("#sidebar").classList.toggle("open"); };
+  $("#themeBtn").onclick=toggleTheme;
+  $("#logoutBtn").onclick=doLogout;
+}
+
+function init(){
+  try{ var th=localStorage.getItem(LS_PREFIX+"theme"); applyTheme(th||"dark"); }catch(e){ applyTheme("dark"); }
+  wireGate(); wireAuthUI(); wireShell();
+  // Firebase em paralelo, NÃO bloqueia
+  initFirebase().then(function(){
+    $("#fbStatus").textContent="☁️ Nuvem disponível — crie conta ou entre.";
+    if(FB.auth){ FB.auth.onAuthStateChanged(function(u){ /* sessão tratada no login */ }); }
+  }).catch(function(){
+    $("#fbStatus").textContent="📴 Sem nuvem agora — você pode usar o modo offline normalmente.";
+  });
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init); else init();
+
+})();
+</script>
+</body>
+</html>
