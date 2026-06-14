@@ -3,18 +3,20 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>NeuroResidência · Plataforma de Estudos · por Jackeline Delfini</title>
+<title>NeuroAtlas · ELID · Ensino Legitimado para Internos em Desenvolvimento</title>
+<meta name="description" content="NeuroAtlas — Estudos de Neurologia para residência médica. ELID | Criado por Jackeline Delfini . Inspirado em Elisabete Delfini" />
 <meta name="description" content="Plataforma de estudos de Neurologia para provas de residência médica (ENARE, Revalida, SUS-SP, PSU-MG, SES-PE, SES-RJ)." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Raleway:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   NEURORESIDÊNCIA — DESIGN SYSTEM
+   NEUROATLAS · ELID — DESIGN SYSTEM
    ============================================================ */
 :root{
-  --font-display:'Fraunces', Georgia, serif;
-  --font-body:'Manrope', system-ui, sans-serif;
+  --font-display:'Cormorant Garamond', Georgia, serif;
+  --font-script:'Beau Rivage', 'Great Vibes', cursive;
+  --font-body:'Raleway', system-ui, sans-serif;
   --font-mono:'Spline Sans Mono', ui-monospace, monospace;
 
   /* DARK (default) — premium feminino, ameixa/violeta */
@@ -90,7 +92,7 @@ body{
   transition:background-color .4s var(--ease), color .3s var(--ease);
   overflow-x:hidden;
 }
-h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;line-height:1.15;letter-spacing:-.01em}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.12;letter-spacing:0}
 .mono{font-family:var(--font-mono)}
 a{color:var(--accent);text-decoration:none}
 ::-webkit-scrollbar{width:10px;height:10px}
@@ -118,8 +120,9 @@ a{color:var(--accent);text-decoration:none}
 .auth-card{width:100%;max-width:430px;padding:38px 34px;border-radius:24px;position:relative;overflow:hidden}
 .auth-card::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(45,212,191,.07),transparent 40%);pointer-events:none}
 .brand-mark{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-.brand-logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--teal),var(--cyan));display:grid;place-items:center;box-shadow:var(--glow);font-size:24px}
-.brand-name{font-family:var(--font-display);font-weight:700;font-size:1.25rem;letter-spacing:-.02em}
+.brand-logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center}
+.brand-logo .brain-ic{width:100%;height:100%;color:var(--rose)}
+.brand-name{font-family:var(--font-display);font-weight:700;font-size:1.7rem;letter-spacing:.01em;line-height:1.05}
 .brand-name small{display:block;font-family:var(--font-body);font-weight:600;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim)}
 .auth-card h2{font-size:1.5rem;margin:6px 0 4px}
 .auth-card p.sub{color:var(--text-soft);font-size:.9rem;margin-bottom:22px}
@@ -141,10 +144,11 @@ a{color:var(--accent);text-decoration:none}
   border-right:1px solid var(--border);background:var(--surface);backdrop-filter:blur(20px);transition:width .3s var(--ease);z-index:40}
 .sidebar.collapsed{width:var(--sidebar-w-collapsed)}
 .side-head{display:flex;align-items:center;gap:11px;padding:18px 16px 14px;border-bottom:1px solid var(--border)}
-.side-head .brand-logo{width:38px;height:38px;font-size:19px;border-radius:11px}
-.side-title{overflow:hidden;white-space:nowrap}
-.side-title b{font-family:var(--font-display);font-size:1.02rem;font-weight:700}
+.side-head .brand-logo{width:46px;height:46px}
+.side-title{min-width:0}
+.side-title b{font-family:var(--font-display);font-size:1.5rem;font-weight:700;line-height:1.05;letter-spacing:.01em}
 .side-title small{display:block;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim)}
+.side-title .elid-full{font-family:var(--font-body);font-size:.6rem;font-weight:600;letter-spacing:.04em;text-transform:none;line-height:1.3;color:var(--text-dim);margin-top:3px;white-space:normal}
 .sidebar.collapsed .side-title,.sidebar.collapsed .nav-label,.sidebar.collapsed .side-foot-text,.sidebar.collapsed .np-text{display:none}
 .nav{flex:1;overflow-y:auto;padding:12px 10px;display:flex;flex-direction:column;gap:3px}
 .nav-section{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);padding:12px 12px 5px;font-weight:700}
@@ -161,7 +165,7 @@ a{color:var(--accent);text-decoration:none}
 .np-text small{font-size:.64rem;color:var(--text-dim)}
 
 .main{flex:1;min-width:0;display:flex;flex-direction:column}
-.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;padding:13px 22px;border-bottom:1px solid var(--border);background:var(--surface);backdrop-filter:blur(18px)}
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:14px;padding:13px 22px;border-top:3px solid #b76e79;border-bottom:1px solid var(--border);background:var(--surface);backdrop-filter:blur(18px)}
 .icon-btn{width:40px;height:40px;border-radius:11px;border:1px solid var(--border);background:var(--surface-2);color:var(--text-soft);cursor:pointer;display:grid;place-items:center;font-size:1.1rem;transition:.18s;flex-shrink:0}
 .icon-btn:hover{color:var(--accent);border-color:var(--accent)}
 .search-wrap{flex:1;max-width:560px;position:relative}
@@ -200,6 +204,9 @@ a{color:var(--accent);text-decoration:none}
 .stat .l{font-size:.78rem;color:var(--text-soft);font-weight:600}
 .stat .ico{font-size:1.3rem;margin-bottom:6px}
 
+.elid-badge{display:inline-flex;align-items:center;gap:5px;font-size:.58rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#b76e79;margin-top:2px}
+.elid-dot{width:6px;height:6px;border-radius:50%;background:#b76e79;flex-shrink:0}
+.footer-elid{font-size:.72rem;letter-spacing:.02em;color:var(--text-dim);margin:6px 0 2px}
 .credit{display:inline-flex;align-items:center;gap:10px;padding:9px 16px;border-radius:99px;background:linear-gradient(100deg,rgba(251,113,133,.12),rgba(167,139,250,.10));border:1px solid rgba(251,113,133,.3);font-size:.84rem;color:var(--text)}
 .credit b{font-family:var(--font-display);font-weight:600;background:linear-gradient(100deg,var(--rose),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .credit .spark{animation:spark 3s ease-in-out infinite}
@@ -485,35 +492,17 @@ table.med tr:hover td{background:var(--surface-2)}
 <body>
 
 <!-- ============ LOADER ============ -->
-<div class="loader" id="loader"><div style="text-align:center"><div class="ring" style="margin:0 auto 14px"></div><div style="color:var(--text-dim);font-size:.85rem">Carregando NeuroResidência…</div></div></div>
+<div class="loader" id="loader"><div style="text-align:center"><div class="ring" style="margin:0 auto 14px"></div><div style="color:var(--text-dim);font-size:.85rem">Carregando NeuroAtlas…</div></div></div>
 
-<!-- ============ GATE (senha geral) ============ -->
-<div class="veil" id="gate">
-  <div class="auth-card glass">
-    <div class="brand-mark"><div class="brand-logo">🧠</div><div class="brand-name">NeuroResidência<small>Acesso Restrito</small></div></div>
-    <h2>Área exclusiva</h2>
-    <p class="sub">Esta plataforma é de uso convidado. Insira a senha de acesso para continuar.</p>
-    <div id="gateMsg"></div>
-    <div class="field"><label>Senha geral de acesso</label>
-      <input class="input" type="password" id="gatePass" placeholder="••••••••••••" autocomplete="off" onkeydown="if(event.key==='Enter')checkGate()"/></div>
-    <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="checkGate()">Entrar</button>
-    <div class="auth-foot">Plataforma desenvolvida por <b style="color:var(--rose)">Jackeline Delfini</b></div>
-  </div>
-</div>
-
-<!-- ============ AUTH (login/cadastro) ============ -->
-<div class="veil hidden" id="auth">
-  <div class="auth-card glass">
-    <div class="brand-mark"><div class="brand-logo">🧠</div><div class="brand-name">NeuroResidência<small>ENARE · Revalida · SUS</small></div></div>
-    <h2 id="authTitle">Bem-vinda de volta</h2>
-    <p class="sub" id="authSub">Acesse sua conta para continuar seus estudos.</p>
-    <div id="authMsg"></div>
-    <div class="field" id="nameField" style="display:none"><label>Nome</label><input class="input" id="aName" placeholder="Seu nome"/></div>
-    <div class="field"><label>E-mail</label><input class="input" type="email" id="aEmail" placeholder="voce@email.com"/></div>
-    <div class="field"><label>Senha</label><input class="input" type="password" id="aPass" placeholder="Mínimo 6 caracteres" onkeydown="if(event.key==='Enter')doAuth()"/></div>
-    <button class="btn btn-primary" style="width:100%;justify-content:center" id="authBtn" onclick="doAuth()">Entrar</button>
-    <div class="auth-switch" id="authSwitch">Ainda não tem conta? <b onclick="toggleAuth()">Cadastre-se</b></div>
-    <div class="auth-foot">Seus dados de estudo são salvos automaticamente.</div>
+<!-- ============ REDIRECT (sem sessão ELID) ============ -->
+<div class="veil" id="needAuth">
+  <div class="auth-card glass" style="text-align:center">
+    <div class="brand-mark" style="justify-content:center"><div class="brand-logo"><svg class="brain-ic" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="currentColor"><path d="M32 9c-2-1.6-4.7-2-7.1-1-1.7.7-3 2-3.6 3.7-2.7-.5-5.4.8-6.7 3.3-.9 1.7-.9 3.6-.2 5.3-2.2 1-3.8 3.2-3.8 5.8 0 1.3.4 2.5 1 3.5-1.6 1.2-2.6 3.1-2.6 5.2 0 2.3 1.2 4.3 3 5.4-.4 1-.5 2.1-.3 3.2.5 2.7 2.8 4.7 5.5 4.9.4 2.1 1.9 3.9 4 4.6 1.9.6 3.9.2 5.4-.9 1 .9 2.3 1.4 3.6 1.4V9Z"/><path d="M32 9c2-1.6 4.7-2 7.1-1 1.7.7 3 2 3.6 3.7 2.7-.5 5.4.8 6.7 3.3.9 1.7.9 3.6.2 5.3 2.2 1 3.8 3.2 3.8 5.8 0 1.3-.4 2.5-1 3.5 1.6 1.2 2.6 3.1 2.6 5.2 0 2.3-1.2 4.3-3 5.4.4 1 .5 2.1.3 3.2-.5 2.7-2.8 4.7-5.5 4.9-.4 2.1-1.9 3.9-4 4.6-1.9.6-3.9.2-5.4-.9-1 .9-2.3 1.4-3.6 1.4V9Z"/><path d="M29.5 51h5l-.5 5.5c-.1 1.2-1 2-2 2s-1.9-.8-2-2L29.5 51Z"/></g><g stroke="var(--bg)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.55"><path d="M32 13v34"/><path d="M22 19c2.5.8 4 3 4 5.8M42 19c-2.5.8-4 3-4 5.8"/><path d="M18 30c3 .4 5 2.5 5.4 5.6M46 30c-3 .4-5 2.5-5.4 5.6"/><path d="M23 41c2.3.3 3.8 1.8 4.2 4M41 41c-2.3.3-3.8 1.8-4.2 4"/></g></svg></div><div class="brand-name">NeuroAtlas</div></div>
+    <div class="elid-badge" style="justify-content:center;margin:6px 0 14px"><span class="elid-dot"></span> ELID · Ensino Legitimado para Internos em Desenvolvimento</div>
+    <h2 style="font-family:var(--font-display)">Acesso pelo ELID</h2>
+    <p class="sub">O acesso ao NeuroAtlas é feito pela plataforma ELID. Faça login lá para continuar seus estudos.</p>
+    <a class="btn btn-primary" style="width:100%;justify-content:center;text-decoration:none" href="../../landing-page/">Ir para o ELID</a>
+    <div class="auth-foot"><span style="color:var(--rose);font-weight:700">ELID</span> · Inspirado em Elisabete Delfini ✦</div>
   </div>
 </div>
 
@@ -524,8 +513,10 @@ table.med tr:hover td{background:var(--surface-2)}
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
       <div class="side-head">
-        <div class="brand-logo">🧠</div>
-        <div class="side-title"><b>NeuroResidência</b><small>by Jackeline D.</small></div>
+        <div class="brand-logo"><svg class="brain-ic" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="currentColor"><path d="M32 9c-2-1.6-4.7-2-7.1-1-1.7.7-3 2-3.6 3.7-2.7-.5-5.4.8-6.7 3.3-.9 1.7-.9 3.6-.2 5.3-2.2 1-3.8 3.2-3.8 5.8 0 1.3.4 2.5 1 3.5-1.6 1.2-2.6 3.1-2.6 5.2 0 2.3 1.2 4.3 3 5.4-.4 1-.5 2.1-.3 3.2.5 2.7 2.8 4.7 5.5 4.9.4 2.1 1.9 3.9 4 4.6 1.9.6 3.9.2 5.4-.9 1 .9 2.3 1.4 3.6 1.4V9Z"/><path d="M32 9c2-1.6 4.7-2 7.1-1 1.7.7 3 2 3.6 3.7 2.7-.5 5.4.8 6.7 3.3.9 1.7.9 3.6.2 5.3 2.2 1 3.8 3.2 3.8 5.8 0 1.3-.4 2.5-1 3.5 1.6 1.2 2.6 3.1 2.6 5.2 0 2.3-1.2 4.3-3 5.4.4 1 .5 2.1.3 3.2-.5 2.7-2.8 4.7-5.5 4.9-.4 2.1-1.9 3.9-4 4.6-1.9.6-3.9.2-5.4-.9-1 .9-2.3 1.4-3.6 1.4V9Z"/><path d="M29.5 51h5l-.5 5.5c-.1 1.2-1 2-2 2s-1.9-.8-2-2L29.5 51Z"/></g><g stroke="var(--bg)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.55"><path d="M32 13v34"/><path d="M22 19c2.5.8 4 3 4 5.8M42 19c-2.5.8-4 3-4 5.8"/><path d="M18 30c3 .4 5 2.5 5.4 5.6M46 30c-3 .4-5 2.5-5.4 5.6"/><path d="M23 41c2.3.3 3.8 1.8 4.2 4M41 41c-2.3.3-3.8 1.8-4.2 4"/></g></svg></div>
+        <div class="side-title"><b>NeuroAtlas</b>
+          <div class="elid-badge"><span class="elid-dot"></span> ELID</div>
+          <small class="elid-full">Ensino Legitimado para Internos em Desenvolvimento</small></div>
       </div>
       <nav class="nav" id="nav"></nav>
       <div class="side-foot">
@@ -553,7 +544,8 @@ table.med tr:hover td{background:var(--surface-2)}
       </header>
       <div class="content" id="content"></div>
       <footer class="footer">
-        NeuroResidência · Plataforma de estudos para residência médica
+        NeuroAtlas · Plataforma de estudos para residência médica
+        <div class="footer-elid"><span style="color:#b76e79;font-weight:700">ELID</span> · Ensino Legitimado para Internos em Desenvolvimento · <span style="font-style:italic;color:#c9a0b0">Inspirado em Elisabete Delfini ✦</span></div>
         <div class="credit"><span class="spark">✦</span> Desenvolvido por <b>Jackeline Delfini</b></div>
       </footer>
     </div>
@@ -578,7 +570,8 @@ const firebaseConfig = {
   appId: "1:574246127117:web:29eedab81ea4251b23f744"
 };
 // Identificador desta plataforma — separa os dados de outras plataformas suas
-const PLATFORM_ID = "neuroresidencia";
+const PLATFORM_ID = "neuroatlas";
+const LEGACY_PLATFORM_ID = "neuroresidencia"; // migração automática do path antigo
 
 let fb = { ok:false, auth:null, db:null };
 function loadScriptOnce(src){
@@ -601,20 +594,25 @@ async function initFirebase(){
     fb.db = firebase.firestore();
     fb.ok = true;
     fb.auth.onAuthStateChanged(async (user)=>{
-      if(user && sessionStorage.getItem("nr_gate")==="1"){
+      if(user){
         State.uid=user.uid; State.email=user.email; State.name=user.displayName||(user.email?user.email.split('@')[0]:'Estudante');
+        document.getElementById('needAuth').classList.add('hidden');
         await afterLogin();
+      } else {
+        // sessão é feita na landing page do ELID
+        document.getElementById('app').style.display='none';
+        document.getElementById('needAuth').classList.remove('hidden');
       }
       document.getElementById('loader').style.display='none';
     });
   }catch(e){
-    console.warn("Firebase indisponível — usando armazenamento local.", e);
+    console.warn("Firebase indisponível.", e);
     fb.ok=false;
+    document.getElementById('needAuth').classList.remove('hidden');
   }
   document.getElementById('loader').style.display='none';
 }
 
-const GATE_PASSWORD = "REVALIDA22528129";
 
 /* ---------- estado global ---------- */
 const State = {
@@ -633,9 +631,10 @@ const State = {
 const SP = () => State.data.surgeonProgress;
 
 /* ---------- persistência ---------- */
-function localKey(){ return "neuroresid_"+PLATFORM_ID+"_"+(State.uid||"anon"); }
+function localKey(){ return "neuroatlas_"+PLATFORM_ID+"_"+(State.uid||"anon"); }
+function legacyLocalKey(){ return "neuroresid_"+LEGACY_PLATFORM_ID+"_"+(State.uid||"anon"); }
 function saveLocal(){ try{ localStorage.setItem(localKey(), JSON.stringify(State.data)); }catch(e){} }
-function loadLocal(){ try{ const r=localStorage.getItem(localKey()); if(r) State.data=Object.assign(State.data, JSON.parse(r)); }catch(e){} }
+function loadLocal(){ try{ let r=localStorage.getItem(localKey()); if(!r){ const lr=localStorage.getItem(legacyLocalKey()); if(lr){ r=lr; localStorage.setItem(localKey(), lr); } } if(r) State.data=Object.assign(State.data, JSON.parse(r)); }catch(e){} }
 
 let saveTimer=null;
 async function persist(showFlag){
@@ -655,8 +654,26 @@ async function persist(showFlag){
 async function loadCloud(){
   if(fb.ok && State.uid && !State.usingLocal){
     try{
-      const snap=await fb.db.collection("users").doc(State.uid).collection("platforms").doc(PLATFORM_ID).collection("data").doc("main").get();
-      if(snap.exists && snap.data().data){ State.data=Object.assign(State.data, snap.data().data); }
+      const ref=fb.db.collection("users").doc(State.uid).collection("platforms").doc(PLATFORM_ID).collection("data").doc("main");
+      let snap=await ref.get();
+      if(!snap.exists || !snap.data().data){
+        // ---- migração automática do path antigo (neuroresidencia -> neuroatlas) ----
+        try{
+          const legacy=await fb.db.collection("users").doc(State.uid).collection("platforms").doc(LEGACY_PLATFORM_ID).collection("data").doc("main").get();
+          if(legacy.exists && legacy.data().data){
+            State.data=Object.assign(State.data, legacy.data().data);
+            const base=fb.db.collection("users").doc(State.uid).collection("platforms").doc(PLATFORM_ID);
+            await base.collection("data").doc("main").set({ data:State.data, email:State.email, name:State.name, platform:PLATFORM_ID, migratedFrom:LEGACY_PLATFORM_ID, updated:Date.now() },{merge:true});
+            try{
+              const lsp=await fb.db.collection("users").doc(State.uid).collection("platforms").doc(LEGACY_PLATFORM_ID).collection("surgeonProgress").doc("main").get();
+              if(lsp.exists){ await base.collection("surgeonProgress").doc("main").set(lsp.data(),{merge:true}); }
+            }catch(e){}
+            toast("✦ Dados migrados para o NeuroAtlas","gold");
+          }
+        }catch(e){}
+      } else if(snap.data().data){
+        State.data=Object.assign(State.data, snap.data().data);
+      }
     }catch(e){ State.usingLocal=true; loadLocal(); }
   } else { loadLocal(); }
 }
@@ -667,69 +684,13 @@ window.NR = {};
 /* ============================================================
    GATE + AUTH
    ============================================================ */
-window.checkGate = function(){
-  const v=document.getElementById('gatePass').value.trim();
-  const m=document.getElementById('gateMsg');
-  if(v===GATE_PASSWORD){
-    sessionStorage.setItem("nr_gate","1");
-    document.getElementById('gate').classList.add('hidden');
-    document.getElementById('auth').classList.remove('hidden');
-  } else {
-    m.innerHTML='<div class="auth-msg err">Senha incorreta. Verifique e tente novamente.</div>';
-    document.getElementById('gatePass').value='';
-  }
-};
-
-let authMode='login';
-window.toggleAuth=function(){
-  authMode = authMode==='login'?'signup':'login';
-  document.getElementById('authTitle').textContent = authMode==='login'?'Bem-vinda de volta':'Criar conta';
-  document.getElementById('authSub').textContent = authMode==='login'?'Acesse sua conta para continuar seus estudos.':'Cadastre-se para salvar seu progresso na nuvem.';
-  document.getElementById('authBtn').textContent = authMode==='login'?'Entrar':'Cadastrar';
-  document.getElementById('nameField').style.display = authMode==='signup'?'block':'none';
-  document.getElementById('authSwitch').innerHTML = authMode==='login'
-    ? 'Ainda não tem conta? <b onclick="toggleAuth()">Cadastre-se</b>'
-    : 'Já tem conta? <b onclick="toggleAuth()">Entrar</b>';
-  document.getElementById('authMsg').innerHTML='';
-};
-
-function authErr(msg){ document.getElementById('authMsg').innerHTML='<div class="auth-msg err">'+msg+'</div>'; }
-
-window.doAuth=async function(){
-  const email=document.getElementById('aEmail').value.trim();
-  const pass=document.getElementById('aPass').value;
-  const name=document.getElementById('aName').value.trim();
-  if(!email||!pass){ authErr('Preencha e-mail e senha.'); return; }
-  if(pass.length<6){ authErr('A senha deve ter ao menos 6 caracteres.'); return; }
-  const btn=document.getElementById('authBtn'); btn.textContent='Aguarde…'; btn.disabled=true;
-
-  if(!fb.ok){ // fallback offline
-    State.usingLocal=true; State.uid="local_"+btoa(email).slice(0,12); State.email=email;
-    State.name=name||email.split('@')[0];
-    await afterLogin(); btn.disabled=false; return;
-  }
-  try{
-    if(authMode==='signup'){
-      const cred=await fb.auth.createUserWithEmailAndPassword(email,pass);
-      if(name && cred.user) await cred.user.updateProfile({displayName:name});
-    } else {
-      await fb.auth.signInWithEmailAndPassword(email,pass);
-    }
-  }catch(e){
-    btn.disabled=false; btn.textContent=authMode==='login'?'Entrar':'Cadastrar';
-    const map={'auth/invalid-credential':'E-mail ou senha incorretos.','auth/email-already-in-use':'E-mail já cadastrado. Faça login.','auth/invalid-email':'E-mail inválido.','auth/weak-password':'Senha muito fraca.','auth/network-request-failed':'Sem conexão. Tente novamente.'};
-    authErr(map[e.code]||('Erro: '+(e.code||e.message)));
-  }
-};
-
 window.doLogout=async function(){
   if(fb.ok && !State.usingLocal){ try{ await fb.auth.signOut(); }catch(e){} }
-  location.reload();
+  window.location.href="../../landing-page/";
 };
 
 async function afterLogin(){
-  document.getElementById('auth').classList.add('hidden');
-  document.getElementById('gate').classList.add('hidden');
+  document.getElementById('needAuth').classList.add('hidden');
   await loadCloud();
   initStreak();
   document.getElementById('app').style.display='block';
