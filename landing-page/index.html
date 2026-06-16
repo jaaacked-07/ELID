@@ -75,7 +75,7 @@
     .toast-error { background: rgba(180,60,60,0.92); color: #fff; }
     .toast-success { background: rgba(110,160,110,0.9); color: #fff; }
 
-    #gate-view, #auth-view { transition: opacity 0.4s ease, transform 0.4s ease; }
+    #auth-view { transition: opacity 0.4s ease, transform 0.4s ease; }
   </style>
 </head>
 <body class="h-full overflow-auto" style="background: var(--deep-plum);">
@@ -86,36 +86,19 @@
     <!-- Landing View -->
     <div id="landing-view" class="text-center max-w-lg w-full">
       <div class="mb-4">
-        <span class="text-xs tracking-[0.4em] uppercase" style="color:var(--soft-mauve);font-weight:300;word-spacing:0.5em;">Acesso Restrito</span>
+        <span class="text-xs tracking-[0.4em] uppercase" style="color:var(--soft-mauve);font-weight:300;">Acesso Restrito</span>
       </div>
       <h1 class="font-cormorant text-7xl md:text-8xl font-light tracking-wide mb-4" style="color:var(--ivory);">
         <span class="letter-highlight">E</span>LI<span class="letter-highlight">D</span>
       </h1>
-      <p id="subtitle" class="text-sm tracking-[0.08em] uppercase font-light mb-3 whitespace-nowrap" style="color:var(--soft-mauve);">
+      <p id="subtitle" class="text-sm tracking-[0.08em] uppercase font-light mb-3" style="color:var(--soft-mauve);">
         <span class="letter-highlight">E</span>nsino <span class="letter-highlight">L</span>egitimado para <span class="letter-highlight">I</span>nternos em <span class="letter-highlight">D</span>esenvolvimento
       </p>
-      <p class="text-xs tracking-[0.3em] uppercase font-light mb-8" style="color:rgba(201,160,176,0.65);word-spacing:0.25em;">Sua Jornada Rumo à Residência Médica</p>
+      <p class="text-xs tracking-[0.3em] uppercase font-light mb-8" style="color:rgba(201,160,176,0.65);">Sua Jornada Rumo à Residência Médica</p>
       <p class="font-script mb-12" style="color:rgba(201,160,176,0.7);font-size:1.1rem;letter-spacing:0.05em;">
         Inspirado em <span class="letter-highlight" style="font-style:normal;font-weight:500;">E</span>lisabete <span class="letter-highlight" style="font-style:normal;font-weight:500;">D</span>elfini
       </p>
       <button id="btn-enter" class="btn-access px-12 py-3 rounded-full text-sm tracking-widest uppercase text-white font-light">Acessar Plataformas</button>
-    </div>
-
-    <!-- Gate View -->
-    <div id="gate-view" class="hidden text-center max-w-sm w-full view-transition">
-      <div class="glass rounded-2xl p-8">
-        <h2 class="font-cormorant text-3xl font-light mb-1" style="color:var(--ivory);"><span class="letter-highlight">E</span>LI<span class="letter-highlight">D</span></h2>
-        <p class="text-xs tracking-wider mb-6" style="color:var(--soft-mauve);">Código de Acesso</p>
-        <div class="space-y-4">
-          <input id="input-gate" type="password" placeholder="Insira o código" class="input-field w-full px-4 py-3 rounded-lg text-sm text-center tracking-widest">
-          <div id="gate-error" class="hidden text-xs" style="color:var(--rose-gold);"></div>
-          <button id="btn-gate" class="btn-access w-full py-3 rounded-lg text-sm tracking-widest uppercase text-white font-light">Validar</button>
-        </div>
-        <div class="mt-6 pt-6 border-t" style="border-color:rgba(183,110,121,0.2);">
-          <p class="text-xs font-light" style="color:rgba(201,160,176,0.4);">Desenvolvido por Jackeline Delfini</p>
-        </div>
-        <button id="btn-gate-back" class="mt-4 text-xs tracking-wider" style="color:rgba(201,160,176,0.5);">← Voltar</button>
-      </div>
     </div>
 
     <!-- Auth View -->
@@ -169,16 +152,13 @@
       }
     });
 
-    const ACCESS_CODE = 'RUMOARESIDENCIA0707!';
     let isLoginMode = true;
-    let gatePassed = false;
 
     const landingView = document.getElementById('landing-view');
-    const gateView = document.getElementById('gate-view');
     const authView = document.getElementById('auth-view');
 
     function showView(view) {
-      [landingView, gateView, authView].forEach(v => {
+      [landingView, authView].forEach(v => {
         v.classList.add('hidden');
         v.style.opacity = '0';
         v.style.transform = 'translateY(10px)';
@@ -198,27 +178,9 @@
       setTimeout(() => el.remove(), 3500);
     }
 
-    // Landing -> Gate
-    document.getElementById('btn-enter').addEventListener('click', () => showView(gateView));
-    document.getElementById('btn-gate-back').addEventListener('click', () => showView(landingView));
-    document.getElementById('btn-back').addEventListener('click', () => showView(gateView));
-
-    // Gate
-    function validateGate() {
-      const code = document.getElementById('input-gate').value.trim();
-      const errEl = document.getElementById('gate-error');
-      errEl.classList.add('hidden');
-      if (code === ACCESS_CODE) {
-        gatePassed = true;
-        showToast('Acesso liberado!', 'success');
-        showView(authView);
-      } else {
-        errEl.textContent = 'Código incorreto';
-        errEl.classList.remove('hidden');
-      }
-    }
-    document.getElementById('btn-gate').addEventListener('click', validateGate);
-    document.getElementById('input-gate').addEventListener('keydown', (e) => { if (e.key === 'Enter') validateGate(); });
+    // Landing -> Auth (login/cadastro)
+    document.getElementById('btn-enter').addEventListener('click', () => showView(authView));
+    document.getElementById('btn-back').addEventListener('click', () => showView(landingView));
 
     // Toggle login/criar conta
     document.getElementById('toggle-mode').addEventListener('click', () => {
