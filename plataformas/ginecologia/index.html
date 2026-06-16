@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GinePlus — Plataforma de Estudos em Ginecologia | ENARE · Revalida</title>
-<meta name="description" content="Plataforma premium de estudos em Ginecologia para residência médica.">
+<title>GinecoAtlas — ELID · Ensino Legitimado para Internos em Desenvolvimento</title>
+<meta name="description" content="GinecoAtlas — plataforma de estudos em Ginecologia para residência médica. Parte do ELID · Ensino Legitimado para Internos em Desenvolvimento.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Quicksand:wght@400;500;600;700&family=Great+Vibes&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <!-- Firebase (compat) — funciona direto em GitHub Pages -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -29,10 +29,13 @@
   --ok:#26A69A; --warn:#FFB300; --err:#EF5350; --info:#42A5F5;
   --r-sm:10px; --r-md:16px; --r-lg:24px; --r-xl:32px;
   --ease:cubic-bezier(.22,1,.36,1);
-  --font-display:'Poppins',system-ui,sans-serif;
-  --font-body:'Inter',system-ui,sans-serif;
+  --font-display:'Parisienne',cursive;
+  --font-body:'Quicksand',system-ui,sans-serif;
   --font-mono:'Space Mono',monospace;
-  --font-alt:'Montserrat',system-ui,sans-serif;
+  --font-alt:'Quicksand',system-ui,sans-serif;
+  --font-script:'Great Vibes',cursive;
+  /* Identidade ELID */
+  --elid-rose:#b76e79; --elid-mauve:#c9a0b0; --elid-glow:rgba(183,110,121,.45);
   --maxw:1320px;
 }
 [data-theme="dark"]{
@@ -97,13 +100,12 @@ input,textarea{font-family:var(--font-body)}
 @keyframes rise{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:none}}
 .brand-mark{display:flex;align-items:center;gap:12px;margin-bottom:8px}
 .brand-glyph{
-  width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex:none;
-  background:linear-gradient(135deg,var(--emerald),var(--emerald-deep));
-  box-shadow:0 8px 24px -6px var(--glow),inset 0 1px 0 rgba(255,255,255,.25);
-  font-family:var(--font-display);font-weight:900;color:#fff;font-size:24px;
+  width:48px;height:48px;display:grid;place-items:center;flex:none;
+  background:transparent;box-shadow:none;color:var(--emerald-bright);
 }
-.brand-name{font-family:var(--font-display);font-size:27px;font-weight:700;letter-spacing:-.02em}
-.brand-name b{color:var(--emerald-bright)}
+.brand-glyph svg{width:100%;height:100%;display:block;overflow:visible}
+.brand-name{font-family:var(--font-display);font-size:40px;font-weight:400;letter-spacing:0;line-height:1;color:var(--text)}
+.brand-name b{color:var(--emerald-bright);font-weight:400}
 .gate-sub{color:var(--text-2);font-size:14.5px;margin:14px 0 28px}
 .field{margin-bottom:16px}
 .field label{display:block;font-size:12.5px;font-weight:600;color:var(--text-2);margin-bottom:7px;letter-spacing:.02em;text-transform:uppercase}
@@ -143,11 +145,19 @@ input,textarea{font-family:var(--font-body)}
   padding:20px 14px;transition:width .4s var(--ease);z-index:50;
 }
 .sidebar.collapsed{width:74px}
-.side-head{display:flex;align-items:center;gap:11px;padding:6px 8px 18px;min-height:46px}
-.side-head .brand-glyph{width:40px;height:40px;font-size:21px;border-radius:12px}
-.side-brand-txt{font-family:var(--font-display);font-size:21px;font-weight:700;white-space:nowrap;transition:.3s}
-.side-brand-txt b{color:var(--emerald-bright)}
+.side-head{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:6px 6px 16px}
+.side-head-top{display:flex;align-items:center;gap:10px;min-height:46px}
+.side-head .brand-glyph{width:44px;height:44px}
+.side-brand-txt{font-family:var(--font-display);font-size:34px;font-weight:400;line-height:1;white-space:nowrap;transition:.3s;color:var(--text)}
+.side-brand-txt b{color:var(--emerald-bright);font-weight:400}
+/* Badge ELID — nome completo pode quebrar linha sem corte */
+.elid-badge{display:flex;align-items:flex-start;gap:8px;width:100%;padding:8px 10px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border);transition:.3s}
+.elid-badge .elid-dot{width:8px;height:8px;border-radius:50%;background:var(--elid-rose);flex:none;margin-top:4px;animation:elidPulse 2.4s var(--ease) infinite}
+.elid-badge .elid-txt{font-family:var(--font-alt);font-size:9.5px;font-weight:600;line-height:1.3;letter-spacing:.02em;color:var(--text-3);white-space:normal;overflow:visible;text-overflow:clip}
+.elid-badge .elid-txt b{display:block;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--elid-rose);margin-bottom:2px}
+@keyframes elidPulse{0%{box-shadow:0 0 0 0 var(--elid-glow)}70%{box-shadow:0 0 0 8px rgba(183,110,121,0)}100%{box-shadow:0 0 0 0 rgba(183,110,121,0)}}
 .sidebar.collapsed .side-brand-txt,.sidebar.collapsed .nav-label,.sidebar.collapsed .side-section-t,.sidebar.collapsed .lvl-mini-txt{opacity:0;width:0;overflow:hidden;pointer-events:none}
+.sidebar.collapsed .elid-badge{opacity:0;height:0;width:0;padding:0;margin:0;border:0;overflow:hidden;pointer-events:none}
 .side-section-t{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);padding:16px 12px 7px;white-space:nowrap}
 .nav{display:flex;flex-direction:column;gap:3px;overflow-y:auto;overflow-x:hidden;flex:1}
 .nav::-webkit-scrollbar{width:5px}
@@ -172,6 +182,7 @@ input,textarea{font-family:var(--font-body)}
 .topbar{
   position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:16px;
   padding:14px 30px;background:linear-gradient(var(--bg),transparent);backdrop-filter:blur(8px);
+  border-top:3px solid var(--elid-rose);
 }
 .menu-toggle{display:none;width:42px;height:42px;border-radius:11px;background:var(--surface);border:1px solid var(--border);place-items:center}
 .search-wrap{position:relative;flex:1;max-width:520px}
@@ -449,8 +460,10 @@ table.med td strong{color:var(--emerald-bright)}
 /* ====== Crédito da autora ====== */
 .gate-credit{margin-top:18px;text-align:center;font-family:var(--font-alt);font-size:12.5px;font-weight:500;color:var(--text-3);letter-spacing:.02em}
 .gate-credit span{font-weight:700;background:linear-gradient(120deg,var(--emerald-bright),var(--garnet-soft));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 18px var(--glow)}
-.app-foot{padding:22px 32px;text-align:center;font-family:var(--font-alt);font-size:12.5px;color:var(--text-3);border-top:1px solid var(--border);margin-top:30px}
-.app-foot span{font-weight:700;background:linear-gradient(120deg,var(--emerald-bright),var(--garnet-soft));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.app-foot{padding:26px 32px 30px;text-align:center;font-family:var(--font-alt);font-size:12.5px;color:var(--text-3);border-top:1px solid var(--border);margin-top:30px;box-shadow:inset 0 3px 0 -1px var(--elid-rose)}
+.app-foot .elid-foot-line{font-weight:600;letter-spacing:.04em;color:var(--text-2)}
+.app-foot .elid-foot-line b{font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--elid-rose)}
+.app-foot .elid-homenagem{font-family:var(--font-script);font-size:20px;line-height:1.2;color:var(--elid-rose);margin-top:8px;letter-spacing:.01em}
 .credit-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:40px;background:var(--surface);border:1px solid var(--border-strong);backdrop-filter:blur(14px);box-shadow:0 8px 26px -12px var(--glow);font-family:var(--font-alt)}
 .credit-badge .cb-spark{font-size:16px}
 .credit-badge b{background:linear-gradient(120deg,var(--emerald-bright),var(--garnet-soft));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;letter-spacing:.01em}
@@ -532,58 +545,50 @@ table.med td strong{color:var(--emerald-bright)}
 .ach.unlocked .ach-ico{filter:drop-shadow(0 0 12px var(--glow))}
 .ach.unlocked{border-color:var(--emerald-bright);background:var(--grad-card)}
 
-/* fontes premium nos títulos */
-h1,h2,h3,h4{font-family:var(--font-display)}
+/* fontes nos títulos */
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;letter-spacing:0;line-height:1.25}
 .brand-name,.side-brand-txt{font-family:var(--font-display)}
-.stat .num,.fc-q,.cycle-center .cc-pct,.cm-title{font-family:var(--font-display)}
 .prose h3{font-family:var(--font-display)}
+/* Parisienne é decorativa: manter números, código e UI funcional legíveis em Quicksand */
+.stat .num,.cycle-center .cc-pct,.cm-title,.fc-q,
+.heat-rank,.lvl-ring,.xp-pill .lvl-badge,.cycle-pill .cy-pct,.cy-pct,
+.global-search,.nav-item,.sr-item b,.exam-tab,.prio-tag,.cycle-msg .cm-title,
+.cycle-pill .cy-phase,.cycle-mini .cm-phase,.phase-dot small,.heat-body b{
+  font-family:var(--font-body) !important;
+}
+.cycle-center .cc-pct,.stat .num,.heat-rank,.cm-title,.cycle-msg .cm-title{font-weight:700}
+.mono,.fc-q.mono{font-family:var(--font-mono) !important}
 </style>
 </head>
 <body>
-<!-- ============ GATE (senha geral) ============ -->
-<div class="overlay" id="gate">
-  <div class="gate-card">
-    <div class="brand-mark"><div class="brand-glyph">G+</div><div class="brand-name">Gine<b>Plus</b></div></div>
-    <p class="gate-sub">Plataforma fechada de estudos em Ginecologia para residência. Informe a senha de acesso recebida no convite.</p>
-    <div class="msg" id="gate-msg"></div>
-    <div class="field">
-      <label>Senha de acesso</label>
-      <input class="input" id="gate-pass" type="password" placeholder="••••••••••••" autocomplete="off">
+<!-- ============ ACESSO PELO ELID ============ -->
+<div class="overlay" id="elid-gate">
+  <div class="gate-card" style="text-align:center">
+    <div class="brand-mark" style="justify-content:center">
+      <div class="brand-glyph"><svg class="emblem" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g stroke="currentColor" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"><path d="M36 42 C 39 33 45 30 50 30 C 55 30 61 33 64 42"/><path d="M36 42 C 32 53 39.5 62 44 69 C 46.2 72 46.2 76 46.2 79.5 L 46.2 85 C 46.2 88.6 53.8 88.6 53.8 85 L 53.8 79.5 C 53.8 76 53.8 72 56 69 C 60.5 62 68 53 64 42"/><path d="M47.4 82.5 L 52.6 82.5" stroke-width="3.4"/><path d="M37 42.5 C 30 37 23 37 18.5 31.5 C 15.2 27.5 16 22 20 20"/><path d="M63 42.5 C 70 37 77 37 81.5 31.5 C 84.8 27.5 84 22 80 20"/></g><g stroke="currentColor" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round" fill="none"><g><ellipse cx="20" cy="11" rx="4.4" ry="8"/><ellipse cx="20" cy="11" rx="4.4" ry="8" transform="rotate(72 20 20)"/><ellipse cx="20" cy="11" rx="4.4" ry="8" transform="rotate(144 20 20)"/><ellipse cx="20" cy="11" rx="4.4" ry="8" transform="rotate(216 20 20)"/><ellipse cx="20" cy="11" rx="4.4" ry="8" transform="rotate(288 20 20)"/></g><g><ellipse cx="80" cy="11" rx="4.4" ry="8"/><ellipse cx="80" cy="11" rx="4.4" ry="8" transform="rotate(72 80 20)"/><ellipse cx="80" cy="11" rx="4.4" ry="8" transform="rotate(144 80 20)"/><ellipse cx="80" cy="11" rx="4.4" ry="8" transform="rotate(216 80 20)"/><ellipse cx="80" cy="11" rx="4.4" ry="8" transform="rotate(288 80 20)"/></g></g><g fill="currentColor"><circle cx="20" cy="20" r="3.2"/><circle cx="80" cy="20" r="3.2"/></g></svg></div>
+      <div class="brand-name">Gineco<b>Atlas</b></div>
     </div>
-    <button class="btn btn-primary" id="gate-btn">Entrar na plataforma</button>
-    <p class="gate-foot">Conteúdo: ENARE · Revalida · SUS-SP · PSU-MG · SES-PE · SES-RJ<br>Acesso restrito a convidadas.</p>
-    <p class="gate-credit">Desenvolvido por <span>Jackeline Delfini</span></p>
-  </div>
-</div>
-
-<!-- ============ AUTH ============ -->
-<div class="overlay hidden" id="auth">
-  <div class="gate-card">
-    <div class="brand-mark"><div class="brand-glyph">G+</div><div class="brand-name">Gine<b>Plus</b></div></div>
-    <p class="gate-sub" id="auth-sub">Acesse sua conta para continuar de onde parou.</p>
-    <div class="msg" id="auth-msg"></div>
-    <div class="field" id="name-field" style="display:none">
-      <label>Nome</label>
-      <input class="input" id="auth-name" type="text" placeholder="Como devo te chamar?">
-    </div>
-    <div class="field">
-      <label>E-mail</label>
-      <input class="input" id="auth-email" type="email" placeholder="voce@email.com" autocomplete="email">
-    </div>
-    <div class="field">
-      <label>Senha</label>
-      <input class="input" id="auth-pass" type="password" placeholder="mínimo 6 caracteres" autocomplete="current-password">
-    </div>
-    <button class="btn btn-primary" id="auth-btn"><span id="auth-btn-txt">Entrar</span></button>
-    <p class="auth-switch" id="auth-switch">Ainda não tem conta? <b id="switch-link">Criar conta</b></p>
-    <p class="gate-credit">Desenvolvido por <span>Jackeline Delfini</span></p>
+    <p class="gate-sub" id="elid-gate-sub">Esta plataforma faz parte do <b>ELID</b>. Entre pela página inicial do ELID para acessar a GinecoAtlas e continuar de onde parou — seu progresso é o mesmo.</p>
+    <a class="btn btn-primary" href="../../landing-page/" style="text-decoration:none">Acessar pelo ELID</a>
+    <a class="btn btn-ghost" href="../../biblioteca-web/" style="text-decoration:none;margin-top:10px">Ir para a Biblioteca</a>
+    <p class="gate-foot">ELID — Ensino Legitimado para Internos em Desenvolvimento</p>
+    <p class="elid-homenagem" style="font-family:var(--font-script);color:var(--elid-rose);font-size:20px;margin-top:6px">Inspirado em Elisabete Delfini ✦</p>
   </div>
 </div>
 
 <!-- ============ APP SHELL ============ -->
 <div class="app" id="app">
   <aside class="sidebar" id="sidebar">
-    <div class="side-head"><div class="brand-glyph">G+</div><div class="side-brand-txt">Gine<b>Plus</b></div></div>
+    <div class="side-head">
+      <div class="side-head-top">
+        <div class="brand-glyph"><svg class="emblem" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g stroke="currentColor" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"><path d="M36 42 C 39 33 45 30 50 30 C 55 30 61 33 64 42"/><path d="M36 42 C 32 53 39.5 62 44 69 C 46.2 72 46.2 76 46.2 79.5 L 46.2 85 C 46.2 88.6 53.8 88.6 53.8 85 L 53.8 79.5 C 53.8 76 53.8 72 56 69 C 60.5 62 68 53 64 42"/><path d="M47.4 82.5 L 52.6 82.5" stroke-width="3.4"/><path d="M37 42.5 C 30 37 23 37 18.5 31.5 C 15.2 27.5 16 22 20 20"/><path d="M63 42.5 C 70 37 77 37 81.5 31.5 C 84.8 27.5 84 22 80 20"/></g><g stroke="currentColor" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round" fill="none"><g><ellipse cx="20" cy="11" rx="4.4" ry="8"/><ellipse cx="20" cy="11" rx="4.4" ry="8" transform="rotate(72 20 20)"/><ellipse cx="20" cy="11" rx="4.4" ry="8" transform="rotate(144 20 20)"/><ellipse cx="20" cy="11" rx="4.4" ry="8" transform="rotate(216 20 20)"/><ellipse cx="20" cy="11" rx="4.4" ry="8" transform="rotate(288 20 20)"/></g><g><ellipse cx="80" cy="11" rx="4.4" ry="8"/><ellipse cx="80" cy="11" rx="4.4" ry="8" transform="rotate(72 80 20)"/><ellipse cx="80" cy="11" rx="4.4" ry="8" transform="rotate(144 80 20)"/><ellipse cx="80" cy="11" rx="4.4" ry="8" transform="rotate(216 80 20)"/><ellipse cx="80" cy="11" rx="4.4" ry="8" transform="rotate(288 80 20)"/></g></g><g fill="currentColor"><circle cx="20" cy="20" r="3.2"/><circle cx="80" cy="20" r="3.2"/></g></svg></div>
+        <div class="side-brand-txt">Gineco<b>Atlas</b></div>
+      </div>
+      <div class="elid-badge">
+        <span class="elid-dot"></span>
+        <span class="elid-txt"><b>ELID</b>Ensino Legitimado para Internos em Desenvolvimento</span>
+      </div>
+    </div>
     <nav class="nav" id="nav"><!-- nav injetada --></nav>
     <div class="side-foot">
       <div class="cycle-mini" id="side-cycle"></div>
@@ -610,12 +615,16 @@ h1,h2,h3,h4{font-family:var(--font-display)}
           <span class="cy-phase" id="cy-phase">Menstruação</span>
           <span class="cy-pct" id="cy-pct">0%</span>
         </div>
+        <a class="icon-btn" id="back-biblioteca" href="../../biblioteca-web/" title="Voltar à Biblioteca ELID"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></a>
         <button class="icon-btn" id="theme-toggle" title="Tema"><svg id="theme-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button>
         <button class="icon-btn" id="logout-btn" title="Sair"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
       </div>
     </header>
     <main class="view" id="view"><!-- views injetadas --></main>
-    <footer class="app-foot">Desenvolvido por <span>Jackeline Delfini</span> · GinePlus — Plataforma de Ginecologia para residência</footer>
+    <footer class="app-foot">
+      <div class="elid-foot-line"><b>ELID</b> — Ensino Legitimado para Internos em Desenvolvimento</div>
+      <div class="elid-homenagem">Inspirado em Elisabete Delfini ✦</div>
+    </footer>
   </div>
 </div>
 
@@ -649,7 +658,7 @@ const PLATFORM_ID = "ginecologia";
 function platformDoc(){ return db.collection("users").doc(currentUser.uid).collection("platforms").doc(PLATFORM_ID); }
 function summaryDoc(){ return db.collection("users").doc(currentUser.uid).collection("summaries").doc(PLATFORM_ID); }
 
-const GATE_PASS = "REVALIDA22528129";
+
 
 /* ---- A JORNADA DO CICLO MENSTRUAL (substitui XP/níveis) ---- */
 /* Cada fase tem faixa de %, cor, emoji e mensagem. Progresso = cyclePercentage (0–100). */
@@ -1259,143 +1268,51 @@ function applyTheme(th){
 }
 (function(){ let th="dark"; try{ th=localStorage.getItem("gineplus_theme")||"dark"; }catch(e){} applyTheme(th); })();
 /* ============================================================
-   GATE + AUTH
+   AUTENTICAÇÃO — HERANÇA DE SESSÃO DO ELID
+   A GinecoAtlas não tem tela de login própria: a sessão é a mesma
+   do ELID (mesmo projeto Firebase / mesma origem). Sem sessão,
+   mostramos a tela "Acesso pelo ELID".
    ============================================================ */
-function showMsg(el, text, type){ el.className="msg "+type; el.textContent=text; }
+function showMsg(el, text, type){ if(!el) return; el.className="msg "+type; el.textContent=text; }
 
-// GATE
-const gateUnlocked = (()=>{ try{ return sessionStorage.getItem("gineplus_gate")==="1"; }catch(e){ return false; } })();
-function openAuth(){ $("#gate").classList.add("hidden"); $("#auth").classList.remove("hidden"); }
+function showElidGate(){ const g=$("#elid-gate"); if(g) g.classList.remove("hidden"); }
+function hideElidGate(){ const g=$("#elid-gate"); if(g) g.classList.add("hidden"); }
 
-$("#gate-btn").addEventListener("click", tryGate);
-$("#gate-pass").addEventListener("keydown", e=>{ if(e.key==="Enter") tryGate(); });
-function tryGate(){
-  const v=$("#gate-pass").value.trim();
-  if(v===GATE_PASS){
-    try{ sessionStorage.setItem("gineplus_gate","1"); }catch(e){}
-    // Se já houver uma usuária autenticada no Firebase, entra direto
-    if(fbOK && auth.currentUser && !appStarted){
-      const u=auth.currentUser;
-      currentUser={ uid:u.uid, displayName:u.displayName||(u.email?u.email.split("@")[0]:"Estudante"), email:u.email };
-      $("#gate").classList.add("hidden"); startApp();
-    } else {
-      openAuth();
-    }
-  }
-  else showMsg($("#gate-msg"),"Senha de acesso incorreta. Confira o convite.","err");
-}
-if(gateUnlocked) openAuth();
-
-// AUTH toggle login/signup
-let mode="login";
-function applyAuthMode(){
-  const signup = mode==="signup";
-  $("#name-field").style.display = signup?"block":"none";
-  $("#auth-btn-txt").textContent = signup?"Criar conta":"Entrar";
-  $("#auth-sub").textContent = signup
-    ? "Crie sua conta para salvar seu progresso na nuvem."
-    : "Acesse sua conta para continuar de onde parou.";
-  $("#auth-switch").innerHTML = signup
-    ? 'Já tem conta? <b id="switch-link">Entrar</b>'
-    : 'Ainda não tem conta? <b id="switch-link">Criar conta</b>';
-  // o innerHTML recria #switch-link, então (re)vinculamos o clique aqui
-  $("#switch-link").addEventListener("click", ()=>{
-    mode = mode==="login" ? "signup" : "login";
-    $("#auth-msg").className="msg";
-    applyAuthMode();
-  });
-}
-applyAuthMode();
-
-$("#auth-btn").addEventListener("click", doAuth);
-$("#auth-pass").addEventListener("keydown", e=>{ if(e.key==="Enter") doAuth(); });
-$("#auth-email").addEventListener("keydown", e=>{ if(e.key==="Enter") doAuth(); });
-
-async function doAuth(){
-  const email=$("#auth-email").value.trim();
-  const pass=$("#auth-pass").value;
-  const name=$("#auth-name").value.trim();
-  if(!email||!pass){ showMsg($("#auth-msg"),"Preencha e-mail e senha.","err"); return; }
-  if(pass.length<6){ showMsg($("#auth-msg"),"A senha precisa ter ao menos 6 caracteres.","err"); return; }
-  $("#auth-btn-txt").innerHTML='<span class="spinner"></span>';
-
-  // Modo local (sem Firebase, ex.: preview/sandbox) — permite testar offline
-  if(!fbOK){
-    const lk="gineplus_users";
-    let users={}; try{ users=JSON.parse(localStorage.getItem(lk)||"{}"); }catch(e){}
-    const key=email.toLowerCase();
-    if(mode==="signup"){
-      if(users[key]){ authErr("Este e-mail já possui conta. Tente entrar."); return; }
-      users[key]={ pass, name:name||email.split("@")[0] }; try{ localStorage.setItem(lk, JSON.stringify(users)); }catch(e){}
-      currentUser={ uid:"local_"+key, displayName:name||email.split("@")[0], email };
-      await startApp(); return;
-    } else {
-      if(!users[key]){ authErr("E-mail não encontrado. Crie uma conta."); return; }
-      if(users[key].pass!==pass){ authErr("Senha incorreta."); return; }
-      currentUser={ uid:"local_"+key, displayName:users[key].name||email.split("@")[0], email };
-      await startApp(); return;
-    }
-  }
-
-  // Modo Firebase Auth real: cada usuária recebe um uid único e seguro
-  try{
-    if(mode==="signup"){
-      const cred = await auth.createUserWithEmailAndPassword(email, pass);
-      if(name) await cred.user.updateProfile({ displayName:name });
-      // o onAuthStateChanged abaixo cuida de iniciar o app
-    } else {
-      await auth.signInWithEmailAndPassword(email, pass);
-    }
-  }catch(e){
-    let m=e.message;
-    if(e.code==="auth/email-already-in-use") m="Este e-mail já possui conta. Tente entrar.";
-    else if(e.code==="auth/invalid-credential"||e.code==="auth/wrong-password"||e.code==="auth/user-not-found") m="E-mail ou senha incorretos.";
-    else if(e.code==="auth/weak-password") m="A senha precisa ter ao menos 6 caracteres.";
-    else if(e.code==="auth/invalid-email") m="E-mail inválido.";
-    else if(e.code==="auth/network-request-failed") m="Falha de conexão. Verifique sua internet.";
-    authErr(m);
-  }
-}
-function authErr(m){ showMsg($("#auth-msg"), m, "err"); $("#auth-btn-txt").textContent = mode==="signup"?"Criar conta":"Entrar"; }
-
-/* Firebase mantém a sessão automaticamente — re-login automático ao recarregar */
 let appStarted=false;
 if(fbOK){
+  /* O Firebase mantém a sessão automaticamente (persistência local),
+     então a sessão iniciada na landing-page do ELID é herdada aqui. */
   auth.onAuthStateChanged(async (user)=>{
-    if(user && !appStarted){
-      // só entra no app após passar pela senha geral (gate)
-      let gateOk=false; try{ gateOk = sessionStorage.getItem("gineplus_gate")==="1"; }catch(e){}
-      if(!gateOk) return;
+    if(user){
       currentUser = { uid:user.uid, displayName:user.displayName||(user.email?user.email.split("@")[0]:"Estudante"), email:user.email };
-      await startApp();
+      hideElidGate();
+      if(!appStarted) await startApp();
+    } else {
+      currentUser=null; appStarted=false;
+      $("#app").classList.remove("show");
+      showElidGate();
     }
   });
+} else {
+  /* Sem Firebase disponível não há como herdar a sessão do ELID. */
+  showElidGate();
 }
 
 $("#logout-btn").addEventListener("click", async ()=>{
   if(fbOK){ try{ await auth.signOut(); }catch(e){} }
-  currentUser=null; appStarted=false; location.reload();
+  window.location.href = "../../landing-page/";
 });
 
 async function startApp(){
   if(appStarted) return; appStarted=true;
   await loadState();
   if(currentUser?.email) state.profile.email = currentUser.email;
-  $("#gate").classList.add("hidden"); $("#auth").classList.add("hidden");
+  hideElidGate();
   $("#app").classList.add("show");
   buildSidebar(); refreshXPUI();
   route("dashboard");
 }
-/* re-login no modo local (sem Firebase): restaura a sessão pela aba */
-(function(){
-  if(fbOK) return; // no modo Firebase, o onAuthStateChanged cuida disso
-  try{
-    const raw=sessionStorage.getItem("gineplus_user");
-    if(raw && sessionStorage.getItem("gineplus_gate")==="1"){
-      currentUser=JSON.parse(raw); startApp();
-    }
-  }catch(e){}
-})();
+
 /* ============================================================
    SIDEBAR / TOPBAR / ROUTER
    ============================================================ */
@@ -2260,7 +2177,7 @@ function renderSettings(){
   </div>
   <div class="card glass">
     <h3 style="margin-bottom:10px">Sobre</h3>
-    <p style="color:var(--text-2);font-size:14px">GinePlus — plataforma premium de estudos em Ginecologia para residência (ENARE, Revalida e bancas estaduais).</p>
+    <p style="color:var(--text-2);font-size:14px">GinecoAtlas — plataforma de estudos em Ginecologia para residência (ENARE, Revalida e bancas estaduais), parte do ELID · Ensino Legitimado para Internos em Desenvolvimento.</p>
     <p style="margin-top:10px;font-family:var(--font-alt)">Desenvolvido por <b style="background:linear-gradient(120deg,var(--emerald-bright),var(--garnet-soft));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Jackeline Delfini</b></p>
   </div>`;
   $("#set-save").addEventListener("click",()=>{ state.profile.name=$("#set-name").value.trim()||"Estudante"; queueSave(); toast("✅","Nome salvo!",""); });
