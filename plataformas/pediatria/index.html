@@ -375,7 +375,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     <div class="gate-sub">Pediatria para Residência</div>
     <p class="muted" id="elidMsg" style="margin:4px 0 22px">Verificando seu acesso pelo ELID…</p>
     <a class="btn btn-primary btn-block" href="../../landing-page/">Entrar pelo ELID</a>
-    <a class="btn btn-ghost btn-block" href="../../biblioteca-web/" style="margin-top:8px">Ir para a Biblioteca</a>
     <div class="homage">Inspirado em Elisabete Delfini ✦</div>
     <div class="gate-foot">ELID · Ensino Legitimado para Internos em Desenvolvimento</div>
   </div>
@@ -387,12 +386,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <header class="topbar glass">
     <button class="icon-btn menu-toggle" id="menuToggle">☰</button>
     <div class="brand"><span class="logo-badge"><svg class="logo-mark" width="27" height="27"><use href="#teddyMark"/></svg></span><span class="grad-text">PedAtlas</span></div>
-    <a class="btn-voltar" href="../../biblioteca-web/" title="Voltar à Biblioteca">← Biblioteca</a>
     <div class="top-spacer"></div>
     <div class="top-stat" id="topXP" title="Experiência">⭐ <span id="xpVal">0</span> XP</div>
     <div class="top-stat" id="topStreak" title="Sequência de dias">🔥 <span id="streakVal">0</span></div>
     <button class="icon-btn" id="themeBtn" title="Tema claro/escuro">🌙</button>
-    <button class="icon-btn" id="logoutBtn" title="Sair">⏻</button>
+    <button class="icon-btn" id="logoutBtn" title="Sair para a Biblioteca (Atlas ELID)">⏻</button>
   </header>
 
   <!-- sidebar -->
@@ -2183,6 +2181,11 @@ function showAccess(msg){
   var a=$("#authScreen"); if(a)a.classList.remove("hidden");
   var m=$("#elidMsg"); if(m&&msg)m.textContent=msg;
 }
+function exitToLibrary(){
+  // Sair da plataforma de Pediatria mantendo a sessão do ELID:
+  // volta para a Biblioteca (Atlas ELID).
+  location.href="../../biblioteca-web/";
+}
 function doLogout(){
   function go(){ location.href="../../landing-page/"; }
   if(FB.auth){ try{ var r=FB.auth.signOut(); if(r&&r.then){ r.then(go).catch(go); return; } }catch(e){} }
@@ -2192,7 +2195,7 @@ function wireShell(){
   $all(".nav-item").forEach(function(n){ n.onclick=function(){ var v=n.getAttribute("data-view"); CURRENT.mat=null; nav(v); }; });
   $("#menuToggle").onclick=function(){ $("#sidebar").classList.toggle("open"); };
   $("#themeBtn").onclick=toggleTheme;
-  $("#logoutBtn").onclick=doLogout;
+  $("#logoutBtn").onclick=exitToLibrary;
 }
 
 function init(){
