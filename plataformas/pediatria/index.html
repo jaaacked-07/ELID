@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>PedAtlas · by Jackeline Delfini</title>
-<meta name="description" content="Plataforma de estudos de Pediatria para residência médica — ENARE, Revalida, PSU-MG, SES-RJ, UERJ, UFRJ.">
+<title>【PedAtlas】 — ELID · Ensino Legitimado para Internos em Desenvolvimento</title>
+<meta name="description" content="【PedAtlas】 — ELID · Ensino Legitimado para Internos em Desenvolvimento. Plataforma de estudos de Pediatria para residência médica — ENARE, Revalida, PSU-MG, SES-RJ, UERJ, UFRJ.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Baloo+2:wght@400;500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Baloo+2:wght@400;500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 /* =================== TOKENS / TEMAS =================== */
 :root{
@@ -328,36 +328,56 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 </head>
 <body data-theme="light">
 
-<!-- ============ GATE (senha de acesso) ============ -->
-<div id="gate" class="overlay">
-  <div class="gate-card glass">
-    <div class="gate-logo grad-text">PedAtlas</div>
-    <div class="gate-sub">by Jackeline Delfini · Pediatria para Residência</div>
-    <div class="field">
-      <label>Senha de acesso</label>
-      <input id="gateInput" type="password" placeholder="Digite a senha da plataforma" autocomplete="off">
-    </div>
-    <button class="btn btn-primary btn-block" id="gateBtn">Entrar 🍼</button>
-    <div class="msg" id="gateMsg"></div>
-    <div class="gate-foot">ENARE · Revalida · PSU-MG · SES-RJ · UERJ · UFRJ</div>
-  </div>
-</div>
+<!-- ============ SÍMBOLO REUTILIZÁVEL (ursinho PedAtlas) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="teddyMark" viewBox="0 0 120 120">
+    <g fill="none">
+      <!-- brilhos -->
+      <g stroke="none">
+        <path d="M15 20 C 16 17 16.5 16.5 18 15.5 C 16.5 14.5 16 14 15 11 C 14 14 13.5 14.5 12 15.5 C 13.5 16.5 14 17 15 20 Z" fill="#f2b84b"/>
+        <path d="M105 22 C 106 19 106.5 18.5 108 17.5 C 106.5 16.5 106 16 105 13 C 104 16 103.5 16.5 102 17.5 C 103.5 18.5 104 19 105 22 Z" fill="#ff6fa5"/>
+        <path d="M104 64 C 104.8 61.8 105.2 61.4 106.5 60.6 C 105.2 59.8 104.8 59.4 104 57.2 C 103.2 59.4 102.8 59.8 101.5 60.6 C 102.8 61.4 103.2 61.8 104 64 Z" fill="#4aa6e8"/>
+        <path d="M14 64 C 14.8 61.8 15.2 61.4 16.5 60.6 C 15.2 59.8 14.8 59.4 14 57.2 C 13.2 59.4 12.8 59.8 11.5 60.6 C 12.8 61.4 13.2 61.8 14 64 Z" fill="#b58bd6"/>
+        <circle cx="24" cy="13" r="1.7" fill="#ff6fa5"/>
+        <circle cx="97" cy="11" r="1.7" fill="#4aa6e8"/>
+      </g>
+      <g stroke="currentColor" stroke-linejoin="round" stroke-linecap="round">
+        <ellipse cx="60" cy="80" rx="27" ry="25" fill="var(--card-solid,#fff)" stroke-width="6"/>
+        <ellipse cx="45" cy="101" rx="11" ry="9" fill="var(--card-solid,#fff)" stroke-width="6"/>
+        <ellipse cx="75" cy="101" rx="11" ry="9" fill="var(--card-solid,#fff)" stroke-width="6"/>
+        <ellipse cx="33" cy="74" rx="9" ry="13" fill="var(--card-solid,#fff)" stroke-width="6" transform="rotate(20 33 74)"/>
+        <ellipse cx="87" cy="74" rx="9" ry="13" fill="var(--card-solid,#fff)" stroke-width="6" transform="rotate(-20 87 74)"/>
+        <circle cx="42" cy="26" r="11" fill="var(--card-solid,#fff)" stroke-width="6"/>
+        <circle cx="78" cy="26" r="11" fill="var(--card-solid,#fff)" stroke-width="6"/>
+        <circle cx="60" cy="41" r="23" fill="var(--card-solid,#fff)" stroke-width="6"/>
+        <circle cx="42" cy="26" r="4.6" stroke-width="3.4"/>
+        <circle cx="78" cy="26" r="4.6" stroke-width="3.4"/>
+        <ellipse cx="60" cy="48" rx="11" ry="9" fill="var(--card-solid,#fff)" stroke-width="3.6"/>
+        <circle cx="45" cy="99" r="4" stroke-width="3"/>
+        <circle cx="75" cy="99" r="4" stroke-width="3"/>
+      </g>
+      <g fill="currentColor" stroke="none">
+        <circle cx="51.5" cy="38" r="2.9"/>
+        <circle cx="68.5" cy="38" r="2.9"/>
+        <ellipse cx="60" cy="44" rx="3.4" ry="2.7"/>
+      </g>
+      <path d="M60 46.5 L60 50 M60 50 C 57.5 52 55.5 51 55 49 M60 50 C 62.5 52 64.5 51 65 49" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+      <path d="M60 90 C 58.6 87.5 54 85.5 54 81.8 C 54 79.2 56.4 78.2 58 79.8 C 58.9 80.7 60 82 60 82 C 60 82 61.1 80.7 62 79.8 C 63.6 78.2 66 79.2 66 81.8 C 66 85.5 61.4 87.5 60 90 Z" fill="#ff6fa5" stroke="var(--card-solid,#fff)" stroke-width="1.4"/>
+    </g>
+  </symbol>
+</svg>
 
-<!-- ============ AUTH ============ -->
-<div id="authScreen" class="overlay hidden">
-  <div class="gate-card glass">
-    <div class="gate-logo grad-text">PedAtlas</div>
-    <div class="gate-sub" id="authSub">Crie sua conta ou entre para sincronizar</div>
-    <div class="auth-tabs">
-      <button id="tabLogin" class="active">Entrar</button>
-      <button id="tabSignup">Criar conta</button>
-    </div>
-    <div class="field"><label>E-mail</label><input id="authEmail" type="email" placeholder="seuemail@exemplo.com"></div>
-    <div class="field"><label>Senha</label><input id="authPass" type="password" placeholder="mínimo 6 caracteres"></div>
-    <button class="btn btn-primary btn-block" id="authBtn">Entrar</button>
-    <button class="btn btn-ghost btn-block" id="authOffline" style="margin-top:8px">Usar offline (sem conta)</button>
-    <div class="msg" id="authMsg"></div>
-    <div class="gate-foot" id="fbStatus">Verificando conexão…</div>
+<!-- ============ ACESSO PELO ELID ============ -->
+<div id="authScreen" class="overlay">
+  <div class="gate-card glass elid-access">
+    <div class="mk"><svg class="logo-mark" width="60" height="60"><use href="#teddyMark"/></svg></div>
+    <div class="gate-logo grad-text" style="margin-bottom:2px">PedAtlas</div>
+    <div class="gate-sub">Pediatria para Residência</div>
+    <p class="muted" id="elidMsg" style="margin:4px 0 22px">Verificando seu acesso pelo ELID…</p>
+    <a class="btn btn-primary btn-block" href="../../landing-page/">Entrar pelo ELID</a>
+    <a class="btn btn-ghost btn-block" href="../../biblioteca-web/" style="margin-top:8px">Ir para a Biblioteca</a>
+    <div class="homage">Inspirado em Elisabete Delfini ✦</div>
+    <div class="gate-foot">ELID · Ensino Legitimado para Internos em Desenvolvimento</div>
   </div>
 </div>
 
@@ -366,7 +386,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   <!-- topbar -->
   <header class="topbar glass">
     <button class="icon-btn menu-toggle" id="menuToggle">☰</button>
-    <div class="brand"><span class="logo-badge">🧸</span><span class="grad-text">PedAtlas</span></div>
+    <div class="brand"><span class="logo-badge"><svg class="logo-mark" width="27" height="27"><use href="#teddyMark"/></svg></span><span class="grad-text">PedAtlas</span></div>
+    <a class="btn-voltar" href="../../biblioteca-web/" title="Voltar à Biblioteca">← Biblioteca</a>
     <div class="top-spacer"></div>
     <div class="top-stat" id="topXP" title="Experiência">⭐ <span id="xpVal">0</span> XP</div>
     <div class="top-stat" id="topStreak" title="Sequência de dias">🔥 <span id="streakVal">0</span></div>
@@ -376,6 +397,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
   <!-- sidebar -->
   <aside class="sidebar glass" id="sidebar">
+    <div class="sb-brand">
+      <div class="sb-mark"><span class="mk"><svg class="logo-mark" width="34" height="34"><use href="#teddyMark"/></svg></span><span class="sb-name grad-text">【PedAtlas】</span></div>
+      <div class="elid-badge"><span class="dot"></span><span class="eb-txt"><b>ELID</b>Ensino Legitimado para Internos em Desenvolvimento</span></div>
+    </div>
     <div class="nav-sep">Principal</div>
     <div class="nav-item active" data-view="dash"><span class="ni-ic">🏠</span> Início</div>
     <div class="nav-item" data-view="study"><span class="ni-ic">☀️</span> Estudo do Dia</div>
@@ -387,7 +412,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     <div class="nav-item" data-view="flashcards"><span class="ni-ic">🎴</span> Meus Flashcards</div>
     <div class="nav-item" data-view="settings"><span class="ni-ic">⚙️</span> Configurações</div>
     <div style="flex:1"></div>
-    <div style="font-size:.72rem;color:var(--ink-faint);font-weight:700;text-align:center;padding:10px">Feito com 💗 por<br><b>Jackeline Delfini</b></div>
+    <div class="sb-foot">
+      <div class="ln">ELID — Ensino Legitimado para Internos em Desenvolvimento</div>
+      <div class="homage">Inspirado em Elisabete Delfini ✦</div>
+    </div>
   </aside>
 
   <!-- main -->
@@ -397,6 +425,34 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 <div id="modalRoot"></div>
 <div id="toasts"></div>
 <style>
+/* ===================== IDENTIDADE ELID ===================== */
+.topbar{border-top:3px solid #b76e79}
+.homage{font-family:'Great Vibes',cursive}
+.btn-block{width:100%}
+/* logo (ursinho) */
+.logo-mark{display:block;color:var(--ink)}
+.brand .logo-badge{background:var(--card-solid);box-shadow:none;border:1px solid var(--line);overflow:hidden;color:var(--ink)}
+/* botão voltar à biblioteca */
+.btn-voltar{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:var(--chip);color:var(--ink);font-weight:800;font-family:var(--font-head);font-size:.86rem;white-space:nowrap;transition:background var(--t),transform var(--t)}
+.btn-voltar:hover{background:var(--lilas-soft);transform:translateY(-1px)}
+/* marca da sidebar + badge ELID */
+.sb-brand{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:4px 8px 14px;margin-bottom:4px;border-bottom:1px solid var(--line)}
+.sb-brand .sb-mark{display:flex;align-items:center;gap:11px}
+.sb-brand .sb-mark .mk{width:46px;height:46px;border-radius:14px;background:var(--card-solid);border:1px solid var(--line);display:grid;place-items:center;flex:none;color:var(--ink)}
+.sb-brand .sb-name{font-family:var(--font-title);font-size:1.45rem;line-height:1}
+.elid-badge{display:inline-flex;align-items:flex-start;gap:8px;padding:8px 11px;border-radius:13px;background:rgba(183,110,121,.12);border:1px solid rgba(183,110,121,.34);max-width:100%}
+.elid-badge .dot{width:8px;height:8px;border-radius:50%;background:#b76e79;flex:none;margin-top:4px;animation:elidPulse 2.2s infinite}
+@keyframes elidPulse{0%{box-shadow:0 0 0 0 rgba(183,110,121,.55)}70%{box-shadow:0 0 0 7px rgba(183,110,121,0)}100%{box-shadow:0 0 0 0 rgba(183,110,121,0)}}
+.elid-badge .eb-txt{font-family:var(--font-body);font-weight:700;font-size:.72rem;line-height:1.28;color:var(--ink-soft);white-space:normal}
+.elid-badge .eb-txt b{display:block;font-size:.74rem;letter-spacing:.16em;color:#b76e79}
+/* rodapé da sidebar (homenagem) */
+.sb-foot{padding:13px 10px 4px;border-top:1px solid var(--line);text-align:center}
+.sb-foot .ln{font-family:var(--font-body);font-size:.64rem;font-weight:700;color:var(--ink-faint);line-height:1.34}
+.sb-foot .homage{font-size:1.16rem;color:#b76e79;margin-top:3px;line-height:1}
+/* tela "Acesso pelo ELID" */
+.elid-access .mk{width:88px;height:88px;border-radius:24px;background:var(--card-solid);border:1px solid var(--line);display:grid;place-items:center;margin:0 auto 14px;color:var(--ink)}
+.elid-access .homage{font-size:1.34rem;color:#b76e79;margin-top:18px;line-height:1}
+
 /* ===== Estilos complementares (markup do motor de render) ===== */
 .muted{color:var(--ink-faint);font-size:.92rem}
 .credit{text-align:center;color:var(--ink-faint);font-weight:700;margin:28px 0 8px}
@@ -628,7 +684,6 @@ var firebaseConfig = {
   appId: "1:574246127117:web:29eedab81ea4251b23f744"
 };
 var PLATFORM_ID = "PedAtlas by Jackeline Delfini";
-var ACCESS_PASSWORD = "REVALIDA22528129";
 var LS_PREFIX = "pedatlas_v1_";
 
 /* ---------- STATE ---------- */
@@ -2088,9 +2143,9 @@ function renderSettings(m){
      '<div class="field"><label>Sexo</label><div class="seg"><button class="seg-b'+(STATE.child.sex==="f"?" on":"")+'" data-s="f">👧 Feminino</button><button class="seg-b'+(STATE.child.sex==="m"?" on":"")+'" data-s="m">👦 Masculino</button></div></div>'+
      '<button class="btn btn-primary" id="setSave">Salvar</button></div>'+
    '<div class="panel glass"><h3>🎨 Aparência</h3><button class="btn btn-ghost" id="setTheme">Alternar tema claro/escuro</button></div>'+
-   '<div class="panel glass"><h3>☁️ Conta</h3><p class="muted">Modo atual: <b>'+(FB.mode==="firebase"?"Conta na nuvem ("+(FB.user&&FB.user.email||"")+")":"Offline (apenas neste dispositivo)")+'</b></p><button class="btn btn-ghost" id="setLogout">Sair / trocar conta</button></div>'+
+   '<div class="panel glass"><h3>☁️ Conta ELID</h3><p class="muted">Conectada como <b>'+esc(FB.user&&FB.user.email||"—")+'</b> · acesso herdado do ELID (mesma conta da Biblioteca).</p><button class="btn btn-ghost" id="setLogout">Sair do ELID</button></div>'+
    '<div class="panel glass danger"><h3>⚠️ Zona de risco</h3><p class="muted">Reinicia XP, progresso e flashcards deste perfil (não afeta o conteúdo das matérias).</p><button class="btn btn-danger" id="setReset">Reiniciar meu progresso</button></div>'+
-   '<p class="credit">PedAtlas · feito com 💗 por <b>Jackeline Delfini</b></p>';
+   '<p class="credit">ELID — Ensino Legitimado para Internos em Desenvolvimento</p><p class="homage" style="text-align:center;font-size:1.3rem;color:#b76e79;margin-top:-2px">Inspirado em Elisabete Delfini ✦</p>';
   var sex=STATE.child.sex;
   $all(".seg-b").forEach(function(b){ b.onclick=function(){ sex=b.getAttribute("data-s"); $all(".seg-b").forEach(function(x){x.classList.remove("on");}); b.classList.add("on"); }; });
   $("#setSave").onclick=function(){ STATE.child.name=$("#setName").value.trim(); STATE.child.sex=sex; STATE.child.setup=true; save(); toast("Salvo! 🍼","win"); refreshTop(); };
@@ -2117,52 +2172,21 @@ function childSetup(then){
 
 /* ---- Auth / Gate / Init ---- */
 function showApp(){
-  $("#gate").classList.add("hidden");
-  $("#authScreen").classList.add("hidden");
+  var a=$("#authScreen"); if(a)a.classList.add("hidden");
   $("#app").classList.remove("hidden");
   refreshTop();
   if(!STATE.child.setup){ childSetup(function(){ nav("dash"); }); }
   else nav("dash");
 }
+function showAccess(msg){
+  $("#app").classList.add("hidden");
+  var a=$("#authScreen"); if(a)a.classList.remove("hidden");
+  var m=$("#elidMsg"); if(m&&msg)m.textContent=msg;
+}
 function doLogout(){
-  if(FB.mode==="firebase"&&FB.auth){ try{FB.auth.signOut();}catch(e){} }
-  FB.user=null; FB.mode="local";
-  location.reload();
-}
-function wireAuthUI(){
-  var mode="login";
-  $("#tabLogin").onclick=function(){mode="login";$("#tabLogin").classList.add("active");$("#tabSignup").classList.remove("active");$("#authBtn").textContent="Entrar";$("#authSub").textContent="Entre para sincronizar seu progresso";};
-  $("#tabSignup").onclick=function(){mode="signup";$("#tabSignup").classList.add("active");$("#tabLogin").classList.remove("active");$("#authBtn").textContent="Criar conta";$("#authSub").textContent="Crie sua conta para sincronizar na nuvem";};
-  $("#authBtn").onclick=function(){
-    var em=$("#authEmail").value.trim(), pw=$("#authPass").value;
-    if(!FB.ready||!FB.auth){ $("#authMsg").textContent="Sem conexão com a nuvem — use o modo offline."; return; }
-    if(!em||pw.length<6){ $("#authMsg").textContent="Informe e-mail e senha (mín. 6 caracteres)."; return; }
-    $("#authMsg").textContent="Processando…";
-    var p=(mode==="signup")?FB.auth.createUserWithEmailAndPassword(em,pw):FB.auth.signInWithEmailAndPassword(em,pw);
-    p.then(function(cred){ FB.user=cred.user; FB.mode="firebase"; cloudLoad(function(){ showApp(); }); })
-     .catch(function(e){ $("#authMsg").textContent=fbErr(e); });
-  };
-  $("#authOffline").onclick=function(){ FB.mode="local"; FB.user=null; loadLocal(); showApp(); };
-}
-function fbErr(e){
-  var c=e&&e.code||"";
-  if(c.indexOf("email-already")>=0)return "E-mail já cadastrado — tente entrar.";
-  if(c.indexOf("wrong-password")>=0||c.indexOf("invalid-cred")>=0)return "E-mail ou senha incorretos.";
-  if(c.indexOf("user-not-found")>=0)return "Conta não encontrada — crie uma conta.";
-  if(c.indexOf("invalid-email")>=0)return "E-mail inválido.";
-  if(c.indexOf("network")>=0)return "Falha de rede — tente o modo offline.";
-  return "Não foi possível. Tente o modo offline.";
-}
-function wireGate(){
-  function tryGate(){
-    if($("#gateInput").value===ACCESS_PASSWORD){
-      $("#gate").classList.add("hidden");
-      $("#authScreen").classList.remove("hidden");
-    } else { $("#gateMsg").textContent="Senha incorreta. Tente novamente."; }
-  }
-  $("#gateBtn").onclick=tryGate;
-  $("#gateInput").addEventListener("keydown",function(e){ if(e.key==="Enter")tryGate(); });
-  $("#authPass").addEventListener("keydown",function(e){ if(e.key==="Enter")$("#authBtn").click(); });
+  function go(){ location.href="../../landing-page/"; }
+  if(FB.auth){ try{ var r=FB.auth.signOut(); if(r&&r.then){ r.then(go).catch(go); return; } }catch(e){} }
+  go();
 }
 function wireShell(){
   $all(".nav-item").forEach(function(n){ n.onclick=function(){ var v=n.getAttribute("data-view"); CURRENT.mat=null; nav(v); }; });
@@ -2173,13 +2197,23 @@ function wireShell(){
 
 function init(){
   try{ var th=localStorage.getItem(LS_PREFIX+"theme"); applyTheme(th||"dark"); }catch(e){ applyTheme("dark"); }
-  wireGate(); wireAuthUI(); wireShell();
-  // Firebase em paralelo, NÃO bloqueia
+  wireShell();
+  // Autenticação herdada do ELID: mesmo projeto Firebase / mesma origem.
+  // Sem tela de login nesta plataforma — a sessão vem da landing-page do ELID.
   initFirebase().then(function(){
-    $("#fbStatus").textContent="☁️ Nuvem disponível — crie conta ou entre.";
-    if(FB.auth){ FB.auth.onAuthStateChanged(function(u){ /* sessão tratada no login */ }); }
+    if(!FB.auth){ showAccess("Não foi possível verificar seu acesso agora. Entre pelo ELID."); return; }
+    FB.auth.onAuthStateChanged(function(u){
+      if(u){
+        FB.user=u; FB.mode="firebase";
+        showAccess("Carregando seu progresso…");
+        cloudLoad(function(){ showApp(); });
+      } else {
+        FB.user=null; FB.mode="local";
+        showAccess("Entre pelo ELID para acessar o PedAtlas.");
+      }
+    });
   }).catch(function(){
-    $("#fbStatus").textContent="📴 Sem nuvem agora — você pode usar o modo offline normalmente.";
+    showAccess("Sem conexão para verificar seu acesso. Tente entrar pelo ELID.");
   });
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init); else init();
