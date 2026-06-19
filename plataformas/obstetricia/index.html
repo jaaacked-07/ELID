@@ -2,9 +2,10 @@
 <html lang="pt-BR" data-theme="dark">
 <head>
 <meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Sofia&family=Raleway:wght@400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 <meta name="theme-color" content="#0e1016">
-<title>OBSTETRÍCIA PRO · Plataforma de Estudos</title>
+<title>Atlas de Obstetrícia — ELID · Ensino Legitimado para Internos em Desenvolvimento</title>
 <style>
 /* ===================== DESIGN TOKENS ===================== */
 :root{
@@ -397,6 +398,27 @@ mark.hl-y{background:var(--hl-y)} mark.hl-g{background:var(--hl-g)} mark.hl-b{ba
   .panel > .pb{padding:4px 14px 18px}
 }
 @media(min-width:781px){ .menu-btn{display:none} }
+
+/* ===================== IDENTIDADE ELID ===================== */
+:root{ --elid-rose:#b76e79; --elid-mauve:#c9a0b0; --elid-plum:#2d1b2e; --elid-ivory:#faf6f0; }
+body{ font-family:'Raleway',var(--font); }
+h1, .elid-h1, .login-card h1{ font-family:'Sofia',cursive; font-weight:400; letter-spacing:.005em; line-height:1.12; }
+.brand-mini b, .sb-brand b{ font-family:'Sofia',cursive !important; font-weight:400; font-size:1.32rem; letter-spacing:.01em; line-height:1; }
+.topbar{ border-top:3px solid var(--elid-rose); }
+.elid-badge{ display:flex; align-items:flex-start; gap:7px; margin:2px 12px 4px; padding:7px 11px; border-radius:14px; background:rgba(183,110,121,.12); border:1px solid rgba(183,110,121,.28); font-family:'Raleway',sans-serif; font-size:.6rem; font-weight:700; letter-spacing:.05em; color:var(--elid-rose); text-transform:uppercase; white-space:normal; line-height:1.4; }
+.elid-badge .dot{ width:7px; height:7px; margin-top:3px; border-radius:50%; background:var(--elid-rose); flex:0 0 auto; animation:elidpulse 1.8s ease-in-out infinite; }
+@keyframes elidpulse{ 0%,100%{ opacity:1; transform:scale(1);} 50%{ opacity:.35; transform:scale(.6);} }
+.elid-foot{ margin-top:18px; padding:16px 12px; border-top:1px solid var(--line); text-align:center; line-height:1.5; font-family:'Raleway',sans-serif; }
+.elid-foot .e1{ display:block; font-size:.64rem; font-weight:700; letter-spacing:.04em; color:var(--txt3); }
+.elid-foot .tribute{ display:block; margin-top:6px; font-family:'Great Vibes',cursive; font-size:1.22rem; line-height:1.15; color:var(--elid-rose); }
+body.sb-collapsed .elid-badge, body.sb-collapsed .elid-foot{ display:none; }
+/* ---- respiro de leitura ---- */
+.prose{ line-height:1.72; }
+.prose p{ margin:0 0 13px; }
+.prose h3{ margin:24px 0 9px; } .prose h4{ margin:18px 0 7px; }
+.prose ul, .prose ol{ margin:10px 0 14px; padding-left:22px; }
+.prose li{ margin:6px 0; line-height:1.66; }
+.callout{ line-height:1.66; } .case{ line-height:1.66; }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -500,26 +522,19 @@ body.sb-collapsed .nav-item{ justify-content:center; }
 </head>
 <body>
 
-<!-- ===================== LOGIN ===================== -->
+<!-- ===================== ACESSO ELID ===================== -->
 <div id="login">
-  <div class="login-card">
-    <div class="login-logo">
-      <div class="mark">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.6-7-10.2A4.8 4.8 0 0 1 12 6a4.8 4.8 0 0 1 7 4.8C19 16.4 12 21 12 21Z" fill="#fff"/><circle cx="12" cy="10.4" r="2.1" fill="#e0497f"/></svg>
-      </div>
-      <div>
-        <h1>OBSTETRÍCIA<span>PRO · ENARE · Revalida · Residência</span></h1>
-      </div>
+  <div class="login-card" style="text-align:center">
+    <div class="login-logo" style="justify-content:center">
+      <div class="mark" style="background:transparent;box-shadow:none;width:72px;height:72px;color:var(--brand)"><svg width="72" height="72" viewBox="0 0 64 64" style="display:block;overflow:visible"><defs><mask id="bsymLogin"><rect x="0" y="0" width="64" height="64" fill="#000"/><path d="M25 30 C21 34 20 41 24 47 C27 51 37 51 40 47 C44 41 43 34 39 30 C37 28 35 27.6 32 27.6 C29 27.6 27 28 25 30 Z" fill="#fff"/><circle cx="32" cy="19" r="8.2" fill="#fff"/><circle cx="32.3" cy="10.8" r="2.4" fill="#fff"/><path d="M27.8 18.8 q1.9 1.5 3.6 0" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M32.6 18.8 q1.9 1.5 3.6 0" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M28.3 29.4 C30.4 31 33.6 31 35.7 29.4" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M24 36 C30 39 36 40 41 38" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M24.6 42 C31 45 37 45 40.4 43" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/></mask></defs><rect x="0" y="0" width="64" height="64" fill="currentColor" mask="url(#bsymLogin)"/><path d="M51 9.6 C51 12.68 52.32 14 55.4 14 C52.32 14 51 15.32 51 18.4 C51 15.32 49.68 14 46.6 14 C49.68 14 51 12.68 51 9.6 Z" fill="#1fb6a6"/><path d="M13.5 12.8 C13.5 15.04 14.46 16 16.7 16 C14.46 16 13.5 16.96 13.5 19.2 C13.5 16.96 12.54 16 10.3 16 C12.54 16 13.5 15.04 13.5 12.8 Z" fill="#e0497f"/><path d="M50 49.2 C46.8 46 46.8 43.12 48.4 43.12 C49.52 43.12 50 44.24 50 45.04 C50 44.24 50.48 43.12 51.6 43.12 C53.2 43.12 53.2 46 50 49.2 Z" fill="#e0497f"/></svg></div>
     </div>
-    <p class="login-sub">Sua plataforma premium de estudos em <b>Obstetrícia</b>. Entre com um usuário para salvar e exportar seu progresso entre aparelhos.</p>
-    <form id="loginForm" autocomplete="off">
-      <div class="field">
-        <input id="userInput" type="text" placeholder="Digite seu nome de usuário" maxlength="40" required>
-      </div>
-      <button class="btn-primary" type="submit">Entrar na plataforma →</button>
-    </form>
-    <div class="login-chips"><span>Offline</span><span>Sem servidor</span><span>Backup por código</span></div>
-    <div class="login-foot">Plataforma desenvolvida por <b>Jackeline Delfini</b></div>
+    <h1 class="elid-h1" style="margin:14px 0 0">Atlas de Obstetrícia</h1>
+    <p class="login-sub" style="margin-top:8px">Esta plataforma faz parte do <b>ELID</b>. O acesso é feito pela sua conta ELID — entre uma vez e navegue por todos os Atlas.</p>
+    <a href="../../landing-page/" class="btn-primary" style="display:block;text-decoration:none;text-align:center;margin-top:6px">Entrar pelo ELID →</a>
+    <div class="elid-foot" style="border:none;margin-top:20px">
+      <span class="e1">ELID — Ensino Legitimado para Internos em Desenvolvimento</span>
+      <span class="tribute">Inspirado em Elisabete Delfini ✦</span>
+    </div>
   </div>
 </div>
 
@@ -530,8 +545,8 @@ body.sb-collapsed .nav-item{ justify-content:center; }
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
     <div class="brand-mini">
-      <div class="mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.6-7-10.2A4.8 4.8 0 0 1 12 6a4.8 4.8 0 0 1 7 4.8C19 16.4 12 21 12 21Z" fill="#fff"/><circle cx="12" cy="10.4" r="2.1" fill="#e0497f"/></svg></div>
-      <span class="lbltxt"><b>OBSTETRÍCIA</b><small>PRO</small></span>
+      <div class="mark" style="background:transparent;box-shadow:none;color:var(--brand)"><svg width="28" height="28" viewBox="0 0 64 64" style="display:block;overflow:visible"><defs><mask id="bsymTop"><rect x="0" y="0" width="64" height="64" fill="#000"/><path d="M25 30 C21 34 20 41 24 47 C27 51 37 51 40 47 C44 41 43 34 39 30 C37 28 35 27.6 32 27.6 C29 27.6 27 28 25 30 Z" fill="#fff"/><circle cx="32" cy="19" r="8.2" fill="#fff"/><circle cx="32.3" cy="10.8" r="2.4" fill="#fff"/><path d="M27.8 18.8 q1.9 1.5 3.6 0" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M32.6 18.8 q1.9 1.5 3.6 0" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M28.3 29.4 C30.4 31 33.6 31 35.7 29.4" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M24 36 C30 39 36 40 41 38" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M24.6 42 C31 45 37 45 40.4 43" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/></mask></defs><rect x="0" y="0" width="64" height="64" fill="currentColor" mask="url(#bsymTop)"/></svg></div>
+      <span class="lbltxt"><b>Atlas de Obstetrícia</b></span>
     </div>
     <div class="searchbar">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -539,6 +554,7 @@ body.sb-collapsed .nav-item{ justify-content:center; }
       <div class="search-pop" id="searchPop"></div>
     </div>
     <div class="spacer"></div>
+    <button class="icon-btn" id="bibBtn" aria-label="Biblioteca" title="Voltar à Biblioteca (Atlas ELID)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v9"/><path d="M6.5 7a8 8 0 1 0 11 0"/></svg></button>
     <button class="icon-btn" id="themeBtn" aria-label="Tema" title="Alternar tema"></button>
     <button class="icon-btn" id="userBtn" aria-label="Conta" title="Conta"></button>
   </header>
@@ -1234,7 +1250,7 @@ function importCode(code){
 function renderBackup(){
   const m=$('#main');
   m.innerHTML=`
-  <div class="page-head"><div class="crumb">${IC.backup} Backup entre aparelhos</div><h1>Exportar & Importar progresso</h1><p>Sem login online, sem servidor. Gere um código com todo o seu progresso (anotações, marcações, destaques, questões, flashcards e a Jornada da Vida) e cole em outro aparelho para continuar.</p></div>
+  <div class="page-head"><div class="crumb">${IC.backup} Backup entre aparelhos</div><h1>Exportar & Importar progresso</h1><p>Gere um código com todo o seu progresso (anotações, marcações, destaques, questões, flashcards e a Jornada da Vida) e cole em outro aparelho para continuar.</p></div>
   <div class="grid g2">
     <div class="card" style="padding:22px">
       <h3 style="margin:0 0 6px">📤 Exportar progresso</h3>
@@ -1251,11 +1267,11 @@ function renderBackup(){
     </div>
   </div>
   <div class="card" style="padding:20px;margin-top:16px">
-    <h3 style="margin:0 0 8px">Conta atual</h3>
+    <h3 style="margin:0 0 8px">Conta ELID</h3>
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-      <div class="mc-ic" style="width:44px;height:44px;background:var(--grad-brand)">${esc((App.user||'?')[0].toUpperCase())}</div>
-      <div style="flex:1"><b>${esc(App.user)}</b><div class="mc-meta">Progresso salvo localmente neste navegador</div></div>
-      <button class="btn-sm" onclick="logout()">Trocar de usuário</button>
+      <div class="mc-ic" style="width:44px;height:44px;background:var(--grad-brand)">${esc(((App.email||'E')[0]||'E').toUpperCase())}</div>
+      <div style="flex:1"><b>${esc(App.email||'Conta ELID')}</b><div class="mc-meta">Progresso sincronizado pela sua conta ELID</div></div>
+      <button class="btn-sm" onclick="logoutELID()">Sair do ELID</button>
     </div>
   </div>`;
   genExport();
@@ -1263,7 +1279,8 @@ function renderBackup(){
 function genExport(){ const b=$('#expBox'); if(b) b.value=exportCode(); }
 function doCopy(){ const b=$('#expBox'); b.select(); try{document.execCommand('copy');}catch(e){} navigator.clipboard&&navigator.clipboard.writeText(b.value).catch(()=>{}); toast('Código copiado ✓'); }
 function doImport(){ const v=$('#impBox').value; if(!v.trim())return toast('Cole um código primeiro'); if(importCode(v)){ toast('Progresso restaurado ✓'); buildIndex(); renderSidebar(); go('dashboard'); } else toast('Código inválido ✗'); }
-function logout(){ if(confirm('Trocar de usuário? Seu progresso continua salvo para '+App.user+'.')){ location.reload(); } }
+function logout(){ if(confirm('Recarregar a plataforma?')){ location.reload(); } }
+function logoutELID(){ if(confirm('Sair do ELID? Você voltará para a tela de login do ELID.')){ try{ if(FB.unsub) FB.unsub(); }catch(e){} try{ FB.auth.signOut().then(function(){ location.href='../../landing-page/'; }).catch(function(){ location.href='../../landing-page/'; }); }catch(e){ location.href='../../landing-page/'; } } }
 
 /* ---------- HIGHLIGHTER ---------- */
 let hlRange=null, hlNode=null;
@@ -3276,6 +3293,37 @@ async function cloudInit(u){
 }
 /* Grava na nuvem (debounced). Chamado por save() após o localStorage. */
 var _cloudTimer=null;
+async function cloudInitSession(user){
+  if(!FB.ready||!user){ return; }
+  FB.uid=user.uid; if(!FB.uid){ return; }
+  var ref=platformRef();
+  try{
+    var snap=await ref.get();
+    if(snap.exists){
+      var data=snap.data();
+      if(data&&data.state){
+        App.state=mergeState(App.state, data.state);
+        try{ localStorage.setItem(keyFor(), JSON.stringify(App.state)); }catch(e){}
+        if(typeof ensureGoalDay==='function') ensureGoalDay();
+        refreshAfterSync();
+      }
+    } else {
+      FB.localWriteTs=Date.now();
+      await ref.set({user:(user.email||user.uid), state:App.state, updatedAt:FB.localWriteTs});
+    }
+  }catch(e){ console.warn('[Sync] leitura inicial (ELID) falhou:', e); }
+  try{
+    if(FB.unsub){ try{ FB.unsub(); }catch(e){} }
+    FB.unsub=ref.onSnapshot(function(doc){
+      if(!doc||!doc.exists) return;
+      var d=doc.data(); if(!d||!d.state) return;
+      if(d.updatedAt&&FB.localWriteTs&&d.updatedAt<=FB.localWriteTs) return;
+      App.state=mergeState(App.state, d.state);
+      try{ localStorage.setItem(keyFor(), JSON.stringify(App.state)); }catch(e){}
+      refreshAfterSync();
+    }, function(err){ console.warn('[Sync] onSnapshot (ELID):', err); });
+  }catch(e){}
+}
 function cloudSave(){
   if(!FB.ready||!FB.uid||!App.user){ return; }
   clearTimeout(_cloudTimer);
@@ -3297,35 +3345,7 @@ function cloudSave(){
   function ensureFav(){ if(!App.state.favorites) App.state.favorites={}; }
   window.ensureFav=ensureFav;
 
-  /* ---- GATE DE ACESSO (senha geral) ---- */
-  var GATEPASS="REVALIDA22528129";
-  (function showGate(){
-    try{ if(localStorage.getItem('obsterPRO_gate')==='1') return; }catch(e){}
-    var g=document.createElement('div'); g.id='gate';
-    g.innerHTML='<div class="gate-card glass"><div class="gate-badge">ACESSO RESTRITO</div>'
-      +'<h1 class="gate-title">OBSTETRÍCIA<span>PRO</span></h1>'
-      +'<p class="gate-sub">Plataforma exclusiva. Insira a senha de acesso para continuar.</p>'
-      +'<input id="gateInput" type="password" placeholder="Senha de acesso" autocomplete="off">'
-      +'<button id="gateBtn">Desbloquear plataforma</button>'
-      +'<div id="gateErr" class="gate-err"></div>'
-      +'<div class="gate-foot">Desenvolvido por <b>Jackeline Delfini</b></div></div>';
-    document.body.appendChild(g);
-    function tryUnlock(){
-      var v=(document.getElementById('gateInput').value||'').trim();
-      if(v===GATEPASS){
-        try{ localStorage.setItem('obsterPRO_gate','1'); }catch(e){}
-        try{ if(typeof FB!=='undefined'&&FB.ready&&FB.db){ FB.db.collection('access').add({ts:Date.now(),ok:true}).catch(function(){}); } }catch(e){}
-        g.classList.add('hide'); setTimeout(function(){ if(g&&g.parentNode) g.parentNode.removeChild(g); },450);
-      } else {
-        document.getElementById('gateErr').textContent='Senha incorreta. Tente novamente.';
-        document.getElementById('gateInput').value='';
-        var c=g.querySelector('.gate-card'); c.classList.remove('shake'); void c.offsetWidth; c.classList.add('shake');
-      }
-    }
-    document.getElementById('gateBtn').onclick=tryUnlock;
-    document.getElementById('gateInput').addEventListener('keydown',function(e){ if(e.key==='Enter') tryUnlock(); });
-    setTimeout(function(){ var i=document.getElementById('gateInput'); if(i) i.focus(); },80);
-  })();
+  /* ---- GATE DE ACESSO removido: acesso controlado pela sessão ELID ---- */
 
   /* ---- ÍCONES NOVOS ---- */
   var ICX={
@@ -3339,8 +3359,9 @@ function cloudSave(){
   renderSidebar=function(){
     var sb=document.getElementById('sidebar'); sb.innerHTML='';
     var head=document.createElement('div'); head.className='sb-head';
-    head.innerHTML='<div class="sb-brand"><span class="sb-mark"></span><b>OBSTETRÍCIA</b><small>PRO</small></div><button class="sb-collapse" title="Recolher menu">«</button>';
+    head.innerHTML='<div class="sb-brand"><span class="sb-mark" style="background:transparent;box-shadow:none;color:var(--brand);display:grid;place-items:center"><svg width="26" height="26" viewBox="0 0 64 64" style="display:block;overflow:visible"><defs><mask id="bsymSide"><rect x="0" y="0" width="64" height="64" fill="#000"/><path d="M25 30 C21 34 20 41 24 47 C27 51 37 51 40 47 C44 41 43 34 39 30 C37 28 35 27.6 32 27.6 C29 27.6 27 28 25 30 Z" fill="#fff"/><circle cx="32" cy="19" r="8.2" fill="#fff"/><circle cx="32.3" cy="10.8" r="2.4" fill="#fff"/><path d="M27.8 18.8 q1.9 1.5 3.6 0" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M32.6 18.8 q1.9 1.5 3.6 0" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M28.3 29.4 C30.4 31 33.6 31 35.7 29.4" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M24 36 C30 39 36 40 41 38" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M24.6 42 C31 45 37 45 40.4 43" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/></mask></defs><rect x="0" y="0" width="64" height="64" fill="currentColor" mask="url(#bsymSide)"/></svg></span><b>Atlas de Obstetrícia</b></div><button class="sb-collapse" title="Recolher menu">«</button>';
     sb.appendChild(head);
+    var elidBadge=document.createElement('div'); elidBadge.className='elid-badge'; elidBadge.innerHTML='<span class="dot"></span><span>Ensino Legitimado para Internos em Desenvolvimento</span>'; sb.appendChild(elidBadge);
     head.querySelector('.sb-collapse').onclick=function(){ document.body.classList.toggle('sb-collapsed'); };
     var nav=[['dashboard','Dashboard',IC.dash],['daily','Estudos do Dia',IC.daily],['journey','Minha Jornada',IC.journey],
       ['goals','Metas',IC.goals],['ranking','Temas Mais Cobrados',IC.ranking],['favorites','Favoritos',ICX.star],
@@ -3354,7 +3375,7 @@ function cloudSave(){
       it.innerHTML='<span class="ic" style="background:'+m.color+';color:#fff;border-color:transparent">'+(m.tag||m.num)+'</span><span class="lbl">'+esc(m.title)+'</span><span class="badge">'+p+'%</span>';
       it.onclick=function(){ go('mod:'+m.id); }; grp.appendChild(it); });
     sb.appendChild(grp);
-    var foot=document.createElement('div'); foot.className='sb-foot'; foot.innerHTML='Desenvolvido por<br><b>Jackeline Delfini</b>'; sb.appendChild(foot);
+    var foot=document.createElement('div'); foot.className='elid-foot'; foot.innerHTML='<span class="e1">ELID — Ensino Legitimado para Internos em Desenvolvimento</span><span class="tribute">Inspirado em Elisabete Delfini ✦</span>'; sb.appendChild(foot);
   };
 
   /* ---- ROTEADOR (novos destinos + microinterações) ---- */
@@ -3445,25 +3466,32 @@ function cloudSave(){
   var th='dark'; try{ th=localStorage.getItem('obsterPRO_theme')||'dark'; }catch(e){}
   setTheme(th);
   $('#themeBtn').onclick=function(){setTheme(App.theme==='dark'?'light':'dark');};
-  var lastUser=(function(){try{return localStorage.getItem('obsterPRO_lastUser')||'';}catch(e){return'';}})();
-  if(lastUser) $('#userInput').value=lastUser;
-  $('#loginForm').onsubmit=function(e){ e.preventDefault(); var u=$('#userInput').value.trim()||'Estudante'; enter(u); };
-  async function enter(u){
-    App.user=u; try{localStorage.setItem('obsterPRO_lastUser',u);}catch(e){}
+  $('#menuBtn').onclick=openDrawer; $('#backdrop').onclick=closeDrawer;
+  var bib=$('#bibBtn'); if(bib){ bib.onclick=function(){ location.href='../../biblioteca-web/'; }; }
+  $('#search').addEventListener('input',function(e){doSearch(e.target.value);});
+  $('#search').addEventListener('focus',function(e){ if(e.target.value)doSearch(e.target.value); });
+  document.addEventListener('keydown',function(e){ if(e.key==='/'&&document.activeElement!==$('#search')&&$('#app').classList.contains('on')){ e.preventDefault(); $('#search').focus(); } if(e.key==='Escape'){$('#searchPop').classList.remove('on'); closeDrawer();} });
+
+  var entered=false;
+  function showAccess(){ var l=$('#login'); if(l){ l.classList.remove('hide'); l.style.display='flex'; } var a=$('#app'); if(a) a.classList.remove('on'); }
+  function enterELID(user){
+    if(entered) return; entered=true;
+    App.user=user.uid; App.email=(user.email||'');
     load(); buildIndex(); ensureGoalDay();
     $('#login').classList.add('hide'); setTimeout(function(){$('#login').style.display='none';},520);
     $('#app').classList.add('on');
     renderSidebar(); initHighlighter();
-    $('#userBtn').innerHTML='<div style="width:28px;height:28px;border-radius:9px;background:var(--grad-brand);display:grid;place-items:center;color:#fff;font-weight:800;font-size:.85rem">'+esc(u[0].toUpperCase())+'</div>';
+    var ini=((App.email||'E')[0]||'E').toUpperCase();
+    $('#userBtn').innerHTML='<div style="width:28px;height:28px;border-radius:9px;background:var(--grad-brand);display:grid;place-items:center;color:#fff;font-weight:800;font-size:.85rem">'+esc(ini)+'</div>';
     $('#userBtn').onclick=function(){go('backup');};
+    $('#userBtn').title='Conta ELID';
     App.state.journeySeen=App.state.journeySeen||overallPct();
     go('dashboard');
-    try{ await cloudInit(u); }catch(e){ console.warn('Cloud init falhou, seguindo com cache local:', e); }
+    try{ cloudInitSession(user); }catch(e){ console.warn('Cloud init (sessão ELID) falhou:', e); }
   }
-  $('#menuBtn').onclick=openDrawer; $('#backdrop').onclick=closeDrawer;
-  $('#search').addEventListener('input',function(e){doSearch(e.target.value);});
-  $('#search').addEventListener('focus',function(e){ if(e.target.value)doSearch(e.target.value); });
-  document.addEventListener('keydown',function(e){ if(e.key==='/'&&document.activeElement!==$('#search')&&$('#app').classList.contains('on')){ e.preventDefault(); $('#search').focus(); } if(e.key==='Escape'){$('#searchPop').classList.remove('on'); closeDrawer();} });
+  if(typeof FB!=='undefined' && FB.ready && FB.auth){
+    FB.auth.onAuthStateChanged(function(user){ if(user){ enterELID(user); } else { showAccess(); } });
+  } else { showAccess(); }
 })();
 </script>
 <script>
