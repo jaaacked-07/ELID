@@ -3395,7 +3395,7 @@ function cloudSave(){
   /* ---- INJEÇÃO DE CHROME (crédito, favorito) ---- */
   function injectChrome(route){
     route=route||App.route; var main=document.getElementById('main'); if(!main) return;
-    if(!main.querySelector('.app-credit')){ var f=document.createElement('div'); f.className='app-credit'; f.innerHTML='OBSTETRÍCIA <b>PRO</b> · Desenvolvido por <b>Jackeline Delfini</b> · ENARE · Revalida · Residência'; main.appendChild(f); }
+    if(!main.querySelector('.app-credit')){ var f=document.createElement('div'); f.className='app-credit elid-foot'; f.innerHTML='<span class="e1">ELID — Ensino Legitimado para Internos em Desenvolvimento</span><span class="tribute">Inspirado em Elisabete Delfini ✦</span>'; main.appendChild(f); }
     if(route==='dashboard'){ var ph=main.querySelector('.page-head'); if(ph && !main.querySelector('.author-hero')){ var a=document.createElement('div'); a.className='author-hero glass';
       a.innerHTML='<div class="ah-l"><span class="ah-badge">PLATAFORMA PREMIUM</span><div class="ah-t">Desenvolvido por <b>Jackeline Delfini</b></div><div class="ah-s">Sua preparação premium e completa para as provas de residência em Obstetrícia</div></div><div class="ah-r">🩺</div>';
       ph.parentNode.insertBefore(a, ph.nextSibling); } }
