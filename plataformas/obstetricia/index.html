@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 <meta name="theme-color" content="#2d1b2e">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@200;300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@200;300;400;500;600;700&family=Great+Vibes&family=Parisienne&display=swap" rel="stylesheet">
 <title>Atlas de Obstetrícia — ELID · Ensino Legitimado para Internos em Desenvolvimento</title>
 <style>
 /* ===================== ELID DESIGN TOKENS ===================== */
@@ -15,6 +15,9 @@
   --font-body:'Raleway',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --font-display:'Cormorant Garamond',Georgia,serif;
   --font-script:'Great Vibes',cursive;
+  --font-brand:'Parisienne',cursive;
+  /* ACENTO DA PLATAFORMA — Obstetrícia = coral. Para outra plataforma, troque só estes 2 valores. */
+  --accent:#e0997a; --accent-soft:rgba(224,153,122,.13);
   --radius:16px; --radius-sm:11px; --radius-lg:22px;
   --speed:.4s cubic-bezier(.34,1.3,.64,1);
   --maxw:1180px;
@@ -27,6 +30,10 @@ html[data-theme="dark"]{
   --ok:#7ec9a2; --okbg:rgba(126,201,162,.14); --bad:#e08a98; --badbg:rgba(224,138,152,.14);
   --warn:#e3b778; --warnbg:rgba(227,183,120,.14); --info:#9db6d8; --infobg:rgba(157,182,216,.14);
   --hl:rgba(247,231,206,.28);
+  /* SUBTOM v2 (nível Médio) — derivado de --accent. Trocar só --accent muda toda a plataforma. */
+  --accent-wash:color-mix(in srgb, var(--accent) 21%, transparent);
+  --accent-glow:color-mix(in srgb, var(--accent) 34%, transparent);
+  --accent-warm:color-mix(in srgb, var(--champagne) 14%, transparent);
 }
 html[data-theme="light"]{
   --bg:#f5f0e8; --bg2:#ece3d6; --panel:rgba(183,110,121,.06); --panel2:rgba(183,110,121,.1);
@@ -36,10 +43,19 @@ html[data-theme="light"]{
   --ok:#3f9e72; --okbg:rgba(63,158,114,.12); --bad:#c2566a; --badbg:rgba(194,86,106,.1);
   --warn:#b4892f; --warnbg:rgba(180,137,47,.12); --info:#4f7099; --infobg:rgba(79,112,153,.1);
   --hl:rgba(183,110,121,.22);
+  --accent-wash:color-mix(in srgb, var(--accent) 13%, transparent);
+  --accent-glow:color-mix(in srgb, var(--accent) 20%, transparent);
+  --accent-warm:color-mix(in srgb, var(--champagne) 10%, transparent);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;height:100%}
-body{font-family:var(--font-body);background:var(--bg);color:var(--txt);line-height:1.66;
+body{font-family:var(--font-body);color:var(--txt);line-height:1.66;
+  background:
+    linear-gradient(152deg, var(--accent-wash) 0%, transparent 55%),
+    radial-gradient(1200px 720px at 90% -12%, var(--accent-glow), transparent 60%),
+    radial-gradient(680px 460px at 10% 4%, var(--accent-warm), transparent 55%),
+    var(--bg);
+  background-attachment:fixed;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;
   transition:background .5s ease,color .3s ease;font-weight:400}
 canvas#bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.5}
@@ -57,13 +73,14 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;letter-spacing:.02em
 
 /* ===================== ELID ACCESS ===================== */
 #login{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;
-  background:radial-gradient(900px 520px at 18% -8%,rgba(183,110,121,.22),transparent 60%),
-            radial-gradient(800px 520px at 110% 112%,rgba(201,160,176,.18),transparent 55%),var(--bg)}
+  background:linear-gradient(152deg, var(--accent-wash) 0%, transparent 55%),
+            radial-gradient(900px 560px at 90% -10%,var(--accent-glow),transparent 60%),
+            radial-gradient(620px 440px at 8% 2%,var(--accent-warm),transparent 55%),var(--bg)}
 #login.hide{opacity:0;transition:opacity .5s ease}
 .login-card{max-width:460px;width:100%;text-align:center;padding:48px 36px;border-radius:var(--radius-lg);
   background:var(--glass);backdrop-filter:blur(24px);border:1px solid var(--line);box-shadow:var(--shadow)}
 .login-mark{width:96px;height:96px;margin:0 auto 8px;color:var(--rose-gold)}
-.elid-h1{font-family:var(--font-display);font-weight:300;font-size:2.4rem;letter-spacing:.06em;margin:10px 0 0}
+.elid-h1{font-family:var(--font-brand);font-weight:400;font-size:3rem;letter-spacing:.01em;margin:10px 0 0;line-height:1.05}
 .login-sub{color:var(--txt2);font-size:.95rem;font-weight:300;margin:14px auto 26px;max-width:340px}
 .btn-primary{display:block;width:100%;padding:14px 20px;border-radius:999px;text-align:center;font-weight:500;letter-spacing:.04em;
   color:#fff;background:linear-gradient(120deg,var(--rose-gold),var(--soft-mauve));transition:transform .3s,box-shadow .3s}
@@ -77,12 +94,14 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;letter-spacing:.02em
 #app.on{opacity:1;pointer-events:auto;transition:opacity .6s ease}
 .topbar{position:sticky;top:0;z-index:60;height:64px;display:flex;align-items:center;gap:14px;padding:0 22px;
   background:var(--glass);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.topbar::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;
+  background:linear-gradient(90deg,var(--rose-gold),var(--accent))}
 .icon-btn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:var(--rose-gold);
   background:var(--panel2);border:1px solid var(--line);transition:.3s}
 .icon-btn:hover{background:var(--panel);box-shadow:0 0 16px rgba(183,110,121,.22);transform:scale(1.06)}
 .brand-mini{display:flex;align-items:center;gap:11px;min-width:0}
 .brand-mini .mark{width:34px;height:34px;color:var(--rose-gold);flex:0 0 auto}
-.brand-mini .lbltxt{font-family:var(--font-display);font-weight:300;font-size:1.32rem;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-mini .lbltxt{font-family:var(--font-brand);font-weight:400;font-size:1.5rem;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1}
 .searchbar{flex:1;max-width:420px;display:flex;align-items:center;gap:9px;padding:0 14px;height:42px;
   background:var(--panel2);border:1px solid var(--line);border-radius:999px;color:var(--txt3);position:relative}
 .searchbar input{flex:1;background:none;border:none;outline:none;color:var(--txt);font-family:inherit;font-size:.9rem}
@@ -106,7 +125,7 @@ h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;letter-spacing:.02em
 .dr-brand{display:flex;align-items:center;gap:12px;padding:6px 8px 18px;border-bottom:1px solid var(--line);margin-bottom:14px}
 .dr-brand .mark{width:42px;height:42px;color:var(--rose-gold)}
 .dr-brand b{font-family:var(--font-display);font-weight:400;font-size:1.3rem;letter-spacing:.04em;display:block}
-.dr-brand small{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--txt3)}
+.dr-brand small{font-family:var(--font-brand);font-size:1.05rem;letter-spacing:.01em;text-transform:none;color:var(--soft-mauve);display:block;line-height:1.1;margin-top:1px}
 .nav-item{display:flex;align-items:center;gap:13px;padding:12px 14px;border-radius:var(--radius-sm);color:var(--txt2);
   font-weight:500;font-size:.92rem;cursor:pointer;transition:.25s;margin-bottom:3px}
 .nav-item:hover{background:var(--panel2);color:var(--txt)}
@@ -2364,13 +2383,27 @@ function addDays(n){var d=new Date();d.setDate(d.getDate()+n);return d.toISOStri
 function daysBetween(a,b){return Math.round((new Date(b)-new Date(a))/86400000);}
 
 /* ---- Bastão de Asclépio (flat, sem 3D, sem sombra) ---- */
-function asclepius(size){
-  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 64 64" fill="none" stroke="currentColor" '+
-  'stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" style="display:block">'+
-  '<line x1="32" y1="5" x2="32" y2="59"/>'+
-  '<path d="M32 9 c8 1 10 6 3 9 c-9 3 -9 8 0 11 c9 3 9 8 0 11 c-7 2 -6 7 2 8" stroke-width="2.4"/>'+
-  '<circle cx="37.5" cy="9.2" r="1.5" fill="currentColor" stroke="none"/>'+
-  '<path d="M22 52 h20" stroke-width="1.6" opacity=".7"/></svg>';
+var _bmid=0;
+/* Símbolo da marca da Obstetrícia — BEBÊ (aprovado). Silhueta em currentColor via máscara;
+   faíscas harmonizadas à paleta ELID (coral + champagne). Bastão de Asclépio segue no canvas de fundo. */
+function babyMark(size){
+  var id='bsym'+(++_bmid);
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 64 64" style="display:block;overflow:visible">'+
+  '<defs><mask id="'+id+'"><rect x="0" y="0" width="64" height="64" fill="#000"/>'+
+  '<path d="M25 30 C21 34 20 41 24 47 C27 51 37 51 40 47 C44 41 43 34 39 30 C37 28 35 27.6 32 27.6 C29 27.6 27 28 25 30 Z" fill="#fff"/>'+
+  '<circle cx="32" cy="19" r="8.2" fill="#fff"/>'+
+  '<circle cx="32.3" cy="10.8" r="2.4" fill="#fff"/>'+
+  '<path d="M27.8 18.8 q1.9 1.5 3.6 0" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/>'+
+  '<path d="M32.6 18.8 q1.9 1.5 3.6 0" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/>'+
+  '<path d="M28.3 29.4 C30.4 31 33.6 31 35.7 29.4" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/>'+
+  '<path d="M24 36 C30 39 36 40 41 38" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/>'+
+  '<path d="M24.6 42 C31 45 37 45 40.4 43" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/>'+
+  '</mask></defs>'+
+  '<rect x="0" y="0" width="64" height="64" fill="currentColor" mask="url(#'+id+')"/>'+
+  '<path d="M51 9.6 C51 12.68 52.32 14 55.4 14 C52.32 14 51 15.32 51 18.4 C51 15.32 49.68 14 46.6 14 C49.68 14 51 12.68 51 9.6 Z" fill="var(--accent)"/>'+
+  '<path d="M13.5 12.8 C13.5 15.04 14.46 16 16.7 16 C14.46 16 13.5 16.96 13.5 19.2 C13.5 16.96 12.54 16 10.3 16 C12.54 16 13.5 15.04 13.5 12.8 Z" fill="var(--champagne)"/>'+
+  '<path d="M50 49.2 C46.8 46 46.8 43.12 48.4 43.12 C49.52 43.12 50 44.24 50 45.04 C50 44.24 50.48 43.12 51.6 43.12 C53.2 43.12 53.2 46 50 49.2 Z" fill="var(--accent)"/>'+
+  '</svg>';
 }
 /* paleta de módulos no espectro ELID (substitui as cores antigas só na exibição) */
 var MOD_PALETTE=['#b76e79','#c9a0b0','#a86b8c','#9d7e9c','#bf8a6d','#8d6e8f','#c98aa0','#a5728a','#b88a6c','#9a6b82'];
@@ -2480,7 +2513,7 @@ function renderSidebar(){
       it[1]+(it[3]==='badge'?'<span class="badge" id="navBadge">0</span>':'')+'</div>';
   }).join('');
   $('#navList').innerHTML=html;
-  $('#drMark').innerHTML=asclepius(40);$('#topMark').innerHTML=asclepius(32);$('#loginMark').innerHTML=asclepius(94);
+  $('#drMark').innerHTML=babyMark(40);$('#topMark').innerHTML=babyMark(32);$('#loginMark').innerHTML=babyMark(94);
   syncNav();
 }
 function syncNav(){
@@ -2544,7 +2577,7 @@ function renderModule(id){
   html+='<div class="grid g2">'+(m.topics||[]).map(function(t){
     var p=topicProgress(t);var nq=(t.questions||[]).length,nc=(t.cards||[]).length;
     return '<div class="card mod-card view-anim" onclick="go(\'topic:'+t.id+'\')">'+
-      '<div class="mc-head"><div class="mc-ic" style="background:'+col+';font-size:1rem">'+asclepius(22)+'</div>'+
+      '<div class="mc-head"><div class="mc-ic" style="background:'+col+';font-size:1rem">'+babyMark(22)+'</div>'+
       '<div><h3 style="font-size:1.22rem">'+esc(t.title)+'</h3><div class="mc-meta">'+nq+' questões · '+nc+' flashcards</div></div></div>'+
       '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">'+(t.tags||[]).map(function(g){return '<span class="tag">'+esc(g)+'</span>';}).join('')+'</div>'+
       '<div class="bar"><i style="width:'+p+'%"></i></div></div>';
@@ -3086,7 +3119,7 @@ window.addEventListener('resize',function(){drawBgCanvas();});
 
   var entered=false;
   function showAccess(){var l=$('#login');if(l){l.classList.remove('hide');l.style.display='flex';}var a=$('#app');if(a)a.classList.remove('on');
-    $('#loginMark').innerHTML=asclepius(94);}
+    $('#loginMark').innerHTML=babyMark(94);}
   function enterELID(user){
     if(entered)return;entered=true;
     App.user=user.uid;App.email=(user.email||'');
