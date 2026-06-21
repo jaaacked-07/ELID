@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atlas ELID — Biblioteca de Plataformas</title>
+  <title>Biblioteca ELID</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@200;300;400;500;600&family=Great+Vibes:wght@400&display=swap" rel="stylesheet">
@@ -19,9 +19,6 @@
     .font-cormorant { font-family: 'Cormorant Garamond', serif; }
     .font-script { font-family: 'Great Vibes', cursive; }
     .letter-highlight { color: var(--rose-gold); font-weight: 500; }
-    .elid-badge { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--rose-gold); margin-top:14px; }
-    .elid-dot { width:6px; height:6px; border-radius:50%; background:var(--rose-gold); }
-    .elid-tagline { font-family:'Raleway',sans-serif; font-size:12px; letter-spacing:0.04em; color:rgba(201,160,176,0.75); margin-top:6px; line-height:1.5; }
 
     canvas#bg-canvas { position: fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
     body.light-mode #bg-canvas { opacity: 0.3; }
@@ -96,16 +93,49 @@
     .section-title { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; letter-spacing:0.1em; color:var(--ivory); margin-bottom:40px; text-align:center; }
     body.light-mode .section-title { color:var(--deep-plum); }
 
-    .stats-section {
-      background:rgba(45,27,46,0.3); backdrop-filter:blur(20px);
-      border:1px solid rgba(183,110,121,0.15); border-radius:20px; padding:40px; margin-bottom:60px;
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:32px;
+    /* Frase do dia */
+    .daily-quote-wrap {
+      display:flex; align-items:center; justify-content:center; gap:18px;
+      margin:8px auto 64px; padding:36px 24px; max-width:780px; text-align:center;
     }
-    body.light-mode .stats-section { background:rgba(255,255,255,0.5); border:1px solid rgba(183,110,121,0.2); }
-    .stat-block { text-align:center; }
-    .stat-number { font-size:48px; font-weight:300; color:var(--rose-gold); margin-bottom:8px; }
-    .stat-label { font-size:13px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(201,160,176,0.7); }
-    body.light-mode .stat-label { color:rgba(120,80,100,0.7); }
+    .daily-quote {
+      font-family:'Great Vibes', cursive;
+      font-size:clamp(2rem, 5vw, 3.1rem); line-height:1.25;
+      color:var(--rose-gold); letter-spacing:0.02em; margin:0;
+      text-shadow:0 0 24px rgba(183,110,121,0.25);
+      animation: quoteFade 1.1s ease both;
+    }
+    body.light-mode .daily-quote { color:#9a5562; text-shadow:none; }
+    .daily-quote-mark { color:rgba(183,110,121,0.45); font-size:1.1rem; flex-shrink:0; }
+    @keyframes quoteFade { 0%{opacity:0;transform:translateY(8px)} 100%{opacity:1;transform:none} }
+    @media(max-width:600px){ .daily-quote-wrap{ gap:10px; padding:24px 12px; margin-bottom:48px; } }
+
+    /* Cabeçalho de categoria (✦ ESSENCIAIS / ✦ ATLAS) */
+    .category-header { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:34px; }
+    .category-mark { color:var(--rose-gold); font-size:18px; opacity:0.85; }
+    .category-title {
+      font-family:'Cormorant Garamond',serif; font-weight:300;
+      font-size:26px; letter-spacing:0.32em; color:var(--ivory);
+      text-transform:uppercase; margin:0; padding-left:0.32em;
+    }
+    body.light-mode .category-title { color:var(--deep-plum); }
+
+    /* Grade dos Essenciais (2 colunas) */
+    .grid-essentials { display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
+    @media(max-width:768px){ .grid-essentials { grid-template-columns:1fr; } }
+
+    /* Cards Essenciais — acento champagne para destaque */
+    .essential-card {
+      border-color:rgba(247,231,206,0.3) !important;
+      background:linear-gradient(135deg, rgba(183,110,121,0.12) 0%, rgba(247,231,206,0.06) 100%) !important;
+    }
+    .essential-card:hover {
+      border-color:rgba(247,231,206,0.5) !important;
+      box-shadow:0 20px 40px rgba(183,110,121,0.28), 0 0 36px rgba(247,231,206,0.12) !important;
+    }
+    .essential-desc { margin-top:12px; font-size:13px; line-height:1.55; color:rgba(201,160,176,0.85); letter-spacing:0.02em; }
+    body.light-mode .essential-desc { color:rgba(120,80,100,0.85); }
+    .essential-tag { margin-top:16px; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--rose-gold); }
 
     .footer { position:relative; z-index:10; text-align:center; padding:40px 32px; border-top:1px solid rgba(183,110,121,0.1); color:rgba(201,160,176,0.5); font-size:12px; letter-spacing:0.1em; }
     body.light-mode .footer { border-top-color:rgba(183,110,121,0.2); color:rgba(120,80,100,0.6); }
@@ -117,7 +147,7 @@
   <canvas id="bg-canvas"></canvas>
 
   <div class="topbar">
-    <div class="topbar-title"><span class="letter-highlight">A</span>tlas</div>
+    <div class="topbar-title"><span class="letter-highlight">B</span>iblioteca</div>
     <div class="topbar-controls">
       <button class="btn-icon" id="btn-theme" title="Modo claro/escuro">
         <svg id="icon-theme" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
@@ -139,28 +169,75 @@
       <div style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;letter-spacing:0.15em;color:var(--ivory);margin-bottom:12px;">
         <span class="letter-highlight">E</span>LI<span class="letter-highlight">D</span>
       </div>
-      <p style="font-family:'Raleway',sans-serif;font-size:13px;font-weight:300;text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;color:var(--soft-mauve);margin-bottom:14px;">
-        <span class="letter-highlight">E</span>nsino <span class="letter-highlight">L</span>egitimado para <span class="letter-highlight">I</span>nternos em <span class="letter-highlight">D</span>esenvolvimento
-      </p>
       <div style="font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,160,176,0.7);">Sua Jornada Rumo à Residência Médica</div>
-      <div style="font-family:'Great Vibes',cursive;font-size:1.15rem;color:rgba(201,160,176,0.8);letter-spacing:0.05em;margin-top:12px;">
+      <div style="font-family:'Great Vibes',cursive;font-size:1.05rem;color:rgba(201,160,176,0.7);letter-spacing:0.05em;margin-top:12px;">
         Inspirado em <span class="letter-highlight" style="font-style:normal;font-weight:500;">E</span>lisabete <span class="letter-highlight" style="font-style:normal;font-weight:500;">D</span>elfini
       </div>
     </div>
 
-    <div class="stats-section">
-      <div class="stat-block"><div class="stat-number">1,247</div><div class="stat-label">Questões</div></div>
-      <div class="stat-block"><div class="stat-number">42h</div><div class="stat-label">Estudadas</div></div>
-      <div class="stat-block"><div class="stat-number">87%</div><div class="stat-label">Aproveitamento</div></div>
-      <div class="stat-block"><div class="stat-number">8</div><div class="stat-label">Especialidades</div></div>
+    <!-- FRASE DO DIA (substitui as antigas métricas) -->
+    <div class="daily-quote-wrap">
+      <span class="daily-quote-mark">&#10022;</span>
+      <p id="daily-quote" class="daily-quote">A constância vence a intensidade.</p>
+      <span class="daily-quote-mark">&#10022;</span>
     </div>
 
-    <!-- PLATAFORMAS DISPONÍVEIS -->
+    <!-- ✦ ESSENCIAIS -->
+    <div style="margin-bottom:64px;">
+      <div class="category-header">
+        <span class="category-mark">&#10022;</span>
+        <h2 class="category-title">ESSENCIAIS</h2>
+      </div>
+
+      <div class="grid-essentials">
+        <!-- Central ELID -->
+        <a href="../central-elid/">
+          <div class="specialty-card essential-card">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="24" cy="9" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="11" cy="33" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="37" cy="33" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M24 18V12.5M21 27.5L13.5 31.5M27 27.5L34.5 31.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Central ELID</div>
+              <div class="card-subtitle">Revisão Espaçada Global</div>
+              <div class="essential-desc">Todas as revisões convergem aqui. Flashcards e questões do dia de todas as especialidades em um só lugar.</div>
+              <div class="essential-tag">&#10022; Rotina Diária</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Cronograma ENARE -->
+        <a href="../cronograma-enare/">
+          <div class="specialty-card essential-card">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <rect x="9" y="12" width="30" height="28" rx="3" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M9 19H39" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M16 9V15M32 9V15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M16 27L21 32L32 23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Cronograma ENARE</div>
+              <div class="card-subtitle">Preparação Organizada</div>
+              <div class="essential-desc">Sua preparação organizada até a prova, semana a semana, com simulados e revisões programadas.</div>
+              <div class="essential-tag">&#10022; Planejamento</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ✦ ATLAS -->
     <div style="margin-bottom:80px;">
-      <div style="text-align:center;margin-bottom:30px;">
-        <p style="font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(201,160,176,0.7);margin-bottom:8px;">Plataformas de Estudos</p>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--ivory);letter-spacing:0.1em;">Sua coleção de plataformas ELID</h3>
-        <p style="font-size:13px;color:rgba(201,160,176,0.65);margin-top:8px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.6;">Cada especialidade, um universo de conhecimento.</p>
+      <div class="category-header">
+        <span class="category-mark">&#10022;</span>
+        <h2 class="category-title">ATLAS</h2>
       </div>
 
       <div class="grid-specialties">
@@ -174,7 +251,7 @@
                   <circle cx="24" cy="22" r="4" fill="currentColor"/>
                 </svg>
               </div>
-              <div class="card-title">NeuroAtlas</div>
+              <div class="card-title">Neurologia</div>
               <div class="card-subtitle">Sistema Nervoso Central</div>
               <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
             </div>
@@ -191,7 +268,7 @@
                   <path d="M24 22V34M18 28H30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
               </div>
-              <div class="card-title">GinecoAtlas</div>
+              <div class="card-title">Ginecologia</div>
               <div class="card-subtitle">Saúde Feminina</div>
               <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
             </div>
@@ -209,7 +286,7 @@
                   <path d="M24 12V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
               </div>
-              <div class="card-title">Atlas de Obstetrícia</div>
+              <div class="card-title">Obstetrícia</div>
               <div class="card-subtitle">Gravidez & Parto</div>
               <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
             </div>
@@ -227,7 +304,7 @@
                   <path d="M22 14V42M22 14L28 20M22 14L16 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <div class="card-title">Atlas de Cirurgia</div>
+              <div class="card-title">Cirurgia Geral</div>
               <div class="card-subtitle">Procedimentos</div>
               <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
             </div>
@@ -247,7 +324,7 @@
                   <circle cx="40" cy="36" r="3" stroke="currentColor" stroke-width="1.5"/>
                 </svg>
               </div>
-              <div class="card-title">PedAtlas</div>
+              <div class="card-title">Pediatria</div>
               <div class="card-subtitle">Medicina Infantil</div>
               <div style="margin-top:12px;font-size:12px;color:rgba(201,160,176,0.7);letter-spacing:0.08em;">⏳ Em Andamento</div>
             </div>
@@ -263,7 +340,7 @@
                   <path d="M24 10V24M24 24C24 24 14 20 10 28C6 36 12 42 18 40C22 38 24 34 24 34C24 34 26 38 30 40C36 42 42 36 38 28C34 20 24 24 24 24Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <div class="card-title">PneumoAtlas</div>
+              <div class="card-title">Pneumologia</div>
               <div class="card-subtitle">Sistema Respiratório</div>
               <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
             </div>
@@ -281,7 +358,7 @@
                   <path d="M14 40H34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
               </div>
-              <div class="card-title">Atlas de Preventiva</div>
+              <div class="card-title">Med. Preventiva</div>
               <div class="card-subtitle">Saúde Coletiva</div>
               <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
             </div>
@@ -299,7 +376,7 @@
                   <path d="M20 20V16M28 20V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
               </div>
-              <div class="card-title">SemioAtlas</div>
+              <div class="card-title">Semiologia</div>
               <div class="card-subtitle">Propedêutica Médica</div>
               <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
             </div>
@@ -311,7 +388,6 @@
 
   <div class="footer">
     <p>Desenvolvido por Jackeline Delfini</p>
-    <p style="font-family:'Great Vibes',cursive;font-size:1.15rem;letter-spacing:0.05em;color:rgba(201,160,176,0.8);margin-top:6px;">Inspirado em <span class="letter-highlight" style="font-style:normal;font-weight:500;">E</span>lisabete <span class="letter-highlight" style="font-style:normal;font-weight:500;">D</span>elfini</p>
     <p style="margin-top:8px;font-size:11px;">© 2025 ELID — Ensino Legitimado para Internos em Desenvolvimento</p>
   </div>
 
@@ -384,6 +460,47 @@
     });
 
     lucide.createIcons();
+
+    // Frase do dia — muda automaticamente a cada dia (determinístico por data)
+    (function () {
+      const frases = [
+        "Você está chegando lá.",
+        "A constância vence a intensidade.",
+        "Hoje é mais um passo em direção à residência.",
+        "Cada revisão conta.",
+        "Há sempre algo novo para explorar.",
+        "Confie no processo: cada dia soma.",
+        "O foco de hoje constrói o resultado de amanhã.",
+        "Pequenos avanços, repetidos todos os dias.",
+        "A residência é um caminho, não um salto.",
+        "Estude com calma, revise com intenção.",
+        "Disciplina é lembrar do que você quer.",
+        "O que se revê, se retém.",
+        "Você é mais capaz do que imagina.",
+        "Respire. Uma questão de cada vez.",
+        "Quem persiste, alcança.",
+        "Conhecimento se constrói camada por camada.",
+        "Hoje você está mais perto do que ontem.",
+        "A jornada importa tanto quanto o destino.",
+        "Cada flashcard é uma semente.",
+        "Confiança nasce da preparação.",
+        "Foque no próximo passo, não na montanha inteira.",
+        "Seu esforço de hoje tem nome: futuro médico.",
+        "Aprender é um ato de coragem diária.",
+        "A repetição transforma esforço em domínio.",
+        "Calma e constância vencem o cansaço.",
+        "Você não precisa ser perfeito, só constante.",
+        "O progresso silencioso também é progresso.",
+        "Lembre-se do porquê começou.",
+        "Cada dia de estudo é um voto na sua aprovação.",
+        "Continue: o melhor ainda está por vir."
+      ];
+      const agora = new Date();
+      const inicioAno = new Date(agora.getFullYear(), 0, 0);
+      const diaDoAno = Math.floor((agora - inicioAno) / 86400000);
+      const el = document.getElementById('daily-quote');
+      if (el) el.textContent = frases[diaDoAno % frases.length];
+    })();
   </script>
 </body>
 </html>
