@@ -693,6 +693,7 @@ window.doLogout=async function(){
 async function afterLogin(){
   document.getElementById('needAuth').classList.add('hidden');
   await loadCloud();
+  try{ elidPublish(); }catch(e){}
   initStreak();
   document.getElementById('app').style.display='block';
   document.getElementById('userAvatar').textContent=(State.name[0]||'J').toUpperCase();
