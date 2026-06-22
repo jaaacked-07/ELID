@@ -634,6 +634,7 @@ onAuthStateChanged(auth, async (user)=>{
     $("#auth").classList.add("hidden"); $("#gate").classList.add("hidden");
     $("#app").classList.add("on");
     await loadState();
+    try{ elidPublish(); }catch(e){}
     const nm = user.displayName || (user.email||"J").split("@")[0];
     $("#avatar").textContent = (nm[0]||"J").toUpperCase();
     window.USER_NAME = nm;
