@@ -733,9 +733,46 @@ function save(){
           .collection("platforms").doc(PLATFORM_ID)
           .collection("data").doc("main")
           .set(STATE).catch(function(){});
+        elidPublish();   /* espelha os itens "feitos" (avaliados/respondidos) na Central ELID */
       }catch(e){}
     },900);
   }
+}
+
+/* ---------- ELID · publicacao na Central ----------
+   Espelha em users/{uid}/central/pediatria o TEXTO dos itens ja "feitos":
+   - flashcards com dificuldade marcada (tem entrada em STATE.fcReviews)
+   - questoes ja respondidas (STATE.qSeen[id] === true)
+   O agendamento continua so aqui (fcReviews/qSeen); o feed carrega so texto. */
+function elidQuestionById(id){
+  var all=allNativeQuestions();
+  for(var i=0;i<all.length;i++){
+    var o=all[i].q;
+    if(o && o.id===id){
+      var opts=(o.opts||[]).map(function(t,ix){ return { text:t, correct: ix===o.correct }; });
+      return { id:id, stem:o.stem||"", options:opts, explanation:o.expl||"", modTitle:(all[i].mat&&all[i].mat.t)||"" };
+    }
+  }
+  return null;
+}
+function elidPublish(){
+  try{
+    if(!FB.user || !FB.db) return;
+    var cards={};
+    Object.keys(STATE.fcReviews||{}).forEach(function(id){
+      var c=findCard(id);
+      if(c) cards[id]={ front:c.front||"", back:c.back||"", modTitle:c._src||"" };
+    });
+    var questions=[];
+    var seen=STATE.qSeen||{};
+    Object.keys(seen).forEach(function(id){
+      if(seen[id]){ var q=elidQuestionById(id); if(q) questions.push(q); }
+    });
+    FB.db.collection("users").doc(FB.user.uid)
+      .collection("central").doc("pediatria")
+      .set({ platform:"pediatria", label:"PedAtlas", updated:Date.now(), cards:cards, questions:questions }, { merge:true })
+      .catch(function(){});
+  }catch(e){}
 }
 function cloudLoad(cb){
   if(FB.mode!=="firebase"||!FB.user||!FB.db){ loadLocal(); cb&&cb(); return; }
@@ -1657,10 +1694,14 @@ function srsState(id){ return STATE.fcReviews[id]||{ease:2.5,interval:0,due:nowD
 function srsDue(id){ var s=STATE.fcReviews[id]; if(!s)return true; return s.due<=nowDay(); }
 function srsGrade(id,g){
   var s=srsState(id);
-  if(g===0){ s.ease=Math.max(1.3,s.ease-0.2); s.interval=0; s.reps=0; s.due=nowDay(); }
-  else if(g===1){ s.ease=Math.max(1.3,s.ease-0.15); s.interval=Math.max(1,Math.round((s.interval||1)*1.2)); s.reps++; s.due=nowDay()+s.interval; }
-  else if(g===2){ s.interval=(s.reps===0)?1:(s.reps===1?3:Math.round(s.interval*s.ease)); s.reps++; s.due=nowDay()+s.interval; }
-  else { s.ease=s.ease+0.15; s.interval=Math.round((s.interval||1)*s.ease*1.3)+1; s.reps++; s.due=nowDay()+s.interval; }
+  var q=[0,3,4,5][g];                                  /* Errei/Dificil/Bom/Facil -> qualidade SM-2 (0..5) */
+  s.ease=s.ease+(0.1-(5-q)*(0.08+(5-q)*0.02));         /* fator de facilidade (EF) - formula SM-2 */
+  if(s.ease<1.3)s.ease=1.3;
+  if(q<3){ s.reps=0; s.interval=0; s.due=nowDay(); }   /* falha -> reaprender hoje */
+  else{
+    s.interval=(s.reps===0)?1:(s.reps===1?6:Math.round(s.interval*s.ease)); /* 1 -> 6 -> I*EF */
+    s.reps++; s.due=nowDay()+s.interval;
+  }
   STATE.fcReviews[id]=s;
   award("revisarFc");
 }
