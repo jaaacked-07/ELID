@@ -1147,17 +1147,17 @@ function elidPublish(){
       var back=c.back||((c.type==='fv'||c.type==='vf')?(c.answer?'Verdadeiro':'Falso'):'');
       cards[id]={front:front,back:back,modTitle:c.topicTitle||c.modName||''};
     });
-    var questions=[], tp=state.topics||{};
-    Object.keys(tp).forEach(function(tid){
-      var src=CONTENT[tid]&&CONTENT[tid].questoes; if(!src) return;
-      var qs=(tp[tid]&&tp[tid].questions)||{};
-      Object.keys(qs).forEach(function(k){
-        var i=parseInt(String(k).replace('q',''),10); var Q=src[i]; if(!Q) return;
+    var questions=[];
+    try{
+      var t=todayStr(); var dq=(state.daily&&state.daily.date===t&&state.daily.q)||null;
+      if(!dq){ var seed=parseInt(t.replace(/-/g,''),10); var QQ=allQuestions(); dq=seededShuffle(QQ.map(function(_,i){return i;}),seed).slice(0,3).map(function(i){return {id:QQ[i].id,i:QQ[i].i};}); }
+      dq.forEach(function(x){
+        var Q=CONTENT[x.id]&&CONTENT[x.id].questoes&&CONTENT[x.id].questoes[x.i]; if(!Q) return;
         var opts=(Q.opts||[]).map(function(t,ix){return {text:t,correct:ix===Q.correct};});
-        var tt=(typeof findTopic==='function'&&findTopic(tid)&&(findTopic(tid).title||findTopic(tid).name))||tid;
-        questions.push({id:tid+':'+i, stem:Q.stem||'', options:opts, explanation:Q.comment||'', modTitle:tt});
+        var tt=(typeof findTopic==='function'&&findTopic(x.id)&&(findTopic(x.id).title||findTopic(x.id).name))||x.id;
+        questions.push({id:x.id+':'+x.i, stem:Q.stem||'', options:opts, explanation:Q.comment||'', modTitle:tt});
       });
-    });
+    }catch(e){}
     db.collection('users').doc(currentUser.uid).collection('central').doc('ginecologia')
       .set({platform:'ginecologia',label:'GinecoAtlas',updated:Date.now(),cards:cards,questions:questions},{merge:true}).catch(function(){});
   }catch(e){}
