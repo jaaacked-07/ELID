@@ -1141,11 +1141,20 @@ function queueSave(){
 function elidPublish(){
   try{
     if(!fbOK||!currentUser||!db||!state) return;
-    var cards={}, uc=state.userCards||{};
-    Object.keys(uc).forEach(function(id){ var c=uc[id]; if(!c||(c.reviews||0)<1) return;
-      var front=c.front||c.statement||c.text||'';
-      var back=c.back||((c.type==='fv'||c.type==='vf')?(c.answer?'Verdadeiro':'Falso'):'');
-      cards[id]={front:front,back:back,modTitle:c.topicTitle||c.modName||''};
+    var cards={};
+    try{
+      Object.keys(CONTENT).forEach(function(tid){
+        var arr=CONTENT[tid]&&CONTENT[tid].flashcards; if(!arr) return;
+        var tt=(typeof findTopic==='function'&&findTopic(tid)&&(findTopic(tid).title||findTopic(tid).name))||tid;
+        arr.forEach(function(fc,i){ cards[tid+':f'+i]={front:fc.q||fc.front||'', back:fc.a||fc.back||'', modTitle:tt}; });
+      });
+    }catch(e){}
+    var uc=state.userCards||{};
+    Object.keys(uc).forEach(function(id){ var c=uc[id]; if(!c) return;
+      var o={front:c.front||'', back:c.back||'', modTitle:c.topicTitle||c.modName||''};
+      if(c.type)o.type=c.type; if(c.image)o.image=c.image; if(c.text)o.text=c.text; if(c.statement)o.statement=c.statement;
+      if(typeof c.answer==='boolean')o.answer=c.answer;
+      cards[id]=o;
     });
     var questions=[];
     try{
