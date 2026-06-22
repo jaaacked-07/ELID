@@ -85,13 +85,15 @@
   body.light-mode .flash-face{background:linear-gradient(135deg,rgba(183,110,121,.1) 0%,rgba(247,231,206,.16) 100%);border-color:rgba(183,110,121,.28);}
   .flash-back{transform:rotateY(180deg);}
   .face-tag{position:absolute;top:14px;left:18px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,160,176,.65);}
-  .face-src{position:absolute;top:14px;right:18px;font-size:10px;letter-spacing:.12em;color:var(--rose-gold);max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .face-src{position:absolute;top:14px;right:18px;font-size:10px;letter-spacing:.12em;color:var(--rose-gold);max-width:55%;text-align:right;line-height:1.35;}
+  .face-sub{display:block;font-size:9px;letter-spacing:.08em;color:rgba(201,160,176,.8);text-transform:uppercase;margin-top:2px;}
+  body.light-mode .face-sub{color:rgba(120,80,100,.8);}
   .face-text{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(21px,3.8vw,29px);line-height:1.45;max-width:100%;overflow-wrap:anywhere;}
   .flash-back .face-text{font-weight:700;}
   .face-note{display:block;margin-top:12px;font-size:16px;font-weight:600;color:rgba(201,160,176,.9);line-height:1.5;}
   body.light-mode .face-note{color:rgba(120,80,100,.85);}
   .face-img{display:block;max-width:100%;max-height:340px;height:auto;border-radius:12px;margin:12px auto 0;object-fit:contain;}
-  .cloze-blank{display:inline-block;min-width:46px;border-bottom:2px solid var(--rose-gold);color:transparent;margin:0 3px;}
+  .cloze-blank{display:inline-block;color:var(--rose-gold);font-weight:700;letter-spacing:1px;margin:0 4px;}
   .cloze-fill{color:var(--rose-gold);font-weight:500;}
   .face-hint{position:absolute;bottom:12px;left:0;right:0;font-size:11px;letter-spacing:.1em;color:rgba(201,160,176,.55);}
   body.light-mode .face-hint{color:rgba(120,80,100,.55);}
@@ -323,7 +325,7 @@
       quizMode:"cirurgiaQuiz", quizField:"quiz",
       gam:{ mode:"obj", xpField:"xp", streakField:"streak", xpCard:6, xpQuest:5, xpCorrect:5,
             stats:{ field:"stats", q:"questionsAnswered", qok:"correctAnswers" } } },
-    { key:"pneumologia", label:"Pneumologia",         href:"../plataformas/pneumologia/", status:"rw",
+    { key:"pneumologia", label:"PneumoAtlas",         href:"../plataformas/pneumologia/", status:"rw",
       platformId:"PNEUMO", docPath:["state","main"], engine:"fcmap", unit:"iso", srsField:"srs", showNew:true,
       quizMode:"pneumoQ",
       gam:{ mode:"flat", xpField:"xp", streakField:"studyStreak", lastDayField:"lastStudyDay", dateFmt:"iso",
@@ -337,13 +339,14 @@
   function safeUrl(u){ u = (u||"").trim(); return /^https?:\/\//i.test(u) ? u : ""; }
   function faceText(html){ return '<div class="face-text">' + html + '</div>'; }
   function imgTag(u){ var s = safeUrl(u); return s ? '<img class="face-img" src="' + s + '" alt="">' : ''; }
-  function clozeMask(t){ return safe(t).replace(/\{\{(.+?)\}\}/g, '<span class="cloze-blank">&nbsp;&nbsp;&nbsp;</span>'); }
+  function clozeMask(t){ return safe(t).replace(/\{\{(.+?)\}\}/g, '<span class="cloze-blank">_______</span>'); }
   function clozeReveal(t){ return safe(t).replace(/\{\{(.+?)\}\}/g, '<span class="cloze-fill">$1</span>'); }
 
   // FRENTE — cobre fv/qa, cloze, vf, imagem (img/occ); cai no texto se faltar campo
   function cardFrontHTML(c){
     var t = c.type || c.tipo || "";
-    if(t === "cloze" && c.text) return faceText(clozeMask(c.text));
+    var clz = c.text || c.front || "";
+    if(t === "cloze" && /\{\{.+?\}\}/.test(clz)) return faceText(clozeMask(clz));
     if((t === "occ" || t === "img") && safeUrl(c.image)){
       var pf = c.front || c.statement || (t === "occ" ? "O que está oculto?" : "");
       return (pf ? faceText(safe(pf)) : "") + imgTag(c.image);
@@ -354,7 +357,8 @@
   // VERSO — SEMPRE mostra algo (texto, V/F, imagem revelada, cloze preenchido)
   function cardBackHTML(c){
     var t = c.type || c.tipo || "";
-    if(t === "cloze" && c.text) return faceText(clozeReveal(c.text));
+    var clz = c.text || c.front || "";
+    if(t === "cloze" && /\{\{.+?\}\}/.test(clz)) return faceText(clozeReveal(clz) + (c.back ? '<span class="face-note">' + safe(c.back) + '</span>' : ''));
     if(t === "vf" || typeof c.answer === "boolean"){
       var vf = (c.answer ? "Verdadeiro" : "Falso");
       return faceText('<b>' + vf + '</b>' + (c.back ? '<span class="face-note">' + safe(c.back) + '</span>' : ''));
@@ -590,13 +594,11 @@
         var feedCards = feed.cards || {};
 
         if(p.engine === "obsrs"){
-          // Obstetrícia: agendamento no próprio srs (ladders, due ISO); texto do feed
+          // Obstetrícia: mostra os cards do feed (novos ou devidos); agendamento no srs nativo (ladders, ISO)
           var osrs = state[p.srsField] || {};
-          Object.keys(osrs).forEach(function(id){
-            var s = osrs[id]; if(!s) return;
-            if((s.type === "card" || id.indexOf("c:") === 0) && isDueISO(s.due) && feedCards[id]){
-              SESSION.allFlash.push({ p:p, id:id, card:feedCards[id], rev:s });
-            }
+          Object.keys(feedCards).forEach(function(id){
+            var s = osrs[id];
+            if(!s || isDueISO(s.due)) SESSION.allFlash.push({ p:p, id:id, card:feedCards[id], rev: s || null });
           });
         } else {
           // FLASHCARDS — fcmap (SM-2): texto do feed (+ array de cards do usuário) + agendamento em fcReviews
@@ -687,12 +689,12 @@
         '<div class="flash" id="flash">' +
           '<div class="flash-inner">' +
             '<div class="flash-face">' +
-              '<span class="face-tag">Frente</span><span class="face-src">' + esc(item.p.label) + '</span>' +
+              '<span class="face-tag">Frente</span><span class="face-src">' + esc(item.p.label) + (item.card && item.card.modTitle ? '<span class="face-sub">' + esc(item.card.modTitle) + '</span>' : '') + '</span>' +
               cardFrontHTML(item.card) +
               '<div class="face-hint">toque para virar</div>' +
             '</div>' +
             '<div class="flash-face flash-back">' +
-              '<span class="face-tag">Verso</span><span class="face-src">' + esc(item.p.label) + '</span>' +
+              '<span class="face-tag">Verso</span><span class="face-src">' + esc(item.p.label) + (item.card && item.card.modTitle ? '<span class="face-sub">' + esc(item.card.modTitle) + '</span>' : '') + '</span>' +
               cardBackHTML(item.card) +
             '</div>' +
           '</div>' +
