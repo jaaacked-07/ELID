@@ -132,6 +132,22 @@
     animation:tin .35s both;}
   @keyframes tin{from{opacity:0;transform:translateY(12px);}}
 
+  /* Questões */
+  .quest-list{display:flex;flex-direction:column;gap:16px;}
+  .qcard{background:rgba(183,110,121,.07);border:1px solid rgba(183,110,121,.18);border-radius:16px;padding:20px 22px;}
+  body.light-mode .qcard{background:rgba(183,110,121,.06);}
+  .qsrc{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--rose-gold);margin-bottom:10px;}
+  .qstem{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;line-height:1.45;margin-bottom:16px;}
+  .qopts{display:flex;flex-direction:column;gap:9px;}
+  .qopt{text-align:left;padding:12px 16px;border-radius:11px;border:1px solid rgba(183,110,121,.22);
+    background:rgba(247,231,206,.04);color:inherit;font-family:inherit;font-size:14px;cursor:pointer;transition:all .2s ease;}
+  .qopt:hover:not(:disabled){background:rgba(183,110,121,.14);}
+  .qopt:disabled{cursor:default;}
+  .qopt.ok{border-color:rgba(150,180,140,.6);background:rgba(150,180,140,.16);}
+  .qopt.wrong{border-color:rgba(198,90,100,.6);background:rgba(198,90,100,.14);}
+  .qexplain{margin-top:14px;padding-top:14px;border-top:1px solid rgba(183,110,121,.16);font-size:13px;line-height:1.6;color:rgba(201,160,176,.85);}
+  body.light-mode .qexplain{color:rgba(120,80,100,.85);}
+
   .footer{position:relative;z-index:10;text-align:center;padding:34px 24px;border-top:1px solid rgba(183,110,121,.1);
     color:rgba(201,160,176,.5);font-size:12px;letter-spacing:.1em;}
   body.light-mode .footer{border-top-color:rgba(183,110,121,.2);color:rgba(120,80,100,.6);}
@@ -256,7 +272,8 @@
       platformId:"PedAtlas by Jackeline Delfini",    // PLATFORM_ID literal real
       docPath:["data","main"],                       // .../platforms/{id}/data/main
       cardsField:"flashcards",                        // STATE.flashcards (array, criados pela usuária)
-      srsField:"fcReviews"                            // STATE.fcReviews { cardId: {ease,interval,due,reps} }
+      srsField:"fcReviews",                           // STATE.fcReviews { cardId: {ease,interval,due,reps} }
+      unit:"day"                                       // PedAtlas agenda em DIAS (nowDay), não em ms
     },
     { key:"neurologia",  label:"NeuroAtlas",          href:"../plataformas/neurologia/",  status:"soon" },
     { key:"ginecologia", label:"GinecoAtlas",         href:"../plataformas/ginecologia/", status:"soon" },
@@ -276,31 +293,39 @@
     if(typeof c.answer === "boolean" || c.type === "fv") return c.answer ? "Verdadeiro" : "Falso";
     return c.back || c.verso || c.a || c.resposta || c.answerText || c.explicacao || "";
   }
-  function isDue(rev){
-    if(!rev || rev.due == null) return true;     // sem agendamento = novo = revisar hoje
-    return Number(rev.due) <= Date.now();
+  function nowDay(){ return Math.floor(Date.now() / 86400000); }
+  function isDue(rev, unit){
+    if(!rev || rev.due == null) return true;
+    return unit === "day" ? Number(rev.due) <= nowDay() : Number(rev.due) <= Date.now();
   }
 
-  /* ===== SM-2 (grava exatamente os campos que o PedAtlas lê) =====
+  /* ===== Reagendamento — grava EXATAMENTE no formato que a plataforma lê =====
      grade: 0 Errei · 1 Difícil · 2 Bom · 3 Fácil */
-  function schedule(prev, grade){
-    var ease = (prev && prev.ease) || 2.5;
-    var interval = (prev && prev.interval) || 0;
-    var reps = (prev && prev.reps) || 0;
-    var DAY = 86400000;
-    if(grade === 0){
-      return { ease: Math.max(1.3, ease - 0.2), interval: 0, reps: 0, due: Date.now() + 10*60*1000 };
+  function schedule(prev, grade, unit){
+    return unit === "day" ? scheduleDay(prev, grade) : scheduleMs(prev, grade);
+  }
+  // SM-2 canônico (idêntico ao srsGrade das plataformas) — due em dias
+  function scheduleDay(prev, g){
+    var s = prev
+      ? { ease: prev.ease || 2.5, interval: prev.interval || 0, reps: prev.reps || 0, due: prev.due }
+      : { ease: 2.5, interval: 0, reps: 0, due: nowDay() };
+    var q = [0,3,4,5][g];                                  // Errei/Difícil/Bom/Fácil -> qualidade (0..5)
+    s.ease = s.ease + (0.1 - (5-q)*(0.08 + (5-q)*0.02));   // fator de facilidade (EF)
+    if(s.ease < 1.3) s.ease = 1.3;
+    if(q < 3){ s.reps = 0; s.interval = 0; s.due = nowDay(); }   // falha -> reaprender hoje
+    else {
+      s.interval = (s.reps === 0) ? 1 : (s.reps === 1 ? 6 : Math.round(s.interval * s.ease)); // 1 -> 6 -> I*EF
+      s.reps++; s.due = nowDay() + s.interval;
     }
+    return s;
+  }
+  function scheduleMs(prev, grade){
+    var ease = (prev && prev.ease) || 2.5, interval = (prev && prev.interval) || 0, reps = (prev && prev.reps) || 0, DAY = 86400000;
+    if(grade === 0) return { ease: Math.max(1.3, ease - 0.2), interval: 0, reps: 0, due: Date.now() + 10*60*1000 };
     reps += 1;
-    if(grade === 1){
-      ease = Math.max(1.3, ease - 0.15);
-      interval = interval <= 0 ? 1 : Math.max(1, Math.round(interval * 1.2));
-    } else if(grade === 2){
-      interval = interval <= 0 ? 1 : (reps === 1 ? 1 : Math.round(interval * ease));
-    } else {
-      ease = ease + 0.05;
-      interval = interval <= 0 ? 2 : Math.round(interval * ease * 1.3);
-    }
+    if(grade === 1){ ease = Math.max(1.3, ease - 0.15); interval = interval <= 0 ? 1 : Math.max(1, Math.round(interval * 1.2)); }
+    else if(grade === 2){ interval = interval <= 0 ? 1 : (reps === 1 ? 1 : Math.round(interval * ease)); }
+    else { ease = ease + 0.05; interval = interval <= 0 ? 2 : Math.round(interval * ease * 1.3); }
     return { ease: ease, interval: interval, reps: reps, due: Date.now() + interval * DAY };
   }
 
@@ -310,15 +335,35 @@
       .collection("platforms").doc(p.platformId)
       .collection(p.docPath[0]).doc(p.docPath[1]);
   }
+  // Feed publicado pela plataforma (só o TEXTO dos módulos estudados):
+  // users/{uid}/central/{platformKey}  ->  { cards:{id:{front,back,mod,modTitle}}, questions:[...] }
+  function feedDocRef(p){
+    return FB.db.collection("users").doc(FB.uid).collection("central").doc(p.key);
+  }
 
   /* ===== Estado da Central ===== */
   var SESSION = {
-    queue: [],          // [{p, card, rev, srsMap (ref ao objeto carregado)}]
+    queue: [],          // flashcards devidos: [{p, id, card, rev}]
+    quests: [],         // questões devidas: [{p, q, platformId}]
     index: 0,
     doneToday: 0,
     activeCount: 0,
-    docCache: {}        // platformId -> {ref, state}
+    internalPending: 0, // prontos devidos sem texto disponível (módulo não publicado)
+    docCache: {}        // platformId -> {ref, state, p}
   };
+
+  /* ===== Normalização defensiva de questão ===== */
+  function qId(q){ return q.id || q.qid || q._id || null; }
+  function qStem(q){ return q.stem || q.enunciado || q.pergunta || q.q || q.text || ""; }
+  function qOptions(q){
+    var raw = q.options || q.alternativas || q.opcoes || q.choices || [];
+    var correct = (q.correct != null) ? q.correct : (q.answer != null ? q.answer : q.gabarito);
+    return raw.map(function(o, i){
+      if(typeof o === "string") return { text:o, correct: (correct === i || correct === String(i)) };
+      return { text: (o.text || o.t || o.label || o.alt || ""), correct: !!(o.correct || correct === i) };
+    });
+  }
+  function qExplain(q){ return q.explanation || q.explicacao || q.comentario || q.justificativa || ""; }
 
   function toast(msg){
     var t = document.createElement("div"); t.className = "toast"; t.textContent = msg;
@@ -326,51 +371,58 @@
     setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 2600);
   }
 
-  /* ===== Carrega flashcards devidos de todas as plataformas "rw" ===== */
+  /* ===== Carrega doc principal (agendamento) + feed (texto dos módulos estudados) ===== */
   function loadAll(){
     var rwPlats = PLATFORMS.filter(function(p){ return p.status === "rw"; });
     SESSION.activeCount = rwPlats.length;
     var pending = rwPlats.length;
-    var internalPending = 0;
-
-    if(pending === 0){ render(0, internalPending); return; }
+    if(pending === 0){ render(); return; }
 
     rwPlats.forEach(function(p){
-      platformDocRef(p).get().then(function(doc){
-        if(doc.exists){
-          var state = doc.data() || {};
-          SESSION.docCache[p.platformId] = { ref: platformDocRef(p), state: state, p: p };
-          var cards = Array.isArray(state[p.cardsField]) ? state[p.cardsField] : [];
-          var srs = state[p.srsField] || {};
-          var knownIds = {};
-          cards.forEach(function(c){
-            var id = cardId(c); if(!id) return;
-            knownIds[id] = true;
-            if(isDue(srs[id])){
-              SESSION.queue.push({ p:p, id:id, card:c, rev: srs[id] || null });
-            }
-          });
-          // cards internos (prontos): têm agendamento mas o texto não está no Firestore
-          Object.keys(srs).forEach(function(id){
-            if(!knownIds[id] && isDue(srs[id])) internalPending++;
-          });
-        }
-      }).catch(function(e){
-        console.warn("Falha lendo", p.label, e);
+      Promise.all([
+        platformDocRef(p).get().catch(function(){ return null; }),
+        feedDocRef(p).get().catch(function(){ return null; })
+      ]).then(function(res){
+        var mainDoc = res[0], feedDoc = res[1];
+        var state = (mainDoc && mainDoc.exists) ? (mainDoc.data() || {}) : {};
+        SESSION.docCache[p.platformId] = { ref: platformDocRef(p), state: state, p: p };
+
+        var srs = state[p.srsField] || {};
+        var feed = (feedDoc && feedDoc.exists) ? (feedDoc.data() || {}) : {};
+        var feedCards = feed.cards || {};                 // {id:{front,back,modTitle}} — só itens já avaliados
+        var feedQuests = Array.isArray(feed.questions) ? feed.questions : [];
+
+        // Texto por id: cards do feed (avaliados, prontos+criados) + fallback nos cards do usuário
+        var textById = {};
+        Object.keys(feedCards).forEach(function(id){ textById[id] = feedCards[id]; });
+        var userCards = Array.isArray(state[p.cardsField]) ? state[p.cardsField] : [];
+        userCards.forEach(function(c){ var id = cardId(c); if(id && !textById[id]) textById[id] = c; });
+
+        // "Feito" = tem agendamento (foi avaliado). Mostra os devidos hoje.
+        Object.keys(srs).forEach(function(id){
+          if(!isDue(srs[id], p.unit)) return;             // agendado p/ frente → não mostra hoje
+          if(textById[id]) SESSION.queue.push({ p:p, id:id, card:textById[id], rev: srs[id] });
+          else SESSION.internalPending++;                  // avaliado antes do gancho → texto ainda não publicado
+        });
+
+        // Questões publicadas pela plataforma (= respondidas/"feitas" lá)
+        feedQuests.forEach(function(q){
+          var id = qId(q); if(id) SESSION.quests.push({ p:p, q:q, platformId:p.platformId });
+        });
       }).then(function(){
         pending--;
-        if(pending === 0){ render(rwPlats.length, internalPending); }
+        if(pending === 0){ render(); }
       });
     });
   }
 
   /* ===== Render ===== */
-  function render(activeCount, internalPending){
+  function render(){
     $("#s-flash").textContent = SESSION.queue.length;
     $("#s-done").textContent = SESSION.doneToday;
-    $("#s-plat").textContent = activeCount;
+    $("#s-plat").textContent = SESSION.activeCount;
     renderPlatforms();
-    renderInternal(internalPending);
+    renderInternal(SESSION.internalPending);
     renderQuest();
     renderStage();
   }
@@ -428,7 +480,7 @@
 
   function rate(grade){
     var item = SESSION.queue[SESSION.index];
-    var newRev = schedule(item.rev, grade);
+    var newRev = schedule(item.rev, grade, item.p.unit);
     var cache = SESSION.docCache[item.p.platformId];
     if(!cache){ next(); return; }
 
@@ -465,10 +517,65 @@
   }
 
   function renderQuest(){
-    $("#quest-area").innerHTML =
-      '<div class="panel"><div class="big">Questões por plataforma</div>' +
-      '<p>As questões do dia são geradas dentro de cada Atlas. Resolva por aqui o atalho e o progresso fica salvo na plataforma.</p>' +
-      '<a class="cta" href="../plataformas/pediatria/">Questões do dia · PedAtlas</a></div>';
+    var area = $("#quest-area");
+    if(SESSION.quests.length === 0){
+      area.innerHTML =
+        '<div class="panel"><div class="big">Sem questões para hoje</div>' +
+        '<p>As questões dos módulos que você estudar aparecem aqui assim que a plataforma as publica. ' +
+        'Você também pode resolvê-las direto no Atlas.</p>' +
+        '<a class="cta" href="../plataformas/pediatria/">Abrir PedAtlas</a></div>';
+      return;
+    }
+    var html = '<div class="quest-list">';
+    SESSION.quests.forEach(function(item, i){
+      var q = item.q, opts = qOptions(q);
+      html +=
+        '<div class="qcard" data-i="' + i + '">' +
+          '<div class="qsrc">' + esc(item.p.label) + (q.modTitle ? ' · ' + esc(q.modTitle) : '') + '</div>' +
+          '<div class="qstem">' + safe(qStem(q)) + '</div>' +
+          '<div class="qopts">' +
+            opts.map(function(o, oi){
+              return '<button class="qopt" data-oi="' + oi + '" data-correct="' + (o.correct ? 1 : 0) + '">' + safe(o.text) + '</button>';
+            }).join('') +
+          '</div>' +
+          '<div class="qexplain" hidden>' + (qExplain(q) ? safe(qExplain(q)) : '') + '</div>' +
+        '</div>';
+    });
+    html += '</div>';
+    area.innerHTML = html;
+
+    Array.prototype.forEach.call(area.querySelectorAll(".qcard"), function(qcard){
+      var i = parseInt(qcard.getAttribute("data-i"), 10);
+      Array.prototype.forEach.call(qcard.querySelectorAll(".qopt"), function(btn){
+        btn.addEventListener("click", function(){
+          if(qcard.classList.contains("answered")) return;
+          qcard.classList.add("answered");
+          var correct = btn.getAttribute("data-correct") === "1";
+          Array.prototype.forEach.call(qcard.querySelectorAll(".qopt"), function(b){
+            b.disabled = true;
+            if(b.getAttribute("data-correct") === "1") b.classList.add("ok");
+          });
+          if(!correct) btn.classList.add("wrong");
+          var ex = qcard.querySelector(".qexplain");
+          if(ex && ex.textContent.trim()) ex.hidden = false;
+          markQuestionAnswered(SESSION.quests[i], correct);
+        });
+      });
+    });
+  }
+
+  // grava qSeen no MESMO documento da plataforma (merge) — single source of truth
+  function markQuestionAnswered(item, correct){
+    var cache = SESSION.docCache[item.platformId];
+    if(!cache) return;
+    var id = qId(item.q); if(!id) return;
+    var qSeen = cache.state.qSeen || {};
+    qSeen[id] = true;
+    cache.state.qSeen = qSeen;
+    cache.ref.set({ qSeen: qSeen }, { merge: true }).catch(function(e){
+      console.warn("Falha ao salvar questão", e);
+      toast("Não consegui salvar a questão — verifique a conexão.");
+    });
   }
 
   function renderPlatforms(){
