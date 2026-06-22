@@ -3156,6 +3156,7 @@ window.addEventListener('resize',function(){drawBgCanvas();});
     App.state.journeySeen=App.state.journeySeen||overallPct();
     go('dashboard');
     try{cloudInitSession(user);}catch(e){console.warn('Cloud init (sessão ELID) falhou:',e);}
+    try{ setTimeout(function(){ if(typeof elidPublish==='function') elidPublish(); }, 2500); }catch(e){}
   }
   if(typeof FB!=='undefined'&&FB.ready&&FB.auth){
     FB.auth.onAuthStateChanged(function(user){if(user){enterELID(user);}else{showAccess();}});
