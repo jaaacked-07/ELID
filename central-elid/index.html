@@ -291,7 +291,11 @@
     { key:"neurologia",  label:"NeuroAtlas",          href:"../plataformas/neurologia/",  status:"soon" },
     { key:"ginecologia", label:"GinecoAtlas",         href:"../plataformas/ginecologia/", status:"soon" },
     { key:"obstetricia", label:"Atlas de Obstetrícia",href:"../plataformas/obstetricia/", status:"soon" },
-    { key:"cirurgia",    label:"Cirurgia Geral",      href:"../plataformas/cirurgia/",    status:"soon" },
+    { key:"cirurgia",    label:"Cirurgia Geral",      href:"../plataformas/cirurgia/",    status:"rw",
+      platformId:"cirurgia-geral", docPath:null, engine:"inline", unit:"ms",
+      cardsMap:"userCards",                            // STATE.userCards { id: card{front,back,interval,ease,due,diff,reviews,reps} }
+      quizField:"quiz", statsField:"stats",            // questões nativas em STATE.quiz[subId][qIndex]; id no feed = "subId:qIndex"
+      gam:{ mode:"obj", xpField:"xp", streakField:"streak", xpCard:6, xpQuest:5, xpCorrect:5 } },
     { key:"pneumologia", label:"Pneumologia",         href:"../plataformas/pneumologia/", status:"soon" },
     { key:"preventiva",  label:"Med. Preventiva",     href:"../plataformas/preventiva/",  status:"soon" },
     { key:"semiologia",  label:"Semiologia",          href:"../plataformas/semiologia/",  status:"soon" }
@@ -344,9 +348,8 @@
 
   /* ===== Acesso ao documento de uma plataforma ===== */
   function platformDocRef(p){
-    return FB.db.collection("users").doc(FB.uid)
-      .collection("platforms").doc(p.platformId)
-      .collection(p.docPath[0]).doc(p.docPath[1]);
+    var base = FB.db.collection("users").doc(FB.uid).collection("platforms").doc(p.platformId);
+    return p.docPath ? base.collection(p.docPath[0]).doc(p.docPath[1]) : base;
   }
   // Feed publicado pela plataforma (só o TEXTO dos módulos estudados):
   // users/{uid}/central/{platformKey}  ->  { cards:{id:{front,back,mod,modTitle}}, questions:[...] }
@@ -411,10 +414,19 @@
     var st = cache.state;
     var gain = (kind === "card") ? g.xpCard : (g.xpQuest + (correct ? g.xpCorrect : 0));
     st[g.xpField] = (st[g.xpField]||0) + gain;
-    bumpStreakOn(st, g.streakField, g.lastDayField);
     update[g.xpField] = st[g.xpField];
-    update[g.streakField] = st[g.streakField];
-    update[g.lastDayField] = st[g.lastDayField];
+    if(g.mode === "obj"){
+      // streak como objeto { count, last } (ex.: cirurgia)
+      var sk = st[g.streakField] || { count:0, last:"" };
+      var t = todayStr();
+      if(sk.last !== t){ sk.count = (sk.last === yestStr()) ? (sk.count + 1) : 1; sk.last = t; }
+      st[g.streakField] = sk;
+      update[g.streakField] = sk;
+    } else {
+      bumpStreakOn(st, g.streakField, g.lastDayField);
+      update[g.streakField] = st[g.streakField];
+      update[g.lastDayField] = st[g.lastDayField];
+    }
   }
 
   /* ===== Normalização defensiva de questão ===== */
@@ -452,23 +464,31 @@
         var state = (mainDoc && mainDoc.exists) ? (mainDoc.data() || {}) : {};
         SESSION.docCache[p.platformId] = { ref: platformDocRef(p), state: state, p: p };
 
-        var srs = state[p.srsField] || {};
         var feed = (feedDoc && feedDoc.exists) ? (feedDoc.data() || {}) : {};
-        var feedCards = feed.cards || {};                 // {id:{front,back,modTitle}} — só itens já avaliados
         var feedQuests = Array.isArray(feed.questions) ? feed.questions : [];
 
-        // Texto por id: cards do feed (avaliados, prontos+criados) + fallback nos cards do usuário
-        var textById = {};
-        Object.keys(feedCards).forEach(function(id){ textById[id] = feedCards[id]; });
-        var userCards = Array.isArray(state[p.cardsField]) ? state[p.cardsField] : [];
-        userCards.forEach(function(c){ var id = cardId(c); if(id && !textById[id]) textById[id] = c; });
-
-        // "Feito" = tem agendamento (foi avaliado). Mostra os devidos hoje.
-        Object.keys(srs).forEach(function(id){
-          if(!isDue(srs[id], p.unit)) return;             // agendado p/ frente → não mostra hoje
-          if(textById[id]) SESSION.allFlash.push({ p:p, id:id, card:textById[id], rev: srs[id] });
-          else SESSION.internalPending++;                  // avaliado antes do gancho → texto ainda não publicado
-        });
+        if(p.engine === "inline"){
+          // flashcards: STATE.userCards (objeto), SRS inline no card, due em ms
+          var uc = state[p.cardsMap] || {};
+          Object.keys(uc).forEach(function(id){
+            var c = uc[id]; if(!c || (c.reviews||0) < 1) return;   // só os já avaliados
+            if((c.due||0) <= Date.now()){
+              SESSION.allFlash.push({ p:p, id:id, card:{ front:(c.front||c.statement||c.text||""), back:(c.back||((c.type==="fv"||c.type==="vf")?(c.answer?"Verdadeiro":"Falso"):"")) }, rev:c });
+            }
+          });
+        } else {
+          // fcmap (PedAtlas): texto do feed/cards do usuário + agendamento em fcReviews (map)
+          var srs = state[p.srsField] || {};
+          var feedCards = feed.cards || {};
+          var textById = {};
+          Object.keys(feedCards).forEach(function(id){ textById[id] = feedCards[id]; });
+          var userCards = Array.isArray(state[p.cardsField]) ? state[p.cardsField] : [];
+          userCards.forEach(function(c){ var id = cardId(c); if(id && !textById[id]) textById[id] = c; });
+          Object.keys(srs).forEach(function(id){
+            if(!isDue(srs[id], p.unit)) return;
+            if(textById[id]) SESSION.allFlash.push({ p:p, id:id, card:textById[id], rev: srs[id] });
+          });
+        }
 
         // Questões publicadas pela plataforma (= respondidas/"feitas" lá)
         feedQuests.forEach(function(q){
@@ -574,17 +594,29 @@
 
   function rate(grade){
     var item = SESSION.queue[SESSION.index];
-    var newRev = schedule(item.rev, grade, item.p.unit);
-    var cache = SESSION.docCache[item.p.platformId];
+    var p = item.p;
+    var cache = SESSION.docCache[p.platformId];
     if(!cache){ next(); return; }
-
-    // atualiza o mapa de SRS em memória e grava de volta no MESMO documento (merge)
-    var srs = cache.state[item.p.srsField] || {};
-    srs[item.id] = newRev;
-    cache.state[item.p.srsField] = srs;
-
     var update = {};
-    update[item.p.srsField] = srs;          // grava o mapa inteiro de fcReviews (merge não toca nos demais campos)
+
+    if(p.engine === "inline"){
+      // cirurgia: SRS inline no próprio card (ms). Recalcula e grava o card em userCards[id].
+      var rev = schedule({ ease:item.rev.ease, interval:item.rev.interval, reps:item.rev.reps, due:item.rev.due }, grade, "ms");
+      var uc = cache.state[p.cardsMap] || {};
+      var c = uc[item.id] || item.rev;
+      c.ease = rev.ease; c.interval = rev.interval; c.reps = rev.reps; c.due = rev.due;
+      c.reviews = (c.reviews||0) + 1; if(grade >= 2) c.correct = (c.correct||0) + 1;
+      c.diff = grade === 0 ? "dificil" : (grade === 1 ? "dificil" : (grade === 2 ? "medio" : "facil"));
+      uc[item.id] = c; cache.state[p.cardsMap] = uc;
+      update[p.cardsMap] = uc;
+    } else {
+      // pedatlas: agendamento no map fcReviews (dias)
+      var srs = cache.state[p.srsField] || {};
+      srs[item.id] = schedule(item.rev, grade, p.unit);
+      cache.state[p.srsField] = srs;
+      update[p.srsField] = srs;
+    }
+
     creditPlatform(cache, "card", true, update);   // +XP/ofensiva na plataforma de origem
     cache.ref.set(update, { merge: true }).catch(function(e){
       console.warn("Falha ao salvar revisão", e);
@@ -669,22 +701,38 @@
           if(!correct) btn.classList.add("wrong");
           var ex = qcard.querySelector(".qexplain");
           if(ex && ex.textContent.trim()) ex.hidden = false;
-          markQuestionAnswered(SESSION.viewQuests[i], correct);
+          markQuestionAnswered(SESSION.viewQuests[i], correct, parseInt(btn.getAttribute("data-oi"), 10));
         });
       });
     });
   }
 
-  // grava qSeen no MESMO documento da plataforma (merge) — single source of truth
-  function markQuestionAnswered(item, correct){
+  // grava "feito" no MESMO documento da plataforma (merge) — fonte única
+  function markQuestionAnswered(item, correct, oi){
     var cache = SESSION.docCache[item.platformId];
     if(!cache) return;
-    var id = qId(item.q); if(!id) return;
-    var qSeen = cache.state.qSeen || {};
-    qSeen[id] = true;
-    cache.state.qSeen = qSeen;
-    var update = { qSeen: qSeen };
-    creditPlatform(cache, "quest", correct, update);   // +XP/ofensiva na plataforma (questao + acerto)
+    var p = cache.p, st = cache.state, id = qId(item.q); if(!id) return;
+    var update = {};
+    if(p.engine === "inline"){
+      // cirurgia: STATE.quiz[subId][qIndex] = opção escolhida + stats
+      var parts = String(id).split(":"), sub = parts[0], qi = parts[1];
+      var quiz = st[p.quizField] || {};
+      quiz[sub] = quiz[sub] || {};
+      quiz[sub][qi] = (oi == null ? 1 : oi);
+      st[p.quizField] = quiz;
+      var stats = st[p.statsField] || {};
+      stats.questionsAnswered = (stats.questionsAnswered||0) + 1;
+      if(correct) stats.correctAnswers = (stats.correctAnswers||0) + 1;
+      st[p.statsField] = stats;
+      update[p.quizField] = quiz;
+      update[p.statsField] = stats;
+    } else {
+      // pedatlas: qSeen[id] = true
+      var qSeen = st.qSeen || {};
+      qSeen[id] = true; st.qSeen = qSeen;
+      update.qSeen = qSeen;
+    }
+    creditPlatform(cache, "quest", correct, update);   // +XP/ofensiva na plataforma
     cache.ref.set(update, { merge: true }).catch(function(e){
       console.warn("Falha ao salvar questão", e);
       toast("Não consegui salvar a questão — verifique a conexão.");
