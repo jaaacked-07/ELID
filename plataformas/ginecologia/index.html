@@ -1344,6 +1344,7 @@ async function startApp(){
   if(appStarted) return; appStarted=true;
   await loadState();
   if(currentUser?.email) state.profile.email = currentUser.email;
+  try{ elidPublish(); }catch(e){}
   hideElidGate();
   $("#app").classList.add("show");
   buildSidebar(); refreshXPUI();
