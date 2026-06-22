@@ -47,14 +47,18 @@
   .hero .today{font-size:13px;letter-spacing:.12em;color:rgba(201,160,176,.7);margin-top:14px;text-transform:capitalize;}
   body.light-mode .hero .today{color:rgba(120,80,100,.7);}
 
-  /* Resumo do dia */
-  .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:48px;}
-  @media(max-width:640px){.summary{grid-template-columns:1fr;}}
-  .sum-card{background:rgba(183,110,121,.08);border:1px solid rgba(183,110,121,.2);border-radius:16px;padding:22px;text-align:center;}
-  body.light-mode .sum-card{background:rgba(183,110,121,.06);border-color:rgba(183,110,121,.25);}
-  .sum-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--rose-gold);line-height:1;}
-  .sum-lab{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(201,160,176,.7);margin-top:8px;}
-  body.light-mode .sum-lab{color:rgba(120,80,100,.7);}
+  /* Gamificação */
+  .gam-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:44px;}
+  @media(max-width:640px){.gam-bar{grid-template-columns:repeat(2,1fr);}}
+  .gam-stat{background:rgba(183,110,121,.08);border:1px solid rgba(183,110,121,.2);border-radius:16px;
+    padding:18px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:124px;}
+  body.light-mode .gam-stat{background:rgba(183,110,121,.06);border-color:rgba(183,110,121,.25);}
+  .gam-ic{font-size:22px;line-height:1;margin-bottom:6px;}
+  .gam-num{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--rose-gold);line-height:1;}
+  .gam-lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(201,160,176,.72);margin-top:6px;}
+  body.light-mode .gam-lab{color:rgba(120,80,100,.72);}
+  .gam-goal .goal-ring{margin-bottom:4px;}
+  #goal-arc{transition:stroke-dashoffset .6s ease;}
 
   /* Section heads */
   .cat-head{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 26px;}
@@ -214,10 +218,19 @@
   </div>
 
   <!-- Resumo -->
-  <div class="summary">
-    <div class="sum-card"><div class="sum-num" id="s-flash">0</div><div class="sum-lab">Flashcards do dia</div></div>
-    <div class="sum-card"><div class="sum-num" id="s-done">0</div><div class="sum-lab">Revisados hoje</div></div>
-    <div class="sum-card"><div class="sum-num" id="s-plat">0</div><div class="sum-lab">Plataformas ativas</div></div>
+  <!-- GAMIFICAÇÃO (global ELID) -->
+  <div class="gam-bar">
+    <div class="gam-stat"><div class="gam-ic">&#128293;</div><div class="gam-num" id="g-streak">0</div><div class="gam-lab">Ofensiva</div></div>
+    <div class="gam-stat"><div class="gam-ic">&#11088;</div><div class="gam-num" id="g-xp">0</div><div class="gam-lab" id="g-level">Nível 1</div></div>
+    <div class="gam-stat"><div class="gam-ic">&#9989;</div><div class="gam-num" id="g-today">0</div><div class="gam-lab">Feitos hoje</div></div>
+    <div class="gam-stat gam-goal">
+      <svg class="goal-ring" viewBox="0 0 64 64" width="56" height="56">
+        <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(183,110,121,.18)" stroke-width="6"/>
+        <circle id="goal-arc" cx="32" cy="32" r="26" fill="none" stroke="var(--rose-gold)" stroke-width="6"
+          stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="163.4" transform="rotate(-90 32 32)"/>
+      </svg>
+      <div class="gam-lab" id="g-goal">Meta 0/20</div>
+    </div>
   </div>
 
   <!-- FILTRO (plataforma / embaralhar) — controla flashcards e questões -->
@@ -284,7 +297,11 @@
       docPath:["data","main"],                       // .../platforms/{id}/data/main
       cardsField:"flashcards",                        // STATE.flashcards (array, criados pela usuária)
       srsField:"fcReviews",                           // STATE.fcReviews { cardId: {ease,interval,due,reps} }
-      unit:"day"                                       // PedAtlas agenda em DIAS (nowDay), não em ms
+      unit:"day",                                      // PedAtlas agenda em DIAS (nowDay), não em ms
+      gam:{                                            // crédito de XP/ofensiva na própria plataforma
+        xpField:"xp", streakField:"streak", lastDayField:"lastDay",
+        xpCard:2, xpQuest:5, xpCorrect:10              // = XP_RULES do PedAtlas (revisarFc/questao/acerto)
+      }
     },
     { key:"neurologia",  label:"NeuroAtlas",          href:"../plataformas/neurologia/",  status:"soon" },
     { key:"ginecologia", label:"GinecoAtlas",         href:"../plataformas/ginecologia/", status:"soon" },
@@ -391,6 +408,78 @@
     SESSION.index = 0;
   }
 
+  /* ===== Gamificação global (doc próprio: users/{uid}/central/_stats) ===== */
+  var GAM = { xp:0, streak:0, lastDay:null, reviewsToday:0, questsToday:0, todayKey:null, goal:20, ref:null };
+  var GOAL_CIRC = 2 * Math.PI * 26;   // circunferência do anel (r=26)
+
+  function dStr(d){ return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate(); }   // = todayStr() do PedAtlas
+  function todayStr(){ return dStr(new Date()); }
+  function yestStr(){ var y = new Date(); y.setDate(y.getDate()-1); return dStr(y); }
+  // ofensiva: +1 se a última atividade foi ontem, senão reinicia em 1 (≥1 atividade/dia)
+  function bumpStreakOn(obj, streakKey, lastKey){
+    var t = todayStr();
+    if(obj[lastKey] === t) return;
+    obj[streakKey] = (obj[lastKey] === yestStr()) ? ((obj[streakKey]||0) + 1) : 1;
+    obj[lastKey] = t;
+  }
+
+  function loadGlobal(){
+    FB.db.collection("users").doc(FB.uid).collection("central").doc("_stats").get().then(function(doc){
+      GAM.ref = FB.db.collection("users").doc(FB.uid).collection("central").doc("_stats");
+      if(doc.exists){
+        var d = doc.data() || {};
+        GAM.xp = d.xp||0; GAM.streak = d.streak||0; GAM.lastDay = d.lastDay||null;
+        GAM.reviewsToday = d.reviewsToday||0; GAM.questsToday = d.questsToday||0; GAM.todayKey = d.todayKey||null;
+        if(d.goal) GAM.goal = d.goal;
+      }
+      if(GAM.todayKey !== todayStr()){ GAM.reviewsToday = 0; GAM.questsToday = 0; GAM.todayKey = todayStr(); }
+      renderGam();
+    }).catch(function(){ renderGam(); });
+  }
+
+  function levelOf(xp){ return Math.floor((xp||0)/100) + 1; }   // 100 XP por nível
+
+  function renderGam(){
+    var done = GAM.reviewsToday + GAM.questsToday;
+    var set = function(id, v){ var el = $("#"+id); if(el) el.textContent = v; };
+    set("g-streak", GAM.streak);
+    set("g-xp", GAM.xp);
+    set("g-level", "Nível " + levelOf(GAM.xp));
+    set("g-today", done);
+    set("g-goal", "Meta " + Math.min(done, GAM.goal) + "/" + GAM.goal);
+    var arc = $("#goal-arc");
+    if(arc){
+      var frac = Math.max(0, Math.min(1, GAM.goal ? done / GAM.goal : 0));
+      arc.setAttribute("stroke-dasharray", GOAL_CIRC.toFixed(1));
+      arc.setAttribute("stroke-dashoffset", (GOAL_CIRC * (1 - frac)).toFixed(1));
+    }
+  }
+
+  // registra atividade feita NA Central: atualiza placar global + persiste
+  function updateGlobal(kind, correct){
+    if(GAM.todayKey !== todayStr()){ GAM.reviewsToday = 0; GAM.questsToday = 0; GAM.todayKey = todayStr(); }
+    if(kind === "card"){ GAM.reviewsToday++; GAM.xp += 10; }
+    else { GAM.questsToday++; GAM.xp += 10; if(correct) GAM.xp += 5; }
+    bumpStreakOn(GAM, "streak", "lastDay");
+    if(GAM.ref){
+      GAM.ref.set({ xp:GAM.xp, streak:GAM.streak, lastDay:GAM.lastDay,
+        reviewsToday:GAM.reviewsToday, questsToday:GAM.questsToday, todayKey:GAM.todayKey, goal:GAM.goal }, { merge:true }).catch(function(){});
+    }
+    renderGam();
+  }
+
+  // credita XP/ofensiva NA PLATAFORMA de origem (mesmos campos/regras dela)
+  function creditPlatform(cache, kind, correct, update){
+    var g = cache.p.gam; if(!g) return;
+    var st = cache.state;
+    var gain = (kind === "card") ? g.xpCard : (g.xpQuest + (correct ? g.xpCorrect : 0));
+    st[g.xpField] = (st[g.xpField]||0) + gain;
+    bumpStreakOn(st, g.streakField, g.lastDayField);
+    update[g.xpField] = st[g.xpField];
+    update[g.streakField] = st[g.streakField];
+    update[g.lastDayField] = st[g.lastDayField];
+  }
+
   /* ===== Normalização defensiva de questão ===== */
   function qId(q){ return q.id || q.qid || q._id || null; }
   function qStem(q){ return q.stem || q.enunciado || q.pergunta || q.q || q.text || ""; }
@@ -458,9 +547,7 @@
   /* ===== Render ===== */
   function render(){
     applyFilter();
-    $("#s-flash").textContent = SESSION.allFlash.length;
-    $("#s-done").textContent = SESSION.doneToday;
-    $("#s-plat").textContent = SESSION.activeCount;
+    renderGam();
     renderPlatforms();
     renderInternal(SESSION.internalPending);
     renderFilterBar();
@@ -562,18 +649,19 @@
 
     var update = {};
     update[item.p.srsField] = srs;          // grava o mapa inteiro de fcReviews (merge não toca nos demais campos)
+    creditPlatform(cache, "card", true, update);   // +XP/ofensiva na plataforma de origem
     cache.ref.set(update, { merge: true }).catch(function(e){
       console.warn("Falha ao salvar revisão", e);
       toast("Não consegui salvar — verifique a conexão.");
     });
 
+    updateGlobal("card");                   // placar global do ELID
     SESSION.doneToday++;
     next();
   }
 
   function next(){
     SESSION.index++;
-    $("#s-done").textContent = SESSION.doneToday;
     renderStage();
   }
 
@@ -644,10 +732,13 @@
     var qSeen = cache.state.qSeen || {};
     qSeen[id] = true;
     cache.state.qSeen = qSeen;
-    cache.ref.set({ qSeen: qSeen }, { merge: true }).catch(function(e){
+    var update = { qSeen: qSeen };
+    creditPlatform(cache, "quest", correct, update);   // +XP/ofensiva na plataforma (questao + acerto)
+    cache.ref.set(update, { merge: true }).catch(function(e){
       console.warn("Falha ao salvar questão", e);
       toast("Não consegui salvar a questão — verifique a conexão.");
     });
+    updateGlobal("quest", correct);                    // placar global do ELID
   }
 
   function renderPlatforms(){
@@ -688,6 +779,7 @@
         $("#gate").classList.remove("show");
         $("#app").hidden = false;
         showToday();
+        loadGlobal();
         loadAll();
       });
     }catch(e){
