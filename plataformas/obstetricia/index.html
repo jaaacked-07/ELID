@@ -2368,8 +2368,29 @@ function cloudSave(){
       FB.localWriteTs=Date.now();
       platformRef().set({user:App.user, state:App.state, updatedAt:FB.localWriteTs},{merge:true})
         .catch(function(e){ console.warn('[Sync] gravação na nuvem falhou (mantido localmente):', e); });
+      elidPublish();
     }catch(e){ console.warn('[Sync] exceção ao gravar na nuvem:', e); }
   },800);
+}
+/* ---------- ELID - publicacao na Central (obstetricia) ---------- */
+function elidPublish(){
+  try{
+    if(!FB.uid||!FB.db) return;
+    var cards={}, allQ=[];
+    MODULES.forEach(function(m){ (m.topics||[]).forEach(function(t){
+      (t.cards||[]).forEach(function(c,i){ cards['c:'+t.id+':'+i]={front:c.front||'',back:c.back||'',modTitle:m.title||''}; });
+      (t.questions||[]).forEach(function(q,i){ allQ.push({tid:t.id,i:i,q:q,mod:m.title||''}); });
+    });});
+    var seed=0,ds=todayStr(); for(var k=0;k<ds.length;k++) seed=(seed*31+ds.charCodeAt(k))>>>0;
+    function rnd(){ seed=(seed*1664525+1013904223)>>>0; return seed/4294967296; }
+    var arr=allQ.slice(); for(var a=arr.length-1;a>0;a--){ var b=Math.floor(rnd()*(a+1)); var tmp=arr[a];arr[a]=arr[b];arr[b]=tmp; }
+    var questions=arr.slice(0,6).map(function(it){
+      var q=it.q; var opts=(q.opts||[]).map(function(t,ix){return {text:t,correct:ix===q.correct};});
+      return {id:it.tid+':'+it.i, stem:q.q||'', options:opts, explanation:q.e||'', modTitle:it.mod};
+    });
+    FB.db.collection('users').doc(FB.uid).collection('central').doc('obstetricia')
+      .set({platform:'obstetricia',label:'Atlas de Obstetrícia',updated:Date.now(),cards:cards,questions:questions},{merge:true}).catch(function(){});
+  }catch(e){}
 }
 </script>
 <script>
