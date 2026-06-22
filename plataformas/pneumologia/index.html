@@ -567,9 +567,21 @@ function queueSave(){
   clearTimeout(saveTimer);
   saveTimer = setTimeout(async()=>{
     if(!UID||!STATE) return;
-    try{ STATE.lastActivity = Date.now(); await setDoc(stateRef(), STATE, {merge:true}); }
+    try{ STATE.lastActivity = Date.now(); await setDoc(stateRef(), STATE, {merge:true}); elidPublish(); }
     catch(e){ console.warn("save",e); }
   }, 700);
+}
+/* ---------- ELID - publicacao na Central (pneumologia) ---------- */
+async function elidPublish(){
+  try{
+    if(!UID||!db||!STATE) return;
+    const cards={};
+    allCards().forEach(c=>{ cards[c.id]={front:c.front||"",back:c.back||"",type:c.type||"",modTitle:c.mat||c.tema||""}; });
+    const ds=dailySet();
+    const questions=ds.qs.map(it=>{ const q=it.q; const opts=(q.opts||[]).map((tx,ix)=>({text:tx,correct:ix===q.correct}));
+      return {id:`${it.modId}:${it.topId}:${it.qi}`, stem:q.q||q.stem||"", options:opts, explanation:q.e||q.expl||q.comment||"", modTitle:(it.m&&it.m.title)||it.topId}; });
+    await setDoc(doc(db,"users",UID,"central","pneumologia"), {platform:"pneumologia",label:"Pneumologia",updated:Date.now(),cards,questions}, {merge:true});
+  }catch(e){}
 }
 window.queueSave = queueSave;
 
