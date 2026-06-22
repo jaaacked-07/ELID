@@ -1158,13 +1158,15 @@ function elidPublish(){
     });
     var questions=[];
     try{
-      var t=todayStr(); var dq=(state.daily&&state.daily.date===t&&state.daily.q)||null;
-      if(!dq){ var seed=parseInt(t.replace(/-/g,''),10); var QQ=allQuestions(); dq=seededShuffle(QQ.map(function(_,i){return i;}),seed).slice(0,3).map(function(i){return {id:QQ[i].id,i:QQ[i].i};}); }
-      dq.forEach(function(x){
-        var Q=CONTENT[x.id]&&CONTENT[x.id].questoes&&CONTENT[x.id].questoes[x.i]; if(!Q) return;
-        var opts=(Q.opts||[]).map(function(t,ix){return {text:t,correct:ix===Q.correct};});
-        var tt=(typeof findTopic==='function'&&findTopic(x.id)&&(findTopic(x.id).title||findTopic(x.id).name))||x.id;
-        questions.push({id:x.id+':'+x.i, stem:Q.stem||'', options:opts, explanation:Q.comment||'', modTitle:tt});
+      var QQ=allQuestions();                 // [{id, i, q}] todas as nativas
+      var t=todayStr(), seed=0; for(var z=0;z<t.length;z++) seed=(seed*31+t.charCodeAt(z))>>>0;
+      var idx=QQ.map(function(_,i){return i;});
+      for(var a=idx.length-1;a>0;a--){ seed=(seed*1664525+1013904223)>>>0; var b=seed%(a+1); var tmp=idx[a];idx[a]=idx[b];idx[b]=tmp; }
+      idx.slice(0,6).forEach(function(j){
+        var it=QQ[j]; var Q=it.q; if(!Q) return;
+        var opts=(Q.opts||[]).map(function(tx,ix){return {text:tx,correct:ix===Q.correct};});
+        var tt=(typeof findTopic==='function'&&findTopic(it.id)&&(findTopic(it.id).title||findTopic(it.id).name))||it.id;
+        questions.push({id:it.id+':'+it.i, stem:Q.stem||'', options:opts, explanation:Q.comment||'', modTitle:tt});
       });
     }catch(e){}
     db.collection('users').doc(currentUser.uid).collection('central').doc('ginecologia')
