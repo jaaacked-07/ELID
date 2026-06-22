@@ -310,13 +310,20 @@
       quizMode:"ginecoTopics",
       gam:{ mode:"profile",
             stats:{ field:"stats", card:"flashTotal", q:"qTotal", qok:"qCorrect" } } },
-    { key:"obstetricia", label:"Atlas de Obstetrícia",href:"../plataformas/obstetricia/", status:"soon" },
+    { key:"obstetricia", label:"Atlas de Obstetrícia",href:"../plataformas/obstetricia/", status:"rw",
+      platformId:"obstetricia", docPath:null, stateField:"state", engine:"obsrs", srsField:"srs",
+      quizMode:"obsAnswered",
+      gam:{ mode:"obj", streakField:"streak", dateFmt:"iso" } },
     { key:"cirurgia",    label:"Atlas Cirúrgico",     href:"../plataformas/cirurgia/",    status:"rw",
       platformId:"cirurgia-geral", docPath:null, engine:"fcmap", unit:"day", srsField:"fcReviews", showNew:true,
       quizMode:"cirurgiaQuiz", quizField:"quiz",
       gam:{ mode:"obj", xpField:"xp", streakField:"streak", xpCard:6, xpQuest:5, xpCorrect:5,
             stats:{ field:"stats", q:"questionsAnswered", qok:"correctAnswers" } } },
-    { key:"pneumologia", label:"Pneumologia",         href:"../plataformas/pneumologia/", status:"soon" },
+    { key:"pneumologia", label:"Pneumologia",         href:"../plataformas/pneumologia/", status:"rw",
+      platformId:"PNEUMO", docPath:["state","main"], engine:"fcmap", unit:"iso", srsField:"srs", showNew:true,
+      quizMode:"pneumoQ",
+      gam:{ mode:"flat", xpField:"xp", streakField:"studyStreak", lastDayField:"lastStudyDay", dateFmt:"iso",
+            xpCard:5, xpQuest:4, xpCorrect:8 } },
     { key:"preventiva",  label:"Med. Preventiva",     href:"../plataformas/preventiva/",  status:"soon" },
     { key:"semiologia",  label:"Semiologia",          href:"../plataformas/semiologia/",  status:"soon" }
   ];
@@ -359,13 +366,25 @@
   function nowDay(){ return Math.floor(Date.now() / 86400000); }
   function isDue(rev, unit){
     if(!rev || rev.due == null) return true;
+    if(unit === "iso") return String(rev.due) <= todayISO();
     return unit === "day" ? Number(rev.due) <= nowDay() : Number(rev.due) <= Date.now();
   }
 
   /* ===== Reagendamento — grava EXATAMENTE no formato que a plataforma lê =====
      grade: 0 Errei · 1 Difícil · 2 Bom · 3 Fácil */
   function schedule(prev, grade, unit){
+    if(unit === "iso") return scheduleISO(prev, grade);
     return unit === "day" ? scheduleDay(prev, grade) : scheduleMs(prev, grade);
+  }
+  // SM-2 com due em data ISO (Pneumo) — mesma matemática, lapses preservado
+  function scheduleISO(prev, g){
+    var s = prev ? { ease:prev.ease||2.5, interval:prev.interval||0, reps:prev.reps||0, lapses:prev.lapses||0 }
+                 : { ease:2.5, interval:0, reps:0, lapses:0 };
+    var q = [0,3,4,5][g];
+    s.ease = s.ease + (0.1 - (5-q)*(0.08 + (5-q)*0.02)); if(s.ease < 1.3) s.ease = 1.3;
+    if(q < 3){ s.reps = 0; s.interval = 0; s.lapses = (s.lapses||0) + 1; s.due = todayISO(); }
+    else { s.interval = (s.reps===0)?1:(s.reps===1?6:Math.round(s.interval*s.ease)); s.reps++; s.due = addDaysISO(s.interval); }
+    return s;
   }
   // SM-2 canônico (idêntico ao srsGrade das plataformas) — due em dias
   function scheduleDay(prev, g){
@@ -456,7 +475,21 @@
     obj[lastKey] = t;
   }
 
-  function todayISO(){ return new Date().toISOString().slice(0,10); }   // formato do Gineco
+  function todayISO(){ return new Date().toISOString().slice(0,10); }   // formato do Gineco/Obstetrícia
+  function yestISO(){ var y=new Date(); y.setDate(y.getDate()-1); return y.toISOString().slice(0,10); }
+  function addDaysISO(n){ var d=new Date(); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
+  function isDueISO(due){ return !due || due <= todayISO(); }
+  // ladders do Obstetrícia (replicadas para sync two-way no próprio srs)
+  var OBS_EASY=[1,3,7,15,30,60], OBS_HARD=[1,3,7,15], OBS_MISS=[0,1,3,7];
+  function obsGrade(s, grade){   // grade: 'errei'|'dificil'|'medio'|'facil'
+    var inDays;
+    if(grade==='errei'){ s.track='miss'; s.step=0; s.lapses=(s.lapses||0)+1; inDays=OBS_MISS[0]; }
+    else if(grade==='dificil'){ if(s.track!=='hard'){ s.track='hard'; s.step=0; } inDays=OBS_HARD[Math.min(s.step,OBS_HARD.length-1)]; }
+    else if(grade==='medio'){ var w=s.track==='hard'; s.track='hard'; s.step=Math.min(w?s.step+1:1,OBS_HARD.length-1); inDays=OBS_HARD[s.step]; }
+    else { var we=s.track==='easy'; s.track='easy'; s.step=Math.min(we?s.step+1:1,OBS_EASY.length-1); inDays=OBS_EASY[s.step]; }
+    s.reps=(s.reps||0)+1; s.last=todayISO(); s.due=addDaysISO(inDays);
+    return s;
+  }
   // credita XP/ofensiva/estatísticas NA PLATAFORMA de origem — nada é exibido na Central
   function creditPlatform(cache, kind, correct, update){
     var g = cache.p.gam; if(!g) return;
@@ -468,10 +501,11 @@
       update[g.xpField] = st[g.xpField];
     }
     // ofensiva
-    if(g.mode === "obj"){                       // streak objeto { count, last } — cirurgia
+    if(g.mode === "obj"){                       // streak objeto { count, last }
       var sk = st[g.streakField] || { count:0, last:"" };
-      var t = todayStr();
-      if(sk.last !== t){ sk.count = (sk.last === yestStr()) ? (sk.count + 1) : 1; sk.last = t; }
+      var t = (g.dateFmt === "iso") ? todayISO() : todayStr();
+      var y = (g.dateFmt === "iso") ? yestISO() : yestStr();
+      if(sk.last !== t){ sk.count = (sk.last === y) ? (sk.count + 1) : 1; sk.last = t; }
       st[g.streakField] = sk; update[g.streakField] = sk;
     } else if(g.mode === "profile"){            // streak em state.profile (ISO) — gineco
       var pr = st.profile || (st.profile = {});
@@ -482,8 +516,13 @@
         pr.lastActive = ti;
       }
       st.profile = pr; update.profile = pr;
-    } else {                                    // flat: streak num + lastDay (Y-M-D) — pedatlas
-      bumpStreakOn(st, g.streakField, g.lastDayField);
+    } else {                                    // flat: streak num + lastDay
+      var tf = (g.dateFmt === "iso") ? todayISO() : todayStr();
+      var yf = (g.dateFmt === "iso") ? yestISO() : yestStr();
+      if(st[g.lastDayField] !== tf){
+        st[g.streakField] = (st[g.lastDayField] === yf) ? ((st[g.streakField]||0) + 1) : 1;
+        st[g.lastDayField] = tf;
+      }
       update[g.streakField] = st[g.streakField];
       update[g.lastDayField] = st[g.lastDayField];
     }
@@ -531,35 +570,44 @@
         feedDocRef(p).get().catch(function(){ return null; })
       ]).then(function(res){
         var mainDoc = res[0], feedDoc = res[1];
-        var state = (mainDoc && mainDoc.exists) ? (mainDoc.data() || {}) : {};
+        var raw = (mainDoc && mainDoc.exists) ? (mainDoc.data() || {}) : {};
+        var state = p.stateField ? (raw[p.stateField] || {}) : raw;
         SESSION.docCache[p.platformId] = { ref: platformDocRef(p), state: state, p: p };
 
         var feed = (feedDoc && feedDoc.exists) ? (feedDoc.data() || {}) : {};
         var feedQuests = Array.isArray(feed.questions) ? feed.questions : [];
-
-        // FLASHCARDS — motor fcmap (SM-2): texto do feed (+ array de cards do usuário) e agendamento em fcReviews
-        var srs = state[p.srsField] || {};
         var feedCards = feed.cards || {};
-        var textById = {};
-        Object.keys(feedCards).forEach(function(id){ textById[id] = feedCards[id]; });
-        var userCards = Array.isArray(state[p.cardsField]) ? state[p.cardsField] : [];
-        userCards.forEach(function(c){ var id = cardId(c); if(id && !textById[id]) textById[id] = c; });
 
-        if(p.showNew){
-          // mostra todos os flashcards publicados que estão devidos (novos = sem agendamento = devidos)
-          Object.keys(textById).forEach(function(id){
-            if(isDue(srs[id], p.unit)) SESSION.allFlash.push({ p:p, id:id, card:textById[id], rev: srs[id] || null });
+        if(p.engine === "obsrs"){
+          // Obstetrícia: agendamento no próprio srs (ladders, due ISO); texto do feed
+          var osrs = state[p.srsField] || {};
+          Object.keys(osrs).forEach(function(id){
+            var s = osrs[id]; if(!s) return;
+            if((s.type === "card" || id.indexOf("c:") === 0) && isDueISO(s.due) && feedCards[id]){
+              SESSION.allFlash.push({ p:p, id:id, card:feedCards[id], rev:s });
+            }
           });
         } else {
-          // só os que já têm agendamento (ex.: PedAtlas — flashcards já avaliados)
-          Object.keys(srs).forEach(function(id){
-            if(isDue(srs[id], p.unit) && textById[id]) SESSION.allFlash.push({ p:p, id:id, card:textById[id], rev: srs[id] });
-          });
+          // FLASHCARDS — fcmap (SM-2): texto do feed (+ array de cards do usuário) + agendamento em fcReviews
+          var srs = state[p.srsField] || {};
+          var textById = {};
+          Object.keys(feedCards).forEach(function(id){ textById[id] = feedCards[id]; });
+          var userCards = Array.isArray(state[p.cardsField]) ? state[p.cardsField] : [];
+          userCards.forEach(function(c){ var id = cardId(c); if(id && !textById[id]) textById[id] = c; });
+          if(p.showNew){
+            Object.keys(textById).forEach(function(id){
+              if(isDue(srs[id], p.unit)) SESSION.allFlash.push({ p:p, id:id, card:textById[id], rev: srs[id] || null });
+            });
+          } else {
+            Object.keys(srs).forEach(function(id){
+              if(isDue(srs[id], p.unit) && textById[id]) SESSION.allFlash.push({ p:p, id:id, card:textById[id], rev: srs[id] });
+            });
+          }
         }
 
         // Questões do dia publicadas pela plataforma
         feedQuests.forEach(function(q){
-          var id = qId(q); if(id) SESSION.allQuests.push({ p:p, q:q, platformId:p.platformId });
+          var id = qId(q); if(id) SESSION.allQuests.push({ p:p, q:q, platformId:p.platformId, answered: questAnswered(p, state, id) });
         });
       }).then(function(){
         pending--;
@@ -666,7 +714,14 @@
     if(!cache){ next(); return; }
     var update = {};
 
-    if(p.engine === "inline"){
+    if(p.engine === "obsrs"){
+      // Obstetrícia: grava no próprio srs com as ladders nativas (two-way real)
+      var os = cache.state[p.srsField] || {};
+      var s = os[item.id] || { type:"card", track:"new", step:-1, due:todayISO(), reps:0, lapses:0, last:"" };
+      obsGrade(s, ["errei","dificil","medio","facil"][grade]);
+      os[item.id] = s; cache.state[p.srsField] = os;
+      update[p.srsField] = os;
+    } else if(p.engine === "inline"){
       // cirurgia: SRS inline no próprio card (ms). Recalcula e grava o card em userCards[id].
       var rev = schedule({ ease:item.rev.ease, interval:item.rev.interval, reps:item.rev.reps, due:item.rev.due }, grade, "ms");
       var uc = cache.state[p.cardsMap] || {};
@@ -677,7 +732,7 @@
       uc[item.id] = c; cache.state[p.cardsMap] = uc;
       update[p.cardsMap] = uc;
     } else {
-      // pedatlas: agendamento no map fcReviews (dias)
+      // pedatlas/cir/gin fcmap: agendamento no map fcReviews
       var srs = cache.state[p.srsField] || {};
       srs[item.id] = schedule(item.rev, grade, p.unit);
       cache.state[p.srsField] = srs;
@@ -685,10 +740,7 @@
     }
 
     creditPlatform(cache, "card", true, update);   // +XP/ofensiva na plataforma de origem
-    cache.ref.set(update, { merge: true }).catch(function(e){
-      console.warn("Falha ao salvar revisão", e);
-      toast("Não consegui salvar — verifique a conexão.");
-    });
+    commit(cache, update);
     SESSION.doneToday++;
     next();
   }
@@ -760,6 +812,18 @@
 
     Array.prototype.forEach.call(area.querySelectorAll(".qcard"), function(qcard){
       var i = parseInt(qcard.getAttribute("data-i"), 10);
+      var itemQ = SESSION.viewQuests[i], ans = itemQ && itemQ.answered;
+      if(ans){
+        // já respondida na plataforma → mostra travada (preserva progresso)
+        qcard.classList.add("answered");
+        Array.prototype.forEach.call(qcard.querySelectorAll(".qopt"), function(b){
+          b.disabled = true;
+          if(b.getAttribute("data-correct") === "1") b.classList.add("ok");
+          if(ans.chosen != null && parseInt(b.getAttribute("data-oi"),10) === ans.chosen && b.getAttribute("data-correct") !== "1") b.classList.add("wrong");
+        });
+        var exA = qcard.querySelector(".qexplain");
+        if(exA && exA.textContent.trim()) exA.hidden = false;
+      }
       Array.prototype.forEach.call(qcard.querySelectorAll(".qopt"), function(btn){
         btn.addEventListener("click", function(){
           if(qcard.classList.contains("answered")) return;
@@ -781,6 +845,32 @@
     if(nxt) nxt.addEventListener("click", function(){ SESSION.qPage++; renderQuest(); window.scrollTo(0, document.querySelector("#quest-area").offsetTop - 80); });
   }
 
+  // lê se uma questão já foi respondida na plataforma (para restaurar progresso na Central)
+  function questAnswered(p, st, id){
+    if(!st) return null;
+    if(p.quizMode === "cirurgiaQuiz"){
+      var pc = String(id).split(":"), q = st.quiz && st.quiz[pc[0]];
+      var v = q ? q[pc[1]] : undefined;
+      return (v == null) ? null : { chosen:v };
+    }
+    if(p.quizMode === "ginecoTopics"){
+      var pg = String(id).split(":"), t = st.topics && st.topics[pg[0]];
+      var qq = t && t.questions && t.questions["q"+pg[1]];
+      return qq ? { chosen:qq.chosen, correct:qq.correct } : null;
+    }
+    if(p.quizMode === "obsAnswered"){
+      var poo = String(id).split(":"), a = st.answered && st.answered[poo[0]];
+      var vv = a ? a[poo[1]] : undefined;
+      return (vv == null) ? null : { correct: vv === 1 };
+    }
+    if(p.quizMode === "pneumoQ"){
+      var pa = st.qAnswered && st.qAnswered[id];
+      return pa ? { chosen:pa.ans, correct:pa.correct } : null;
+    }
+    var qs = st.qSeen || {};   // pedatlas
+    return qs[id] ? { seen:true } : null;
+  }
+
   // grava "feito" no MESMO documento da plataforma (merge) — fonte única
   function markQuestionAnswered(item, correct, oi){
     var cache = SESSION.docCache[item.platformId];
@@ -800,15 +890,34 @@
       var quiz = st[p.quizField] || {};
       quiz[sa] = quiz[sa] || {}; quiz[sa][sb] = (oi==null?1:oi);
       st[p.quizField] = quiz; update[p.quizField] = quiz;
+    } else if(p.quizMode === "obsAnswered"){
+      // obstetrícia: state.answered[tid][i] = 1/0
+      var po = String(id).split(":"), oa = po[0], ob = po[1];
+      var ans = st.answered || {};
+      ans[oa] = ans[oa] || {}; ans[oa][ob] = correct ? 1 : 0;
+      st.answered = ans; update.answered = ans;
+    } else if(p.quizMode === "pneumoQ"){
+      // pneumo: state.qAnswered[id] = {ans, correct}
+      var qa = st.qAnswered || {};
+      qa[id] = { ans:(oi==null?0:oi), correct:!!correct };
+      st.qAnswered = qa; update.qAnswered = qa;
     } else {
       // pedatlas: qSeen[id] = true
       var qSeen = st.qSeen || {};
       qSeen[id] = true; st.qSeen = qSeen; update.qSeen = qSeen;
     }
     creditPlatform(cache, "quest", correct, update);   // +XP/ofensiva/estatísticas na plataforma
-    cache.ref.set(update, { merge: true }).catch(function(e){
-      console.warn("Falha ao salvar questão", e);
-      toast("Não consegui salvar a questão — verifique a conexão.");
+    commit(cache, update);
+  }
+
+  // grava no doc (aninhado em state quando a plataforma usa esse formato; bump updatedAt p/ sync)
+  function commit(cache, update){
+    var ref = cache.ref, sf = cache.p.stateField, payload;
+    if(sf){ payload = { updatedAt: Date.now() }; payload[sf] = update; }
+    else payload = update;
+    ref.set(payload, { merge: true }).catch(function(e){
+      console.warn("Falha ao salvar", e);
+      toast("Não consegui salvar — verifique a conexão.");
     });
   }
 
