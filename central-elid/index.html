@@ -132,6 +132,14 @@
     animation:tin .35s both;}
   @keyframes tin{from{opacity:0;transform:translateY(12px);}}
 
+  /* Barra de filtro */
+  .filter-bar{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:0 auto 30px;max-width:760px;}
+  .chip{padding:9px 16px;border-radius:999px;border:1px solid rgba(183,110,121,.28);background:rgba(183,110,121,.07);
+    color:inherit;font-family:inherit;font-size:12px;letter-spacing:.06em;cursor:pointer;transition:all .2s ease;white-space:nowrap;}
+  .chip:hover{background:rgba(183,110,121,.16);}
+  .chip.on{background:linear-gradient(100deg,var(--rose-gold),var(--soft-mauve));border-color:transparent;color:#fff;
+    box-shadow:0 4px 14px rgba(183,110,121,.28);}
+
   /* Questões */
   .quest-list{display:flex;flex-direction:column;gap:16px;}
   .qcard{background:rgba(183,110,121,.07);border:1px solid rgba(183,110,121,.18);border-radius:16px;padding:20px 22px;}
@@ -212,11 +220,14 @@
     <div class="sum-card"><div class="sum-num" id="s-plat">0</div><div class="sum-lab">Plataformas ativas</div></div>
   </div>
 
+  <!-- FILTRO (plataforma / embaralhar) — controla flashcards e questões -->
+  <div class="filter-bar" id="filter-bar"></div>
+
   <!-- FLASHCARDS DO DIA -->
   <div class="cat-head"><span class="cat-mark">&#10022;</span><h2 class="cat-title">Flashcards do dia</h2></div>
   <div id="flash-area"></div>
 
-  <!-- internos pendentes (sem texto no Firestore) -->
+  <!-- internos pendentes (avaliados antes da sincronização do feed) -->
   <div id="internal-area"></div>
 
   <!-- QUESTÕES DO DIA -->
@@ -343,14 +354,42 @@
 
   /* ===== Estado da Central ===== */
   var SESSION = {
-    queue: [],          // flashcards devidos: [{p, id, card, rev}]
-    quests: [],         // questões devidas: [{p, q, platformId}]
+    allFlash: [],       // todos os flashcards devidos carregados: [{p, id, card, rev}]
+    allQuests: [],      // todas as questões carregadas: [{p, q, platformId}]
+    queue: [],          // flashcards exibidos (após filtro/ordem)
+    viewQuests: [],     // questões exibidas (após filtro)
+    filter: "all",      // "all" | "shuffle" | <platformKey>
     index: 0,
     doneToday: 0,
     activeCount: 0,
-    internalPending: 0, // prontos devidos sem texto disponível (módulo não publicado)
+    internalPending: 0, // já avaliados na plataforma, mas texto ainda não sincronizado no feed
     docCache: {}        // platformId -> {ref, state, p}
   };
+
+  function shuffle(arr){
+    var a = arr.slice();
+    for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  // plataformas que têm itens carregados (para montar os filtros)
+  function platformsWithItems(){
+    var seen = {}, out = [];
+    SESSION.allFlash.forEach(function(it){ if(!seen[it.p.key]){ seen[it.p.key] = true; out.push(it.p); } });
+    SESSION.allQuests.forEach(function(it){ if(!seen[it.p.key]){ seen[it.p.key] = true; out.push(it.p); } });
+    return out;
+  }
+  function applyFilter(){
+    var f = SESSION.filter;
+    var flash = SESSION.allFlash, quests = SESSION.allQuests;
+    if(f !== "all" && f !== "shuffle"){
+      flash = flash.filter(function(it){ return it.p.key === f; });
+      quests = quests.filter(function(it){ return it.p.key === f; });
+    }
+    if(f === "shuffle"){ flash = shuffle(flash); quests = shuffle(quests); }
+    SESSION.queue = flash;
+    SESSION.viewQuests = quests;
+    SESSION.index = 0;
+  }
 
   /* ===== Normalização defensiva de questão ===== */
   function qId(q){ return q.id || q.qid || q._id || null; }
@@ -401,13 +440,13 @@
         // "Feito" = tem agendamento (foi avaliado). Mostra os devidos hoje.
         Object.keys(srs).forEach(function(id){
           if(!isDue(srs[id], p.unit)) return;             // agendado p/ frente → não mostra hoje
-          if(textById[id]) SESSION.queue.push({ p:p, id:id, card:textById[id], rev: srs[id] });
+          if(textById[id]) SESSION.allFlash.push({ p:p, id:id, card:textById[id], rev: srs[id] });
           else SESSION.internalPending++;                  // avaliado antes do gancho → texto ainda não publicado
         });
 
         // Questões publicadas pela plataforma (= respondidas/"feitas" lá)
         feedQuests.forEach(function(q){
-          var id = qId(q); if(id) SESSION.quests.push({ p:p, q:q, platformId:p.platformId });
+          var id = qId(q); if(id) SESSION.allQuests.push({ p:p, q:q, platformId:p.platformId });
         });
       }).then(function(){
         pending--;
@@ -418,13 +457,44 @@
 
   /* ===== Render ===== */
   function render(){
-    $("#s-flash").textContent = SESSION.queue.length;
+    applyFilter();
+    $("#s-flash").textContent = SESSION.allFlash.length;
     $("#s-done").textContent = SESSION.doneToday;
     $("#s-plat").textContent = SESSION.activeCount;
     renderPlatforms();
     renderInternal(SESSION.internalPending);
+    renderFilterBar();
     renderQuest();
     renderStage();
+  }
+
+  // re-render só das listas filtradas (sem recarregar do Firestore)
+  function reflow(){
+    applyFilter();
+    renderFilterBar();
+    renderStage();
+    renderQuest();
+  }
+
+  function renderFilterBar(){
+    var bar = $("#filter-bar");
+    var plats = platformsWithItems();
+    if(plats.length === 0){ bar.innerHTML = ""; return; }
+    var html = '';
+    html += chip("all", "Todas");
+    html += chip("shuffle", "&#10022; Embaralhar");
+    plats.forEach(function(p){ html += chip(p.key, esc(p.label)); });
+    bar.innerHTML = html;
+    Array.prototype.forEach.call(bar.querySelectorAll(".chip"), function(b){
+      b.addEventListener("click", function(){
+        SESSION.filter = b.getAttribute("data-f");
+        reflow();
+      });
+    });
+  }
+  function chip(value, label){
+    var on = SESSION.filter === value ? " on" : "";
+    return '<button class="chip' + on + '" data-f="' + value + '">' + label + '</button>';
   }
 
   function renderStage(){
@@ -450,7 +520,7 @@
             '<div class="flash-face">' +
               '<span class="face-tag">Frente</span><span class="face-src">' + esc(item.p.label) + '</span>' +
               '<div class="face-text">' + safe(cardFront(item.card)) + '</div>' +
-              '<div class="face-hint">toque para ver a resposta</div>' +
+              '<div class="face-hint">toque para virar</div>' +
             '</div>' +
             '<div class="flash-face flash-back">' +
               '<span class="face-tag">Verso</span><span class="face-src">' + esc(item.p.label) + '</span>' +
@@ -459,19 +529,20 @@
           '</div>' +
         '</div>' +
         '<div class="rate-row" id="rates" hidden>' +
-          '<button class="rate r0" data-g="0"><b>Errei</b><small>10 min</small></button>' +
-          '<button class="rate r1" data-g="1"><b>Difícil</b><small>+ curto</small></button>' +
+          '<button class="rate r0" data-g="0"><b>Errei</b><small>hoje</small></button>' +
+          '<button class="rate r1" data-g="1"><b>Difícil</b><small>EF −</small></button>' +
           '<button class="rate r2" data-g="2"><b>Bom</b><small>padrão</small></button>' +
-          '<button class="rate r3" data-g="3"><b>Fácil</b><small>+ longo</small></button>' +
+          '<button class="rate r3" data-g="3"><b>Fácil</b><small>EF +</small></button>' +
         '</div>' +
         '<div class="stage-nav"><span>Card ' + (SESSION.index + 1) + ' de ' + SESSION.queue.length + '</span>' +
         '<span>' + SESSION.doneToday + ' revisados hoje</span></div>' +
       '</div>';
 
     var flash = $("#flash");
+    var revealed = false;
     flash.addEventListener("click", function(){
-      flash.classList.add("flipped");
-      $("#rates").hidden = false;
+      flash.classList.toggle("flipped");        // vira e desvira quantas vezes quiser
+      if(!revealed){ revealed = true; $("#rates").hidden = false; }
     });
     Array.prototype.forEach.call(document.querySelectorAll("#rates .rate"), function(btn){
       btn.addEventListener("click", function(){ rate(parseInt(btn.getAttribute("data-g"), 10)); });
@@ -511,23 +582,24 @@
     if(!n){ area.innerHTML = ""; return; }
     area.innerHTML =
       '<div class="pending-row">' +
-        '<span>+ ' + n + ' flashcard(s) prontos do PedAtlas vencem hoje (o texto deles fica na plataforma).</span>' +
-        '<a href="../plataformas/pediatria/">Revisar no PedAtlas →</a>' +
+        '<span>' + n + ' flashcard(s) já avaliados no PedAtlas ainda não foram sincronizados aqui. ' +
+        'Abra o PedAtlas e avalie/salve uma vez para trazer o conteúdo deles.</span>' +
+        '<a href="../plataformas/pediatria/">Abrir PedAtlas →</a>' +
       '</div>';
   }
 
   function renderQuest(){
     var area = $("#quest-area");
-    if(SESSION.quests.length === 0){
+    if(SESSION.viewQuests.length === 0){
       area.innerHTML =
-        '<div class="panel"><div class="big">Sem questões para hoje</div>' +
-        '<p>As questões dos módulos que você estudar aparecem aqui assim que a plataforma as publica. ' +
+        '<div class="panel"><div class="big">Sem questões para mostrar</div>' +
+        '<p>As questões que você responder nas plataformas aparecem aqui. ' +
         'Você também pode resolvê-las direto no Atlas.</p>' +
         '<a class="cta" href="../plataformas/pediatria/">Abrir PedAtlas</a></div>';
       return;
     }
     var html = '<div class="quest-list">';
-    SESSION.quests.forEach(function(item, i){
+    SESSION.viewQuests.forEach(function(item, i){
       var q = item.q, opts = qOptions(q);
       html +=
         '<div class="qcard" data-i="' + i + '">' +
@@ -558,7 +630,7 @@
           if(!correct) btn.classList.add("wrong");
           var ex = qcard.querySelector(".qexplain");
           if(ex && ex.textContent.trim()) ex.hidden = false;
-          markQuestionAnswered(SESSION.quests[i], correct);
+          markQuestionAnswered(SESSION.viewQuests[i], correct);
         });
       });
     });
