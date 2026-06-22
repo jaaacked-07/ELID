@@ -47,18 +47,17 @@
   .hero .today{font-size:13px;letter-spacing:.12em;color:rgba(201,160,176,.7);margin-top:14px;text-transform:capitalize;}
   body.light-mode .hero .today{color:rgba(120,80,100,.7);}
 
-  /* Gamificação */
-  .gam-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:44px;}
-  @media(max-width:640px){.gam-bar{grid-template-columns:repeat(2,1fr);}}
-  .gam-stat{background:rgba(183,110,121,.08);border:1px solid rgba(183,110,121,.2);border-radius:16px;
-    padding:18px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:124px;}
-  body.light-mode .gam-stat{background:rgba(183,110,121,.06);border-color:rgba(183,110,121,.25);}
-  .gam-ic{font-size:22px;line-height:1;margin-bottom:6px;}
-  .gam-num{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--rose-gold);line-height:1;}
-  .gam-lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(201,160,176,.72);margin-top:6px;}
-  body.light-mode .gam-lab{color:rgba(120,80,100,.72);}
-  .gam-goal .goal-ring{margin-bottom:4px;}
-  #goal-arc{transition:stroke-dashoffset .6s ease;}
+  /* Questões — sanfona */
+  .qcard{background:rgba(183,110,121,.07);border:1px solid rgba(183,110,121,.18);border-radius:14px;overflow:hidden;}
+  body.light-mode .qcard{background:rgba(183,110,121,.06);}
+  .qhead{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:15px 18px;background:transparent;border:0;cursor:pointer;color:inherit;font-family:inherit;text-align:left;}
+  .qhead:hover{background:rgba(183,110,121,.08);}
+  .qhead-txt{display:flex;flex-direction:column;gap:3px;}
+  .qnum{font-size:14px;font-weight:500;letter-spacing:.02em;}
+  .qsrc{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--rose-gold);}
+  .qtoggle{font-size:22px;font-weight:300;color:var(--rose-gold);width:24px;text-align:center;flex-shrink:0;}
+  .qbody{padding:4px 18px 18px;}
 
   /* Section heads */
   .cat-head{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 26px;}
@@ -146,9 +145,6 @@
 
   /* Questões */
   .quest-list{display:flex;flex-direction:column;gap:16px;}
-  .qcard{background:rgba(183,110,121,.07);border:1px solid rgba(183,110,121,.18);border-radius:16px;padding:20px 22px;}
-  body.light-mode .qcard{background:rgba(183,110,121,.06);}
-  .qsrc{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--rose-gold);margin-bottom:10px;}
   .qstem{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;line-height:1.45;margin-bottom:16px;}
   .qopts{display:flex;flex-direction:column;gap:9px;}
   .qopt{text-align:left;padding:12px 16px;border-radius:11px;border:1px solid rgba(183,110,121,.22);
@@ -218,20 +214,8 @@
   </div>
 
   <!-- Resumo -->
-  <!-- GAMIFICAÇÃO (global ELID) -->
-  <div class="gam-bar">
-    <div class="gam-stat"><div class="gam-ic">&#128293;</div><div class="gam-num" id="g-streak">0</div><div class="gam-lab">Ofensiva</div></div>
-    <div class="gam-stat"><div class="gam-ic">&#11088;</div><div class="gam-num" id="g-xp">0</div><div class="gam-lab" id="g-level">Nível 1</div></div>
-    <div class="gam-stat"><div class="gam-ic">&#9989;</div><div class="gam-num" id="g-today">0</div><div class="gam-lab">Feitos hoje</div></div>
-    <div class="gam-stat gam-goal">
-      <svg class="goal-ring" viewBox="0 0 64 64" width="56" height="56">
-        <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(183,110,121,.18)" stroke-width="6"/>
-        <circle id="goal-arc" cx="32" cy="32" r="26" fill="none" stroke="var(--rose-gold)" stroke-width="6"
-          stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="163.4" transform="rotate(-90 32 32)"/>
-      </svg>
-      <div class="gam-lab" id="g-goal">Meta 0/20</div>
-    </div>
-  </div>
+  <!-- (sem painel de gamificação na Central) -->
+
 
   <!-- FILTRO (plataforma / embaralhar) — controla flashcards e questões -->
   <div class="filter-bar" id="filter-bar"></div>
@@ -245,6 +229,7 @@
 
   <!-- QUESTÕES DO DIA -->
   <div class="cat-head" style="margin-top:44px;"><span class="cat-mark">&#10022;</span><h2 class="cat-title">Questões do dia</h2></div>
+  <div class="filter-bar" id="qfilter-bar"></div>
   <div id="quest-area"></div>
 
   <!-- PLATAFORMAS -->
@@ -375,7 +360,8 @@
     allQuests: [],      // todas as questões carregadas: [{p, q, platformId}]
     queue: [],          // flashcards exibidos (após filtro/ordem)
     viewQuests: [],     // questões exibidas (após filtro)
-    filter: "all",      // "all" | "shuffle" | <platformKey>
+    filter: "all",      // filtro dos flashcards: "all" | "shuffle" | <platformKey>
+    qFilter: "all",     // filtro das questões: "all" | "shuffle" | <platformKey>
     index: 0,
     doneToday: 0,
     activeCount: 0,
@@ -388,31 +374,27 @@
     for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
     return a;
   }
-  // plataformas que têm itens carregados (para montar os filtros)
-  function platformsWithItems(){
+  // plataformas presentes em uma lista (para montar os filtros)
+  function platsOf(list){
     var seen = {}, out = [];
-    SESSION.allFlash.forEach(function(it){ if(!seen[it.p.key]){ seen[it.p.key] = true; out.push(it.p); } });
-    SESSION.allQuests.forEach(function(it){ if(!seen[it.p.key]){ seen[it.p.key] = true; out.push(it.p); } });
+    list.forEach(function(it){ if(!seen[it.p.key]){ seen[it.p.key] = true; out.push(it.p); } });
     return out;
   }
-  function applyFilter(){
-    var f = SESSION.filter;
-    var flash = SESSION.allFlash, quests = SESSION.allQuests;
-    if(f !== "all" && f !== "shuffle"){
-      flash = flash.filter(function(it){ return it.p.key === f; });
-      quests = quests.filter(function(it){ return it.p.key === f; });
-    }
-    if(f === "shuffle"){ flash = shuffle(flash); quests = shuffle(quests); }
-    SESSION.queue = flash;
-    SESSION.viewQuests = quests;
-    SESSION.index = 0;
+  function applyFlashFilter(){
+    var f = SESSION.filter, a = SESSION.allFlash;
+    if(f !== "all" && f !== "shuffle") a = a.filter(function(it){ return it.p.key === f; });
+    if(f === "shuffle") a = shuffle(a);
+    SESSION.queue = a; SESSION.index = 0;
+  }
+  function applyQuestFilter(){
+    var f = SESSION.qFilter, a = SESSION.allQuests;
+    if(f !== "all" && f !== "shuffle") a = a.filter(function(it){ return it.p.key === f; });
+    if(f === "shuffle") a = shuffle(a);
+    SESSION.viewQuests = a;
   }
 
-  /* ===== Gamificação global (doc próprio: users/{uid}/central/_stats) ===== */
-  var GAM = { xp:0, streak:0, lastDay:null, reviewsToday:0, questsToday:0, todayKey:null, goal:20, ref:null };
-  var GOAL_CIRC = 2 * Math.PI * 26;   // circunferência do anel (r=26)
-
-  function dStr(d){ return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate(); }   // = todayStr() do PedAtlas
+  /* ===== Datas (formato AAAA-M-D, igual ao PedAtlas) ===== */
+  function dStr(d){ return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate(); }
   function todayStr(){ return dStr(new Date()); }
   function yestStr(){ var y = new Date(); y.setDate(y.getDate()-1); return dStr(y); }
   // ofensiva: +1 se a última atividade foi ontem, senão reinicia em 1 (≥1 atividade/dia)
@@ -423,52 +405,7 @@
     obj[lastKey] = t;
   }
 
-  function loadGlobal(){
-    FB.db.collection("users").doc(FB.uid).collection("central").doc("_stats").get().then(function(doc){
-      GAM.ref = FB.db.collection("users").doc(FB.uid).collection("central").doc("_stats");
-      if(doc.exists){
-        var d = doc.data() || {};
-        GAM.xp = d.xp||0; GAM.streak = d.streak||0; GAM.lastDay = d.lastDay||null;
-        GAM.reviewsToday = d.reviewsToday||0; GAM.questsToday = d.questsToday||0; GAM.todayKey = d.todayKey||null;
-        if(d.goal) GAM.goal = d.goal;
-      }
-      if(GAM.todayKey !== todayStr()){ GAM.reviewsToday = 0; GAM.questsToday = 0; GAM.todayKey = todayStr(); }
-      renderGam();
-    }).catch(function(){ renderGam(); });
-  }
-
-  function levelOf(xp){ return Math.floor((xp||0)/100) + 1; }   // 100 XP por nível
-
-  function renderGam(){
-    var done = GAM.reviewsToday + GAM.questsToday;
-    var set = function(id, v){ var el = $("#"+id); if(el) el.textContent = v; };
-    set("g-streak", GAM.streak);
-    set("g-xp", GAM.xp);
-    set("g-level", "Nível " + levelOf(GAM.xp));
-    set("g-today", done);
-    set("g-goal", "Meta " + Math.min(done, GAM.goal) + "/" + GAM.goal);
-    var arc = $("#goal-arc");
-    if(arc){
-      var frac = Math.max(0, Math.min(1, GAM.goal ? done / GAM.goal : 0));
-      arc.setAttribute("stroke-dasharray", GOAL_CIRC.toFixed(1));
-      arc.setAttribute("stroke-dashoffset", (GOAL_CIRC * (1 - frac)).toFixed(1));
-    }
-  }
-
-  // registra atividade feita NA Central: atualiza placar global + persiste
-  function updateGlobal(kind, correct){
-    if(GAM.todayKey !== todayStr()){ GAM.reviewsToday = 0; GAM.questsToday = 0; GAM.todayKey = todayStr(); }
-    if(kind === "card"){ GAM.reviewsToday++; GAM.xp += 10; }
-    else { GAM.questsToday++; GAM.xp += 10; if(correct) GAM.xp += 5; }
-    bumpStreakOn(GAM, "streak", "lastDay");
-    if(GAM.ref){
-      GAM.ref.set({ xp:GAM.xp, streak:GAM.streak, lastDay:GAM.lastDay,
-        reviewsToday:GAM.reviewsToday, questsToday:GAM.questsToday, todayKey:GAM.todayKey, goal:GAM.goal }, { merge:true }).catch(function(){});
-    }
-    renderGam();
-  }
-
-  // credita XP/ofensiva NA PLATAFORMA de origem (mesmos campos/regras dela)
+  // credita XP/ofensiva NA PLATAFORMA de origem (mesmos campos/regras dela) — nada é exibido na Central
   function creditPlatform(cache, kind, correct, update){
     var g = cache.p.gam; if(!g) return;
     var st = cache.state;
@@ -546,42 +483,41 @@
 
   /* ===== Render ===== */
   function render(){
-    applyFilter();
-    renderGam();
+    applyFlashFilter();
+    applyQuestFilter();
     renderPlatforms();
-    renderInternal(SESSION.internalPending);
     renderFilterBar();
-    renderQuest();
-    renderStage();
-  }
-
-  // re-render só das listas filtradas (sem recarregar do Firestore)
-  function reflow(){
-    applyFilter();
-    renderFilterBar();
+    renderQuestFilterBar();
     renderStage();
     renderQuest();
   }
+  function reflowFlash(){ applyFlashFilter(); renderFilterBar(); renderStage(); }
+  function reflowQuest(){ applyQuestFilter(); renderQuestFilterBar(); renderQuest(); }
 
   function renderFilterBar(){
-    var bar = $("#filter-bar");
-    var plats = platformsWithItems();
+    var bar = $("#filter-bar"); if(!bar) return;
+    var plats = platsOf(SESSION.allFlash);
     if(plats.length === 0){ bar.innerHTML = ""; return; }
-    var html = '';
-    html += chip("all", "Todas");
-    html += chip("shuffle", "&#10022; Embaralhar");
-    plats.forEach(function(p){ html += chip(p.key, esc(p.label)); });
+    var html = chip("all", "Todas", SESSION.filter) + chip("shuffle", "&#10022; Embaralhar", SESSION.filter);
+    plats.forEach(function(p){ html += chip(p.key, esc(p.label), SESSION.filter); });
     bar.innerHTML = html;
     Array.prototype.forEach.call(bar.querySelectorAll(".chip"), function(b){
-      b.addEventListener("click", function(){
-        SESSION.filter = b.getAttribute("data-f");
-        reflow();
-      });
+      b.addEventListener("click", function(){ SESSION.filter = b.getAttribute("data-f"); reflowFlash(); });
     });
   }
-  function chip(value, label){
-    var on = SESSION.filter === value ? " on" : "";
-    return '<button class="chip' + on + '" data-f="' + value + '">' + label + '</button>';
+  function renderQuestFilterBar(){
+    var bar = $("#qfilter-bar"); if(!bar) return;
+    var plats = platsOf(SESSION.allQuests);
+    if(plats.length === 0){ bar.innerHTML = ""; return; }
+    var html = chip("all", "Todas", SESSION.qFilter) + chip("shuffle", "&#10022; Embaralhar", SESSION.qFilter);
+    plats.forEach(function(p){ html += chip(p.key, esc(p.label), SESSION.qFilter); });
+    bar.innerHTML = html;
+    Array.prototype.forEach.call(bar.querySelectorAll(".chip"), function(b){
+      b.addEventListener("click", function(){ SESSION.qFilter = b.getAttribute("data-f"); reflowQuest(); });
+    });
+  }
+  function chip(value, label, active){
+    return '<button class="chip' + (active === value ? " on" : "") + '" data-f="' + value + '">' + label + '</button>';
   }
 
   function renderStage(){
@@ -654,8 +590,6 @@
       console.warn("Falha ao salvar revisão", e);
       toast("Não consegui salvar — verifique a conexão.");
     });
-
-    updateGlobal("card");                   // placar global do ELID
     SESSION.doneToday++;
     next();
   }
@@ -689,16 +623,23 @@
     var html = '<div class="quest-list">';
     SESSION.viewQuests.forEach(function(item, i){
       var q = item.q, opts = qOptions(q);
+      var titulo = esc(item.p.label) + (q.modTitle ? ' · ' + esc(q.modTitle) : '');
       html +=
         '<div class="qcard" data-i="' + i + '">' +
-          '<div class="qsrc">' + esc(item.p.label) + (q.modTitle ? ' · ' + esc(q.modTitle) : '') + '</div>' +
-          '<div class="qstem">' + safe(qStem(q)) + '</div>' +
-          '<div class="qopts">' +
-            opts.map(function(o, oi){
-              return '<button class="qopt" data-oi="' + oi + '" data-correct="' + (o.correct ? 1 : 0) + '">' + safe(o.text) + '</button>';
-            }).join('') +
+          '<button class="qhead" type="button">' +
+            '<span class="qhead-txt"><span class="qnum">Questão ' + (i+1) + '</span>' +
+            '<span class="qsrc">' + titulo + '</span></span>' +
+            '<span class="qtoggle">+</span>' +
+          '</button>' +
+          '<div class="qbody" hidden>' +
+            '<div class="qstem">' + safe(qStem(q)) + '</div>' +
+            '<div class="qopts">' +
+              opts.map(function(o, oi){
+                return '<button class="qopt" data-oi="' + oi + '" data-correct="' + (o.correct ? 1 : 0) + '">' + safe(o.text) + '</button>';
+              }).join('') +
+            '</div>' +
+            '<div class="qexplain" hidden>' + (qExplain(q) ? safe(qExplain(q)) : '') + '</div>' +
           '</div>' +
-          '<div class="qexplain" hidden>' + (qExplain(q) ? safe(qExplain(q)) : '') + '</div>' +
         '</div>';
     });
     html += '</div>';
@@ -706,6 +647,16 @@
 
     Array.prototype.forEach.call(area.querySelectorAll(".qcard"), function(qcard){
       var i = parseInt(qcard.getAttribute("data-i"), 10);
+      // expandir/recolher
+      var head = qcard.querySelector(".qhead");
+      head.addEventListener("click", function(){
+        var body = qcard.querySelector(".qbody");
+        var open = body.hidden;
+        body.hidden = !open;
+        qcard.classList.toggle("open", open);
+        qcard.querySelector(".qtoggle").textContent = open ? "−" : "+";
+      });
+      // responder
       Array.prototype.forEach.call(qcard.querySelectorAll(".qopt"), function(btn){
         btn.addEventListener("click", function(){
           if(qcard.classList.contains("answered")) return;
@@ -738,7 +689,6 @@
       console.warn("Falha ao salvar questão", e);
       toast("Não consegui salvar a questão — verifique a conexão.");
     });
-    updateGlobal("quest", correct);                    // placar global do ELID
   }
 
   function renderPlatforms(){
@@ -779,7 +729,6 @@
         $("#gate").classList.remove("show");
         $("#app").hidden = false;
         showToday();
-        loadGlobal();
         loadAll();
       });
     }catch(e){
