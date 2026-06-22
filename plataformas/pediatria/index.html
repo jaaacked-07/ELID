@@ -739,11 +739,11 @@ function save(){
   }
 }
 
-/* ---------- ELID · publicacao na Central ----------
-   Espelha em users/{uid}/central/pediatria o TEXTO dos itens ja "feitos":
-   - flashcards com dificuldade marcada (tem entrada em STATE.fcReviews)
-   - questoes ja respondidas (STATE.qSeen[id] === true)
-   O agendamento continua so aqui (fcReviews/qSeen); o feed carrega so texto. */
+/* ---------- ELID · publicação na Central ----------
+   Espelha em users/{uid}/central/pediatria o TEXTO dos itens já "feitos":
+   - flashcards com dificuldade marcada (têm entrada em STATE.fcReviews)
+   - questões já respondidas (STATE.qSeen[id] === true)
+   O agendamento continua só aqui (fcReviews/qSeen); o feed carrega só texto. */
 function elidQuestionById(id){
   var all=allNativeQuestions();
   for(var i=0;i<all.length;i++){
@@ -764,10 +764,13 @@ function elidPublish(){
       if(c) cards[id]={ front:c.front||"", back:c.back||"", modTitle:c._src||"" };
     });
     var questions=[];
-    var seen=STATE.qSeen||{};
-    Object.keys(seen).forEach(function(id){
-      if(seen[id]){ var q=elidQuestionById(id); if(q) questions.push(q); }
-    });
+    try{
+      var seed=todayStr();
+      seededShuffle(allNativeQuestions(), seed+"q").slice(0,5).forEach(function(it){
+        var o=it.q; var opts=(o.opts||[]).map(function(t,ix){return {text:t,correct:ix===o.correct};});
+        questions.push({id:o.id, stem:o.stem||"", options:opts, explanation:o.expl||"", modTitle:(it.mat&&it.mat.t)||""});
+      });
+    }catch(e){}
     FB.db.collection("users").doc(FB.user.uid)
       .collection("central").doc("pediatria")
       .set({ platform:"pediatria", label:"PedAtlas", updated:Date.now(), cards:cards, questions:questions }, { merge:true })
@@ -1694,8 +1697,8 @@ function srsState(id){ return STATE.fcReviews[id]||{ease:2.5,interval:0,due:nowD
 function srsDue(id){ var s=STATE.fcReviews[id]; if(!s)return true; return s.due<=nowDay(); }
 function srsGrade(id,g){
   var s=srsState(id);
-  var q=[0,3,4,5][g];                                  /* Errei/Dificil/Bom/Facil -> qualidade SM-2 (0..5) */
-  s.ease=s.ease+(0.1-(5-q)*(0.08+(5-q)*0.02));         /* fator de facilidade (EF) - formula SM-2 */
+  var q=[0,3,4,5][g];                                  /* Errei/Difícil/Bom/Fácil -> qualidade SM-2 (0..5) */
+  s.ease=s.ease+(0.1-(5-q)*(0.08+(5-q)*0.02));         /* fator de facilidade (EF) — fórmula SM-2 */
   if(s.ease<1.3)s.ease=1.3;
   if(q<3){ s.reps=0; s.interval=0; s.due=nowDay(); }   /* falha -> reaprender hoje */
   else{
