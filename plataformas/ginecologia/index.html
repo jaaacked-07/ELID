@@ -1132,9 +1132,35 @@ function queueSave(){
         completedModules: Object.keys(CONTENT).filter(id=>moduleProgress(id)===100),
         lastActivity: c.lastActivity||new Date().toISOString()
       }, {merge:true});
+      elidPublish();
     }
     catch(e){ console.warn("save Firestore falhou:", e.message); }
   }, 800);
+}
+/* ---------- ELID - publicacao na Central (ginecologia) ---------- */
+function elidPublish(){
+  try{
+    if(!fbOK||!currentUser||!db||!state) return;
+    var cards={}, uc=state.userCards||{};
+    Object.keys(uc).forEach(function(id){ var c=uc[id]; if(!c||(c.reviews||0)<1) return;
+      var front=c.front||c.statement||c.text||'';
+      var back=c.back||((c.type==='fv'||c.type==='vf')?(c.answer?'Verdadeiro':'Falso'):'');
+      cards[id]={front:front,back:back,modTitle:c.topicTitle||c.modName||''};
+    });
+    var questions=[], tp=state.topics||{};
+    Object.keys(tp).forEach(function(tid){
+      var src=CONTENT[tid]&&CONTENT[tid].questoes; if(!src) return;
+      var qs=(tp[tid]&&tp[tid].questions)||{};
+      Object.keys(qs).forEach(function(k){
+        var i=parseInt(String(k).replace('q',''),10); var Q=src[i]; if(!Q) return;
+        var opts=(Q.opts||[]).map(function(t,ix){return {text:t,correct:ix===Q.correct};});
+        var tt=(typeof findTopic==='function'&&findTopic(tid)&&(findTopic(tid).title||findTopic(tid).name))||tid;
+        questions.push({id:tid+':'+i, stem:Q.stem||'', options:opts, explanation:Q.comment||'', modTitle:tt});
+      });
+    });
+    db.collection('users').doc(currentUser.uid).collection('central').doc('ginecologia')
+      .set({platform:'ginecologia',label:'GinecoAtlas',updated:Date.now(),cards:cards,questions:questions},{merge:true}).catch(function(){});
+  }catch(e){}
 }
 async function loadState(){
   let loaded=null;
@@ -4126,11 +4152,12 @@ window.FC_CFG = {
   function delCard(id){ var u=UC(); if(u[id]){ delete u[id]; save(); } }
   function rate(c,q){
     c.reviews=(c.reviews||0)+1; if(q>=2) c.correct=(c.correct||0)+1;
-    var e=(c.ease||2.5), iv=(c.interval||0);
-    if(q===0){ c.interval=0; c.ease=Math.max(1.3,e-0.2); c.diff='dificil'; c.due=Date.now()+10*60*1000; }
-    else if(q===2){ c.interval=iv<=0?1:Math.max(1,Math.round(iv*1.2)); c.ease=Math.max(1.3,e-0.15); c.diff='dificil'; c.due=Date.now()+c.interval*864e5; }
-    else if(q===3){ c.interval=iv<=0?1:Math.round(iv*e); c.diff='medio'; c.due=Date.now()+c.interval*864e5; }
-    else { c.interval=iv<=0?2:Math.round(iv*e*1.3); c.ease=e+0.05; c.diff='facil'; c.due=Date.now()+c.interval*864e5; }
+    /* SM-2 canonico (padrao ELID): botao 0/2/3/4 -> qualidade 0/3/4/5 */
+    var Q = q===0?0 : q===2?3 : q===3?4 : 5;
+    var e=(c.ease||2.5), iv=(c.interval||0), n=(c.reps||0);
+    e = e + (0.1-(5-Q)*(0.08+(5-Q)*0.02)); if(e<1.3)e=1.3; c.ease=e;
+    if(Q<3){ c.reps=0; c.interval=0; c.diff='dificil'; c.due=Date.now(); }
+    else { c.interval = n===0?1:(n===1?6:Math.round(iv*e)); c.reps=n+1; c.diff = Q===3?'dificil':(Q===4?'medio':'facil'); c.due=Date.now()+c.interval*864e5; }
     STT().reviewed=(STT().reviewed||0)+1;
     reward(q===0?'Revisei (errei)':'Flashcard revisado');
     save();
