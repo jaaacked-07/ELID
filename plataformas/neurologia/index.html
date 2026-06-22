@@ -646,6 +646,7 @@ async function persist(showFlag){
         const base=fb.db.collection("users").doc(State.uid).collection("platforms").doc(PLATFORM_ID);
         await base.collection("data").doc("main").set({ data:State.data, email:State.email, name:State.name, platform:PLATFORM_ID, updated:Date.now() },{merge:true});
         await base.collection("surgeonProgress").doc("main").set(SP(),{merge:true});
+        elidPublish();
       }catch(e){ State.usingLocal=true; }
     }, 700);
   }
@@ -708,6 +709,18 @@ setTimeout(()=>{ document.getElementById('loader').style.display='none'; },2500)
    STREAK / NEUROPONTOS / TOAST
    ============================================================ */
 function todayStr(){ return new Date().toISOString().slice(0,10); }
+/* ---------- ELID - publicacao na Central (neurologia) ---------- */
+function elidPublish(){
+  try{
+    if(!fb.ok||!State.uid||!fb.db) return;
+    var cards={};
+    MODULES.forEach(function(m){ (m.cards||[]).forEach(function(c,i){ cards['c:'+m.id+':'+i]={front:c.q||c.front||'',back:c.a||c.back||'',modTitle:m.title||''}; }); });
+    (State.data.userCards||[]).forEach(function(c){ if(!c||!c.id) return; var o={front:c.front||c.q||'',back:c.back||c.a||'',modTitle:c.mat||c.tema||c.modTitle||''}; if(c.type)o.type=c.type; if(c.image)o.image=c.image; if(c.text)o.text=c.text; cards[c.id]=o; });
+    var d=dailyPicks(); var questions=(d.q||[]).map(function(x){ var q=x.q; var opts=(q.opts||[]).map(function(t,ix){return {text:t,correct:ix===q.correct};}); return {id:x.mod+':'+x.i, stem:q.stem||q.q||'', options:opts, explanation:q.expl||q.ex||'', modTitle:x.title||''}; });
+    fb.db.collection('users').doc(State.uid).collection('central').doc('neurologia')
+      .set({platform:'neurologia',label:'NeuroAtlas',updated:Date.now(),cards:cards,questions:questions},{merge:true}).catch(function(){});
+  }catch(e){}
+}
 function initStreak(){
   const sp=SP(); const t=todayStr();
   if(!sp.studyDays) sp.studyDays=[];
