@@ -55,11 +55,17 @@
   .qnum{font-size:14px;font-weight:600;letter-spacing:.02em;}
   .qsrc{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--rose-gold);}
   .qstem{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;line-height:1.45;margin-bottom:16px;}
-  .q-expand,.q-more{display:block;width:100%;margin:0 auto;padding:14px;border-radius:13px;
+  .q-expand{display:block;width:100%;margin:0 auto;padding:14px;border-radius:13px;
     border:1px dashed rgba(183,110,121,.4);background:rgba(183,110,121,.07);color:var(--rose-gold);
     font-family:inherit;font-size:14px;letter-spacing:.06em;cursor:pointer;transition:all .2s ease;}
-  .q-more{margin-top:16px;}
-  .q-expand:hover,.q-more:hover{background:rgba(183,110,121,.16);}
+  .q-expand:hover{background:rgba(183,110,121,.16);}
+  .q-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;}
+  .q-pg{padding:11px 16px;border-radius:11px;border:1px solid rgba(183,110,121,.35);background:rgba(183,110,121,.08);
+    color:var(--rose-gold);font-family:inherit;font-size:13px;letter-spacing:.05em;cursor:pointer;transition:all .2s ease;}
+  .q-pg:hover:not(:disabled){background:rgba(183,110,121,.18);}
+  .q-pg:disabled{opacity:.35;cursor:default;}
+  .q-pginfo{font-size:12px;letter-spacing:.08em;color:rgba(201,160,176,.7);}
+  body.light-mode .q-pginfo{color:rgba(120,80,100,.7);}
 
   /* Section heads */
   .cat-head{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 26px;}
@@ -300,15 +306,14 @@
     },
     { key:"neurologia",  label:"NeuroAtlas",          href:"../plataformas/neurologia/",  status:"soon" },
     { key:"ginecologia", label:"GinecoAtlas",         href:"../plataformas/ginecologia/", status:"rw",
-      platformId:"ginecologia", docPath:null, engine:"inline", unit:"ms",
-      cardsMap:"userCards", quizMode:"ginecoTopics",   // questões em state.topics[tid].questions["q"+i]; id feed = "tid:i"
-      gam:{ mode:"profile",                            // Gineco não tem XP: ofensiva em profile.streak/lastActive (ISO)
+      platformId:"ginecologia", docPath:null, engine:"fcmap", unit:"day", srsField:"fcReviews", showNew:true,
+      quizMode:"ginecoTopics",
+      gam:{ mode:"profile",
             stats:{ field:"stats", card:"flashTotal", q:"qTotal", qok:"qCorrect" } } },
     { key:"obstetricia", label:"Atlas de Obstetrícia",href:"../plataformas/obstetricia/", status:"soon" },
-    { key:"cirurgia",    label:"Cirurgia Geral",      href:"../plataformas/cirurgia/",    status:"rw",
-      platformId:"cirurgia-geral", docPath:null, engine:"inline", unit:"ms",
-      cardsMap:"userCards",                            // STATE.userCards { id: card{front,back,interval,ease,due,diff,reviews,reps} }
-      quizField:"quiz", statsField:"stats",            // questões nativas em STATE.quiz[subId][qIndex]; id no feed = "subId:qIndex"
+    { key:"cirurgia",    label:"Atlas Cirúrgico",     href:"../plataformas/cirurgia/",    status:"rw",
+      platformId:"cirurgia-geral", docPath:null, engine:"fcmap", unit:"day", srsField:"fcReviews", showNew:true,
+      quizMode:"cirurgiaQuiz", quizField:"quiz",
       gam:{ mode:"obj", xpField:"xp", streakField:"streak", xpCard:6, xpQuest:5, xpCorrect:5,
             stats:{ field:"stats", q:"questionsAnswered", qok:"correctAnswers" } } },
     { key:"pneumologia", label:"Pneumologia",         href:"../plataformas/pneumologia/", status:"soon" },
@@ -407,7 +412,7 @@
     filter: "all",      // filtro dos flashcards: "all" | "shuffle" | <platformKey>
     qFilter: "all",     // filtro das questões: "all" | "shuffle" | <platformKey>
     qOpen: false,       // seção de questões expandida?
-    qShown: 10,         // quantas questões já visíveis (paginação de 10)
+    qPage: 0,           // página atual de questões (10 por página, substituindo)
     index: 0,
     doneToday: 0,
     activeCount: 0,
@@ -532,30 +537,27 @@
         var feed = (feedDoc && feedDoc.exists) ? (feedDoc.data() || {}) : {};
         var feedQuests = Array.isArray(feed.questions) ? feed.questions : [];
 
-        if(p.engine === "inline"){
-          // flashcards: STATE.userCards (objeto), SRS inline no card, due em ms
-          var uc = state[p.cardsMap] || {};
-          Object.keys(uc).forEach(function(id){
-            var c = uc[id]; if(!c || (c.reviews||0) < 1) return;   // só os já avaliados
-            if((c.due||0) <= Date.now()){
-              SESSION.allFlash.push({ p:p, id:id, card:c, rev:c });   // card completo (tipo/imagem/cloze preservados)
-            }
+        // FLASHCARDS — motor fcmap (SM-2): texto do feed (+ array de cards do usuário) e agendamento em fcReviews
+        var srs = state[p.srsField] || {};
+        var feedCards = feed.cards || {};
+        var textById = {};
+        Object.keys(feedCards).forEach(function(id){ textById[id] = feedCards[id]; });
+        var userCards = Array.isArray(state[p.cardsField]) ? state[p.cardsField] : [];
+        userCards.forEach(function(c){ var id = cardId(c); if(id && !textById[id]) textById[id] = c; });
+
+        if(p.showNew){
+          // mostra todos os flashcards publicados que estão devidos (novos = sem agendamento = devidos)
+          Object.keys(textById).forEach(function(id){
+            if(isDue(srs[id], p.unit)) SESSION.allFlash.push({ p:p, id:id, card:textById[id], rev: srs[id] || null });
           });
         } else {
-          // fcmap (PedAtlas): texto do feed/cards do usuário + agendamento em fcReviews (map)
-          var srs = state[p.srsField] || {};
-          var feedCards = feed.cards || {};
-          var textById = {};
-          Object.keys(feedCards).forEach(function(id){ textById[id] = feedCards[id]; });
-          var userCards = Array.isArray(state[p.cardsField]) ? state[p.cardsField] : [];
-          userCards.forEach(function(c){ var id = cardId(c); if(id && !textById[id]) textById[id] = c; });
+          // só os que já têm agendamento (ex.: PedAtlas — flashcards já avaliados)
           Object.keys(srs).forEach(function(id){
-            if(!isDue(srs[id], p.unit)) return;
-            if(textById[id]) SESSION.allFlash.push({ p:p, id:id, card:textById[id], rev: srs[id] });
+            if(isDue(srs[id], p.unit) && textById[id]) SESSION.allFlash.push({ p:p, id:id, card:textById[id], rev: srs[id] });
           });
         }
 
-        // Questões publicadas pela plataforma (= respondidas/"feitas" lá)
+        // Questões do dia publicadas pela plataforma
         feedQuests.forEach(function(q){
           var id = qId(q); if(id) SESSION.allQuests.push({ p:p, q:q, platformId:p.platformId });
         });
@@ -577,7 +579,7 @@
     renderQuest();
   }
   function reflowFlash(){ applyFlashFilter(); renderFilterBar(); renderStage(); }
-  function reflowQuest(){ SESSION.qShown = 10; applyQuestFilter(); renderQuestFilterBar(); renderQuest(); }
+  function reflowQuest(){ SESSION.qPage = 0; applyQuestFilter(); renderQuestFilterBar(); renderQuest(); }
 
   function renderFilterBar(){
     var bar = $("#filter-bar"); if(!bar) return;
@@ -716,22 +718,26 @@
         '<p>As questões do dia de cada plataforma aparecem aqui depois que você abre a plataforma uma vez.</p></div>';
       return;
     }
-    // recolhida: um único botão revela TODAS de uma vez
+    // recolhida: um único botão revela as questões
     if(!SESSION.qOpen){
       area.innerHTML =
         '<button class="q-expand" id="q-expand">Ver as ' + list.length + ' questões &#9662;</button>';
-      $("#q-expand").addEventListener("click", function(){ SESSION.qOpen = true; SESSION.qShown = 10; renderQuest(); });
+      $("#q-expand").addEventListener("click", function(){ SESSION.qOpen = true; SESSION.qPage = 0; renderQuest(); });
       return;
     }
 
-    var shown = Math.min(SESSION.qShown, list.length);
+    var PER = 10, pages = Math.ceil(list.length / PER);
+    if(SESSION.qPage >= pages) SESSION.qPage = pages - 1;
+    if(SESSION.qPage < 0) SESSION.qPage = 0;
+    var start = SESSION.qPage * PER, end = Math.min(start + PER, list.length);
+
     var html = '<div class="quest-list">';
-    for(var i = 0; i < shown; i++){
+    for(var i = start; i < end; i++){
       var item = list[i], q = item.q, opts = qOptions(q);
       var titulo = esc(item.p.label) + (q.modTitle ? ' · ' + esc(q.modTitle) : '');
       html +=
-        '<div class="qcard open" data-i="' + i + '">' +
-          '<div class="qhead-static"><span class="qnum">Questão ' + (i+1) + '</span>' +
+        '<div class="qcard" data-i="' + i + '">' +
+          '<div class="qhead-static"><span class="qnum">Questão ' + (i+1) + ' de ' + list.length + '</span>' +
           '<span class="qsrc">' + titulo + '</span></div>' +
           '<div class="qstem">' + safe(qStem(q)) + '</div>' +
           '<div class="qopts">' +
@@ -743,8 +749,12 @@
         '</div>';
     }
     html += '</div>';
-    if(shown < list.length){
-      html += '<button class="q-more" id="q-more">Mostrar mais ' + Math.min(10, list.length - shown) + ' &#9662;</button>';
+    if(pages > 1){
+      html += '<div class="q-nav">' +
+        '<button class="q-pg" id="q-prev"' + (SESSION.qPage===0?' disabled':'') + '>&#9650; Anteriores</button>' +
+        '<span class="q-pginfo">' + (start+1) + '–' + end + ' de ' + list.length + '</span>' +
+        '<button class="q-pg" id="q-next"' + (SESSION.qPage>=pages-1?' disabled':'') + '>Próximas 10 &#9660;</button>' +
+      '</div>';
     }
     area.innerHTML = html;
 
@@ -766,8 +776,9 @@
         });
       });
     });
-    var more = $("#q-more");
-    if(more) more.addEventListener("click", function(){ SESSION.qShown += 10; renderQuest(); });
+    var prev = $("#q-prev"), nxt = $("#q-next");
+    if(prev) prev.addEventListener("click", function(){ if(SESSION.qPage>0){ SESSION.qPage--; renderQuest(); window.scrollTo(0, document.querySelector("#quest-area").offsetTop - 80); } });
+    if(nxt) nxt.addEventListener("click", function(){ SESSION.qPage++; renderQuest(); window.scrollTo(0, document.querySelector("#quest-area").offsetTop - 80); });
   }
 
   // grava "feito" no MESMO documento da plataforma (merge) — fonte única
@@ -776,20 +787,19 @@
     if(!cache) return;
     var p = cache.p, st = cache.state, id = qId(item.q); if(!id) return;
     var update = {};
-    if(p.engine === "inline"){
+    if(p.quizMode === "ginecoTopics"){
+      // gineco: state.topics[tid].questions["q"+i] = {chosen,correct}
       var parts = String(id).split(":"), a = parts[0], b = parts[1];
-      if(p.quizMode === "ginecoTopics"){
-        // gineco: state.topics[tid].questions["q"+i] = {chosen,correct}
-        var tp = st.topics || {};
-        tp[a] = tp[a] || { questions:{} }; tp[a].questions = tp[a].questions || {};
-        tp[a].questions["q"+b] = { chosen:(oi==null?0:oi), correct:!!correct };
-        st.topics = tp; update.topics = tp;
-      } else {
-        // cirurgia: state.quiz[subId][qIndex] = opção escolhida
-        var quiz = st[p.quizField] || {};
-        quiz[a] = quiz[a] || {}; quiz[a][b] = (oi==null?1:oi);
-        st[p.quizField] = quiz; update[p.quizField] = quiz;
-      }
+      var tp = st.topics || {};
+      tp[a] = tp[a] || { questions:{} }; tp[a].questions = tp[a].questions || {};
+      tp[a].questions["q"+b] = { chosen:(oi==null?0:oi), correct:!!correct };
+      st.topics = tp; update.topics = tp;
+    } else if(p.quizMode === "cirurgiaQuiz"){
+      // cirurgia: state.quiz[subId][qIndex] = opção escolhida
+      var pc = String(id).split(":"), sa = pc[0], sb = pc[1];
+      var quiz = st[p.quizField] || {};
+      quiz[sa] = quiz[sa] || {}; quiz[sa][sb] = (oi==null?1:oi);
+      st[p.quizField] = quiz; update[p.quizField] = quiz;
     } else {
       // pedatlas: qSeen[id] = true
       var qSeen = st.qSeen || {};
