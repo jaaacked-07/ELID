@@ -304,7 +304,11 @@
         xpCard:2, xpQuest:5, xpCorrect:10              // = XP_RULES do PedAtlas (revisarFc/questao/acerto)
       }
     },
-    { key:"neurologia",  label:"NeuroAtlas",          href:"../plataformas/neurologia/",  status:"soon" },
+    { key:"neurologia",  label:"NeuroAtlas",          href:"../plataformas/neurologia/",  status:"rw",
+      platformId:"neuroatlas", docPath:["data","main"], stateField:"data", engine:"fcmap", unit:"day", srsField:"fcReviews", showNew:true,
+      quizMode:"neuroQ",
+      gam:{ mode:"flat", nest:"surgeonProgress", xpField:"neuroPoints", streakField:"studyStreak", lastDayField:"lastStreakDay", dateFmt:"iso",
+            xpCard:5, xpQuest:4, xpCorrect:8, stats:{ card:"flashcardsReviewed" } } },
     { key:"ginecologia", label:"GinecoAtlas",         href:"../plataformas/ginecologia/", status:"rw",
       platformId:"ginecologia", docPath:null, engine:"fcmap", unit:"day", srsField:"fcReviews", showNew:true,
       quizMode:"ginecoTopics",
@@ -494,19 +498,19 @@
   function creditPlatform(cache, kind, correct, update){
     var g = cache.p.gam; if(!g) return;
     var st = cache.state;
+    var tgt = g.nest ? (st[g.nest] = st[g.nest] || {}) : st;   // alvo (aninhado p/ Neuro)
     // XP (se a plataforma tiver)
     if(g.xpField){
       var gain = (kind === "card") ? g.xpCard : (g.xpQuest + (correct ? g.xpCorrect : 0));
-      st[g.xpField] = (st[g.xpField]||0) + gain;
-      update[g.xpField] = st[g.xpField];
+      tgt[g.xpField] = (tgt[g.xpField]||0) + gain;
     }
     // ofensiva
     if(g.mode === "obj"){                       // streak objeto { count, last }
-      var sk = st[g.streakField] || { count:0, last:"" };
+      var sk = tgt[g.streakField] || { count:0, last:"" };
       var t = (g.dateFmt === "iso") ? todayISO() : todayStr();
       var y = (g.dateFmt === "iso") ? yestISO() : yestStr();
       if(sk.last !== t){ sk.count = (sk.last === y) ? (sk.count + 1) : 1; sk.last = t; }
-      st[g.streakField] = sk; update[g.streakField] = sk;
+      tgt[g.streakField] = sk;
     } else if(g.mode === "profile"){            // streak em state.profile (ISO) — gineco
       var pr = st.profile || (st.profile = {});
       var ti = todayISO();
@@ -519,22 +523,29 @@
     } else {                                    // flat: streak num + lastDay
       var tf = (g.dateFmt === "iso") ? todayISO() : todayStr();
       var yf = (g.dateFmt === "iso") ? yestISO() : yestStr();
-      if(st[g.lastDayField] !== tf){
-        st[g.streakField] = (st[g.lastDayField] === yf) ? ((st[g.streakField]||0) + 1) : 1;
-        st[g.lastDayField] = tf;
+      if(tgt[g.lastDayField] !== tf){
+        tgt[g.streakField] = (tgt[g.lastDayField] === yf) ? ((tgt[g.streakField]||0) + 1) : 1;
+        tgt[g.lastDayField] = tf;
       }
-      update[g.streakField] = st[g.streakField];
-      update[g.lastDayField] = st[g.lastDayField];
     }
-    // estatísticas (alimentam conquistas/resumo da plataforma)
+    // estatísticas
     if(g.stats){
-      var S = st[g.stats.field] || {};
+      var S = g.stats.field ? (st[g.stats.field] || {}) : tgt;   // sub-objeto (cir/gin) ou direto no alvo (neuro)
       if(kind === "card" && g.stats.card) S[g.stats.card] = (S[g.stats.card]||0) + 1;
       if(kind === "quest"){
         if(g.stats.q) S[g.stats.q] = (S[g.stats.q]||0) + 1;
         if(correct && g.stats.qok) S[g.stats.qok] = (S[g.stats.qok]||0) + 1;
       }
-      st[g.stats.field] = S; update[g.stats.field] = S;
+      if(g.stats.field){ st[g.stats.field] = S; update[g.stats.field] = S; }
+    }
+    // montar o update
+    if(g.nest){ update[g.nest] = tgt; }
+    else {
+      if(g.xpField) update[g.xpField] = tgt[g.xpField];
+      if(g.mode === "obj" || g.mode === "flat"){
+        update[g.streakField] = tgt[g.streakField];
+        if(g.lastDayField) update[g.lastDayField] = tgt[g.lastDayField];
+      }
     }
   }
 
@@ -867,6 +878,11 @@
       var pa = st.qAnswered && st.qAnswered[id];
       return pa ? { chosen:pa.ans, correct:pa.correct } : null;
     }
+    if(p.quizMode === "neuroQ"){
+      var pn = String(id).split(":"), nq = st.questions && st.questions[pn[0]];
+      var nv = nq ? nq[pn[1]] : undefined;
+      return nv ? { chosen:nv.chosen, correct:nv.correct } : null;
+    }
     var qs = st.qSeen || {};   // pedatlas
     return qs[id] ? { seen:true } : null;
   }
@@ -901,6 +917,12 @@
       var qa = st.qAnswered || {};
       qa[id] = { ans:(oi==null?0:oi), correct:!!correct };
       st.qAnswered = qa; update.qAnswered = qa;
+    } else if(p.quizMode === "neuroQ"){
+      // neuro: state.questions[mod][i] = {chosen, correct}
+      var pn = String(id).split(":"), nm = pn[0], ni = pn[1];
+      var qm = st.questions || {};
+      qm[nm] = qm[nm] || {}; qm[nm][ni] = { chosen:(oi==null?0:oi), correct:!!correct };
+      st.questions = qm; update.questions = qm;
     } else {
       // pedatlas: qSeen[id] = true
       var qSeen = st.qSeen || {};
