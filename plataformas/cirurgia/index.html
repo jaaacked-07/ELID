@@ -4450,17 +4450,13 @@ function elidPublish(){
       var back=c.back||((c.type==='fv'||c.type==='vf')?(c.answer?'Verdadeiro':'Falso'):'');
       cards[id]={front:front,back:back,modTitle:c.topicTitle||c.modName||''};
     });
-    var questions=[], quiz=STATE.quiz||{};
-    Object.keys(quiz).forEach(function(sid){
-      if(sid.indexOf('__daily__')===0) return;
-      var sub=(typeof findSub==='function')?findSub(sid):null; if(!sub||!sub.quiz) return;
-      var ans=quiz[sid]||{};
-      Object.keys(ans).forEach(function(qi){
-        var Q=sub.quiz[qi]; if(!Q) return;
-        var opts=(Q.o||[]).map(function(t,ix){return {text:t,correct:ix===Q.a};});
-        questions.push({id:sid+':'+qi, stem:Q.q||'', options:opts, explanation:Q.e||'', modTitle:sub.title||''});
+    var questions=[];
+    try{
+      shuffleSeed(dailyPool().qs, daySeed()).slice(0,6).forEach(function(it){
+        var q=it.q; var opts=(q.o||[]).map(function(t,ix){return {text:t,correct:ix===q.a};});
+        questions.push({id:it.sid+':'+it.qi, stem:q.q||'', options:opts, explanation:q.e||'', modTitle:it.sub||''});
       });
-    });
+    }catch(e){}
     fb.db.collection('users').doc(fb.user.uid).collection('central').doc('cirurgia')
       .set({platform:'cirurgia',label:'Cirurgia Geral',updated:Date.now(),cards:cards,questions:questions},{merge:true}).catch(function(){});
   }catch(e){}
