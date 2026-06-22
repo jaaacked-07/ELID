@@ -66,20 +66,27 @@
 
   /* Flashcard de revisão */
   .review-stage{max-width:560px;margin:0 auto 40px;}
-  .flash{position:relative;border-radius:20px;min-height:230px;cursor:pointer;perspective:1200px;}
-  .flash-inner{position:relative;width:100%;min-height:230px;transition:transform .55s cubic-bezier(.34,1.1,.5,1);transform-style:preserve-3d;}
+  .flash{position:relative;border-radius:20px;cursor:pointer;perspective:1600px;}
+  .flash-inner{display:grid;transition:transform .55s cubic-bezier(.34,1.1,.5,1);transform-style:preserve-3d;}
   .flash.flipped .flash-inner{transform:rotateY(180deg);}
-  .flash-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:30px;display:flex;flex-direction:column;
-    justify-content:center;align-items:center;text-align:center;
+  .flash-face{grid-area:1 / 1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;
+    padding:46px 26px 40px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    min-height:210px;overflow-wrap:anywhere;word-break:break-word;
     background:linear-gradient(135deg,rgba(183,110,121,.14) 0%,rgba(247,231,206,.06) 100%);
     border:1px solid rgba(247,231,206,.28);}
   body.light-mode .flash-face{background:linear-gradient(135deg,rgba(183,110,121,.1) 0%,rgba(247,231,206,.16) 100%);border-color:rgba(183,110,121,.28);}
   .flash-back{transform:rotateY(180deg);}
   .face-tag{position:absolute;top:14px;left:18px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,160,176,.65);}
-  .face-src{position:absolute;top:14px;right:18px;font-size:10px;letter-spacing:.12em;color:var(--rose-gold);}
-  .face-text{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(20px,3.4vw,26px);line-height:1.4;}
-  .face-hint{position:absolute;bottom:14px;left:0;right:0;font-size:11px;letter-spacing:.1em;color:rgba(201,160,176,.55);}
+  .face-src{position:absolute;top:14px;right:18px;font-size:10px;letter-spacing:.12em;color:var(--rose-gold);max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .face-text{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(18px,3.2vw,25px);line-height:1.4;max-width:100%;overflow-wrap:anywhere;}
+  .face-note{display:block;margin-top:10px;font-size:14px;color:rgba(201,160,176,.85);line-height:1.5;}
+  body.light-mode .face-note{color:rgba(120,80,100,.85);}
+  .face-img{display:block;max-width:100%;max-height:340px;height:auto;border-radius:12px;margin:12px auto 0;object-fit:contain;}
+  .cloze-blank{display:inline-block;min-width:46px;border-bottom:2px solid var(--rose-gold);color:transparent;margin:0 3px;}
+  .cloze-fill{color:var(--rose-gold);font-weight:500;}
+  .face-hint{position:absolute;bottom:12px;left:0;right:0;font-size:11px;letter-spacing:.1em;color:rgba(201,160,176,.55);}
   body.light-mode .face-hint{color:rgba(120,80,100,.55);}
+
 
   .rate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px;}
   .rate{padding:13px 8px;border-radius:13px;border:1px solid rgba(183,110,121,.25);background:rgba(183,110,121,.08);
@@ -289,13 +296,18 @@
       }
     },
     { key:"neurologia",  label:"NeuroAtlas",          href:"../plataformas/neurologia/",  status:"soon" },
-    { key:"ginecologia", label:"GinecoAtlas",         href:"../plataformas/ginecologia/", status:"soon" },
+    { key:"ginecologia", label:"GinecoAtlas",         href:"../plataformas/ginecologia/", status:"rw",
+      platformId:"ginecologia", docPath:null, engine:"inline", unit:"ms",
+      cardsMap:"userCards", quizMode:"ginecoTopics",   // questões em state.topics[tid].questions["q"+i]; id feed = "tid:i"
+      gam:{ mode:"profile",                            // Gineco não tem XP: ofensiva em profile.streak/lastActive (ISO)
+            stats:{ field:"stats", card:"flashTotal", q:"qTotal", qok:"qCorrect" } } },
     { key:"obstetricia", label:"Atlas de Obstetrícia",href:"../plataformas/obstetricia/", status:"soon" },
     { key:"cirurgia",    label:"Cirurgia Geral",      href:"../plataformas/cirurgia/",    status:"rw",
       platformId:"cirurgia-geral", docPath:null, engine:"inline", unit:"ms",
       cardsMap:"userCards",                            // STATE.userCards { id: card{front,back,interval,ease,due,diff,reviews,reps} }
       quizField:"quiz", statsField:"stats",            // questões nativas em STATE.quiz[subId][qIndex]; id no feed = "subId:qIndex"
-      gam:{ mode:"obj", xpField:"xp", streakField:"streak", xpCard:6, xpQuest:5, xpCorrect:5 } },
+      gam:{ mode:"obj", xpField:"xp", streakField:"streak", xpCard:6, xpQuest:5, xpCorrect:5,
+            stats:{ field:"stats", q:"questionsAnswered", qok:"correctAnswers" } } },
     { key:"pneumologia", label:"Pneumologia",         href:"../plataformas/pneumologia/", status:"soon" },
     { key:"preventiva",  label:"Med. Preventiva",     href:"../plataformas/preventiva/",  status:"soon" },
     { key:"semiologia",  label:"Semiologia",          href:"../plataformas/semiologia/",  status:"soon" }
@@ -303,12 +315,38 @@
 
   /* ===== Helpers de extração defensiva ===== */
   function cardId(c){ return c.id || c.cardId || c._id || null; }
-  function cardFront(c){
-    return c.front || c.frente || c.q || c.pergunta || c.statement || c.text || c.title || "(frente)";
+  function safeUrl(u){ u = (u||"").trim(); return /^https?:\/\//i.test(u) ? u : ""; }
+  function faceText(html){ return '<div class="face-text">' + html + '</div>'; }
+  function imgTag(u){ var s = safeUrl(u); return s ? '<img class="face-img" src="' + s + '" alt="">' : ''; }
+  function clozeMask(t){ return safe(t).replace(/\{\{(.+?)\}\}/g, '<span class="cloze-blank">&nbsp;&nbsp;&nbsp;</span>'); }
+  function clozeReveal(t){ return safe(t).replace(/\{\{(.+?)\}\}/g, '<span class="cloze-fill">$1</span>'); }
+
+  // FRENTE — cobre fv/qa, cloze, vf, imagem (img/occ); cai no texto se faltar campo
+  function cardFrontHTML(c){
+    var t = c.type || c.tipo || "";
+    if(t === "cloze" && c.text) return faceText(clozeMask(c.text));
+    if((t === "occ" || t === "img") && safeUrl(c.image)){
+      var pf = c.front || c.statement || (t === "occ" ? "O que está oculto?" : "");
+      return (pf ? faceText(safe(pf)) : "") + imgTag(c.image);
+    }
+    if(t === "vf" && c.statement) return faceText(safe(c.statement));
+    return faceText(safe(c.front || c.frente || c.q || c.pergunta || c.statement || c.text || "(frente)"));
   }
-  function cardBack(c){
-    if(typeof c.answer === "boolean" || c.type === "fv") return c.answer ? "Verdadeiro" : "Falso";
-    return c.back || c.verso || c.a || c.resposta || c.answerText || c.explicacao || "";
+  // VERSO — SEMPRE mostra algo (texto, V/F, imagem revelada, cloze preenchido)
+  function cardBackHTML(c){
+    var t = c.type || c.tipo || "";
+    if(t === "cloze" && c.text) return faceText(clozeReveal(c.text));
+    if(t === "vf" || typeof c.answer === "boolean"){
+      var vf = (c.answer ? "Verdadeiro" : "Falso");
+      return faceText('<b>' + vf + '</b>' + (c.back ? '<span class="face-note">' + safe(c.back) + '</span>' : ''));
+    }
+    if((t === "occ" || t === "img") && safeUrl(c.image)){
+      return (c.back ? faceText(safe(c.back)) : "") + imgTag(c.image);
+    }
+    var b = c.back || c.verso || c.a || c.resposta || c.answerText || c.explicacao || "";
+    if(b) return faceText(safe(b));
+    if(safeUrl(c.image)) return imgTag(c.image);
+    return faceText('<span style="opacity:.6">(sem verso registrado)</span>');
   }
   function nowDay(){ return Math.floor(Date.now() / 86400000); }
   function isDue(rev, unit){
@@ -408,24 +446,46 @@
     obj[lastKey] = t;
   }
 
-  // credita XP/ofensiva NA PLATAFORMA de origem (mesmos campos/regras dela) — nada é exibido na Central
+  function todayISO(){ return new Date().toISOString().slice(0,10); }   // formato do Gineco
+  // credita XP/ofensiva/estatísticas NA PLATAFORMA de origem — nada é exibido na Central
   function creditPlatform(cache, kind, correct, update){
     var g = cache.p.gam; if(!g) return;
     var st = cache.state;
-    var gain = (kind === "card") ? g.xpCard : (g.xpQuest + (correct ? g.xpCorrect : 0));
-    st[g.xpField] = (st[g.xpField]||0) + gain;
-    update[g.xpField] = st[g.xpField];
-    if(g.mode === "obj"){
-      // streak como objeto { count, last } (ex.: cirurgia)
+    // XP (se a plataforma tiver)
+    if(g.xpField){
+      var gain = (kind === "card") ? g.xpCard : (g.xpQuest + (correct ? g.xpCorrect : 0));
+      st[g.xpField] = (st[g.xpField]||0) + gain;
+      update[g.xpField] = st[g.xpField];
+    }
+    // ofensiva
+    if(g.mode === "obj"){                       // streak objeto { count, last } — cirurgia
       var sk = st[g.streakField] || { count:0, last:"" };
       var t = todayStr();
       if(sk.last !== t){ sk.count = (sk.last === yestStr()) ? (sk.count + 1) : 1; sk.last = t; }
-      st[g.streakField] = sk;
-      update[g.streakField] = sk;
-    } else {
+      st[g.streakField] = sk; update[g.streakField] = sk;
+    } else if(g.mode === "profile"){            // streak em state.profile (ISO) — gineco
+      var pr = st.profile || (st.profile = {});
+      var ti = todayISO();
+      if(pr.lastActive !== ti){
+        var diff = pr.lastActive ? Math.round((new Date(ti) - new Date(pr.lastActive)) / 86400000) : NaN;
+        pr.streak = (diff === 1) ? ((pr.streak||0) + 1) : 1;
+        pr.lastActive = ti;
+      }
+      st.profile = pr; update.profile = pr;
+    } else {                                    // flat: streak num + lastDay (Y-M-D) — pedatlas
       bumpStreakOn(st, g.streakField, g.lastDayField);
       update[g.streakField] = st[g.streakField];
       update[g.lastDayField] = st[g.lastDayField];
+    }
+    // estatísticas (alimentam conquistas/resumo da plataforma)
+    if(g.stats){
+      var S = st[g.stats.field] || {};
+      if(kind === "card" && g.stats.card) S[g.stats.card] = (S[g.stats.card]||0) + 1;
+      if(kind === "quest"){
+        if(g.stats.q) S[g.stats.q] = (S[g.stats.q]||0) + 1;
+        if(correct && g.stats.qok) S[g.stats.qok] = (S[g.stats.qok]||0) + 1;
+      }
+      st[g.stats.field] = S; update[g.stats.field] = S;
     }
   }
 
@@ -473,7 +533,7 @@
           Object.keys(uc).forEach(function(id){
             var c = uc[id]; if(!c || (c.reviews||0) < 1) return;   // só os já avaliados
             if((c.due||0) <= Date.now()){
-              SESSION.allFlash.push({ p:p, id:id, card:{ front:(c.front||c.statement||c.text||""), back:(c.back||((c.type==="fv"||c.type==="vf")?(c.answer?"Verdadeiro":"Falso"):"")) }, rev:c });
+              SESSION.allFlash.push({ p:p, id:id, card:c, rev:c });   // card completo (tipo/imagem/cloze preservados)
             }
           });
         } else {
@@ -562,12 +622,12 @@
           '<div class="flash-inner">' +
             '<div class="flash-face">' +
               '<span class="face-tag">Frente</span><span class="face-src">' + esc(item.p.label) + '</span>' +
-              '<div class="face-text">' + safe(cardFront(item.card)) + '</div>' +
+              cardFrontHTML(item.card) +
               '<div class="face-hint">toque para virar</div>' +
             '</div>' +
             '<div class="flash-face flash-back">' +
               '<span class="face-tag">Verso</span><span class="face-src">' + esc(item.p.label) + '</span>' +
-              '<div class="face-text">' + (cardBack(item.card) ? safe(cardBack(item.card)) : '<span style="opacity:.6">(sem verso registrado)</span>') + '</div>' +
+              cardBackHTML(item.card) +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -714,25 +774,25 @@
     var p = cache.p, st = cache.state, id = qId(item.q); if(!id) return;
     var update = {};
     if(p.engine === "inline"){
-      // cirurgia: STATE.quiz[subId][qIndex] = opção escolhida + stats
-      var parts = String(id).split(":"), sub = parts[0], qi = parts[1];
-      var quiz = st[p.quizField] || {};
-      quiz[sub] = quiz[sub] || {};
-      quiz[sub][qi] = (oi == null ? 1 : oi);
-      st[p.quizField] = quiz;
-      var stats = st[p.statsField] || {};
-      stats.questionsAnswered = (stats.questionsAnswered||0) + 1;
-      if(correct) stats.correctAnswers = (stats.correctAnswers||0) + 1;
-      st[p.statsField] = stats;
-      update[p.quizField] = quiz;
-      update[p.statsField] = stats;
+      var parts = String(id).split(":"), a = parts[0], b = parts[1];
+      if(p.quizMode === "ginecoTopics"){
+        // gineco: state.topics[tid].questions["q"+i] = {chosen,correct}
+        var tp = st.topics || {};
+        tp[a] = tp[a] || { questions:{} }; tp[a].questions = tp[a].questions || {};
+        tp[a].questions["q"+b] = { chosen:(oi==null?0:oi), correct:!!correct };
+        st.topics = tp; update.topics = tp;
+      } else {
+        // cirurgia: state.quiz[subId][qIndex] = opção escolhida
+        var quiz = st[p.quizField] || {};
+        quiz[a] = quiz[a] || {}; quiz[a][b] = (oi==null?1:oi);
+        st[p.quizField] = quiz; update[p.quizField] = quiz;
+      }
     } else {
       // pedatlas: qSeen[id] = true
       var qSeen = st.qSeen || {};
-      qSeen[id] = true; st.qSeen = qSeen;
-      update.qSeen = qSeen;
+      qSeen[id] = true; st.qSeen = qSeen; update.qSeen = qSeen;
     }
-    creditPlatform(cache, "quest", correct, update);   // +XP/ofensiva na plataforma
+    creditPlatform(cache, "quest", correct, update);   // +XP/ofensiva/estatísticas na plataforma
     cache.ref.set(update, { merge: true }).catch(function(e){
       console.warn("Falha ao salvar questão", e);
       toast("Não consegui salvar a questão — verifique a conexão.");
