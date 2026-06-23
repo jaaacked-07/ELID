@@ -330,8 +330,11 @@
       quizMode:"pneumoQ",
       gam:{ mode:"flat", xpField:"xp", streakField:"studyStreak", lastDayField:"lastStudyDay", dateFmt:"iso",
             xpCard:5, xpQuest:4, xpCorrect:8 } },
-    { key:"preventiva",  label:"Med. Preventiva",     href:"../plataformas/preventiva/",  status:"soon" },
-    { key:"semiologia",  label:"Semiologia",          href:"../plataformas/semiologia/",  status:"soon" }
+    { key:"preventiva",  label:"Atlas de Preventiva",  href:"../plataformas/preventiva/",  status:"rw",
+      platformId:"PREVENTIVA", docPath:["state","main"], engine:"fcmap", unit:"ms", srsField:"srs", showNew:true,
+      quizMode:"qSeen",
+      gam:{ mode:"flat", xpField:"xp", streakField:"streak", lastDayField:"lastDay", dateFmt:"iso",
+            xpCard:5, xpQuest:4, xpCorrect:0 } }
   ];
 
   /* ===== Helpers de extração defensiva ===== */
@@ -440,6 +443,7 @@
     qFilter: "all",     // filtro das questões: "all" | "shuffle" | <platformKey>
     qOpen: false,       // seção de questões expandida?
     qPage: 0,           // página atual de questões (10 por página, substituindo)
+    progress: {},       // respostas feitas NA CENTRAL: "key::id" -> {chosen,correct} (doc central/_progress)
     index: 0,
     doneToday: 0,
     activeCount: 0,
@@ -576,14 +580,16 @@
   function loadAll(){
     var rwPlats = PLATFORMS.filter(function(p){ return p.status === "rw"; });
     SESSION.activeCount = rwPlats.length;
-    var pending = rwPlats.length;
-    if(pending === 0){ render(); return; }
-
-    rwPlats.forEach(function(p){
-      Promise.all([
-        platformDocRef(p).get().catch(function(){ return null; }),
-        feedDocRef(p).get().catch(function(){ return null; })
-      ]).then(function(res){
+    // carrega o registro de respostas da própria Central primeiro
+    progressRef().get().catch(function(){ return null; }).then(function(pd){
+      SESSION.progress = (pd && pd.exists && pd.data() && pd.data().q) ? pd.data().q : {};
+      var pending = rwPlats.length;
+      if(pending === 0){ render(); return; }
+      rwPlats.forEach(function(p){
+        Promise.all([
+          platformDocRef(p).get().catch(function(){ return null; }),
+          feedDocRef(p).get().catch(function(){ return null; })
+        ]).then(function(res){
         var mainDoc = res[0], feedDoc = res[1];
         var raw = (mainDoc && mainDoc.exists) ? (mainDoc.data() || {}) : {};
         var state = p.stateField ? (raw[p.stateField] || {}) : raw;
@@ -620,14 +626,16 @@
 
         // Questões do dia publicadas pela plataforma
         feedQuests.forEach(function(q){
-          var id = qId(q); if(id) SESSION.allQuests.push({ p:p, q:q, platformId:p.platformId, answered: questAnswered(p, state, id) });
+          var id = qId(q); if(id) SESSION.allQuests.push({ p:p, q:q, platformId:p.platformId, answered: questAnswered(p, id) });
         });
       }).then(function(){
         pending--;
         if(pending === 0){ render(); }
       });
+      });
     });
   }
+  function progressRef(){ return FB.db.collection("users").doc(FB.uid).collection("central").doc("_progress"); }
 
   /* ===== Render ===== */
   function render(){
@@ -858,35 +866,9 @@
     if(nxt) nxt.addEventListener("click", function(){ SESSION.qPage++; renderQuest(); window.scrollTo(0, document.querySelector("#quest-area").offsetTop - 80); });
   }
 
-  // lê se uma questão já foi respondida na plataforma (para restaurar progresso na Central)
-  function questAnswered(p, st, id){
-    if(!st) return null;
-    if(p.quizMode === "cirurgiaQuiz"){
-      var pc = String(id).split(":"), q = st.quiz && st.quiz[pc[0]];
-      var v = q ? q[pc[1]] : undefined;
-      return (v == null) ? null : { chosen:v };
-    }
-    if(p.quizMode === "ginecoTopics"){
-      var pg = String(id).split(":"), t = st.topics && st.topics[pg[0]];
-      var qq = t && t.questions && t.questions["q"+pg[1]];
-      return qq ? { chosen:qq.chosen, correct:qq.correct } : null;
-    }
-    if(p.quizMode === "obsAnswered"){
-      var poo = String(id).split(":"), a = st.answered && st.answered[poo[0]];
-      var vv = a ? a[poo[1]] : undefined;
-      return (vv == null) ? null : { correct: vv === 1 };
-    }
-    if(p.quizMode === "pneumoQ"){
-      var pa = st.qAnswered && st.qAnswered[id];
-      return pa ? { chosen:pa.ans, correct:pa.correct } : null;
-    }
-    if(p.quizMode === "neuroQ"){
-      var pn = String(id).split(":"), nq = st.questions && st.questions[pn[0]];
-      var nv = nq ? nq[pn[1]] : undefined;
-      return nv ? { chosen:nv.chosen, correct:nv.correct } : null;
-    }
-    var qs = st.qSeen || {};   // pedatlas
-    return qs[id] ? { seen:true } : null;
+  // só conta como respondida o que foi respondido NA CENTRAL (evita falso-positivo de "visto" das plataformas)
+  function questAnswered(p, id){
+    return SESSION.progress[p.key + "::" + id] || null;
   }
 
   // grava "feito" no MESMO documento da plataforma (merge) — fonte única
@@ -932,6 +914,9 @@
     }
     creditPlatform(cache, "quest", correct, update);   // +XP/ofensiva/estatísticas na plataforma
     commit(cache, update);
+    // registra na Central (restaura progresso ao recarregar, independe dos formatos das plataformas)
+    SESSION.progress[p.key + "::" + id] = { chosen:(oi==null?0:oi), correct:!!correct };
+    progressRef().set({ q: SESSION.progress }, { merge:true }).catch(function(){});
   }
 
   // grava no doc (aninhado em state quando a plataforma usa esse formato; bump updatedAt p/ sync)
