@@ -717,7 +717,7 @@ function elidPublish(){
     var cards={};
     MODULES.forEach(function(m){ (m.cards||[]).forEach(function(c,i){ cards['c:'+m.id+':'+i]={front:c.q||c.front||'',back:c.a||c.back||'',modTitle:m.title||''}; }); });
     (State.data.userCards||[]).forEach(function(c){ if(!c||!c.id) return; var o={front:c.front||c.q||'',back:c.back||c.a||'',modTitle:c.mat||c.tema||c.modTitle||''}; if(c.type)o.type=c.type; if(c.image)o.image=c.image; if(c.text)o.text=c.text; cards[c.id]=o; });
-    var d=dailyPicks(); var questions=(d.q||[]).map(function(x){ var q=x.q; var opts=(q.opts||[]).map(function(t,ix){return {text:t,correct:ix===q.correct};}); return {id:x.mod+':'+x.i, stem:q.stem||q.q||'', options:opts, explanation:q.expl||q.ex||'', modTitle:x.title||''}; });
+    var questions=[]; MODULES.forEach(function(m){ (m.questions||[]).forEach(function(q,i){ var opts=(q.opts||[]).map(function(t,ix){return {text:t,correct:ix===q.correct};}); questions.push({id:m.id+':'+i, stem:q.stem||q.q||'', options:opts, explanation:q.expl||q.ex||'', modTitle:m.title||''}); }); });
     fb.db.collection('users').doc(State.uid).collection('central').doc('neurologia')
       .set({platform:'neurologia',label:'NeuroAtlas',updated:Date.now(),cards:cards,questions:questions},{merge:true}).catch(function(){});
   }catch(e){}
