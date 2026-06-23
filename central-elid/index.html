@@ -317,11 +317,11 @@
       gam:{ mode:"profile",
             stats:{ field:"stats", card:"flashTotal", q:"qTotal", qok:"qCorrect" } } },
     { key:"obstetricia", label:"Atlas de Obstetrícia",href:"../plataformas/obstetricia/", status:"rw",
-      platformId:"obstetricia", docPath:null, stateField:"state", engine:"obsrs", srsField:"srs",
+      platformId:"obstetricia", docPath:null, stateField:"state", engine:"obsrs", srsField:"srs", dailyQ:6,
       quizMode:"obsAnswered",
       gam:{ mode:"obj", streakField:"streak", dateFmt:"iso" } },
     { key:"cirurgia",    label:"Atlas Cirúrgico",     href:"../plataformas/cirurgia/",    status:"rw",
-      platformId:"cirurgia-geral", docPath:null, engine:"fcmap", unit:"day", srsField:"fcReviews", showNew:true,
+      platformId:"cirurgia-geral", docPath:null, engine:"fcmap", unit:"day", srsField:"fcReviews", showNew:true, dailyQ:6,
       quizMode:"cirurgiaQuiz", quizField:"quiz",
       gam:{ mode:"obj", xpField:"xp", streakField:"streak", xpCard:6, xpQuest:5, xpCorrect:5,
             stats:{ field:"stats", q:"questionsAnswered", qok:"correctAnswers" } } },
@@ -491,6 +491,15 @@
   function yestISO(){ var y=new Date(); y.setDate(y.getDate()-1); return y.toISOString().slice(0,10); }
   function addDaysISO(n){ var d=new Date(); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
   function isDueISO(due){ return !due || due <= todayISO(); }
+  function daySeedNum(){ return Math.floor(Date.now()/86400000); }   // muda a cada dia
+  function dailyPick(arr, key, n){
+    if(!arr || arr.length <= n) return (arr || []).slice();
+    var seed = daySeedNum();
+    for(var c=0;c<key.length;c++) seed = (seed*31 + key.charCodeAt(c)) >>> 0;
+    var idx = arr.map(function(_,i){ return i; });
+    for(var i=idx.length-1;i>0;i--){ seed=(seed*1664525+1013904223)>>>0; var j=seed%(i+1); var t=idx[i];idx[i]=idx[j];idx[j]=t; }
+    return idx.slice(0,n).map(function(i){ return arr[i]; });
+  }
   // ladders do Obstetrícia (replicadas para sync two-way no próprio srs)
   var OBS_EASY=[1,3,7,15,30,60], OBS_HARD=[1,3,7,15], OBS_MISS=[0,1,3,7];
   function obsGrade(s, grade){   // grade: 'errei'|'dificil'|'medio'|'facil'
@@ -624,8 +633,8 @@
           }
         }
 
-        // Questões do dia publicadas pela plataforma
-        feedQuests.forEach(function(q){
+        // Questões do dia: a Central seleciona deterministicamente por data a partir do banco completo (gira todo dia)
+        dailyPick(feedQuests, p.key, p.dailyQ || 5).forEach(function(q){
           var id = qId(q); if(id) SESSION.allQuests.push({ p:p, q:q, platformId:p.platformId, answered: questAnswered(p, id) });
         });
       }).then(function(){
