@@ -220,6 +220,13 @@
   .tb-power{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid var(--line);background:transparent;color:var(--rose-bright);cursor:pointer;transition:.15s}
   .tb-power:hover{border-color:var(--rose);background:rgba(183,110,121,.12)}
   .tb-user{font-size:12px;color:var(--mauve);max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .jump-card{background:linear-gradient(135deg,rgba(183,110,121,.20),rgba(201,160,176,.07));border:1.5px solid var(--rose);border-radius:16px;padding:16px 18px}
+  .jump-card .nav-btn{font-size:14px;padding:8px 15px}
+  .nav-btn.qfinal{background:var(--rose);color:#fff;border-color:var(--rose);font-weight:700}
+  .week-final-ribbon{display:inline-block;margin-left:10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:var(--rose);color:#fff;padding:3px 11px;border-radius:999px;font-family:var(--font-b);vertical-align:middle}
+  .reg-q-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:7px 0}
+  .reg-q-row label{color:var(--mauve);font-size:13px}
+  .reg-q-row .in-time{width:88px}
 </style>
 </head>
 <body>
@@ -269,14 +276,11 @@
     <h2 class="sec">Hoje <span class="acc">— seu painel</span></h2>
     <p class="sec-sub" id="hoje-data"></p>
 
-    <h3 class="grp">📊 Estatísticas de estudo</h3>
-    <div class="stats" id="hoje-stats"></div>
-    <button class="reset" id="edit-metrics">✎ Editar estatísticas</button>
-    <div id="metrics-edit"></div>
-
     <h3 class="grp">🎯 Radar de desempenho</h3>
     <p class="sec-sub" style="margin-bottom:10px">Quanto menor o desempenho, mais destacada fica a área — é onde concentrar energia.</p>
     <div class="card"><div class="radar-wrap"><div class="radar-svg" id="radar"></div><div style="flex:1;min-width:220px" id="radar-side"></div></div></div>
+    <button class="reset" id="reg-q-btn">✎ Registrar questões já resolvidas (alimenta o radar — fica salvo)</button>
+    <div id="reg-q-box"></div>
 
     <h3 class="grp">🏁 Modo ENARE — se a prova fosse hoje</h3>
     <div class="card">
@@ -304,10 +308,10 @@
   <!-- CRONOGRAMA -->
   <section id="cronograma">
     <h2 class="sec">Cronograma <span class="acc">diário</span></h2>
-    <p class="sec-sub">Seg–sex 19h30–22h (bateria de questões focada na matéria, correção e flashcards) · sáb/dom a partir das 09h (leitura teórica que <b>prepara a semana seguinte</b>, resumos, mapas e simulado geral). Toque na tarefa para concluir (fica verde). No ✎ você edita <b>horário, atividade e matéria</b>. Toque na data para <b>minimizar o dia</b>. Tudo é sugestão — ajuste à vontade.</p>
-    <div class="card" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-      <span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mauve)">Ir para a semana:</span>
-      <div id="week-jump" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+    <p class="sec-sub"><b>Domingo</b>: leitura da teoria dos 5 assuntos da semana. <b>Seg–sex 19h30–22h</b>: um assunto por dia — flashcards, questões do dia e 50 questões com correção. <b>Sábado</b>: simulado geral ENARE de 100 questões + correção. A última semana antes da prova é <b>só questões</b>. Toque na tarefa para concluir, no ✎ edite <b>horário, atividade e matéria</b>, e toque na data para minimizar o dia. Tudo é ajustável.</p>
+    <div class="card jump-card" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <span style="font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose);font-weight:700">📍 Ir para a semana</span>
+      <div id="week-jump" style="display:flex;gap:8px;flex-wrap:wrap"></div>
     </div>
     <div id="crono"></div>
   </section>
@@ -395,7 +399,7 @@ window.startApp=function(uid){
   if(window.__cronStarted)return; window.__cronStarted=true;
 var PREFIX='elid_cron::'+(uid||'anon')+'::';
 var EXAM=new Date('2026-09-13T00:00:00');
-var START=new Date('2026-06-15T00:00:00');
+var START=new Date('2026-06-28T00:00:00');
 
 function load(k,d){ try{ return JSON.parse(localStorage.getItem(PREFIX+k))||d; }catch(e){ return d; } }
 function store(k,v){ try{ localStorage.setItem(PREFIX+k,JSON.stringify(v)); }catch(e){} if(window.__elidCloudSave)window.__elidCloudSave(); }
@@ -421,58 +425,44 @@ function slug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-
 
 /* ---------- semanas ---------- */
 var WEEKS=[
- {n:1,area:'Clínica Médica · Cardiologia',temas:['HAS','Síndrome coronariana aguda','Insuficiência cardíaca','Fibrilação atrial e arritmias','Valvopatias e dislipidemia'],prox:['Asma','DPOC','Pneumonia (PAC)','Tuberculose'],simN:30},
- {n:2,area:'Clínica Médica · Pneumologia',temas:['Asma','DPOC','Pneumonia (PAC)','Tuberculose','TEP'],prox:['SUS — Leis 8.080 e 8.142','Epidemiologia e indicadores','Tipos de estudo e testes diagnósticos','Rastreamento (INCA)'],simN:40},
- {n:3,area:'Medicina Preventiva · SUS',temas:['SUS — Leis 8.080/8.142','Epidemiologia e indicadores','Tipos de estudo e medidas','Testes diagnósticos (S/E/VPP)','Rastreamento + vacinação PNI'],prox:['Neonatologia e reanimação','Aleitamento e crescimento','Calendário vacinal infantil','IVAS e bronquiolite'],simN:40},
- {n:4,area:'Pediatria',temas:['Neonatologia e reanimação','Aleitamento e crescimento (DNPM)','Calendário vacinal (PNI)','IVAS, bronquiolite e asma','Diarreia e desidratação'],prox:['Trauma / ATLS','Abdome agudo','Apendicite','Colecistite e vias biliares'],simN:50},
- {n:5,area:'Cirurgia Geral',temas:['Trauma / ATLS','Abdome agudo','Apendicite','Colecistite e vias biliares','Hérnias e pré/pós-operatório'],prox:['Ciclo menstrual e SOP','Sangramento uterino anormal','Corrimento e DIP','Rastreio de CA de colo/mama'],simN:50},
- {n:6,area:'Ginecologia',temas:['Ciclo menstrual e SOP','Sangramento uterino anormal','Corrimento vaginal e DIP','Rastreio de CA colo/mama','Contracepção'],prox:['Pré-natal','Pré-eclâmpsia / DHEG','Hemorragias da gestação','Diabetes gestacional'],simN:60},
- {n:7,area:'Obstetrícia',temas:['Pré-natal','Pré-eclâmpsia / DHEG','Hemorragias 1ª e 2ª metade (DPP/PP)','Diabetes gestacional','Prematuridade e TPP'],prox:['Diabetes mellitus','Tireoidopatias','Injúria renal aguda (IRA)','Doença renal crônica (DRC)'],simN:60},
- {n:8,area:'Clínica Médica · Endócrino + Nefro',temas:['Diabetes mellitus','Tireoidopatias','Injúria renal aguda','Doença renal crônica','Distúrbios hidroeletrolíticos e ácido-base'],prox:['Hepatites e cirrose','Hemorragia digestiva','Sepse','HIV / AIDS'],simN:70},
- {n:9,area:'Clínica Médica · Gastro + Infecto + Hemato + Reumato',temas:['Hepatites e cirrose','Hemorragia digestiva (HDA/HDB)','Sepse, HIV e dengue','Anemias','LES, artrite reumatoide e gota'],prox:['AVC','Cefaleias','Epilepsia e crises','Meningites e encefalites'],simN:80},
- {n:10,area:'Neurologia + fechamento de Clínica',temas:['AVC isquêmico e hemorrágico','Cefaleias','Epilepsia e crises','Meningites e encefalites','Demências e confusão aguda'],prox:['Revisão geral — todas as áreas','Temas mais cobrados','Pegadinhas clássicas','Fluxogramas de conduta'],simN:80},
- {n:11,area:'Consolidação geral',temas:['Revisão CM (cardio/pneumo/endo)','Revisão Cirurgia','Revisão GO','Revisão Pediatria','Revisão Preventiva'],prox:['Revisão dirigida por erros','Temas mais cobrados','Tabelas comparativas','Fluxogramas'],simN:100},
- {n:12,area:'Revisão final intensiva',temas:['Temas mais cobrados — CM','Temas mais cobrados — Cirurgia/GO','Temas mais cobrados — Peds/Preventiva','Revisão dos erros dos simulados','Memorização de scores e critérios'],prox:['Revisão de véspera — alto rendimento','Checklists finais'],simN:120},
- {n:13,area:'Reta final',last:true,temas:['Revisão de alto rendimento — CM','Revisão Cirurgia + GO','Revisão Peds + Preventiva','Revisão de véspera (resumos/mapas)','Descanso e logística da prova'],prox:[],simN:30}
+ {n:1, area:'Clínica Médica · Cardiologia', areaKey:'cm', temas:['HAS','Síndrome coronariana aguda (SCA)','Insuficiência cardíaca','Arritmias','Emergência hipertensiva']},
+ {n:2, area:'Clínica Médica · Pneumo + Infecto', areaKey:'cm', temas:['Pneumonia (PAC)','Tuberculose','Asma','DPOC','Sepse']},
+ {n:3, area:'Clínica Médica · Endócrino + Nefro', areaKey:'cm', temas:['Diabetes mellitus','Distúrbios da tireoide','Injúria renal aguda (IRA)','Doença renal crônica (DRC)','Distúrbios hidroeletrolíticos']},
+ {n:4, area:'Clínica Médica · GI + Hemato + Infecto', areaKey:'cm', temas:['Hepatites e cirrose','Hemorragia digestiva (HDA/HDB)','Anemias','HIV / AIDS','Arboviroses (Dengue)']},
+ {n:5, area:'Medicina Preventiva', areaKey:'prev', temas:['SUS — Leis 8.080/8.142','Epidemiologia e indicadores','Estudos epidemiológicos','Testes diagnósticos (S/E/VPP)','Rastreamento + vacinação (PNI)']},
+ {n:6, area:'Pediatria', areaKey:'peds', temas:['Reanimação neonatal','Aleitamento e crescimento (DNPM)','Calendário vacinal (PNI)','IVAS, bronquiolite e asma','Diarreia e desidratação']},
+ {n:7, area:'Cirurgia Geral', areaKey:'cir', temas:['Trauma / ATLS','Abdome agudo','Apendicite','Colecistite e colelitíase','Hérnias e pós-operatório']},
+ {n:8, area:'Ginecologia', areaKey:'gineco', temas:['Rastreio de CA de colo/mama','Sangramento uterino anormal','SOP','Corrimento, DIP e ISTs','Contracepção']},
+ {n:9, area:'Obstetrícia', areaKey:'obst', temas:['Pré-natal','Síndromes hipertensivas (DHEG/pré-eclâmpsia)','Hemorragias da gestação (DPP/PP)','Diabetes gestacional','Prematuridade e TPP']},
+ {n:10, area:'Clínica Médica · Neurologia', areaKey:'cm', temas:['AVC isquêmico e hemorrágico','Cefaleias','Epilepsia e crises','Meningites e encefalites','Síndromes demenciais e confusão aguda']},
+ {n:11, area:'Reta final — só questões', qonly:true, temas:['Maratona de questões','Questões de alto rendimento','Simulação dirigida','Revisão por erros','Simulado final']}
 ];
 function weekStart(n){return addDays(START,(n-1)*7);}
 
 function dayBlocks(week,dow,dateISO){
-  var bl=[],wn=week.n,nextW=wn+1;
+  var bl=[],wn=week.n;
   function add(time,act,tema,tipo){ bl.push({id:'w'+wn+'-'+dateISO+'-'+bl.length,time:time,act:act,tema:tema,tipo:tipo}); }
-  if(dow>=1&&dow<=5){
-    var idx=dow-1,tema=week.temas[idx%week.temas.length];
-    add('19h30–20h00','Revisão Anki — flashcards acumulados','Revisão espaçada','rev');
-    add('20h00–21h00','Bateria de questões (foco na matéria)',tema,'q');
-    add('21h00–21h30','Correção comentada',tema,'q');
-    add('21h30–22h00','Criação de flashcards dos erros',tema,'rev');
-  } else if(dow===6){
-    if(week.last){
-      add('09h00–11h00','Revisão de véspera — Clínica Médica','Resumos e mapas','rev');
-      add('11h00–12h00','Revisão de véspera — Cirurgia/GO','Resumos e mapas','rev');
-      add('13h00–15h00','Simulado geral (misto) — '+week.simN+' questões','Estilo prova · todas as áreas','sim');
-      add('15h30–17h00','Correção leve + checklist final','Alto rendimento','rev');
-    } else {
-      var t0=week.prox[0]||week.temas[0];
-      add('09h00–11h00','Leitura teórica (prepara a Semana '+nextW+')',t0,'teo');
-      add('11h00–12h00','Resumo + mapa mental',t0,'teo');
-      add('13h00–17h00','Simulado geral (misto) — '+week.simN+' questões','Estilo prova · todas as áreas vistas','sim');
-      add('17h30–18h30','Correção do simulado','Análise por área','q');
-      add('18h30–20h00','Flashcards dos erros do simulado','Revisão espaçada','rev');
-    }
-  } else if(dow===0){
-    if(week.last){
-      add('09h00–10h30','Revisão de véspera — Peds + Preventiva','Resumos e mapas','rev');
-      add('10h30–11h30','Releitura de scores, critérios e doses','Memorização final','rev');
-      add('Tarde','Descanso, sono e logística da prova','Cuide de você ✦','rev');
-    } else {
-      var p1=week.prox[1]||week.temas[1],p2=week.prox[2]||week.temas[2],p3=week.prox[3]||week.temas[3];
-      add('09h00–11h00','Leitura teórica (prepara a Semana '+nextW+')',p1,'teo');
-      add('11h00–12h00','Leitura teórica (prepara a Semana '+nextW+')',p2,'teo');
-      add('13h00–14h30','Leitura teórica (prepara a Semana '+nextW+')',p3,'teo');
-      add('14h30–15h30','Resumo + tabela comparativa','Síntese da semana','teo');
-      add('15h30–17h00','Revisão espaçada (7/15/30 dias) + flashcards','Revisão programada','rev');
-    }
+  if(week.qonly){ // última semana antes da prova: só questões, sem rever matéria
+    if(dow===6){ add('09h00–12h00','Simulado final ENARE — 100 questões','Estilo prova · todas as áreas','sim'); add('14h00–16h30','Correção completa do simulado','Análise por área','q'); }
+    else if(dow===0){ add('09h00–12h00','Maratona de questões de alto rendimento','Temas mais cobrados','q'); add('14h00–16h00','Correção + flashcards dos erros','Revisão por erros','rev'); }
+    else if(dow>=1&&dow<=5){ add('19h30–20h30','Flashcards dos erros + questões rápidas','Revisão por erros','rev'); add('20h30–22h00','60 questões mistas de alto rendimento + correção','Simulação dirigida','q'); }
+    return bl;
+  }
+  if(dow===0){ // domingo: leitura da teoria dos 5 assuntos da semana
+    var T=week.temas;
+    add('09h00–10h00','Leitura teórica',T[0],'teo');
+    add('10h00–11h00','Leitura teórica',T[1],'teo');
+    add('11h00–12h00','Leitura teórica',T[2],'teo');
+    add('14h00–15h00','Leitura teórica',T[3],'teo');
+    add('15h00–16h00','Leitura teórica',T[4],'teo');
+    add('16h00–17h00','Resumo + mapas mentais da semana','Síntese dos 5 assuntos','teo');
+  } else if(dow>=1&&dow<=5){ // seg–sex: um assunto por dia
+    var tema=week.temas[dow-1];
+    add('19h30–20h30','Flashcards do assunto + questões do dia',tema,'rev');
+    add('20h30–22h00','50 questões do assunto + correção',tema,'q');
+  } else if(dow===6){ // sábado: simulado
+    add('09h00–12h00','Simulado geral ENARE — 100 questões','Estilo prova · todas as áreas','sim');
+    add('14h00–16h00','Correção completa do simulado','Análise por área','q');
   }
   return bl;
 }
@@ -533,37 +523,28 @@ window.elidSetDesempenho=function(obj){
   if(changed){ saveQStats(); if(typeof renderHoje==='function')renderHoje(); }
 };
 /* Matérias ENARE por grande área. Segundo valor = semana do cronograma (0 = extra/manual) */
-var MATERIAS_ENARE=[
- {area:'Clínica Médica',itens:[
-   ['Hipertensão Arterial Sistêmica (HAS)',1],['Síndrome Coronariana Aguda (SCA)',1],['Insuficiência Cardíaca',1],['Arritmias',1],
-   ['DPOC',2],['Asma',2],['Pneumonias',2],['Tuberculose',2],
-   ['Diabetes Mellitus',8],['Distúrbios da Tireoide',8],['Insuficiência Renal Aguda (IRA)',8],['Doença Renal Crônica (DRC)',8],['Distúrbios Hidroeletrolíticos',8],
-   ['Hepatites',9],['Cirrose',9],['HIV/AIDS',9],['Arboviroses (Dengue)',9],['Anemias',9],['LES',9],['Artrite Reumatoide',9],
-   ['Antimicrobianos',0],['Emergências Clínicas',0]]},
- {area:'Cirurgia',itens:[
-   ['Trauma (ATLS)',5],['Atendimento Inicial ao Politraumatizado',5],['Abdome Agudo',5],['Apendicite',5],['Colecistite',5],['Colelitíase',5],['Hérnias',5],['Pós-operatório',5],
-   ['Hemorragia Digestiva',9],
-   ['Queimaduras',0],['Obstrução Intestinal',0],['Pancreatite Aguda',0],['Doença Péptica',0],['Câncer Colorretal',0],['Câncer Gástrico',0],['Nutrição em Cirurgia',0],['Choque',0]]},
- {area:'Ginecologia',itens:[
-   ['Rastreamento do Câncer de Colo Uterino',6],['Câncer de Colo Uterino',6],['Câncer de Mama',6],['Mastologia',6],
-   ['Sangramento Uterino Anormal',6],['SOP',6],['Planejamento Familiar',6],['ISTs',6],['DIP',6],['Vulvovaginites',6],
-   ['Miomatose',0],['Endometriose',0],['Amenorreia',0],['Climatério e Menopausa',0],['Puberdade Precoce e Tardia',0]]},
- {area:'Obstetrícia',itens:[
-   ['Pré-natal de Baixo Risco',7],['Pré-natal de Alto Risco',7],['Diabetes Gestacional',7],['Síndromes Hipertensivas da Gestação',7],
-   ['Hemorragias da Gestação',7],['Placenta Prévia',7],['DPP',7],['Prematuridade',7],['Aleitamento Materno',4],
-   ['Trabalho de Parto',0],['Partograma',0],['Indução do Parto',0],['RPMO',0],['Restrição de Crescimento Fetal',0],['Sofrimento Fetal',0],['Puerpério',0],['Isoimunização Rh',0],['TORCHS',0]]},
- {area:'Pediatria',itens:[
-   ['Aleitamento Materno',4],['Alimentação Complementar',4],['Puericultura',4],['Crescimento Infantil',4],['Desenvolvimento Neuropsicomotor',4],['Calendário Vacinal',4],['Reanimação Neonatal',4],
-   ['IVAS',4],['Bronquiolite Viral Aguda',4],['Asma',4],['Diarreia Aguda',4],['Desidratação',4],['Terapia de Reidratação Oral',4],
-   ['Dengue',9],['Sepse Pediátrica',9],['Meningites',10],['Crise Convulsiva',10],
-   ['Imunização Especial',0],['Anemia Ferropriva',0],['Desnutrição',0],['Obesidade Infantil',0],['Pneumonia Comunitária',0],['Coqueluche',0],['Exantemas Virais',0],['Escarlatina',0],
-   ['Constipação Intestinal',0],['Refluxo Gastroesofágico',0],['Dor Abdominal na Criança',0],['Infecção do Trato Urinário',0],['Síndrome Nefrótica',0],['Síndrome Nefrítica',0],['Glomerulonefrite Pós-Estreptocócica',0],
-   ['Diabetes Mellitus Tipo 1',0],['Baixa Estatura',0],['Puberdade Precoce',0],['Puberdade Tardia',0],
-   ['Icterícia Neonatal',0],['Sepse Neonatal',0],['Triagem Neonatal',0],['Distúrbios Respiratórios do RN',0],['Emergências Pediátricas',0],['Choque na Criança',0],['Insuficiência Respiratória Aguda',0]]},
- {area:'Preventiva',itens:[
-   ['SUS (Leis e Princípios)',3],['Rastreamento',3],['Calendário Vacinal',3],['Bioestatística',3],['Estudos Epidemiológicos',3],['Sensibilidade e Especificidade',3],['Valores Preditivos',3],['Indicadores de Saúde',3],
-   ['Redes de Atenção à Saúde',0],['Atenção Primária',0],['Estratégia Saúde da Família',0],['Vigilância Epidemiológica',0],['Vigilância Sanitária',0],['Medicina Baseada em Evidências',0],['Promoção e Prevenção em Saúde',0],['Imunobiológicos Especiais',0],['Saúde da Mulher',0],['Saúde da Criança',0],['Ética Médica',0],['Segurança do Paciente',0]]}
-];
+function fmtShort(d){return ('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2);}
+/* temas de alta prevalência NÃO contemplados no cronograma (marcação manual) */
+var EXTRAS_ENARE={
+ cm:['TEP','Valvopatias e dislipidemia','LES','Artrite reumatoide e gota','Distúrbios ácido-base','Antimicrobianos','Emergências clínicas'],
+ cir:['Queimaduras','Obstrução intestinal','Pancreatite aguda','Doença péptica','Câncer colorretal','Câncer gástrico','Choque','Nutrição em cirurgia'],
+ peds:['Exantemas virais','Coqueluche','Anemia ferropriva','Desnutrição','Obesidade infantil','ITU na criança','Síndrome nefrótica','Síndrome nefrítica','GNPE','Crise convulsiva','Icterícia neonatal','Sepse neonatal','Refluxo gastroesofágico'],
+ gineco:['Miomatose','Endometriose','Amenorreia','Climatério e menopausa','Vulvovaginites','Puberdade precoce e tardia'],
+ obst:['Trabalho de parto e partograma','Indução do parto','RPMO','Restrição de crescimento fetal','Sofrimento fetal','Puerpério','Aleitamento materno','Isoimunização Rh','TORCHS'],
+ prev:['Atenção primária e ESF','Redes de atenção à saúde','Vigilância epidemiológica','Vigilância sanitária','Medicina baseada em evidências','Ética médica','Segurança do paciente','Saúde da mulher e da criança']
+};
+/* mapa do cronograma: para cada assunto -> semana, data de resolução de questões e semana/data de revisão */
+var _crono=null;
+function cronoMap(){
+  if(_crono)return _crono;
+  var m={cm:[],cir:[],peds:[],gineco:[],obst:[],prev:[]};
+  WEEKS.forEach(function(w){ if(w.qonly||!w.areaKey)return; var ws=weekStart(w.n);
+    w.temas.forEach(function(tema,i){ var sd=addDays(ws,1+i);
+      m[w.areaKey].push({nome:tema,week:w.n,date:sd,revWeek:w.n+1,revDate:addDays(sd,7)});
+    });
+  });
+  _crono=m;return m;
+}
 
 /* ============================================================
    helpers
@@ -656,18 +637,11 @@ function renderHoje(){
   renderCountdown();
   var t=todayMid();
   $('#hoje-data').textContent=DOW[t.getDay()]+', '+t.getDate()+' de '+MES[t.getMonth()]+' de '+t.getFullYear();
-  var pctAcerto=METRICS.questoes>0?Math.round(METRICS.acertos/METRICS.questoes*100):0;
-  $('#hoje-stats').innerHTML=
-    '<div class="stat"><b>'+METRICS.questoes+'</b><span>questões resolvidas</span></div>'+
-    '<div class="stat"><b>'+pctAcerto+'%</b><span>de acertos</span></div>'+
-    '<div class="stat"><b>'+METRICS.flashcards+'</b><span>flashcards estudados</span></div>'+
-    '<div class="stat"><b>'+METRICS.tempoH+'h</b><span>tempo de estudo</span></div>'+
-    '<div class="stat"><b>'+METRICS.assuntos+'</b><span>assuntos concluídos</span></div>';
   renderRadar(); renderEnare();
   // tarefas de hoje
   var box=$('#hoje-tasks');box.innerHTML='';var day=dayByIso(iso(t));
   if(day&&t>=START&&t<=EXAM)box.appendChild(dayEl(day,'hoje-day'));
-  else if(t<START)box.appendChild(el('<div class="card">O cronograma começa em <b>15/06/2026</b>.</div>'));
+  else if(t<START)box.appendChild(el('<div class="card">O cronograma começa no domingo, <b>28/06/2026</b>.</div>'));
   else if(t>EXAM)box.appendChild(el('<div class="card">A prova já passou — torço por um ótimo resultado. ✦</div>'));
   else box.appendChild(el('<div class="card">Sem bloco programado para hoje.</div>'));
 }
@@ -708,20 +682,26 @@ function renderEnare(){
   var overall=Math.round(base.reduce(function(s,a){return s+pctArea(a.key);},0)/base.length);
   $('#enare-overall').textContent=overall+'%';
 }
-/* edição de métricas */
-$('#edit-metrics').addEventListener('click',function(){
-  var box=$('#metrics-edit');if(box.innerHTML){box.innerHTML='';return;}
-  box.appendChild(el('<div class="edit-row" style="border-radius:12px;margin-top:10px">'+
-    '<label style="color:var(--mauve);font-size:13px">Questões <input class="in-time" id="m-q" type="number" value="'+METRICS.questoes+'"></label>'+
-    '<label style="color:var(--mauve);font-size:13px">Acertos <input class="in-time" id="m-a" type="number" value="'+METRICS.acertos+'"></label>'+
-    '<label style="color:var(--mauve);font-size:13px">Flashcards <input class="in-time" id="m-f" type="number" value="'+METRICS.flashcards+'"></label>'+
-    '<label style="color:var(--mauve);font-size:13px">Tempo (h) <input class="in-time" id="m-t" type="number" value="'+METRICS.tempoH+'"></label>'+
-    '<label style="color:var(--mauve);font-size:13px">Assuntos <input class="in-time" id="m-s" type="number" value="'+METRICS.assuntos+'"></label>'+
-    '<button class="ebtn save" id="m-save">Salvar</button></div>'));
-  $('#m-save').addEventListener('click',function(){
-    METRICS.questoes=+$('#m-q').value||0;METRICS.acertos=+$('#m-a').value||0;METRICS.flashcards=+$('#m-f').value||0;METRICS.tempoH=+$('#m-t').value||0;METRICS.assuntos=+$('#m-s').value||0;
-    saveMetrics();box.innerHTML='';renderHoje();toast('Estatísticas atualizadas');});
+/* registrar questões já resolvidas (incrementa o total por área; fica salvo por usuário) */
+$('#reg-q-btn').addEventListener('click',function(){
+  var box=$('#reg-q-box'); if(box.innerHTML){box.innerHTML='';return;}
+  var wrap=el('<div class="edit-row" style="border-radius:12px;margin-top:10px;display:block"></div>');
+  wrap.appendChild(el('<div class="note" style="margin:0 0 10px">Some aqui as questões que você já fez (e as próximas). Os valores são <b>adicionados</b> ao total de cada área e salvos na sua conta. Clínica Médica reúne todas as subáreas.</div>'));
+  AREAS.forEach(function(a){var s=QSTATS[a.key]||{tot:0,ac:0};
+    wrap.appendChild(el('<div class="reg-q-row"><span style="flex:0 0 120px;color:var(--ivory)">'+a.label+'</span><span style="color:var(--mauve);font-size:12px">atual: '+s.ac+'/'+s.tot+'</span><label>+ respondidas <input class="in-time" data-k="'+a.key+'" data-f="r" type="number" min="0" value="0"></label><label>+ acertos <input class="in-time" data-k="'+a.key+'" data-f="a" type="number" min="0" value="0"></label></div>'));
+  });
+  var sv=el('<button class="ebtn save" style="margin-top:6px">Salvar e atualizar radar</button>');
+  wrap.appendChild(sv); box.appendChild(wrap);
+  sv.addEventListener('click',function(){
+    AREAS.forEach(function(a){
+      var r=+wrap.querySelector('input[data-k="'+a.key+'"][data-f="r"]').value||0;
+      var ac=+wrap.querySelector('input[data-k="'+a.key+'"][data-f="a"]').value||0;
+      if(r>0) window.elidRegistrarQuestoes(a.key,r,ac);
+    });
+    box.innerHTML=''; toast('Questões registradas ✦'); renderHoje();
+  });
 });
+
 /* desempenho por área agora é 100% automático (via questões resolvidas) — sem edição manual */
 
 /* ============================================================
@@ -730,15 +710,12 @@ $('#edit-metrics').addEventListener('click',function(){
 function autoPend(day){
   var items=[];
   if(day){ day.blocks.forEach(function(b){var f=effTask(b);
-    if(b.tipo==='q'&&/Bateria/.test(b.act)) items.push({txt:'Fazer 20 questões de '+f.tema,tag:'questões'});
-    else if(b.tipo==='q'&&/Correção/.test(b.act)) items.push({txt:'Corrigir erros das questões de '+f.tema,tag:'correção'});
-    else if(b.tipo==='rev'&&/Anki/.test(b.act)) items.push({txt:'Revisar flashcards acumulados (Anki)',tag:'revisão'});
-    else if(b.tipo==='rev'&&/flashcards dos erros/i.test(b.act)) items.push({txt:'Criar flashcards dos erros de '+f.tema,tag:'flashcards'});
-    else if(b.tipo==='teo') items.push({txt:'Ler teoria: '+f.tema,tag:'teoria'});
+    if(b.tipo==='teo') items.push({txt:'Ler teoria: '+f.tema,tag:'teoria'});
     else if(b.tipo==='sim') items.push({txt:f.act,tag:'simulado'});
-    else if(b.tipo==='rev') items.push({txt:f.act,tag:'revisão'});
+    else if(b.tipo==='q'&&/Corre/i.test(f.act)) items.push({txt:f.act,tag:'correção'});
+    else if(b.tipo==='q') items.push({txt:f.act+(f.tema?' — '+f.tema:''),tag:'questões'});
+    else if(b.tipo==='rev') items.push({txt:f.act+((f.tema&&!/erro/i.test(f.act))?' — '+f.tema:''),tag:'revisão'});
   }); }
-  // revisões espaçadas que vencem hoje
   var ti=iso(todayMid());
   revEvents().forEach(function(e){ if(e.iso===ti) items.push({txt:'Revisar (espaçada): '+e.tema,tag:e.kind}); });
   return items;
@@ -776,12 +753,14 @@ function addPend(){var v=$('#pend-input').value.trim();if(!v)return;var ti=iso(t
    ============================================================ */
 function renderCrono(){
   var jump=$('#week-jump');jump.innerHTML='';
-  WEEKS.forEach(function(w){var b=el('<button class="nav-btn" style="border-color:var(--line)">S'+w.n+'</button>');b.addEventListener('click',function(){var t=document.getElementById('week-'+w.n);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});jump.appendChild(b);});
+  WEEKS.forEach(function(w){var b=el('<button class="nav-btn'+(w.qonly?' qfinal':'')+'">'+(w.qonly?'Reta final':'S'+w.n)+'</button>');b.addEventListener('click',function(){var t=document.getElementById('week-'+w.n);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});jump.appendChild(b);});
   var box=$('#crono');box.innerHTML='';
   WEEKS.forEach(function(w){
     var ws=weekStart(w.n),we=addDays(ws,6);
-    box.appendChild(el('<h3 class="grp" id="week-'+w.n+'" data-week="'+w.n+'">Semana '+w.n+' · '+fmt(ws)+'–'+fmt(we)+' · '+esc(w.area)+'<span class="week-ribbon">✓ Semana concluída</span></h3>'));
-    if(w.n===1)box.appendChild(el('<div class="note">Modelo de leitura adiantada: a teoria de cada semana é lida no fim de semana ANTERIOR, para você fazer questões e flashcards com autonomia. A Semana 1 é a exceção (não há fim de semana anterior) — use a teoria de Cardiologia que já tiver à mão.</div>'));
+    var ribbon=w.qonly?'<span class="week-final-ribbon">só questões</span>':'<span class="week-ribbon">✓ Semana concluída</span>';
+    box.appendChild(el('<h3 class="grp" id="week-'+w.n+'" data-week="'+w.n+'">Semana '+w.n+' · '+fmt(ws)+'–'+fmt(we)+' · '+esc(w.area)+ribbon+'</h3>'));
+    if(w.n===1)box.appendChild(el('<div class="note">No <b>domingo</b> você lê os 5 assuntos da semana; de <b>segunda a sexta</b> resolve questões de um assunto por dia; no <b>sábado</b>, simulado de 100 questões. O cronograma começa em 28/06.</div>'));
+    if(w.qonly)box.appendChild(el('<div class="note">Última semana antes da prova: foco <b>exclusivo em questões e simulados</b>, sem rever matéria nova. Prova ENARE em <b>13/09/2026</b>.</div>'));
     DAYS.filter(function(d){return d.week.n===w.n;}).forEach(function(d){box.appendChild(dayEl(d));});
   });
   refreshTallies();
@@ -824,7 +803,7 @@ function renderCal(){
    ============================================================ */
 function revEvents(){
   var ev=[];
-  WEEKS.forEach(function(w){ if(w.n>=11)return; var ws=weekStart(w.n);
+  WEEKS.forEach(function(w){ if(w.qonly||!w.areaKey)return; var ws=weekStart(w.n);
     w.temas.forEach(function(tema,i){var base=addDays(ws,i);
       [[7,'7d','#7fd0a6'],[15,'15d','#d8a657'],[30,'30d','#cf8593']].forEach(function(r){var d=addDays(base,r[0]);if(d<=EXAM)ev.push({date:d,iso:iso(d),tema:tema,area:w.area.split('·')[0].trim(),kind:r[1],cor:r[2]});});
     });
@@ -872,27 +851,33 @@ function renderSim(){
    ============================================================ */
 function renderRanking(){
   var box=$('#ranking-body');box.innerHTML='';
+  var cm=cronoMap();
+  var labels={cm:'Clínica Médica',cir:'Cirurgia',peds:'Pediatria',gineco:'Ginecologia',obst:'Obstetrícia',prev:'Preventiva'};
+  var order=['cm','cir','peds','gineco','obst','prev'];
+  var total=order.reduce(function(a,k){return a+cm[k].length;},0);
+  var sum='<div class="card" style="margin-bottom:14px"><div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mauve);margin-bottom:10px">Matérias contempladas se você seguir o cronograma</div><div style="display:flex;flex-wrap:wrap;gap:10px 22px">';
+  order.forEach(function(k){sum+='<span style="color:var(--ivory)"><b style="color:var(--rose);font-family:var(--font-d);font-size:20px">'+cm[k].length+'</b> '+labels[k]+'</span>';});
+  sum+='<span style="color:var(--ivory)">· <b style="color:var(--rose);font-family:var(--font-d);font-size:20px">'+total+'</b> no total</span></div></div>';
+  box.appendChild(el(sum));
   function mid(area,nome){return slug(area+'-'+nome);}
-  MATERIAS_ENARE.forEach(function(g,gi){
-    var ckey='matc-'+gi,collapsed=(COLLAPSE[ckey]==null)?true:!!COLLAPSE[ckey]; // inicia recolhido
-    function marcado(it){var id=mid(g.area,it[0]);return it[1]>0?!isDone('matoff-'+id):isDone('mat-'+id);}
-    function conta(){return g.itens.filter(marcado).length;}
-    var noCrono=g.itens.filter(function(it){return it[1]>0;}).length;
-    var head=el('<div class="area-head'+(collapsed?' collapsed':'')+'"><span class="arw">▾</span><h3>'+esc(g.area)+'</h3><span class="cnt">'+conta()+'/'+g.itens.length+' marcados · '+noCrono+' no cronograma</span></div>');
+  order.forEach(function(k,gi){
+    var label=labels[k],cont=cm[k],extras=(EXTRAS_ENARE[k]||[]);
+    var itens=cont.map(function(c){return {nome:c.nome,crono:true,c:c};}).concat(extras.map(function(n){return {nome:n,crono:false};}));
+    var ckey='matc-'+gi,collapsed=(COLLAPSE[ckey]==null)?true:!!COLLAPSE[ckey];
+    function marc(it){var id=mid(label,it.nome);return it.crono?!isDone('matoff-'+id):isDone('mat-'+id);}
+    function conta(){return itens.filter(marc).length;}
+    var head=el('<div class="area-head'+(collapsed?' collapsed':'')+'"><span class="arw">▾</span><h3>'+esc(label)+'</h3><span class="cnt">'+conta()+'/'+itens.length+' marcados · '+cont.length+' no cronograma</span></div>');
     var bodyEl=el('<div class="area-body'+(collapsed?' collapsed':'')+'"><div class="rk-list"></div></div>');
     var list=bodyEl.querySelector('.rk-list');
-    function atualizaCnt(){head.querySelector('.cnt').textContent=conta()+'/'+g.itens.length+' marcados · '+noCrono+' no cronograma';}
-    g.itens.slice().sort(function(a,b){return (a[1]||999)-(b[1]||999);}).forEach(function(it){
-      var nome=it[0],sem=it[1],id=mid(g.area,nome),crono=sem>0,on=marcado(it);
-      var tag=crono?('✦ Conteúdo marcado para a Semana '+sem+' do cronograma'):'Extra — marque se estudar no tempo livre';
-      var card=el('<div class="mat-item'+(crono?' crono':'')+(on?' done':'')+'"><div class="chk">'+CHECK+'</div><div style="flex:1"><div class="mat-name"></div><div class="mat-tag'+(crono?' crono':'')+'">'+tag+'</div></div></div>');
-      card.querySelector('.mat-name').textContent=nome;
-      card.addEventListener('click',function(){
-        var novo=!marcado(it);
-        if(crono) setDone('matoff-'+id, novo?false:true); else setDone('mat-'+id, novo);
-        card.classList.toggle('done',novo); atualizaCnt();
-        toast(crono?(novo?'Tema do cronograma marcado':'Tema desmarcado'):(novo?'Tema extra marcado':'Tema desmarcado'));
-      });
+    function upd(){head.querySelector('.cnt').textContent=conta()+'/'+itens.length+' marcados · '+cont.length+' no cronograma';}
+    itens.forEach(function(it){
+      var id=mid(label,it.nome),on=marc(it),tag;
+      if(it.crono){var c=it.c;tag='✦ Contemplada · Semana '+c.week+' · questões em '+fmtShort(c.date)+' · revisão na Semana '+c.revWeek+' ('+fmtShort(c.revDate)+')';}
+      else tag='Não contemplada no cronograma — marque se estudar no tempo livre';
+      var card=el('<div class="mat-item'+(it.crono?' crono':'')+(on?' done':'')+'"><div class="chk">'+CHECK+'</div><div style="flex:1"><div class="mat-name"></div><div class="mat-tag'+(it.crono?' crono':'')+'"></div></div></div>');
+      card.querySelector('.mat-name').textContent=it.nome;
+      card.querySelector('.mat-tag').textContent=tag;
+      card.addEventListener('click',function(){var novo=!marc(it);if(it.crono)setDone('matoff-'+id,novo?false:true);else setDone('mat-'+id,novo);card.classList.toggle('done',novo);upd();toast(novo?'Marcado':'Desmarcado');});
       list.appendChild(card);
     });
     head.addEventListener('click',function(){head.classList.toggle('collapsed');bodyEl.classList.toggle('collapsed');COLLAPSE[ckey]=head.classList.contains('collapsed')?1:0;saveCollapse();});
