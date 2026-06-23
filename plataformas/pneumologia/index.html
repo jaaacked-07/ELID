@@ -577,8 +577,8 @@ async function elidPublish(){
     if(!UID||!db||!STATE) return;
     const cards={};
     allCards().forEach(c=>{ cards[c.id]={front:c.front||"",back:c.back||"",type:c.type||"",modTitle:c.mat||c.tema||""}; });
-    const ds=dailySet();
-    const questions=ds.qs.map(it=>{ const q=it.q; const opts=(q.opts||[]).map((tx,ix)=>({text:tx,correct:ix===q.correct}));
+    const qpool=[]; MODULES.forEach(m=>m.topics.forEach(t=>{ if(t.content&&t.content.questions) t.content.questions.forEach((q,i)=>qpool.push({modId:m.id,topId:t.id,qi:i,q,m})); }));
+    const questions=qpool.map(it=>{ const q=it.q; const opts=(q.opts||[]).map((tx,ix)=>({text:tx,correct:ix===q.correct}));
       return {id:`${it.modId}:${it.topId}:${it.qi}`, stem:q.q||q.stem||"", options:opts, explanation:q.e||q.expl||q.comment||"", modTitle:(it.m&&it.m.title)||it.topId}; });
     await setDoc(doc(db,"users",UID,"central","pneumologia"), {platform:"pneumologia",label:"PneumoAtlas",updated:Date.now(),cards,questions}, {merge:true});
   }catch(e){}
