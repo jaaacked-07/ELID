@@ -268,6 +268,8 @@
   .pend-task .pe-del:hover{color:#e79a9a}
   /* pin no calendário */
   .cal-pin{position:absolute;top:2px;left:4px;font-size:11px;line-height:1;z-index:1}
+  .enare-bar--empty{display:flex;align-items:center;justify-content:center;font-size:11.5px;color:var(--mauve);background:none !important;letter-spacing:.02em}
+  .enare-bar--empty::after{content:none}
 </style>
 </head>
 <body>
@@ -540,6 +542,8 @@ function areaDe(k){ if(!k)return null; var n=String(k).toLowerCase().replace(/[^
 function areaTot(key){ var t=0,a=0,m=QSTATS[key]; if(m){t+=m.tot||0;a+=m.ac||0;}
   Object.keys(QPLAT).forEach(function(pk){ if(areaDe(pk)===key){ var s=QPLAT[pk]||{}; t+=s.tot||0; a+=s.ac||0; } });
   return {tot:t,ac:a}; }
+var MINQ=30; /* mínimo de questões respondidas por área para exibir desempenho */
+function areaReady(key){ return areaTot(key).tot>=MINQ; }
 function pctArea(key){ var s=areaTot(key); return s.tot>0?Math.round(s.ac/s.tot*100):0; }
 /* tendência: compara últimos 30 dias com os 30 anteriores */
 function trendArea(key){
@@ -745,41 +749,46 @@ function renderHoje(){
   else box.appendChild(el('<div class="card">Sem bloco programado para hoje.</div>'));
 }
 function renderRadar(){
-  var perf=AREAS.map(function(a){return {label:a.short,key:a.key,v:pctArea(a.key),trend:trendArea(a.key),tot:areaTot(a.key).tot};});
-  var temDados=perf.some(function(p){return p.tot>0;});
-  var n=perf.length,cx=175,cy=140,R=100,minV=Math.min.apply(null,perf.map(function(p){return p.v;}));
+  var perf=AREAS.map(function(a){var tt=areaTot(a.key);return {label:a.short,key:a.key,v:pctArea(a.key),trend:trendArea(a.key),tot:tt.tot,ready:tt.tot>=MINQ};});
+  var ready=perf.filter(function(p){return p.ready;});
+  var minV=ready.length?Math.min.apply(null,ready.map(function(p){return p.v;})):-1;
+  var n=perf.length,cx=175,cy=140,R=100;
   function pt(i,r){var ang=(-90+i*360/n)*Math.PI/180;return [cx+r*Math.cos(ang),cy+r*Math.sin(ang)];}
   var grid='';[0.25,0.5,0.75,1].forEach(function(g){grid+='<polygon points="'+perf.map(function(p,i){var q=pt(i,R*g);return q[0].toFixed(1)+','+q[1].toFixed(1);}).join(' ')+'" fill="none" stroke="rgba(201,160,176,.16)"/>';});
   var axes='',labels='',dots='';
-  perf.forEach(function(p,i){var a=pt(i,R),l=pt(i,R+24),weak=temDados&&p.tot>0&&p.v===minV;
+  perf.forEach(function(p,i){var a=pt(i,R),l=pt(i,R+24),weak=p.ready&&p.v===minV;var pv=p.ready?p.v:0;
     axes+='<line x1="'+cx+'" y1="'+cy+'" x2="'+a[0].toFixed(1)+'" y2="'+a[1].toFixed(1)+'" stroke="rgba(201,160,176,.16)"/>';
-    labels+='<text x="'+l[0].toFixed(1)+'" y="'+l[1].toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" font-size="11" font-family="Raleway,sans-serif" fill="'+(weak?'#e79a9a':'#c9a0b0')+'" font-weight="'+(weak?'700':'500')+'">'+p.label+' '+p.v+'%</text>';
-    var d=pt(i,R*p.v/100);dots+='<circle cx="'+d[0].toFixed(1)+'" cy="'+d[1].toFixed(1)+'" r="'+(weak?5.5:3.5)+'" fill="'+(weak?'#e79a9a':'#cf8593')+'"/>';
+    var txt=p.ready?(p.label+' '+p.v+'%'):(p.label+' · s/ dados');
+    labels+='<text x="'+l[0].toFixed(1)+'" y="'+l[1].toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" font-size="11" font-family="Raleway,sans-serif" fill="'+(weak?'#e79a9a':(p.ready?'#c9a0b0':'rgba(201,160,176,.45)'))+'" font-weight="'+(weak?'700':'500')+'">'+txt+'</text>';
+    var d=pt(i,R*pv/100);
+    if(p.ready)dots+='<circle cx="'+d[0].toFixed(1)+'" cy="'+d[1].toFixed(1)+'" r="'+(weak?5.5:3.5)+'" fill="'+(weak?'#e79a9a':'#cf8593')+'"/>';
   });
-  var poly=perf.map(function(p,i){var d=pt(i,R*p.v/100);return d[0].toFixed(1)+','+d[1].toFixed(1);}).join(' ');
+  var poly=perf.map(function(p,i){var pv=p.ready?p.v:0;var d=pt(i,R*pv/100);return d[0].toFixed(1)+','+d[1].toFixed(1);}).join(' ');
   $('#radar').innerHTML='<svg viewBox="0 0 350 270" style="width:100%">'+grid+axes+'<polygon points="'+poly+'" fill="rgba(183,110,121,.26)" stroke="#b76e79" stroke-width="2"/>'+dots+labels+'</svg>';
   function seta(t){ if(!t)return '<span style="color:var(--mauve)">→</span>'; return t.dir==='up'?'<span style="color:#7fd0a6">↑ +'+t.delta+'%</span>':t.dir==='down'?'<span style="color:#e79a9a">↓ '+t.delta+'%</span>':'<span style="color:var(--mauve)">→ estável</span>'; }
-  var withData=perf.filter(function(p){return p.tot>0;});
-  var weakest=withData.slice().sort(function(a,b){return a.v-b.v;});
+  var weakest=ready.slice().sort(function(a,b){return a.v-b.v;});
   var side='<div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mauve);margin-bottom:8px">Onde focar (do mais fraco ao mais forte)</div>';
-  if(!withData.length){
-    side+='<div class="note" style="margin-top:0">Cálculo automático: as questões resolvidas nas plataformas ELID já são somadas aqui (a cada login). Você também pode lançar manualmente abaixo. Clínica Médica reúne todas as subáreas (cardio, pneumo, neuro, reumato, etc.).</div>';
+  if(!ready.length){
+    side+='<div class="note" style="margin-top:0"><b>Dados insuficientes. Responda mais questões!</b><br>O radar mede só acertos em questões e precisa de pelo menos <b>'+MINQ+' questões respondidas por área</b>. As questões feitas em todas as plataformas ELID são somadas aqui a cada login (Clínica Médica reúne cardio, pneumo, neuro, reumato, etc.). Você também pode lançar abaixo.</div>';
   } else {
     side+=weakest.map(function(p,i){return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="flex:0 0 22px;font-family:var(--font-d);font-size:18px;color:'+(i===0?'#e79a9a':'var(--mauve)')+'">'+(i+1)+'</span><span style="flex:1;font-weight:'+(i===0?'700':'500')+';color:'+(i===0?'#e79a9a':'var(--ivory)')+'">'+p.label+'</span><span style="color:var(--mauve);font-variant-numeric:tabular-nums">'+p.v+'%</span><span style="flex:0 0 78px;text-align:right;font-size:12px">'+seta(p.trend)+'</span></div>';}).join('');
-    side+='<div class="note" style="margin-top:6px">🔴 <b>'+weakest[0].label+'</b> é hoje sua maior prioridade.</div>';
+    side+='<div class="note" style="margin-top:6px">🔴 <b>'+weakest[0].label+'</b> é hoje sua maior prioridade.';
+    var faltam=perf.filter(function(p){return !p.ready;});
+    if(faltam.length)side+='<br><span style="color:var(--mauve)">Sem dados ainda (mín. '+MINQ+' questões): '+faltam.map(function(p){return p.label;}).join(', ')+'.</span>';
+    side+='</div>';
   }
   $('#radar-side').innerHTML=side;
 }
 function renderEnare(){
   var list=$('#enare-list');list.innerHTML='';
   function cor(v){return v>=75?'#7fd0a6':v>=60?'var(--warn)':'#e79a9a';}
-  AREAS.forEach(function(a){var v=pctArea(a.key);
-    list.appendChild(el('<div class="enare-row"><span class="enare-name">'+a.label+'</span><span class="enare-bar"><i style="width:'+v+'%;background:'+cor(v)+'"></i></span><span class="enare-pct" style="color:'+cor(v)+'">'+v+'%</span></div>'));
+  AREAS.forEach(function(a){var v=pctArea(a.key),ready=areaReady(a.key);
+    if(ready) list.appendChild(el('<div class="enare-row"><span class="enare-name">'+a.label+'</span><span class="enare-bar"><i style="width:'+v+'%;background:'+cor(v)+'"></i></span><span class="enare-pct" style="color:'+cor(v)+'">'+v+'%</span></div>'));
+    else list.appendChild(el('<div class="enare-row"><span class="enare-name">'+a.label+'</span><span class="enare-bar enare-bar--empty">Dados insuficientes — responda mais questões</span><span class="enare-pct" style="color:var(--mauve)">—</span></div>'));
   });
-  var comDados=AREAS.filter(function(a){return areaTot(a.key).tot>0;});
-  var base=comDados.length?comDados:AREAS;
-  var overall=Math.round(base.reduce(function(s,a){return s+pctArea(a.key);},0)/base.length);
-  $('#enare-overall').textContent=overall+'%';
+  var prontas=AREAS.filter(function(a){return areaReady(a.key);});
+  if(prontas.length){ var overall=Math.round(prontas.reduce(function(s,a){return s+pctArea(a.key);},0)/prontas.length); $('#enare-overall').textContent=overall+'%'; }
+  else $('#enare-overall').textContent='—';
 }
 /* registrar questões já resolvidas (incrementa o total por área; fica salvo por usuário) */
 $('#reg-q-btn').addEventListener('click',function(){
