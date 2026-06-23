@@ -569,6 +569,7 @@ window.elidRegistrarQuestoes=function(plataformaOuArea,respondidas,acertos){
   saveQStats(); saveQSnap(); if(typeof renderHoje==='function')renderHoje();
 };
 /* registra o total ABSOLUTO de questões de uma plataforma (não acumula — substitui o snapshot) */
+window.elidResetPlataformas=function(){ QPLAT={}; saveQPlat(); if(typeof renderHoje==='function')renderHoje(); };
 window.elidSetPlataforma=function(platformKey,tot,ac){
   var k=String(platformKey||'').toLowerCase(); if(!k)return;
   tot=+tot||0; QPLAT[k]={tot:tot,ac:Math.min(tot,+ac||0)};
@@ -782,13 +783,13 @@ function renderRadar(){
 function renderEnare(){
   var list=$('#enare-list');list.innerHTML='';
   function cor(v){return v>=75?'#7fd0a6':v>=60?'var(--warn)':'#e79a9a';}
-  AREAS.forEach(function(a){var v=pctArea(a.key),ready=areaReady(a.key);
-    if(ready) list.appendChild(el('<div class="enare-row"><span class="enare-name">'+a.label+'</span><span class="enare-bar"><i style="width:'+v+'%;background:'+cor(v)+'"></i></span><span class="enare-pct" style="color:'+cor(v)+'">'+v+'%</span></div>'));
-    else list.appendChild(el('<div class="enare-row"><span class="enare-name">'+a.label+'</span><span class="enare-bar enare-bar--empty">Dados insuficientes — responda mais questões</span><span class="enare-pct" style="color:var(--mauve)">—</span></div>'));
+  AREAS.forEach(function(a){var v=pctArea(a.key);
+    list.appendChild(el('<div class="enare-row"><span class="enare-name">'+a.label+'</span><span class="enare-bar"><i style="width:'+v+'%;background:'+cor(v)+'"></i></span><span class="enare-pct" style="color:'+cor(v)+'">'+v+'%</span></div>'));
   });
-  var prontas=AREAS.filter(function(a){return areaReady(a.key);});
-  if(prontas.length){ var overall=Math.round(prontas.reduce(function(s,a){return s+pctArea(a.key);},0)/prontas.length); $('#enare-overall').textContent=overall+'%'; }
-  else $('#enare-overall').textContent='—';
+  var comDados=AREAS.filter(function(a){return areaTot(a.key).tot>0;});
+  var base=comDados.length?comDados:AREAS;
+  var overall=Math.round(base.reduce(function(s,a){return s+pctArea(a.key);},0)/base.length);
+  $('#enare-overall').textContent=overall+'%';
 }
 /* registrar questões já resolvidas (incrementa o total por área; fica salvo por usuário) */
 $('#reg-q-btn').addEventListener('click',function(){
@@ -1152,62 +1153,54 @@ onAuthStateChanged(auth, async (user)=>{
   showApp();
   window.startApp(uid);
 
-  // (1) Doc agregado opcional: users/{uid}/desempenho/areas { cm:{tot,ac}, ... }
-  try{
-    const ds = await getDoc(doc(db,'users',uid,'desempenho','areas'));
-    if(ds.exists() && window.elidSetDesempenho){ window.elidSetDesempenho(ds.data()); }
-  }catch(e){ console.warn('ELID desempenho', e); }
-
-  // (2) Soma o progresso REAL de questões de cada plataforma (busca tolerante a esquemas).
+  // Soma o progresso REAL de questões de cada plataforma (a cada login).
   await lerProgressoPlataformas(uid);
 });
 
 // Extrai respondidas/acertos de qualquer formato de doc de plataforma (tolerante a esquemas).
 function extraiQ(data){
-  var tot=0, ac=0, err=0, hasTot=false, found=false;
-  (function walk(o,depth){
-    if(!o||typeof o!=='object'||depth>6) return;
-    if(Array.isArray(o)){
-      // lista de tentativas/questões: conta itens e acertos
-      var allObj=o.length>0 && o.every(function(x){return x&&typeof x==='object';});
-      if(allObj){ var hit=0,any=false;
-        o.forEach(function(x){ if(('correct' in x)||('acertou' in x)||('certo' in x)||('isCorrect' in x)||('ok' in x)||('acerto' in x)){ any=true; if(x.correct||x.acertou||x.certo||x.isCorrect||x.ok||x.acerto)hit++; } });
-        if(any){ tot+=o.length; ac+=hit; hasTot=true; found=true; return; }
-      }
-      o.forEach(function(x){walk(x,depth+1);}); return;
-    }
-    Object.keys(o).forEach(function(key){
-      var v=o[key], lk=key.toLowerCase();
-      if(typeof v==='number'){
-        if(/(respond|answered|feitas|resolv|totalquest|qtot|questoesresp|nresp|totalanswered)/.test(lk)){ tot+=v; hasTot=true; found=true; }
-        else if(/(acert|correct|certas|hits|corretas|acerto)/.test(lk)){ ac+=v; found=true; }
-        else if(/(erro|errad|wrong|incorret)/.test(lk)){ err+=v; found=true; }
-      } else if(v && typeof v==='object'){ walk(v,depth+1); }
+  // RIGOROSO: só aceita desempenho de QUESTÕES com campos explícitos.
+  // Ignora flashcards, SRS, listas e contadores genéricos (evita falsos como 139/139).
+  if(!data||typeof data!=='object') return null;
+  var src=data;
+  if(typeof data.data==='string'){ try{ src=JSON.parse(data.data); }catch(e){ src=data; } }
+  function campos(o,trusted){
+    if(!o||typeof o!=='object') return null;
+    var tot=null, ac=null;
+    Object.keys(o).forEach(function(k){ var lk=k.toLowerCase(), v=o[k]; if(typeof v!=='number'||v<0) return;
+      var temQuest=/quest/.test(lk);
+      if(tot==null && ((temQuest && /(respond|feitas|resolv|total)/.test(lk)) || (trusted && /^(respondidas|total|tot)$/.test(lk)))) tot=v;
+      if(ac==null && ((temQuest && /(acert|corret)/.test(lk)) || (trusted && /^(acertos|ac|corretas|certas)$/.test(lk)))) ac=v;
     });
-  })(data,0);
-  var total = hasTot ? tot : (ac+err);
-  if(!found || total<=0 && ac<=0) return null;
-  total=Math.max(total,ac);
-  return {tot:total, ac:Math.min(ac,total)};
+    if(tot!=null && ac!=null && tot>0) return {tot:tot, ac:Math.min(ac,tot)};
+    return null;
+  }
+  // objetos dedicados de desempenho de prova são confiáveis (aceitam campos curtos)
+  var nested=['radar','desempenho','questoes','provas','simulado','simulados','questaoStats','qstats'];
+  for(var i=0;i<nested.length;i++){ var o=src[nested[i]]; if(o&&typeof o==='object'){ var r=campos(o,true); if(r) return r; } }
+  // caso contrário, exige nomes que mencionem "quest" explicitamente
+  return campos(src,false);
 }
 async function aplicaDoc(id,data){
   if(!data) return;
-  if(typeof data.data==='string'){ try{ data=JSON.parse(data.data); }catch(e){} }
   var q=extraiQ(data);
   if(q && q.tot>0 && window.elidSetPlataforma){ window.elidSetPlataforma(id,q.tot,q.ac); }
 }
 async function lerProgressoPlataformas(uid){
-  // 2a) coleções agregadoras (central/desempenho): users/{uid}/{col}/{plataforma}
+  // zera o snapshot das plataformas a cada login (autocorrige leituras antigas equivocadas)
+  if(window.elidResetPlataformas) window.elidResetPlataformas();
+  // 1) doc agregado confiável: users/{uid}/desempenho/areas  { cm:{tot,ac}, ... }
+  try{ const ds=await getDoc(doc(db,'users',uid,'desempenho','areas')); if(ds.exists() && window.elidSetDesempenho) window.elidSetDesempenho(ds.data()); }
+  catch(e){ console.warn('ELID desempenho', e); }
+  // 2) coleção central + estados de plataforma (extração rigorosa de questões)
   for(const col of ['central','desempenho']){
     try{ const qs=await getDocs(collection(db,'users',uid,col)); qs.forEach(function(d){ aplicaDoc(d.id,d.data()); }); }
     catch(e){ console.warn('ELID '+col, e); }
   }
-  // 2b) lista TODAS as plataformas do usuário e lê o estado de cada uma
   var ids=[];
   try{ const ps=await getDocs(collection(db,'users',uid,'platforms')); ps.forEach(function(d){ ids.push(d.id); aplicaDoc(d.id,d.data()); }); }
   catch(e){ console.warn('ELID platforms list', e); }
-  // garante nomes conhecidos mesmo se a listagem falhar
-  ['clinica','cardiologia','pneumologia','neurologia','semiologia','preventiva','pediatria','ginecologia','obstetricia','cirurgia','reumatologia','endocrino','nefrologia','gastro','infecto','hemato'].forEach(function(x){ if(ids.indexOf(x)<0)ids.push(x); });
+  ['clinica','cardiologia','pneumologia','neurologia','semiologia','preventiva','pediatria','ginecologia','obstetricia','cirurgia'].forEach(function(x){ if(ids.indexOf(x)<0)ids.push(x); });
   for(const id of ids){ if(id==='cronograma')continue;
     try{ const ms=await getDoc(doc(db,'users',uid,'platforms',id,'state','main')); if(ms.exists()) aplicaDoc(id,ms.data()); }catch(e){}
   }
