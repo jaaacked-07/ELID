@@ -1158,12 +1158,8 @@ function elidPublish(){
     });
     var questions=[];
     try{
-      var QQ=allQuestions();                 // [{id, i, q}] todas as nativas
-      var t=todayStr(), seed=0; for(var z=0;z<t.length;z++) seed=(seed*31+t.charCodeAt(z))>>>0;
-      var idx=QQ.map(function(_,i){return i;});
-      for(var a=idx.length-1;a>0;a--){ seed=(seed*1664525+1013904223)>>>0; var b=seed%(a+1); var tmp=idx[a];idx[a]=idx[b];idx[b]=tmp; }
-      idx.slice(0,6).forEach(function(j){
-        var it=QQ[j]; var Q=it.q; if(!Q) return;
+      allQuestions().forEach(function(it){
+        var Q=it.q; if(!Q) return;
         var opts=(Q.opts||[]).map(function(tx,ix){return {text:tx,correct:ix===Q.correct};});
         var tt=(typeof findTopic==='function'&&findTopic(it.id)&&(findTopic(it.id).title||findTopic(it.id).name))||it.id;
         questions.push({id:it.id+':'+it.i, stem:Q.stem||'', options:opts, explanation:Q.comment||'', modTitle:tt});
