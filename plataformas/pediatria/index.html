@@ -765,8 +765,7 @@ function elidPublish(){
     });
     var questions=[];
     try{
-      var seed=todayStr();
-      seededShuffle(allNativeQuestions(), seed+"q").slice(0,5).forEach(function(it){
+      allNativeQuestions().forEach(function(it){
         var o=it.q; var opts=(o.opts||[]).map(function(t,ix){return {text:t,correct:ix===o.correct};});
         questions.push({id:o.id, stem:o.stem||"", options:opts, explanation:o.expl||"", modTitle:(it.mat&&it.mat.t)||""});
       });
