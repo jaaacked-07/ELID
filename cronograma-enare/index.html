@@ -293,7 +293,7 @@
 
 <div id="app" style="display:none">
 <div class="topbar" id="topbar">
-  <button class="tb-power" id="tb-back" title="Voltar à Biblioteca ELID" onclick="try{location.assign(new URL('../../biblioteca-web/',location.href).href)}catch(e){location.href='../../biblioteca-web/'}">⏻</button>
+  <button class="tb-power" id="tb-back" title="Voltar à Biblioteca ELID" onclick="window.location.href='../../biblioteca-web/'">⏻</button>
 </div>
 <header>
   <div class="wrap">
@@ -322,7 +322,7 @@
     <h3 class="grp">🎯 Radar de desempenho</h3>
     <p class="sec-sub" style="margin-bottom:10px">Quanto menor o desempenho, mais destacada fica a área — é onde concentrar energia.</p>
     <div class="card"><div class="radar-wrap"><div class="radar-svg" id="radar"></div><div style="flex:1;min-width:220px" id="radar-side"></div></div></div>
-    <button class="reset" id="reg-q-btn">✎ Registrar questões já resolvidas (alimenta o radar — fica salvo)</button>
+    <button class="reset" id="reg-q-btn">✎ Registrar / editar questões manuais (alimenta o radar — fica salvo)</button>
     <div id="reg-q-box"></div>
 
     <h3 class="grp">🏁 Modo ENARE — se a prova fosse hoje</h3>
@@ -796,19 +796,19 @@ function renderEnare(){
 $('#reg-q-btn').addEventListener('click',function(){
   var box=$('#reg-q-box'); if(box.innerHTML){box.innerHTML='';return;}
   var wrap=el('<div class="edit-row" style="border-radius:12px;margin-top:10px;display:block"></div>');
-  wrap.appendChild(el('<div class="note" style="margin:0 0 10px">Some aqui as questões que você já fez (e as próximas). Os valores são <b>adicionados</b> ao total de cada área e salvos na sua conta. Clínica Médica reúne todas as subáreas.</div>'));
-  AREAS.forEach(function(a){var s=areaTot(a.key);
-    wrap.appendChild(el('<div class="reg-q-row"><span style="flex:0 0 120px;color:var(--ivory)">'+a.label+'</span><span style="color:var(--mauve);font-size:12px">atual: '+s.ac+'/'+s.tot+'</span><label>+ respondidas <input class="in-time" data-k="'+a.key+'" data-f="r" type="number" min="0" value="0"></label><label>+ acertos <input class="in-time" data-k="'+a.key+'" data-f="a" type="number" min="0" value="0"></label></div>'));
+  wrap.appendChild(el('<div class="note" style="margin:0 0 10px">Edite aqui as questões que você lança <b>manualmente</b> por área (pode corrigir a qualquer momento). As questões lidas das plataformas são somadas automaticamente por cima. Clínica Médica reúne todas as subáreas.</div>'));
+  AREAS.forEach(function(a){var m=QSTATS[a.key]||{tot:0,ac:0},pl=areaTot(a.key).tot-(m.tot||0);
+    wrap.appendChild(el('<div class="reg-q-row"><span style="flex:0 0 120px;color:var(--ivory)">'+a.label+'</span><label>respondidas <input class="in-time" data-k="'+a.key+'" data-f="r" type="number" min="0" value="'+(m.tot||0)+'"></label><label>acertos <input class="in-time" data-k="'+a.key+'" data-f="a" type="number" min="0" value="'+(m.ac||0)+'"></label>'+(pl>0?'<span style="color:var(--mauve);font-size:11px">+'+pl+' das plataformas</span>':'')+'</div>'));
   });
   var sv=el('<button class="ebtn save" style="margin-top:6px">Salvar e atualizar radar</button>');
   wrap.appendChild(sv); box.appendChild(wrap);
   sv.addEventListener('click',function(){
     AREAS.forEach(function(a){
-      var r=+wrap.querySelector('input[data-k="'+a.key+'"][data-f="r"]').value||0;
-      var ac=+wrap.querySelector('input[data-k="'+a.key+'"][data-f="a"]').value||0;
-      if(r>0) window.elidRegistrarQuestoes(a.key,r,ac);
+      var r=Math.max(0,+wrap.querySelector('input[data-k="'+a.key+'"][data-f="r"]').value||0);
+      var ac=Math.min(r,Math.max(0,+wrap.querySelector('input[data-k="'+a.key+'"][data-f="a"]').value||0));
+      if(r>0) QSTATS[a.key]={tot:r,ac:ac}; else delete QSTATS[a.key];
     });
-    box.innerHTML=''; toast('Questões registradas ✦'); renderHoje();
+    saveQStats(); box.innerHTML=''; toast('Questões atualizadas ✦'); renderHoje();
   });
 });
 
@@ -905,7 +905,22 @@ function renderCrono(){
     if(w.qonly)box.appendChild(el('<div class="note">Última semana antes da prova: foco <b>exclusivo em questões e simulados</b>, sem rever matéria nova. Prova ENARE em <b>13/09/2026</b>.</div>'));
     DAYS.filter(function(d){return d.week.n===w.n;}).forEach(function(d){box.appendChild(dayEl(d));});
   });
+  // pendências/lembretes em datas FORA do cronograma (antes do início ou depois) ganham um dia próprio
+  var cov={}; DAYS.forEach(function(d){cov[d.iso]=1;});
+  var extra=[]; Object.keys(PEND).forEach(function(key){ if(key.indexOf('custom-')!==0)return; var di=key.slice(7); if(!cov[di] && (PEND[key]||[]).length) extra.push(di); });
+  extra=extra.filter(function(v,i,a){return a.indexOf(v)===i;}).sort();
+  if(extra.length){
+    box.appendChild(el('<h3 class="grp">📌 Pendências fora do cronograma</h3>'));
+    extra.forEach(function(di){ box.appendChild(extraDayEl(di)); });
+  }
   refreshTallies();
+}
+function extraDayEl(di){
+  var pp=di.split('-'), dt=new Date(+pp[0],+pp[1]-1,+pp[2]);
+  var e=el('<div class="day" id="d-'+di+'"><div class="day-head"><span class="day-collapse">▾</span><div><div class="day-date">'+fmt(dt)+' · '+DOW[dt.getDay()]+'</div><div class="day-dow">Pendência avulsa</div></div><div class="day-tally"></div></div></div>');
+  (PEND['custom-'+di]||[]).forEach(function(it){ e.appendChild(pendTaskEl(di,it)); });
+  e.querySelector('.day-head').addEventListener('click',function(ev){ if(ev.target.closest('.t-edit'))return; e.classList.toggle('collapsed'); });
+  return e;
 }
 
 /* ============================================================
@@ -1121,7 +1136,7 @@ function showLogin(){ $g('gate').style.display='flex'; $g('gate-loading').style.
 function showApp(){ $g('gate').style.display='none'; $g('app').style.display='block'; $g('topbar').style.display='flex'; }
 
 // navegação da barra (⏻ volta à biblioteca, mantém sessão)
-if($g('tb-back')) $g('tb-back').onclick = ()=>{ try{ location.assign(new URL('../../biblioteca-web/',location.href).href); }catch(e){ location.href='../../biblioteca-web/'; } };
+if($g('tb-back')) $g('tb-back').addEventListener('click',function(){ window.location.href='../../biblioteca-web/'; });
 
 let saveTimer=null;
 onAuthStateChanged(auth, async (user)=>{
