@@ -227,6 +227,18 @@
   .reg-q-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:7px 0}
   .reg-q-row label{color:var(--mauve);font-size:13px}
   .reg-q-row .in-time{width:88px}
+  .cal-cell{position:relative}
+  .cal-x{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:34px;font-weight:800;color:var(--rose-bright);pointer-events:none;line-height:1}
+  .cal-cell.xed .cal-x{display:flex}
+  .cal-cell.xed{opacity:.65}
+  .cal-go{position:absolute;top:2px;right:4px;background:none;border:none;color:var(--mauve);font-size:13px;cursor:pointer;opacity:.65;padding:0;z-index:2}
+  .cal-go:hover{color:var(--rose);opacity:1}
+  .mat-item .t-edit{flex:0 0 auto;align-self:flex-start;background:none;border:none;color:var(--mauve);cursor:pointer;width:30px;height:30px;border-radius:8px}
+  .mat-item .t-edit:hover{color:var(--rose);background:rgba(183,110,121,.12)}
+  .mat-item .t-edit svg{width:16px;height:16px}
+  .mat-note{font-size:12px;color:var(--ivory);margin-top:4px;opacity:.9}
+  .mat-add-btn{width:100%;background:none;border:1px dashed var(--mauve);color:var(--mauve);border-radius:12px;padding:11px;cursor:pointer;font-family:var(--font-b);font-size:13px;transition:.15s}
+  .mat-add-btn:hover{border-color:var(--rose);color:var(--rose)}
 </style>
 </head>
 <body>
@@ -412,6 +424,9 @@ var PEND=load('pend',{});          function savePend(){store('pend',PEND);}
 /* desempenho automático por questões: QSTATS[area]={tot,ac}; QSNAP[area][iso]={r,a} p/ tendência */
 var QSTATS=load('qstats',{});      function saveQStats(){store('qstats',QSTATS);}
 var QSNAP=load('qsnap',{});        function saveQSnap(){store('qsnap',QSNAP);}
+var QPLAT=load('qplat',{});        function saveQPlat(){store('qplat',QPLAT);}   /* snapshot absoluto por plataforma */
+var MATADD=load('matadd',{});      function saveMatAdd(){store('matadd',MATADD);} /* matérias adicionadas pelo usuário */
+var MATNOTE=load('matnote',{});    function saveMatNote(){store('matnote',MATNOTE);} /* observações por matéria */
 function isDone(id){return !!STORE[id];}
 function setDone(id,v){ if(v)STORE[id]=1; else delete STORE[id]; save(); }
 
@@ -492,7 +507,10 @@ var PLATAFORMA_AREA={
   prev:'prev',preventiva:'prev','medicina-preventiva':'prev'
 };
 function areaDe(k){ if(!k)return null; var n=String(k).toLowerCase().replace(/[^a-z-]/g,''); return PLATAFORMA_AREA[n]||(AREAS.some(function(a){return a.key===n;})?n:null); }
-function pctArea(key){ var s=QSTATS[key]; return (s&&s.tot>0)?Math.round(s.ac/s.tot*100):0; }
+function areaTot(key){ var t=0,a=0,m=QSTATS[key]; if(m){t+=m.tot||0;a+=m.ac||0;}
+  Object.keys(QPLAT).forEach(function(pk){ if(areaDe(pk)===key){ var s=QPLAT[pk]||{}; t+=s.tot||0; a+=s.ac||0; } });
+  return {tot:t,ac:a}; }
+function pctArea(key){ var s=areaTot(key); return s.tot>0?Math.round(s.ac/s.tot*100):0; }
 /* tendência: compara últimos 30 dias com os 30 anteriores */
 function trendArea(key){
   var snap=QSNAP[key]; if(!snap)return null;
@@ -515,6 +533,12 @@ window.elidRegistrarQuestoes=function(plataformaOuArea,respondidas,acertos){
   var di=iso(todayMid()); if(!QSNAP[area])QSNAP[area]={}; if(!QSNAP[area][di])QSNAP[area][di]={r:0,a:0};
   QSNAP[area][di].r+=respondidas; QSNAP[area][di].a+=acertos;
   saveQStats(); saveQSnap(); if(typeof renderHoje==='function')renderHoje();
+};
+/* registra o total ABSOLUTO de questões de uma plataforma (não acumula — substitui o snapshot) */
+window.elidSetPlataforma=function(platformKey,tot,ac){
+  var k=String(platformKey||'').toLowerCase(); if(!k)return;
+  tot=+tot||0; QPLAT[k]={tot:tot,ac:Math.min(tot,+ac||0)};
+  saveQPlat(); if(typeof renderHoje==='function')renderHoje();
 };
 /* define valores absolutos por área (usado ao ler o doc agregado do Firestore) */
 window.elidSetDesempenho=function(obj){
@@ -646,7 +670,7 @@ function renderHoje(){
   else box.appendChild(el('<div class="card">Sem bloco programado para hoje.</div>'));
 }
 function renderRadar(){
-  var perf=AREAS.map(function(a){return {label:a.short,key:a.key,v:pctArea(a.key),trend:trendArea(a.key),tot:(QSTATS[a.key]&&QSTATS[a.key].tot)||0};});
+  var perf=AREAS.map(function(a){return {label:a.short,key:a.key,v:pctArea(a.key),trend:trendArea(a.key),tot:areaTot(a.key).tot};});
   var temDados=perf.some(function(p){return p.tot>0;});
   var n=perf.length,cx=175,cy=140,R=100,minV=Math.min.apply(null,perf.map(function(p){return p.v;}));
   function pt(i,r){var ang=(-90+i*360/n)*Math.PI/180;return [cx+r*Math.cos(ang),cy+r*Math.sin(ang)];}
@@ -664,7 +688,7 @@ function renderRadar(){
   var weakest=withData.slice().sort(function(a,b){return a.v-b.v;});
   var side='<div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mauve);margin-bottom:8px">Onde focar (do mais fraco ao mais forte)</div>';
   if(!withData.length){
-    side+='<div class="note" style="margin-top:0">Cálculo automático: resolva e corrija questões nas plataformas ELID e o radar se preenche sozinho — sem digitar percentuais. Clínica Médica reúne todas as subáreas (cardio, pneumo, neuro, reumato, etc.).</div>';
+    side+='<div class="note" style="margin-top:0">Cálculo automático: as questões resolvidas nas plataformas ELID já são somadas aqui (a cada login). Você também pode lançar manualmente abaixo. Clínica Médica reúne todas as subáreas (cardio, pneumo, neuro, reumato, etc.).</div>';
   } else {
     side+=weakest.map(function(p,i){return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="flex:0 0 22px;font-family:var(--font-d);font-size:18px;color:'+(i===0?'#e79a9a':'var(--mauve)')+'">'+(i+1)+'</span><span style="flex:1;font-weight:'+(i===0?'700':'500')+';color:'+(i===0?'#e79a9a':'var(--ivory)')+'">'+p.label+'</span><span style="color:var(--mauve);font-variant-numeric:tabular-nums">'+p.v+'%</span><span style="flex:0 0 78px;text-align:right;font-size:12px">'+seta(p.trend)+'</span></div>';}).join('');
     side+='<div class="note" style="margin-top:6px">🔴 <b>'+weakest[0].label+'</b> é hoje sua maior prioridade.</div>';
@@ -677,7 +701,7 @@ function renderEnare(){
   AREAS.forEach(function(a){var v=pctArea(a.key);
     list.appendChild(el('<div class="enare-row"><span class="enare-name">'+a.label+'</span><span class="enare-bar"><i style="width:'+v+'%;background:'+cor(v)+'"></i></span><span class="enare-pct" style="color:'+cor(v)+'">'+v+'%</span></div>'));
   });
-  var comDados=AREAS.filter(function(a){return QSTATS[a.key]&&QSTATS[a.key].tot>0;});
+  var comDados=AREAS.filter(function(a){return areaTot(a.key).tot>0;});
   var base=comDados.length?comDados:AREAS;
   var overall=Math.round(base.reduce(function(s,a){return s+pctArea(a.key);},0)/base.length);
   $('#enare-overall').textContent=overall+'%';
@@ -687,7 +711,7 @@ $('#reg-q-btn').addEventListener('click',function(){
   var box=$('#reg-q-box'); if(box.innerHTML){box.innerHTML='';return;}
   var wrap=el('<div class="edit-row" style="border-radius:12px;margin-top:10px;display:block"></div>');
   wrap.appendChild(el('<div class="note" style="margin:0 0 10px">Some aqui as questões que você já fez (e as próximas). Os valores são <b>adicionados</b> ao total de cada área e salvos na sua conta. Clínica Médica reúne todas as subáreas.</div>'));
-  AREAS.forEach(function(a){var s=QSTATS[a.key]||{tot:0,ac:0};
+  AREAS.forEach(function(a){var s=areaTot(a.key);
     wrap.appendChild(el('<div class="reg-q-row"><span style="flex:0 0 120px;color:var(--ivory)">'+a.label+'</span><span style="color:var(--mauve);font-size:12px">atual: '+s.ac+'/'+s.tot+'</span><label>+ respondidas <input class="in-time" data-k="'+a.key+'" data-f="r" type="number" min="0" value="0"></label><label>+ acertos <input class="in-time" data-k="'+a.key+'" data-f="a" type="number" min="0" value="0"></label></div>'));
   });
   var sv=el('<button class="ebtn save" style="margin-top:6px">Salvar e atualizar radar</button>');
@@ -773,9 +797,8 @@ function renderCal(){
   $('#cal-legend').innerHTML=
     '<span><span class="dot" style="background:var(--rose)"></span> Dia de estudo</span>'+
     '<span><span class="dot" style="background:var(--warn)"></span> Simulado</span>'+
-    '<span><span class="dot" style="background:var(--ok)"></span> Revisão programada</span>'+
     '<span><span class="dot" style="background:var(--lilac)"></span> Leitura teórica</span>'+
-    '<span><span class="dot sq" style="background:var(--ok);opacity:.55"></span> Dia concluído</span>';
+    '<span><span style="color:var(--rose-bright);font-weight:800">✕</span> Toque no dia p/ marcar que passou · ↗ abre no cronograma</span>';
   var box=$('#cal');box.innerHTML='';var months=[[2026,5],[2026,6],[2026,7],[2026,8]],tIso=iso(todayMid());
   months.forEach(function(m){
     var y=m[0],mo=m[1],first=new Date(y,mo,1),days=new Date(y,mo+1,0).getDate();
@@ -785,13 +808,15 @@ function renderCal(){
     for(var i=0;i<first.getDay();i++)grid.appendChild(el('<div class="cal-cell empty-cell"></div>'));
     for(var dd=1;dd<=days;dd++){
       var date=new Date(y,mo,dd),di=iso(date),day=dayByIso(di),cls='cal-cell'+(di===tIso?' today':''),cell;
+      var xed=isDone('calx-'+di);
       if(day){var dots='';day.blocks.forEach(function(b){if(b.tipo==='sim')dots+='<i style="background:var(--warn)"></i>';});
         if(date.getDay()>=1&&date.getDay()<=5)dots+='<i style="background:var(--rose)"></i>';
-        if(date.getDay()===0)dots+='<i style="background:var(--ok)"></i>';
-        if(date.getDay()===6||date.getDay()===0)dots+='<i style="background:var(--lilac)"></i>';
-        cell=el('<div class="'+cls+'" data-iso="'+di+'" title="Semana '+day.week.n+' · '+esc(day.week.area)+'"><div class="d">'+dd+'</div><div class="cal-dots">'+dots+'</div></div>');
-        cell.addEventListener('click',function(){showSection('cronograma');setTimeout(function(){var t=document.getElementById('d-'+di);if(t)t.scrollIntoView({behavior:'smooth',block:'center'});},80);});
-      } else cell=el('<div class="'+cls+'" style="opacity:.45"><div class="d">'+dd+'</div></div>');
+        if(date.getDay()===6)dots+='<i style="background:var(--warn)"></i>';
+        if(date.getDay()===0)dots+='<i style="background:var(--lilac)"></i>';
+        cell=el('<div class="'+cls+(xed?' xed':'')+'" data-iso="'+di+'" title="Semana '+day.week.n+' · '+esc(day.week.area)+'"><div class="d">'+dd+'</div><div class="cal-dots">'+dots+'</div><div class="cal-x">✕</div><button class="cal-go" title="Abrir no cronograma">↗</button></div>');
+        cell.querySelector('.cal-go').addEventListener('click',function(ev){ev.stopPropagation();showSection('cronograma');setTimeout(function(){var t=document.getElementById('d-'+di);if(t)t.scrollIntoView({behavior:'smooth',block:'center'});},80);});
+      } else cell=el('<div class="'+cls+(xed?' xed':'')+'" data-iso="'+di+'"><div class="d">'+dd+'</div><div class="cal-x">✕</div></div>');
+      (function(c,key){c.addEventListener('click',function(ev){if(ev.target.closest('.cal-go'))return;var nd=!isDone(key);setDone(key,nd);c.classList.toggle('xed',nd);});})(cell,'calx-'+di);
       grid.appendChild(cell);
     }
     wrap.appendChild(grid);box.appendChild(wrap);
@@ -861,25 +886,41 @@ function renderRanking(){
   box.appendChild(el(sum));
   function mid(area,nome){return slug(area+'-'+nome);}
   order.forEach(function(k,gi){
-    var label=labels[k],cont=cm[k],extras=(EXTRAS_ENARE[k]||[]);
-    var itens=cont.map(function(c){return {nome:c.nome,crono:true,c:c};}).concat(extras.map(function(n){return {nome:n,crono:false};}));
+    var label=labels[k],cont=cm[k],extras=(EXTRAS_ENARE[k]||[]),custom=(MATADD[k]||[]);
+    var itens=cont.map(function(c){return {nome:c.nome,crono:true,c:c,id:mid(label,c.nome)};})
+      .concat(extras.map(function(n){return {nome:n,crono:false,id:mid(label,n)};}))
+      .concat(custom.map(function(x){return {nome:x.nome,crono:false,custom:true,cid:x.id,id:'addmat-'+x.id};}));
     var ckey='matc-'+gi,collapsed=(COLLAPSE[ckey]==null)?true:!!COLLAPSE[ckey];
-    function marc(it){var id=mid(label,it.nome);return it.crono?!isDone('matoff-'+id):isDone('mat-'+id);}
+    function marc(it){return it.crono?!isDone('matoff-'+it.id):isDone('mat-'+it.id);}
     function conta(){return itens.filter(marc).length;}
     var head=el('<div class="area-head'+(collapsed?' collapsed':'')+'"><span class="arw">▾</span><h3>'+esc(label)+'</h3><span class="cnt">'+conta()+'/'+itens.length+' marcados · '+cont.length+' no cronograma</span></div>');
     var bodyEl=el('<div class="area-body'+(collapsed?' collapsed':'')+'"><div class="rk-list"></div></div>');
     var list=bodyEl.querySelector('.rk-list');
     function upd(){head.querySelector('.cnt').textContent=conta()+'/'+itens.length+' marcados · '+cont.length+' no cronograma';}
     itens.forEach(function(it){
-      var id=mid(label,it.nome),on=marc(it),tag;
+      var on=marc(it),tag;
       if(it.crono){var c=it.c;tag='✦ Contemplada · Semana '+c.week+' · questões em '+fmtShort(c.date)+' · revisão na Semana '+c.revWeek+' ('+fmtShort(c.revDate)+')';}
+      else if(it.custom) tag='Adicionada por você — marque ao estudar';
       else tag='Não contemplada no cronograma — marque se estudar no tempo livre';
-      var card=el('<div class="mat-item'+(it.crono?' crono':'')+(on?' done':'')+'"><div class="chk">'+CHECK+'</div><div style="flex:1"><div class="mat-name"></div><div class="mat-tag'+(it.crono?' crono':'')+'"></div></div></div>');
+      var note=MATNOTE[it.id];
+      var card=el('<div class="mat-item'+(it.crono?' crono':'')+(on?' done':'')+'"><div class="chk">'+CHECK+'</div><div style="flex:1"><div class="mat-name"></div><div class="mat-tag'+(it.crono?' crono':'')+'"></div><div class="mat-note"></div></div><button class="t-edit" title="Editar / observação">'+PENCIL+'</button></div>');
       card.querySelector('.mat-name').textContent=it.nome;
       card.querySelector('.mat-tag').textContent=tag;
-      card.addEventListener('click',function(){var novo=!marc(it);if(it.crono)setDone('matoff-'+id,novo?false:true);else setDone('mat-'+id,novo);card.classList.toggle('done',novo);upd();toast(novo?'Marcado':'Desmarcado');});
+      var nEl=card.querySelector('.mat-note'); if(note){nEl.textContent='📝 '+note;} else {nEl.style.display='none';}
+      card.addEventListener('click',function(ev){if(ev.target.closest('.t-edit'))return;var novo=!marc(it);if(it.crono)setDone('matoff-'+it.id,novo?false:true);else setDone('mat-'+it.id,novo);card.classList.toggle('done',novo);upd();toast(novo?'Marcado':'Desmarcado');});
+      card.querySelector('.t-edit').addEventListener('click',function(ev){ev.stopPropagation();
+        if(it.custom){ var nn=prompt('Nome da matéria (deixe vazio para remover):',it.nome); if(nn!=null){ nn=nn.trim();
+            var arr=MATADD[k]||[],idx=-1; arr.forEach(function(x,j){if(x.id===it.cid)idx=j;});
+            if(nn===''){ if(idx>=0)arr.splice(idx,1); delete MATNOTE[it.id]; MATADD[k]=arr; saveMatAdd(); saveMatNote(); renderRanking(); return; }
+            if(idx>=0)arr[idx].nome=nn; MATADD[k]=arr; saveMatAdd(); } }
+        var nv=prompt('Observação / ajuste para sua rotina:',MATNOTE[it.id]||''); if(nv!=null){ nv=nv.trim(); if(nv==='')delete MATNOTE[it.id]; else MATNOTE[it.id]=nv; saveMatNote(); }
+        renderRanking();
+      });
       list.appendChild(card);
     });
+    var addBtn=el('<button class="mat-add-btn">＋ Adicionar matéria em '+esc(label)+'</button>');
+    addBtn.addEventListener('click',function(ev){ev.stopPropagation();var nn=prompt('Nova matéria em '+label+':');if(nn==null)return;nn=nn.trim();if(!nn)return;var arr=MATADD[k]||[];arr.push({id:'m'+Date.now(),nome:nn});MATADD[k]=arr;saveMatAdd();renderRanking();});
+    list.appendChild(addBtn);
     head.addEventListener('click',function(){head.classList.toggle('collapsed');bodyEl.classList.toggle('collapsed');COLLAPSE[ckey]=head.classList.contains('collapsed')?1:0;saveCollapse();});
     box.appendChild(head);box.appendChild(bodyEl);
   });
@@ -933,7 +974,7 @@ renderCountdown();renderCrono();renderCal();renderRev();renderSim();renderRankin
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { getFirestore, doc, getDoc, setDoc, getDocs, collection } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAKN3qsYIc3pel81vl8WEAH6Ob4oR-icAM",
@@ -945,7 +986,7 @@ const firebaseConfig = {
 };
 
 const PLATFORM_ID = 'cronograma'; // = nome da pasta (sagrado)
-const SUBKEYS = ['state','edits','collapse','metrics','pend','qstats','qsnap'];
+const SUBKEYS = ['state','edits','collapse','metrics','pend','qstats','qsnap','qplat','matadd','matnote'];
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -989,14 +1030,51 @@ onAuthStateChanged(auth, async (user)=>{
   showApp();
   window.startApp(uid);
 
-  // Desempenho agregado por área (alimentado pelas plataformas ELID).
-  // Cada plataforma de especialidade pode publicar em users/{uid}/desempenho/areas
-  // no formato { cm:{tot,ac}, cir:{tot,ac}, peds:{...}, gineco:{...}, obst:{...}, prev:{...} }.
+  // (1) Doc agregado opcional: users/{uid}/desempenho/areas { cm:{tot,ac}, ... }
   try{
     const ds = await getDoc(doc(db,'users',uid,'desempenho','areas'));
     if(ds.exists() && window.elidSetDesempenho){ window.elidSetDesempenho(ds.data()); }
   }catch(e){ console.warn('ELID desempenho', e); }
+
+  // (2) Soma o progresso REAL de questões de cada plataforma (busca tolerante a esquemas).
+  await lerProgressoPlataformas(uid);
 });
+
+// Procura, em qualquer objeto, pares de "respondidas" e "acertos" (nomes de campo variados).
+function extraiQ(data){
+  var tot=0, ac=0, found=false;
+  (function walk(o){
+    if(!o||typeof o!=='object') return;
+    Object.keys(o).forEach(function(key){
+      var v=o[key], lk=key.toLowerCase();
+      if(typeof v==='number'){
+        if(/(respond|answered|feitas|resolv|totalq|qtot|questoes)/.test(lk)){ tot+=v; found=true; }
+        else if(/(acert|correct|certas|hits|corretas)/.test(lk)){ ac+=v; found=true; }
+      } else if(v && typeof v==='object'){ walk(v); }
+    });
+  })(data);
+  return found?{tot:tot,ac:ac}:null;
+}
+async function aplicaDoc(id,data){
+  if(!data) return;
+  // o blob de estado das plataformas costuma vir em data.data (JSON string)
+  if(typeof data.data==='string'){ try{ data=JSON.parse(data.data); }catch(e){} }
+  var q=extraiQ(data);
+  if(q && q.tot>0 && window.elidSetPlataforma) window.elidSetPlataforma(id,q.tot,q.ac);
+}
+async function lerProgressoPlataformas(uid){
+  // 2a) coleção agregadora central: users/{uid}/central/{plataforma}
+  for(const col of ['central','desempenho']){
+    try{ const qs=await getDocs(collection(db,'users',uid,col)); qs.forEach(function(d){ aplicaDoc(d.id,d.data()); }); }
+    catch(e){ console.warn('ELID '+col, e); }
+  }
+  // 2b) estado de cada plataforma conhecida: users/{uid}/platforms/{esp}/state/main
+  const esp=['clinica','cardiologia','pneumologia','neurologia','semiologia','preventiva','pediatria','ginecologia','obstetricia','cirurgia'];
+  for(const id of esp){
+    try{ const ms=await getDoc(doc(db,'users',uid,'platforms',id,'state','main')); if(ms.exists()) aplicaDoc(id,ms.data()); }
+    catch(e){}
+  }
+}
 </script>
 </body>
 </html>
