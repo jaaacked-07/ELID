@@ -147,6 +147,14 @@
   .area-head h3{font-family:var(--font-d);font-size:22px;font-weight:500;margin:0}
   .area-head .cnt{font-size:12px;color:var(--mauve)}
   .area-body.collapsed{display:none}
+  .mat-item{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-left-width:4px;border-left-color:var(--mauve);border-radius:12px;padding:11px 15px;cursor:pointer;transition:.15s}
+  .mat-item.crono{border-left-color:#7fd0a6}
+  .mat-item:hover{background:rgba(255,255,255,.03)}
+  .mat-item.done .chk{background:var(--ok);border-color:var(--ok)}
+  .mat-item.done .chk svg{opacity:1;transform:scale(1)}
+  .mat-name{font-size:14px;font-weight:500}
+  .mat-tag{font-size:11.5px;color:var(--mauve);margin-top:3px}
+  .mat-tag.crono{color:#8fd3ad}
 
   /* pendências */
   .pend-item{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:9px;cursor:pointer}
@@ -205,15 +213,13 @@
   .gate .brand{font-family:var(--font-d);font-size:46px;font-weight:300;letter-spacing:.18em}
   .gate-btn{display:inline-block;margin-top:20px;background:var(--rose);color:#fff;border:none;border-radius:999px;padding:13px 28px;font-family:var(--font-b);font-weight:600;font-size:14px;cursor:pointer;text-decoration:none}
   .gate-btn:hover{background:var(--rose-bright)}
-  .topbar{display:none;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px;border-bottom:1px solid var(--line);background:rgba(45,27,46,.55)}
+  .topbar{display:none;align-items:center;justify-content:flex-end;gap:12px;padding:10px 20px;border-bottom:1px solid var(--line);background:rgba(45,27,46,.55)}
   .tb-left,.tb-right{display:flex;align-items:center;gap:10px}
   .tb-btn{border:1px solid var(--line);background:transparent;color:var(--mauve);border-radius:999px;padding:8px 14px;font-family:var(--font-b);font-size:12.5px;font-weight:600;cursor:pointer;transition:.15s}
   .tb-btn:hover{border-color:var(--rose);color:var(--ivory)}
   .tb-power{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid var(--line);background:transparent;color:var(--rose-bright);cursor:pointer;transition:.15s}
   .tb-power:hover{border-color:var(--rose);background:rgba(183,110,121,.12)}
   .tb-user{font-size:12px;color:var(--mauve);max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .tb-exit{border-color:rgba(215,122,122,.4);color:#e79a9a}
-  .tb-exit:hover{border-color:var(--urgent);color:#e79a9a}
 </style>
 </head>
 <body>
@@ -237,14 +243,7 @@
 
 <div id="app" style="display:none">
 <div class="topbar" id="topbar">
-  <div class="tb-left">
-    <button class="tb-power" id="tb-back" title="Voltar à Biblioteca ELID">⏻</button>
-    <button class="tb-btn" id="tb-back2">← Biblioteca</button>
-  </div>
-  <div class="tb-right">
-    <span class="tb-user" id="elid-user"></span>
-    <button class="tb-btn tb-exit" id="tb-exit">Sair do ELID</button>
-  </div>
+  <button class="tb-power" id="tb-back" title="Voltar à Biblioteca ELID">⏻</button>
 </div>
 <header>
   <div class="wrap">
@@ -283,10 +282,8 @@
     <div class="card">
       <div class="grid g2" style="align-items:center">
         <div class="enare-list" id="enare-list"></div>
-        <div class="enare-overall"><span style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mauve)">Estimativa geral</span><b id="enare-overall">71%</b><span style="color:var(--mauve);font-size:13px">média das 5 áreas</span></div>
+        <div class="enare-overall"><span style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mauve)">Nota ENARE</span><b id="enare-overall">0%</b><span style="color:var(--mauve);font-size:13px">Estimativa baseada no desempenho global das áreas estudadas.</span></div>
       </div>
-      <button class="reset" id="edit-perf" style="margin-top:8px">✎ Editar desempenho por área</button>
-      <div id="perf-edit"></div>
     </div>
 
     <h3 class="grp">📅 Programado para hoje</h3>
@@ -342,14 +339,13 @@
     <div id="sim-list"></div>
   </section>
 
-  <!-- RANKING -->
+  <!-- MATÉRIAS ENARE -->
   <section id="ranking">
-    <h2 class="sec">Ranking dos temas <span class="acc">mais cobrados</span></h2>
-    <p class="sec-sub">Incidência histórica em ENARE / ENAMED, Revalida e provas estaduais. Marque o que já estudou para acompanhar sua cobertura dos temas de maior peso. Toque no título da área para minimizá-la.</p>
+    <h2 class="sec">Matérias <span class="acc">ENARE</span></h2>
+    <p class="sec-sub">Os temas mais prevalentes por grande área. O que já está no seu cronograma vem <b>marcado automaticamente</b> (com a semana em que você vai vê-lo) — é o lembrete do que a plataforma cobre se você seguir o plano. Pode desmarcar se um imprevisto atrapalhar, e marcar por conta própria os temas extras que estudar no tempo livre. Toque na área para expandir ou recolher.</p>
     <div class="legend">
-      <span><span class="dot sq" style="background:#e79a9a"></span> Altíssima incidência</span>
-      <span><span class="dot sq" style="background:var(--warn)"></span> Alta incidência</span>
-      <span><span class="dot sq" style="background:#7fd0a6"></span> Incidência relevante</span>
+      <span><span class="dot sq" style="background:#7fd0a6"></span> No cronograma (marcado automaticamente)</span>
+      <span><span class="dot sq" style="background:var(--mauve)"></span> Extra — marque se estudar</span>
     </div>
     <div id="ranking-body"></div>
   </section>
@@ -409,6 +405,9 @@ var COLLAPSE=load('collapse',{});  function saveCollapse(){store('collapse',COLL
 var METRICS=load('metrics',{questoes:0,acertos:0,flashcards:0,tempoH:0,assuntos:0,cm:72,peds:65,go:81,cir:60,prev:78});
 function saveMetrics(){store('metrics',METRICS);}
 var PEND=load('pend',{});          function savePend(){store('pend',PEND);}
+/* desempenho automático por questões: QSTATS[area]={tot,ac}; QSNAP[area][iso]={r,a} p/ tendência */
+var QSTATS=load('qstats',{});      function saveQStats(){store('qstats',QSTATS);}
+var QSNAP=load('qsnap',{});        function saveQSnap(){store('qsnap',QSNAP);}
 function isDone(id){return !!STORE[id];}
 function setDone(id,v){ if(v)STORE[id]=1; else delete STORE[id]; save(); }
 
@@ -481,30 +480,89 @@ var DAYS=(function(){var out=[];WEEKS.forEach(function(w){var ws=weekStart(w.n);
 function dayByIso(s){for(var i=0;i<DAYS.length;i++)if(DAYS[i].iso===s)return DAYS[i];return null;}
 
 /* ---------- ranking ---------- */
-var AREAS=[{key:'cm',label:'Clínica Médica',short:'Clínica'},{key:'peds',label:'Pediatria',short:'Pediatria'},{key:'go',label:'GO',short:'GO'},{key:'cir',label:'Cirurgia',short:'Cirurgia'},{key:'prev',label:'Preventiva',short:'Preventiva'}];
-var COVTXT={good:'Cobertura ELID: bem desenvolvida',imp:'Cobertura ELID: parcial',urgent:'Cobertura ELID: em desenvolvimento',low:'Cobertura ELID: em desenvolvimento'};
-var FLAGCLS={urgent:'b-urgent',imp:'b-imp',low:'b-low',good:'b-good'};
-var RANKING=[
- {area:'Clínica Médica',rows:[
-   ['HAS','★★★★★','urgent'],['Síndrome coronariana aguda / IAM','★★★★★','urgent'],['Insuficiência cardíaca','★★★★☆','urgent'],
-   ['Diabetes mellitus','★★★★★','urgent'],['Tireoidopatias','★★★★☆','urgent'],['Sepse','★★★★★','urgent'],
-   ['HIV / AIDS','★★★★☆','urgent'],['IRA e DRC','★★★★☆','urgent'],['Distúrbios HE e ácido-base','★★★★☆','urgent'],
-   ['Pneumonia (PAC)','★★★★★','good'],['DPOC e asma','★★★★★','good'],['Tuberculose','★★★★★','good'],
-   ['Hepatites e cirrose','★★★★☆','imp'],['Anemias','★★★★☆','imp'],['AVC','★★★★★','good'],['Cefaleias e epilepsia','★★★☆☆','imp']]},
- {area:'Cirurgia Geral',rows:[
-   ['Trauma / ATLS','★★★★★','good'],['Abdome agudo','★★★★★','good'],['Apendicite','★★★★★','good'],
-   ['Colecistite e colelitíase','★★★★☆','good'],['Choque','★★★★☆','good'],['Hérnias','★★★☆☆','good']]},
- {area:'Ginecologia e Obstetrícia',rows:[
-   ['Pré-natal','★★★★★','good'],['Pré-eclâmpsia / DHEG','★★★★★','good'],['Hemorragias da gestação','★★★★☆','good'],
-   ['Diabetes gestacional','★★★★☆','good'],['Rastreio CA colo/mama','★★★★★','good'],['Sangramento uterino anormal','★★★★☆','good'],
-   ['Contracepção','★★★★☆','good'],['Corrimento e DIP','★★★★☆','good']]},
- {area:'Pediatria',rows:[
-   ['Calendário vacinal (PNI)','★★★★★','imp'],['Aleitamento materno','★★★★☆','imp'],['Diarreia e desidratação','★★★★☆','imp'],
-   ['Bronquiolite e IVAS','★★★★☆','imp'],['Reanimação neonatal','★★★★☆','imp'],['Crescimento e DNPM','★★★★☆','good']]},
- {area:'Medicina Preventiva',rows:[
-   ['SUS — Leis 8.080 e 8.142','★★★★★','good'],['Indicadores e epidemiologia','★★★★★','good'],['Rastreamento (INCA)','★★★★★','good'],
-   ['Tipos de estudo e medidas','★★★★☆','good'],['Testes diagnósticos (S/E/VPP)','★★★★☆','good'],['Vacinação / PNI','★★★★☆','good'],
-   ['APS / ESF','★★★★☆','imp'],['Vigilância e notificação','★★★★☆','imp']]}
+/* ---------- áreas do radar (6 grandes áreas ENARE) ---------- */
+var AREAS=[
+  {key:'cm',label:'Clínica Médica',short:'Clínica'},
+  {key:'cir',label:'Cirurgia',short:'Cirurgia'},
+  {key:'peds',label:'Pediatria',short:'Pediatria'},
+  {key:'gineco',label:'Ginecologia',short:'Gineco'},
+  {key:'obst',label:'Obstetrícia',short:'Obstetrícia'},
+  {key:'prev',label:'Preventiva',short:'Preventiva'}
+];
+/* Clínica Médica agrega todas as subáreas clínicas (pneumo, neuro, reumato, cardio, etc.) */
+var PLATAFORMA_AREA={
+  cm:'cm',clinica:'cm',clinicamedica:'cm','clinica-medica':'cm',
+  cardiologia:'cm',pneumologia:'cm',pneumo:'cm',neurologia:'cm',neuro:'cm',
+  reumatologia:'cm',reumato:'cm',endocrino:'cm',nefro:'cm',nefrologia:'cm',
+  gastro:'cm',infecto:'cm',hemato:'cm',semiologia:'cm',
+  cir:'cir',cirurgia:'cir','atlas-cirurgico':'cir',cirurgico:'cir',
+  peds:'peds',pediatria:'peds',pedatlas:'peds',
+  gineco:'gineco',ginecologia:'gineco',ginecoatlas:'gineco',
+  obst:'obst',obstetricia:'obst','atlas-de-obstetricia':'obst',
+  prev:'prev',preventiva:'prev','medicina-preventiva':'prev'
+};
+function areaDe(k){ if(!k)return null; var n=String(k).toLowerCase().replace(/[^a-z-]/g,''); return PLATAFORMA_AREA[n]||(AREAS.some(function(a){return a.key===n;})?n:null); }
+function pctArea(key){ var s=QSTATS[key]; return (s&&s.tot>0)?Math.round(s.ac/s.tot*100):0; }
+/* tendência: compara últimos 30 dias com os 30 anteriores */
+function trendArea(key){
+  var snap=QSNAP[key]; if(!snap)return null;
+  var hoje=todayMid(), aR=0,aA=0,bR=0,bA=0;
+  Object.keys(snap).forEach(function(di){
+    var parts=di.split('-'), d=new Date(+parts[0],+parts[1]-1,+parts[2]);
+    var diff=Math.floor((hoje-d)/86400000), s=snap[di];
+    if(diff>=0&&diff<30){aR+=s.r;aA+=s.a;} else if(diff>=30&&diff<60){bR+=s.r;bA+=s.a;}
+  });
+  if(aR===0||bR===0)return null;
+  var pa=aA/aR*100, pb=bA/bR*100, delta=Math.round(pa-pb);
+  return {delta:delta,dir:delta>1?'up':delta<-1?'down':'flat'};
+}
+/* HOOK público p/ as plataformas: registra incrementos de questões resolvidas/corrigidas */
+window.elidRegistrarQuestoes=function(plataformaOuArea,respondidas,acertos){
+  var area=areaDe(plataformaOuArea); if(!area)return;
+  respondidas=+respondidas||0; acertos=Math.min(respondidas,+acertos||0);
+  if(!QSTATS[area])QSTATS[area]={tot:0,ac:0};
+  QSTATS[area].tot+=respondidas; QSTATS[area].ac+=acertos;
+  var di=iso(todayMid()); if(!QSNAP[area])QSNAP[area]={}; if(!QSNAP[area][di])QSNAP[area][di]={r:0,a:0};
+  QSNAP[area][di].r+=respondidas; QSNAP[area][di].a+=acertos;
+  saveQStats(); saveQSnap(); if(typeof renderHoje==='function')renderHoje();
+};
+/* define valores absolutos por área (usado ao ler o doc agregado do Firestore) */
+window.elidSetDesempenho=function(obj){
+  if(!obj)return; var changed=false;
+  AREAS.forEach(function(a){ var v=obj[a.key]; if(v&&typeof v==='object'&&v.tot!=null){ QSTATS[a.key]={tot:+v.tot||0,ac:+v.ac||0}; changed=true; } });
+  if(changed){ saveQStats(); if(typeof renderHoje==='function')renderHoje(); }
+};
+/* Matérias ENARE por grande área. Segundo valor = semana do cronograma (0 = extra/manual) */
+var MATERIAS_ENARE=[
+ {area:'Clínica Médica',itens:[
+   ['Hipertensão Arterial Sistêmica (HAS)',1],['Síndrome Coronariana Aguda (SCA)',1],['Insuficiência Cardíaca',1],['Arritmias',1],
+   ['DPOC',2],['Asma',2],['Pneumonias',2],['Tuberculose',2],
+   ['Diabetes Mellitus',8],['Distúrbios da Tireoide',8],['Insuficiência Renal Aguda (IRA)',8],['Doença Renal Crônica (DRC)',8],['Distúrbios Hidroeletrolíticos',8],
+   ['Hepatites',9],['Cirrose',9],['HIV/AIDS',9],['Arboviroses (Dengue)',9],['Anemias',9],['LES',9],['Artrite Reumatoide',9],
+   ['Antimicrobianos',0],['Emergências Clínicas',0]]},
+ {area:'Cirurgia',itens:[
+   ['Trauma (ATLS)',5],['Atendimento Inicial ao Politraumatizado',5],['Abdome Agudo',5],['Apendicite',5],['Colecistite',5],['Colelitíase',5],['Hérnias',5],['Pós-operatório',5],
+   ['Hemorragia Digestiva',9],
+   ['Queimaduras',0],['Obstrução Intestinal',0],['Pancreatite Aguda',0],['Doença Péptica',0],['Câncer Colorretal',0],['Câncer Gástrico',0],['Nutrição em Cirurgia',0],['Choque',0]]},
+ {area:'Ginecologia',itens:[
+   ['Rastreamento do Câncer de Colo Uterino',6],['Câncer de Colo Uterino',6],['Câncer de Mama',6],['Mastologia',6],
+   ['Sangramento Uterino Anormal',6],['SOP',6],['Planejamento Familiar',6],['ISTs',6],['DIP',6],['Vulvovaginites',6],
+   ['Miomatose',0],['Endometriose',0],['Amenorreia',0],['Climatério e Menopausa',0],['Puberdade Precoce e Tardia',0]]},
+ {area:'Obstetrícia',itens:[
+   ['Pré-natal de Baixo Risco',7],['Pré-natal de Alto Risco',7],['Diabetes Gestacional',7],['Síndromes Hipertensivas da Gestação',7],
+   ['Hemorragias da Gestação',7],['Placenta Prévia',7],['DPP',7],['Prematuridade',7],['Aleitamento Materno',4],
+   ['Trabalho de Parto',0],['Partograma',0],['Indução do Parto',0],['RPMO',0],['Restrição de Crescimento Fetal',0],['Sofrimento Fetal',0],['Puerpério',0],['Isoimunização Rh',0],['TORCHS',0]]},
+ {area:'Pediatria',itens:[
+   ['Aleitamento Materno',4],['Alimentação Complementar',4],['Puericultura',4],['Crescimento Infantil',4],['Desenvolvimento Neuropsicomotor',4],['Calendário Vacinal',4],['Reanimação Neonatal',4],
+   ['IVAS',4],['Bronquiolite Viral Aguda',4],['Asma',4],['Diarreia Aguda',4],['Desidratação',4],['Terapia de Reidratação Oral',4],
+   ['Dengue',9],['Sepse Pediátrica',9],['Meningites',10],['Crise Convulsiva',10],
+   ['Imunização Especial',0],['Anemia Ferropriva',0],['Desnutrição',0],['Obesidade Infantil',0],['Pneumonia Comunitária',0],['Coqueluche',0],['Exantemas Virais',0],['Escarlatina',0],
+   ['Constipação Intestinal',0],['Refluxo Gastroesofágico',0],['Dor Abdominal na Criança',0],['Infecção do Trato Urinário',0],['Síndrome Nefrótica',0],['Síndrome Nefrítica',0],['Glomerulonefrite Pós-Estreptocócica',0],
+   ['Diabetes Mellitus Tipo 1',0],['Baixa Estatura',0],['Puberdade Precoce',0],['Puberdade Tardia',0],
+   ['Icterícia Neonatal',0],['Sepse Neonatal',0],['Triagem Neonatal',0],['Distúrbios Respiratórios do RN',0],['Emergências Pediátricas',0],['Choque na Criança',0],['Insuficiência Respiratória Aguda',0]]},
+ {area:'Preventiva',itens:[
+   ['SUS (Leis e Princípios)',3],['Rastreamento',3],['Calendário Vacinal',3],['Bioestatística',3],['Estudos Epidemiológicos',3],['Sensibilidade e Especificidade',3],['Valores Preditivos',3],['Indicadores de Saúde',3],
+   ['Redes de Atenção à Saúde',0],['Atenção Primária',0],['Estratégia Saúde da Família',0],['Vigilância Epidemiológica',0],['Vigilância Sanitária',0],['Medicina Baseada em Evidências',0],['Promoção e Prevenção em Saúde',0],['Imunobiológicos Especiais',0],['Saúde da Mulher',0],['Saúde da Criança',0],['Ética Médica',0],['Segurança do Paciente',0]]}
 ];
 
 /* ============================================================
@@ -614,30 +672,40 @@ function renderHoje(){
   else box.appendChild(el('<div class="card">Sem bloco programado para hoje.</div>'));
 }
 function renderRadar(){
-  var perf=AREAS.map(function(a){return {label:a.short,v:METRICS[a.key]};});
+  var perf=AREAS.map(function(a){return {label:a.short,key:a.key,v:pctArea(a.key),trend:trendArea(a.key),tot:(QSTATS[a.key]&&QSTATS[a.key].tot)||0};});
+  var temDados=perf.some(function(p){return p.tot>0;});
   var n=perf.length,cx=175,cy=140,R=100,minV=Math.min.apply(null,perf.map(function(p){return p.v;}));
   function pt(i,r){var ang=(-90+i*360/n)*Math.PI/180;return [cx+r*Math.cos(ang),cy+r*Math.sin(ang)];}
   var grid='';[0.25,0.5,0.75,1].forEach(function(g){grid+='<polygon points="'+perf.map(function(p,i){var q=pt(i,R*g);return q[0].toFixed(1)+','+q[1].toFixed(1);}).join(' ')+'" fill="none" stroke="rgba(201,160,176,.16)"/>';});
   var axes='',labels='',dots='';
-  perf.forEach(function(p,i){var a=pt(i,R),l=pt(i,R+24),weak=p.v===minV;
+  perf.forEach(function(p,i){var a=pt(i,R),l=pt(i,R+24),weak=temDados&&p.tot>0&&p.v===minV;
     axes+='<line x1="'+cx+'" y1="'+cy+'" x2="'+a[0].toFixed(1)+'" y2="'+a[1].toFixed(1)+'" stroke="rgba(201,160,176,.16)"/>';
     labels+='<text x="'+l[0].toFixed(1)+'" y="'+l[1].toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" font-size="11" font-family="Raleway,sans-serif" fill="'+(weak?'#e79a9a':'#c9a0b0')+'" font-weight="'+(weak?'700':'500')+'">'+p.label+' '+p.v+'%</text>';
     var d=pt(i,R*p.v/100);dots+='<circle cx="'+d[0].toFixed(1)+'" cy="'+d[1].toFixed(1)+'" r="'+(weak?5.5:3.5)+'" fill="'+(weak?'#e79a9a':'#cf8593')+'"/>';
   });
   var poly=perf.map(function(p,i){var d=pt(i,R*p.v/100);return d[0].toFixed(1)+','+d[1].toFixed(1);}).join(' ');
   $('#radar').innerHTML='<svg viewBox="0 0 350 270" style="width:100%">'+grid+axes+'<polygon points="'+poly+'" fill="rgba(183,110,121,.26)" stroke="#b76e79" stroke-width="2"/>'+dots+labels+'</svg>';
-  var weakest=perf.slice().sort(function(a,b){return a.v-b.v;});
-  $('#radar-side').innerHTML='<div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mauve);margin-bottom:8px">Onde focar (do mais fraco ao mais forte)</div>'+
-    weakest.map(function(p,i){return '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="flex:0 0 22px;font-family:var(--font-d);font-size:18px;color:'+(i===0?'#e79a9a':'var(--mauve)')+'">'+(i+1)+'</span><span style="flex:1;font-weight:'+(i===0?'700':'500')+';color:'+(i===0?'#e79a9a':'var(--ivory)')+'">'+p.label+'</span><span style="color:var(--mauve)">'+p.v+'%</span></div>';}).join('')+
-    '<div class="note" style="margin-top:6px">🔴 <b>'+weakest[0].label+'</b> é hoje sua maior prioridade.</div>';
+  function seta(t){ if(!t)return '<span style="color:var(--mauve)">→</span>'; return t.dir==='up'?'<span style="color:#7fd0a6">↑ +'+t.delta+'%</span>':t.dir==='down'?'<span style="color:#e79a9a">↓ '+t.delta+'%</span>':'<span style="color:var(--mauve)">→ estável</span>'; }
+  var withData=perf.filter(function(p){return p.tot>0;});
+  var weakest=withData.slice().sort(function(a,b){return a.v-b.v;});
+  var side='<div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mauve);margin-bottom:8px">Onde focar (do mais fraco ao mais forte)</div>';
+  if(!withData.length){
+    side+='<div class="note" style="margin-top:0">Cálculo automático: resolva e corrija questões nas plataformas ELID e o radar se preenche sozinho — sem digitar percentuais. Clínica Médica reúne todas as subáreas (cardio, pneumo, neuro, reumato, etc.).</div>';
+  } else {
+    side+=weakest.map(function(p,i){return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="flex:0 0 22px;font-family:var(--font-d);font-size:18px;color:'+(i===0?'#e79a9a':'var(--mauve)')+'">'+(i+1)+'</span><span style="flex:1;font-weight:'+(i===0?'700':'500')+';color:'+(i===0?'#e79a9a':'var(--ivory)')+'">'+p.label+'</span><span style="color:var(--mauve);font-variant-numeric:tabular-nums">'+p.v+'%</span><span style="flex:0 0 78px;text-align:right;font-size:12px">'+seta(p.trend)+'</span></div>';}).join('');
+    side+='<div class="note" style="margin-top:6px">🔴 <b>'+weakest[0].label+'</b> é hoje sua maior prioridade.</div>';
+  }
+  $('#radar-side').innerHTML=side;
 }
 function renderEnare(){
   var list=$('#enare-list');list.innerHTML='';
   function cor(v){return v>=75?'#7fd0a6':v>=60?'var(--warn)':'#e79a9a';}
-  AREAS.forEach(function(a){var v=METRICS[a.key];
+  AREAS.forEach(function(a){var v=pctArea(a.key);
     list.appendChild(el('<div class="enare-row"><span class="enare-name">'+a.label+'</span><span class="enare-bar"><i style="width:'+v+'%;background:'+cor(v)+'"></i></span><span class="enare-pct" style="color:'+cor(v)+'">'+v+'%</span></div>'));
   });
-  var overall=Math.round(AREAS.reduce(function(s,a){return s+METRICS[a.key];},0)/AREAS.length);
+  var comDados=AREAS.filter(function(a){return QSTATS[a.key]&&QSTATS[a.key].tot>0;});
+  var base=comDados.length?comDados:AREAS;
+  var overall=Math.round(base.reduce(function(s,a){return s+pctArea(a.key);},0)/base.length);
   $('#enare-overall').textContent=overall+'%';
 }
 /* edição de métricas */
@@ -654,14 +722,7 @@ $('#edit-metrics').addEventListener('click',function(){
     METRICS.questoes=+$('#m-q').value||0;METRICS.acertos=+$('#m-a').value||0;METRICS.flashcards=+$('#m-f').value||0;METRICS.tempoH=+$('#m-t').value||0;METRICS.assuntos=+$('#m-s').value||0;
     saveMetrics();box.innerHTML='';renderHoje();toast('Estatísticas atualizadas');});
 });
-/* edição de desempenho */
-$('#edit-perf').addEventListener('click',function(){
-  var box=$('#perf-edit');if(box.innerHTML){box.innerHTML='';return;}
-  var row=el('<div class="edit-row" style="border-radius:12px;margin-top:10px"></div>');
-  AREAS.forEach(function(a){row.appendChild(el('<label style="color:var(--mauve);font-size:13px">'+a.label+' <input class="in-time" data-k="'+a.key+'" type="number" min="0" max="100" value="'+METRICS[a.key]+'"></label>'));});
-  var sv=el('<button class="ebtn save">Salvar</button>');row.appendChild(sv);box.appendChild(row);
-  sv.addEventListener('click',function(){row.querySelectorAll('input[data-k]').forEach(function(i){METRICS[i.getAttribute('data-k')]=Math.max(0,Math.min(100,+i.value||0));});saveMetrics();box.innerHTML='';renderHoje();toast('Desempenho atualizado');});
-});
+/* desempenho por área agora é 100% automático (via questões resolvidas) — sem edição manual */
 
 /* ============================================================
    PENDÊNCIAS DO DIA (auto + editável)
@@ -811,18 +872,27 @@ function renderSim(){
    ============================================================ */
 function renderRanking(){
   var box=$('#ranking-body');box.innerHTML='';
-  RANKING.forEach(function(g,gi){
-    var ckey='rkc-'+gi,collapsed=!!COLLAPSE[ckey];
-    var done=g.rows.filter(function(r){return isDone('rk-'+slug(g.area+'-'+r[0]));}).length;
-    var head=el('<div class="area-head'+(collapsed?' collapsed':'')+'"><span class="arw">▾</span><h3>'+esc(g.area)+'</h3><span class="cnt">'+done+'/'+g.rows.length+' estudados</span></div>');
+  function mid(area,nome){return slug(area+'-'+nome);}
+  MATERIAS_ENARE.forEach(function(g,gi){
+    var ckey='matc-'+gi,collapsed=(COLLAPSE[ckey]==null)?true:!!COLLAPSE[ckey]; // inicia recolhido
+    function marcado(it){var id=mid(g.area,it[0]);return it[1]>0?!isDone('matoff-'+id):isDone('mat-'+id);}
+    function conta(){return g.itens.filter(marcado).length;}
+    var noCrono=g.itens.filter(function(it){return it[1]>0;}).length;
+    var head=el('<div class="area-head'+(collapsed?' collapsed':'')+'"><span class="arw">▾</span><h3>'+esc(g.area)+'</h3><span class="cnt">'+conta()+'/'+g.itens.length+' marcados · '+noCrono+' no cronograma</span></div>');
     var bodyEl=el('<div class="area-body'+(collapsed?' collapsed':'')+'"><div class="rk-list"></div></div>');
     var list=bodyEl.querySelector('.rk-list');
-    var rank={urgent:0,imp:1,good:2,low:3};
-    g.rows.slice().sort(function(a,b){return rank[a[2]]-rank[b[2]];}).forEach(function(r){
-      var id='rk-'+slug(g.area+'-'+r[0]),on=isDone(id);
-      var card=el('<div class="rk-card '+r[2]+'"><div class="rk-top"><span class="rk-name">'+esc(r[0])+'</span><button class="studied-btn'+(on?' on':'')+'">'+(on?'✓ Estudado':'Não estudado')+'</button></div><div class="rk-meta"><span class="rk-stars">'+r[1]+'</span><span>· '+COVTXT[r[2]]+'</span></div></div>');
-      var btn=card.querySelector('.studied-btn');
-      btn.addEventListener('click',function(){var nd=!isDone(id);setDone(id,nd);btn.classList.toggle('on',nd);btn.textContent=nd?'✓ Estudado':'Não estudado';head.querySelector('.cnt').textContent=g.rows.filter(function(x){return isDone('rk-'+slug(g.area+'-'+x[0]));}).length+'/'+g.rows.length+' estudados';if(nd)toast('Marcado como estudado');});
+    function atualizaCnt(){head.querySelector('.cnt').textContent=conta()+'/'+g.itens.length+' marcados · '+noCrono+' no cronograma';}
+    g.itens.slice().sort(function(a,b){return (a[1]||999)-(b[1]||999);}).forEach(function(it){
+      var nome=it[0],sem=it[1],id=mid(g.area,nome),crono=sem>0,on=marcado(it);
+      var tag=crono?('✦ Conteúdo marcado para a Semana '+sem+' do cronograma'):'Extra — marque se estudar no tempo livre';
+      var card=el('<div class="mat-item'+(crono?' crono':'')+(on?' done':'')+'"><div class="chk">'+CHECK+'</div><div style="flex:1"><div class="mat-name"></div><div class="mat-tag'+(crono?' crono':'')+'">'+tag+'</div></div></div>');
+      card.querySelector('.mat-name').textContent=nome;
+      card.addEventListener('click',function(){
+        var novo=!marcado(it);
+        if(crono) setDone('matoff-'+id, novo?false:true); else setDone('mat-'+id, novo);
+        card.classList.toggle('done',novo); atualizaCnt();
+        toast(crono?(novo?'Tema do cronograma marcado':'Tema desmarcado'):(novo?'Tema extra marcado':'Tema desmarcado'));
+      });
       list.appendChild(card);
     });
     head.addEventListener('click',function(){head.classList.toggle('collapsed');bodyEl.classList.toggle('collapsed');COLLAPSE[ckey]=head.classList.contains('collapsed')?1:0;saveCollapse();});
@@ -863,7 +933,7 @@ $('#pomo-full').addEventListener('click',function(){var st=$('#pomo-stage');if(s
 /* ============================================================
    NAV
    ============================================================ */
-var TABS=[['hoje','Hoje'],['pendencias','Pendências do dia'],['cronograma','Cronograma'],['calendario','Calendário'],['revisoes','Revisões'],['simulados','Simulados'],['ranking','Ranking ENARE'],['pomodoro','Pomodoro']];
+var TABS=[['hoje','Hoje'],['pendencias','Pendências do dia'],['cronograma','Cronograma'],['calendario','Calendário'],['revisoes','Revisões'],['simulados','Simulados'],['ranking','Matérias ENARE'],['pomodoro','Pomodoro']];
 function showSection(id){document.querySelectorAll('section').forEach(function(s){s.classList.toggle('show',s.id===id);});document.querySelectorAll('.nav-btn[data-tab]').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-tab')===id);});window.scrollTo({top:0,behavior:'smooth'});if(id==='pendencias')renderPend();}
 (function(){var nav=$('#nav');TABS.forEach(function(t){var b=el('<button class="nav-btn'+(t[0]==='hoje'?' active':'')+'" data-tab="'+t[0]+'">'+t[1]+'</button>');b.addEventListener('click',function(){showSection(t[0]);});nav.appendChild(b);});})();
 
@@ -890,7 +960,7 @@ const firebaseConfig = {
 };
 
 const PLATFORM_ID = 'cronograma'; // = nome da pasta (sagrado)
-const SUBKEYS = ['state','edits','collapse','metrics','pend'];
+const SUBKEYS = ['state','edits','collapse','metrics','pend','qstats','qsnap'];
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -900,10 +970,8 @@ const $g = (id)=>document.getElementById(id);
 function showLogin(){ $g('gate').style.display='flex'; $g('gate-loading').style.display='none'; $g('gate-login').style.display='block'; $g('app').style.display='none'; }
 function showApp(){ $g('gate').style.display='none'; $g('app').style.display='block'; $g('topbar').style.display='flex'; }
 
-// navegação da barra (⏻ volta à biblioteca sem deslogar; Sair faz signOut real)
+// navegação da barra (⏻ volta à biblioteca, mantém sessão)
 $g('tb-back').onclick = ()=>{ location.href='../../biblioteca-web/'; };
-$g('tb-back2').onclick = ()=>{ location.href='../../biblioteca-web/'; };
-$g('tb-exit').onclick = ()=>{ signOut(auth).finally(()=>{ location.href='../../landing-page/'; }); };
 
 let saveTimer=null;
 onAuthStateChanged(auth, async (user)=>{
@@ -933,9 +1001,16 @@ onAuthStateChanged(auth, async (user)=>{
     }, 1200);
   };
 
-  $g('elid-user').textContent = user.email || 'Conta ELID';
   showApp();
   window.startApp(uid);
+
+  // Desempenho agregado por área (alimentado pelas plataformas ELID).
+  // Cada plataforma de especialidade pode publicar em users/{uid}/desempenho/areas
+  // no formato { cm:{tot,ac}, cir:{tot,ac}, peds:{...}, gineco:{...}, obst:{...}, prev:{...} }.
+  try{
+    const ds = await getDoc(doc(db,'users',uid,'desempenho','areas'));
+    if(ds.exists() && window.elidSetDesempenho){ window.elidSetDesempenho(ds.data()); }
+  }catch(e){ console.warn('ELID desempenho', e); }
 });
 </script>
 </body>
