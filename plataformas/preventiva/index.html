@@ -2193,7 +2193,7 @@ function elidPublish(){
     var cards={};
     allTopicCardsFlat().forEach(function(o){ var f=o.f||{}; cards[o.id]={front:f.front||'',back:f.back||'',type:f.type||'',modTitle:o.top||o.mod||''}; });
     var seed=0,ds=new Date().toISOString().slice(0,10); for(var k=0;k<ds.length;k++) seed=(seed*31+ds.charCodeAt(k))>>>0;
-    var qsel=seededPick(allQuestionsFlat(), seed, 5);
+    var qsel=allQuestionsFlat();
     var questions=qsel.map(function(o){ var q=o.q; var opts=(q.opts||[]).map(function(t,ix){return {text:t,correct:ix===q.correct};});
       return {id:o.tid+':'+o.qi, stem:q.stem||'', options:opts, explanation:q.expl||'', modTitle:o.top||''}; });
     db.collection("users").doc(UID).collection("central").doc("preventiva")
