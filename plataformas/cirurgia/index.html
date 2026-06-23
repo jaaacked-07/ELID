@@ -4460,7 +4460,7 @@ function elidPublish(){
     });
     var questions=[];
     try{
-      shuffleSeed(dailyPool().qs, daySeed()).slice(0,6).forEach(function(it){
+      dailyPool().qs.forEach(function(it){
         var q=it.q; var opts=(q.o||[]).map(function(t,ix){return {text:t,correct:ix===q.a};});
         questions.push({id:it.sid+':'+it.qi, stem:q.q||'', options:opts, explanation:q.e||'', modTitle:it.sub||''});
       });
