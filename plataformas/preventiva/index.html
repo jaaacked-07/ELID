@@ -418,6 +418,27 @@ textarea.notes{width:100%;min-height:200px;padding:16px;border-radius:14px;borde
 .btn-ghost:hover{border-color:var(--primary)}
 
 @media(max-width:820px){#app{grid-template-columns:0 1fr}.sidebar{position:fixed;z-index:60;left:-260px;width:248px;transition:left .3s}#app.mobopen .sidebar{left:0}.content{padding:18px}.srs-rate{grid-template-columns:repeat(2,1fr)}.cal-grid{grid-template-columns:repeat(7,1fr)}}
+@media(max-width:820px){
+  #app{grid-template-columns:1fr!important;display:block!important}
+  .sidebar{position:fixed;z-index:60;left:-260px;width:248px;transition:left .3s;top:0;height:100vh;overflow-y:auto}
+  #app.mobopen .sidebar{left:0}
+  .main{width:100%}
+  .content{padding:16px!important;max-width:100%!important}
+  .topbar{position:sticky;top:0}
+  .search{display:none!important}
+  img,svg,.epi-svg,video,iframe{max-width:100%!important;height:auto!important}
+  table{display:block;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .bp-grid,.g2,.g3,.g4,.journey-grid{grid-template-columns:1fr!important}
+  .srs-rate{grid-template-columns:repeat(2,1fr)}
+  .srs-card{padding:18px!important}
+  h1,h2,h3,h4,.logo{word-break:break-word;overflow-wrap:anywhere}
+  pre,code{white-space:pre-wrap;word-break:break-word}
+}
+@media(max-width:480px){
+  .content{padding:12px!important}
+  body{font-size:15px}
+  .srs-front{font-size:17px}
+}
 </style>
 </head>
 <body>
@@ -2166,6 +2187,19 @@ let S = JSON.parse(JSON.stringify(DEFAULT_STATE));
 let UID=null, saveTimer=null, currentRoute="dashboard", curMod=null, curTopic=null, authMode="login";
 
 function localKey(){return "atlas_"+PLATFORM_ID+"_"+(UID||"anon");}
+function elidPublish(){
+  try{
+    if(!FB_OK||!UID||!db) return;
+    var cards={};
+    allTopicCardsFlat().forEach(function(o){ var f=o.f||{}; cards[o.id]={front:f.front||'',back:f.back||'',type:f.type||'',modTitle:o.top||o.mod||''}; });
+    var seed=0,ds=new Date().toISOString().slice(0,10); for(var k=0;k<ds.length;k++) seed=(seed*31+ds.charCodeAt(k))>>>0;
+    var qsel=seededPick(allQuestionsFlat(), seed, 5);
+    var questions=qsel.map(function(o){ var q=o.q; var opts=(q.opts||[]).map(function(t,ix){return {text:t,correct:ix===q.correct};});
+      return {id:o.tid+':'+o.qi, stem:q.stem||'', options:opts, explanation:q.expl||'', modTitle:o.top||''}; });
+    db.collection("users").doc(UID).collection("central").doc("preventiva")
+      .set({platform:"preventiva",label:"Atlas de Preventiva",updated:Date.now(),cards:cards,questions:questions},{merge:true}).catch(function(){});
+  }catch(e){}
+}
 function saveState(){
   S.theme = document.documentElement.getAttribute("data-theme");
   localStorage && localStorage.setItem(localKey(), JSON.stringify(S));
@@ -2174,6 +2208,7 @@ function saveState(){
     saveTimer=setTimeout(()=>{
       db.collection("users").doc(UID).collection("platforms").doc(PLATFORM_ID)
         .collection("state").doc("main").set(S,{merge:true}).catch(e=>console.warn("save",e));
+      elidPublish();
     },700);
   }
 }
@@ -2288,6 +2323,7 @@ async function startApp(){
   const em=(FB_OK&&auth.currentUser)?auth.currentUser.email:"Estudante";
   document.getElementById("avatar").textContent=(em[0]||"J").toUpperCase();
   buildSidebar(); refreshTopbar(); markStudyDay(); go("dashboard");
+  try{ elidPublish(); }catch(e){}
 }
 function logout(){ if(FB_OK&&auth) auth.signOut(); location.reload(); }
 
