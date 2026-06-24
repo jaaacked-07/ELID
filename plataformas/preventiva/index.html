@@ -109,7 +109,7 @@ body{
 .dash-prog{margin-top:16px;max-width:560px}
 .dash-prog-top{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);margin-bottom:6px}
 .dash-pct{color:var(--primary);font-weight:800}
-.dash-symbol{position:relative;z-index:1;flex:0 0 36%;max-width:250px;margin-left:-7%;cursor:pointer;display:grid;place-items:center;filter:drop-shadow(0 0 30px rgba(6,214,193,.5))}
+.dash-symbol{position:relative;z-index:1;flex:0 0 48%;max-width:400px;margin:0;cursor:pointer;display:grid;place-items:center;filter:drop-shadow(0 0 40px rgba(6,214,193,.6))}
 .dash-symbol svg{width:100%;height:auto;display:block}
 .qa-h{font-family:var(--font-s);font-size:1.05rem;margin-bottom:6px}
 .qa-p{color:var(--muted);font-size:.9rem}
@@ -118,7 +118,8 @@ body{
 /* ===== AJUSTES FINAIS (créditos, tributo, topbar, marca) ===== */
 /* crédito ELID: fonte de título (página inicial), branco, só E/L/I/D no acento, maior */
 .elid-cred{font-family:'Cormorant Garamond',Georgia,serif;color:var(--text);font-size:13px;font-weight:600;letter-spacing:.01em;line-height:1.3;display:inline-block}
-.elid-cred b{font-weight:700;letter-spacing:.14em}
+.elid-cred b{font-weight:700;letter-spacing:.14em;color:var(--text)}
+.page-foot .elid-cred b{color:var(--text)}
 .elid-cred .hl{color:var(--elid-hl);font-weight:800;font-size:1em;letter-spacing:inherit}
 .na-cred .elid-cred{font-size:14.5px}
 .page-foot .elid-cred{font-size:14px}
@@ -152,7 +153,7 @@ body{
 /* avatar: sem fundo colorido (igual aos outros), contorno deep plum->acento, letra Parisienne bold */
 .avatar{background:var(--glass);border:1px solid var(--plum-line);color:var(--primary);font-family:var(--font-d);font-weight:700;font-size:20px;transition:.18s}
 .avatar:hover{border-color:var(--primary);box-shadow:0 0 12px -2px rgba(6,214,193,.5)}
-@media(max-width:760px){.dash-symbol{margin:0 auto;flex:0 0 auto;width:60%}}
+@media(max-width:760px){.dash-symbol{margin:0 auto;flex:0 0 auto;width:88%;max-width:none}}
 .particles{position:fixed;inset:0;z-index:-2;pointer-events:none}
 .particles span{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--primary);opacity:.4;animation:float linear infinite}
 @keyframes float{from{transform:translateY(110vh)}to{transform:translateY(-10vh)}}
@@ -2529,7 +2530,7 @@ function buildSidebar(){
     `<div class="nav-scroll">`+
     NAV.map(n=>`<div class="nav-item ${n.id===currentRoute?'active':''}" data-r="${n.id}" onclick="go('${n.id}')" title="${n.t}"><span class="nav-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${n.ic}</svg></span><span class="nav-txt">${n.t}</span></div>`).join("")+
     `</div>`+
-    `<div class="side-foot-elid">${ELID_CRED_STACK}<span class="elid-tribute">${ELID_TR}</span></div>`;
+    `<div class="side-foot-elid"><span class="elid-tribute">${ELID_TR}</span></div>`;
 }
 function refreshTopbar(){
   var x=document.getElementById("xpN"); if(x) x.textContent=S.xp||0;
@@ -2608,11 +2609,12 @@ function layerColor(val,c){
 }
 function cityMapClean(pct){
   pct=pct||0; const amb=pct>=70?.9:pct>=35?.6:.34;
-  const polys=BAIRROS.map(b=>`<path d="${b.d}" fill="currentColor" fill-opacity="${(.16+.4*amb).toFixed(2)}" stroke="currentColor" stroke-width="1.5" stroke-opacity=".85"/>`).join("");
-  return `<svg viewBox="62 76 400 212" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="color:var(--primary);width:100%;height:auto;display:block">
+  const polys=BAIRROS.map(b=>`<path d="${b.d}" fill="currentColor" fill-opacity="${(.18+.42*amb).toFixed(2)}" stroke="currentColor" stroke-width="1.7" stroke-opacity=".92"/>`).join("");
+  const names=BAIRROS.map(b=>`<text x="${b.cx}" y="${b.cy+3}" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" font-family="Inter" style="paint-order:stroke" stroke="rgba(20,12,20,.55)" stroke-width="2.4">${b.n}</text>`).join("");
+  return `<svg viewBox="58 72 408 224" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="color:var(--primary);width:100%;height:auto;display:block">
     <path d="M-10,165 Q130,150 270,185 Q400,212 530,205" stroke="currentColor" stroke-width="9" fill="none" opacity=".3"/>
     <path d="M75,-10 Q120,90 215,165 Q250,190 270,185" stroke="currentColor" stroke-width="6" fill="none" opacity=".28"/>
-    ${polys}
+    ${polys}${names}
   </svg>`;
 }
 function cityMapSVG(pct){
