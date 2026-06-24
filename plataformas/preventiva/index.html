@@ -2376,15 +2376,16 @@ function elidSubscribeCentral(){
 function saveState(){
   S.theme = document.documentElement.getAttribute("data-theme");
   S._updated = Date.now();
-  localStorage && localStorage.setItem(localKey(), JSON.stringify(S));
+  var clean; try{ clean = JSON.parse(JSON.stringify(S)); }catch(e){ clean = S; }
+  try{ localStorage && localStorage.setItem(localKey(), JSON.stringify(clean)); }catch(e){}
   if(FB_OK && UID){
     clearTimeout(saveTimer);
     saveTimer=setTimeout(()=>{
       db.collection("users").doc(UID).collection("platforms").doc(PLATFORM_ID)
-        .collection("state").doc("main").set(S,{merge:true}).catch(e=>console.warn("save",e));
-      elidPublish();
-      elidPublishDesempenho();
-    },700);
+        .collection("state").doc("main").set(clean,{merge:true})
+        .then(()=>{ try{ elidPublish(); elidPublishDesempenho(); }catch(e){} })
+        .catch(e=>console.warn("save",e));
+    },250);
   }
 }
 async function loadState(){
