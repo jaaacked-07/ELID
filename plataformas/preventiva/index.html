@@ -7,13 +7,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Great+Vibes&family=Parisienne&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Great+Vibes&family=Parisienne&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --primary:#06d6c1; --primary2:#05b3a2; --accent:#06d6c1;
   --bg:#2d1b2e; --bg2:#20131f; --card:rgba(60,38,58,.66); --card2:rgba(48,30,46,.5);
   --text:#f4eef2; --muted:#cbb6c4; --border:rgba(201,160,176,.12);
-  --glass:rgba(255,255,255,.04); --glow:rgba(6,214,193,.40); --plum-line:#4a2f44;
+  --glass:rgba(255,255,255,.04); --glow:rgba(6,214,193,.40); --plum-line:#4a2f44; --elid-hl:#ef8a6a;
   --good:#22c55e; --warn:#f59e0b; --bad:#ef4444;
   --shadow:0 20px 50px -12px rgba(0,0,0,.6);
   --font-d:'Parisienne','Great Vibes',cursive; --font-s:'Fraunces',Georgia,serif; --font-b:'Inter',sans-serif;
@@ -23,7 +23,7 @@
   --primary:#05a896; --primary2:#048a7b; --accent:#05a896;
   --bg:#FBF6F8; --bg2:#f3eaf0; --card:rgba(255,255,255,.82); --card2:rgba(255,255,255,.6);
   --text:#2A1B36; --muted:#6b5878; --border:rgba(120,72,134,.12);
-  --glass:rgba(255,255,255,.5); --glow:rgba(6,214,193,.22); --plum-line:rgba(120,72,134,.4);
+  --glass:rgba(255,255,255,.5); --glow:rgba(6,214,193,.22); --plum-line:rgba(120,72,134,.4); --elid-hl:#e3744f;
   --shadow:0 20px 50px -12px rgba(40,70,90,.22);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -111,16 +111,18 @@ body{
 .dash-symbol svg{width:100%;height:auto;display:block}
 .qa-h{font-family:var(--font-s);font-size:1.05rem;margin-bottom:6px}
 .qa-p{color:var(--muted);font-size:.9rem}
+.ph-ic{display:inline-flex;vertical-align:-.12em;margin-right:9px;-webkit-text-fill-color:initial}
+.ph-ic svg{width:.82em;height:.82em;color:var(--primary)}
 /* ===== AJUSTES FINAIS (créditos, tributo, topbar, marca) ===== */
 /* crédito ELID: fonte de título (página inicial), branco, só E/L/I/D no acento, maior */
-.elid-cred{font-family:var(--font-s);font-weight:600;color:var(--text);font-size:12.5px;letter-spacing:.01em;line-height:1.3;display:inline-block}
-.elid-cred .hl{color:var(--primary);font-weight:800}
-.elid-cred span{display:inline;font-size:inherit;color:inherit;letter-spacing:inherit;margin:0}
-.na-cred .elid-cred{font-size:14px}
-.page-foot .elid-cred{font-size:13.5px}
+.elid-cred{font-family:'Cormorant Garamond',Georgia,serif;display:inline-block;text-align:center;line-height:1.12}
+.elid-cred b{display:block;color:var(--elid-hl);font-size:17px;font-weight:700;letter-spacing:.26em;padding-left:.26em}
+.elid-cred span{display:block;color:var(--text);font-size:11.5px;font-weight:600;letter-spacing:.015em;margin-top:1px}
+.na-cred .elid-cred b{font-size:19px}.na-cred .elid-cred span{font-size:12.5px}
+.page-foot .elid-cred b{font-size:18px}.page-foot .elid-cred span{font-size:12px}
 /* tributo: Great Vibes, branco, só E e D no acento, menor (minimalista) */
-.elid-tribute{font-family:var(--font-script);color:var(--text);opacity:.92;font-size:.9rem;line-height:1.15;display:block;margin-top:3px}
-.elid-tribute .hl{color:var(--primary)}
+.elid-tribute{font-family:var(--font-script);color:var(--text);opacity:.9;font-size:.82rem;line-height:1.1;display:block;margin-top:4px}
+.elid-tribute .hl{color:var(--elid-hl)}
 .side-foot-elid .elid-tribute{font-size:.95rem}
 .page-foot .elid-tribute{font-size:1.05rem}
 .na-cred + .brand-title{margin-top:6px}
@@ -171,6 +173,7 @@ body{
 .err{color:var(--bad);font-size:13px;text-align:center;margin-top:10px;min-height:18px}
 .credit{text-align:center;margin-top:22px;font-size:11px;color:var(--muted);font-family:var(--font-s);font-style:italic}
 .hidden{display:none!important}
+#app.hidden{display:none!important}
 
 /* APP SHELL */
 #app{display:grid;grid-template-columns:248px 1fr;min-height:100vh;transition:grid-template-columns .3s}
@@ -558,7 +561,7 @@ textarea.notes{width:100%;min-height:200px;padding:16px;border-radius:14px;borde
 <div class="overlay" id="needAuth">
   <div class="auth-card" style="text-align:center">
     <div class="sb-logo-wrap" style="padding:2px 0 0"><div class="sb-logo-glow" style="width:80px;height:80px"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:50px;height:50px;color:var(--primary)"><circle cx="32" cy="32" r="23" stroke-width="1.6"/><ellipse cx="32" cy="32" rx="8.5" ry="23"/><ellipse cx="32" cy="32" rx="17" ry="23" opacity=".75"/><line x1="32" y1="9" x2="32" y2="55"/><path d="M11 24h42M9 32h46M11 40h42" opacity=".85"/><path d="M16 16.5c10 4 22 4 32 0M16 47.5c10-4 22-4 32 0" opacity=".6"/><path d="M20 22 41 30 26 43 45 38" stroke-width="1" opacity=".55"/><g fill="currentColor" stroke="none"><circle cx="20" cy="22" r="1.5"/><circle cx="41" cy="30" r="1.5"/><circle cx="26" cy="43" r="1.5"/><circle cx="45" cy="38" r="1.4"/><circle cx="38" cy="19" r="1.3"/><circle cx="22" cy="41" r="1.3"/></g></svg></div></div>
-    <div class="na-cred"><span class="elid-cred"><span class="hl">E</span>nsino <span class="hl">L</span>egitimado para <span class="hl">I</span>nternos em <span class="hl">D</span>esenvolvimento</span></div>
+    <div class="na-cred"><div class="elid-cred"><b>ELID</b><span>Ensino Legitimado para Internos em Desenvolvimento</span></div></div>
     <div class="brand-title" style="font-size:46px;margin-top:2px">Atlas de Preventiva</div>
     <div class="brand-sub">O acesso ao Atlas de Preventiva é feito pela plataforma ELID. Faça login no ELID para continuar seus estudos.</div>
     <a class="btn" href="../../landing-page/" style="display:block;text-decoration:none;text-align:center">Ir para o ELID</a>
@@ -581,14 +584,13 @@ textarea.notes{width:100%;min-height:200px;padding:16px;border-radius:14px;borde
         <div class="search-results" id="searchRes"></div>
       </div>
       <div class="tb-right">
-        <div class="xp-pill" onclick="go('jornada')" title="Minha Jornada — XP e nível"><span class="lv" id="lvBadge">1</span><span id="xpN">0</span> XP</div>
-        <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Alternar tema"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+                <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Alternar tema"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
         <div class="avatar" id="avatar" onclick="go('jornada')" title="Minha Jornada">J</div>
         <button class="icon-btn" onclick="logout()" title="Voltar à Biblioteca ELID"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
       </div>
     </header>
     <div class="content" id="content"></div>
-    <footer class="page-foot"><div class="elid-cred"><span class="hl">E</span>nsino <span class="hl">L</span>egitimado para <span class="hl">I</span>nternos em <span class="hl">D</span>esenvolvimento</div><span class="elid-tribute">Inspirado em <span class="hl">E</span>lisabete <span class="hl">D</span>elfini ✦</span></footer>
+    <footer class="page-foot"><div class="elid-cred"><b>ELID</b><span>Ensino Legitimado para Internos em Desenvolvimento</span></div><span class="elid-tribute">Inspirado em <span class="hl">E</span>lisabete <span class="hl">D</span>elfini ✦</span></footer>
   </div>
 </div>
 
@@ -2286,7 +2288,7 @@ let S = JSON.parse(JSON.stringify(DEFAULT_STATE));
 let UID=null, saveTimer=null, currentRoute="dashboard", curMod=null, curTopic=null, authMode="login";
 const ELID_CR='<b>ELID</b> · Ensino Legitimado para Internos em Desenvolvimento';
 const ELID_TR='Inspirado em <span class="hl">E</span>lisabete <span class="hl">D</span>elfini \u2726';
-const ELID_CRED_STACK='<span class="elid-cred"><span class="hl">E</span>nsino <span class="hl">L</span>egitimado para <span class="hl">I</span>nternos em <span class="hl">D</span>esenvolvimento</span>';
+const ELID_CRED_STACK='<div class="elid-cred"><b>ELID</b><span>Ensino Legitimado para Internos em Desenvolvimento</span></div>';
 const ELID_GLOBE='<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="23" stroke-width="1.6"/><ellipse cx="32" cy="32" rx="8.5" ry="23"/><ellipse cx="32" cy="32" rx="17" ry="23" opacity=".75"/><line x1="32" y1="9" x2="32" y2="55"/><path d="M11 24h42M9 32h46M11 40h42" opacity=".85"/><path d="M16 16.5c10 4 22 4 32 0M16 47.5c10-4 22-4 32 0" opacity=".6"/><path d="M20 22 41 30 26 43 45 38" stroke-width="1" opacity=".55"/><path d="M22 41 38 19" stroke-width=".9" opacity=".4"/><g fill="currentColor" stroke="none"><circle cx="20" cy="22" r="1.5"/><circle cx="41" cy="30" r="1.5"/><circle cx="26" cy="43" r="1.5"/><circle cx="45" cy="38" r="1.4"/><circle cx="38" cy="19" r="1.3"/><circle cx="22" cy="41" r="1.3"/></g></svg>';
 
 function localKey(){return "atlas_"+PLATFORM_ID+"_"+(UID||"anon");}
@@ -2367,6 +2369,7 @@ function elidSubscribeCentral(){
 }
 function saveState(){
   S.theme = document.documentElement.getAttribute("data-theme");
+  S._updated = Date.now();
   localStorage && localStorage.setItem(localKey(), JSON.stringify(S));
   if(FB_OK && UID){
     clearTimeout(saveTimer);
@@ -2379,13 +2382,26 @@ function saveState(){
   }
 }
 async function loadState(){
-  let loaded=null;
+  let cloud=null, local=null;
   if(FB_OK && UID){
     try{const d=await db.collection("users").doc(UID).collection("platforms").doc(PLATFORM_ID).collection("state").doc("main").get();
-      if(d.exists) loaded=d.data();}catch(e){console.warn("load",e);}
+      if(d.exists) cloud=d.data();}catch(e){console.warn("load",e);}
   }
-  if(!loaded && localStorage){ const l=localStorage.getItem(localKey()); if(l) loaded=JSON.parse(l); }
-  S = Object.assign(JSON.parse(JSON.stringify(DEFAULT_STATE)), loaded||{});
+  if(localStorage){ const l=localStorage.getItem(localKey()); if(l){ try{local=JSON.parse(l);}catch(e){} } }
+  const base = (((cloud&&cloud._updated)||0) >= ((local&&local._updated)||0)) ? cloud : local;
+  const other = base===cloud ? local : cloud;
+  S = Object.assign(JSON.parse(JSON.stringify(DEFAULT_STATE)), other||{}, base||{});
+  // UNIÃO dos mapas de progresso de AMBAS as fontes — usuário nunca perde nada
+  ["qSeen","qRight","qPick","srs","done","achievements","fav","notes"].forEach(function(k){
+    var a=(cloud&&cloud[k])||{}, b=(local&&local[k])||{};
+    if(typeof a==="object"&&!Array.isArray(a)) S[k]=Object.assign({},a,b,S[k]||{});
+  });
+  // cartões criados: união por assinatura (sem duplicar)
+  var allC=[].concat((cloud&&cloud.cards)||[],(local&&local.cards)||[]); var seen={}; var merged=[];
+  allC.forEach(function(c){ if(!c)return; var sig=(c.front||"")+"|"+(c.back||"")||JSON.stringify(c); if(!seen[sig]){seen[sig]=1;merged.push(c);} });
+  if(merged.length) S.cards=merged;
+  S.xp=Math.max((cloud&&cloud.xp)||0,(local&&local.xp)||0,S.xp||0);
+  S.streak=Math.max((cloud&&cloud.streak)||0,(local&&local.streak)||0,S.streak||0);
   if(S.theme) document.documentElement.setAttribute("data-theme",S.theme);
   checkStreak();
 }
@@ -2686,6 +2702,7 @@ function radarSVG(){
 }
 
 /* ---------- PÁGINAS ---------- */
+function phIco(id){var n=NAV.find(function(x){return x.id===id});return n?('<span class="ph-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+n.ic+'</svg></span>'):'';}
 function renderDashboard(){
   const pct=computeGlobalPct(), rank=careerRank(pct);
   const nome=(window.ELID_NOME||localStorage.getItem("elid_nome")||"Jackeline");
@@ -2695,7 +2712,7 @@ function renderDashboard(){
   const lt=S.lastTopic;
   return `
   <div class="dash-hero">
-    <div class="dash-symbol">${cityMapSVG(pct)}</div>
+    <div class="dash-symbol" onclick="go('jornada')" style="cursor:pointer" title="Ver minha jornada na cidade">${cityMapSVG(pct)}</div>
     <div class="dash-hero-main">
       <div class="dash-rank">${rank.ic} ${rank.n}</div>
       <h1 class="dash-hello">Olá, ${nome}!</h1>
@@ -2730,7 +2747,7 @@ function modStatus(m){const r=m.topics.filter(isTopicReady).length,tot=m.topics.
   return{lbl:`🟡 Parcial (${r}/${tot})`,cls:"st-part",r,tot};}
 function renderModulos(){
   const completos=MODULES.filter(m=>modStatus(m).r===m.topics.length).length;
-  return `<h1 class="ph">Módulos</h1><p class="ph-sub">15 módulos · <b style="color:var(--primary)">${completos} completo(s)</b>, ${MODULES.length-completos} em desenvolvimento. As etiquetas mostram o status do conteúdo.</p>
+  return `<h1 class="ph">${phIco('modulos')}Módulos</h1><p class="ph-sub">15 módulos · <b style="color:var(--primary)">${completos} completo(s)</b>, ${MODULES.length-completos} em desenvolvimento. As etiquetas mostram o status do conteúdo.</p>
   <div class="grid g2">`+MODULES.map(m=>{
     const tot=m.topics.length,done=m.topics.filter(t=>S.done["topic:"+t.id]).length;const p=Math.round(done/tot*100);
     const st=modStatus(m);
@@ -2956,7 +2973,7 @@ function renderDia(){
   const dueCount=cardsDue().length;
   const c=document.getElementById("content");
   c.innerHTML=`
-    <h1 class="ph">📅 Estudos do Dia</h1>
+    <h1 class="ph">${phIco('dia')}Estudos do Dia</h1>
     <p class="sub">Sua dose diária: 10 questões, 8 flashcards e suas revisões pendentes. Concluir tudo vale a meta diária (+75 XP).</p>
     <div class="card-grid">
       <div class="stat-card"><div class="stat-ic">🎯</div><div><b>${qs.length}</b><span>questões do dia</span></div></div>
@@ -2976,7 +2993,7 @@ function renderDia(){
   qbox.innerHTML=qs.map((o,idx)=>{
     const key=o.tid+":"+o.qi, done=!!(S.qSeen&&S.qSeen[key]), pick=(S.qPick||{})[key], corr=o.q.correct;
     const opts=o.q.opts.map((op,i)=>{let cls="qopt";if(done){if(i===corr)cls+=" correct";else if(i===pick)cls+=" wrong";}
-      return `<button class="${cls}" ${done?"disabled":""} onclick="answerDiaQ('${o.tid}',${o.qi},${i},this)">${String.fromCharCode(65+i)}) ${op}</button>`;}).join("");
+      return `<button class="${cls}" ${done?"disabled":""} onclick="answerDiaQ('${key}',${i},${corr},this)">${String.fromCharCode(65+i)}) ${op}</button>`;}).join("");
     return `<div class="qcard"${done?' data-done="1"':''}><div class="qmeta">${o.mod} · ${o.top}</div>
       <div class="qtext">${idx+1}. ${o.q.stem}</div>
       <div class="qopts">${opts}</div>
@@ -2986,13 +3003,13 @@ function renderDia(){
   const fcbox=document.getElementById("diaFC");
   fcbox.innerHTML=cards.map(o=>flipCardHTML(o)).join("");
 }
-function answerDiaQ(tid,qi,choice,btn){
-  const t=findTopicById(tid); const q=t.CONTENT.questions[qi];
-  const parent=btn.closest(".qcard"); if(parent.dataset.done)return; parent.dataset.done="1";
-  parent.querySelectorAll(".qopt").forEach((b,i)=>{b.classList.add(i===q.correct?"correct":(i===choice?"wrong":""));b.disabled=true;});
-  parent.querySelector(".qexp").style.display="block";
-  const key=tid+":"+qi; S.qSeen[key]=true; S.qPick=S.qPick||{}; S.qPick[key]=choice;
-  if(choice===q.correct){S.qRight[key]=true;addXP(12,"questão certa");}else addXP(4,"questão respondida");
+function answerDiaQ(key,choice,correct,btn){
+  const parent=btn.closest(".qcard"); if(!parent||parent.dataset.done)return; parent.dataset.done="1";
+  parent.querySelectorAll(".qopt").forEach((b,i)=>{b.classList.add(i===correct?"correct":(i===choice?"wrong":""));b.disabled=true;});
+  const ex=parent.querySelector(".qexp"); if(ex)ex.style.display="block";
+  S.qSeen=S.qSeen||{}; S.qRight=S.qRight||{}; S.qPick=S.qPick||{};
+  S.qSeen[key]=true; S.qPick[key]=choice;
+  if(choice===correct){S.qRight[key]=true;addXP(12,"questão certa");}else addXP(4,"questão respondida");
   saveState();
 }
 function completeDailyGoal(){
@@ -3021,7 +3038,7 @@ function renderJornada(){
   const rank=careerRank(pct);
   const c=document.getElementById("content");
   c.innerHTML=`
-    <h1 class="ph">🗺️ Minha Jornada</h1>
+    <h1 class="ph">${phIco('jornada')}Minha Jornada</h1>
     <p class="sub">Três Rios floresce conforme você domina a Saúde Preventiva. Você é <b>${rank.n}</b>.</p>
     <div class="journey-grid">
       <div class="panel">
@@ -3054,7 +3071,7 @@ function renderMetas(){
   const weekDone=weeklyProgress();
   const c=document.getElementById("content");
   c.innerHTML=`
-    <h1 class="ph">🎯 Metas</h1>
+    <h1 class="ph">${phIco('metas')}Metas</h1>
     <p class="sub">Constância vence intensidade. Cada dia de estudo aproxima você da residência.</p>
     <div class="card-grid">
       <div class="goal-card ${dailyDone?'done':''}">
@@ -3103,7 +3120,7 @@ function renderTemas(){
     {t:"Testes diagnósticos — S, E, VPP, VPN",inc:"★★★★☆",p:"Cálculo e interpretação."},
     {t:"Bioética e bioestatística aplicada",inc:"★★★☆☆",p:"Princípios, valor-p, IC95%."},
   ];
-  c.innerHTML=`<h1 class="ph">🔥 Temas Mais Cobrados</h1>
+  c.innerHTML=`<h1 class="ph">${phIco('temas')}Temas Mais Cobrados</h1>
     <p class="sub">Onde concentrar energia: incidência histórica em ENARE, Revalida e provas estaduais.</p>
     <div class="temas-list">${temas.map(x=>`
       <div class="tema-card">
@@ -3120,7 +3137,7 @@ function renderFavoritos(){
   const favs=(S.favs||[]);
   let items=[];
   MODULES.forEach(m=>m.topics.forEach(t=>{if(favs.includes(t.id))items.push({m,t});}));
-  c.innerHTML=`<h1 class="ph">⭐ Favoritos</h1>
+  c.innerHTML=`<h1 class="ph">${phIco('favoritos')}Favoritos</h1>
     <p class="sub">Seus tópicos marcados para revisar com prioridade.</p>
     ${items.length?`<div class="card-grid">${items.map(x=>`
       <div class="topic-card" onclick="openModule('${x.m.id}');setTimeout(()=>openTopic('${x.m.id}','${x.t.id}'),50)">
@@ -3135,7 +3152,7 @@ function renderFavoritos(){
 function renderAnotacoes(){
   const c=document.getElementById("content");
   const notes=Object.entries(S.topicNotes||{}).filter(([k,v])=>v&&v.trim());
-  c.innerHTML=`<h1 class="ph">📝 Anotações</h1>
+  c.innerHTML=`<h1 class="ph">${phIco('anotacoes')}Anotações</h1>
     <p class="sub">Tudo que você anotou, reunido em um só lugar.</p>
     ${notes.length?notes.map(([tid,v])=>{const t=findTopicById(tid);
       return `<div class="note-block"><div class="note-h">${t?t.t:tid}</div><div class="note-body">${v||""}</div>
@@ -3157,7 +3174,7 @@ function renderRevisao(){
   srsQueue=cardsDue(); srsIdx=0;
   const c=document.getElementById("content");
   if(!srsQueue.length){
-    c.innerHTML=`<h1 class="ph">🔁 Revisão Espaçada</h1>
+    c.innerHTML=`<h1 class="ph">${phIco('revisao')}Revisão Espaçada</h1>
       <p class="sub">Repetição espaçada: cada acerto afasta a próxima revisão. Um card é "dominado" quando o intervalo atinge 21 dias ou mais.</p>
       <div class="empty">🎉 Nenhuma revisão pendente! Volte amanhã ou estude novos tópicos para alimentar o baralho.</div>
       <div class="card-grid" style="margin-top:18px">
@@ -3166,7 +3183,7 @@ function renderRevisao(){
       </div>`;
     return;
   }
-  c.innerHTML=`<h1 class="ph">🔁 Revisão Espaçada</h1>
+  c.innerHTML=`<h1 class="ph">${phIco('revisao')}Revisão Espaçada</h1>
     <p class="sub"><b id="srsLeft">${srsQueue.length}</b> cards para revisar hoje. Avalie sua memória honestamente.</p>
     <div id="srsArea"></div>`;
   showSRSCard();
@@ -3226,7 +3243,7 @@ function renderFlashcards(){
   const c=document.getElementById("content");
   const total=deckSize();const mast=masteredCards();const due=cardsDue().length;
   const byMod=MODULES.map(m=>{let n=0;m.topics.forEach(t=>n+=t.CONTENT.flashcards.length);return {m,n};}).filter(x=>x.n);
-  c.innerHTML=`<h1 class="ph">🃏 Central de Flashcards</h1>
+  c.innerHTML=`<h1 class="ph">${phIco('flashcards')}Central de Flashcards</h1>
     <p class="sub">Todos os baralhos da plataforma + os cards que você criou. Estude por repetição espaçada.</p>
     <div class="card-grid">
       <div class="stat-card"><div class="stat-ic">🃏</div><div><b>${total}</b><span>cards no total</span></div></div>
@@ -3250,7 +3267,7 @@ function renderFlashcards(){
 function renderConquistas(){
   const c=document.getElementById("content");
   const unlocked=Object.keys(S.achievements||{}).length;
-  c.innerHTML=`<h1 class="ph">🏅 Conquistas</h1>
+  c.innerHTML=`<h1 class="ph">${phIco('conquistas')}Conquistas</h1>
     <p class="sub">${unlocked}/${ACHS.length} desbloqueadas. Cada medalha marca um marco na sua preparação.</p>
     <div class="ach-grid">${ACHS.map(a=>{const on=S.achievements&&S.achievements[a.id];
       return `<div class="ach-card ${on?'on':'locked'}">
