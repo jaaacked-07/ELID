@@ -3030,7 +3030,7 @@ function renderDia(){
 }
 function answerDiaQ(dkey,qkey,choice,correct,btn){
   const parent=btn.closest(".qcard"); if(!parent||parent.dataset.done)return; parent.dataset.done="1";
-  parent.querySelectorAll(".qopt").forEach((b,i)=>{b.classList.add(i===correct?"correct":(i===choice?"wrong":""));b.disabled=true;});
+  parent.querySelectorAll(".qopt").forEach((b,i)=>{ if(i===correct)b.classList.add("correct"); else if(i===choice)b.classList.add("wrong"); b.disabled=true; });
   const ex=parent.querySelector(".qexp"); if(ex)ex.style.display="block";
   S.diaSeen=S.diaSeen||{}; S.qSeen=S.qSeen||{}; S.qRight=S.qRight||{}; S.qPick=S.qPick||{};
   S.diaSeen[dkey]=choice;            /* estado do dia (restaura no reload) */
