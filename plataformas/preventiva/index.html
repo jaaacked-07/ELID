@@ -13,7 +13,7 @@
   --primary:#06d6c1; --primary2:#05b3a2; --accent:#06d6c1;
   --bg:#2d1b2e; --bg2:#20131f; --card:rgba(60,38,58,.66); --card2:rgba(48,30,46,.5);
   --text:#f4eef2; --muted:#cbb6c4; --border:rgba(201,160,176,.12);
-  --glass:rgba(255,255,255,.04); --glow:rgba(6,214,193,.40);
+  --glass:rgba(255,255,255,.04); --glow:rgba(6,214,193,.40); --plum-line:#4a2f44;
   --good:#22c55e; --warn:#f59e0b; --bad:#ef4444;
   --shadow:0 20px 50px -12px rgba(0,0,0,.6);
   --font-d:'Parisienne','Great Vibes',cursive; --font-s:'Fraunces',Georgia,serif; --font-b:'Inter',sans-serif;
@@ -23,7 +23,7 @@
   --primary:#05a896; --primary2:#048a7b; --accent:#05a896;
   --bg:#FBF6F8; --bg2:#f3eaf0; --card:rgba(255,255,255,.82); --card2:rgba(255,255,255,.6);
   --text:#2A1B36; --muted:#6b5878; --border:rgba(120,72,134,.12);
-  --glass:rgba(255,255,255,.5); --glow:rgba(6,214,193,.22);
+  --glass:rgba(255,255,255,.5); --glow:rgba(6,214,193,.22); --plum-line:rgba(120,72,134,.4);
   --shadow:0 20px 50px -12px rgba(40,70,90,.22);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -111,6 +111,43 @@ body{
 .dash-symbol svg{width:100%;height:auto;display:block}
 .qa-h{font-family:var(--font-s);font-size:1.05rem;margin-bottom:6px}
 .qa-p{color:var(--muted);font-size:.9rem}
+/* ===== AJUSTES FINAIS (créditos, tributo, topbar, marca) ===== */
+/* crédito ELID: fonte de título (página inicial), branco, só E/L/I/D no acento, maior */
+.elid-cred{font-family:var(--font-s);font-weight:600;color:var(--text);font-size:12.5px;letter-spacing:.01em;line-height:1.3;display:inline-block}
+.elid-cred .hl{color:var(--primary);font-weight:800}
+.elid-cred span{display:inline;font-size:inherit;color:inherit;letter-spacing:inherit;margin:0}
+.na-cred .elid-cred{font-size:14px}
+.page-foot .elid-cred{font-size:13.5px}
+/* tributo: Great Vibes, branco, só E e D no acento, menor (minimalista) */
+.elid-tribute{font-family:var(--font-script);color:var(--text);opacity:.92;font-size:.9rem;line-height:1.15;display:block;margin-top:3px}
+.elid-tribute .hl{color:var(--primary)}
+.side-foot-elid .elid-tribute{font-size:.95rem}
+.page-foot .elid-tribute{font-size:1.05rem}
+.na-cred + .brand-title{margin-top:6px}
+#needAuth .elid-tribute{font-size:1.05rem}
+/* marca na sidebar: menor p/ caber em 1 linha (apenas esta plataforma) */
+.sb-brand-name{font-size:20px;white-space:nowrap;line-height:1.05}
+/* saudação do hero: cor unificada (sem letra pintada) */
+.dash-hello{color:var(--text)}
+/* gamificação à esquerda, textos à direita (não tampa o SVG de fundo) */
+.dash-hero{flex-wrap:nowrap}
+.dash-hero-main{text-align:right}
+.dash-prog,.dash-desc{margin-left:auto}
+@media(max-width:760px){.dash-hero{flex-wrap:wrap}.dash-hero-main{text-align:center}.dash-prog,.dash-desc{margin:14px auto 0}}
+/* ferramenta de recolher (mover) = cor da especialidade, elegante */
+.tb-toggle{color:var(--primary)}
+.tb-toggle svg{filter:drop-shadow(0 0 7px rgba(6,214,193,.6))}
+.tb-toggle:hover{background:var(--glass);border-color:var(--primary)}
+/* busca: ícone Pneumo + contorno deep plum */
+.search input{border:1px solid var(--plum-line)!important}
+.search input:focus{border-color:var(--primary)!important}
+/* botões topo: contorno deep plum -> acento no hover */
+.icon-btn{background:var(--glass);border:1px solid var(--plum-line);transition:.18s}
+.icon-btn:hover{border-color:var(--primary);box-shadow:0 0 12px -2px rgba(6,214,193,.5)}
+.icon-btn svg{width:19px;height:19px}
+/* avatar: sem fundo colorido (igual aos outros), contorno deep plum->acento, letra Parisienne bold */
+.avatar{background:var(--glass);border:1px solid var(--plum-line);color:var(--primary);font-family:var(--font-d);font-weight:700;font-size:20px;transition:.18s}
+.avatar:hover{border-color:var(--primary);box-shadow:0 0 12px -2px rgba(6,214,193,.5)}
 @media(max-width:760px){.dash-symbol{margin:0 auto}}
 .particles{position:fixed;inset:0;z-index:-2;pointer-events:none}
 .particles span{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--primary);opacity:.4;animation:float linear infinite}
@@ -520,13 +557,12 @@ textarea.notes{width:100%;min-height:200px;padding:16px;border-radius:14px;borde
 <!-- ACESSO PELO ELID -->
 <div class="overlay" id="needAuth">
   <div class="auth-card" style="text-align:center">
-    <div class="na-hello"><span class="tr-i">O</span>lá<span id="naName"></span>!</div>
     <div class="sb-logo-wrap" style="padding:2px 0 0"><div class="sb-logo-glow" style="width:80px;height:80px"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:50px;height:50px;color:var(--primary)"><circle cx="32" cy="32" r="23" stroke-width="1.6"/><ellipse cx="32" cy="32" rx="8.5" ry="23"/><ellipse cx="32" cy="32" rx="17" ry="23" opacity=".75"/><line x1="32" y1="9" x2="32" y2="55"/><path d="M11 24h42M9 32h46M11 40h42" opacity=".85"/><path d="M16 16.5c10 4 22 4 32 0M16 47.5c10-4 22-4 32 0" opacity=".6"/><path d="M20 22 41 30 26 43 45 38" stroke-width="1" opacity=".55"/><g fill="currentColor" stroke="none"><circle cx="20" cy="22" r="1.5"/><circle cx="41" cy="30" r="1.5"/><circle cx="26" cy="43" r="1.5"/><circle cx="45" cy="38" r="1.4"/><circle cx="38" cy="19" r="1.3"/><circle cx="22" cy="41" r="1.3"/></g></svg></div></div>
-    <div class="elid-cred na-cred"><b>ELID</b><span>Ensino Legitimado para Internos em Desenvolvimento</span></div>
+    <div class="na-cred"><span class="elid-cred"><span class="hl">E</span>nsino <span class="hl">L</span>egitimado para <span class="hl">I</span>nternos em <span class="hl">D</span>esenvolvimento</span></div>
     <div class="brand-title" style="font-size:46px;margin-top:2px">Atlas de Preventiva</div>
     <div class="brand-sub">O acesso ao Atlas de Preventiva é feito pela plataforma ELID. Faça login no ELID para continuar seus estudos.</div>
     <a class="btn" href="../../landing-page/" style="display:block;text-decoration:none;text-align:center">Ir para o ELID</a>
-    <div style="margin-top:16px"><span class="elid-tribute" style="font-size:1.5rem"><span class="tr-i">I</span>nspirado em Elisabete Delfini ✦</span></div>
+    <div style="margin-top:16px"><span class="elid-tribute">Inspirado em <span class="hl">E</span>lisabete <span class="hl">D</span>elfini ✦</span></div>
   </div>
 </div>
 
@@ -535,8 +571,7 @@ textarea.notes{width:100%;min-height:200px;padding:16px;border-radius:14px;borde
   <aside class="sidebar" id="sidebar"></aside>
   <div class="main">
     <header class="topbar">
-      <div class="tb-logo"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="23" stroke-width="1.8"/><ellipse cx="32" cy="32" rx="8.5" ry="23"/><ellipse cx="32" cy="32" rx="17" ry="23" opacity=".7"/><line x1="32" y1="9" x2="32" y2="55"/><path d="M11 24h42M9 32h46M11 40h42" opacity=".85"/><g fill="currentColor" stroke="none"><circle cx="20" cy="22" r="1.6"/><circle cx="41" cy="30" r="1.6"/><circle cx="26" cy="43" r="1.5"/></g></svg></div>
-      <button class="tb-toggle" onclick="toggleSidebar()" title="Expandir / recolher menu" aria-label="Menu">
+            <button class="tb-toggle" onclick="toggleSidebar()" title="Expandir / recolher menu" aria-label="Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
       </button>
       <div class="tb-brand">Atlas de Preventiva</div>
@@ -553,7 +588,7 @@ textarea.notes{width:100%;min-height:200px;padding:16px;border-radius:14px;borde
       </div>
     </header>
     <div class="content" id="content"></div>
-    <footer class="page-foot"><div class="elid-cred" style="display:inline-block"><b>ELID</b><span>Ensino Legitimado para Internos em Desenvolvimento</span></div><span class="elid-tribute"><span class="tr-i">I</span>nspirado em Elisabete Delfini ✦</span></footer>
+    <footer class="page-foot"><div class="elid-cred"><span class="hl">E</span>nsino <span class="hl">L</span>egitimado para <span class="hl">I</span>nternos em <span class="hl">D</span>esenvolvimento</div><span class="elid-tribute">Inspirado em <span class="hl">E</span>lisabete <span class="hl">D</span>elfini ✦</span></footer>
   </div>
 </div>
 
@@ -2250,8 +2285,8 @@ const DEFAULT_STATE = {
 let S = JSON.parse(JSON.stringify(DEFAULT_STATE));
 let UID=null, saveTimer=null, currentRoute="dashboard", curMod=null, curTopic=null, authMode="login";
 const ELID_CR='<b>ELID</b> · Ensino Legitimado para Internos em Desenvolvimento';
-const ELID_TR='<span class="tr-i">I</span>nspirado em Elisabete Delfini \u2726';
-const ELID_CRED_STACK='<div class="elid-cred"><b>ELID</b><span>Ensino Legitimado para Internos em Desenvolvimento</span></div>';
+const ELID_TR='Inspirado em <span class="hl">E</span>lisabete <span class="hl">D</span>elfini \u2726';
+const ELID_CRED_STACK='<span class="elid-cred"><span class="hl">E</span>nsino <span class="hl">L</span>egitimado para <span class="hl">I</span>nternos em <span class="hl">D</span>esenvolvimento</span>';
 const ELID_GLOBE='<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="23" stroke-width="1.6"/><ellipse cx="32" cy="32" rx="8.5" ry="23"/><ellipse cx="32" cy="32" rx="17" ry="23" opacity=".75"/><line x1="32" y1="9" x2="32" y2="55"/><path d="M11 24h42M9 32h46M11 40h42" opacity=".85"/><path d="M16 16.5c10 4 22 4 32 0M16 47.5c10-4 22-4 32 0" opacity=".6"/><path d="M20 22 41 30 26 43 45 38" stroke-width="1" opacity=".55"/><path d="M22 41 38 19" stroke-width=".9" opacity=".4"/><g fill="currentColor" stroke="none"><circle cx="20" cy="22" r="1.5"/><circle cx="41" cy="30" r="1.5"/><circle cx="26" cy="43" r="1.5"/><circle cx="45" cy="38" r="1.4"/><circle cx="38" cy="19" r="1.3"/><circle cx="22" cy="41" r="1.3"/></g></svg>';
 
 function localKey(){return "atlas_"+PLATFORM_ID+"_"+(UID||"anon");}
@@ -2274,17 +2309,19 @@ var elidUnsub=null;
 function cloudReady(){ return !!(FB_OK&&UID&&db); }
 /* achata o que foi feito: questoes (tid:qi = id da Central), SRS e cartoes criados */
 function elidFlattenDone(){
-  var q={}; Object.keys(S.qSeen||{}).forEach(function(k){ q[k]={seen:1,right:(S.qRight&&S.qRight[k])?1:0}; });
+  var q={}; Object.keys(S.qSeen||{}).forEach(function(k){ q[k]={seen:1,right:(S.qRight&&S.qRight[k])?1:0,pick:(S.qPick&&S.qPick[k]!=null)?S.qPick[k]:null}; });
   return {q:q, srs:(S.srs||{}), userCards:(S.cards||[])};
 }
 /* mescla o que veio da Central (idempotente; nunca sobrescreve local) */
 function elidMergeDone(done){
   if(!done) return false; var changed=false;
   S.qSeen=S.qSeen||{}; S.qRight=S.qRight||{}; S.srs=S.srs||{}; S.cards=S.cards||[];
+  S.qPick=S.qPick||{};
   if(done.q) Object.keys(done.q).forEach(function(k){
     var v=done.q[k]||{};
     if(!S.qSeen[k]){ S.qSeen[k]=true; changed=true; }
     if(v.right && !S.qRight[k]){ S.qRight[k]=true; changed=true; }
+    if(v.pick!=null && S.qPick[k]==null){ S.qPick[k]=v.pick; changed=true; }
   });
   if(done.srs) Object.keys(done.srs).forEach(function(id){ if(!S.srs[id]){ S.srs[id]=done.srs[id]; changed=true; } });
   if(done.userCards && done.userCards.length){
@@ -2658,13 +2695,13 @@ function renderDashboard(){
   const lt=S.lastTopic;
   return `
   <div class="dash-hero">
+    <div class="dash-symbol">${cityMapSVG(pct)}</div>
     <div class="dash-hero-main">
       <div class="dash-rank">${rank.ic} ${rank.n}</div>
-      <h1 class="dash-hello"><span class="tr-i">O</span>lá, ${nome}!</h1>
+      <h1 class="dash-hello">Olá, ${nome}!</h1>
       <p class="dash-desc">Você é a Secretária(o) Municipal de Saúde de Três Rios. Estude para transformar a cidade — conteúdo passo a passo, questões comentadas, flashcards inteligentes e gamificação real.</p>
       <div class="dash-prog"><div class="dash-prog-top"><span>Progresso geral da plataforma</span><span class="dash-pct">${pct}%</span></div><div class="progress"><i style="width:${pct}%"></i></div></div>
     </div>
-    <div class="dash-symbol">${cityMapSVG(pct)}</div>
   </div>
   <div class="grid g4" style="margin-top:18px">
     <div class="card stat"><div class="v">${S.xp||0}</div><div class="l">XP acumulada</div></div>
@@ -2807,9 +2844,12 @@ function updateMaybeMod(){maybeCompleteTopic();}
 /* QUESTÕES */
 function renderQuestoes(C){
   return `<div class="section-bar">${C.questions.length} questões comentadas</div>`+C.questions.map((q,i)=>{
-    return `<div class="q" id="q${i}"><div class="stem"><b>${i+1}.</b> ${q.stem}</div>
-    ${q.opts.map((o,j)=>`<label class="opt" onclick="answerQ(${i},${j})">${String.fromCharCode(65+j)}) ${o}</label>`).join("")}
-    <div class="expl" id="expl${i}"><b>Comentário:</b> ${q.expl}</div></div>`;
+    const key=curTopic.id+":"+i, done=!!(S.qSeen&&S.qSeen[key]), pick=(S.qPick||{})[key];
+    const opts=q.opts.map((o,j)=>{let cls="opt";if(done){if(j===q.correct)cls+=" correct";else if(j===pick)cls+=" wrong";}
+      return `<label class="${cls}" ${done?'style="pointer-events:none"':''} onclick="answerQ(${i},${j})">${String.fromCharCode(65+j)}) ${o}</label>`;}).join("");
+    return `<div class="q" id="q${i}"${done?' data-done="1"':''}><div class="stem"><b>${i+1}.</b> ${q.stem}</div>
+    ${opts}
+    <div class="expl ${done?'show':''}" id="expl${i}"><b>Comentário:</b> ${q.expl}</div></div>`;
   }).join("");
 }
 function answerQ(qi,opt){
@@ -2818,6 +2858,7 @@ function answerQ(qi,opt){
   const qid=curTopic.id+":"+qi;
   opts.forEach((o,j)=>{o.style.pointerEvents="none";if(j===q.correct)o.classList.add("correct");if(j===opt&&opt!==q.correct)o.classList.add("wrong");});
   document.getElementById("expl"+qi).classList.add("show");
+  S.qPick=S.qPick||{}; S.qPick[qid]=opt;
   if(!S.qSeen[qid]){S.qSeen[qid]=true;addXP(4,"questão");}
   if(opt===q.correct&&!S.qRight[qid]){S.qRight[qid]=true;addXP(12,"acertou!");}
   saveState();
@@ -2910,13 +2951,13 @@ function allCardsForSRS(){const tc=allTopicCardsFlat();const uc=(S.cards||[]).ma
    ============================================================ */
 function renderDia(){
   const seed=daySeed();
-  const qs=seededPick(allQuestionsFlat(),seed,5);
+  const qs=seededPick(allQuestionsFlat(),seed,10);
   const cards=seededPick(allCardsForSRS(),seed+7,8);
   const dueCount=cardsDue().length;
   const c=document.getElementById("content");
   c.innerHTML=`
     <h1 class="ph">📅 Estudos do Dia</h1>
-    <p class="sub">Sua dose diária: 5 questões, 8 flashcards e suas revisões pendentes. Concluir tudo vale a meta diária (+75 XP).</p>
+    <p class="sub">Sua dose diária: 10 questões, 8 flashcards e suas revisões pendentes. Concluir tudo vale a meta diária (+75 XP).</p>
     <div class="card-grid">
       <div class="stat-card"><div class="stat-ic">🎯</div><div><b>${qs.length}</b><span>questões do dia</span></div></div>
       <div class="stat-card"><div class="stat-ic">🃏</div><div><b>${cards.length}</b><span>flashcards do dia</span></div></div>
@@ -2933,10 +2974,13 @@ function renderDia(){
   // questões
   const qbox=document.getElementById("diaQ");
   qbox.innerHTML=qs.map((o,idx)=>{
-    return `<div class="qcard"><div class="qmeta">${o.mod} · ${o.top}</div>
+    const key=o.tid+":"+o.qi, done=!!(S.qSeen&&S.qSeen[key]), pick=(S.qPick||{})[key], corr=o.q.correct;
+    const opts=o.q.opts.map((op,i)=>{let cls="qopt";if(done){if(i===corr)cls+=" correct";else if(i===pick)cls+=" wrong";}
+      return `<button class="${cls}" ${done?"disabled":""} onclick="answerDiaQ('${o.tid}',${o.qi},${i},this)">${String.fromCharCode(65+i)}) ${op}</button>`;}).join("");
+    return `<div class="qcard"${done?' data-done="1"':''}><div class="qmeta">${o.mod} · ${o.top}</div>
       <div class="qtext">${idx+1}. ${o.q.stem}</div>
-      <div class="qopts">${o.q.opts.map((op,i)=>`<button class="qopt" onclick="answerDiaQ('${o.tid}',${o.qi},${i},this)">${String.fromCharCode(65+i)}) ${op}</button>`).join("")}</div>
-      <div class="qexp" style="display:none">${o.q.expl}</div></div>`;
+      <div class="qopts">${opts}</div>
+      <div class="qexp" style="display:${done?'block':'none'}">${o.q.expl}</div></div>`;
   }).join("");
   // flashcards
   const fcbox=document.getElementById("diaFC");
@@ -2947,7 +2991,7 @@ function answerDiaQ(tid,qi,choice,btn){
   const parent=btn.closest(".qcard"); if(parent.dataset.done)return; parent.dataset.done="1";
   parent.querySelectorAll(".qopt").forEach((b,i)=>{b.classList.add(i===q.correct?"correct":(i===choice?"wrong":""));b.disabled=true;});
   parent.querySelector(".qexp").style.display="block";
-  const key=tid+":"+qi; S.qSeen[key]=true;
+  const key=tid+":"+qi; S.qSeen[key]=true; S.qPick=S.qPick||{}; S.qPick[key]=choice;
   if(choice===q.correct){S.qRight[key]=true;addXP(12,"questão certa");}else addXP(4,"questão respondida");
   saveState();
 }
