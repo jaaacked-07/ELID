@@ -2330,6 +2330,7 @@ function elidMergeDone(done){
     if(!S.qSeen[k]){ S.qSeen[k]=true; changed=true; }
     if(v.right && !S.qRight[k]){ S.qRight[k]=true; changed=true; }
     if(v.pick!=null && S.qPick[k]==null){ S.qPick[k]=v.pick; changed=true; }
+    S.diaSeen=S.diaSeen||{}; var _dk=daySeed()+":"+k; if(S.diaSeen[_dk]==null){ S.diaSeen[_dk]=(v.pick!=null?v.pick:-1); changed=true; }
   });
   if(done.srs) Object.keys(done.srs).forEach(function(id){ if(!S.srs[id]){ S.srs[id]=done.srs[id]; changed=true; } });
   if(done.userCards && done.userCards.length){
@@ -3015,7 +3016,7 @@ function renderDia(){
   // questões
   const qbox=document.getElementById("diaQ");
   qbox.innerHTML=qs.map((o,idx)=>{
-    const qkey=o.tid+":"+o.qi, dkey=seed+":"+idx;
+    const qkey=o.tid+":"+o.qi, dkey=seed+":"+qkey;
     const done=!!(S.diaSeen&&S.diaSeen[dkey]!=null), pick=(S.diaSeen||{})[dkey], corr=o.q.correct;
     const opts=o.q.opts.map((op,i)=>{let cls="qopt";if(done){if(i===corr)cls+=" correct";else if(i===pick)cls+=" wrong";}
       return `<button class="${cls}" ${done?"disabled":""} onclick="answerDiaQ('${dkey}','${qkey}',${i},${corr},this)">${String.fromCharCode(65+i)}) ${op}</button>`;}).join("");
