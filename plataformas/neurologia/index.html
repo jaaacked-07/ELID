@@ -121,12 +121,12 @@ a{color:var(--accent);text-decoration:none}
 
 /* ============== GATE / AUTH ============== */
 .veil{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;
-  background:radial-gradient(900px 620px at 50% -10%, rgba(167,139,250,.26), transparent 60%), radial-gradient(700px 500px at 10% 110%, rgba(244,114,182,.20), transparent 55%), linear-gradient(155deg,#2c1d44,#160f26);}
+  background:radial-gradient(900px 620px at 50% -10%, rgba(6,214,193,.16), transparent 60%), radial-gradient(700px 520px at 12% 110%, rgba(247,231,206,.06), transparent 55%), linear-gradient(155deg,#34203a,#20131f);}
 .auth-card{width:100%;max-width:430px;padding:38px 34px;border-radius:24px;position:relative;overflow:hidden}
 .auth-card::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(45,212,191,.07),transparent 40%);pointer-events:none}
 .brand-mark{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-.brand-logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center}
-.brand-logo .brain-ic{width:100%;height:100%;color:var(--rose)}
+.brand-logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:radial-gradient(circle at 50% 50%, rgba(6,214,193,.32), transparent 68%);box-shadow:0 0 26px -4px rgba(6,214,193,.60)}
+.brand-logo .brain-ic{width:100%;height:100%;color:var(--accent)}
 .brand-name{font-family:var(--font-brand);font-weight:400;font-size:1.7rem;letter-spacing:0;line-height:1.05}
 .brand-name small{display:block;font-family:var(--font-body);font-weight:600;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim)}
 .auth-card h2{font-size:1.5rem;margin:6px 0 4px}
@@ -547,7 +547,7 @@ table.med tr:hover td{background:var(--surface-2)}
         <div class="topbar-user">
           <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Tema">🌙</button>
           <div class="avatar" id="userAvatar">J</div>
-          <button class="icon-btn" onclick="doLogout()" title="Sair">⏻</button>
+          <button class="icon-btn" onclick="goBiblioteca()" title="Voltar à Biblioteca ELID">⏻</button>
         </div>
       </header>
       <div class="content" id="content"></div>
@@ -627,6 +627,7 @@ const State = {
   uid:null, email:null, name:"Estudante", usingLocal:false,
   data:{
     checklists:{}, questions:{}, flashcards:{}, notes:{}, highlights:{}, favorites:[],
+    desempenho:{questoesRespondidas:0,questoesCorretas:0},
     spaced:{}, dailySeed:null, dailyDone:{q:0,f:0}, userCards:[],
     surgeonProgress:{
       currentPhase:1, cyclePercentage:0, completedStages:[], achievements:[],
@@ -654,7 +655,9 @@ async function persist(showFlag){
         const base=fb.db.collection("users").doc(State.uid).collection("platforms").doc(PLATFORM_ID);
         await base.collection("data").doc("main").set({ data:State.data, email:State.email, name:State.name, platform:PLATFORM_ID, updated:Date.now() },{merge:true});
         await base.collection("surgeonProgress").doc("main").set(SP(),{merge:true});
+        await base.collection("state").doc("current").set({ desempenho:(State.data.desempenho||{questoesRespondidas:0,questoesCorretas:0}), updated:Date.now() },{merge:true});
         elidPublish();
+        elidPublishDesempenho();
       }catch(e){ State.usingLocal=true; }
     }, 700);
   }
@@ -693,15 +696,16 @@ window.NR = {};
 /* ============================================================
    GATE + AUTH
    ============================================================ */
-window.doLogout=async function(){
-  if(fb.ok && !State.usingLocal){ try{ await fb.auth.signOut(); }catch(e){} }
-  window.location.href="../../landing-page/";
-};
+/* Único botão de retorno da plataforma: volta à Biblioteca ELID sem deslogar (sessão herdada) */
+window.goBiblioteca=function(){ window.location.href="../../biblioteca-web/"; };
 
 async function afterLogin(){
   document.getElementById('needAuth').classList.add('hidden');
   await loadCloud();
+  await elidPullCentral();
+  refreshProgress();
   try{ elidPublish(); }catch(e){}
+  try{ elidPublishDesempenho(); }catch(e){}
   initStreak();
   document.getElementById('app').style.display='block';
   document.getElementById('userAvatar').textContent=(State.name[0]||'J').toUpperCase();
@@ -727,7 +731,38 @@ function elidPublish(){
     (State.data.userCards||[]).forEach(function(c){ if(!c||!c.id) return; var o={front:c.front||c.q||'',back:c.back||c.a||'',modTitle:c.mat||c.tema||c.modTitle||''}; if(c.type)o.type=c.type; if(c.image)o.image=c.image; if(c.text)o.text=c.text; cards[c.id]=o; });
     var questions=[]; MODULES.forEach(function(m){ (m.questions||[]).forEach(function(q,i){ var opts=(q.opts||[]).map(function(t,ix){return {text:t,correct:ix===q.correct};}); questions.push({id:m.id+':'+i, stem:q.stem||q.q||'', options:opts, explanation:q.expl||q.ex||'', modTitle:m.title||''}); }); });
     fb.db.collection('users').doc(State.uid).collection('central').doc('neurologia')
-      .set({platform:'neurologia',label:'NeuroAtlas',updated:Date.now(),cards:cards,questions:questions},{merge:true}).catch(function(){});
+      .set({platform:'neurologia',label:'NeuroAtlas',updated:Date.now(),cards:cards,questions:questions,done:elidFlattenDone()},{merge:true}).catch(function(){});
+  }catch(e){}
+}
+/* área deste Atlas no RADAR da Central (neuro = Clínica Médica) */
+var ELID_AREA_KEY='cm';
+/* achata respostas de questões e flashcards p/ chaves "modId:i" compartilhadas com a Central */
+function elidFlattenDone(){
+  var q={},f={};
+  var Q=State.data.questions||{}; Object.keys(Q).forEach(function(mod){ var mm=Q[mod]||{}; Object.keys(mm).forEach(function(i){ q[mod+':'+i]=mm[i]; }); });
+  var F=State.data.flashcards||{}; Object.keys(F).forEach(function(mod){ var mm=F[mod]||{}; Object.keys(mm).forEach(function(i){ f[mod+':'+i]=mm[i]; }); });
+  return {q:q,f:f};
+}
+/* puxa da Central respostas/flashcards feitos lá (questão do dia respondida na Central aparece feita aqui, e vice-versa) */
+async function elidPullCentral(){
+  try{
+    if(!fb.ok||!State.uid||!fb.db) return;
+    var snap=await fb.db.collection('users').doc(State.uid).collection('central').doc('neurologia').get();
+    if(!snap.exists) return; var done=(snap.data()||{}).done||{}; var changed=false;
+    function splitK(k){ var ix=k.lastIndexOf(':'); return [k.slice(0,ix),k.slice(ix+1)]; }
+    if(done.q) Object.keys(done.q).forEach(function(k){ var p=splitK(k),mod=p[0],i=p[1]; if(!mod||i==='')return; State.data.questions[mod]=State.data.questions[mod]||{}; if(!State.data.questions[mod][i]){ State.data.questions[mod][i]=done.q[k]; changed=true; } });
+    if(done.f) Object.keys(done.f).forEach(function(k){ var p=splitK(k),mod=p[0],i=p[1]; if(!mod||i==='')return; State.data.flashcards[mod]=State.data.flashcards[mod]||{}; if(State.data.flashcards[mod][i]===undefined){ State.data.flashcards[mod][i]=done.f[k]; changed=true; } });
+    if(changed){ refreshProgress(); }
+  }catch(e){}
+}
+/* publica desempenho de questões na Central (RADAR): hook global + users/{uid}/desempenho/areas */
+function elidPublishDesempenho(){
+  try{
+    var d=State.data.desempenho||{questoesRespondidas:0,questoesCorretas:0};
+    if(typeof window.elidRegistrarQuestoes==='function'){ try{ window.elidRegistrarQuestoes(ELID_AREA_KEY,d.questoesRespondidas,d.questoesCorretas); }catch(e){} }
+    if(!fb.ok||!State.uid||!fb.db) return;
+    var payload={}; payload[ELID_AREA_KEY]={tot:d.questoesRespondidas,ac:d.questoesCorretas};
+    fb.db.collection('users').doc(State.uid).collection('desempenho').doc('areas').set(payload,{merge:true}).catch(function(){});
   }catch(e){}
 }
 function initStreak(){
@@ -4177,6 +4212,10 @@ function refreshProgress(){
   sp.questionsAnswered=MODULES.reduce((s,m)=>s+Object.keys(State.data.questions[m.id]||{}).length,0);
   sp.correctAnswers=MODULES.reduce((s,m)=>s+Object.values(State.data.questions[m.id]||{}).filter(x=>x.correct).length,0);
   sp.flashcardsReviewed=MODULES.reduce((s,m)=>s+Object.keys(State.data.flashcards[m.id]||{}).length,0);
+  /* desempenho acumulado e padronizado (apenas QUESTÕES; nunca flashcards/SRS) */
+  State.data.desempenho=State.data.desempenho||{questoesRespondidas:0,questoesCorretas:0};
+  State.data.desempenho.questoesRespondidas=sp.questionsAnswered;
+  State.data.desempenho.questoesCorretas=sp.correctAnswers;
   registerActivity();
 }
 
