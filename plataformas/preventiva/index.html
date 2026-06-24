@@ -6,21 +6,24 @@
 <title>Atlas de Preventiva · Residência Médica</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cookie&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Great+Vibes&family=Parisienne&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --primary:#14B8A6; --primary2:#0EA5A4; --accent:#D962D9;
-  --bg:#0a1118; --bg2:#0f1b24; --card:rgba(20,32,42,.72); --card2:rgba(15,25,33,.55);
-  --text:#e8f1f5; --muted:#8aa0ad; --border:rgba(255,255,255,.08);
-  --glass:rgba(255,255,255,.04); --glow:rgba(20,184,166,.35);
+  --primary:#06d6c1; --primary2:#05b3a2; --accent:#06d6c1;
+  --bg:#2d1b2e; --bg2:#20131f; --card:rgba(60,38,58,.66); --card2:rgba(48,30,46,.5);
+  --text:#f4eef2; --muted:#cbb6c4; --border:rgba(201,160,176,.12);
+  --glass:rgba(255,255,255,.04); --glow:rgba(6,214,193,.40);
   --good:#22c55e; --warn:#f59e0b; --bad:#ef4444;
   --shadow:0 20px 50px -12px rgba(0,0,0,.6);
-  --font-d:'Cookie',cursive; --font-s:'Merriweather',serif; --font-b:'Inter',sans-serif;
+  --font-d:'Parisienne','Great Vibes',cursive; --font-s:'Fraunces',Georgia,serif; --font-b:'Inter',sans-serif;
+  --font-title:'Fraunces',Georgia,serif; --font-brand:'Parisienne','Great Vibes',cursive; --font-script:'Great Vibes',cursive;
 }
 [data-theme="light"]{
-  --bg:#F2F7FC; --bg2:#e7f0f8; --card:rgba(255,255,255,.78); --card2:rgba(255,255,255,.55);
-  --text:#0F172A; --muted:#5b6b78; --border:rgba(15,23,42,.08);
-  --glass:rgba(255,255,255,.5); --glow:rgba(20,184,166,.25);
+  --primary:#05a896; --primary2:#048a7b; --accent:#05a896;
+  --bg:#FBF6F8; --bg2:#f3eaf0; --card:rgba(255,255,255,.82); --card2:rgba(255,255,255,.6);
+  --text:#2A1B36; --muted:#6b5878; --border:rgba(120,72,134,.12);
+  --glass:rgba(255,255,255,.5); --glow:rgba(6,214,193,.22);
   --shadow:0 20px 50px -12px rgba(40,70,90,.22);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -32,15 +35,32 @@ body{
 }
 /* MESH BACKGROUND */
 .mesh{position:fixed;inset:0;z-index:-3;overflow:hidden;background:
-  radial-gradient(circle at 15% 20%, var(--glow), transparent 45%),
-  radial-gradient(circle at 85% 15%, rgba(217,98,217,.22), transparent 42%),
-  radial-gradient(circle at 75% 85%, rgba(14,165,164,.25), transparent 48%),
-  radial-gradient(circle at 20% 90%, rgba(217,98,217,.12), transparent 40%),
-  linear-gradient(160deg,var(--bg),var(--bg2));
+  radial-gradient(circle at 90% 6%, rgba(6,214,193,.22), transparent 50%),
+  radial-gradient(circle at 8% 14%, rgba(6,214,193,.14), transparent 45%),
+  radial-gradient(circle at 50% 116%, rgba(6,214,193,.10), transparent 55%),
+  radial-gradient(circle at 12% 92%, rgba(247,231,206,.05), transparent 42%),
+  linear-gradient(150deg,#34203a,var(--bg) 55%,var(--bg2));
   animation:drift 22s ease-in-out infinite alternate;}
 @keyframes drift{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.15) translate(-3%,2%)}}
 .mesh::after{content:'';position:absolute;inset:-50%;background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);background-size:38px 38px;animation:drift2 30s linear infinite;}
 @keyframes drift2{to{transform:translate(38px,38px)}}
+.elid-worldnet-bg{position:fixed;top:50%;right:-4%;transform:translateY(-50%);height:96vh;width:auto;max-width:46vw;pointer-events:none;z-index:-2;opacity:.05;color:var(--primary)}
+.elid-worldnet-bg svg{height:100%;width:auto;display:block;margin-left:auto}
+@media(max-width:900px){.elid-worldnet-bg{display:none}}
+.elid-tribute{font-family:var(--font-script);color:var(--primary);font-size:1.05rem;display:block;line-height:1.1;margin-top:2px}
+.elid-credit-line{font-size:9.5px;line-height:1.4;color:var(--muted)}
+.elid-credit-line b{color:var(--primary);letter-spacing:.1em;font-weight:800}
+.page-foot{margin:34px auto 8px;padding:26px 20px;text-align:center;border-top:1px solid var(--border);color:var(--muted);font-size:12px;line-height:1.5;max-width:900px}
+.page-foot b{color:var(--primary);letter-spacing:.08em;font-weight:800}
+.page-foot .elid-tribute{font-size:1.4rem;margin-top:4px}
+.side-foot-elid{text-align:center;padding:14px 10px;border-top:1px solid var(--border);margin-top:8px}
+.side-foot-elid .elid-tribute{font-size:1.25rem}
+.sb-logo-wrap{display:flex;align-items:center;justify-content:center;padding:16px 8px 4px}
+.sb-logo-glow{width:62px;height:62px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(6,214,193,.30),rgba(6,214,193,.04) 70%);box-shadow:0 0 30px -4px rgba(6,214,193,.55)}
+.sb-logo-glow svg{width:42px;height:42px;color:var(--primary)}
+.collapsed .sb-brand-name,.collapsed .elid-credit-line,.collapsed .side-foot-elid{display:none}
+.sb-brand-name{font-family:var(--font-d);font-size:30px;line-height:.95;text-align:center;background:linear-gradient(120deg,var(--primary),#7af0e4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;padding:2px 8px}
+.sb-credit{text-align:center;padding:0 12px 10px}
 .particles{position:fixed;inset:0;z-index:-2;pointer-events:none}
 .particles span{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--primary);opacity:.4;animation:float linear infinite}
 @keyframes float{from{transform:translateY(110vh)}to{transform:translateY(-10vh)}}
@@ -178,7 +198,7 @@ body{
 .flow-restart.sm{padding:5px 11px;font-size:12px}
 .flow-panel .flow-node{margin:0 14px 12px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-h1.ph{font-family:var(--font-s);font-size:30px;font-weight:900;margin-bottom:4px}
+h1.ph{font-family:var(--font-s);font-size:34px;font-weight:900;letter-spacing:-.02em;margin-bottom:4px;background:linear-gradient(104deg,var(--text) 58%,var(--primary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 14px rgba(6,214,193,.18))}
 .ph-sub{color:var(--muted);margin-bottom:26px;font-size:15px}
 .section-bar{display:inline-block;font-family:var(--font-s);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:1px;padding:6px 14px;border-radius:8px;background:linear-gradient(120deg,var(--primary),var(--primary2));color:#fff;margin:24px 0 14px}
 .section-bar.acc{background:linear-gradient(120deg,var(--accent),#b347b3)}
@@ -443,34 +463,18 @@ textarea.notes{width:100%;min-height:200px;padding:16px;border-radius:14px;borde
 </head>
 <body>
 <div class="mesh"></div>
+<div class="elid-worldnet-bg" aria-hidden="true"><svg viewBox="0 0 900 1100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"><g><line x1="144" y1="373" x2="169" y2="379" stroke-width=".6"/><line x1="144" y1="373" x2="118" y2="372" stroke-width=".6"/><line x1="234" y1="403" x2="236" y2="415" stroke-width=".6"/><line x1="234" y1="403" x2="236" y2="418" stroke-width=".6"/><line x1="129" y1="292" x2="121" y2="291" stroke-width=".6"/><line x1="129" y1="292" x2="139" y2="292" stroke-width=".6"/><line x1="121" y1="291" x2="139" y2="292" stroke-width=".6"/><line x1="121" y1="291" x2="99" y2="276" stroke-width=".6"/><line x1="244" y1="273" x2="238" y2="262" stroke-width=".6"/><line x1="244" y1="273" x2="224" y2="279" stroke-width=".6"/><line x1="202" y1="289" x2="183" y2="282" stroke-width=".6"/><line x1="202" y1="289" x2="224" y2="279" stroke-width=".6"/><line x1="152" y1="328" x2="143" y2="333" stroke-width=".6"/><line x1="152" y1="328" x2="166" y2="327" stroke-width=".6"/><line x1="266" y1="360" x2="264" y2="384" stroke-width=".6"/><line x1="266" y1="360" x2="262" y2="394" stroke-width=".6"/><line x1="93" y1="300" x2="99" y2="276" stroke-width=".6"/><line x1="93" y1="300" x2="131" y2="316" stroke-width=".6"/><line x1="121" y1="407" x2="133" y2="404" stroke-width=".6"/><line x1="121" y1="407" x2="144" y2="403" stroke-width=".6"/><line x1="260" y1="395" x2="262" y2="394" stroke-width=".6"/><line x1="260" y1="395" x2="259" y2="401" stroke-width=".6"/><line x1="264" y1="384" x2="262" y2="394" stroke-width=".6"/><line x1="264" y1="384" x2="276" y2="395" stroke-width=".6"/><line x1="289" y1="393" x2="276" y2="395" stroke-width=".6"/><line x1="289" y1="393" x2="297" y2="374" stroke-width=".6"/><line x1="144" y1="403" x2="133" y2="404" stroke-width=".6"/><line x1="144" y1="403" x2="177" y2="406" stroke-width=".6"/><line x1="192" y1="386" x2="206" y2="385" stroke-width=".6"/><line x1="192" y1="386" x2="169" y2="379" stroke-width=".6"/><line x1="208" y1="327" x2="217" y2="321" stroke-width=".6"/><line x1="208" y1="327" x2="231" y2="359" stroke-width=".6"/><line x1="166" y1="327" x2="167" y2="310" stroke-width=".6"/><line x1="166" y1="327" x2="143" y2="333" stroke-width=".6"/><line x1="156" y1="271" x2="139" y2="292" stroke-width=".6"/><line x1="156" y1="271" x2="183" y2="282" stroke-width=".6"/><line x1="262" y1="394" x2="259" y2="401" stroke-width=".6"/><line x1="262" y1="394" x2="276" y2="395" stroke-width=".6"/><line x1="297" y1="374" x2="276" y2="395" stroke-width=".6"/><line x1="297" y1="374" x2="305" y2="412" stroke-width=".6"/><line x1="206" y1="385" x2="231" y2="359" stroke-width=".6"/><line x1="206" y1="385" x2="177" y2="406" stroke-width=".6"/><line x1="118" y1="372" x2="105" y2="367" stroke-width=".6"/><line x1="118" y1="372" x2="99" y2="369" stroke-width=".6"/><line x1="183" y1="282" x2="167" y2="310" stroke-width=".6"/><line x1="183" y1="282" x2="224" y2="279" stroke-width=".6"/><line x1="133" y1="344" x2="143" y2="333" stroke-width=".6"/><line x1="133" y1="344" x2="117" y2="338" stroke-width=".6"/><line x1="143" y1="333" x2="131" y2="316" stroke-width=".6"/><line x1="143" y1="333" x2="117" y2="338" stroke-width=".6"/><line x1="217" y1="321" x2="231" y2="359" stroke-width=".6"/><line x1="217" y1="321" x2="224" y2="279" stroke-width=".6"/><line x1="117" y1="338" x2="131" y2="316" stroke-width=".6"/><line x1="117" y1="338" x2="105" y2="367" stroke-width=".6"/><line x1="139" y1="292" x2="131" y2="316" stroke-width=".6"/><line x1="139" y1="292" x2="167" y2="310" stroke-width=".6"/><line x1="131" y1="316" x2="167" y2="310" stroke-width=".6"/><line x1="105" y1="367" x2="99" y2="369" stroke-width=".6"/><line x1="105" y1="367" x2="133" y2="404" stroke-width=".6"/><line x1="241" y1="418" x2="236" y2="418" stroke-width=".6"/><line x1="241" y1="418" x2="236" y2="415" stroke-width=".6"/><line x1="259" y1="401" x2="276" y2="395" stroke-width=".6"/><line x1="259" y1="401" x2="236" y2="415" stroke-width=".6"/><line x1="224" y1="279" x2="238" y2="262" stroke-width=".6"/><line x1="224" y1="279" x2="235" y2="241" stroke-width=".6"/><line x1="177" y1="406" x2="169" y2="379" stroke-width=".6"/><line x1="177" y1="406" x2="133" y2="404" stroke-width=".6"/><line x1="276" y1="395" x2="283" y2="424" stroke-width=".6"/><line x1="276" y1="395" x2="305" y2="412" stroke-width=".6"/><line x1="133" y1="404" x2="169" y2="379" stroke-width=".6"/><line x1="133" y1="404" x2="99" y2="369" stroke-width=".6"/><line x1="192" y1="644" x2="181" y2="643" stroke-width=".6"/><line x1="192" y1="644" x2="170" y2="650" stroke-width=".6"/><line x1="267" y1="589" x2="263" y2="566" stroke-width=".6"/><line x1="267" y1="589" x2="252" y2="569" stroke-width=".6"/><line x1="204" y1="566" x2="213" y2="561" stroke-width=".6"/><line x1="204" y1="566" x2="209" y2="575" stroke-width=".6"/><line x1="263" y1="560" x2="263" y2="566" stroke-width=".6"/><line x1="263" y1="560" x2="259" y2="550" stroke-width=".6"/><line x1="227" y1="590" x2="211" y2="580" stroke-width=".6"/><line x1="227" y1="590" x2="229" y2="614" stroke-width=".6"/><line x1="225" y1="495" x2="223" y2="494" stroke-width=".6"/><line x1="225" y1="495" x2="209" y2="493" stroke-width=".6"/><line x1="196" y1="580" x2="209" y2="575" stroke-width=".6"/><line x1="196" y1="580" x2="211" y2="580" stroke-width=".6"/><line x1="188" y1="480" x2="191" y2="487" stroke-width=".6"/><line x1="188" y1="480" x2="189" y2="496" stroke-width=".6"/><line x1="181" y1="572" x2="184" y2="597" stroke-width=".6"/><line x1="181" y1="572" x2="209" y2="575" stroke-width=".6"/><line x1="259" y1="550" x2="247" y2="552" stroke-width=".6"/><line x1="259" y1="550" x2="253" y2="534" stroke-width=".6"/><line x1="176" y1="527" x2="182" y2="533" stroke-width=".6"/><line x1="176" y1="527" x2="176" y2="517" stroke-width=".6"/><line x1="225" y1="450" x2="240" y2="460" stroke-width=".6"/><line x1="225" y1="450" x2="236" y2="418" stroke-width=".6"/><line x1="170" y1="650" x2="165" y2="655" stroke-width=".6"/><line x1="170" y1="650" x2="181" y2="643" stroke-width=".6"/><line x1="189" y1="496" x2="191" y2="487" stroke-width=".6"/><line x1="189" y1="496" x2="203" y2="492" stroke-width=".6"/><line x1="213" y1="561" x2="209" y2="575" stroke-width=".6"/><line x1="213" y1="561" x2="211" y2="580" stroke-width=".6"/><line x1="182" y1="533" x2="175" y2="540" stroke-width=".6"/><line x1="182" y1="533" x2="176" y2="517" stroke-width=".6"/><line x1="229" y1="614" x2="249" y2="643" stroke-width=".6"/><line x1="229" y1="614" x2="211" y2="580" stroke-width=".6"/><line x1="171" y1="504" x2="176" y2="517" stroke-width=".6"/><line x1="171" y1="504" x2="168" y2="520" stroke-width=".6"/><line x1="249" y1="643" x2="267" y2="619" stroke-width=".6"/><line x1="253" y1="534" x2="247" y2="552" stroke-width=".6"/><line x1="253" y1="534" x2="264" y2="508" stroke-width=".6"/><line x1="277" y1="495" x2="264" y2="493" stroke-width=".6"/><line x1="277" y1="495" x2="268" y2="480" stroke-width=".6"/><line x1="175" y1="540" x2="168" y2="520" stroke-width=".6"/><line x1="175" y1="540" x2="176" y2="517" stroke-width=".6"/><line x1="316" y1="592" x2="320" y2="586" stroke-width=".6"/><line x1="316" y1="592" x2="304" y2="578" stroke-width=".6"/><line x1="211" y1="580" x2="209" y2="575" stroke-width=".6"/><line x1="211" y1="580" x2="184" y2="597" stroke-width=".6"/><line x1="306" y1="487" x2="302" y2="478" stroke-width=".6"/><line x1="306" y1="487" x2="294" y2="472" stroke-width=".6"/><line x1="264" y1="508" x2="264" y2="493" stroke-width=".6"/><line x1="264" y1="508" x2="268" y2="480" stroke-width=".6"/><line x1="209" y1="493" x2="203" y2="492" stroke-width=".6"/><line x1="209" y1="493" x2="223" y2="494" stroke-width=".6"/><line x1="203" y1="507" x2="203" y2="492" stroke-width=".6"/><line x1="203" y1="507" x2="191" y2="487" stroke-width=".6"/><line x1="176" y1="517" x2="168" y2="520" stroke-width=".6"/><line x1="176" y1="517" x2="191" y2="487" stroke-width=".6"/><line x1="184" y1="597" x2="172" y2="609" stroke-width=".6"/><line x1="184" y1="597" x2="209" y2="575" stroke-width=".6"/><line x1="266" y1="431" x2="283" y2="424" stroke-width=".6"/><line x1="266" y1="431" x2="236" y2="418" stroke-width=".6"/><line x1="294" y1="472" x2="302" y2="478" stroke-width=".6"/><line x1="294" y1="472" x2="308" y2="455" stroke-width=".6"/><line x1="247" y1="552" x2="252" y2="569" stroke-width=".6"/><line x1="247" y1="552" x2="263" y2="566" stroke-width=".6"/><line x1="223" y1="494" x2="203" y2="492" stroke-width=".6"/><line x1="223" y1="494" x2="191" y2="487" stroke-width=".6"/><line x1="240" y1="460" x2="260" y2="471" stroke-width=".6"/><line x1="240" y1="460" x2="268" y2="480" stroke-width=".6"/><line x1="308" y1="455" x2="302" y2="478" stroke-width=".6"/><line x1="308" y1="455" x2="283" y2="424" stroke-width=".6"/><line x1="302" y1="478" x2="268" y2="480" stroke-width=".6"/><line x1="302" y1="478" x2="264" y2="493" stroke-width=".6"/><line x1="393" y1="280" x2="400" y2="287" stroke-width=".6"/><line x1="393" y1="280" x2="390" y2="298" stroke-width=".6"/><line x1="364" y1="247" x2="361" y2="255" stroke-width=".6"/><line x1="364" y1="247" x2="375" y2="236" stroke-width=".6"/><line x1="400" y1="287" x2="390" y2="298" stroke-width=".6"/><line x1="400" y1="287" x2="413" y2="278" stroke-width=".6"/><line x1="456" y1="359" x2="443" y2="361" stroke-width=".6"/><line x1="456" y1="359" x2="460" y2="339" stroke-width=".6"/><line x1="365" y1="300" x2="375" y2="307" stroke-width=".6"/><line x1="365" y1="300" x2="358" y2="287" stroke-width=".6"/><line x1="374" y1="334" x2="384" y2="323" stroke-width=".6"/><line x1="374" y1="334" x2="398" y2="334" stroke-width=".6"/><line x1="395" y1="346" x2="398" y2="334" stroke-width=".6"/><line x1="395" y1="346" x2="387" y2="366" stroke-width=".6"/><line x1="420" y1="246" x2="424" y2="272" stroke-width=".6"/><line x1="420" y1="246" x2="393" y2="243" stroke-width=".6"/><line x1="361" y1="262" x2="361" y2="255" stroke-width=".6"/><line x1="361" y1="262" x2="358" y2="287" stroke-width=".6"/><line x1="455" y1="249" x2="466" y2="220" stroke-width=".6"/><line x1="455" y1="249" x2="453" y2="282" stroke-width=".6"/><line x1="413" y1="278" x2="424" y2="272" stroke-width=".6"/><line x1="413" y1="278" x2="434" y2="277" stroke-width=".6"/><line x1="398" y1="334" x2="384" y2="323" stroke-width=".6"/><line x1="398" y1="334" x2="417" y2="350" stroke-width=".6"/><line x1="384" y1="323" x2="375" y2="307" stroke-width=".6"/><line x1="384" y1="323" x2="390" y2="298" stroke-width=".6"/><line x1="433" y1="352" x2="443" y2="361" stroke-width=".6"/><line x1="433" y1="352" x2="417" y2="350" stroke-width=".6"/><line x1="417" y1="350" x2="422" y2="377" stroke-width=".6"/><line x1="417" y1="350" x2="443" y2="361" stroke-width=".6"/><line x1="442" y1="475" x2="439" y2="484" stroke-width=".6"/><line x1="442" y1="475" x2="433" y2="455" stroke-width=".6"/><line x1="467" y1="528" x2="480" y2="533" stroke-width=".6"/><line x1="467" y1="528" x2="472" y2="551" stroke-width=".6"/><line x1="506" y1="383" x2="503" y2="381" stroke-width=".6"/><line x1="506" y1="383" x2="497" y2="383" stroke-width=".6"/><line x1="399" y1="467" x2="407" y2="475" stroke-width=".6"/><line x1="399" y1="467" x2="433" y2="455" stroke-width=".6"/><line x1="494" y1="467" x2="480" y2="482" stroke-width=".6"/><line x1="494" y1="467" x2="499" y2="443" stroke-width=".6"/><line x1="422" y1="552" x2="426" y2="547" stroke-width=".6"/><line x1="422" y1="552" x2="415" y2="530" stroke-width=".6"/><line x1="422" y1="377" x2="443" y2="361" stroke-width=".6"/><line x1="422" y1="377" x2="387" y2="366" stroke-width=".6"/><line x1="387" y1="366" x2="384" y2="412" stroke-width=".6"/><line x1="482" y1="381" x2="497" y2="383" stroke-width=".6"/><line x1="482" y1="381" x2="503" y2="381" stroke-width=".6"/><line x1="480" y1="533" x2="472" y2="551" stroke-width=".6"/><line x1="480" y1="533" x2="497" y2="503" stroke-width=".6"/><line x1="520" y1="522" x2="519" y2="512" stroke-width=".6"/><line x1="520" y1="522" x2="497" y2="503" stroke-width=".6"/><line x1="439" y1="484" x2="433" y2="455" stroke-width=".6"/><line x1="439" y1="484" x2="421" y2="512" stroke-width=".6"/><line x1="497" y1="503" x2="519" y2="512" stroke-width=".6"/><line x1="497" y1="503" x2="480" y2="482" stroke-width=".6"/><line x1="421" y1="512" x2="417" y2="517" stroke-width=".6"/><line x1="421" y1="512" x2="415" y2="530" stroke-width=".6"/><line x1="395" y1="422" x2="384" y2="412" stroke-width=".6"/><line x1="395" y1="422" x2="433" y2="455" stroke-width=".6"/><line x1="519" y1="454" x2="530" y2="447" stroke-width=".6"/><line x1="519" y1="454" x2="499" y2="443" stroke-width=".6"/><line x1="417" y1="517" x2="415" y2="530" stroke-width=".6"/><line x1="417" y1="517" x2="426" y2="547" stroke-width=".6"/><line x1="443" y1="361" x2="460" y2="339" stroke-width=".6"/><line x1="443" y1="361" x2="455" y2="399" stroke-width=".6"/><line x1="426" y1="547" x2="445" y2="540" stroke-width=".6"/><line x1="426" y1="547" x2="415" y2="530" stroke-width=".6"/><line x1="415" y1="530" x2="396" y2="549" stroke-width=".6"/><line x1="415" y1="530" x2="385" y2="524" stroke-width=".6"/><line x1="499" y1="443" x2="495" y2="415" stroke-width=".6"/><line x1="499" y1="443" x2="530" y2="447" stroke-width=".6"/><line x1="519" y1="512" x2="556" y2="491" stroke-width=".6"/><line x1="519" y1="512" x2="562" y2="533" stroke-width=".6"/><line x1="448" y1="412" x2="455" y2="399" stroke-width=".6"/><line x1="448" y1="412" x2="470" y2="408" stroke-width=".6"/><line x1="445" y1="540" x2="472" y2="551" stroke-width=".6"/><line x1="445" y1="540" x2="440" y2="585" stroke-width=".6"/><line x1="455" y1="399" x2="470" y2="408" stroke-width=".6"/><line x1="455" y1="399" x2="475" y2="422" stroke-width=".6"/><line x1="433" y1="455" x2="407" y2="475" stroke-width=".6"/><line x1="385" y1="524" x2="396" y2="549" stroke-width=".6"/><line x1="385" y1="524" x2="360" y2="563" stroke-width=".6"/><line x1="515" y1="269" x2="509" y2="275" stroke-width=".6"/><line x1="515" y1="269" x2="525" y2="259" stroke-width=".6"/><line x1="617" y1="305" x2="618" y2="296" stroke-width=".6"/><line x1="617" y1="305" x2="628" y2="299" stroke-width=".6"/><line x1="691" y1="339" x2="703" y2="330" stroke-width=".6"/><line x1="691" y1="339" x2="674" y2="340" stroke-width=".6"/><line x1="600" y1="400" x2="598" y2="390" stroke-width=".6"/><line x1="600" y1="400" x2="602" y2="413" stroke-width=".6"/><line x1="524" y1="384" x2="503" y2="381" stroke-width=".6"/><line x1="524" y1="384" x2="497" y2="383" stroke-width=".6"/><line x1="632" y1="327" x2="645" y2="327" stroke-width=".6"/><line x1="632" y1="327" x2="641" y2="318" stroke-width=".6"/><line x1="710" y1="254" x2="714" y2="266" stroke-width=".6"/><line x1="710" y1="254" x2="726" y2="264" stroke-width=".6"/><line x1="686" y1="276" x2="680" y2="278" stroke-width=".6"/><line x1="686" y1="276" x2="701" y2="296" stroke-width=".6"/><line x1="680" y1="278" x2="655" y2="266" stroke-width=".6"/><line x1="680" y1="278" x2="701" y2="296" stroke-width=".6"/><line x1="483" y1="340" x2="489" y2="336" stroke-width=".6"/><line x1="483" y1="340" x2="472" y2="331" stroke-width=".6"/><line x1="701" y1="296" x2="708" y2="311" stroke-width=".6"/><line x1="701" y1="296" x2="689" y2="319" stroke-width=".6"/><line x1="592" y1="359" x2="598" y2="390" stroke-width=".6"/><line x1="592" y1="359" x2="611" y2="385" stroke-width=".6"/><line x1="531" y1="345" x2="548" y2="326" stroke-width=".6"/><line x1="531" y1="345" x2="489" y2="336" stroke-width=".6"/><line x1="472" y1="331" x2="460" y2="339" stroke-width=".6"/><line x1="472" y1="331" x2="489" y2="336" stroke-width=".6"/><line x1="660" y1="311" x2="641" y2="318" stroke-width=".6"/><line x1="660" y1="311" x2="645" y2="327" stroke-width=".6"/><line x1="525" y1="259" x2="509" y2="275" stroke-width=".6"/><line x1="525" y1="259" x2="498" y2="273" stroke-width=".6"/><line x1="645" y1="327" x2="641" y2="318" stroke-width=".6"/><line x1="645" y1="327" x2="674" y2="340" stroke-width=".6"/><line x1="699" y1="383" x2="703" y2="397" stroke-width=".6"/><line x1="699" y1="383" x2="678" y2="373" stroke-width=".6"/><line x1="495" y1="415" x2="475" y2="422" stroke-width=".6"/><line x1="495" y1="415" x2="470" y2="408" stroke-width=".6"/><line x1="703" y1="397" x2="678" y2="373" stroke-width=".6"/><line x1="703" y1="397" x2="677" y2="432" stroke-width=".6"/><line x1="678" y1="373" x2="650" y2="370" stroke-width=".6"/><line x1="678" y1="373" x2="674" y2="340" stroke-width=".6"/><line x1="650" y1="370" x2="630" y2="360" stroke-width=".6"/><line x1="650" y1="370" x2="674" y2="340" stroke-width=".6"/><line x1="618" y1="296" x2="628" y2="299" stroke-width=".6"/><line x1="618" y1="296" x2="613" y2="324" stroke-width=".6"/><line x1="503" y1="381" x2="497" y2="383" stroke-width=".6"/><line x1="503" y1="381" x2="522" y2="418" stroke-width=".6"/><line x1="619" y1="260" x2="655" y2="266" stroke-width=".6"/><line x1="619" y1="260" x2="588" y2="238" stroke-width=".6"/><line x1="630" y1="360" x2="611" y2="385" stroke-width=".6"/><line x1="630" y1="360" x2="613" y2="324" stroke-width=".6"/><line x1="598" y1="390" x2="611" y2="385" stroke-width=".6"/><line x1="598" y1="390" x2="602" y2="413" stroke-width=".6"/><line x1="689" y1="319" x2="703" y2="330" stroke-width=".6"/><line x1="689" y1="319" x2="708" y2="311" stroke-width=".6"/><line x1="674" y1="340" x2="703" y2="330" stroke-width=".6"/><line x1="674" y1="340" x2="641" y2="318" stroke-width=".6"/><line x1="613" y1="324" x2="641" y2="318" stroke-width=".6"/><line x1="613" y1="324" x2="628" y2="299" stroke-width=".6"/><line x1="703" y1="330" x2="708" y2="311" stroke-width=".6"/><line x1="703" y1="330" x2="736" y2="317" stroke-width=".6"/><line x1="708" y1="311" x2="736" y2="317" stroke-width=".6"/><line x1="708" y1="311" x2="714" y2="266" stroke-width=".6"/><line x1="638" y1="414" x2="635" y2="422" stroke-width=".6"/><line x1="638" y1="414" x2="610" y2="418" stroke-width=".6"/><line x1="641" y1="318" x2="628" y2="299" stroke-width=".6"/><line x1="489" y1="336" x2="487" y2="320" stroke-width=".6"/><line x1="489" y1="336" x2="487" y2="314" stroke-width=".6"/><line x1="574" y1="397" x2="581" y2="428" stroke-width=".6"/><line x1="574" y1="397" x2="552" y2="421" stroke-width=".6"/><line x1="666" y1="428" x2="671" y2="431" stroke-width=".6"/><line x1="666" y1="428" x2="677" y2="432" stroke-width=".6"/><line x1="582" y1="324" x2="548" y2="326" stroke-width=".6"/><line x1="611" y1="385" x2="602" y2="413" stroke-width=".6"/><line x1="611" y1="385" x2="610" y2="418" stroke-width=".6"/><line x1="490" y1="289" x2="492" y2="293" stroke-width=".6"/><line x1="490" y1="289" x2="498" y2="273" stroke-width=".6"/><line x1="506" y1="308" x2="497" y2="313" stroke-width=".6"/><line x1="506" y1="308" x2="492" y2="293" stroke-width=".6"/><line x1="545" y1="424" x2="552" y2="421" stroke-width=".6"/><line x1="545" y1="424" x2="563" y2="432" stroke-width=".6"/><line x1="522" y1="418" x2="530" y2="447" stroke-width=".6"/><line x1="522" y1="418" x2="552" y2="421" stroke-width=".6"/><line x1="544" y1="287" x2="509" y2="275" stroke-width=".6"/><line x1="544" y1="287" x2="548" y2="326" stroke-width=".6"/><line x1="714" y1="266" x2="726" y2="264" stroke-width=".6"/><line x1="714" y1="266" x2="685" y2="239" stroke-width=".6"/><line x1="498" y1="273" x2="509" y2="275" stroke-width=".6"/><line x1="498" y1="273" x2="492" y2="293" stroke-width=".6"/><line x1="487" y1="320" x2="487" y2="314" stroke-width=".6"/><line x1="487" y1="320" x2="497" y2="313" stroke-width=".6"/><line x1="588" y1="484" x2="582" y2="484" stroke-width=".6"/><line x1="588" y1="484" x2="577" y2="485" stroke-width=".6"/><line x1="562" y1="533" x2="567" y2="526" stroke-width=".6"/><line x1="562" y1="533" x2="570" y2="510" stroke-width=".6"/><line x1="566" y1="491" x2="561" y2="489" stroke-width=".6"/><line x1="566" y1="491" x2="556" y2="491" stroke-width=".6"/><line x1="634" y1="550" x2="651" y2="542" stroke-width=".6"/><line x1="634" y1="550" x2="646" y2="534" stroke-width=".6"/><line x1="646" y1="534" x2="651" y2="542" stroke-width=".6"/><line x1="646" y1="534" x2="627" y2="517" stroke-width=".6"/><line x1="651" y1="542" x2="652" y2="508" stroke-width=".6"/><line x1="651" y1="542" x2="627" y2="517" stroke-width=".6"/><line x1="671" y1="484" x2="662" y2="486" stroke-width=".6"/><line x1="671" y1="484" x2="685" y2="481" stroke-width=".6"/><line x1="567" y1="526" x2="570" y2="510" stroke-width=".6"/><line x1="567" y1="526" x2="556" y2="491" stroke-width=".6"/><line x1="627" y1="517" x2="620" y2="525" stroke-width=".6"/><line x1="627" y1="517" x2="627" y2="505" stroke-width=".6"/><line x1="662" y1="486" x2="673" y2="501" stroke-width=".6"/><line x1="662" y1="486" x2="685" y2="481" stroke-width=".6"/><line x1="652" y1="508" x2="673" y2="501" stroke-width=".6"/><line x1="652" y1="508" x2="627" y2="505" stroke-width=".6"/><line x1="615" y1="492" x2="621" y2="504" stroke-width=".6"/><line x1="615" y1="492" x2="627" y2="505" stroke-width=".6"/><line x1="264" y1="493" x2="268" y2="480" stroke-width=".6"/><line x1="264" y1="493" x2="260" y2="471" stroke-width=".6"/><line x1="452" y1="670" x2="414" y2="666" stroke-width=".6"/><line x1="452" y1="670" x2="451" y2="621" stroke-width=".6"/><line x1="263" y1="566" x2="252" y2="569" stroke-width=".6"/><line x1="263" y1="566" x2="304" y2="578" stroke-width=".6"/><line x1="137" y1="532" x2="168" y2="520" stroke-width=".6"/><line x1="137" y1="532" x2="123" y2="570" stroke-width=".6"/><line x1="181" y1="643" x2="165" y2="655" stroke-width=".6"/><line x1="181" y1="643" x2="172" y2="609" stroke-width=".6"/><line x1="628" y1="299" x2="655" y2="266" stroke-width=".6"/><line x1="281" y1="236" x2="235" y2="241" stroke-width=".6"/><line x1="281" y1="236" x2="238" y2="262" stroke-width=".6"/><line x1="375" y1="236" x2="375" y2="218" stroke-width=".6"/><line x1="375" y1="236" x2="393" y2="243" stroke-width=".6"/><line x1="556" y1="491" x2="561" y2="489" stroke-width=".6"/><line x1="556" y1="491" x2="577" y2="485" stroke-width=".6"/><line x1="360" y1="563" x2="396" y2="549" stroke-width=".6"/><line x1="360" y1="563" x2="320" y2="586" stroke-width=".6"/><line x1="321" y1="181" x2="335" y2="205" stroke-width=".6"/><line x1="321" y1="181" x2="362" y2="201" stroke-width=".6"/><line x1="682" y1="228" x2="685" y2="239" stroke-width=".6"/><line x1="682" y1="228" x2="695" y2="190" stroke-width=".6"/><line x1="140" y1="611" x2="172" y2="609" stroke-width=".6"/><line x1="140" y1="611" x2="123" y2="570" stroke-width=".6"/><line x1="635" y1="422" x2="610" y2="418" stroke-width=".6"/><line x1="635" y1="422" x2="602" y2="413" stroke-width=".6"/><line x1="361" y1="255" x2="358" y2="287" stroke-width=".6"/><line x1="361" y1="255" x2="393" y2="243" stroke-width=".6"/><line x1="238" y1="262" x2="235" y2="241" stroke-width=".6"/><line x1="695" y1="190" x2="685" y2="239" stroke-width=".6"/><line x1="320" y1="586" x2="304" y2="578" stroke-width=".6"/><line x1="320" y1="586" x2="348" y2="614" stroke-width=".6"/><line x1="585" y1="238" x2="588" y2="238" stroke-width=".6"/><line x1="585" y1="238" x2="567" y2="216" stroke-width=".6"/><line x1="582" y1="484" x2="577" y2="485" stroke-width=".6"/><line x1="582" y1="484" x2="561" y2="489" stroke-width=".6"/><line x1="505" y1="689" x2="528" y2="665" stroke-width=".6"/><line x1="505" y1="689" x2="537" y2="718" stroke-width=".6"/><line x1="621" y1="504" x2="627" y2="505" stroke-width=".6"/><line x1="621" y1="504" x2="620" y2="525" stroke-width=".6"/><line x1="601" y1="446" x2="581" y2="428" stroke-width=".6"/><line x1="601" y1="446" x2="610" y2="418" stroke-width=".6"/><line x1="451" y1="621" x2="431" y2="605" stroke-width=".6"/><line x1="451" y1="621" x2="440" y2="585" stroke-width=".6"/><line x1="497" y1="383" x2="470" y2="408" stroke-width=".6"/><line x1="497" y1="383" x2="475" y2="422" stroke-width=".6"/><line x1="84" y1="606" x2="70" y2="602" stroke-width=".6"/><line x1="84" y1="606" x2="95" y2="628" stroke-width=".6"/><line x1="305" y1="412" x2="283" y2="424" stroke-width=".6"/><line x1="268" y1="480" x2="260" y2="471" stroke-width=".6"/><line x1="347" y1="630" x2="348" y2="614" stroke-width=".6"/><line x1="347" y1="630" x2="347" y2="652" stroke-width=".6"/><line x1="610" y1="418" x2="602" y2="413" stroke-width=".6"/><line x1="610" y1="418" x2="581" y2="428" stroke-width=".6"/><line x1="440" y1="585" x2="431" y2="605" stroke-width=".6"/><line x1="440" y1="585" x2="472" y2="551" stroke-width=".6"/><line x1="685" y1="481" x2="673" y2="501" stroke-width=".6"/><line x1="685" y1="481" x2="716" y2="457" stroke-width=".6"/><line x1="453" y1="282" x2="434" y2="277" stroke-width=".6"/><line x1="453" y1="282" x2="424" y2="272" stroke-width=".6"/><line x1="236" y1="415" x2="236" y2="418" stroke-width=".6"/><line x1="236" y1="415" x2="283" y2="424" stroke-width=".6"/><line x1="414" y1="666" x2="415" y2="700" stroke-width=".6"/><line x1="581" y1="428" x2="563" y2="432" stroke-width=".6"/><line x1="581" y1="428" x2="602" y2="413" stroke-width=".6"/><line x1="655" y1="266" x2="685" y2="239" stroke-width=".6"/><line x1="602" y1="413" x2="563" y2="432" stroke-width=".6"/><line x1="602" y1="413" x2="552" y2="421" stroke-width=".6"/><line x1="462" y1="211" x2="459" y2="211" stroke-width=".6"/><line x1="462" y1="211" x2="466" y2="220" stroke-width=".6"/><line x1="348" y1="614" x2="347" y2="652" stroke-width=".6"/><line x1="577" y1="485" x2="561" y2="489" stroke-width=".6"/><line x1="577" y1="485" x2="570" y2="510" stroke-width=".6"/><line x1="362" y1="201" x2="364" y2="218" stroke-width=".6"/><line x1="362" y1="201" x2="375" y2="218" stroke-width=".6"/><line x1="552" y1="421" x2="563" y2="432" stroke-width=".6"/><line x1="552" y1="421" x2="530" y2="447" stroke-width=".6"/><line x1="570" y1="510" x2="561" y2="489" stroke-width=".6"/><line x1="347" y1="652" x2="360" y2="685" stroke-width=".6"/><line x1="347" y1="652" x2="308" y2="659" stroke-width=".6"/><line x1="161" y1="698" x2="129" y2="703" stroke-width=".6"/><line x1="161" y1="698" x2="165" y2="655" stroke-width=".6"/><line x1="475" y1="422" x2="470" y2="408" stroke-width=".6"/><line x1="716" y1="457" x2="677" y2="432" stroke-width=".6"/><line x1="421" y1="212" x2="459" y2="211" stroke-width=".6"/><line x1="421" y1="212" x2="393" y2="243" stroke-width=".6"/><line x1="620" y1="525" x2="627" y2="505" stroke-width=".6"/><line x1="671" y1="431" x2="677" y2="432" stroke-width=".6"/><line x1="95" y1="628" x2="70" y2="602" stroke-width=".6"/><line x1="209" y1="575" x2="252" y2="569" stroke-width=".6"/><line x1="209" y1="575" x2="172" y2="609" stroke-width=".6"/><line x1="172" y1="609" x2="165" y2="655" stroke-width=".6"/><line x1="567" y1="189" x2="567" y2="216" stroke-width=".6"/><line x1="460" y1="339" x2="487" y2="314" stroke-width=".6"/><line x1="460" y1="339" x2="497" y2="313" stroke-width=".6"/><line x1="550" y1="699" x2="564" y2="697" stroke-width=".6"/><line x1="550" y1="699" x2="537" y2="718" stroke-width=".6"/><line x1="530" y1="447" x2="563" y2="432" stroke-width=".6"/><line x1="487" y1="314" x2="497" y2="313" stroke-width=".6"/><line x1="487" y1="314" x2="492" y2="293" stroke-width=".6"/><line x1="393" y1="243" x2="375" y2="218" stroke-width=".6"/><line x1="393" y1="243" x2="364" y2="218" stroke-width=".6"/><line x1="567" y1="216" x2="588" y2="238" stroke-width=".6"/><line x1="434" y1="277" x2="424" y2="272" stroke-width=".6"/><line x1="434" y1="277" x2="390" y2="298" stroke-width=".6"/><line x1="459" y1="211" x2="466" y2="220" stroke-width=".6"/><line x1="566" y1="660" x2="597" y2="643" stroke-width=".6"/><line x1="566" y1="660" x2="564" y2="697" stroke-width=".6"/><line x1="537" y1="718" x2="564" y2="697" stroke-width=".6"/><line x1="168" y1="520" x2="191" y2="487" stroke-width=".6"/><line x1="168" y1="520" x2="203" y2="492" stroke-width=".6"/><line x1="509" y1="275" x2="492" y2="293" stroke-width=".6"/><line x1="509" y1="275" x2="497" y2="313" stroke-width=".6"/><line x1="424" y1="272" x2="390" y2="298" stroke-width=".6"/><line x1="497" y1="313" x2="492" y2="293" stroke-width=".6"/><line x1="283" y1="424" x2="236" y2="418" stroke-width=".6"/><line x1="375" y1="307" x2="390" y2="298" stroke-width=".6"/><line x1="375" y1="307" x2="358" y2="287" stroke-width=".6"/><line x1="533" y1="621" x2="528" y2="665" stroke-width=".6"/><line x1="390" y1="298" x2="358" y2="287" stroke-width=".6"/><line x1="627" y1="505" x2="673" y2="501" stroke-width=".6"/><line x1="375" y1="218" x2="364" y2="218" stroke-width=".6"/><line x1="375" y1="218" x2="335" y2="205" stroke-width=".6"/><line x1="685" y1="239" x2="726" y2="264" stroke-width=".6"/><line x1="528" y1="665" x2="564" y2="697" stroke-width=".6"/><line x1="191" y1="487" x2="203" y2="492" stroke-width=".6"/><line x1="335" y1="205" x2="364" y2="218" stroke-width=".6"/><path d="M211 580Q316 360 498 273" stroke-width=".7" opacity=".5"/><path d="M260 471Q374 467 562 533" stroke-width=".7" opacity=".5"/><path d="M581 428Q396 374 144 373" stroke-width=".7" opacity=".5"/><path d="M453 282Q325 273 217 321" stroke-width=".7" opacity=".5"/><path d="M281 236Q156 285 71 461" stroke-width=".7" opacity=".5"/><path d="M283 424Q393 537 550 699" stroke-width=".7" opacity=".5"/><path d="M413 278Q251 263 131 316" stroke-width=".7" opacity=".5"/><path d="M601 446Q499 356 375 307" stroke-width=".7" opacity=".5"/><path d="M259 401Q487 385 677 432" stroke-width=".7" opacity=".5"/><path d="M213 561Q357 531 440 585" stroke-width=".7" opacity=".5"/><path d="M597 643Q614 429 701 296" stroke-width=".7" opacity=".5"/><path d="M211 580Q402 488 530 447" stroke-width=".7" opacity=".5"/><path d="M634 550Q498 515 415 530" stroke-width=".7" opacity=".5"/><path d="M710 254Q573 280 422 377" stroke-width=".7" opacity=".5"/><path d="M267 589Q464 493 588 484" stroke-width=".7" opacity=".5"/><path d="M685 481Q682 298 695 190" stroke-width=".7" opacity=".5"/><path d="M480 482Q276 491 123 570" stroke-width=".7" opacity=".5"/><path d="M682 228Q620 417 550 699" stroke-width=".7" opacity=".5"/><path d="M259 401Q368 480 452 670" stroke-width=".7" opacity=".5"/><path d="M152 328Q381 390 634 550" stroke-width=".7" opacity=".5"/></g><g fill="currentColor" stroke="none"><circle cx="144" cy="373" r="1.5"/><circle cx="234" cy="403" r="1.6"/><circle cx="129" cy="292" r="2.0"/><circle cx="121" cy="291" r="1.2"/><circle cx="244" cy="273" r="1.3"/><circle cx="202" cy="289" r="1.9"/><circle cx="152" cy="328" r="1.9"/><circle cx="266" cy="360" r="1.8"/><circle cx="93" cy="300" r="1.9"/><circle cx="121" cy="407" r="1.2"/><circle cx="260" cy="395" r="1.7"/><circle cx="264" cy="384" r="1.2"/><circle cx="289" cy="393" r="1.9"/><circle cx="144" cy="403" r="1.5"/><circle cx="192" cy="386" r="1.5"/><circle cx="208" cy="327" r="1.6"/><circle cx="166" cy="327" r="1.3"/><circle cx="156" cy="271" r="1.6"/><circle cx="262" cy="394" r="1.9"/><circle cx="297" cy="374" r="1.5"/><circle cx="206" cy="385" r="1.5"/><circle cx="118" cy="372" r="1.4"/><circle cx="183" cy="282" r="1.3"/><circle cx="133" cy="344" r="1.4"/><circle cx="143" cy="333" r="1.9"/><circle cx="217" cy="321" r="2.0"/><circle cx="117" cy="338" r="1.4"/><circle cx="139" cy="292" r="1.4"/><circle cx="131" cy="316" r="1.4"/><circle cx="105" cy="367" r="1.9"/><circle cx="290" cy="320" r="1.3"/><circle cx="241" cy="418" r="1.3"/><circle cx="99" cy="276" r="1.4"/><circle cx="259" cy="401" r="1.2"/><circle cx="224" cy="279" r="1.2"/><circle cx="177" cy="406" r="1.3"/><circle cx="276" cy="395" r="1.7"/><circle cx="133" cy="404" r="1.9"/><circle cx="169" cy="379" r="1.3"/><circle cx="192" cy="644" r="1.4"/><circle cx="267" cy="589" r="1.6"/><circle cx="204" cy="566" r="1.1"/><circle cx="263" cy="560" r="1.2"/><circle cx="227" cy="590" r="1.6"/><circle cx="225" cy="495" r="1.5"/><circle cx="196" cy="580" r="1.4"/><circle cx="188" cy="480" r="1.5"/><circle cx="181" cy="572" r="1.1"/><circle cx="259" cy="550" r="1.3"/><circle cx="176" cy="527" r="1.3"/><circle cx="225" cy="450" r="1.3"/><circle cx="170" cy="650" r="1.2"/><circle cx="189" cy="496" r="1.8"/><circle cx="213" cy="561" r="1.1"/><circle cx="182" cy="533" r="1.5"/><circle cx="229" cy="614" r="1.3"/><circle cx="171" cy="504" r="1.3"/><circle cx="249" cy="643" r="1.8"/><circle cx="253" cy="534" r="2.0"/><circle cx="277" cy="495" r="2.0"/><circle cx="175" cy="540" r="1.4"/><circle cx="316" cy="592" r="1.6"/><circle cx="211" cy="580" r="1.5"/><circle cx="306" cy="487" r="1.2"/><circle cx="264" cy="508" r="1.5"/><circle cx="209" cy="493" r="1.7"/><circle cx="203" cy="507" r="1.5"/><circle cx="176" cy="517" r="1.8"/><circle cx="184" cy="597" r="1.5"/><circle cx="266" cy="431" r="1.4"/><circle cx="294" cy="472" r="1.9"/><circle cx="247" cy="552" r="1.6"/><circle cx="223" cy="494" r="1.3"/><circle cx="240" cy="460" r="1.9"/><circle cx="308" cy="455" r="1.5"/><circle cx="302" cy="478" r="1.6"/><circle cx="393" cy="280" r="1.5"/><circle cx="364" cy="247" r="1.9"/><circle cx="400" cy="287" r="1.8"/><circle cx="456" cy="359" r="1.5"/><circle cx="365" cy="300" r="1.4"/><circle cx="374" cy="334" r="1.8"/><circle cx="395" cy="346" r="1.9"/><circle cx="420" cy="246" r="1.6"/><circle cx="361" cy="262" r="1.9"/><circle cx="455" cy="249" r="1.6"/><circle cx="413" cy="278" r="1.5"/><circle cx="398" cy="334" r="1.4"/><circle cx="384" cy="323" r="1.3"/><circle cx="433" cy="352" r="1.2"/><circle cx="417" cy="350" r="1.9"/><circle cx="442" cy="475" r="1.6"/><circle cx="467" cy="528" r="1.2"/><circle cx="506" cy="383" r="1.3"/><circle cx="399" cy="467" r="1.5"/><circle cx="494" cy="467" r="1.8"/><circle cx="422" cy="552" r="1.9"/><circle cx="422" cy="377" r="1.8"/><circle cx="387" cy="366" r="1.4"/><circle cx="482" cy="381" r="1.5"/><circle cx="480" cy="533" r="2.0"/><circle cx="520" cy="522" r="1.4"/><circle cx="439" cy="484" r="1.7"/><circle cx="497" cy="503" r="1.1"/><circle cx="421" cy="512" r="1.5"/><circle cx="395" cy="422" r="1.6"/><circle cx="519" cy="454" r="1.9"/><circle cx="417" cy="517" r="2.0"/><circle cx="443" cy="361" r="1.8"/><circle cx="384" cy="412" r="1.4"/><circle cx="426" cy="547" r="1.9"/><circle cx="415" cy="530" r="1.9"/><circle cx="499" cy="443" r="1.2"/><circle cx="519" cy="512" r="1.5"/><circle cx="448" cy="412" r="1.6"/><circle cx="445" cy="540" r="1.4"/><circle cx="455" cy="399" r="1.3"/><circle cx="433" cy="455" r="1.8"/><circle cx="407" cy="475" r="1.3"/><circle cx="385" cy="524" r="1.6"/><circle cx="515" cy="269" r="1.1"/><circle cx="617" cy="305" r="1.5"/><circle cx="691" cy="339" r="2.0"/><circle cx="600" cy="400" r="1.1"/><circle cx="524" cy="384" r="1.2"/><circle cx="632" cy="327" r="1.9"/><circle cx="710" cy="254" r="1.9"/><circle cx="686" cy="276" r="1.6"/><circle cx="680" cy="278" r="1.4"/><circle cx="483" cy="340" r="1.4"/><circle cx="701" cy="296" r="1.8"/><circle cx="592" cy="359" r="1.6"/><circle cx="531" cy="345" r="1.5"/><circle cx="472" cy="331" r="1.7"/><circle cx="660" cy="311" r="1.2"/><circle cx="525" cy="259" r="1.5"/><circle cx="645" cy="327" r="1.9"/><circle cx="699" cy="383" r="1.9"/><circle cx="495" cy="415" r="1.5"/><circle cx="703" cy="397" r="1.8"/><circle cx="678" cy="373" r="1.9"/><circle cx="650" cy="370" r="1.6"/><circle cx="618" cy="296" r="1.2"/><circle cx="503" cy="381" r="1.2"/><circle cx="619" cy="260" r="1.7"/><circle cx="630" cy="360" r="1.4"/><circle cx="598" cy="390" r="1.6"/><circle cx="689" cy="319" r="1.1"/><circle cx="674" cy="340" r="2.0"/><circle cx="613" cy="324" r="1.4"/><circle cx="703" cy="330" r="1.7"/><circle cx="708" cy="311" r="1.7"/><circle cx="638" cy="414" r="1.4"/><circle cx="641" cy="318" r="1.3"/><circle cx="489" cy="336" r="1.6"/><circle cx="574" cy="397" r="1.4"/><circle cx="666" cy="428" r="1.2"/><circle cx="582" cy="324" r="1.3"/><circle cx="611" cy="385" r="1.1"/><circle cx="490" cy="289" r="1.9"/><circle cx="506" cy="308" r="1.3"/><circle cx="545" cy="424" r="1.9"/><circle cx="522" cy="418" r="1.7"/><circle cx="544" cy="287" r="2.0"/><circle cx="714" cy="266" r="1.5"/><circle cx="498" cy="273" r="1.3"/><circle cx="487" cy="320" r="1.2"/><circle cx="588" cy="484" r="1.7"/><circle cx="562" cy="533" r="1.7"/><circle cx="566" cy="491" r="1.7"/><circle cx="634" cy="550" r="1.9"/><circle cx="646" cy="534" r="1.2"/><circle cx="651" cy="542" r="1.7"/><circle cx="671" cy="484" r="1.7"/><circle cx="567" cy="526" r="1.9"/><circle cx="627" cy="517" r="1.3"/><circle cx="662" cy="486" r="1.9"/><circle cx="652" cy="508" r="1.1"/><circle cx="615" cy="492" r="1.6"/><circle cx="264" cy="493" r="1.4"/><circle cx="452" cy="670" r="1.6"/><circle cx="263" cy="566" r="1.3"/><circle cx="137" cy="532" r="1.4"/><circle cx="181" cy="643" r="1.4"/><circle cx="736" cy="317" r="1.5"/><circle cx="628" cy="299" r="1.5"/><circle cx="281" cy="236" r="1.3"/><circle cx="375" cy="236" r="1.3"/><circle cx="556" cy="491" r="1.5"/><circle cx="360" cy="563" r="2.0"/><circle cx="231" cy="359" r="1.9"/><circle cx="321" cy="181" r="1.2"/><circle cx="682" cy="228" r="1.7"/><circle cx="140" cy="611" r="1.2"/><circle cx="635" cy="422" r="1.4"/><circle cx="361" cy="255" r="2.0"/><circle cx="71" cy="461" r="1.4"/><circle cx="238" cy="262" r="1.2"/><circle cx="695" cy="190" r="1.6"/><circle cx="320" cy="586" r="1.6"/><circle cx="585" cy="238" r="1.6"/><circle cx="582" cy="484" r="2.0"/><circle cx="505" cy="689" r="1.6"/><circle cx="621" cy="504" r="1.4"/><circle cx="601" cy="446" r="1.3"/><circle cx="451" cy="621" r="1.6"/><circle cx="497" cy="383" r="1.8"/><circle cx="84" cy="606" r="1.6"/><circle cx="305" cy="412" r="1.5"/><circle cx="268" cy="480" r="1.3"/><circle cx="347" cy="630" r="1.9"/><circle cx="480" cy="482" r="2.0"/><circle cx="610" cy="418" r="1.6"/><circle cx="440" cy="585" r="1.7"/><circle cx="569" cy="582" r="1.4"/><circle cx="685" cy="481" r="1.2"/><circle cx="453" cy="282" r="1.2"/><circle cx="236" cy="415" r="1.7"/><circle cx="414" cy="666" r="1.9"/><circle cx="99" cy="369" r="1.7"/><circle cx="581" cy="428" r="1.7"/><circle cx="655" cy="266" r="1.9"/><circle cx="602" cy="413" r="1.5"/><circle cx="462" cy="211" r="1.5"/><circle cx="348" cy="614" r="1.3"/><circle cx="577" cy="485" r="1.8"/><circle cx="362" cy="201" r="1.7"/><circle cx="552" cy="421" r="1.6"/><circle cx="570" cy="510" r="1.8"/><circle cx="347" cy="652" r="1.9"/><circle cx="161" cy="698" r="1.1"/><circle cx="129" cy="703" r="1.3"/><circle cx="475" cy="422" r="1.5"/><circle cx="716" cy="457" r="1.7"/><circle cx="421" cy="212" r="1.3"/><circle cx="620" cy="525" r="1.5"/><circle cx="235" cy="241" r="1.7"/><circle cx="360" cy="685" r="1.4"/><circle cx="671" cy="431" r="1.7"/><circle cx="95" cy="628" r="1.2"/><circle cx="209" cy="575" r="1.5"/><circle cx="415" cy="700" r="1.7"/><circle cx="172" cy="609" r="1.9"/><circle cx="567" cy="189" r="1.6"/><circle cx="460" cy="339" r="1.7"/><circle cx="550" cy="699" r="1.7"/><circle cx="530" cy="447" r="1.7"/><circle cx="487" cy="314" r="1.5"/><circle cx="393" cy="243" r="1.4"/><circle cx="567" cy="216" r="1.2"/><circle cx="434" cy="277" r="1.9"/><circle cx="459" cy="211" r="1.8"/><circle cx="89" cy="517" r="1.7"/><circle cx="566" cy="660" r="1.8"/><circle cx="537" cy="718" r="1.4"/><circle cx="168" cy="520" r="1.3"/><circle cx="509" cy="275" r="1.6"/><circle cx="167" cy="310" r="1.5"/><circle cx="431" cy="605" r="1.7"/><circle cx="561" cy="489" r="1.9"/><circle cx="123" cy="570" r="1.5"/><circle cx="424" cy="272" r="1.4"/><circle cx="497" cy="313" r="1.7"/><circle cx="283" cy="424" r="1.9"/><circle cx="588" cy="238" r="1.6"/><circle cx="375" cy="307" r="1.6"/><circle cx="533" cy="621" r="1.9"/><circle cx="252" cy="569" r="1.9"/><circle cx="390" cy="298" r="1.1"/><circle cx="260" cy="471" r="2.0"/><circle cx="627" cy="505" r="1.2"/><circle cx="70" cy="602" r="1.6"/><circle cx="470" cy="408" r="1.5"/><circle cx="236" cy="418" r="2.0"/><circle cx="548" cy="326" r="1.3"/><circle cx="165" cy="655" r="1.1"/><circle cx="375" cy="218" r="2.0"/><circle cx="685" cy="239" r="1.5"/><circle cx="322" cy="514" r="1.5"/><circle cx="528" cy="665" r="1.5"/><circle cx="191" cy="487" r="1.3"/><circle cx="677" cy="432" r="1.1"/><circle cx="563" cy="432" r="1.6"/><circle cx="564" cy="697" r="1.3"/><circle cx="304" cy="578" r="1.5"/><circle cx="308" cy="659" r="2.0"/><circle cx="597" cy="643" r="2.0"/><circle cx="673" cy="501" r="1.4"/><circle cx="726" cy="264" r="1.4"/><circle cx="466" cy="220" r="1.2"/><circle cx="472" cy="551" r="1.6"/><circle cx="267" cy="619" r="1.3"/><circle cx="358" cy="287" r="1.2"/><circle cx="203" cy="492" r="1.9"/><circle cx="335" cy="205" r="1.6"/><circle cx="281" cy="706" r="1.9"/><circle cx="396" cy="549" r="1.3"/><circle cx="364" cy="218" r="1.3"/><circle cx="492" cy="293" r="1.6"/></g></svg></div>
 <div class="particles" id="particles"></div>
 
-<!-- GATE -->
-<div class="overlay" id="gate">
-  <div class="auth-card">
-    <div class="brand-title">Atlas de Preventiva</div>
-    <div class="brand-sub">Medicina Preventiva · ENARE · Revalida</div>
-    <div class="field">
-      <label>Senha de acesso</label>
-      <input type="password" id="gatePass" placeholder="Digite a senha de acesso" onkeydown="if(event.key==='Enter')checkGate()">
-    </div>
-    <button class="btn" onclick="checkGate()">Entrar</button>
-    <div class="err" id="gateErr"></div>
-    <div class="credit">Desenvolvido por Jackeline Delfini · Em memória de Elisabete Delfini</div>
-  </div>
-</div>
-
-<!-- AUTH -->
-<div class="overlay hidden" id="auth">
-  <div class="auth-card">
-    <div class="brand-title">Atlas de Preventiva</div>
-    <div class="brand-sub" id="authSub">Entre na sua conta para continuar</div>
-    <div class="field"><label>E-mail</label><input type="email" id="email" placeholder="seu@email.com"></div>
-    <div class="field"><label>Senha</label><input type="password" id="pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAuth()"></div>
-    <button class="btn" id="authBtn" onclick="doAuth()">Entrar</button>
-    <div class="link" id="authToggle" onclick="toggleAuthMode()">Não tem conta? <b>Cadastre-se</b></div>
-    <div class="err" id="authErr"></div>
-    <div class="credit">Desenvolvido por Jackeline Delfini</div>
+<!-- ACESSO PELO ELID -->
+<div class="overlay" id="needAuth">
+  <div class="auth-card" style="text-align:center">
+    <div class="sb-logo-wrap" style="padding-top:0"><div class="sb-logo-glow" style="width:78px;height:78px"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:50px;height:50px;color:var(--primary)"><circle cx="32" cy="32" r="23" stroke-width="1.6"/><ellipse cx="32" cy="32" rx="8.5" ry="23"/><ellipse cx="32" cy="32" rx="17" ry="23" opacity=".75"/><line x1="32" y1="9" x2="32" y2="55"/><path d="M11 24h42M9 32h46M11 40h42" opacity=".85"/><path d="M16 16.5c10 4 22 4 32 0M16 47.5c10-4 22-4 32 0" opacity=".6"/><path d="M20 22 41 30 26 43 45 38" stroke-width="1" opacity=".55"/><g fill="currentColor" stroke="none"><circle cx="20" cy="22" r="1.5"/><circle cx="41" cy="30" r="1.5"/><circle cx="26" cy="43" r="1.5"/><circle cx="45" cy="38" r="1.4"/><circle cx="38" cy="19" r="1.3"/><circle cx="22" cy="41" r="1.3"/></g></svg></div></div>
+    <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);font-weight:800;margin:14px 0 6px">ELID · Ensino Legitimado para Internos em Desenvolvimento</div>
+    <div class="brand-title" style="font-size:54px">Preventiva</div>
+    <div class="brand-sub">O acesso ao Atlas de Preventiva é feito pela plataforma ELID. Faça login no ELID para continuar seus estudos.</div>
+    <a class="btn" href="../../landing-page/" style="display:block;text-decoration:none;text-align:center">Ir para o ELID</a>
+    <div style="margin-top:18px"><span class="elid-tribute" style="font-size:1.4rem">Inspirado em Elisabete Delfini ✦</span></div>
   </div>
 </div>
 
@@ -492,6 +496,7 @@ textarea.notes{width:100%;min-height:200px;padding:16px;border-radius:14px;borde
       </div>
     </div>
     <div class="content" id="content"></div>
+    <footer class="page-foot"><div class="elid-credit-line" style="font-size:12px"><b>ELID</b> · Ensino Legitimado para Internos em Desenvolvimento</div><span class="elid-tribute">Inspirado em Elisabete Delfini ✦</span></footer>
   </div>
 </div>
 
@@ -2158,12 +2163,14 @@ ${SVG_PRINCIPIOS}
 
 /* ===== engine1.js ===== */
 /* ================= ATLAS DE PREVENTIVA — MOTOR ================= */
-const GATE_PASS = "REVALIDA22528129";
 const PLATFORM_ID = "PREVENTIVA";
 const firebaseConfig = {
-  apiKey:"AIzaSyDEMO-REPLACE", authDomain:"atlas-preventiva.firebaseapp.com",
-  projectId:"atlas-preventiva", storageBucket:"atlas-preventiva.firebasestorage.app",
-  messagingSenderId:"000000000000", appId:"1:000000000000:web:demo"
+  apiKey: "AIzaSyAKN3qsYIc3pel81vl8WEAH6Ob4oR-icAM",
+  authDomain: "jackeline-study-platform.firebaseapp.com",
+  projectId: "jackeline-study-platform",
+  storageBucket: "jackeline-study-platform.firebasestorage.app",
+  messagingSenderId: "574246127117",
+  appId: "1:574246127117:web:29eedab81ea4251b23f744"
 };
 let auth=null, db=null, FB_OK=false;
 try{
@@ -2185,6 +2192,9 @@ const DEFAULT_STATE = {
 };
 let S = JSON.parse(JSON.stringify(DEFAULT_STATE));
 let UID=null, saveTimer=null, currentRoute="dashboard", curMod=null, curTopic=null, authMode="login";
+const ELID_CR='<b>ELID</b> · Ensino Legitimado para Internos em Desenvolvimento';
+const ELID_TR='Inspirado em Elisabete Delfini \u2726';
+const ELID_GLOBE='<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="23" stroke-width="1.6"/><ellipse cx="32" cy="32" rx="8.5" ry="23"/><ellipse cx="32" cy="32" rx="17" ry="23" opacity=".75"/><line x1="32" y1="9" x2="32" y2="55"/><path d="M11 24h42M9 32h46M11 40h42" opacity=".85"/><path d="M16 16.5c10 4 22 4 32 0M16 47.5c10-4 22-4 32 0" opacity=".6"/><path d="M20 22 41 30 26 43 45 38" stroke-width="1" opacity=".55"/><path d="M22 41 38 19" stroke-width=".9" opacity=".4"/><g fill="currentColor" stroke="none"><circle cx="20" cy="22" r="1.5"/><circle cx="41" cy="30" r="1.5"/><circle cx="26" cy="43" r="1.5"/><circle cx="45" cy="38" r="1.4"/><circle cx="38" cy="19" r="1.3"/><circle cx="22" cy="41" r="1.3"/></g></svg>';
 
 function localKey(){return "atlas_"+PLATFORM_ID+"_"+(UID||"anon");}
 function elidPublish(){
@@ -2197,7 +2207,67 @@ function elidPublish(){
     var questions=qsel.map(function(o){ var q=o.q; var opts=(q.opts||[]).map(function(t,ix){return {text:t,correct:ix===q.correct};});
       return {id:o.tid+':'+o.qi, stem:q.stem||'', options:opts, explanation:q.expl||'', modTitle:o.top||''}; });
     db.collection("users").doc(UID).collection("central").doc("preventiva")
-      .set({platform:"preventiva",label:"Atlas de Preventiva",updated:Date.now(),cards:cards,questions:questions},{merge:true}).catch(function(){});
+      .set({platform:"preventiva",label:"Atlas de Preventiva",updated:Date.now(),cards:cards,questions:questions,done:elidFlattenDone()},{merge:true}).catch(function(){});
+  }catch(e){}
+}
+/* ===== FUNCIONAL: RADAR + SINCRONIZACAO (regra ELID) ===== */
+var ELID_AREA_KEY='prev';            /* area desta plataforma no RADAR */
+var elidUnsub=null;
+function cloudReady(){ return !!(FB_OK&&UID&&db); }
+/* achata o que foi feito: questoes (tid:qi = id da Central), SRS e cartoes criados */
+function elidFlattenDone(){
+  var q={}; Object.keys(S.qSeen||{}).forEach(function(k){ q[k]={seen:1,right:(S.qRight&&S.qRight[k])?1:0}; });
+  return {q:q, srs:(S.srs||{}), userCards:(S.cards||[])};
+}
+/* mescla o que veio da Central (idempotente; nunca sobrescreve local) */
+function elidMergeDone(done){
+  if(!done) return false; var changed=false;
+  S.qSeen=S.qSeen||{}; S.qRight=S.qRight||{}; S.srs=S.srs||{}; S.cards=S.cards||[];
+  if(done.q) Object.keys(done.q).forEach(function(k){
+    var v=done.q[k]||{};
+    if(!S.qSeen[k]){ S.qSeen[k]=true; changed=true; }
+    if(v.right && !S.qRight[k]){ S.qRight[k]=true; changed=true; }
+  });
+  if(done.srs) Object.keys(done.srs).forEach(function(id){ if(!S.srs[id]){ S.srs[id]=done.srs[id]; changed=true; } });
+  if(done.userCards && done.userCards.length){
+    var sig={}; S.cards.forEach(function(c){ sig[(c.front||'')+'||'+(c.back||'')]=1; });
+    done.userCards.forEach(function(c){ var k=(c.front||'')+'||'+(c.back||''); if(!sig[k]){ S.cards.push(c); sig[k]=1; changed=true; } });
+  }
+  return changed;
+}
+function elidPullCentral(){
+  return new Promise(function(res){
+    if(!cloudReady()){ res(); return; }
+    db.collection("users").doc(UID).collection("central").doc("preventiva").get()
+      .then(function(doc){ if(doc.exists){ if(elidMergeDone((doc.data()||{}).done)){ try{ saveState(); }catch(e){} } } res(); })
+      .catch(function(){ res(); });
+  });
+}
+/* desempenho padronizado em state/current + RADAR em users/{uid}/desempenho/areas */
+function elidPublishDesempenho(){
+  try{
+    if(!cloudReady()) return;
+    var resp=Object.keys(S.qSeen||{}).length, ac=Object.keys(S.qRight||{}).length;
+    db.collection("users").doc(UID).collection("platforms").doc(PLATFORM_ID).collection("state").doc("current")
+      .set({desempenho:{questoesRespondidas:resp,questoesCorretas:ac},updated:Date.now()},{merge:true}).catch(function(){});
+    if(typeof window.elidRegistrarQuestoes==='function'){ try{ window.elidRegistrarQuestoes(ELID_AREA_KEY,resp,ac); }catch(e){} }
+    var payload={}; payload[ELID_AREA_KEY]={tot:resp,ac:ac};
+    db.collection("users").doc(UID).collection("desempenho").doc("areas").set(payload,{merge:true}).catch(function(){});
+  }catch(e){}
+}
+/* SOLUCAO DA LIMITACAO: listener em tempo real na Central (reflete ao vivo o feito la, e vice-versa) */
+function elidSubscribeCentral(){
+  try{
+    if(!cloudReady()) return; if(elidUnsub){ try{elidUnsub();}catch(e){} elidUnsub=null; }
+    elidUnsub=db.collection("users").doc(UID).collection("central").doc("preventiva")
+      .onSnapshot(function(doc){
+        if(!doc.exists) return;
+        if(elidMergeDone((doc.data()||{}).done)){
+          try{ saveState(); }catch(e){}
+          try{ refreshTopbar(); }catch(e){}
+          try{ if(currentRoute) go(currentRoute); }catch(e){}
+        }
+      }, function(){});
   }catch(e){}
 }
 function saveState(){
@@ -2209,6 +2279,7 @@ function saveState(){
       db.collection("users").doc(UID).collection("platforms").doc(PLATFORM_ID)
         .collection("state").doc("main").set(S,{merge:true}).catch(e=>console.warn("save",e));
       elidPublish();
+      elidPublishDesempenho();
     },700);
   }
 }
@@ -2284,48 +2355,25 @@ function toast(msg){const t=document.createElement("div");t.className="toast";t.
 
 
 /* ===== engine2.js ===== */
-/* ---------- GATE / AUTH ---------- */
-function checkGate(){
-  const v=document.getElementById("gatePass").value.trim();
-  if(v===GATE_PASS){document.getElementById("gate").classList.add("hidden");document.getElementById("auth").classList.remove("hidden");}
-  else document.getElementById("gateErr").textContent="Senha incorreta. Tente novamente.";
-}
-function toggleAuthMode(){
-  authMode = authMode==="login"?"signup":"login";
-  document.getElementById("authSub").textContent = authMode==="login"?"Entre na sua conta para continuar":"Crie sua conta de estudos";
-  document.getElementById("authBtn").textContent = authMode==="login"?"Entrar":"Cadastrar";
-  document.getElementById("authToggle").innerHTML = authMode==="login"?'Não tem conta? <b>Cadastre-se</b>':'Já tem conta? <b>Entrar</b>';
-  document.getElementById("authErr").textContent="";
-}
-async function doAuth(){
-  const email=document.getElementById("email").value.trim(), pass=document.getElementById("pass").value;
-  const err=document.getElementById("authErr"); err.textContent="";
-  if(!email||pass.length<6){err.textContent="Informe e-mail e senha (mín. 6 caracteres).";return;}
-  if(!FB_OK){ // modo local fallback
-    UID="local_"+btoa(email).slice(0,12); await startApp(); return;
-  }
-  try{
-    if(authMode==="signup") await auth.createUserWithEmailAndPassword(email,pass);
-    else await auth.signInWithEmailAndPassword(email,pass);
-  }catch(e){
-    const map={"auth/email-already-in-use":"E-mail já cadastrado. Faça login.","auth/wrong-password":"Senha incorreta.","auth/user-not-found":"Usuário não encontrado. Cadastre-se.","auth/invalid-email":"E-mail inválido.","auth/invalid-credential":"Credenciais inválidas."};
-    err.textContent=map[e.code]||("Erro: "+e.message);
-  }
-}
+/* ---------- Acesso 100% pelo ELID: sessao herdada; sem gate/senha nem login local ---------- */
+function showNeedAuth(){ var n=document.getElementById("needAuth"); if(n) n.classList.remove("hidden"); document.getElementById("app").classList.add("hidden"); }
 if(FB_OK){
-  auth.onAuthStateChanged(async u=>{ if(u){ UID=u.uid; await startApp(); } });
-}
+  auth.onAuthStateChanged(async u=>{ if(u){ UID=u.uid; await startApp(); } else { UID=null; showNeedAuth(); } });
+} else { showNeedAuth(); }
 async function startApp(){
-  document.getElementById("gate").classList.add("hidden");
-  document.getElementById("auth").classList.add("hidden");
+  var na=document.getElementById("needAuth"); if(na) na.classList.add("hidden");
   document.getElementById("app").classList.remove("hidden");
   await loadState();
-  const em=(FB_OK&&auth.currentUser)?auth.currentUser.email:"Estudante";
+  const em=(FB_OK&&auth.currentUser&&auth.currentUser.email)?auth.currentUser.email:"Estudante";
   document.getElementById("avatar").textContent=(em[0]||"J").toUpperCase();
   buildSidebar(); refreshTopbar(); markStudyDay(); go("dashboard");
+  try{ await elidPullCentral(); }catch(e){}
+  try{ go(currentRoute); }catch(e){}
   try{ elidPublish(); }catch(e){}
+  try{ elidPublishDesempenho(); }catch(e){}
+  try{ elidSubscribeCentral(); }catch(e){}
 }
-function logout(){ if(FB_OK&&auth) auth.signOut(); location.reload(); }
+function logout(){ try{ saveState(); }catch(e){} window.location.href="../../biblioteca-web/"; }
 
 /* ---------- SHELL ---------- */
 function toggleTheme(){
@@ -2350,10 +2398,12 @@ const NAV=[
 ];
 function buildSidebar(){
   const sb=document.getElementById("sidebar");
-  sb.innerHTML=`<div class="logo">Atlas</div><div class="logo-sub">de Preventiva</div>`+
+  sb.innerHTML=`<div class="sb-logo-wrap"><div class="sb-logo-glow">${ELID_GLOBE}</div></div>`+
+    `<div class="sb-brand-name">Preventiva</div>`+
+    `<div class="sb-credit"><div class="elid-credit-line">${ELID_CR}</div></div>`+
     NAV.map(n=>`<div class="nav-item ${n.id===currentRoute?'active':''}" data-r="${n.id}" onclick="go('${n.id}')"><span class="nav-ic">${n.ic}</span><span class="nav-txt">${n.t}</span></div>`).join("")+
-    `<div style="flex:1"></div><div class="nav-item" onclick="logout()"><span class="nav-ic">🚪</span><span class="nav-txt">Sair</span></div>`+
-    `<div style="font-family:var(--font-s);font-size:10px;color:var(--muted);padding:10px 8px;font-style:italic" class="nav-txt">Desenvolvido por<br>Jackeline Delfini</div>`;
+    `<div style="flex:1"></div><div class="nav-item" onclick="logout()"><span class="nav-ic">⏻</span><span class="nav-txt">Voltar ao ELID</span></div>`+
+    `<div class="side-foot-elid"><div class="elid-credit-line">${ELID_CR}</div><span class="elid-tribute">${ELID_TR}</span></div>`;
 }
 function refreshTopbar(){
   document.getElementById("xpN").textContent=S.xp||0;
