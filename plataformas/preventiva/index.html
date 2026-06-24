@@ -13,7 +13,7 @@
   --primary:#06d6c1; --primary2:#05b3a2; --accent:#06d6c1;
   --bg:#2d1b2e; --bg2:#20131f; --card:rgba(60,38,58,.66); --card2:rgba(48,30,46,.5);
   --text:#f4eef2; --muted:#cbb6c4; --border:rgba(201,160,176,.12);
-  --glass:rgba(255,255,255,.04); --glow:rgba(6,214,193,.40); --plum-line:#4a2f44; --elid-hl:#ef8a6a;
+  --glass:rgba(255,255,255,.04); --glow:rgba(6,214,193,.40); --plum-line:#4a2f44; --elid-hl:#c98a98;
   --good:#22c55e; --warn:#f59e0b; --bad:#ef4444;
   --shadow:0 20px 50px -12px rgba(0,0,0,.6);
   --font-d:'Parisienne','Great Vibes',cursive; --font-s:'Fraunces',Georgia,serif; --font-b:'Inter',sans-serif;
@@ -23,7 +23,7 @@
   --primary:#05a896; --primary2:#048a7b; --accent:#05a896;
   --bg:#FBF6F8; --bg2:#f3eaf0; --card:rgba(255,255,255,.82); --card2:rgba(255,255,255,.6);
   --text:#2A1B36; --muted:#6b5878; --border:rgba(120,72,134,.12);
-  --glass:rgba(255,255,255,.5); --glow:rgba(6,214,193,.22); --plum-line:rgba(120,72,134,.4); --elid-hl:#e3744f;
+  --glass:rgba(255,255,255,.5); --glow:rgba(6,214,193,.22); --plum-line:rgba(120,72,134,.4); --elid-hl:#b06a75;
   --shadow:0 20px 50px -12px rgba(40,70,90,.22);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -75,6 +75,10 @@ body{
 @media(max-width:820px){.tb-logo{display:none}}
 /* ===== SIDEBAR: nav icons profissionais + recolhível ===== */
 .nav-scroll{display:flex;flex-direction:column;gap:4px;flex:1;overflow-y:auto;margin-top:6px}
+*{scrollbar-width:thin;scrollbar-color:var(--primary) transparent}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px;border:2px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-track{background:transparent}
 .nav-ic{width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .nav-ic svg{width:19px;height:19px}
 .nav-item.active .nav-ic{color:var(--primary);filter:drop-shadow(0 0 6px var(--primary))}
@@ -90,7 +94,8 @@ body{
 .elid-tribute{color:var(--text);opacity:.9}
 .elid-tribute .tr-i{color:var(--primary)}
 .page-foot .elid-cred b{font-size:14px}
-.sb-credit{text-align:center;padding:0 12px 10px}
+.sb-credit{text-align:center;padding:2px 12px 10px}
+.sb-credit .elid-cred{font-size:11px}
 .na-hello{font-family:var(--font-d);font-size:40px;line-height:1;color:var(--text);margin-bottom:6px}
 .na-hello .tr-i{color:var(--primary)}
 .na-cred{margin:12px 0 4px;display:inline-block;text-align:center}
@@ -98,7 +103,7 @@ body{
 .na-cred span{font-size:10px}
 /* ===== DASHBOARD PADRÃO (hero horizontal + símbolo com glow) ===== */
 .dash-hero{position:relative;display:flex;gap:18px;align-items:center;flex-wrap:wrap;background:var(--card);backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:24px;padding:26px 28px;box-shadow:var(--shadow);overflow:hidden}
-.dash-hero::after{content:"";position:absolute;right:-60px;top:-60px;width:300px;height:300px;background:radial-gradient(circle,var(--glow),transparent 70%);opacity:.5;border-radius:50%;filter:blur(10px);pointer-events:none}
+.dash-hero{overflow:visible}
 .dash-hero-main{flex:1;min-width:260px;position:relative;z-index:1}
 .dash-rank{font-size:.84rem;font-weight:800;color:var(--primary);letter-spacing:.02em}
 .dash-hello{font-family:var(--font-d);font-size:clamp(34px,5vw,48px);line-height:1.02;margin:4px 0 8px;color:var(--text);background:none;-webkit-text-fill-color:initial;filter:none}
@@ -107,7 +112,7 @@ body{
 .dash-prog{margin-top:16px;max-width:560px}
 .dash-prog-top{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);margin-bottom:6px}
 .dash-pct{color:var(--primary);font-weight:800}
-.dash-symbol{position:relative;z-index:1;width:210px;max-width:42vw;display:grid;place-items:center;filter:drop-shadow(0 0 26px rgba(6,214,193,.45))}
+.dash-symbol{position:relative;z-index:1;flex:0 0 36%;max-width:250px;margin-left:-7%;cursor:pointer;display:grid;place-items:center;filter:drop-shadow(0 0 30px rgba(6,214,193,.5))}
 .dash-symbol svg{width:100%;height:auto;display:block}
 .qa-h{font-family:var(--font-s);font-size:1.05rem;margin-bottom:6px}
 .qa-p{color:var(--muted);font-size:.9rem}
@@ -115,11 +120,11 @@ body{
 .ph-ic svg{width:.82em;height:.82em;color:var(--primary)}
 /* ===== AJUSTES FINAIS (créditos, tributo, topbar, marca) ===== */
 /* crédito ELID: fonte de título (página inicial), branco, só E/L/I/D no acento, maior */
-.elid-cred{font-family:'Cormorant Garamond',Georgia,serif;display:inline-block;text-align:center;line-height:1.12}
-.elid-cred b{display:block;color:var(--elid-hl);font-size:17px;font-weight:700;letter-spacing:.26em;padding-left:.26em}
-.elid-cred span{display:block;color:var(--text);font-size:11.5px;font-weight:600;letter-spacing:.015em;margin-top:1px}
-.na-cred .elid-cred b{font-size:19px}.na-cred .elid-cred span{font-size:12.5px}
-.page-foot .elid-cred b{font-size:18px}.page-foot .elid-cred span{font-size:12px}
+.elid-cred{font-family:'Cormorant Garamond',Georgia,serif;color:var(--text);font-size:13px;font-weight:600;letter-spacing:.01em;line-height:1.3;display:inline-block}
+.elid-cred b{font-weight:700;letter-spacing:.14em}
+.elid-cred .hl{color:var(--elid-hl)}
+.na-cred .elid-cred{font-size:14.5px}
+.page-foot .elid-cred{font-size:14px}
 /* tributo: Great Vibes, branco, só E e D no acento, menor (minimalista) */
 .elid-tribute{font-family:var(--font-script);color:var(--text);opacity:.9;font-size:.82rem;line-height:1.1;display:block;margin-top:4px}
 .elid-tribute .hl{color:var(--elid-hl)}
@@ -128,7 +133,7 @@ body{
 .na-cred + .brand-title{margin-top:6px}
 #needAuth .elid-tribute{font-size:1.05rem}
 /* marca na sidebar: menor p/ caber em 1 linha (apenas esta plataforma) */
-.sb-brand-name{font-size:20px;white-space:nowrap;line-height:1.05}
+.sb-brand-name{font-size:27px;white-space:normal;line-height:1;padding:0 6px}
 /* saudação do hero: cor unificada (sem letra pintada) */
 .dash-hello{color:var(--text)}
 /* gamificação à esquerda, textos à direita (não tampa o SVG de fundo) */
@@ -150,7 +155,7 @@ body{
 /* avatar: sem fundo colorido (igual aos outros), contorno deep plum->acento, letra Parisienne bold */
 .avatar{background:var(--glass);border:1px solid var(--plum-line);color:var(--primary);font-family:var(--font-d);font-weight:700;font-size:20px;transition:.18s}
 .avatar:hover{border-color:var(--primary);box-shadow:0 0 12px -2px rgba(6,214,193,.5)}
-@media(max-width:760px){.dash-symbol{margin:0 auto}}
+@media(max-width:760px){.dash-symbol{margin:0 auto;flex:0 0 auto;width:60%}}
 .particles{position:fixed;inset:0;z-index:-2;pointer-events:none}
 .particles span{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--primary);opacity:.4;animation:float linear infinite}
 @keyframes float{from{transform:translateY(110vh)}to{transform:translateY(-10vh)}}
@@ -561,7 +566,7 @@ textarea.notes{width:100%;min-height:200px;padding:16px;border-radius:14px;borde
 <div class="overlay" id="needAuth">
   <div class="auth-card" style="text-align:center">
     <div class="sb-logo-wrap" style="padding:2px 0 0"><div class="sb-logo-glow" style="width:80px;height:80px"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:50px;height:50px;color:var(--primary)"><circle cx="32" cy="32" r="23" stroke-width="1.6"/><ellipse cx="32" cy="32" rx="8.5" ry="23"/><ellipse cx="32" cy="32" rx="17" ry="23" opacity=".75"/><line x1="32" y1="9" x2="32" y2="55"/><path d="M11 24h42M9 32h46M11 40h42" opacity=".85"/><path d="M16 16.5c10 4 22 4 32 0M16 47.5c10-4 22-4 32 0" opacity=".6"/><path d="M20 22 41 30 26 43 45 38" stroke-width="1" opacity=".55"/><g fill="currentColor" stroke="none"><circle cx="20" cy="22" r="1.5"/><circle cx="41" cy="30" r="1.5"/><circle cx="26" cy="43" r="1.5"/><circle cx="45" cy="38" r="1.4"/><circle cx="38" cy="19" r="1.3"/><circle cx="22" cy="41" r="1.3"/></g></svg></div></div>
-    <div class="na-cred"><div class="elid-cred"><b>ELID</b><span>Ensino Legitimado para Internos em Desenvolvimento</span></div></div>
+    <div class="na-cred"><span class="elid-cred"><b><span class="hl">E</span>LI<span class="hl">D</span></b> · <span class="hl">E</span>nsino <span class="hl">L</span>egitimado para <span class="hl">I</span>nternos em <span class="hl">D</span>esenvolvimento</span></div>
     <div class="brand-title" style="font-size:46px;margin-top:2px">Atlas de Preventiva</div>
     <div class="brand-sub">O acesso ao Atlas de Preventiva é feito pela plataforma ELID. Faça login no ELID para continuar seus estudos.</div>
     <a class="btn" href="../../landing-page/" style="display:block;text-decoration:none;text-align:center">Ir para o ELID</a>
@@ -590,7 +595,7 @@ textarea.notes{width:100%;min-height:200px;padding:16px;border-radius:14px;borde
       </div>
     </header>
     <div class="content" id="content"></div>
-    <footer class="page-foot"><div class="elid-cred"><b>ELID</b><span>Ensino Legitimado para Internos em Desenvolvimento</span></div><span class="elid-tribute">Inspirado em <span class="hl">E</span>lisabete <span class="hl">D</span>elfini ✦</span></footer>
+    <footer class="page-foot"><span class="elid-cred"><b><span class="hl">E</span>LI<span class="hl">D</span></b> · <span class="hl">E</span>nsino <span class="hl">L</span>egitimado para <span class="hl">I</span>nternos em <span class="hl">D</span>esenvolvimento</span><span class="elid-tribute">Inspirado em <span class="hl">E</span>lisabete <span class="hl">D</span>elfini ✦</span></footer>
   </div>
 </div>
 
@@ -2288,7 +2293,7 @@ let S = JSON.parse(JSON.stringify(DEFAULT_STATE));
 let UID=null, saveTimer=null, currentRoute="dashboard", curMod=null, curTopic=null, authMode="login";
 const ELID_CR='<b>ELID</b> · Ensino Legitimado para Internos em Desenvolvimento';
 const ELID_TR='Inspirado em <span class="hl">E</span>lisabete <span class="hl">D</span>elfini \u2726';
-const ELID_CRED_STACK='<div class="elid-cred"><b>ELID</b><span>Ensino Legitimado para Internos em Desenvolvimento</span></div>';
+const ELID_CRED_STACK='<span class=\"elid-cred\"><b><span class=\"hl\">E</span>LI<span class=\"hl\">D</span></b> · <span class=\"hl\">E</span>nsino <span class=\"hl\">L</span>egitimado para <span class=\"hl\">I</span>nternos em <span class=\"hl\">D</span>esenvolvimento</span>';
 const ELID_GLOBE='<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="23" stroke-width="1.6"/><ellipse cx="32" cy="32" rx="8.5" ry="23"/><ellipse cx="32" cy="32" rx="17" ry="23" opacity=".75"/><line x1="32" y1="9" x2="32" y2="55"/><path d="M11 24h42M9 32h46M11 40h42" opacity=".85"/><path d="M16 16.5c10 4 22 4 32 0M16 47.5c10-4 22-4 32 0" opacity=".6"/><path d="M20 22 41 30 26 43 45 38" stroke-width="1" opacity=".55"/><path d="M22 41 38 19" stroke-width=".9" opacity=".4"/><g fill="currentColor" stroke="none"><circle cx="20" cy="22" r="1.5"/><circle cx="41" cy="30" r="1.5"/><circle cx="26" cy="43" r="1.5"/><circle cx="45" cy="38" r="1.4"/><circle cx="38" cy="19" r="1.3"/><circle cx="22" cy="41" r="1.3"/></g></svg>';
 
 function localKey(){return "atlas_"+PLATFORM_ID+"_"+(UID||"anon");}
@@ -2392,7 +2397,7 @@ async function loadState(){
   const other = base===cloud ? local : cloud;
   S = Object.assign(JSON.parse(JSON.stringify(DEFAULT_STATE)), other||{}, base||{});
   // UNIÃO dos mapas de progresso de AMBAS as fontes — usuário nunca perde nada
-  ["qSeen","qRight","qPick","srs","done","achievements","fav","notes"].forEach(function(k){
+  ["qSeen","qRight","qPick","diaSeen","srs","done","achievements","fav","notes","topicNotes"].forEach(function(k){
     var a=(cloud&&cloud[k])||{}, b=(local&&local[k])||{};
     if(typeof a==="object"&&!Array.isArray(a)) S[k]=Object.assign({},a,b,S[k]||{});
   });
@@ -2604,6 +2609,15 @@ function layerColor(val,c){
   if(c.inv){v=Math.max(0,100-val*2.2);} else if(c.abs){v=60;}
   if(v>=75)return "#16a34a"; if(v>=55)return "#84cc16"; if(v>=40)return "#eab308"; if(v>=25)return "#f97316"; return "#dc2626";
 }
+function cityMapClean(pct){
+  pct=pct||0; const amb=pct>=70?.9:pct>=35?.6:.34;
+  const polys=BAIRROS.map(b=>`<path d="${b.d}" fill="currentColor" fill-opacity="${(.16+.4*amb).toFixed(2)}" stroke="currentColor" stroke-width="1.5" stroke-opacity=".85"/>`).join("");
+  return `<svg viewBox="62 76 400 212" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="color:var(--primary);width:100%;height:auto;display:block">
+    <path d="M-10,165 Q130,150 270,185 Q400,212 530,205" stroke="currentColor" stroke-width="9" fill="none" opacity=".3"/>
+    <path d="M75,-10 Q120,90 215,165 Q250,190 270,185" stroke="currentColor" stroke-width="6" fill="none" opacity=".28"/>
+    ${polys}
+  </svg>`;
+}
 function cityMapSVG(pct){
   const fase=pct>=70?3:pct>=35?2:1;
   const faseTxt=fase===3?"MUNICÍPIO SAUDÁVEL":fase===2?"EM RECUPERAÇÃO":"MUNICÍPIO VULNERÁVEL";
@@ -2712,7 +2726,7 @@ function renderDashboard(){
   const lt=S.lastTopic;
   return `
   <div class="dash-hero">
-    <div class="dash-symbol" onclick="go('jornada')" style="cursor:pointer" title="Ver minha jornada na cidade">${cityMapSVG(pct)}</div>
+    <div class="dash-symbol" onclick="go('jornada')" title="Ver minha jornada na cidade">${cityMapClean(pct)}</div>
     <div class="dash-hero-main">
       <div class="dash-rank">${rank.ic} ${rank.n}</div>
       <h1 class="dash-hello">Olá, ${nome}!</h1>
@@ -2991,9 +3005,10 @@ function renderDia(){
   // questões
   const qbox=document.getElementById("diaQ");
   qbox.innerHTML=qs.map((o,idx)=>{
-    const key=o.tid+":"+o.qi, done=!!(S.qSeen&&S.qSeen[key]), pick=(S.qPick||{})[key], corr=o.q.correct;
+    const qkey=o.tid+":"+o.qi, dkey=seed+":"+idx;
+    const done=!!(S.diaSeen&&S.diaSeen[dkey]!=null), pick=(S.diaSeen||{})[dkey], corr=o.q.correct;
     const opts=o.q.opts.map((op,i)=>{let cls="qopt";if(done){if(i===corr)cls+=" correct";else if(i===pick)cls+=" wrong";}
-      return `<button class="${cls}" ${done?"disabled":""} onclick="answerDiaQ('${key}',${i},${corr},this)">${String.fromCharCode(65+i)}) ${op}</button>`;}).join("");
+      return `<button class="${cls}" ${done?"disabled":""} onclick="answerDiaQ('${dkey}','${qkey}',${i},${corr},this)">${String.fromCharCode(65+i)}) ${op}</button>`;}).join("");
     return `<div class="qcard"${done?' data-done="1"':''}><div class="qmeta">${o.mod} · ${o.top}</div>
       <div class="qtext">${idx+1}. ${o.q.stem}</div>
       <div class="qopts">${opts}</div>
@@ -3003,13 +3018,14 @@ function renderDia(){
   const fcbox=document.getElementById("diaFC");
   fcbox.innerHTML=cards.map(o=>flipCardHTML(o)).join("");
 }
-function answerDiaQ(key,choice,correct,btn){
+function answerDiaQ(dkey,qkey,choice,correct,btn){
   const parent=btn.closest(".qcard"); if(!parent||parent.dataset.done)return; parent.dataset.done="1";
   parent.querySelectorAll(".qopt").forEach((b,i)=>{b.classList.add(i===correct?"correct":(i===choice?"wrong":""));b.disabled=true;});
   const ex=parent.querySelector(".qexp"); if(ex)ex.style.display="block";
-  S.qSeen=S.qSeen||{}; S.qRight=S.qRight||{}; S.qPick=S.qPick||{};
-  S.qSeen[key]=true; S.qPick[key]=choice;
-  if(choice===correct){S.qRight[key]=true;addXP(12,"questão certa");}else addXP(4,"questão respondida");
+  S.diaSeen=S.diaSeen||{}; S.qSeen=S.qSeen||{}; S.qRight=S.qRight||{}; S.qPick=S.qPick||{};
+  S.diaSeen[dkey]=choice;            /* estado do dia (restaura no reload) */
+  S.qSeen[qkey]=true; S.qPick[qkey]=choice;   /* registro p/ RADAR + Central */
+  if(choice===correct){S.qRight[qkey]=true;addXP(12,"questão certa");}else addXP(4,"questão respondida");
   saveState();
 }
 function completeDailyGoal(){
