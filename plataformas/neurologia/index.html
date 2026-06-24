@@ -8,32 +8,33 @@
 <meta name="description" content="Plataforma de estudos de Neurologia para provas de residência médica (ENARE, Revalida, SUS-SP, PSU-MG, SES-PE, SES-RJ)." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Raleway:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Great+Vibes&family=Parisienne&family=Raleway:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    NEUROATLAS · ELID — DESIGN SYSTEM
    ============================================================ */
 :root{
-  --font-display:'Fraunces', Georgia, serif;
-  --font-script:'Beau Rivage', 'Great Vibes', cursive;
+  --font-display:'Cormorant Garamond', Georgia, serif;
+  --font-script:'Great Vibes', cursive;
+  --font-brand:'Parisienne', 'Great Vibes', cursive;
   --font-body:'Raleway', system-ui, sans-serif;
   --font-mono:'Spline Sans Mono', ui-monospace, monospace;
 
-  /* DARK (default) — premium feminino, ameixa/violeta */
-  --bg:#1B1230;
-  --bg-grad-1:#2c1d44;
-  --bg-grad-2:#160f26;
-  --surface:rgba(48,33,72,0.62);
-  --surface-solid:#271a3d;
-  --surface-2:rgba(62,44,90,0.52);
-  --border:rgba(196,168,224,0.16);
-  --border-strong:rgba(206,178,232,0.32);
-  --text:#EAF0FF;
-  --text-soft:#A7B3CE;
-  --text-dim:#6B7795;
+  /* DARK (default) — ELID Deep Plum + acento NeuroAtlas */
+  --bg:#2d1b2e;
+  --bg-grad-1:#37213a;
+  --bg-grad-2:#20131f;
+  --surface:rgba(62,40,60,0.62);
+  --surface-solid:#3a2438;
+  --surface-2:rgba(78,50,74,0.50);
+  --border:rgba(201,160,176,0.16);
+  --border-strong:rgba(201,160,176,0.30);
+  --text:#F5EEF2;
+  --text-soft:#CBB6C4;
+  --text-dim:#8E7888;
 
-  --teal:#2DD4BF;
-  --cyan:#38BDF8;
+  --teal:#06D6C1;
+  --cyan:#3FE3D4;
   --rose:#FB7185;
   --violet:#A78BFA;
   --gold:#F5C451;
@@ -43,7 +44,7 @@
 
   --accent:var(--teal);
   --accent-2:var(--cyan);
-  --glow:0 0 0 1px rgba(45,212,191,.25), 0 8px 40px -8px rgba(45,212,191,.35);
+  --glow:0 0 0 1px rgba(6,214,193,.25), 0 8px 40px -8px rgba(6,214,193,.35);
   --shadow:0 18px 50px -18px rgba(0,0,0,.6);
   --radius:18px;
   --radius-sm:12px;
@@ -81,17 +82,21 @@ body{
   color:var(--text);
   background:var(--bg);
   background-image:
-    radial-gradient(1100px 720px at 88% -8%, rgba(167,139,250,.22), transparent 58%),
-    radial-gradient(950px 680px at -8% 6%, rgba(244,114,182,.18), transparent 55%),
-    radial-gradient(820px 620px at 50% 116%, rgba(45,212,191,.12), transparent 60%),
-    radial-gradient(600px 500px at 25% 60%, rgba(129,140,248,.10), transparent 60%),
-    linear-gradient(155deg,var(--bg-grad-1),var(--bg-grad-2));
+    radial-gradient(1200px 800px at 92% 6%, rgba(6,214,193,.20), transparent 56%),
+    radial-gradient(900px 700px at 8% 2%, rgba(247,231,206,.08), transparent 55%),
+    radial-gradient(720px 560px at 50% 118%, rgba(6,214,193,.10), transparent 60%),
+    linear-gradient(150deg,#34203a 0%,var(--bg) 52%,var(--bg-grad-2) 100%);
   background-attachment:fixed;
   -webkit-font-smoothing:antialiased;
   line-height:1.55;
   transition:background-color .4s var(--ease), color .3s var(--ease);
   overflow-x:hidden;
 }
+/* Cérebro line-art decorativo (assinatura visual NeuroAtlas) */
+.elid-brain-glow{position:fixed;top:44%;right:0;width:46vw;max-width:760px;height:46vw;max-height:760px;transform:translateY(-50%);border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle,rgba(6,214,193,.20),rgba(6,214,193,.07) 42%,transparent 70%);filter:blur(24px)}
+.elid-brain-bg{position:fixed;top:50%;right:-5%;transform:translateY(-50%);width:46vw;max-width:780px;pointer-events:none;z-index:-1;opacity:.05;color:var(--accent)}
+.elid-brain-bg svg{width:100%;height:auto;display:block}
+@media(max-width:940px){.elid-brain-bg,.elid-brain-glow{display:none}}
 h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.12;letter-spacing:0}
 .mono{font-family:var(--font-mono)}
 a{color:var(--accent);text-decoration:none}
@@ -122,7 +127,7 @@ a{color:var(--accent);text-decoration:none}
 .brand-mark{display:flex;align-items:center;gap:12px;margin-bottom:18px}
 .brand-logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center}
 .brand-logo .brain-ic{width:100%;height:100%;color:var(--rose)}
-.brand-name{font-family:var(--font-display);font-weight:700;font-size:1.55rem;letter-spacing:0;line-height:1.05}
+.brand-name{font-family:var(--font-brand);font-weight:400;font-size:1.7rem;letter-spacing:0;line-height:1.05}
 .brand-name small{display:block;font-family:var(--font-body);font-weight:600;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim)}
 .auth-card h2{font-size:1.5rem;margin:6px 0 4px}
 .auth-card p.sub{color:var(--text-soft);font-size:.9rem;margin-bottom:22px}
@@ -146,7 +151,7 @@ a{color:var(--accent);text-decoration:none}
 .side-head{display:flex;align-items:center;gap:11px;padding:18px 16px 14px;border-bottom:1px solid var(--border)}
 .side-head .brand-logo{width:46px;height:46px}
 .side-title{min-width:0}
-.side-title b{font-family:var(--font-display);font-size:1.4rem;font-weight:700;line-height:1.05;letter-spacing:0}
+.side-title b{font-family:var(--font-brand);font-size:1.6rem;font-weight:400;line-height:1.05;letter-spacing:0}
 .side-title small{display:block;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim)}
 .side-title .elid-full{font-family:var(--font-body);font-size:.6rem;font-weight:600;letter-spacing:.04em;text-transform:none;line-height:1.3;color:var(--text-dim);margin-top:3px;white-space:normal}
 .sidebar.collapsed .side-title,.sidebar.collapsed .nav-label,.sidebar.collapsed .side-foot-text,.sidebar.collapsed .np-text{display:none}
@@ -491,6 +496,9 @@ table.med tr:hover td{background:var(--surface-2)}
 </head>
 <body>
 
+<div class="elid-brain-glow" aria-hidden="true"></div>
+<div class="elid-brain-bg" aria-hidden="true"><svg viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><!-- contorno externo do cérebro (vista lateral) --><path d="M120 96c-22 4-40 20-46 42-4 14-2 26 4 36-14 8-22 24-20 41 2 16 12 29 26 35-3 14 3 29 16 36 11 6 24 5 34-2 8 12 22 19 37 18 14-1 26-9 32-21 13 5 28 1 37-10 7-9 9-21 5-31 16-6 27-22 26-40-1-15-10-28-23-34 8-12 9-28 2-41-8-15-24-24-41-23 0-18-12-34-29-39-17-5-35 1-46 14-14-5-30-3-41 7-4 4-7 8-10 13" stroke-width="3"/><!-- haste / tronco cerebral --><path d="M232 338c4 12 4 26 1 39M214 350c-6 9-16 14-27 13"/><!-- cerebelo --><path d="M250 318c20 10 33 30 33 53M262 312c14 7 24 19 28 35M256 332c10 6 17 16 19 28"/><!-- sulcos / giros internos --><path d="M96 156c20-6 33 4 38 22 4 16-3 30-18 38"/><path d="M150 110c14 10 18 28 9 43-7 12-21 18-35 16"/><path d="M196 100c16 6 24 24 17 40-6 14-22 22-37 18"/><path d="M250 116c18 2 30 19 26 37-3 15-17 26-33 25"/><path d="M300 134c16 6 23 24 15 39-7 13-23 19-38 14"/><path d="M340 168c12 8 14 25 4 36-8 9-22 11-33 5"/><path d="M104 214c22-4 36 8 38 28 1 16-9 30-25 34"/><path d="M160 200c16 9 20 28 10 43-8 12-24 17-39 12"/><path d="M214 196c17 5 26 23 19 40-6 15-23 23-39 18"/><path d="M268 206c16 7 22 25 13 40-7 13-24 19-39 12"/><path d="M316 224c13 8 16 24 6 35-7 9-21 12-32 7"/><path d="M120 278c18-2 30 10 30 27 0 14-10 26-24 28"/><path d="M172 270c14 9 16 26 6 39-8 11-23 14-36 9"/><path d="M224 272c15 6 21 23 13 37-7 13-22 19-36 13"/><path d="M276 280c12 7 16 22 7 33-7 9-20 12-31 7"/></svg></div>
+
 <!-- ============ LOADER ============ -->
 <div class="loader" id="loader"><div style="text-align:center"><div class="ring" style="margin:0 auto 14px"></div><div style="color:var(--text-dim);font-size:.85rem">Carregando NeuroAtlas…</div></div></div>
 
@@ -499,7 +507,7 @@ table.med tr:hover td{background:var(--surface-2)}
   <div class="auth-card glass" style="text-align:center">
     <div class="brand-mark" style="justify-content:center"><div class="brand-logo"><svg class="brain-ic" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="currentColor"><path d="M32 9c-2-1.6-4.7-2-7.1-1-1.7.7-3 2-3.6 3.7-2.7-.5-5.4.8-6.7 3.3-.9 1.7-.9 3.6-.2 5.3-2.2 1-3.8 3.2-3.8 5.8 0 1.3.4 2.5 1 3.5-1.6 1.2-2.6 3.1-2.6 5.2 0 2.3 1.2 4.3 3 5.4-.4 1-.5 2.1-.3 3.2.5 2.7 2.8 4.7 5.5 4.9.4 2.1 1.9 3.9 4 4.6 1.9.6 3.9.2 5.4-.9 1 .9 2.3 1.4 3.6 1.4V9Z"/><path d="M32 9c2-1.6 4.7-2 7.1-1 1.7.7 3 2 3.6 3.7 2.7-.5 5.4.8 6.7 3.3.9 1.7.9 3.6.2 5.3 2.2 1 3.8 3.2 3.8 5.8 0 1.3-.4 2.5-1 3.5 1.6 1.2 2.6 3.1 2.6 5.2 0 2.3-1.2 4.3-3 5.4.4 1 .5 2.1.3 3.2-.5 2.7-2.8 4.7-5.5 4.9-.4 2.1-1.9 3.9-4 4.6-1.9.6-3.9.2-5.4-.9-1 .9-2.3 1.4-3.6 1.4V9Z"/><path d="M29.5 51h5l-.5 5.5c-.1 1.2-1 2-2 2s-1.9-.8-2-2L29.5 51Z"/></g><g stroke="var(--bg)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.55"><path d="M32 13v34"/><path d="M22 19c2.5.8 4 3 4 5.8M42 19c-2.5.8-4 3-4 5.8"/><path d="M18 30c3 .4 5 2.5 5.4 5.6M46 30c-3 .4-5 2.5-5.4 5.6"/><path d="M23 41c2.3.3 3.8 1.8 4.2 4M41 41c-2.3.3-3.8 1.8-4.2 4"/></g></svg></div><div class="brand-name">NeuroAtlas</div></div>
     <div class="elid-badge" style="justify-content:center;margin:6px 0 14px"><span class="elid-dot"></span> ELID · Ensino Legitimado para Internos em Desenvolvimento</div>
-    <h2 style="font-family:var(--font-display)">Acesso pelo ELID</h2>
+    <h2 style="font-family:var(--font-brand);font-weight:400;font-size:1.9rem">Acesso pelo ELID</h2>
     <p class="sub">O acesso ao NeuroAtlas é feito pela plataforma ELID. Faça login lá para continuar seus estudos.</p>
     <a class="btn btn-primary" style="width:100%;justify-content:center;text-decoration:none" href="../../landing-page/">Ir para o ELID</a>
     <div class="auth-foot"><span style="color:var(--rose);font-weight:700">ELID</span> · Inspirado em Elisabete Delfini ✦</div>
