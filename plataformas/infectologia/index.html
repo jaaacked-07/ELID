@@ -1000,6 +1000,15 @@ if(!document.getElementById('ac-style')){
   .ac-mask{position:absolute;background:var(--accent);border-radius:4px;opacity:.92}
   .ac-srs-grade{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
   .ac-srs-grade button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;padding:8px 14px;cursor:pointer;font-size:.82rem}
+  .ac-srs-grade button:hover{border-color:var(--accent);color:var(--accent)}
+  .fc-status{min-height:15px;text-align:center;font-size:.76rem;color:#3ddc84;margin-top:6px}
+  .mod-card.done{border-color:var(--accent)!important;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:66px;text-align:center}
+  .mod-card.done h4{margin:0;text-align:center}
+  .mod-card.done .tag-soon{display:none}
+  .mod-card.done:hover{box-shadow:0 8px 24px var(--accent-soft)}
+  #gate .gate-name{font-family:'Parisienne',cursive!important}
+  #gate .gate-supra{font-family:'Cormorant Garamond',serif!important}
+  #gate .gate-desc{font-family:'Inter',sans-serif!important}
   `;
   document.head.appendChild(st);
 }
@@ -1522,13 +1531,20 @@ function clozeFront(s){return (s||'').replace(/\{\{([^}]+)\}\}/g,'<b style="colo
 function clozeBack(s){return (s||'').replace(/\{\{([^}]+)\}\}/g,'<b style="color:var(--accent)">$1</b>');}
 function renderFlashcards(arg,d){
   if(!d.flashcards||!d.flashcards.length) return ph('Flashcards em breve');
-  var h='<p class="page-sub">'+d.flashcards.length+' flashcards do módulo. Toque para virar. Use “+ Meu baralho” para enviar à Revisão Espaçada.</p>';
+  var ss=S(); var srs=ss.srs||{};
+  var h='<p class="page-sub">'+d.flashcards.length+' flashcards do módulo. Toque para virar e classifique (Anki) — vai direto para a Revisão Espaçada, sincronizada com a Central.</p>';
   d.flashcards.forEach(function(c,fi){
+    var id='m_'+arg.replace(/\W/g,'')+'_'+fi;
     var front = c.type==='cloze'?clozeFront(c.front):c.front;
-    var back = c.type==='cloze'?clozeBack(c.front):c.back;
-    h+='<div class="fc" onclick="acFlip(this)"><div class="fc-in"><span class="fc-side">frente</span>'+
-       '<span class="fc-add" onclick="event.stopPropagation();acAddDeck(\''+arg+'\','+fi+')">+ Meu baralho</span>'+
-       '<span class="fc-f">'+front+'</span><span class="fc-b" style="display:none">'+back+'</span></div></div>';
+    var back = c.type==='cloze'?clozeBack(c.front):(c.back||'');
+    var e=srs[id]; var status=e?('✓ classificado · revisar em '+(e.interval||0)+'d'):'';
+    h+='<div class="fc" data-id="'+id+'"><div class="fc-in" onclick="acFlip(this.parentNode)"><span class="fc-side">frente</span>'+
+       '<span class="fc-f">'+front+'</span><span class="fc-b" style="display:none">'+back+'</span></div>'+
+       '<div class="ac-srs-grade"><button onclick="acMGrade(\''+arg+'\','+fi+',0,this)">Errei</button>'+
+       '<button onclick="acMGrade(\''+arg+'\','+fi+',3,this)">Difícil</button>'+
+       '<button onclick="acMGrade(\''+arg+'\','+fi+',4,this)">Bom</button>'+
+       '<button onclick="acMGrade(\''+arg+'\','+fi+',5,this)">Fácil</button></div>'+
+       '<div class="fc-status">'+status+'</div></div>';
   });
   return h;
 }
@@ -1536,13 +1552,17 @@ window.acFlip=function(el){
   var f=el.querySelector('.fc-f'),b=el.querySelector('.fc-b'),s=el.querySelector('.fc-side');
   var show=f.style.display==='none'; f.style.display=show?'':'none'; b.style.display=show?'none':''; s.textContent=show?'frente':'verso';
 };
-window.acAddDeck=function(arg,fi){
-  var c=C[arg].flashcards[fi]; var ss=S(); ss.cards=ss.cards||[];
+window.acMGrade=function(arg,fi,q,btn){
+  var c=C[arg].flashcards[fi]; var id='m_'+arg.replace(/\W/g,'')+'_'+fi;
+  var ss=S(); ss.cards=ss.cards||[];
   var front=c.type==='cloze'?clozeFront(c.front):c.front;
   var back=c.type==='cloze'?clozeBack(c.front):(c.back||'');
-  var id='m_'+arg.replace(/\W/g,'')+'_'+fi;
-  if(ss.cards.some(function(x){return x.id===id;})){ toast('Já está no seu baralho'); return; }
-  ss.cards.push({id:id,front:front,back:back,type:c.type||'basic',top:C[arg].name}); save(); toast('Adicionado ao baralho ✓');
+  if(!ss.cards.some(function(x){return x.id===id;})) ss.cards.push({id:id,front:front,back:back,type:c.type||'basic',top:C[arg].name});
+  if(window.__srsReview) window.__srsReview(id,q); else save();
+  var e=(S().srs||{})[id]||{interval:0};
+  var card=btn.closest('.fc'); var st=card?card.querySelector('.fc-status'):null;
+  if(st) st.textContent='✓ classificado · revisar em '+(e.interval||0)+'d';
+  toast(q<3?'Vai voltar em breve ↻':'Enviado à Revisão Espaçada ✓');
 };
 
 /* ---- CHECKLIST ---- */
@@ -1740,6 +1760,20 @@ window.viewSRS=function(){
 };
 window.acGrade=function(id,q){ if(window.__srsReview)window.__srsReview(id,q); if(window.navigate)navigate('srs'); };
 
+window.viewModules=function(){
+  var h='<div class="view"><div class="page-title">'+gICON()+'<h1>Módulos</h1></div>'+
+    '<p class="page-sub">Matérias divididas por etiologia. Disciplinas concluídas aparecem contornadas no tom do acento.</p>';
+  for(var ck in CH){
+    h+='<div class="mod-div">'+CH[ck].replace(/^\d+\.\s/,'')+'</div><div class="mod-cards">';
+    (MODULES[ck]||[]).forEach(function(m,i){
+      var arg=ck+'|'+i, done=!!C[arg];
+      if(done) h+='<div class="mod-card done" onclick="navigate(\'module\',\''+arg+'\')"><h4>'+m+'</h4></div>';
+      else h+='<div class="mod-card" onclick="navigate(\'module\',\''+arg+'\')"><h4>'+m+'</h4><span class="tag-soon">em breve</span></div>';
+    });
+    h+='</div>';
+  }
+  return h+gfoot()+'</div>';
+};
 /* re-render se o usuário já estiver numa rota dinâmica */
 try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
 })();
