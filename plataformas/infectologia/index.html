@@ -121,7 +121,7 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 .page-sub{color:var(--muted);font-size:.9rem;margin-bottom:26px}
 
 /* hero dashboard */
-.hero{display:flex;gap:32px;align-items:center;flex-wrap:wrap;padding:30px;border-radius:22px;
+.hero{display:flex;gap:32px;align-items:center;flex-wrap:wrap;padding:30px;border-radius:22px;perspective:1100px;
   background:var(--panel);border:1px solid var(--line);margin-bottom:30px}
 .hero-symbol{position:relative;width:180px;height:180px;flex:none;color:var(--accent);cursor:pointer;
   display:flex;align-items:center;justify-content:center;transition:.3s}
@@ -158,6 +158,21 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 .hero-stats .hs-sub{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
 .hero-stats .hs-row{display:flex;justify-content:space-between;font-size:.74rem;color:var(--muted);margin-top:6px}
 .hero-stats .hs-tag{font-family:'Fraunces',serif;font-size:.9rem;color:var(--ink);margin-bottom:12px}
+
+/* card inicial = capa do livro (chamativo) */
+.hero-cover{position:relative;width:194px;height:256px;flex:none;cursor:pointer;border-radius:5px 13px 13px 5px;
+  background:linear-gradient(135deg,#3a2330,#241420 60%,#2d1b2e);
+  box-shadow:0 20px 44px rgba(0,0,0,.5),inset 0 0 0 1px rgba(245,159,10,.3);
+  border-left:9px solid rgba(245,159,10,.55);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;text-align:center;
+  transition:.35s cubic-bezier(.34,1.3,.64,1)}
+.hero-cover:hover{transform:translateY(-5px) rotateY(-9deg);box-shadow:0 30px 56px rgba(0,0,0,.55)}
+.hero-cover .hc-border{position:absolute;inset:12px;border:1.4px solid rgba(245,159,10,.45);border-radius:9px}
+.hero-cover .hc-border::after{content:'';position:absolute;inset:6px;border:1px solid rgba(245,159,10,.22);border-radius:6px}
+.hero-cover .hcv-logo{position:relative;width:78px;height:78px;color:var(--accent)}
+.hero-cover .hcv-logo svg{width:78px;height:78px}.hero-cover .sb-glow{inset:-12%}
+.hero-cover .hcv-ttl{font-family:'Parisienne',cursive;font-size:1.55rem;color:var(--accent);line-height:1.05}
+.hero-cover .hcv-sub{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(247,231,206,.6)}
 
 /* ---------- LIVRO INTERATIVO ---------- */
 .book-bar{display:flex;align-items:center;justify-content:center;gap:18px;margin:14px 0 22px}
@@ -369,7 +384,7 @@ let uid=null, unsubCentral=null;
 
 // ---------- estado ----------
 let S=loadLocal();
-function blankState(){return {_updated:0, done:{}, srs:{}, cards:[], notes:{}, dia:{}, diaSeen:{}, qSeen:0, qRight:0};}
+function blankState(){return {_updated:0, done:{}, srs:{}, cards:[], notes:{}, dia:{}, diaSeen:{}, qSeen:0, qRight:0, xp:0};}
 function loadLocal(){
   let base=blankState();
   try{
@@ -392,6 +407,7 @@ function mergeState(a,b){
   out.cards=[...(a.cards||[]),...(b.cards||[])].filter((c,i,arr)=>arr.findIndex(x=>x.id===c.id)===i);
   out.qSeen=Math.max(a.qSeen||0,b.qSeen||0);
   out.qRight=Math.max(a.qRight||0,b.qRight||0);
+  out.xp=Math.max(a.xp||0,b.xp||0);
   return out;
 }
 function sanitize(o){return JSON.parse(JSON.stringify(o));}
@@ -416,7 +432,7 @@ function pushRadar(){
     {[AREA_KEY]:{tot:S.qSeen||0, ac:S.qRight||0}},{merge:true}).catch(()=>{});
 }
 window.elidRegistrarQuestoes=function(areaKey, tot, ac){
-  S.qSeen=(S.qSeen||0)+tot; S.qRight=(S.qRight||0)+ac; saveState();
+  S.qSeen=(S.qSeen||0)+tot; S.qRight=(S.qRight||0)+ac; S.xp=(S.xp||0)+tot; saveState();
 };
 
 // ---------- CENTRAL (bidirecional) ----------
@@ -555,27 +571,40 @@ function foot(){return `<div class="page-foot">
   <div class="elid-credit"><b>E</b>LI<b>D</b> · <b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div>
   <div class="elid-tribute" style="margin-top:6px">Inspirado em <b>E</b>lisabete <b>D</b>elfini ✦</div></div>`;}
 
+// progresso da plataforma (0..1). Conteúdo concluído / total. Estrutura: TOTAL_ITEMS=0 => 0.
+function platformProgress(){
+  const done=Object.keys(S0().done||{}).length;
+  const tot=window.TOTAL_ITEMS||0;
+  if(!tot) return 0;
+  return Math.min(1, done/tot);
+}
+function totalAgents(){return Object.values(PATOGENOS).reduce((a,b)=>a+b.length,0);}
+// nº de patógenos liberados pela sequência de níveis. O ÚLTIMO só com plataforma 100%.
+function unlockedCount(){
+  const p=platformProgress(), n=totalAgents();
+  if(p>=1) return n;
+  return Math.max(0, Math.min(n-1, Math.floor(p*n)));
+}
+function platformLevel(){return unlockedCount()+1;}
 function collStats(){
-  const total=Object.values(PATOGENOS).reduce((a,b)=>a+b.length,0);
-  const unlocked=Object.keys((S0().done||{})).length?0:0; // estrutura: desbloqueio futuro
+  const total=totalAgents(), unlocked=unlockedCount();
   const pct=total?Math.round(unlocked/total*100):0;
   return {total,unlocked,pct};
 }
 function viewDashboard(nm){
-  const cs=collStats();
+  const cs=collStats(); const lvl=platformLevel();
   return `<div class="view">
     <div class="hero">
-      <div class="hero-stats" onclick="navigate('collection')" title="Abrir Coleção de Patógenos">
-        <span class="sb-glow"></span>
-        <div class="hs-tag">Coleção de Patógenos</div>
-        <div class="hs-big">${cs.unlocked}/${cs.total}</div>
-        <div class="hs-sub">Catalogados · ${cs.pct}%</div>
-        <div class="hs-row"><span>Toque para abrir o livro</span></div>
+      <div class="hero-cover" onclick="navigate('collection')" title="Abrir Coleção de Patógenos">
+        <div class="hc-border"></div>
+        <div class="hcv-logo"><span class="sb-glow"></span>${LOGO}</div>
+        <div class="hcv-ttl">Coleção de<br>Patógenos</div>
+        <div class="hcv-sub">Abrir o livro</div>
       </div>
       <div class="hero-info">
         <h2>Olá, ${nm}!</h2>
-        <div class="hero-rank">Coletor Iniciante</div>
-        <p class="page-sub" style="margin:0 0 8px">Progresso geral da coleção</p>
+        <div class="hero-rank">Nível ${lvl} · Coletor</div>
+        <p class="page-sub" style="margin:0 0 8px">Coleção: ${cs.unlocked}/${cs.total} catalogados · ${cs.pct}%</p>
         <div class="prog"><i style="width:${cs.pct}%"></i></div>
       </div>
     </div>
@@ -650,15 +679,40 @@ window.setTab=setTab;window.setSub=setSub;window.bindNotarea=bindNotarea;
 // ===== LIVRO v2 =====
 const SIL='<svg viewBox="0 0 120 120" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-width="2"><circle cx="60" cy="60" r="30"/><circle cx="60" cy="60" r="8" fill-opacity="0.4"/><g stroke-width="2"><line x1="60" y1="30" x2="60" y2="16"/><line x1="60" y1="90" x2="60" y2="104"/><line x1="30" y1="60" x2="16" y2="60"/><line x1="90" y1="60" x2="104" y2="60"/><line x1="39" y1="39" x2="29" y2="29"/><line x1="81" y1="39" x2="91" y2="29"/><line x1="39" y1="81" x2="29" y2="91"/><line x1="81" y1="81" x2="91" y2="91"/></g><circle cx="60" cy="14" r="4" fill-opacity="0.4"/><circle cx="60" cy="106" r="4" fill-opacity="0.4"/><circle cx="14" cy="60" r="4" fill-opacity="0.4"/><circle cx="106" cy="60" r="4" fill-opacity="0.4"/><circle cx="27" cy="27" r="3.5" fill-opacity="0.4"/><circle cx="93" cy="27" r="3.5" fill-opacity="0.4"/><circle cx="27" cy="93" r="3.5" fill-opacity="0.4"/><circle cx="93" cy="93" r="3.5" fill-opacity="0.4"/></svg>';
 const FICHA=['Nome','Grupo/Classificação','Família / Gênero','Reservatório / fonte','Via de transmissão','Principal doença','Clínica clássica','Diagnóstico de escolha','Tratamento de 1ª linha','Resistência importante','Prevenção','Pegadinha de prova','Macete de prova'];
-function isUnlocked(cap,i){const c=(S0().coll||{});return !!c[cap+':'+i];}
+function agentOrdinal(cap,i){let n=0;for(const c of Object.keys(PATOGENOS)){if(c===cap)return n+i;n+=PATOGENOS[c].length;}return n;}
+function isUnlocked(cap,i){return agentOrdinal(cap,i) < unlockedCount();}
 function capCount(cap){return PATOGENOS[cap].filter((_,i)=>isUnlocked(cap,i)).length;}
 let bk={screen:'cover',cap:null,i:null,opened:false};
 
 function viewCollection(){
   return `<div class="view"><div class="page-title">${ICONS.collection}<h1>Coleção de Patógenos</h1></div>
-    <p class="page-sub">Sua enciclopédia pessoal de Infectologia — cada patógeno dominado é uma conquista catalogada.</p>
+    <p class="page-sub">Sua enciclopédia pessoal de Infectologia — os patógenos são catalogados conforme você avança de nível na plataforma.</p>
     <div class="bookx"><div class="bookstage" id="bookstage"></div></div>
+    <div class="book-bar">
+      <button class="book-nav" id="bprev" title="Página anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="book-ind" id="bind">Capa</span>
+      <button class="book-nav" id="bnext" title="Próxima página"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
     ${foot()}</div>`;
+}
+function bookSeq(){
+  const seq=[{screen:'index'}];
+  Object.keys(PATOGENOS).forEach(cap=>{seq.push({screen:'cat',cap});PATOGENOS[cap].forEach((_,i)=>seq.push({screen:'agent',cap,i}));});
+  seq.push({screen:'stats'}); return seq;
+}
+function seqPos(){const seq=bookSeq();return seq.findIndex(s=>s.screen===bk.screen&&(s.cap||null)===(bk.cap||null)&&(s.i==null?null:s.i)===(bk.i==null?null:bk.i));}
+function bkStep(d){
+  if(!bk.opened)return;
+  const seq=bookSeq();let p=seqPos();if(p<0)p=0;p+=d;
+  if(p<0)p=0;if(p>=seq.length)p=seq.length-1;
+  const s=seq[p];bk.screen=s.screen;bk.cap=s.cap||null;bk.i=(s.i==null?null:s.i);renderPages();
+}
+function updateBar(){
+  const ind=document.getElementById('bind'),prev=document.getElementById('bprev'),next=document.getElementById('bnext');
+  if(!ind)return;
+  if(!bk.opened){ind.textContent='Capa';prev.disabled=true;next.disabled=true;return;}
+  const seq=bookSeq(),p=seqPos();
+  ind.textContent=(p+1)+' / '+seq.length;prev.disabled=p<=0;next.disabled=p>=seq.length-1;
 }
 function innerForScreen(){
   if(bk.screen==='cat')return bkCat(bk.cap);
@@ -666,7 +720,7 @@ function innerForScreen(){
   if(bk.screen==='stats')return bkStats();
   return bkIndex();
 }
-function renderPages(){const p=document.querySelector('.bookpages');if(p)p.innerHTML=innerForScreen();}
+function renderPages(){const p=document.querySelector('.bookpages');if(p)p.innerHTML=innerForScreen();updateBar();}
 function bkGo(screen,cap,i){bk.screen=screen;bk.cap=cap||null;bk.i=(i===undefined?null:i);renderPages();}
 window.bkGo=bkGo;
 function bindBook(){
@@ -684,7 +738,11 @@ function bindBook(){
       </div>
     </div></div>`;
   const hc=document.getElementById('hardcover');
-  hc.onclick=()=>{ if(!bk.opened){ bk.opened=true; bk.screen='index'; hc.classList.add('opened'); } };
+  hc.onclick=()=>{ if(!bk.opened){ bk.opened=true; bk.screen='index'; hc.classList.add('opened'); updateBar(); } };
+  const prev=document.getElementById('bprev'),next=document.getElementById('bnext');
+  if(prev)prev.onclick=()=>bkStep(-1);
+  if(next)next.onclick=()=>bkStep(1);
+  updateBar();
 }
 function bkIndex(){
   const total=Object.values(PATOGENOS).reduce((a,b)=>a+b.length,0);
@@ -719,7 +777,7 @@ function bkAgent(cap,i){
         <div class="bk-h2" style="text-align:left;margin-bottom:8px">${name}</div>${rows}
       </div>
     </div>
-    <div class="agent-status">${un?'Catalogado ✦':'Bloqueado — conclua o conteúdo do módulo para catalogar este patógeno.'}</div>
+    <div class="agent-status">${un?'Catalogado ✦':'Bloqueado — avance de nível na plataforma para catalogar este patógeno. A coleção só é concluída ao concluir a plataforma.'}</div>
   </div>`;
 }
 function bkStats(){
