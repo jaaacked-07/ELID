@@ -71,7 +71,7 @@ body.light .topbar{background:rgba(255,255,255,.6)}
 body.light .tb-burger,body.light .tb-btn{border-color:rgba(45,27,46,.3)}
 .tb-burger{color:var(--accent);border-color:transparent}
 .tb-btn:hover,.tb-burger:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 14px var(--accent-soft)}
-.tb-brand{font-family:'Parisienne',cursive;font-size:1.7rem;color:var(--ink)}
+.tb-brand{font-family:'Parisienne',cursive;font-size:1.7rem;color:var(--accent)}
 .tb-search{flex:1;max-width:360px;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:24px;
   border:1px solid rgba(45,27,46,.35);color:var(--muted)}
 body.light .tb-search{border-color:rgba(45,27,46,.25)}
@@ -91,7 +91,7 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 .sb-logo{position:relative;width:62px;height:62px;margin:0 auto 8px;color:var(--accent)}
 .sb-logo svg{width:62px;height:62px}
 .sb-glow{position:absolute;inset:-35%;background:radial-gradient(circle,var(--accent-soft),transparent 65%);filter:blur(10px);z-index:-1}
-.sb-name{font-family:'Parisienne',cursive;font-size:1.5rem;color:var(--ink)}
+.sb-name{font-family:'Parisienne',cursive;font-size:1.5rem;color:var(--accent)}
 .sb-credit{margin-top:4px}
 .nav{display:flex;flex-direction:column;gap:3px;margin-top:6px}
 .nav-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;cursor:pointer;
@@ -129,7 +129,57 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 .hero-symbol svg{width:160px;height:160px}
 .hero-symbol .sb-glow{inset:-20%}
 .hero-info{flex:1;min-width:240px}
-.hero-info h2{font-family:'Fraunces',serif;font-size:1.7rem;color:var(--accent);margin-bottom:4px}
+.hero-info h2{font-family:'Parisienne',cursive;font-size:2.4rem;color:var(--ivory);margin-bottom:4px}
+
+/* divisão de módulos (minimalista, acento) */
+.mod-div{font-family:'Fraunces',serif;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);margin:26px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.mod-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.mod-card{padding:18px;border-radius:14px;background:var(--panel);border:1px solid var(--line);cursor:pointer;transition:.25s}
+.mod-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px var(--accent-soft)}
+.mod-card h4{font-family:'Fraunces',serif;font-weight:500;font-size:1.02rem;color:var(--ink);margin-bottom:6px}
+.mod-card .tag-soon{font-size:.62rem}
+
+/* anotações agregadas */
+.note-block{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:18px;margin-bottom:14px}
+.note-block h4{font-family:'Fraunces',serif;color:var(--accent);font-size:1rem;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.note-block .open-link{font-size:.72rem;color:var(--accent);cursor:pointer;border:1px solid var(--line);border-radius:14px;padding:3px 10px}
+.note-block pre{white-space:pre-wrap;font-family:'Inter',sans-serif;font-size:.86rem;color:var(--ink);opacity:.9;line-height:1.5}
+.notarea{width:100%;min-height:200px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);
+  padding:14px;font-family:'Inter',sans-serif;font-size:.9rem;line-height:1.5;resize:vertical;outline:none}
+.notarea:focus{border-color:var(--accent)}
+
+/* card inicial = estatísticas da coleção (glow do acento) */
+.hero-stats{position:relative;width:230px;flex:none;cursor:pointer;padding:22px;border-radius:20px;
+  background:var(--panel);border:1px solid var(--line);text-align:center;transition:.3s}
+.hero-stats:hover{transform:scale(1.03)}
+.hero-stats .sb-glow{inset:-10%}
+.hero-stats .hs-big{font-family:'Fraunces',serif;font-size:2.6rem;color:var(--accent);line-height:1}
+.hero-stats .hs-sub{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.hero-stats .hs-row{display:flex;justify-content:space-between;font-size:.74rem;color:var(--muted);margin-top:6px}
+.hero-stats .hs-tag{font-family:'Fraunces',serif;font-size:.9rem;color:var(--ink);margin-bottom:12px}
+
+/* ---------- LIVRO INTERATIVO ---------- */
+.book-bar{display:flex;align-items:center;justify-content:center;gap:18px;margin:14px 0 22px}
+.book-nav{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--panel);
+  color:var(--accent);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s}
+.book-nav:hover{background:var(--accent-soft);box-shadow:0 0 16px var(--accent-soft)}
+.book-nav:disabled{opacity:.3;cursor:default}
+.book-ind{font-size:.78rem;color:var(--muted);letter-spacing:.06em;min-width:120px;text-align:center}
+.book-wrap{perspective:2200px;display:flex;justify-content:center}
+.book{position:relative;width:100%;max-width:880px;min-height:520px;border-radius:18px;
+  background:linear-gradient(135deg,rgba(245,159,10,.07),rgba(45,27,46,.25));
+  border:1px solid var(--line);box-shadow:0 30px 60px rgba(0,0,0,.35);overflow:hidden}
+.book::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--line);opacity:.5}
+.bpage{padding:40px 44px;animation:flip .55s cubic-bezier(.4,.1,.3,1) both;transform-origin:left center}
+@keyframes flip{from{opacity:0;transform:rotateY(-14deg)}to{opacity:1;transform:none}}
+.bpage.cover{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:520px}
+.bcover-logo{position:relative;width:120px;height:120px;color:var(--accent);margin-bottom:16px}
+.bcover-logo svg{width:120px;height:120px}
+.bcover-title{font-family:'Fraunces',serif;font-size:2.2rem;color:var(--accent)}
+.bcover-sub{color:var(--muted);font-size:.9rem;margin-top:8px;max-width:420px;line-height:1.5}
+.bchap-title{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--accent);margin-bottom:4px;text-align:center}
+.bchap-sub{text-align:center;color:var(--muted);font-size:.8rem;margin-bottom:22px}
 .hero-rank{display:inline-block;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
   border:1px solid var(--line);border-radius:20px;padding:4px 12px;margin:6px 0 14px}
 .prog{height:8px;border-radius:6px;background:rgba(245,159,10,.15);overflow:hidden;margin-top:6px}
@@ -191,7 +241,7 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
     <div class="gate-logo"><span class="gate-glow"></span><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round"><path d="M32 6 C44 9 54 11 58 12 C58 30 56 46 32 60 C8 46 6 30 6 12 C10 11 20 9 32 6 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><line x1="32" y1="20" x2="24" y2="28" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="20" x2="40" y2="28" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="24" y1="28" x2="32" y2="36" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="40" y1="28" x2="32" y2="36" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="24" y1="28" x2="20" y2="38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="40" y1="28" x2="44" y2="38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="20" y1="38" x2="28" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="36" x2="28" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="36" x2="38" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="44" y1="38" x2="38" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="28" y1="46" x2="32" y2="52" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="38" y1="46" x2="32" y2="52" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="20" y1="38" x2="32" y2="36" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="36" x2="44" y2="38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><circle cx="32" cy="20" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="24" cy="28" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="40" cy="28" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="20" cy="38" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="32" cy="36" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="44" cy="38" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="28" cy="46" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="38" cy="46" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="32" cy="52" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></div>
     <div class="gate-supra">Acesso pelo ELID</div>
     <div class="gate-name">InfectoAtlas</div>
-    <div class="elid-credit" style="margin-top:4px"><b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div>
+    <div class="elid-credit" style="margin-top:4px"><b>E</b>LI<b>D</b> · <b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div>
     <p class="gate-desc">Atlas de Infectologia da suíte ELID. O acesso é feito pela plataforma ELID.</p>
     <button class="btn-primary" id="go-elid">Ir para o ELID</button>
     <div class="elid-tribute" style="margin-top:22px">Inspirado em <b>E</b>lisabete <b>D</b>elfini ✦</div>
@@ -224,7 +274,7 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
     <div class="sb-head">
       <div class="sb-logo"><span class="sb-glow"></span><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round"><path d="M32 6 C44 9 54 11 58 12 C58 30 56 46 32 60 C8 46 6 30 6 12 C10 11 20 9 32 6 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><line x1="32" y1="20" x2="24" y2="28" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="20" x2="40" y2="28" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="24" y1="28" x2="32" y2="36" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="40" y1="28" x2="32" y2="36" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="24" y1="28" x2="20" y2="38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="40" y1="28" x2="44" y2="38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="20" y1="38" x2="28" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="36" x2="28" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="36" x2="38" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="44" y1="38" x2="38" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="28" y1="46" x2="32" y2="52" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="38" y1="46" x2="32" y2="52" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="20" y1="38" x2="32" y2="36" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="36" x2="44" y2="38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><circle cx="32" cy="20" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="24" cy="28" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="40" cy="28" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="20" cy="38" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="32" cy="36" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="44" cy="38" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="28" cy="46" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="38" cy="46" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="32" cy="52" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></div>
       <div class="sb-name">InfectoAtlas</div>
-      <div class="sb-credit elid-credit"><b>E</b>nsino <b>L</b>egitimado · <b>I</b>nternos em <b>D</b>esenvolvimento</div>
+      <div class="sb-credit elid-credit"><b>E</b>LI<b>D</b> · <b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div>
     </div>
     <nav class="nav" id="nav"></nav>
     <div class="sb-foot">
@@ -396,7 +446,8 @@ const ICONS={
   daily:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4" stroke-linecap="round"/></svg>',
   srs:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-3-6.7" stroke-linecap="round"/><path d="M21 4v5h-5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   lock:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
-  empty:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01" stroke-linecap="round"/></svg>'
+  empty:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01" stroke-linecap="round"/></svg>',
+  notes:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M6 3h9l5 5v13a0 0 0 0 1 0 0H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke-linejoin="round"/><path d="M14 3v6h6M9 13h6M9 17h4" stroke-linecap="round"/></svg>'
 };
 // abas padrão de cada módulo
 const TABS=[['teoria','Teoria'],['escores','Escores/Critérios'],['questoes','Questões'],['flashcards','Flashcards'],
@@ -415,13 +466,11 @@ function bootUI(){ buildNav(); renderRoute(); }
 function buildNav(){
   const nav=document.getElementById('nav');
   let h=`<div class="nav-item active" data-v="dashboard" onclick="navigate('dashboard')">${ICONS.dashboard}<span>Dashboard</span></div>`;
+  h+=`<div class="nav-item" data-v="modules" onclick="navigate('modules')">${ICONS.modules}<span>Módulos</span></div>`;
   h+=`<div class="nav-item" data-v="collection" onclick="navigate('collection')">${ICONS.collection}<span>Coleção de Patógenos</span></div>`;
   h+=`<div class="nav-item" data-v="daily" onclick="navigate('daily')">${ICONS.daily}<span>Estudos do Dia</span></div>`;
   h+=`<div class="nav-item" data-v="srs" onclick="navigate('srs')">${ICONS.srs}<span>Revisão Espaçada</span></div>`;
-  h+=`<div class="nav-sec">Módulos</div>`;
-  for(const ck in CH){
-    h+=`<div class="nav-item" data-v="ch:${ck}" onclick="navigate('modules','${ck}')">${ICONS.modules}<span>${CH[ck].replace(/^\d+\.\s/,'')}</span></div>`;
-  }
+  h+=`<div class="nav-item" data-v="notes" onclick="navigate('notes')">${ICONS.notes}<span>Minhas Anotações</span></div>`;
   nav.innerHTML=h;
 }
 function setActive(v){document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.v===v));}
@@ -430,60 +479,72 @@ function renderRoute(){
   const main=document.getElementById('main');
   const nm=window.__USERNAME__||'Aluno';
   if(route.view==='dashboard'){setActive('dashboard');main.innerHTML=viewDashboard(nm);}
-  else if(route.view==='collection'){setActive('collection');main.innerHTML=viewCollection();}
+  else if(route.view==='collection'){setActive('collection');main.innerHTML=viewCollection();bindBook();}
   else if(route.view==='daily'){setActive('daily');main.innerHTML=viewDaily();}
   else if(route.view==='srs'){setActive('srs');main.innerHTML=viewSRS();}
-  else if(route.view==='modules'){setActive('ch:'+route.arg);main.innerHTML=viewModules(route.arg);}
-  else if(route.view==='module'){main.innerHTML=viewModule(route.arg);}
+  else if(route.view==='notes'){setActive('notes');main.innerHTML=viewNotes();}
+  else if(route.view==='modules'){setActive('modules');main.innerHTML=viewModules();}
+  else if(route.view==='module'){setActive('modules');main.innerHTML=viewModule(route.arg);bindNotarea(route.arg);}
 }
 
 function foot(){return `<div class="page-foot">
-  <div class="elid-credit"><b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div>
+  <div class="elid-credit"><b>E</b>LI<b>D</b> · <b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div>
   <div class="elid-tribute" style="margin-top:6px">Inspirado em <b>E</b>lisabete <b>D</b>elfini ✦</div></div>`;}
 
-function viewDashboard(nm){
+function collStats(){
   const total=Object.values(PATOGENOS).reduce((a,b)=>a+b.length,0);
-  const unlocked=0;
+  const unlocked=Object.keys((S0().done||{})).length?0:0; // estrutura: desbloqueio futuro
+  const pct=total?Math.round(unlocked/total*100):0;
+  return {total,unlocked,pct};
+}
+function viewDashboard(nm){
+  const cs=collStats();
   return `<div class="view">
     <div class="hero">
-      <div class="hero-symbol" onclick="navigate('collection')" title="Abrir Coleção de Patógenos">
-        <span class="sb-glow"></span>${LOGO}
+      <div class="hero-stats" onclick="navigate('collection')" title="Abrir Coleção de Patógenos">
+        <span class="sb-glow"></span>
+        <div class="hs-tag">Coleção de Patógenos</div>
+        <div class="hs-big">${cs.unlocked}/${cs.total}</div>
+        <div class="hs-sub">Catalogados · ${cs.pct}%</div>
+        <div class="hs-row"><span>Toque para abrir o livro</span></div>
       </div>
       <div class="hero-info">
         <h2>Olá, ${nm}!</h2>
         <div class="hero-rank">Coletor Iniciante</div>
-        <p class="page-sub" style="margin:0 0 8px">Coleção de Patógenos — ${unlocked}/${total} catalogados</p>
-        <div class="prog"><i style="width:${total?Math.round(unlocked/total*100):0}%"></i></div>
+        <p class="page-sub" style="margin:0 0 8px">Progresso geral da coleção</p>
+        <div class="prog"><i style="width:${cs.pct}%"></i></div>
       </div>
     </div>
     <div class="grid grid-4">
       <div class="card"><div class="stat-n">${S0().qSeen||0}</div><div class="stat-l">Questões</div></div>
       <div class="card"><div class="stat-n">${(S0().cards||[]).length}</div><div class="stat-l">Flashcards</div></div>
       <div class="card"><div class="stat-n">${(window.__cardsDue?window.__cardsDue():[]).length}</div><div class="stat-l">A revisar</div></div>
-      <div class="card"><div class="stat-n">${unlocked}</div><div class="stat-l">Patógenos</div></div>
+      <div class="card"><div class="stat-n">${cs.unlocked}</div><div class="stat-l">Patógenos</div></div>
     </div>
     <div class="sec-title">Acesso rápido</div>
     <div class="grid grid-3">
+      <div class="card qa" onclick="navigate('modules')"><h3>Módulos</h3><p>Matérias divididas por etiologia.</p></div>
       <div class="card qa" onclick="navigate('daily')"><h3>Estudos do Dia</h3><p>10 itens selecionados por dia.</p></div>
       <div class="card qa" onclick="navigate('srs')"><h3>Revisão Espaçada</h3><p>Seus flashcards no prazo.</p></div>
-      <div class="card qa" onclick="navigate('modules','bases')"><h3>Começar pelos módulos</h3><p>Bases da Infectologia.</p></div>
     </div>
     <div class="sec-title">Continue de onde parou</div>
-    <div class="card"><p class="page-sub" style="margin:0">Nenhum módulo iniciado ainda — escolha um capítulo no menu.</p></div>
+    <div class="card"><p class="page-sub" style="margin:0">Nenhum módulo iniciado ainda — abra "Módulos" no menu.</p></div>
     ${foot()}
   </div>`;
 }
 
-function viewModules(ck){
-  let body='';
-  (MODULES[ck]||[]).forEach((m,i)=>{
-    body+=`<div class="mod-item" onclick="navigate('module','${ck}|${i}')"><span>${m}</span><span class="tag-soon">em breve</span></div>`;
-  });
-  return `<div class="view">
-    <div class="page-title">${ICONS.modules}<h1>${CH[ck]}</h1></div>
-    <p class="page-sub">Selecione um módulo. A estrutura está pronta; o conteúdo entra em seguida.</p>
-    <div class="acc open"><div class="acc-body">${body}</div></div>
-    ${foot()}</div>`;
+function viewModules(){
+  let h=`<div class="view"><div class="page-title">${ICONS.modules}<h1>Módulos</h1></div>
+    <p class="page-sub">Matérias divididas por etiologia. A estrutura está pronta; o conteúdo entra em seguida.</p>`;
+  for(const ck in CH){
+    h+=`<div class="mod-div">${CH[ck].replace(/^\d+\.\s/,'')}</div><div class="mod-cards">`;
+    (MODULES[ck]||[]).forEach((m,i)=>{
+      h+=`<div class="mod-card" onclick="navigate('module','${ck}|${i}')"><h4>${m}</h4><span class="tag-soon">em breve</span></div>`;
+    });
+    h+=`</div>`;
+  }
+  h+=foot()+`</div>`;
+  return h;
 }
 
 let curTab='teoria', curSub='entendendo';
@@ -491,11 +552,16 @@ function viewModule(arg){
   const [ck,idx]=arg.split('|'); const name=(MODULES[ck]||[])[+idx]||'Módulo';
   let tabsH=TABS.map(([k,l])=>`<div class="tab ${k===curTab?'active':''}" onclick="setTab('${arg}','${k}')">${l}</div>`).join('');
   let inner;
+  const key=ck+'|'+idx;
   if(curTab==='teoria'){
     const subs=SUBTABS.map(([k,l])=>`<div class="subtab ${k===curSub?'active':''}" onclick="setSub('${arg}','${k}')">${l}</div>`).join('');
     inner=`<div class="subtabs">${subs}</div>${placeholder('Conteúdo da teoria em breve')}`;
   }else if(curTab==='flashcards'){
-    inner=`<div class="fc-create">＋ Criar flashcard</div>${placeholder('Flashcards do módulo em breve')}`;
+    inner=placeholder('Flashcards do módulo em breve');
+  }else if(curTab==='notas'){
+    const val=(S0().notes||{})[key]||'';
+    inner=`<p class="page-sub" style="margin:0 0 10px">Suas anotações deste módulo (também aparecem em "Minhas Anotações").</p>
+      <textarea class="notarea" id="notarea" placeholder="Escreva aqui...">${val.replace(/</g,'&lt;')}</textarea>`;
   }else{
     inner=placeholder('Conteúdo em breve');
   }
@@ -507,30 +573,84 @@ function viewModule(arg){
     ${inner}
     ${foot()}</div>`;
 }
-function setTab(arg,k){curTab=k; if(k==='teoria')curSub='entendendo'; document.getElementById('main').innerHTML=viewModule(arg);}
+function setTab(arg,k){curTab=k; if(k==='teoria')curSub='entendendo'; document.getElementById('main').innerHTML=viewModule(arg); bindNotarea(arg);}
 function setSub(arg,k){curSub=k; document.getElementById('main').innerHTML=viewModule(arg);}
-window.setTab=setTab;window.setSub=setSub;
-
-function viewCollection(){
-  let h=`<div class="view"><div class="page-title">${ICONS.collection}<h1>Coleção de Patógenos</h1></div>
-    <p class="page-sub">Álbum científico — patógenos são catalogados conforme você avança nos módulos.</p>`;
-  for(const cap in PATOGENOS){
-    h+=`<div class="sec-title">${cap}</div><div class="patg-grid">`;
-    PATOGENOS[cap].forEach(p=>{
-      h+=`<div class="patg locked" title="Bloqueado">${ICONS.lock.replace('<svg','<svg class="lk"')}<span>${p}</span></div>`;
-    });
-    h+=`</div>`;
-  }
-  const total=Object.values(PATOGENOS).reduce((a,b)=>a+b.length,0);
-  h+=`<div class="sec-title">Minha Coleção</div>
-    <div class="grid grid-4">
-      <div class="card"><div class="stat-n">0</div><div class="stat-l">Desbloqueados</div></div>
-      <div class="card"><div class="stat-n">${total}</div><div class="stat-l">Total</div></div>
-      <div class="card"><div class="stat-n">0%</div><div class="stat-l">Concluído</div></div>
-      <div class="card"><div class="stat-n">—</div><div class="stat-l">Último adquirido</div></div>
-    </div>${foot()}</div>`;
-  return h;
+function bindNotarea(arg){
+  const ta=document.getElementById('notarea'); if(!ta) return;
+  ta.addEventListener('input',()=>{
+    const S=window.__S(); S.notes=S.notes||{}; S.notes[arg]=ta.value; window.__save();
+  });
 }
+window.setTab=setTab;window.setSub=setSub;window.bindNotarea=bindNotarea;
+
+let bookPage=0;
+function statsHTML(total){
+  const cs=collStats();
+  const perCap=Object.keys(PATOGENOS).map(c=>`<div class="card"><div class="stat-n">0</div><div class="stat-l">${c}</div></div>`).join('');
+  return `<div class="bchap-title">Minha Coleção</div><div class="bchap-sub">Estatísticas da coleção</div>
+    <div class="grid grid-4" style="margin-bottom:16px">
+      <div class="card"><div class="stat-n">${cs.unlocked}</div><div class="stat-l">Desbloqueados</div></div>
+      <div class="card"><div class="stat-n">${total}</div><div class="stat-l">Total</div></div>
+      <div class="card"><div class="stat-n">${cs.pct}%</div><div class="stat-l">Concluído</div></div>
+      <div class="card"><div class="stat-n">—</div><div class="stat-l">Último adquirido</div></div>
+    </div>
+    <div class="grid grid-4">${perCap}</div>`;
+}
+function bookPages(){
+  const total=Object.values(PATOGENOS).reduce((a,b)=>a+b.length,0);
+  const pages=[];
+  pages.push(`<div class="bpage cover"><div class="bcover-logo"><span class="sb-glow"></span>${LOGO}</div>
+    <div class="bcover-title">Coleção de Patógenos</div>
+    <div class="bcover-sub">Um álbum científico. Cada patógeno é catalogado conforme você conclui o conteúdo da plataforma.</div></div>`);
+  Object.keys(PATOGENOS).forEach(cap=>{
+    let cards='';
+    PATOGENOS[cap].forEach(p=>{cards+=`<div class="patg locked" title="Bloqueado">${ICONS.lock.replace('<svg','<svg class="lk"')}<span>${p}</span></div>`;});
+    pages.push(`<div class="bpage"><div class="bchap-title">${cap}</div>
+      <div class="bchap-sub">0/${PATOGENOS[cap].length} catalogados</div>
+      <div class="patg-grid">${cards}</div></div>`);
+  });
+  pages.push(`<div class="bpage">${statsHTML(total)}</div>`);
+  return pages;
+}
+function viewCollection(){
+  const pages=bookPages();
+  if(bookPage>=pages.length)bookPage=0;
+  return `<div class="view"><div class="page-title">${ICONS.collection}<h1>Coleção de Patógenos</h1></div>
+    <div class="book-bar">
+      <button class="book-nav" id="bprev" title="Anterior">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="book-ind" id="bind"></span>
+      <button class="book-nav" id="bnext" title="Próxima">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+    <div class="book-wrap"><div class="book" id="book">${pages[bookPage]}</div></div>
+    ${foot()}</div>`;
+}
+function bindBook(){
+  const pages=bookPages();
+  const ind=document.getElementById('bind'),prev=document.getElementById('bprev'),next=document.getElementById('bnext'),book=document.getElementById('book');
+  if(!book)return;
+  function lbl(){if(bookPage===0)return 'Capa';if(bookPage===pages.length-1)return 'Estatísticas';return 'Página '+bookPage+' de '+(pages.length-2);}
+  function upd(){book.innerHTML=pages[bookPage];ind.textContent=lbl();prev.disabled=bookPage===0;next.disabled=bookPage===pages.length-1;}
+  prev.onclick=()=>{if(bookPage>0){bookPage--;upd();}};
+  next.onclick=()=>{if(bookPage<pages.length-1){bookPage++;upd();}};
+  upd();
+}
+function viewNotes(){
+  const notes=(S0().notes||{});
+  let blocks='';
+  Object.keys(notes).forEach(key=>{
+    const txt=(notes[key]||'').trim(); if(!txt)return;
+    const [ck,idx]=key.split('|'); const name=(MODULES[ck]||[])[+idx]||key;
+    blocks+=`<div class="note-block"><h4>${name} <span class="open-link" onclick="openMod('${key}')">Abrir módulo</span></h4><pre>${txt.replace(/</g,'&lt;')}</pre></div>`;
+  });
+  if(!blocks)blocks=placeholder('Você ainda não escreveu anotações. Anote ao final de cada módulo.');
+  return `<div class="view"><div class="page-title">${ICONS.notes}<h1>Minhas Anotações</h1></div>
+    <p class="page-sub">Tudo que você anota nos módulos aparece aqui, separado por módulo (somente leitura). Para editar, abra o módulo.</p>
+    ${blocks}${foot()}</div>`;
+}
+function openMod(key){curTab='notas';navigate('module',key);}
+window.openMod=openMod;
 
 function viewDaily(){
   return `<div class="view"><div class="page-title">${ICONS.daily}<h1>Estudos do Dia</h1></div>
