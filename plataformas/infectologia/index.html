@@ -129,7 +129,7 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 .hero-symbol svg{width:160px;height:160px}
 .hero-symbol .sb-glow{inset:-20%}
 .hero-info{flex:1;min-width:240px}
-.hero-info h2{font-family:'Parisienne',cursive;font-size:2.4rem;color:var(--ivory);margin-bottom:4px}
+.hero-info h2{font-family:'Parisienne',cursive;font-size:2.4rem;color:var(--ink);margin-bottom:4px}
 
 /* divisão de módulos (minimalista, acento) */
 .mod-div{font-family:'Fraunces',serif;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
@@ -259,6 +259,22 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 .pst{border:1px solid rgba(150,110,50,.3);border-radius:12px;background:rgba(255,255,255,.4);padding:16px;text-align:center}
 .pst-n{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--accent)}
 .pst-l{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#8a6a36;margin-top:2px}
+
+/* ===== Temas mais cobrados ===== */
+.exam-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.exam-tab{padding:8px 16px;border-radius:20px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer;font-size:.84rem;font-weight:600;transition:.2s}
+.exam-tab:hover{color:var(--ink)}
+.exam-tab.on{color:var(--accent);background:var(--accent-soft);border-color:var(--accent)}
+.heat{display:flex;flex-direction:column;gap:10px}
+.heat-row{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:var(--panel);cursor:pointer;transition:.2s}
+.heat-row:hover{border-color:var(--accent);transform:translateX(4px)}
+.heat-rank{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--accent);width:30px;flex:none;text-align:center}
+.heat-body{flex:1;min-width:0}
+.heat-body b{font-size:.92rem;color:var(--ink);display:block}
+.heat-track{height:7px;border-radius:5px;background:rgba(245,159,10,.15);overflow:hidden;margin-top:6px}
+.heat-track>i{display:block;height:100%;background:var(--accent);border-radius:5px}
+.heat-prio{font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);flex:none}
+.heat-stars{font-size:.8rem;color:var(--accent);flex:none;letter-spacing:1px}
 .hero-rank{display:inline-block;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
   border:1px solid var(--line);border-radius:20px;padding:4px 12px;margin:6px 0 14px}
 .prog{height:8px;border-radius:6px;background:rgba(245,159,10,.15);overflow:hidden;margin-top:6px}
@@ -527,7 +543,8 @@ const ICONS={
   srs:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-3-6.7" stroke-linecap="round"/><path d="M21 4v5h-5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   lock:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
   empty:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01" stroke-linecap="round"/></svg>',
-  notes:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M6 3h9l5 5v13a0 0 0 0 1 0 0H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke-linejoin="round"/><path d="M14 3v6h6M9 13h6M9 17h4" stroke-linecap="round"/></svg>'
+  notes:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M6 3h9l5 5v13a0 0 0 0 1 0 0H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke-linejoin="round"/><path d="M14 3v6h6M9 13h6M9 17h4" stroke-linecap="round"/></svg>',
+  trending:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 7h4v4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 };
 // abas padrão de cada módulo
 const TABS=[['teoria','Teoria'],['escores','Escores/Critérios'],['questoes','Questões'],['flashcards','Flashcards'],
@@ -550,6 +567,7 @@ function buildNav(){
   h+=`<div class="nav-item" data-v="collection" onclick="navigate('collection')">${ICONS.collection}<span>Coleção de Patógenos</span></div>`;
   h+=`<div class="nav-item" data-v="daily" onclick="navigate('daily')">${ICONS.daily}<span>Estudos do Dia</span></div>`;
   h+=`<div class="nav-item" data-v="srs" onclick="navigate('srs')">${ICONS.srs}<span>Revisão Espaçada</span></div>`;
+  h+=`<div class="nav-item" data-v="temas" onclick="navigate('temas')">${ICONS.trending}<span>Temas mais cobrados</span></div>`;
   h+=`<div class="nav-item" data-v="notes" onclick="navigate('notes')">${ICONS.notes}<span>Minhas Anotações</span></div>`;
   nav.innerHTML=h;
 }
@@ -562,6 +580,7 @@ function renderRoute(){
   else if(route.view==='collection'){setActive('collection');main.innerHTML=viewCollection();bindBook();}
   else if(route.view==='daily'){setActive('daily');main.innerHTML=viewDaily();}
   else if(route.view==='srs'){setActive('srs');main.innerHTML=viewSRS();}
+  else if(route.view==='temas'){setActive('temas');main.innerHTML=viewTemas();}
   else if(route.view==='notes'){setActive('notes');main.innerHTML=viewNotes();}
   else if(route.view==='modules'){setActive('modules');main.innerHTML=viewModules();}
   else if(route.view==='module'){setActive('modules');main.innerHTML=viewModule(route.arg);bindNotarea(route.arg);}
@@ -723,6 +742,12 @@ function innerForScreen(){
 function renderPages(){const p=document.querySelector('.bookpages');if(p)p.innerHTML=innerForScreen();updateBar();}
 function bkGo(screen,cap,i){bk.screen=screen;bk.cap=cap||null;bk.i=(i===undefined?null:i);renderPages();}
 window.bkGo=bkGo;
+function bkClose(){
+  bk.opened=false;bk.screen='cover';bk.cap=null;bk.i=null;
+  const hc=document.getElementById('hardcover');if(hc)hc.classList.remove('opened');
+  renderPages();
+}
+window.bkClose=bkClose;
 function bindBook(){
   bk={screen:'cover',cap:null,i:null,opened:false};
   const st=document.getElementById('bookstage');if(!st)return;
@@ -749,7 +774,8 @@ function bkIndex(){
   const unAll=Object.keys(PATOGENOS).reduce((a,cap)=>a+capCount(cap),0);
   const items=Object.keys(PATOGENOS).map(cap=>
     `<div class="idx-item" onclick="bkGo('cat','${cap}')"><span class="idx-box"></span>${cap}<span class="idx-count">${capCount(cap)}/${PATOGENOS[cap].length}</span></div>`).join('');
-  return `<div class="bsheet"><div class="bk-h">Índice</div>
+  return `<div class="bsheet"><div class="bk-nav"><span class="bk-back" onclick="bkClose()">⌂ Capa</span></div>
+    <div class="bk-h">Índice</div>
     <div class="bk-sub2">Navegue pelas categorias</div>
     <div class="idx">${items}
       <div class="idx-item" onclick="bkGo('stats')"><span class="idx-box"></span>Minha Coleção<span class="idx-count">${unAll}/${total}</span></div>
@@ -762,7 +788,7 @@ function bkCat(cap){
     return `<div class="pcard ${un?'':'locked'}" onclick="bkGo('agent','${cap}',${i})">${ic}<span>${p}</span></div>`;
   }).join('');
   return `<div class="bsheet">
-    <div class="bk-nav"><span class="bk-back" onclick="bkGo('index')">‹ Índice</span></div>
+    <div class="bk-nav"><span class="bk-back" onclick="bkGo('index')">‹ Índice</span> <span class="bk-back" onclick="bkClose()">⌂ Capa</span></div>
     <div class="bk-h2">${cap}</div><div class="bk-sub2">${capCount(cap)}/${PATOGENOS[cap].length} catalogados</div>
     <div class="pgrid">${cards}</div></div>`;
 }
@@ -770,7 +796,7 @@ function bkAgent(cap,i){
   const name=PATOGENOS[cap][i]; const un=isUnlocked(cap,i);
   const rows=FICHA.map(f=>`<div class="ficha-row"><b>${f}</b><span>${un?'—':'—'}</span></div>`).join('');
   return `<div class="bsheet">
-    <div class="bk-nav"><span class="bk-back" onclick="bkGo('cat','${cap}')">‹ ${cap}</span></div>
+    <div class="bk-nav"><span class="bk-back" onclick="bkGo('cat','${cap}')">‹ ${cap}</span> <span class="bk-back" onclick="bkClose()">⌂ Capa</span></div>
     <div class="agent-wrap">
       <div class="agent-illu ${un?'':'locked'}">${SIL}${un?'':`<span class="agent-lock">${ICONS.lock}</span>`}</div>
       <div class="ficha ${un?'':'locked'}">
@@ -784,7 +810,7 @@ function bkStats(){
   const total=Object.values(PATOGENOS).reduce((a,b)=>a+b.length,0); const cs=collStats();
   const per=Object.keys(PATOGENOS).map(c=>`<div class="pst"><div class="pst-n">${capCount(c)}</div><div class="pst-l">${c}</div></div>`).join('');
   return `<div class="bsheet">
-    <div class="bk-nav"><span class="bk-back" onclick="bkGo('index')">‹ Índice</span></div>
+    <div class="bk-nav"><span class="bk-back" onclick="bkGo('index')">‹ Índice</span> <span class="bk-back" onclick="bkClose()">⌂ Capa</span></div>
     <div class="bk-h2">Minha Coleção</div><div class="bk-sub2">Estatísticas da coleção</div>
     <div class="pstats">
       <div class="pst"><div class="pst-n">${cs.unlocked}</div><div class="pst-l">Desbloqueados</div></div>
@@ -794,6 +820,60 @@ function bkStats(){
     </div>
     <div class="pstats" style="margin-top:14px">${per}</div></div>`;
 }
+// ===== TEMAS MAIS COBRADOS (estimativas didáticas por padrão histórico das bancas) =====
+const TEMA_LIST=[
+  {id:'antimic',nm:'Antimicrobianos (escolha/espectro/resistência)',ref:'bases|0'},
+  {id:'hiv',nm:'HIV (TARV, CD4, oportunistas, PEP/PrEP)',ref:'virus|0'},
+  {id:'tb',nm:'Tuberculose (RIPE, TRM, HIV)',ref:'bacterias|0'},
+  {id:'sifilis',nm:'Sífilis & ISTs (VDRL, gestação, congênita)',ref:'bacterias|2'},
+  {id:'meningite',nm:'Meningite bacteriana (LCR)',ref:'bacterias|4'},
+  {id:'pac',nm:'Pneumonias bacterianas (PAC/PAV)',ref:'bacterias|6'},
+  {id:'dengue',nm:'Dengue (sinais de alarme, MS)',ref:'virus|2'},
+  {id:'arbo',nm:'Arboviroses (Zika/Chikungunya/Febre Amarela)',ref:'virus|3'},
+  {id:'hepat',nm:'Hepatites virais (sorologias B/C)',ref:'virus|1'},
+  {id:'sepse',nm:'Sepse & choque séptico (1ª hora)',ref:'bases|1'},
+  {id:'endocardite',nm:'Endocardite infecciosa (Duke)',ref:'bacterias|5'},
+  {id:'hanseniase',nm:'Hanseníase (classificação, PQT)',ref:'bacterias|1'},
+  {id:'lepto',nm:'Leptospirose',ref:'bacterias|3'},
+  {id:'malaria',nm:'Malária (espécies, tratamento)',ref:'parasitas|1'},
+  {id:'chagas',nm:'Doença de Chagas',ref:'parasitas|3'},
+  {id:'leish',nm:'Leishmaniose (visceral/tegumentar)',ref:'parasitas|2'},
+  {id:'toxo',nm:'Toxoplasmose (gestação/congênita)',ref:'parasitas|0'},
+  {id:'ippm',nm:'Infecções de pele e partes moles',ref:'bacterias|7'},
+  {id:'hosp',nm:'Infecção hospitalar & isolamentos',ref:'bases|2'},
+  {id:'fungos',nm:'Micoses oportunistas (Cripto/Candida)',ref:'fungos|1'},
+];
+const BANCA={
+  ENARE:{antimic:5,hiv:5,tb:5,sifilis:5,meningite:4,pac:4,dengue:4,sepse:4,hepat:4,endocardite:3,arbo:3,hosp:3,ippm:3,hanseniase:3,malaria:2,toxo:2,leish:2,chagas:2,lepto:2,fungos:3},
+  REVALIDA:{dengue:5,tb:5,sifilis:5,hiv:5,hepat:4,hanseniase:4,lepto:4,arbo:4,malaria:4,meningite:4,antimic:3,pac:3,sepse:3,chagas:3,toxo:3,leish:3,ippm:3,endocardite:2,hosp:2,fungos:2},
+  'PSU-MG':{hiv:5,tb:5,dengue:5,sifilis:4,antimic:4,meningite:4,hepat:4,sepse:4,pac:3,arbo:3,endocardite:3,lepto:3,chagas:3,hanseniase:3,leish:3,malaria:2,toxo:2,ippm:2,hosp:2,fungos:2},
+  'SES-RJ':{dengue:5,arbo:5,hiv:5,tb:4,sifilis:4,meningite:4,lepto:4,sepse:4,antimic:4,hepat:3,pac:3,endocardite:3,ippm:3,hosp:3,hanseniase:2,malaria:2,toxo:2,chagas:2,leish:2,fungos:2},
+  UFRJ:{hiv:5,tb:5,sifilis:5,antimic:4,sepse:4,meningite:4,dengue:4,endocardite:4,hepat:4,pac:3,arbo:3,hosp:3,fungos:3,ippm:3,lepto:3,malaria:2,toxo:2,leish:2,chagas:2,hanseniase:2},
+  UERJ:{hiv:5,tb:5,dengue:5,sifilis:4,meningite:4,antimic:4,arbo:4,hepat:4,sepse:3,pac:3,lepto:3,endocardite:3,toxo:3,ippm:3,hanseniase:2,chagas:2,leish:2,malaria:2,hosp:2,fungos:2},
+};
+let temaBanca='ENARE';
+function viewTemas(){
+  const bancas=Object.keys(BANCA);
+  return `<div class="view"><div class="page-title">${ICONS.trending}<h1>Temas mais cobrados</h1></div>
+    <p class="page-sub">Assuntos de Infectologia ranqueados por incidência em cada banca de referência. Toque em um tema para abrir o módulo. <span style="opacity:.7">(Estimativas didáticas baseadas no padrão histórico das bancas — confira sempre editais e provas recentes.)</span></p>
+    <div class="exam-tabs" id="examTabs">${bancas.map(b=>`<button class="exam-tab ${b===temaBanca?'on':''}" onclick="setBanca('${b}')">${b}</button>`).join('')}</div>
+    <div id="heatWrap">${heatList(temaBanca)}</div>
+    ${foot()}</div>`;
+}
+function heatList(b){
+  const m=BANCA[b];
+  const rows=TEMA_LIST.map(t=>({t,s:m[t.id]||1})).sort((a,x)=>x.s-a.s);
+  const prio=s=>s>=5?'altíssima':s>=4?'muito alta':s>=3?'alta':'moderada';
+  return `<div class="heat">${rows.map((r,i)=>`
+    <div class="heat-row" onclick="navigate('module','${r.t.ref}')">
+      <div class="heat-rank">${i+1}º</div>
+      <div class="heat-body"><b>${r.t.nm}</b><div class="heat-track"><i style="width:${r.s/5*100}%"></i></div></div>
+      <div class="heat-prio">${prio(r.s)}</div>
+      <div class="heat-stars">${'★'.repeat(r.s)}${'☆'.repeat(5-r.s)}</div>
+    </div>`).join('')}</div>`;
+}
+function setBanca(b){temaBanca=b;document.querySelectorAll('#examTabs .exam-tab').forEach(x=>x.classList.toggle('on',x.textContent===b));const w=document.getElementById('heatWrap');if(w)w.innerHTML=heatList(b);}
+window.setBanca=setBanca;
 function viewNotes(){
   const notes=(S0().notes||{});
   let blocks='';
