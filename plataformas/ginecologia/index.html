@@ -1859,14 +1859,24 @@ function allQuestions(){ const out=[]; readyIds().forEach(id=>(CONTENT[id].quest
 function allFlashcards(){ const out=[]; readyIds().forEach(id=>(CONTENT[id].flashcards||[]).forEach((f,i)=>out.push({id,i,f}))); return out; }
 function gotoTopicTab(id, tab){ route("topic",id); setTimeout(()=>{ activeTab=tab; $$(".ttab").forEach(x=>x.classList.toggle("active",x.dataset.tab===tab)); renderTab(id); },120); }
 
+/* ESTUDO DO DIA — algoritmo padronizado do ELID (igual à Central e demais plataformas) */
+function daySeedNum(){ return Math.floor(Date.now()/86400000); }
+function seedShuffle(a,seed){ a=a.slice(); var s=(seed||1)>>>0;
+  function rnd(){ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; }
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
+function dailyStdQ(){ const Q=allQuestions(); return seedShuffle(Q.map((_,k)=>k), daySeedNum()).slice(0,10).map(k=>({id:Q[k].id, i:Q[k].i})); }
 function ensureDaily(){
   const t=todayStr();
   if(state.daily.date!==t){
     const seed=parseInt(t.replace(/-/g,""),10);
-    const Q=allQuestions(), F=allFlashcards();
-    const q=seededShuffle(Q.map((_,i)=>i), seed).slice(0,3).map(i=>({id:Q[i].id, i:Q[i].i}));
+    const F=allFlashcards();
+    const q=dailyStdQ();
     const f=seededShuffle(F.map((_,i)=>i), seed+7).slice(0,4).map(i=>({id:F[i].id, i:F[i].i}));
     state.daily={ date:t, q, f, done:{} };
+    queueSave();
+  } else if(!state.daily.q || state.daily.q.length!==10){
+    // migração para o algoritmo padronizado, preservando o progresso do dia
+    state.daily.q = dailyStdQ();
     queueSave();
   }
 }
