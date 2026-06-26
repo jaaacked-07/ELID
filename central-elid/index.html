@@ -344,7 +344,7 @@
             xpCard:5, xpQuest:4, xpCorrect:0 } },
     { key:"infectologia", label:"InfectoAtlas",        href:"../plataformas/infectologia/", status:"rw",
       platformId:"infectologia", docPath:["state","current"], stateField:"state", engine:"fcmap", unit:"ms",
-      srsField:"srs", cardsField:"cards", showNew:true, dailyQ:5,
+      srsField:"srs", cardsField:"cards", showNew:true, dailyQ:5, pin:true,
       quizMode:"infectoDone" }   // questões marcam state.done["<arg>:<i>"]=true (sem gamificação na origem)
   ];
 
@@ -471,6 +471,15 @@
   function platsOf(list){
     var seen = {}, out = [];
     list.forEach(function(it){ if(!seen[it.p.key]){ seen[it.p.key] = true; out.push(it.p); } });
+    return out;
+  }
+  function platByKey(k){ for(var i=0;i<PLATFORMS.length;i++){ if(PLATFORMS[i].key===k) return PLATFORMS[i]; } return null; }
+  // garante que plataformas "fixadas" (pin) apareçam sempre como chip, mesmo sem conteúdo carregado
+  function withPinned(list){
+    var out = list.slice();
+    PLATFORMS.forEach(function(p){
+      if(p.status==="rw" && p.pin && !out.some(function(x){ return x.key===p.key; })) out.push(p);
+    });
     return out;
   }
   function applyFlashFilter(){
@@ -672,7 +681,7 @@
 
   function renderFilterBar(){
     var bar = $("#filter-bar"); if(!bar) return;
-    var plats = platsOf(SESSION.allFlash);
+    var plats = withPinned(platsOf(SESSION.allFlash));
     if(plats.length === 0){ bar.innerHTML = ""; return; }
     var html = chip("all", "Todas", SESSION.filter) + chip("shuffle", "&#10022; Embaralhar", SESSION.filter);
     plats.forEach(function(p){ html += chip(p.key, esc(p.label), SESSION.filter); });
@@ -683,7 +692,7 @@
   }
   function renderQuestFilterBar(){
     var bar = $("#qfilter-bar"); if(!bar) return;
-    var plats = platsOf(SESSION.allQuests);
+    var plats = withPinned(platsOf(SESSION.allQuests));
     if(plats.length === 0){ bar.innerHTML = ""; return; }
     var html = chip("all", "Todas", SESSION.qFilter) + chip("shuffle", "&#10022; Embaralhar", SESSION.qFilter);
     plats.forEach(function(p){ html += chip(p.key, esc(p.label), SESSION.qFilter); });
@@ -699,10 +708,18 @@
   function renderStage(){
     var area = $("#flash-area");
     if(SESSION.queue.length === 0){
-      area.innerHTML =
-        '<div class="panel"><div class="big">Nenhuma revisão pendente</div>' +
-        '<p>Você está em dia com os flashcards de hoje. Crie novos cards nas plataformas ou volte amanhã.</p>' +
-        '<a class="cta" href="../biblioteca-web/">Voltar à Biblioteca</a></div>';
+      var pf = (SESSION.filter !== "all" && SESSION.filter !== "shuffle") ? platByKey(SESSION.filter) : null;
+      if(pf){
+        area.innerHTML =
+          '<div class="panel"><div class="big">' + esc(pf.label) + '</div>' +
+          '<p>Ainda não há flashcards do ' + esc(pf.label) + ' por aqui. Abra a plataforma para estudar — eles passam a aparecer e revisar nesta Central.</p>' +
+          '<a class="cta" href="' + pf.href + '">Abrir ' + esc(pf.label) + ' &#8594;</a></div>';
+      } else {
+        area.innerHTML =
+          '<div class="panel"><div class="big">Nenhuma revisão pendente</div>' +
+          '<p>Você está em dia com os flashcards de hoje. Crie novos cards nas plataformas ou volte amanhã.</p>' +
+          '<a class="cta" href="../biblioteca-web/">Voltar à Biblioteca</a></div>';
+      }
       return;
     }
     if(SESSION.index >= SESSION.queue.length){
@@ -806,9 +823,17 @@
     var area = $("#quest-area");
     var list = SESSION.viewQuests;
     if(list.length === 0){
-      area.innerHTML =
-        '<div class="panel"><div class="big">Sem questões para mostrar</div>' +
-        '<p>As questões do dia de cada plataforma aparecem aqui depois que você abre a plataforma uma vez.</p></div>';
+      var qpf = (SESSION.qFilter !== "all" && SESSION.qFilter !== "shuffle") ? platByKey(SESSION.qFilter) : null;
+      if(qpf){
+        area.innerHTML =
+          '<div class="panel"><div class="big">' + esc(qpf.label) + '</div>' +
+          '<p>As questões do dia do ' + esc(qpf.label) + ' aparecem aqui depois que você abre a plataforma uma vez.</p>' +
+          '<a class="cta" href="' + qpf.href + '">Abrir ' + esc(qpf.label) + ' &#8594;</a></div>';
+      } else {
+        area.innerHTML =
+          '<div class="panel"><div class="big">Sem questões para mostrar</div>' +
+          '<p>As questões do dia de cada plataforma aparecem aqui depois que você abre a plataforma uma vez.</p></div>';
+      }
       return;
     }
     // recolhida: um único botão revela as questões
