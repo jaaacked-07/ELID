@@ -1644,6 +1644,11 @@ var TABS=[
 function hashStr(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
 function seededShuffle(arr,seed){var r=mulberry32(hashStr(seed)),a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+/* ESTUDO DO DIA — algoritmo padronizado do ELID (igual à Central e demais plataformas) */
+function daySeedNum(){ return Math.floor(Date.now()/86400000); }
+function seedShuffle(a,seed){ a=a.slice(); var s=(seed||1)>>>0;
+  function rnd(){ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; }
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
 
 /* ---- Coleta de conteúdo das matérias prontas ---- */
 function readyMaterias(){var out=[];for(var i=0;i<TEMAS.length;i++){for(var j=0;j<TEMAS[i].mats.length;j++){var mm=TEMAS[i].mats[j];if(mm.ready&&MAT[mm.id])out.push(MAT[mm.id]);}}return out;}
@@ -1819,7 +1824,7 @@ function statCard(ic,v,l){ return '<div class="stat-card glass"><div class="sc-i
 function renderStudy(m){
   var seed=todayStr();
   STATE.dailySeed=seed;
-  var qs=seededShuffle(allNativeQuestions(),seed+"q").slice(0,5);
+  var qs=seedShuffle(allNativeQuestions(),daySeedNum()).slice(0,10);
   var due=allFlashcards().filter(function(c){return srsDue(c.id);});
   var pool=due.length?due:allFlashcards();
   var fcs=seededShuffle(pool,seed+"f").slice(0,10);
