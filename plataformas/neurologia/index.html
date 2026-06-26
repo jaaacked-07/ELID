@@ -4623,12 +4623,17 @@ window.saveNote=function(id,v){ State.data.notes[id]=v; clearTimeout(noteTimer);
    ESTUDOS DO DIA
    ============================================================ */
 function seededRandom(seed){ let x=Math.sin(seed)*10000; return x-Math.floor(x); }
+/* ESTUDO DO DIA — algoritmo padronizado do ELID (igual à Central e demais plataformas) */
+function daySeedNum(){ return Math.floor(Date.now()/86400000); }
+function seedShuffle(a,seed){ a=a.slice(); var s=(seed||1)>>>0;
+  function rnd(){ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; }
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
 function dailyPicks(){
   const today=todayStr(); const seed=parseInt(today.replace(/-/g,''),10);
   const allQ=[]; MODULES.forEach(m=>m.questions.forEach((q,i)=>allQ.push({mod:m.id,i,q,title:m.title,emoji:m.emoji})));
   const allF=[]; MODULES.forEach(m=>m.cards.forEach((c,i)=>allF.push({mod:m.id,i,c,title:m.title})));
   const pick=(arr,n,s)=>{ const a=[...arr]; const out=[]; for(let k=0;k<n&&a.length;k++){ const idx=Math.floor(seededRandom(s+k*7)*a.length); out.push(a.splice(idx,1)[0]); } return out; };
-  return { q:pick(allQ,5,seed), f:pick(allF,5,seed+99), challenge:pick(allQ,3,seed+555) };
+  return { q:seedShuffle(allQ, daySeedNum()).slice(0,10), f:pick(allF,5,seed+99), challenge:pick(allQ,3,seed+555) };
 }
 let dfc={idx:0,flip:false,day:null};
 function renderEstudos(){
