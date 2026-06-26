@@ -1,1108 +1,530 @@
 <!doctype html>
 <html lang="pt-BR" class="h-full">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>Central ELID</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@200;300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --rose-gold:#b76e79; --champagne:#f7e7ce; --deep-plum:#2d1b2e;
-    --soft-mauve:#c9a0b0; --ivory:#faf6f0; --off-white:#f5f0e8; --light-beige:#e8dcc8;
-    --ink:var(--ivory); --credit-rose:var(--rose-gold);
-  }
-  body.light-mode{ --ink:var(--deep-plum); }
-  *{box-sizing:border-box;}
-  html,body{height:100%;margin:0;}
-  body{font-family:'Raleway',sans-serif;background:var(--deep-plum);color:var(--ivory);overflow-x:hidden;}
-  body.light-mode{background:linear-gradient(135deg,var(--off-white) 0%,var(--light-beige) 100%);color:var(--deep-plum);}
-  a{text-decoration:none;color:inherit;}
-  .font-cormorant{font-family:'Cormorant Garamond',serif;}
-  .font-script{font-family:'Great Vibes',cursive;}
-  .hl{color:var(--rose-gold);font-weight:500;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca ELID</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@200;300;400;500;600&family=Great+Vibes:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rose-gold: #b76e79; --champagne: #f7e7ce; --deep-plum: #2d1b2e;
+      --soft-mauve: #c9a0b0; --ivory: #faf6f0; --off-white: #f5f0e8; --light-beige: #e8dcc8;
+      --ink: var(--ivory); --credit-rose: var(--rose-gold);
+    }
+    body.light-mode { --ink: var(--deep-plum); }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { font-family: 'Raleway', sans-serif; background: var(--deep-plum); overflow-x: hidden; }
+    body.light-mode { background: linear-gradient(135deg, var(--off-white) 0%, var(--light-beige) 100%); }
+    .font-cormorant { font-family: 'Cormorant Garamond', serif; }
+    .font-script { font-family: 'Great Vibes', cursive; }
+    .letter-highlight { color: var(--rose-gold); font-weight: 500; }
 
-  canvas#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
-  body.light-mode #bg{opacity:.3;}
+    canvas#bg-canvas { position: fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+    body.light-mode #bg-canvas { opacity: 0.3; }
 
-  /* Topbar */
-  .topbar{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;
-    padding:0 28px;z-index:50;background:rgba(45,27,46,.42);backdrop-filter:blur(16px);border-bottom:1px solid rgba(183,110,121,.12);}
-  body.light-mode .topbar{background:rgba(255,255,255,.6);border-bottom-color:rgba(183,110,121,.18);}
-  .topbar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--rose-gold);opacity:.8;}
-  .tb-title{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:300;letter-spacing:.12em;}
-  .tb-controls{display:flex;gap:12px;align-items:center;}
-  .btn-icon{width:40px;height:40px;border-radius:50%;background:rgba(183,110,121,.12);border:1px solid rgba(183,110,121,.22);
-    cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--rose-gold);transition:all .3s ease;}
-  .btn-icon:hover{background:rgba(183,110,121,.25);transform:scale(1.08);box-shadow:0 0 15px rgba(183,110,121,.2);}
-  body.light-mode .btn-icon{background:rgba(183,110,121,.08);}
+    .glass { background: rgba(45,27,46,0.35); backdrop-filter: blur(24px); border: 1px solid rgba(183,110,121,0.15); }
+    body.light-mode .glass { background: rgba(255,255,255,0.7); border: 1px solid rgba(183,110,121,0.2); }
 
-  .wrap{position:relative;z-index:10;max-width:1080px;margin:0 auto;padding:96px 28px 80px;}
+    @keyframes scaleInGentle { 0%{opacity:0;transform:scale(0.94)} 100%{opacity:1;transform:scale(1)} }
+    .view-transition { animation: scaleInGentle 0.55s cubic-bezier(0.34,1.3,0.64,1) both; }
 
-  /* Hero */
-  .hero{text-align:center;margin-bottom:52px;}
-  .convergence{width:64px;height:64px;margin:0 auto 18px;display:block;color:var(--rose-gold);opacity:.9;}
-  .hero h1{font-family:'Cormorant Garamond',serif;font-weight:300;letter-spacing:.16em;font-size:clamp(34px,6vw,48px);margin:0 0 6px;}
-  .hero .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,160,176,.75);}
-  body.light-mode .hero .eyebrow{color:rgba(120,80,100,.75);}
-  .hero .tribute{font-family:'Great Vibes',cursive;font-size:1.5rem;color:var(--rose-gold);margin-top:14px;text-shadow:0 0 22px rgba(183,110,121,.25);}
-  body.light-mode .hero .tribute{color:#9a5562;text-shadow:none;}
-  .hero .today{font-size:13px;letter-spacing:.12em;color:rgba(201,160,176,.7);margin-top:14px;text-transform:capitalize;}
-  body.light-mode .hero .today{color:rgba(120,80,100,.7);}
+    .specialty-card {
+      background: rgba(183,110,121,0.08); border: 1px solid rgba(183,110,121,0.2);
+      border-radius: 16px; padding: 28px;
+      transition: all 0.4s cubic-bezier(0.34,1.3,0.64,1);
+      cursor: pointer; position: relative; overflow: hidden;
+    }
+    .specialty-card::before {
+      content:''; position:absolute; top:0; left:0; width:100%; height:100%;
+      background: linear-gradient(135deg, rgba(247,231,206,0) 0%, rgba(183,110,121,0.08) 100%);
+      opacity:0; transition:opacity 0.4s ease;
+    }
+    .specialty-card:hover::before { opacity:1; }
+    .specialty-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(183,110,121,0.25), 0 0 30px rgba(183,110,121,0.15);
+      border-color: rgba(183,110,121,0.35);
+      background: rgba(183,110,121,0.12);
+    }
+    body.light-mode .specialty-card { background: rgba(183,110,121,0.06); border: 1px solid rgba(183,110,121,0.25); }
+    body.light-mode .specialty-card:hover { background: rgba(183,110,121,0.12); border-color: rgba(183,110,121,0.4); }
 
-  /* Questões — lista estática + paginação */
-  .quest-list{display:flex;flex-direction:column;gap:16px;}
-  .qcard{background:rgba(183,110,121,.07);border:1px solid rgba(183,110,121,.18);border-radius:14px;padding:18px 20px;}
-  body.light-mode .qcard{background:rgba(183,110,121,.06);}
-  .qhead-static{display:flex;flex-direction:column;gap:3px;margin-bottom:12px;}
-  .qnum{font-size:14px;font-weight:600;letter-spacing:.02em;}
-  .qsrc{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--rose-gold);}
-  .qstem{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;line-height:1.45;margin-bottom:16px;}
-  .q-expand{display:block;width:100%;margin:0 auto;padding:14px;border-radius:13px;
-    border:1px dashed rgba(183,110,121,.4);background:rgba(183,110,121,.07);color:var(--rose-gold);
-    font-family:inherit;font-size:14px;letter-spacing:.06em;cursor:pointer;transition:all .2s ease;}
-  .q-expand:hover{background:rgba(183,110,121,.16);}
-  .q-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;}
-  .q-pg{padding:11px 16px;border-radius:11px;border:1px solid rgba(183,110,121,.35);background:rgba(183,110,121,.08);
-    color:var(--rose-gold);font-family:inherit;font-size:13px;letter-spacing:.05em;cursor:pointer;transition:all .2s ease;}
-  .q-pg:hover:not(:disabled){background:rgba(183,110,121,.18);}
-  .q-pg:disabled{opacity:.35;cursor:default;}
-  .q-pginfo{font-size:12px;letter-spacing:.08em;color:rgba(201,160,176,.7);}
-  body.light-mode .q-pginfo{color:rgba(120,80,100,.7);}
+    .card-content { position: relative; z-index: 1; }
+    .card-icon { font-size:48px; margin-bottom:16px; display:block; color:var(--rose-gold); }
+    .card-icon svg { width:48px; height:48px; stroke:currentColor; color:var(--rose-gold); }
+    .card-title { font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:300; letter-spacing:0.1em; color:var(--ivory); margin-bottom:8px; }
+    body.light-mode .card-title { color:var(--deep-plum); }
+    .card-subtitle { font-size:12px; letter-spacing:0.15em; color:rgba(201,160,176,0.7); text-transform:uppercase; margin-bottom:12px; }
+    body.light-mode .card-subtitle { color:rgba(120,80,100,0.7); }
 
-  /* Section heads */
-  .cat-head{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 26px;}
-  .cat-mark{color:var(--rose-gold);font-size:16px;opacity:.85;}
-  .cat-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:24px;letter-spacing:.3em;text-transform:uppercase;margin:0;padding-left:.3em;}
+    .progress-bar { width:100%; height:4px; background:rgba(183,110,121,0.2); border-radius:2px; overflow:hidden; margin-top:16px; }
+    .progress-fill { height:100%; background:linear-gradient(90deg,var(--rose-gold),var(--soft-mauve)); border-radius:2px; transition:width 0.6s cubic-bezier(0.34,1.3,0.64,1); }
+    .card-stats { display:flex; gap:12px; margin-top:12px; font-size:11px; color:rgba(201,160,176,0.6); }
+    body.light-mode .card-stats { color:rgba(120,80,100,0.6); }
+    .stat-item { display:flex; align-items:center; gap:4px; }
+    .stat-dot { width:4px; height:4px; background:var(--rose-gold); border-radius:50%; }
 
-  /* Flashcard de revisão */
-  .review-stage{max-width:620px;margin:0 auto 40px;}
-  .flash{position:relative;border-radius:20px;cursor:pointer;perspective:1600px;}
-  .flash-inner{display:grid;transition:transform .55s cubic-bezier(.34,1.1,.5,1);transform-style:preserve-3d;}
-  .flash.flipped .flash-inner{transform:rotateY(180deg);}
-  .flash-face{grid-area:1 / 1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;
-    padding:52px 30px 46px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
-    min-height:260px;overflow-wrap:anywhere;word-break:break-word;
-    background:linear-gradient(135deg,rgba(183,110,121,.14) 0%,rgba(247,231,206,.06) 100%);
-    border:1px solid rgba(247,231,206,.28);}
-  body.light-mode .flash-face{background:linear-gradient(135deg,rgba(183,110,121,.1) 0%,rgba(247,231,206,.16) 100%);border-color:rgba(183,110,121,.28);}
-  .flash-back{transform:rotateY(180deg);}
-  .face-tag{position:absolute;top:14px;left:18px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,160,176,.65);}
-  .face-src{position:absolute;top:14px;right:18px;font-size:10px;letter-spacing:.12em;color:var(--rose-gold);max-width:55%;text-align:right;line-height:1.35;}
-  .face-sub{display:block;font-size:9px;letter-spacing:.08em;color:rgba(201,160,176,.8);text-transform:uppercase;margin-top:2px;}
-  body.light-mode .face-sub{color:rgba(120,80,100,.8);}
-  .face-text{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(21px,3.8vw,29px);line-height:1.45;max-width:100%;overflow-wrap:anywhere;}
-  .flash-back .face-text{font-weight:700;}
-  .face-note{display:block;margin-top:12px;font-size:16px;font-weight:600;color:rgba(201,160,176,.9);line-height:1.5;}
-  body.light-mode .face-note{color:rgba(120,80,100,.85);}
-  .face-img{display:block;max-width:100%;max-height:340px;height:auto;border-radius:12px;margin:12px auto 0;object-fit:contain;}
-  .cloze-blank{display:inline-block;color:var(--rose-gold);font-weight:700;letter-spacing:1px;margin:0 4px;}
-  .cloze-fill{color:var(--rose-gold);font-weight:500;}
-  .face-hint{position:absolute;bottom:12px;left:0;right:0;font-size:11px;letter-spacing:.1em;color:rgba(201,160,176,.55);}
-  body.light-mode .face-hint{color:rgba(120,80,100,.55);}
+    .topbar {
+      position:fixed; top:0; left:0; right:0; height:64px;
+      background:rgba(45,27,46,0.4); backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(183,110,121,0.1);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 32px; z-index:50;
+    }
+    body.light-mode .topbar { background:rgba(255,255,255,0.6); border-bottom-color:rgba(183,110,121,0.15); }
+    .topbar-title { font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:300; letter-spacing:0.1em; color:var(--ivory); }
+    body.light-mode .topbar-title { color:var(--deep-plum); }
+    .topbar-controls { display:flex; gap:16px; align-items:center; }
+    .btn-icon {
+      width:40px; height:40px; border-radius:50%; background:rgba(183,110,121,0.12);
+      border:1px solid rgba(183,110,121,0.2); cursor:pointer; display:flex; align-items:center;
+      justify-content:center; color:var(--rose-gold); transition:all 0.3s ease;
+    }
+    .btn-icon:hover { background:rgba(183,110,121,0.25); box-shadow:0 0 15px rgba(183,110,121,0.2); transform:scale(1.08); }
+    body.light-mode .btn-icon { background:rgba(183,110,121,0.08); }
 
+    .container { position:relative; z-index:10; max-width:1200px; margin:0 auto; padding:80px 32px 60px; }
 
-  .rate-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px;}
-  .rate{padding:13px 8px;border-radius:13px;border:1px solid rgba(183,110,121,.25);background:rgba(183,110,121,.08);
-    cursor:pointer;text-align:center;transition:all .25s ease;color:inherit;font-family:inherit;}
-  .rate:hover{transform:translateY(-2px);background:rgba(183,110,121,.18);}
-  .rate b{display:block;font-size:14px;font-weight:500;}
-  .rate small{display:block;font-size:10px;letter-spacing:.06em;color:rgba(201,160,176,.7);margin-top:3px;}
-  body.light-mode .rate small{color:rgba(120,80,100,.7);}
-  .rate.r0{border-color:rgba(198,90,100,.4);} .rate.r0:hover{background:rgba(198,90,100,.18);}
-  .rate.r3{border-color:rgba(150,180,140,.4);} .rate.r3:hover{background:rgba(150,180,140,.18);}
-  .rate:disabled{opacity:.4;cursor:default;transform:none;}
+    .grid-specialties { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-bottom:60px; }
+    @media(max-width:1200px) { .grid-specialties { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:768px) { .grid-specialties { grid-template-columns:1fr; } .container { padding:80px 20px 60px; } .topbar { padding:0 20px; } }
 
-  .stage-nav{display:flex;align-items:center;justify-content:space-between;margin-top:16px;font-size:12px;letter-spacing:.1em;color:rgba(201,160,176,.7);}
-  body.light-mode .stage-nav{color:rgba(120,80,100,.7);}
+    .section-title { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; letter-spacing:0.1em; color:var(--ivory); margin-bottom:40px; text-align:center; }
+    body.light-mode .section-title { color:var(--deep-plum); }
 
-  /* Empty / states */
-  .panel{background:rgba(45,27,46,.32);backdrop-filter:blur(18px);border:1px solid rgba(183,110,121,.15);border-radius:18px;padding:30px;text-align:center;}
-  body.light-mode .panel{background:rgba(255,255,255,.55);border-color:rgba(183,110,121,.2);}
-  .panel .big{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;margin-bottom:8px;}
-  .panel p{color:rgba(201,160,176,.78);font-size:14px;line-height:1.6;margin:6px 0;}
-  body.light-mode .panel p{color:rgba(120,80,100,.78);}
+    /* Frase do dia */
+    .daily-quote-wrap {
+      display:flex; align-items:center; justify-content:center; gap:18px;
+      margin:8px auto 64px; padding:36px 24px; max-width:780px; text-align:center;
+    }
+    .daily-quote {
+      font-family:'Great Vibes', cursive;
+      font-size:clamp(2rem, 5vw, 3.1rem); line-height:1.25;
+      color:var(--rose-gold); letter-spacing:0.02em; margin:0;
+      text-shadow:0 0 24px rgba(183,110,121,0.25);
+      animation: quoteFade 1.1s ease both;
+    }
+    body.light-mode .daily-quote { color:#9a5562; text-shadow:none; }
+    .daily-quote-mark { color:rgba(183,110,121,0.45); font-size:1.1rem; flex-shrink:0; }
+    @keyframes quoteFade { 0%{opacity:0;transform:translateY(8px)} 100%{opacity:1;transform:none} }
+    @media(max-width:600px){ .daily-quote-wrap{ gap:10px; padding:24px 12px; margin-bottom:48px; } }
 
-  .cta{display:inline-block;margin-top:14px;padding:11px 22px;border-radius:999px;border:1px solid rgba(183,110,121,.4);
-    color:var(--rose-gold);font-size:13px;letter-spacing:.08em;transition:all .25s ease;}
-  .cta:hover{background:rgba(183,110,121,.16);box-shadow:0 0 18px rgba(183,110,121,.18);}
+    /* Cabeçalho de categoria (✦ ESSENCIAIS / ✦ ATLAS) */
+    .category-header { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:34px; }
+    .category-mark { color:var(--rose-gold); font-size:18px; opacity:0.85; }
+    .category-title {
+      font-family:'Cormorant Garamond',serif; font-weight:300;
+      font-size:26px; letter-spacing:0.32em; color:var(--ivory);
+      text-transform:uppercase; margin:0; padding-left:0.32em;
+    }
+    body.light-mode .category-title { color:var(--deep-plum); }
 
-  .pending-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:13px;
-    background:rgba(183,110,121,.07);border:1px solid rgba(183,110,121,.16);margin-bottom:24px;font-size:13px;}
-  body.light-mode .pending-row{background:rgba(183,110,121,.06);}
-  .pending-row a{color:var(--rose-gold);letter-spacing:.06em;white-space:nowrap;}
+    /* Grade dos Essenciais (2 colunas) */
+    .grid-essentials { display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
+    @media(max-width:768px){ .grid-essentials { grid-template-columns:1fr; } }
 
-  /* Plataformas conectadas */
-  .plat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-top:8px;}
-  .plat{padding:16px 18px;border-radius:14px;border:1px solid rgba(183,110,121,.18);background:rgba(183,110,121,.06);}
-  .plat .name{font-size:14px;font-weight:500;letter-spacing:.04em;}
-  .plat .st{font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-top:6px;}
-  .plat .st.on{color:#9fc78f;} .plat .st.off{color:rgba(201,160,176,.6);}
-  body.light-mode .plat .st.off{color:rgba(120,80,100,.6);}
+    /* Cards Essenciais — acento champagne para destaque */
+    .essential-card {
+      border-color:rgba(247,231,206,0.3) !important;
+      background:linear-gradient(135deg, rgba(183,110,121,0.12) 0%, rgba(247,231,206,0.06) 100%) !important;
+    }
+    .essential-card:hover {
+      border-color:rgba(247,231,206,0.5) !important;
+      box-shadow:0 20px 40px rgba(183,110,121,0.28), 0 0 36px rgba(247,231,206,0.12) !important;
+    }
+    .essential-desc { margin-top:12px; font-size:13px; line-height:1.55; color:rgba(201,160,176,0.85); letter-spacing:0.02em; }
+    body.light-mode .essential-desc { color:rgba(120,80,100,0.85); }
+    .essential-tag { margin-top:16px; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--rose-gold); }
 
-  /* Acesso pelo ELID */
-  .gate{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:24px;
-    background:rgba(45,27,46,.92);backdrop-filter:blur(10px);}
-  .gate.show{display:flex;}
-  .gate .card{max-width:420px;text-align:center;}
-  .gate .mark{font-family:'Great Vibes',cursive;font-size:3rem;color:var(--rose-gold);}
-  #loader{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;background:var(--deep-plum);}
-  .spin{width:42px;height:42px;border:3px solid rgba(183,110,121,.25);border-top-color:var(--rose-gold);border-radius:50%;animation:spin 1s linear infinite;}
-  @keyframes spin{to{transform:rotate(360deg);}}
+    .footer { position:relative; z-index:10; text-align:center; padding:40px 32px; border-top:1px solid rgba(183,110,121,0.1); color:rgba(201,160,176,0.5); font-size:12px; letter-spacing:0.1em; }
+    body.light-mode .footer { border-top-color:rgba(183,110,121,0.2); color:rgba(120,80,100,0.6); }
+    /* ---------- crédito ELID + tributo ---------- */
+    .elid-credit { font-family:'Cormorant Garamond',serif; color:var(--ink); font-size:.92rem; letter-spacing:.04em; line-height:1.3; }
+    .elid-credit b { color:var(--credit-rose); font-weight:600; }
+    .elid-tribute { font-family:'Great Vibes',cursive; color:var(--ink); font-size:1.15rem; line-height:1.2; opacity:.92; margin-top:6px; }
+    .elid-tribute b { color:var(--credit-rose); }
 
-  .toast-wrap{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:100;display:flex;flex-direction:column;gap:8px;}
-  .toast{padding:11px 20px;border-radius:999px;font-size:13px;letter-spacing:.04em;color:#fff;
-    background:linear-gradient(100deg,var(--rose-gold),var(--soft-mauve));box-shadow:0 8px 24px rgba(0,0,0,.25);
-    animation:tin .35s both;}
-  @keyframes tin{from{opacity:0;transform:translateY(12px);}}
-
-  /* Barra de filtro */
-  .filter-bar{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:0 auto 30px;max-width:760px;}
-  .chip{padding:9px 16px;border-radius:999px;border:1px solid rgba(183,110,121,.28);background:rgba(183,110,121,.07);
-    color:inherit;font-family:inherit;font-size:12px;letter-spacing:.06em;cursor:pointer;transition:all .2s ease;white-space:nowrap;}
-  .chip:hover{background:rgba(183,110,121,.16);}
-  .chip.on{background:linear-gradient(100deg,var(--rose-gold),var(--soft-mauve));border-color:transparent;color:#fff;
-    box-shadow:0 4px 14px rgba(183,110,121,.28);}
-
-  /* Questões */
-  .quest-list{display:flex;flex-direction:column;gap:16px;}
-  .qstem{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;line-height:1.45;margin-bottom:16px;}
-  .qopts{display:flex;flex-direction:column;gap:9px;}
-  .qopt{text-align:left;padding:12px 16px;border-radius:11px;border:1px solid rgba(183,110,121,.22);
-    background:rgba(247,231,206,.04);color:inherit;font-family:inherit;font-size:14px;cursor:pointer;transition:all .2s ease;}
-  .qopt:hover:not(:disabled){background:rgba(183,110,121,.14);}
-  .qopt:disabled{cursor:default;}
-  .qopt.ok{border-color:rgba(150,180,140,.6);background:rgba(150,180,140,.16);}
-  .qopt.wrong{border-color:rgba(198,90,100,.6);background:rgba(198,90,100,.14);}
-  .qexplain{margin-top:14px;padding-top:14px;border-top:1px solid rgba(183,110,121,.16);font-size:13px;line-height:1.6;color:rgba(201,160,176,.85);}
-  body.light-mode .qexplain{color:rgba(120,80,100,.85);}
-
-  .footer{position:relative;z-index:10;text-align:center;padding:34px 24px;border-top:1px solid rgba(183,110,121,.1);
-    color:rgba(201,160,176,.5);font-size:12px;letter-spacing:.1em;}
-  body.light-mode .footer{border-top-color:rgba(183,110,121,.2);color:rgba(120,80,100,.6);}
-  /* ---------- crédito ELID + tributo ---------- */
-  .elid-credit{font-family:'Cormorant Garamond',serif;color:var(--ink);font-size:.92rem;letter-spacing:.04em;line-height:1.3}
-  .elid-credit b{color:var(--credit-rose);font-weight:600}
-  .elid-tribute{font-family:'Great Vibes',cursive;color:var(--ink);font-size:1.15rem;line-height:1.2;opacity:.92;margin-top:6px}
-  .elid-tribute b{color:var(--credit-rose)}
-  [hidden]{display:none!important;}
-</style>
+    a { text-decoration: none; }
+  </style>
 </head>
 <body class="h-full">
-<canvas id="bg"></canvas>
+  <canvas id="bg-canvas"></canvas>
 
-<!-- Loader -->
-<div id="loader"><div class="spin"></div></div>
-
-<!-- Acesso pelo ELID -->
-<div class="gate" id="gate">
-  <div class="card">
-    <div class="mark">Central ELID</div>
-    <div class="panel" style="margin-top:18px;">
-      <div class="big">Acesso pelo ELID</div>
-      <p>Esta área usa sua sessão do ELID. Entre pela landing-page e suas revisões aparecem aqui.</p>
-      <a class="cta" href="../landing-page/">Ir para o ELID</a>
+  <div class="topbar">
+    <div class="topbar-title"><span class="letter-highlight">B</span>iblioteca</div>
+    <div class="topbar-controls">
+      <button class="btn-icon" id="btn-theme" title="Modo claro/escuro">
+        <svg id="icon-theme" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zM4.22 4.22a1 1 0 011.415 0l1.414 1.415a1 1 0 01-1.414 1.414L4.22 5.636a1 1 0 010-1.414zM2 10a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4.22 15.78a1 1 0 010-1.415l1.414-1.414a1 1 0 111.414 1.414l-1.414 1.415a1 1 0 01-1.414 0zM10 18a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1zm6-6a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+      </button>
+      <button class="btn-icon" id="btn-logout" title="Sair">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+      </button>
     </div>
   </div>
-</div>
 
-<!-- Topbar -->
-<div class="topbar">
-  <div class="tb-title"><span class="hl">C</span>entral <span class="hl">ELID</span></div>
-  <div class="tb-controls">
-    <button class="btn-icon" id="btn-back" title="Voltar à Biblioteca">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
-    </button>
-    <button class="btn-icon" id="btn-theme" title="Modo claro/escuro">
-      <svg id="icon-theme" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zM4.22 4.22a1 1 0 011.415 0l1.414 1.415a1 1 0 01-1.414 1.414L4.22 5.636a1 1 0 010-1.414zM2 10a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4.22 15.78a1 1 0 010-1.415l1.414-1.414a1 1 0 111.414 1.414l-1.414 1.415a1 1 0 01-1.414 0zM10 18a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1zm6-6a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-    </button>
-    <button class="btn-icon" id="btn-logout" title="Sair do ELID">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-    </button>
+  <div class="container view-transition">
+    <div class="header" style="position:relative;z-index:10;padding:32px 24px;text-align:center;margin-bottom:40px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;letter-spacing:0.15em;color:var(--ivory);margin-bottom:12px;">
+        <span class="letter-highlight">E</span>LI<span class="letter-highlight">D</span>
+      </div>
+      <div style="font-size:13px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,160,176,0.7);">Sua Jornada Rumo à Residência Médica</div>
+      <div style="font-family:'Great Vibes',cursive;font-size:1.05rem;color:rgba(201,160,176,0.7);letter-spacing:0.05em;margin-top:12px;">
+        Inspirado em <span class="letter-highlight" style="font-style:normal;font-weight:500;">E</span>lisabete <span class="letter-highlight" style="font-style:normal;font-weight:500;">D</span>elfini
+      </div>
+    </div>
+
+    <!-- FRASE DO DIA (substitui as antigas métricas) -->
+    <div class="daily-quote-wrap">
+      <span class="daily-quote-mark">&#10022;</span>
+      <p id="daily-quote" class="daily-quote">A constância vence a intensidade.</p>
+      <span class="daily-quote-mark">&#10022;</span>
+    </div>
+
+    <!-- ✦ ESSENCIAIS -->
+    <div style="margin-bottom:64px;">
+      <div class="category-header">
+        <span class="category-mark">&#10022;</span>
+        <h2 class="category-title">ESSENCIAIS</h2>
+      </div>
+
+      <div class="grid-essentials">
+        <!-- Central ELID -->
+        <a href="../central-elid/">
+          <div class="specialty-card essential-card">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="24" cy="9" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="11" cy="33" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="37" cy="33" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M24 18V12.5M21 27.5L13.5 31.5M27 27.5L34.5 31.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Central ELID</div>
+              <div class="card-subtitle">Revisão Espaçada Global</div>
+              <div class="essential-desc">Todas as revisões convergem aqui. Flashcards e questões do dia de todas as especialidades em um só lugar.</div>
+              <div class="essential-tag">&#10022; Rotina Diária</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Cronograma ENARE -->
+        <a href="../cronograma-enare/">
+          <div class="specialty-card essential-card">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <rect x="9" y="12" width="30" height="28" rx="3" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M9 19H39" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M16 9V15M32 9V15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M16 27L21 32L32 23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Cronograma ENARE</div>
+              <div class="card-subtitle">Preparação Organizada</div>
+              <div class="essential-desc">Sua preparação organizada até a prova, semana a semana, com simulados e revisões programadas.</div>
+              <div class="essential-tag">&#10022; Planejamento</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ✦ ATLAS -->
+    <div style="margin-bottom:80px;">
+      <div class="category-header">
+        <span class="category-mark">&#10022;</span>
+        <h2 class="category-title">ATLAS</h2>
+      </div>
+
+      <div class="grid-specialties">
+        <!-- Neurologia -->
+        <a href="../plataformas/neurologia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <path d="M24 8C15 8 10 13 10 22C10 32 24 40 24 40C24 40 38 32 38 22C38 13 33 8 24 8Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="24" cy="22" r="4" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="card-title">Neurologia</div>
+              <div class="card-subtitle">Sistema Nervoso Central</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Ginecologia -->
+        <a href="../plataformas/ginecologia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="14" r="8" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M24 22V34M18 28H30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Ginecologia</div>
+              <div class="card-subtitle">Saúde Feminina</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Obstetrícia -->
+        <a href="../plataformas/obstetricia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <ellipse cx="24" cy="26" rx="12" ry="14" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="24" cy="26" r="5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M24 12V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Obstetrícia</div>
+              <div class="card-subtitle">Gravidez & Parto</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Cirurgia -->
+        <a href="../plataformas/cirurgia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <path d="M14 20L12 22L18 28L12 34L14 36L22 28L14 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M34 20L36 22L30 28L36 34L34 36L26 28L34 20Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M22 14V42M22 14L28 20M22 14L16 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Cirurgia Geral</div>
+              <div class="card-subtitle">Procedimentos</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Pediatria -->
+        <a href="../plataformas/pediatria/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="14" r="5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M24 20V28L20 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M24 28L28 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="8" cy="36" r="3" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="40" cy="36" r="3" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="card-title">Pediatria</div>
+              <div class="card-subtitle">Medicina Infantil</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(201,160,176,0.7);letter-spacing:0.08em;">⏳ Em Andamento</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Pneumologia -->
+        <a href="../plataformas/pneumologia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <path d="M24 10V24M24 24C24 24 14 20 10 28C6 36 12 42 18 40C22 38 24 34 24 34C24 34 26 38 30 40C36 42 42 36 38 28C34 20 24 24 24 24Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Pneumologia</div>
+              <div class="card-subtitle">Sistema Respiratório</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Preventiva -->
+        <a href="../plataformas/preventiva/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <path d="M24 10C20 6 14 8 14 14C14 20 24 32 24 32C24 32 34 20 34 14C34 8 28 6 24 10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                  <path d="M10 36H38" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M14 40H34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Med. Preventiva</div>
+              <div class="card-subtitle">Saúde Coletiva</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Semiologia -->
+        <a href="../plataformas/semiologia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="20" r="8" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M16 20C16 20 12 22 12 28C12 34 18 36 24 36C30 36 36 34 36 28C36 22 32 20 32 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M20 20V16M28 20V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="card-title">Semiologia</div>
+              <div class="card-subtitle">Propedêutica Médica</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Infectologia -->
+        <a href="../plataformas/infectologia/">
+          <div class="specialty-card" style="border-color:rgba(183,110,121,0.35);background:rgba(183,110,121,0.1);">
+            <div class="card-content">
+              <div class="card-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M24 6V14M24 34V42M6 24H14M34 24H42M11.3 11.3L17 17M31 31L36.7 36.7M36.7 11.3L31 17M17 31L11.3 36.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="card-title">InfectoAtlas</div>
+              <div class="card-subtitle">Doenças Infecciosas</div>
+              <div style="margin-top:12px;font-size:12px;color:rgba(183,110,121,0.8);letter-spacing:0.08em;">✓ Disponível</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="wrap" id="app" hidden>
-  <!-- Hero -->
-  <div class="hero">
-    <svg class="convergence" viewBox="0 0 64 64" fill="none">
-      <circle cx="32" cy="32" r="5" stroke="currentColor" stroke-width="1.5"/>
-      <path d="M32 27V8M32 37V56M27 32H8M37 32H56M28.5 28.5L15 15M35.5 28.5L49 15M28.5 35.5L15 49M35.5 35.5L49 49" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".85"/>
-      <circle cx="8" cy="8" r="2.4" fill="currentColor"/><circle cx="56" cy="8" r="2.4" fill="currentColor"/>
-      <circle cx="8" cy="56" r="2.4" fill="currentColor"/><circle cx="56" cy="56" r="2.4" fill="currentColor"/>
-      <circle cx="32" cy="6" r="2.4" fill="currentColor"/><circle cx="6" cy="32" r="2.4" fill="currentColor"/>
-      <circle cx="58" cy="32" r="2.4" fill="currentColor"/><circle cx="32" cy="58" r="2.4" fill="currentColor"/>
-    </svg>
-    <div class="eyebrow">Rotina diária de revisão</div>
-    <h1>Central <span class="hl">ELID</span></h1>
-    <div class="tribute">Todas as revisões convergem aqui</div>
-    <div class="today" id="today"></div>
+  <div class="footer">
+    <p class="elid-credit"><b>ELID</b> &middot; Ensino Legitimado para Internos em Desenvolvimento</p>
+    <p class="elid-tribute">Inspirado em <b>Elisabete Delfini</b> &#10022;</p>
   </div>
 
-  <!-- Resumo -->
-  <!-- (sem painel de gamificação na Central) -->
+  <!-- Firebase Auth (verificar login) -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
+    const firebaseConfig = {
+      apiKey: "AIzaSyAKN3qsYIc3pel81vl8WEAH6Ob4oR-icAM",
+      authDomain: "jackeline-study-platform.firebaseapp.com",
+      projectId: "jackeline-study-platform",
+      storageBucket: "jackeline-study-platform.firebasestorage.app",
+      messagingSenderId: "574246127117",
+      appId: "1:574246127117:web:29eedab81ea4251b23f744"
+    };
 
-  <!-- FILTRO (plataforma / embaralhar) — controla flashcards e questões -->
-  <div class="filter-bar" id="filter-bar"></div>
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-  <!-- FLASHCARDS DO DIA -->
-  <div class="cat-head"><span class="cat-mark">&#10022;</span><h2 class="cat-title">Flashcards do dia</h2></div>
-  <div id="flash-area"></div>
-
-  <!-- internos pendentes (avaliados antes da sincronização do feed) -->
-  <div id="internal-area"></div>
-
-  <!-- QUESTÕES DO DIA -->
-  <div class="cat-head" style="margin-top:44px;"><span class="cat-mark">&#10022;</span><h2 class="cat-title">Questões do dia</h2></div>
-  <div class="filter-bar" id="qfilter-bar"></div>
-  <div id="quest-area"></div>
-
-  <!-- PLATAFORMAS -->
-  <div class="cat-head" style="margin-top:44px;"><span class="cat-mark">&#10022;</span><h2 class="cat-title">Plataformas</h2></div>
-  <div class="plat-grid" id="plat-grid"></div>
-</div>
-
-<div class="footer">
-  <p class="elid-credit"><b>ELID</b> &middot; Ensino Legitimado para Internos em Desenvolvimento</p>
-  <p class="elid-tribute">Inspirado em <b>Elisabete Delfini</b> &#10022;</p>
-</div>
-
-<div class="toast-wrap" id="toasts"></div>
-
-<!-- Firebase real (compat) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
-<script>
-(function(){
-  "use strict";
-
-  /* ===== Config (mesma de todo o ELID) ===== */
-  var firebaseConfig = {
-    apiKey: "AIzaSyAKN3qsYIc3pel81vl8WEAH6Ob4oR-icAM",
-    authDomain: "jackeline-study-platform.firebaseapp.com",
-    projectId: "jackeline-study-platform",
-    storageBucket: "jackeline-study-platform.firebasestorage.app",
-    messagingSenderId: "574246127117",
-    appId: "1:574246127117:web:29eedab81ea4251b23f744"
-  };
-
-  var $ = function(s){ return document.querySelector(s); };
-  var FB = { ready:false, auth:null, db:null, uid:null };
-
-  /* =====================================================================
-     REGISTRO DE PLATAFORMAS (adaptadores)
-     Cada adaptador descreve ONDE e COMO ler/escrever os flashcards de uma
-     plataforma. Só ative "rw" depois de confirmar o esquema lendo o arquivo
-     real da plataforma — escrever no caminho/campo errado corrompe os dados.
-     ===================================================================== */
-  var PLATFORMS = [
-    {
-      key:"pediatria",
-      label:"PedAtlas",
-      href:"../plataformas/pediatria/",
-      status:"rw",                                   // leitura + escrita confirmadas
-      platformId:"PedAtlas by Jackeline Delfini",    // PLATFORM_ID literal real
-      docPath:["data","main"],                       // .../platforms/{id}/data/main
-      cardsField:"flashcards",                        // STATE.flashcards (array, criados pela usuária)
-      srsField:"fcReviews",                           // STATE.fcReviews { cardId: {ease,interval,due,reps} }
-      unit:"day",                                      // PedAtlas agenda em DIAS (nowDay), não em ms
-      gam:{                                            // crédito de XP/ofensiva na própria plataforma
-        xpField:"xp", streakField:"streak", lastDayField:"lastDay",
-        xpCard:2, xpQuest:5, xpCorrect:10              // = XP_RULES do PedAtlas (revisarFc/questao/acerto)
+    // Se não estiver logada, manda para landing
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = '../landing-page/';
       }
-    },
-    { key:"neurologia",  label:"NeuroAtlas",          href:"../plataformas/neurologia/",  status:"rw",
-      platformId:"neuroatlas", docPath:["data","main"], stateField:"data", engine:"fcmap", unit:"day", srsField:"fcReviews", showNew:true,
-      quizMode:"neuroQ",
-      gam:{ mode:"flat", nest:"surgeonProgress", xpField:"neuroPoints", streakField:"studyStreak", lastDayField:"lastStreakDay", dateFmt:"iso",
-            xpCard:5, xpQuest:4, xpCorrect:8, stats:{ card:"flashcardsReviewed" } } },
-    { key:"ginecologia", label:"GinecoAtlas",         href:"../plataformas/ginecologia/", status:"rw",
-      platformId:"ginecologia", docPath:null, engine:"fcmap", unit:"day", srsField:"fcReviews", showNew:true,
-      quizMode:"ginecoTopics",
-      gam:{ mode:"profile",
-            stats:{ field:"stats", card:"flashTotal", q:"qTotal", qok:"qCorrect" } } },
-    { key:"obstetricia", label:"Atlas de Obstetrícia",href:"../plataformas/obstetricia/", status:"rw",
-      platformId:"obstetricia", docPath:null, stateField:"state", engine:"obsrs", srsField:"srs", dailyQ:6,
-      quizMode:"obsAnswered",
-      gam:{ mode:"obj", streakField:"streak", dateFmt:"iso" } },
-    { key:"cirurgia",    label:"Atlas Cirúrgico",     href:"../plataformas/cirurgia/",    status:"rw",
-      platformId:"cirurgia-geral", docPath:null, engine:"fcmap", unit:"day", srsField:"fcReviews", showNew:true, dailyQ:6,
-      quizMode:"cirurgiaQuiz", quizField:"quiz",
-      gam:{ mode:"obj", xpField:"xp", streakField:"streak", xpCard:6, xpQuest:5, xpCorrect:5,
-            stats:{ field:"stats", q:"questionsAnswered", qok:"correctAnswers" } } },
-    { key:"pneumologia", label:"PneumoAtlas",         href:"../plataformas/pneumologia/", status:"rw",
-      platformId:"PNEUMO", docPath:["state","main"], engine:"fcmap", unit:"iso", srsField:"srs", showNew:true,
-      quizMode:"pneumoQ",
-      gam:{ mode:"flat", xpField:"xp", streakField:"studyStreak", lastDayField:"lastStudyDay", dateFmt:"iso",
-            xpCard:5, xpQuest:4, xpCorrect:8 } },
-    { key:"preventiva",  label:"Atlas de Preventiva",  href:"../plataformas/preventiva/",  status:"rw",
-      platformId:"PREVENTIVA", docPath:["state","main"], engine:"fcmap", unit:"ms", srsField:"srs", showNew:true,
-      quizMode:"qSeen",
-      gam:{ mode:"flat", xpField:"xp", streakField:"streak", lastDayField:"lastDay", dateFmt:"iso",
-            xpCard:5, xpQuest:4, xpCorrect:0 } },
-    { key:"infectologia", label:"InfectoAtlas",        href:"../plataformas/infectologia/", status:"rw",
-      platformId:"infectologia", docPath:["state","current"], stateField:"state", engine:"fcmap", unit:"ms",
-      srsField:"srs", cardsField:"cards", showNew:true, pin:true,
-      dailySelect:"seedShuffle", dailyN:10,   // MESMA seleção de "questões do dia" da plataforma (seedShuffle + 10/dia)
-      quizMode:"infectoDone" }   // questões marcam state.done["<arg>:<i>"]=true (sem gamificação na origem)
-  ];
-
-  /* ===== Helpers de extração defensiva ===== */
-  function cardId(c){ return c.id || c.cardId || c._id || null; }
-  function safeUrl(u){ u = (u||"").trim(); return /^https?:\/\//i.test(u) ? u : ""; }
-  function faceText(html){ return '<div class="face-text">' + html + '</div>'; }
-  function imgTag(u){ var s = safeUrl(u); return s ? '<img class="face-img" src="' + s + '" alt="">' : ''; }
-  function clozeMask(t){ return safe(t).replace(/\{\{(.+?)\}\}/g, '<span class="cloze-blank">_______</span>'); }
-  function clozeReveal(t){ return safe(t).replace(/\{\{(.+?)\}\}/g, '<span class="cloze-fill">$1</span>'); }
-
-  // FRENTE — cobre fv/qa, cloze, vf, imagem (img/occ); cai no texto se faltar campo
-  function cardFrontHTML(c){
-    var t = c.type || c.tipo || "";
-    var clz = c.text || c.front || "";
-    if(t === "cloze" && /\{\{.+?\}\}/.test(clz)) return faceText(clozeMask(clz));
-    if((t === "occ" || t === "img") && safeUrl(c.image)){
-      var pf = c.front || c.statement || (t === "occ" ? "O que está oculto?" : "");
-      return (pf ? faceText(safe(pf)) : "") + imgTag(c.image);
-    }
-    if(t === "vf" && c.statement) return faceText(safe(c.statement));
-    return faceText(safe(c.front || c.frente || c.q || c.pergunta || c.statement || c.text || "(frente)"));
-  }
-  // VERSO — SEMPRE mostra algo (texto, V/F, imagem revelada, cloze preenchido)
-  function cardBackHTML(c){
-    var t = c.type || c.tipo || "";
-    var clz = c.text || c.front || "";
-    if(t === "cloze" && /\{\{.+?\}\}/.test(clz)) return faceText(clozeReveal(clz) + (c.back ? '<span class="face-note">' + safe(c.back) + '</span>' : ''));
-    if(t === "vf" || typeof c.answer === "boolean"){
-      var vf = (c.answer ? "Verdadeiro" : "Falso");
-      return faceText('<b>' + vf + '</b>' + (c.back ? '<span class="face-note">' + safe(c.back) + '</span>' : ''));
-    }
-    if((t === "occ" || t === "img") && safeUrl(c.image)){
-      return (c.back ? faceText(safe(c.back)) : "") + imgTag(c.image);
-    }
-    var b = c.back || c.verso || c.a || c.resposta || c.answerText || c.explicacao || "";
-    if(b) return faceText(safe(b));
-    if(safeUrl(c.image)) return imgTag(c.image);
-    return faceText('<span style="opacity:.6">(sem verso registrado)</span>');
-  }
-  function nowDay(){ return Math.floor(Date.now() / 86400000); }
-  function isDue(rev, unit){
-    if(!rev || rev.due == null) return true;
-    if(unit === "iso") return String(rev.due) <= todayISO();
-    return unit === "day" ? Number(rev.due) <= nowDay() : Number(rev.due) <= Date.now();
-  }
-
-  /* ===== Reagendamento — grava EXATAMENTE no formato que a plataforma lê =====
-     grade: 0 Errei · 1 Difícil · 2 Bom · 3 Fácil */
-  function schedule(prev, grade, unit){
-    if(unit === "iso") return scheduleISO(prev, grade);
-    return unit === "day" ? scheduleDay(prev, grade) : scheduleMs(prev, grade);
-  }
-  // SM-2 com due em data ISO (Pneumo) — mesma matemática, lapses preservado
-  function scheduleISO(prev, g){
-    var s = prev ? { ease:prev.ease||2.5, interval:prev.interval||0, reps:prev.reps||0, lapses:prev.lapses||0 }
-                 : { ease:2.5, interval:0, reps:0, lapses:0 };
-    var q = [0,3,4,5][g];
-    s.ease = s.ease + (0.1 - (5-q)*(0.08 + (5-q)*0.02)); if(s.ease < 1.3) s.ease = 1.3;
-    if(q < 3){ s.reps = 0; s.interval = 0; s.lapses = (s.lapses||0) + 1; s.due = todayISO(); }
-    else { s.interval = (s.reps===0)?1:(s.reps===1?6:Math.round(s.interval*s.ease)); s.reps++; s.due = addDaysISO(s.interval); }
-    return s;
-  }
-  // SM-2 canônico (idêntico ao srsGrade das plataformas) — due em dias
-  function scheduleDay(prev, g){
-    var s = prev
-      ? { ease: prev.ease || 2.5, interval: prev.interval || 0, reps: prev.reps || 0, due: prev.due }
-      : { ease: 2.5, interval: 0, reps: 0, due: nowDay() };
-    var q = [0,3,4,5][g];                                  // Errei/Difícil/Bom/Fácil -> qualidade (0..5)
-    s.ease = s.ease + (0.1 - (5-q)*(0.08 + (5-q)*0.02));   // fator de facilidade (EF)
-    if(s.ease < 1.3) s.ease = 1.3;
-    if(q < 3){ s.reps = 0; s.interval = 0; s.due = nowDay(); }   // falha -> reaprender hoje
-    else {
-      s.interval = (s.reps === 0) ? 1 : (s.reps === 1 ? 6 : Math.round(s.interval * s.ease)); // 1 -> 6 -> I*EF
-      s.reps++; s.due = nowDay() + s.interval;
-    }
-    return s;
-  }
-  function scheduleMs(prev, grade){
-    var ease = (prev && prev.ease) || 2.5, interval = (prev && prev.interval) || 0, reps = (prev && prev.reps) || 0, DAY = 86400000;
-    if(grade === 0) return { ease: Math.max(1.3, ease - 0.2), interval: 0, reps: 0, due: Date.now() + 10*60*1000 };
-    reps += 1;
-    if(grade === 1){ ease = Math.max(1.3, ease - 0.15); interval = interval <= 0 ? 1 : Math.max(1, Math.round(interval * 1.2)); }
-    else if(grade === 2){ interval = interval <= 0 ? 1 : (reps === 1 ? 1 : Math.round(interval * ease)); }
-    else { ease = ease + 0.05; interval = interval <= 0 ? 2 : Math.round(interval * ease * 1.3); }
-    return { ease: ease, interval: interval, reps: reps, due: Date.now() + interval * DAY };
-  }
-
-  /* ===== Acesso ao documento de uma plataforma ===== */
-  function platformDocRef(p){
-    var base = FB.db.collection("users").doc(FB.uid).collection("platforms").doc(p.platformId);
-    return p.docPath ? base.collection(p.docPath[0]).doc(p.docPath[1]) : base;
-  }
-  // Feed publicado pela plataforma (só o TEXTO dos módulos estudados):
-  // users/{uid}/central/{platformKey}  ->  { cards:{id:{front,back,mod,modTitle}}, questions:[...] }
-  function feedDocRef(p){
-    return FB.db.collection("users").doc(FB.uid).collection("central").doc(p.key);
-  }
-
-  /* ===== Estado da Central ===== */
-  var SESSION = {
-    allFlash: [],       // todos os flashcards devidos carregados: [{p, id, card, rev}]
-    allQuests: [],      // todas as questões carregadas: [{p, q, platformId}]
-    queue: [],          // flashcards exibidos (após filtro/ordem)
-    viewQuests: [],     // questões exibidas (após filtro)
-    filter: "all",      // filtro dos flashcards: "all" | "shuffle" | <platformKey>
-    qFilter: "all",     // filtro das questões: "all" | "shuffle" | <platformKey>
-    qOpen: false,       // seção de questões expandida?
-    qPage: 0,           // página atual de questões (10 por página, substituindo)
-    progress: {},       // respostas feitas NA CENTRAL: "key::id" -> {chosen,correct} (doc central/_progress)
-    index: 0,
-    doneToday: 0,
-    activeCount: 0,
-    internalPending: 0, // já avaliados na plataforma, mas texto ainda não sincronizado no feed
-    docCache: {}        // platformId -> {ref, state, p}
-  };
-
-  function shuffle(arr){
-    var a = arr.slice();
-    for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
-    return a;
-  }
-  // embaralhamento determinístico IDÊNTICO ao das plataformas (mesma seleção de "itens do dia")
-  function seedShuffle(a, seed){ a = a.slice(); var s = (seed||1) >>> 0;
-    function rnd(){ s = (s*1103515245+12345) & 0x7fffffff; return s/0x7fffffff; }
-    for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
-  // plataformas presentes em uma lista (para montar os filtros)
-  function platsOf(list){
-    var seen = {}, out = [];
-    list.forEach(function(it){ if(!seen[it.p.key]){ seen[it.p.key] = true; out.push(it.p); } });
-    return out;
-  }
-  function platByKey(k){ for(var i=0;i<PLATFORMS.length;i++){ if(PLATFORMS[i].key===k) return PLATFORMS[i]; } return null; }
-  // garante que plataformas "fixadas" (pin) apareçam sempre como chip, mesmo sem conteúdo carregado
-  function withPinned(list){
-    var out = list.slice();
-    PLATFORMS.forEach(function(p){
-      if(p.status==="rw" && p.pin && !out.some(function(x){ return x.key===p.key; })) out.push(p);
     });
-    return out;
-  }
-  function applyFlashFilter(){
-    var f = SESSION.filter, a = SESSION.allFlash;
-    if(f !== "all" && f !== "shuffle") a = a.filter(function(it){ return it.p.key === f; });
-    if(f === "shuffle") a = shuffle(a);
-    SESSION.queue = a; SESSION.index = 0;
-  }
-  function applyQuestFilter(){
-    var f = SESSION.qFilter, a = SESSION.allQuests;
-    if(f !== "all" && f !== "shuffle") a = a.filter(function(it){ return it.p.key === f; });
-    if(f === "shuffle") a = shuffle(a);
-    SESSION.viewQuests = a;
-  }
 
-  /* ===== Datas (formato AAAA-M-D, igual ao PedAtlas) ===== */
-  function dStr(d){ return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate(); }
-  function todayStr(){ return dStr(new Date()); }
-  function yestStr(){ var y = new Date(); y.setDate(y.getDate()-1); return dStr(y); }
-  // ofensiva: +1 se a última atividade foi ontem, senão reinicia em 1 (≥1 atividade/dia)
-  function bumpStreakOn(obj, streakKey, lastKey){
-    var t = todayStr();
-    if(obj[lastKey] === t) return;
-    obj[streakKey] = (obj[lastKey] === yestStr()) ? ((obj[streakKey]||0) + 1) : 1;
-    obj[lastKey] = t;
-  }
-
-  function todayISO(){ return new Date().toISOString().slice(0,10); }   // formato do Gineco/Obstetrícia
-  function yestISO(){ var y=new Date(); y.setDate(y.getDate()-1); return y.toISOString().slice(0,10); }
-  function addDaysISO(n){ var d=new Date(); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
-  function isDueISO(due){ return !due || due <= todayISO(); }
-  function daySeedNum(){ return Math.floor(Date.now()/86400000); }   // muda a cada dia
-  function dailyPick(arr, key, n){
-    if(!arr || arr.length <= n) return (arr || []).slice();
-    var seed = daySeedNum();
-    for(var c=0;c<key.length;c++) seed = (seed*31 + key.charCodeAt(c)) >>> 0;
-    var idx = arr.map(function(_,i){ return i; });
-    for(var i=idx.length-1;i>0;i--){ seed=(seed*1664525+1013904223)>>>0; var j=seed%(i+1); var t=idx[i];idx[i]=idx[j];idx[j]=t; }
-    return idx.slice(0,n).map(function(i){ return arr[i]; });
-  }
-  // ladders do Obstetrícia (replicadas para sync two-way no próprio srs)
-  var OBS_EASY=[1,3,7,15,30,60], OBS_HARD=[1,3,7,15], OBS_MISS=[0,1,3,7];
-  function obsGrade(s, grade){   // grade: 'errei'|'dificil'|'medio'|'facil'
-    var inDays;
-    if(grade==='errei'){ s.track='miss'; s.step=0; s.lapses=(s.lapses||0)+1; inDays=OBS_MISS[0]; }
-    else if(grade==='dificil'){ if(s.track!=='hard'){ s.track='hard'; s.step=0; } inDays=OBS_HARD[Math.min(s.step,OBS_HARD.length-1)]; }
-    else if(grade==='medio'){ var w=s.track==='hard'; s.track='hard'; s.step=Math.min(w?s.step+1:1,OBS_HARD.length-1); inDays=OBS_HARD[s.step]; }
-    else { var we=s.track==='easy'; s.track='easy'; s.step=Math.min(we?s.step+1:1,OBS_EASY.length-1); inDays=OBS_EASY[s.step]; }
-    s.reps=(s.reps||0)+1; s.last=todayISO(); s.due=addDaysISO(inDays);
-    return s;
-  }
-  // credita XP/ofensiva/estatísticas NA PLATAFORMA de origem — nada é exibido na Central
-  function creditPlatform(cache, kind, correct, update){
-    var g = cache.p.gam; if(!g) return;
-    var st = cache.state;
-    var tgt = g.nest ? (st[g.nest] = st[g.nest] || {}) : st;   // alvo (aninhado p/ Neuro)
-    // XP (se a plataforma tiver)
-    if(g.xpField){
-      var gain = (kind === "card") ? g.xpCard : (g.xpQuest + (correct ? g.xpCorrect : 0));
-      tgt[g.xpField] = (tgt[g.xpField]||0) + gain;
-    }
-    // ofensiva
-    if(g.mode === "obj"){                       // streak objeto { count, last }
-      var sk = tgt[g.streakField] || { count:0, last:"" };
-      var t = (g.dateFmt === "iso") ? todayISO() : todayStr();
-      var y = (g.dateFmt === "iso") ? yestISO() : yestStr();
-      if(sk.last !== t){ sk.count = (sk.last === y) ? (sk.count + 1) : 1; sk.last = t; }
-      tgt[g.streakField] = sk;
-    } else if(g.mode === "profile"){            // streak em state.profile (ISO) — gineco
-      var pr = st.profile || (st.profile = {});
-      var ti = todayISO();
-      if(pr.lastActive !== ti){
-        var diff = pr.lastActive ? Math.round((new Date(ti) - new Date(pr.lastActive)) / 86400000) : NaN;
-        pr.streak = (diff === 1) ? ((pr.streak||0) + 1) : 1;
-        pr.lastActive = ti;
+    // Logout
+    document.getElementById('btn-logout').addEventListener('click', async () => {
+      if (confirm('Tem certeza que deseja sair?')) {
+        await signOut(auth);
+        window.location.href = '../landing-page/';
       }
-      st.profile = pr; update.profile = pr;
-    } else {                                    // flat: streak num + lastDay
-      var tf = (g.dateFmt === "iso") ? todayISO() : todayStr();
-      var yf = (g.dateFmt === "iso") ? yestISO() : yestStr();
-      if(tgt[g.lastDayField] !== tf){
-        tgt[g.streakField] = (tgt[g.lastDayField] === yf) ? ((tgt[g.streakField]||0) + 1) : 1;
-        tgt[g.lastDayField] = tf;
-      }
-    }
-    // estatísticas
-    if(g.stats){
-      var S = g.stats.field ? (st[g.stats.field] || {}) : tgt;   // sub-objeto (cir/gin) ou direto no alvo (neuro)
-      if(kind === "card" && g.stats.card) S[g.stats.card] = (S[g.stats.card]||0) + 1;
-      if(kind === "quest"){
-        if(g.stats.q) S[g.stats.q] = (S[g.stats.q]||0) + 1;
-        if(correct && g.stats.qok) S[g.stats.qok] = (S[g.stats.qok]||0) + 1;
-      }
-      if(g.stats.field){ st[g.stats.field] = S; update[g.stats.field] = S; }
-    }
-    // montar o update
-    if(g.nest){ update[g.nest] = tgt; }
-    else {
-      if(g.xpField) update[g.xpField] = tgt[g.xpField];
-      if(g.mode === "obj" || g.mode === "flat"){
-        update[g.streakField] = tgt[g.streakField];
-        if(g.lastDayField) update[g.lastDayField] = tgt[g.lastDayField];
-      }
-    }
-  }
-
-  /* ===== Normalização defensiva de questão ===== */
-  function qId(q){ return q.id || q.qid || q._id || null; }
-  function qStem(q){ return q.stem || q.enunciado || q.pergunta || q.q || q.text || ""; }
-  function qOptions(q){
-    var raw = q.options || q.alternativas || q.opcoes || q.choices || [];
-    var correct = (q.correct != null) ? q.correct : (q.answer != null ? q.answer : q.gabarito);
-    return raw.map(function(o, i){
-      if(typeof o === "string") return { text:o, correct: (correct === i || correct === String(i)) };
-      return { text: (o.text || o.t || o.label || o.alt || ""), correct: !!(o.correct || correct === i) };
     });
-  }
-  function qExplain(q){ return q.explanation || q.explicacao || q.comentario || q.justificativa || ""; }
+  </script>
 
-  function toast(msg){
-    var t = document.createElement("div"); t.className = "toast"; t.textContent = msg;
-    $("#toasts").appendChild(t);
-    setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 2600);
-  }
-
-  /* ===== Carrega doc principal (agendamento) + feed (texto dos módulos estudados) ===== */
-  function loadAll(){
-    var rwPlats = PLATFORMS.filter(function(p){ return p.status === "rw"; });
-    SESSION.activeCount = rwPlats.length;
-    // carrega o registro de respostas da própria Central primeiro
-    progressRef().get().catch(function(){ return null; }).then(function(pd){
-      SESSION.progress = (pd && pd.exists && pd.data() && pd.data().q) ? pd.data().q : {};
-      var pending = rwPlats.length;
-      if(pending === 0){ render(); return; }
-      rwPlats.forEach(function(p){
-        Promise.all([
-          platformDocRef(p).get().catch(function(){ return null; }),
-          feedDocRef(p).get().catch(function(){ return null; })
-        ]).then(function(res){
-        var mainDoc = res[0], feedDoc = res[1];
-        var raw = (mainDoc && mainDoc.exists) ? (mainDoc.data() || {}) : {};
-        var state = p.stateField ? (raw[p.stateField] || {}) : raw;
-        SESSION.docCache[p.platformId] = { ref: platformDocRef(p), state: state, p: p };
-
-        var feed = (feedDoc && feedDoc.exists) ? (feedDoc.data() || {}) : {};
-        var feedQuests = Array.isArray(feed.questions) ? feed.questions : [];
-        var feedCards = feed.cards || {};
-
-        if(p.engine === "obsrs"){
-          // Obstetrícia: mostra os cards do feed (novos ou devidos); agendamento no srs nativo (ladders, ISO)
-          var osrs = state[p.srsField] || {};
-          Object.keys(feedCards).forEach(function(id){
-            var s = osrs[id];
-            if(!s || isDueISO(s.due)) SESSION.allFlash.push({ p:p, id:id, card:feedCards[id], rev: s || null });
-          });
-        } else {
-          // FLASHCARDS — fcmap (SM-2): texto do feed (+ array de cards do usuário) + agendamento em fcReviews
-          var srs = state[p.srsField] || {};
-          var textById = {};
-          Object.keys(feedCards).forEach(function(id){ textById[id] = feedCards[id]; });
-          var userCards = Array.isArray(state[p.cardsField]) ? state[p.cardsField] : [];
-          userCards.forEach(function(c){ var id = cardId(c); if(id && !textById[id]) textById[id] = c; });
-          if(p.showNew){
-            Object.keys(textById).forEach(function(id){
-              if(isDue(srs[id], p.unit)) SESSION.allFlash.push({ p:p, id:id, card:textById[id], rev: srs[id] || null });
-            });
-          } else {
-            Object.keys(srs).forEach(function(id){
-              if(isDue(srs[id], p.unit) && textById[id]) SESSION.allFlash.push({ p:p, id:id, card:textById[id], rev: srs[id] });
-            });
-          }
-        }
-
-        // Questões do dia: usa a MESMA seleção da plataforma de origem.
-        // - dailySelect "seedShuffle": replica exatamente o algoritmo da plataforma
-        //   (seedShuffle do banco completo + slice). O feed é publicado na mesma
-        //   ordem do banco da plataforma, então o conjunto do dia fica idêntico.
-        // - padrão: dailyPick determinístico por data (demais plataformas).
-        var picks = (p.dailySelect === "seedShuffle")
-          ? seedShuffle(feedQuests, daySeedNum()).slice(0, p.dailyN || 10)
-          : dailyPick(feedQuests, p.key, p.dailyQ || 5);
-        picks.forEach(function(q){
-          var id = qId(q); if(id) SESSION.allQuests.push({ p:p, q:q, platformId:p.platformId, answered: questAnswered(p, id) });
-        });
-      }).then(function(){
-        pending--;
-        if(pending === 0){ render(); }
-      });
-      });
-    });
-  }
-  function progressRef(){ return FB.db.collection("users").doc(FB.uid).collection("central").doc("_progress"); }
-
-  /* ===== Render ===== */
-  function render(){
-    applyFlashFilter();
-    applyQuestFilter();
-    renderPlatforms();
-    renderFilterBar();
-    renderQuestFilterBar();
-    renderStage();
-    renderQuest();
-  }
-  function reflowFlash(){ applyFlashFilter(); renderFilterBar(); renderStage(); }
-  function reflowQuest(){ SESSION.qPage = 0; applyQuestFilter(); renderQuestFilterBar(); renderQuest(); }
-
-  function renderFilterBar(){
-    var bar = $("#filter-bar"); if(!bar) return;
-    var plats = withPinned(platsOf(SESSION.allFlash));
-    if(plats.length === 0){ bar.innerHTML = ""; return; }
-    var html = chip("all", "Todas", SESSION.filter) + chip("shuffle", "&#10022; Embaralhar", SESSION.filter);
-    plats.forEach(function(p){ html += chip(p.key, esc(p.label), SESSION.filter); });
-    bar.innerHTML = html;
-    Array.prototype.forEach.call(bar.querySelectorAll(".chip"), function(b){
-      b.addEventListener("click", function(){ SESSION.filter = b.getAttribute("data-f"); reflowFlash(); });
-    });
-  }
-  function renderQuestFilterBar(){
-    var bar = $("#qfilter-bar"); if(!bar) return;
-    var plats = withPinned(platsOf(SESSION.allQuests));
-    if(plats.length === 0){ bar.innerHTML = ""; return; }
-    var html = chip("all", "Todas", SESSION.qFilter) + chip("shuffle", "&#10022; Embaralhar", SESSION.qFilter);
-    plats.forEach(function(p){ html += chip(p.key, esc(p.label), SESSION.qFilter); });
-    bar.innerHTML = html;
-    Array.prototype.forEach.call(bar.querySelectorAll(".chip"), function(b){
-      b.addEventListener("click", function(){ SESSION.qFilter = b.getAttribute("data-f"); reflowQuest(); });
-    });
-  }
-  function chip(value, label, active){
-    return '<button class="chip' + (active === value ? " on" : "") + '" data-f="' + value + '">' + label + '</button>';
-  }
-
-  function renderStage(){
-    var area = $("#flash-area");
-    if(SESSION.queue.length === 0){
-      var pf = (SESSION.filter !== "all" && SESSION.filter !== "shuffle") ? platByKey(SESSION.filter) : null;
-      if(pf){
-        area.innerHTML =
-          '<div class="panel"><div class="big">' + esc(pf.label) + '</div>' +
-          '<p>Ainda não há flashcards do ' + esc(pf.label) + ' por aqui. Abra a plataforma para estudar — eles passam a aparecer e revisar nesta Central.</p>' +
-          '<a class="cta" href="' + pf.href + '">Abrir ' + esc(pf.label) + ' &#8594;</a></div>';
-      } else {
-        area.innerHTML =
-          '<div class="panel"><div class="big">Nenhuma revisão pendente</div>' +
-          '<p>Você está em dia com os flashcards de hoje. Crie novos cards nas plataformas ou volte amanhã.</p>' +
-          '<a class="cta" href="../biblioteca-web/">Voltar à Biblioteca</a></div>';
-      }
-      return;
+  <script>
+    // Canvas
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [], w, h;
+    function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+    resize(); window.addEventListener('resize', resize);
+    for (let i = 0; i < 60; i++) {
+      particles.push({ x: Math.random()*w, y: Math.random()*h, vx:(Math.random()-0.5)*0.15, vy:(Math.random()-0.5)*0.1, r:Math.random()*1.2+0.4, alpha:Math.random()*0.3+0.08 });
     }
-    if(SESSION.index >= SESSION.queue.length){
-      area.innerHTML =
-        '<div class="panel"><div class="big">Revisão concluída &#10022;</div>' +
-        '<p>Você revisou ' + SESSION.doneToday + ' card(s) hoje. Reagendados pela revisão espaçada — vão reaparecer no dia certo, aqui e na plataforma.</p></div>';
-      return;
-    }
-    var item = SESSION.queue[SESSION.index];
-    area.innerHTML =
-      '<div class="review-stage">' +
-        '<div class="flash" id="flash">' +
-          '<div class="flash-inner">' +
-            '<div class="flash-face">' +
-              '<span class="face-tag">Frente</span><span class="face-src">' + esc(item.p.label) + (item.card && item.card.modTitle ? '<span class="face-sub">' + esc(item.card.modTitle) + '</span>' : '') + '</span>' +
-              cardFrontHTML(item.card) +
-              '<div class="face-hint">toque para virar</div>' +
-            '</div>' +
-            '<div class="flash-face flash-back">' +
-              '<span class="face-tag">Verso</span><span class="face-src">' + esc(item.p.label) + (item.card && item.card.modTitle ? '<span class="face-sub">' + esc(item.card.modTitle) + '</span>' : '') + '</span>' +
-              cardBackHTML(item.card) +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="rate-row" id="rates" hidden>' +
-          '<button class="rate r0" data-g="0"><b>Errei</b><small>hoje</small></button>' +
-          '<button class="rate r1" data-g="1"><b>Difícil</b><small>EF −</small></button>' +
-          '<button class="rate r2" data-g="2"><b>Bom</b><small>padrão</small></button>' +
-          '<button class="rate r3" data-g="3"><b>Fácil</b><small>EF +</small></button>' +
-        '</div>' +
-        '<div class="stage-nav"><span>Card ' + (SESSION.index + 1) + ' de ' + SESSION.queue.length + '</span>' +
-        '<span>' + SESSION.doneToday + ' revisados hoje</span></div>' +
-      '</div>';
-
-    var flash = $("#flash");
-    var revealed = false;
-    flash.addEventListener("click", function(){
-      flash.classList.toggle("flipped");        // vira e desvira quantas vezes quiser
-      if(!revealed){ revealed = true; $("#rates").hidden = false; }
-    });
-    Array.prototype.forEach.call(document.querySelectorAll("#rates .rate"), function(btn){
-      btn.addEventListener("click", function(){ rate(parseInt(btn.getAttribute("data-g"), 10)); });
-    });
-  }
-
-  function rate(grade){
-    var item = SESSION.queue[SESSION.index];
-    var p = item.p;
-    var cache = SESSION.docCache[p.platformId];
-    if(!cache){ next(); return; }
-    var update = {};
-
-    if(p.engine === "obsrs"){
-      // Obstetrícia: grava no próprio srs com as ladders nativas (two-way real)
-      var os = cache.state[p.srsField] || {};
-      var s = os[item.id] || { type:"card", track:"new", step:-1, due:todayISO(), reps:0, lapses:0, last:"" };
-      obsGrade(s, ["errei","dificil","medio","facil"][grade]);
-      os[item.id] = s; cache.state[p.srsField] = os;
-      update[p.srsField] = os;
-    } else if(p.engine === "inline"){
-      // cirurgia: SRS inline no próprio card (ms). Recalcula e grava o card em userCards[id].
-      var rev = schedule({ ease:item.rev.ease, interval:item.rev.interval, reps:item.rev.reps, due:item.rev.due }, grade, "ms");
-      var uc = cache.state[p.cardsMap] || {};
-      var c = uc[item.id] || item.rev;
-      c.ease = rev.ease; c.interval = rev.interval; c.reps = rev.reps; c.due = rev.due;
-      c.reviews = (c.reviews||0) + 1; if(grade >= 2) c.correct = (c.correct||0) + 1;
-      c.diff = grade === 0 ? "dificil" : (grade === 1 ? "dificil" : (grade === 2 ? "medio" : "facil"));
-      uc[item.id] = c; cache.state[p.cardsMap] = uc;
-      update[p.cardsMap] = uc;
-    } else {
-      // pedatlas/cir/gin fcmap: agendamento no map fcReviews
-      var srs = cache.state[p.srsField] || {};
-      srs[item.id] = schedule(item.rev, grade, p.unit);
-      cache.state[p.srsField] = srs;
-      update[p.srsField] = srs;
-    }
-
-    creditPlatform(cache, "card", true, update);   // +XP/ofensiva na plataforma de origem
-    commit(cache, update);
-    SESSION.doneToday++;
-    next();
-  }
-
-  function next(){
-    SESSION.index++;
-    renderStage();
-  }
-
-  function renderInternal(n){
-    var area = $("#internal-area");
-    if(!n){ area.innerHTML = ""; return; }
-    area.innerHTML =
-      '<div class="pending-row">' +
-        '<span>' + n + ' flashcard(s) já avaliados no PedAtlas ainda não foram sincronizados aqui. ' +
-        'Abra o PedAtlas e avalie/salve uma vez para trazer o conteúdo deles.</span>' +
-        '<a href="../plataformas/pediatria/">Abrir PedAtlas →</a>' +
-      '</div>';
-  }
-
-  function renderQuest(){
-    var area = $("#quest-area");
-    var list = SESSION.viewQuests;
-    if(list.length === 0){
-      var qpf = (SESSION.qFilter !== "all" && SESSION.qFilter !== "shuffle") ? platByKey(SESSION.qFilter) : null;
-      if(qpf){
-        area.innerHTML =
-          '<div class="panel"><div class="big">' + esc(qpf.label) + '</div>' +
-          '<p>As questões do dia do ' + esc(qpf.label) + ' aparecem aqui depois que você abre a plataforma uma vez.</p>' +
-          '<a class="cta" href="' + qpf.href + '">Abrir ' + esc(qpf.label) + ' &#8594;</a></div>';
-      } else {
-        area.innerHTML =
-          '<div class="panel"><div class="big">Sem questões para mostrar</div>' +
-          '<p>As questões do dia de cada plataforma aparecem aqui depois que você abre a plataforma uma vez.</p></div>';
-      }
-      return;
-    }
-    // recolhida: um único botão revela as questões
-    if(!SESSION.qOpen){
-      area.innerHTML =
-        '<button class="q-expand" id="q-expand">Ver as ' + list.length + ' questões &#9662;</button>';
-      $("#q-expand").addEventListener("click", function(){ SESSION.qOpen = true; SESSION.qPage = 0; renderQuest(); });
-      return;
-    }
-
-    var PER = 10, pages = Math.ceil(list.length / PER);
-    if(SESSION.qPage >= pages) SESSION.qPage = pages - 1;
-    if(SESSION.qPage < 0) SESSION.qPage = 0;
-    var start = SESSION.qPage * PER, end = Math.min(start + PER, list.length);
-
-    var html = '<div class="quest-list">';
-    for(var i = start; i < end; i++){
-      var item = list[i], q = item.q, opts = qOptions(q);
-      var titulo = esc(item.p.label) + (q.modTitle ? ' · ' + esc(q.modTitle) : '');
-      html +=
-        '<div class="qcard" data-i="' + i + '">' +
-          '<div class="qhead-static"><span class="qnum">Questão ' + (i+1) + ' de ' + list.length + '</span>' +
-          '<span class="qsrc">' + titulo + '</span></div>' +
-          '<div class="qstem">' + safe(qStem(q)) + '</div>' +
-          '<div class="qopts">' +
-            opts.map(function(o, oi){
-              return '<button class="qopt" data-oi="' + oi + '" data-correct="' + (o.correct ? 1 : 0) + '">' + safe(o.text) + '</button>';
-            }).join('') +
-          '</div>' +
-          '<div class="qexplain" hidden>' + (qExplain(q) ? safe(qExplain(q)) : '') + '</div>' +
-        '</div>';
-    }
-    html += '</div>';
-    if(pages > 1){
-      html += '<div class="q-nav">' +
-        '<button class="q-pg" id="q-prev"' + (SESSION.qPage===0?' disabled':'') + '>&#9650; Anteriores</button>' +
-        '<span class="q-pginfo">' + (start+1) + '–' + end + ' de ' + list.length + '</span>' +
-        '<button class="q-pg" id="q-next"' + (SESSION.qPage>=pages-1?' disabled':'') + '>Próximas 10 &#9660;</button>' +
-      '</div>';
-    }
-    area.innerHTML = html;
-
-    Array.prototype.forEach.call(area.querySelectorAll(".qcard"), function(qcard){
-      var i = parseInt(qcard.getAttribute("data-i"), 10);
-      var itemQ = SESSION.viewQuests[i], ans = itemQ && itemQ.answered;
-      if(ans){
-        // já respondida na plataforma → mostra travada (preserva progresso)
-        qcard.classList.add("answered");
-        Array.prototype.forEach.call(qcard.querySelectorAll(".qopt"), function(b){
-          b.disabled = true;
-          if(b.getAttribute("data-correct") === "1") b.classList.add("ok");
-          if(ans.chosen != null && parseInt(b.getAttribute("data-oi"),10) === ans.chosen && b.getAttribute("data-correct") !== "1") b.classList.add("wrong");
-        });
-        var exA = qcard.querySelector(".qexplain");
-        if(exA && exA.textContent.trim()) exA.hidden = false;
-      }
-      Array.prototype.forEach.call(qcard.querySelectorAll(".qopt"), function(btn){
-        btn.addEventListener("click", function(){
-          if(qcard.classList.contains("answered")) return;
-          qcard.classList.add("answered");
-          var correct = btn.getAttribute("data-correct") === "1";
-          Array.prototype.forEach.call(qcard.querySelectorAll(".qopt"), function(b){
-            b.disabled = true;
-            if(b.getAttribute("data-correct") === "1") b.classList.add("ok");
-          });
-          if(!correct) btn.classList.add("wrong");
-          var ex = qcard.querySelector(".qexplain");
-          if(ex && ex.textContent.trim()) ex.hidden = false;
-          markQuestionAnswered(SESSION.viewQuests[i], correct, parseInt(btn.getAttribute("data-oi"), 10));
-        });
-      });
-    });
-    var prev = $("#q-prev"), nxt = $("#q-next");
-    if(prev) prev.addEventListener("click", function(){ if(SESSION.qPage>0){ SESSION.qPage--; renderQuest(); window.scrollTo(0, document.querySelector("#quest-area").offsetTop - 80); } });
-    if(nxt) nxt.addEventListener("click", function(){ SESSION.qPage++; renderQuest(); window.scrollTo(0, document.querySelector("#quest-area").offsetTop - 80); });
-  }
-
-  // Respondida = registrada na Central OU no estado nativo da plataforma.
-  // (para InfectoAtlas, state.done["<arg>:<i>"] só é gravado ao RESPONDER — não há
-  //  falso-positivo de "visto"; por isso é seguro espelhar o que foi feito na plataforma.)
-  function questAnswered(p, id){
-    var c = SESSION.progress[p.key + "::" + id];
-    if(c) return c;
-    var cache = SESSION.docCache[p.platformId];
-    if(cache && cache.state && p.quizMode === "infectoDone"){
-      var dn = cache.state.done;
-      if(dn && dn[id] === true) return { chosen:null, correct:true, fromPlatform:true };
-    }
-    return null;
-  }
-
-  // grava "feito" no MESMO documento da plataforma (merge) — fonte única
-  function markQuestionAnswered(item, correct, oi){
-    var cache = SESSION.docCache[item.platformId];
-    if(!cache) return;
-    var p = cache.p, st = cache.state, id = qId(item.q); if(!id) return;
-    var update = {};
-    if(p.quizMode === "ginecoTopics"){
-      // gineco: state.topics[tid].questions["q"+i] = {chosen,correct}
-      var parts = String(id).split(":"), a = parts[0], b = parts[1];
-      var tp = st.topics || {};
-      tp[a] = tp[a] || { questions:{} }; tp[a].questions = tp[a].questions || {};
-      tp[a].questions["q"+b] = { chosen:(oi==null?0:oi), correct:!!correct };
-      st.topics = tp; update.topics = tp;
-    } else if(p.quizMode === "cirurgiaQuiz"){
-      // cirurgia: state.quiz[subId][qIndex] = opção escolhida
-      var pc = String(id).split(":"), sa = pc[0], sb = pc[1];
-      var quiz = st[p.quizField] || {};
-      quiz[sa] = quiz[sa] || {}; quiz[sa][sb] = (oi==null?1:oi);
-      st[p.quizField] = quiz; update[p.quizField] = quiz;
-    } else if(p.quizMode === "obsAnswered"){
-      // obstetrícia: state.answered[tid][i] = 1/0
-      var po = String(id).split(":"), oa = po[0], ob = po[1];
-      var ans = st.answered || {};
-      ans[oa] = ans[oa] || {}; ans[oa][ob] = correct ? 1 : 0;
-      st.answered = ans; update.answered = ans;
-    } else if(p.quizMode === "pneumoQ"){
-      // pneumo: state.qAnswered[id] = {ans, correct}
-      var qa = st.qAnswered || {};
-      qa[id] = { ans:(oi==null?0:oi), correct:!!correct };
-      st.qAnswered = qa; update.qAnswered = qa;
-    } else if(p.quizMode === "neuroQ"){
-      // neuro: state.questions[mod][i] = {chosen, correct}
-      var pn = String(id).split(":"), nm = pn[0], ni = pn[1];
-      var qm = st.questions || {};
-      qm[nm] = qm[nm] || {}; qm[nm][ni] = { chosen:(oi==null?0:oi), correct:!!correct };
-      st.questions = qm; update.questions = qm;
-    } else if(p.quizMode === "infectoDone"){
-      // infecto: state.done["<arg>:<i>"] = true (id do feed já vem nesse formato)
-      var dn = st.done || {};
-      dn[id] = true; st.done = dn; update.done = dn;
-    } else {
-      // pedatlas: qSeen[id] = true
-      var qSeen = st.qSeen || {};
-      qSeen[id] = true; st.qSeen = qSeen; update.qSeen = qSeen;
-    }
-    creditPlatform(cache, "quest", correct, update);   // +XP/ofensiva/estatísticas na plataforma
-    commit(cache, update);
-    // registra na Central (restaura progresso ao recarregar, independe dos formatos das plataformas)
-    SESSION.progress[p.key + "::" + id] = { chosen:(oi==null?0:oi), correct:!!correct };
-    progressRef().set({ q: SESSION.progress }, { merge:true }).catch(function(){});
-  }
-
-  // grava no doc (aninhado em state quando a plataforma usa esse formato; bump updatedAt p/ sync)
-  function commit(cache, update){
-    var ref = cache.ref, sf = cache.p.stateField, payload;
-    if(sf){ payload = { updatedAt: Date.now() }; payload[sf] = update; }
-    else payload = update;
-    ref.set(payload, { merge: true }).catch(function(e){
-      console.warn("Falha ao salvar", e);
-      toast("Não consegui salvar — verifique a conexão.");
-    });
-  }
-
-  function renderPlatforms(){
-    var html = "";
-    PLATFORMS.forEach(function(p){
-      var on = p.status === "rw";
-      html +=
-        '<a class="plat" href="' + p.href + '">' +
-          '<div class="name">' + esc(p.label) + '</div>' +
-          '<div class="st ' + (on ? "on" : "off") + '">' + (on ? "● Conectada" : "○ A conectar") + '</div>' +
-        '</a>';
-    });
-    $("#plat-grid").innerHTML = html;
-  }
-
-  /* ===== util ===== */
-  function esc(s){ return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-  // permite HTML simples já existente nos cards (negrito etc.), mas neutraliza <script>
-  function safe(s){ return String(s == null ? "" : s).replace(/<\s*script/gi, "&lt;script"); }
-
-  /* ===== Auth + boot ===== */
-  function boot(){
-    try{
-      if(typeof firebase === "undefined"){ throw new Error("SDK indisponível"); }
-      if(!firebase.apps || !firebase.apps.length){ firebase.initializeApp(firebaseConfig); }
-      FB.auth = firebase.auth();
-      FB.db = firebase.firestore();
-      FB.ready = true;
-
-      FB.auth.onAuthStateChanged(function(user){
-        $("#loader").style.display = "none";
-        if(!user){
-          $("#gate").classList.add("show");
-          $("#app").hidden = true;
-          return;
-        }
-        FB.uid = user.uid;
-        $("#gate").classList.remove("show");
-        $("#app").hidden = false;
-        showToday();
-        loadAll();
-      });
-    }catch(e){
-      $("#loader").style.display = "none";
-      $("#gate").classList.add("show");
-      console.warn("Firebase indisponível:", e);
-    }
-  }
-
-  function showToday(){
-    try{
-      var d = new Date();
-      $("#today").textContent = d.toLocaleDateString("pt-BR", { weekday:"long", day:"numeric", month:"long" });
-    }catch(e){ $("#today").textContent = ""; }
-  }
-
-  /* ===== Topbar handlers ===== */
-  // ⏻/seta: volta à biblioteca SEM deslogar
-  document.getElementById("btn-back").addEventListener("click", function(){
-    window.location.href = "../biblioteca-web/";
-  });
-  // Sair do ELID: signOut real -> landing
-  document.getElementById("btn-logout").addEventListener("click", function(){
-    if(!confirm("Sair do ELID?")) return;
-    if(FB.auth){ FB.auth.signOut().then(function(){ window.location.href = "../landing-page/"; })
-      .catch(function(){ window.location.href = "../landing-page/"; }); }
-    else { window.location.href = "../landing-page/"; }
-  });
-  // Tema
-  document.getElementById("btn-theme").addEventListener("click", function(){
-    document.body.classList.toggle("light-mode");
-    var icon = document.getElementById("icon-theme");
-    icon.innerHTML = document.body.classList.contains("light-mode")
-      ? '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>'
-      : '<path d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zM4.22 4.22a1 1 0 011.415 0l1.414 1.415a1 1 0 01-1.414 1.414L4.22 5.636a1 1 0 010-1.414zM2 10a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4.22 15.78a1 1 0 010-1.415l1.414-1.414a1 1 0 111.414 1.414l-1.414 1.415a1 1 0 01-1.414 0zM10 18a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1zm6-6a4 4 0 11-8 0 4 4 0 018 0z"/>';
-  });
-
-  /* ===== Canvas (mesmo clima da Biblioteca) ===== */
-  (function(){
-    var canvas = document.getElementById("bg"), ctx = canvas.getContext("2d");
-    var particles = [], w, h;
-    function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-    resize(); window.addEventListener("resize", resize);
-    for(var i=0;i<60;i++){
-      particles.push({ x:Math.random()*w, y:Math.random()*h, vx:(Math.random()-0.5)*0.15, vy:(Math.random()-0.5)*0.1, r:Math.random()*1.2+0.4, alpha:Math.random()*0.3+0.08 });
-    }
-    function draw(){
+    function drawBg() {
       ctx.clearRect(0,0,w,h);
-      var t = Date.now()*0.0003;
-      var grd = ctx.createRadialGradient(w*0.5+Math.sin(t)*100, h*0.3, 50, w*0.5, h*0.5, h*0.8);
-      grd.addColorStop(0,"rgba(183,110,121,0.05)"); grd.addColorStop(0.5,"rgba(45,27,46,0)"); grd.addColorStop(1,"rgba(45,27,46,0)");
+      const t = Date.now()*0.0003;
+      const grd = ctx.createRadialGradient(w*0.5+Math.sin(t)*100,h*0.3,50,w*0.5,h*0.5,h*0.8);
+      grd.addColorStop(0,'rgba(183,110,121,0.04)'); grd.addColorStop(0.5,'rgba(45,27,46,0)'); grd.addColorStop(1,'rgba(45,27,46,0)');
       ctx.fillStyle=grd; ctx.fillRect(0,0,w,h);
-      particles.forEach(function(p){
+      particles.forEach(p => {
         p.x+=p.vx; p.y+=p.vy;
         if(p.x<0)p.x=w; if(p.x>w)p.x=0; if(p.y<0)p.y=h; if(p.y>h)p.y=0;
         ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle="rgba(247,231,206,"+p.alpha+")"; ctx.fill();
+        ctx.fillStyle=`rgba(247,231,206,${p.alpha})`; ctx.fill();
       });
-      requestAnimationFrame(draw);
+      requestAnimationFrame(drawBg);
     }
-    draw();
-  })();
+    drawBg();
 
-  boot();
-})();
-</script>
+    // Tema
+    document.getElementById('btn-theme').addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const icon = document.getElementById('icon-theme');
+      icon.innerHTML = document.body.classList.contains('light-mode')
+        ? '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>'
+        : '<path d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zM4.22 4.22a1 1 0 011.415 0l1.414 1.415a1 1 0 01-1.414 1.414L4.22 5.636a1 1 0 010-1.414zM2 10a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zM4.22 15.78a1 1 0 010-1.415l1.414-1.414a1 1 0 111.414 1.414l-1.414 1.415a1 1 0 01-1.414 0zM10 18a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1zm6-6a4 4 0 11-8 0 4 4 0 018 0z"/>';
+    });
+
+    lucide.createIcons();
+
+    // Frase do dia — muda automaticamente a cada dia (determinístico por data)
+    (function () {
+      const frases = [
+        "Você está chegando lá.",
+        "A constância vence a intensidade.",
+        "Hoje é mais um passo em direção à residência.",
+        "Cada revisão conta.",
+        "Há sempre algo novo para explorar.",
+        "Confie no processo: cada dia soma.",
+        "O foco de hoje constrói o resultado de amanhã.",
+        "Pequenos avanços, repetidos todos os dias.",
+        "A residência é um caminho, não um salto.",
+        "Estude com calma, revise com intenção.",
+        "Disciplina é lembrar do que você quer.",
+        "O que se revê, se retém.",
+        "Você é mais capaz do que imagina.",
+        "Respire. Uma questão de cada vez.",
+        "Quem persiste, alcança.",
+        "Conhecimento se constrói camada por camada.",
+        "Hoje você está mais perto do que ontem.",
+        "A jornada importa tanto quanto o destino.",
+        "Cada flashcard é uma semente.",
+        "Confiança nasce da preparação.",
+        "Foque no próximo passo, não na montanha inteira.",
+        "Seu esforço de hoje tem nome: futuro médico.",
+        "Aprender é um ato de coragem diária.",
+        "A repetição transforma esforço em domínio.",
+        "Calma e constância vencem o cansaço.",
+        "Você não precisa ser perfeito, só constante.",
+        "O progresso silencioso também é progresso.",
+        "Lembre-se do porquê começou.",
+        "Cada dia de estudo é um voto na sua aprovação.",
+        "Continue: o melhor ainda está por vir."
+      ];
+      const agora = new Date();
+      const inicioAno = new Date(agora.getFullYear(), 0, 0);
+      const diaDoAno = Math.floor((agora - inicioAno) / 86400000);
+      const el = document.getElementById('daily-quote');
+      if (el) el.textContent = frases[diaDoAno % frases.length];
+    })();
+  </script>
 </body>
 </html>
