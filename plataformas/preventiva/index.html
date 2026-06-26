@@ -2991,9 +2991,14 @@ function allCardsForSRS(){const tc=allTopicCardsFlat();const uc=(S.cards||[]).ma
 /* ============================================================
    ESTUDOS DO DIA
    ============================================================ */
+/* ESTUDO DO DIA — algoritmo padronizado do ELID (igual à Central e demais plataformas) */
+function daySeedNum(){ return Math.floor(Date.now()/86400000); }
+function seedShuffle(a,seed){ a=a.slice(); var s=(seed||1)>>>0;
+  function rnd(){ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; }
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
 function renderDia(){
   const seed=daySeed();
-  const qs=seededPick(allQuestionsFlat(),seed,10);
+  const qs=seedShuffle(allQuestionsFlat(), daySeedNum()).slice(0,10);
   const cards=seededPick(allCardsForSRS(),seed+7,8);
   const dueCount=cardsDue().length;
   const c=document.getElementById("content");
