@@ -344,7 +344,8 @@
             xpCard:5, xpQuest:4, xpCorrect:0 } },
     { key:"infectologia", label:"InfectoAtlas",        href:"../plataformas/infectologia/", status:"rw",
       platformId:"infectologia", docPath:["state","current"], stateField:"state", engine:"fcmap", unit:"ms",
-      srsField:"srs", cardsField:"cards", showNew:true, dailyQ:5, pin:true,
+      srsField:"srs", cardsField:"cards", showNew:true, pin:true,
+      dailySelect:"seedShuffle", dailyN:10,   // MESMA seleção de "questões do dia" da plataforma (seedShuffle + 10/dia)
       quizMode:"infectoDone" }   // questões marcam state.done["<arg>:<i>"]=true (sem gamificação na origem)
   ];
 
@@ -467,6 +468,10 @@
     for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
     return a;
   }
+  // embaralhamento determinístico IDÊNTICO ao das plataformas (mesma seleção de "itens do dia")
+  function seedShuffle(a, seed){ a = a.slice(); var s = (seed||1) >>> 0;
+    function rnd(){ s = (s*1103515245+12345) & 0x7fffffff; return s/0x7fffffff; }
+    for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
   // plataformas presentes em uma lista (para montar os filtros)
   function platsOf(list){
     var seen = {}, out = [];
@@ -653,8 +658,12 @@
           }
         }
 
-        // Questões do dia: a Central seleciona deterministicamente por data a partir do banco completo (gira todo dia)
-        dailyPick(feedQuests, p.key, p.dailyQ || 5).forEach(function(q){
+        // Questões do dia — algoritmo ÚNICO e padronizado para TODAS as plataformas
+        // (idêntico ao das plataformas): seedShuffle(banco completo, seed numérico do dia)
+        // + 10/dia. O feed é publicado na mesma ordem do banco da plataforma, então o
+        // conjunto do dia da Central fica idêntico ao "Estudo do Dia" da plataforma.
+        var picks = seedShuffle(feedQuests, daySeedNum()).slice(0, 10);
+        picks.forEach(function(q){
           var id = qId(q); if(id) SESSION.allQuests.push({ p:p, q:q, platformId:p.platformId, answered: questAnswered(p, id) });
         });
       }).then(function(){
@@ -911,9 +920,18 @@
     if(nxt) nxt.addEventListener("click", function(){ SESSION.qPage++; renderQuest(); window.scrollTo(0, document.querySelector("#quest-area").offsetTop - 80); });
   }
 
-  // só conta como respondida o que foi respondido NA CENTRAL (evita falso-positivo de "visto" das plataformas)
+  // Respondida = registrada na Central OU no estado nativo da plataforma.
+  // (para InfectoAtlas, state.done["<arg>:<i>"] só é gravado ao RESPONDER — não há
+  //  falso-positivo de "visto"; por isso é seguro espelhar o que foi feito na plataforma.)
   function questAnswered(p, id){
-    return SESSION.progress[p.key + "::" + id] || null;
+    var c = SESSION.progress[p.key + "::" + id];
+    if(c) return c;
+    var cache = SESSION.docCache[p.platformId];
+    if(cache && cache.state && p.quizMode === "infectoDone"){
+      var dn = cache.state.done;
+      if(dn && dn[id] === true) return { chosen:null, correct:true, fromPlatform:true };
+    }
+    return null;
   }
 
   // grava "feito" no MESMO documento da plataforma (merge) — fonte única
