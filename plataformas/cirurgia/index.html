@@ -4154,6 +4154,11 @@ function bindTri(m){
 function mulberry32(a){ return function(){ a|=0;a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
 function daySeed(){ var d=new Date(); return Math.floor(new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime()/864e5); }
 function shuffleSeed(arr, seed){ var r=mulberry32(seed), a=arr.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(r()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
+/* ESTUDO DO DIA — algoritmo padronizado do ELID (igual à Central e demais plataformas) */
+function daySeedNum(){ return Math.floor(Date.now()/86400000); }
+function seedShuffle(a,seed){ a=a.slice(); var s=(seed||1)>>>0;
+  function rnd(){ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; }
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
 function dailyPool(){
   var qs=[], fc=[];
   MODULES.forEach(function(m){
@@ -4167,14 +4172,14 @@ function dailyPool(){
 function viewDaily(){
   var d=new Date(); var seed=daySeed();
   var pool=dailyPool();
-  var qs=shuffleSeed(pool.qs, seed).slice(0,6);
+  var qs=seedShuffle(pool.qs, daySeedNum()).slice(0,10);
   var fc=shuffleSeed(pool.fc, seed+7).slice(0,8);
   var dateFmt=d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
   var dstate=STATE.quiz['__daily__'+seed]||{};
   var h='<div class="page-head"><div class="page-eyebrow">Estudos do Dia</div><h1 class="page-title">Sua dose diária</h1>'+
     '<p class="page-sub">Uma seleção de questões e flashcards de cirurgia geral que muda automaticamente a cada dia. Volte amanhã para um novo conjunto.</p></div>';
   h+='<div class="daily-banner"><div class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg></div>'+
-    '<div class="dt"><h3>Desafio de hoje</h3><p>6 questões comentadas + 8 flashcards selecionados para você</p></div>'+
+    '<div class="dt"><h3>Desafio de hoje</h3><p>10 questões comentadas + 8 flashcards selecionados para você</p></div>'+
     '<span class="daily-date">'+dateFmt+'</span></div>';
   // questões
   h+='<div class="section-h"><h2>Questões do dia</h2><div class="line"></div></div><div data-dailyquiz>';
