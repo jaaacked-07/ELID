@@ -3966,10 +3966,15 @@ window.renderTopic=function(arg){
 function seededRand(seed){ const x=Math.sin(seed)*10000; return x-Math.floor(x); }
 function dailyReset(){ ensure(); if(STATE.__dd!==todayKey()){ STATE.__dd=todayKey(); STATE.dailyDone={q:0,f:0}; queueSave(); } }
 function checkDailyGoal(){ ensure(); const g=STATE.goals.daily; const t=todayKey(); STATE.goals.history=STATE.goals.history||{}; if(!STATE.goals.history[t] && (STATE.dailyDone.q||0)>=g.questions && (STATE.dailyDone.f||0)>=g.flashcards){ STATE.goals.history[t]=true; awardXp(75,"Meta diária cumprida! 🎯"); } }
+/* ESTUDO DO DIA — algoritmo padronizado do ELID (igual à Central e demais plataformas) */
+function daySeedNum(){ return Math.floor(Date.now()/86400000); }
+function seedShuffle(a,seed){ a=a.slice(); var s=(seed||1)>>>0;
+  function rnd(){ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; }
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
 function dailySet(){
   const seed=Number(todayKey().replace(/-/g,""));
   const qpool=[]; MODULES.forEach(m=>m.topics.forEach(t=>{ if(t.content&&t.content.questions) t.content.questions.forEach((q,i)=>qpool.push({modId:m.id,topId:t.id,qi:i,q,m})); }));
-  const qs=qpool.map((x,i)=>({x,r:seededRand(seed+i*7.13)})).sort((a,b)=>a.r-b.r).map(o=>o.x).slice(0,5);
+  const qs=seedShuffle(qpool, daySeedNum()).slice(0,10);
   const cards=allCards(); const cs=cards.map((x,i)=>({x,r:seededRand(seed+i*3.7)})).sort((a,b)=>a.r-b.r).map(o=>o.x).slice(0,8);
   return {qs,cards:cs};
 }
