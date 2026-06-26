@@ -2958,6 +2958,17 @@ function renderNotes(t,b){
 }
 
 /* ===================== ESTUDO DO DIA ===================== */
+/* ESTUDO DO DIA — algoritmo padronizado do ELID (igual à Central e demais plataformas) */
+function daySeedNum(){ return Math.floor(Date.now()/86400000); }
+function seedShuffle(a,seed){ a=a.slice(); var s=(seed||1)>>>0;
+  function rnd(){ s=(s*1103515245+12345)&0x7fffffff; return s/0x7fffffff; }
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
+/* mesmo conjunto/ordem do feed (MODULES→topics→questions); 10/dia por seed numérico */
+function obstDailyQ(){
+  var pool=[];
+  MODULES.forEach(function(m){ (m.topics||[]).forEach(function(t){ (t.questions||[]).forEach(function(q,i){ pool.push({t:t,q:q,qi:i}); }); }); });
+  return seedShuffle(pool, daySeedNum()).slice(0,10);
+}
 function renderEstudo(){
   var main=$('#main');var c=srsCounts();
   var html=pageHead('Revisão espaçada','Estudo do Dia','Tudo que precisa rever hoje, em um só lugar. Flashcards e questões de <b>todos os módulos</b> entram aqui automaticamente, no ritmo certo para fixar.');
@@ -2988,6 +2999,12 @@ function renderEstudo(){
     '<div style="flex:1"><div style="font-size:.84rem;color:var(--txt2);font-weight:300">Retenção atual <b style="color:var(--ok)">'+retention()+'%</b></div><div class="bar" style="margin-top:8px"><i style="width:'+retention()+'%;background:var(--ok)"></i></div>'+
     '<div style="font-size:.84rem;color:var(--txt2);font-weight:300;margin-top:12px">Progresso geral <b>'+overallPct()+'%</b></div><div class="bar" style="margin-top:8px"><i style="width:'+overallPct()+'%"></i></div></div></div></div>';
   html+='</div>';
+  // Questões do dia — padronizado ELID (seedShuffle + seed numérico + 10/dia), idênticas às da Central
+  var dq=obstDailyQ();
+  html+='<div class="card" style="margin-top:18px"><h3 style="font-size:1.3rem;font-weight:400;margin:0 0 6px">📝 Questões do dia</h3>'+
+    '<p style="color:var(--txt2);font-weight:300;margin:0 0 14px">10 questões que giram automaticamente a cada dia — as mesmas que aparecem na Central.</p>'+
+    (dq.length? dq.map(function(it){return questionHTML(it.t, it.q, it.qi);}).join('') : '<p style="color:var(--txt3);font-weight:300">Sem questões disponíveis ainda.</p>')+
+    '</div>';
   main.innerHTML=html;
 }
 function startSession(){
