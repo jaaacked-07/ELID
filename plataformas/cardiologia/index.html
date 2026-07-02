@@ -1743,7 +1743,8 @@ function renderHeartStructList(){
       var un=isUnlocked(cap,i);
       var id=idFor(cap,i);
       var cls='hsl-item'+(un?'':' locked')+(HEART_SELECTED[id]?' on':'');
-      html+='<div class="'+cls+'"'+(un?' onclick="toggleHeartSelect(\''+cap+'\','+i+')"':'')+
+      var act=un?('toggleHeartSelect(\''+cap+'\','+i+')'):'toast(\'Estrutura ainda bloqueada — complete os checklists de domínio dos módulos para desbloqueá-la.\')';
+      html+='<div class="'+cls+'" onclick="'+act+'"'+
         ' title="'+(un?'Toque para exibir/ocultar no coração':'Ainda bloqueada')+'">'+
         '<span>'+(un?name:'??? (bloqueado)')+'</span><span class="hsl-dot"></span></div>';
     });
@@ -1825,8 +1826,11 @@ window.bindBook=function(){
   stage.addEventListener('pointerup',function(e){
     dragging=false; stage.classList.remove('grabbing');
     if(moved<6){
-      var g=e.target.closest && e.target.closest('.heart-struct.unlocked');
-      if(g){ toggleHeartSelect(g.getAttribute('data-cap'), +g.getAttribute('data-i')); }
+      var g=e.target.closest && e.target.closest('.heart-struct');
+      if(g){
+        if(g.classList.contains('unlocked')) toggleHeartSelect(g.getAttribute('data-cap'), +g.getAttribute('data-i'));
+        else toast('Estrutura ainda bloqueada — complete os checklists de domínio dos módulos para desbloqueá-la.');
+      }
     }
   });
   stage.addEventListener('wheel',function(e){
