@@ -1614,6 +1614,25 @@ if(!document.getElementById('heart-style')){
   .heart-hero-cover .heart-mini-wrap{width:150px;height:150px;pointer-events:none}
   .heart-hero-cover .heart-mini-wrap .heart-struct{transition:opacity 1s}
   .heart-hero-cover svg{width:100%;height:100%}
+  .unlock-ov{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+    background:rgba(20,8,10,.72);backdrop-filter:blur(3px);animation:unlockFadeIn .35s ease}
+  @keyframes unlockFadeIn{from{opacity:0}to{opacity:1}}
+  .unlock-card{position:relative;width:min(420px,88vw);background:var(--panel);border:1px solid var(--accent);
+    border-radius:22px;padding:34px 30px 30px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.45);
+    animation:unlockPop .5s cubic-bezier(.2,.9,.3,1.3)}
+  @keyframes unlockPop{0%{transform:scale(.7);opacity:0}60%{transform:scale(1.04)}100%{transform:scale(1);opacity:1}}
+  .unlock-burst{position:relative;width:78px;height:78px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center}
+  .unlock-burst::before,.unlock-burst::after{content:'';position:absolute;inset:0;border-radius:50%;
+    border:3px solid var(--accent);opacity:0;animation:unlockRing 1.8s ease-out infinite}
+  .unlock-burst::after{animation-delay:.55s}
+  .unlock-burst svg{width:42px;height:38px;fill:var(--accent);position:relative;z-index:1;
+    animation:unlockHeartBeat 1s ease-in-out infinite;filter:drop-shadow(0 0 10px var(--accent))}
+  @keyframes unlockRing{0%{transform:scale(.4);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+  @keyframes unlockHeartBeat{0%,100%{transform:scale(1)}20%{transform:scale(1.18)}35%{transform:scale(.96)}50%{transform:scale(1.12)}65%{transform:scale(1)}}
+  .unlock-t{font-family:'Fraunces',serif;color:var(--accent);font-size:1.02rem;letter-spacing:.02em;margin-top:2px}
+  .unlock-n{font-family:'Fraunces',serif;font-size:1.45rem;color:var(--ink);margin:8px 0 4px;line-height:1.25}
+  .unlock-sub{color:var(--muted);font-size:.82rem;margin-bottom:22px}
+  .unlock-card .btn-primary,.unlock-card .caso-btn{margin-top:4px}
   `;
   document.head.appendChild(hst);
 }
@@ -1810,6 +1829,28 @@ window.renderRoute=function(){
 };
 
 function flatNames(){ var a=[]; for(var cap in PATOGENOS){ PATOGENOS[cap].forEach(function(p){a.push({cap:cap,name:p});}); } return a; }
+function playHeartbeatSound(){
+  try{
+    var Ctx=window.AudioContext||window.webkitAudioContext;
+    if(!Ctx) return;
+    var ctx=window.__unlockAudioCtx||(window.__unlockAudioCtx=new Ctx());
+    if(ctx.state==='suspended' && ctx.resume) ctx.resume();
+    function thump(t,freq,dur,peak){
+      var osc=ctx.createOscillator(), g=ctx.createGain();
+      osc.type='sine';
+      osc.frequency.setValueAtTime(freq,t);
+      osc.frequency.exponentialRampToValueAtTime(Math.max(freq*0.55,30),t+dur);
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.exponentialRampToValueAtTime(peak,t+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+      osc.connect(g); g.connect(ctx.destination);
+      osc.start(t); osc.stop(t+dur+0.03);
+    }
+    var now=ctx.currentTime;
+    thump(now,95,0.16,0.5);        /* B1 "lub": mais grave e longa */
+    thump(now+0.20,130,0.11,0.32); /* B2 "dub": mais aguda, curta e discreta */
+  }catch(e){}
+}
 function celebrateHeart(before,after){
   var flat=flatNames(); var got=[]; for(var k=before;k<after&&k<flat.length;k++) got.push(flat[k]);
   if(!got.length) return;
@@ -1819,7 +1860,7 @@ function celebrateHeart(before,after){
   var pulse=document.getElementById('heartPulse');
   if(pulse && catDone){ pulse.classList.add('bigpulse'); setTimeout(function(){pulse.classList.remove('bigpulse');},2600); }
   var ov=document.createElement('div'); ov.className='unlock-ov';
-  ov.innerHTML='<div class="unlock-card"><div class="unlock-burst"></div>'+
+  ov.innerHTML='<div class="unlock-card"><div class="unlock-burst"><svg viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg"><path d="M16 28C16 28 2 18.5 2 9.5C2 4.8 5.8 1 10.5 1C13.1 1 15.3 2.2 16 4.1C16.7 2.2 18.9 1 21.5 1C26.2 1 30 4.8 30 9.5C30 18.5 16 28 16 28Z"/></svg></div>'+
     '<div class="unlock-t">'+(catDone?'Categoria anatômica concluída!':'Nova estrutura construída!')+'</div>'+
     '<div class="unlock-n">'+first.name+extra+'</div>'+
     '<div class="unlock-sub">'+first.cap+' · adicionada ao seu Atlas Cardíaco</div>'+
@@ -1828,6 +1869,7 @@ function celebrateHeart(before,after){
     '</div>';
   ov.addEventListener('click',function(e){ if(e.target===ov) ov.remove(); });
   document.body.appendChild(ov);
+  playHeartbeatSound();
   setTimeout(function(){ if(ov.parentNode) ov.remove(); }, 9000);
 }
 var _ck2=window.acCk;
@@ -2374,27 +2416,45 @@ if(!document.getElementById('fcc-style')){
     padding:12px 10px;text-align:center;color:var(--ink)}
   .fcc-stat b{display:block;font-size:1.3rem;font-family:'Fraunces',serif}
   .fcc-stat span{font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
-  .fcc-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .fcc-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
   .fcc-input{flex:2 1 220px;border:1px solid var(--line);background:var(--panel);color:var(--ink);
     border-radius:12px;padding:10px 14px;font-size:.86rem;outline:none}
   .fcc-input:focus{border-color:var(--accent)}
-  .fcc-select{flex:1 1 150px;border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  .fcc-input::placeholder{color:var(--muted)}
+  .fcc-select{flex:1 1 150px;border:1px solid var(--line);background:var(--bg);color:var(--ink);
     border-radius:12px;padding:10px 12px;font-size:.86rem;outline:none;cursor:pointer}
   .fcc-select:focus{border-color:var(--accent)}
-  .fcc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-  .fcc-card{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:16px;
+  /* a "aba" nativa do <select> (lista de opções) não herda var(--panel) translúcido dos
+     navegadores — força fundo/texto sólidos e no tema da plataforma para não ficar
+     branco-no-branco */
+  .fcc-select option{background:var(--bg);color:var(--ink)}
+  body.light .fcc-select option{background:var(--ivory);color:var(--ink)}
+  .fcc-div{font-family:'Fraunces',serif;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);margin:26px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .fcc-div span.fcc-div-n{font-family:'Inter',sans-serif;letter-spacing:0;text-transform:none;
+    color:var(--muted);font-size:.72rem;white-space:nowrap}
+  .fcc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+  .fcc-card{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:12px;
     display:flex;flex-direction:column;gap:8px}
-  .fcc-card-top{display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap}
-  .fcc-tag-topic{font-size:.68rem;color:var(--accent);border:1px solid var(--line);border-radius:12px;padding:3px 10px}
-  .fcc-tag-diff{font-size:.66rem;font-weight:700;border:1px solid;border-radius:12px;padding:3px 10px}
-  .fcc-card-front{font-size:.88rem;line-height:1.5;color:var(--ink)}
-  .fcc-card-back{font-size:.84rem;line-height:1.5;color:var(--muted)}
-  .fcc-card-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px;
-    border-top:1px dashed var(--line);padding-top:8px;flex-wrap:wrap}
-  .fcc-due{font-size:.7rem;color:var(--muted)}
-  .fcc-actions{display:flex;gap:6px}
-  .fcc-actions button{font-size:.72rem;border:1px solid var(--line);background:transparent;color:var(--ink);
-    border-radius:10px;padding:5px 10px;cursor:pointer}
+  .fcc-card-top{display:flex;justify-content:flex-end;align-items:center;gap:6px;flex-wrap:wrap}
+  .fcc-tag-diff{font-size:.62rem;font-weight:700;border:1px solid;border-radius:12px;padding:2px 9px}
+  .fcc-flip{position:relative;aspect-ratio:1/1;border-radius:12px;border:1px solid var(--line);
+    background:linear-gradient(160deg,var(--accent-soft),transparent 70%);cursor:pointer;
+    display:flex;overflow:hidden}
+  .fcc-flip:hover{border-color:var(--accent)}
+  .fcc-flip.is-back{background:linear-gradient(160deg,var(--accent-soft),var(--accent-soft) 100%)}
+  @keyframes fccFlipAnim{0%{transform:rotateY(0) scale(1)}50%{transform:rotateY(90deg) scale(.94);opacity:.35}100%{transform:rotateY(0) scale(1)}}
+  .fcc-flip.fcc-anim .fcc-flip-inner{animation:fccFlipAnim .4s cubic-bezier(.4,.08,.3,1)}
+  .fcc-flip-inner{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:6px;padding:10px;text-align:center;overflow:auto}
+  .fcc-flip-tag{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .fcc-flip-text{font-size:.78rem;line-height:1.4;color:var(--ink)}
+  .fcc-card-foot{display:flex;flex-direction:column;gap:6px}
+  .fcc-due{font-size:.66rem;color:var(--muted);text-align:center}
+  .fcc-actions{display:flex;gap:6px;justify-content:center}
+  .fcc-actions button{font-size:.68rem;border:1px solid var(--line);background:transparent;color:var(--ink);
+    border-radius:10px;padding:4px 9px;cursor:pointer}
   .fcc-actions button:hover{border-color:var(--accent);color:var(--accent)}
   .fcc-actions button.fcc-del:hover{border-color:#e8675f;color:#e8675f}
   `;
@@ -2443,8 +2503,49 @@ function fccDifficulty(id,srs){
   if(e.ease<2.6) return {key:'medio',label:'Médio',color:'#f0a93f'};
   return {key:'facil',label:'Fácil',color:'#3ddc84'};
 }
+/* mapa nome-do-módulo -> categoria (etiologia), na mesma ordem/rótulo usados em "Módulos" */
+function fccNorm(s){ return (''+(s||'')).toLowerCase().trim().replace(/\s+/g,' '); }
+function fccCategoryMap(){
+  /* chave normalizada (minúsculas/trim) -> categoria, pois o rótulo em MODULES
+     nem sempre bate 100% com CONTENT[arg].name (ex.: diferenças de maiúscula) */
+  var map={};
+  if(typeof MODULES!=='undefined' && typeof CH!=='undefined'){
+    for(var ck in MODULES){
+      var label=(CH[ck]||ck).replace(/^\d+\.\s/,'');
+      (MODULES[ck]||[]).forEach(function(name){ map[fccNorm(name)]=label; });
+    }
+  }
+  /* também mapeia pelo nome real salvo em CONTENT (C[arg].name), que é o texto
+     de fato gravado em card.top quando o usuário classifica um flashcard do módulo */
+  if(typeof C!=='undefined' && typeof MODULES!=='undefined' && typeof CH!=='undefined'){
+    for(var ck2 in MODULES){
+      var label2=(CH[ck2]||ck2).replace(/^\d+\.\s/,'');
+      (MODULES[ck2]||[]).forEach(function(_name,i){
+        var arg=ck2+'|'+i, d=C[arg];
+        if(d && d.name) map[fccNorm(d.name)]=label2;
+      });
+    }
+  }
+  return map;
+}
+function fccCategoryOrder(){
+  var order=[];
+  if(typeof CH!=='undefined'){ for(var ck in CH){ order.push(CH[ck].replace(/^\d+\.\s/,'')); } }
+  order.push('Meus Cards');
+  return order;
+}
+function fccGroup(cards){
+  var map=fccCategoryMap(); var groups={};
+  cards.forEach(function(c){
+    var cat=map[fccNorm(c.top)]||'Meus Cards';
+    (groups[cat]=groups[cat]||[]).push(c);
+  });
+  var order=fccCategoryOrder().filter(function(cat){ return groups[cat] && groups[cat].length; });
+  return {groups:groups, order:order};
+}
 
 /* ---- render ---- */
+var FCC_TXT = {}; /* id -> {front, back} — evita duplicar HTML grande em atributos */
 function viewFcCenter(){
   var ss=S(); var cards=fccList(); var srs=ss.srs||{};
   var topics=fccUniqueTopics();
@@ -2452,7 +2553,7 @@ function viewFcCenter(){
   cards.forEach(function(c){ stats[fccDifficulty(c.id,srs).key]++; });
   var icon=(typeof ICONS!=='undefined'&&(ICONS.fccenter||ICONS.srs))||'';
   var h='<div class="view"><div class="page-title">'+icon+'<h1>Central de Flashcards</h1></div>'+
-    '<p class="page-sub">Todos os flashcards da CardioAtlas em um só lugar — busque, filtre, edite ou exclua os seus.</p>'+
+    '<p class="page-sub">Todos os flashcards da CardioAtlas em um só lugar — busque, filtre, edite ou exclua os seus. Toque em um card para ver a resposta.</p>'+
     '<div class="fcc-stats">'+
       '<div class="fcc-stat"><b>'+cards.length+'</b><span>Total</span></div>'+
       '<div class="fcc-stat" style="color:#6db3f2"><b>'+stats.novo+'</b><span>Novos</span></div>'+
@@ -2477,21 +2578,40 @@ function fccCardHTML(c,srs){
   var diff=fccDifficulty(c.id,srs);
   var frontTxt=fccStrip(c.type==='cloze'?clozeFront(c.front):c.front);
   var backTxt=fccStrip(c.type==='cloze'?clozeBack(c.front):c.back);
-  if(frontTxt.length>140) frontTxt=frontTxt.slice(0,140)+'…';
-  if(backTxt.length>140) backTxt=backTxt.slice(0,140)+'…';
+  FCC_TXT[c.id]={front:frontTxt||'—', back:backTxt||'—'};
   var due=(srs[c.id]&&srs[c.id].due)?new Date(srs[c.id].due).toLocaleDateString('pt-BR'):'—';
+  var safeId=c.id.replace(/'/g,'');
   return '<div class="fcc-card">'+
     '<div class="fcc-card-top">'+
-      '<span class="fcc-tag-topic">'+(c.top||'Geral')+'</span>'+
       '<span class="fcc-tag-diff" style="background:'+diff.color+'22;color:'+diff.color+';border-color:'+diff.color+'66">'+diff.label+'</span>'+
     '</div>'+
-    '<div class="fcc-card-front"><b>P:</b> '+(frontTxt||'—')+'</div>'+
-    '<div class="fcc-card-back"><b>R:</b> '+(backTxt||'—')+'</div>'+
-    '<div class="fcc-card-foot"><span class="fcc-due">Próxima revisão: '+due+'</span>'+
-      '<span class="fcc-actions"><button onclick="fccEdit(\''+c.id+'\')">Editar</button>'+
-      '<button class="fcc-del" onclick="fccDelete(\''+c.id+'\')">Excluir</button></span>'+
+    '<div class="fcc-flip" id="fcc-flip-'+safeId+'" data-side="front" onclick="fccFlip(\''+safeId+'\')">'+
+      '<div class="fcc-flip-inner" id="fcc-flip-inner-'+safeId+'">'+
+        '<span class="fcc-flip-tag">Pergunta</span>'+
+        '<div class="fcc-flip-text">'+frontTxt+'</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="fcc-card-foot">'+
+      '<span class="fcc-due">Próxima revisão: '+due+'</span>'+
+      '<span class="fcc-actions">'+
+        '<button onclick="event.stopPropagation();fccEdit(\''+safeId+'\')">Editar</button>'+
+        '<button class="fcc-del" onclick="event.stopPropagation();fccDelete(\''+safeId+'\')">Excluir</button>'+
+      '</span>'+
     '</div></div>';
 }
+window.fccFlip=function(id){
+  var box=document.getElementById('fcc-flip-'+id); if(!box) return;
+  var inner=document.getElementById('fcc-flip-inner-'+id); if(!inner) return;
+  var side=box.dataset.side||'front';
+  box.classList.add('fcc-anim');
+  setTimeout(function(){
+    var data=FCC_TXT[id]||{front:'—',back:'—'};
+    var tag=inner.querySelector('.fcc-flip-tag'), txt=inner.querySelector('.fcc-flip-text');
+    if(side==='front'){ txt.innerHTML=data.back; tag.textContent='Resposta'; box.dataset.side='back'; box.classList.add('is-back'); }
+    else{ txt.innerHTML=data.front; tag.textContent='Pergunta'; box.dataset.side='front'; box.classList.remove('is-back'); }
+  },190);
+  setTimeout(function(){ box.classList.remove('fcc-anim'); },400);
+};
 window.fccApply=function(){
   var ss=S(); var cards=fccList(); var srs=ss.srs||{};
   var qEl=document.getElementById('fcc-search'), tEl=document.getElementById('fcc-topic'), dEl=document.getElementById('fcc-diff');
@@ -2512,7 +2632,14 @@ window.fccApply=function(){
     list.innerHTML = ph(cards.length ? 'Nenhum flashcard encontrado com esses filtros.' : 'Você ainda não tem flashcards. Classifique cards nos módulos ou crie os seus com “+ Criar flashcard”.');
     return;
   }
-  list.innerHTML = '<div class="fcc-grid">'+filtered.map(function(c){return fccCardHTML(c,srs);}).join('')+'</div>';
+  var grouped=fccGroup(filtered);
+  var html='';
+  grouped.order.forEach(function(cat){
+    var items=grouped.groups[cat];
+    html+='<div class="fcc-div">'+cat+'<span class="fcc-div-n">'+items.length+' card'+(items.length>1?'s':'')+'</span></div>';
+    html+='<div class="fcc-grid">'+items.map(function(c){return fccCardHTML(c,srs);}).join('')+'</div>';
+  });
+  list.innerHTML = html;
 };
 function bindFcCenter(){
   window.fccApply();
@@ -2561,7 +2688,6 @@ window.fccDelete=function(id){
 try{ if(typeof route!=='undefined' && route && route.view==='fccenter') renderRoute(); }catch(e){}
 })();
 </script>
-
 
 <!-- ===== MODULO ANGINA INSTAVEL (aditivo) ===== -->
 <script>Object.assign(window.ASVG=window.ASVG||{},{"angina_espectro": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"28\" fill=\"#f59f0a\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Angina Instavel x IAMSSST: o mesmo espectro, um criterio diferente</text><rect x=\"24\" y=\"48\" width=\"290\" height=\"150\" rx=\"12\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"169\" y=\"70\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Angina Instavel (AI)</text><circle cx=\"169\" cy=\"120\" r=\"34\" fill=\"none\" stroke=\"#6db3f2\" stroke-width=\"6\"/><circle cx=\"169\" cy=\"120\" r=\"14\" fill=\"#6db3f2\" fill-opacity=\"0.5\"/><text x=\"169\" y=\"178\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Isquemia SEM necrose</text><text x=\"169\" y=\"192\" fill=\"#cbb9ac\" font-size=\"9.2\" text-anchor=\"middle\">Troponina normal (sem delta)</text><rect x=\"366\" y=\"48\" width=\"290\" height=\"150\" rx=\"12\" fill=\"#2b2140\" stroke=\"#E53935\"/><text x=\"511\" y=\"70\" fill=\"#E53935\" font-weight=\"700\" text-anchor=\"middle\">IAMSSST</text><circle cx=\"511\" cy=\"120\" r=\"34\" fill=\"#E53935\" fill-opacity=\"0.55\"/><circle cx=\"511\" cy=\"120\" r=\"14\" fill=\"#1f1730\"/><text x=\"511\" y=\"178\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Isquemia COM necrose</text><text x=\"511\" y=\"192\" fill=\"#cbb9ac\" font-size=\"9.2\" text-anchor=\"middle\">Troponina elevada (com delta)</text><rect x=\"40\" y=\"214\" width=\"600\" height=\"46\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"234\" fill=\"#f1e3e0\" font-size=\"10.3\" text-anchor=\"middle\" font-weight=\"700\">O UNICO criterio que separa os dois: houve ou nao necrose miocardica (troponina)</text><text x=\"340\" y=\"250\" fill=\"#f1e3e0\" font-size=\"9.8\" text-anchor=\"middle\">Mecanismo, clinica e ECG podem ser praticamente identicos entre AI e IAMSSST.</text><rect x=\"40\" y=\"268\" width=\"600\" height=\"36\" rx=\"10\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"340\" y=\"290\" fill=\"#cfe0e6\" font-size=\"9.6\" text-anchor=\"middle\">Com a troponina de alta sensibilidade, cada vez mais casos \"cruzam a linha\" e viram IAMSSST</text></svg>", "angina_triade": "<svg viewBox=\"0 0 680 330\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"330\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"28\" fill=\"#f59f0a\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">As 3 formas classicas de apresentacao da Angina Instavel</text><rect x=\"24\" y=\"48\" width=\"200\" height=\"180\" rx=\"12\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"124\" y=\"70\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">1. Angina de repouso</text><path d=\"M60 100 l30 0 l10 -30 l14 55 l10 -25 l10 0\" stroke=\"#6db3f2\" stroke-width=\"2\" fill=\"none\"/><text x=\"124\" y=\"150\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">Dor em repouso,</text><text x=\"124\" y=\"164\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">geralmente</text><text x=\"124\" y=\"178\" fill=\"#f59f0a\" font-size=\"9.6\" text-anchor=\"middle\" font-weight=\"700\">&gt; 20 minutos</text><text x=\"124\" y=\"200\" fill=\"#cbb9ac\" font-size=\"8.8\" text-anchor=\"middle\">sem relacao com esforco</text><rect x=\"240\" y=\"48\" width=\"200\" height=\"180\" rx=\"12\" fill=\"#2b2140\" stroke=\"#f0a93f\"/><text x=\"340\" y=\"70\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\">2. Inicio recente</text><text x=\"340\" y=\"120\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">Nova, ha menos de</text><text x=\"340\" y=\"134\" fill=\"#f59f0a\" font-size=\"9.6\" text-anchor=\"middle\" font-weight=\"700\">2 meses</text><text x=\"340\" y=\"156\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">Pelo menos CCS</text><text x=\"340\" y=\"170\" fill=\"#f59f0a\" font-size=\"9.6\" text-anchor=\"middle\" font-weight=\"700\">classe III ou IV</text><text x=\"340\" y=\"192\" fill=\"#cbb9ac\" font-size=\"8.8\" text-anchor=\"middle\">(limita atividades minimas)</text><rect x=\"456\" y=\"48\" width=\"200\" height=\"180\" rx=\"12\" fill=\"#2b2140\" stroke=\"#ff6f61\"/><text x=\"556\" y=\"70\" fill=\"#ff6f61\" font-weight=\"700\" text-anchor=\"middle\">3. Em crescendo</text><path d=\"M480 190 l20 -10 l20 -18 l20 -28 l20 -38 l20 -46\" stroke=\"#ff6f61\" stroke-width=\"2.4\" fill=\"none\"/><text x=\"556\" y=\"150\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">Angina previamente</text><text x=\"556\" y=\"164\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">estavel que piora:</text><text x=\"556\" y=\"200\" fill=\"#f59f0a\" font-size=\"8.8\" text-anchor=\"middle\" font-weight=\"700\">+frequente / +intensa /</text><text x=\"556\" y=\"212\" fill=\"#f59f0a\" font-size=\"8.8\" text-anchor=\"middle\" font-weight=\"700\">+prolongada / menor esforco</text><rect x=\"40\" y=\"246\" width=\"600\" height=\"46\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"266\" fill=\"#f1e3e0\" font-size=\"10.3\" text-anchor=\"middle\" font-weight=\"700\">Qualquer uma das 3 formas + troponina normal seriada = Angina Instavel</text><text x=\"340\" y=\"282\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Se a troponina subir (delta+), o diagnostico muda para IAMSSST.</text></svg>", "angina_braunwald": "<svg viewBox=\"0 0 680 380\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"380\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Classificacao de Braunwald: gravidade x circunstancia clinica</text><rect x=\"20\" y=\"44\" width=\"300\" height=\"180\" rx=\"12\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"170\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Gravidade (classe)</text><text x=\"34\" y=\"90\" fill=\"#f1e3e0\" font-size=\"9.6\" font-weight=\"700\">Classe I</text><text x=\"34\" y=\"104\" fill=\"#cbb9ac\" font-size=\"8.8\">Angina grave de inicio recente ou</text><text x=\"34\" y=\"116\" fill=\"#cbb9ac\" font-size=\"8.8\">acelerada; sem dor em repouso</text><text x=\"34\" y=\"138\" fill=\"#f1e3e0\" font-size=\"9.6\" font-weight=\"700\">Classe II</text><text x=\"34\" y=\"152\" fill=\"#cbb9ac\" font-size=\"8.8\">Angina de repouso no ultimo mes,</text><text x=\"34\" y=\"164\" fill=\"#cbb9ac\" font-size=\"8.8\">mas nao nas ultimas 48h (subaguda)</text><text x=\"34\" y=\"186\" fill=\"#f1e3e0\" font-size=\"9.6\" font-weight=\"700\">Classe III</text><text x=\"34\" y=\"200\" fill=\"#cbb9ac\" font-size=\"8.8\">Angina de repouso nas ultimas</text><text x=\"34\" y=\"212\" fill=\"#cbb9ac\" font-size=\"8.8\">48 horas (aguda) -&gt; maior risco</text><rect x=\"360\" y=\"44\" width=\"300\" height=\"180\" rx=\"12\" fill=\"#2b2140\" stroke=\"#E53935\"/><text x=\"510\" y=\"66\" fill=\"#E53935\" font-weight=\"700\" text-anchor=\"middle\">Circunstancia clinica</text><text x=\"374\" y=\"90\" fill=\"#f1e3e0\" font-size=\"9.6\" font-weight=\"700\">A (secundaria)</text><text x=\"374\" y=\"104\" fill=\"#cbb9ac\" font-size=\"8.8\">Causa extracardiaca precipita</text><text x=\"374\" y=\"116\" fill=\"#cbb9ac\" font-size=\"8.8\">(anemia, febre, taquiarritmia...)</text><text x=\"374\" y=\"138\" fill=\"#f1e3e0\" font-size=\"9.6\" font-weight=\"700\">B (primaria)</text><text x=\"374\" y=\"152\" fill=\"#cbb9ac\" font-size=\"8.8\">Sem fator extracardiaco -&gt; forma</text><text x=\"374\" y=\"164\" fill=\"#cbb9ac\" font-size=\"8.8\">mais comum</text><text x=\"374\" y=\"186\" fill=\"#f1e3e0\" font-size=\"9.6\" font-weight=\"700\">C (pos-infarto)</text><text x=\"374\" y=\"200\" fill=\"#cbb9ac\" font-size=\"8.8\">Nas 2 semanas apos um IAM</text><text x=\"374\" y=\"212\" fill=\"#cbb9ac\" font-size=\"8.8\">-&gt; maior risco de novo evento</text><rect x=\"20\" y=\"238\" width=\"640\" height=\"46\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"258\" fill=\"#f1e3e0\" font-size=\"10.3\" text-anchor=\"middle\" font-weight=\"700\">Quanto maior a classe e mais \"primaria/pos-infarto\" a circunstancia, maior o risco</text><text x=\"340\" y=\"274\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Classe III B e III C sao as combinacoes de maior risco de evolucao para infarto.</text><rect x=\"20\" y=\"292\" width=\"640\" height=\"70\" rx=\"10\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"34\" y=\"312\" fill=\"#6db3f2\" font-weight=\"700\" font-size=\"10.3\">Uso na pratica</text><text x=\"34\" y=\"330\" fill=\"#f1e3e0\" font-size=\"9.4\">Historicamente muito cobrada em prova, mas hoje tem peso secundario frente aos</text><text x=\"34\" y=\"346\" fill=\"#f1e3e0\" font-size=\"9.4\">escores objetivos (GRACE/TIMI/HEART) para decidir a conduta na pratica clinica.</text></svg>", "angina_troponina": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">O que confirma Angina Instavel: troponina seriada SEM delta</text><rect x=\"30\" y=\"46\" width=\"620\" height=\"140\" rx=\"12\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><g><rect x=\"60\" y=\"80\" width=\"110\" height=\"60\" rx=\"4\" fill=\"#5a2a2c\" fill-opacity=\"0\"/><rect x=\"60\" y=\"130\" width=\"110\" height=\"10\" rx=\"4\" fill=\"#6db3f2\" fill-opacity=\"0.85\"/><text x=\"115\" y=\"158\" fill=\"#f1e3e0\" font-size=\"9.3\" text-anchor=\"middle\">0h</text></g><g><rect x=\"205\" y=\"80\" width=\"110\" height=\"60\" rx=\"4\" fill=\"#5a2a2c\" fill-opacity=\"0\"/><rect x=\"205\" y=\"128\" width=\"110\" height=\"12\" rx=\"4\" fill=\"#6db3f2\" fill-opacity=\"0.85\"/><text x=\"260\" y=\"158\" fill=\"#f1e3e0\" font-size=\"9.3\" text-anchor=\"middle\">1-3h</text></g><g><rect x=\"350\" y=\"80\" width=\"110\" height=\"60\" rx=\"4\" fill=\"#5a2a2c\" fill-opacity=\"0\"/><rect x=\"350\" y=\"129\" width=\"110\" height=\"11\" rx=\"4\" fill=\"#6db3f2\" fill-opacity=\"0.85\"/><text x=\"405\" y=\"158\" fill=\"#f1e3e0\" font-size=\"9.3\" text-anchor=\"middle\">6h</text></g><g><rect x=\"495\" y=\"80\" width=\"110\" height=\"60\" rx=\"4\" fill=\"#5a2a2c\" fill-opacity=\"0\"/><rect x=\"495\" y=\"130\" width=\"110\" height=\"10\" rx=\"4\" fill=\"#3ddc84\" fill-opacity=\"0.85\"/><text x=\"550\" y=\"158\" fill=\"#f1e3e0\" font-size=\"9.3\" text-anchor=\"middle\">repete se dor</text></g><text x=\"340\" y=\"66\" fill=\"#3ddc84\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"700\">Valores estaveis, abaixo do percentil 99 -&gt; SEM delta relevante</text><rect x=\"30\" y=\"198\" width=\"620\" height=\"46\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"218\" fill=\"#f1e3e0\" font-size=\"10.3\" text-anchor=\"middle\" font-weight=\"700\">Protocolo 0h/1h ou 0h/2h de troponina de alta sensibilidade tambem serve para EXCLUIR IAM</text><text x=\"340\" y=\"234\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Se estavel e abaixo do limite -&gt; ainda assim, pensar em AI se a clinica for muito sugestiva.</text><rect x=\"30\" y=\"252\" width=\"620\" height=\"46\" rx=\"10\" fill=\"#2b2140\" stroke=\"#ff6f61\"/><text x=\"340\" y=\"272\" fill=\"#cfe0e6\" font-size=\"9.6\" text-anchor=\"middle\" font-weight=\"700\">Pegadinha: repetir troponina se a dor voltar ou mudar de caracteristica</text><text x=\"340\" y=\"288\" fill=\"#cfe0e6\" font-size=\"9.3\" text-anchor=\"middle\">Um novo episodio pode ser o que finalmente \"cruza a linha\" para IAMSSST</text></svg>", "angina_conduta": "<svg viewBox=\"0 0 680 340\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"340\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"28\" fill=\"#f59f0a\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Conduta na Angina Instavel: o mesmo funil de risco do IAMSSST</text><rect x=\"24\" y=\"48\" width=\"200\" height=\"170\" rx=\"12\" fill=\"#2b2140\" stroke=\"#ff6f61\"/><text x=\"124\" y=\"70\" fill=\"#ff6f61\" font-weight=\"700\" text-anchor=\"middle\">Muito alto / alto risco</text><text x=\"38\" y=\"94\" fill=\"#f1e3e0\" font-size=\"9.2\">GRACE elevado, angina</text><text x=\"38\" y=\"108\" fill=\"#f1e3e0\" font-size=\"9.2\">refrataria, instabilidade,</text><text x=\"38\" y=\"122\" fill=\"#f1e3e0\" font-size=\"9.2\">alteracoes dinamicas de ST/T</text><rect x=\"38\" y=\"140\" width=\"172\" height=\"50\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.15\" stroke=\"#f59f0a\"/><text x=\"124\" y=\"160\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">Angiografia imediata</text><text x=\"124\" y=\"176\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">ou precoce (&lt;24h)</text><rect x=\"240\" y=\"48\" width=\"200\" height=\"170\" rx=\"12\" fill=\"#2b2140\" stroke=\"#f0a93f\"/><text x=\"340\" y=\"70\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\">Risco intermediario</text><text x=\"254\" y=\"94\" fill=\"#f1e3e0\" font-size=\"9.2\">Diabetes, DRC, FE reduzida,</text><text x=\"254\" y=\"108\" fill=\"#f1e3e0\" font-size=\"9.2\">revascularizacao previa,</text><text x=\"254\" y=\"122\" fill=\"#f1e3e0\" font-size=\"9.2\">escore intermediario</text><rect x=\"254\" y=\"140\" width=\"172\" height=\"50\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.15\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"160\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">Estrategia invasiva</text><text x=\"340\" y=\"176\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">durante a internacao</text><rect x=\"456\" y=\"48\" width=\"200\" height=\"170\" rx=\"12\" fill=\"#2b2140\" stroke=\"#3ddc84\"/><text x=\"556\" y=\"70\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Baixo risco</text><text x=\"470\" y=\"94\" fill=\"#f1e3e0\" font-size=\"9.2\">Troponina normal seriada,</text><text x=\"470\" y=\"108\" fill=\"#f1e3e0\" font-size=\"9.2\">ECG estavel, sem</text><text x=\"470\" y=\"122\" fill=\"#f1e3e0\" font-size=\"9.2\">recorrencia de sintomas</text><rect x=\"470\" y=\"140\" width=\"172\" height=\"50\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.15\" stroke=\"#f59f0a\"/><text x=\"556\" y=\"160\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">Teste nao invasivo</text><text x=\"556\" y=\"176\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">antes de indicar CATE</text><rect x=\"40\" y=\"234\" width=\"600\" height=\"46\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"254\" fill=\"#f1e3e0\" font-size=\"10.3\" text-anchor=\"middle\" font-weight=\"700\">DAPT + anticoagulacao parenteral desde a suspeita — igual ao IAMSSST</text><text x=\"340\" y=\"270\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Sem trombolitico. A diferenca real e so a AUSENCIA de necrose confirmando o diagnostico.</text><rect x=\"40\" y=\"288\" width=\"600\" height=\"34\" rx=\"10\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"340\" y=\"310\" fill=\"#cfe0e6\" font-size=\"9.6\" text-anchor=\"middle\">Na duvida entre AI e IAMSSST, tratar como SCA de risco ate a troponina seriada esclarecer</text></svg>"});</script>
@@ -2789,5 +2915,522 @@ try{ if(typeof route!=='undefined' && route &&
 })();
 
 </script>
+<script>Object.assign(window.ASVG=window.ASVG||{},{"ecg_papel": "<svg viewBox=\"0 0 680 340\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"340\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">O papel de ECG e uma regua de tempo e voltagem</text><rect x=\"24\" y=\"42\" width=\"300\" height=\"150\" rx=\"10\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"174\" y=\"62\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Quadradinho (1 mm)</text>\n<g stroke=\"#4a3d5c\" stroke-width=\"0.6\">\n<path d=\"M44 76 h260 M44 96 h260 M44 116 h260 M44 136 h260 M44 156 h260 M44 176 h260\"/>\n<path d=\"M44 76 v100 M64 76 v100 M84 76 v100 M104 76 v100 M124 76 v100 M144 76 v100 M164 76 v100 M184 76 v100 M204 76 v100 M224 76 v100 M244 76 v100 M264 76 v100 M284 76 v100 M304 76 v100\"/>\n</g>\n<rect x=\"44\" y=\"76\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"#f0a93f\" stroke-width=\"1.6\"/>\n<text x=\"174\" y=\"200\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">1 quadradinho = 0.04 s (40 ms) e 1 mm de amplitude</text>\n<rect x=\"356\" y=\"42\" width=\"300\" height=\"150\" rx=\"10\" fill=\"#2b2140\" stroke=\"#e8675f\"/><text x=\"506\" y=\"62\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Quadradao (5 mm)</text>\n<g stroke=\"#4a3d5c\" stroke-width=\"0.6\">\n<path d=\"M376 76 h260 M396 76 h260 M416 76 h260 M436 76 h260 M456 76 h260 M476 76 h260 M496 76 h260 M516 76 h260 M536 76 h260 M556 76 h260 M576 76 h260\"/>\n</g>\n<rect x=\"376\" y=\"76\" width=\"100\" height=\"100\" fill=\"none\" stroke=\"#e8675f\" stroke-width=\"2.2\"/>\n<text x=\"506\" y=\"200\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">1 quadradao = 5 quadradinhos = 0.20 s (200 ms)</text>\n<rect x=\"24\" y=\"204\" width=\"632\" height=\"40\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"228\" fill=\"#f1e3e0\" font-size=\"10.4\" text-anchor=\"middle\" font-weight=\"700\">Calibracao padrao: velocidade 25 mm/s (papel) e amplitude 10 mm = 1 mV</text>\n<rect x=\"24\" y=\"254\" width=\"632\" height=\"72\" rx=\"10\" fill=\"#2b2140\" stroke=\"#3ddc84\"/>\n<text x=\"40\" y=\"274\" fill=\"#3ddc84\" font-weight=\"700\" font-size=\"10.6\">Calculo rapido da FC (ritmo regular): conte os quadradoes entre 2 ondas R e use a tabela</text>\n<text x=\"40\" y=\"294\" fill=\"#f1e3e0\" font-size=\"9.8\">1 quadradao=300 bpm  |  2=150 bpm  |  3=100 bpm  |  4=75 bpm  |  5=60 bpm  |  6=50 bpm</text>\n<text x=\"40\" y=\"312\" fill=\"#cbb9ac\" font-size=\"9.2\">Regra pratica: \"RR menor que 3 quadradoes\" ja e taquicardia (FC maior que 100 bpm) — e o 1o passo do algoritmo</text>\n</svg>", "ecg_ondas": "<svg viewBox=\"0 0 680 340\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"340\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Ondas, intervalos e segmentos de um batimento</text>\n<rect x=\"24\" y=\"42\" width=\"632\" height=\"160\" rx=\"10\" fill=\"#2b2140\"/>\n<path d=\"M50 150 h40 q6 -18 12 -18 t12 18 h20 l8 -50 l14 76 l10 -30 h60 q10 -22 20 -22 t20 22 h60 q8 -14 16 -14 t16 14 h60\" fill=\"none\" stroke=\"#f1e3e0\" stroke-width=\"2\"/>\n<text x=\"90\" y=\"118\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">P</text>\n<text x=\"146\" y=\"70\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">R</text>\n<text x=\"128\" y=\"190\" fill=\"#e8675f\" font-size=\"9.6\" text-anchor=\"middle\">Q</text>\n<text x=\"168\" y=\"190\" fill=\"#e8675f\" font-size=\"9.6\" text-anchor=\"middle\">S</text>\n<text x=\"270\" y=\"112\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">T</text>\n<path d=\"M60 220 h108\" stroke=\"#6db3f2\" stroke-width=\"1.6\"/><path d=\"M60 214 v12 M168 214 v12\" stroke=\"#6db3f2\" stroke-width=\"1.6\"/>\n<text x=\"114\" y=\"236\" fill=\"#6db3f2\" font-size=\"9.4\" text-anchor=\"middle\">Intervalo PR (120-200 ms)</text>\n<path d=\"M112 250 h72\" stroke=\"#e8675f\" stroke-width=\"1.6\"/><path d=\"M112 244 v12 M184 244 v12\" stroke=\"#e8675f\" stroke-width=\"1.6\"/>\n<text x=\"148\" y=\"266\" fill=\"#e8675f\" font-size=\"9.4\" text-anchor=\"middle\">QRS (menor que 120 ms)</text>\n<path d=\"M112 280 h220\" stroke=\"#3ddc84\" stroke-width=\"1.6\"/><path d=\"M112 274 v12 M332 274 v12\" stroke=\"#3ddc84\" stroke-width=\"1.6\"/>\n<text x=\"222\" y=\"296\" fill=\"#3ddc84\" font-size=\"9.4\" text-anchor=\"middle\">Intervalo QT (varia com a FC — corrigir por Bazett)</text>\n<rect x=\"184\" y=\"150\" width=\"86\" height=\"30\" fill=\"#f0a93f\" fill-opacity=\"0.18\"/>\n<text x=\"227\" y=\"326\" fill=\"#f0a93f\" font-size=\"9.6\" text-anchor=\"middle\">Segmento ST: do fim do QRS ao inicio da T — base para supra/infra de ST</text>\n</svg>", "ecg_derivacoes": "<svg viewBox=\"0 0 680 360\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"360\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">12 derivacoes: cada uma \"olha\" para um territorio do coracao</text>\n<rect x=\"24\" y=\"42\" width=\"300\" height=\"160\" rx=\"10\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"174\" y=\"62\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Plano frontal (membros)</text>\n<circle cx=\"174\" cy=\"130\" r=\"56\" fill=\"none\" stroke=\"#4a3d5c\"/>\n<text x=\"174\" y=\"80\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">aVF</text>\n<text x=\"230\" y=\"120\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">DIII</text>\n<text x=\"230\" y=\"145\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">DII</text>\n<text x=\"174\" y=\"185\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">aVR</text>\n<text x=\"118\" y=\"120\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">DI</text>\n<text x=\"118\" y=\"150\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">aVL</text>\n<text x=\"174\" y=\"200\" fill=\"#cbb9ac\" font-size=\"8.8\" text-anchor=\"middle\">DI, DII, DIII, aVR, aVL, aVF</text>\n<rect x=\"356\" y=\"42\" width=\"300\" height=\"160\" rx=\"10\" fill=\"#2b2140\" stroke=\"#3ddc84\"/><text x=\"506\" y=\"62\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Plano horizontal (precordiais)</text>\n<g font-size=\"9.6\" fill=\"#f1e3e0\" text-anchor=\"middle\">\n<text x=\"386\" y=\"130\">V1</text><text x=\"420\" y=\"120\">V2</text><text x=\"454\" y=\"115\">V3</text><text x=\"488\" y=\"112\">V4</text><text x=\"522\" y=\"115\">V5</text><text x=\"556\" y=\"122\">V6</text>\n</g>\n<path d=\"M380 140 q120 -40 240 0\" fill=\"none\" stroke=\"#4a3d5c\"/>\n<text x=\"506\" y=\"188\" fill=\"#cbb9ac\" font-size=\"8.8\" text-anchor=\"middle\">V1-V6, do septo (V1) a lateral (V6)</text>\n<rect x=\"24\" y=\"216\" width=\"632\" height=\"128\" rx=\"10\" fill=\"#2b2140\"/>\n<text x=\"40\" y=\"236\" fill=\"#f59f0a\" font-weight=\"700\" font-size=\"10.6\">Territorio -&gt; derivacoes -&gt; artéria culpada mais provavel</text>\n<text x=\"40\" y=\"256\" fill=\"#f0a93f\" font-size=\"9.8\">Anterior/septal: V1-V4 -&gt; Descendente Anterior (DA)</text>\n<text x=\"40\" y=\"274\" fill=\"#6db3f2\" font-size=\"9.8\">Inferior: DII, DIII, aVF -&gt; Coronaria Direita (CD) na maioria</text>\n<text x=\"40\" y=\"292\" fill=\"#3ddc84\" font-size=\"9.8\">Lateral: DI, aVL, V5-V6 -&gt; Circunflexa (CX)</text>\n<text x=\"40\" y=\"310\" fill=\"#e8675f\" font-size=\"9.8\">aVR: nao \"olha\" um territorio isolado — supra em aVR sugere lesao de tronco/multivascular</text>\n<text x=\"40\" y=\"328\" fill=\"#cbb9ac\" font-size=\"9.2\">Para arritmias, a derivacao mais usada e a DII — melhor angulo para enxergar a onda P</text>\n</svg>", "ecg_eixo": "<svg viewBox=\"0 0 680 360\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"360\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Eixo eletrico: para onde aponta a despolarizacao ventricular</text>\n<circle cx=\"220\" cy=\"180\" r=\"120\" fill=\"none\" stroke=\"#4a3d5c\"/>\n<path d=\"M220 60 A120 120 0 0 1 316 240\" fill=\"#3ddc84\" fill-opacity=\"0.16\" stroke=\"#3ddc84\"/>\n<line x1=\"100\" y1=\"180\" x2=\"340\" y2=\"180\" stroke=\"#5a4d6c\" stroke-width=\"1\"/>\n<line x1=\"220\" y1=\"60\" x2=\"220\" y2=\"300\" stroke=\"#5a4d6c\" stroke-width=\"1\"/>\n<text x=\"345\" y=\"184\" fill=\"#f1e3e0\" font-size=\"9.4\">0 graus</text>\n<text x=\"220\" y=\"52\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">-90</text>\n<text x=\"220\" y=\"316\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">+90</text>\n<text x=\"90\" y=\"184\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"end\">+-180</text>\n<text x=\"260\" y=\"130\" fill=\"#3ddc84\" font-size=\"9.6\" font-weight=\"700\">Normal: -30 a +90</text>\n<line x1=\"220\" y1=\"180\" x2=\"300\" y2=\"120\" stroke=\"#f59f0a\" stroke-width=\"2.4\" marker-end=\"url(#arw)\"/>\n<defs><marker id=\"arw\" markerWidth=\"8\" markerHeight=\"8\" refX=\"4\" refY=\"4\" orient=\"auto\"><path d=\"M0 0 L8 4 L0 8 Z\" fill=\"#f59f0a\"/></marker></defs>\n<rect x=\"380\" y=\"60\" width=\"276\" height=\"240\" rx=\"10\" fill=\"#2b2140\"/>\n<text x=\"396\" y=\"82\" fill=\"#f59f0a\" font-weight=\"700\" font-size=\"10.6\">Metodo rapido (DI + aVF)</text>\n<text x=\"396\" y=\"106\" fill=\"#f1e3e0\" font-size=\"9.6\">DI positivo + aVF positivo</text>\n<text x=\"396\" y=\"120\" fill=\"#3ddc84\" font-size=\"9.6\" font-weight=\"700\">-&gt; Eixo normal</text>\n<text x=\"396\" y=\"146\" fill=\"#f1e3e0\" font-size=\"9.6\">DI positivo + aVF negativo</text>\n<text x=\"396\" y=\"160\" fill=\"#f0a93f\" font-size=\"9.6\" font-weight=\"700\">-&gt; Possivel desvio p/ esquerda</text>\n<text x=\"396\" y=\"186\" fill=\"#f1e3e0\" font-size=\"9.6\">DI negativo + aVF positivo</text>\n<text x=\"396\" y=\"200\" fill=\"#6db3f2\" font-size=\"9.6\" font-weight=\"700\">-&gt; Desvio para a direita</text>\n<text x=\"396\" y=\"226\" fill=\"#f1e3e0\" font-size=\"9.6\">DI negativo + aVF negativo</text>\n<text x=\"396\" y=\"240\" fill=\"#e8675f\" font-size=\"9.6\" font-weight=\"700\">-&gt; Eixo extremo/indeterminado</text>\n<text x=\"396\" y=\"270\" fill=\"#cbb9ac\" font-size=\"8.8\">Nas taquiarritmias, o eixo ajuda a diferenciar TV (eixo bizarro) de aberrancia de conducao</text>\n</svg>", "ecg_conducao": "<svg viewBox=\"0 0 680 340\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"340\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Cada onda do ECG nasce em um ponto do sistema de conducao</text>\n<rect x=\"24\" y=\"44\" width=\"230\" height=\"220\" rx=\"10\" fill=\"#2b2140\"/>\n<circle cx=\"90\" cy=\"90\" r=\"10\" fill=\"#6db3f2\"/><text x=\"108\" y=\"94\" fill=\"#f1e3e0\" font-size=\"9.6\">No sinoatrial (SA) dispara</text>\n<line x1=\"90\" y1=\"100\" x2=\"90\" y2=\"140\" stroke=\"#6db3f2\" stroke-width=\"2\"/>\n<text x=\"108\" y=\"140\" fill=\"#f1e3e0\" font-size=\"9.6\">Despolariza os atrios</text>\n<circle cx=\"90\" cy=\"160\" r=\"8\" fill=\"#f0a93f\"/><text x=\"108\" y=\"164\" fill=\"#f1e3e0\" font-size=\"9.6\">No atrioventricular (AV) atrasa</text>\n<line x1=\"90\" y1=\"168\" x2=\"90\" y2=\"200\" stroke=\"#f0a93f\" stroke-width=\"2\"/>\n<text x=\"108\" y=\"200\" fill=\"#f1e3e0\" font-size=\"9.6\">His -&gt; ramos -&gt; Purkinje</text>\n<circle cx=\"90\" cy=\"222\" r=\"10\" fill=\"#e8675f\"/><text x=\"108\" y=\"226\" fill=\"#f1e3e0\" font-size=\"9.6\">Despolariza os ventriculos</text>\n<rect x=\"278\" y=\"44\" width=\"378\" height=\"220\" rx=\"10\" fill=\"#2b2140\"/>\n<path d=\"M300 190 h30 q5 -16 10 -16 t10 16 h16 l6 -40 l12 62 l8 -22 h50 q9 -18 18 -18 t18 18 h50\" fill=\"none\" stroke=\"#f1e3e0\" stroke-width=\"2\"/>\n<text x=\"345\" y=\"160\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Onda P</text>\n<text x=\"345\" y=\"176\" fill=\"#6db3f2\" font-size=\"8.8\" text-anchor=\"middle\">= SA + atrios</text>\n<text x=\"410\" y=\"120\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">QRS</text>\n<text x=\"410\" y=\"136\" fill=\"#e8675f\" font-size=\"8.8\" text-anchor=\"middle\">= His-Purkinje + ventriculos</text>\n<text x=\"500\" y=\"150\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Onda T</text>\n<text x=\"500\" y=\"166\" fill=\"#3ddc84\" font-size=\"8.8\" text-anchor=\"middle\">= repolarizacao ventricular</text>\n<rect x=\"300\" y=\"220\" width=\"330\" height=\"34\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/>\n<text x=\"465\" y=\"242\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\" font-weight=\"700\">Por isso o algoritmo comeca perguntando pela onda P: ela mostra se o ritmo nasce no atrio</text>\n<rect x=\"24\" y=\"276\" width=\"632\" height=\"48\" rx=\"10\" fill=\"#2b2140\"/>\n<text x=\"40\" y=\"296\" fill=\"#cbb9ac\" font-size=\"9.4\">Se o estimulo nasce ACIMA do ventriculo (SA, atrio, no AV) e desce pelas vias normais, o QRS sai ESTREITO.</text>\n<text x=\"40\" y=\"314\" fill=\"#cbb9ac\" font-size=\"9.4\">Se nasce DENTRO do ventriculo (fora do sistema de conducao rapido), o QRS sai ALARGADO — por isso QRS largo = pensar em origem ventricular.</text>\n</svg>"});</script>
+
+<!-- ===== MODULO ECG BASICO arritmias|0 (aditivo) ===== -->
+<script>(function(){
+"use strict";
+if(!document.getElementById('ecgalgo-style')){
+  var st=document.createElement('style'); st.id='ecgalgo-style';
+  st.textContent=`
+  .eba-wrap{margin-top:10px}
+  .eba-step{display:none;animation:ebaIn .35s ease}
+  .eba-step.show{display:block}
+  @keyframes ebaIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  .eba-q{font-family:'Fraunces',serif;font-size:1.14rem;color:var(--accent);margin-bottom:6px}
+  .eba-hint{color:var(--muted);font-size:.84rem;margin-bottom:14px;line-height:1.5}
+  .eba-opts{display:flex;flex-direction:column;gap:8px}
+  .eba-btn{text-align:left;padding:12px 16px;border-radius:12px;border:1px solid var(--line);
+    background:var(--panel);color:var(--ink);cursor:pointer;font-size:.87rem;transition:.15s;font-family:inherit}
+  .eba-btn:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .eba-btn-out{opacity:.82}
+  .eba-leaf{padding:24px;border-radius:16px;border:2px solid var(--line);text-align:center}
+  .eba-leaf-t{font-family:'Fraunces',serif;font-size:1.32rem;margin-bottom:8px}
+  .eba-leaf-d{font-size:.89rem;line-height:1.6;margin-bottom:18px;color:var(--ink);text-align:left}
+  .eba-restart{display:inline-block;margin-top:2px}
+  .eba-c-sinusal{border-color:#6db3f2;background:rgba(109,179,242,.09)}
+  .eba-c-sinusal .eba-leaf-t{color:#6db3f2}
+  .eba-c-atrial{border-color:#3ddc84;background:rgba(61,220,132,.09)}
+  .eba-c-atrial .eba-leaf-t{color:#3ddc84}
+  .eba-c-flutter{border-color:#a78bfa;background:rgba(167,139,250,.09)}
+  .eba-c-flutter .eba-leaf-t{color:#a78bfa}
+  .eba-c-fa{border-color:#e8675f;background:rgba(232,103,95,.10)}
+  .eba-c-fa .eba-leaf-t{color:#e8675f}
+  .eba-c-tsv{border-color:#f0a93f;background:rgba(240,169,63,.10)}
+  .eba-c-tsv .eba-leaf-t{color:#f0a93f}
+  .eba-c-vt{border-color:#e53935;background:rgba(229,57,53,.10)}
+  .eba-c-vt .eba-leaf-t{color:#e53935}
+  .eba-c-tdp{border-color:#ec4899;background:rgba(236,72,153,.10)}
+  .eba-c-tdp .eba-leaf-t{color:#ec4899}
+  .eba-c-fv{border-color:#8b0000;background:rgba(139,0,0,.16)}
+  .eba-c-fv .eba-leaf-t{color:#ff6b6b}
+  .eba-c-neutral{border-color:var(--line);background:var(--panel)}
+  .fx-node.eba-c-sinusal,.fx-node.eba-c-atrial,.fx-node.eba-c-flutter,.fx-node.eba-c-fa,
+  .fx-node.eba-c-tsv,.fx-node.eba-c-vt,.fx-node.eba-c-tdp,.fx-node.eba-c-fv{color:var(--ink);font-weight:600}
+  `;
+  document.head.appendChild(st);
+}
+window.ecgAlgoGo=function(id){
+  var wrap=document.getElementById('ecgAlgo'); if(!wrap) return;
+  var steps=wrap.querySelectorAll('.eba-step');
+  for(var i=0;i<steps.length;i++) steps[i].classList.remove('show');
+  var target=wrap.querySelector('[data-id="'+id+'"]');
+  if(target){ target.classList.add('show'); try{ target.scrollIntoView({behavior:'smooth',block:'nearest'}); }catch(e){} }
+};
+})();</script>
+
+<script>/* CardioAtlas — Conteudo ECG Basico (arritmias|0). Aditivo. */
+(function(){
+"use strict";
+var A = window.ASVG || {};
+var C = (window.CONTENT = window.CONTENT || {});
+C['arritmias|0'] = {
+ name: 'ECG básico',
+ intro: 'Antes de nomear qualquer arritmia, o ECG se lê sempre pela mesma régua: quadradinhos, quadradões, ondas e um algoritmo de 5 perguntas que resolve praticamente toda taquiarritmia de prova.',
+ sub: [
+  ['entendendo','Entendendo do Zero', `
+    <div class="ac-h">Por que aprender a "ler" o ECG antes de decorar arritmias</div>
+    <p class="ac-p">O eletrocardiograma registra a atividade elétrica do coração ao longo do tempo: cada onda representa a despolarização ou repolarização de uma câmara. Tentar decorar o "desenho" de cada arritmia sem entender o que gera cada onda é a receita para travar na prova diante de um traçado levemente diferente do que foi visto em aula. Este módulo ensina o caminho contrário: dominar os blocos básicos (papel, ondas, derivações, eixo) para depois aplicar um algoritmo lógico de 5 perguntas que reconstrói o raciocínio diagnóstico de qualquer taquiarritmia — em vez de reconhecimento de padrão decorado.</p>
+    <div class="ac-call"><b>A grande ideia:</b> o ECG não é uma imagem para memorizar — é uma pergunta de cada vez. "Tem taquicardia? Tem onda P? Tem onda F? O QRS é largo? O R-R é regular?" — essas 5 perguntas, respondidas em ordem, chegam ao diagnóstico de praticamente qualquer taquiarritmia cobrada em prova.</div>
+    <table class="ac-tbl"><tr><th>Bloco</th><th>O que você vai dominar</th></tr>
+      <tr><td>Papel e calibração</td><td>Quadradinho x quadradão, cálculo rápido de frequência cardíaca</td></tr>
+      <tr><td>Ondas e intervalos</td><td>P, QRS, T, PR, QT, segmento ST</td></tr>
+      <tr><td>Derivações</td><td>Qual derivação usar para cada pergunta do algoritmo</td></tr>
+      <tr><td>Eixo elétrico</td><td>Método rápido DI + aVF</td></tr>
+      <tr><td>Algoritmo das taquiarritmias</td><td>5 perguntas que resolvem o diagnóstico diferencial completo</td></tr>
+    </table>
+    <p class="ac-p">Este módulo é a base para todos os outros de Arritmias — taquicardia supraventricular, flutter, fibrilação atrial, taquicardia ventricular e fibrilação ventricular são desenvolvidos em profundidade em módulos próprios, mas o algoritmo diagnóstico que os diferencia entre si mora aqui.</p>`],
+
+  ['papel','Papel de ECG e Calibração', `
+    <div class="ac-h">A régua de tempo e voltagem</div>
+    <p class="ac-p">O papel de ECG é impresso em uma grade milimetrada e roda no aparelho a uma velocidade padrão de <b>25 mm/s</b>. Isso transforma a distância horizontal em tempo: cada quadradinho pequeno (1 mm) equivale a <b>0,04 segundos (40 ms)</b>, e cada quadrado grande — o "quadradão", formado por 5 quadradinhos — equivale a <b>0,20 segundos (200 ms)</b>. Na vertical, a amplitude também é calibrada: 10 mm equivalem a 1 mV, com o aparelho pré-configurado para essa calibração antes de qualquer registro.</p>
+    ${A.ecg_papel}
+    <p class="ac-p">Saber contar quadradinhos e quadradões é a ferramenta mais usada durante toda a leitura do ECG — desde calcular a frequência cardíaca até medir a duração do QRS ou do intervalo QT.</p>
+    <div class="ac-h" style="margin-top:14px">Calculando a frequência cardíaca (ritmo regular)</div>
+    <p class="ac-p">O método mais rápido para ritmos regulares é contar quantos quadradões existem entre duas ondas R consecutivas e aplicar a sequência decorada <b>300-150-100-75-60-50</b>: 1 quadradão = 300 bpm, 2 = 150 bpm, 3 = 100 bpm, 4 = 75 bpm, 5 = 60 bpm, 6 = 50 bpm. Para ritmos irregulares (como a fibrilação atrial), o método correto é contar o número de QRS em 6 segundos (30 quadradões grandes) e multiplicar por 10.</p>
+    <div class="ac-tip"><b>Ponte direta com o algoritmo:</b> a primeira pergunta do algoritmo diagnóstico ("existe taquicardia?") já usa exatamente essa régua — "RR menor que 3 quadradões" é a forma rápida de dizer "frequência cardíaca maior que 100 bpm".</div>`],
+
+  ['ondas','Ondas, Intervalos e Segmentos', `
+    <div class="ac-h">P, QRS, T — e o que fica entre elas</div>
+    <p class="ac-p">Cada batimento normal no ECG é composto por três ondas principais, na ordem em que a eletricidade percorre o coração: a onda <b>P</b> (despolarização atrial), o complexo <b>QRS</b> (despolarização ventricular, muito mais rápida e por isso com amplitude maior) e a onda <b>T</b> (repolarização ventricular). A repolarização atrial existe, mas costuma ficar "escondida" dentro do QRS, que é muito maior em amplitude.</p>
+    ${A.ecg_ondas}
+    <table class="ac-tbl"><tr><th>Medida</th><th>Do início ao fim de</th><th>Valor normal</th></tr>
+      <tr><td>Intervalo PR</td><td>Início da onda P ao início do QRS</td><td>120-200 ms (3-5 quadradinhos)</td></tr>
+      <tr><td>Duração do QRS</td><td>Início ao fim do complexo QRS</td><td>Menor que 120 ms (menor que 3 quadradinhos)</td></tr>
+      <tr><td>Intervalo QT</td><td>Início do QRS ao fim da onda T</td><td>Varia com a FC — corrigir pela fórmula de Bazett (QTc)</td></tr>
+      <tr><td>Segmento ST</td><td>Fim do QRS ao início da onda T</td><td>Isoelétrico (na linha de base)</td></tr>
+    </table>
+    <p class="ac-p">A duração do QRS é a medida mais decisiva para o algoritmo de taquiarritmias: um QRS estreito (menor que 120 ms) indica que o estímulo percorreu o sistema de condução normal até os ventrículos, enquanto um QRS alargado (maior que 120 ms) sugere que a origem do ritmo está dentro do próprio músculo ventricular, fora das vias rápidas de condução — a base para diferenciar arritmias supraventriculares de ventriculares.</p>
+    <div class="ac-warn">Erro comum: medir o QRS "a olho" sem contar quadradinhos. Sempre meça objetivamente — 3 quadradinhos é o limite entre estreito e alargado.</div>`],
+
+  ['derivacoes','Derivações e Correlação com o Sistema de Condução', `
+    <div class="ac-h">12 derivações, 12 ângulos de visão</div>
+    <p class="ac-p">O ECG de 12 derivações combina dois planos: o <b>frontal</b> (DI, DII, DIII, aVR, aVL, aVF — derivações dos membros) e o <b>horizontal</b> (V1 a V6 — derivações precordiais, do septo à parede lateral). Cada derivação "olha" o coração de um ângulo diferente, o que permite localizar territórios isquêmicos e, no caso das arritmias, encontrar o melhor ângulo para enxergar a atividade elétrica atrial.</p>
+    ${A.ecg_derivacoes}
+    <div class="ac-call"><b>Por que D2 é a derivação-chave do algoritmo:</b> a derivação DII forma um ângulo quase paralelo ao eixo normal de despolarização atrial (do nó sinoatrial ao nó AV), o que a torna a melhor derivação isolada para enxergar a onda P com clareza — por isso o algoritmo sempre pede para "olhar em D2".</div>
+    <div class="ac-h" style="margin-top:14px">De onde vem cada onda</div>
+    ${A.ecg_conducao}
+    <p class="ac-p">Entender essa correlação explica por que o algoritmo segue exatamente essa ordem de perguntas: primeiro verifica se existe onda P (o ritmo nasceu no nó sinoatrial ou no átrio?); depois, se não houver onda P organizada, verifica se existe atividade atrial de outro tipo (onda F do flutter); só então avalia a duração do QRS, que revela se o estímulo desceu pelas vias normais de condução (QRS estreito) ou nasceu dentro do próprio ventrículo (QRS alargado).</p>`],
+
+  ['eixo','Eixo Elétrico', `
+    <div class="ac-h">Para onde "aponta" a despolarização ventricular</div>
+    <p class="ac-p">O eixo elétrico do coração representa a direção média para onde aponta o vetor de despolarização ventricular no plano frontal. Ele é útil tanto para reconhecer sobrecargas e bloqueios de ramo quanto para ajudar a diferenciar uma taquicardia ventricular (que costuma ter eixo "bizarro", muito desviado) de uma taquicardia supraventricular com aberrância de condução.</p>
+    ${A.ecg_eixo}
+    <p class="ac-p">O método mais rápido para estimar o eixo à beira do leito usa apenas duas derivações: DI e aVF. Se o QRS é predominantemente positivo (para cima da linha de base) nas duas, o eixo está dentro da faixa normal (-30° a +90°). Combinações diferentes de positividade/negatividade apontam para desvio à esquerda, à direita, ou eixo extremo — ver a tabela na imagem acima.</p>
+    <div class="ac-tip">Esse método (DI + aVF) é rápido o suficiente para usar durante a resolução do algoritmo de taquiarritmias, sem precisar calcular o ângulo exato em graus.</div>`],
+
+  ['sistematica','Leitura Sistemática do ECG', `
+    <div class="ac-h">A sequência que evita passar batido por um achado</div>
+    <p class="ac-p">Antes de aplicar o algoritmo específico de taquiarritmias, todo ECG merece uma leitura sistemática, sempre na mesma ordem, para não esquecer nenhum passo:</p>
+    <table class="ac-tbl"><tr><th>Passo</th><th>Pergunta</th></tr>
+      <tr><td>1. Ritmo</td><td>É sinusal? Existe onda P antes de cada QRS, positiva em D2?</td></tr>
+      <tr><td>2. Frequência</td><td>Está dentro de 60-100 bpm, ou é uma bradi/taquiarritmia?</td></tr>
+      <tr><td>3. Eixo</td><td>Está entre -30° e +90° (método DI + aVF)?</td></tr>
+      <tr><td>4. Intervalos</td><td>PR, QRS e QT estão dentro dos valores normais?</td></tr>
+      <tr><td>5. Morfologia</td><td>Existem sinais de sobrecarga, isquemia, supra/infra de ST?</td></tr>
+    </table>
+    <p class="ac-p">Quando o passo 2 revela uma taquicardia (FC maior que 100 bpm, RR menor que 3 quadradões), é hora de sair da leitura sistemática genérica e aplicar o algoritmo específico de taquiarritmias — desenvolvido em detalhe na próxima sub-aba, com uma versão interativa para você praticar o raciocínio passo a passo.</p>
+    <div class="ac-warn">Erro comum: pular direto para "tentar reconhecer a arritmia pelo desenho geral" sem passar pelos passos 1 e 2. Isso funciona até aparecer um traçado atípico — o algoritmo estruturado não falha.</div>`],
+
+  ['algoritmo','Algoritmo das Taquiarritmias', `
+    <div class="ac-h">5 perguntas resolvem (quase) qualquer taquiarritmia de prova</div>
+    <p class="ac-p">Este é o algoritmo mais usado na prática e em prova para diagnosticar uma taquiarritmia a partir do ECG. Ele não exige decorar o "desenho" de cada arritmia — exige responder, em ordem, exatamente 5 perguntas. Clique nas respostas abaixo e pratique o caminho até o diagnóstico:</p>
+    <div id="ecgAlgo" class="eba-wrap">
+
+      <div class="eba-step show" data-id="q1">
+        <div class="eba-q">1. Existe taquicardia?</div>
+        <div class="eba-hint">Meça o intervalo R-R: conte os quadradões grandes entre duas ondas R consecutivas.</div>
+        <div class="eba-opts">
+          <button class="eba-btn" onclick="ecgAlgoGo('q2')">Sim — R-R menor que 3 quadradões (FC maior que 100 bpm)</button>
+          <button class="eba-btn eba-btn-out" onclick="ecgAlgoGo('leaf_notaqui')">Não — R-R maior ou igual a 3 quadradões</button>
+        </div>
+      </div>
+
+      <div class="eba-step eba-leaf eba-c-neutral" data-id="leaf_notaqui">
+        <div class="eba-leaf-t">Não é uma taquiarritmia</div>
+        <div class="eba-leaf-d">A frequência cardíaca está normal ou baixa — este algoritmo específico para taquiarritmias não se aplica. Avalie separadamente se há bradiarritmia ou bloqueio.</div>
+        <button class="eba-btn eba-restart" onclick="ecgAlgoGo('q1')">↺ Recomeçar</button>
+      </div>
+
+      <div class="eba-step" data-id="q2">
+        <div class="eba-q">2. Existe onda P? (olhe em D2)</div>
+        <div class="eba-hint">D2 é a melhor derivação para enxergar a atividade atrial.</div>
+        <div class="eba-opts">
+          <button class="eba-btn" onclick="ecgAlgoGo('leaf_sinusal')">Sim — positiva em D2, morfologia normal</button>
+          <button class="eba-btn" onclick="ecgAlgoGo('leaf_atrial_uni')">Sim — negativa em D2, sempre com a MESMA morfologia</button>
+          <button class="eba-btn" onclick="ecgAlgoGo('leaf_atrial_multi')">Sim — morfologias DIFERENTES entre si (P "esquisitas")</button>
+          <button class="eba-btn eba-btn-out" onclick="ecgAlgoGo('q3')">Não vejo onda P organizada</button>
+        </div>
+      </div>
+
+      <div class="eba-step eba-leaf eba-c-sinusal" data-id="leaf_sinusal">
+        <div class="eba-leaf-t">Taquicardia Sinusal</div>
+        <div class="eba-leaf-d">O nó sinusal está disparando numa frequência aumentada — geralmente uma resposta fisiológica (febre, dor, ansiedade, anemia, hipovolemia, hipertireoidismo) e não uma arritmia primária. Onda P positiva em D2 com morfologia normal, sempre antes de cada QRS.</div>
+        <button class="eba-btn eba-restart" onclick="ecgAlgoGo('q1')">↺ Recomeçar</button>
+      </div>
+
+      <div class="eba-step eba-leaf eba-c-atrial" data-id="leaf_atrial_uni">
+        <div class="eba-leaf-t">Taquicardia Atrial Unifocal</div>
+        <div class="eba-leaf-d">Um único foco ectópico atrial passa a disparar automaticamente, "vencendo" o nó sinusal. Onda P negativa em D2 (ou com morfologia diferente da sinusal), porém sempre IGUAL a si mesma em todos os batimentos — um foco só.</div>
+        <button class="eba-btn eba-restart" onclick="ecgAlgoGo('q1')">↺ Recomeçar</button>
+      </div>
+
+      <div class="eba-step eba-leaf eba-c-atrial" data-id="leaf_atrial_multi">
+        <div class="eba-leaf-t">Taquicardia Atrial Multifocal</div>
+        <div class="eba-leaf-d">Vários focos atriais diferentes disparam de forma independente, gerando ondas P com pelo menos 3 morfologias diferentes entre si. Associação clássica de prova: DPOC — a doença pulmonar grave evolui com cor pulmonale (sobrecarga do átrio direito), que predispõe a múltiplos focos atriais ectópicos. Não confundir com fibrilação atrial: na FA não existe onda P.</div>
+        <button class="eba-btn eba-restart" onclick="ecgAlgoGo('q1')">↺ Recomeçar</button>
+      </div>
+
+      <div class="eba-step" data-id="q3">
+        <div class="eba-q">3. Existe onda F (de flutter atrial)?</div>
+        <div class="eba-hint">Procure um padrão de "dentes de serra" contínuo, sem linha de base isoelétrica entre os batimentos — bem visível em D2, DIII ou aVF.</div>
+        <div class="eba-opts">
+          <button class="eba-btn" onclick="ecgAlgoGo('leaf_flutter')">Sim — ondas em serrote (ondas F)</button>
+          <button class="eba-btn eba-btn-out" onclick="ecgAlgoGo('q4')">Não vejo onda F</button>
+        </div>
+      </div>
+
+      <div class="eba-step eba-leaf eba-c-flutter" data-id="leaf_flutter">
+        <div class="eba-leaf-t">Flutter Atrial</div>
+        <div class="eba-leaf-d">O átrio dispara de forma organizada e muito rápida (geralmente ao redor de 300 bpm), gerando as clássicas ondas F em "dentes de serra". Como costuma haver bloqueio 2:1 no nó AV, a frequência ventricular resultante fica perto de 150 bpm — por isso o flutter é chamado de "arritmia matemática": FC ao redor de 150 bpm com R-R medindo exatamente 2 quadradões é flutter atrial até que se prove o contrário.</div>
+        <button class="eba-btn eba-restart" onclick="ecgAlgoGo('q1')">↺ Recomeçar</button>
+      </div>
+
+      <div class="eba-step" data-id="q4">
+        <div class="eba-q">4. O QRS está estreito ou alargado?</div>
+        <div class="eba-hint">Meça: 120 ms equivalem a 3 quadradinhos pequenos.</div>
+        <div class="eba-opts">
+          <button class="eba-btn" onclick="ecgAlgoGo('q_vtclass')">Alargado — maior que 120 ms (mais que 3 quadradinhos)</button>
+          <button class="eba-btn eba-btn-out" onclick="ecgAlgoGo('q5')">Estreito — menor que 120 ms</button>
+        </div>
+      </div>
+
+      <div class="eba-step" data-id="q_vtclass">
+        <div class="eba-q">QRS alargado, sem onda P e sem onda F: é Taquicardia Ventricular. Qual o padrão?</div>
+        <div class="eba-hint">Observe a morfologia dos complexos QRS ao longo do traçado.</div>
+        <div class="eba-opts">
+          <button class="eba-btn" onclick="ecgAlgoGo('leaf_tdp')">Começa com ritmo sinusal (onda P), QT longo (maior que 440 ms) e os QRS parecem "torcer" em torno da linha de base</button>
+          <button class="eba-btn" onclick="ecgAlgoGo('leaf_fv')">Os QRS vão perdendo a organização, "derretendo" progressivamente</button>
+          <button class="eba-btn" onclick="ecgAlgoGo('q_vtmono')">Todos os QRS têm a MESMA morfologia (monomórfica)</button>
+          <button class="eba-btn" onclick="ecgAlgoGo('leaf_vt_poli')">Os QRS têm morfologias VARIADAS entre si (polimórfica, sem torção nem QT longo)</button>
+        </div>
+      </div>
+
+      <div class="eba-step" data-id="q_vtmono">
+        <div class="eba-q">A TV monomórfica dura 30 segundos ou mais, OU há sinal de instabilidade (hipotensão, síncope, dor torácica, congestão pulmonar)?</div>
+        <div class="eba-opts">
+          <button class="eba-btn" onclick="ecgAlgoGo('leaf_vt_mono_sust')">Sim — pelo menos 1 desses critérios presente</button>
+          <button class="eba-btn eba-btn-out" onclick="ecgAlgoGo('leaf_vt_mono_naosust')">Não — nenhum critério, reverte sozinha rapidamente</button>
+        </div>
+      </div>
+
+      <div class="eba-step eba-leaf eba-c-vt" data-id="leaf_vt_mono_sust">
+        <div class="eba-leaf-t">TV Monomórfica Sustentada</div>
+        <div class="eba-leaf-d">QRS alargados, todos com a mesma forma (um único circuito/foco ventricular), durando 30 segundos ou mais ou já causando instabilidade hemodinâmica. Emergência: se instável, cardioversão elétrica imediata; se estável, antiarrítmico endovenoso (ex. amiodarona) com cardioversão de reserva.</div>
+        <button class="eba-btn eba-restart" onclick="ecgAlgoGo('q1')">↺ Recomeçar</button>
+      </div>
+
+      <div class="eba-step eba-leaf eba-c-vt" data-id="leaf_vt_mono_naosust">
+        <div class="eba-leaf-t">TV Monomórfica Não-Sustentada</div>
+        <div class="eba-leaf-d">Mesmo padrão morfológico (monomórfica), porém autolimitada — reverte sozinha antes de 30 segundos e sem gerar instabilidade. Ainda assim exige investigação de cardiopatia estrutural de base, principalmente isquêmica.</div>
+        <button class="eba-btn eba-restart" onclick="ecgAlgoGo('q1')">↺ Recomeçar</button>
+      </div>
+
+      <div class="eba-step eba-leaf eba-c-vt" data-id="leaf_vt_poli">
+        <div class="eba-leaf-t">TV Polimórfica</div>
+        <div class="eba-leaf-d">Complexos QRS com morfologias diferentes entre si, batimento a batimento — reflete múltiplos focos ou circuitos ventriculares simultâneos. Tende a ser mais instável que a monomórfica. Sempre descartar Torsades de Pointes (QT longo + padrão de torção) antes de fechar como polimórfica "comum", pois a conduta muda (ver próxima).</div>
+        <button class="eba-btn eba-restart" onclick="ecgAlgoGo('q1')">↺ Recomeçar</button>
+      </div>
+
+      <div class="eba-step eba-leaf eba-c-tdp" data-id="leaf_tdp">
+        <div class="eba-leaf-t">Torsades de Pointes</div>
+        <div class="eba-leaf-d">Clássico de prova: um ritmo sinusal normal (com onda P e QT já longo, maior que 440 ms) é seguido por uma taquicardia ventricular polimórfica em que os complexos QRS parecem "torcer" progressivamente em torno da linha de base, mudando de amplitude e direção. Sempre investigar causas de QT longo (distúrbios eletrolíticos como hipocalemia e hipomagnesemia, antiarrítmicos, antibióticos, antipsicóticos, síndromes congênitas de QT longo). Tratamento de urgência: sulfato de magnésio endovenoso, mesmo com magnésio sérico normal.</div>
+        <button class="eba-btn eba-restart" onclick="ecgAlgoGo('q1')">↺ Recomeçar</button>
+      </div>
+
+      <div class="eba-step eba-leaf eba-c-fv" data-id="leaf_fv">
+        <div class="eba-leaf-t">Fibrilação Ventricular</div>
+        <div class="eba-leaf-d">O ritmo tipicamente começa parecendo uma TV e progressivamente os complexos QRS perdem toda a organização, "derretendo" em uma atividade elétrica caótica, sem nenhuma coordenação mecânica eficaz. É um ritmo de parada cardiorrespiratória (PCR) — o ventrículo não gera nenhum débito cardíaco. Tratamento: reanimação cardiopulmonar imediata e desfibrilação (não cardioversão sincronizada).</div>
+        <button class="eba-btn eba-restart" onclick="ecgAlgoGo('q1')">↺ Recomeçar</button>
+      </div>
+
+      <div class="eba-step" data-id="q5">
+        <div class="eba-q">5. O intervalo R-R está regular ou irregular?</div>
+        <div class="eba-hint">Compare a distância entre vários pares consecutivos de ondas R ao longo da tira de ritmo.</div>
+        <div class="eba-opts">
+          <button class="eba-btn" onclick="ecgAlgoGo('leaf_fa')">Irregular — distâncias diferentes entre os R-R ("irregularmente irregular")</button>
+          <button class="eba-btn" onclick="ecgAlgoGo('leaf_tsv')">Regular — todas as distâncias R-R são iguais</button>
+        </div>
+      </div>
+
+      <div class="eba-step eba-leaf eba-c-fa" data-id="leaf_fa">
+        <div class="eba-leaf-t">Fibrilação Atrial</div>
+        <div class="eba-leaf-d">Sem onda P (atividade atrial caótica, sem despolarização organizada) e com intervalo R-R irregularmente irregular — a combinação que fecha o diagnóstico. QRS estreito na ausência de bloqueio de ramo associado. É a arritmia sustentada mais comum na prática — lembrar de estratificar risco tromboembólico (CHA2DS2-VASc) antes de definir anticoagulação.</div>
+        <button class="eba-btn eba-restart" onclick="ecgAlgoGo('q1')">↺ Recomeçar</button>
+      </div>
+
+      <div class="eba-step eba-leaf eba-c-tsv" data-id="leaf_tsv">
+        <div class="eba-leaf-t">Taquicardia Supraventricular (TSV)</div>
+        <div class="eba-leaf-d">Ritmo regular, QRS estreito, sem onda P visível (geralmente escondida dentro do QRS ou logo após ele) e sem onda F de flutter — um ritmo de reentrada nascendo acima do ventrículo (mais comumente reentrada nodal AV ou por via acessória), mas que não é sinusal, não é atrial "clássica" e não é fibrilação atrial. Costuma responder a manobras vagais ou adenosina.</div>
+        <button class="eba-btn eba-restart" onclick="ecgAlgoGo('q1')">↺ Recomeçar</button>
+      </div>
+
+    </div>
+
+    <div class="ac-h" style="margin-top:26px">Por trás de cada pergunta: o que você está realmente perguntando</div>
+    <p class="ac-p">A <b>pergunta 1</b> separa quem precisa deste algoritmo (taquicardia, FC maior que 100) de quem não precisa. A <b>pergunta 2</b> usa a onda P para descobrir se o comando do ritmo ainda está no átrio (sinusal ou atrial) — e, se houver onda P, a morfologia dela (positiva/normal, negativa e uniforme, ou multiforme) já separa sinusal de atrial unifocal de atrial multifocal. A <b>pergunta 3</b> busca uma forma muito específica e organizada de atividade atrial rápida — o flutter, com seu padrão característico em serrote e sua relação matemática com a frequência ventricular. A <b>pergunta 4</b> é a mais decisiva de todas: a duração do QRS separa arritmias de origem supraventricular (QRS estreito, desceu pelas vias normais de condução) de arritmias de origem ventricular (QRS alargado, nasceu dentro do próprio músculo ventricular, fora do sistema de condução rápido). A <b>pergunta 5</b>, reservada para quando não há onda P, onda F, nem QRS alargado, usa a regularidade do R-R para diferenciar a irregularidade caótica da fibrilação atrial da regularidade de uma taquicardia supraventricular por reentrada.</p>
+    <p class="ac-p">Quando o QRS está alargado, o algoritmo se ramifica em uma segunda camada de perguntas — não para trocar de algoritmo, mas para <b>classificar</b> a taquicardia ventricular encontrada: monomórfica ou polimórfica, sustentada ou não-sustentada, e dois padrões especiais que mudam a conduta — Torsades de Pointes (QT longo + torção, tratada com magnésio) e Fibrilação Ventricular (QRS "derretendo", ritmo de PCR, tratada com desfibrilação).</p>
+
+    <div class="ac-h" style="margin-top:26px">Versão fixa do algoritmo, colorida por arritmia</div>
+    <p class="ac-p">A mesma lógica acima, agora com todos os caminhos visíveis ao mesmo tempo — útil para revisão rápida antes da prova. Cada cor representa uma arritmia diferente, a mesma cor usada nos cards interativos acima.</p>
+    <div class="fx">
+      <div class="fx-node start">1. Existe taquicardia? (R-R menor que 3 quadradões)</div>
+      <div class="fx-arrow"></div>
+      <div class="fx-row">
+        <div class="fx-node eba-c-neutral">Não → não é taquiarritmia</div>
+        <div class="fx-node">Sim → pergunta 2</div>
+      </div>
+      <div class="fx-arrow"></div>
+      <div class="fx-lbl">2. Existe onda P (olhar em D2)?</div>
+      <div class="fx-row">
+        <div class="fx-node eba-c-sinusal">P positiva, morfologia normal → Taquicardia Sinusal</div>
+        <div class="fx-node eba-c-atrial">P negativa, sempre igual → Taquicardia Atrial Unifocal</div>
+        <div class="fx-node eba-c-atrial">P com formas diferentes → Taquicardia Atrial Multifocal</div>
+      </div>
+      <div class="fx-lbl">Sem onda P → pergunta 3</div>
+      <div class="fx-arrow"></div>
+      <div class="fx-lbl">3. Existe onda F (dentes de serra)?</div>
+      <div class="fx-row">
+        <div class="fx-node eba-c-flutter">Sim → Flutter Atrial (~150 bpm, R-R = 2 quadradões)</div>
+        <div class="fx-node">Não → pergunta 4</div>
+      </div>
+      <div class="fx-arrow"></div>
+      <div class="fx-lbl">4. QRS estreito ou alargado (maior que 120 ms)?</div>
+      <div class="fx-row">
+        <div class="fx-node eba-c-vt">Alargado → Taquicardia Ventricular (classificar abaixo)</div>
+        <div class="fx-node">Estreito → pergunta 5</div>
+      </div>
+      <div class="fx-arrow"></div>
+      <div class="fx-lbl">5. R-R regular ou irregular?</div>
+      <div class="fx-row">
+        <div class="fx-node eba-c-fa">Irregular → Fibrilação Atrial</div>
+        <div class="fx-node eba-c-tsv">Regular → Taquicardia Supraventricular (TSV)</div>
+      </div>
+      <div class="fx-arrow"></div>
+      <div class="fx-lbl">Classificando a Taquicardia Ventricular (QRS alargado)</div>
+      <div class="fx-row">
+        <div class="fx-node eba-c-vt">Monomórfica sustentada (≥30s ou instável)</div>
+        <div class="fx-node eba-c-vt">Monomórfica não-sustentada</div>
+        <div class="fx-node eba-c-vt">Polimórfica (sem QT longo/torção)</div>
+        <div class="fx-node eba-c-tdp">Torsades de Pointes (QT longo + torção)</div>
+        <div class="fx-node eba-c-fv">Fibrilação Ventricular (QRS "derretendo")</div>
+      </div>
+    </div>`],
+ ],
+
+ escores: `<div class="ac-h">Fórmulas e escores úteis na leitura do ECG e nas arritmias</div>
+   <table class="ac-tbl"><tr><th>Ferramenta</th><th>Fórmula / uso</th><th>Quando aplicar</th></tr>
+     <tr><td>Regra 300-150-100-75-60-50</td><td>FC = 300 ÷ nº de quadradões entre 2 ondas R</td><td>Ritmo regular, cálculo rápido de FC</td></tr>
+     <tr><td>FC em ritmo irregular</td><td>Nº de QRS em 6 segundos (30 quadradões) × 10</td><td>Fibrilação atrial e outros ritmos irregulares</td></tr>
+     <tr><td>Fórmula de Bazett (QTc)</td><td>QTc = QT medido ÷ raiz quadrada do intervalo R-R (em segundos)</td><td>Corrigir o QT pela frequência cardíaca antes de dizer "QT longo"</td></tr>
+     <tr><td>Método DI + aVF</td><td>Positivo/positivo = eixo normal; demais combinações = desvio</td><td>Estimativa rápida do eixo elétrico</td></tr>
+     <tr><td>CHA2DS2-VASc</td><td>Soma de fatores de risco (IC, HAS, idade, diabetes, AVC prévio, doença vascular, sexo)</td><td>Decidir anticoagulação após diagnosticar Fibrilação Atrial</td></tr>
+   </table>
+   <div class="ac-tip"><b>Lembrete:</b> QTc maior que 440-450 ms já é considerado prolongado e levanta o alerta para risco de Torsades de Pointes — sempre corrigir o QT pela frequência antes de comparar com esse limite, nunca usar o QT "bruto" em taquicardia.</div>`,
+
+ dif: `<div class="ac-h">Diferenciais entre as taquiarritmias (resumo comparativo)</div>
+   <table class="ac-tbl"><tr><th>Achado</th><th>Se presente, pensar em</th><th>Achado-chave que confirma</th></tr>
+     <tr><td>Onda P positiva em D2, normal</td><td>Taquicardia Sinusal</td><td>P antes de cada QRS, morfologia idêntica à basal</td></tr>
+     <tr><td>Onda P negativa, sempre igual</td><td>Taquicardia Atrial Unifocal</td><td>Um único foco ectópico, morfologia constante</td></tr>
+     <tr><td>Ondas P com formas variadas</td><td>Taquicardia Atrial Multifocal</td><td>3 ou mais morfologias diferentes de P; associação com DPOC</td></tr>
+     <tr><td>Padrão em "dentes de serra"</td><td>Flutter Atrial</td><td>FC ≈150 bpm, R-R = 2 quadradões (2:1)</td></tr>
+     <tr><td>Sem onda P, R-R irregular</td><td>Fibrilação Atrial</td><td>Irregularmente irregular, linha de base "tremida"</td></tr>
+     <tr><td>Sem onda P, R-R regular, QRS estreito</td><td>Taquicardia Supraventricular</td><td>Início e término súbitos, resposta a adenosina/manobra vagal</td></tr>
+     <tr><td>QRS alargado, morfologia única</td><td>TV Monomórfica</td><td>Todos os complexos idênticos entre si</td></tr>
+     <tr><td>QRS alargado, morfologias variadas</td><td>TV Polimórfica</td><td>Complexos mudando de forma batimento a batimento</td></tr>
+     <tr><td>QT longo + torção progressiva</td><td>Torsades de Pointes</td><td>Início com ritmo sinusal de QT já prolongado</td></tr>
+     <tr><td>QRS "derretendo", sem pulso</td><td>Fibrilação Ventricular</td><td>Ritmo de PCR, ausência total de organização</td></tr>
+   </table>
+   <div class="ac-warn">Erro comum: tentar diferenciar TSV de TV apenas pela frequência cardíaca. A frequência sozinha não diferencia nada — o critério decisivo é a duração do QRS (e, quando alargado, o contexto clínico e a morfologia).</div>`,
+
+ mapa: `<div class="ac-h">Mapa mental (cards)</div>
+   <div class="mm">
+     <div class="mm-card"><h5>Pergunta 1 — Taquicardia?</h5><ul><li>R-R menor que 3 quadradões</li><li>Equivale a FC maior que 100 bpm</li></ul></div>
+     <div class="mm-card"><h5>Pergunta 2 — Onda P?</h5><ul><li>Positiva e normal → Sinusal</li><li>Negativa, uniforme → Atrial unifocal</li><li>Formas variadas → Atrial multifocal</li></ul></div>
+     <div class="mm-card"><h5>Pergunta 3 — Onda F?</h5><ul><li>Dentes de serra</li><li>~150 bpm, R-R = 2 quadradões</li><li>= Flutter Atrial</li></ul></div>
+     <div class="mm-card"><h5>Pergunta 4 — QRS largo?</h5><ul><li>Maior que 120 ms (3 quadradinhos)</li><li>Alargado = Ventricular</li><li>Estreito = pergunta 5</li></ul></div>
+     <div class="mm-card"><h5>Pergunta 5 — R-R regular?</h5><ul><li>Irregular = Fibrilação Atrial</li><li>Regular = TSV</li></ul></div>
+     <div class="mm-card"><h5>Classificando a TV</h5><ul><li>Monomórfica x Polimórfica</li><li>Sustentada (≥30s/instável) x não</li><li>Torsades: QT longo + torção</li><li>FV: QRS "derretendo", ritmo de PCR</li></ul></div>
+   </div>`,
+
+ fluxo_dx: `<div class="ac-h">Fluxograma resumido (quick reference)</div>
+   <div class="fx">
+     <div class="fx-node start">Taquicardia no ECG (R-R menor que 3 quadradões)</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Existe onda P organizada em D2?</div>
+     <div class="fx-row">
+       <div class="fx-node end">Sim → Sinusal / Atrial unifocal / Atrial multifocal (ver morfologia)</div>
+       <div class="fx-node">Não → existe onda F (flutter)?</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-row">
+       <div class="fx-node end">Onda F presente → Flutter Atrial</div>
+       <div class="fx-node">Sem onda F → QRS está alargado?</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-row">
+       <div class="fx-node end">Alargado → Taquicardia Ventricular</div>
+       <div class="fx-node">Estreito → R-R regular ou irregular?</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-row">
+       <div class="fx-node end">Irregular → Fibrilação Atrial</div>
+       <div class="fx-node end">Regular → Taquicardia Supraventricular</div>
+     </div>
+   </div>`,
+
+ fluxo_cond: `<div class="ac-h">Conduta inicial diante de qualquer taquiarritmia</div>
+   <div class="fx">
+     <div class="fx-node start">Paciente com taquiarritmia identificada no ECG</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Primeiro: o paciente está hemodinamicamente ESTÁVEL ou INSTÁVEL?</div>
+     <div class="fx-row">
+       <div class="fx-node end">Instável (hipotensão, rebaixamento, dor torácica isquêmica, congestão) → Cardioversão elétrica sincronizada imediata (ou desfibrilação, se ritmo de PCR/FV)</div>
+       <div class="fx-node">Estável → aplicar o algoritmo diagnóstico das 5 perguntas com calma</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Após o diagnóstico específico, tratar a causa/mecanismo</div>
+     <div class="fx-row">
+       <div class="fx-node">QRS estreito → manobra vagal, adenosina (TSV) ou controle de FC/anticoagulação (FA/flutter)</div>
+       <div class="fx-node">QRS alargado → tratar como TV até prova em contrário; antiarrítmico ou cardioversão</div>
+     </div>
+   </div>`,
+
+ vespera: `<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Ponto 1:</b> O algoritmo tem 5 perguntas fixas, sempre nessa ordem: taquicardia? onda P? onda F? QRS largo? R-R regular?</div>
+   <div class="ac-call"><b>Ponto 2:</b> D2 é a derivação padrão para procurar a onda P — é o melhor ângulo para ver a atividade atrial.</div>
+   <div class="ac-call"><b>Ponto 3:</b> Onda P positiva e normal = sinusal; negativa e uniforme = atrial unifocal; com formas variadas = atrial multifocal (pensar em DPOC).</div>
+   <div class="ac-call"><b>Ponto 4:</b> Flutter é "arritmia matemática": ~150 bpm com R-R de exatamente 2 quadradões, padrão em dentes de serra.</div>
+   <div class="ac-call"><b>Ponto 5:</b> QRS alargado (maior que 120 ms) sem onda P nem onda F = Taquicardia Ventricular até prova em contrário.</div>
+   <div class="ac-call"><b>Ponto 6:</b> Sem onda P, sem onda F, QRS estreito: R-R irregular = Fibrilação Atrial; R-R regular = TSV.</div>
+   <div class="ac-call"><b>Ponto 7:</b> Torsades de Pointes = QT longo + torção do QRS em torno da linha de base; tratamento é sulfato de magnésio.</div>
+   <div class="ac-call"><b>Ponto 8:</b> Fibrilação Ventricular = QRS "derretendo", ritmo de PCR — desfibrilação, não cardioversão sincronizada.</div>
+   <div class="ac-call"><b>Ponto 9:</b> Instabilidade hemodinâmica (hipotensão, síncope, dor torácica, congestão pulmonar) manda a conduta: cardioversão elétrica imediata, independentemente do diagnóstico exato.</div>`,
+
+ dicas: `<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Sempre siga a ordem das 5 perguntas — pular etapas é a causa mais comum de erro em prova (ex.: tentar diferenciar FA de TSV sem antes excluir onda P ou onda F).</div>
+   <div class="ac-tip">Meça o QRS objetivamente contando quadradinhos (3 quadradinhos = 120 ms) — não estime "a olho".</div>
+   <div class="ac-tip">Flutter atrial com FC ao redor de 150 bpm e R-R de 2 quadradões é praticamente diagnóstico só pelo número — decore essa relação matemática.</div>
+   <div class="ac-tip">Diante de QRS alargado, pense sempre primeiro em origem ventricular — tratar como supraventricular com aberrância é um erro perigoso se a hipótese errada for escolhida sem certeza.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Confundir Taquicardia Atrial Multifocal com Fibrilação Atrial — a diferença crucial é que na FA NÃO existe onda P, enquanto na multifocal as ondas P existem, só que com formas diferentes entre si.</div>
+   <div class="ac-warn">Usar o QT "bruto" (não corrigido pela FC) para dizer que há QT longo — sempre calcular o QTc pela fórmula de Bazett antes.</div>
+   <div class="ac-warn">Esquecer que, diante de instabilidade hemodinâmica, a prioridade é cardioversão elétrica imediata — não perder tempo tentando fechar o diagnóstico exato pelo algoritmo antes de estabilizar o paciente.</div>`,
+
+ checklist: [
+   'Sei calcular a frequência cardíaca pelo método dos quadradões (regra 300-150-100-75-60-50)',
+   'Domino a duração normal de PR, QRS e QT e sei medir cada um contando quadradinhos',
+   'Sei por que D2 é a melhor derivação para ver a onda P',
+   'Aplico as 5 perguntas do algoritmo diagnóstico de taquiarritmias na ordem correta',
+   'Diferencio Taquicardia Atrial Unifocal de Multifocal pela morfologia da onda P',
+   'Reconheço o padrão em "dentes de serra" do Flutter Atrial e sua relação matemática de frequência',
+   'Sei classificar uma Taquicardia Ventricular (monomórfica/polimórfica, sustentada/não-sustentada)',
+   'Reconheço Torsades de Pointes (QT longo + torção) e Fibrilação Ventricular (QRS "derretendo")',
+   'Sei diferenciar Fibrilação Atrial de Taquicardia Supraventricular pela regularidade do R-R'
+ ],
+};
+
+Object.assign(C['arritmias|0'], {
+ questoes: [
+  {stem:'Em um traçado de ECG, o intervalo R-R mede menos de 3 quadradões grandes. Em D2, observa-se onda P positiva antes de cada QRS, com morfologia idêntica à basal do paciente. Qual o diagnóstico?',
+   opts:['Taquicardia Atrial Unifocal','Taquicardia Sinusal','Flutter Atrial','Fibrilação Atrial'], correct:1,
+   expl:'Onda P positiva em D2, com morfologia normal, antes de cada QRS, em vigência de taquicardia, define <b>Taquicardia Sinusal</b> — geralmente uma resposta fisiológica a um estímulo (febre, dor, hipovolemia etc.).'},
+  {stem:'Paciente com DPOC grave apresenta taquicardia com ondas P visíveis em D2, porém com pelo menos 3 morfologias diferentes entre si ao longo do traçado. Qual a hipótese mais provável?',
+   opts:['Fibrilação Atrial','Flutter Atrial','Taquicardia Atrial Multifocal','Taquicardia Ventricular'], correct:2,
+   expl:'Múltiplos focos atriais ectópicos, gerando ondas P com formas diferentes entre si, associados a doença pulmonar grave (cor pulmonale/sobrecarga atrial direita), definem <b>Taquicardia Atrial Multifocal</b>. A presença de onda P (ainda que variável) já exclui Fibrilação Atrial.'},
+  {stem:'ECG mostra taquicardia sem onda P visível, com um padrão contínuo de ondas em "dentes de serra" em D2 e DIII, frequência ventricular de aproximadamente 150 bpm. Qual o diagnóstico e o mecanismo esperado?',
+   opts:['Fibrilação Atrial, condução variável pelo nó AV','Flutter Atrial, condução 2:1 pelo nó AV','Taquicardia Atrial Unifocal, condução 1:1','Taquicardia Supraventricular, reentrada nodal'], correct:1,
+   expl:'O padrão em dentes de serra (ondas F) com FC próxima de 150 bpm sugere <b>Flutter Atrial</b> com bloqueio 2:1 fisiológico no nó AV (atividade atrial ao redor de 300 bpm, metade conduzida aos ventrículos).'},
+  {stem:'Uma taquicardia de QRS estreito, sem onda P visível e sem padrão de flutter, apresenta intervalo R-R absolutamente regular do início ao fim do traçado. Qual o diagnóstico mais provável?',
+   opts:['Fibrilação Atrial','Taquicardia Supraventricular','Taquicardia Ventricular Monomórfica','Taquicardia Atrial Multifocal'], correct:1,
+   expl:'QRS estreito + R-R regular + ausência de onda P organizada e de onda F é o padrão clássico de <b>Taquicardia Supraventricular</b> (geralmente por reentrada nodal AV ou via acessória).'},
+  {stem:'Qual achado, isoladamente, mais diferencia a Fibrilação Atrial da Taquicardia Supraventricular, ambas com QRS estreito?',
+   opts:['A frequência cardíaca','A presença de sintomas','A regularidade do intervalo R-R','A duração do episódio'], correct:2,
+   expl:'Ambas podem ter QRS estreito e frequências parecidas. O critério decisivo é a regularidade do R-R: irregularmente irregular na Fibrilação Atrial, regular na TSV.'},
+  {stem:'ECG com QRS alargado (150 ms), sem onda P visível e sem onda F, todos os complexos QRS com morfologia idêntica entre si, durando mais de 1 minuto. Qual a classificação mais precisa?',
+   opts:['TV Polimórfica Não-Sustentada','TV Monomórfica Sustentada','Torsades de Pointes','Fibrilação Ventricular'], correct:1,
+   expl:'QRS alargado, morfologia única (monomórfica) e duração maior que 30 segundos definem <b>TV Monomórfica Sustentada</b>, independente de haver ou não instabilidade — basta um dos dois critérios (duração ou instabilidade).'},
+  {stem:'Paciente em ritmo sinusal com QT corrigido de 480 ms evolui subitamente para uma taquicardia de QRS alargado, com complexos que parecem "torcer" em torno da linha de base, mudando progressivamente de amplitude. Qual o diagnóstico e a conduta imediata?',
+   opts:['Fibrilação Ventricular; desfibrilação imediata','Torsades de Pointes; sulfato de magnésio endovenoso','TV Monomórfica; amiodarona endovenosa','Flutter Atrial com condução aberrante; controle de FC'], correct:1,
+   expl:'QT longo prévio seguido de TV polimórfica com padrão de torção em torno da linha de base é o quadro clássico de <b>Torsades de Pointes</b>. O tratamento de urgência é sulfato de magnésio endovenoso, mesmo com magnesemia normal.'},
+  {stem:'Um ritmo que se inicia como taquicardia ventricular e progressivamente os complexos QRS perdem toda a organização, tornando-se uma atividade caótica sem pulso palpável, corresponde a:',
+   opts:['Taquicardia Ventricular Polimórfica estável','Fibrilação Ventricular','Torsades de Pointes autolimitada','Fibrilação Atrial com resposta ventricular alta'], correct:1,
+   expl:'A degeneração progressiva dos complexos QRS até a perda completa de organização, sem pulso, define <b>Fibrilação Ventricular</b> — ritmo de parada cardiorrespiratória, tratado com desfibrilação imediata.'},
+  {stem:'Qual é a forma mais rápida de estimar a frequência cardíaca em um ritmo REGULAR, contando apenas os quadradões grandes entre duas ondas R?',
+   opts:['Multiplicar o número de quadradões por 10','Aplicar a sequência 300-150-100-75-60-50 conforme o número de quadradões','Contar QRS em 6 segundos e multiplicar por 10','Dividir 1500 pelo número de quadradões'], correct:1,
+   expl:'Para ritmos regulares, a sequência decorada 300-150-100-75-60-50 (conforme 1, 2, 3, 4, 5 ou 6 quadradões entre as ondas R) é o método mais rápido. O método "QRS em 6 segundos × 10" é reservado para ritmos irregulares.'},
+  {stem:'Um paciente apresenta taquicardia de QRS alargado associada a hipotensão sintomática e rebaixamento do nível de consciência. Qual a conduta imediata mais apropriada, independente da classificação exata da arritmia?',
+   opts:['Aguardar a confirmação diagnóstica completa pelo algoritmo antes de tratar','Cardioversão elétrica sincronizada imediata (ou desfibrilação se for ritmo de PCR)','Iniciar antiarrítmico oral e reavaliar em 24 horas','Solicitar ecocardiograma antes de qualquer intervenção'], correct:1,
+   expl:'Instabilidade hemodinâmica (hipotensão, rebaixamento do nível de consciência, entre outros sinais) exige cardioversão elétrica imediata — a classificação detalhada da arritmia não deve atrasar a estabilização do paciente.'},
+  {stem:'Por que a derivação D2 (DII) é preferida para procurar a onda P na aplicação do algoritmo diagnóstico de taquiarritmias?',
+   opts:['Porque tem a maior amplitude de QRS entre todas as derivações','Porque seu ângulo é quase paralelo ao eixo normal de despolarização atrial, entre o nó sinoatrial e o nó AV','Porque é a única derivação que registra a repolarização atrial','Porque é a derivação padrão para medir o intervalo QT'], correct:1,
+   expl:'O eixo de DII acompanha de perto a direção de despolarização atrial normal (do nó sinoatrial em direção ao nó AV), tornando essa derivação a mais nítida para visualizar a onda P.'},
+  {stem:'Qual associação clínica é mais classicamente cobrada em prova junto ao diagnóstico de Taquicardia Atrial Multifocal?',
+   opts:['Hipertireoidismo','Insuficiência renal crônica dialítica','DPOC com cor pulmonale','Uso crônico de betabloqueador'], correct:2,
+   expl:'A sobrecarga atrial direita causada por DPOC grave evoluindo com cor pulmonale é a associação clínica clássica de prova para <b>Taquicardia Atrial Multifocal</b>.'}
+ ],
+
+ flashcards: [
+  {front:'Quais são as 5 perguntas do algoritmo diagnóstico de taquiarritmias, em ordem?', back:'1) Existe taquicardia? 2) Existe onda P? 3) Existe onda F (flutter)? 4) O QRS está alargado? 5) O R-R é regular ou irregular?', type:'basic'},
+  {front:'1 quadradinho (1 mm) no papel de ECG equivale a {{0,04 segundos (40 ms)}} de tempo.', back:'0,04 segundos (40 ms)', type:'cloze'},
+  {front:'1 quadradão (5 mm) no papel de ECG equivale a {{0,20 segundos (200 ms)}} de tempo.', back:'0,20 segundos (200 ms)', type:'cloze'},
+  {front:'Qual derivação é a preferida para procurar a onda P e por quê?', back:'D2 (DII) — seu ângulo é quase paralelo ao eixo normal de despolarização atrial (do nó sinoatrial ao nó AV), dando a visão mais nítida da onda P.', type:'basic'},
+  {front:'Onda P positiva em D2, morfologia normal, antes de cada QRS, em taquicardia = ?', back:'Taquicardia Sinusal.', type:'basic'},
+  {front:'Onda P negativa em D2, sempre com a MESMA morfologia, em taquicardia = ?', back:'Taquicardia Atrial Unifocal.', type:'basic'},
+  {front:'Ondas P com pelo menos 3 morfologias DIFERENTES entre si = ? Qual a associação clínica clássica?', back:'Taquicardia Atrial Multifocal; associação clássica com DPOC e cor pulmonale.', type:'basic'},
+  {front:'Descreva o padrão eletrocardiográfico característico do Flutter Atrial e sua "regra matemática" de frequência.', back:'Ondas F em "dentes de serra" contínuas; FC ventricular ao redor de 150 bpm com R-R de exatamente 2 quadradões (condução 2:1 pelo nó AV).', type:'basic'},
+  {front:'QRS alargado (maior que 120 ms), sem onda P e sem onda F = ?', back:'Taquicardia Ventricular (até prova em contrário).', type:'basic'},
+  {front:'Sem onda P, sem onda F, QRS estreito, R-R irregular = ? E se R-R for regular?', back:'Irregular = Fibrilação Atrial. Regular = Taquicardia Supraventricular (TSV).', type:'basic'},
+  {front:'O que define uma TV Monomórfica como SUSTENTADA?', back:'Durar 30 segundos ou mais, OU causar instabilidade hemodinâmica (hipotensão, síncope, dor torácica, congestão pulmonar) — basta 1 dos critérios.', type:'basic'},
+  {front:'Quais os dois achados que definem Torsades de Pointes?', back:'QT longo (maior que 440 ms) previamente ao evento + complexos QRS com padrão de "torção" progressiva em torno da linha de base.', type:'basic'},
+  {front:'Qual o tratamento de urgência específico para Torsades de Pointes?', back:'Sulfato de magnésio endovenoso, mesmo com magnesemia sérica normal.', type:'basic'},
+  {front:'Como se caracteriza a Fibrilação Ventricular no ECG e qual sua gravidade?', back:'Complexos QRS que vão "derretendo", perdendo toda a organização, em atividade caótica sem pulso — é ritmo de parada cardiorrespiratória (PCR), tratado com desfibrilação imediata.', type:'basic'}
+ ],
+
+ casos: [
+  {t:'Caso 1 — A "arritmia matemática"', stem:'Homem, 68 anos, chega com palpitações. ECG mostra frequência cardíaca de 148 bpm, ritmo regular, sem onda P nítida em D2, mas com um padrão contínuo em "dentes de serra" visível em D2, DIII e aVF. QRS estreito.', passos:[
+    {h:'1. Reconhecer', p:'Padrão em dentes de serra + FC próxima de 150 bpm com R-R de 2 quadradões é o clássico Flutter Atrial com condução 2:1 pelo nó AV — "arritmia matemática" de prova.'},
+    {h:'2. Conduzir', p:'Avaliar estabilidade hemodinâmica; se estável, controle de frequência e avaliação para anticoagulação (mesmo raciocínio tromboembólico da fibrilação atrial) e considerar cardioversão eletiva ou ablação.'},
+    {h:'Lição de prova', p:'Sempre que a FC estiver bem próxima de 150 bpm com ritmo muito regular, suspeitar de flutter atrial 2:1 antes de qualquer outro diagnóstico.'}
+  ]},
+  {t:'Caso 2 — QT longo que ninguém tinha visto', stem:'Mulher, 45 anos, em uso de antibiótico macrolídeo há 3 dias por pneumonia, apresenta síncope. ECG anterior (antes do antibiótico) mostrava QTc de 470 ms. No momento do episódio, monitor mostra taquicardia de QRS alargado com complexos que mudam de amplitude e parecem torcer em torno da linha de base, iniciando logo após um batimento sinusal.', passos:[
+    {h:'1. Reconhecer', p:'QT já prolongado antes do evento + taquicardia ventricular polimórfica com padrão de torção em torno da linha de base = Torsades de Pointes, provavelmente precipitada pelo antibiótico (conhecido prolongador de QT).'},
+    {h:'2. Conduzir', p:'Sulfato de magnésio endovenoso imediato, suspender o medicamento prolongador de QT, corrigir distúrbios eletrolíticos associados (potássio, magnésio) e monitorização contínua.'},
+    {h:'Lição de prova', p:'QT longo prévio é o principal fator de risco para Torsades — sempre revisar medicações em uso diante desse achado, mesmo antes de qualquer sintoma.'}
+  ]},
+  {t:'Caso 3 — Quando a onda P engana', stem:'Paciente com DPOC avançado, em insuficiência respiratória crônica agudizada, desenvolve taquicardia de 130 bpm. Ao observar D2 com atenção, notam-se ondas antes de cada QRS, mas com pelo menos 4 formas diferentes entre si ao longo do traçado — nunca idênticas.', passos:[
+    {h:'1. Reconhecer', p:'Presença de onda P (ainda que variável) já exclui Fibrilação Atrial. Múltiplas morfologias diferentes de P definem Taquicardia Atrial Multifocal — associação clássica com DPOC/cor pulmonale por sobrecarga atrial direita.'},
+    {h:'2. Conduzir', p:'Tratar a causa de base (otimizar a doença pulmonar, corrigir hipóxia e distúrbios eletrolíticos) — antiarrítmicos costumam ter resposta limitada até a causa pulmonar ser controlada.'},
+    {h:'Lição de prova', p:'Não confundir Taquicardia Atrial Multifocal com Fibrilação Atrial só porque o ritmo "parece irregular" — a presença de onda P organizada (mesmo variável) é o detalhe que muda tudo.'}
+  ]}
+ ]
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+</script>
+
 </body>
 </html>
