@@ -372,7 +372,7 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
     <div class="gate-supra">Acesso pelo ELID</div>
     <div class="gate-name">CardioAtlas</div>
     <div class="elid-credit" style="margin-top:4px"><b>E</b>LI<b>D</b> · <b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div>
-    <p class="gate-desc">Atlas de Infectologia da suíte ELID. O acesso é feito pela plataforma ELID.</p>
+    <p class="gate-desc">O acesso ao CardioAtlas é feito pela plataforma ELID. Faça login no ELID para continuar seus estudos.</p>
     <button class="btn-primary" id="go-elid">Ir para o ELID</button>
     <div class="elid-tribute" style="margin-top:22px">Inspirado em <b>E</b>lisabete <b>D</b>elfini ✦</div>
   </div>
@@ -452,7 +452,7 @@ import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/fi
 import { getFirestore, doc, getDoc, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const PLATFORM_ID='cardiologia'; /* ID unico da especialidade (sem espacos/acentos) para o Firebase */
-const LS_PREFIX='atlas_infectologia_progress';
+const LS_PREFIX='atlas_'+PLATFORM_ID+'_progress';
 const AREA_KEY='cm';
 const firebaseConfig={apiKey:"AIzaSyAKN3qsYIc3pel81vl8WEAH6Ob4oR-icAM",authDomain:"jackeline-study-platform.firebaseapp.com",projectId:"jackeline-study-platform",storageBucket:"jackeline-study-platform.firebasestorage.app",messagingSenderId:"574246127117",appId:"1:574246127117:web:29eedab81ea4251b23f744"};
 const app=initializeApp(firebaseConfig);
@@ -800,7 +800,7 @@ let bk={screen:'cover',cap:null,i:null,opened:false};
 
 function viewCollection(){
   return `<div class="view"><div class="page-title">${ICONS.collection}<h1>Coleção de Patógenos</h1></div>
-    <p class="page-sub">Sua enciclopédia pessoal de Infectologia — os patógenos são catalogados conforme você avança de nível na plataforma.</p>
+    <p class="page-sub">Sua enciclopédia pessoal de Cardiologia — os patógenos são catalogados conforme você avança de nível na plataforma.</p>
     <div class="bookx"><div class="bookstage" id="bookstage"></div></div>
     <div class="book-bar">
       <button class="book-nav" id="bprev" title="Página anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
@@ -853,7 +853,7 @@ function bindBook(){
         <div class="hc-border"></div>
         <div class="hc-logo"><span class="sb-glow"></span>${LOGO}</div>
         <div class="hc-title">Coleção de Patógenos</div>
-        <div class="hc-sub">Atlas pessoal de Infectologia</div>
+        <div class="hc-sub">Atlas pessoal de Cardiologia</div>
         <div class="hc-hint">Toque para abrir ✦</div>
       </div>
     </div></div>`;
@@ -916,41 +916,13 @@ function bkStats(){
     <div class="pstats" style="margin-top:14px">${per}</div></div>`;
 }
 // ===== TEMAS MAIS COBRADOS (estimativas didáticas por padrão histórico das bancas) =====
-const TEMA_LIST=[
-  {id:'antimic',nm:'Antimicrobianos (escolha/espectro/resistência)',ref:'bases|0'},
-  {id:'hiv',nm:'HIV (TARV, CD4, oportunistas, PEP/PrEP)',ref:'virus|0'},
-  {id:'tb',nm:'Tuberculose (RIPE, TRM, HIV)',ref:'bacterias|0'},
-  {id:'sifilis',nm:'Sífilis & ISTs (VDRL, gestação, congênita)',ref:'bacterias|2'},
-  {id:'meningite',nm:'Meningite bacteriana (LCR)',ref:'bacterias|4'},
-  {id:'pac',nm:'Pneumonias bacterianas (PAC/PAV)',ref:'bacterias|6'},
-  {id:'dengue',nm:'Dengue (sinais de alarme, MS)',ref:'virus|2'},
-  {id:'arbo',nm:'Arboviroses (Zika/Chikungunya/Febre Amarela)',ref:'virus|3'},
-  {id:'hepat',nm:'Hepatites virais (sorologias B/C)',ref:'virus|1'},
-  {id:'sepse',nm:'Sepse & choque séptico (1ª hora)',ref:'bases|1'},
-  {id:'endocardite',nm:'Endocardite infecciosa (Duke)',ref:'bacterias|5'},
-  {id:'hanseniase',nm:'Hanseníase (classificação, PQT)',ref:'bacterias|1'},
-  {id:'lepto',nm:'Leptospirose',ref:'bacterias|3'},
-  {id:'malaria',nm:'Malária (espécies, tratamento)',ref:'parasitas|1'},
-  {id:'chagas',nm:'Doença de Chagas',ref:'parasitas|3'},
-  {id:'leish',nm:'Leishmaniose (visceral/tegumentar)',ref:'parasitas|2'},
-  {id:'toxo',nm:'Toxoplasmose (gestação/congênita)',ref:'parasitas|0'},
-  {id:'ippm',nm:'Infecções de pele e partes moles',ref:'bacterias|7'},
-  {id:'hosp',nm:'Infecção hospitalar & isolamentos',ref:'bases|2'},
-  {id:'fungos',nm:'Micoses oportunistas (Cripto/Candida)',ref:'fungos|1'},
-];
-const BANCA={
-  ENARE:{antimic:5,hiv:5,tb:5,sifilis:5,meningite:4,pac:4,dengue:4,sepse:4,hepat:4,endocardite:3,arbo:3,hosp:3,ippm:3,hanseniase:3,malaria:2,toxo:2,leish:2,chagas:2,lepto:2,fungos:3},
-  REVALIDA:{dengue:5,tb:5,sifilis:5,hiv:5,hepat:4,hanseniase:4,lepto:4,arbo:4,malaria:4,meningite:4,antimic:3,pac:3,sepse:3,chagas:3,toxo:3,leish:3,ippm:3,endocardite:2,hosp:2,fungos:2},
-  'PSU-MG':{hiv:5,tb:5,dengue:5,sifilis:4,antimic:4,meningite:4,hepat:4,sepse:4,pac:3,arbo:3,endocardite:3,lepto:3,chagas:3,hanseniase:3,leish:3,malaria:2,toxo:2,ippm:2,hosp:2,fungos:2},
-  'SES-RJ':{dengue:5,arbo:5,hiv:5,tb:4,sifilis:4,meningite:4,lepto:4,sepse:4,antimic:4,hepat:3,pac:3,endocardite:3,ippm:3,hosp:3,hanseniase:2,malaria:2,toxo:2,chagas:2,leish:2,fungos:2},
-  UFRJ:{hiv:5,tb:5,sifilis:5,antimic:4,sepse:4,meningite:4,dengue:4,endocardite:4,hepat:4,pac:3,arbo:3,hosp:3,fungos:3,ippm:3,lepto:3,malaria:2,toxo:2,leish:2,chagas:2,hanseniase:2},
-  UERJ:{hiv:5,tb:5,dengue:5,sifilis:4,meningite:4,antimic:4,arbo:4,hepat:4,sepse:3,pac:3,lepto:3,endocardite:3,toxo:3,ippm:3,hanseniase:2,chagas:2,leish:2,malaria:2,hosp:2,fungos:2},
-};
+const TEMA_LIST=[{id:'iamcsst',nm:'IAM com supradesnivelamento de ST (IAMCSST)',ref:'sca|2'},{id:'iamssst',nm:'IAM sem supradesnivelamento de ST (IAMSSST)',ref:'sca|1'},{id:'angina_inst',nm:'Angina instável',ref:'sca|0'},{id:'fa',nm:'Fibrilação atrial (CHA2DS2-VASc/HAS-BLED)',ref:'arritmias|2'},{id:'tv',nm:'Taquicardia ventricular',ref:'arritmias|4'},{id:'bav',nm:'Bloqueios atrioventriculares',ref:'arritmias|8'},{id:'icfer',nm:'Insuficiência cardíaca com FE reduzida (ICFEr)',ref:'ic|0'},{id:'icfep',nm:'Insuficiência cardíaca com FE preservada (ICFEp)',ref:'ic|1'},{id:'has',nm:'Hipertensão arterial crônica',ref:'has|0'},{id:'crise_has',nm:'Crise hipertensiva (urgência/emergência)',ref:'has|1'},{id:'eao',nm:'Estenose aórtica',ref:'valvo|0'},{id:'im',nm:'Insuficiência mitral',ref:'valvo|3'},{id:'ei',nm:'Endocardite infecciosa (critérios de Duke)',ref:'ei|0'},{id:'tampo',nm:'Tamponamento cardíaco',ref:'pericardio|2'},{id:'choque_cardio',nm:'Choque cardiogênico',ref:'choques|0'},{id:'dac',nm:'Doença arterial coronariana crônica',ref:'dac|0'},{id:'ecg1',nm:'ECG: ritmo, eixo, sobrecargas e hipertrofias',ref:'ecg|0'},{id:'aorta',nm:'Dissecção de aorta',ref:'aorta|0'},{id:'tep',nm:'Tromboembolismo pulmonar (TEP)',ref:'tev|1'},{id:'sincope',nm:'Síncope',ref:'sincope|0'}];
+const BANCA={'ENARE':{iamcsst:5,iamssst:5,angina_inst:4,fa:5,tv:4,bav:3,icfer:5,icfep:4,has:5,crise_has:4,eao:3,im:3,ei:3,tampo:3,choque_cardio:3,dac:4,ecg1:5,aorta:3,tep:4,sincope:3},'REVALIDA':{iamcsst:5,iamssst:4,angina_inst:4,fa:4,tv:3,bav:3,icfer:4,icfep:3,has:5,crise_has:4,eao:3,im:2,ei:3,tampo:2,choque_cardio:3,dac:3,ecg1:4,aorta:3,tep:4,sincope:3},'PSU-MG':{iamcsst:5,iamssst:4,angina_inst:3,fa:4,tv:3,bav:3,icfer:4,icfep:3,has:5,crise_has:4,eao:2,im:2,ei:3,tampo:2,choque_cardio:3,dac:3,ecg1:4,aorta:2,tep:3,sincope:2},'SES-RJ':{iamcsst:5,iamssst:4,angina_inst:3,fa:4,tv:4,bav:3,icfer:4,icfep:3,has:4,crise_has:5,eao:2,im:2,ei:2,tampo:3,choque_cardio:4,dac:3,ecg1:4,aorta:3,tep:4,sincope:2},'UFRJ':{iamcsst:5,iamssst:5,angina_inst:4,fa:4,tv:3,bav:3,icfer:5,icfep:4,has:4,crise_has:3,eao:3,im:3,ei:4,tampo:3,choque_cardio:3,dac:4,ecg1:5,aorta:3,tep:3,sincope:3},'UERJ':{iamcsst:5,iamssst:4,angina_inst:4,fa:4,tv:3,bav:3,icfer:4,icfep:3,has:5,crise_has:4,eao:3,im:3,ei:3,tampo:2,choque_cardio:3,dac:3,ecg1:4,aorta:3,tep:3,sincope:3}};
 let temaBanca='ENARE';
 function viewTemas(){
   const bancas=Object.keys(BANCA);
   return `<div class="view"><div class="page-title">${ICONS.trending}<h1>Temas mais cobrados</h1></div>
-    <p class="page-sub">Assuntos de Infectologia ranqueados por incidência em cada banca de referência. Toque em um tema para abrir o módulo. <span style="opacity:.7">(Estimativas didáticas baseadas no padrão histórico das bancas — confira sempre editais e provas recentes.)</span></p>
+    <p class="page-sub">Assuntos de Cardiologia ranqueados por incidência em cada banca de referência. Toque em um tema para abrir o módulo. <span style="opacity:.7">(Estimativas didáticas baseadas no padrão histórico das bancas — confira sempre editais e provas recentes.)</span></p>
     <div class="exam-tabs" id="examTabs">${bancas.map(b=>`<button class="exam-tab ${b===temaBanca?'on':''}" onclick="setBanca('${b}')">${b}</button>`).join('')}</div>
     <div id="heatWrap">${heatList(temaBanca)}</div>
     ${foot()}</div>`;
@@ -1115,427 +1087,6 @@ if(!document.getElementById('ac-style')){
 }
 
 /* ===================== CONTEÚDO: ANTIMICROBIANOS ===================== */
-C['bases|0'] = {
- name:'Antimicrobianos',
- intro:'Escolha, espectro e resistência — o maior bloco isolado de Infecto no ENARE. Base para todas as síndromes infecciosas.',
- /* -------- TEORIA (sub-abas) -------- */
- sub:[
-  ['entendendo','Entendendo do Zero',`
-   <div class="ac-h">O que é um antimicrobiano, em linguagem simples</div>
-   <p class="ac-p">Imagine que a bactéria é uma <b>casa viva</b>: tem parede (proteção externa), fábricas que montam suas proteínas (os ribossomos), um manual de instruções (o DNA) e uma cozinha que produz vitaminas (a via do folato). Um <b>antibiótico</b> é uma chave que estraga uma dessas partes específicas. Se ele derruba a parede ou para a fábrica, a bactéria morre ou para de se multiplicar — e o seu sistema imune limpa o resto.</p>
-   <p class="ac-p">O segredo de toda a Infectologia de prova é entender <b>qual parte cada classe ataca</b>. Quem sabe o alvo, deduz o espectro, os efeitos colaterais e a resistência.</p>
-   ${A.alvos}
-   <div class="ac-call"><b>Ideia central:</b> antibiótico bom é o que atinge a bactéria <b>certa</b> sem destruir o que é nosso. Por isso ele age em estruturas que a bactéria tem e nós não — como a parede de peptidoglicano e o ribossomo 70S (o nosso é 80S).</div>
-   <div class="ac-h" style="margin-top:18px">Três perguntas que organizam tudo</div>
-   <table class="ac-tbl">
-     <tr><th>Pergunta</th><th>Por que importa na prova</th></tr>
-     <tr><td>Qual o <b>alvo</b>?</td><td>Define o mecanismo e a classe (parede, ribossomo, DNA, folato).</td></tr>
-     <tr><td>Qual o <b>espectro</b>?</td><td>Cobre Gram+, Gram-, anaeróbio, atípico, Pseudomonas?</td></tr>
-     <tr><td>Como vem a <b>resistência</b>?</td><td>É o que mais cai: MRSA, ESBL, AmpC, KPC, NDM, VRE.</td></tr>
-   </table>
-   <div class="ac-tip"><b>Macete inicial:</b> "bactericida" mata a bactéria; "bacteriostático" só impede a multiplicação. Em paciente grave/imunossuprimido (meningite, endocardite, neutropênico) preferimos <b>bactericida</b>.</div>`],
-
-  ['principios','Princípios Gerais',`
-   <div class="ac-h">Bactericida × bacteriostático</div>
-   <p class="ac-p">Antes de decorar nomes, entenda a lógica: um antibiótico <b>bactericida</b> mata a bactéria diretamente; um <b>bacteriostático</b> apenas trava a multiplicação e deixa o sistema imune terminar o serviço. Por isso, quando a defesa do paciente está fraca ou o local é de difícil acesso para as células de defesa (sangue, valva cardíaca, líquor), preferimos uma droga que <b>mate sozinha</b>. Essa diferença explica muitas escolhas de prova.</p>
-   <p class="ac-p"><b>Bactericidas:</b> β-lactâmicos, glicopeptídeos (vancomicina), aminoglicosídeos, quinolonas, metronidazol, daptomicina. <b>Bacteriostáticos:</b> macrolídeos, tetraciclinas, clindamicina, linezolida, sulfametoxazol-trimetoprim (clássico, embora SMX-TMP seja bactericida em combinação). Em <b>meningite, endocardite e neutropenia febril</b> escolha bactericida.</p>
-   <div class="ac-h" style="margin-top:14px">PK/PD: como o antibiótico mata</div>
-   <p class="ac-p">Duas formas de matar. Nos <b>tempo-dependentes</b> o que importa é o <b>tempo acima da CIM</b> (concentração inibitória mínima): mantemos a droga "encostada" no alvo o máximo possível — daí dose fracionada e <b>infusão estendida</b>. Nos <b>concentração-dependentes</b> importa o <b>pico</b> (Cmáx/CIM ou AUC/CIM): dose alta de uma vez só.</p>
-   ${A.pkpd}
-   <table class="ac-tbl">
-     <tr><th>Padrão</th><th>Drogas</th><th>Estratégia de dose</th></tr>
-     <tr><td><b>Tempo-dependente</b> (T&gt;CIM)</td><td>β-lactâmicos, vancomicina (AUC/CIM)</td><td>fracionar; infusão estendida/contínua</td></tr>
-     <tr><td><b>Concentração-dependente</b></td><td>aminoglicosídeos, fluoroquinolonas, daptomicina</td><td>dose alta 1x/dia (pico alto)</td></tr>
-   </table>
-   <div class="ac-call"><b>Atualização (vancomicina):</b> o alvo hoje é <b>AUC/CIM 400–600</b>, e não mais o "vale 15–20". A monitorização por AUC reduz nefrotoxicidade mantendo eficácia.</div>
-   <div class="ac-h" style="margin-top:14px">Tempo-dependente vs efeito pós-antibiótico</div>
-   <p class="ac-p">Aminoglicosídeos têm <b>efeito pós-antibiótico</b> longo: continuam matando mesmo quando o nível cai. Por isso a dose única diária é eficaz e <b>menos tóxica</b> (rim e ouvido têm tempo de "limpar" a droga).</p>
-   <div class="ac-h" style="margin-top:14px">Sinergismo, antagonismo e combinações</div>
-   <p class="ac-p"><b>Sinergismo clássico:</b> β-lactâmico + aminoglicosídeo (endocardite enterocócica/estafilocócica); sulfa + trimetoprim (bloqueiam dois passos do folato). <b>Antagonismo:</b> juntar bactericida que precisa de bactéria em multiplicação (β-lactâmico) com bacteriostático que a "congela" pode reduzir efeito — clássico de prova.</p>
-   <div class="ac-h" style="margin-top:14px">Princípios de uso racional (stewardship)</div>
-   <div class="ac-pills">
-     <span class="ac-pill">Coletar culturas ANTES da 1ª dose</span>
-     <span class="ac-pill">Empírico amplo → descalonar pela cultura</span>
-     <span class="ac-pill">Menor tempo eficaz (cursos curtos)</span>
-     <span class="ac-pill">Fonte controlada (drenar abscesso, retirar cateter)</span>
-     <span class="ac-pill">Reavaliar em 48–72h</span>
-   </div>
-   <div class="ac-warn"><b>Erro de prova:</b> manter antibiótico de amplo espectro sem descalonar após a cultura, ou tratar <b>colonização</b> (ex.: urocultura positiva sem sintomas — bacteriúria assintomática não trata, salvo gestante e pré-procedimento urológico).</div>`],
-
-  ['beta','Betalactâmicos',`
-   <div class="ac-h">A maior família — todos têm o anel β-lactâmico</div>
-   <p class="ac-p">Para entender os β-lactâmicos, pense na parede bacteriana como um muro de tijolos. As enzimas <b>PBP</b> são os "pedreiros" que ligam os tijolos (peptidoglicano). O anel β-lactâmico encaixa nessas enzimas e as trava: sem pedreiro, o muro não se fecha e a bactéria estoura pela própria pressão interna. Por isso toda a família mata (bactericida) e depende do <b>tempo</b> de contato — quanto mais horas acima da concentração mínima, melhor o efeito.</p>
-   <p class="ac-p">Todos os β-lactâmicos agem na <b>parede</b>: ligam-se às PBP (proteínas ligadoras de penicilina) e impedem a montagem do peptidoglicano. São <b>bactericidas</b> e <b>tempo-dependentes</b>. A regra geral: conforme avançamos nas gerações, a cobertura migra de <b>Gram+ para Gram-</b>.</p>
-   ${A.betalactamicos}
-   <div class="ac-h" style="margin-top:14px">Penicilinas (resumo de prova)</div>
-   <table class="ac-tbl">
-     <tr><th>Grupo</th><th>Exemplos</th><th>Uso âncora</th></tr>
-     <tr><td>Naturais</td><td>Penicilina G/V, benzatina</td><td>Strepto, sífilis (penicilina benzatina), erisipela</td></tr>
-     <tr><td>Antiestafilo</td><td>Oxacilina, nafcilina</td><td><b>MSSA</b> (S. aureus sensível)</td></tr>
-     <tr><td>Aminopenicilinas</td><td>Amoxicilina, ampicilina</td><td>otite/sinusite, ITU, Listeria, enterococo</td></tr>
-     <tr><td>+ inibidor</td><td>Amox-clav, ampi-sulbactam</td><td>mordedura, sinusite, anaeróbios de boca</td></tr>
-     <tr><td>Antipseudomonas</td><td><b>Piperacilina-tazobactam</b></td><td>infecção grave/hospitalar, anaeróbios, Pseudomonas</td></tr>
-   </table>
-   <div class="ac-h" style="margin-top:14px">Cefalosporinas — saiba "subir as gerações"</div>
-   <table class="ac-tbl">
-     <tr><th>Geração</th><th>Droga-chave</th><th>Decore por isto</th></tr>
-     <tr><td>1ª</td><td>Cefazolina, cefalexina</td><td>Gram+ (pele, profilaxia cirúrgica)</td></tr>
-     <tr><td>2ª</td><td>Cefuroxima, cefoxitina</td><td>cefoxitina cobre anaeróbio (abdome)</td></tr>
-     <tr><td>3ª</td><td>Ceftriaxona; <b>Ceftazidima</b></td><td>ceftriaxona: meningite/pneumonia; ceftazidima: <b>Pseudomonas</b></td></tr>
-     <tr><td>4ª</td><td>Cefepime</td><td>amplo + <b>antipseudomonas</b> (neutropênico)</td></tr>
-     <tr><td>5ª</td><td>Ceftarolina</td><td>única que cobre <b>MRSA</b></td></tr>
-   </table>
-   <div class="ac-warn"><b>Pegadinhas:</b> ceftriaxona <b>não</b> cobre Pseudomonas (quem cobre é ceftazidima/cefepime). Nenhuma cefalosporina "clássica" cobre <b>enterococo</b> nem <b>Listeria</b> (use ampicilina). Cefalosporinas não cobrem MRSA — exceto a 5ª geração (ceftarolina).</div>
-   <div class="ac-h" style="margin-top:14px">Carbapenêmicos e monobactâmico</div>
-   <p class="ac-p"><b>Carbapenêmicos</b> (meropenem, imipenem, ertapenem) têm o <b>maior espectro</b> — Gram+, Gram-, anaeróbios. Reserve para infecção grave ou <b>ESBL</b>. <b>Ertapenem é a exceção</b>: não cobre Pseudomonas, Acinetobacter nem enterococo (mas é cômodo, 1x/dia). <b>Aztreonam</b> (monobactâmico) cobre só Gram- aeróbio e é a <b>opção segura na alergia grave a penicilina</b> (sem reação cruzada relevante, exceto com ceftazidima).</p>
-   <div class="ac-h" style="margin-top:14px">Inibidores de β-lactamase</div>
-   <p class="ac-p">Clássicos (clavulanato, sulbactam, tazobactam) "tampam" β-lactamases comuns. Os <b>novos</b> (ceftazidima-avibactam, meropenem-vaborbactam, imipenem-relebactam) resgatam atividade contra <b>KPC</b>. Importante: <b>avibactam não inibe metalo-β-lactamases (NDM)</b> — para NDM associa-se <b>aztreonam</b> (ceftazidima-avibactam + aztreonam) ou usa-se cefiderocol.</p>
-   <div class="ac-call"><b>Alergia à penicilina:</b> a reação cruzada com cefalosporinas modernas é &lt;1–2% (era superestimada). Em alergia não-grave pode-se usar cefalosporina; em anafilaxia, prefira aztreonam, quinolona ou outra classe.</div>`],
-
-  ['outras','Outras Classes',`
-   <div class="ac-h">Inibidores da síntese proteica (ribossomo)</div>
-   <p class="ac-p">Se os β-lactâmicos atacam o muro, este grupo ataca a <b>fábrica de proteínas</b> — o ribossomo. A bactéria tem ribossomo 70S (subunidades 30S e 50S), diferente do nosso (80S), e é essa diferença que permite atingir o micróbio poupando a célula humana. Decore pela subunidade (drogas de <b>30S</b> e de <b>50S</b>). A maioria é bacteriostática, com exceções importantes como os aminoglicosídeos.</p>
-   <table class="ac-tbl">
-     <tr><th>Classe</th><th>Alvo</th><th>Use para / lembre</th></tr>
-     <tr><td>Aminoglicosídeos (gentamicina, amicacina)</td><td>30S</td><td>Gram- + sinergismo; <b>nefro/ototóxico</b>; dose única diária</td></tr>
-     <tr><td>Tetraciclinas (doxiciclina)</td><td>30S</td><td>atípicas, riquétsia, leptospira, sífilis se alérgico; evitar gestante/criança</td></tr>
-     <tr><td>Macrolídeos (azitromicina)</td><td>50S</td><td>atípicas (PAC), coqueluche; <b>prolonga QT</b></td></tr>
-     <tr><td>Lincosamidas (clindamicina)</td><td>50S</td><td>anaeróbios acima do diafragma, IPPM, toxinas; risco <b>C. difficile</b></td></tr>
-     <tr><td>Oxazolidinonas (linezolida)</td><td>50S</td><td><b>MRSA/VRE</b>; preferida na pneumonia por MRSA; mielossupressão &gt;14d</td></tr>
-     <tr><td>Anfenicóis (cloranfenicol)</td><td>50S</td><td>uso restrito; aplasia medular</td></tr>
-   </table>
-   <div class="ac-h" style="margin-top:14px">Antibióticos de parede/membrana não-β-lactâmicos</div>
-   <table class="ac-tbl">
-     <tr><th>Droga</th><th>Espectro/uso</th><th>Cuidado</th></tr>
-     <tr><td><b>Vancomicina</b></td><td>Gram+ (MRSA, enterococo, C. difficile VO)</td><td>AUC/CIM 400–600; "red man" se rápida</td></tr>
-     <tr><td>Teicoplanina</td><td>alternativa à vanco</td><td>—</td></tr>
-     <tr><td><b>Daptomicina</b></td><td>Gram+ (MRSA, VRE), bacteremia/endocardite</td><td><b>inativada no pulmão</b> (não usar em pneumonia); CPK</td></tr>
-     <tr><td>Fosfomicina</td><td>cistite não complicada (dose única)</td><td>—</td></tr>
-     <tr><td>Nitrofurantoína</td><td>cistite; não em pielonefrite/ClCr baixo</td><td>—</td></tr>
-   </table>
-   <div class="ac-h" style="margin-top:14px">Ataque ao DNA e ao folato</div>
-   <table class="ac-tbl">
-     <tr><th>Classe</th><th>Use para / lembre</th></tr>
-     <tr><td>Fluoroquinolonas (cipro, levo, moxi)</td><td>cipro: Gram-/Pseudomonas; levo/moxi: "respiratórias" (pneumococo, atípicas). Avisos: tendinopatia, QT, aneurisma de aorta, disglicemia</td></tr>
-     <tr><td>Metronidazol</td><td>anaeróbios <b>abaixo do diafragma</b>, C. difficile, protozoários; efeito dissulfiram com álcool</td></tr>
-     <tr><td>Sulfametoxazol-trimetoprim</td><td>ITU, Pneumocystis, Nocardia, alguns MRSA comunitários; hipercalemia, rash</td></tr>
-     <tr><td>Rifampicina</td><td>TB, hanseníase, sinergia em prótese; <b>indutor potente do CYP</b> (interações), urina laranja</td></tr>
-   </table>
-   <div class="ac-tip"><b>Anaeróbios — regra do diafragma:</b> <b>acima</b> (boca/pulmão) → clindamicina; <b>abaixo</b> (abdome/pelve) → metronidazol. Pipe-tazo e carbapenêmicos cobrem ambos.</div>`],
-
-  ['espectro','Espectro de Ação',`
-   <div class="ac-h">O mapa que resolve a maioria das questões</div>
-   <p class="ac-p">"Espectro" é simplesmente <b>quais bactérias</b> a droga cobre. Em vez de decorar listas soltas, agrupe os micróbios por "famílias": Gram-positivos (mais ligados a pele/tecidos), Gram-negativos (urina/abdome), anaeróbios (abscessos e aspiração), atípicos (pneumonias arrastadas) e o temido <b>Pseudomonas</b> (ambiente hospitalar). Sabendo o provável culpado pelo foco, você escolhe a droga que o cobre — e evita usar espectro de menos ou de mais.</p>
-   <p class="ac-p">Antes de escolher, pergunte: o foco sugere <b>Gram+</b> (pele), <b>Gram-</b> (urina/abdome), <b>anaeróbio</b> (abscesso/aspiração), <b>atípico</b> (PAC arrastada) ou <b>Pseudomonas</b> (hospitalar, neutropênico, fibrose cística)?</p>
-   ${A.espectro}
-   <div class="ac-grid">
-     <div class="ac-box"><h5>Quem cobre Pseudomonas</h5><ul>
-       <li>Pipe-tazo</li><li>Ceftazidima, Cefepime</li><li>Carbapenêmicos (não ertapenem)</li><li>Cipro/levofloxacino</li><li>Amicacina, gentamicina</li><li>Aztreonam</li></ul></div>
-     <div class="ac-box"><h5>Quem cobre MRSA</h5><ul>
-       <li>Vancomicina</li><li>Linezolida (pneumonia)</li><li>Daptomicina (não pulmão)</li><li>Ceftarolina (5ª G)</li><li>SMX-TMP, clinda, doxi (comunitário)</li></ul></div>
-     <div class="ac-box"><h5>Quem cobre anaeróbios</h5><ul>
-       <li>Metronidazol (abaixo diafragma)</li><li>Clindamicina (acima)</li><li>Pipe-tazo, amox-clav, ampi-sulb</li><li>Carbapenêmicos</li><li>Cefoxitina, moxifloxacino</li></ul></div>
-     <div class="ac-box"><h5>Quem cobre atípicos</h5><ul>
-       <li>Macrolídeos (azitro)</li><li>Doxiciclina</li><li>Fluoroquinolona respiratória</li></ul><div class="ac-lbl" style="margin-top:6px">Mycoplasma, Chlamydia, Legionella</div></div>
-     <div class="ac-box"><h5>Quem cobre Enterococo</h5><ul>
-       <li>Ampicilina (1ª escolha)</li><li>Vancomicina</li><li>Linezolida/daptomicina (VRE)</li></ul><div class="ac-lbl" style="margin-top:6px">Cefalosporina NÃO cobre</div></div>
-     <div class="ac-box"><h5>Quem cobre Listeria</h5><ul>
-       <li>Ampicilina (+ genta)</li><li>SMX-TMP se alérgico</li></ul><div class="ac-lbl" style="margin-top:6px">Por isso ampi entra na meningite do idoso/imunossuprimido</div></div>
-   </div>
-   <div class="ac-warn"><b>Buracos clássicos:</b> cefalosporinas (exceto 5ª) não pegam enterococo, Listeria nem MRSA. Aminoglicosídeo isolado não trata Gram+ (precisa de sinergia). Daptomicina não trata pneumonia.</div>`],
-
-  ['resist','Resistência',`
-   <div class="ac-h">O tema que mais cresce nas provas</div>
-   <p class="ac-p">Resistência é a bactéria "se defendendo" do antibiótico. São quatro truques principais: produzir <b>enzimas</b> que destroem a droga (β-lactamases), <b>mudar a fechadura</b> onde a droga se encaixa (a PBP2a do MRSA), <b>bombear</b> a droga para fora (efluxo) e <b>fechar a porta</b> de entrada (perda de porinas). Reconhecer o mecanismo no enunciado já entrega o tratamento — por isso é o tópico que mais rende pontos.</p>
-   <p class="ac-p">Bactérias resistem por quatro estratégias: <b>enzimas que destroem</b> a droga (β-lactamases), <b>alterar o alvo</b> (PBP2a do MRSA), <b>bombear para fora</b> (efluxo) e <b>fechar a porta</b> (perda de porina). Saber o mecanismo aponta o tratamento.</p>
-   ${A.resistencia}
-   <table class="ac-tbl">
-     <tr><th>Resistência</th><th>Mecanismo</th><th>Tratar com</th></tr>
-     <tr><td><b>MRSA</b></td><td>mecA → PBP2a (β-lactâmico não liga)</td><td>vanco; <b>linezolida</b> se pneumonia; dapto (não pulmão); ceftarolina</td></tr>
-     <tr><td><b>ESBL</b></td><td>β-lactamase de espectro estendido (hidrolisa cefalosporina)</td><td><b>carbapenêmico</b> (grave); pip-tazo só em focos leves</td></tr>
-     <tr><td><b>AmpC</b></td><td>cefalosporinase indutível (Enterobacter, Serratia, Citrobacter)</td><td><b>cefepime</b> ou carbapenêmico (evite cefa 3ª G)</td></tr>
-     <tr><td><b>KPC</b></td><td>carbapenemase classe A</td><td><b>ceftazidima-avibactam</b> ou meropenem-vaborbactam</td></tr>
-     <tr><td><b>NDM/MBL</b></td><td>metalo-β-lactamase (não inibida por avibactam)</td><td>cefta-avibactam <b>+ aztreonam</b>, ou cefiderocol</td></tr>
-     <tr><td><b>VRE</b></td><td>vanA/vanB altera o alvo do peptidoglicano</td><td><b>linezolida</b> ou daptomicina</td></tr>
-   </table>
-   <div class="ac-call"><b>Brasil hoje:</b> a <b>KPC</b> é a carbapenemase mais prevalente, mas há ascensão de <b>NDM</b> (que muda a conduta, pois exige aztreonam). Vigilância (BR-GLASS/ANVISA) e <b>higiene das mãos</b> seguem como a principal medida de controle.</div>
-   <div class="ac-h" style="margin-top:14px">Mnemônico para AmpC (induz resistência "na hora")</div>
-   <div class="ac-pills">
-     <span class="ac-pill">"ESCaPM/SPACE": Serratia</span>
-     <span class="ac-pill">Pseudomonas/Providencia</span>
-     <span class="ac-pill">Acinetobacter</span>
-     <span class="ac-pill">Citrobacter</span>
-     <span class="ac-pill">Enterobacter</span>
-   </div>
-   <div class="ac-warn"><b>Erro grave:</b> tratar Enterobacter/Serratia (AmpC) com <b>ceftriaxona</b> — pode haver melhora inicial e depois falha por indução. Prefira cefepime ou carbapenêmico.</div>`],
-
-  ['escolha','Escolha Clínica',`
-   <div class="ac-h">Do diagnóstico à prescrição: o raciocínio</div>
-   <p class="ac-p">Escolher antibiótico não é "chutar o mais forte". O raciocínio é sempre o mesmo: identifique o <b>foco</b> (de onde vem a infecção), pense nos <b>germes mais prováveis</b> daquele foco, considere a <b>gravidade</b> e o <b>perfil do paciente</b> (alergia, rim, fígado, gestação, comunitário vs hospitalar) e só então prescreva o <b>empírico</b>. Em 48–72h, com a cultura, troque para o menor espectro que funcione (descalonamento).</p>
-   <p class="ac-p">Empírico inicial = <b>foco provável + gravidade + epidemiologia local + paciente</b> (alergia, função renal/hepática, gestação, comunitário vs hospitalar). Depois <b>descalone</b> pela cultura.</p>
-   <table class="ac-tbl">
-     <tr><th>Cenário</th><th>1ª linha empírica (comum em prova)</th></tr>
-     <tr><td>Cistite não complicada</td><td>nitrofurantoína, fosfomicina dose única ou SMX-TMP</td></tr>
-     <tr><td>Pielonefrite comunitária</td><td>ceftriaxona (internado) / ciprofloxacino (ambulatorial conforme resistência)</td></tr>
-     <tr><td>PAC ambulatorial</td><td>amoxicilina ± macrolídeo; ou macrolídeo/doxiciclina</td></tr>
-     <tr><td>PAC internado</td><td>β-lactâmico (ceftriaxona/ampi-sulb) + macrolídeo, ou quinolona respiratória</td></tr>
-     <tr><td>Meningite adulto</td><td>ceftriaxona + vancomicina (+ <b>ampicilina</b> se &gt;50a/imunossuprimido → Listeria)</td></tr>
-     <tr><td>Erisipela/celulite</td><td>penicilina/cefalexina; oxacilina se S. aureus; cobrir MRSA se fatores de risco</td></tr>
-     <tr><td>Abdome (peritonite secundária)</td><td>pip-tazo ou (cefalosporina + metronidazol)</td></tr>
-     <tr><td>Neutropenia febril</td><td><b>cefepime</b> ou pip-tazo (antipseudomonas); add vanco se cateter/instabilidade</td></tr>
-     <tr><td>Sepse hospitalar (foco indefinido)</td><td>antipseudomonas ± cobertura MRSA conforme local</td></tr>
-   </table>
-   <div class="ac-call"><b>Profilaxia cirúrgica:</b> <b>cefazolina</b> 30–60 min antes da incisão é o padrão. Não confundir tratamento com profilaxia.</div>
-   <div class="ac-tip"><b>Ajustes especiais:</b> gestante → β-lactâmicos são seguros; evitar quinolona, tetraciclina, SMX-TMP (1º e 3º trim.). Renal → ajustar aminoglicosídeo, vancomicina, β-lactâmicos. Hepatopata → cuidado com macrolídeo, metronidazol prolongado.</div>`]
- ],
-};
-
-Object.assign(C['bases|0'], {
- /* -------- ESCORES / CRITÉRIOS -------- */
- escores:`
-   <div class="ac-h">Classificação de Ambler das β-lactamases</div>
-   <table class="ac-tbl">
-     <tr><th>Classe</th><th>Tipo</th><th>Exemplos</th><th>Inibida por avibactam?</th></tr>
-     <tr><td>A</td><td>serina</td><td>ESBL, <b>KPC</b></td><td>Sim</td></tr>
-     <tr><td>B</td><td><b>metalo</b> (Zn)</td><td><b>NDM</b>, VIM, IMP</td><td>Não (usar +aztreonam/cefiderocol)</td></tr>
-     <tr><td>C</td><td>serina</td><td><b>AmpC</b></td><td>Sim</td></tr>
-     <tr><td>D</td><td>serina (oxacilinase)</td><td>OXA-48</td><td>Parcial</td></tr>
-   </table>
-   <div class="ac-h" style="margin-top:14px">Interpretação do antibiograma (CIM / breakpoint)</div>
-   <p class="ac-p">A <b>CIM</b> é a menor concentração que inibe a bactéria. Comparada ao <b>breakpoint</b> (BrCAST no Brasil / EUCAST / CLSI) classifica-se em <b>S</b> (sensível), <b>I</b> (sensível em exposição aumentada) e <b>R</b> (resistente). CIM menor não significa "mais potente" entre drogas diferentes — só vale dentro do par droga-bactéria.</p>
-   <table class="ac-tbl">
-     <tr><th>Resultado</th><th>Leitura prática</th></tr>
-     <tr><td><b>S</b></td><td>dose padrão deve funcionar no foco</td></tr>
-     <tr><td><b>I</b></td><td>funciona com dose/exposição aumentada (ex.: infusão estendida)</td></tr>
-     <tr><td><b>R</b></td><td>não usar</td></tr>
-   </table>
-   <div class="ac-h" style="margin-top:14px">Critérios de descalonamento (de-escalation)</div>
-   <div class="ac-pills">
-     <span class="ac-pill">Cultura + antibiograma disponíveis</span>
-     <span class="ac-pill">Melhora clínica em 48–72h</span>
-     <span class="ac-pill">Sem neutropenia grave</span>
-     <span class="ac-pill">Foco controlado</span>
-     <span class="ac-pill">→ trocar para espectro mais estreito</span>
-   </div>
-   <div class="ac-call"><b>Atualização IDSA 2024 (Gram-negativos resistentes):</b> ceftazidima-avibactam e meropenem-vaborbactam ficam <b>reservados</b> para organismos carbapenem-resistentes — não como 1ª linha de ESBL/AmpC, para preservar atividade.</div>`,
-
- /* -------- DIFERENCIAIS -------- */
- dif:`
-   <div class="ac-h">Quando escolher X e não Y</div>
-   <table class="ac-tbl">
-     <tr><th>Dúvida</th><th>Escolha</th><th>Porque</th></tr>
-     <tr><td>Vanco × Linezolida × Dapto (MRSA)</td><td><b>Linezolida</b> na pneumonia; <b>dapto</b> em bacteremia/endocardite; vanco "coringa"</td><td>dapto é inativada pelo surfactante (não no pulmão)</td></tr>
-     <tr><td>Ceftriaxona × Ceftazidima</td><td>Ceftriaxona p/ meningite/PAC; <b>ceftazidima</b> p/ Pseudomonas</td><td>ceftriaxona não cobre Pseudomonas</td></tr>
-     <tr><td>Pip-tazo × Carbapenêmico</td><td>Carbapenêmico se <b>ESBL</b> ou grave</td><td>pip-tazo falha em ESBL de foco profundo</td></tr>
-     <tr><td>Cefepime × Ceftriaxona (AmpC)</td><td><b>Cefepime</b></td><td>estável à AmpC; evita indução de resistência</td></tr>
-     <tr><td>Clindamicina × Metronidazol</td><td>Clinda <b>acima</b> do diafragma; metro <b>abaixo</b></td><td>cobertura anaeróbia por território</td></tr>
-     <tr><td>Cipro × Levo/Moxi</td><td>Cipro p/ Gram-/Pseudomonas; levo/moxi "respiratória"</td><td>moxi não atinge boa concentração urinária</td></tr>
-     <tr><td>Ampicilina × Cefalosporina (meningite idoso)</td><td>Add <b>ampicilina</b></td><td>cefalosporina não cobre Listeria</td></tr>
-   </table>`,
-
- /* -------- MAPA MENTAL (cards lado a lado, não radial) -------- */
- mapa:`
-   <div class="ac-h">Antimicrobianos por alvo (visão de mapa)</div>
-   <div class="mm">
-     <div class="mm-card"><h5>Parede celular</h5><ul>
-       <li>β-lactâmicos (penicilinas, cefalosporinas, carbapenêmicos, aztreonam)</li>
-       <li>Glicopeptídeos: vancomicina, teicoplanina</li>
-       <li>Fosfomicina</li>
-       <li><b>Todos bactericidas</b></li></ul></div>
-     <div class="mm-card"><h5>Membrana</h5><ul>
-       <li>Daptomicina (Gram+, não pulmão)</li>
-       <li>Polimixinas/colistina (Gram- MDR, nefrotóxica)</li></ul></div>
-     <div class="mm-card"><h5>Ribossomo 30S</h5><ul>
-       <li>Aminoglicosídeos (bactericida, sinergia)</li>
-       <li>Tetraciclinas (bacteriostático)</li></ul></div>
-     <div class="mm-card"><h5>Ribossomo 50S</h5><ul>
-       <li>Macrolídeos, clindamicina</li>
-       <li>Linezolida (MRSA/VRE), cloranfenicol</li></ul></div>
-     <div class="mm-card"><h5>DNA / RNA</h5><ul>
-       <li>Fluoroquinolonas (girase/topo IV)</li>
-       <li>Metronidazol (anaeróbio)</li>
-       <li>Rifampicina (RNA-polimerase)</li></ul></div>
-     <div class="mm-card"><h5>Via do folato</h5><ul>
-       <li>Sulfonamidas + trimetoprim</li>
-       <li>Sinergismo bactericida</li></ul></div>
-   </div>`,
-
- /* -------- FLUXOGRAMA DIAGNÓSTICO (como escolher) -------- */
- fluxo_dx:`
-   <div class="ac-h">Raciocínio para escolher o antibiótico</div>
-   <div class="fx">
-     <div class="fx-node start">Suspeita de infecção bacteriana</div>
-     <div class="fx-arrow"></div>
-     <div class="fx-node">Coletar culturas ANTES da 1ª dose (hemo, urina, foco)</div>
-     <div class="fx-arrow"></div>
-     <div class="fx-node">Definir foco provável + gravidade + epidemiologia</div>
-     <div class="fx-arrow"></div>
-     <div class="fx-lbl">Comunitário ou hospitalar / fatores de risco para MDR?</div>
-     <div class="fx-row">
-       <div class="fx-node">Comunitário → espectro dirigido (Gram+/Gram-/atípico)</div>
-       <div class="fx-node">Hospitalar/MDR → antipseudomonas ± anti-MRSA</div>
-     </div>
-     <div class="fx-arrow"></div>
-     <div class="fx-node">Iniciar empírico precoce (sepse: 1ª hora)</div>
-     <div class="fx-arrow"></div>
-     <div class="fx-node">Reavaliar em 48–72h com cultura</div>
-     <div class="fx-arrow"></div>
-     <div class="fx-node end">Descalonar para o menor espectro eficaz e definir duração</div>
-   </div>`,
-
- /* -------- FLUXOGRAMA DE CONDUTA (empírico por foco) -------- */
- fluxo_cond:`
-   <div class="ac-h">Conduta empírica por foco (mapa rápido)</div>
-   <div class="fx">
-     <div class="fx-node start">Identifique o foco</div>
-     <div class="fx-arrow"></div>
-     <div class="fx-row">
-       <div class="fx-node">Urinário<br><b>cistite:</b> nitro/fosfo · <b>pielo:</b> ceftriaxona</div>
-       <div class="fx-node">Respiratório<br><b>PAC:</b> β-lactâmico + macrolídeo</div>
-       <div class="fx-node">Pele<br>cefalexina/oxacilina; MRSA se risco</div>
-     </div>
-     <div class="fx-row">
-       <div class="fx-node">Abdome<br>pip-tazo OU cefa+metronidazol</div>
-       <div class="fx-node">SNC (meningite)<br>ceftriax+vanco (+ampi se &gt;50a)</div>
-       <div class="fx-node">Neutropenia febril<br>cefepime/pip-tazo (+vanco se cateter)</div>
-     </div>
-     <div class="fx-arrow"></div>
-     <div class="fx-node end">Controle de fonte + descalonar pela cultura</div>
-   </div>
-   <div class="ac-warn"><b>Sepse:</b> antibiótico de amplo espectro na <b>1ª hora</b>, após coletar hemoculturas — não atrase esperando exames.</div>`,
-
- /* -------- REVISÃO DE VÉSPERA -------- */
- vespera:`
-   <div class="ac-h">Revisão de véspera — 60 segundos por bloco</div>
-   <div class="ac-call">β-lactâmicos = parede, bactericidas, tempo-dependentes. Gerações de cefalosporina sobem de Gram+ → Gram-.</div>
-   <div class="ac-call"><b>Pseudomonas:</b> pip-tazo, ceftazidima, cefepime, carbapenêmico (não ertapenem), cipro/levo, amicacina, aztreonam.</div>
-   <div class="ac-call"><b>MRSA:</b> vanco (AUC/CIM 400–600); <b>linezolida</b> na pneumonia; dapto não no pulmão; ceftarolina cobre MRSA.</div>
-   <div class="ac-call"><b>Resistências:</b> ESBL → carbapenêmico; AmpC → cefepime; KPC → cefta-avibactam; <b>NDM → cefta-avi + aztreonam</b>; VRE → linezolida/dapto.</div>
-   <div class="ac-call"><b>Anaeróbio:</b> acima do diafragma clinda; abaixo metronidazol.</div>
-   <div class="ac-call"><b>Cefalosporina não cobre:</b> enterococo, Listeria, MRSA (exceto 5ª G).</div>
-   <div class="ac-call"><b>Profilaxia cirúrgica:</b> cefazolina 30–60 min antes.</div>
-   <div class="ac-call"><b>Gestante:</b> β-lactâmico ok; evitar quinolona, tetraciclina, SMX-TMP.</div>`,
-
- /* -------- DICAS E ERROS -------- */
- dicas:`
-   <div class="ac-h">Dicas de ouro</div>
-   <div class="ac-tip">Saiba o <b>alvo</b> → deduz espectro, toxicidade e resistência. É o atalho do tema.</div>
-   <div class="ac-tip">Sempre <b>cultura antes do antibiótico</b> e <b>descalonar</b> em 48–72h.</div>
-   <div class="ac-tip">"Respiratórias" = levo/moxifloxacino (cobrem pneumococo + atípicos).</div>
-   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
-   <div class="ac-warn">Tratar AmpC (Enterobacter/Serratia) com <b>ceftriaxona</b> → falha por indução. Use cefepime.</div>
-   <div class="ac-warn">Usar <b>daptomicina na pneumonia</b> → inativada pelo surfactante.</div>
-   <div class="ac-warn">Achar que <b>ceftriaxona cobre Pseudomonas</b> → não cobre (é ceftazidima/cefepime).</div>
-   <div class="ac-warn">Esquecer <b>ampicilina</b> (Listeria) na meningite do idoso/imunossuprimido.</div>
-   <div class="ac-warn">Tratar <b>bacteriúria assintomática</b> (exceto gestante / pré-procedimento urológico).</div>
-   <div class="ac-warn">Para <b>NDM</b>, prescrever só cefta-avibactam → precisa associar <b>aztreonam</b>.</div>`,
-
- /* -------- CHECKLIST DE DOMÍNIO -------- */
- checklist:[
-   'Sei o alvo de cada classe (parede, 30S, 50S, DNA, folato)',
-   'Diferencio bactericida × bacteriostático e quando exigir bactericida',
-   'Explico PK/PD: tempo × concentração-dependente e a meta AUC/CIM da vancomicina',
-   'Subo as gerações de cefalosporina e sei os "buracos" (enterococo, Listeria, MRSA)',
-   'Listo quem cobre Pseudomonas, MRSA, anaeróbios e atípicos',
-   'Conheço ESBL, AmpC, KPC, NDM e VRE — e o tratamento de cada',
-   'Sei a conduta empírica por foco (urinário, respiratório, abdome, SNC, neutropenia)',
-   'Aplico stewardship: cultura antes, descalonar, controle de fonte, duração',
-   'Ajusto para gestante, função renal/hepática e alergia a penicilina'
- ],
-});
-
-Object.assign(C['bases|0'], {
- /* -------- QUESTÕES {stem,opts,correct,expl} -------- */
- questoes:[
-  {stem:'Homem de 68 anos, internado, evolui com pneumonia. Cultura do aspirado traqueal revela S. aureus resistente à oxacilina (MRSA). Qual a melhor escolha terapêutica?',
-   opts:['Daptomicina','Linezolida','Ceftriaxona','Cefazolina'],correct:1,
-   expl:'<b>Linezolida</b> é preferida (ou alternativa à vancomicina) na pneumonia por MRSA, com boa penetração pulmonar. A <b>daptomicina é inativada pelo surfactante</b> e não deve ser usada em pneumonia. Cefazolina/ceftriaxona não cobrem MRSA.'},
-  {stem:'Paciente com infecção grave por Klebsiella produtora de ESBL. A conduta antimicrobiana de escolha é:',
-   opts:['Ceftriaxona em dose alta','Piperacilina-tazobactam','Meropenem','Cefepime'],correct:2,
-   expl:'Em infecção grave por <b>ESBL</b>, o tratamento de escolha é um <b>carbapenêmico</b> (meropenem). Cefalosporinas são hidrolisadas; pip-tazo pode falhar em focos profundos. Reserve novos β-lactâmicos para carbapenem-resistentes.'},
-  {stem:'Idoso de 74 anos com meningite bacteriana comunitária. Além de ceftriaxona e vancomicina, deve-se associar:',
-   opts:['Ampicilina','Metronidazol','Azitromicina','Gentamicina'],correct:0,
-   expl:'Acima de 50 anos (e imunossuprimidos) há risco de <b>Listeria monocytogenes</b>, não coberta por cefalosporinas. Acrescenta-se <b>ampicilina</b>. Vancomicina cobre pneumococo resistente.'},
-  {stem:'Sobre o tratamento de Enterobacter cloacae (produtor de AmpC indutível) em bacteremia, assinale a melhor opção:',
-   opts:['Ceftriaxona','Cefepime','Amoxicilina-clavulanato','Cefuroxima'],correct:1,
-   expl:'AmpC é uma cefalosporinase indutível (grupo ESCaPM/SPACE). Cefalosporinas de 3ª geração (ceftriaxona) podem selecionar resistência. <b>Cefepime</b> (4ª G, mais estável) ou carbapenêmico são preferidos.'},
-  {stem:'Qual antibiótico é a melhor opção em paciente com história de anafilaxia à penicilina que necessita cobertura para bacilo Gram-negativo aeróbio?',
-   opts:['Cefepime','Meropenem','Aztreonam','Ampicilina-sulbactam'],correct:2,
-   expl:'<b>Aztreonam</b> (monobactâmico) não tem reação cruzada relevante com penicilinas (exceto ceftazidima, por cadeia lateral) e cobre Gram- aeróbios, incluindo Pseudomonas. É a escolha na alergia grave.'},
-  {stem:'Em relação à vancomicina, segundo as diretrizes atuais, o parâmetro recomendado para monitorização é:',
-   opts:['Nível de vale 15–20 mg/L','AUC/CIM de 400–600','Pico sérico > 30 mg/L','Tempo acima da CIM > 40%'],correct:1,
-   expl:'A monitorização atual baseia-se em <b>AUC/CIM 400–600</b>, que mantém eficácia e <b>reduz a nefrotoxicidade</b> associada aos níveis de vale elevados do método antigo.'},
-  {stem:'Antibiótico de padrão CONCENTRAÇÃO-dependente, com efeito pós-antibiótico, cuja dose única diária reduz toxicidade:',
-   opts:['Piperacilina-tazobactam','Vancomicina','Amicacina','Meropenem'],correct:2,
-   expl:'<b>Aminoglicosídeos</b> (amicacina) são concentração-dependentes com efeito pós-antibiótico; a dose única diária otimiza o pico/CIM e diminui nefro e ototoxicidade. Os β-lactâmicos e a vanco são tempo-dependentes.'},
-  {stem:'Mulher com cistite não complicada, sem alergias. Qual opção de primeira linha?',
-   opts:['Ciprofloxacino 7 dias','Nitrofurantoína','Ceftriaxona IM','Amoxicilina'],correct:1,
-   expl:'Para <b>cistite não complicada</b>, opções de 1ª linha incluem <b>nitrofurantoína</b>, fosfomicina dose única ou SMX-TMP. Reserva-se quinolona por efeitos adversos e pressão de resistência.'},
-  {stem:'Isolado de Klebsiella pneumoniae carbapenem-resistente produtor de KPC. Tratamento de escolha:',
-   opts:['Colistina isolada','Ceftazidima-avibactam','Tigeciclina','Ertapenem'],correct:1,
-   expl:'<b>KPC</b> (carbapenemase classe A) é tratada com <b>ceftazidima-avibactam</b> (ou meropenem-vaborbactam). O avibactam inibe a KPC. Para metalo-β-lactamases (NDM), associa-se aztreonam.'},
-  {stem:'Paciente com infecção por Enterobacterales produtor de metalo-β-lactamase (NDM). A combinação adequada é:',
-   opts:['Ceftazidima-avibactam isolada','Meropenem-vaborbactam','Ceftazidima-avibactam + aztreonam','Piperacilina-tazobactam'],correct:2,
-   expl:'O <b>avibactam não inibe metalo-β-lactamases</b> (NDM). A estratégia é <b>ceftazidima-avibactam + aztreonam</b> (o aztreonam resiste à MBL e o avibactam protege o aztreonam de outras β-lactamases) — ou cefiderocol.'},
-  {stem:'Profilaxia antibiótica para cirurgia limpa (ex.: herniorrafia). Qual a droga e o momento corretos?',
-   opts:['Cefazolina 30–60 min antes da incisão','Ceftriaxona após a cirurgia','Vancomicina 4h antes','Metronidazol no pós-operatório'],correct:0,
-   expl:'O padrão de profilaxia cirúrgica é <b>cefazolina 30–60 minutos antes da incisão</b>, garantindo nível tecidual adequado no momento da contaminação. Profilaxia não é tratamento.'},
-  {stem:'Sobre cobertura de anaeróbios, assinale a associação CORRETA:',
-   opts:['Metronidazol cobre anaeróbios acima do diafragma','Clindamicina é preferida para anaeróbios abdominais','Metronidazol é a escolha para anaeróbios abaixo do diafragma','Ceftriaxona cobre anaeróbios da cavidade oral'],correct:2,
-   expl:'Regra do diafragma: <b>metronidazol</b> para anaeróbios <b>abaixo</b> (abdome/pelve) e <b>clindamicina acima</b> (boca/pulmão). Pip-tazo e carbapenêmicos cobrem ambos; ceftriaxona não cobre anaeróbios.'}
- ],
-
- /* -------- FLASHCARDS DO MÓDULO {front,back,type} -------- */
- flashcards:[
-  {front:'Qual o alvo dos β-lactâmicos?',back:'Parede celular — ligam-se às PBP e inibem a síntese do peptidoglicano. São bactericidas e tempo-dependentes.',type:'basic'},
-  {front:'MRSA: por que os β-lactâmicos falham?',back:'Gene mecA produz a PBP2a, que tem baixa afinidade pelos β-lactâmicos. Tratar com vancomicina, linezolida (pneumonia), daptomicina (não pulmão) ou ceftarolina.',type:'basic'},
-  {front:'ESBL grave trata-se com {{carbapenêmico}}.',back:'Carbapenêmico (ex.: meropenem). Pip-tazo pode falhar em focos profundos.',type:'cloze'},
-  {front:'AmpC indutível: tratar com {{cefepime}} (evitar cefalosporina de 3ª geração).',back:'Cefepime ou carbapenêmico. Germes ESCaPM/SPACE (Enterobacter, Serratia, Citrobacter...).',type:'cloze'},
-  {front:'KPC trata-se com qual β-lactâmico novo?',back:'Ceftazidima-avibactam (ou meropenem-vaborbactam). Para NDM, associar aztreonam.',type:'basic'},
-  {front:'Por que a daptomicina não trata pneumonia?',back:'É inativada pelo surfactante pulmonar.',type:'basic'},
-  {front:'Quem cobre Pseudomonas?',back:'Pip-tazo, ceftazidima, cefepime, carbapenêmico (não ertapenem), cipro/levofloxacino, amicacina/gentamicina, aztreonam.',type:'basic'},
-  {front:'Meta de monitorização da vancomicina hoje:',back:'AUC/CIM 400–600 (reduz nefrotoxicidade vs. vale 15–20 antigo).',type:'basic'},
-  {front:'Cefalosporinas (exceto 5ª G) NÃO cobrem: {{enterococo, Listeria e MRSA}}.',back:'Enterococo, Listeria e MRSA. Por isso ampicilina entra na meningite do idoso (Listeria).',type:'cloze'},
-  {front:'Anaeróbios: regra do diafragma.',back:'Acima → clindamicina; abaixo → metronidazol. Pip-tazo/carbapenêmico cobrem ambos.',type:'basic'},
-  {front:'Padrão tempo-dependente x concentração-dependente:',back:'Tempo (T>CIM): β-lactâmicos, vanco → fracionar/infusão estendida. Concentração (pico/CIM, AUC): aminoglicosídeos, quinolonas → dose alta 1x/dia.',type:'basic'},
-  {front:'Profilaxia cirúrgica padrão:',back:'Cefazolina 30–60 min antes da incisão.',type:'basic'},
-  {front:'Alergia grave (anafilaxia) à penicilina + necessidade de cobertura Gram-: usar {{aztreonam}}.',back:'Aztreonam (sem reação cruzada relevante, exceto ceftazidima).',type:'cloze'},
-  {front:'Sinergismo clássico em endocardite:',back:'β-lactâmico + aminoglicosídeo (e sulfa + trimetoprim na via do folato).',type:'basic'}
- ],
-
- /* -------- CASOS CLÍNICOS (raciocínio clínico) -------- */
- casos:[
-  {t:'Caso 1 — Sepse de foco urinário (histórico de ESBL)',
-   stem:'Mulher, 63 anos, diabética, com febre, calafrios, dor lombar e PA 84/52 mmHg. Lactato elevado. Já internou 2x por ITU por <b>E. coli ESBL</b>.',
-   passos:[
-     {h:'1. Reconhecer a gravidade',p:'Febre + hipotensão + lactato alto = <b>sepse/choque séptico</b>. O foco mais provável é urinário (dor lombar, ITU de repetição). O relógio começa a contar.'},
-     {h:'2. Coletar antes de tratar',p:'Hemoculturas (2 pares) e urocultura <b>antes</b> da 1ª dose — sem atrasar o antibiótico.'},
-     {h:'3. Escolher o empírico pela epidemiologia',p:'O histórico de <b>ESBL</b> muda tudo: cefalosporinas e pip-tazo (em foco grave/profundo) podem falhar. A escolha segura é um <b>carbapenêmico</b> (meropenem).'},
-     {h:'4. Pacote da 1ª hora',p:'Antibiótico de amplo espectro na <b>1ª hora</b>, ressuscitação volêmica e controle de fonte (afastar obstrução/abscesso).'},
-     {h:'5. Reavaliar e descalonar',p:'Com a cultura em 48–72h, estreitar o espectro. Nitrofurantoína estaria errada: não trata pielonefrite nem sepse.'},
-     {h:'Lição de prova',p:'Sepse + histórico de ESBL → <b>carbapenêmico na 1ª hora</b>, culturas antes, descalonar depois.'}
-   ]},
-  {t:'Caso 2 — Neutropenia febril',
-   stem:'Homem, 28 anos, em quimioterapia, <b>neutrófilos 200/mm³</b>, febre 38,8 °C, sem foco evidente, hemodinamicamente estável.',
-   passos:[
-     {h:'1. Definir o cenário',p:'Neutropenia (&lt;500) + febre = <b>emergência</b>. O risco principal é bacteriemia por Gram-negativos, incluindo <b>Pseudomonas</b>.'},
-     {h:'2. Cobrir Pseudomonas',p:'A base é um β-lactâmico <b>antipseudomonas</b>: <b>cefepime</b> ou piperacilina-tazobactam, após culturas e o quanto antes.'},
-     {h:'3. Quando associar anti-MRSA',p:'Acrescentar <b>vancomicina</b> se: instabilidade, mucosite grave, infecção de cateter, pele/partes moles ou colonização por MRSA. Não é rotina inicial.'},
-     {h:'4. Erros a evitar',p:'Ceftriaxona ou azitromicina não cobrem Pseudomonas; “apenas observar” é inaceitável na neutropenia febril.'},
-     {h:'Lição de prova',p:'Neutropenia febril → <b>monoterapia antipseudomonas</b> imediata; vanco só com indicação específica.'}
-   ]},
-  {t:'Caso 3 — Pneumonia comunitária internado',
-   stem:'Homem, 70 anos, tosse produtiva, febre e consolidação lobar; será internado em enfermaria. Sem fatores de risco para Pseudomonas/MRSA.',
-   passos:[
-     {h:'1. Classificar',p:'PAC com critério de internação — pensar em pneumococo e <b>atípicos</b> (Mycoplasma, Legionella).'},
-     {h:'2. Montar o esquema',p:'<b>β-lactâmico (ceftriaxona) + macrolídeo</b> (cobre o atípico) OU <b>quinolona respiratória</b> isolada (levo/moxifloxacino).'},
-     {h:'3. Por que não “tudo”',p:'Sem fatores de risco, não se cobre Pseudomonas (cefepime/pip-tazo) nem MRSA (vancomicina) — seria espectro excessivo.'},
-     {h:'4. Acompanhar',p:'Reavaliar em 48–72h, descalonar conforme cultura/antígenos e definir duração curta se boa evolução.'},
-     {h:'Lição de prova',p:'PAC internado padrão → <b>β-lactâmico + macrolídeo</b> ou quinolona respiratória.'}
-   ]}
- ],
-});
-
 /* ============================================================
    ENGINE DE RENDER (aditivo — sobrescreve em runtime)
    ============================================================ */
@@ -2496,6 +2047,251 @@ Object.assign(C['sca|2'], {
 });
 
 /* ---------- Gatilho de re-render ---------- */
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+
+</script>
+
+<!-- ===== MODULO IAMSSST (aditivo) ===== -->
+<script>Object.assign(window.ASVG=window.ASVG||{},{"iamssst_mecanismo": "<svg viewBox=\"0 0 680 330\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"330\" rx=\"16\" fill=\"#241a2e\"/><text x=\"340\" y=\"28\" fill=\"#f59f0a\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">O mecanismo do IAMSSST: obstrucao PARCIAL, nao total</text><rect x=\"24\" y=\"48\" width=\"200\" height=\"150\" rx=\"12\" fill=\"#33223f\" stroke=\"#f0a93f\"/><text x=\"124\" y=\"70\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\">1. Placa se rompe</text><circle cx=\"124\" cy=\"120\" r=\"38\" fill=\"none\" stroke=\"#8a8f9a\" stroke-width=\"6\"/><circle cx=\"124\" cy=\"120\" r=\"18\" fill=\"#8a8f9a\" fill-opacity=\"0.5\"/><path d=\"M104 100 L114 112 L100 118\" stroke=\"#f1e3e0\" stroke-width=\"2\" fill=\"none\"/><text x=\"124\" y=\"180\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Ruptura ou erosao</text><text x=\"124\" y=\"194\" fill=\"#cbb9ac\" font-size=\"9.2\" text-anchor=\"middle\">expoe material trombogenico</text><rect x=\"240\" y=\"48\" width=\"200\" height=\"150\" rx=\"12\" fill=\"#33223f\" stroke=\"#E53935\"/><text x=\"340\" y=\"70\" fill=\"#E53935\" font-weight=\"700\" text-anchor=\"middle\">2. Trombo SUB-oclusivo</text><circle cx=\"340\" cy=\"120\" r=\"38\" fill=\"#E53935\" fill-opacity=\"0.55\"/><circle cx=\"340\" cy=\"120\" r=\"14\" fill=\"#241a2e\"/><text x=\"340\" y=\"126\" fill=\"#f1e3e0\" font-size=\"9\" font-weight=\"700\" text-anchor=\"middle\">70-90%</text><text x=\"340\" y=\"180\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Fecha a maior parte do</text><text x=\"340\" y=\"194\" fill=\"#cbb9ac\" font-size=\"9.2\" text-anchor=\"middle\">vaso, mas ainda passa fluxo</text><rect x=\"456\" y=\"48\" width=\"200\" height=\"150\" rx=\"12\" fill=\"#33223f\" stroke=\"#ff6f61\"/><text x=\"556\" y=\"70\" fill=\"#ff6f61\" font-weight=\"700\" text-anchor=\"middle\">3. Oclusao intermitente</text><path d=\"M520 120 q 18 -26 36 0 q 18 26 36 0\" stroke=\"#ff6f61\" stroke-width=\"3\" fill=\"none\"/><text x=\"556\" y=\"150\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\">embolizacao distal</text><text x=\"556\" y=\"180\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Fragmentos de trombo</text><text x=\"556\" y=\"194\" fill=\"#cbb9ac\" font-size=\"9.2\" text-anchor=\"middle\">embolizam p/ microcirculacao</text><rect x=\"40\" y=\"214\" width=\"600\" height=\"46\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"234\" fill=\"#f1e3e0\" font-size=\"10.3\" text-anchor=\"middle\" font-weight=\"700\">A grande ideia: isquemia SUBENDOCARDICA (nao transmural) -&gt; sem supra de ST</text><text x=\"340\" y=\"250\" fill=\"#f1e3e0\" font-size=\"9.8\" text-anchor=\"middle\">Ha necrose (troponina sobe), mas o ECG nao mostra a \"assinatura\" de oclusao total.</text><rect x=\"40\" y=\"268\" width=\"600\" height=\"46\" rx=\"10\" fill=\"#33223f\" stroke=\"#6db3f2\"/><text x=\"340\" y=\"288\" fill=\"#cfe0e6\" font-size=\"9.6\" text-anchor=\"middle\">Isso explica o espectro: Angina Instavel (sem necrose) -&gt; IAMSSST (com necrose) -&gt; IAMCSST</text><text x=\"340\" y=\"303\" fill=\"#cfe0e6\" font-size=\"9.3\" text-anchor=\"middle\">O mesmo evento (ruptura de placa) pode terminar em qualquer ponto desse espectro.</text></svg>", "iamssst_ecg_trop": "<svg viewBox=\"0 0 680 360\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"360\" rx=\"16\" fill=\"#241a2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">ECG \"quieto\" nao afasta IAMSSST: a troponina e quem confirma</text><rect x=\"24\" y=\"42\" width=\"300\" height=\"150\" rx=\"12\" fill=\"#33223f\" stroke=\"#6db3f2\"/><text x=\"174\" y=\"62\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"11.5\">Possiveis achados de ECG</text><path d=\"M40 110 l20 0 l6 6 l8 -22 l8 30 l6 -14 l10 0 l14 8 l40 0\" stroke=\"#f1e3e0\" stroke-width=\"1.6\" fill=\"none\"/><text x=\"60\" y=\"140\" fill=\"#f1e3e0\" font-size=\"9.2\">Infradesnivelamento de ST</text><path d=\"M40 165 l20 0 l6 0 l10 0 l10 -10 l10 20 l10 0 l40 0\" stroke=\"#ff6f61\" stroke-width=\"1.6\" fill=\"none\"/><text x=\"60\" y=\"182\" fill=\"#f1e3e0\" font-size=\"9.2\">Inversao de onda T (simetrica)</text><text x=\"60\" y=\"205\" fill=\"#cbb9ac\" font-size=\"9\">Ou ECG completamente normal!</text><rect x=\"356\" y=\"42\" width=\"300\" height=\"150\" rx=\"12\" fill=\"#33223f\" stroke=\"#E53935\"/><text x=\"506\" y=\"62\" fill=\"#E53935\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"11.5\">Padrao de Wellens (alerta!)</text><path d=\"M380 90 l20 0 l6 0 l16 -4 l10 40 l16 4 l40 0\" stroke=\"#f59f0a\" stroke-width=\"1.8\" fill=\"none\"/><text x=\"420\" y=\"145\" fill=\"#f1e3e0\" font-size=\"9.2\" text-anchor=\"middle\">T bifasica ou profundamente</text><text x=\"420\" y=\"158\" fill=\"#f1e3e0\" font-size=\"9.2\" text-anchor=\"middle\">invertida em V2-V3</text><text x=\"420\" y=\"178\" fill=\"#f59f0a\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">Sugere lesao critica de DA proximal</text><g><rect x=\"40\" y=\"222\" width=\"120\" height=\"8\" rx=\"4\" fill=\"#8a8f9a\" fill-opacity=\"0.85\" transform=\"translate(0,92)\"/><text x=\"100\" y=\"336\" fill=\"#f1e3e0\" font-size=\"9.3\" text-anchor=\"middle\">Admissao (0h)</text></g><g><rect x=\"185\" y=\"222\" width=\"120\" height=\"55\" rx=\"4\" fill=\"#f0a93f\" fill-opacity=\"0.85\" transform=\"translate(0,45)\"/><text x=\"245\" y=\"336\" fill=\"#f1e3e0\" font-size=\"9.3\" text-anchor=\"middle\">1-3h (delta +)</text></g><g><rect x=\"330\" y=\"222\" width=\"120\" height=\"92\" rx=\"4\" fill=\"#E53935\" fill-opacity=\"0.85\" transform=\"translate(0,8)\"/><text x=\"390\" y=\"336\" fill=\"#f1e3e0\" font-size=\"9.3\" text-anchor=\"middle\">6h (pico)</text></g><g><rect x=\"475\" y=\"222\" width=\"120\" height=\"70\" rx=\"4\" fill=\"#ff6f61\" fill-opacity=\"0.85\" transform=\"translate(0,30)\"/><text x=\"535\" y=\"336\" fill=\"#f1e3e0\" font-size=\"9.3\" text-anchor=\"middle\">12-24h (declinio)</text></g><rect x=\"24\" y=\"204\" width=\"632\" height=\"24\" rx=\"8\" fill=\"none\"/><text x=\"340\" y=\"220\" fill=\"#cbb9ac\" font-size=\"9.6\" text-anchor=\"middle\">Curva de troponina de alta sensibilidade (protocolo 0h/1h ou 0h/2h)</text></svg>", "iamssst_risco": "<svg viewBox=\"0 0 680 380\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"380\" rx=\"16\" fill=\"#241a2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Tres escores, um objetivo: quem precisa de cateterismo mais rapido</text><rect x=\"20\" y=\"44\" width=\"200\" height=\"220\" rx=\"12\" fill=\"#33223f\" stroke=\"#6db3f2\"/><text x=\"120\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">TIMI (0-7)</text><text x=\"34\" y=\"86\" fill=\"#f1e3e0\" font-size=\"9.2\">7 variaveis, 1 ponto cada:</text><text x=\"34\" y=\"102\" fill=\"#cbb9ac\" font-size=\"8.8\">Idade &gt;=65</text><text x=\"34\" y=\"116\" fill=\"#cbb9ac\" font-size=\"8.8\">&gt;=3 fatores de risco p/ DAC</text><text x=\"34\" y=\"130\" fill=\"#cbb9ac\" font-size=\"8.8\">DAC conhecida (estenose &gt;=50%)</text><text x=\"34\" y=\"144\" fill=\"#cbb9ac\" font-size=\"8.8\">Uso de AAS nos ult. 7 dias</text><text x=\"34\" y=\"158\" fill=\"#cbb9ac\" font-size=\"8.8\">Angina grave (&gt;=2 ep/24h)</text><text x=\"34\" y=\"172\" fill=\"#cbb9ac\" font-size=\"8.8\">Desvio de ST &gt;=0,5mm</text><text x=\"34\" y=\"186\" fill=\"#cbb9ac\" font-size=\"8.8\">Marcador de necrose +</text><rect x=\"34\" y=\"200\" width=\"172\" height=\"50\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.15\" stroke=\"#f59f0a\"/><text x=\"120\" y=\"220\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">Alto risco: 5-7 pontos</text><text x=\"120\" y=\"236\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">Simples, a beira do leito</text><rect x=\"240\" y=\"44\" width=\"200\" height=\"220\" rx=\"12\" fill=\"#33223f\" stroke=\"#E53935\"/><text x=\"340\" y=\"66\" fill=\"#E53935\" font-weight=\"700\" text-anchor=\"middle\">GRACE 2.0</text><text x=\"254\" y=\"86\" fill=\"#f1e3e0\" font-size=\"9.2\">Variaveis hemodinamicas:</text><text x=\"254\" y=\"102\" fill=\"#cbb9ac\" font-size=\"8.8\">Idade, FC, PAS</text><text x=\"254\" y=\"116\" fill=\"#cbb9ac\" font-size=\"8.8\">Creatinina serica</text><text x=\"254\" y=\"130\" fill=\"#cbb9ac\" font-size=\"8.8\">Classe de Killip</text><text x=\"254\" y=\"144\" fill=\"#cbb9ac\" font-size=\"8.8\">PCR na admissao</text><text x=\"254\" y=\"158\" fill=\"#cbb9ac\" font-size=\"8.8\">Desvio de ST</text><text x=\"254\" y=\"172\" fill=\"#cbb9ac\" font-size=\"8.8\">Marcador de necrose +</text><text x=\"254\" y=\"188\" fill=\"#cbb9ac\" font-size=\"8.6\">-&gt; melhor discrimina mortalidade</text><rect x=\"254\" y=\"200\" width=\"172\" height=\"50\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.15\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"220\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">Alto risco: &gt;140 pontos</text><text x=\"340\" y=\"236\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">Guia o TEMPO da estrategia invasiva</text><rect x=\"460\" y=\"44\" width=\"200\" height=\"220\" rx=\"12\" fill=\"#33223f\" stroke=\"#3ddc84\"/><text x=\"560\" y=\"66\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">HEART (0-10)</text><text x=\"474\" y=\"86\" fill=\"#f1e3e0\" font-size=\"9.2\">5 dominios, 0-2 pts cada:</text><text x=\"474\" y=\"102\" fill=\"#cbb9ac\" font-size=\"8.8\">History (historia clinica)</text><text x=\"474\" y=\"116\" fill=\"#cbb9ac\" font-size=\"8.8\">ECG</text><text x=\"474\" y=\"130\" fill=\"#cbb9ac\" font-size=\"8.8\">Age (idade)</text><text x=\"474\" y=\"144\" fill=\"#cbb9ac\" font-size=\"8.8\">Risk factors (fatores de risco)</text><text x=\"474\" y=\"158\" fill=\"#cbb9ac\" font-size=\"8.8\">Troponina</text><text x=\"474\" y=\"176\" fill=\"#cbb9ac\" font-size=\"8.6\">-&gt; muito usado p/ decidir alta segura</text><text x=\"474\" y=\"190\" fill=\"#cbb9ac\" font-size=\"8.6\">de dor toracica na emergencia</text><rect x=\"474\" y=\"200\" width=\"172\" height=\"50\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.15\" stroke=\"#f59f0a\"/><text x=\"560\" y=\"220\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">Alto risco: 7-10 pontos</text><text x=\"560\" y=\"236\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">Melhor acuracia (c-estat. ~0,9)</text><rect x=\"20\" y=\"278\" width=\"640\" height=\"46\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"298\" fill=\"#f1e3e0\" font-size=\"10.3\" text-anchor=\"middle\" font-weight=\"700\">Na prova: GRACE define o TEMPO da cinecoronariografia; HEART/TIMI ajudam na decisao clinica geral</text><text x=\"340\" y=\"314\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Nenhum escore substitui achados de muito alto risco (instabilidade, dor refrataria, arritmia, EAP)</text><rect x=\"20\" y=\"332\" width=\"640\" height=\"34\" rx=\"10\" fill=\"#33223f\" stroke=\"#6db3f2\"/><text x=\"340\" y=\"354\" fill=\"#cfe0e6\" font-size=\"9.6\" text-anchor=\"middle\">Todos foram validados na era da troponina de alta sensibilidade, com boa performance preditiva</text></svg>", "iamssst_estrategia": "<svg viewBox=\"0 0 680 340\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"340\" rx=\"16\" fill=\"#241a2e\"/><text x=\"340\" y=\"28\" fill=\"#f59f0a\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Quando cateterizar? A estrategia invasiva por camadas de risco</text><rect x=\"24\" y=\"48\" width=\"200\" height=\"170\" rx=\"12\" fill=\"#33223f\" stroke=\"#ff6f61\"/><text x=\"124\" y=\"70\" fill=\"#ff6f61\" font-weight=\"700\" text-anchor=\"middle\">Muito alto risco</text><text x=\"124\" y=\"90\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">Imediata (&lt;2h)</text><text x=\"38\" y=\"112\" fill=\"#cbb9ac\" font-size=\"8.8\">Instabilidade hemodinamica</text><text x=\"38\" y=\"126\" fill=\"#cbb9ac\" font-size=\"8.8\">Choque cardiogenico</text><text x=\"38\" y=\"140\" fill=\"#cbb9ac\" font-size=\"8.8\">Dor refrataria ao tratamento</text><text x=\"38\" y=\"154\" fill=\"#cbb9ac\" font-size=\"8.8\">Arritmia ventricular grave</text><text x=\"38\" y=\"168\" fill=\"#cbb9ac\" font-size=\"8.8\">Complicacao mecanica (IM, CIV)</text><text x=\"38\" y=\"182\" fill=\"#cbb9ac\" font-size=\"8.8\">EAP refratario</text><text x=\"38\" y=\"196\" fill=\"#cbb9ac\" font-size=\"8.8\">Reinfarto / infra de ST &gt;=1mm</text><text x=\"38\" y=\"210\" fill=\"#cbb9ac\" font-size=\"8.8\">em &gt;=6 derivacoes</text><rect x=\"240\" y=\"48\" width=\"200\" height=\"170\" rx=\"12\" fill=\"#33223f\" stroke=\"#f0a93f\"/><text x=\"340\" y=\"70\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\">Alto risco</text><text x=\"340\" y=\"90\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">Precoce (&lt;24h)</text><text x=\"254\" y=\"112\" fill=\"#cbb9ac\" font-size=\"8.8\">GRACE &gt;140</text><text x=\"254\" y=\"126\" fill=\"#cbb9ac\" font-size=\"8.8\">Elevacao/queda confirmada</text><text x=\"254\" y=\"140\" fill=\"#cbb9ac\" font-size=\"8.8\">de troponina (dg. de IAM)</text><text x=\"254\" y=\"154\" fill=\"#cbb9ac\" font-size=\"8.8\">Alteracoes dinamicas de</text><text x=\"254\" y=\"168\" fill=\"#cbb9ac\" font-size=\"8.8\">ST/T novas</text><text x=\"254\" y=\"188\" fill=\"#cbb9ac\" font-size=\"8.6\">Compromisso funcional: cateterismo</text><text x=\"254\" y=\"200\" fill=\"#cbb9ac\" font-size=\"8.6\">dentro do 1o dia de internacao</text><rect x=\"456\" y=\"48\" width=\"200\" height=\"170\" rx=\"12\" fill=\"#33223f\" stroke=\"#3ddc84\"/><text x=\"556\" y=\"70\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Baixo risco</text><text x=\"556\" y=\"90\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">Seletiva</text><text x=\"470\" y=\"112\" fill=\"#cbb9ac\" font-size=\"8.8\">Sem nenhum criterio acima</text><text x=\"470\" y=\"126\" fill=\"#cbb9ac\" font-size=\"8.8\">Troponina normal seriada</text><text x=\"470\" y=\"140\" fill=\"#cbb9ac\" font-size=\"8.8\">ECG normal ou inalterado</text><text x=\"470\" y=\"160\" fill=\"#cbb9ac\" font-size=\"8.6\">Avaliar isquemia por teste</text><text x=\"470\" y=\"174\" fill=\"#cbb9ac\" font-size=\"8.6\">nao invasivo (ergometria,</text><text x=\"470\" y=\"188\" fill=\"#cbb9ac\" font-size=\"8.6\">cintilografia, AngioTC) antes</text><text x=\"470\" y=\"202\" fill=\"#cbb9ac\" font-size=\"8.6\">de indicar cateterismo</text><rect x=\"40\" y=\"234\" width=\"600\" height=\"46\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"254\" fill=\"#f1e3e0\" font-size=\"10.3\" text-anchor=\"middle\" font-weight=\"700\">Diferenca-chave para o IAMCSST: aqui quase NUNCA se usa trombolitico</text><text x=\"340\" y=\"270\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">O trombo e sub-oclusivo; a prioridade e antitrombotico potente + timing de cateterismo pelo risco.</text><rect x=\"40\" y=\"288\" width=\"600\" height=\"34\" rx=\"10\" fill=\"#33223f\" stroke=\"#6db3f2\"/><text x=\"340\" y=\"310\" fill=\"#cfe0e6\" font-size=\"9.6\" text-anchor=\"middle\">Ecocardiograma na admissao ajuda a avaliar funcao do VE e diferenciais (dissecao, TEP, pericardite)</text></svg>", "iamssst_tratamento": "<svg viewBox=\"0 0 680 350\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"350\" rx=\"16\" fill=\"#241a2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">O \"combo\" terapeutico inicial do IAMSSST</text><rect x=\"20\" y=\"42\" width=\"308\" height=\"130\" rx=\"12\" fill=\"#33223f\" stroke=\"#E53935\"/><text x=\"174\" y=\"62\" fill=\"#E53935\" font-weight=\"700\" text-anchor=\"middle\">Antiplaquetario duplo (DAPT)</text><text x=\"34\" y=\"84\" fill=\"#f1e3e0\" font-size=\"9.4\">AAS (dose de ataque + manutencao)</text><text x=\"34\" y=\"100\" fill=\"#f1e3e0\" font-size=\"9.4\">+ inibidor de P2Y12 potente</text><text x=\"34\" y=\"118\" fill=\"#cbb9ac\" font-size=\"8.8\">Ticagrelor ou prasugrel preferidos</text><text x=\"34\" y=\"132\" fill=\"#cbb9ac\" font-size=\"8.8\">Clopidogrel se contraindicacao/</text><text x=\"34\" y=\"146\" fill=\"#cbb9ac\" font-size=\"8.8\">alto risco hemorragico</text><text x=\"34\" y=\"162\" fill=\"#cbb9ac\" font-size=\"8.6\">Manter DAPT por ate 12 meses (regra geral)</text><rect x=\"352\" y=\"42\" width=\"308\" height=\"130\" rx=\"12\" fill=\"#33223f\" stroke=\"#6db3f2\"/><text x=\"506\" y=\"62\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Anticoagulacao parenteral</text><text x=\"366\" y=\"84\" fill=\"#f1e3e0\" font-size=\"9.4\">Fondaparinux OU HNF OU HBPM</text><text x=\"366\" y=\"100\" fill=\"#cbb9ac\" font-size=\"8.8\">Fondaparinux: melhor perfil de</text><text x=\"366\" y=\"114\" fill=\"#cbb9ac\" font-size=\"8.8\">seguranca (menos sangramento)</text><text x=\"366\" y=\"132\" fill=\"#cbb9ac\" font-size=\"8.8\">HNF preferida se for para</text><text x=\"366\" y=\"146\" fill=\"#cbb9ac\" font-size=\"8.8\">hemodinamica em seguida</text><text x=\"366\" y=\"162\" fill=\"#cbb9ac\" font-size=\"8.6\">Suspender apos ICP, salvo indicacao</text><rect x=\"20\" y=\"186\" width=\"308\" height=\"106\" rx=\"12\" fill=\"#33223f\" stroke=\"#f0a93f\"/><text x=\"174\" y=\"206\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\">Anti-isquemico</text><text x=\"34\" y=\"226\" fill=\"#f1e3e0\" font-size=\"9.2\">Betabloqueador (se sem contraindicacao)</text><text x=\"34\" y=\"242\" fill=\"#f1e3e0\" font-size=\"9.2\">Nitrato (alivio sintomatico)</text><text x=\"34\" y=\"258\" fill=\"#f1e3e0\" font-size=\"9.2\">O2 se SatO2 &lt;90%</text><text x=\"34\" y=\"276\" fill=\"#cbb9ac\" font-size=\"8.6\">Morfina: so em dor refrataria (associada</text><rect x=\"352\" y=\"186\" width=\"308\" height=\"106\" rx=\"12\" fill=\"#33223f\" stroke=\"#3ddc84\"/><text x=\"506\" y=\"206\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Terapia de longo prazo</text><text x=\"366\" y=\"226\" fill=\"#f1e3e0\" font-size=\"9.2\">Estatina de alta intensidade</text><text x=\"366\" y=\"242\" fill=\"#f1e3e0\" font-size=\"9.2\">IECA/BRA (sobretudo se FE reduzida)</text><text x=\"366\" y=\"258\" fill=\"#f1e3e0\" font-size=\"9.2\">Betabloqueador de manutencao</text><text x=\"366\" y=\"276\" fill=\"#cbb9ac\" font-size=\"8.6\">Controle de fatores de risco cardiovascular</text><rect x=\"20\" y=\"300\" width=\"640\" height=\"38\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"323\" fill=\"#f1e3e0\" font-size=\"9.8\" text-anchor=\"middle\" font-weight=\"700\">Pegadinha classica: morfina em excesso pode mascarar sintomas e atrasar reavaliacao -&gt; usar com criterio</text></svg>"});</script>
+<script>(function(){
+"use strict";
+var A = window.ASVG || {};
+var C = (window.CONTENT = window.CONTENT || {});
+
+C['sca|1'] = {
+ name: 'IAM sem Supradesnivelamento de ST (IAMSSST)',
+ intro: 'O grande desafio aqui nao e reconhecer um ECG obvio: e suspeitar mesmo quando o ECG "engana".',
+ sub: [
+  ['entendendo','Entendendo do Zero', `
+    <div class="ac-h">O que e, com calma</div>
+    <p class="ac-p">O IAMSSST (infarto agudo do miocardio sem supradesnivelamento do segmento ST) faz parte de um espectro chamado <b>Sindrome Coronariana Aguda sem supra de ST (SCASSST)</b>, que tambem inclui a Angina Instavel. Os dois quadros comecam do mesmo jeito: uma placa aterosclerotica se rompe ou erode e forma um trombo em cima dela. A diferenca entre eles e simples de enunciar e dificil de esquecer: na Angina Instavel o trombo reduz o fluxo o suficiente para causar dor, mas nao o suficiente para matar celulas -&gt; a troponina fica normal. No IAMSSST, o mesmo mecanismo avanca um pouco mais e ja existe necrose miocardica -&gt; a troponina sobe.</p>
+    <p class="ac-p">Isso importa na pratica porque muda a pergunta que voce faz na cabeceira do paciente. Nao e "o ECG tem supra?" (essa pergunta so separa o IAMCSST do resto). A pergunta certa e "esse paciente tem uma sindrome coronariana aguda, e se tiver, qual o risco dela nas proximas horas?". Quem responde isso e a combinacao de historia clinica + ECG seriado + troponina seriada + escores de risco.</p>
+    <p class="ac-p">Por que isso cai tanto em prova? Porque o IAMSSST e statisticamente mais comum que o IAMCSST, e porque o erro mais caro na emergencia e liberar um paciente com SCA achando que "o ECG estava normal, entao nao e nada".</p>
+    ${A.iamssst_mecanismo}
+    <div class="ac-call"><b>A grande ideia:</b> o mesmo evento (ruptura de placa) pode terminar em Angina Instavel, IAMSSST ou IAMCSST — o que muda e o grau de obstrucao e se ha ou nao necrose.</div>
+    <table class="ac-tbl"><tr><th>Eixo</th><th>O que dominar</th></tr>
+      <tr><td>Mecanismo</td><td>Trombo sub-oclusivo sobre placa rota/erodida</td></tr>
+      <tr><td>ECG</td><td>Sem supra persistente de ST (pode ter infra, T invertida, ou ser normal)</td></tr>
+      <tr><td>Confirmacao</td><td>Troponina de alta sensibilidade, com curva (delta) seriada</td></tr>
+      <tr><td>Conduta</td><td>Definida pelo RISCO (GRACE/TIMI/HEART), nao pela urgencia de reperfusao imediata</td></tr>
+    </table>`],
+  ['fisio','Fisiopatologia', `<div class="ac-h">Da placa instavel a isquemia subendocardica</div>
+    <p class="ac-p">A aterosclerose coronariana evolui por decadas de forma silenciosa. O problema agudo nao costuma vir da placa "grande e cronica" que ja causa angina estavel — vem de uma placa muitas vezes de tamanho medio, mas com capa fibrosa fina e nucleo lipidico grande e inflamado, ou seja, uma <b>placa vulneravel</b>. Quando essa capa se rompe (ou, num numero relevante de casos, quando ha apenas erosao endotelial sem ruptura franca — mais comum em mulheres jovens e tabagistas), o sangue entra em contato com colageno e fator tecidual, ativando a cascata de coagulacao e a agregacao plaquetaria.</p>
+    <p class="ac-p">No IAMSSST, o trombo formado costuma ser <b>sub-oclusivo</b> (fecha boa parte do lumen, mas nao 100%) ou pode ocluir de forma <b>intermitente</b>, com fragmentos se soltando e embolizando para a microcirculacao distal — isso explica por que alguns pacientes tem troponina elevada mesmo sem uma oclusao completa e fixa de uma epicardica.</p>
+    ${A.iamssst_mecanismo}
+    <p class="ac-p">O resultado eletrico dessa fisiopatologia e a isquemia predominantemente <b>subendocardica</b>: a camada mais interna do miocardio e a mais distante do suprimento sanguineo e a que sofre com pressao intramural mais alta, entao e a primeira a sofrer quando o fluxo cai — mas a necrose nao costuma atravessar toda a parede (nao e transmural). E por isso que o ECG classicamente mostra infradesnivelamento de ST (isquemia subendocardica) em vez do supra (isquemia transmural).</p>
+    <div class="ac-tip"><b>Macete:</b> supra = "corrente de lesao" atravessando a parede toda (transmural); infra = isquemia restrita ao subendocardio.</div>`],
+  ['clinica','Quadro Clinico', `<div class="ac-h">Como o paciente chega</div>
+    <p class="ac-p">A apresentacao classica e dor ou desconforto retroesternal em aperto/peso, que pode irradiar para membro superior esquerdo, mandibula ou epigastrio, com duracao tipicamente maior que 10-20 minutos, podendo vir acompanhada de sudorese, nausea, dispneia e sensacao de morte iminente. Mas atencao: no IAMSSST, comparado ao IAMCSST, e mais comum a dor ser mais prolongada, recorrente/intermitente, ou desencadeada por esforcos progressivamente menores (padrao de "angina em crescendo").</p>
+    <p class="ac-p">Existem tres formas classicas de apresentacao da SCASSST que voce precisa reconhecer de cor: (1) <b>angina de repouso</b>, geralmente prolongada (&gt;20 min); (2) <b>angina de inicio recente</b> (novo, ha menos de 2 meses), pelo menos classe funcional III da CCS (limita atividades minimas); (3) <b>angina em crescendo</b> — angina previamente estavel que passa a ser mais frequente, mais intensa, mais prolongada ou desencadeada por esforcos menores.</p>
+    <div class="ac-warn"><b>Apresentacoes atipicas:</b> idosos, mulheres, diabeticos e pacientes com doenca renal cronica podem ter apresentacoes atipicas — dispneia isolada, fadiga, sincope, dor epigastrica ou "mal-estar" sem dor toracica classica. Sempre ter alto indice de suspeicao nesses grupos.</div>
+    <table class="ac-tbl"><tr><th>Achado ao exame</th><th>O que sugere</th></tr>
+      <tr><td>B4 (galope atrial)</td><td>Comum, reflete disfuncao diastolica isquemica</td></tr>
+      <tr><td>Estertores pulmonares, B3</td><td>Disfuncao de VE / congestao — pior prognostico</td></tr>
+      <tr><td>Sopro sistolico novo</td><td>Pensar em insuficiencia mitral isquemica (disfuncao de musculo papilar)</td></tr>
+      <tr><td>Hipotensao, extremidades frias</td><td>Sinal de alarme — investigar choque cardiogenico</td></tr>
+    </table>`],
+  ['ecg_lab','ECG e Marcadores', `<div class="ac-h">O ECG que nao "grita" — e por isso que engana</div>
+    <p class="ac-p">O ECG no IAMSSST pode mostrar infradesnivelamento do segmento ST (o achado mais especifico), inversao simetrica de onda T, ou — e isso e crucial memorizar — <b>ser completamente normal</b>. Um ECG normal NAO afasta SCA e exige repeticao seriada (por exemplo em 15-30 minutos se a dor persistir, e novamente em algumas horas) associada a dosagem de troponina.</p>
+    ${A.iamssst_ecg_trop}
+    <p class="ac-p">Um padrao que merece destaque especial pela sua importancia prognostica e o <b>padrao de Wellens</b>: ondas T bifasicas ou profundamente invertidas em V2-V3 (podendo se estender a V1-V4), tipicamente encontradas quando o paciente ja esta assintomatico e com troponina discretamente alterada ou normal. Esse padrao sugere fortemente lesao critica proximal na arteria descendente anterior e indica necessidade de estratificacao invasiva precoce — apesar de nao haver supra de ST.</p>
+    <div class="ac-warn"><b>Pegadinha classica:</b> paciente com padrao de Wellens que fica assintomatico e "parece bem" — o risco de evoluir para IAM extenso anterior nos proximos dias e alto se nao for investigado. Nao dar alta!</div>
+    <div class="ac-h" style="margin-top:14px">Troponina de alta sensibilidade</div>
+    <p class="ac-p">A troponina cardiaca (I ou T) de alta sensibilidade e o biomarcador de escolha. O diagnostico de infarto exige um padrao de <b>ascensao e/ou queda</b> (delta) com pelo menos um valor acima do percentil 99 do limite superior de referencia — um unico valor isoladamente elevado pode representar lesao miocardica cronica (nao aguda) e nao fecha diagnostico de infarto sozinho. Os protocolos atuais (0h/1h ou 0h/2h) permitem descartar ou confirmar IAM de forma rapida e segura, reduzindo o tempo de permanencia na emergencia.</p>
+    <div class="ac-tip"><b>Diagnosticos diferenciais de troponina elevada sem SCA:</b> miocardite, embolia pulmonar, insuficiencia renal, sepse, taquiarritmias, insuficiencia cardiaca descompensada, AVC — sempre interpretar a troponina no contexto clinico.</div>`],
+  ['risco','Estratificacao de Risco', `<div class="ac-h">Por que estratificar risco muda a conduta</div>
+    <p class="ac-p">Diferente do IAMCSST (onde a conduta e sempre "reperfundir o mais rapido possivel"), no IAMSSST a decisao central e: <b>quando</b> levar esse paciente para a hemodinamica? A resposta depende do risco de eventos adversos, calculado por escores validados que voce precisa saber interpretar — nao decorar formula, mas entender o que cada um mede e para que serve.</p>
+    ${A.iamssst_risco}
+    <p class="ac-p">O <b>escore de GRACE (2.0)</b> e o mais recomendado pelas diretrizes para guiar o TEMPO da estrategia invasiva, pois e o que melhor discrimina mortalidade intra-hospitalar e em 6 meses. Ele usa variaveis hemodinamicas (idade, frequencia cardiaca, pressao arterial sistolica, classe de Killip, creatinina, parada cardiorrespiratoria na admissao, desvio de ST, marcador de necrose positivo). GRACE acima de 140 pontos define alto risco.</p>
+    <p class="ac-p">O <b>escore TIMI</b> e mais simples (7 variaveis dicotomicas, 1 ponto cada) e pode ser calculado rapidamente a beira do leito, mas discrimina pior que o GRACE. O <b>escore HEART</b> foi desenhado para a emergencia, com boa performance para identificar pacientes de baixo risco que podem ter alta segura com investigacao ambulatorial.</p>
+    <div class="ac-call"><b>Na pratica de prova:</b> memorize os "achados de muito alto risco" (instabilidade hemodinamica, choque, dor refrataria, arritmia ventricular grave, complicacao mecanica, edema agudo de pulmao refratario) — eles IGNORAM o escore e indicam cateterismo imediato por si so.</div>`],
+  ['estrategia','Estrategia Invasiva', `<div class="ac-h">Quando cateterizar: imediata, precoce ou seletiva</div>
+    <p class="ac-p">Uma vez estratificado o risco, a conduta se divide em tres estrategias de tempo para a cinecoronariografia:</p>
+    ${A.iamssst_estrategia}
+    <p class="ac-p">Pacientes de <b>muito alto risco</b> (instabilidade hemodinamica, choque cardiogenico, dor toracica refrataria ao tratamento clinico, arritmias ventriculares com risco de vida, complicacoes mecanicas do infarto, edema agudo de pulmao refratario, ou infradesnivelamento de ST &gt;=1mm em 6 ou mais derivacoes com supra em aVR) devem ir para <b>angiografia imediata (menos de 2 horas)</b>, de forma semelhante a um IAMCSST.</p>
+    <p class="ac-p">Pacientes de <b>alto risco</b> (GRACE &gt;140, elevacao ou queda confirmada de troponina compativel com infarto, alteracoes dinamicas novas de ST/T) devem ser levados a <b>angiografia precoce, dentro de 24 horas</b>.</p>
+    <p class="ac-p">Pacientes de <b>baixo risco</b>, sem nenhum criterio acima, sem recorrencia de sintomas, com troponina seriada normal e ECG estavel, podem seguir uma <b>estrategia seletiva</b>: investigacao de isquemia por metodo nao invasivo (teste ergometrico, cintilografia miocardica, ecoestresse ou angiotomografia de coronarias) antes de decidir pela cinecoronariografia.</p>
+    <div class="ac-warn"><b>Diferenca essencial para o IAMCSST:</b> no IAMSSST NAO se usa trombolitico como estrategia de rotina — o trombo e sub-oclusivo e a fibrinolise tem beneficio incerto e risco de sangramento que geralmente supera o beneficio nesse cenario.</div>`],
+  ['tratamento','Tratamento', `<div class="ac-h">O combo terapeutico inicial</div>
+    <p class="ac-p">O tratamento farmacologico do IAMSSST combina antiagregacao plaquetaria dupla, anticoagulacao parenteral, terapia anti-isquemica e, a partir da alta, terapia de prevencao secundaria de longo prazo.</p>
+    ${A.iamssst_tratamento}
+    <p class="ac-p">A <b>dupla antiagregacao plaquetaria (DAPT)</b> combina AAS (dose de ataque seguida de manutencao) com um inibidor de P2Y12 — ticagrelor ou prasugrel sao preferidos por serem mais potentes e terem inicio de acao mais rapido que o clopidogrel, que fica reservado para pacientes com alto risco hemorragico ou contraindicacao aos mais potentes. A DAPT costuma ser mantida por 12 meses apos o evento, podendo ser individualizada (encurtada ou prolongada) conforme o risco isquemico versus hemorragico do paciente.</p>
+    <p class="ac-p">A <b>anticoagulacao parenteral</b> (fondaparinux, heparina nao fracionada ou heparina de baixo peso molecular) e iniciada already na admissao. O fondaparinux tem o melhor perfil de seguranca (menos sangramento), mas se o paciente for direto para intervencao coronariana percutanea, a heparina nao fracionada costuma ser preferida por facilidade de manejo periprocedimento.</p>
+    <p class="ac-p">A terapia <b>anti-isquemica</b> inclui betabloqueador (na ausencia de contraindicacoes como choque, bradicardia ou broncoespasmo grave), nitratos para alivio sintomatico e oxigenio suplementar apenas se saturacao &lt;90%. A morfina deve ser reservada para dor refrataria ao tratamento, pois seu uso indiscriminado foi associado a pior absorcao de antiplaquetarios orais e a possivel mascaramento de sintomas.</p>
+    <p class="ac-p">Para a <b>prevencao secundaria</b>, todo paciente deve sair com estatina de alta intensidade (independente do LDL basal), IECA ou BRA (especialmente se fracao de ejecao reduzida, diabetes, hipertensao ou doenca renal cronica), betabloqueador de manutencao e controle rigoroso de fatores de risco cardiovascular (tabagismo, atividade fisica, dieta, controle glicemico).</p>
+    <table class="ac-tbl"><tr><th>Situacao</th><th>Conduta</th></tr>
+      <tr><td>DAPT + alto risco hemorragico</td><td>Considerar clopidogrel no lugar de ticagrelor/prasugrel</td></tr>
+      <tr><td>Cateterismo planejado em breve</td><td>Preferir HNF a fondaparinux (facilita manejo periprocedimento)</td></tr>
+      <tr><td>FE reduzida pos-IAM</td><td>IECA/BRA + betabloqueador + considerar antagonista mineralocorticoide</td></tr>
+    </table>`],
+  ['complicacoes','Complicacoes e Prognostico', `<div class="ac-h">O que pode dar errado</div>
+    <p class="ac-p">Embora o IAMSSST tenha mortalidade hospitalar geralmente menor que o IAMCSST, seu prognostico em medio/longo prazo pode ser igual ou ate pior, porque costuma acometer pacientes mais idosos, com mais comorbidades (diabetes, doenca renal cronica, doenca coronariana multiarterial previa) e porque a doenca aterosclerotica de base tende a ser mais extensa.</p>
+    <p class="ac-p">As complicacoes possiveis incluem: arritmias (fibrilacao atrial, taquicardia/fibrilacao ventricular, bloqueios atrioventriculares — menos frequentes que no IAMCSST, mas possiveis, sobretudo se houver embolizacao distal extensa), insuficiencia cardiaca por disfuncao isquemica do VE, insuficiencia mitral isquemica por disfuncao de musculo papilar, e reinfarto (recorrencia de eventos por instabilidade persistente da placa ou de outras placas).</p>
+    <div class="ac-tip"><b>Ponto de prova:</b> como a necrose costuma ser subendocardica e mais limitada, complicacoes mecanicas graves (ruptura de parede livre, CIV pos-infarto) sao mais raras que no IAMCSST — mas nao impossiveis, especialmente se houve embolizacao distal recorrente ou diagnostico tardio.</div>
+    <p class="ac-p">O seguimento ambulatorial deve incluir reavaliacao da funcao ventricular (ecocardiograma), otimizacao medicamentosa, reabilitacao cardiovascular e reforco continuo de mudanca de estilo de vida — a recorrencia de eventos e comum se os fatores de risco nao forem controlados.</p>`],
+ ],
+};
+
+Object.assign(C['sca|1'], {
+ escores: `<div class="ac-h">Escores de risco no IAMSSST</div>
+   <table class="ac-tbl"><tr><th>Escore</th><th>Variaveis</th><th>Ponto de corte alto risco</th><th>Uso principal</th></tr>
+     <tr><td>TIMI (0-7)</td><td>Idade&gt;=65, &gt;=3 fatores de risco p/ DAC, DAC conhecida, uso de AAS em 7 dias, angina grave recente, desvio de ST&gt;=0,5mm, marcador de necrose +</td><td>5-7 pontos</td><td>Rapido, a beira do leito</td></tr>
+     <tr><td>GRACE 2.0</td><td>Idade, FC, PAS, creatinina, Killip, PCR na admissao, desvio de ST, marcador de necrose +</td><td>&gt;140 pontos</td><td>Define o TEMPO da estrategia invasiva (preferido pelas diretrizes)</td></tr>
+     <tr><td>HEART (0-10)</td><td>History, ECG, Age, Risk factors, Troponina (0-2 cada)</td><td>7-10 pontos</td><td>Decisao de alta segura na emergencia; melhor c-estatistica</td></tr>
+   </table>
+   <div class="ac-tip"><b>Killip-Kimball (classe funcional pos-IAM):</b> I = sem sinais de IC; II = estertores/B3; III = edema agudo de pulmao; IV = choque cardiogenico. Quanto maior a classe, maior a mortalidade.</div>`,
+ dif: `<div class="ac-h">Diferenciais</div>
+   <table class="ac-tbl"><tr><th>Cenario</th><th>Diferenciar de</th><th>Chave</th></tr>
+     <tr><td>Dor toracica + troponina elevada</td><td>Miocardite</td><td>Contexto viral, sem obstrucao coronariana no cateterismo/AngioTC, RM cardiaca com padrao de realce nao isquemico</td></tr>
+     <tr><td>Dor toracica + troponina elevada</td><td>Embolia pulmonar</td><td>Dispneia subita, fatores de risco para TEV, D-dimero, angioTC de torax</td></tr>
+     <tr><td>Dor toracica + infra de ST</td><td>Dissecção de aorta</td><td>Dor "em rasgao" que irradia p/ dorso, assimetria de pulsos/PA, mediastino alargado</td></tr>
+     <tr><td>Dor toracica + T invertida</td><td>Pericardite aguda</td><td>Dor pleuritica que piora deitado e melhora ao sentar, atrito pericardico, supra difuso de ST (nao segmentar) na pericardite</td></tr>
+     <tr><td>Troponina elevada cronica</td><td>Lesao miocardica sem SCA (DRC, sepse, taquiarritmia)</td><td>Sem delta (ascensao/queda) e sem quadro clinico compativel com isquemia aguda</td></tr>
+     <tr><td>Padrao de Wellens</td><td>Isquemia subendocardica difusa</td><td>Wellens e localizado em V2-V3 e o paciente costuma estar assintomatico no momento do ECG</td></tr>
+   </table>`,
+ mapa: `<div class="ac-h">Mapa mental (cards)</div>
+   <div class="mm">
+     <div class="mm-card"><h5>Mecanismo</h5><ul><li>Placa rota/erodida</li><li>Trombo sub-oclusivo ou intermitente</li><li>Isquemia subendocardica</li></ul></div>
+     <div class="mm-card"><h5>ECG possivel</h5><ul><li>Infra de ST</li><li>T invertida (Wellens = alerta)</li><li>Pode ser normal!</li></ul></div>
+     <div class="mm-card"><h5>Confirmacao</h5><ul><li>Troponina de alta sensibilidade</li><li>Precisa de delta (ascensao/queda)</li><li>Protocolo 0h/1h ou 0h/2h</li></ul></div>
+     <div class="mm-card"><h5>Risco</h5><ul><li>GRACE define o tempo da CATE</li><li>TIMI: rapido, a beira do leito</li><li>HEART: decisao de alta segura</li></ul></div>
+     <div class="mm-card"><h5>Estrategia</h5><ul><li>Muito alto risco: &lt;2h</li><li>Alto risco: &lt;24h</li><li>Baixo risco: seletiva/nao invasiva</li></ul></div>
+     <div class="mm-card"><h5>Tratamento</h5><ul><li>DAPT (AAS + ticagrelor/prasugrel)</li><li>Anticoagulacao parenteral</li><li>Sem trombolitico de rotina</li></ul></div>
+   </div>`,
+ fluxo_dx: `<div class="ac-h">Fluxograma diagnostico</div>
+   <div class="fx">
+     <div class="fx-node start">Dor toracica sugestiva de SCA</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">ECG de 12 derivacoes em ate 10 min</div>
+     <div class="fx-row">
+       <div class="fx-node end">Supra de ST persistente -&gt; IAMCSST (reperfusao imediata)</div>
+       <div class="fx-node">Sem supra (infra, T invertida ou normal)</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Troponina de alta sensibilidade seriada (0h/1h ou 0h/2h)</div>
+     <div class="fx-row">
+       <div class="fx-node end">Delta positivo (ascensao/queda) -&gt; IAMSSST</div>
+       <div class="fx-node end">Sem delta, sem recorrencia, escore baixo -&gt; Angina Instavel/dor nao cardiaca</div>
+     </div>
+   </div>`,
+ fluxo_cond: `<div class="ac-h">Conduta por camada de risco</div>
+   <div class="fx">
+     <div class="fx-node start">IAMSSST confirmado</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Calcular GRACE / avaliar criterios de muito alto risco</div>
+     <div class="fx-row">
+       <div class="fx-node end">Muito alto risco -&gt; angiografia imediata (&lt;2h)</div>
+       <div class="fx-node">Alto risco (GRACE&gt;140) -&gt; angiografia precoce (&lt;24h)</div>
+       <div class="fx-node">Baixo risco -&gt; estrategia seletiva (teste nao invasivo)</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Em paralelo: DAPT + anticoagulacao + anti-isquemico + prevencao secundaria</div>
+   </div>`,
+ vespera: `<div class="ac-h">Revisao de vespera</div>
+   <div class="ac-call"><b>Ponto 1:</b> IAMSSST = SCA + troponina elevada com delta + SEM supra persistente de ST.</div>
+   <div class="ac-call"><b>Ponto 2:</b> ECG pode ser normal — isso NUNCA afasta SCA. Repita o ECG e a troponina.</div>
+   <div class="ac-call"><b>Ponto 3:</b> GRACE define o TEMPO da cinecoronariografia: muito alto risco &lt;2h, alto risco &lt;24h, baixo risco = seletiva.</div>
+   <div class="ac-call"><b>Ponto 4:</b> NAO se usa trombolitico de rotina no IAMSSST (trombo sub-oclusivo).</div>
+   <div class="ac-call"><b>Ponto 5:</b> DAPT (AAS + ticagrelor/prasugrel de preferencia) + anticoagulacao parenteral + anti-isquemico + estatina de alta intensidade.</div>
+   <div class="ac-call"><b>Ponto 6:</b> Padrao de Wellens (T bifasica/invertida em V2-V3) = lesao critica de DA proximal, mesmo sem dor no momento do ECG.</div>`,
+ dicas: `<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Sempre repita o ECG se a dor persistir ou mudar de caracteristica — o ECG e um "filme", nao uma "foto".</div>
+   <div class="ac-tip">Troponina isoladamente alta, sem delta e sem clinica compativel, sugere lesao miocardica cronica — nao e infarto agudo.</div>
+   <div class="ac-tip">Achados de muito alto risco (choque, instabilidade, arritmia grave, dor refrataria) mandam para a hemodinamica IMEDIATAMENTE, independente de qualquer escore.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Dar alta para paciente com ECG normal e dor toracica sem dosar troponina seriada.</div>
+   <div class="ac-warn">Trombolisar um IAMSSST — conduta de IAMCSST, nao se aplica aqui.</div>
+   <div class="ac-warn">Ignorar padrao de Wellens por o paciente "estar bem" no momento do exame.</div>
+   <div class="ac-warn">Usar morfina como primeira linha para dor, mascarando a evolucao clinica.</div>`,
+ checklist: [
+   'Sei diferenciar Angina Instavel de IAMSSST pelo criterio da troponina',
+   'Entendo por que o trombo sub-oclusivo gera isquemia subendocardica (sem supra)',
+   'Reconheco os achados de ECG possiveis, incluindo ECG normal e padrao de Wellens',
+   'Sei interpretar troponina de alta sensibilidade e o conceito de delta',
+   'Domino os tres escores de risco (TIMI, GRACE, HEART) e para que cada um serve',
+   'Sei definir a estrategia invasiva (imediata/precoce/seletiva) pelo risco',
+   'Conheco o esquema terapeutico (DAPT, anticoagulacao, anti-isquemico, prevencao secundaria)',
+   'Sei por que nao se usa trombolitico no IAMSSST'
+ ],
+});
+
+Object.assign(C['sca|1'], {
+ questoes: [
+  {stem:'Paciente de 62 anos chega com dor toracica em aperto ha 40 minutos, sudorese e nausea. ECG mostra infradesnivelamento de ST de 1,5mm em V4-V6. Qual a fisiopatologia mais provavel?',
+   opts:['Oclusao coronariana total subita com isquemia transmural','Trombo sub-oclusivo sobre placa rota, causando isquemia subendocardica','Vasoespasmo coronariano isolado sem aterosclerose de base','Dissecção espontanea de coronaria sem componente trombotico'], correct:1,
+   expl:'O infradesnivelamento de ST reflete isquemia <b>subendocardica</b>, tipica de obstrucao parcial (sub-oclusiva) do fluxo coronariano — mecanismo classico do IAMSSST.'},
+  {stem:'Qual achado laboratorial e obrigatorio para diferenciar IAMSSST de Angina Instavel?',
+   opts:['Elevacao de CK-MB isolada','Elevacao e/ou queda de troponina de alta sensibilidade (delta) com valor acima do percentil 99','PCR elevada','Leucocitose com desvio a esquerda'], correct:1,
+   expl:'A presenca de necrose miocardica, confirmada pelo delta de troponina, e o que separa o IAMSSST (ha necrose) da Angina Instavel (sem necrose).'},
+  {stem:'Um paciente apresenta ondas T bifasicas/profundamente invertidas em V2-V3, atualmente assintomatico, com troponina discretamente elevada. Qual a conduta mais adequada?',
+   opts:['Alta com anti-inflamatorio, pois o paciente esta assintomatico','Repetir ECG em 1 semana ambulatorialmente','Internar e investigar de forma precoce, pois sugere lesao critica de DA proximal (padrao de Wellens)','Solicitar apenas ecocardiograma transtoracico e liberar'], correct:2,
+   expl:'O padrao de Wellens indica lesao critica proximal na descendente anterior e exige estratificacao invasiva precoce, mesmo com o paciente estavel no momento.'},
+  {stem:'Segundo as diretrizes atuais, qual escore e o mais recomendado para definir o TEMPO da estrategia invasiva no IAMSSST?',
+   opts:['Escore de Wells','Escore GRACE','Escore CHA2DS2-VASc','Escore de Charlson'], correct:1,
+   expl:'O GRACE (2.0) e o escore com melhor discriminacao de mortalidade e e o preferido pelas diretrizes para guiar o tempo da cinecoronariografia.'},
+  {stem:'Paciente com IAMSSST evolui com hipotensao, extremidades frias e necessidade de drogas vasoativas. Qual a conduta quanto ao momento da cinecoronariografia?',
+   opts:['Estrategia seletiva, apos teste ergometrico','Angiografia precoce, em ate 24 horas','Angiografia imediata, em menos de 2 horas','Trombolise quimica imediata'], correct:2,
+   expl:'Instabilidade hemodinamica/choque cardiogenico e criterio de MUITO ALTO risco — indica angiografia imediata, independente do escore calculado.'},
+  {stem:'Qual das alternativas descreve corretamente a dupla antiagregacao plaquetaria (DAPT) preferencial no IAMSSST?',
+   opts:['AAS isolado por 12 meses','AAS + varfarina','AAS + inibidor de P2Y12 potente (ticagrelor ou prasugrel), exceto contraindicacao','Clopidogrel isolado, sem AAS'], correct:2,
+   expl:'A DAPT combina AAS com um inibidor de P2Y12 mais potente (ticagrelor/prasugrel) como primeira escolha, reservando clopidogrel para casos de contraindicacao ou alto risco hemorragico.'},
+  {stem:'Por que a fibrinolise (trombolitico) NAO e indicada de rotina no IAMSSST?',
+   opts:['Porque o custo e muito elevado','Porque o trombo costuma ser sub-oclusivo, e o beneficio da fibrinolise e incerto com risco de sangramento maior que o beneficio','Porque a troponina ja esta normalizada nesse momento','Porque so pode ser usada em pacientes jovens'], correct:1,
+   expl:'No IAMSSST o vaso nao esta totalmente ocluido; a fibrinolise nao tem o mesmo racional beneficio-risco que tem no IAMCSST (oclusao total).'},
+  {stem:'Um paciente de 70 anos, diabetico, chega com fadiga e dispneia progressiva ha 2 dias, sem dor toracica classica. Qual conduta e mais apropriada?',
+   opts:['Descartar SCA de imediato pela ausencia de dor toracica tipica','Manter alto indice de suspeicao para SCA, pois idosos e diabeticos frequentemente tem apresentacoes atipicas','Solicitar apenas radiografia de torax','Iniciar antibioticoterapia empirica sem investigacao cardiaca'], correct:1,
+   expl:'Idosos, diabeticos e mulheres frequentemente apresentam SCA de forma atipica (dispneia, fadiga, mal-estar) — a ausencia de dor toracica classica nao afasta o diagnostico.'},
+  {stem:'Qual e a classificacao de Killip-Kimball associada a maior mortalidade pos-infarto?',
+   opts:['Killip I','Killip II','Killip III','Killip IV (choque cardiogenico)'], correct:3,
+   expl:'A classificacao de Killip vai de I (sem sinais de IC) a IV (choque cardiogenico), com mortalidade crescente a cada classe.'},
+  {stem:'Em relacao a anticoagulacao parenteral no IAMSSST, qual afirmativa esta correta?',
+   opts:['Fondaparinux tem o melhor perfil de seguranca hemorragica entre as opcoes disponiveis','Heparina nao fracionada e sempre contraindicada','Anticoagulacao parenteral nunca deve ser usada no IAMSSST','Varfarina e a primeira escolha na fase aguda'], correct:0,
+   expl:'O fondaparinux apresenta o melhor perfil de seguranca (menor risco de sangramento) entre as opcoes de anticoagulacao parenteral no IAMSSST.'},
+  {stem:'Sobre a terapia de prevencao secundaria apos IAMSSST, qual conduta esta INCORRETA?',
+   opts:['Iniciar estatina de alta intensidade independente do LDL basal','Suspender betabloqueador de manutencao apos alta hospitalar, se o paciente estiver assintomatico','Considerar IECA/BRA especialmente se fracao de ejecao reduzida','Reforcar controle de fatores de risco cardiovascular (tabagismo, dieta, atividade fisica)'], correct:1,
+   expl:'O betabloqueador de manutencao deve ser continuado apos a alta como parte da prevencao secundaria, nao suspenso apenas por ausencia de sintomas.'},
+  {stem:'Qual dos achados abaixo, isoladamente, NAO e suficiente para diagnosticar infarto agudo do miocardio?',
+   opts:['Troponina elevada uma unica vez, sem clinica compativel e sem delta','Troponina com delta positivo e clinica compativel com isquemia','Alteracoes dinamicas novas de ST associadas a delta de troponina','Sintomas isquemicos associados a novo delta de troponina significativo'], correct:0,
+   expl:'Um unico valor de troponina elevado, sem padrao de ascensao/queda e sem contexto clinico compativel, pode refletir lesao miocardica cronica e nao fecha diagnostico de infarto agudo isoladamente.'},
+ ],
+ flashcards: [
+  {front:'O que diferencia Angina Instavel de IAMSSST?', back:'A presenca de necrose miocardica confirmada por delta de troponina — presente no IAMSSST, ausente na Angina Instavel.', type:'basic'},
+  {front:'No IAMSSST, o trombo formado sobre a placa rota costuma ser {{sub-oclusivo ou de oclusao intermitente}}, nao totalmente oclusivo.', back:'sub-oclusivo ou de oclusao intermitente', type:'cloze'},
+  {front:'Por que o IAMSSST tipicamente NAO causa supra de ST?', back:'Porque a isquemia e predominantemente subendocardica (nao transmural), gerando infradesnivelamento de ST em vez de supra.', type:'basic'},
+  {front:'Um ECG normal em paciente com dor toracica {{afasta ou nao afasta}} sindrome coronariana aguda?', back:'nao afasta', type:'cloze'},
+  {front:'O que e o padrao de Wellens e o que ele sugere?', back:'Ondas T bifasicas ou profundamente invertidas em V2-V3; sugere lesao critica proximal na arteria descendente anterior.', type:'basic'},
+  {front:'Qual escore e o mais recomendado para definir o TEMPO da estrategia invasiva no IAMSSST?', back:'Escore de GRACE (2.0) — GRACE >140 indica alto risco.', type:'basic'},
+  {front:'Cite as 3 categorias de estrategia invasiva por tempo no IAMSSST.', back:'Imediata (<2h, muito alto risco), precoce (<24h, alto risco), seletiva (baixo risco, apos teste nao invasivo).', type:'basic'},
+  {front:'Cite 3 achados de "muito alto risco" que indicam angiografia imediata.', back:'Instabilidade hemodinamica/choque, dor refrataria ao tratamento, arritmia ventricular grave (outros: complicacao mecanica, EAP refratario, infra de ST difuso com supra em aVR).', type:'basic'},
+  {front:'No IAMSSST, a fibrinolise (trombolitico) e uma conduta de {{rotina ou excecao}}?', back:'excecao (nao e usada de rotina, ao contrario do IAMCSST)', type:'cloze'},
+  {front:'Qual a dupla antiagregacao plaquetaria preferencial no IAMSSST?', back:'AAS + inibidor de P2Y12 potente (ticagrelor ou prasugrel), reservando clopidogrel para alto risco hemorragico/contraindicacao.', type:'basic'},
+  {front:'Por quanto tempo geralmente se mantem a DAPT apos um IAMSSST?', back:'Cerca de 12 meses, podendo ser individualizada conforme risco isquemico versus hemorragico.', type:'basic'},
+  {front:'Qual anticoagulante parenteral tem o melhor perfil de seguranca (menos sangramento) no IAMSSST?', back:'Fondaparinux.', type:'basic'},
+  {front:'Cite as 5 variaveis do escore HEART.', back:'History (historia), ECG, Age (idade), Risk factors (fatores de risco), Troponina.', type:'basic'},
+  {front:'Por que a morfina deve ser usada com criterio no IAMSSST?', back:'Seu uso excessivo pode mascarar sintomas, atrasar reavaliacao clinica e prejudicar a absorcao de antiplaquetarios orais.', type:'basic'},
+ ],
+ casos: [
+  {t:'Caso 1 — A dor que nao para', stem:'Homem, 58 anos, hipertenso e tabagista, chega com dor retroesternal em aperto ha 45 minutos, associada a sudorese fria. ECG mostra infradesnivelamento de ST de 2mm em V4-V6, DI e aVL. Troponina inicial discretamente elevada.', passos:[
+    {h:'1. Reconhecer', p:'Quadro classico de SCA com ECG sugestivo de isquemia subendocardica (infra de ST) — sem supra, portanto sem indicacao de reperfusao imediata tipo IAMCSST.'},
+    {h:'2. Conduzir', p:'Repetir troponina seriada para confirmar delta, calcular GRACE, iniciar DAPT (AAS + ticagrelor) e anticoagulacao parenteral, anti-isquemico (betabloqueador se sem contraindicacao) e definir tempo da angiografia pelo risco calculado.'},
+    {h:'Licao de prova', p:'Infra de ST + delta de troponina confirma IAMSSST; a conduta e guiada pelo risco (GRACE), nao pela urgencia de reperfusao mecanica/quimica imediata como no IAMCSST.'}
+  ]},
+  {t:'Caso 2 — O ECG "normal" que engana', stem:'Mulher, 74 anos, diabetica, chega com fadiga e dispneia leve ha 2 dias, sem dor toracica classica. ECG na admissao e normal. Ela refere episodio de dor epigastrica ha 2 dias que melhorou espontaneamente.', passos:[
+    {h:'1. Reconhecer', p:'Apresentacao atipica (comum em idosos e diabeticos) — a ausencia de dor toracica classica e de alteracoes de ECG NAO afasta SCA.'},
+    {h:'2. Conduzir', p:'Manter alto indice de suspeicao, solicitar troponina de alta sensibilidade seriada (protocolo 0h/1h ou 0h/2h) e repetir ECG. Se houver delta positivo, tratar como IAMSSST mesmo com ECG normal.'},
+    {h:'Licao de prova', p:'ECG normal nunca fecha o caso sozinho em paciente com quadro sugestivo, especialmente em populacoes de apresentacao atipica (idosos, diabeticos, mulheres).'}
+  ]},
+  {t:'Caso 3 — Estavel na sala, critico na coronaria', stem:'Homem, 50 anos, deu entrada ha 6 horas com dor toracica que ja cessou espontaneamente. No momento, assintomatico. ECG mostra ondas T profundamente invertidas em V2 e V3. Troponina discretamente elevada, com delta positivo na segunda coleta.', passos:[
+    {h:'1. Reconhecer', p:'Padrao eletrocardiografico de Wellens — mesmo com o paciente assintomatico, isso sugere fortemente lesao critica proximal na arteria descendente anterior.'},
+    {h:'2. Conduzir', p:'Internar, manter monitorizacao continua, iniciar DAPT e anticoagulacao, e indicar angiografia precoce (nao aguardar reaparecimento de sintomas nem realizar teste de esforco, que e contraindicado nesse padrao).'},
+    {h:'Licao de prova', p:'O padrao de Wellens e uma das poucas situacoes em que o ECG por si so — mesmo sem sintomas ativos — direciona para investigacao invasiva precoce por alto risco de IAM extenso iminente.'}
+  ]},
+ ],
+});
+
 try{ if(typeof route!=='undefined' && route &&
    (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
    renderRoute(); }catch(e){}
