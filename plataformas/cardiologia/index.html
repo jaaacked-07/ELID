@@ -1576,6 +1576,8 @@ if(!document.getElementById('heart-style')){
     border-radius:20px;font-size:.76rem;cursor:pointer;transition:.2s;white-space:nowrap}
   .heart-btn:hover{border-color:var(--accent);color:var(--accent)}
   .heart-btn.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+  .heart-btn-struct{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;font-weight:600}
+  .heart-btn-struct.on{background:var(--accent);color:#fff}
   .heart-layout{display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap}
   .heart-stagewrap{flex:1 1 420px;min-width:300px;height:560px;position:relative;border-radius:22px;
     border:1px solid var(--line);overflow:hidden;cursor:grab;
@@ -1635,12 +1637,14 @@ if(!document.getElementById('heart-style')){
   .unlock-card .btn-primary,.unlock-card .caso-btn{margin-top:4px}
   .heart-struct.selected{filter:drop-shadow(0 0 12px var(--accent)) drop-shadow(0 0 4px #fff);}
   .heart-struct.selected .hf{stroke-width:3.4;}
-  .heart-struct-list{margin-top:22px}
-  .hsl-cat{color:var(--accent);font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-    border-bottom:1px solid var(--line);padding-bottom:4px;margin:16px 0 6px}
+  .heart-struct-list{margin-top:22px;max-height:360px;overflow-y:auto;display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px 14px;align-content:start;
+    border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+  .hsl-cat{grid-column:1/-1;color:var(--accent);font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    border-bottom:1px solid var(--line);padding-bottom:4px;margin:14px 0 4px;position:sticky;top:-12px;background:var(--bg);z-index:1}
   .hsl-cat:first-child{margin-top:0}
-  .hsl-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:9px;
-    font-size:.82rem;cursor:pointer;color:var(--ink);transition:.15s}
+  .hsl-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 10px;border-radius:9px;
+    font-size:.8rem;cursor:pointer;color:var(--ink);transition:.15s}
   .hsl-item:hover{background:var(--accent-soft)}
   .hsl-item.locked{cursor:default;opacity:.5;color:var(--muted)}
   .hsl-item.locked:hover{background:transparent}
@@ -1754,6 +1758,7 @@ function renderHeartStructList(){
 window.renderHeartStructList=renderHeartStructList;
 
 var HV={rx:0, ry:0, scale:1, px:0, py:0, mode:'rotate', view:'Anterior'};
+var STRUCT_MODE=false;
 var VIEWS=[
   ['Anterior',0,0],['Posterior',0,180],['Lateral D',0,-90],['Lateral E',0,90],
   ['Superior',65,0],['Inferior',-65,0]
@@ -1761,6 +1766,7 @@ var VIEWS=[
 function toolbarHTML(){
   var btns=VIEWS.map(function(v){return '<button class="heart-btn view-btn" data-v="'+v[0]+'">'+v[0]+'</button>';}).join('');
   return btns+
+    '<button class="heart-btn heart-btn-struct" id="hStructMode" title="Ative para tocar nas estruturas do coração e revelar/ocultar">Estruturas Cardíacas</button>'+
     '<button class="heart-btn view-btn" data-cut="long">Corte longitudinal</button>'+
     '<button class="heart-btn view-btn" data-cut="trans">Corte transversal</button>'+
     '<button class="heart-btn" id="hMove">Mover</button>'+
@@ -1825,7 +1831,7 @@ window.bindBook=function(){
   });
   stage.addEventListener('pointerup',function(e){
     dragging=false; stage.classList.remove('grabbing');
-    if(moved<6){
+    if(moved<6 && STRUCT_MODE){
       var g=e.target.closest && e.target.closest('.heart-struct');
       if(g){
         if(g.classList.contains('unlocked')) toggleHeartSelect(g.getAttribute('data-cap'), +g.getAttribute('data-i'));
@@ -1840,6 +1846,12 @@ window.bindBook=function(){
   },{passive:false});
 
   if(toolbar){
+    var structBtn=document.getElementById('hStructMode');
+    if(structBtn) structBtn.addEventListener('click',function(){
+      STRUCT_MODE=!STRUCT_MODE;
+      structBtn.classList.toggle('on', STRUCT_MODE);
+      toast(STRUCT_MODE ? 'Modo "Estruturas Cardíacas" ativado — toque numa estrutura desbloqueada no coração.' : 'Modo "Estruturas Cardíacas" desativado.');
+    });
     toolbar.querySelectorAll('.view-btn[data-v]').forEach(function(btn){
       btn.addEventListener('click',function(){
         var v=VIEWS.find(function(x){return x[0]===btn.dataset.v;});
@@ -2539,6 +2551,7 @@ if(!document.getElementById('fcc-style')){
   .fcc-card-foot{display:flex;flex-direction:column;gap:6px}
   .fcc-due{font-size:.66rem;color:var(--muted);text-align:center}
   .fcc-actions{display:flex;gap:6px;justify-content:center}
+  .fcc-origin-tag{font-size:.68rem;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:3px 10px;background:var(--panel)}
   .fcc-actions button{font-size:.68rem;border:1px solid var(--line);background:transparent;color:var(--ink);
     border-radius:10px;padding:4px 9px;cursor:pointer}
   .fcc-actions button:hover{border-color:var(--accent);color:var(--accent)}
@@ -2576,7 +2589,23 @@ window.renderRoute = function(){
 };
 
 /* ---- dados ---- */
-function fccList(){ var ss=S(); return ss.cards||[]; }
+function fccList(){
+  var ss=S(); var mine=ss.cards||[]; var seen={};
+  var all=mine.map(function(c){ seen[c.id]=true; return Object.assign({},c,{origin:(''+c.id).indexOf('m_')===0?'platform':'mine'}); });
+  var CT=window.CONTENT||{};
+  if(true){
+    Object.keys(CT).forEach(function(arg){
+      var d=CT[arg]; if(!d||!Array.isArray(d.flashcards)) return;
+      d.flashcards.forEach(function(c,idx){
+        var id='m_'+arg.replace(/\W/g,'')+'_'+idx; if(seen[id]) return;
+        var front=c.type==='cloze'?clozeFront(c.front):c.front;
+        var back=c.type==='cloze'?clozeBack(c.front):(c.back||'');
+        all.push({id:id,front:front,back:back,type:c.type||'basic',top:d.name,origin:'platform'});
+      });
+    });
+  }
+  return all;
+}
 function fccUniqueTopics(){
   var seen={}; fccList().forEach(function(c){ if(c.top) seen[c.top]=true; });
   return Object.keys(seen).sort(function(a,b){return a.localeCompare(b,'pt-BR');});
@@ -2639,7 +2668,7 @@ function viewFcCenter(){
   cards.forEach(function(c){ stats[fccDifficulty(c.id,srs).key]++; });
   var icon=(typeof ICONS!=='undefined'&&(ICONS.fccenter||ICONS.srs))||'';
   var h='<div class="view"><div class="page-title">'+icon+'<h1>Central de Flashcards</h1></div>'+
-    '<p class="page-sub">Todos os flashcards da CardioAtlas em um só lugar — busque, filtre, edite ou exclua os seus. Toque em um card para ver a resposta.</p>'+
+    '<p class="page-sub">Todos os flashcards da CardioAtlas em um só lugar — os seus (editáveis) e os da plataforma (somente leitura). Busque, filtre e toque em um card para ver a resposta.</p>'+
     '<div class="fcc-stats">'+
       '<div class="fcc-stat"><b>'+cards.length+'</b><span>Total</span></div>'+
       '<div class="fcc-stat" style="color:#6db3f2"><b>'+stats.novo+'</b><span>Novos</span></div>'+
@@ -2655,6 +2684,9 @@ function viewFcCenter(){
       '<select id="fcc-diff" class="fcc-select"><option value="">Toda dificuldade</option>'+
         '<option value="novo">Novo</option><option value="dificil">Difícil</option>'+
         '<option value="medio">Médio</option><option value="facil">Fácil</option>'+
+      '</select>'+
+      '<select id="fcc-origin" class="fcc-select"><option value="">Todas as origens</option>'+
+        '<option value="mine">Criados por mim</option><option value="platform">Criados pela plataforma</option>'+
       '</select>'+
     '</div>'+
     '<div id="fcc-list"></div>'+gfoot()+'</div>';
@@ -2680,8 +2712,9 @@ function fccCardHTML(c,srs){
     '<div class="fcc-card-foot">'+
       '<span class="fcc-due">Próxima revisão: '+due+'</span>'+
       '<span class="fcc-actions">'+
-        '<button onclick="event.stopPropagation();fccEdit(\''+safeId+'\')">Editar</button>'+
-        '<button class="fcc-del" onclick="event.stopPropagation();fccDelete(\''+safeId+'\')">Excluir</button>'+
+        (c.origin==='platform' ? '<span class="fcc-origin-tag">Da plataforma</span>' :
+          '<button onclick="event.stopPropagation();fccEdit(\''+safeId+'\')">Editar</button>'+
+          '<button class="fcc-del" onclick="event.stopPropagation();fccDelete(\''+safeId+'\')">Excluir</button>')+
       '</span>'+
     '</div></div>';
 }
@@ -2700,11 +2733,13 @@ window.fccFlip=function(id){
 };
 window.fccApply=function(){
   var ss=S(); var cards=fccList(); var srs=ss.srs||{};
-  var qEl=document.getElementById('fcc-search'), tEl=document.getElementById('fcc-topic'), dEl=document.getElementById('fcc-diff');
+  var qEl=document.getElementById('fcc-search'), tEl=document.getElementById('fcc-topic'), dEl=document.getElementById('fcc-diff'), oEl=document.getElementById('fcc-origin');
   var q=(qEl&&qEl.value||'').toLowerCase().trim();
   var topic=(tEl&&tEl.value)||'';
   var diff=(dEl&&dEl.value)||'';
+  var origin=(oEl&&oEl.value)||'';
   var filtered=cards.filter(function(c){
+    if(origin && c.origin!==origin) return false;
     if(topic && c.top!==topic) return false;
     if(diff && fccDifficulty(c.id,srs).key!==diff) return false;
     if(q){
@@ -2732,10 +2767,12 @@ function bindFcCenter(){
   var s=document.getElementById('fcc-search'); if(s) s.addEventListener('input', window.fccApply);
   var t=document.getElementById('fcc-topic'); if(t) t.addEventListener('change', window.fccApply);
   var dd=document.getElementById('fcc-diff'); if(dd) dd.addEventListener('change', window.fccApply);
+  var od=document.getElementById('fcc-origin'); if(od) od.addEventListener('change', window.fccApply);
 }
 
 /* ---- editar / excluir (reaproveita o compositor de flashcard: colorTool + ac-fc-card) ---- */
 window.fccEdit=function(id){
+  if((''+id).indexOf('m_')===0){ toast('Flashcards da plataforma não podem ser editados.'); return; }
   var ss=S(); var c=(ss.cards||[]).filter(function(x){return x.id===id;})[0]; if(!c) return;
   var ov=document.createElement('div'); ov.id='ac-fc-ov';
   ov.innerHTML=
@@ -2762,6 +2799,7 @@ window.fccSaveEdit=function(id){
   toast('Flashcard atualizado');
 };
 window.fccDelete=function(id){
+  if((''+id).indexOf('m_')===0){ toast('Flashcards da plataforma não podem ser excluídos.'); return; }
   if(!window.confirm('Excluir este flashcard? Essa ação não pode ser desfeita.')) return;
   var ss=S(); ss.cards=(ss.cards||[]).filter(function(x){return x.id!==id;});
   if(ss.srs) delete ss.srs[id];
@@ -3518,5 +3556,239 @@ try{ if(typeof route!=='undefined' && route &&
 })();
 </script>
 
+
+<!-- ===== MODULO ESTENOSE AORTICA valvo|0 (aditivo) ===== -->
+<script>Object.assign(window.ASVG=window.ASVG||{},{"ea_anatomia": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Valva normal x valva estenotica: a mesma abertura, bem menor</text>\n<rect x=\"30\" y=\"46\" width=\"290\" height=\"220\" rx=\"12\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"175\" y=\"68\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Valva aortica normal</text>\n<circle cx=\"175\" cy=\"165\" r=\"70\" fill=\"none\" stroke=\"#6db3f2\" stroke-width=\"3\"/><path d=\"M175 100 L175 230 M115 135 L235 195 M115 195 L235 135\" stroke=\"#6db3f2\" stroke-width=\"2\" opacity=\"0.5\"/>\n<circle cx=\"175\" cy=\"165\" r=\"30\" fill=\"#6db3f2\" fill-opacity=\"0.3\"/>\n<text x=\"175\" y=\"250\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">3 cuspides finas, abrem totalmente</text>\n<rect x=\"360\" y=\"46\" width=\"290\" height=\"220\" rx=\"12\" fill=\"#2b2140\" stroke=\"#e8675f\"/><text x=\"505\" y=\"68\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Valva estenotica</text>\n<circle cx=\"505\" cy=\"165\" r=\"70\" fill=\"none\" stroke=\"#e8675f\" stroke-width=\"3\"/>\n<path d=\"M505 100 L505 230 M445 135 L565 195 M445 195 L565 135\" stroke=\"#e8675f\" stroke-width=\"5\" opacity=\"0.85\"/>\n<circle cx=\"505\" cy=\"165\" r=\"10\" fill=\"#e8675f\" fill-opacity=\"0.6\"/>\n<text x=\"505\" y=\"250\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Cuspides calcificadas/fundidas, abertura minima</text>\n<rect x=\"30\" y=\"278\" width=\"620\" height=\"30\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/>\n<text x=\"340\" y=\"298\" fill=\"#f1e3e0\" font-size=\"9.8\" text-anchor=\"middle\" font-weight=\"700\">Causa mais comum: calcificacao degenerativa senil (idosos) | Bicuspide congenita (jovens/meia-idade)</text>\n</svg>", "ea_fisiopatologia": "<svg viewBox=\"0 0 680 340\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"340\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Do obstaculo fixo a descompensacao do VE</text>\n<rect x=\"24\" y=\"46\" width=\"290\" height=\"110\" rx=\"10\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"169\" y=\"68\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">1. Obstrucao fixa</text><text x=\"169\" y=\"90\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Valva estreita = maior</text><text x=\"169\" y=\"104\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">resistencia a ejecao (pos-carga)</text><text x=\"169\" y=\"126\" fill=\"#cbb9ac\" font-size=\"8.8\" text-anchor=\"middle\">Gradiente de pressao VE-aorta aumenta</text>\n<rect x=\"366\" y=\"46\" width=\"290\" height=\"110\" rx=\"10\" fill=\"#2b2140\" stroke=\"#f0a93f\"/><text x=\"511\" y=\"68\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\">2. Hipertrofia concentrica</text><text x=\"511\" y=\"90\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">VE espessa a parede para</text><text x=\"511\" y=\"104\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">manter a pressao sistolica</text><text x=\"511\" y=\"126\" fill=\"#cbb9ac\" font-size=\"8.8\" text-anchor=\"middle\">Mecanismo compensatorio (Laplace)</text>\n<rect x=\"24\" y=\"176\" width=\"290\" height=\"110\" rx=\"10\" fill=\"#2b2140\" stroke=\"#f0a93f\"/><text x=\"169\" y=\"198\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\">3. Disfuncao diastolica</text><text x=\"169\" y=\"220\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Parede rigida dificulta o</text><text x=\"169\" y=\"234\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">enchimento -&gt; depende do AE (B4)</text><text x=\"169\" y=\"256\" fill=\"#cbb9ac\" font-size=\"8.8\" text-anchor=\"middle\">Maior demanda de O2 pelo musculo hipertrofiado</text>\n<rect x=\"366\" y=\"176\" width=\"290\" height=\"110\" rx=\"10\" fill=\"#e8675f\" fill-opacity=\"0.16\" stroke=\"#e8675f\"/><text x=\"511\" y=\"198\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">4. Descompensacao</text><text x=\"511\" y=\"220\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">VE dilata, FE cai, aparecem</text><text x=\"511\" y=\"234\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">angina, sincope, dispneia</text><text x=\"511\" y=\"256\" fill=\"#cbb9ac\" font-size=\"8.8\" text-anchor=\"middle\">Ponto de virada: sintomas = pior prognostico</text>\n<rect x=\"24\" y=\"300\" width=\"632\" height=\"30\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/>\n<text x=\"340\" y=\"320\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\" font-weight=\"700\">A gravidade anatomica pode ser a mesma por anos -&gt; o que muda o prognostico e o SINTOMA</text>\n</svg>", "ea_triade": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Triade classica: cada sintoma piora o prognostico sem cirurgia</text>\n<rect x=\"24\" y=\"48\" width=\"200\" height=\"180\" rx=\"12\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"124\" y=\"70\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Angina</text><text x=\"124\" y=\"140\" fill=\"#f1e3e0\" font-size=\"34\" text-anchor=\"middle\" font-weight=\"700\">5</text><text x=\"124\" y=\"158\" fill=\"#cbb9ac\" font-size=\"9.4\" text-anchor=\"middle\">anos de sobrevida media</text><text x=\"124\" y=\"192\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\">Demanda de O2 aumentada</text><text x=\"124\" y=\"206\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\">+ compressao coronariana</text>\n<rect x=\"240\" y=\"48\" width=\"200\" height=\"180\" rx=\"12\" fill=\"#2b2140\" stroke=\"#f0a93f\"/><text x=\"340\" y=\"70\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\">Sincope</text><text x=\"340\" y=\"140\" fill=\"#f1e3e0\" font-size=\"34\" text-anchor=\"middle\" font-weight=\"700\">3</text><text x=\"340\" y=\"158\" fill=\"#cbb9ac\" font-size=\"9.4\" text-anchor=\"middle\">anos de sobrevida media</text><text x=\"340\" y=\"192\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\">Debito fixo nao aumenta</text><text x=\"340\" y=\"206\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\">ao esforco -&gt; hipoperfusao cerebral</text>\n<rect x=\"456\" y=\"48\" width=\"200\" height=\"180\" rx=\"12\" fill=\"#e8675f\" fill-opacity=\"0.16\" stroke=\"#e8675f\"/><text x=\"556\" y=\"70\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Dispneia / IC</text><text x=\"556\" y=\"140\" fill=\"#f1e3e0\" font-size=\"34\" text-anchor=\"middle\" font-weight=\"700\">2</text><text x=\"556\" y=\"158\" fill=\"#cbb9ac\" font-size=\"9.4\" text-anchor=\"middle\">anos de sobrevida media</text><text x=\"556\" y=\"192\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\">Disfuncao diastolica e depois</text><text x=\"556\" y=\"206\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\">sistolica -&gt; congestao pulmonar</text>\n<rect x=\"24\" y=\"246\" width=\"632\" height=\"52\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/>\n<text x=\"340\" y=\"266\" fill=\"#f1e3e0\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"700\">Qualquer um dos 3 sintomas em paciente com EAo grave = indicacao de troca valvar</text>\n<text x=\"340\" y=\"282\" fill=\"#cbb9ac\" font-size=\"9.2\" text-anchor=\"middle\">Sincope de esforco e sinal de alarme particularmente grave — nao esperar para investigar</text>\n</svg>", "ea_ausculta": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Onde ouvir e para onde o sopro \"viaja\"</text>\n<circle cx=\"180\" cy=\"170\" r=\"110\" fill=\"none\" stroke=\"#4a3d5c\"/>\n<circle cx=\"180\" cy=\"90\" r=\"9\" fill=\"#e8675f\"/><text x=\"180\" y=\"72\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"10.4\" text-anchor=\"middle\">Foco aortico</text><text x=\"180\" y=\"106\" fill=\"#cbb9ac\" font-size=\"8.8\" text-anchor=\"middle\">2o EIC direito</text>\n<path d=\"M180 90 C 120 60, 60 60, 30 70\" stroke=\"#e8675f\" stroke-width=\"2\" fill=\"none\" stroke-dasharray=\"4 3\"/>\n<path d=\"M180 90 C 240 60, 300 60, 330 70\" stroke=\"#e8675f\" stroke-width=\"2\" fill=\"none\" stroke-dasharray=\"4 3\"/>\n<text x=\"30\" y=\"60\" fill=\"#e8675f\" font-size=\"9\" text-anchor=\"middle\">Carotida E</text><text x=\"330\" y=\"60\" fill=\"#e8675f\" font-size=\"9\" text-anchor=\"middle\">Carotida D</text>\n<text x=\"180\" y=\"270\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Irradiacao classica: para as carotidas</text>\n<text x=\"180\" y=\"286\" fill=\"#cbb9ac\" font-size=\"8.8\" text-anchor=\"middle\">Sinal de Gallavardin: pode irradiar tambem para o apice, mimetizando IM</text>\n<rect x=\"360\" y=\"48\" width=\"296\" height=\"130\" rx=\"10\" fill=\"#2b2140\"/>\n<text x=\"376\" y=\"68\" fill=\"#f59f0a\" font-weight=\"700\" font-size=\"10.6\">Fonocardiograma esquematico</text>\n<path d=\"M376 130 h20 M400 130 q10 -50 20 -50 t20 50 q10 -50 20 -50 t20 50 M480 130 h30\" stroke=\"#f1e3e0\" stroke-width=\"2\" fill=\"none\"/>\n<text x=\"380\" y=\"150\" fill=\"#6db3f2\" font-size=\"9\" text-anchor=\"middle\">B1</text><text x=\"500\" y=\"150\" fill=\"#6db3f2\" font-size=\"9\" text-anchor=\"middle\">B2</text>\n<text x=\"440\" y=\"112\" fill=\"#f0a93f\" font-size=\"9\" text-anchor=\"middle\">Sopro em \"diamante\"</text>\n<text x=\"376\" y=\"172\" fill=\"#cbb9ac\" font-size=\"8.8\">Sistolico ejetivo, crescendo-decrescendo, entre B1 e B2</text>\n<rect x=\"360\" y=\"192\" width=\"296\" height=\"106\" rx=\"10\" fill=\"#2b2140\"/>\n<text x=\"376\" y=\"212\" fill=\"#f59f0a\" font-weight=\"700\" font-size=\"10.4\">Outros achados classicos</text>\n<text x=\"376\" y=\"232\" fill=\"#f1e3e0\" font-size=\"9.4\">B2 hipofonetica ou paradoxal (A2 atrasado)</text>\n<text x=\"376\" y=\"250\" fill=\"#f1e3e0\" font-size=\"9.4\">B4 (hipertrofia com atrio contraindo forte)</text>\n<text x=\"376\" y=\"268\" fill=\"#f1e3e0\" font-size=\"9.4\">Pulso parvus et tardus (fraco e tardio)</text>\n<text x=\"376\" y=\"286\" fill=\"#f1e3e0\" font-size=\"9.4\">Fremito sistolico em foco aortico (se grave)</text>\n</svg>", "ea_gravidade": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Classificacao de gravidade ao ecocardiograma</text>\n<rect x=\"24\" y=\"46\" width=\"632\" height=\"34\" rx=\"8\" fill=\"#2b2140\"/><text x=\"40\" y=\"68\" fill=\"#cbb9ac\" font-size=\"9.6\" font-weight=\"700\">Parametro</text><text x=\"260\" y=\"68\" fill=\"#cbb9ac\" font-size=\"9.6\" font-weight=\"700\">Velocidade maxima (Vmax)</text><text x=\"460\" y=\"68\" fill=\"#cbb9ac\" font-size=\"9.6\" font-weight=\"700\">Gradiente medio</text><text x=\"600\" y=\"68\" fill=\"#cbb9ac\" font-size=\"9.6\" font-weight=\"700\">AVA</text>\n<rect x=\"24\" y=\"84\" width=\"632\" height=\"40\" rx=\"8\" fill=\"#3ddc84\" fill-opacity=\"0.12\" stroke=\"#3ddc84\"/><text x=\"40\" y=\"108\" fill=\"#3ddc84\" font-weight=\"700\" font-size=\"10.4\">Leve</text><text x=\"260\" y=\"108\" fill=\"#f1e3e0\" font-size=\"9.8\">2.6 - 2.9 m/s</text><text x=\"460\" y=\"108\" fill=\"#f1e3e0\" font-size=\"9.8\">menor que 20 mmHg</text><text x=\"600\" y=\"108\" fill=\"#f1e3e0\" font-size=\"9.8\">maior que 1.5 cm2</text>\n<rect x=\"24\" y=\"130\" width=\"632\" height=\"40\" rx=\"8\" fill=\"#f0a93f\" fill-opacity=\"0.12\" stroke=\"#f0a93f\"/><text x=\"40\" y=\"154\" fill=\"#f0a93f\" font-weight=\"700\" font-size=\"10.4\">Moderada</text><text x=\"260\" y=\"154\" fill=\"#f1e3e0\" font-size=\"9.8\">3.0 - 3.9 m/s</text><text x=\"460\" y=\"154\" fill=\"#f1e3e0\" font-size=\"9.8\">20 - 40 mmHg</text><text x=\"600\" y=\"154\" fill=\"#f1e3e0\" font-size=\"9.8\">1.0 - 1.5 cm2</text>\n<rect x=\"24\" y=\"176\" width=\"632\" height=\"40\" rx=\"8\" fill=\"#e8675f\" fill-opacity=\"0.14\" stroke=\"#e8675f\"/><text x=\"40\" y=\"200\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"10.4\">Grave</text><text x=\"260\" y=\"200\" fill=\"#f1e3e0\" font-size=\"9.8\">maior/igual a 4.0 m/s</text><text x=\"460\" y=\"200\" fill=\"#f1e3e0\" font-size=\"9.8\">maior/igual a 40 mmHg</text><text x=\"600\" y=\"200\" fill=\"#f1e3e0\" font-size=\"9.8\">menor que 1.0 cm2</text>\n<rect x=\"24\" y=\"222\" width=\"632\" height=\"40\" rx=\"8\" fill=\"#e8675f\" fill-opacity=\"0.28\" stroke=\"#e8675f\"/><text x=\"40\" y=\"246\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"10.4\">Muito grave</text><text x=\"260\" y=\"246\" fill=\"#f1e3e0\" font-size=\"9.8\">maior/igual a 5.0 m/s</text><text x=\"460\" y=\"246\" fill=\"#f1e3e0\" font-size=\"9.8\">maior/igual a 60 mmHg</text><text x=\"600\" y=\"246\" fill=\"#f1e3e0\" font-size=\"9.8\">-</text>\n<rect x=\"24\" y=\"272\" width=\"632\" height=\"34\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/>\n<text x=\"340\" y=\"292\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\" font-weight=\"700\">Baixo fluxo/baixo gradiente + FE reduzida: usar eco com dobutamina para confirmar gravidade real</text>\n</svg>"});</script>
+<script>/* CardioAtlas — Conteudo Estenose Aortica (valvo|0). Aditivo. */
+(function(){ "use strict";
+var A = window.ASVG || {};
+var C = (window.CONTENT = window.CONTENT || {});
+
+C['valvo|0'] = {
+ name: 'Estenose Aórtica',
+ intro: 'A ideia central: a gravidade anatômica pode ser a mesma por anos — o que muda o prognóstico e a conduta é o SINTOMA.',
+ sub: [
+  ['entendendo','Entendendo do Zero', `
+    <div class="ac-h">O que é, com calma</div>
+    <p class="ac-p">A Estenose Aórtica (EAo) é a obstrução fixa da via de saída do ventrículo esquerdo (VE) por doença da valva aórtica, que perde mobilidade e reduz sua área de abertura. É a valvopatia mais comum no idoso e uma das principais indicações de cirurgia cardíaca no mundo.</p>
+    ${A.ea_anatomia}
+    <p class="ac-p">O ponto-chave para a prova: a valva pode estar gravemente estenosada por anos sem gerar sintoma nenhum, porque o VE compensa hipertrofiando. Quando os sintomas aparecem (a tríade angina-síncope-dispneia), o prognóstico piora drasticamente sem tratamento — por isso EAo sintomática grave é sempre indicação de troca valvar.</p>
+    <div class="ac-call"><b>A grande ideia:</b> EAo assintomática, mesmo grave, pode ser só observada. EAo sintomática grave é cirurgia/TAVI — quase sem exceção.</div>
+    <table class="ac-tbl"><tr><th>Eixo</th><th>O que dominar</th></tr>
+      <tr><td>Causa mais comum (geral)</td><td>Calcificação degenerativa senil</td></tr>
+      <tr><td>Causa mais comum (jovem)</td><td>Valva bicúspide congênita</td></tr>
+      <tr><td>Mecanismo</td><td>Obstrução fixa -&gt; hipertrofia concêntrica compensatória</td></tr>
+      <tr><td>Padrão-ouro dx</td><td>Ecocardiograma com Doppler</td></tr>
+      <tr><td>Tratamento definitivo</td><td>Troca valvar (cirúrgica/SAVR ou TAVI)</td></tr>
+    </table>`],
+  ['etiologia','Etiologia por Faixa Etária', `<div class="ac-h">Três causas, três perfis de paciente</div>
+    <p class="ac-p">A etiologia da EAo muda de forma previsível conforme a idade do paciente — e essa é uma das perguntas mais diretas de prova.</p>
+    <table class="ac-tbl"><tr><th>Causa</th><th>Perfil típico</th><th>Detalhe</th></tr>
+      <tr><td>Calcificação degenerativa (senil)</td><td>Idosos (&gt;65 anos)</td><td>Causa mais comum em geral; fatores de risco ateroscleróticos sobrepostos (dislipidemia, HAS, tabagismo)</td></tr>
+      <tr><td>Valva bicúspide congênita</td><td>Adultos jovens/meia-idade (&lt;65 anos)</td><td>Malformação cardíaca congênita mais comum; degenera mais cedo por estresse mecânico anormal</td></tr>
+      <tr><td>Febre reumática</td><td>Variável, mais rara isolada</td><td>Quase sempre acompanhada de acometimento mitral concomitante; causa fusão das comissuras</td></tr>
+    </table>
+    <p class="ac-p">Na prática, ao ver "homem de 45 anos com sopro sistólico em foco aórtico", pensar primeiro em valva bicúspide. Ao ver "mulher de 78 anos com o mesmo sopro", pensar primeiro em calcificação degenerativa senil.</p>
+    <div class="ac-tip"><b>Macete:</b> bicúspide = jovem; calcificada = idoso; reumática = raramente isolada (procure doença mitral associada).</div>`],
+  ['fisiopatologia','Fisiopatologia', `<div class="ac-h">Da obstrução fixa à descompensação</div>
+    <p class="ac-p">A obstrução na via de saída aumenta a pós-carga do VE, que responde hipertrofiando de forma concêntrica (espessamento da parede sem dilatar a cavidade) para manter a pressão sistólica e o débito cardíaco normais — esse é o mecanismo compensatório, pela lei de Laplace.</p>
+    ${A.ea_fisiopatologia}
+    <p class="ac-p">O preço dessa hipertrofia é a rigidez: o VE hipertrofiado relaxa mal na diástole (disfunção diastólica), passando a depender mais da contração atrial para completar o enchimento — daí a quarta bulha (B4). Ao mesmo tempo, o músculo hipertrofiado consome mais oxigênio, enquanto a perfusão coronariana subendocárdica fica prejudicada pela própria pressão intramural elevada — por isso pode haver angina mesmo sem coronária obstruída.</p>
+    <p class="ac-p">Enquanto a compensação se mantém, o paciente é assintomático. Quando o VE finalmente não consegue mais compensar, ele dilata e a fração de ejeção cai — é o ponto de descompensação, quando surgem os sintomas e o prognóstico piora abruptamente.</p>
+    <div class="ac-warn"><b>Cuidado:</b> a gravidade anatômica (área valvar) pode estar estável há anos enquanto o paciente é assintomático — não subestime o valor do sintoma como marcador de mudança de fase da doença.</div>`],
+  ['exame_fisico','Exame Físico e Ausculta', `<div class="ac-h">Onde ouvir e o que sentir</div>
+    <p class="ac-p">A ausculta é a porta de entrada clássica para o diagnóstico de EAo: sopro sistólico ejetivo, em crescendo-decrescendo ("em diamante"), mais audível no foco aórtico (2º espaço intercostal direito), com irradiação característica para as carótidas.</p>
+    ${A.ea_ausculta}
+    <p class="ac-p">Outros achados clássicos incluem B2 hipofonética ou paradoxal (por atraso do componente aórtico A2), B4 (pela contração atrial vigorosa contra um VE hipertrofiado e complacência diastólica reduzida), frêmito sistólico em foco aórtico nos casos graves, e o pulso <b>parvus et tardus</b> (fraco em amplitude e retardado no tempo) — acentuado quanto mais grave a estenose. O sinal de Gallavardin descreve a irradiação do componente musical do sopro para o ápice, podendo mimetizar insuficiência mitral.</p>
+    <div class="ac-tip"><b>Macete:</b> "sopro sistólico + irradia para carótida + pulso fraco e atrasado" fecha EAo antes mesmo do ecocardiograma.</div>
+    <div class="ac-warn"><b>Erro comum:</b> confundir a irradiação apical (Gallavardin) com sopro de insuficiência mitral — sempre correlacionar com o foco de maior intensidade e o padrão do sopro (ejetivo x holossistólico).</div>`],
+  ['dx_gravidade','Diagnóstico e Gravidade', `<div class="ac-h">Ecocardiograma: o padrão-ouro</div>
+    <p class="ac-p">O ecocardiograma transtorácico com Doppler é o exame padrão-ouro, capaz de confirmar o diagnóstico, quantificar a gravidade e avaliar a repercussão sobre o VE (hipertrofia, função sistólica).</p>
+    ${A.ea_gravidade}
+    <p class="ac-p">Três parâmetros classificam a gravidade: a velocidade máxima do jato (Vmax), o gradiente médio transvalvar, e a área valvar aórtica (AVA), calculada pela equação de continuidade. Um cenário de prova importante é a <b>EAo de baixo fluxo/baixo gradiente</b> com fração de ejeção reduzida: a AVA calculada pode parecer grave só porque o VE não gera fluxo suficiente para abrir a valva adequadamente — o eco com dobutamina em baixa dose ajuda a diferenciar estenose verdadeiramente grave de "pseudograve".</p>
+    <p class="ac-p">O ECG tipicamente mostra hipertrofia ventricular esquerda (critério de Sokolow-Lyon) com padrão de sobrecarga (infra de ST e T invertida assimétrica em derivações laterais). O ECG não diagnostica EAo, mas sugere repercussão significativa.</p>
+    <div class="ac-tip"><b>Lembrete:</b> AVA &lt;1,0 cm² (ou &lt;0,6 cm²/m² indexada pela superfície corporal), Vmax ≥4,0 m/s e gradiente médio ≥40 mmHg = estenose grave.</div>`],
+  ['tratamento','Tratamento', `<div class="ac-h">Quando e como trocar a valva</div>
+    <p class="ac-p">Não existe tratamento farmacológico que mude a história natural da EAo — estatinas foram testadas com base em mecanismo teórico (semelhança com aterosclerose), mas não mostraram benefício robusto em reduzir progressão ou eventos.</p>
+    ${A.ea_triade}
+    <p class="ac-p">A indicação clássica de troca valvar é <b>EAo grave sintomática</b> (qualquer um dos três sintomas: angina, síncope ou dispneia). Em pacientes assintomáticos com EAo grave, a troca também pode ser indicada se houver disfunção do VE (FE &lt;50%), necessidade de cirurgia cardíaca por outro motivo, teste ergométrico positivo (sintomas ou queda de pressão ao esforço), ou critérios de muito alta gravidade/progressão rápida em pacientes de baixo risco cirúrgico.</p>
+    <p class="ac-p">A escolha entre cirurgia convencional (SAVR) e implante valvar transcateter (TAVI) depende principalmente do risco cirúrgico (calculado por escores como STS Score e EuroSCORE II), da idade e de comorbidades — TAVI historicamente indicada para idosos/alto risco cirúrgico, com evidências crescentes também em risco intermediário e baixo.</p>
+    <div class="ac-warn"><b>Cuidado com vasodilatadores:</b> nitrato e outros vasodilatadores devem ser usados com extrema cautela (ou evitados) na EAo grave sintomática — a obstrução fixa impede aumento do débito para compensar a queda da pré-carga/pós-carga, podendo precipitar síncope ou colapso hemodinâmico.</div>
+    <div class="ac-call"><b>Resumo prático:</b> sintoma + gravidade = cirurgia/TAVI. Sem sintoma, mesmo grave, geralmente é vigilância ativa com ecocardiogramas seriados.</div>`],
+  ['diferenciais_eao','Diferenciando de Outras Causas de Sopro', `<div class="ac-h">EAo x seus principais imitadores</div>
+    <p class="ac-p">Um ponto muito cobrado é diferenciar a EAo de outras causas de sopro sistólico — especialmente a esclerose aórtica e a cardiomiopatia hipertrófica obstrutiva (CMH).</p>
+    <table class="ac-tbl"><tr><th>Característica</th><th>Estenose Aórtica</th><th>Esclerose Aórtica</th><th>CMH obstrutiva</th></tr>
+      <tr><td>Obstrução</td><td>Significativa (AVA reduzida)</td><td>Ausente/mínima (só espessamento)</td><td>Dinâmica (subvalvar, septo)</td></tr>
+      <tr><td>Sopro com Valsalva/agachar-levantar</td><td>Diminui</td><td>Sem alteração relevante</td><td>Aumenta (menos pré-carga = mais obstrução)</td></tr>
+      <tr><td>Sopro com handgrip</td><td>Diminui</td><td>Sem alteração relevante</td><td>Diminui (mais pós-carga = menos obstrução)</td></tr>
+      <tr><td>Pulso</td><td>Parvus et tardus</td><td>Normal</td><td>Bisferiens (duplo pico)</td></tr>
+    </table>
+    <p class="ac-p">A resposta do sopro às manobras dinâmicas é o detalhe que mais separa EAo de CMH obstrutiva: na EAo (obstrução fixa), manobras que reduzem o retorno venoso (Valsalva, ficar em pé) diminuem o sopro; na CMH (obstrução dinâmica, que piora com menor volume ventricular), essas mesmas manobras aumentam o sopro — exatamente o oposto.</p>
+    <div class="ac-call"><b>Associação clássica de prova — Síndrome de Heyde:</b> EAo + sangramento gastrointestinal por angiodisplasia, explicado por uma síndrome de von Willebrand adquirida (destruição mecânica dos multímeros de alto peso molecular do fator de von Willebrand ao passarem pela valva estenótica).</div>
+    <div class="ac-tip"><b>Macete das manobras:</b> "aperta a mão (handgrip) e o sopro da CMH aperta junto (diminui); levanta rápido e o sopro da CMH levanta junto (aumenta)". Na EAo, o comportamento é sempre o oposto da CMH.</div>`],
+ ],
+};
+
+Object.assign(C['valvo|0'], {
+ escores: `<div class="ac-h">Ferramentas e critérios na Estenose Aórtica</div>
+   <table class="ac-tbl"><tr><th>Ferramenta</th><th>O que avalia</th><th>Uso principal</th></tr>
+     <tr><td>Equação de continuidade</td><td>Calcula a área valvar aórtica (AVA) a partir do fluxo</td><td>Quantificação da gravidade ao Doppler</td></tr>
+     <tr><td>Vmax / gradiente médio</td><td>Velocidade do jato e gradiente de pressão transvalvar</td><td>Classificação leve/moderada/grave</td></tr>
+     <tr><td>Eco com dobutamina (baixa dose)</td><td>Resposta do fluxo/gradiente ao aumento do inotropismo</td><td>Diferenciar EAo grave real de "pseudograve" (baixo fluxo/baixo gradiente com FE reduzida)</td></tr>
+     <tr><td>STS Score / EuroSCORE II</td><td>Risco cirúrgico estimado</td><td>Decisão entre SAVR (cirurgia) e TAVI</td></tr>
+     <tr><td>Teste ergométrico</td><td>Sintomas/resposta pressórica ao esforço em "assintomáticos"</td><td>Desmascarar sintomas em EAo grave aparentemente assintomática</td></tr>
+   </table>`,
+ dif: `<div class="ac-h">Diferenciais</div>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Diferenciar de</th><th>Chave</th></tr>
+     <tr><td>Sopro sistólico em foco aórtico</td><td>Esclerose aórtica</td><td>Espessamento sem obstrução relevante; sem irradiação carotídea nem sintomas</td></tr>
+     <tr><td>Sopro sistólico que muda com manobras</td><td>Cardiomiopatia hipertrófica obstrutiva</td><td>Comportamento oposto às manobras dinâmicas (Valsalva/handgrip)</td></tr>
+     <tr><td>Sopro sistólico irradiando para axila</td><td>Insuficiência mitral</td><td>Sopro holossistólico em foco mitral, não ejetivo</td></tr>
+     <tr><td>Sopro sistólico + CIV</td><td>Comunicação interventricular</td><td>Sopro holossistólico em borda esternal esquerda baixa, geralmente desde a infância</td></tr>
+     <tr><td>EAo + FE reduzida com AVA "grave"</td><td>EAo de baixo fluxo/baixo gradiente "pseudograve"</td><td>Eco com dobutamina para confirmar se a AVA realmente é fixa e grave</td></tr>
+   </table>`,
+ mapa: `<div class="ac-h">Mapa mental (cards)</div>
+   <div class="mm">
+     <div class="mm-card"><h5>Etiologia</h5><ul><li>Idoso: calcificação senil</li><li>Jovem: valva bicúspide</li><li>Reumática: raramente isolada</li></ul></div>
+     <div class="mm-card"><h5>Fisiopatologia</h5><ul><li>Obstrução fixa -&gt; pós-carga alta</li><li>Hipertrofia concêntrica compensa</li><li>Disfunção diastólica -&gt; B4</li></ul></div>
+     <div class="mm-card"><h5>Tríade clássica</h5><ul><li>Angina (~5 anos)</li><li>Síncope (~3 anos)</li><li>Dispneia/IC (~2 anos)</li></ul></div>
+     <div class="mm-card"><h5>Ausculta</h5><ul><li>Sopro ejetivo em diamante</li><li>Irradia p/ carótidas</li><li>Pulso parvus et tardus</li></ul></div>
+     <div class="mm-card"><h5>Gravidade (eco)</h5><ul><li>Grave: Vmax ≥4 m/s</li><li>Gradiente médio ≥40 mmHg</li><li>AVA &lt;1,0 cm²</li></ul></div>
+     <div class="mm-card"><h5>Tratamento</h5><ul><li>Sintomática grave = trocar</li><li>SAVR x TAVI (risco cirúrgico)</li><li>Evitar vasodilatador se grave</li></ul></div>
+   </div>`,
+ fluxo_dx: `<div class="ac-h">Fluxograma diagnóstico</div>
+   <div class="fx">
+     <div class="fx-node start">Sopro sistólico ejetivo em foco aórtico, irradiando para carótidas</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Ecocardiograma transtorácico com Doppler</div>
+     <div class="fx-row">
+       <div class="fx-node end">Vmax e gradiente compatíveis com AVA -&gt; classificar gravidade</div>
+       <div class="fx-node end">FE reduzida + AVA "grave" mas gradiente baixo -&gt; eco com dobutamina</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Avaliar sintomas (angina/síncope/dispneia) e função do VE</div>
+     <div class="fx-node end">Define necessidade e urgência de troca valvar</div>
+   </div>`,
+ fluxo_cond: `<div class="ac-h">Conduta conforme sintoma e gravidade</div>
+   <div class="fx">
+     <div class="fx-node start">EAo grave confirmada ao eco</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Paciente sintomático (angina/síncope/dispneia)?</div>
+     <div class="fx-row">
+       <div class="fx-node end">Sim -&gt; indicação de troca valvar (SAVR ou TAVI conforme risco)</div>
+       <div class="fx-node">Não -&gt; avaliar FE, teste ergométrico e progressão</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">FE &lt;50%, ergométrico positivo, cirurgia por outro motivo ou progressão rápida em baixo risco</div>
+     <div class="fx-node end">Considerar troca valvar mesmo assintomático; caso contrário, vigilância ativa</div>
+   </div>`,
+ vespera: `<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Ponto 1:</b> EAo grave assintomática pode ser só observada; EAo grave sintomática é indicação de troca valvar quase sem exceção.</div>
+   <div class="ac-call"><b>Ponto 2:</b> Etiologia por idade: senil/calcificada no idoso, bicúspide no jovem, reumática raramente isolada.</div>
+   <div class="ac-call"><b>Ponto 3:</b> Tríade clássica com prognóstico decrescente: angina (5a) &gt; síncope (3a) &gt; dispneia/IC (2a) de sobrevida média sem tratamento.</div>
+   <div class="ac-call"><b>Ponto 4:</b> Ausculta: sopro ejetivo em diamante, irradia para carótidas, B4, pulso parvus et tardus.</div>
+   <div class="ac-call"><b>Ponto 5:</b> Grave = Vmax ≥4 m/s, gradiente médio ≥40 mmHg, AVA &lt;1,0 cm². Baixo fluxo/baixo gradiente com FE reduzida: eco com dobutamina.</div>
+   <div class="ac-call"><b>Ponto 6:</b> Evitar vasodilatadores (nitrato) em EAo grave sintomática — risco de síncope/colapso.</div>
+   <div class="ac-call"><b>Ponto 7:</b> CMH obstrutiva responde ao OPOSTO das manobras dinâmicas em relação à EAo.</div>
+   <div class="ac-call"><b>Ponto 8:</b> Síndrome de Heyde: EAo + sangramento GI por angiodisplasia (von Willebrand adquirida).</div>`,
+ dicas: `<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Grave o pulso parvus et tardus junto com o sopro que irradia para as carótidas — é a combinação clássica de prova ao exame físico.</div>
+   <div class="ac-tip">Memorize a tríade com os números 5-3-2 (angina-síncope-dispneia, em anos de sobrevida média sem tratamento).</div>
+   <div class="ac-tip">Na dúvida entre EAo e CMH obstrutiva, pense nas manobras dinâmicas — elas sempre respondem de forma oposta.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Prescrever nitrato para dor torácica sem considerar EAo grave como contraindicação relativa/absoluta.</div>
+   <div class="ac-warn">Indicar troca valvar em EAo grave assintomática sem checar os critérios de exceção (FE, ergométrico, progressão).</div>
+   <div class="ac-warn">Confundir a irradiação apical do sopro (Gallavardin) com insuficiência mitral verdadeira.</div>
+   <div class="ac-warn">Esquecer de considerar EAo de baixo fluxo/baixo gradiente em paciente com FE reduzida e gradiente aparentemente baixo.</div>`,
+ checklist: [
+   'Sei diferenciar as 3 principais etiologias da EAo por faixa etária',
+   'Entendo a fisiopatologia da hipertrofia concêntrica compensatória e sua evolução para descompensação',
+   'Reconheço a tríade clássica (angina-síncope-dispneia) e o prognóstico de cada sintoma',
+   'Domino os achados de ausculta e o exame do pulso (parvus et tardus)',
+   'Sei classificar a gravidade pelo ecocardiograma (Vmax, gradiente médio, AVA)',
+   'Entendo quando indicar troca valvar em pacientes sintomáticos e assintomáticos',
+   'Sei diferenciar EAo de esclerose aórtica e de CMH obstrutiva pelas manobras dinâmicas',
+   'Conheço a Síndrome de Heyde e o cuidado com vasodilatadores na EAo grave'
+ ],
+});
+
+Object.assign(C['valvo|0'], {
+ questoes: [
+  {stem:'Homem, 78 anos, com sopro sistólico ejetivo em foco aórtico irradiando para carótidas, pulso parvus et tardus. Qual a etiologia mais provável?',
+   opts:['Valva bicúspide congênita','Calcificação degenerativa senil','Febre reumática','Endocardite infecciosa'], correct:1,
+   expl:'Em idosos, a causa mais comum de Estenose Aórtica é a calcificação degenerativa senil da valva trivalvular.'},
+  {stem:'Mulher, 42 anos, assintomática, com o mesmo sopro descrito acima. Qual a etiologia mais provável?',
+   opts:['Calcificação degenerativa senil','Valva bicúspide congênita','Prolapso mitral','Cardiomiopatia hipertrófica'], correct:1,
+   expl:'Em pacientes mais jovens, a valva aórtica bicúspide congênita — a malformação cardíaca congênita mais comum — é a causa mais provável de EAo.'},
+  {stem:'Qual mecanismo compensatório inicial do VE frente à obstrução fixa da EAo?',
+   opts:['Dilatação excêntrica','Hipertrofia concêntrica','Fibrose difusa imediata','Redução da massa ventricular'], correct:1,
+   expl:'O VE responde à sobrecarga de pressão hipertrofiando de forma concêntrica, mantendo a pressão sistólica e o débito cardíaco às custas de maior espessura de parede.'},
+  {stem:'Paciente com EAo grave desenvolve síncope aos esforços. Qual a sobrevida média esperada sem tratamento a partir desse sintoma?',
+   opts:['Cerca de 5 anos','Cerca de 3 anos','Cerca de 2 anos','Cerca de 10 anos'], correct:1,
+   expl:'Na tríade clássica, a síncope carrega sobrevida média de aproximadamente 3 anos sem tratamento (angina ~5 anos, dispneia/IC ~2 anos).'},
+  {stem:'Qual achado de exame físico é mais específico de Estenose Aórtica grave?',
+   opts:['Pulso em martelo de água (Corrigan)','Pulso parvus et tardus','Pulso paradoxal','Pulso bisferiens'], correct:1,
+   expl:'O pulso parvus et tardus (fraco e retardado) reflete diretamente a obstrução fixa na via de saída do VE, sendo mais evidente quanto mais grave a estenose.'},
+  {stem:'Ao ecocardiograma, quais critérios definem Estenose Aórtica grave?',
+   opts:['Vmax ≥4,0 m/s, gradiente médio ≥40 mmHg, AVA <1,0 cm²','Vmax 2,6-2,9 m/s, gradiente médio <20 mmHg','Vmax 3,0-3,9 m/s, AVA 1,0-1,5 cm²','Gradiente médio <20 mmHg, AVA >1,5 cm²'], correct:0,
+   expl:'A tríade que define gravidade é Vmax ≥4,0 m/s, gradiente médio ≥40 mmHg e área valvar aórtica <1,0 cm² (ou <0,6 cm²/m² indexada).'},
+  {stem:'Paciente com EAo, FE de 35% e gradiente médio de 25 mmHg (AVA calculada <1,0 cm²). Qual a melhor conduta para esclarecer a real gravidade?',
+   opts:['Aceitar a AVA calculada como definitiva','Realizar ecocardiograma com dobutamina em baixa dose','Repetir apenas o ECG','Indicar cirurgia sem mais exames'], correct:1,
+   expl:'Esse é o cenário de baixo fluxo/baixo gradiente com FE reduzida — o eco com dobutamina ajuda a diferenciar estenose verdadeiramente grave de "pseudograve".'},
+  {stem:'Qual das alternativas é uma indicação de troca valvar em paciente ASSINTOMÁTICO com EAo grave?',
+   opts:['Fração de ejeção >60%','Teste ergométrico normal','Fração de ejeção <50%','Ausência de calcificação valvar'], correct:2,
+   expl:'Disfunção sistólica do VE (FE <50%) é uma das indicações de troca valvar mesmo na ausência de sintomas.'},
+  {stem:'Por que vasodilatadores como nitrato devem ser usados com extrema cautela na EAo grave sintomática?',
+   opts:['Porque aumentam a pós-carga de forma perigosa','Porque a obstrução fixa impede compensar a queda de pré-carga, podendo causar síncope/colapso','Porque causam hipertensão reflexa','Porque bloqueiam a condução AV'], correct:1,
+   expl:'Como o débito é limitado pela obstrução fixa, a queda de pré-carga/pós-carga induzida pelo vasodilatador não pode ser compensada por aumento de fluxo, podendo levar a hipotensão grave e síncope.'},
+  {stem:'Como o sopro da Estenose Aórtica se comporta durante a manobra de handgrip (aumento da pós-carga), em comparação com a cardiomiopatia hipertrófica obstrutiva?',
+   opts:['Ambos aumentam','Ambos diminuem','EAo diminui, CMH também diminui','EAo diminui, CMH aumenta'], correct:2,
+   expl:'O handgrip aumenta a pós-carga: isso diminui o gradiente na EAo (obstrução fixa) e também diminui a obstrução dinâmica na CMH — em ambos os casos o sopro diminui. Já a Valsalva/ficar em pé tem efeito oposto entre as duas condições.'},
+  {stem:'Paciente com EAo apresenta episódios recorrentes de sangramento digestivo por angiodisplasia. Qual síndrome explica essa associação?',
+   opts:['Síndrome de Heyde','Síndrome de Eisenmenger','Síndrome de Dressler','Síndrome de Marfan'], correct:0,
+   expl:'A Síndrome de Heyde associa EAo a sangramento GI por angiodisplasia, explicada pela destruição mecânica dos multímeros de alto peso molecular do fator de von Willebrand ao passarem pela valva estenótica.'},
+  {stem:'Qual fator é o principal determinante na escolha entre cirurgia convencional (SAVR) e TAVI para tratar a EAo grave sintomática?',
+   opts:['Preferência do paciente exclusivamente','Risco cirúrgico estimado (ex.: STS Score, EuroSCORE II) e idade/comorbidades','Presença de valva bicúspide','Nível de troponina'], correct:1,
+   expl:'A decisão entre SAVR e TAVI é guiada principalmente pelo risco cirúrgico calculado por escores validados, além de idade e comorbidades do paciente.'},
+ ],
+ flashcards: [
+  {front:'Qual a causa mais comum de Estenose Aórtica em idosos?', back:'Calcificação degenerativa senil da valva aórtica trivalvular.', type:'basic'},
+  {front:'Qual a causa mais comum de Estenose Aórtica em pacientes jovens/meia-idade?', back:'Valva aórtica bicúspide congênita — a malformação cardíaca congênita mais comum.', type:'basic'},
+  {front:'Cite a tríade clássica de sintomas da Estenose Aórtica grave, em ordem de pior prognóstico.', back:'Dispneia/IC (~2 anos de sobrevida) pior que Síncope (~3 anos) pior que Angina (~5 anos) sem tratamento.', type:'basic'},
+  {front:'A Estenose Aórtica gera hipertrofia {{concêntrica}} do ventrículo esquerdo como mecanismo compensatório.', back:'concêntrica', type:'cloze'},
+  {front:'Descreva o sopro característico da Estenose Aórtica e sua irradiação.', back:'Sopro sistólico ejetivo, em crescendo-decrescendo ("diamante"), em foco aórtico, irradiando para as carótidas.', type:'basic'},
+  {front:'O que é o pulso parvus et tardus e em que condição ele é clássico?', back:'Pulso de amplitude fraca (parvus) e ascensão retardada (tardus); clássico da Estenose Aórtica grave, refletindo a obstrução fixa na via de saída do VE.', type:'basic'},
+  {front:'Quais os 3 parâmetros ecocardiográficos usados para classificar a gravidade da EAo?', back:'Velocidade máxima do jato (Vmax), gradiente médio transvalvar, e área valvar aórtica (AVA).', type:'basic'},
+  {front:'Cite os valores que definem Estenose Aórtica grave ao ecocardiograma.', back:'Vmax ≥4,0 m/s, gradiente médio ≥40 mmHg, AVA <1,0 cm² (ou <0,6 cm²/m² indexada).', type:'basic'},
+  {front:'O que fazer diante de EAo com AVA calculada "grave" mas FE reduzida e gradiente baixo?', back:'Realizar ecocardiograma com dobutamina em baixa dose, para diferenciar estenose verdadeiramente grave de "pseudograve" (baixo fluxo/baixo gradiente).', type:'basic'},
+  {front:'Qual a principal indicação de troca valvar na Estenose Aórtica grave?', back:'Presença de sintomas (angina, síncope ou dispneia) — indicação praticamente universal, independentemente da idade.', type:'basic'},
+  {front:'Cite 3 indicações de troca valvar em EAo grave ASSINTOMÁTICA.', back:'FE <50%, necessidade de cirurgia cardíaca por outro motivo, ou teste ergométrico positivo (sintomas/queda de PA ao esforço) — também progressão rápida em baixo risco cirúrgico.', type:'basic'},
+  {front:'Por que vasodilatadores como nitrato devem ser evitados/usados com cautela na EAo grave sintomática?', back:'A obstrução fixa impede que o débito aumente para compensar a queda de pré-carga/pós-carga, podendo causar hipotensão grave e síncope.', type:'basic'},
+  {front:'Como diferenciar o sopro da EAo do sopro da CMH obstrutiva pela manobra de Valsalva/ficar em pé?', back:'Na EAo (obstrução fixa) o sopro diminui; na CMH obstrutiva (obstrução dinâmica) o sopro aumenta — comportamento oposto.', type:'basic'},
+  {front:'O que é a Síndrome de Heyde?', back:'Associação de Estenose Aórtica com sangramento gastrointestinal por angiodisplasia, por síndrome de von Willebrand adquirida (destruição mecânica dos multímeros do FvW ao passarem pela valva estenótica).', type:'basic'},
+ ],
+ casos: [
+  {t:'Caso 1 — O sopro "silencioso" há anos', stem:'Homem, 74 anos, assintomático, sopro sistólico em foco aórtico conhecido há 5 anos, sem investigação prévia. Ecocardiograma agora mostra Vmax 4,3 m/s, gradiente médio 46 mmHg, AVA 0,8 cm², FE 62%, sem sintomas relatados mesmo em atividade física.', passos:[
+    {h:'1. Reconhecer', p:'Critérios ecocardiográficos de Estenose Aórtica grave (Vmax e gradiente elevados, AVA reduzida), porém paciente assintomático e com FE preservada.'},
+    {h:'2. Conduzir', p:'Como não há sintomas nem critérios de exceção evidentes, investigar ativamente com teste ergométrico (para desmascarar sintomas/resposta pressórica anormal) antes de decidir por vigilância versus troca valvar antecipada.'},
+    {h:'Lição de prova', p:'EAo grave assintomática nem sempre significa "aguardar passivamente" — o teste ergométrico pode revelar sintomas subclínicos que mudam a indicação.'}
+  ]},
+  {t:'Caso 2 — A síncope que mudou tudo', stem:'Mulher, 81 anos, com EAo grave conhecida e acompanhada ambulatorialmente há 2 anos, sempre assintomática. Procura o pronto-socorro após episódio de síncope durante caminhada.', passos:[
+    {h:'1. Reconhecer', p:'Síncope de esforço em paciente com EAo grave é sinal de alarme — indica que a doença "cruzou a linha" para a fase sintomática, com prognóstico reservado sem tratamento (~3 anos de sobrevida média).'},
+    {h:'2. Conduzir', p:'Encaminhar para avaliação de troca valvar (SAVR ou TAVI conforme risco cirúrgico calculado por STS Score/EuroSCORE II) — não há papel para conduta expectante nesse momento.'},
+    {h:'Lição de prova', p:'Qualquer sintoma da tríade clássica, mesmo um único episódio, muda completamente a indicação terapêutica na EAo grave.'}
+  ]},
+  {t:'Caso 3 — Dor torácica e um detalhe perigoso na receita', stem:'Homem, 70 anos, com EAo grave sintomática (angina aos esforços), é atendido em unidade básica com queixa de dor torácica leve e recebe prescrição de nitrato sublingual para alívio da dor.', passos:[
+    {h:'1. Reconhecer', p:'Nitrato em paciente com EAo grave é uma prescrição de risco: a obstrução fixa impede que o débito cardíaco aumente para compensar a queda de pré-carga/pós-carga causada pelo vasodilatador.'},
+    {h:'2. Conduzir', p:'Suspender/evitar o nitrato, encaminhar para avaliação cardiológica urgente e priorizar a investigação para troca valvar, já que o paciente já apresenta sintoma da tríade clássica (angina).'},
+    {h:'Lição de prova', p:'Angina em paciente com EAo grave não deve ser tratada como uma angina "comum" — a via de saída obstruída torna vasodilatadores potencialmente perigosos e a resolução definitiva depende da troca valvar, não de terapia anti-anginosa isolada.'}
+  ]},
+ ],
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+</script>
 </body>
 </html>
