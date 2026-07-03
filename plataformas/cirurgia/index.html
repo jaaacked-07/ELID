@@ -160,20 +160,20 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 .hero-stats .hs-row{display:flex;justify-content:space-between;font-size:.74rem;color:var(--muted);margin-top:6px}
 .hero-stats .hs-tag{font-family:'Fraunces',serif;font-size:.9rem;color:var(--ink);margin-bottom:12px}
 
-/* card inicial = capa do livro (chamativo) */
-.hero-cover{position:relative;width:194px;height:256px;flex:none;cursor:pointer;border-radius:5px 13px 13px 5px;
-  background:linear-gradient(135deg,#3a2330,#241420 60%,#2d1b2e);
-  box-shadow:0 20px 44px rgba(0,0,0,.5),inset 0 0 0 1px rgba(245,159,10,.3);
-  border-left:9px solid rgba(245,159,10,.55);
+/* card inicial = bandeja cirúrgica estéril (gamificação Mesa Cirúrgica) */
+.hero-cover{position:relative;width:194px;height:256px;flex:none;cursor:pointer;border-radius:18px;
+  background:linear-gradient(150deg,#eef3f6 0%,#dbe6ec 45%,#c5d3db 100%);
+  box-shadow:0 20px 44px rgba(0,0,0,.4),inset 0 0 0 1px rgba(3,157,252,.3);
+  border:1px solid rgba(3,157,252,.35);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;text-align:center;
   transition:.35s cubic-bezier(.34,1.3,.64,1)}
-.hero-cover:hover{transform:translateY(-5px) rotateY(-9deg);box-shadow:0 30px 56px rgba(0,0,0,.55)}
-.hero-cover .hc-border{position:absolute;inset:12px;border:1.4px solid rgba(245,159,10,.45);border-radius:9px}
-.hero-cover .hc-border::after{content:'';position:absolute;inset:6px;border:1px solid rgba(245,159,10,.22);border-radius:6px}
-.hero-cover .hcv-logo{position:relative;width:78px;height:78px;color:var(--accent)}
-.hero-cover .hcv-logo svg{width:78px;height:78px}.hero-cover .sb-glow{inset:-12%}
+.hero-cover:hover{transform:translateY(-5px);box-shadow:0 30px 56px rgba(0,0,0,.45)}
+.hero-cover .hc-border{position:absolute;inset:12px;border:1.4px solid rgba(3,157,252,.4);border-radius:14px}
+.hero-cover .hc-border::after{content:'';position:absolute;inset:6px;border:1px dashed rgba(3,157,252,.28);border-radius:10px}
+.hero-cover .hcv-logo{position:relative;width:84px;height:60px;color:var(--accent)}
+.hero-cover .hcv-logo svg{width:84px;height:60px}.hero-cover .sb-glow{inset:-12%}
 .hero-cover .hcv-ttl{font-family:'Parisienne',cursive;font-size:1.55rem;color:var(--accent);line-height:1.05}
-.hero-cover .hcv-sub{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(247,231,206,.6)}
+.hero-cover .hcv-sub{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(30,45,55,.55)}
 
 /* ---------- LIVRO INTERATIVO ---------- */
 .book-bar{display:flex;align-items:center;justify-content:center;gap:18px;margin:14px 0 22px}
@@ -740,7 +740,14 @@ function viewDashboard(nm){
     <div class="hero">
       <div class="hero-cover" onclick="navigate('collection')" title="Abrir Mesa Cirúrgica">
         <div class="hc-border"></div>
-        <div class="hcv-logo"><span class="sb-glow"></span>${LOGO}</div>
+        <div class="hcv-logo"><span class="sb-glow"></span><svg viewBox="0 0 84 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="42" cy="32" rx="38" ry="22" stroke="currentColor" stroke-width="2"/>
+          <ellipse cx="42" cy="32" rx="29" ry="15.5" stroke="currentColor" stroke-width="1.1" stroke-dasharray="3 3" opacity=".55"/>
+          <path d="M17 29q12-7 25 0t25 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".5"/>
+          <path d="M19 36q11-6 23 0t23 0" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity=".35"/>
+          <line x1="9" y1="13" x2="16" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".5"/>
+          <line x1="75" y1="13" x2="68" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".5"/>
+        </svg></div>
         <div class="hcv-ttl">Mesa<br>Cirúrgica</div>
         <div class="hcv-sub">Ver instrumentos</div>
       </div>
@@ -2215,9 +2222,15 @@ window.IC = {
 </script>
 
 <script>
+/* ===== SVGs didáticos do módulo Trauma (aditivo) ===== */
+Object.assign(window.ASVG = window.ASVG || {}, {"tr_trimodal": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#241418\"/><text x=\"340\" y=\"28\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Distribuição trimodal da morte no trauma</text><rect x=\"20\" y=\"50\" width=\"200\" height=\"150\" rx=\"12\" fill=\"#3a1c1e\" stroke=\"#e8675f\"/><text x=\"120\" y=\"72\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Imediata</text><text x=\"120\" y=\"90\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">Segundos a minutos</text><text x=\"34\" y=\"112\" fill=\"#cbb9ac\" font-size=\"8.8\">Lesão de aorta, tronco</text><text x=\"34\" y=\"126\" fill=\"#cbb9ac\" font-size=\"8.8\">encefalico, coração</text><text x=\"34\" y=\"146\" fill=\"#f1e3e0\" font-size=\"9\" font-weight=\"700\">So a PREVENção evita</text><rect x=\"240\" y=\"50\" width=\"200\" height=\"150\" rx=\"12\" fill=\"#3a1c1e\" stroke=\"#f0a93f\"/><text x=\"340\" y=\"72\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\">Precoce</text><text x=\"340\" y=\"90\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">Minutos a horas</text><text x=\"254\" y=\"112\" fill=\"#cbb9ac\" font-size=\"8.8\">Hematomas, pneumotorax,</text><text x=\"254\" y=\"126\" fill=\"#cbb9ac\" font-size=\"8.8\">ruptura de baco/figado</text><text x=\"254\" y=\"146\" fill=\"#f59f0a\" font-size=\"9.4\" font-weight=\"700\">\"GOLDEN HOUR\" - o ATLS</text><text x=\"254\" y=\"160\" fill=\"#f59f0a\" font-size=\"9.4\" font-weight=\"700\">salva vidas aqui</text><rect x=\"460\" y=\"50\" width=\"200\" height=\"150\" rx=\"12\" fill=\"#3a1c1e\" stroke=\"#6db3f2\"/><text x=\"560\" y=\"72\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Tardia</text><text x=\"560\" y=\"90\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">Dias a semanas</text><text x=\"474\" y=\"112\" fill=\"#cbb9ac\" font-size=\"8.8\">Sepse e disfunção de</text><text x=\"474\" y=\"126\" fill=\"#cbb9ac\" font-size=\"8.8\">multiplos órgãos (DMOS)</text><text x=\"474\" y=\"146\" fill=\"#f1e3e0\" font-size=\"9\" font-weight=\"700\">UTI, controle de foco</text><rect x=\"20\" y=\"218\" width=\"640\" height=\"46\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"238\" fill=\"#f1e3e0\" font-size=\"10.3\" text-anchor=\"middle\" font-weight=\"700\">Principio de ouro do ATLS: tratar a maior ameaca a vida primeiro, sem esperar diagnostico fechado</text><text x=\"340\" y=\"254\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">A historia detalhada NAO e pre-requisito para iniciar o tratamento salvador</text><rect x=\"20\" y=\"272\" width=\"640\" height=\"34\" rx=\"10\" fill=\"#3a1c1e\" stroke=\"#6db3f2\"/><text x=\"340\" y=\"294\" fill=\"#cfe0e6\" font-size=\"9.6\" text-anchor=\"middle\">Sequencia: preparo/triagem -&gt; primaria (XABCDE) -&gt; adjuntos -&gt; reavaliar -&gt; secundaria (AMPLA)</text></svg>", "tr_xabcde": "<svg viewBox=\"0 0 680 360\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"360\" rx=\"16\" fill=\"#241418\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">XABCDE - o que mata primeiro, resolve primeiro</text><g><rect x=\"18\" y=\"42\" width=\"100\" height=\"130\" rx=\"10\" fill=\"#3a1c1e\" stroke=\"#e8675f\"/><text x=\"68\" y=\"64\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"15\">X</text><text x=\"68\" y=\"82\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">Hemorragia</text><text x=\"68\" y=\"94\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">exsanguinante</text><text x=\"68\" y=\"118\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">Torniquete</text><text x=\"68\" y=\"130\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">ja, antes do A</text></g><g><rect x=\"124\" y=\"42\" width=\"100\" height=\"130\" rx=\"10\" fill=\"#3a1c1e\" stroke=\"#f0a93f\"/><text x=\"174\" y=\"64\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"15\">A</text><text x=\"174\" y=\"82\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">Via aerea +</text><text x=\"174\" y=\"94\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">coluna cervical</text><text x=\"174\" y=\"118\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">Glasgow&lt;=8 =</text><text x=\"174\" y=\"130\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">via aerea definitiva</text></g><g><rect x=\"230\" y=\"42\" width=\"100\" height=\"130\" rx=\"10\" fill=\"#3a1c1e\" stroke=\"#f59f0a\"/><text x=\"280\" y=\"64\" fill=\"#f59f0a\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"15\">B</text><text x=\"280\" y=\"82\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">Respiracao</text><text x=\"280\" y=\"94\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">(5 letais)</text><text x=\"280\" y=\"118\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">Pneumotorax</text><text x=\"280\" y=\"130\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">e clinico</text></g><g><rect x=\"336\" y=\"42\" width=\"100\" height=\"130\" rx=\"10\" fill=\"#3a1c1e\" stroke=\"#3ddc84\"/><text x=\"386\" y=\"64\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"15\">C</text><text x=\"386\" y=\"82\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">Circulacao</text><text x=\"386\" y=\"94\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">(5 focos)</text><text x=\"386\" y=\"118\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">2 acessos</text><text x=\"386\" y=\"130\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">calibrosos</text></g><g><rect x=\"442\" y=\"42\" width=\"100\" height=\"130\" rx=\"10\" fill=\"#3a1c1e\" stroke=\"#6db3f2\"/><text x=\"492\" y=\"64\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"15\">D</text><text x=\"492\" y=\"82\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">Neurologico</text><text x=\"492\" y=\"94\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">(Glasgow/pupilas)</text><text x=\"492\" y=\"118\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">Corrigir A,B,C</text><text x=\"492\" y=\"130\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">antes de culpar SNC</text></g><g><rect x=\"548\" y=\"42\" width=\"114\" height=\"130\" rx=\"10\" fill=\"#3a1c1e\" stroke=\"#a98bf0\"/><text x=\"605\" y=\"64\" fill=\"#a98bf0\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"15\">E</text><text x=\"605\" y=\"82\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">Exposicao +</text><text x=\"605\" y=\"94\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">aquecer</text><text x=\"605\" y=\"118\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">Despir tudo,</text><text x=\"605\" y=\"130\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">evitar hipotermia</text></g><path d=\"M118 107 L124 107\" stroke=\"#f1e3e0\" stroke-width=\"2\"/><path d=\"M224 107 L230 107\" stroke=\"#f1e3e0\" stroke-width=\"2\"/><path d=\"M330 107 L336 107\" stroke=\"#f1e3e0\" stroke-width=\"2\"/><path d=\"M436 107 L442 107\" stroke=\"#f1e3e0\" stroke-width=\"2\"/><path d=\"M542 107 L548 107\" stroke=\"#f1e3e0\" stroke-width=\"2\"/><rect x=\"18\" y=\"188\" width=\"644\" height=\"60\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"210\" fill=\"#f1e3e0\" font-size=\"10.3\" text-anchor=\"middle\" font-weight=\"700\">Regra de ouro: so avanca para a proxima letra quando a anterior esta controlada</text><text x=\"340\" y=\"228\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">Qualquer piora clinica durante o atendimento = VOLTAR ao A e reavaliar tudo de novo</text><rect x=\"18\" y=\"258\" width=\"644\" height=\"86\" rx=\"10\" fill=\"#3a1c1e\" stroke=\"#6db3f2\"/><text x=\"34\" y=\"280\" fill=\"#6db3f2\" font-weight=\"700\" font-size=\"10\">Os 5 focos de hemorragia (foco do \"C\")</text><text x=\"34\" y=\"298\" fill=\"#f1e3e0\" font-size=\"9.4\">Torax - Abdome - Pelve/retroperitonio - Ossos longos (femur) - Externo (\"sangue no chao\")</text><text x=\"34\" y=\"320\" fill=\"#f1e3e0\" font-size=\"9.4\">As 5 condicoes letais do \"B\": pneumotorax hipertensivo, aberto, hemotorax macico,</text><text x=\"34\" y=\"334\" fill=\"#f1e3e0\" font-size=\"9.4\">tamponamento cardiaco, torax instavel - todas sao diagnostico CLINICO</text></svg>", "tr_choque_classes": "<svg viewBox=\"0 0 680 340\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"340\" rx=\"16\" fill=\"#201822\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">As 4 classes do choque hemorragico (ATLS)</text><g><rect x=\"16\" y=\"44\" width=\"158\" height=\"176\" rx=\"10\" fill=\"#2c2130\" stroke=\"#3ddc84\"/><text x=\"95\" y=\"64\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Classe I</text><text x=\"95\" y=\"80\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">&lt;15% (&lt;750mL)</text><text x=\"28\" y=\"100\" fill=\"#cbb9ac\" font-size=\"8.6\">FC &lt;100</text><text x=\"28\" y=\"114\" fill=\"#cbb9ac\" font-size=\"8.6\">PA normal</text><text x=\"28\" y=\"128\" fill=\"#cbb9ac\" font-size=\"8.6\">Pulso normal/alto</text><text x=\"28\" y=\"142\" fill=\"#cbb9ac\" font-size=\"8.6\">Pouco ansioso</text><text x=\"28\" y=\"160\" fill=\"#3ddc84\" font-size=\"8.4\" font-weight=\"700\">Como doar sangue</text></g><g><rect x=\"182\" y=\"44\" width=\"158\" height=\"176\" rx=\"10\" fill=\"#2c2130\" stroke=\"#f0a93f\"/><text x=\"261\" y=\"64\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\">Classe II</text><text x=\"261\" y=\"80\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">15-30% (750-1500mL)</text><text x=\"194\" y=\"100\" fill=\"#cbb9ac\" font-size=\"8.6\">FC 100-120</text><text x=\"194\" y=\"114\" fill=\"#cbb9ac\" font-size=\"8.6\">PA sistolica normal</text><text x=\"194\" y=\"128\" fill=\"#cbb9ac\" font-size=\"8.6\">Pulso ESTREITO</text><text x=\"194\" y=\"142\" fill=\"#cbb9ac\" font-size=\"8.6\">Ansioso</text><text x=\"194\" y=\"160\" fill=\"#f0a93f\" font-size=\"8.2\" font-weight=\"700\">1o sinal: pulso</text><text x=\"194\" y=\"172\" fill=\"#f0a93f\" font-size=\"8.2\" font-weight=\"700\">estreito</text></g><g><rect x=\"348\" y=\"44\" width=\"158\" height=\"176\" rx=\"10\" fill=\"#2c2130\" stroke=\"#e8675f\"/><text x=\"427\" y=\"64\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Classe III</text><text x=\"427\" y=\"80\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">31-40% (1500-2000mL)</text><text x=\"360\" y=\"100\" fill=\"#cbb9ac\" font-size=\"8.6\">FC 120-140</text><text x=\"360\" y=\"114\" fill=\"#cbb9ac\" font-size=\"8.6\">PA sistolica CAI</text><text x=\"360\" y=\"128\" fill=\"#cbb9ac\" font-size=\"8.6\">Diurese 5-15 mL/h</text><text x=\"360\" y=\"142\" fill=\"#cbb9ac\" font-size=\"8.6\">Confuso</text><text x=\"360\" y=\"160\" fill=\"#e8675f\" font-size=\"8.2\" font-weight=\"700\">Paciente em</text><text x=\"360\" y=\"172\" fill=\"#e8675f\" font-size=\"8.2\" font-weight=\"700\">perigo real</text></g><g><rect x=\"514\" y=\"44\" width=\"150\" height=\"176\" rx=\"10\" fill=\"#2c2130\" stroke=\"#c2453d\"/><text x=\"589\" y=\"64\" fill=\"#c2453d\" font-weight=\"700\" text-anchor=\"middle\">Classe IV</text><text x=\"589\" y=\"80\" fill=\"#f1e3e0\" font-size=\"9.2\" text-anchor=\"middle\">&gt;40% (&gt;2000mL)</text><text x=\"526\" y=\"100\" fill=\"#cbb9ac\" font-size=\"8.6\">FC &gt;140</text><text x=\"526\" y=\"114\" fill=\"#cbb9ac\" font-size=\"8.6\">PA muito baixa</text><text x=\"526\" y=\"128\" fill=\"#cbb9ac\" font-size=\"8.6\">Anuria</text><text x=\"526\" y=\"142\" fill=\"#cbb9ac\" font-size=\"8.6\">Letargico</text><text x=\"526\" y=\"160\" fill=\"#c2453d\" font-size=\"8.2\" font-weight=\"700\">Pre-morte,</text><text x=\"526\" y=\"172\" fill=\"#c2453d\" font-size=\"8.2\" font-weight=\"700\">agir ja</text></g><rect x=\"16\" y=\"234\" width=\"648\" height=\"44\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"254\" fill=\"#f1e3e0\" font-size=\"10.2\" text-anchor=\"middle\" font-weight=\"700\">FC e nivel de consciencia mudam ANTES da pressao cair - nao espere hipotensao para reconhecer choque</text><text x=\"340\" y=\"270\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\">A hipotensao so aparece a partir da classe III (perda ja de 31-40%)</text><rect x=\"16\" y=\"288\" width=\"648\" height=\"38\" rx=\"10\" fill=\"#2c2130\" stroke=\"#6db3f2\"/><text x=\"340\" y=\"310\" fill=\"#cfe0e6\" font-size=\"9.6\" text-anchor=\"middle\">Jovens compensam ate a classe III e descompensam de repente; idosos/betabloqueados podem nao taquicardizar</text></svg>", "tr_fast_janelas": "<svg viewBox=\"0 0 680 340\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"340\" rx=\"16\" fill=\"#161f24\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">As 4 janelas do FAST (+ pleura no eFAST)</text><ellipse cx=\"340\" cy=\"180\" rx=\"150\" ry=\"120\" fill=\"#22323a\" stroke=\"#3a4a52\" stroke-width=\"2\"/><circle cx=\"340\" cy=\"120\" r=\"26\" fill=\"#6db3f2\" fill-opacity=\"0.5\" stroke=\"#6db3f2\"/><text x=\"340\" y=\"124\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">coracao</text><circle cx=\"290\" cy=\"175\" r=\"24\" fill=\"#f0a93f\" fill-opacity=\"0.5\" stroke=\"#f0a93f\"/><text x=\"290\" y=\"179\" fill=\"#f1e3e0\" font-size=\"7.6\" text-anchor=\"middle\">Morrison</text><circle cx=\"392\" cy=\"178\" r=\"24\" fill=\"#3ddc84\" fill-opacity=\"0.45\" stroke=\"#3ddc84\"/><text x=\"392\" y=\"182\" fill=\"#f1e3e0\" font-size=\"7.4\" text-anchor=\"middle\">esplenorrenal</text><circle cx=\"340\" cy=\"240\" r=\"26\" fill=\"#e8675f\" fill-opacity=\"0.45\" stroke=\"#e8675f\"/><text x=\"340\" y=\"244\" fill=\"#f1e3e0\" font-size=\"7.6\" text-anchor=\"middle\">Douglas</text><rect x=\"20\" y=\"44\" width=\"188\" height=\"140\" rx=\"10\" fill=\"#22323a\" stroke=\"#6db3f2\"/><text x=\"114\" y=\"64\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"10.4\">1. Pericardica</text><text x=\"34\" y=\"84\" fill=\"#cbb9ac\" font-size=\"8.4\">Subxifoide</text><text x=\"34\" y=\"98\" fill=\"#f1e3e0\" font-size=\"8.4\">Detecta derrame/</text><text x=\"34\" y=\"110\" fill=\"#f1e3e0\" font-size=\"8.4\">tamponamento</text><text x=\"34\" y=\"128\" fill=\"#f59f0a\" font-size=\"8.2\" font-weight=\"700\">Crucial em ferimento</text><text x=\"34\" y=\"140\" fill=\"#f59f0a\" font-size=\"8.2\" font-weight=\"700\">precordial</text><rect x=\"472\" y=\"44\" width=\"188\" height=\"140\" rx=\"10\" fill=\"#22323a\" stroke=\"#f0a93f\"/><text x=\"566\" y=\"64\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"10.4\">2. Hepatorrenal</text><text x=\"486\" y=\"84\" fill=\"#cbb9ac\" font-size=\"8.4\">Espaco de Morrison</text><text x=\"486\" y=\"102\" fill=\"#f59f0a\" font-size=\"8.6\" font-weight=\"700\">A MAIS sensivel</text><text x=\"486\" y=\"116\" fill=\"#f59f0a\" font-size=\"8.6\" font-weight=\"700\">para abdome</text><text x=\"486\" y=\"134\" fill=\"#f1e3e0\" font-size=\"8.2\">Primeiro lugar onde</text><text x=\"486\" y=\"146\" fill=\"#f1e3e0\" font-size=\"8.2\">o liquido se acumula</text><rect x=\"20\" y=\"196\" width=\"188\" height=\"128\" rx=\"10\" fill=\"#22323a\" stroke=\"#3ddc84\"/><text x=\"114\" y=\"216\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"10.4\">3. Esplenorrenal</text><text x=\"34\" y=\"236\" fill=\"#cbb9ac\" font-size=\"8.4\">Quadrante superior</text><text x=\"34\" y=\"248\" fill=\"#cbb9ac\" font-size=\"8.4\">esquerdo</text><rect x=\"472\" y=\"196\" width=\"188\" height=\"128\" rx=\"10\" fill=\"#22323a\" stroke=\"#e8675f\"/><text x=\"566\" y=\"216\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"10.4\">4. Pelvica</text><text x=\"486\" y=\"236\" fill=\"#cbb9ac\" font-size=\"8.4\">Fundo de saco de</text><text x=\"486\" y=\"248\" fill=\"#cbb9ac\" font-size=\"8.4\">Douglas (suprapubica)</text><rect x=\"214\" y=\"292\" width=\"252\" height=\"34\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.16\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"313\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">eFAST = FAST + pleura (pneumo/hemotorax)</text></svg>", "tr_fast_decisao": "<svg viewBox=\"0 0 680 260\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"260\" rx=\"16\" fill=\"#161f24\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">FAST so responde: \"tem liquido livre?\"</text><rect x=\"250\" y=\"42\" width=\"180\" height=\"38\" rx=\"10\" fill=\"#22323a\" stroke=\"#6db3f2\"/><text x=\"340\" y=\"66\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\" font-weight=\"700\">Trauma - avaliar estabilidade</text><path d=\"M300 80 L200 108\" stroke=\"#c9a8a0\" stroke-width=\"2\"/><path d=\"M380 80 L480 108\" stroke=\"#c9a8a0\" stroke-width=\"2\"/><rect x=\"110\" y=\"110\" width=\"180\" height=\"40\" rx=\"10\" fill=\"#3a1c1e\" stroke=\"#e8675f\"/><text x=\"200\" y=\"135\" fill=\"#e8675f\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"700\">INSTAVEL</text><rect x=\"390\" y=\"110\" width=\"180\" height=\"40\" rx=\"10\" fill=\"#1c3a2a\" stroke=\"#3ddc84\"/><text x=\"480\" y=\"135\" fill=\"#3ddc84\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"700\">ESTAVEL</text><path d=\"M200 150 L200 170\" stroke=\"#c9a8a0\" stroke-width=\"2\"/><path d=\"M480 150 L480 170\" stroke=\"#c9a8a0\" stroke-width=\"2\"/><rect x=\"90\" y=\"172\" width=\"220\" height=\"66\" rx=\"10\" fill=\"#22323a\" stroke=\"#f59f0a\"/><text x=\"200\" y=\"192\" fill=\"#f1e3e0\" font-size=\"9.2\" text-anchor=\"middle\" font-weight=\"700\">FAST na propria maca</text><text x=\"200\" y=\"208\" fill=\"#3ddc84\" font-size=\"8.8\" text-anchor=\"middle\">Positivo -&gt; laparotomia JA</text><text x=\"200\" y=\"222\" fill=\"#f0a93f\" font-size=\"8.8\" text-anchor=\"middle\">Negativo -&gt; buscar outro foco</text><rect x=\"370\" y=\"172\" width=\"220\" height=\"66\" rx=\"10\" fill=\"#22323a\" stroke=\"#f59f0a\"/><text x=\"480\" y=\"192\" fill=\"#f1e3e0\" font-size=\"9.2\" text-anchor=\"middle\" font-weight=\"700\">TC e o exame de escolha</text><text x=\"480\" y=\"208\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">Caracteriza lesao, define</text><text x=\"480\" y=\"222\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">tratamento nao-operatorio</text></svg>", "tr_abdome_mecanismo": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#201822\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Fechado x penetrante: mecanismos e orgaos mais atingidos</text><rect x=\"20\" y=\"44\" width=\"300\" height=\"200\" rx=\"12\" fill=\"#2c2130\" stroke=\"#6db3f2\"/><text x=\"170\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Trauma FECHADO (contuso)</text><text x=\"34\" y=\"88\" fill=\"#f1e3e0\" font-size=\"9.2\">Desaceleracao/compressao</text><text x=\"34\" y=\"104\" fill=\"#f1e3e0\" font-size=\"9.2\">(colisao, queda)</text><rect x=\"34\" y=\"116\" width=\"272\" height=\"34\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.16\" stroke=\"#f59f0a\"/><text x=\"170\" y=\"138\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\" font-weight=\"700\">Orgao mais lesado: BACO</text><text x=\"34\" y=\"168\" fill=\"#cbb9ac\" font-size=\"8.8\">Depois: figado</text><text x=\"34\" y=\"184\" fill=\"#cbb9ac\" font-size=\"8.8\">Perigo = lesao interna escondida,</text><text x=\"34\" y=\"198\" fill=\"#cbb9ac\" font-size=\"8.8\">sem ferida visivel</text><text x=\"34\" y=\"220\" fill=\"#f0a93f\" font-size=\"8.6\" font-weight=\"700\">Sinal do cinto de seguranca:</text><text x=\"34\" y=\"234\" fill=\"#f0a93f\" font-size=\"8.4\">pensar em viscera oca + Chance</text><rect x=\"360\" y=\"44\" width=\"300\" height=\"200\" rx=\"12\" fill=\"#2c2130\" stroke=\"#e8675f\"/><text x=\"510\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Trauma PENETRANTE</text><text x=\"374\" y=\"88\" fill=\"#f1e3e0\" font-size=\"9.2\">Arma branca ou arma de fogo</text><rect x=\"374\" y=\"100\" width=\"130\" height=\"60\" rx=\"8\" fill=\"#1c3a2a\" stroke=\"#3ddc84\"/><text x=\"439\" y=\"118\" fill=\"#3ddc84\" font-size=\"8.8\" text-anchor=\"middle\" font-weight=\"700\">Arma branca</text><text x=\"439\" y=\"134\" fill=\"#f1e3e0\" font-size=\"8.2\" text-anchor=\"middle\">Baixa energia</text><text x=\"439\" y=\"148\" fill=\"#f1e3e0\" font-size=\"8.2\" text-anchor=\"middle\">Orgao+: FIGADO</text><rect x=\"516\" y=\"100\" width=\"130\" height=\"60\" rx=\"8\" fill=\"#3a1c1e\" stroke=\"#e8675f\"/><text x=\"581\" y=\"118\" fill=\"#e8675f\" font-size=\"8.8\" text-anchor=\"middle\" font-weight=\"700\">Arma de fogo</text><text x=\"581\" y=\"134\" fill=\"#f1e3e0\" font-size=\"8.2\" text-anchor=\"middle\">Alta energia</text><text x=\"581\" y=\"148\" fill=\"#f1e3e0\" font-size=\"8.2\" text-anchor=\"middle\">Orgao+: DELGADO</text><text x=\"374\" y=\"182\" fill=\"#cbb9ac\" font-size=\"8.6\">FAF com violacao peritoneal =</text><text x=\"374\" y=\"196\" fill=\"#cbb9ac\" font-size=\"8.6\">laparotomia (mesmo estavel)</text><text x=\"374\" y=\"216\" fill=\"#cbb9ac\" font-size=\"8.6\">Arma branca estavel = pode</text><text x=\"374\" y=\"230\" fill=\"#cbb9ac\" font-size=\"8.6\">ser conduta seletiva</text><rect x=\"20\" y=\"256\" width=\"640\" height=\"34\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"278\" fill=\"#f1e3e0\" font-size=\"9.8\" text-anchor=\"middle\" font-weight=\"700\">Pergunta central sempre: operar ou nao? Depende de estabilidade hemodinamica + mecanismo</text></svg>", "tr_torax_letais": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#1c1620\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">As 5 lesoes toracicas que matam JA (letais imediatas)</text><g><rect x=\"16\" y=\"44\" width=\"122\" height=\"150\" rx=\"10\" fill=\"#28202e\" stroke=\"#e8675f\"/><text x=\"77\" y=\"64\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"9.6\">Pneumotorax</text><text x=\"77\" y=\"78\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"9.6\">hipertensivo</text><text x=\"28\" y=\"98\" fill=\"#f1e3e0\" font-size=\"8\">Desvio traqueia,</text><text x=\"28\" y=\"110\" fill=\"#f1e3e0\" font-size=\"8\">jugular cheia,</text><text x=\"28\" y=\"122\" fill=\"#f1e3e0\" font-size=\"8\">MV abolido,</text><text x=\"28\" y=\"134\" fill=\"#f1e3e0\" font-size=\"8\">timpanismo</text><text x=\"28\" y=\"156\" fill=\"#f59f0a\" font-size=\"8\" font-weight=\"700\">Puncao/dreno JA,</text><text x=\"28\" y=\"168\" fill=\"#f59f0a\" font-size=\"8\" font-weight=\"700\">antes do Rx</text></g><g><rect x=\"144\" y=\"44\" width=\"122\" height=\"150\" rx=\"10\" fill=\"#28202e\" stroke=\"#f0a93f\"/><text x=\"205\" y=\"64\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"9.6\">Pneumotorax</text><text x=\"205\" y=\"78\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"9.6\">aberto</text><text x=\"156\" y=\"98\" fill=\"#f1e3e0\" font-size=\"8\">Ferida soprante</text><text x=\"156\" y=\"112\" fill=\"#f1e3e0\" font-size=\"8\">no torax</text><text x=\"156\" y=\"156\" fill=\"#f59f0a\" font-size=\"8\" font-weight=\"700\">Curativo 3 pontas</text><text x=\"156\" y=\"168\" fill=\"#f59f0a\" font-size=\"8\" font-weight=\"700\">+ dreno em outro local</text></g><g><rect x=\"272\" y=\"44\" width=\"122\" height=\"150\" rx=\"10\" fill=\"#28202e\" stroke=\"#6db3f2\"/><text x=\"333\" y=\"64\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"9.6\">Hemotorax</text><text x=\"333\" y=\"78\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"9.6\">macico</text><text x=\"284\" y=\"98\" fill=\"#f1e3e0\" font-size=\"8\">MV abolido +</text><text x=\"284\" y=\"110\" fill=\"#f1e3e0\" font-size=\"8\">macicez + choque</text><text x=\"284\" y=\"156\" fill=\"#f59f0a\" font-size=\"8\" font-weight=\"700\">Dreno + reposicao</text><text x=\"284\" y=\"168\" fill=\"#f59f0a\" font-size=\"8\" font-weight=\"700\">+- toracotomia</text></g><g><rect x=\"400\" y=\"44\" width=\"122\" height=\"150\" rx=\"10\" fill=\"#28202e\" stroke=\"#3ddc84\"/><text x=\"461\" y=\"64\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"9.6\">Tamponamento</text><text x=\"461\" y=\"78\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"9.6\">cardiaco</text><text x=\"412\" y=\"98\" fill=\"#f1e3e0\" font-size=\"8\">Triade de Beck:</text><text x=\"412\" y=\"110\" fill=\"#f1e3e0\" font-size=\"8\">hipotensao+jugular</text><text x=\"412\" y=\"122\" fill=\"#f1e3e0\" font-size=\"8\">+bulhas abafadas</text><text x=\"412\" y=\"156\" fill=\"#f59f0a\" font-size=\"8\" font-weight=\"700\">FAST -&gt; pericardio-</text><text x=\"412\" y=\"168\" fill=\"#f59f0a\" font-size=\"8\" font-weight=\"700\">centese/toracotomia</text></g><g><rect x=\"528\" y=\"44\" width=\"136\" height=\"150\" rx=\"10\" fill=\"#28202e\" stroke=\"#a98bf0\"/><text x=\"596\" y=\"64\" fill=\"#a98bf0\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"9.6\">Torax instavel</text><text x=\"540\" y=\"86\" fill=\"#f1e3e0\" font-size=\"8\">Respiracao</text><text x=\"540\" y=\"98\" fill=\"#f1e3e0\" font-size=\"8\">paradoxal +</text><text x=\"540\" y=\"110\" fill=\"#f1e3e0\" font-size=\"8\">contusao pulmonar</text><text x=\"540\" y=\"156\" fill=\"#f59f0a\" font-size=\"8\" font-weight=\"700\">Analgesia+O2</text><text x=\"540\" y=\"168\" fill=\"#f59f0a\" font-size=\"8\" font-weight=\"700\">+- ventilacao</text></g><rect x=\"16\" y=\"210\" width=\"648\" height=\"42\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"230\" fill=\"#f1e3e0\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"700\">Todas sao diagnostico CLINICO (na avaliacao primaria) - nao esperar exame de imagem</text><text x=\"340\" y=\"246\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">~85% do trauma toracico resolve so com dreno; apenas ~15% precisa de toracotomia</text><rect x=\"16\" y=\"262\" width=\"648\" height=\"42\" rx=\"10\" fill=\"#28202e\" stroke=\"#6db3f2\"/><text x=\"340\" y=\"282\" fill=\"#cfe0e6\" font-size=\"9.4\" text-anchor=\"middle\">Potencialmente letais (2a avaliacao): contusao pulmonar/miocardica, ruptura de aorta,</text><text x=\"340\" y=\"296\" fill=\"#cfe0e6\" font-size=\"9.4\" text-anchor=\"middle\">lesao traqueobronquica, de esofago e de diafragma</text></svg>", "tr_tce_hematomas": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#181c26\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Epidural x Subdural - a diferenca que mais cai</text><g><rect x=\"30\" y=\"44\" width=\"290\" height=\"216\" rx=\"12\" fill=\"#212a38\" stroke=\"#e8675f\"/><text x=\"175\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"12\">Hematoma EPIDURAL</text><ellipse cx=\"175\" cy=\"120\" rx=\"70\" ry=\"34\" fill=\"#e8675f\" fill-opacity=\"0.5\" stroke=\"#e8675f\"/><text x=\"175\" y=\"124\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\" font-weight=\"700\">biconvexo (lente)</text><text x=\"44\" y=\"172\" fill=\"#f1e3e0\" font-size=\"9\">Vaso: arteria meningea media</text><text x=\"44\" y=\"188\" fill=\"#f1e3e0\" font-size=\"9\">NAO cruza suturas cranianas</text><rect x=\"44\" y=\"200\" width=\"252\" height=\"48\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.16\" stroke=\"#f59f0a\"/><text x=\"175\" y=\"218\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\" font-weight=\"700\">Intervalo lucido classico</text><text x=\"175\" y=\"234\" fill=\"#f1e3e0\" font-size=\"8.2\" text-anchor=\"middle\">Desmaia -&gt; acorda lucido -&gt; piora rapido</text></g><g><rect x=\"360\" y=\"44\" width=\"290\" height=\"216\" rx=\"12\" fill=\"#212a38\" stroke=\"#6db3f2\"/><text x=\"505\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"12\">Hematoma SUBDURAL</text><path d=\"M470 90 Q560 100 560 150 Q560 200 470 210 Q510 150 470 90 Z\" fill=\"#6db3f2\" fill-opacity=\"0.5\" stroke=\"#6db3f2\"/><text x=\"540\" y=\"150\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\" font-weight=\"700\">crescente</text><text x=\"540\" y=\"164\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\" font-weight=\"700\">(meia-lua)</text><text x=\"374\" y=\"172\" fill=\"#f1e3e0\" font-size=\"9\">Vaso: veias-ponte</text><text x=\"374\" y=\"188\" fill=\"#f1e3e0\" font-size=\"9\">CRUZA suturas cranianas</text><rect x=\"374\" y=\"200\" width=\"252\" height=\"48\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.16\" stroke=\"#f59f0a\"/><text x=\"505\" y=\"218\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\" font-weight=\"700\">Idoso/alcoolista, atrofia cerebral</text><text x=\"505\" y=\"234\" fill=\"#f1e3e0\" font-size=\"8.2\" text-anchor=\"middle\">Pior prognostico (lesao cerebral junto)</text></g><rect x=\"30\" y=\"270\" width=\"620\" height=\"24\" rx=\"8\" fill=\"none\"/><text x=\"340\" y=\"286\" fill=\"#cbb9ac\" font-size=\"9.2\" text-anchor=\"middle\">HSA traumatica e a hemorragia intracraniana mais comum no TCE (sangue em sulcos/cisternas)</text></svg>", "tr_glasgow": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#181c26\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Escala de Coma de Glasgow (3 a 15)</text><g><rect x=\"20\" y=\"44\" width=\"200\" height=\"180\" rx=\"10\" fill=\"#212a38\" stroke=\"#6db3f2\"/><text x=\"120\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Ocular (4)</text><text x=\"34\" y=\"88\" fill=\"#f1e3e0\" font-size=\"8.8\">4 - Espontanea</text><text x=\"34\" y=\"104\" fill=\"#f1e3e0\" font-size=\"8.8\">3 - Ao som/chamado</text><text x=\"34\" y=\"120\" fill=\"#f1e3e0\" font-size=\"8.8\">2 - A pressao/dor</text><text x=\"34\" y=\"136\" fill=\"#f1e3e0\" font-size=\"8.8\">1 - Ausente</text></g><g><rect x=\"236\" y=\"44\" width=\"208\" height=\"180\" rx=\"10\" fill=\"#212a38\" stroke=\"#f0a93f\"/><text x=\"340\" y=\"66\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\">Verbal (5)</text><text x=\"250\" y=\"88\" fill=\"#f1e3e0\" font-size=\"8.8\">5 - Orientado</text><text x=\"250\" y=\"104\" fill=\"#f1e3e0\" font-size=\"8.8\">4 - Confuso</text><text x=\"250\" y=\"120\" fill=\"#f1e3e0\" font-size=\"8.8\">3 - Palavras inapropriadas</text><text x=\"250\" y=\"136\" fill=\"#f1e3e0\" font-size=\"8.8\">2 - Sons incompreensiveis</text><text x=\"250\" y=\"152\" fill=\"#f1e3e0\" font-size=\"8.8\">1 - Ausente</text></g><g><rect x=\"460\" y=\"44\" width=\"200\" height=\"180\" rx=\"10\" fill=\"#212a38\" stroke=\"#3ddc84\"/><text x=\"560\" y=\"66\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Motora (6)</text><text x=\"474\" y=\"88\" fill=\"#f1e3e0\" font-size=\"8.6\">6 - Obedece comandos</text><text x=\"474\" y=\"104\" fill=\"#f1e3e0\" font-size=\"8.6\">5 - Localiza dor</text><text x=\"474\" y=\"120\" fill=\"#f1e3e0\" font-size=\"8.6\">4 - Retirada a dor</text><text x=\"474\" y=\"136\" fill=\"#f0a93f\" font-size=\"8.6\">3 - Flexao (decorticacao)</text><text x=\"474\" y=\"152\" fill=\"#e8675f\" font-size=\"8.6\">2 - Extensao (descerebracao)</text><text x=\"474\" y=\"168\" fill=\"#f1e3e0\" font-size=\"8.6\">1 - Ausente</text></g><rect x=\"20\" y=\"234\" width=\"640\" height=\"52\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"254\" fill=\"#f1e3e0\" font-size=\"10.2\" text-anchor=\"middle\" font-weight=\"700\">Leve 13-15  |  Moderado 9-12  |  Grave &lt;=8 -&gt; via aerea definitiva</text><text x=\"340\" y=\"272\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">Decorticacao (flexao) = lesao mais alta. Descerebracao (extensao) = lesao mais baixa, pior</text></svg>", "tr_rqm_choques": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1a2018\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Choque medular x choque neurogenico (nao confundir!)</text><g><rect x=\"30\" y=\"46\" width=\"290\" height=\"180\" rx=\"12\" fill=\"#232c20\" stroke=\"#6db3f2\"/><text x=\"175\" y=\"68\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"12\">Choque MEDULAR</text><text x=\"175\" y=\"86\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"700\">Fenomeno NEUROLOGICO</text><text x=\"44\" y=\"108\" fill=\"#f1e3e0\" font-size=\"8.8\">Arreflexia/flacidez transitoria</text><text x=\"44\" y=\"122\" fill=\"#f1e3e0\" font-size=\"8.8\">abaixo da lesao</text><text x=\"44\" y=\"144\" fill=\"#cbb9ac\" font-size=\"8.6\">Reflexo bulbocavernoso</text><text x=\"44\" y=\"158\" fill=\"#cbb9ac\" font-size=\"8.6\">ausente na fase aguda</text><rect x=\"44\" y=\"170\" width=\"252\" height=\"42\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.16\" stroke=\"#f59f0a\"/><text x=\"175\" y=\"188\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\" font-weight=\"700\">Fim: retorno do reflexo</text><text x=\"175\" y=\"202\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\" font-weight=\"700\">bulbocavernoso</text></g><g><rect x=\"360\" y=\"46\" width=\"290\" height=\"180\" rx=\"12\" fill=\"#232c20\" stroke=\"#e8675f\"/><text x=\"505\" y=\"68\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"12\">Choque NEUROGENICO</text><text x=\"505\" y=\"86\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"700\">Fenomeno HEMODINAMICO</text><text x=\"374\" y=\"108\" fill=\"#f1e3e0\" font-size=\"8.8\">Perda do tono simpatico</text><text x=\"374\" y=\"122\" fill=\"#f1e3e0\" font-size=\"8.8\">(vasodilatacao generalizada)</text><rect x=\"374\" y=\"134\" width=\"252\" height=\"78\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.16\" stroke=\"#f59f0a\"/><text x=\"505\" y=\"152\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\" font-weight=\"700\">Hipotensao + BRADICARDIA</text><text x=\"505\" y=\"168\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\" font-weight=\"700\">+ pele quente e seca</text><text x=\"505\" y=\"184\" fill=\"#f0a93f\" font-size=\"8.2\" text-anchor=\"middle\">(oposto do choque</text><text x=\"505\" y=\"198\" fill=\"#f0a93f\" font-size=\"8.2\" text-anchor=\"middle\">hemorragico!)</text></g><rect x=\"30\" y=\"238\" width=\"620\" height=\"46\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"258\" fill=\"#f1e3e0\" font-size=\"9.8\" text-anchor=\"middle\" font-weight=\"700\">SEMPRE excluir hemorragia antes de assumir choque neurogenico</text><text x=\"340\" y=\"274\" fill=\"#f1e3e0\" font-size=\"9.2\" text-anchor=\"middle\">Hipotensao no trauma e hemorragica ate prova em contrario</text></svg>", "tr_vascular_sinais": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1c1a24\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Sinais duros x moles de lesao vascular</text><g><rect x=\"24\" y=\"44\" width=\"300\" height=\"200\" rx=\"12\" fill=\"#262233\" stroke=\"#e8675f\"/><text x=\"174\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"12\">Sinais DUROS (hard)</text><text x=\"38\" y=\"88\" fill=\"#f1e3e0\" font-size=\"9\">Hemorragia pulsatil/ativa</text><text x=\"38\" y=\"104\" fill=\"#f1e3e0\" font-size=\"9\">Hematoma expansivo/pulsatil</text><text x=\"38\" y=\"120\" fill=\"#f1e3e0\" font-size=\"9\">Fremito/sopro (fistula AV)</text><text x=\"38\" y=\"136\" fill=\"#f1e3e0\" font-size=\"9\">Ausencia de pulso distal</text><text x=\"38\" y=\"152\" fill=\"#f1e3e0\" font-size=\"9\">Sinais dos 6 P (isquemia)</text><rect x=\"38\" y=\"166\" width=\"272\" height=\"60\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.16\" stroke=\"#f59f0a\"/><text x=\"174\" y=\"186\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">= EXPLORACAO CIRURGICA</text><text x=\"174\" y=\"202\" fill=\"#f1e3e0\" font-size=\"8.4\" text-anchor=\"middle\">Nao atrasar com exames se ha</text><text x=\"174\" y=\"216\" fill=\"#f1e3e0\" font-size=\"8.4\" text-anchor=\"middle\">isquemia ameacadora</text></g><g><rect x=\"356\" y=\"44\" width=\"300\" height=\"200\" rx=\"12\" fill=\"#262233\" stroke=\"#f0a93f\"/><text x=\"506\" y=\"66\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"12\">Sinais MOLES (soft)</text><text x=\"370\" y=\"88\" fill=\"#f1e3e0\" font-size=\"9\">Historia de sangramento moderado</text><text x=\"370\" y=\"104\" fill=\"#f1e3e0\" font-size=\"9\">Hematoma estavel, nao expansivo</text><text x=\"370\" y=\"120\" fill=\"#f1e3e0\" font-size=\"9\">Lesao de nervo adjacente</text><text x=\"370\" y=\"136\" fill=\"#f1e3e0\" font-size=\"9\">Pulso diminuido mas presente</text><text x=\"370\" y=\"152\" fill=\"#f1e3e0\" font-size=\"9\">Proximidade de trajeto a vaso</text><rect x=\"370\" y=\"166\" width=\"272\" height=\"60\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.16\" stroke=\"#f59f0a\"/><text x=\"506\" y=\"186\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\" font-weight=\"700\">= INVESTIGAR (ITB/angioTC)</text><text x=\"506\" y=\"202\" fill=\"#f1e3e0\" font-size=\"8.4\" text-anchor=\"middle\">ITB &lt;0,9 sugere lesao</text><text x=\"506\" y=\"216\" fill=\"#f1e3e0\" font-size=\"8.4\" text-anchor=\"middle\">arterial a confirmar</text></g><rect x=\"24\" y=\"256\" width=\"632\" height=\"34\" rx=\"10\" fill=\"#212a38\" stroke=\"#6db3f2\"/><text x=\"340\" y=\"278\" fill=\"#cfe0e6\" font-size=\"9.6\" text-anchor=\"middle\">Os 6 P da isquemia aguda: Pain, Pallor, Pulselessness, Paresthesia, Paralysis, Poikilothermia</text></svg>", "tr_pelve_anel": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#241a16\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Por que a pelve sangra tanto - e como estancar</text><g><rect x=\"24\" y=\"44\" width=\"300\" height=\"200\" rx=\"12\" fill=\"#332721\" stroke=\"#e8675f\"/><text x=\"174\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"11.6\">Anel pelvico se abre</text><path d=\"M100 90 A75 75 0 1 1 99 91\" fill=\"none\" stroke=\"#e8675f\" stroke-width=\"4\" stroke-dasharray=\"6 5\"/><text x=\"174\" y=\"180\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">Fratura instavel aumenta</text><text x=\"174\" y=\"194\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">o volume da pelve</text><rect x=\"38\" y=\"204\" width=\"272\" height=\"30\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.16\" stroke=\"#f59f0a\"/><text x=\"174\" y=\"224\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\" font-weight=\"700\">Cabe MUITO sangue escondido</text></g><g><rect x=\"356\" y=\"44\" width=\"300\" height=\"200\" rx=\"12\" fill=\"#332721\" stroke=\"#3ddc84\"/><text x=\"506\" y=\"66\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"11.6\">Cinta pelvica fecha o anel</text><path d=\"M420 90 A75 75 0 1 1 419 91\" fill=\"none\" stroke=\"#3ddc84\" stroke-width=\"4\"/><rect x=\"405\" y=\"82\" width=\"30\" height=\"16\" rx=\"4\" fill=\"#3ddc84\" fill-opacity=\"0.6\"/><text x=\"506\" y=\"180\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">Reduz volume, tampona</text><text x=\"506\" y=\"194\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">sangramento venoso/osseo</text><rect x=\"370\" y=\"204\" width=\"272\" height=\"30\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.16\" stroke=\"#f59f0a\"/><text x=\"506\" y=\"224\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\" font-weight=\"700\">Posicionar nos TROCANTERES</text></g><rect x=\"24\" y=\"256\" width=\"632\" height=\"34\" rx=\"10\" fill=\"#211a24\" stroke=\"#6db3f2\"/><text x=\"340\" y=\"278\" fill=\"#cfe0e6\" font-size=\"9.4\" text-anchor=\"middle\">Maioria e sangramento venoso/osseo (responde a cinta); minoria arterial precisa de angioembolizacao</text></svg>", "tr_queimadura_profundidade": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#241812\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Profundidade da queimadura: quanto mais fundo, menos dor</text><rect x=\"30\" y=\"44\" width=\"620\" height=\"140\" rx=\"10\" fill=\"#332318\" stroke=\"#6a5240\"/><rect x=\"50\" y=\"56\" width=\"580\" height=\"26\" fill=\"#e0b98a\" fill-opacity=\"0.5\"/><text x=\"60\" y=\"74\" fill=\"#3a2a18\" font-size=\"8.6\" font-weight=\"700\">Epiderme</text><rect x=\"50\" y=\"82\" width=\"580\" height=\"46\" fill=\"#c98f5e\" fill-opacity=\"0.55\"/><text x=\"60\" y=\"108\" fill=\"#2a1c10\" font-size=\"8.6\" font-weight=\"700\">Derme papilar</text><rect x=\"50\" y=\"128\" width=\"580\" height=\"46\" fill=\"#8a5c38\" fill-opacity=\"0.6\"/><text x=\"60\" y=\"154\" fill=\"#f1e3e0\" font-size=\"8.6\" font-weight=\"700\">Derme reticular / hipoderme</text><line x1=\"130\" y1=\"56\" x2=\"130\" y2=\"174\" stroke=\"#f59f0a\" stroke-width=\"2\" stroke-dasharray=\"3 3\"/><text x=\"130\" y=\"192\" fill=\"#f59f0a\" font-size=\"8.4\" text-anchor=\"middle\" font-weight=\"700\">1o grau</text><line x1=\"300\" y1=\"56\" x2=\"300\" y2=\"174\" stroke=\"#f0a93f\" stroke-width=\"2\" stroke-dasharray=\"3 3\"/><text x=\"300\" y=\"192\" fill=\"#f0a93f\" font-size=\"8.4\" text-anchor=\"middle\" font-weight=\"700\">2o superficial</text><line x1=\"440\" y1=\"56\" x2=\"440\" y2=\"174\" stroke=\"#e8675f\" stroke-width=\"2\" stroke-dasharray=\"3 3\"/><text x=\"440\" y=\"192\" fill=\"#e8675f\" font-size=\"8.4\" text-anchor=\"middle\" font-weight=\"700\">2o profundo</text><line x1=\"580\" y1=\"56\" x2=\"580\" y2=\"174\" stroke=\"#c2453d\" stroke-width=\"2\" stroke-dasharray=\"3 3\"/><text x=\"580\" y=\"192\" fill=\"#c2453d\" font-size=\"8.4\" text-anchor=\"middle\" font-weight=\"700\">3o grau</text><g><rect x=\"30\" y=\"204\" width=\"150\" height=\"96\" rx=\"8\" fill=\"#332318\" stroke=\"#f59f0a\"/><text x=\"105\" y=\"222\" fill=\"#f59f0a\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"700\">1o grau</text><text x=\"42\" y=\"240\" fill=\"#f1e3e0\" font-size=\"8\">Eritema, sem bolha</text><text x=\"42\" y=\"254\" fill=\"#f1e3e0\" font-size=\"8\">Dolorosa</text><text x=\"42\" y=\"272\" fill=\"#f1e3e0\" font-size=\"8\">NAO entra na SCQ</text></g><g><rect x=\"188\" y=\"204\" width=\"150\" height=\"96\" rx=\"8\" fill=\"#332318\" stroke=\"#f0a93f\"/><text x=\"263\" y=\"222\" fill=\"#f0a93f\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"700\">2o superficial</text><text x=\"200\" y=\"240\" fill=\"#f1e3e0\" font-size=\"8\">Bolhas, rosea,</text><text x=\"200\" y=\"254\" fill=\"#f1e3e0\" font-size=\"8\">branqueia bem</text><text x=\"200\" y=\"272\" fill=\"#f1e3e0\" font-size=\"8\">MUITO dolorosa</text></g><g><rect x=\"346\" y=\"204\" width=\"150\" height=\"96\" rx=\"8\" fill=\"#332318\" stroke=\"#e8675f\"/><text x=\"421\" y=\"222\" fill=\"#e8675f\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"700\">2o profundo</text><text x=\"358\" y=\"240\" fill=\"#f1e3e0\" font-size=\"8\">Palida, mosqueada,</text><text x=\"358\" y=\"254\" fill=\"#f1e3e0\" font-size=\"8\">branqueia pouco</text><text x=\"358\" y=\"272\" fill=\"#f1e3e0\" font-size=\"8\">Dor reduzida</text></g><g><rect x=\"504\" y=\"204\" width=\"146\" height=\"96\" rx=\"8\" fill=\"#332318\" stroke=\"#c2453d\"/><text x=\"577\" y=\"222\" fill=\"#c2453d\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"700\">3o grau</text><text x=\"516\" y=\"240\" fill=\"#f1e3e0\" font-size=\"8\">Branca/marrom,</text><text x=\"516\" y=\"254\" fill=\"#f1e3e0\" font-size=\"8\">seca, coriacea</text><text x=\"516\" y=\"272\" fill=\"#f1e3e0\" font-size=\"8\" font-weight=\"700\">INDOLOR</text></g></svg>", "tr_regra_dos_9": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#241812\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Regra dos 9 e formula de Parkland</text><g><circle cx=\"150\" cy=\"70\" r=\"22\" fill=\"none\" stroke=\"#f1e3e0\" stroke-width=\"2.4\"/><text x=\"150\" y=\"74\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"700\">9%</text><text x=\"150\" y=\"102\" fill=\"#cbb9ac\" font-size=\"8\" text-anchor=\"middle\">Cabeca</text><rect x=\"120\" y=\"112\" width=\"60\" height=\"76\" rx=\"8\" fill=\"none\" stroke=\"#f1e3e0\" stroke-width=\"2.4\"/><text x=\"150\" y=\"128\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\" font-weight=\"700\">18%</text><text x=\"150\" y=\"142\" fill=\"#cbb9ac\" font-size=\"7.6\" text-anchor=\"middle\">tronco ant.</text><text x=\"150\" y=\"156\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\" font-weight=\"700\">18%</text><text x=\"150\" y=\"170\" fill=\"#cbb9ac\" font-size=\"7.6\" text-anchor=\"middle\">tronco post.</text><rect x=\"80\" y=\"112\" width=\"30\" height=\"60\" rx=\"6\" fill=\"none\" stroke=\"#6db3f2\" stroke-width=\"2\"/><text x=\"95\" y=\"146\" fill=\"#6db3f2\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"700\">9%</text><rect x=\"190\" y=\"112\" width=\"30\" height=\"60\" rx=\"6\" fill=\"none\" stroke=\"#6db3f2\" stroke-width=\"2\"/><text x=\"205\" y=\"146\" fill=\"#6db3f2\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"700\">9%</text><rect x=\"122\" y=\"192\" width=\"26\" height=\"76\" rx=\"6\" fill=\"none\" stroke=\"#3ddc84\" stroke-width=\"2\"/><text x=\"135\" y=\"234\" fill=\"#3ddc84\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"700\">18%</text><rect x=\"152\" y=\"192\" width=\"26\" height=\"76\" rx=\"6\" fill=\"none\" stroke=\"#3ddc84\" stroke-width=\"2\"/><text x=\"165\" y=\"234\" fill=\"#3ddc84\" font-size=\"8\" text-anchor=\"middle\" font-weight=\"700\">18%</text><text x=\"150\" y=\"286\" fill=\"#f0a93f\" font-size=\"8.2\" text-anchor=\"middle\">Perineo 1% (nao mostrado)</text></g><rect x=\"260\" y=\"50\" width=\"400\" height=\"90\" rx=\"10\" fill=\"#332318\" stroke=\"#f59f0a\"/><text x=\"280\" y=\"72\" fill=\"#f59f0a\" font-size=\"10.4\" font-weight=\"700\">Palma da mao do paciente = 1% da SCQ</text><text x=\"280\" y=\"92\" fill=\"#f1e3e0\" font-size=\"9\">Util para estimar queimaduras irregulares</text><text x=\"280\" y=\"112\" fill=\"#f1e3e0\" font-size=\"9\">e espalhadas pelo corpo</text><text x=\"280\" y=\"128\" fill=\"#e8675f\" font-size=\"8.6\" font-weight=\"700\">1o grau NAO conta na SCQ</text><rect x=\"260\" y=\"150\" width=\"400\" height=\"130\" rx=\"10\" fill=\"#332318\" stroke=\"#6db3f2\"/><text x=\"280\" y=\"172\" fill=\"#6db3f2\" font-size=\"11\" font-weight=\"700\">Formula de Parkland</text><text x=\"280\" y=\"192\" fill=\"#f1e3e0\" font-size=\"10\" font-weight=\"700\">4 mL x peso(kg) x %SCQ = RL em 24h</text><text x=\"280\" y=\"214\" fill=\"#f1e3e0\" font-size=\"9\">Metade nas 1as 8h (da hora da QUEIMADURA,</text><text x=\"280\" y=\"228\" fill=\"#f1e3e0\" font-size=\"9\">nao da chegada ao hospital)</text><text x=\"280\" y=\"248\" fill=\"#f1e3e0\" font-size=\"9\">Outra metade nas 16h seguintes</text><text x=\"280\" y=\"266\" fill=\"#f59f0a\" font-size=\"8.8\" font-weight=\"700\">Titular sempre pela diurese (0,5 mL/kg/h adulto)</text></svg>", "tr_damage_control": "<svg viewBox=\"0 0 680 280\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"280\" rx=\"16\" fill=\"#1c1620\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Cirurgia de controle de danos: \"salvar a vida, depois a anatomia\"</text><g><rect x=\"20\" y=\"46\" width=\"190\" height=\"150\" rx=\"10\" fill=\"#262233\" stroke=\"#e8675f\"/><text x=\"115\" y=\"68\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"10.6\">Triade letal</text><text x=\"34\" y=\"90\" fill=\"#f1e3e0\" font-size=\"9\">Hipotermia</text><text x=\"34\" y=\"106\" fill=\"#f1e3e0\" font-size=\"9\">Acidose</text><text x=\"34\" y=\"122\" fill=\"#f1e3e0\" font-size=\"9\">Coagulopatia</text><text x=\"34\" y=\"146\" fill=\"#f0a93f\" font-size=\"8.4\">Cada uma piora as</text><text x=\"34\" y=\"160\" fill=\"#f0a93f\" font-size=\"8.4\">outras duas (circulo</text><text x=\"34\" y=\"174\" fill=\"#f0a93f\" font-size=\"8.4\">vicioso letal)</text></g><path d=\"M210 120 L240 120\" stroke=\"#c9a8a0\" stroke-width=\"2\"/><g><rect x=\"242\" y=\"46\" width=\"190\" height=\"150\" rx=\"10\" fill=\"#262233\" stroke=\"#f0a93f\"/><text x=\"337\" y=\"68\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"10.6\">Tempo 1 (abreviado)</text><text x=\"256\" y=\"90\" fill=\"#f1e3e0\" font-size=\"8.8\">Controlar sangramento</text><text x=\"256\" y=\"104\" fill=\"#f1e3e0\" font-size=\"8.8\">Controlar contaminacao</text><text x=\"256\" y=\"118\" fill=\"#f1e3e0\" font-size=\"8.8\">Abdome fica ABERTO</text><text x=\"256\" y=\"132\" fill=\"#f1e3e0\" font-size=\"8.8\">(peritoneostomia)</text><text x=\"256\" y=\"154\" fill=\"#e8675f\" font-size=\"8.2\" font-weight=\"700\">SEM reconstrucao</text><text x=\"256\" y=\"168\" fill=\"#e8675f\" font-size=\"8.2\" font-weight=\"700\">definitiva agora</text></g><path d=\"M432 120 L462 120\" stroke=\"#c9a8a0\" stroke-width=\"2\"/><g><rect x=\"464\" y=\"46\" width=\"196\" height=\"150\" rx=\"10\" fill=\"#262233\" stroke=\"#6db3f2\"/><text x=\"562\" y=\"68\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"10.6\">UTI (corrigir fisiologia)</text><text x=\"478\" y=\"90\" fill=\"#f1e3e0\" font-size=\"8.8\">Aquecer, corrigir pH,</text><text x=\"478\" y=\"104\" fill=\"#f1e3e0\" font-size=\"8.8\">repor fatores de coagulacao</text><rect x=\"478\" y=\"118\" width=\"168\" height=\"50\" rx=\"8\" fill=\"#3ddc84\" fill-opacity=\"0.16\" stroke=\"#3ddc84\"/><text x=\"562\" y=\"136\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\" font-weight=\"700\">Reoperar em 24-48h</text><text x=\"562\" y=\"152\" fill=\"#f1e3e0\" font-size=\"8.6\" text-anchor=\"middle\">para reconstrucao definitiva</text></g><rect x=\"20\" y=\"212\" width=\"640\" height=\"44\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"234\" fill=\"#f1e3e0\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"700\">Pensar em damage control diante de grandes perdas, transfusao macica, pH baixo e hipotermia</text><text x=\"340\" y=\"250\" fill=\"#f1e3e0\" font-size=\"9.2\" text-anchor=\"middle\">Nao e sinal de fracasso do cirurgiao - e a conduta correta na fisiologia extrema</text></svg>"});
+</script>
+
+<script>
 /* ===== Atlas Cirúrgico — conteúdo migrado do arquivo antigo (aditivo) ===== */
 (function(){
 var C = (window.CONTENT = window.CONTENT || {}); window.C = C;
+var A = window.ASVG || {};
 C["trauma|0"] = {
   "name": "ATLS — princípios gerais",
   "intro": "Filosofia, golden hour, prioridades e fluxo de atendimento",
@@ -2235,7 +2248,8 @@ C["trauma|0"] = {
 <li><strong>Imediata</strong> (segundos a minutos): lesões incompatíveis com a vida (aorta, tronco cerebral). Prevenção é a única arma.</li>
 <li><strong>Precoce</strong> (minutos a horas): a "golden hour" — hematomas, pneumotórax, ruptura esplênica/hepática. É aqui que o ATLS salva.</li>
 <li><strong>Tardia</strong> (dias a semanas): sepse e disfunção de múltiplos órgãos.</li>
-</ul>`
+</ul>
+${A.tr_trimodal}`
     ],
     [
       "clinica",
@@ -2498,6 +2512,107 @@ C["trauma|0"] = {
     }
   ]
 };
+
+Object.assign(C["trauma|0"], {
+  "escores": `<div class="ac-h">Escala de Coma de Glasgow (adjunto do XABCDE)</div>
+<p class="ac-p">Embora seja detalhada no tópico de TCE, a triagem inicial do ATLS ja usa o Glasgow como parte da avaliação primária (letra D). Pontuação de 3 a 15, soma de resposta ocular + verbal + motora.</p>
+<table class="ac-tbl"><tr><th>Faixa</th><th>Classificação</th><th>Conduta</th></tr>
+<tr><td>13-15</td><td>TCE leve</td><td>Observação, criterios de imagem</td></tr>
+<tr><td>9-12</td><td>TCE moderado</td><td>TC, reavaliação frequente</td></tr>
+<tr><td>&le;8</td><td>TCE grave</td><td><b>Via aérea definitiva obrigatoria</b></td></tr>
+</table>
+<div class="ac-h" style="margin-top:14px">Revised Trauma Score (RTS) e Trauma Score (conceito)</div>
+<p class="ac-p">Combinam Glasgow, PA sistolica e frequência respiratoria para estimar gravidade e prever mortalidade — usados sobretudo em triagem pre-hospitalar e pesquisa, pouco cobrados em detalhe, mas o conceito ("gravidade fisiologica prediz desfecho") e frequente em prova.</p>
+<div class="ac-call"><b>Ideia central:</b> nenhum escore substitui o raciocinio do XABCDE em tempo real — eles servem para comunicar gravidade e para triagem, nao para guiar a sequência de atendimento.</div>`,
+  "dif": `<div class="ac-h">Erros conceituais frequentes</div>
+<table class="ac-tbl"><tr><th>Conceito errado</th><th>Conceito correto</th></tr>
+<tr><td>"Preciso do diagnóstico antes de agir"</td><td>Trata-se a ameaca a vida sem diagnóstico fechado</td></tr>
+<tr><td>"Comeco pela anamnese detalhada"</td><td>Historia nao atrasa a avaliação primária</td></tr>
+<tr><td>"Secundária pode ser feita junto com a primária"</td><td>So apos primária concluida e doente estável</td></tr>
+<tr><td>"Cristaloide a vontade no choque"</td><td>Limitar cristaloide; priorizar hemocomponentes</td></tr>
+<tr><td>"Em vitimas em massa, atende-se o mais grave primeiro"</td><td>Prioriza-se quem sobrevive com menos recursos</td></tr>
+</table>
+<div class="ac-warn"><b>Pegadinha classica:</b> confundir o cenário de "multiplas vitimas" (recursos suficientes, atende-se o mais grave) com "vitimas em massa" (recursos insuficientes, prioriza-se quem tem maior chance de sobreviver gastando menos recursos). A prova adora trocar esses dois cenarios.</div>`,
+  "mapa": `<div class="ac-h">ATLS em mapa mental</div>
+<div class="mm">
+  <div class="mm-card"><h5>Filosofia</h5><ul><li>Tratar a maior ameaca a vida primeiro</li><li>Diagnóstico definitivo nao atrasa tratamento</li><li>Historia nao e essencial para comecar</li></ul></div>
+  <div class="mm-card"><h5>Sequência</h5><ul><li>Preparação e triagem</li><li>Primária (XABCDE) + reanimação simultanea</li><li>Adjuntos -&gt; reavaliar -&gt; secundária (AMPLA)</li></ul></div>
+  <div class="mm-card"><h5>Morte trimodal</h5><ul><li>Imediata: so prevenção</li><li>Precoce: golden hour, ATLS atua aqui</li><li>Tardia: sepse/DMOS na UTI</li></ul></div>
+  <div class="mm-card"><h5>Reanimação (ATLS 10)</h5><ul><li>Controle de hemorragia e prioridade maxima</li><li>Hemocomponentes 1:1:1, cristaloide limitado</li><li>Acido tranexamico &lt;3h</li></ul></div>
+  <div class="mm-card"><h5>Hipotensao permissiva</h5><ul><li>PAS 80-90 ate controlar o foco</li><li>Exceção: TCE (manter PAS&gt;=110)</li></ul></div>
+  <div class="mm-card"><h5>Triagem</h5><ul><li>Multiplas vitimas: mais grave primeiro</li><li>Vitimas em massa: maior sobrevida/menor recurso</li></ul></div>
+</div>`,
+  "fluxo_cond": `<div class="ac-h">Fluxograma de conduta - sequência ATLS completa</div>
+<div class="fx">
+  <div class="fx-node start">Chegada do politraumatizado</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Preparação e triagem (avaliar cenário/recursos)</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Avaliação primária: X-A-B-C-D-E com reanimação SIMULTANEA a cada achado</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Alguma letra alterada/instável?</div>
+  <div class="fx-row">
+    <div class="fx-node">Sim -&gt; tratar IMEDIATAMENTE antes de prosseguir</div>
+    <div class="fx-node">Nao -&gt; segue para a proxima letra</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Adjuntos da primária: monitorização, sondas, Rx torax/pelve, FAST, gasometria/lactato</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Doente estável e primária completa?</div>
+  <div class="fx-row">
+    <div class="fx-node">Nao -&gt; reavaliar e VOLTAR ao A</div>
+    <div class="fx-node end">Sim -&gt; avaliação secundária (AMPLA + exame cabeca aos pes)</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Adjuntos da secundária + monitorização continua + considerar transferência</div>
+</div>`,
+  "vespera": `<div class="ac-h">Revisao de vespera</div>
+<div class="ac-call"><b>1.</b> Filosofia: tratar a maior ameaca a vida primeiro, mesmo sem diagnóstico fechado. Historia detalhada nao atrasa a conduta salvadora.</div>
+<div class="ac-call"><b>2.</b> Sequência: preparo/triagem -&gt; primária (XABCDE, reanimação simultanea) -&gt; adjuntos -&gt; reavaliar -&gt; secundária (AMPLA + exame completo) -&gt; adjuntos da secundária.</div>
+<div class="ac-call"><b>3.</b> Golden hour = janela de maior impacto terapeutico. Morte trimodal: imediata (so prevenção), precoce (ATLS atua), tardia (sepse/DMOS).</div>
+<div class="ac-call"><b>4.</b> ATLS 10: controle de hemorragia e prioridade; hemocomponentes 1:1:1; cristaloide limitado a ~1L; acido tranexamico ate 3h; hipotensao permissiva (PAS 80-90) exceto no TCE.</div>
+<div class="ac-call"><b>5.</b> Triagem: multiplas vitimas (recursos suficientes) = mais grave primeiro. Vitimas em massa (recursos insuficientes) = maior sobrevida com menor gasto de recursos.</div>
+<div class="ac-call"><b>6.</b> Secundária SO comeca com a primária concluida e doente estável. Qualquer deterioração = voltar ao A.</div>`,
+  "dicas": `<div class="ac-h">Dicas de ouro</div>
+<div class="ac-tip">Pense no ATLS como um algoritmo CIRCULAR, nao linear: a todo momento que algo piora, volta-se ao A — mesmo estando ja na avaliação secundária.</div>
+<div class="ac-tip">"X antes do A" e a mudanca mais recente e mais cobrada do ATLS atual: hemorragia externa exsanguinante mata mais rapido que uma via aérea parcialmente comprometida.</div>
+<div class="ac-tip">Memorize a proporção 1:1:1 associando a "sangue total reconstituido" — e como devolver ao paciente uma composição parecida com o sangue que ele perdeu.</div>
+<div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+<div class="ac-warn">Achar que a avaliação secundária pode comecar em paralelo com a primária em politraumatizado grave — ela SO comeca depois, com o doente estável.</div>
+<div class="ac-warn">Confundir "multiplas vitimas" com "vitimas em massa" na hora de definir a ordem de atendimento — os criterios sao opostos.</div>
+<div class="ac-warn">Usar cristaloide em grande volume "para nao faltar acesso" — hoje isso e considerado erro, pois dilui fatores de coagulação e piora a tríade letal.</div>
+<div class="ac-warn">Dar acido tranexamico apos 3 horas do trauma "por precaução" — passada a janela, o risco pode superar o beneficio (CRASH-2).</div>`,
+  "checklist": [
+    "Entendo a filosofia do ATLS: tratar a maior ameaca a vida primeiro, sem esperar diagnóstico fechado",
+    "Sei descrever a sequência completa: preparo, primária, adjuntos, reavaliação, secundária, adjuntos da secundária",
+    "Conheco a distribuição trimodal da morte e em qual pico o ATLS tem maior impacto",
+    "Sei diferenciar a triagem de multiplas vitimas da triagem de vitimas em massa",
+    "Domino os principios da reanimação hemostatica: 1:1:1, acido tranexamico, hipotensao permissiva e suas exceções",
+    "Entendo o conceito de cirurgia de controle de danos e quando ela e indicada",
+    "Sei o que compoe a anamnese AMPLA e quando ela e coletada"
+  ],
+  "casos": [
+    {"t":"Caso 1 — Acidente de moto com multiplas lesões","stem":"Homem de 28 anos, vitima de colisao motociclistica, chega com sangramento ativo em coxa esquerda, falando frases completas, FC 118, PA 100x70.","passos":[
+      {"h":"1. Reconhecer","p":"Antes de qualquer outra avaliação, identificar hemorragia externa exsanguinante visível (o 'X' do XABCDE) e conter imediatamente com compressao direta ou torniquete."},
+      {"h":"2. Investigar","p":"Com o sangramento controlado, prosseguir para A (via aérea patente, paciente fala), B (avaliar expansibilidade e ausculta) e C (dois acessos calibrosos, reavaliar sinais de choque)."},
+      {"h":"3. Conduzir","p":"Seguir XABCDE completo, considerar reposição volemica balanceada se sinais de choque associado, e so avancar para avaliação secundária apos estabilização."},
+      {"h":"Lição de prova","p":"O 'X' vem antes do 'A' justamente para casos assim: uma hemorragia exsanguinante visível mata mais rapido do que a maioria dos problemas de via aérea parcial."}
+    ]},
+    {"t":"Caso 2 — Triagem em acidente com onibus (12 vitimas, recursos limitados)","stem":"Um onibus tomba na rodovia. Chegam 12 vitimas simultaneamente a uma UPA pequena, com apenas 2 medicos e 1 sala de emergência disponível.","passos":[
+      {"h":"1. Reconhecer","p":"Este e um cenário de vitimas em massa: o numero de feridos supera a capacidade de atendimento imediato — recursos INSUFICIENTES."},
+      {"h":"2. Investigar","p":"Aplicar triagem que prioriza quem tem maior chance de sobreviver com menor gasto de recursos, e nao simplesmente o paciente mais grave."},
+      {"h":"3. Conduzir","p":"Pacientes com lesões extremamente graves e baixa chance de sobrevida mesmo com tratamento maximo podem ser temporariamente postergados em favor de aqueles com lesões graves mas tratáveis rapidamente."},
+      {"h":"Lição de prova","p":"A logica se inverte em relação ao dia a dia hospitalar: em vitimas em massa, o objetivo e salvar o maior numero de vidas possível com os recursos disponíveis, nao necessariamente atender quem esta mais grave primeiro."}
+    ]},
+    {"t":"Caso 3 — Reanimação volemica no choque hemorrágico grave","stem":"Mulher de 35 anos, trauma abdominal fechado, PA 78x50, FC 138, pele fria e palida. Foi levada a sala de emergência.","passos":[
+      {"h":"1. Reconhecer","p":"Quadro de choque hemorrágico avancado (classe III/IV). Prioridade: controle do foco de sangramento associado a reanimação guiada."},
+      {"h":"2. Investigar","p":"FAST a beira leito para identificar liquido livre em cavidade; se positivo em paciente instável, aciona-se cirurgia sem atraso para TC."},
+      {"h":"3. Conduzir","p":"Reposição volemica com cristaloide LIMITADO (~1L), seguida de hemocomponentes na proporção 1:1:1, acido tranexamico se dentro de 3h, e hipotensao permissiva (PAS alvo 80-90) ate o controle cirúrgico do sangramento."},
+      {"h":"Lição de prova","p":"O objetivo nao e 'normalizar a pressão' com litros de soro — e controlar a fonte do sangramento o mais rapido possível, evitando a tríade letal (hipotermia, acidose, coagulopatia)."}
+    ]}
+  ]
+});
+
 C["trauma|1"] = {
   "name": "Avaliação primária — XABCDE",
   "intro": "Sequência letra a letra: o que mata e como corrigir",
@@ -2509,7 +2624,8 @@ C["trauma|1"] = {
 <p>A avaliação primária identifica e trata, <em>em ordem de letalidade</em>, as condições que matam em minutos. Só se avança para a próxima letra quando a anterior está controlada. A qualquer piora, <strong>volta-se ao A</strong>.</p>
 <div class="callout key"><div class="ci">${IC.info}</div><div><b>O que cada letra protege</b><p><strong>X</strong> hemorragia exsanguinante · <strong>A</strong> via aérea + coluna cervical · <strong>B</strong> respiração/oxigenação · <strong>C</strong> circulação/hemorragia · <strong>D</strong> neurológico · <strong>E</strong> exposição/hipotermia.</p></div></div>
 <h4>Por que a ordem importa</h4>
-<p>Uma via aérea obstruída mata antes de um pneumotórax; este mata antes de uma hemorragia abdominal lenta. A sequência reflete o "tempo até a morte" de cada lesão.</p>`
+<p>Uma via aérea obstruída mata antes de um pneumotórax; este mata antes de uma hemorragia abdominal lenta. A sequência reflete o "tempo até a morte" de cada lesão.</p>
+${A.tr_xabcde}`
     ],
     [
       "clinica",
@@ -2765,6 +2881,110 @@ C["trauma|1"] = {
     }
   ]
 };
+
+Object.assign(C["trauma|1"], {
+  "escores": `<div class="ac-h">Escala de Coma de Glasgow (parte do "D")</div>
+<table class="ac-tbl"><tr><th>Componente</th><th>Pontuação</th></tr>
+<tr><td>Ocular</td><td>4 (espontanea) a 1 (ausente)</td></tr>
+<tr><td>Verbal</td><td>5 (orientado) a 1 (ausente)</td></tr>
+<tr><td>Motora</td><td>6 (obedece comandos) a 1 (ausente)</td></tr>
+</table>
+<p class="ac-p">Soma de 3 a 15. No "D" da avaliação primária, o Glasgow ja direciona: <b>&le;8 indica via aérea definitiva</b>, independentemente da causa do rebaixamento.</p>
+<div class="ac-h" style="margin-top:14px">Classificação de hemorragia (ATLS) por classe</div>
+<p class="ac-p">Usada em conjunto com o "C" para estimar volume perdido a partir de FC, PA, pressão de pulso e estado mental — detalhada no tópico de Choque Hemorrágico.</p>`,
+  "dif": `<div class="ac-h">Pneumotorax hipertensivo x Tamponamento cardiaco</div>
+<p class="ac-p">Ambos cursam com <b>hipotensao + turgência jugular</b>, e sao a maior fonte de confusao dentro do "B"/"C". Diferencie pela ausculta e percussao:</p>
+<table class="ac-tbl"><tr><th>—</th><th>Pneumotorax hipertensivo</th><th>Tamponamento</th></tr>
+<tr><td>Ausculta</td><td>MV <b>abolido</b> unilateral</td><td>MV <b>presente</b>; bulhas abafadas</td></tr>
+<tr><td>Percussao</td><td>Timpanismo</td><td>Normal</td></tr>
+<tr><td>Traqueia</td><td>Desviada (para o lado sao)</td><td>Centrada</td></tr>
+<tr><td>Mecanismo</td><td>Ar aprisionado sob pressão na pleura</td><td>Sangue/liquido no pericardio</td></tr>
+<tr><td>Conduta</td><td>Descompressao torácica (agulha/dedo) -&gt; dreno</td><td>Pericardiocentese/toracotomia</td></tr>
+</table>
+<div class="ac-warn"><b>Cuidado:</b> os dois sao diagnósticos CLÍNICOS na avaliação primária — nao se deve esperar Rx de torax ou FAST para agir diante de instabilidade franca com esses sinais.</div>`,
+  "mapa": `<div class="ac-h">XABCDE em mapa mental</div>
+<div class="mm">
+  <div class="mm-card"><h5>X</h5><ul><li>Hemorragia exsanguinante</li><li>Compressao/torniquete imediato</li></ul></div>
+  <div class="mm-card"><h5>A</h5><ul><li>Via aérea + coluna cervical</li><li>Glasgow&lt;=8 = via aérea definitiva</li></ul></div>
+  <div class="mm-card"><h5>B</h5><ul><li>5 condições letais (clínicas)</li><li>Locais de descompressao</li></ul></div>
+  <div class="mm-card"><h5>C</h5><ul><li>5 focos de hemorragia</li><li>2 acessos calibrosos (14-16G)</li></ul></div>
+  <div class="mm-card"><h5>D</h5><ul><li>Glasgow + pupilas</li><li>Corrigir A/B/C antes de culpar SNC</li></ul></div>
+  <div class="mm-card"><h5>E</h5><ul><li>Despir totalmente</li><li>Aquecer logo em seguida</li></ul></div>
+</div>`,
+  "fluxo_cond": `<div class="ac-h">Fluxograma de conduta - suspeita de lesão letal no "B"</div>
+<div class="fx">
+  <div class="fx-node start">Paciente com desconforto respiratorio / instabilidade no B</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">MV abolido unilateral + timpanismo + desvio de traqueia?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; Pneumotorax hipertensivo -&gt; descompressao IMEDIATA (agulha/dedo) -&gt; dreno</div>
+    <div class="fx-node">Nao -&gt; continuar investigação</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Ferida soprante visível no torax?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; Pneumotorax aberto -&gt; curativo de 3 pontas + dreno em outro local</div>
+    <div class="fx-node">Nao -&gt; continuar</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">MV abolido + macicez + choque?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; Hemotorax maciço -&gt; dreno + reposição +- toracotomia</div>
+    <div class="fx-node">Nao -&gt; continuar</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Tríade de Beck (hipotensao + jugular + bulhas abafadas)?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; Tamponamento -&gt; FAST -&gt; pericardiocentese/toracotomia</div>
+    <div class="fx-node end">Nao -&gt; Avaliar torax instável (respiração paradoxal) -&gt; analgesia/O2/suporte</div>
+  </div>
+</div>`,
+  "vespera": `<div class="ac-h">Revisao de vespera</div>
+<div class="ac-call"><b>1.</b> X: hemorragia exsanguinante (compressao/torniquete). A: via aérea + coluna cervical; Glasgow&lt;=8 = via aérea definitiva.</div>
+<div class="ac-call"><b>2.</b> B: 5 condições letais — pneumo hipertensivo, aberto, hemotorax maciço, tamponamento, torax instável — TODAS diagnóstico clínico.</div>
+<div class="ac-call"><b>3.</b> C: 5 focos de hemorragia (torax, abdome, pelve/retroperitonio, ossos longos, externo); 2 acessos calibrosos (14-16G).</div>
+<div class="ac-call"><b>4.</b> D: Glasgow + pupilas; corrigir hipoxia/hipotensao antes de atribuir rebaixamento ao SNC. E: despir e aquecer.</div>
+<div class="ac-call"><b>5.</b> Local preferido de descompressao no adulto (ATLS atual): 5o EIC linha axilar anterior (alternativa: 2o EIC hemiclavicular).</div>
+<div class="ac-call"><b>6.</b> Hemotorax maciço: &gt;1500mL inicial ou &gt;200mL/h por 2-4h -&gt; toracotomia.</div>`,
+  "dicas": `<div class="ac-h">Dicas de ouro</div>
+<div class="ac-tip">Para nao esquecer os 5 focos de hemorragia, pense "chao e mais 4": externo (chao), torax, abdome, pelve/retroperitonio, ossos longos.</div>
+<div class="ac-tip">A tetrade classica do pneumotorax hipertensivo (desvio de traqueia + turgência jugular + MV abolido + timpanismo) raramente aparece completa na pratica — qualquer combinação com instabilidade ja basta para descomprimir.</div>
+<div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+<div class="ac-warn">Esperar o Rx de torax para descomprimir um pneumotorax hipertensivo clínico — isso pode matar o paciente enquanto se espera o exame.</div>
+<div class="ac-warn">Atribuir rebaixamento de consciência direto ao TCE sem antes corrigir hipoxia e hipotensao (que por si sos deprimem o sensorio).</div>
+<div class="ac-warn">Confundir pneumotorax hipertensivo com tamponamento cardiaco — o detalhe que salva e a ausculta/percussao (MV abolido+timpanismo x MV presente+bulhas abafadas).</div>
+<div class="ac-warn">Fazer cricotireoidostomia cirúrgica em crianca menor de 12 anos — e contraindicada; usar a via por punção.</div>`,
+  "checklist": [
+    "Sei recitar a sequência XABCDE e o que cada letra avalia",
+    "Reconheco clinicamente as 5 condições letais do B sem depender de exame de imagem",
+    "Sei diferenciar pneumotorax hipertensivo de tamponamento cardiaco pela ausculta/percussao",
+    "Conheco os 5 focos de hemorragia do C e a logica dos 2 acessos calibrosos",
+    "Entendo por que corrigir A/B/C antes de atribuir rebaixamento ao D",
+    "Sei as indicações de via aérea definitiva e a exceção pediatrica da cricotireoidostomia cirúrgica",
+    "Conheco os criterios de hemotorax maciço e a indicação de toracotomia"
+  ],
+  "casos": [
+    {"t":"Caso 1 — Motociclista com dispneia subita","stem":"Homem, acidente de moto, chega taquipneico, FC 122, PA 92x64. Ausculta: MV abolido a direita. Percussao: timpanismo a direita. Turgência jugular presente.","passos":[
+      {"h":"1. Reconhecer","p":"Trade classica de pneumotorax hipertensivo: MV abolido + timpanismo + turgência jugular em paciente instável. Diagnóstico CLÍNICO."},
+      {"h":"2. Investigar","p":"Nao ha tempo para Rx de torax — a descompressao deve ser imediata, sem esperar confirmação radiológica."},
+      {"h":"3. Conduzir","p":"Descompressao torácica por agulha (ou toracostomia digital, conforme protocolo local) no 5o EIC linha axilar anterior direita, seguida de drenagem torácica em selo d'agua."},
+      {"h":"Lição de prova","p":"Pneumotorax hipertensivo e uma das poucas condições no trauma em que se trata ANTES de confirmar por imagem — o atraso pode ser fatal."}
+    ]},
+    {"t":"Caso 2 — Ferimento penetrante em torax com sopro","stem":"Paciente com ferimento por arma branca em regiao precordial, hipotenso, taquicardico, bulhas cardiacas abafadas, MV presente bilateralmente, sem desvio de traqueia.","passos":[
+      {"h":"1. Reconhecer","p":"Tríade de Beck presente (hipotensao + bulhas abafadas + turgência jugular) em ferimento precordial — suspeitar de tamponamento cardiaco."},
+      {"h":"2. Investigar","p":"FAST cardiaco (janela pericardica subxifoide) confirma derrame pericardico/sinais de tamponamento rapidamente, sem sair da sala."},
+      {"h":"3. Conduzir","p":"Se confirmado e paciente instável, pericardiocentese como medida temporizadora ou toracotomia/esternotomia de emergência para descompressao definitiva, dependendo do cenário e recursos."},
+      {"h":"Lição de prova","p":"MV presente bilateralmente e ausência de desvio de traqueia ajudam a excluir pneumotorax hipertensivo e reforcam o tamponamento como hipotese principal."}
+    ]},
+    {"t":"Caso 3 — Rebaixamento de consciência no trauma","stem":"Vitima de queda de altura chega com Glasgow 12, hipotensa (PA 84x56) e taquipneica. A equipe cogita TC de crânio imediata para investigar o rebaixamento.","passos":[
+      {"h":"1. Reconhecer","p":"Antes de atribuir o rebaixamento a uma lesão cerebral, e obrigatorio revisar A, B e C — hipoxia e hipotensao sao causas frequentes e reversíveis de queda do Glasgow."},
+      {"h":"2. Investigar","p":"Reavaliar via aérea (patente?), respiração (oxigenação adequada?) e circulação (ha sinais de choque nao corrigido?)."},
+      {"h":"3. Conduzir","p":"Corrigir hipotensao e garantir oxigenação antes de repetir o exame neurológico; so entao decidir se a TC de crânio e prioritária ou se outro foco de instabilidade precisa ser resolvido primeiro."},
+      {"h":"Lição de prova","p":"'D' rebaixado no politraumatizado hipotenso NAO deve ser assumido como TCE isolado sem antes excluir e corrigir causas de A/B/C — essa e uma das pegadinhas mais classicas do ATLS."}
+    ]}
+  ]
+});
+
 C["trauma|2"] = {
   "name": "Choque hemorrágico",
   "intro": "As 4 classes, resposta à volemia e reanimação balanceada",
@@ -2776,7 +2996,8 @@ C["trauma|2"] = {
 <p>Choque é a <strong>hipoperfusão tecidual</strong> com oferta de O₂ insuficiente. No trauma, é <em>hemorrágico até prova em contrário</em>. A perda de volume reduz o retorno venoso e o débito cardíaco; o organismo compensa com taquicardia e vasoconstrição (mediada por catecolaminas).</p>
 <div class="callout key"><div class="ci">${IC.info}</div><div><b>Marcador mais precoce</b><p>A <strong>pressão de pulso estreita</strong> (↑ da diastólica por vasoconstrição) surge antes da queda da sistólica. Taquicardia + ansiedade + pressão de pulso estreita = choque inicial, mesmo com PA "normal".</p></div></div>
 <h4>Tipos de choque (diferencie no trauma)</h4>
-<ul><li><strong>Hipovolêmico/hemorrágico</strong>: o mais comum.</li><li><strong>Cardiogênico</strong>: contusão miocárdica, tamponamento.</li><li><strong>Obstrutivo</strong>: pneumotórax hipertensivo.</li><li><strong>Neurogênico</strong>: lesão medular (hipotensão + bradicardia).</li><li><strong>Séptico</strong>: tardio.</li></ul>`
+<ul><li><strong>Hipovolêmico/hemorrágico</strong>: o mais comum.</li><li><strong>Cardiogênico</strong>: contusão miocárdica, tamponamento.</li><li><strong>Obstrutivo</strong>: pneumotórax hipertensivo.</li><li><strong>Neurogênico</strong>: lesão medular (hipotensão + bradicardia).</li><li><strong>Séptico</strong>: tardio.</li></ul>
+${A.tr_choque_classes}`
     ],
     [
       "clinica",
@@ -3039,6 +3260,101 @@ C["trauma|2"] = {
     }
   ]
 };
+
+Object.assign(C["trauma|2"], {
+  "escores": `<div class="ac-h">Classificação ATLS do choque hemorrágico (4 classes)</div>
+<table class="ac-tbl"><tr><th>Parametro</th><th>Classe I</th><th>Classe II</th><th>Classe III</th><th>Classe IV</th></tr>
+<tr><td>Perda (%)</td><td>&lt;15%</td><td>15-30%</td><td>31-40%</td><td>&gt;40%</td></tr>
+<tr><td>Volume (70kg)</td><td>&lt;750mL</td><td>750-1500mL</td><td>1500-2000mL</td><td>&gt;2000mL</td></tr>
+<tr><td>FC</td><td>&lt;100</td><td>100-120</td><td>120-140</td><td>&gt;140</td></tr>
+<tr><td>PA sistolica</td><td>Normal</td><td>Normal</td><td>Cai</td><td>Cai muito</td></tr>
+<tr><td>Pressão de pulso</td><td>Normal/aumentada</td><td>Estreita</td><td>Estreita</td><td>Estreita</td></tr>
+<tr><td>Diurese</td><td>&gt;30mL/h</td><td>20-30mL/h</td><td>5-15mL/h</td><td>Anuria</td></tr>
+<tr><td>Estado mental</td><td>Pouco ansioso</td><td>Ansioso</td><td>Confuso</td><td>Letargico</td></tr>
+</table>
+<div class="ac-call"><b>Uso pratico:</b> a classificação nao precisa ser "decorada por casa decimal" — o que importa e reconhecer o padrão (FC sobe e pressão de pulso estreita ANTES da PA sistolica cair) e agir cedo.</div>`,
+  "dif": `<div class="ac-h">Choque hemorrágico x neurogenico x outros tipos</div>
+<table class="ac-tbl"><tr><th>—</th><th>Hemorrágico</th><th>Neurogenico</th><th>Obstrutivo (pneumo hipertensivo)</th><th>Cardiogenico (contusao)</th></tr>
+<tr><td>FC</td><td>Taquicardia</td><td><b>Bradicardia</b></td><td>Taquicardia</td><td>Variável/arritmia</td></tr>
+<tr><td>Pele</td><td>Fria, palida, sudoreica</td><td>Quente, rosada, seca</td><td>Fria</td><td>Fria</td></tr>
+<tr><td>Jugulares</td><td>Colabadas (hipovolemia)</td><td>Normais/colabadas</td><td>Distendidas</td><td>Distendidas</td></tr>
+<tr><td>Mecanismo</td><td>Perda de volume</td><td>Perda do tono simpatico</td><td>Ar sob pressão comprime veias</td><td>Falência de bomba</td></tr>
+</table>
+<div class="ac-warn"><b>Atenção:</b> sempre excluir hemorragia antes de assumir choque neurogenico ou qualquer outro tipo — no trauma, a hipotensao e hemorrágica ate prova em contrário.</div>`,
+  "mapa": `<div class="ac-h">Choque hemorrágico em mapa mental</div>
+<div class="mm">
+  <div class="mm-card"><h5>Definição</h5><ul><li>Hipoperfusao tecidual com O2 insuficiente</li><li>No trauma: hemorrágico ate prova em contrário</li></ul></div>
+  <div class="mm-card"><h5>Sinal mais precoce</h5><ul><li>Pressão de pulso estreita</li><li>Taquicardia, antes da PA cair</li></ul></div>
+  <div class="mm-card"><h5>4 classes</h5><ul><li>I&lt;15%, II 15-30%, III 31-40%, IV&gt;40%</li><li>Hipotensao so a partir da III</li></ul></div>
+  <div class="mm-card"><h5>Resposta a volemia</h5><ul><li>Rapida: observar</li><li>Transitoria: sangue+foco</li><li>Minima: cirurgia</li></ul></div>
+  <div class="mm-card"><h5>Reanimação</h5><ul><li>~1L cristaloide aquecido</li><li>Hemocomponentes 1:1:1</li><li>Hipotensao permissiva</li></ul></div>
+  <div class="mm-card"><h5>Armadilhas</h5><ul><li>Jovem compensa ate III</li><li>Idoso/betabloqueado nao taquicardiza</li><li>Hb normal nao exclui sangramento</li></ul></div>
+</div>`,
+  "fluxo_cond": `<div class="ac-h">Fluxograma de conduta - choque hemorrágico</div>
+<div class="fx">
+  <div class="fx-node start">Suspeita de choque no politraumatizado</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Controle imediato do foco visível (compressao/torniquete) + 2 acessos calibrosos</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Infundir ~1L de cristaloide aquecido e observar resposta</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Qual foi a resposta?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Rapida (normaliza e mantém) -&gt; observar, reavaliar</div>
+    <div class="fx-node">Transitoria (melhora e piora) -&gt; hemocomponentes + procurar foco ativo</div>
+  </div>
+  <div class="fx-row">
+    <div class="fx-node end">Minima/ausente -&gt; hemocomponentes + cirurgia/controle de foco IMEDIATO</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Em paralelo: acido tranexamico se &lt;3h, hipotensao permissiva (exceto TCE), prevenir tríade letal</div>
+</div>`,
+  "vespera": `<div class="ac-h">Revisao de vespera</div>
+<div class="ac-call"><b>1.</b> Choque no trauma = hemorrágico ate prova em contrário. Sinal mais precoce: pressão de pulso estreita + taquicardia (ANTES da PA cair).</div>
+<div class="ac-call"><b>2.</b> Classes: I&lt;15%, II 15-30%, III 31-40% (hipotensao comeca aqui), IV&gt;40% (pre-morte).</div>
+<div class="ac-call"><b>3.</b> Resposta a volemia guia a conduta: rapida=observar; transitoria=sangue+foco; minima=cirurgia.</div>
+<div class="ac-call"><b>4.</b> Reanimação atual: ~1L cristaloide, depois hemocomponentes 1:1:1, acido tranexamico &lt;3h, hipotensao permissiva (exceto TCE).</div>
+<div class="ac-call"><b>5.</b> Neurogenico: hipotensao + BRADICARDIA + pele quente (sempre excluir hemorragia antes). Jovens/idosos/gestantes mascaram sinais classicos.</div>
+<div class="ac-call"><b>6.</b> Hb inicial normal NAO exclui hemorragia aguda — a hemoconcentração mascara a queda por horas.</div>`,
+  "dicas": `<div class="ac-h">Dicas de ouro</div>
+<div class="ac-tip">Memorize: "a pressão de pulso estreita antes da pressão sistolica cair" — isso e o que separa quem reconhece choque cedo de quem so percebe quando ja e classe III.</div>
+<div class="ac-tip">Lactato e base excess sao os melhores marcadores de PERFUSAO (nao so de volume) — usam-se para guiar e confirmar a qualidade da reanimação, alem da diurese.</div>
+<div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+<div class="ac-warn">Esperar a PA cair para reconhecer choque — nessa hora o paciente ja perdeu pelo menos 30% da volemia.</div>
+<div class="ac-warn">Assumir que PA normal exclui choque em jovem — a reserva cardiovascular do jovem compensa ate a classe III, com descompensação subita e dramatica depois.</div>
+<div class="ac-warn">Rotular hipotensao com bradicardia como "neurogenica" sem excluir hemorragia — a hemorragia continua sendo a causa mais provável e mais perigosa de nao tratar.</div>
+<div class="ac-warn">Confiar na hemoglobina inicial para excluir sangramento agudo — ela ainda nao caiu por causa da hemoconcentração dos primeiros minutos/horas.</div>`,
+  "checklist": [
+    "Sei definir choque e por que no trauma ele e hemorrágico ate prova em contrário",
+    "Reconheco o sinal mais precoce do choque (pressão de pulso estreita) antes da hipotensao franca",
+    "Sei classificar o choque hemorrágico nas 4 classes do ATLS pelos parametros clínicos",
+    "Entendo a logica da resposta a reposição volemica (rapida/transitoria/minima) e sua conduta",
+    "Conheco os principios da reanimação hemostatica atual e por que se limita cristaloide",
+    "Sei diferenciar choque hemorrágico de neurogenico e por que excluir hemorragia primeiro",
+    "Reconheco armadilhas classicas: jovem, idoso betabloqueado, gestante, Hb normal"
+  ],
+  "casos": [
+    {"t":"Caso 1 — Jovem com PA normal mas taquicardico","stem":"Homem de 22 anos, vitima de esfaqueamento abdominal, PA 118x92, FC 112, um pouco ansioso, pele levemente fria.","passos":[
+      {"h":"1. Reconhecer","p":"Apesar da PA sistolica normal, a pressão de pulso esta estreita (118-92=26) e ha taquicardia — sinais de choque classe II ja presentes."},
+      {"h":"2. Investigar","p":"Nao aguardar queda da PA para agir; iniciar 2 acessos calibrosos, colher tipagem sanguinea e considerar FAST para avaliar sangramento intracavitário."},
+      {"h":"3. Conduzir","p":"Reposição volemica inicial controlada e reavaliação continua, com atenção redobrada pois pacientes jovens podem descompensar subitamente da classe II para IV."},
+      {"h":"Lição de prova","p":"PA sistolica 'normal' nao significa ausência de choque — a pressão de pulso estreita e o alerta precoce que a prova adora cobrar."}
+    ]},
+    {"t":"Caso 2 — Resposta transitoria a reposição volemica","stem":"Mulher, colisao automobilistica, PA inicial 82x54, apos 1L de cristaloide aquecido melhora para 110x72, mas 15 minutos depois volta a cair para 86x58.","passos":[
+      {"h":"1. Reconhecer","p":"Padrão classico de resposta TRANSITORIA — melhora seguida de piora indica sangramento ativo persistente."},
+      {"h":"2. Investigar","p":"Buscar ativamente o foco de sangramento (FAST, Rx de torax/pelve) enquanto se inicia hemocomponentes."},
+      {"h":"3. Conduzir","p":"Iniciar protocolo de transfusão 1:1:1, acido tranexamico se dentro da janela de 3h, e encaminhar para controle definitivo do foco (cirurgia ou embolização) assim que identificado."},
+      {"h":"Lição de prova","p":"Resposta transitoria NAO significa 'esta melhorando' — significa que o paciente continua sangrando e precisa de controle de foco, nao apenas mais volume."}
+    ]},
+    {"t":"Caso 3 — Idoso em uso de betabloqueador","stem":"Homem de 74 anos, em uso cronico de metoprolol, sofre queda com fratura de femur e sangramento importante. FC mantém-se em 88, PA 96x64, confuso.","passos":[
+      {"h":"1. Reconhecer","p":"O betabloqueio impede a taquicardia compensatoria esperada — a FC 'normal' esconde um choque ja instalado, sugerido pela confusao mental e hipotensao relativa."},
+      {"h":"2. Investigar","p":"Nao confiar na FC como parametro isolado; usar lactato, base excess e diurese para avaliar gravidade real da perfusao."},
+      {"h":"3. Conduzir","p":"Tratar como choque hemorrágico significativo apesar da FC enganosa, com reposição volemica e hemocomponentes guiados pelos marcadores de perfusao, nao pela frequência cardiaca."},
+      {"h":"Lição de prova","p":"Idosos em uso de betabloqueador sao o exemplo classico de paciente que 'nao taquicardiza' apesar do choque — confiar cegamente na FC pode atrasar o diagnóstico."}
+    ]}
+  ]
+});
+
 C["trauma|3"] = {
   "name": "FAST e eFAST",
   "intro": "Ultrassom à beira-leito: 4 janelas + pleura/pulmão",
@@ -3055,7 +3371,8 @@ C["trauma|3"] = {
 <li><strong>Hepatorrenal</strong> (espaço de Morrison) — <em>a mais sensível para o abdome</em>;</li>
 <li><strong>Esplenorrenal</strong> (quadrante superior esquerdo);</li>
 <li><strong>Pélvica/suprapúbica</strong> (fundo de saco de Douglas).</li>
-</ul>`
+</ul>
+${A.tr_fast_janelas}`
     ],
     [
       "clinica",
@@ -3080,7 +3397,8 @@ C["trauma|3"] = {
 <tr><td>Negativo</td><td>Instável</td><td>Procurar outros focos (tórax, pelve, retroperitônio)</td></tr>
 <tr><td>Negativo</td><td>Estável</td><td>TC se mecanismo/clínica suspeitos</td></tr>
 </tbody></table></div>
-<div class="callout tip"><div class="ci">${IC.check}</div><div><b>Regra de ouro</b><p><strong>Instável + FAST positivo = sala de cirurgia.</strong> Estável = a TC é o exame de escolha (FAST negativo não exclui lesão).</p></div></div>`
+<div class="callout tip"><div class="ci">${IC.check}</div><div><b>Regra de ouro</b><p><strong>Instável + FAST positivo = sala de cirurgia.</strong> Estável = a TC é o exame de escolha (FAST negativo não exclui lesão).</p></div></div>
+${A.tr_fast_decisao}`
     ],
     [
       "tratamento",
@@ -3307,6 +3625,96 @@ C["trauma|3"] = {
     }
   ]
 };
+
+Object.assign(C["trauma|3"], {
+  "escores": `<div class="ac-h">FAST nao tem "escore" proprio - mas define condutas por corte</div>
+<p class="ac-p">O FAST e um exame binário (positivo/negativo), mas sua interpretação pratica segue uma tabela de decisao cruzando o resultado com a estabilidade hemodinamica.</p>
+<table class="ac-tbl"><tr><th>FAST</th><th>Hemodinamica</th><th>Conduta</th></tr>
+<tr><td>Positivo</td><td>Instável</td><td><b>Laparotomia imediata</b> (sem TC)</td></tr>
+<tr><td>Positivo</td><td>Estável</td><td>TC para caracterizar (possível TNO)</td></tr>
+<tr><td>Negativo</td><td>Instável</td><td>Buscar outros focos (torax, pelve, retroperitonio, externo)</td></tr>
+<tr><td>Negativo</td><td>Estável</td><td>TC se mecanismo/clínica suspeitos</td></tr>
+</table>
+<div class="ac-h" style="margin-top:14px">Criterios classicos do LPD (lavado peritoneal diagnóstico)</div>
+<p class="ac-p">Ainda cobrado como alternativa historica: positivo se aspirado &gt;10mL de sangue franco, ou no lavado &gt;100.000 hemacias/mm3, &gt;500 leucocitos/mm3, ou presenca de bile/conteudo entérico/fibras vegetais.</p>`,
+  "dif": `<div class="ac-h">FAST x TC x LPD</div>
+<table class="ac-tbl"><tr><th>—</th><th>FAST</th><th>TC</th><th>LPD</th></tr>
+<tr><td>Detecta liquido</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+<tr><td>Lesão de viscera oca</td><td>Ruim</td><td>Limitado</td><td>Bom (conteudo entérico)</td></tr>
+<tr><td>Retroperitonio</td><td>Nao</td><td><b>Sim</b></td><td>Nao</td></tr>
+<tr><td>Paciente instável</td><td><b>Ideal</b> (beira-leito)</td><td>Contraindicado (sai da sala)</td><td>Alternativa</td></tr>
+<tr><td>Radiação</td><td>Nao</td><td>Sim</td><td>Nao</td></tr>
+<tr><td>Repetível</td><td><b>Sim, facilmente</b></td><td>Limitado (radiação)</td><td>Nao (invasivo)</td></tr>
+</table>`,
+  "mapa": `<div class="ac-h">FAST/eFAST em mapa mental</div>
+<div class="mm">
+  <div class="mm-card"><h5>O que e</h5><ul><li>US rapido a beira-leito</li><li>Responde: "tem liquido livre?"</li></ul></div>
+  <div class="mm-card"><h5>4 janelas</h5><ul><li>Pericardica (subxifoide)</li><li>Hepatorrenal (Morrison) - a + sensível</li><li>Esplenorrenal, pélvica (Douglas)</li></ul></div>
+  <div class="mm-card"><h5>eFAST</h5><ul><li>FAST + pleura</li><li>Detecta pneumo/hemotorax</li></ul></div>
+  <div class="mm-card"><h5>Instável</h5><ul><li>Positivo = laparotomia JA</li><li>Negativo = buscar outro foco</li></ul></div>
+  <div class="mm-card"><h5>Estável</h5><ul><li>TC e o exame de escolha</li><li>FAST negativo NAO exclui lesão</li></ul></div>
+  <div class="mm-card"><h5>Limitações</h5><ul><li>Viscera oca, retroperitonio, diafragma</li><li>Obesidade, enfisema, operador</li></ul></div>
+</div>`,
+  "fluxo_dx": `<div class="ac-h">Fluxograma diagnóstico - FAST no trauma abdominal</div>
+<div class="fx">
+  <div class="fx-node start">Trauma abdominal - avaliar estabilidade hemodinamica</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Paciente instável ou estável?</div>
+  <div class="fx-row">
+    <div class="fx-node">INSTável -&gt; FAST na propria sala de emergência</div>
+    <div class="fx-node">ESTável -&gt; TC com contraste e o exame de escolha</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">No instável: FAST positivo ou negativo?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Positivo -&gt; Laparotomia IMEDIATA (nunca sair da sala para TC)</div>
+    <div class="fx-node">Negativo -&gt; buscar outros focos: torax, pelve/retroperitonio, ossos longos, externo</div>
+  </div>
+</div>`,
+  "vespera": `<div class="ac-h">Revisao de vespera</div>
+<div class="ac-call"><b>1.</b> FAST detecta liquido livre em 4 janelas (pericardica, hepatorrenal/Morrison, esplenorrenal, pélvica); eFAST acrescenta pleura (pneumo/hemotorax).</div>
+<div class="ac-call"><b>2.</b> Janela mais sensível para abdome: hepatorrenal (espaco de Morrison).</div>
+<div class="ac-call"><b>3.</b> Instável + FAST positivo = laparotomia imediata, sem passar pela TC.</div>
+<div class="ac-call"><b>4.</b> Estável = TC e o exame de escolha (mais detalhado, avalia retroperitonio).</div>
+<div class="ac-call"><b>5.</b> FAST e ruim para viscera oca, retroperitonio e diafragma — negativo nao exclui essas lesões.</div>
+<div class="ac-call"><b>6.</b> LPD e alternativa historica, ainda cobrado em prova: positivo com &gt;10mL sangue ou &gt;100.000 hemacias/mm3.</div>`,
+  "dicas": `<div class="ac-h">Dicas de ouro</div>
+<div class="ac-tip">Pense no FAST como uma pergunta de "sim ou nao" — ele nao caracteriza a lesão, so diz se ha liquido. Caracterizar (grau, órgão) e papel da TC.</div>
+<div class="ac-tip">Na janela pericardica, lembre que o pericardio "nao mente": qualquer derrame ali em ferimento penetrante precordial e emergência ate prova em contrário.</div>
+<div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+<div class="ac-warn">Levar paciente instável para a TC "so para confirmar" — o instável nao pode sair da sala de emergência; FAST positivo ja e suficiente para indicar cirurgia.</div>
+<div class="ac-warn">Achar que FAST negativo exclui lesão abdominal — ele e ruim para viscera oca e retroperitonio; a vigilância clínica continua sendo essencial.</div>
+<div class="ac-warn">Confundir a janela mais sensível (Morrison/hepatorrenal) com a pélvica — essa troca e armadilha classica de prova.</div>`,
+  "checklist": [
+    "Sei nomear as 4 janelas do FAST e o que cada uma avalia",
+    "Sei qual e a janela mais sensível para detecção de sangramento abdominal",
+    "Entendo o que o eFAST acrescenta ao FAST tradicional",
+    "Sei a conduta em cada combinação de FAST e estabilidade hemodinamica",
+    "Reconheco as limitações do FAST (viscera oca, retroperitonio, diafragma)",
+    "Conheco os criterios classicos de positividade do LPD como alternativa historica"
+  ],
+  "casos": [
+    {"t":"Caso 1 — Trauma abdominal fechado instável","stem":"Vitima de colisao automobilistica frontal, PA 78x50, FC 132, abdome distendido e doloroso difusamente.","passos":[
+      {"h":"1. Reconhecer","p":"Paciente instável com suspeita de sangramento abdominal — nao pode sair da sala de emergência para exames demorados."},
+      {"h":"2. Investigar","p":"FAST a beira-leito, priorizando a janela hepatorrenal (Morrison), que e a mais sensível."},
+      {"h":"3. Conduzir","p":"Se FAST positivo, encaminhar diretamente para laparotomia exploradora — nao ha tempo nem indicação para TC nesse cenário."},
+      {"h":"Lição de prova","p":"O valor do FAST esta exatamente aqui: decidir rapidamente, a beira-leito, sem expor o paciente instável ao risco de sair da sala de emergência."}
+    ]},
+    {"t":"Caso 2 — FAST negativo em paciente instável","stem":"Vitima de trauma fechado grave, hipotensa e taquicardica, com FAST abdominal negativo em todas as janelas.","passos":[
+      {"h":"1. Reconhecer","p":"FAST negativo NAO explica a instabilidade — e preciso procurar ativamente outros focos de sangramento."},
+      {"h":"2. Investigar","p":"Revisar torax (Rx/eFAST), pelve (Rx de pelve, exame fisico unico e cuidadoso), ossos longos (fraturas de femur) e sangramento externo."},
+      {"h":"3. Conduzir","p":"Direcionar a investigação e o tratamento conforme o foco identificado — por exemplo, cinta pélvica se houver fratura instável de pelve, ou drenagem torácica se hemotorax."},
+      {"h":"Lição de prova","p":"FAST negativo em paciente instável NUNCA encerra a investigação — ele apenas redireciona a busca para os outros focos de hemorragia do politrauma."}
+    ]},
+    {"t":"Caso 3 — Achado incidental em paciente estável","stem":"Paciente estável apos trauma abdominal fechado, assintomatico, mas com FAST positivo no quadrante superior esquerdo (suspeita de lesão esplenica).","passos":[
+      {"h":"1. Reconhecer","p":"Paciente estável com FAST positivo — a conduta aqui e diferente do instável: nao se opera de imediato."},
+      {"h":"2. Investigar","p":"Solicitar TC de abdome com contraste para caracterizar e graduar a lesão esplenica (classificação AAST)."},
+      {"h":"3. Conduzir","p":"Se a lesão for compatível, considerar tratamento nao-operatorio (TNO) em ambiente monitorizado, com possibilidade de angioembolização se houver blush arterial."},
+      {"h":"Lição de prova","p":"FAST positivo em paciente ESTável nao e sinonimo automatico de cirurgia — abre-se espaco para investigação e, frequentemente, tratamento conservador."}
+    ]}
+  ]
+});
+
 C["trauma|4"] = {
   "name": "Trauma abdominal",
   "intro": "Fechado × penetrante e indicações de laparotomia",
@@ -3321,7 +3729,8 @@ C["trauma|4"] = {
 </ul>
 <div class="callout key"><div class="ci">${IC.info}</div><div><b>Pergunta central</b><p>Toda a conduta gira em torno de: <strong>operar ou não?</strong> — determinado pela <em>estabilidade hemodinâmica</em> e pelo <em>mecanismo</em>.</p></div></div>
 <h4>Regiões anatômicas</h4>
-<p>Abdome anterior, dorso/flanco e <strong>região toracoabdominal</strong> (entre mamilo/escápula e rebordo costal — risco de lesão diafragmática e de órgãos torácicos).</p>`
+<p>Abdome anterior, dorso/flanco e <strong>região toracoabdominal</strong> (entre mamilo/escápula e rebordo costal — risco de lesão diafragmática e de órgãos torácicos).</p>
+${A.tr_abdome_mecanismo}`
     ],
     [
       "clinica",
@@ -3579,6 +3988,103 @@ C["trauma|4"] = {
     }
   ]
 };
+
+Object.assign(C["trauma|4"], {
+  "escores": `<div class="ac-h">Graduação AAST de lesões de órgãos solidos (baco/figado)</div>
+<p class="ac-p">A American Association for the Surgery of Trauma (AAST) classifica lesões esplenicas e hepaticas de grau I a V pela TC, orientando a decisao entre tratamento nao-operatorio (TNO) e cirurgia.</p>
+<table class="ac-tbl"><tr><th>Grau</th><th>Caracteristica geral</th></tr>
+<tr><td>I</td><td>Hematoma subcapsular pequeno / laceração superficial</td></tr>
+<tr><td>II</td><td>Hematoma/laceração de profundidade e extensao moderadas</td></tr>
+<tr><td>III</td><td>Laceração mais profunda, hematoma maior/expansivo</td></tr>
+<tr><td>IV</td><td>Laceração envolvendo vasos segmentares/hilares</td></tr>
+<tr><td>V</td><td>Órgão fragmentado ou desvascularizado</td></tr>
+</table>
+<div class="ac-call"><b>Uso pratico:</b> o grau NAO decide sozinho — o que manda e a estabilidade hemodinamica. Um grau IV estável pode ser TNO; um grau I instável pode precisar de cirurgia se for a fonte do choque.</div>`,
+  "dif": `<div class="ac-h">Arma branca x arma de fogo</div>
+<table class="ac-tbl"><tr><th>—</th><th>Arma branca</th><th>Arma de fogo</th></tr>
+<tr><td>Energia</td><td>Baixa</td><td>Alta</td></tr>
+<tr><td>Padrão de lesão</td><td>Pelo trajeto direto</td><td>Multiplas (cavitação temporária)</td></tr>
+<tr><td>Conduta (estável, peritonio violado)</td><td>Seletiva (observação/exploração local)</td><td><b>Laparotomia</b></td></tr>
+<tr><td>Órgão mais lesado</td><td>Figado</td><td>Delgado</td></tr>
+</table>
+<div class="ac-h" style="margin-top:14px">Trauma fechado x penetrante</div>
+<p class="ac-p">No fechado, o órgão mais lesado e o baco (depois figado); no penetrante, depende da arma (figado na branca, delgado na de fogo). Essa diferenca de mecanismo e cobrada em quase toda prova de cirurgia do trauma.</p>`,
+  "mapa": `<div class="ac-h">Trauma abdominal em mapa mental</div>
+<div class="mm">
+  <div class="mm-card"><h5>Mecanismos</h5><ul><li>Fechado: baco &gt; figado</li><li>Arma branca: figado</li><li>Arma de fogo: delgado</li></ul></div>
+  <div class="mm-card"><h5>Pergunta central</h5><ul><li>Operar ou nao?</li><li>Depende de estabilidade + mecanismo</li></ul></div>
+  <div class="mm-card"><h5>Laparotomia obrigatoria</h5><ul><li>Peritonite, evisceração</li><li>FAF transperitoneal, pneumoperitonio</li></ul></div>
+  <div class="mm-card"><h5>TNO</h5><ul><li>Baco/figado em estáveis</li><li>+- angioembolização</li></ul></div>
+  <div class="mm-card"><h5>Sinal do cinto</h5><ul><li>Viscera oca + mesenterio</li><li>Fratura de Chance</li></ul></div>
+  <div class="mm-card"><h5>Pos-esplenectomia</h5><ul><li>Vacinar encapsulados</li><li>Risco de OPSI</li></ul></div>
+</div>`,
+  "fluxo_cond": `<div class="ac-h">Fluxograma de conduta - trauma abdominal</div>
+<div class="fx">
+  <div class="fx-node start">Trauma abdominal (fechado ou penetrante)</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Instabilidade hemodinamica?</div>
+  <div class="fx-row">
+    <div class="fx-node">Instável -&gt; FAST/LPD na sala</div>
+    <div class="fx-node">Estável -&gt; segue avaliação</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Instável: positivo?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; Laparotomia imediata</div>
+    <div class="fx-node">Nao -&gt; buscar outro foco de choque</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Estável: ha indicação absoluta de laparotomia (peritonite, evisceração, FAF transperitoneal, pneumoperitonio)?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; Laparotomia</div>
+    <div class="fx-node end">Nao -&gt; TC com contraste -&gt; considerar TNO (baco/figado) +- angioembolização</div>
+  </div>
+</div>`,
+  "vespera": `<div class="ac-h">Revisao de vespera</div>
+<div class="ac-call"><b>1.</b> Fechado: baco e o mais lesado, depois figado. Arma branca: figado. Arma de fogo: delgado.</div>
+<div class="ac-call"><b>2.</b> Instável + FAST positivo -&gt; laparotomia. Estável fechado -&gt; TC com contraste.</div>
+<div class="ac-call"><b>3.</b> Laparotomia obrigatoria: peritonite difusa, evisceração, FAF transperitoneal, pneumoperitonio, sangue em SNG/reto.</div>
+<div class="ac-call"><b>4.</b> TNO: baco e figado em pacientes estáveis, monitorizados, +- angioembolização para blush arterial.</div>
+<div class="ac-call"><b>5.</b> Sinal do cinto de seguranca: suspeitar de lesão de viscera oca, mesenterio e fratura de Chance da coluna lombar.</div>
+<div class="ac-call"><b>6.</b> Pos-esplenectomia: vacinar contra germes encapsulados (pneumococo, meningococo, Haemophilus) — risco de OPSI (sepse fulminante pos-esplenectomia).</div>`,
+  "dicas": `<div class="ac-h">Dicas de ouro</div>
+<div class="ac-tip">Para lembrar os órgãos: "no fechado, o Baco Bate primeiro" (aliteração); no penetrante, pense em "Figado por Faca, Delgado por Disparo".</div>
+<div class="ac-tip">A regiao toracoabdominal (entre mamilos/escapulas e rebordo costal) e uma zona de risco duplo — pode envolver diafragma e órgãos torácicos junto com o abdome.</div>
+<div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+<div class="ac-warn">Tratar ferimento por arma de fogo com violação peritoneal como "conduta seletiva" so porque o paciente esta estável — a alta energia e a taxa de lesão visceral favorecem laparotomia.</div>
+<div class="ac-warn">Nao reparar lesão diafragmatica pequena "porque e assintomatica" — o diafragma nao cicatriza sozinho e pode herniar anos depois.</div>
+<div class="ac-warn">Esquecer a vacinação pos-esplenectomia — e uma das perguntas mais repetidas de prova sobre trauma abdominal.</div>`,
+  "checklist": [
+    "Sei o órgão mais lesado no trauma fechado e nos dois tipos de trauma penetrante",
+    "Reconheco as indicações absolutas de laparotomia no trauma abdominal",
+    "Entendo os criterios e limites do tratamento nao-operatorio (TNO)",
+    "Sei o significado clínico do sinal do cinto de seguranca",
+    "Conheco a conduta correta diante de lesão diafragmatica",
+    "Sei a profilaxia obrigatoria apos esplenectomia e por que ela existe",
+    "Sei diferenciar a conduta entre arma branca e arma de fogo em paciente estável"
+  ],
+  "casos": [
+    {"t":"Caso 1 — Sinal do cinto de seguranca","stem":"Adolescente, colisao frontal usando cinto de seguranca, apresenta equimose transversal no abdome inferior e dor lombar. Exame abdominal com discreta defesa.","passos":[
+      {"h":"1. Reconhecer","p":"O sinal do cinto de seguranca (equimose transversal) e um marcador de alto risco para lesão de viscera oca, mesenterio e fratura de coluna lombar tipo Chance."},
+      {"h":"2. Investigar","p":"Baixar o limiar para TC de abdome e considerar radiografia/TC de coluna lombar mesmo com exame inicial pouco exuberante."},
+      {"h":"3. Conduzir","p":"Observação clínica seriada rigorosa mesmo com TC inicial pouco alterada, pois lesões de viscera oca podem nao aparecer de imediato na imagem."},
+      {"h":"Lição de prova","p":"O sinal do cinto de seguranca e uma pista fisica que 'avisa' sobre lesões que o FAST e ate a TC inicial podem nao capturar bem — a vigilância clínica e essencial."}
+    ]},
+    {"t":"Caso 2 — Ferimento por arma de fogo abdominal","stem":"Homem, ferimento por projetil de arma de fogo em flanco direito, estável hemodinamicamente, com orificio de entrada e sem orificio de saida visível.","passos":[
+      {"h":"1. Reconhecer","p":"Ferimento por arma de fogo com suspeita de trajeto transperitoneal — mesmo estável, esse mecanismo tem alta probabilidade de lesão visceral."},
+      {"h":"2. Investigar","p":"TC pode ajudar a definir o trajeto do projetil, mas nao deve atrasar uma decisao cirúrgica se houver sinais de violação peritoneal."},
+      {"h":"3. Conduzir","p":"Encaminhar para laparotomia exploradora, que e a conduta classica para FAF com violação peritoneal confirmada ou fortemente suspeita, mesmo em paciente estável."},
+      {"h":"Lição de prova","p":"Diferente da arma branca, o ferimento por arma de fogo com violação peritoneal tem indicação classica de laparotomia independentemente da estabilidade hemodinamica."}
+    ]},
+    {"t":"Caso 3 — Lesão esplenica em paciente estável","stem":"Jovem, trauma fechado em bicicleta, TC evidência lesão esplenica grau III, sem blush arterial, paciente hemodinamicamente estável durante toda a observação.","passos":[
+      {"h":"1. Reconhecer","p":"Lesão esplenica graduada por TC em paciente estável e candidata classica a tratamento nao-operatorio (TNO)."},
+      {"h":"2. Investigar","p":"Monitorização continua em ambiente adequado (UTI ou unidade de cuidados intermediarios), com reavaliações seriadas de sinais vitais e exame abdominal."},
+      {"h":"3. Conduzir","p":"Manter TNO enquanto o paciente permanecer estável; se houver deterioração hemodinamica ou sinais de sangramento ativo, converter para tratamento cirúrgico ou angioembolização sem hesitar."},
+      {"h":"Lição de prova","p":"TNO nao e 'so observar e torcer' — exige ambiente monitorizado e criterio claro para converter para tratamento ativo se o paciente deteriorar."}
+    ]}
+  ]
+});
+
 C["trauma|5"] = {
   "name": "Trauma torácico",
   "intro": "Lesões letais imediatas e potencialmente letais",
@@ -3588,7 +4094,8 @@ C["trauma|5"] = {
       "Entendendo",
       `<div class="callout key" style="border-left:4px solid var(--accent);background:var(--accent-soft)"><div class="ci">${IC.brain}</div><div><b>📖 Base para iniciantes — as lesões que matam no tórax</b><p style='margin-top:6px'>O tórax guarda coração e pulmões — lesões aqui matam rápido, mas muitas se resolvem com <strong>um simples dreno</strong> (não precisam de cirurgia grande).</p><p style="background:var(--rose-soft);border-radius:8px;padding:8px 10px"><strong>⚠️ As 5 lesões que matam JÁ (decore — caem muito):</strong> pense em <strong>'ATOM-C'</strong>:<br>• <strong>A</strong> = Pneumotórax <strong>A</strong>berto (ferida soprante) → curativo de 3 pontas + dreno.<br>• <strong>T</strong> = Pneumotórax hipertensivo (<strong>T</strong>ension) → punção/dreno IMEDIATO, antes do raio-X!<br>• <strong>O</strong> = Hemotórax maciço (<strong>O</strong> sangue enche o tórax) → dreno + reposição.<br>• <strong>M</strong> = Tórax instável (<strong>'M'</strong>flail/afundamento de costelas) + contusão pulmonar.<br>• <strong>C</strong> = Tamponamento <strong>C</strong>ardíaco → tríade de Beck.</p><p style="background:var(--gold-soft);border-radius:8px;padding:8px 10px"><strong>🧠 Tríade de Beck (tamponamento):</strong> hipotensão + <strong>turgência jugular</strong> + abafamento de bulhas. Coração 'apertado' por sangue no pericárdio.</p><p style="background:var(--accent-soft);border-radius:8px;padding:8px 10px"><strong>🧠 Pneumotórax hipertensivo:</strong> diagnóstico é <strong>clínico</strong> (não espera imagem!) — desvio de traqueia, jugular estufada, ausência de murmúrio de um lado. Trate puncionando JÁ.</p></div></div><h4>Panorama</h4>
 <p>O trauma torácico responde por grande parte das mortes evitáveis, mas <strong>apenas ~15% exigem toracotomia</strong> — a maioria resolve com <strong>drenagem de tórax</strong> e suporte. Separe as <em>letais imediatas</em> (diagnóstico na avaliação primária) das <em>potencialmente letais</em> (diagnóstico na secundária).</p>
-<div class="callout key"><div class="ci">${IC.info}</div><div><b>Dois grupos</b><p><strong>Imediatas</strong>: pneumotórax hipertensivo/aberto, hemotórax maciço, tamponamento, tórax instável. <strong>Potencialmente letais</strong>: contusão pulmonar/miocárdica, rotura de aorta, lesão traqueobrônquica, de esôfago e de diafragma.</p></div></div>`
+<div class="callout key"><div class="ci">${IC.info}</div><div><b>Dois grupos</b><p><strong>Imediatas</strong>: pneumotórax hipertensivo/aberto, hemotórax maciço, tamponamento, tórax instável. <strong>Potencialmente letais</strong>: contusão pulmonar/miocárdica, rotura de aorta, lesão traqueobrônquica, de esôfago e de diafragma.</p></div></div>
+${A.tr_torax_letais}`
     ],
     [
       "clinica",
@@ -3841,6 +4348,96 @@ C["trauma|5"] = {
     }
   ]
 };
+
+Object.assign(C["trauma|5"], {
+  "escores": `<div class="ac-h">Criterios de toracotomia (nao ha escore formal, mas limiares numericos classicos)</div>
+<table class="ac-tbl"><tr><th>Criterio</th><th>Valor</th></tr>
+<tr><td>Drenagem inicial</td><td>&gt;1500 mL</td></tr>
+<tr><td>Debito continuo</td><td>&gt;200 mL/h por 2-4h</td></tr>
+<tr><td>Necessidade de transfusão continua</td><td>Instabilidade apesar de reposição</td></tr>
+</table>
+<div class="ac-h" style="margin-top:14px">Toracotomia de reanimação ("na sala") - criterios de seleção</div>
+<p class="ac-p">Reservada a trauma penetrante torácico com sinais de vida recentes (movimento, atividade eletrica cardiaca, reatividade pupilar) em parada ou pre-parada. Pouco efetiva no trauma fechado, especialmente com PCR prolongada.</p>`,
+  "dif": `<div class="ac-h">Imediatas x Potencialmente letais</div>
+<table class="ac-tbl"><tr><th>Imediatas (avaliação primária)</th><th>Potencialmente letais (avaliação secundária)</th></tr>
+<tr><td>Pneumotorax hipertensivo</td><td>Contusao pulmonar</td></tr>
+<tr><td>Pneumotorax aberto</td><td>Contusao miocardica</td></tr>
+<tr><td>Hemotorax maciço</td><td>Ruptura de aorta</td></tr>
+<tr><td>Tamponamento cardiaco</td><td>Lesão traqueobronquica</td></tr>
+<tr><td>Torax instável</td><td>Lesão de esofago e diafragma</td></tr>
+</table>
+<div class="ac-warn"><b>Diferencie:</b> as imediatas sao diagnóstico CLÍNICO e tratadas na primária; as potencialmente letais costumam precisar de imagem (Rx, angioTC) e sao identificadas na secundária.</div>`,
+  "mapa": `<div class="ac-h">Trauma torácico em mapa mental</div>
+<div class="mm">
+  <div class="mm-card"><h5>Panorama</h5><ul><li>~85% resolve com dreno</li><li>~15% precisa de toracotomia</li></ul></div>
+  <div class="mm-card"><h5>5 imediatas</h5><ul><li>Pneumo hipertensivo/aberto</li><li>Hemotorax maciço, tamponamento, torax instável</li></ul></div>
+  <div class="mm-card"><h5>Contusao pulmonar</h5><ul><li>Causa +comum de morte tardia evitável</li><li>Piora em 24-48h</li></ul></div>
+  <div class="mm-card"><h5>Ruptura de aorta</h5><ul><li>Desaceleração, istmo aortico</li><li>Mediastino alargado -&gt; angioTC</li></ul></div>
+  <div class="mm-card"><h5>Toracotomia</h5><ul><li>&gt;1500mL ou &gt;200mL/h x2-4h</li><li>Reanimação: penetrante c/ sinais de vida</li></ul></div>
+  <div class="mm-card"><h5>Outras letais</h5><ul><li>Traqueobronquica: fuga aérea persistente</li><li>Esofago: pneumomediastino+amilase</li></ul></div>
+</div>`,
+  "fluxo_cond": `<div class="ac-h">Fluxograma de conduta - trauma torácico</div>
+<div class="fx">
+  <div class="fx-node start">Trauma torácico - avaliação primária (B)</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Alguma das 5 lesões imediatas presente (diagnóstico clínico)?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; tratar JA (descompressao/dreno/curativo/pericardiocentese)</div>
+    <div class="fx-node">Nao -&gt; segue avaliação</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Colocado dreno de torax: monitorar debito</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Debito &gt;1500mL inicial OU &gt;200mL/h por 2-4h?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; Toracotomia</div>
+    <div class="fx-node end">Nao -&gt; manter dreno + investigar lesões potencialmente letais na secundária (angioTC se suspeita de aorta)</div>
+  </div>
+</div>`,
+  "vespera": `<div class="ac-h">Revisao de vespera</div>
+<div class="ac-call"><b>1.</b> ~85% do trauma torácico resolve com dreno de torax; apenas ~15% vai a toracotomia.</div>
+<div class="ac-call"><b>2.</b> 5 lesões imediatas (diagnóstico clínico, avaliação primária): pneumo hipertensivo/aberto, hemotorax maciço, tamponamento, torax instável.</div>
+<div class="ac-call"><b>3.</b> Criterio de toracotomia por hemotorax: &gt;1500mL inicial ou &gt;200mL/h por 2-4h.</div>
+<div class="ac-call"><b>4.</b> Ruptura de aorta: mecanismo de desaceleração, local classico e o istmo aortico, Rx com mediastino alargado, confirma angioTC.</div>
+<div class="ac-call"><b>5.</b> Torax instável mata pela contusao pulmonar associada, nao pela fratura em si — tratamento e analgesia/O2/suporte, nao "imobilizar com peso".</div>
+<div class="ac-call"><b>6.</b> Contusao pulmonar e a causa mais comum de morte tardia evitável no trauma torácico.</div>`,
+  "dicas": `<div class="ac-h">Dicas de ouro</div>
+<div class="ac-tip">A maioria das lesões torácicas graves se resolve so com um dreno de torax bem posicionado — nao superestime a necessidade de cirurgia grande nesse contexto.</div>
+<div class="ac-tip">Pense na aorta como um "tubo preso nas duas pontas": o istmo aortico (junto ao ligamento arterioso) e o ponto de maior cisalhamento na desaceleração brusca.</div>
+<div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+<div class="ac-warn">Achar que o tratamento do torax instável e "fixar/imobilizar com peso" — na verdade e analgesia, oxigenio e, se necessário, suporte ventilatorio para a contusao pulmonar subjacente.</div>
+<div class="ac-warn">Nao investigar rotura de aorta diante de mecanismo de desaceleração com mediastino alargado no Rx — essa e uma das lesões potencialmente letais mais cobradas.</div>
+<div class="ac-warn">Ignorar escape aéreo persistente e pulmao que nao reexpande apos o dreno — isso sinaliza lesão traqueobronquica, nao "dreno mal posicionado".</div>`,
+  "checklist": [
+    "Sei diferenciar lesões imediatas de potencialmente letais no trauma torácico",
+    "Conheco os criterios numericos de toracotomia por hemotorax",
+    "Entendo o mecanismo e o sinal radiológico classico da ruptura de aorta",
+    "Sei por que o torax instável mata pela contusao pulmonar, nao pela fratura",
+    "Reconheco os sinais de lesão traqueobronquica e de lesão esofagica",
+    "Sei quando a toracotomia de reanimação tem indicação (e quando nao tem)"
+  ],
+  "casos": [
+    {"t":"Caso 1 — Hemotorax com debito elevado","stem":"Paciente com ferimento penetrante em torax, dreno de torax drena 1700mL de sangue imediatamente apos inserção, com sinais de instabilidade hemodinamica persistente.","passos":[
+      {"h":"1. Reconhecer","p":"Drenagem inicial acima de 1500mL caracteriza hemotorax maciço com criterio de toracotomia."},
+      {"h":"2. Investigar","p":"Confirmar acesso venoso calibroso e reposição volemica/hemocomponentes em curso enquanto se prepara a sala cirúrgica."},
+      {"h":"3. Conduzir","p":"Encaminhar para toracotomia de urgência para controle do sangramento, sem aguardar mais tempo de observação."},
+      {"h":"Lição de prova","p":"O criterio numerico (&gt;1500mL inicial) e suficiente por si so para indicar toracotomia, mesmo sem outros sinais adicionais de gravidade."}
+    ]},
+    {"t":"Caso 2 — Mediastino alargado apos colisao frontal","stem":"Motorista de colisao frontal em alta velocidade, estável, com Rx de torax mostrando alargamento do mediastino e apagamento do botao aortico.","passos":[
+      {"h":"1. Reconhecer","p":"Mecanismo de desaceleração brusca associado a alargamento de mediastino levanta forte suspeita de ruptura traumatica de aorta."},
+      {"h":"2. Investigar","p":"Solicitar angioTC de torax com urgência para confirmar e localizar a lesão (tipicamente no istmo aortico)."},
+      {"h":"3. Conduzir","p":"Se confirmada, controle rigoroso da pressão arterial e frequência cardiaca (evitar picos de pressão) enquanto se organiza tratamento definitivo (endovascular ou cirúrgico aberto, conforme o caso)."},
+      {"h":"Lição de prova","p":"Mesmo em paciente estável, o mecanismo de desaceleração com mediastino alargado no Rx obriga a investigação ativa de rotura de aorta — e uma lesão 'silenciosa' que pode ser fatal se nao pesquisada."}
+    ]},
+    {"t":"Caso 3 — Fuga aérea persistente pos-dreno","stem":"Paciente com trauma torácico penetrante, apos drenagem de pneumotorax, mantém grande fuga aérea pelo dreno e o pulmao nao reexpande na radiografia de controle.","passos":[
+      {"h":"1. Reconhecer","p":"Escape aéreo persistente e falha de reexpansao pulmonar apos dreno bem posicionado sugerem lesão de via aérea (traqueobronquica), nao simples pneumotorax."},
+      {"h":"2. Investigar","p":"Considerar broncoscopia para localizar e caracterizar a lesão traqueobronquica."},
+      {"h":"3. Conduzir","p":"Dependendo da extensao e localização, o tratamento pode variar de conduta expectante com drenagem adequada ate reparo cirúrgico da via aérea."},
+      {"h":"Lição de prova","p":"Fuga aérea persistente nao e sinal de 'dreno mal posicionado' na maioria das vezes — e um sinal de alerta para lesão estrutural da via aérea que precisa de investigação dirigida."}
+    ]}
+  ]
+});
+
 C["trauma|6"] = {
   "name": "Traumatismo cranioencefálico",
   "intro": "Glasgow, lesão 1ª × 2ª, hematomas e HIC",
@@ -3855,7 +4452,8 @@ C["trauma|6"] = {
 </ul>
 <div class="callout key"><div class="ci">${IC.info}</div><div><b>Os dois maiores vilões</b><p><strong>Hipóxia (SatO₂ &lt;90%)</strong> e <strong>hipotensão (PAS &lt;90)</strong> dobram a mortalidade do TCE. Por isso, no TCE NÃO se faz hipotensão permissiva.</p></div></div>
 <h4>PPC e doutrina de Monro-Kellie</h4>
-<p>PPC = PAM − PIC. O crânio é uma caixa rígida; aumentos de volume (hematoma, edema) elevam a PIC e reduzem a perfusão.</p>`
+<p>PPC = PAM − PIC. O crânio é uma caixa rígida; aumentos de volume (hematoma, edema) elevam a PIC e reduzem a perfusão.</p>
+${A.tr_glasgow}`
     ],
     [
       "clinica",
@@ -3882,6 +4480,7 @@ C["trauma|6"] = {
 <tr><td><strong>HSA traumática</strong></td><td>Vasos subaracnóideos</td><td>Sangue em sulcos/cisternas</td><td>A mais comum no TCE</td></tr>
 <tr><td><strong>Intraparenquimatosa</strong></td><td>—</td><td>Hiperdensidade no parênquima</td><td>Contusão</td></tr>
 </tbody></table></div>
+${A.tr_tce_hematomas}
 <h4>Quando pedir TC de crânio</h4>
 <p>Glasgow &lt;15 após 2h, déficit focal, sinais de fratura de base/afundamento, vômitos repetidos, convulsão, anticoagulação, idade avançada (critérios tipo Canadian CT Head Rule).</p>`
     ],
@@ -4122,6 +4721,112 @@ C["trauma|6"] = {
     }
   ]
 };
+
+Object.assign(C["trauma|6"], {
+  "escores": `<div class="ac-h">Escala de Coma de Glasgow (detalhada)</div>
+<table class="ac-tbl"><tr><th>Pontos</th><th>Ocular (4)</th><th>Verbal (5)</th><th>Motora (6)</th></tr>
+<tr><td>6</td><td>—</td><td>—</td><td>Obedece comandos</td></tr>
+<tr><td>5</td><td>—</td><td>Orientado</td><td>Localiza dor</td></tr>
+<tr><td>4</td><td>Espontanea</td><td>Confuso</td><td>Retirada a dor</td></tr>
+<tr><td>3</td><td>Ao som/chamado</td><td>Palavras inapropriadas</td><td>Flexao anormal (decorticação)</td></tr>
+<tr><td>2</td><td>A pressão/dor</td><td>Sons incompreensíveis</td><td>Extensao (descerebração)</td></tr>
+<tr><td>1</td><td>Ausente</td><td>Ausente</td><td>Ausente</td></tr>
+</table>
+<p class="ac-p">Classificação: leve 13-15, moderado 9-12, grave &le;8 (indica via aérea definitiva).</p>
+<div class="ac-h" style="margin-top:14px">Canadian CT Head Rule (conceito)</div>
+<p class="ac-p">Conjunto de criterios de alto e medio risco (Glasgow&lt;15 apos 2h, suspeita de fratura aberta/base de crânio, vomitos repetidos &ge;2, idade &ge;65, amnesia &gt;30min, mecanismo perigoso) que ajuda a decidir quem precisa de TC de crânio em TCE leve — usado para reduzir exames desnecessarios sem perder lesões significativas.</p>`,
+  "dif": `<div class="ac-h">Epidural x Subdural x HSA traumatica x Intraparenquimatosa</div>
+<table class="ac-tbl"><tr><th>—</th><th>Epidural</th><th>Subdural</th></tr>
+<tr><td>Vaso</td><td>Arteria meningea media</td><td>Veias-ponte</td></tr>
+<tr><td>Forma na TC</td><td>Biconvexo (lente)</td><td>Crescente (semilua)</td></tr>
+<tr><td>Cruza suturas?</td><td>Nao</td><td>Sim</td></tr>
+<tr><td>Evolução</td><td>Aguda, intervalo lucido</td><td>Aguda ou cronica; idosos</td></tr>
+<tr><td>Prognóstico</td><td>Melhor se drenado a tempo</td><td>Pior (lesão cerebral associada)</td></tr>
+</table>
+<div class="ac-call"><b>Lembrete:</b> a HSA traumatica (sangue em sulcos/cisternas) e a hemorragia intracraniana mais comum no TCE, mas raramente e a que precisa de cirurgia de urgência isolada.</div>`,
+  "mapa": `<div class="ac-h">TCE em mapa mental</div>
+<div class="mm">
+  <div class="mm-card"><h5>Primária x secundária</h5><ul><li>Primária: impacto (irreversível)</li><li>Secundária: hipoxia/hipotensao (evitável)</li></ul></div>
+  <div class="mm-card"><h5>Glasgow</h5><ul><li>Leve 13-15, moderado 9-12, grave &lt;=8</li><li>&lt;=8 = via aérea definitiva</li></ul></div>
+  <div class="mm-card"><h5>Hematomas</h5><ul><li>Epidural: biconvexo, intervalo lucido</li><li>Subdural: crescente, idoso</li></ul></div>
+  <div class="mm-card"><h5>Hemodinamica</h5><ul><li>PAS&gt;=110, SatO2&gt;90%</li><li>Sem hipotensao permissiva</li></ul></div>
+  <div class="mm-card"><h5>HIC</h5><ul><li>Tríade de Cushing (tardia)</li><li>Cabeceira 30, salina/manitol</li></ul></div>
+  <div class="mm-card"><h5>Herniação</h5><ul><li>Anisocoria fixa ipsilateral</li><li>Compressao do III par (uncal)</li></ul></div>
+</div>`,
+  "fluxo_dx": `<div class="ac-h">Fluxograma diagnóstico - TCE</div>
+<div class="fx">
+  <div class="fx-node start">Trauma cranioencefalico - calcular Glasgow</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Qual a classificação?</div>
+  <div class="fx-row">
+    <div class="fx-node">Leve (13-15) -&gt; avaliar criterios de TC (Canadian CT Head Rule)</div>
+    <div class="fx-node end">Moderado/Grave (&lt;=12) -&gt; TC de crânio imediata</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">No leve: presenca de criterio de alto/medio risco?</div>
+  <div class="fx-row">
+    <div class="fx-node">Sim -&gt; TC de crânio</div>
+    <div class="fx-node end">Nao -&gt; observação clínica seriada, alta se criterios OK</div>
+  </div>
+</div>`,
+  "fluxo_cond": `<div class="ac-h">Fluxograma de conduta - hipertensao intracraniana</div>
+<div class="fx">
+  <div class="fx-node start">TCE grave com sinais de HIC (anisocoria, Cushing, deterioração)</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Medidas de primeira linha: cabeceira 30, cabeca neutra, normoxemia (SatO2&gt;90%), PAS&gt;=110</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Normoventilação (PaCO2 35-40); salina hipertonica ou manitol</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Herniação iminente (piora aguda, anisocoria)?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; hiperventilação breve como PONTE + acionar neurocirurgia urgente</div>
+    <div class="fx-node">Nao -&gt; manter medidas + avaliação neurocirurgica para hematoma com efeito de massa</div>
+  </div>
+</div>`,
+  "vespera": `<div class="ac-h">Revisao de vespera</div>
+<div class="ac-call"><b>1.</b> Lesão primária (impacto, irreversível) x secundária (hipoxia/hipotensao/HIC, evitável — foco de todo o manejo).</div>
+<div class="ac-call"><b>2.</b> Glasgow: leve 13-15, moderado 9-12, grave &le;8 (via aérea definitiva).</div>
+<div class="ac-call"><b>3.</b> Epidural: arteria meningea media, biconvexo, intervalo lucido. Subdural: veias-ponte, crescente, idoso/alcoolista, pior prognóstico.</div>
+<div class="ac-call"><b>4.</b> Sem hipotensao permissiva no TCE — manter PAS&ge;110 e SatO2&gt;90%.</div>
+<div class="ac-call"><b>5.</b> HIC: tríade de Cushing e sinal TARDIO; medidas praticas: cabeceira 30, salina hipertonica/manitol, normoventilação, neurocirurgia se massa.</div>
+<div class="ac-call"><b>6.</b> Anisocoria com pupila fixa e dilatada ipsilateral = herniação uncal, compressao do III par — emergência neurocirurgica.</div>`,
+  "dicas": `<div class="ac-h">Dicas de ouro</div>
+<div class="ac-tip">Associe "epidural = arteria = rapido e agudo, com intervalo lucido" e "subdural = veia = mais lento, idoso, pior prognóstico" para nao trocar as caracteristicas na hora da prova.</div>
+<div class="ac-tip">Decorticação (flexao, "maos ao corpo") = lesão mais alta/melhor prognóstico relativo. Descerebração (extensao) = lesão mais baixa/pior.</div>
+<div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+<div class="ac-warn">Aplicar hipotensao permissiva no TCE como se fosse outro trauma — aqui a hipotensao piora diretamente a perfusao cerebral e a mortalidade.</div>
+<div class="ac-warn">Usar hiperventilação de rotina "para baixar a PIC" — isso causa vasoconstrição e pode piorar a isquemia; so se justifica como ponte breve na herniação iminente.</div>
+<div class="ac-warn">Esperar a tríade de Cushing para reconhecer hipertensao intracraniana — ela e um sinal TARDIO; agir antes, com base em outros sinais (deterioração do Glasgow, anisocoria).</div>`,
+  "checklist": [
+    "Sei diferenciar lesão primária de secundária e por que o manejo foca na secundária",
+    "Sei calcular e classificar o Glasgow e sua implicação para via aérea",
+    "Diferencio hematoma epidural de subdural pelo vaso, forma na TC e evolução clínica",
+    "Entendo por que nao se faz hipotensao permissiva no TCE",
+    "Conheco as medidas de redução de PIC e sua ordem de prioridade",
+    "Reconheco os sinais de herniação e a tríade de Cushing como sinal tardio"
+  ],
+  "casos": [
+    {"t":"Caso 1 — Intervalo lucido classico","stem":"Jovem sofre trauma craniano em acidente esportivo, perde a consciência brevemente, recupera-se e conversa normalmente por 40 minutos, depois subitamente piora, ficando sonolento e com anisocoria.","passos":[
+      {"h":"1. Reconhecer","p":"Padrão classico de intervalo lucido seguido de deterioração rapida — fortemente sugestivo de hematoma epidural (lesão da arteria meningea media)."},
+      {"h":"2. Investigar","p":"TC de crânio urgente, que tipicamente mostra coleção biconvexa (em lente) que nao cruza suturas cranianas."},
+      {"h":"3. Conduzir","p":"Acionar neurocirurgia com urgência para drenagem, ja que o hematoma epidural tem bom prognóstico se tratado a tempo, mas pode ser rapidamente fatal se nao evacuado."},
+      {"h":"Lição de prova","p":"O 'intervalo lucido' e a pista classica de hematoma epidural — o paciente parece bem por um tempo justamente porque o sangramento arterial ainda esta se acumulando antes de causar efeito de massa critico."}
+    ]},
+    {"t":"Caso 2 — Idoso etilista com trauma leve","stem":"Homem de 78 anos, etilista cronico, sofre queda de propria altura ha 3 semanas, agora apresenta confusao mental progressiva e leve hemiparesia.","passos":[
+      {"h":"1. Reconhecer","p":"Idoso com atrofia cerebral (fator de risco) e trauma leve recente, agora com deterioração neurológica subaguda — pensar em hematoma subdural (frequentemente cronico nesse perfil)."},
+      {"h":"2. Investigar","p":"TC de crânio tipicamente mostrando coleção em crescente (semilua), que cruza suturas cranianas."},
+      {"h":"3. Conduzir","p":"Avaliação neurocirurgica para definir necessidade de drenagem, considerando o volume, o efeito de massa e o estado clínico do paciente."},
+      {"h":"Lição de prova","p":"O hematoma subdural, por envolver veias-ponte de baixa pressão, pode se manifestar de forma subaguda ou cronica, especialmente em idosos e etilistas com atrofia cerebral que 'da espaco' para o sangramento antes de sintomas evidentes."}
+    ]},
+    {"t":"Caso 3 — Sinais de hipertensao intracraniana","stem":"Paciente com TCE grave (Glasgow 6) evolui subitamente com midriase fixa a direita, hipertensao arterial e bradicardia.","passos":[
+      {"h":"1. Reconhecer","p":"Anisocoria fixa ipsilateral + tríade de Cushing indicam herniação uncal iminente com compressao do III par craniano — emergência neurocirurgica."},
+      {"h":"2. Investigar","p":"Nao atrasar o tratamento aguardando exames adicionais; a clínica ja justifica intervenção imediata em paralelo com a preparação de imagem/cirurgia."},
+      {"h":"3. Conduzir","p":"Medidas imediatas de redução de PIC (cabeceira, salina hipertonica/manitol, normoventilação) e, se necessário, hiperventilação breve como ponte, com acionamento IMEDIATO da neurocirurgia."},
+      {"h":"Lição de prova","p":"A tríade de Cushing e um sinal TARDIO de hipertensao intracraniana — quando aparece, a situação ja e critica e exige ação imediata, nao apenas observação."}
+    ]}
+  ]
+});
+
 C["trauma|7"] = {
   "name": "Trauma raquimedular",
   "intro": "Imobilização, choque medular × neurogênico, síndromes",
@@ -4133,7 +4838,8 @@ C["trauma|7"] = {
 <p>Todo politraumatizado com mecanismo compatível tem <strong>lesão de coluna até prova em contrário</strong>. A prioridade na cena é a <strong>imobilização</strong> (colar cervical + prancha rígida, com retirada precoce da prancha para evitar úlceras) e a prevenção de lesão secundária da medula.</p>
 <div class="callout key"><div class="ci">${IC.info}</div><div><b>Lesão primária × secundária</b><p>A lesão <strong>primária</strong> ocorre no impacto. A <strong>secundária</strong> resulta de hipóxia, hipotensão e mobilização inadequada — é o que tentamos evitar com imobilização e manutenção da perfusão medular.</p></div></div>
 <h4>Níveis críticos</h4>
-<ul><li><strong>Acima de C3–C5</strong> ("C3,4,5 mantém o diafragma vivo"): risco de parada respiratória.</li><li>Lesões altas → maior repercussão autonômica (choque neurogênico).</li></ul>`
+<ul><li><strong>Acima de C3–C5</strong> ("C3,4,5 mantém o diafragma vivo"): risco de parada respiratória.</li><li>Lesões altas → maior repercussão autonômica (choque neurogênico).</li></ul>
+${A.tr_rqm_choques}`
     ],
     [
       "clinica",
@@ -4385,6 +5091,92 @@ C["trauma|7"] = {
     }
   ]
 };
+
+Object.assign(C["trauma|7"], {
+  "escores": `<div class="ac-h">Escala ASIA (American Spinal Injury Association) - conceito</div>
+<p class="ac-p">Classifica a lesão medular por grau de comprometimento neurológico, de A (lesão completa, sem função motora/sensitiva abaixo do nível) a E (função normal). Usada para documentar e acompanhar a evolução neurológica apos o choque medular resolver.</p>
+<table class="ac-tbl"><tr><th>Grau ASIA</th><th>Significado</th></tr>
+<tr><td>A</td><td>Lesão completa — sem função motora/sensitiva em S4-S5</td></tr>
+<tr><td>B</td><td>Incompleta — sensibilidade preservada, motricidade ausente abaixo do nível</td></tr>
+<tr><td>C</td><td>Incompleta — motricidade preservada, mas maioria dos músculos-chave &lt;grau 3</td></tr>
+<tr><td>D</td><td>Incompleta — maioria dos músculos-chave &ge;grau 3</td></tr>
+<tr><td>E</td><td>Função normal</td></tr>
+</table>
+<div class="ac-call"><b>Ponto de prova:</b> a avaliação ASIA definitiva so deve ser feita apos a resolução do choque medular (retorno do reflexo bulbocavernoso), pois antes disso a arreflexia transitoria pode mascarar o real grau de lesão.</div>`,
+  "dif": `<div class="ac-h">Síndromes medulares - diferencial completo</div>
+<table class="ac-tbl"><tr><th>Síndrome</th><th>Mecanismo</th><th>Quadro</th><th>Prognóstico</th></tr>
+<tr><td>Medular anterior</td><td>Lesão dos 2/3 anteriores (a. espinhal anterior)</td><td>Perda motora + dor/temperatura; preserva tato/propriocepção</td><td>Pior</td></tr>
+<tr><td>Central</td><td>Hiperextensao (idoso)</td><td>MMSS &gt; MMII</td><td>Variável, geralmente favorável</td></tr>
+<tr><td>Brown-Sequard</td><td>Hemissecção</td><td>Motor+propriocepção ipsilateral; dor/temperatura contralateral</td><td>Melhor</td></tr>
+<tr><td>Posterior</td><td>Cordoes posteriores</td><td>Perda de propriocepção/tato (rara)</td><td>Variável</td></tr>
+</table>
+<div class="ac-h" style="margin-top:14px">Choque medular x choque neurogenico (resumo essencial)</div>
+<p class="ac-p">Medular = fenomeno NEUROLÓGICO (arreflexia transitoria). Neurogenico = fenomeno HEMODINAMICO (hipotensao + bradicardia por perda do tono simpatico). Podem coexistir no mesmo paciente.</p>`,
+  "mapa": `<div class="ac-h">Trauma raquimedular em mapa mental</div>
+<div class="mm">
+  <div class="mm-card"><h5>Principios</h5><ul><li>Coluna lesada ate prova em contrário</li><li>Imobilizar + mobilização em bloco</li></ul></div>
+  <div class="mm-card"><h5>2 choques</h5><ul><li>Medular: reflexos (neurológico)</li><li>Neurogenico: PA/FC (hemodinamico)</li></ul></div>
+  <div class="mm-card"><h5>Síndromes</h5><ul><li>Anterior: motor+dor/temp, pior</li><li>Central: MMSS&gt;MMII, idoso</li><li>Brown-Sequard: melhor prognóstico</li></ul></div>
+  <div class="mm-card"><h5>Nível critico</h5><ul><li>C3-C5 mantém diafragma</li><li>Lesão alta = risco respiratorio</li></ul></div>
+  <div class="mm-card"><h5>Imagem</h5><ul><li>TC: osso</li><li>RM: medula/ligamentos/disco</li></ul></div>
+  <div class="mm-card"><h5>Tratamento</h5><ul><li>Volume+vasopressor (neurogenico)</li><li>Corticoide NAO e rotina</li></ul></div>
+</div>`,
+  "fluxo_dx": `<div class="ac-h">Fluxograma diagnóstico - suspeita de trauma raquimedular</div>
+<div class="fx">
+  <div class="fx-node start">Mecanismo compatível com trauma de coluna</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Imobilização imediata (colar cervical + prancha) + exame neurológico</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Ha deficit neurológico ou dor significativa na coluna?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; TC (osso) + RM (medula/ligamentos) conforme suspeita</div>
+    <div class="fx-node end">Nao -&gt; aplicar criterios clínicos (NEXUS/Canadian C-spine) para liberar a coluna sem imagem</div>
+  </div>
+</div>`,
+  "vespera": `<div class="ac-h">Revisao de vespera</div>
+<div class="ac-call"><b>1.</b> Todo politraumatizado com mecanismo compatível tem lesão de coluna ate prova em contrário — imobilizar (colar + prancha, mobilização em bloco).</div>
+<div class="ac-call"><b>2.</b> Choque medular = perda TRANSITORIA de reflexos (neurológico). Choque neurogenico = hipotensao+bradicardia+pele quente (hemodinamico).</div>
+<div class="ac-call"><b>3.</b> Retorno do reflexo bulbocavernoso encerra a fase de choque medular.</div>
+<div class="ac-call"><b>4.</b> Síndrome central: MMSS&gt;MMII (idoso, hiperextensao). Brown-Sequard: melhor prognóstico entre as síndromes. Anterior: pior prognóstico.</div>
+<div class="ac-call"><b>5.</b> Corticoide em alta dose NAO e recomendado de rotina no trauma raquimedular.</div>
+<div class="ac-call"><b>6.</b> Hipotensao no trauma e hemorrágica ate prova em contrário — sempre excluir antes de rotular como neurogenica.</div>`,
+  "dicas": `<div class="ac-h">Dicas de ouro</div>
+<div class="ac-tip">"Medular = reflexos, neuroGENICO = pressão (hemodinamica)" — a rima "genico-hemodinamico" ajuda a nao trocar os dois na hora da prova.</div>
+<div class="ac-tip">Lembre "C3, 4, 5 mantém o diafragma vivo" para memorizar o nível critico da função respiratoria.</div>
+<div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+<div class="ac-warn">Confundir choque medular com choque neurogenico — sao fenomenos diferentes (neurológico x hemodinamico), embora possam coexistir.</div>
+<div class="ac-warn">Prescrever corticoide em alta dose "porque e trauma raquimedular" — essa pratica caiu de recomendação pelo risco superar o beneficio.</div>
+<div class="ac-warn">Assumir choque neurogenico sem excluir hemorragia — no trauma, hemorragia continua sendo a causa mais provável e mais perigosa de hipotensao.</div>`,
+  "checklist": [
+    "Sei diferenciar choque medular de choque neurogenico em mecanismo e apresentação clínica",
+    "Reconheco as 4 principais síndromes medulares e seus padrões de deficit",
+    "Sei o nível medular critico para a função diafragmatica",
+    "Entendo por que corticoide em alta dose nao e conduta padrão",
+    "Sei a diferenca de indicação entre TC e RM no trauma raquimedular",
+    "Reconheco a importância da mobilização em bloco e da retirada precoce da prancha"
+  ],
+  "casos": [
+    {"t":"Caso 1 — Hipotensao com bradicardia apos trauma cervical","stem":"Homem de 40 anos, trauma cervical em mergulho, tetraplegico, PA 78x50, FC 52, pele quente e seca ao exame.","passos":[
+      {"h":"1. Reconhecer","p":"Apesar do padrão sugestivo de choque neurogenico (hipotensao+bradicardia+pele quente), a primeira conduta obrigatoria e excluir hemorragia como causa da hipotensao."},
+      {"h":"2. Investigar","p":"Revisao completa do XABCDE, FAST e exame para outros focos de sangramento associados ao trauma."},
+      {"h":"3. Conduzir","p":"Apos excluir hemorragia, tratar o choque neurogenico com reposição volemica criteriosa, vasopressores se necessário, e atropina para a bradicardia significativa."},
+      {"h":"Lição de prova","p":"O padrão classico de choque neurogenico (bradicardia + pele quente) so deve ser assumido apos exclusao ativa de hemorragia — nunca por exclusao automatica baseada so no mecanismo."}
+    ]},
+    {"t":"Caso 2 — Idosa com trauma cervical em hiperextensao","stem":"Mulher de 75 anos, queda com hiperextensao cervical, apresenta fraqueza desproporcional em membros superiores comparada aos inferiores, sem alteração significativa de sensibilidade.","passos":[
+      {"h":"1. Reconhecer","p":"Padrão classico de síndrome medular central: deficit motor predominando em membros superiores, tipico de idosos com estenose de canal previa e hiperextensao cervical."},
+      {"h":"2. Investigar","p":"RM de coluna cervical para avaliar medula e ligamentos, alem de TC para avaliar componente osseo/degenerativo associado."},
+      {"h":"3. Conduzir","p":"Imobilização adequada, avaliação neurocirurgica e reabilitação — o prognóstico da síndrome central costuma ser relativamente favorável para a marcha, com recuperação mais lenta dos membros superiores."},
+      {"h":"Lição de prova","p":"A síndrome medular central e classicamente associada a idosos com hiperextensao cervical e apresenta o padrão caracteristico MMSS&gt;MMII — um dos achados mais cobrados em prova sobre síndromes medulares."}
+    ]},
+    {"t":"Caso 3 — Ferimento penetrante lateral na coluna","stem":"Jovem com ferimento por arma branca lateral no dorso, apresenta perda de forca e propriocepção no membro inferior direito, com perda de sensibilidade a dor e temperatura no membro inferior esquerdo.","passos":[
+      {"h":"1. Reconhecer","p":"Padrão classico de síndrome de Brown-Sequard: deficit motor e proprioceptivo ipsilateral a lesão, com perda de dor/temperatura contralateral — resultado de hemissecção medular."},
+      {"h":"2. Investigar","p":"RM de coluna para confirmar a extensao da lesão medular e avaliar necessidade de intervenção cirúrgica."},
+      {"h":"3. Conduzir","p":"Manejo de suporte, imobilização adequada e acompanhamento neurocirurgico; entre as síndromes medulares, esta costuma ter o melhor prognóstico funcional."},
+      {"h":"Lição de prova","p":"A dissociação classica de Brown-Sequard (motor/propriocepção ipsilateral x dor/temperatura contralateral) e uma das perguntas mais didaticas e recorrentes sobre anatomia funcional da medula em provas de trauma."}
+    ]}
+  ]
+});
+
 C["trauma|8"] = {
   "name": "Trauma vascular periférico",
   "intro": "Sinais duros × moles, torniquete e isquemia",
@@ -4394,7 +5186,8 @@ C["trauma|8"] = {
       "Entendendo",
       `<div class="callout key" style="border-left:4px solid var(--accent);background:var(--accent-soft)"><div class="ci">${IC.brain}</div><div><b>📖 Base para iniciantes — lesão de vaso em braço/perna</b><p style='margin-top:6px'>Quando um trauma corta ou comprime uma artéria do braço ou da perna, o membro fica sem sangue (<strong>isquemia</strong>) e pode morrer se não for resolvido rápido.</p><p style="background:var(--gold-soft);border-radius:8px;padding:8px 10px"><strong>🧠 Sinais DUROS x MOLES (essencial!):</strong><br>• <strong>Duros (hard signs)</strong> = quase certeza de lesão arterial → vão direto para reparo: sangramento pulsátil, hematoma em expansão, sopro/frêmito, ausência de pulso, sinais de isquemia (os '6 P').<br>• <strong>Moles (soft signs)</strong> = só suspeita → investigar com angioTC: pulso diminuído, história de sangramento, lesão de nervo próxima.</p><p style="background:var(--accent-soft);border-radius:8px;padding:8px 10px"><strong>🧠 Os '6 P' da isquemia aguda:</strong> <strong>P</strong>ain (dor), <strong>P</strong>allor (palidez), <strong>P</strong>ulselessness (sem pulso), <strong>P</strong>aresthesia (formigamento), <strong>P</strong>aralysis (paralisia), <strong>P</strong>oikilothermia (frio).</p><p style="background:var(--rose-soft);border-radius:8px;padding:8px 10px"><strong>⚠️ Torniquete</strong> voltou a ser recomendado em hemorragia exsanguinante de membro que não para com compressão — salva vida. Anote a hora de colocação.</p></div></div><h4>Conceito</h4>
 <p>Lesão de artéria/veia de extremidade por mecanismo penetrante (mais comum) ou contuso. A meta é <strong>controlar a hemorragia</strong> e <strong>restaurar a perfusão</strong> dentro da janela isquêmica (idealmente &lt; 6 h para músculo).</p>
-<div class="callout key"><div class="ci">${IC.info}</div><div><b>Conceito-chave</b><p>A conduta é guiada pela divisão entre <strong>sinais "duros" (hard signs)</strong> — que indicam exploração — e <strong>sinais "moles" (soft signs)</strong> — que indicam investigação (angioTC/ITB).</p></div></div>`
+<div class="callout key"><div class="ci">${IC.info}</div><div><b>Conceito-chave</b><p>A conduta é guiada pela divisão entre <strong>sinais "duros" (hard signs)</strong> — que indicam exploração — e <strong>sinais "moles" (soft signs)</strong> — que indicam investigação (angioTC/ITB).</p></div></div>
+${A.tr_vascular_sinais}`
     ],
     [
       "clinica",
@@ -4646,6 +5439,95 @@ C["trauma|8"] = {
     }
   ]
 };
+
+Object.assign(C["trauma|8"], {
+  "escores": `<div class="ac-h">Indice tornozelo-braco (ITB) no trauma vascular</div>
+<p class="ac-p">Razao entre a PA sistolica do tornozelo e a do braco no mesmo lado, medida por Doppler portatil. E o "escore" mais usado a beira-leito para triagem de sinais moles.</p>
+<table class="ac-tbl"><tr><th>ITB</th><th>Interpretação</th></tr>
+<tr><td>&ge;1,0</td><td>Normal (ou proximo de normal)</td></tr>
+<tr><td>0,9-1,0</td><td>Limitrofe</td></tr>
+<tr><td>&lt;0,9</td><td>Sugere lesão arterial — investigar com angioTC</td></tr>
+</table>
+<div class="ac-h" style="margin-top:14px">Mangled Extremity Severity Score (MESS) - conceito</div>
+<p class="ac-p">Escore usado em fraturas com lesão vascular grave para auxiliar na decisao entre tentar salvar o membro ou indicar amputação precoce, somando pontos por gravidade da lesão esqueletica/de partes moles, isquemia, choque e idade. Pontuações altas (geralmente &ge;7) se associam a maior probabilidade de amputação ser a melhor conduta.</p>`,
+  "dif": `<div class="ac-h">Sinais duros x moles - e diferencial com síndrome compartimental</div>
+<table class="ac-tbl"><tr><th>Sinais DUROS</th><th>Sinais MOLES</th></tr>
+<tr><td>Hemorragia pulsatil/ativa</td><td>Historia de sangramento moderado</td></tr>
+<tr><td>Hematoma expansivo/pulsatil</td><td>Hematoma estável</td></tr>
+<tr><td>Fremito/sopro (fistula AV)</td><td>Lesão de nervo adjacente</td></tr>
+<tr><td>Ausência de pulso/isquemia (6 P)</td><td>Pulso diminuido mas presente</td></tr>
+</table>
+<div class="ac-call"><b>Diferencie:</b> oclusao arterial aguda (os 6 P, geralmente pulso ausente) x síndrome compartimental (dor desproporcional, pulso PODE estar presente ate fases avancadas). Ambas sao emergencias, mas a conduta e diferente (exploração vascular x fasciotomia).</div>`,
+  "mapa": `<div class="ac-h">Trauma vascular periferico em mapa mental</div>
+<div class="mm">
+  <div class="mm-card"><h5>Conceito</h5><ul><li>Controlar hemorragia + restaurar perfusao</li><li>Janela isquemica ~6h para músculo</li></ul></div>
+  <div class="mm-card"><h5>Sinais duros</h5><ul><li>Hemorragia pulsatil, hematoma expansivo</li><li>Fremito/sopro, ausência de pulso</li><li>= exploração cirúrgica</li></ul></div>
+  <div class="mm-card"><h5>Sinais moles</h5><ul><li>Historia de sangramento, hematoma estável</li><li>= ITB/angioTC</li></ul></div>
+  <div class="mm-card"><h5>6 P da isquemia</h5><ul><li>Pain, Pallor, Pulselessness</li><li>Paresthesia, Paralysis, Poikilothermia</li></ul></div>
+  <div class="mm-card"><h5>Controle inicial</h5><ul><li>Compressao direta primeiro</li><li>Torniquete se exsanguinante (anotar hora)</li></ul></div>
+  <div class="mm-card"><h5>Complicações</h5><ul><li>Síndrome compartimental (fasciotomia)</li><li>Reperfusao: rabdomiolise/hipercalemia</li></ul></div>
+</div>`,
+  "fluxo_dx": `<div class="ac-h">Fluxograma diagnóstico - trauma vascular periferico</div>
+<div class="fx">
+  <div class="fx-node start">Ferimento proximo a trajeto vascular</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Presenca de sinal DURO (hemorragia pulsatil, hematoma expansivo, fremito, ausência de pulso/6P)?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; Exploração cirúrgica (nao atrasar se isquemia ameacadora)</div>
+    <div class="fx-node">Nao -&gt; avaliar sinais moles</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Sinal MOLE presente (historia de sangramento, hematoma estável, pulso diminuido)?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; ITB e/ou angioTC</div>
+    <div class="fx-node end">Nao -&gt; observação clínica seriada</div>
+  </div>
+</div>`,
+  "vespera": `<div class="ac-h">Revisao de vespera</div>
+<div class="ac-call"><b>1.</b> Sinais duros (hemorragia pulsatil, hematoma expansivo, fremito/sopro, ausência de pulso, isquemia) -&gt; exploração cirúrgica.</div>
+<div class="ac-call"><b>2.</b> Sinais moles (historia de sangramento, hematoma estável, pulso diminuido) -&gt; ITB e/ou angioTC.</div>
+<div class="ac-call"><b>3.</b> ITB &lt;0,9 sugere lesão arterial a confirmar por imagem.</div>
+<div class="ac-call"><b>4.</b> 6 P da isquemia: dor, palidez, ausência de pulso, parestesia, paralisia, poiquilotermia.</div>
+<div class="ac-call"><b>5.</b> Controle: compressao direta primeiro; torniquete se exsanguinante (anotar horário). Nunca clampear as cegas.</div>
+<div class="ac-call"><b>6.</b> Síndrome compartimental: dor desproporcional/a extensao passiva; pulso pode estar presente — nao esperar ausência de pulso para indicar fasciotomia.</div>`,
+  "dicas": `<div class="ac-h">Dicas de ouro</div>
+<div class="ac-tip">Para nao esquecer os 6 P: Pain, Pallor, Pulselessness, Paresthesia, Paralysis, Poikilothermia — os primeiros dois (dor e palidez) sao os mais precoces e sensíveis.</div>
+<div class="ac-tip">O torniquete "voltou de moda" na medicina de trauma moderna — nao e mais visto como ultimo recurso desesperado, e sim como ferramenta padrão para hemorragia exsanguinante de membro nao controlável por compressao.</div>
+<div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+<div class="ac-warn">Esperar ausência de pulso para diagnosticar síndrome compartimental — o pulso pode estar presente ate estagios avancados; o sinal mais precoce e a dor desproporcional.</div>
+<div class="ac-warn">Clampear vasos "as cegas" em campo aberto — risco de lesar nervos ou veias adjacentes; a prioridade e compressao direta e controle proximal quando possível.</div>
+<div class="ac-warn">Atrasar a fasciotomia esperando "confirmação" com medida de pressão compartimental em quadro clínico obvio — a decisao pode e deve ser clínica quando os sinais sao claros.</div>`,
+  "checklist": [
+    "Sei diferenciar sinais duros de sinais moles de lesão vascular e a conduta de cada um",
+    "Conheco os 6 P da isquemia aguda de membro",
+    "Sei interpretar o ITB e sua indicação",
+    "Entendo a sequência correta de controle de hemorragia externa (compressao antes de torniquete)",
+    "Reconheco a síndrome compartimental mesmo com pulso presente",
+    "Sei a janela isquemica aproximada e as consequencias da síndrome de reperfusao",
+    "Conheco a estrategia de shunt temporário em fratura associada a lesão vascular"
+  ],
+  "casos": [
+    {"t":"Caso 1 — Ferimento com sinal duro evidente","stem":"Jovem, ferimento por arma branca em coxa, com hematoma pulsatil em expansao visível e ausência de pulso pedioso no membro afetado.","passos":[
+      {"h":"1. Reconhecer","p":"Multiplos sinais duros presentes (hematoma pulsatil expansivo + ausência de pulso distal) — indicação clara de lesão vascular significativa."},
+      {"h":"2. Investigar","p":"Nao ha necessidade de atrasar com exames de imagem diante de sinais duros tao evidentes com isquemia associada."},
+      {"h":"3. Conduzir","p":"Encaminhar imediatamente para exploração cirúrgica, com controle proximal e distal do vaso lesado e reparo (rafia, enxerto ou shunt temporário conforme o cenário)."},
+      {"h":"Lição de prova","p":"Sinais duros combinados com isquemia clínica dispensam investigação complementar antes da exploração — atrasar aqui pode significar perda do membro."}
+    ]},
+    {"t":"Caso 2 — Suspeita de lesão vascular por proximidade","stem":"Paciente com ferimento por arma de fogo proximo ao trajeto da arteria femoral, sem sangramento ativo, pulsos distais presentes mas discretamente diminuidos.","passos":[
+      {"h":"1. Reconhecer","p":"Apenas sinais moles presentes (pulso diminuido, proximidade de trajeto vascular) — nao ha indicação imediata de exploração cirúrgica."},
+      {"h":"2. Investigar","p":"Medir o indice tornozelo-braco (ITB) do lado afetado comparado ao lado sao."},
+      {"h":"3. Conduzir","p":"Se ITB &lt;0,9, solicitar angiotomografia para caracterizar a lesão; se ITB normal e exame seriado estável, pode-se manter observação clínica."},
+      {"h":"Lição de prova","p":"Sinais moles nao autorizam exploração cirúrgica direta — o caminho correto e a investigação objetiva (ITB seguido de angioTC se alterado), evitando cirurgias desnecessarias."}
+    ]},
+    {"t":"Caso 3 — Dor desproporcional apos fratura","stem":"Paciente com fratura exposta de perna, apos redução e imobilização, evolui com dor intensa desproporcional ao trauma, piora a extensao passiva dos dedos, mas pulso pedioso ainda palpável.","passos":[
+      {"h":"1. Reconhecer","p":"Dor desproporcional e piora a extensao passiva sao sinais precoces de síndrome compartimental — a presenca de pulso NAO exclui o diagnóstico."},
+      {"h":"2. Investigar","p":"Avaliação clínica seriada da tensao do compartimento; se disponível e o quadro for duvidoso, pode-se medir a pressão compartimental."},
+      {"h":"3. Conduzir","p":"Diante de quadro clínico compatível, indicar fasciotomia sem aguardar perda de pulso, que e um sinal tardio e de mau prognóstico."},
+      {"h":"Lição de prova","p":"A síndrome compartimental e uma emergência CLÍNICA — esperar a ausência de pulso para agir e um erro grave que pode levar a perda irreversível de músculo e nervo."}
+    ]}
+  ]
+});
+
 C["trauma|9"] = {
   "name": "Trauma pélvico",
   "intro": "Fratura instável, hemorragia retroperitoneal e cinta pélvica",
@@ -4657,7 +5539,8 @@ C["trauma|9"] = {
 <p>A pelve abriga um <strong>plexo venoso volumoso</strong> e ramos arteriais (ilíaca interna). Fraturas instáveis aumentam o volume pélvico e permitem hemorragia retroperitoneal maciça — causa de choque de difícil controle.</p>
 <div class="callout key"><div class="ci">${IC.info}</div><div><b>Conceito-chave</b><p>A maioria do sangramento pélvico é <strong>venoso/ósseo</strong> e responde à <strong>estabilização mecânica</strong> (cinta pélvica). Sangramento arterial (minoria) requer <strong>angioembolização</strong>.</p></div></div>
 <h4>Padrões de fratura</h4>
-<ul><li><strong>Compressão anteroposterior</strong> ("livro aberto"): abre a sínfise, ↑ volume, sangramento.</li><li><strong>Compressão lateral</strong>: a mais comum.</li><li><strong>Cisalhamento vertical</strong>: a mais instável.</li></ul>`
+<ul><li><strong>Compressão anteroposterior</strong> ("livro aberto"): abre a sínfise, ↑ volume, sangramento.</li><li><strong>Compressão lateral</strong>: a mais comum.</li><li><strong>Cisalhamento vertical</strong>: a mais instável.</li></ul>
+${A.tr_pelve_anel}`
     ],
     [
       "clinica",
@@ -4904,6 +5787,95 @@ C["trauma|9"] = {
     }
   ]
 };
+
+Object.assign(C["trauma|9"], {
+  "escores": `<div class="ac-h">Classificação de Young-Burgess (padrões de fratura pélvica)</div>
+<table class="ac-tbl"><tr><th>Padrão</th><th>Mecanismo</th><th>Caracteristica</th></tr>
+<tr><td>Compressao anteroposterior (APC)</td><td>Impacto frontal</td><td>Abre a sinfise ("livro aberto"); aumenta muito o volume pélvico</td></tr>
+<tr><td>Compressao lateral (LC)</td><td>Impacto lateral</td><td>O padrão mais comum; geralmente menos hemorrágico que o APC grave</td></tr>
+<tr><td>Cisalhamento vertical (VS)</td><td>Queda de altura, forca vertical</td><td>Desloca a hemipelve verticalmente; o mais INSTável</td></tr>
+</table>
+<div class="ac-call"><b>Relevância pratica:</b> quanto maior a instabilidade mecanica (especialmente APC grave e cisalhamento vertical), maior o volume potencial da cavidade pélvica e maior o risco de hemorragia retroperitoneal maciça.</div>`,
+  "dif": `<div class="ac-h">Fonte do choque: abdome x pelve</div>
+<table class="ac-tbl"><tr><th>FAST</th><th>Pelve</th><th>Provável fonte / conduta</th></tr>
+<tr><td>Positivo</td><td>Instável</td><td>Abdome (laparotomia) +- embolização pélvica</td></tr>
+<tr><td>Negativo</td><td>Instável</td><td>Pélvica/retroperitoneal -&gt; cinta + embolização/packing</td></tr>
+</table>
+<div class="ac-h" style="margin-top:14px">Sangramento venoso/osseo x arterial</div>
+<p class="ac-p">A maioria do sangramento pélvico e venoso/osseo (responde a estabilização mecanica com cinta pélvica); uma minoria e arterial (geralmente ramos da iliaca interna) e exige angioembolização especifica quando a cinta nao resolve.</p>`,
+  "mapa": `<div class="ac-h">Trauma pélvico em mapa mental</div>
+<div class="mm">
+  <div class="mm-card"><h5>Por que sangra tanto</h5><ul><li>Plexo venoso volumoso</li><li>Fratura instável aumenta volume</li></ul></div>
+  <div class="mm-card"><h5>Exame fisico</h5><ul><li>Uma UNICA vez, delicado</li><li>Nao comprimir repetidamente</li></ul></div>
+  <div class="mm-card"><h5>1a medida</h5><ul><li>Cinta pélvica nos trocanteres</li><li>Reduz volume, tampona</li></ul></div>
+  <div class="mm-card"><h5>Refratário</h5><ul><li>Angioembolização (arterial)</li><li>Packing pre-peritoneal</li></ul></div>
+  <div class="mm-card"><h5>Urogenital</h5><ul><li>Sangue no meato = uretrografia</li><li>Antes de sondar</li></ul></div>
+  <div class="mm-card"><h5>Padrões</h5><ul><li>Livro aberto (APC)</li><li>Cisalhamento vertical = mais instável</li></ul></div>
+</div>`,
+  "fluxo_cond": `<div class="ac-h">Fluxograma de conduta - fratura pélvica instável com choque</div>
+<div class="fx">
+  <div class="fx-node start">Fratura pélvica instável + choque</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Cinta/cinto pélvico ao nível dos trocanteres maiores</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Reanimação hemostatica (1:1:1, acido tranexamico)</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">FAST associado positivo?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; Laparotomia (abdome tem prioridade) +- embolização do componente pélvico</div>
+    <div class="fx-node">Nao -&gt; segue via pélvica isolada</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Persiste instável apesar da cinta?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; Angioembolização (arterial) e/ou packing pre-peritoneal</div>
+    <div class="fx-node end">Nao -&gt; AngioTC + fixação definitiva pela ortopedia</div>
+  </div>
+</div>`,
+  "vespera": `<div class="ac-h">Revisao de vespera</div>
+<div class="ac-call"><b>1.</b> Pelve sangra muito por causa do plexo venoso volumoso; fratura instável aumenta o volume e permite hemorragia retroperitoneal maciça.</div>
+<div class="ac-call"><b>2.</b> Examinar a pelve UMA UNICA vez, com delicadeza — manobras repetidas podem deslocar coagulos e reiniciar o sangramento.</div>
+<div class="ac-call"><b>3.</b> Instável: cinta pélvica (nível dos trocanteres) + reanimação -&gt; se persiste instável, angioembolização/packing.</div>
+<div class="ac-call"><b>4.</b> FAST positivo com pelve instável: abdome tem prioridade (laparotomia), o componente pélvico pode ser tratado por embolização em paralelo.</div>
+<div class="ac-call"><b>5.</b> Sangue no meato uretral, hematoma perineal, prostata alta -&gt; uretrografia retrograda ANTES de qualquer sondagem vesical.</div>
+<div class="ac-call"><b>6.</b> Padrão mais instável: cisalhamento vertical. "Livro aberto" (APC): compressao anteroposterior, abre a sinfise.</div>`,
+  "dicas": `<div class="ac-h">Dicas de ouro</div>
+<div class="ac-tip">Pense na cinta pélvica como um "cinto apertando o anel" — ela funciona reduzindo o volume potencial de sangramento, nao "consertando" a fratura.</div>
+<div class="ac-tip">A maioria do sangramento pélvico e venoso — por isso a cinta resolve a maior parte dos casos; reserve a ideia de "sangramento arterial" para quando a instabilidade persiste apesar da cinta bem posicionada.</div>
+<div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+<div class="ac-warn">Comprimir a pelve repetidamente "para confirmar a fratura" — isso pode deslocar coagulos ja formados e reiniciar hemorragia significativa.</div>
+<div class="ac-warn">Sondar a bexiga antes de investigar sinais de lesão uretral (sangue no meato, hematoma perineal, prostata alta) — pode converter uma lesão parcial em completa.</div>
+<div class="ac-warn">Posicionar a cinta pélvica na cintura abdominal em vez dos trocanteres maiores — essa posição incorreta nao fecha adequadamente o anel pélvico.</div>`,
+  "checklist": [
+    "Entendo por que a fratura pélvica instável causa hemorragia retroperitoneal maciça",
+    "Sei a técnica e o posicionamento correto da cinta pélvica",
+    "Reconheco quando suspeitar de sangramento arterial versus venoso/osseo",
+    "Sei a conduta correta diante de FAST positivo associado a pelve instável",
+    "Reconheco os sinais de lesão uretral e a conduta antes de sondar",
+    "Conheco os padrões de fratura pélvica e qual e o mais instável"
+  ],
+  "casos": [
+    {"t":"Caso 1 — Fratura pélvica instável em choque","stem":"Motociclista, colisao em alta velocidade, pelve instável ao exame (feito uma unica vez), PA 80x52, FC 128, FAST negativo em todas as janelas.","passos":[
+      {"h":"1. Reconhecer","p":"FAST negativo com pelve instável e choque aponta para hemorragia pélvica/retroperitoneal como fonte principal da instabilidade."},
+      {"h":"2. Investigar","p":"Confirmar padrão de fratura por Rx de pelve (adjunto da primária) enquanto se inicia o tratamento — nao atrasar a estabilização mecanica aguardando imagem detalhada."},
+      {"h":"3. Conduzir","p":"Aplicar cinta pélvica imediatamente ao nível dos trocanteres maiores, associada a reanimação hemostatica; se persistir instável, encaminhar para angioembolização/packing pre-peritoneal."},
+      {"h":"Lição de prova","p":"FAST negativo nao significa ausência de sangramento grave — no contexto de pelve instável, ele redireciona a atenção para o proprio foco pélvico/retroperitoneal."}
+    ]},
+    {"t":"Caso 2 — Sangue no meato uretral","stem":"Homem, trauma pélvico por queda de altura, apresenta sangue no meato uretral, hematoma escrotal extenso e prostata palpável em posição elevada ao toque retal.","passos":[
+      {"h":"1. Reconhecer","p":"Tríade classica de sinais de lesão uretral: sangue no meato, hematoma perineal/escrotal e prostata deslocada/elevada."},
+      {"h":"2. Investigar","p":"Uretrografia retrograda ANTES de qualquer tentativa de sondagem vesical, para nao converter uma lesão parcial em completa."},
+      {"h":"3. Conduzir","p":"Se a uretrografia confirmar lesão, encaminhar para avaliação urologica especializada; se necessário, cistostomia suprapubica em vez de sondagem uretral direta."},
+      {"h":"Lição de prova","p":"A regra 'sangue no meato = uretrografia antes de sondar' e uma das mais cobradas em provas de trauma pélvico — sondar as cegas nesse cenário e erro grave."}
+    ]},
+    {"t":"Caso 3 — Instabilidade refratária à cinta","stem":"Paciente com fratura pélvica em livro aberto, ja com cinta pélvica bem posicionada e reanimação volemica em curso, mantém-se hemodinamicamente instável apos 30 minutos.","passos":[
+      {"h":"1. Reconhecer","p":"Instabilidade persistente apesar de cinta pélvica bem colocada e reanimação adequada sugere componente de sangramento ARTERIAL, que nao responde apenas a estabilização mecanica."},
+      {"h":"2. Investigar","p":"Se o servico dispuser de radiologia intervencionista, priorizar angiografia para localizar o vaso sangrante."},
+      {"h":"3. Conduzir","p":"Encaminhar para angioembolização do vaso identificado e/ou packing pre-peritoneal se a angiografia nao estiver disponível rapidamente ou o paciente estiver instável demais para deslocamento."},
+      {"h":"Lição de prova","p":"Quando a cinta pélvica isolada nao resolve a instabilidade, isso e um sinal de alarme para sangramento arterial ativo, exigindo escalada terapeutica imediata (embolização/packing), nao apenas mais volume."}
+    ]}
+  ]
+});
+
 C["trauma|10"] = {
   "name": "Queimaduras",
   "intro": "Profundidade, SCQ, Parkland e via aérea",
@@ -4918,7 +5890,8 @@ C["trauma|10"] = {
 <tr><td><strong>2º profundo</strong></td><td>Derme reticular</td><td>Bolha, mais pálida, branqueia pouco</td><td>Menos dolorosa</td></tr>
 <tr><td><strong>3º (total)</strong></td><td>Toda a derme</td><td>Branca/marrom/carbonizada, seca, coriácea</td><td><strong>Indolor</strong> (destrói terminações)</td></tr>
 </tbody></table></div>
-<div class="callout key"><div class="ci">${IC.info}</div><div><b>SCQ — regra dos 9 (adulto)</b><p>Cabeça 9% · cada MS 9% · tronco anterior 18% · tronco posterior 18% · cada MI 18% · genitália 1%. A palma da mão do paciente ≈ <strong>1%</strong>. O 1º grau NÃO entra na SCQ.</p></div></div>`
+<div class="callout key"><div class="ci">${IC.info}</div><div><b>SCQ — regra dos 9 (adulto)</b><p>Cabeça 9% · cada MS 9% · tronco anterior 18% · tronco posterior 18% · cada MI 18% · genitália 1%. A palma da mão do paciente ≈ <strong>1%</strong>. O 1º grau NÃO entra na SCQ.</p></div></div>
+${A.tr_queimadura_profundidade}`
     ],
     [
       "clinica",
@@ -4927,7 +5900,8 @@ C["trauma|10"] = {
 <p>A queimadura é tratada como trauma: avaliação primária e busca de lesões associadas. A maior ameaça precoce é a <strong>via aérea</strong>.</p>
 <div class="callout warn"><div class="ci">${IC.alert}</div><div><b>Sinais de lesão inalatória / via aérea</b><p>Queimadura em ambiente fechado, rouquidão, estridor, escarro carbonáceo, vibrissas/sobrancelhas chamuscadas, queimadura facial/cervical. Diante deles: <strong>intubação precoce</strong> (antes do edema fechar a via aérea).</p></div></div>
 <h4>Intoxicações associadas</h4>
-<ul><li><strong>Monóxido de carbono</strong>: oximetria pode estar falsamente normal → dosar carboxi-hemoglobina; tratar com <strong>O₂ 100%</strong>.</li><li><strong>Cianeto</strong> (combustão de plásticos): acidoseláctica grave.</li></ul>`
+<ul><li><strong>Monóxido de carbono</strong>: oximetria pode estar falsamente normal → dosar carboxi-hemoglobina; tratar com <strong>O₂ 100%</strong>.</li><li><strong>Cianeto</strong> (combustão de plásticos): acidoseláctica grave.</li></ul>
+${A.tr_regra_dos_9}`
     ],
     [
       "diagnostico",
@@ -5172,6 +6146,102 @@ C["trauma|10"] = {
     }
   ]
 };
+
+Object.assign(C["trauma|10"], {
+  "escores": `<div class="ac-h">Regra dos 9 (Wallace) - superficie corporal queimada</div>
+<table class="ac-tbl"><tr><th>Regiao (adulto)</th><th>%</th></tr>
+<tr><td>Cabeca e pescoco</td><td>9%</td></tr>
+<tr><td>Cada membro superior</td><td>9%</td></tr>
+<tr><td>Tronco anterior</td><td>18%</td></tr>
+<tr><td>Tronco posterior</td><td>18%</td></tr>
+<tr><td>Cada membro inferior</td><td>18%</td></tr>
+<tr><td>Perineo/genitalia</td><td>1%</td></tr>
+</table>
+<p class="ac-p">Em criancas, a proporção muda (cabeca proporcionalmente maior, pernas menores) — usa-se tabela de Lund-Browder para maior precisao pediatrica. A palma da mao do paciente (incluindo dedos) equivale a aproximadamente 1% da SCQ, util para areas irregulares.</p>
+<div class="ac-h" style="margin-top:14px">Formula de Parkland</div>
+<p class="ac-p"><b>4 mL x peso(kg) x %SCQ</b> = volume total de Ringer lactato nas primeiras 24h, com metade administrada nas primeiras 8h (contadas do momento da queimadura) e a outra metade nas 16h seguintes.</p>`,
+  "dif": `<div class="ac-h">Profundidade: 1o x 2o superficial x 2o profundo x 3o grau</div>
+<table class="ac-tbl"><tr><th>—</th><th>1o grau</th><th>2o superficial</th><th>2o profundo</th><th>3o grau</th></tr>
+<tr><td>Camada</td><td>Epiderme</td><td>Derme papilar</td><td>Derme reticular</td><td>Toda a derme</td></tr>
+<tr><td>Aspecto</td><td>Eritema, sem bolha</td><td>Bolha, rosea</td><td>Bolha, palida/mosqueada</td><td>Branca/marrom/carbonizada</td></tr>
+<tr><td>Branqueamento</td><td>Sim</td><td>Sim</td><td>Lento/ausente</td><td>Ausente</td></tr>
+<tr><td>Dor</td><td>Dolorosa</td><td>Muito dolorosa</td><td>Reduzida</td><td>Indolor</td></tr>
+<tr><td>Cicatrização</td><td>Espontanea</td><td>Espontanea</td><td>Pode precisar enxerto</td><td>Exige enxerto</td></tr>
+</table>
+<div class="ac-warn"><b>Pegadinha:</b> nao confundir "indolor" (3o grau) com "leve" — a queimadura de 3o grau e a mais grave justamente por ter destruido as terminações nervosas.</div>`,
+  "mapa": `<div class="ac-h">Queimaduras em mapa mental</div>
+<div class="mm">
+  <div class="mm-card"><h5>Avalie 3 coisas</h5><ul><li>Profundidade</li><li>Extensao (SCQ)</li><li>Via aérea</li></ul></div>
+  <div class="mm-card"><h5>SCQ</h5><ul><li>Regra dos 9; palma=1%</li><li>1o grau NAO conta</li></ul></div>
+  <div class="mm-card"><h5>Parkland</h5><ul><li>4mL x kg x %SCQ = RL/24h</li><li>Metade nas 1as 8h (da queimadura)</li></ul></div>
+  <div class="mm-card"><h5>Via aérea</h5><ul><li>Sinais de lesão inalatoria</li><li>Intubar precocemente</li></ul></div>
+  <div class="mm-card"><h5>Intoxicações</h5><ul><li>CO: SpO2 engana, O2 100%</li><li>Cianeto: acidose lactica</li></ul></div>
+  <div class="mm-card"><h5>Cirúrgico</h5><ul><li>Escarotomia: circunferencial 3o grau</li><li>Centro de queimados: criterios</li></ul></div>
+</div>`,
+  "fluxo_cond": `<div class="ac-h">Fluxograma de conduta - queimado grave</div>
+<div class="fx">
+  <div class="fx-node start">Paciente queimado - tratar como trauma (ABCDE)</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Sinais de lesão inalatoria (rouquidao, escarro carbonaceo, queimadura facial)?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; Intubação PRECOCE, antes do edema fechar a via aérea</div>
+    <div class="fx-node">Nao -&gt; monitorar via aérea de perto</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Calcular SCQ (regra dos 9) e profundidade das lesões</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-node">Iniciar Parkland: 4mL x peso x %SCQ de RL/24h (metade nas 1as 8h da queimadura)</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Queimadura circunferencial de 3o grau comprometendo perfusao/ventilação?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; Escarotomia</div>
+    <div class="fx-node end">Nao -&gt; titular volume pela diurese, considerar centro de queimados conforme criterios</div>
+  </div>
+</div>`,
+  "vespera": `<div class="ac-h">Revisao de vespera</div>
+<div class="ac-call"><b>1.</b> Profundidade: 1o (eritema, dolorosa), 2o superficial (bolha, muito dolorosa), 2o profundo (palida, dor reduzida), 3o (escara, INDOLOR).</div>
+<div class="ac-call"><b>2.</b> SCQ pela regra dos 9; palma do paciente ~1%; 1o grau NAO entra no calculo.</div>
+<div class="ac-call"><b>3.</b> Parkland: 4mL x kg x %SCQ de Ringer lactato em 24h; metade nas 1as 8h contadas DA QUEIMADURA (nao da chegada); titular pela diurese.</div>
+<div class="ac-call"><b>4.</b> Via aérea e a maior ameaca precoce: sinais de lesão inalatoria exigem intubação precoce, antes do edema fechar a via.</div>
+<div class="ac-call"><b>5.</b> CO: oximetria pode estar falsamente normal; tratar com O2 100% e dosar carboxi-hemoglobina.</div>
+<div class="ac-call"><b>6.</b> Escarotomia em queimadura circunferencial de 3o grau comprometendo perfusao ou ventilação.</div>`,
+  "dicas": `<div class="ac-h">Dicas de ouro</div>
+<div class="ac-tip">Pense na profundidade como uma escada de dor invertida: quanto mais profunda a queimadura, MENOS dor (ate a ausência total no 3o grau) — a destruição das terminações nervosas explica isso.</div>
+<div class="ac-tip">Guarde a formula de Parkland associando "4-4-4": 4mL, x peso, x %SCQ — e sempre metade nas primeiras 8 horas contadas da hora da queimadura.</div>
+<div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+<div class="ac-warn">Contar as 8 horas iniciais de Parkland a partir da chegada ao hospital em vez do momento da queimadura — erro classico que subestima o atraso ja ocorrido.</div>
+<div class="ac-warn">Incluir queimadura de 1o grau no calculo da SCQ ou da formula de Parkland — ela nunca entra nesses calculos.</div>
+<div class="ac-warn">Confiar na oximetria de pulso normal para descartar intoxicação por monoxido de carbono — a SpO2 nao diferencia oxi-hemoglobina de carboxi-hemoglobina.</div>`,
+  "checklist": [
+    "Sei classificar a queimadura por profundidade e reconhecer cada grau clinicamente",
+    "Sei calcular a SCQ pela regra dos 9 e sei que o 1o grau nao entra no calculo",
+    "Sei aplicar a formula de Parkland corretamente, incluindo o marco temporal das 8h",
+    "Reconheco os sinais de lesão inalatoria e a urgência da intubação precoce",
+    "Entendo a armadilha da oximetria na intoxicação por CO",
+    "Sei as indicações de escarotomia e os criterios de encaminhamento a centro de queimados"
+  ],
+  "casos": [
+    {"t":"Caso 1 — Calculo de Parkland","stem":"Homem de 80kg sofre queimadura em incendio domestico, com SCQ estimada em 45% (2o e 3o graus), chega ao pronto-socorro 1 hora apos o acidente.","passos":[
+      {"h":"1. Reconhecer","p":"Grande queimado com indicação de reposição volemica guiada pela formula de Parkland, alem de avaliação completa do ABCDE do trauma."},
+      {"h":"2. Investigar","p":"Calcular: 4 x 80 x 45 = 14.400 mL em 24h. Metade (7.200mL) nas primeiras 8h contadas do momento da queimadura — como ja se passou 1h, restam 7h para infundir esse volume."},
+      {"h":"3. Conduzir","p":"Iniciar Ringer lactato aquecido conforme o calculo, titulando pela diurese-alvo (0,5 mL/kg/h no adulto), e reavaliar continuamente."},
+      {"h":"Lição de prova","p":"O relogio de Parkland comeca na hora da queimadura, nao na chegada ao hospital — um erro comum e recalcular as 8h a partir da admissao, o que leva a reposição inadequada."}
+    ]},
+    {"t":"Caso 2 — Sinais de lesão inalatoria","stem":"Vitima resgatada de incendio em ambiente fechado, com queimadura facial, sobrancelhas chamuscadas, rouquidao e escarro carbonaceo, ainda respirando espontaneamente sem estridor evidente no momento.","passos":[
+      {"h":"1. Reconhecer","p":"Multiplos sinais de lesão inalatoria presentes — mesmo sem estridor atual, o risco de edema progressivo de via aérea e alto."},
+      {"h":"2. Investigar","p":"Nao aguardar o desenvolvimento de estridor ou insuficiência respiratoria franca para agir — o edema pode evoluir rapidamente e tornar a via aérea impossível de acessar depois."},
+      {"h":"3. Conduzir","p":"Proceder a intubação orotraqueal PRECOCE, antes que o edema de via aérea torne o procedimento mais dificil ou impossível."},
+      {"h":"Lição de prova","p":"A decisao de intubar na lesão inalatoria deve ser antecipatoria (antes da falência respiratoria), nao reativa — esperar sinais graves pode ser tarde demais."}
+    ]},
+    {"t":"Caso 3 — Queimadura circunferencial de torax","stem":"Paciente com queimadura de 3o grau circunferencial em torax, evolui com dificuldade respiratoria progressiva e restrição da expansibilidade torácica, apesar de via aérea patente.","passos":[
+      {"h":"1. Reconhecer","p":"A escara rigida e inelastica de 3o grau, quando circunferencial no torax, pode restringir mecanicamente a expansao torácica e comprometer a ventilação — mesmo com via aérea livre."},
+      {"h":"2. Investigar","p":"Avaliar sinais de comprometimento respiratorio progressivo relacionado a restrição mecanica (nao confundir com lesão inalatoria isolada)."},
+      {"h":"3. Conduzir","p":"Realizar escarotomia torácica para liberar a restrição mecanica e permitir expansibilidade adequada."},
+      {"h":"Lição de prova","p":"A escarotomia nao e so para membros — queimaduras circunferenciais de torax tambem podem exigir o procedimento quando comprometem a mecanica ventilatoria."}
+    ]}
+  ]
+});
+
 C["trauma|11"] = {
   "name": "Indicações cirúrgicas no trauma",
   "intro": "Quando operar: checklist consolidado por cavidade",
@@ -5181,7 +6251,8 @@ C["trauma|11"] = {
       "Entendendo",
       `<div class="callout key" style="border-left:4px solid var(--accent);background:var(--accent-soft)"><div class="ci">${IC.brain}</div><div><b>📖 Base para iniciantes — o resumão do 'quando operar'</b><p style='margin-top:6px'>Este tópico junta tudo: em cada cavidade, quais achados <strong>obrigam a cirurgia</strong>. A lógica geral é sempre a mesma: <strong>instabilidade que não responde + peritonite/sangramento ativo = operar</strong>.</p><p style="background:var(--gold-soft);border-radius:8px;padding:8px 10px"><strong>🧠 Gatilhos universais de laparotomia:</strong> instabilidade com FAST+ , peritonite difusa, evisceração, ferida por arma de fogo transfixante, sangramento persistente, pneumoperitônio.</p></div></div><h4>Visão integradora</h4>
 <p>Este subtópico <strong>consolida</strong> as indicações de cirurgia espalhadas pelos demais temas. A pergunta unificadora é sempre: <em>estabilidade hemodinâmica + mecanismo + achados de exame/imagem</em> indicam intervenção?</p>
-<div class="callout key"><div class="ci">${IC.info}</div><div><b>Princípio único</b><p><strong>Instável que não responde + foco identificado = cirurgia.</strong> Estável permite investigar (TC) e, muitas vezes, tratamento não-operatório.</p></div></div>`
+<div class="callout key"><div class="ci">${IC.info}</div><div><b>Princípio único</b><p><strong>Instável que não responde + foco identificado = cirurgia.</strong> Estável permite investigar (TC) e, muitas vezes, tratamento não-operatório.</p></div></div>
+${A.tr_damage_control}`
     ],
     [
       "clinica",
@@ -5430,6 +6501,94 @@ C["trauma|11"] = {
     }
   ]
 };
+
+Object.assign(C["trauma|11"], {
+  "escores": `<div class="ac-h">Este tópico integra os escores/criterios ja detalhados nos demais</div>
+<p class="ac-p">Como e um tópico consolidador, os criterios numericos relevantes ja foram apresentados nos temas especificos — aqui reunimos os limiares de decisao cirúrgica mais cobrados em prova, lado a lado, para revisao rapida antes do exame.</p>
+<table class="ac-tbl"><tr><th>Cavidade/situação</th><th>Criterio numerico-chave</th></tr>
+<tr><td>Torax (hemotorax)</td><td>&gt;1500mL inicial ou &gt;200mL/h por 2-4h -&gt; toracotomia</td></tr>
+<tr><td>Vascular (ITB)</td><td>&lt;0,9 sugere lesão arterial</td></tr>
+<tr><td>Choque hemorrágico</td><td>Classe III (31-40% de perda) = inicio da hipotensao franca</td></tr>
+<tr><td>Damage control</td><td>Tríade letal: hipotermia + acidose + coagulopatia</td></tr>
+</table>
+<div class="ac-call"><b>Uso pratico:</b> em prova, questoes deste "tópico guarda-chuva" costumam misturar criterios de diferentes cavidades na mesma questao — treine reconhecer rapidamente de qual sistema cada numero pertence.</div>`,
+  "dif": `<div class="ac-h">Operar agora x investigar (visao consolidada)</div>
+<table class="ac-tbl"><tr><th>Operar imediatamente</th><th>Investigar / TNO</th></tr>
+<tr><td>Instável que nao responde</td><td>Estável apos reanimação</td></tr>
+<tr><td>Peritonite, evisceração</td><td>Lesão de baco/figado graduada e estável</td></tr>
+<tr><td>FAF transperitoneal</td><td>Arma branca selecionada</td></tr>
+<tr><td>Sinais duros vasculares</td><td>Sinais moles vasculares</td></tr>
+<tr><td>Tamponamento confirmado</td><td>Derrame pericardico pequeno estável (raro no trauma agudo)</td></tr>
+<tr><td>Hematoma intracraniano com efeito de massa</td><td>Lesões pequenas, observação seriada</td></tr>
+</table>`,
+  "mapa": `<div class="ac-h">Indicações cirúrgicas no trauma em mapa mental</div>
+<div class="mm">
+  <div class="mm-card"><h5>Principio unico</h5><ul><li>Instável + foco = cirurgia</li><li>Estável = investigar/TNO</li></ul></div>
+  <div class="mm-card"><h5>Abdome</h5><ul><li>FAST+ instável, peritonite</li><li>Evisceração, FAF, pneumoperitonio</li></ul></div>
+  <div class="mm-card"><h5>Torax</h5><ul><li>&gt;1500mL ou &gt;200mL/h x2-4h</li><li>Tamponamento confirmado</li></ul></div>
+  <div class="mm-card"><h5>Pelve</h5><ul><li>Refratária a cinta</li><li>Embolização/packing</li></ul></div>
+  <div class="mm-card"><h5>Vascular</h5><ul><li>Sinais duros = exploração</li><li>Sinais moles = investigar</li></ul></div>
+  <div class="mm-card"><h5>Damage control</h5><ul><li>Tríade letal</li><li>Fisiologia antes de anatomia</li></ul></div>
+</div>`,
+  "fluxo_dx": `<div class="ac-h">Fluxograma diagnóstico - arvore decisoria global</div>
+<div class="fx">
+  <div class="fx-node start">Politraumatizado - avaliar estabilidade hemodinamica</div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Instável que nao responde a reanimação inicial?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; buscar foco (FAST/Rx torax/pelve) -&gt; cirurgia/intervenção do foco identificado</div>
+    <div class="fx-node">Nao (estável ou responde) -&gt; investigação dirigida (TC/angioTC)</div>
+  </div>
+  <div class="fx-arrow"></div>
+  <div class="fx-lbl">Achados de imagem indicam tratamento nao-operatorio (TNO)?</div>
+  <div class="fx-row">
+    <div class="fx-node end">Sim -&gt; TNO em ambiente monitorizado, reavaliação continua</div>
+    <div class="fx-node end">Nao -&gt; cirurgia eletiva/programada conforme a lesão</div>
+  </div>
+</div>`,
+  "vespera": `<div class="ac-h">Revisao de vespera</div>
+<div class="ac-call"><b>1.</b> Principio unificador: instável que nao responde + foco identificado = cirurgia. Estável permite investigar (TC) e considerar TNO.</div>
+<div class="ac-call"><b>2.</b> Abdome: FAST+ no instável, peritonite, evisceração, FAF transperitoneal, pneumoperitonio.</div>
+<div class="ac-call"><b>3.</b> Torax: &gt;1500mL ou &gt;200mL/h por 2-4h; tamponamento confirmado.</div>
+<div class="ac-call"><b>4.</b> Pelve refratária a cinta: angioembolização e/ou packing pre-peritoneal.</div>
+<div class="ac-call"><b>5.</b> Tríade letal (hipotermia+acidose+coagulopatia) -&gt; cirurgia de controle de danos (fisiologia antes de anatomia).</div>
+<div class="ac-call"><b>6.</b> Instável NUNCA vai para TC — vai para a sala de cirurgia/intervenção correspondente.</div>`,
+  "dicas": `<div class="ac-h">Dicas de ouro</div>
+<div class="ac-tip">Use este tópico como um "mapa de revisao final": para cada cavidade (abdome, torax, pelve, vascular, crânio), pergunte "qual e o criterio que manda operar aqui?" e recite de cor antes da prova.</div>
+<div class="ac-tip">Damage control nao e fracasso técnico — e a estrategia CORRETA diante de fisiologia extrema; abreviar a cirurgia para corrigir hipotermia/acidose/coagulopatia salva mais vidas do que insistir em reconstrução completa no primeiro tempo.</div>
+<div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+<div class="ac-warn">Levar paciente instável para exame de imagem demorado "para ter certeza" — o principio e agir com base em achados clínicos e exames rapidos a beira-leito (FAST, Rx).</div>
+<div class="ac-warn">Achar que TNO significa "nao fazer nada" — exige ambiente monitorizado e criterio claro e imediato para converter em cirurgia se houver deterioração.</div>
+<div class="ac-warn">Tentar reconstrução anatomica completa em paciente com tríade letal instalada — isso aumenta o risco de morte na mesa; a prioridade e controle rapido + UTI + reoperação programada.</div>`,
+  "checklist": [
+    "Sei articular o principio unificador das indicações cirúrgicas no trauma",
+    "Consigo listar as indicações de cirurgia/intervenção para cada cavidade principal",
+    "Sei reconhecer a tríade letal e por que ela muda a estrategia cirúrgica",
+    "Entendo os requisitos e limites do tratamento nao-operatorio em qualquer cavidade",
+    "Consigo integrar rapidamente achados de diferentes sistemas numa mesma questao de prova"
+  ],
+  "casos": [
+    {"t":"Caso 1 — Politrauma com multiplos focos","stem":"Vitima de acidente automobilistico grave chega instável, com suspeita simultanea de sangramento abdominal (FAST positivo) e fratura pélvica instável.","passos":[
+      {"h":"1. Reconhecer","p":"Multiplos focos potenciais de hemorragia simultaneos — e necessário priorizar com base no principio de que o achado mais definitivo (FAST positivo) direciona a conduta inicial."},
+      {"h":"2. Investigar","p":"Confirmar rapidamente ambos os achados (FAST e Rx de pelve) sem atrasar a decisao terapeutica em paciente instável."},
+      {"h":"3. Conduzir","p":"Priorizar laparotomia para o foco abdominal (FAST positivo tem prioridade classica), com aplicação simultanea de cinta pélvica e, se necessário, embolização do componente pélvico apos ou durante o mesmo tempo cirúrgico multidisciplinar."},
+      {"h":"Lição de prova","p":"Quando ha FAST positivo associado a pelve instável, a literatura e a prova concordam: o foco abdominal geralmente tem prioridade sobre o pélvico isolado, mas o manejo deve ser coordenado entre as equipes."}
+    ]},
+    {"t":"Caso 2 — Instalação da tríade letal intraoperatoria","stem":"Durante laparotomia por trauma abdominal grave, o paciente desenvolve hipotermia (temperatura 34C), acidose (pH 7,15) e sangramento difuso em superficies cruentas (coagulopatia).","passos":[
+      {"h":"1. Reconhecer","p":"Instalação da tríade letal durante a cirurgia — sinal de que a fisiologia do paciente esta se esgotando, independentemente de quanto ainda falta reconstruir anatomicamente."},
+      {"h":"2. Investigar","p":"Reconhecer que continuar tentando reparos definitivos complexos nesse momento aumenta drasticamente o risco de morte na mesa cirúrgica."},
+      {"h":"3. Conduzir","p":"Abreviar a cirurgia: controlar sangramento com tamponamento/packing, controlar contaminação de forma simplificada, fechar temporariamente o abdome (peritoneostomia) e levar o paciente a UTI para corrigir a fisiologia antes de reoperar em 24-48h."},
+      {"h":"Lição de prova","p":"Reconhecer o momento de converter para damage control e uma habilidade tao importante quanto a técnica cirúrgica — insistir na reconstrução completa diante da tríade letal e um erro potencialmente fatal."}
+    ]},
+    {"t":"Caso 3 — Estável com multiplas lesões de órgãos solidos","stem":"Paciente estável apos trauma fechado, TC evidência lesão esplenica grau II e lesão hepatica grau II, sem sinais de sangramento ativo (blush) em nenhuma delas.","passos":[
+      {"h":"1. Reconhecer","p":"Paciente estável com lesões de órgãos solidos de baixo grau, sem sinais ativos de sangramento — cenário classico para tratamento nao-operatorio (TNO) de ambas as lesões simultaneamente."},
+      {"h":"2. Investigar","p":"Confirmar estabilidade hemodinamica sustentada e ausência de outros criterios de cirurgia (peritonite, evisceração, etc)."},
+      {"h":"3. Conduzir","p":"Manter TNO com monitorização rigorosa em ambiente adequado, reavaliações clínicas e laboratoriais seriadas, com criterio claro para converter em cirurgia caso haja qualquer sinal de deterioração."},
+      {"h":"Lição de prova","p":"Multiplas lesões de órgãos solidos nao contraindicam TNO por si so — o que importa e a estabilidade hemodinamica sustentada e a ausência de outros criterios absolutos de cirurgia."}
+    ]}
+  ]
+});
+
 C["abdome|0"] = {
   "name": "Apendicite aguda",
   "intro": "O abdome agudo cirúrgico mais cobrado",
@@ -11633,44 +12792,4 @@ window.viewModule = function(arg){
       var st = mesaState();
       var on = !!st[ck];
       var btn = '<div class="mod-mastery '+(on?'on':'')+'" onclick="mesaToggleModulo(\''+ck+'\')">'+
-        '<span class="mm-dot">'+(on?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>':'')+'</span>'+
-        '<span>'+(on?'Módulo dominado':'Marcar este módulo como dominado')+'</span></div>';
-      html = html.replace('<div class="fc-create"', btn + '<div class="fc-create"');
-    }
-  }catch(e){}
-  return html;
-};
-
-var _prevRenderRoute = window.renderRoute || renderRoute;
-window.renderRoute = function(){
-  if(typeof route!=='undefined' && route && route.view==='collection'){
-    setActive('collection');
-    document.getElementById('main').innerHTML=viewMesaCirurgica();
-    return;
-  }
-  _prevRenderRoute();
-};
-
-function patchNavLabel(){
-  var nav = document.getElementById('nav');
-  if(!nav) { setTimeout(patchNavLabel, 60); return; }
-  var tryReplace = function(){
-    var item = nav.querySelector('[data-v="collection"]');
-    if(item){
-      var span = item.querySelector('span');
-      if(span) span.textContent = 'Mesa Cirúrgica';
-    }
-  };
-  tryReplace();
-  var mo2 = new MutationObserver(tryReplace);
-  mo2.observe(nav, {childList:true});
-}
-document.addEventListener('DOMContentLoaded', patchNavLabel);
-if(document.readyState !== 'loading') patchNavLabel();
-
-})();
-</script>
-
-
-</body>
-</html>
+        '<
