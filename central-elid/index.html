@@ -346,7 +346,12 @@
       platformId:"infectologia", docPath:["state","current"], stateField:"state", engine:"fcmap", unit:"ms",
       srsField:"srs", cardsField:"cards", showNew:true, pin:true,
       dailySelect:"seedShuffle", dailyN:10,   // MESMA seleção de "questões do dia" da plataforma (seedShuffle + 10/dia)
-      quizMode:"infectoDone" }   // questões marcam state.done["<arg>:<i>"]=true (sem gamificação na origem)
+      quizMode:"infectoDone" },  // questões marcam state.done["<arg>:<i>"]=true (sem gamificação na origem)
+    { key:"cardiologia",  label:"CardioAtlas",         href:"../plataformas/cardiologia/", status:"rw",
+      platformId:"cardiologia", docPath:["state","current"], stateField:"state", engine:"fcmap", unit:"ms",
+      srsField:"srs", cardsField:"cards", showNew:true, pin:true,
+      dailySelect:"seedShuffle", dailyN:10,   // mesmo motor/engine do InfectoAtlas (mesma skill-base)
+      quizMode:"infectoDone" }   // questões marcam state.done["<arg>:<i>"]=true; gamificação (Coração Anatômico) fica na própria plataforma
   ];
 
   /* ===== Helpers de extração defensiva ===== */
@@ -929,7 +934,9 @@
     var cache = SESSION.docCache[p.platformId];
     if(cache && cache.state && p.quizMode === "infectoDone"){
       var dn = cache.state.done;
-      if(dn && dn[id] === true) return { chosen:null, correct:true, fromPlatform:true };
+      // aceita tanto o formato antigo (done[id]===true) quanto o formato real
+      // gravado pela plataforma (done[id]='c'+opcaoEscolhida, ex.: 'c0','c1'...)
+      if(dn && dn[id] !== undefined && dn[id] !== false && dn[id] !== null) return { chosen:null, correct:true, fromPlatform:true };
     }
     return null;
   }
