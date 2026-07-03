@@ -1,14 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<!-- =====================================================================
-     CONFIG DA ESPECIALIDADE (edite estes 3 pontos; o resto do layout fica igual)
-     1) NOME/LOGO ...... troque "Atlas Cirúrgico" por ex.: CardioAtlas
-     2) COR DE ACENTO .. altere a CSS var --accent (procure "COR DE ACENTO")
-     3) PLATFORM_ID .... id unico p/ Firebase (procure "PLATFORM_ID")
-     GAMIFICACAO ....... comeca VAZIA (const PATOGENOS={}); preencha por especialidade.
-     Reconfigure ainda: MODULES, CH e (se usar) FICHA. NAO altere engine/gamificacao.
-===================================================================== -->
+<!-- Atlas Cirúrgico — plataforma de estudos de Cirurgia Geral (ELID). -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Atlas Cirúrgico — ELID</title>
@@ -428,7 +421,7 @@ table.med td strong{color:var(--text)}
 <!-- ===================== GATE ===================== -->
 <div id="gate">
   <div class="gate-card">
-    <div class="gate-logo"><span class="gate-glow"></span><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round"><path d="M32 6 C44 9 54 11 58 12 C58 30 56 46 32 60 C8 46 6 30 6 12 C10 11 20 9 32 6 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><line x1="32" y1="20" x2="24" y2="28" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="20" x2="40" y2="28" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="24" y1="28" x2="32" y2="36" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="40" y1="28" x2="32" y2="36" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="24" y1="28" x2="20" y2="38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="40" y1="28" x2="44" y2="38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="20" y1="38" x2="28" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="36" x2="28" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="36" x2="38" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="44" y1="38" x2="38" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="28" y1="46" x2="32" y2="52" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="38" y1="46" x2="32" y2="52" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="20" y1="38" x2="32" y2="36" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="36" x2="44" y2="38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><circle cx="32" cy="20" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="24" cy="28" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="40" cy="28" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="20" cy="38" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="32" cy="36" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="44" cy="38" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="28" cy="46" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="38" cy="46" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="32" cy="52" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></div>
+    <div class="gate-logo"><span class="gate-glow"></span><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="29" stroke-width="1.4" opacity=".35"/><path d="M14 50 L28 36" stroke-width="4.4"/><path d="M17.5 46.5 L20.5 49.5 M21.5 42.5 L24.5 45.5" stroke-width="2"/><circle cx="31.5" cy="32.5" r="2.6" stroke-width="2"/><path d="M30 34 L46 18 C50.5 13.5 55.5 11 59 11 C56.5 14.5 53 19.5 48.5 24 L33.5 39 Z"/><line x1="46" y1="18" x2="52" y2="24" stroke-width="1.6" opacity=".55"/></svg></div>
     <div class="gate-supra">Acesso pelo ELID</div>
     <div class="gate-name">Atlas Cirúrgico</div>
     <div class="elid-credit" style="margin-top:4px"><b>E</b>LI<b>D</b> · <b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div>
@@ -462,7 +455,7 @@ table.med td strong{color:var(--text)}
 
   <aside class="sidebar" id="sidebar">
     <div class="sb-head">
-      <div class="sb-logo"><span class="sb-glow"></span><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round"><path d="M32 6 C44 9 54 11 58 12 C58 30 56 46 32 60 C8 46 6 30 6 12 C10 11 20 9 32 6 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><line x1="32" y1="20" x2="24" y2="28" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="20" x2="40" y2="28" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="24" y1="28" x2="32" y2="36" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="40" y1="28" x2="32" y2="36" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="24" y1="28" x2="20" y2="38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="40" y1="28" x2="44" y2="38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="20" y1="38" x2="28" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="36" x2="28" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="36" x2="38" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="44" y1="38" x2="38" y2="46" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="28" y1="46" x2="32" y2="52" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="38" y1="46" x2="32" y2="52" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="20" y1="38" x2="32" y2="36" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><line x1="32" y1="36" x2="44" y2="38" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><circle cx="32" cy="20" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="24" cy="28" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="40" cy="28" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="20" cy="38" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="32" cy="36" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="44" cy="38" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="28" cy="46" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="38" cy="46" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="32" cy="52" r="2.6" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></div>
+      <div class="sb-logo"><span class="sb-glow"></span><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="29" stroke-width="1.4" opacity=".35"/><path d="M14 50 L28 36" stroke-width="4.4"/><path d="M17.5 46.5 L20.5 49.5 M21.5 42.5 L24.5 45.5" stroke-width="2"/><circle cx="31.5" cy="32.5" r="2.6" stroke-width="2"/><path d="M30 34 L46 18 C50.5 13.5 55.5 11 59 11 C56.5 14.5 53 19.5 48.5 24 L33.5 39 Z"/><line x1="46" y1="18" x2="52" y2="24" stroke-width="1.6" opacity=".55"/></svg></div>
       <div class="sb-name">Atlas Cirúrgico</div>
       <div class="sb-credit elid-credit"><b>E</b>LI<b>D</b> · <b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div>
     </div>
@@ -692,7 +685,7 @@ function buildNav(){
   const nav=document.getElementById('nav');
   let h=`<div class="nav-item active" data-v="dashboard" onclick="navigate('dashboard')">${ICONS.dashboard}<span>Dashboard</span></div>`;
   h+=`<div class="nav-item" data-v="modules" onclick="navigate('modules')">${ICONS.modules}<span>Módulos</span></div>`;
-  h+=`<div class="nav-item" data-v="collection" onclick="navigate('collection')">${ICONS.collection}<span>Coleção de Patógenos</span></div>`;
+  h+=`<div class="nav-item" data-v="collection" onclick="navigate('collection')">${ICONS.collection}<span>Mesa Cirúrgica</span></div>`;
   h+=`<div class="nav-item" data-v="daily" onclick="navigate('daily')">${ICONS.daily}<span>Estudos do Dia</span></div>`;
   h+=`<div class="nav-item" data-v="srs" onclick="navigate('srs')">${ICONS.srs}<span>Revisão Espaçada</span></div>`;
   h+=`<div class="nav-item" data-v="temas" onclick="navigate('temas')">${ICONS.trending}<span>Temas mais cobrados</span></div>`;
@@ -739,27 +732,30 @@ function collStats(){
   return {total,unlocked,pct};
 }
 function viewDashboard(nm){
-  const cs=collStats(); const lvl=platformLevel();
+  const mDom=(typeof window.mesaDominados==='function')?window.mesaDominados().length:0;
+  const mTot=(window.MESA_MODULOS)?window.MESA_MODULOS.length:7;
+  const mInstr=(typeof window.mesaUnlockedInstruments==='function')?window.mesaUnlockedInstruments().length:0;
+  const mPct=mTot?Math.round(mDom/mTot*100):0;
   return `<div class="view">
     <div class="hero">
-      <div class="hero-cover" onclick="navigate('collection')" title="Abrir Coleção de Patógenos">
+      <div class="hero-cover" onclick="navigate('collection')" title="Abrir Mesa Cirúrgica">
         <div class="hc-border"></div>
         <div class="hcv-logo"><span class="sb-glow"></span>${LOGO}</div>
-        <div class="hcv-ttl">Coleção de<br>Patógenos</div>
-        <div class="hcv-sub">Abrir o livro</div>
+        <div class="hcv-ttl">Mesa<br>Cirúrgica</div>
+        <div class="hcv-sub">Ver instrumentos</div>
       </div>
       <div class="hero-info">
         <h2>Olá, ${nm}!</h2>
-        <div class="hero-rank">Nível ${lvl} · Coletor</div>
-        <p class="page-sub" style="margin:0 0 8px">Coleção: ${cs.unlocked}/${cs.total} catalogados · ${cs.pct}%</p>
-        <div class="prog"><i style="width:${cs.pct}%"></i></div>
+        <div class="hero-rank">${mDom}/${mTot} módulos dominados</div>
+        <p class="page-sub" style="margin:0 0 8px">Mesa cirúrgica: ${mInstr}/21 instrumentos · ${mPct}%</p>
+        <div class="prog"><i style="width:${mPct}%"></i></div>
       </div>
     </div>
     <div class="grid grid-4">
       <div class="card"><div class="stat-n">${S0().qSeen||0}</div><div class="stat-l">Questões</div></div>
       <div class="card"><div class="stat-n">${(S0().cards||[]).length}</div><div class="stat-l">Flashcards</div></div>
       <div class="card"><div class="stat-n">${(window.__cardsDue?window.__cardsDue():[]).length}</div><div class="stat-l">A revisar</div></div>
-      <div class="card"><div class="stat-n">${cs.unlocked}</div><div class="stat-l">Patógenos</div></div>
+      <div class="card"><div class="stat-n">${mInstr}</div><div class="stat-l">Instrumentos</div></div>
     </div>
     <div class="sec-title">Acesso rápido</div>
     <div class="grid grid-3">
@@ -832,7 +828,7 @@ function capCount(cap){return (PATOGENOS[cap]||[]).filter((_,i)=>isUnlocked(cap,
 let bk={screen:'cover',cap:null,i:null,opened:false};
 
 function viewCollection(){
-  return `<div class="view"><div class="page-title">${ICONS.collection}<h1>Coleção de Patógenos</h1></div>
+  return `<div class="view"><div class="page-title">${ICONS.collection}<h1>Mesa Cirúrgica</h1></div>
     <p class="page-sub">Sua enciclopédia pessoal — os itens são catalogados conforme você avança de nível na plataforma.</p>
     <div class="bookx"><div class="bookstage" id="bookstage"></div></div>
     <div class="book-bar">
@@ -885,7 +881,7 @@ function bindBook(){
       <div class="hc-inner">
         <div class="hc-border"></div>
         <div class="hc-logo"><span class="sb-glow"></span>${LOGO}</div>
-        <div class="hc-title">Coleção de Patógenos</div>
+        <div class="hc-title">Mesa Cirúrgica</div>
         <div class="hc-sub">Atlas pessoal da especialidade</div>
         <div class="hc-hint">Toque para abrir ✦</div>
       </div>
@@ -2221,7 +2217,7 @@ window.IC = {
 <script>
 /* ===== Atlas Cirúrgico — conteúdo migrado do arquivo antigo (aditivo) ===== */
 (function(){
-var C = (window.CONTENT = window.C = window.C || {});
+var C = (window.CONTENT = window.CONTENT || {}); window.C = C;
 C["trauma|0"] = {
   "name": "ATLS — princípios gerais",
   "intro": "Filosofia, golden hour, prioridades e fluxo de atendimento",
@@ -11464,6 +11460,10 @@ function mesaUnlockedInstruments(){
   return MESA_INSTR.slice(0, n);
 }
 function mesaIsComplete(){ return mesaDominados().length >= MESA_MODULOS.length; }
+window.mesaDominados = mesaDominados;
+window.MESA_MODULOS = MESA_MODULOS;
+window.mesaUnlockedInstruments = mesaUnlockedInstruments;
+window.mesaIsComplete = mesaIsComplete;
 
 function mesaPlayUnlockSound(){
   try{
