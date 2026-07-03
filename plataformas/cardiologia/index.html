@@ -462,7 +462,7 @@ let uid=null, unsubCentral=null;
 
 // ---------- estado ----------
 let S=loadLocal();
-function blankState(){return {_updated:0, done:{}, srs:{}, cards:[], notes:{}, dia:{}, diaSeen:{}, qSeen:0, qRight:0, xp:0};}
+function blankState(){return {_updated:0, done:{}, srs:{}, cards:[], notes:{}, dia:{}, diaSeen:{}, hl:{}, qSeen:0, qRight:0, xp:0};}
 function loadLocal(){
   let base=blankState();
   try{
@@ -479,7 +479,7 @@ function mergeState(a,b){
   if(!b) return a;
   const out={...a};
   out._updated=Math.max(a._updated||0,b._updated||0);
-  for(const m of ['done','srs','notes','dia','diaSeen']){
+  for(const m of ['done','srs','notes','dia','diaSeen','hl']){
     out[m]={...(a[m]||{}),...(b[m]||{})};        // união de mapas (local vence empate via ordem)
   }
   out.cards=[...(a.cards||[]),...(b.cards||[])].filter((c,i,arr)=>arr.findIndex(x=>x.id===c.id)===i);
@@ -1016,6 +1016,7 @@ if(!document.getElementById('ac-style')){
   .ac-box{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--panel)}
   .ac-box h5{font-family:'Fraunces',serif;color:var(--accent);font-size:.96rem;margin-bottom:6px}
   .ac-box ul{margin:0 0 0 16px;font-size:.85rem;line-height:1.5}
+  mark.uhl{background:#f2e0a2;color:#241a33;border-radius:3px;padding:.02em .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone;cursor:context-menu}
   /* questões */
   .q-card{border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0;background:var(--panel)}
   .q-stem{font-size:.92rem;line-height:1.6;margin-bottom:10px}
@@ -1160,18 +1161,19 @@ window.viewModule=function(arg){
 window.acTab=function(arg,k){ mTab=k; if(k==='teoria'&&!mSub){var d=C[arg]; mSub=d&&d.sub?d.sub[0][0]:'entendendo';} document.getElementById('main').innerHTML=window.viewModule(arg); };
 window.acSub=function(arg,k){ mSub=k; document.getElementById('main').innerHTML=window.viewModule(arg); };
 
+function hlWrap(key,html){ return '<div class="hl-zone" data-hlkey="'+key+'">'+html+'</div>'; }
 function renderTab(arg,d){
   if(mTab==='teoria') return renderTeoria(arg,d);
-  if(mTab==='escores') return d.escores||ph('Escores em breve');
+  if(mTab==='escores') return hlWrap(arg+':escores', d.escores||ph('Escores em breve'));
   if(mTab==='questoes') return renderQuestoes(arg,d);
   if(mTab==='flashcards') return renderFlashcards(arg,d);
-  if(mTab==='casos') return renderCasos(arg,d);
-  if(mTab==='fluxo_dx') return d.fluxo_dx||ph('Fluxograma em breve');
-  if(mTab==='fluxo_cond') return d.fluxo_cond||ph('Fluxograma em breve');
-  if(mTab==='mapa') return d.mapa||ph('Mapa em breve');
-  if(mTab==='dif') return d.dif||ph('Diferenciais em breve');
-  if(mTab==='vespera') return d.vespera||ph('Revisão em breve');
-  if(mTab==='dicas') return d.dicas||ph('Dicas em breve');
+  if(mTab==='casos') return hlWrap(arg+':casos', renderCasos(arg,d));
+  if(mTab==='fluxo_dx') return hlWrap(arg+':fluxo_dx', d.fluxo_dx||ph('Fluxograma em breve'));
+  if(mTab==='fluxo_cond') return hlWrap(arg+':fluxo_cond', d.fluxo_cond||ph('Fluxograma em breve'));
+  if(mTab==='mapa') return hlWrap(arg+':mapa', d.mapa||ph('Mapa em breve'));
+  if(mTab==='dif') return hlWrap(arg+':dif', d.dif||ph('Diferenciais em breve'));
+  if(mTab==='vespera') return hlWrap(arg+':vespera', d.vespera||ph('Revisão em breve'));
+  if(mTab==='dicas') return hlWrap(arg+':dicas', d.dicas||ph('Dicas em breve'));
   if(mTab==='checklist') return renderChecklist(arg,d);
   if(mTab==='notas') return renderNotas(arg);
   return ph('Conteúdo em breve');
@@ -1184,7 +1186,7 @@ function renderTeoria(arg,d){
   if(!mSub) mSub=d.sub[0][0];
   var subs=d.sub.map(function(s){return '<div class="subtab '+(s[0]===mSub?'active':'')+'" onclick="acSub(\''+arg+'\',\''+s[0]+'\')">'+s[1]+'</div>';}).join('');
   var cur=d.sub.filter(function(s){return s[0]===mSub;})[0]||d.sub[0];
-  return '<div class="subtabs">'+subs+'</div><div>'+cur[2]+'</div>';
+  return '<div class="subtabs">'+subs+'</div>'+hlWrap(arg+':teoria:'+cur[0], cur[2]);
 }
 
 /* ---- QUESTÕES ---- */
@@ -5983,6 +5985,303 @@ casos:[
 });
 
 try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+
+</script>
+<script>Object.assign(window.ASVG=window.ASVG||{},{"tako_formato": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Por que o nome \"Takotsubo\"?</text>\n<rect x=\"24\" y=\"46\" width=\"300\" height=\"200\" rx=\"10\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"174\" y=\"68\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Pote de pescar polvo (Japao)</text>\n<path d=\"M124 90 Q124 150 174 170 Q224 150 224 90 L214 90 L214 70 L134 70 L134 90 Z\" fill=\"none\" stroke=\"#6db3f2\" stroke-width=\"2.4\"/>\n<text x=\"174\" y=\"200\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">Corpo largo, gargalo estreito</text>\n<rect x=\"356\" y=\"46\" width=\"300\" height=\"200\" rx=\"10\" fill=\"#2b2140\" stroke=\"#e8675f\"/><text x=\"506\" y=\"68\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">VE em sistole (forma classica)</text>\n<ellipse cx=\"506\" cy=\"140\" rx=\"60\" ry=\"40\" fill=\"#e8675f\" fill-opacity=\"0.25\" stroke=\"#e8675f\" stroke-width=\"2.4\"/>\n<path d=\"M472 108 L540 108\" stroke=\"#f0a93f\" stroke-width=\"3\"/>\n<text x=\"506\" y=\"200\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">Base contrai (estreita), apice</text>\n<text x=\"506\" y=\"216\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">fica largo e paralisado (balonamento)</text>\n<rect x=\"24\" y=\"256\" width=\"632\" height=\"30\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/>\n<text x=\"340\" y=\"276\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\" font-weight=\"700\">O VE assume o formato do pote de polvo — daí o nome da sindrome</text>\n</svg>", "tako_catecolaminas": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Tempestade de catecolaminas e a densidade de receptores</text>\n<rect x=\"24\" y=\"46\" width=\"632\" height=\"80\" rx=\"10\" fill=\"#e8675f\" fill-opacity=\"0.12\" stroke=\"#e8675f\"/>\n<text x=\"40\" y=\"70\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"10.4\">Estresse agudo (emocional ou fisico)</text>\n<text x=\"40\" y=\"92\" fill=\"#f1e3e0\" font-size=\"9.4\">-&gt; liberacao maciça de adrenalina/noradrenalina -&gt; toxicidade direta aos miocitos +</text>\n<text x=\"40\" y=\"110\" fill=\"#f1e3e0\" font-size=\"9.4\">vasoespasmo microvascular difuso (nao e uma lesao coronariana focal)</text>\n<rect x=\"24\" y=\"136\" width=\"300\" height=\"110\" rx=\"10\" fill=\"#2b2140\" stroke=\"#f0a93f\"/><text x=\"174\" y=\"158\" fill=\"#f0a93f\" font-weight=\"700\" text-anchor=\"middle\">Apice do VE</text>\n<text x=\"40\" y=\"182\" fill=\"#f1e3e0\" font-size=\"9.2\">MAIOR densidade de</text>\n<text x=\"40\" y=\"198\" fill=\"#f1e3e0\" font-size=\"9.2\">receptores beta-adrenergicos</text>\n<text x=\"40\" y=\"220\" fill=\"#e8675f\" font-size=\"9.2\" font-weight=\"700\">Mais vulneravel -&gt; acinesia/balonamento</text>\n<rect x=\"356\" y=\"136\" width=\"300\" height=\"110\" rx=\"10\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"506\" y=\"158\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Base do VE</text>\n<text x=\"372\" y=\"182\" fill=\"#f1e3e0\" font-size=\"9.2\">MENOR densidade de</text>\n<text x=\"372\" y=\"198\" fill=\"#f1e3e0\" font-size=\"9.2\">receptores beta-adrenergicos</text>\n<text x=\"372\" y=\"220\" fill=\"#3ddc84\" font-size=\"9.2\" font-weight=\"700\">Relativamente poupada -&gt; hipercontratil</text>\n<rect x=\"24\" y=\"256\" width=\"632\" height=\"30\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/>\n<text x=\"340\" y=\"276\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\" font-weight=\"700\">Essa diferenca de densidade de receptores explica o padrao apical classico</text>\n</svg>", "tako_padroes": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Padroes anatomicos de takotsubo</text>\n<rect x=\"24\" y=\"44\" width=\"300\" height=\"100\" rx=\"8\" fill=\"#2b2140\" stroke=\"#e8675f\"/><text x=\"174\" y=\"64\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"9.8\" text-anchor=\"middle\">Apical (classico) — ~80%</text><text x=\"40\" y=\"88\" fill=\"#f1e3e0\" font-size=\"8.8\">Apice acinetico/discinetico</text><text x=\"40\" y=\"104\" fill=\"#f1e3e0\" font-size=\"8.8\">Base hipercontratil compensatoria</text>\n<rect x=\"356\" y=\"44\" width=\"300\" height=\"100\" rx=\"8\" fill=\"#2b2140\" stroke=\"#f0a93f\"/><text x=\"506\" y=\"64\" fill=\"#f0a93f\" font-weight=\"700\" font-size=\"9.8\" text-anchor=\"middle\">Medio-ventricular</text><text x=\"372\" y=\"88\" fill=\"#f1e3e0\" font-size=\"8.8\">Disfuncao da porcao media</text><text x=\"372\" y=\"104\" fill=\"#f1e3e0\" font-size=\"8.8\">Apice e base relativamente preservados</text>\n<rect x=\"24\" y=\"156\" width=\"300\" height=\"100\" rx=\"8\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"174\" y=\"176\" fill=\"#6db3f2\" font-weight=\"700\" font-size=\"9.8\" text-anchor=\"middle\">Basal (reverso/inverso)</text><text x=\"40\" y=\"200\" fill=\"#f1e3e0\" font-size=\"8.8\">Disfuncao da base</text><text x=\"40\" y=\"216\" fill=\"#f1e3e0\" font-size=\"8.8\">Apice hipercontratil (padrao oposto)</text>\n<rect x=\"356\" y=\"156\" width=\"300\" height=\"100\" rx=\"8\" fill=\"#2b2140\" stroke=\"#3ddc84\"/><text x=\"506\" y=\"176\" fill=\"#3ddc84\" font-weight=\"700\" font-size=\"9.8\" text-anchor=\"middle\">Focal</text><text x=\"372\" y=\"200\" fill=\"#f1e3e0\" font-size=\"8.8\">Disfuncao segmentar localizada</text><text x=\"372\" y=\"216\" fill=\"#f1e3e0\" font-size=\"8.8\">Menos caracteristico, mais raro</text>\n<rect x=\"24\" y=\"266\" width=\"632\" height=\"22\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/>\n<text x=\"340\" y=\"282\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"700\">Todos tem em comum: disfuncao que ultrapassa um unico territorio coronariano</text>\n</svg>", "tako_dx_iam": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Takotsubo x Infarto: pistas diagnosticas</text>\n<rect x=\"24\" y=\"44\" width=\"632\" height=\"34\" rx=\"8\" fill=\"#2b2140\"/><text x=\"40\" y=\"66\" fill=\"#cbb9ac\" font-size=\"9.6\" font-weight=\"700\">Achado</text><text x=\"330\" y=\"66\" fill=\"#cbb9ac\" font-size=\"9.6\" font-weight=\"700\">Takotsubo</text><text x=\"510\" y=\"66\" fill=\"#cbb9ac\" font-size=\"9.6\" font-weight=\"700\">Infarto (IAM)</text>\n<rect x=\"24\" y=\"80\" width=\"632\" height=\"38\" rx=\"8\" fill=\"#2b2140\"/><text x=\"40\" y=\"104\" fill=\"#f1e3e0\" font-size=\"9.2\">Troponina vs disfuncao</text><text x=\"330\" y=\"104\" fill=\"#3ddc84\" font-size=\"9.2\">Desproporcionalmente BAIXA</text><text x=\"510\" y=\"104\" fill=\"#e8675f\" font-size=\"9.2\">Proporcional a extensao da necrose</text>\n<rect x=\"24\" y=\"120\" width=\"632\" height=\"38\" rx=\"8\" fill=\"#2b2140\"/><text x=\"40\" y=\"144\" fill=\"#f1e3e0\" font-size=\"9.2\">BNP/NT-proBNP</text><text x=\"330\" y=\"144\" fill=\"#e8675f\" font-size=\"9.2\">Muito elevado, desproporcional a troponina</text><text x=\"510\" y=\"144\" fill=\"#3ddc84\" font-size=\"9.2\">Mais proporcional ao quadro</text>\n<rect x=\"24\" y=\"160\" width=\"632\" height=\"38\" rx=\"8\" fill=\"#2b2140\"/><text x=\"40\" y=\"184\" fill=\"#f1e3e0\" font-size=\"9.2\">Padrao de disfuncao</text><text x=\"330\" y=\"184\" fill=\"#e8675f\" font-size=\"9.2\">Ultrapassa territorio coronariano</text><text x=\"510\" y=\"184\" fill=\"#3ddc84\" font-size=\"9.2\">Segue territorio de UMA arteria</text>\n<rect x=\"24\" y=\"200\" width=\"632\" height=\"38\" rx=\"8\" fill=\"#2b2140\"/><text x=\"40\" y=\"224\" fill=\"#f1e3e0\" font-size=\"9.2\">Coronariografia</text><text x=\"330\" y=\"224\" fill=\"#e8675f\" font-size=\"9.2\">Sem lesao obstrutiva culpada</text><text x=\"510\" y=\"224\" fill=\"#3ddc84\" font-size=\"9.2\">Lesao obstrutiva/trombo</text>\n<rect x=\"24\" y=\"240\" width=\"632\" height=\"38\" rx=\"8\" fill=\"#2b2140\"/><text x=\"40\" y=\"264\" fill=\"#f1e3e0\" font-size=\"9.2\">RM cardiaca</text><text x=\"330\" y=\"264\" fill=\"#e8675f\" font-size=\"9.2\">Ausencia de realce tardio significativo</text><text x=\"510\" y=\"264\" fill=\"#3ddc84\" font-size=\"9.2\">Realce tardio subendocardico/transmural</text>\n</svg>", "tako_complicacoes": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Complicacoes do takotsubo</text>\n<rect x=\"24\" y=\"44\" width=\"200\" height=\"90\" rx=\"8\" fill=\"#2b2140\"/><text x=\"124\" y=\"64\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"9.6\" text-anchor=\"middle\">Obstrucao dinamica da VSVE</text><text x=\"40\" y=\"84\" fill=\"#f1e3e0\" font-size=\"8.6\">Base hipercontratil \"empurra\"</text><text x=\"40\" y=\"100\" fill=\"#f1e3e0\" font-size=\"8.6\">a via de saida (mecanismo tipo CMH)</text>\n<rect x=\"240\" y=\"44\" width=\"200\" height=\"90\" rx=\"8\" fill=\"#2b2140\"/><text x=\"340\" y=\"64\" fill=\"#f0a93f\" font-weight=\"700\" font-size=\"9.6\" text-anchor=\"middle\">Trombo apical</text><text x=\"256\" y=\"84\" fill=\"#f1e3e0\" font-size=\"8.6\">Estase por acinesia do apice</text><text x=\"256\" y=\"100\" fill=\"#f1e3e0\" font-size=\"8.6\">Risco de embolizacao sistemica</text>\n<rect x=\"456\" y=\"44\" width=\"200\" height=\"90\" rx=\"8\" fill=\"#2b2140\"/><text x=\"556\" y=\"64\" fill=\"#6db3f2\" font-weight=\"700\" font-size=\"9.6\" text-anchor=\"middle\">Arritmias/QT longo</text><text x=\"472\" y=\"84\" fill=\"#f1e3e0\" font-size=\"8.6\">Risco de torsades de pointes</text><text x=\"472\" y=\"100\" fill=\"#f1e3e0\" font-size=\"8.6\">Corrigir eletrolitos</text>\n<rect x=\"24\" y=\"146\" width=\"300\" height=\"80\" rx=\"8\" fill=\"#2b2140\"/><text x=\"174\" y=\"166\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"9.6\" text-anchor=\"middle\">Choque cardiogenico</text><text x=\"40\" y=\"186\" fill=\"#f1e3e0\" font-size=\"8.6\">Minoria, mas relevante</text><text x=\"40\" y=\"202\" fill=\"#f1e3e0\" font-size=\"8.6\">Cuidado com inotropico se houver obstrucao</text>\n<rect x=\"356\" y=\"146\" width=\"300\" height=\"80\" rx=\"8\" fill=\"#2b2140\"/><text x=\"506\" y=\"166\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"9.6\" text-anchor=\"middle\">Ruptura de parede livre</text><text x=\"372\" y=\"186\" fill=\"#f1e3e0\" font-size=\"8.6\">Rara, mas descrita</text><text x=\"372\" y=\"202\" fill=\"#f1e3e0\" font-size=\"8.6\">Mais em discinesia extensa</text>\n<rect x=\"24\" y=\"236\" width=\"632\" height=\"46\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/>\n<text x=\"340\" y=\"258\" fill=\"#f1e3e0\" font-size=\"9.6\" text-anchor=\"middle\" font-weight=\"700\">Se houver obstrucao dinamica: EVITAR inotropicos/vasodilatadores, mesmo em choque</text>\n<text x=\"340\" y=\"274\" fill=\"#f1e3e0\" font-size=\"9.2\" text-anchor=\"middle\">(mesmo raciocinio da CMH obstrutiva)</text>\n</svg>"});</script>
+
+<script>
+(function(){ "use strict";
+var A = window.ASVG || {};
+var C = (window.CONTENT = window.CONTENT || {});
+C['cmp|4'] = { name:'Síndrome de Takotsubo', intro:'A sindrome de takotsubo, tambem conhecida como "sindrome do coracao partido", e uma disfuncao ventricular esquerda aguda e transitoria desencadeada por estresse emocional ou fisico intenso, que imita quase perfeitamente um infarto agudo do miocardio — mas sem uma arteria coronaria entupida por tras do quadro. E o exemplo mais didatico de como as emocoes e o sistema nervoso podem literalmente "paralisar" o coracao por via hormonal.', sub: [
+
+['entendendo','Entendendo do Zero', `
+<p class="ac-p">O nome "takotsubo" vem de um objeto japones: um pote usado tradicionalmente para pescar polvos, com um corpo largo e arredondado e um gargalo estreito — o polvo entra pelo gargalo estreito e fica preso no corpo largo. Quando os cardiologistas japoneses que descreveram essa condicao pela primeira vez, na decada de 1990, observaram o ventriculo esquerdo desses pacientes durante a sistole (contracao), perceberam que ele assumia exatamente essa forma: a base do ventriculo (proxima a valva mitral) contrai normalmente e ate de forma exagerada, ficando estreita, enquanto o apice (a ponta do coracao) fica paralisado e dilatado, como se estivesse "balonando" para fora — o coracao inteiro assume o formato do pote de pescar polvo.</p>
+<p class="ac-p">Mas por que isso acontece? A resposta esta no proprio apelido popular da doenca: "sindrome do coracao partido". Um estresse emocional muito intenso — a morte de um ente querido, uma briga muito grave, uma noticia terrivel, ou ate um susto muito grande — provoca uma liberacao maciça de adrenalina e noradrenalina (as catecolaminas do estresse) na corrente sanguinea. Em quantidades tao altas, essas substancias, que normalmente ajudam o coracao a bater mais forte e mais rapido em situacoes de perigo, se tornam literalmente TOXICAS para as celulas do musculo cardiaco, alem de causar espasmo dos pequenos vasos sanguineos dentro do coracao (a microcirculacao). O resultado e uma "paralisia temporaria" de parte do musculo cardiaco — nao porque uma arteria entupiu, mas porque o proprio corpo, em excesso de resposta ao estresse, acabou "intoxicando" seu proprio coracao.</p>
+<p class="ac-p"><b>Exemplo pratico:</b> uma mulher de 68 anos, ha 3 dias viuva apos o falecimento subito do marido, é levada ao pronto-socorro com dor no peito intensa e falta de ar. O eletrocardiograma mostra supradesnivelamento do segmento ST, exatamente como em um infarto, e a troponina esta elevada. Ela e levada as pressas para cateterismo cardiaco de urgencia — e as arterias coronarias estao completamente normais, sem nenhuma obstrucao. O ecocardiograma mostra o ventriculo esquerdo com o classico formato de "pote de polvo": apice paralisado, base contraindo vigorosamente. Esse e o retrato mais classico da sindrome de takotsubo — e o nome popular "coracao partido" nunca fez tanto sentido literal.</p>
+<div class="ac-call">${A.tako_formato||''}</div>
+<p class="ac-tip">Analogia-chave: pense nas catecolaminas como um "grito" hormonal tao alto que, em vez de simplesmente estimular o coracao a trabalhar mais, acaba "ensurdecendo" temporariamente parte do musculo cardiaco, que para de responder normalmente por um tempo — mas, na maioria dos casos, volta a "ouvir" normalmente depois que o grito passa.</p>
+`],
+
+['fisiopatologia_catecolaminas','Fisiopatologia: Tempestade de Catecolaminas', `
+<p class="ac-p">O mecanismo central da sindrome de takotsubo e uma verdadeira "tempestade" de catecolaminas — adrenalina e noradrenalina liberadas em quantidades muito acima do normal em resposta a um estresse agudo, seja emocional (luto, medo intenso, briga) ou fisico (uma doenca grave aguda, uma cirurgia, uma hemorragia no cerebro, uma crise de asma grave, uma sepse). Essas catecolaminas em excesso causam dois efeitos simultaneos e complementares sobre o coracao: primeiro, uma toxicidade direta aos miocitos (possivelmente por sobrecarga de calcio dentro das celulas musculares, que acaba prejudicando a maquina contratil); segundo, um espasmo da microcirculacao coronariana — os vasos sanguineos muito pequenos dentro do musculo cardiaco, que nao aparecem na coronariografia convencional (que so enxerga as arterias grandes), se contraem excessivamente, reduzindo o fluxo sanguineo local.</p>
+<p class="ac-p">Um detalhe elegante da fisiopatologia explica por que o padrao mais comum e exatamente a disfuncao do apice (ponta do coracao): existe uma diferenca real na quantidade de receptores beta-adrenergicos (os "receptores das catecolaminas") entre as diferentes regioes do ventriculo esquerdo — o apice tem uma densidade MAIOR desses receptores comparado a base. Pense nisso como dois microfones captando o mesmo grito muito alto: um microfone (o apice) esta configurado com sensibilidade muito mais alta que o outro (a base), entao ele "satura" e para de funcionar direito, enquanto o outro continua captando (contraindo) normalmente ou ate de forma exagerada como mecanismo compensatorio.</p>
+<p class="ac-p">Esse conjunto de mecanismos — toxicidade direta + vasoespasmo microvascular difuso + distribuicao desigual de receptores — explica por que a disfuncao do takotsubo tem um padrao caracteristico que NAO corresponde ao territorio de uma unica arteria coronaria (diferente do infarto, onde a area de dano segue exatamente a distribuicao anatomica de uma arteria especifica que entupiu). Isso e um dos pilares do raciocinio diagnostico que sera explorado mais adiante.</p>
+<div class="ac-call">${A.tako_catecolaminas||''}</div>
+<p class="ac-p"><b>Exemplo pratico:</b> um homem de 72 anos, internado em UTI por sepse grave e em uso de altas doses de noradrenalina venosa (justamente uma catecolamina exogena, administrada como parte do tratamento do choque septico), desenvolve subitamente disfuncao ventricular aguda com padrao de balonamento apical ao ecocardiograma. Esse caso ilustra que o estresse "fisico" que desencadeia o takotsubo pode vir tanto do proprio corpo (a doenca grave em si) quanto, paradoxalmente, do proprio tratamento usado para combate-la (as catecolaminas exogenas administradas na UTI).</p>
+`],
+
+['gatilhos_epidemiologia','Gatilhos e Epidemiologia', `
+<p class="ac-p">Um dos achados demograficos mais marcantes e mais cobrados sobre a sindrome de takotsubo e o forte predominio em <b>mulheres na pos-menopausa</b>: mais de 90% dos casos ocorrem em mulheres, com idade media ao redor de 65 a 70 anos. A explicacao exata para essa disparidade nao e totalmente esclarecida, mas acredita-se que a queda dos niveis de estrogeno apos a menopausa — o estrogeno tem um efeito protetor conhecido sobre a funcao endotelial e a resposta vascular ao estresse — deixe o coracao dessas mulheres mais vulneravel aos efeitos toxicos das catecolaminas em situacoes de estresse agudo.</p>
+<p class="ac-p">Os gatilhos classicamente se dividem em dois grandes grupos. Os <b>gatilhos emocionais</b> sao os mais associados popularmente ao nome "sindrome do coracao partido": luto pela morte de um ente querido, uma briga ou discussao muito intensa, receber uma noticia muito ruim, um susto ou medo extremo, ou ate emocoes muito fortes de natureza positiva (uma festa surpresa, uma noticia muito boa — o chamado "happy heart syndrome", uma variante descrita com gatilho emocional positivo). Os <b>gatilhos fisicos</b> incluem qualquer doenca aguda grave (sepse, exacerbacao de asma ou DPOC, hemorragia subaracnoidea, AVC), procedimentos cirurgicos, uso de substancias simpaticomimeticas (incluindo catecolaminas exogenas administradas em contexto hospitalar, como vimos no exemplo anterior), e condicoes que cursam com excesso endogeno de catecolaminas, como o feocromocitoma.</p>
+<p class="ac-p">Vale destacar que, embora um gatilho identificavel esteja presente na maioria dos casos, uma parcela dos pacientes nao tem nenhum estressor claro documentado — o que nao exclui o diagnostico, apenas torna a investigacao um pouco mais desafiadora e refora a importancia de excluir outras causas (como o proprio feocromocitoma nao diagnosticado, que pode ser uma fonte "oculta" de catecolaminas em excesso).</p>
+<p class="ac-p"><b>Exemplo pratico:</b> uma mulher de 61 anos desenvolve dor toracica subita durante uma festa de aniversario surpresa organizada pelos filhos, apos anos sem ve-los. O quadro e diagnosticado como takotsubo com gatilho emocional POSITIVO — um lembrete importante de que nao e apenas o sofrimento que pode desencadear a sindrome, mas qualquer ativacao emocional intensa, seja ela boa ou ruim.</p>
+<p class="ac-p">A recorrencia da sindrome ocorre em uma minoria dos pacientes (aproximadamente 5 a 10% ao longo dos anos de seguimento), e um episodio recorrente pode inclusive apresentar um padrao anatomico diferente do episodio inicial (por exemplo, um paciente que teve balonamento apical no primeiro episodio pode ter um padrao basal invertido em uma recorrencia futura) — reforcando que a suscetibilidade individual a esse mecanismo de resposta exagerada ao estresse pode persistir ao longo do tempo.</p>
+`],
+
+['padroes_anatomicos','Padrões Anatômicos', `
+<p class="ac-p">Embora o padrao classico e mais conhecido de takotsubo seja o balonamento apical (que da nome a doenca), existem outras variantes anatomicas que, apesar de menos comuns, precisam ser reconhecidas porque compartilham o mesmo mecanismo fisiopatologico subjacente, mesmo tendo uma "distribuicao geografica" diferente dentro do ventriculo esquerdo.</p>
+<p class="ac-p">O padrao <b>apical (classico ou tipico)</b> e disparadamente o mais comum, respondendo por cerca de 80% dos casos: o apice do ventriculo esquerdo fica acinetico ou discinetico (nao contrai, ou ate se move de forma paradoxal para fora durante a sistole), enquanto a base contrai de forma vigorosa e compensatoria, ficando relativamente estreita — e essa combinacao que gera o classico aspecto de "pote de polvo" ja descrito.</p>
+<p class="ac-p">O padrao <b>medio-ventricular</b> e a segunda variante mais reconhecida: aqui, a disfuncao se concentra na porcao media do ventriculo, com o apice e a base relativamente preservados e contraindo de forma mais normal — imagine um "aperto" na cintura do coracao, em vez de um problema na ponta.</p>
+<p class="ac-p">O padrao <b>basal (tambem chamado de reverso ou invertido)</b> e menos comum e, curiosamente, o oposto exato do padrao classico: a disfuncao acontece na base do ventriculo, enquanto o apice fica hipercontratil e relativamente poupado. Esse padrao e particularmente importante de se lembrar porque pode ser confundido com outras condicoes e porque demonstra que o mecanismo fisiopatologico (resposta exagerada as catecolaminas) pode, em alguns individuos, se manifestar de forma invertida — talvez por uma distribuicao individual diferente de receptores adrenergicos.</p>
+<p class="ac-p">Por fim, existe o padrao <b>focal</b>, o menos caracteristico e mais raro, em que a disfuncao se limita a um segmento localizado do ventriculo, sem seguir nenhum dos padroes classicos descritos anteriormente.</p>
+<div class="ac-call">${A.tako_padroes||''}</div>
+<p class="ac-p"><b>Exemplo pratico:</b> uma mulher de 70 anos apresenta quadro compativel com sindrome coronariana aguda apos discussao familiar intensa. O ecocardiograma mostra, de forma inesperada, disfuncao da BASE do ventriculo esquerdo com hipercontratilidade do apice — um padrao basal invertido, menos comum que o classico, mas que ainda assim se enquadra no espectro da sindrome de takotsubo, desde que a coronariografia exclua lesao obstrutiva compativel com essa area de disfuncao.</p>
+<p class="ac-p">O ponto em comum entre todas as variantes anatomicas, e que ajuda a diferenciar takotsubo de infarto em qualquer um dos padroes, e que a area de disfuncao sempre <b>ultrapassa os limites do territorio de uma unica arteria coronaria</b> — seja ela concentrada no apice, na regiao media, na base, ou em um segmento focal, a distribuicao nunca respeita exatamente a anatomia vascular coronariana como aconteceria em um infarto verdadeiro.</p>
+`],
+
+['clinica_complicacoes','Clínica e Complicações', `
+<p class="ac-p">A apresentacao clinica da sindrome de takotsubo e quase indistinguivel, a primeira vista, de uma sindrome coronariana aguda: dor toracica aguda e intensa e o sintoma mais comum, podendo vir acompanhada de dispneia, palpitacoes ou sincope. Na grande maioria dos casos, essa apresentacao e precedida por um gatilho de estresse emocional ou fisico identificavel nas horas ou dias anteriores, como discutido na aba de gatilhos — e essa historia de estresse recente e frequentemente a primeira pista clinica que diferencia a suspeita inicial de um infarto "comum".</p>
+<p class="ac-p">Apesar de o prognostico geral ser favoravel na maioria dos casos, o takotsubo pode se complicar de formas potencialmente graves, e reconhecer essas complicacoes e essencial para o manejo adequado. A <b>obstrucao dinamica da via de saida do ventriculo esquerdo</b> pode ocorrer pelo mesmo mecanismo visto na cardiomiopatia hipertrofica obstrutiva: a base do ventriculo, hipercontratil como mecanismo compensatorio, pode literalmente "empurrar" e estreitar a via de saida do VE, criando uma obstrucao dinamica que agrava a instabilidade hemodinamica e pode gerar um sopro sistolico caracteristico — esse e um ponto crucial porque muda completamente a escolha do tratamento em caso de choque, como veremos na proxima aba.</p>
+<p class="ac-p">A <b>formacao de trombo apical</b> e outra complicacao relevante: a acinesia (ausencia completa de movimento) do apice cria uma area de estase sanguinea (o sangue "para" naquela regiao em vez de ser ejetado normalmente), favorecendo a formacao de coagulos que podem se soltar e causar embolizacao sistemica (por exemplo, um AVC isquemico) — por isso a anticoagulacao transitoria e frequentemente considerada em casos com acinesia apical extensa.</p>
+<p class="ac-p"><b>Arritmias</b> tambem sao complicacoes importantes, especialmente o prolongamento do intervalo QT (que pode ocorrer nos dias apos o evento agudo, junto com a evolucao caracteristica do ECG) e o consequente risco de <b>torsades de pointes</b>, uma arritmia ventricular potencialmente fatal — por isso a monitorizacao cardiaca continua e a correcao de eletrolitos (principalmente magnesio e potassio) sao cuidados importantes na fase aguda.</p>
+<div class="ac-call">${A.tako_complicacoes||''}</div>
+<p class="ac-p"><b>Exemplo pratico:</b> uma mulher de 66 anos com takotsubo apical evolui com hipotensao subita e um novo sopro sistolico durante a internacao. O ecocardiograma de urgencia revela obstrucao dinamica significativa na via de saida do VE, causada pela hipercontratilidade basal compensatoria. Essa complicacao exige uma abordagem terapeutica especifica e diferente do choque cardiogenico "comum" — administrar inotropicos nesse cenario poderia piorar dramaticamente a obstrucao e a instabilidade da paciente.</p>
+<p class="ac-p">Menos comumente, mas de forma bem documentada na literatura, pode ocorrer <b>ruptura da parede livre do ventriculo esquerdo</b>, geralmente em casos com discinesia (movimento paradoxal) extensa — uma complicacao rara mas potencialmente catastrofica, que reforca que, apesar do nome poetico, a sindrome de takotsubo pode ser uma condicao genuinamente grave e nao deve ser subestimada apenas por seu carater "transitorio".</p>
+<p class="ac-p">Uma minoria dos pacientes, embora relevante, evolui com <b>choque cardiogenico</b> — e e justamente nesse subgrupo que a diferenciacao entre choque COM ou SEM obstrucao dinamica da via de saida se torna decisiva para a escolha terapeutica correta.</p>
+`],
+
+['dx_diferencial_iam','Diagnóstico e Diferencial com IAM', `
+<p class="ac-p">O maior desafio diagnostico da sindrome de takotsubo e justamente diferencia-la de um infarto agudo do miocardio verdadeiro, ja que a apresentacao inicial e as alteracoes eletrocardiograficas podem ser praticamente identicas. O ECG na fase aguda frequentemente mostra <b>supradesnivelamento do segmento ST</b>, tipicamente em derivacoes precordiais anteriores, mimetizando de forma bastante convincente um IAM com supradesnivelamento de ST (IAMCSST) — e por isso, na pratica clinica real, a maioria dos pacientes com takotsubo e inicialmente encaminhada para cateterismo cardiaco de urgencia como se fosse um infarto, ate que a ausencia de lesao coronariana mude o rumo diagnostico. Nos dias subsequentes, o ECG tipicamente evolui com inversao difusa de onda T e prolongamento do intervalo QT — um padrao evolutivo caracteristico.</p>
+<p class="ac-p">Existem duas pistas laboratoriais classicas e muito cobradas em prova que ajudam a diferenciar takotsubo de infarto, mesmo antes da coronariografia. Primeiro, a <b>troponina</b> costuma estar elevada no takotsubo, mas de forma <b>desproporcionalmente MENOR</b> em relacao a extensao da disfuncao ventricular observada ao ecocardiograma — pense assim: no infarto, quanto maior a area de musculo morto, maior a troponina liberada (relacao proporcional e previsivel); no takotsubo, ha uma grande area de musculo "paralisado" (nao contraindo), mas como nao ha necrose extensa e irreversivel (o dano e predominantemente funcional e reversivel, nao morte celular maciça), a troponina liberada e desproporcionalmente pequena para o tamanho do problema visivel no eco.</p>
+<p class="ac-p">Segundo, o <b>BNP ou NT-proBNP</b> tende a estar francamente elevado no takotsubo, e de forma desproporcional em relacao a troponina — o oposto do padrao geralmente visto no infarto. Pense no BNP como um "termometro de estresse da parede ventricular": mesmo sem necrose extensa, o musculo esta sob grande estresse mecanico (distendido, disfuncional), entao libera muito BNP, enquanto a troponina (marcador mais especifico de morte celular) permanece relativamente mais baixa.</p>
+<div class="ac-call">${A.tako_dx_iam||''}</div>
+<p class="ac-p">A <b>coronariografia</b> continua sendo essencial na maioria dos casos suspeitos, pela urgencia inicial de excluir um infarto verdadeiro: no takotsubo, tipicamente nao ha lesao obstrutiva aguda que justifique a extensao da disfuncao observada (podendo haver doenca coronariana leve e nao obstrutiva associada, o que nao exclui o diagnostico de takotsubo, desde que aquela lesao nao explique todo o padrao de disfuncao visto). A <b>ressonancia magnetica cardiaca</b> e um exame complementar valioso: diferente do infarto (que mostra realce tardio subendocardico ou transmural extenso na area correspondente) e diferente tambem da miocardite (que mostra realce subepicardico ou mesocardico), o takotsubo classicamente apresenta <b>ausencia de realce tardio significativo</b> na area discinetica — reforcando o carater predominantemente funcional (e nao necrotico) da disfuncao.</p>
+<p class="ac-p">Uma ferramenta clinica util na avaliacao inicial, antes mesmo da angiografia, e o <b>escore InterTAK</b>, que estima a probabilidade de takotsubo versus sindrome coronariana aguda com base em variaveis clinicas simples: sexo feminino, presenca de gatilho de estresse emocional, ausencia de depressao do segmento ST no ECG, historia de disturbio psiquiatrico ou neurologico previo, e prolongamento do intervalo QTc — uma pontuacao mais alta favorece takotsubo, mas nao substitui a necessidade de excluir infarto de forma definitiva quando ha duvida clinica significativa.</p>
+<p class="ac-p"><b>Exemplo pratico:</b> uma mulher de 65 anos, apos discussao familiar intensa, apresenta dor toracica e supradesnivelamento de ST. A troponina esta apenas discretamente elevada, mas o NT-proBNP esta extremamente alto e o ecocardiograma mostra disfuncao extensa do apice. Esse padrao de "troponina baixa, BNP muito alto, disfuncao extensa" e um forte indicativo pre-cateterismo de takotsubo, embora a coronariografia de urgencia ainda seja necessaria para confirmar a ausencia de lesao obstrutiva e garantir seguranca diagnostica.</p>
+<p class="ac-p">Um diagnostico diferencial importante a nao esquecer, especialmente em casos recorrentes ou sem gatilho claro identificado, e o <b>feocromocitoma</b> — um tumor produtor de catecolaminas em excesso que pode desencadear um quadro clinico e ecocardiografico muito semelhante ao takotsubo classico, e que deve ser ativamente pesquisado (por exemplo, com dosagem de metanefrinas plasmaticas ou urinarias) quando a apresentacao for atipica ou recorrente sem causa aparente.</p>
+`],
+
+['tratamento','Tratamento', `
+<p class="ac-p">O tratamento da sindrome de takotsubo depende fundamentalmente de reconhecer se ha ou nao <b>obstrucao dinamica da via de saida do ventriculo esquerdo</b> associada, ja que essa distincao muda completamente a escolha terapeutica em caso de instabilidade hemodinamica — um dos pontos mais importantes e mais cobrados sobre o manejo dessa condicao.</p>
+<p class="ac-p">No suporte geral, para pacientes com disfuncao sistolica sem obstrucao dinamica, o tratamento se assemelha ao da insuficiencia cardiaca aguda: inibidores da enzima conversora de angiotensina ou bloqueadores do receptor de angiotensina, e betabloqueadores, sao frequentemente utilizados durante a fase de recuperacao — embora a evidencia de beneficio definitivo em termos de melhora de desfecho seja menos robusta do que em outras cardiomiopatias, justamente pelo carater tipicamente transitorio e autolimitado da disfuncao no takotsubo.</p>
+<p class="ac-p">Aqui esta o ponto central e mais cobrado do tratamento: se houver <b>obstrucao dinamica da via de saida do VE</b> (pela hipercontratilidade basal compensatoria), o raciocinio terapeutico deve seguir a mesma logica ja vista na cardiomiopatia hipertrofica obstrutiva — <b>inotropicos (como a dobutamina) e vasodilatadores devem ser EVITADOS</b>, mesmo diante de um quadro de choque, porque esses medicamentos aumentam ainda mais a contratilidade basal e reduzem o volume ventricular, piorando dramaticamente a obstrucao dinamica e a propria instabilidade hemodinamica que se está tentando tratar. Nesse cenario especifico, o betabloqueador pode inclusive ser preferido (reduzindo a contratilidade basal excessiva), e a reposicao cuidadosa de volume (para aumentar o enchimento ventricular e "afastar" a obstrucao, de forma semelhante ao que se faz na CMH obstrutiva) costuma ser mais apropriada que o suporte inotropico convencional.</p>
+<p class="ac-p">Ja se houver <b>choque cardiogenico SEM obstrucao dinamica</b> associada, o suporte inotropico convencional pode ser utilizado com mais seguranca, e em casos refratarios ao tratamento clinico, o suporte circulatorio mecanico (balao intra-aortico ou ECMO — oxigenacao por membrana extracorporea) pode ser necessario como ponte ate a recuperacao da funcao ventricular, que costuma ocorrer na maioria dos casos.</p>
+<p class="ac-p"><b>Exemplo pratico:</b> uma paciente com takotsubo apical desenvolve choque cardiogenico. O ecocardiograma de urgencia revela obstrucao dinamica significativa da via de saida do VE. Em vez de iniciar dobutamina (a escolha "intuitiva" para choque cardiogenico em outras situacoes), a equipe opta por reposicao volemica cuidadosa e considera betabloqueador — uma decisao terapeutica que so faz sentido quando se reconhece a presenca da obstrucao dinamica subjacente, reforcando por que o ecocardiograma precoce e tao importante nesse contexto.</p>
+<p class="ac-p">Outros cuidados importantes incluem a <b>anticoagulacao transitoria</b> quando ha acinesia apical extensa com risco relevante de trombo mural (mantida ate a resolucao da disfuncao ventricular e reabsorcao do risco trombogenico), a <b>monitorizacao continua de arritmias</b> (dado o risco de prolongamento de QT e torsades de pointes, com correcao ativa de eletrolitos como magnesio e potassio, e evitando outros medicamentos que tambem prolonguem o QT durante a fase aguda), e o <b>manejo do gatilho subjacente</b> quando identificavel — tratamento da causa fisica aguda, ou suporte psicologico/psiquiatrico quando o gatilho for emocional.</p>
+<p class="ac-p">O prognostico a curto prazo e geralmente favoravel, com <b>recuperacao completa da funcao ventricular</b> na maioria dos pacientes, tipicamente dentro de 1 a 4 semanas, podendo se estender por alguns meses em casos mais extensos. Entretanto, e importante nao subestimar a gravidade potencial na fase aguda: a mortalidade intra-hospitalar do takotsubo nao e desprezivel, sendo comparavel, em alguns estudos, a observada em pacientes com infarto agudo do miocardio na mesma fase aguda, dado o risco real de complicacoes como choque cardiogenico, arritmias malignas e, raramente, ruptura cardiaca. A recorrencia ocorre em cerca de 5 a 10% dos pacientes ao longo do seguimento de longo prazo, as vezes com um padrao anatomico diferente do episodio inicial.</p>
+`],
+
+]};
+
+Object.assign(C['cmp|4'], {
+escores:`<div class="ac-call">${A.tako_dx_iam||''}</div>
+<p class="ac-p"><b>Escore InterTAK:</b> ferramenta clinica desenvolvida para estimar a probabilidade pre-teste de sindrome de takotsubo em comparacao com sindrome coronariana aguda, antes mesmo da realizacao de coronariografia. As variaveis incluidas sao: sexo feminino, presenca de gatilho de estresse emocional identificavel, ausencia de depressao do segmento ST no ECG de apresentacao, historia de disturbio psiquiatrico previo, historia de disturbio neurologico previo, e prolongamento do intervalo QTc. Uma pontuacao mais alta aumenta a probabilidade de takotsubo, mas — dada a gravidade de um infarto nao diagnosticado — a coronariografia geralmente ainda e necessaria em casos de apresentacao aguda com alteracoes de ECG compativeis com isquemia, para garantir seguranca diagnostica.</p>
+<p class="ac-p"><b>Criterios diagnosticos (Mayo Clinic / InterTAK):</b> disfuncao transitoria segmentar do VE (hipocinesia, acinesia ou discinesia) que se estende alem do territorio de uma unica arteria coronaria epicardica; ausencia de lesao coronariana obstrutiva culpada ou de ruptura aguda de placa aterosclerotica que justifique o quadro; novas alteracoes eletrocardiograficas (supra de ST, inversao de onda T) ou elevacao modesta de troponina; e ausencia de outras condicoes que expliquem o quadro, como feocromocitoma ou miocardite (a exclusao desses diferenciais reforca, mas nao invalida completamente, o diagnostico segundo os criterios mais atuais).</p>`,
+
+dif:`<table class="ac-tbl"><tr><th>Condicao</th><th>Ponto-chave diferencial</th></tr>
+<tr><td>Infarto agudo do miocardio</td><td>Lesao coronariana obstrutiva culpada, disfuncao segue territorio de UMA arteria, troponina proporcional a extensao</td></tr>
+<tr><td>Miocardite aguda</td><td>RM com realce tardio subepicardico/mesocardico (ausente no takotsubo); pródromo viral mais tipico</td></tr>
+<tr><td>Feocromocitoma</td><td>Excesso endogeno cronico/recorrente de catecolaminas; dosar metanefrinas se recorrencia ou ausencia de gatilho claro</td></tr>
+<tr><td>Cardiomiopatia hipertrofica obstrutiva</td><td>Obstrucao FIXA por hipertrofia septal (nao transitoria); takotsubo tem obstrucao dinamica secundaria e reversivel</td></tr></table>`,
+
+mapa:`<div class="mm"><div class="mm-card"><b>Definicao</b><br>Disfuncao ventricular aguda e transitoria por excesso de catecolaminas, mimetiza IAM</div>
+<div class="mm-card"><b>Epidemiologia</b><br>Mulheres pos-menopausa (&gt;90%), gatilho emocional ou fisico</div>
+<div class="mm-card"><b>Fisiopatologia</b><br>Toxicidade catecolaminergica + vasoespasmo microvascular + maior densidade de receptores no apice</div>
+<div class="mm-card"><b>Padrao mais comum</b><br>Apical (balonamento) — apice acinetico, base hipercontratil ("pote de polvo")</div>
+<div class="mm-card"><b>Pistas diagnosticas</b><br>Troponina desproporcionalmente baixa; BNP desproporcionalmente alto; disfuncao alem de territorio coronariano</div>
+<div class="mm-card"><b>Complicacoes</b><br>Obstrucao dinamica de VSVE, trombo apical, QT longo/torsades, choque, ruptura (rara)</div>
+<div class="mm-card"><b>Tratamento-chave</b><br>Se obstrucao dinamica: EVITAR inotropico/vasodilatador; se nao: suporte convencional</div>
+<div class="mm-card"><b>Prognostico</b><br>Recuperacao completa em 1-4 semanas na maioria; recorrencia em 5-10%</div></div>`,
+
+fluxo_dx:`<div class="fx"><div class="fx-row"><div class="fx-node start">Dor toracica aguda + supra de ST, mimetizando IAM</div></div>
+<div class="fx-arrow">&darr;</div><div class="fx-row"><div class="fx-node">Coronariografia de urgencia (excluir lesao obstrutiva culpada)</div></div>
+<div class="fx-arrow">&darr;</div><div class="fx-row"><div class="fx-node">Ecocardiograma (padrao de disfuncao alem de territorio coronariano)</div></div>
+<div class="fx-arrow">&darr;</div><div class="fx-row"><div class="fx-node">Comparar troponina (baixa) x BNP (alto) x extensao da disfuncao</div></div>
+<div class="fx-arrow">&darr;</div><div class="fx-row"><div class="fx-node">RM cardiaca se duvida (ausencia de realce tardio significativo)</div></div>
+<div class="fx-arrow">&darr;</div><div class="fx-row"><div class="fx-node end">Excluir feocromocitoma se recorrente/sem gatilho claro</div></div></div>`,
+
+fluxo_cond:`<div class="fx"><div class="fx-row"><div class="fx-node start">Takotsubo confirmado, avaliar instabilidade</div></div>
+<div class="fx-arrow">&darr;</div><div class="fx-row"><div class="fx-node">Ecocardiograma: ha obstrucao dinamica da VSVE?</div></div>
+<div class="fx-arrow">&darr;</div><div class="fx-row"><div class="fx-node">SE SIM: evitar inotropico/vasodilatador; considerar betabloqueador + volume</div></div>
+<div class="fx-arrow">&darr;</div><div class="fx-row"><div class="fx-node">SE NAO: suporte inotropico convencional se choque; considerar IECA/BB na recuperacao</div></div>
+<div class="fx-arrow">&darr;</div><div class="fx-row"><div class="fx-node">Anticoagulacao transitoria se trombo apical/acinesia extensa</div></div>
+<div class="fx-arrow">&darr;</div><div class="fx-row"><div class="fx-node end">Monitorizar QT/arritmias; reavaliar funcao ventricular em semanas</div></div></div>`,
+
+vespera:`<p class="ac-p"><b>Revisao rapida:</b> takotsubo = disfuncao ventricular aguda e transitoria por excesso de catecolaminas, mimetiza IAM. Mulheres pos-menopausa (&gt;90%), gatilho emocional/fisico. Padrao apical classico ("pote de polvo"): apice acinetico, base hipercontratil, por maior densidade de receptores beta no apice.</p>
+<p class="ac-p">Pistas diagnosticas: troponina desproporcionalmente BAIXA para a extensao da disfuncao; BNP desproporcionalmente ALTO; disfuncao ultrapassa territorio de uma unica coronaria; RM sem realce tardio significativo (diferente de IAM e miocardite). Escore InterTAK ajuda a estimar probabilidade pre-cateterismo.</p>
+<p class="ac-p">Complicacoes: obstrucao dinamica de VSVE (mecanismo tipo CMH), trombo apical, QT longo/torsades, choque cardiogenico, ruptura rara. Tratamento-chave: SE obstrucao dinamica presente, EVITAR inotropico e vasodilatador mesmo em choque; SE nao, suporte convencional. Prognostico geralmente favoravel, recuperacao em 1-4 semanas; recorrencia 5-10%.</p>`,
+
+dicas:`<ul><li>Mulher pos-menopausa + gatilho de estresse + supra de ST + coronarias normais = pensar em takotsubo</li>
+<li>Troponina desproporcionalmente baixa e BNP desproporcionalmente alto para a extensao da disfuncao = pista classica</li>
+<li>Sempre excluir IAM com coronariografia antes de fechar o diagnostico de takotsubo</li>
+<li>Padrao apical e o mais comum, mas existem variantes medio-ventricular, basal (reverso) e focal</li>
+<li>Nunca dar inotropico/vasodilatador em choque com obstrucao dinamica de VSVE associada</li>
+<li>Pensar em feocromocitoma se takotsubo recorrente ou sem gatilho claro identificado</li>
+<li>RM sem realce tardio significativo ajuda a diferenciar de IAM (subendocardico) e miocardite (subepicardico)</li>
+<li>Nao subestimar a gravidade aguda — mortalidade intra-hospitalar pode se aproximar da do IAM</li></ul>`,
+
+checklist:['Investigar gatilho de estresse emocional ou fisico recente','Solicitar coronariografia para excluir lesao obstrutiva culpada','Comparar troponina x BNP/NT-proBNP x extensao da disfuncao ao eco','Avaliar padrao anatomico de disfuncao (apical, medio-ventricular, basal, focal)','Investigar ativamente obstrucao dinamica da via de saida do VE','Monitorizar QT e eletrolitos (risco de torsades de pointes)','Considerar RM cardiaca se diagnostico incerto','Considerar dosagem de metanefrinas se recorrente ou sem gatilho identificavel']
+});
+
+Object.assign(C['cmp|4'], {
+questoes:[
+{stem:'Mulher de 68 anos, ha 3 dias viuva, apresenta dor toracica e supradesnivelamento de ST. A coronariografia de urgencia nao mostra lesao obstrutiva. O diagnostico mais provavel e:', opts:['Infarto agudo do miocardio tipo 2','Sindrome de takotsubo','Angina vasoespastica de Prinzmetal','Miocardite viral aguda'], correct:1, expl:'O gatilho emocional recente (luto), a apresentacao mimetizando IAM e a ausencia de lesao coronariana obstrutiva sao caracteristicos da sindrome de takotsubo.'},
+{stem:'O padrao anatomico mais comum na sindrome de takotsubo e:', opts:['Basal (reverso)','Medio-ventricular','Apical (balonamento apical)','Focal isolado'], correct:2, expl:'O padrao apical (balonamento apical), com acinesia do apice e hipercontratilidade compensatoria da base, e responsavel por cerca de 80% dos casos.'},
+{stem:'Em relacao aos biomarcadores no takotsubo comparado ao infarto de extensao semelhante, e correto afirmar que:', opts:['A troponina e proporcionalmente mais alta que no infarto','A troponina e desproporcionalmente mais baixa e o BNP desproporcionalmente mais alto','Ambos os marcadores sao identicos ao infarto','O BNP costuma estar normal no takotsubo'], correct:1, expl:'No takotsubo, a troponina costuma ser desproporcionalmente baixa em relacao a extensao da disfuncao (pouca necrose real), enquanto o BNP/NT-proBNP costuma estar desproporcionalmente elevado.'},
+{stem:'Explicacao fisiopatologica para o predominio da disfuncao no apice do ventriculo esquerdo no padrao classico de takotsubo:', opts:['Menor densidade de receptores beta-adrenergicos no apice','Maior densidade de receptores beta-adrenergicos no apice comparado a base','Suprimento coronariano exclusivo do apice por uma unica arteria','Ausencia completa de inervacao simpatica no apice'], correct:1, expl:'O apice do VE tem maior densidade de receptores beta-adrenergicos, tornando-o mais vulneravel a toxicidade das catecolaminas em excesso.'},
+{stem:'Paciente com takotsubo evolui com choque cardiogenico. O ecocardiograma revela obstrucao dinamica significativa da via de saida do VE. A conduta mais apropriada e:', opts:['Iniciar dobutamina em altas doses imediatamente','Evitar inotropicos/vasodilatadores; considerar betabloqueador e reposicao volemica','Iniciar vasodilatador para reduzir a pos-carga','Realizar cardioversao eletrica imediata'], correct:1, expl:'Na presenca de obstrucao dinamica da via de saida do VE, inotropicos e vasodilatadores pioram a obstrucao; o tratamento deve seguir logica semelhante a da CMH obstrutiva, evitando esses agentes.'},
+{stem:'Achado de ressonancia magnetica cardiaca que ajuda a diferenciar takotsubo de infarto do miocardio:', opts:['Realce tardio subendocardico extenso no takotsubo','Ausencia de realce tardio significativo na area discinetica no takotsubo','Realce tardio subepicardico caracteristico do takotsubo','Ausencia total de edema miocardico no infarto'], correct:1, expl:'Diferente do infarto (realce tardio subendocardico/transmural) e da miocardite (subepicardico/mesocardico), o takotsubo classicamente nao apresenta realce tardio significativo na area de disfuncao.'},
+{stem:'Complicacao do takotsubo relacionada a estase sanguinea por acinesia apical, com risco de embolizacao sistemica:', opts:['Trombo apical','Tamponamento cardiaco','Estenose mitral aguda','Fistula arteriovenosa'], correct:0, expl:'A acinesia apical cria estase sanguinea que favorece a formacao de trombo mural, com risco de embolizacao sistemica, justificando anticoagulacao transitoria em casos selecionados.'},
+{stem:'Sobre a epidemiologia da sindrome de takotsubo, e correto afirmar que:', opts:['Predomina em homens jovens','Predomina em mulheres na pos-menopausa (mais de 90% dos casos)','Acomete igualmente homens e mulheres em todas as idades','E mais comum em criancas'], correct:1, expl:'Mais de 90% dos casos de takotsubo ocorrem em mulheres pos-menopausa, com idade media entre 65 e 70 anos.'},
+{stem:'Ferramenta clinica utilizada para estimar a probabilidade pre-teste de takotsubo versus sindrome coronariana aguda:', opts:['Escore de Framingham','Escore InterTAK','Escore CHA2DS2-VASc','Escore de Killip'], correct:1, expl:'O escore InterTAK combina variaveis clinicas (sexo feminino, gatilho emocional, ausencia de depressao de ST, historia psiquiatrica/neurologica, QTc prolongado) para estimar a probabilidade de takotsubo.'},
+{stem:'Diagnostico diferencial importante a ser considerado em casos de takotsubo recorrente ou sem gatilho de estresse identificavel:', opts:['Feocromocitoma','Febre reumatica','Endocardite infecciosa','Doenca de Chagas cronica'], correct:0, expl:'O feocromocitoma, por causar excesso endogeno cronico ou recorrente de catecolaminas, deve ser ativamente pesquisado em casos de takotsubo recorrente ou sem gatilho claro.'},
+{stem:'Em relacao a arritmia de risco associada ao takotsubo, deve-se monitorizar principalmente:', opts:['Fibrilacao atrial paroxistica isolada','Prolongamento do intervalo QT com risco de torsades de pointes','Bloqueio atrioventricular de primeiro grau isolado','Extrassistoles atriais isoladas benignas'], correct:1, expl:'O prolongamento do intervalo QT e uma alteracao eletrocardiografica caracteristica da evolucao do takotsubo, associada a risco de torsades de pointes, exigindo monitorizacao e correcao de eletrolitos.'},
+{stem:'Sobre o prognostico da sindrome de takotsubo, e correto afirmar que:', opts:['A recuperacao da funcao ventricular e rara','A maioria dos pacientes recupera completamente a funcao ventricular em semanas, mas a mortalidade intra-hospitalar aguda nao e desprezivel','O prognostico e sempre pior que o do infarto agudo do miocardio','Nao ha risco de recorrencia'], correct:1, expl:'A maioria dos pacientes recupera completamente a funcao ventricular em 1 a 4 semanas, mas a fase aguda pode ser grave, com mortalidade intra-hospitalar comparavel em alguns estudos a do IAM; a recorrencia ocorre em 5-10% dos casos.'}
+],
+flashcards:[
+{front:'Origem do nome "takotsubo"', back:'Pote japones de pescar polvo, cujo formato (corpo largo, gargalo estreito) lembra o VE em sistole no padrao classico.', type:'basic'},
+{front:'Mecanismo central da fisiopatologia', back:'Excesso de catecolaminas (estresse agudo) causando toxicidade direta aos miocitos e vasoespasmo microvascular difuso.', type:'basic'},
+{front:'Por que o apice e mais afetado no padrao classico?', back:'Maior densidade de receptores beta-adrenergicos no apice comparado a base.', type:'basic'},
+{front:'Perfil demografico tipico do takotsubo', back:'Mulheres na pos-menopausa, mais de 90% dos casos, idade media 65-70 anos.', type:'basic'},
+{front:'Padrao anatomico mais comum', back:'Apical (balonamento apical) — cerca de 80% dos casos.', type:'basic'},
+{front:'Padrao de troponina no takotsubo vs infarto', back:'Desproporcionalmente BAIXA em relacao a extensao da disfuncao (pouca necrose real).', type:'basic'},
+{front:'Padrao de BNP no takotsubo vs infarto', back:'Desproporcionalmente ALTO em relacao a troponina.', type:'basic'},
+{front:'Achado de RM que diferencia takotsubo de infarto e miocardite', back:'Ausencia de realce tardio significativo na area discinetica.', type:'basic'},
+{front:'Complicacao hemodinamica que muda o tratamento do choque no takotsubo', back:'Obstrucao dinamica da via de saida do VE — nesse caso, evitar inotropicos/vasodilatadores.', type:'basic'},
+{front:'Complicacao tromboembolica do takotsubo', back:'Trombo apical por estase (acinesia), com risco de embolizacao sistemica.', type:'basic'},
+{front:'Arritmia de risco a monitorizar no takotsubo', back:'Prolongamento de QT com risco de torsades de pointes.', type:'basic'},
+{front:'Escore usado para estimar probabilidade de takotsubo pre-cateterismo', back:'Escore InterTAK (sexo feminino, gatilho emocional, ausencia de depressao de ST, historia psiquiatrica/neurologica, QTc prolongado).', type:'basic'},
+{front:'Diferencial a excluir em takotsubo recorrente sem gatilho claro', back:'Feocromocitoma (excesso endogeno cronico de catecolaminas).', type:'basic'},
+{front:'Prognostico geral do takotsubo', back:'Recuperacao completa da funcao ventricular em 1-4 semanas na maioria dos casos; recorrencia em 5-10%.', type:'basic'}
+],
+casos:[
+{t:'Takotsubo classico apos gatilho emocional', stem:'Mulher de 68 anos, viuva ha 3 dias, apresenta dor toracica e supradesnivelamento de ST em precordiais. Troponina discretamente elevada.', passos:['Encaminhar para coronariografia de urgencia para excluir IAM','Solicitar ecocardiograma para avaliar padrao de disfuncao segmentar','Comparar troponina com BNP/NT-proBNP e extensao da disfuncao','Confirmar ausencia de lesao obstrutiva culpada na coronariografia','Investigar obstrucao dinamica da via de saida do VE ao eco','Iniciar suporte conforme presenca ou ausencia de obstrucao dinamica, e monitorizar QT']},
+{t:'Choque cardiogenico com obstrucao dinamica', stem:'Mulher de 66 anos com takotsubo apical evolui com hipotensao subita e novo sopro sistolico. Ecocardiograma revela obstrucao dinamica significativa da via de saida do VE.', passos:['Reconhecer a obstrucao dinamica como causa do choque','Evitar inotropicos (dobutamina) e vasodilatadores','Considerar reposicao volemica cuidadosa e betabloqueador','Monitorizar resposta hemodinamica com reavaliacao ecocardiografica seriada','Considerar suporte circulatorio mecanico se refrataria, evitando dispositivos que aumentem contratilidade basal','Reavaliar funcao ventricular apos estabilizacao para confirmar resolucao esperada']},
+{t:'Takotsubo recorrente sem gatilho claro', stem:'Mulher de 55 anos apresenta segundo episodio de disfuncao ventricular aguda transitoria em 2 anos, sem gatilho emocional ou fisico identificavel em nenhum dos episodios.', passos:['Reconfirmar ausencia de lesao coronariana obstrutiva na coronariografia atual','Investigar feocromocitoma com dosagem de metanefrinas plasmaticas ou urinarias','Revisar uso de medicamentos ou substancias simpaticomimeticas','Avaliar padrao anatomico do episodio atual e compara-lo ao episodio previo','Considerar RM cardiaca para documentar ausencia de realce tardio e apoiar o diagnostico','Orientar a paciente sobre o risco de recorrencia e sinais de alarme para procurar atendimento precoce']}
+]
+});
+
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+
+</script>
+<script>
+(function(){ "use strict";
+function S(){ return window.__S ? window.__S() : {}; }
+function save(){ if(window.__save) window.__save(); }
+
+function hlBoundaryOffset(zone, node, offset){
+  try{
+    var r=document.createRange();
+    r.selectNodeContents(zone);
+    r.setEnd(node, offset);
+    return r.toString().length;
+  }catch(e){ return -1; }
+}
+
+function hlApplyOne(zone, start, end, id){
+  if(end<=start) return;
+  var tw=document.createTreeWalker(zone, NodeFilter.SHOW_TEXT, null);
+  var nodes=[]; var n;
+  while((n=tw.nextNode())) nodes.push(n);
+  var pos=0;
+  for(var i=0;i<nodes.length;i++){
+    var node=nodes[i];
+    var len=node.nodeValue.length;
+    var nStart=pos, nEnd=pos+len;
+    if(end<=nStart || start>=nEnd){ pos=nEnd; continue; }
+    var ls=Math.max(0,start-nStart), le=Math.min(len,end-nStart);
+    if(ls<le){
+      var work=node;
+      if(le<len){ work.splitText(le); }
+      var mid=(ls>0)? work.splitText(ls) : work;
+      if(mid && mid.nodeValue && mid.nodeValue.length>0 && mid.parentNode){
+        var already = mid.parentNode.nodeType===1 && mid.parentNode.tagName==='MARK' && mid.parentNode.classList.contains('uhl');
+        if(!already){
+          var mk=document.createElement('mark');
+          mk.className='uhl'; mk.setAttribute('data-hlid', id);
+          mid.parentNode.insertBefore(mk, mid);
+          mk.appendChild(mid);
+        }
+      }
+    }
+    pos=nEnd;
+  }
+}
+
+function hlApplyZone(zone){
+  var key=zone.getAttribute('data-hlkey'); if(!key) return;
+  var st=S(); var list=(st.hl && st.hl[key]) || [];
+  list.forEach(function(h){ hlApplyOne(zone, h.s, h.e, h.id); });
+}
+
+function hlRemove(id){
+  var marks=document.querySelectorAll('mark.uhl[data-hlid="'+id+'"]');
+  marks.forEach(function(mk){
+    var parent=mk.parentNode; if(!parent) return;
+    while(mk.firstChild) parent.insertBefore(mk.firstChild, mk);
+    parent.removeChild(mk);
+    if(parent.normalize) parent.normalize();
+  });
+}
+
+function hlDeleteFromState(zoneKey, id){
+  var st=S(); if(!st.hl || !st.hl[zoneKey]) return;
+  st.hl[zoneKey]=st.hl[zoneKey].filter(function(h){return h.id!==id;});
+  save();
+}
+
+document.addEventListener('mouseup', function(){
+  setTimeout(function(){
+    var sel=window.getSelection();
+    if(!sel || sel.rangeCount===0 || sel.isCollapsed) return;
+    var range=sel.getRangeAt(0);
+    var text=range.toString();
+    if(!text || !text.trim()) return;
+    var startEl = range.startContainer.nodeType===3?range.startContainer.parentNode:range.startContainer;
+    var endEl = range.endContainer.nodeType===3?range.endContainer.parentNode:range.endContainer;
+    if(!startEl.closest || !endEl.closest) return;
+    var hz = startEl.closest('.hl-zone');
+    var hz2 = endEl.closest('.hl-zone');
+    if(!hz || hz!==hz2) return;
+    var start=hlBoundaryOffset(hz, range.startContainer, range.startOffset);
+    var end=hlBoundaryOffset(hz, range.endContainer, range.endOffset);
+    if(start<0||end<0||end<=start) return;
+    var key=hz.getAttribute('data-hlkey'); if(!key) return;
+    var id='h'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+    var st=S(); st.hl=st.hl||{}; st.hl[key]=st.hl[key]||[];
+    st.hl[key].push({id:id, s:start, e:end});
+    save();
+    sel.removeAllRanges();
+    hlApplyOne(hz, start, end, id);
+  }, 0);
+});
+
+document.addEventListener('contextmenu', function(e){
+  var t=e.target;
+  if(t && t.tagName==='MARK' && t.classList && t.classList.contains('uhl')){
+    e.preventDefault();
+    var id=t.getAttribute('data-hlid');
+    var zone=t.closest('.hl-zone'); var key=zone?zone.getAttribute('data-hlkey'):null;
+    if(id && key){ hlDeleteFromState(key,id); hlRemove(id); }
+  }
+});
+
+var hlObserverStarted=false;
+function hlInitObserver(){
+  var main=document.getElementById('main');
+  if(!main || hlObserverStarted) return;
+  hlObserverStarted=true;
+  var mo=new MutationObserver(function(){
+    var zones=main.querySelectorAll('.hl-zone:not([data-hlwired])');
+    zones.forEach(function(z){
+      z.setAttribute('data-hlwired','1');
+      hlApplyZone(z);
+    });
+  });
+  mo.observe(main,{childList:true, subtree:true});
+  var zones0=main.querySelectorAll('.hl-zone:not([data-hlwired])');
+  zones0.forEach(function(z){ z.setAttribute('data-hlwired','1'); hlApplyZone(z); });
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', hlInitObserver);
+}else{
+  hlInitObserver();
+}
+setTimeout(hlInitObserver, 500);
+setTimeout(hlInitObserver, 1500);
 })();
 
 </script>
