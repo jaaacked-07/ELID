@@ -1105,6 +1105,8 @@ if(!document.getElementById('ac-style')){
   .ac-ce:focus{border-color:var(--accent)}
   .ac-lbl{font-size:.74rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
   .ac-occ-wrap{position:relative;display:inline-block;max-width:100%}
+  .ac-occ-pastebox{border:2px dashed var(--line);border-radius:12px;padding:26px 14px;text-align:center;color:var(--muted);font-size:.86rem;cursor:text;margin-top:8px}
+  .ac-occ-pastebox:focus{outline:none;border-color:var(--accent);color:var(--ink)}
   .ac-occ-wrap img{max-width:100%;border-radius:8px;display:block}
   .ac-mask{position:absolute;background:var(--accent);border-radius:4px;opacity:.92}
   .ac-srs-grade{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
@@ -1404,9 +1406,9 @@ window.acFC=function(top){
      '<div class="ac-lbl">Dica / verso (opcional)</div><div class="ac-ce" id="ac-cloze-back" contenteditable="true"></div>'+
    '</div>'+
    '<div id="ac-pane-occ" style="display:none">'+
-     '<div class="ac-lbl">Envie uma imagem; toque sobre ela para adicionar máscaras</div>'+
+     '<div class="ac-lbl">Cole uma imagem (Ctrl+V / Cmd+V) ou escolha um arquivo; toque sobre ela para adicionar máscaras</div>'+
      '<label class="btn-primary" style="display:inline-block;margin:6px 0">Escolher imagem<input type="file" accept="image/*" style="display:none" onchange="acOccUpload(this)"></label>'+
-     '<div id="ac-occ-area"></div>'+
+     '<div id="ac-occ-area" tabindex="0" class="ac-occ-pastebox">Clique aqui e cole (Ctrl+V) uma imagem copiada, ou use "Escolher imagem" acima</div>'+
      '<div class="ac-tool"><button onmousedown="event.preventDefault()" onclick="acOccUndo()">Desfazer máscara</button></div>'+
    '</div>'+
    '<div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px">'+
@@ -1439,6 +1441,17 @@ function compress(file,cb){
   }; img.src=e.target.result; };
   r.readAsDataURL(file);
 }
+function acOccPasteFile(file){ if(!file) return; compress(file,function(data){ occImg=data; occMasks=[]; acOccDraw(); toast('Imagem colada e compactada.'); }); }
+document.addEventListener('paste',function(e){
+  if(window.__acType!=='occ') return;
+  if(!document.getElementById('ac-fc-ov')) return;
+  var items=(e.clipboardData||window.clipboardData||{}).items; if(!items) return;
+  for(var i=0;i<items.length;i++){
+    if(items[i].type && items[i].type.indexOf('image')!==-1){
+      acOccPasteFile(items[i].getAsFile()); e.preventDefault(); break;
+    }
+  }
+});
 window.acPhoto=function(targetId,input){
   if(!input.files||!input.files[0])return;
   compress(input.files[0],function(data){
@@ -1766,7 +1779,6 @@ var VIEWS=[
 function toolbarHTML(){
   var btns=VIEWS.map(function(v){return '<button class="heart-btn view-btn" data-v="'+v[0]+'">'+v[0]+'</button>';}).join('');
   return btns+
-    '<button class="heart-btn heart-btn-struct" id="hStructMode" title="Ative para tocar nas estruturas do coração e revelar/ocultar">Estruturas Cardíacas</button>'+
     '<button class="heart-btn view-btn" data-cut="long">Corte longitudinal</button>'+
     '<button class="heart-btn view-btn" data-cut="trans">Corte transversal</button>'+
     '<button class="heart-btn" id="hMove">Mover</button>'+
@@ -1794,14 +1806,14 @@ window.viewCollection=function(){
     '<p class="page-sub">Construa o coração humano, estrutura por estrutura, conforme avança nos módulos de Cardiologia. '+
     'Cada estrutura desbloqueada revela um resumo de alto rendimento para a prova.</p>'+
     '<div class="prog" style="margin-bottom:18px"><i style="width:'+cs.pct+'%"></i></div>'+
-    '<div class="heart-toolbar" id="heartToolbar">'+toolbarHTML()+'</div>'+
+    '<div class="heart-struct-list" id="heartStructList"></div>'+
     '<div class="heart-layout">'+
       '<div class="heart-stagewrap" id="heartStage"><div class="heart-3d"><div class="heart-rotor" id="heartRotor">'+
         '<div class="heart-pulse" id="heartPulse">'+HEART_SVG+'</div></div></div></div>'+
       '<div class="heart-panel" id="heartPanel"><div class="hp-empty">Toque em uma estrutura desbloqueada do coração para ver seu resumo de alto rendimento.</div></div>'+
     '</div>'+
+    '<div class="heart-toolbar" id="heartToolbar">'+toolbarHTML()+'</div>'+
     '<div class="heart-legend">'+catRows+'</div>'+
-    '<div class="heart-struct-list" id="heartStructList"></div>'+
     foot()+'</div>';
 };
 
@@ -3571,9 +3583,11 @@ C['valvo|0'] = {
   ['entendendo','Entendendo do Zero', `
     <div class="ac-h">O que é, com calma</div>
     <p class="ac-p">A Estenose Aórtica (EAo) é a obstrução fixa da via de saída do ventrículo esquerdo (VE) por doença da valva aórtica, que perde mobilidade e reduz sua área de abertura. É a valvopatia mais comum no idoso e uma das principais indicações de cirurgia cardíaca no mundo.</p>
+    <p class="ac-p">Pense na valva aórtica como a porta de saída de uma bomba d'água (o VE). Em condições normais, essa porta abre quase totalmente a cada batimento, deixando o sangue sair com facilidade. Na EAo, essa porta vai enrijecendo e estreitando com o tempo — como uma dobradiça enferrujada que abre cada vez menos. A bomba (o VE) precisa empurrar com muito mais força para vencer essa porta emperrada, e é exatamente essa força extra, mantida por anos, que vai deixando o músculo do VE mais grosso (hipertrofia).</p>
     ${A.ea_anatomia}
     <p class="ac-p">O ponto-chave para a prova: a valva pode estar gravemente estenosada por anos sem gerar sintoma nenhum, porque o VE compensa hipertrofiando. Quando os sintomas aparecem (a tríade angina-síncope-dispneia), o prognóstico piora drasticamente sem tratamento — por isso EAo sintomática grave é sempre indicação de troca valvar.</p>
     <div class="ac-call"><b>A grande ideia:</b> EAo assintomática, mesmo grave, pode ser só observada. EAo sintomática grave é cirurgia/TAVI — quase sem exceção.</div>
+    <div class="ac-tip"><b>Exemplo prático:</b> imagine dois pacientes com a MESMA área valvar (0,7 cm², critério de gravidade). O primeiro corre, sobe escadas e não sente nada — ele é observado com ecocardiogramas periódicos. O segundo, com a valva igualmente estreita, começa a sentir falta de ar para pentear o cabelo — esse precisa trocar a valva logo, porque o sintoma (não o exame) é quem manda na decisão.</div>
     <table class="ac-tbl"><tr><th>Eixo</th><th>O que dominar</th></tr>
       <tr><td>Causa mais comum (geral)</td><td>Calcificação degenerativa senil</td></tr>
       <tr><td>Causa mais comum (jovem)</td><td>Valva bicúspide congênita</td></tr>
@@ -3589,32 +3603,40 @@ C['valvo|0'] = {
       <tr><td>Febre reumática</td><td>Variável, mais rara isolada</td><td>Quase sempre acompanhada de acometimento mitral concomitante; causa fusão das comissuras</td></tr>
     </table>
     <p class="ac-p">Na prática, ao ver "homem de 45 anos com sopro sistólico em foco aórtico", pensar primeiro em valva bicúspide. Ao ver "mulher de 78 anos com o mesmo sopro", pensar primeiro em calcificação degenerativa senil.</p>
-    <div class="ac-tip"><b>Macete:</b> bicúspide = jovem; calcificada = idoso; reumática = raramente isolada (procure doença mitral associada).</div>`],
+    <p class="ac-p">Por que a valva bicúspide degenera mais cedo? Uma valva normal tem 3 folhetos que dividem bem o fluxo de sangue. Com apenas 2 folhetos, o sangue passa de forma mais turbulenta, batendo com mais força e de forma mais desorganizada nos folhetos — como um rio que, ao passar por uma passagem estreita e torta, corrói mais rápido as margens do que um rio que corre por um leito largo e reto. Esse "desgaste acelerado" faz a valva bicúspide calcificar décadas antes da valva trivalvular normal.</p>
+    <div class="ac-tip"><b>Macete:</b> bicúspide = jovem; calcificada = idoso; reumática = raramente isolada (procure doença mitral associada).</div>
+    <div class="ac-tip"><b>Exemplo:</b> paciente de 38 anos, previamente hígido, descobre em exame de rotina um sopro sistólico ejetivo em foco aórtico. Mesmo sem sintomas e sem fatores de risco cardiovascular, a hipótese número 1 aqui é valva aórtica bicúspide — não calcificação senil, que seria muito incomum nessa idade.</div>`],
   ['fisiopatologia','Fisiopatologia', `<div class="ac-h">Da obstrução fixa à descompensação</div>
     <p class="ac-p">A obstrução na via de saída aumenta a pós-carga do VE, que responde hipertrofiando de forma concêntrica (espessamento da parede sem dilatar a cavidade) para manter a pressão sistólica e o débito cardíaco normais — esse é o mecanismo compensatório, pela lei de Laplace.</p>
     ${A.ea_fisiopatologia}
     <p class="ac-p">O preço dessa hipertrofia é a rigidez: o VE hipertrofiado relaxa mal na diástole (disfunção diastólica), passando a depender mais da contração atrial para completar o enchimento — daí a quarta bulha (B4). Ao mesmo tempo, o músculo hipertrofiado consome mais oxigênio, enquanto a perfusão coronariana subendocárdica fica prejudicada pela própria pressão intramural elevada — por isso pode haver angina mesmo sem coronária obstruída.</p>
     <p class="ac-p">Enquanto a compensação se mantém, o paciente é assintomático. Quando o VE finalmente não consegue mais compensar, ele dilata e a fração de ejeção cai — é o ponto de descompensação, quando surgem os sintomas e o prognóstico piora abruptamente.</p>
-    <div class="ac-warn"><b>Cuidado:</b> a gravidade anatômica (área valvar) pode estar estável há anos enquanto o paciente é assintomático — não subestime o valor do sintoma como marcador de mudança de fase da doença.</div>`],
+    <div class="ac-warn"><b>Cuidado:</b> a gravidade anatômica (área valvar) pode estar estável há anos enquanto o paciente é assintomático — não subestime o valor do sintoma como marcador de mudança de fase da doença.</div>
+    <p class="ac-p"><b>Analogia simples:</b> pense num fisiculturista treinando um braço contra um peso fixo, todos os dias, por anos. O músculo cresce e fica mais forte (hipertrofia) — é a compensação. Mas um músculo muito grosso também fica mais "duro", relaxa pior entre uma contração e outra, e passa a exigir mais sangue (oxigênio) para funcionar. Com a EAo é igual: o VE "malha" contra a valva estreita por anos, fica hipertrofiado e forte, mas rígido — até que um dia essa adaptação não é mais suficiente e o músculo "cansa" (dilata, perde força). É esse cansaço final que gera os sintomas.</p>`],
   ['exame_fisico','Exame Físico e Ausculta', `<div class="ac-h">Onde ouvir e o que sentir</div>
     <p class="ac-p">A ausculta é a porta de entrada clássica para o diagnóstico de EAo: sopro sistólico ejetivo, em crescendo-decrescendo ("em diamante"), mais audível no foco aórtico (2º espaço intercostal direito), com irradiação característica para as carótidas.</p>
     ${A.ea_ausculta}
     <p class="ac-p">Outros achados clássicos incluem B2 hipofonética ou paradoxal (por atraso do componente aórtico A2), B4 (pela contração atrial vigorosa contra um VE hipertrofiado e complacência diastólica reduzida), frêmito sistólico em foco aórtico nos casos graves, e o pulso <b>parvus et tardus</b> (fraco em amplitude e retardado no tempo) — acentuado quanto mais grave a estenose. O sinal de Gallavardin descreve a irradiação do componente musical do sopro para o ápice, podendo mimetizar insuficiência mitral.</p>
     <div class="ac-tip"><b>Macete:</b> "sopro sistólico + irradia para carótida + pulso fraco e atrasado" fecha EAo antes mesmo do ecocardiograma.</div>
-    <div class="ac-warn"><b>Erro comum:</b> confundir a irradiação apical (Gallavardin) com sopro de insuficiência mitral — sempre correlacionar com o foco de maior intensidade e o padrão do sopro (ejetivo x holossistólico).</div>`],
+    <div class="ac-warn"><b>Erro comum:</b> confundir a irradiação apical (Gallavardin) com sopro de insuficiência mitral — sempre correlacionar com o foco de maior intensidade e o padrão do sopro (ejetivo x holossistólico).</div>
+    <p class="ac-p">Explicando cada achado em linguagem simples: o pulso <b>parvus et tardus</b> é fraco e atrasado porque o sangue está saindo por um orifício estreito — é como apertar parcialmente a ponta de uma mangueira: a água sai mais devagar e com menos força, mesmo que a torneira (o VE) esteja "aberta ao máximo". A <b>B4</b> aparece porque o átrio esquerdo precisa "empurrar" o sangue com mais força para dentro de um ventrículo enrijecido — esse empurrão extra gera um som audível logo antes da B1. Já a irradiação para as carótidas acontece simplesmente porque o jato de sangue turbulento, ao sair pela valva estreita, segue o mesmo trajeto anatômico da aorta em direção ao pescoço.</p>
+    <div class="ac-tip"><b>Exemplo clínico:</b> paciente de 70 anos, ausculta com sopro sistólico 3+/6 em foco aórtico irradiando para as carótidas, pulso radial fraco e com pico tardio ao ser palpado. Mesmo antes do ecocardiograma, esse conjunto de achados já é fortemente sugestivo de EAo pelo menos moderada a grave.</div>`],
   ['dx_gravidade','Diagnóstico e Gravidade', `<div class="ac-h">Ecocardiograma: o padrão-ouro</div>
     <p class="ac-p">O ecocardiograma transtorácico com Doppler é o exame padrão-ouro, capaz de confirmar o diagnóstico, quantificar a gravidade e avaliar a repercussão sobre o VE (hipertrofia, função sistólica).</p>
     ${A.ea_gravidade}
     <p class="ac-p">Três parâmetros classificam a gravidade: a velocidade máxima do jato (Vmax), o gradiente médio transvalvar, e a área valvar aórtica (AVA), calculada pela equação de continuidade. Um cenário de prova importante é a <b>EAo de baixo fluxo/baixo gradiente</b> com fração de ejeção reduzida: a AVA calculada pode parecer grave só porque o VE não gera fluxo suficiente para abrir a valva adequadamente — o eco com dobutamina em baixa dose ajuda a diferenciar estenose verdadeiramente grave de "pseudograve".</p>
     <p class="ac-p">O ECG tipicamente mostra hipertrofia ventricular esquerda (critério de Sokolow-Lyon) com padrão de sobrecarga (infra de ST e T invertida assimétrica em derivações laterais). O ECG não diagnostica EAo, mas sugere repercussão significativa.</p>
-    <div class="ac-tip"><b>Lembrete:</b> AVA &lt;1,0 cm² (ou &lt;0,6 cm²/m² indexada pela superfície corporal), Vmax ≥4,0 m/s e gradiente médio ≥40 mmHg = estenose grave.</div>`],
+    <div class="ac-tip"><b>Lembrete:</b> AVA &lt;1,0 cm² (ou &lt;0,6 cm²/m² indexada pela superfície corporal), Vmax ≥4,0 m/s e gradiente médio ≥40 mmHg = estenose grave.</div>
+    <p class="ac-p">Para entender de forma simples o que esses números significam: quanto mais estreita a valva, mais rápido o sangue precisa passar por ela para manter o mesmo volume de sangue circulando — é o mesmo princípio de apertar a ponta de uma mangueira de jardim: o jato de água sai mais rápido e mais forte quanto menor o furo. O ecocardiograma mede exatamente essa velocidade (Vmax) com o Doppler, e a partir dela calcula o gradiente de pressão e a área do "furo" (AVA). Ou seja: Vmax alta e gradiente alto = furo (valva) muito pequeno.</p>
+    <div class="ac-tip"><b>Exemplo numérico:</b> paciente com Vmax de 4,5 m/s, gradiente médio de 48 mmHg e AVA de 0,75 cm² tem EAo grave pelos três critérios ao mesmo tempo — não é preciso esperar todos "baterem" exatamente no mesmo grau, mas quando os três concordam, o diagnóstico de gravidade fica muito mais seguro.</div>`],
   ['tratamento','Tratamento', `<div class="ac-h">Quando e como trocar a valva</div>
     <p class="ac-p">Não existe tratamento farmacológico que mude a história natural da EAo — estatinas foram testadas com base em mecanismo teórico (semelhança com aterosclerose), mas não mostraram benefício robusto em reduzir progressão ou eventos.</p>
     ${A.ea_triade}
     <p class="ac-p">A indicação clássica de troca valvar é <b>EAo grave sintomática</b> (qualquer um dos três sintomas: angina, síncope ou dispneia). Em pacientes assintomáticos com EAo grave, a troca também pode ser indicada se houver disfunção do VE (FE &lt;50%), necessidade de cirurgia cardíaca por outro motivo, teste ergométrico positivo (sintomas ou queda de pressão ao esforço), ou critérios de muito alta gravidade/progressão rápida em pacientes de baixo risco cirúrgico.</p>
     <p class="ac-p">A escolha entre cirurgia convencional (SAVR) e implante valvar transcateter (TAVI) depende principalmente do risco cirúrgico (calculado por escores como STS Score e EuroSCORE II), da idade e de comorbidades — TAVI historicamente indicada para idosos/alto risco cirúrgico, com evidências crescentes também em risco intermediário e baixo.</p>
     <div class="ac-warn"><b>Cuidado com vasodilatadores:</b> nitrato e outros vasodilatadores devem ser usados com extrema cautela (ou evitados) na EAo grave sintomática — a obstrução fixa impede aumento do débito para compensar a queda da pré-carga/pós-carga, podendo precipitar síncope ou colapso hemodinâmico.</div>
-    <div class="ac-call"><b>Resumo prático:</b> sintoma + gravidade = cirurgia/TAVI. Sem sintoma, mesmo grave, geralmente é vigilância ativa com ecocardiogramas seriados.</div>`],
+    <div class="ac-call"><b>Resumo prático:</b> sintoma + gravidade = cirurgia/TAVI. Sem sintoma, mesmo grave, geralmente é vigilância ativa com ecocardiogramas seriados.</div>
+    <p class="ac-p">Dois exemplos ajudam a fixar a escolha entre SAVR e TAVI. <b>Paciente 1:</b> 55 anos, sem outras doenças relevantes, baixo risco cirúrgico (STS Score baixo) — aqui a cirurgia aberta (SAVR) tradicionalmente ainda é a primeira escolha, pois a válvula cirúrgica tende a durar mais e o paciente tolera bem a cirurgia. <b>Paciente 2:</b> 84 anos, com doença renal crônica, DPOC e cirurgia cardíaca prévia (alto risco cirúrgico) — aqui o TAVI (implante da valva por cateter, sem abrir o tórax) é a opção preferencial, pois reduz drasticamente o risco do procedimento nesse perfil frágil.</p>`],
   ['diferenciais_eao','Diferenciando de Outras Causas de Sopro', `<div class="ac-h">EAo x seus principais imitadores</div>
     <p class="ac-p">Um ponto muito cobrado é diferenciar a EAo de outras causas de sopro sistólico — especialmente a esclerose aórtica e a cardiomiopatia hipertrófica obstrutiva (CMH).</p>
     <table class="ac-tbl"><tr><th>Característica</th><th>Estenose Aórtica</th><th>Esclerose Aórtica</th><th>CMH obstrutiva</th></tr>
@@ -3625,7 +3647,8 @@ C['valvo|0'] = {
     </table>
     <p class="ac-p">A resposta do sopro às manobras dinâmicas é o detalhe que mais separa EAo de CMH obstrutiva: na EAo (obstrução fixa), manobras que reduzem o retorno venoso (Valsalva, ficar em pé) diminuem o sopro; na CMH (obstrução dinâmica, que piora com menor volume ventricular), essas mesmas manobras aumentam o sopro — exatamente o oposto.</p>
     <div class="ac-call"><b>Associação clássica de prova — Síndrome de Heyde:</b> EAo + sangramento gastrointestinal por angiodisplasia, explicado por uma síndrome de von Willebrand adquirida (destruição mecânica dos multímeros de alto peso molecular do fator de von Willebrand ao passarem pela valva estenótica).</div>
-    <div class="ac-tip"><b>Macete das manobras:</b> "aperta a mão (handgrip) e o sopro da CMH aperta junto (diminui); levanta rápido e o sopro da CMH levanta junto (aumenta)". Na EAo, o comportamento é sempre o oposto da CMH.</div>`],
+    <div class="ac-tip"><b>Macete das manobras:</b> "aperta a mão (handgrip) e o sopro da CMH aperta junto (diminui); levanta rápido e o sopro da CMH levanta junto (aumenta)". Na EAo, o comportamento é sempre o oposto da CMH.</div>
+    <p class="ac-p">Por que as manobras se comportam de forma oposta? Na EAo, a obstrução é um "buraco fixo" na valva — não importa quanto sangue chega até ali, o tamanho do buraco não muda. Menos sangue chegando (Valsalva) = menos sopro, simplesmente porque passa menos volume pelo mesmo buraco. Já na CMH obstrutiva, quem "aperta" a via de saída é o próprio músculo do septo, que se aproxima mais da valva mitral quanto MENOR o volume dentro do ventrículo — por isso, com menos sangue (Valsalva, ficar em pé), a obstrução dinâmica piora e o sopro aumenta. É a diferença entre um cano com um estreitamento fixo (EAo) e um cano cujas paredes se fecham mais quando há menos líquido dentro (CMH).</p>`],
  ],
 };
 
