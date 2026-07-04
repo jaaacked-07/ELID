@@ -12819,8 +12819,9 @@ window.mesaToggleModulo = function(modId){
     var main = document.getElementById('main');
     if(main) main.innerHTML = window.viewModule(window.mArg);
   }
-  if(typeof route !== 'undefined' && route && route.view==='collection'){
-    var m2 = document.getElementById('main'); if(m2) m2.innerHTML = viewMesaCirurgica();
+  var m2 = document.getElementById('main');
+  if(m2 && m2.querySelector('.mesa-modules')){
+    m2.innerHTML = viewMesaCirurgica();
   }
   if(mesaIsComplete()){
     setTimeout(mesaShowCompleteBanner, novos.length ? 1400 : 200);
