@@ -698,7 +698,7 @@ function renderRoute(){
   const main=document.getElementById('main');
   const nm=window.__USERNAME__||'Aluno';
   if(route.view==='dashboard'){setActive('dashboard');main.innerHTML=viewDashboard(nm);}
-  else if(route.view==='collection'){setActive('collection');main.innerHTML=viewCollection();bindBook();}
+  else if(route.view==='collection'){setActive('collection');main.innerHTML=(typeof window.viewMesaCirurgica==='function')?window.viewMesaCirurgica():viewCollection();}
   else if(route.view==='daily'){setActive('daily');main.innerHTML=viewDaily();}
   else if(route.view==='srs'){setActive('srs');main.innerHTML=viewSRS();}
   else if(route.view==='temas'){setActive('temas');main.innerHTML=viewTemas();}
