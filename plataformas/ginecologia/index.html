@@ -476,7 +476,7 @@ import { getFirestore, doc, getDoc, setDoc, onSnapshot } from 'https://www.gstat
 
 const PLATFORM_ID='ginecologia'; /* ID unico da especialidade (sem espacos/acentos) para o Firebase */
 const LS_PREFIX='atlas_'+PLATFORM_ID+'_progress'; /* NUNCA hardcode outra especialidade aqui — isola os dados no localStorage por plataforma */
-const AREA_KEY='cm';
+const AREA_KEY='gineco';
 const firebaseConfig={apiKey:"AIzaSyAKN3qsYIc3pel81vl8WEAH6Ob4oR-icAM",authDomain:"jackeline-study-platform.firebaseapp.com",projectId:"jackeline-study-platform",storageBucket:"jackeline-study-platform.firebasestorage.app",messagingSenderId:"574246127117",appId:"1:574246127117:web:29eedab81ea4251b23f744"};
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
@@ -1216,7 +1216,7 @@ window.acAns=function(btn,arg,qi,oi){
   for(var j=0;j<opts.length;j++){ opts[j].classList.remove('ok','no'); }
   opts[q.correct].classList.add('ok'); if(!correct)opts[oi].classList.add('no');
   var ex=card.querySelector('.q-expl'); if(ex)ex.style.display='';
-  if(firstTime && window.elidRegistrarQuestoes){ window.elidRegistrarQuestoes('cm',1,correct?1:0); }
+  if(firstTime && window.elidRegistrarQuestoes){ window.elidRegistrarQuestoes('gineco',1,correct?1:0); }
   else { if(firstTime){ ss.qSeen=(ss.qSeen||0)+1; ss.qRight=(ss.qRight||0)+(correct?1:0); } save(); }
 };
 
