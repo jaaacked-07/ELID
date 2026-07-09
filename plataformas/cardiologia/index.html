@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -462,7 +463,7 @@ let uid=null, unsubCentral=null;
 
 // ---------- estado ----------
 let S=loadLocal();
-function blankState(){return {_updated:0, done:{}, srs:{}, cards:[], notes:{}, dia:{}, diaSeen:{}, hl:{}, touch:{}, qSeen:0, qRight:0, xp:0};}
+function blankState(){return {_updated:0, done:{}, srs:{}, cards:[], deletedCards:{}, notes:{}, dia:{}, diaSeen:{}, hl:{}, touch:{}, qSeen:0, qRight:0, xp:0};}
 function loadLocal(){
   let base=blankState();
   try{
@@ -478,11 +479,21 @@ function loadLocal(){
 function mergeState(a,b){
   if(!b) return a;
   const out={...a};
-  out._updated=Math.max(a._updated||0,b._updated||0);
+  const aT=a._updated||0, bT=b._updated||0;
+  out._updated=Math.max(aT,bT);
+  /* bugfix: excluir um flashcard/limpar uma anotação "voltava" depois de recarregar/no dia
+     seguinte porque a união de mapas sempre deixava o lado 'b' (ex.: o snapshot da nuvem)
+     sobrescrever o 'a' em qualquer colisão de chave, mesmo quando 'a' era mais recente e
+     refletia a exclusão. Agora o lado com _updated mais recente vence a colisão. */
+  const newer = bT>=aT ? (b||{}) : (a||{}), older = bT>=aT ? (a||{}) : (b||{});
   for(const m of ['done','srs','notes','dia','diaSeen','hl','touch']){
-    out[m]={...(a[m]||{}),...(b[m]||{})};        // união de mapas (local vence empate via ordem)
+    out[m]={...(older[m]||{}),...(newer[m]||{})};
   }
-  out.cards=[...(a.cards||[]),...(b.cards||[])].filter((c,i,arr)=>arr.findIndex(x=>x.id===c.id)===i);
+  /* tombstones: 'deletedCards' é uma união simples (uma vez excluído, permanece excluído) */
+  out.deletedCards={...(a.deletedCards||{}),...(b.deletedCards||{})};
+  out.cards=[...(a.cards||[]),...(b.cards||[])]
+    .filter((c,i,arr)=>arr.findIndex(x=>x.id===c.id)===i)
+    .filter(c=>!out.deletedCards[c.id]);
   out.qSeen=Math.max(a.qSeen||0,b.qSeen||0);
   out.qRight=Math.max(a.qRight||0,b.qRight||0);
   out.xp=Math.max(a.xp||0,b.xp||0);
@@ -550,7 +561,7 @@ function pushCentral(){
     const payload={
       platform:PLATFORM_ID, label:'CardioAtlas', updated:Date.now(),
       cards: feed.cards, questions: feed.questions,
-      done:{ q:sanitize(S.done||{}), srs:sanitize(S.srs||{}), userCards:sanitize(S.cards||[]) }
+      done:{ q:sanitize(S.done||{}), srs:sanitize(S.srs||{}), userCards:sanitize(S.cards||[]), deletedCards:sanitize(S.deletedCards||{}) }
     };
     setDoc(doc(db,'users',uid,'central',PLATFORM_ID), payload,{merge:true}).catch(()=>{});
   }catch(e){ /* publicação no feed nunca deve interromper a plataforma */ }
@@ -561,9 +572,11 @@ function bindCentral(){
     const d=snap.data(); if(!d||!d.done) return;
     S.done=mergeMap(S.done,d.done.q);
     S.srs=mergeMap(S.srs,d.done.srs);
+    S.deletedCards={...(d.done.deletedCards||{}),...(S.deletedCards||{})};
     if(Array.isArray(d.done.userCards)){
       const ids=new Set((S.cards||[]).map(c=>c.id));
-      d.done.userCards.forEach(c=>{if(c&&!ids.has(c.id))S.cards.push(c);});
+      /* bugfix: nunca ressuscitar um card que foi marcado como excluído (tombstone) */
+      d.done.userCards.forEach(c=>{if(c&&!ids.has(c.id)&&!S.deletedCards[c.id])S.cards.push(c);});
     }
     // refletir no diaSeen de hoje
     const seed=daySeedNum();
@@ -573,18 +586,65 @@ function bindCentral(){
 }
 function mergeMap(a,b){a=a||{};b=b||{};return {...b,...a};}
 
-// ---------- SRS (SM-2) ----------
+// ---------- SRS (FSRS-4.5 — substitui o SM-2 antigo) ----------
 function daySeedNum(){return Math.floor(Date.now()/86400000);}
-function srsReview(id, q){ // q: 0..5
-  const c=S.srs[id]||{ease:2.5,interval:0,due:0,reps:0};
-  if(q<3){c.reps=0;c.interval=1;}
-  else{
-    c.reps++;
-    if(c.reps===1)c.interval=1; else if(c.reps===2)c.interval=6;
-    else c.interval=Math.round(c.interval*c.ease);
-    c.ease=Math.max(1.3, c.ease+(0.1-(5-q)*(0.08+(5-q)*0.02)));
+/* 19 parâmetros default do projeto open-spaced-repetition (treinados sobre centenas de
+   milhões de revisões reais do Anki) — usados como estão, sem otimização por usuário. */
+const FSRS_W=[0.40255,1.18385,3.173,15.69105,7.1949,0.5345,1.4604,0.0046,1.54575,0.1192,1.01925,1.9395,0.11,0.29605,2.2698,0.2315,2.9898,0.51655,0.6621];
+const FSRS_FACTOR=19/81, FSRS_DECAY=-0.5, FSRS_R_TARGET=0.9;
+function fsrsClampD(d){ return Math.min(10, Math.max(1, d)); }
+function fsrsRetrievability(t, s){ return Math.pow(1 + FSRS_FACTOR*(t/s), FSRS_DECAY); }
+function fsrsInterval(s){ return (s/FSRS_FACTOR) * (Math.pow(FSRS_R_TARGET, 1/FSRS_DECAY) - 1); }
+function fsrsS0(g){ return FSRS_W[g-1]; } // g=1..4 (Errei/Difícil/Bom/Fácil)
+function fsrsD0(g){ return fsrsClampD(FSRS_W[4] - Math.exp(FSRS_W[5]*(g-1)) + 1); }
+function fsrsNextD(d, g){
+  var dp = d + (-FSRS_W[6]*(g-3)) * ((10-d)/9);
+  return fsrsClampD(FSRS_W[7]*fsrsD0(4) + (1-FSRS_W[7])*dp);
+}
+function fsrsNextS_success(d, s, r, g){
+  var tD=11-d, tS=Math.pow(s,-FSRS_W[9]), tR=Math.exp(FSRS_W[10]*(1-r))-1;
+  var h=g===2?FSRS_W[15]:1, b=g===4?FSRS_W[16]:1;
+  var alpha=1+tD*tS*tR*h*b*Math.exp(FSRS_W[8]);
+  return s*alpha;
+}
+function fsrsNextS_fail(d, s, r){
+  var dF=Math.pow(d,-FSRS_W[12]), sF=Math.pow(s+1,FSRS_W[13])-1, rF=Math.exp(FSRS_W[14]*(1-r));
+  return Math.min(dF*sF*rF*FSRS_W[11], s);
+}
+function fsrsGradeFromQ(q){ return q<3 ? 1 : (q===3 ? 2 : (q===4 ? 3 : 4)); } // Errei/Difícil/Bom/Fácil -> 1..4
+/* migração preguiçosa: cards antigos salvos como {ease,interval,due,reps} (SM-2) são
+   convertidos para {difficulty,stability,last,due,reps} (FSRS) na primeira revisão deles
+   depois desta atualização — nada é apagado, nada é resetado. */
+function fsrsMigrateLegacy(c){
+  if(!c) return c;
+  if(c.stability !== undefined) return c; // já é FSRS
+  var ease = c.ease===undefined ? 2.5 : c.ease;
+  var eLo=1.3, eHi=3.5, dHi=10, dLo=1;
+  var t = Math.min(1, Math.max(0, (ease-eLo)/(eHi-eLo)));
+  var difficulty = fsrsClampD(dHi - t*(dHi-dLo));
+  var stability = Math.max(1, c.interval||1);
+  var last = (c.due||Date.now()) - (c.interval||1)*86400000;
+  return {difficulty:difficulty, stability:stability, last:last, reps:c.reps||1, due:c.due};
+}
+function srsReview(id, q){ // q: 0..5 (mesma assinatura/UI de sempre — Errei/Difícil/Bom/Fácil)
+  var g = fsrsGradeFromQ(q);
+  var now = Date.now();
+  var c = fsrsMigrateLegacy(S.srs[id]);
+  if(!c){
+    c = {difficulty:fsrsD0(g), stability:fsrsS0(g), last:now, reps:1};
+  } else {
+    var elapsedDays = Math.max(0, (now-(c.last||now))/86400000);
+    var r = fsrsRetrievability(elapsedDays, c.stability);
+    var newS = g===1 ? fsrsNextS_fail(c.difficulty,c.stability,r) : fsrsNextS_success(c.difficulty,c.stability,r,g);
+    c.difficulty = fsrsNextD(c.difficulty, g);
+    c.stability = newS;
+    c.last = now;
+    c.reps = (c.reps||0)+1;
   }
-  c.due=Date.now()+c.interval*86400000;
+  var days = Math.max(1, Math.round(fsrsInterval(c.stability)));
+  /* fuzz (±5%, só acima de 2 dias) evita que cards revisados juntos colidam na mesma data para sempre */
+  if(days>2){ days = Math.round(days*(1+(Math.random()*0.1-0.05))); }
+  c.due = now + days*86400000;
   S.srs[id]=c; saveState();
 }
 function cardsDue(){const now=Date.now();return Object.keys(S.srs).filter(id=>(S.srs[id].due||0)<=now);}
@@ -2664,9 +2724,31 @@ window.renderRoute = function(){
 };
 
 /* ---- dados ---- */
+function fccTopicCanonicalMap(){
+  /* uma matéria pode ter dois nomes históricos (texto cru de MODULES x CONTENT[arg].name) —
+     mapeia os dois para o MESMO nome canônico, fundindo os cards do usuário com os da
+     plataforma numa única entrada na Central de Flashcards (bugfix de matéria duplicada). */
+  var map={};
+  if(typeof MODULES!=='undefined'){
+    for(var ck in MODULES){
+      (MODULES[ck]||[]).forEach(function(rawName,i){
+        var arg=ck+'|'+i, d=(typeof C!=='undefined'?C[arg]:(window.CONTENT||{})[arg]);
+        var canon=(d&&d.name)?d.name:rawName;
+        map[fccNorm(rawName)]=canon;
+        if(d&&d.name) map[fccNorm(d.name)]=canon;
+      });
+    }
+  }
+  return map;
+}
 function fccList(){
   var ss=S(); var mine=ss.cards||[]; var seen={};
-  var all=mine.map(function(c){ seen[c.id]=true; return Object.assign({},c,{origin:(''+c.id).indexOf('m_')===0?'platform':'mine'}); });
+  var topicCanon=fccTopicCanonicalMap();
+  var all=mine.map(function(c){
+    seen[c.id]=true;
+    var top=c.top ? (topicCanon[fccNorm(c.top)]||c.top) : c.top;
+    return Object.assign({},c,{top:top,origin:(''+c.id).indexOf('m_')===0?'platform':'mine'});
+  });
   var CT=window.CONTENT||{};
   if(true){
     Object.keys(CT).forEach(function(arg){
@@ -2689,7 +2771,12 @@ function fccStrip(html){ return (''+(html||'')).replace(/<[^>]*>/g,' ').replace(
 function fccDifficulty(id,srs){
   var e=srs[id];
   if(!e || !e.reps) return {key:'novo',label:'Novo',color:'#6db3f2'};
-  if(e.ease<2.0) return {key:'dificil',label:'Difícil',color:'#e8675f'};
+  if(e.difficulty!==undefined){ // FSRS (escala 1-10)
+    if(e.difficulty>=6.5) return {key:'dificil',label:'Difícil',color:'#e8675f'};
+    if(e.difficulty>=3.5) return {key:'medio',label:'Médio',color:'#f0a93f'};
+    return {key:'facil',label:'Fácil',color:'#3ddc84'};
+  }
+  if(e.ease<2.0) return {key:'dificil',label:'Difícil',color:'#e8675f'}; // legado SM-2 (migra na próxima revisão)
   if(e.ease<2.6) return {key:'medio',label:'Médio',color:'#f0a93f'};
   return {key:'facil',label:'Fácil',color:'#3ddc84'};
 }
@@ -2949,6 +3036,10 @@ window.fccDelete=function(id){
   if(!window.confirm('Excluir este flashcard? Essa ação não pode ser desfeita.')) return;
   var ss=S(); ss.cards=(ss.cards||[]).filter(function(x){return x.id!==id;});
   if(ss.srs) delete ss.srs[id];
+  /* bugfix: tombstone — sem isso, um sync/merge posterior (nuvem ou outro dispositivo)
+     podia trazer o card de volta mesmo depois de excluído mais de uma vez */
+  ss.deletedCards = ss.deletedCards || {};
+  ss.deletedCards[id] = Date.now();
   save();
   window.fccApply();
   toast('Flashcard excluído');
@@ -7524,6 +7615,208 @@ casos: [
  {h:'2. Reavaliar a necessidade de solução definitiva', p:'Pericardiocentese isolada e repetida não resolve a tendência de reacúmulo.'},
  {h:'3. Considerar via cirúrgica', p:'Discutir janela pericárdica ou pericardiectomia como solução mais definitiva para derrame recorrente refratário.'},
  {h:'Lição de prova', p:'Recorrência apesar de tratamento clínico adequado é, por si só, uma indicação para uma abordagem cirúrgica mais definitiva.'}
+]}
+]
+});
+
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+
+</script>
+
+<!-- ===== MODULO Tamponamento Cardiaco (pericardio|2) - aditivo ===== -->
+<script>Object.assign(window.ASVG=window.ASVG||{},{
+"tampo_pressoes":"<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Igualização das pressões diastólicas</text><line x1=\"70\" y1=\"250\" x2=\"640\" y2=\"250\" stroke=\"#cbb9ac\" stroke-width=\"1.4\"/><text x=\"355\" y=\"272\" fill=\"#cbb9ac\" font-size=\"9.5\" text-anchor=\"middle\">Câmaras cardíacas</text><rect x=\"90\" y=\"70\" width=\"90\" height=\"170\" fill=\"#6db3f2\" fill-opacity=\"0.4\"/><text x=\"135\" y=\"258\" fill=\"#f1e3e0\" font-size=\"9.5\" text-anchor=\"middle\">AD</text><rect x=\"210\" y=\"90\" width=\"90\" height=\"150\" fill=\"#3ddc84\" fill-opacity=\"0.4\"/><text x=\"255\" y=\"258\" fill=\"#f1e3e0\" font-size=\"9.5\" text-anchor=\"middle\">VD</text><rect x=\"330\" y=\"75\" width=\"90\" height=\"165\" fill=\"#f0a93f\" fill-opacity=\"0.4\"/><text x=\"375\" y=\"258\" fill=\"#f1e3e0\" font-size=\"9.5\" text-anchor=\"middle\">AE</text><rect x=\"450\" y=\"80\" width=\"90\" height=\"160\" fill=\"#e8675f\" fill-opacity=\"0.4\"/><text x=\"495\" y=\"258\" fill=\"#f1e3e0\" font-size=\"9.5\" text-anchor=\"middle\">VE</text><line x1=\"90\" y1=\"90\" x2=\"540\" y2=\"90\" stroke=\"#f59f0a\" stroke-width=\"2.6\" stroke-dasharray=\"5 3\"/><text x=\"600\" y=\"94\" fill=\"#f59f0a\" font-size=\"9.4\" font-weight=\"700\">todas ~iguais</text><text x=\"340\" y=\"20\" fill=\"none\"></text><rect x=\"24\" y=\"46\" width=\"0\" height=\"0\"/></svg>",
+"tampo_interdependencia":"<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Interdependência ventricular e pulso paradoxal</text><rect x=\"24\" y=\"46\" width=\"300\" height=\"220\" rx=\"10\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"174\" y=\"70\" fill=\"#6db3f2\" font-weight=\"700\" font-size=\"10.4\" text-anchor=\"middle\">Inspiração</text><ellipse cx=\"174\" cy=\"160\" rx=\"90\" ry=\"70\" fill=\"none\" stroke=\"#6db3f2\" stroke-width=\"2.4\"/><path d=\"M174,100 C160,140 160,180 174,220\" fill=\"none\" stroke=\"#f59f0a\" stroke-width=\"3\"/><text x=\"174\" y=\"246\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">Retorno venoso ao VD aumenta →</text><text x=\"174\" y=\"260\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">septo empurra para o VE → PA cai</text><rect x=\"356\" y=\"46\" width=\"300\" height=\"220\" rx=\"10\" fill=\"#2b2140\" stroke=\"#e8675f\"/><text x=\"506\" y=\"70\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"10.4\" text-anchor=\"middle\">Expiração</text><ellipse cx=\"506\" cy=\"160\" rx=\"90\" ry=\"70\" fill=\"none\" stroke=\"#e8675f\" stroke-width=\"2.4\"/><path d=\"M506,100 C518,140 518,180 506,220\" fill=\"none\" stroke=\"#f59f0a\" stroke-width=\"3\"/><text x=\"506\" y=\"246\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">Septo retorna → VE reenche →</text><text x=\"506\" y=\"260\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">PA sobe de novo</text></svg>",
+"tampo_eco":"<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Sinais ecocardiográficos de tamponamento</text><rect x=\"24\" y=\"46\" width=\"300\" height=\"220\" rx=\"10\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"174\" y=\"70\" fill=\"#6db3f2\" font-weight=\"700\" font-size=\"10.4\" text-anchor=\"middle\">Colapso diastólico de VD</text><circle cx=\"174\" cy=\"160\" r=\"60\" fill=\"#e8675f\" fill-opacity=\"0.3\"/><path d=\"M120,150 Q174,190 228,150\" fill=\"none\" stroke=\"#6db3f2\" stroke-width=\"4\"/><text x=\"174\" y=\"246\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">Parede livre do VD colaba</text><text x=\"174\" y=\"260\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">na diástole (câmara de baixa pressão)</text><rect x=\"356\" y=\"46\" width=\"300\" height=\"220\" rx=\"10\" fill=\"#2b2140\" stroke=\"#f0a93f\"/><text x=\"506\" y=\"70\" fill=\"#f0a93f\" font-weight=\"700\" font-size=\"10.4\" text-anchor=\"middle\">Colapso sistólico de AD</text><circle cx=\"506\" cy=\"160\" r=\"55\" fill=\"#e8675f\" fill-opacity=\"0.3\"/><path d=\"M456,150 Q506,180 556,150\" fill=\"none\" stroke=\"#f0a93f\" stroke-width=\"4\"/><text x=\"506\" y=\"246\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">Mais sensível/precoce; se durar</text><text x=\"506\" y=\"260\" fill=\"#f1e3e0\" font-size=\"8.8\" text-anchor=\"middle\">&gt;1/3 do ciclo, é bem específico</text></svg>",
+"tampo_pulso_paradoxal":"<svg viewBox=\"0 0 680 260\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"260\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Pulso paradoxal: queda inspiratória exagerada da PAS</text><line x1=\"60\" y1=\"210\" x2=\"640\" y2=\"210\" stroke=\"#cbb9ac\" stroke-width=\"1.2\"/><path d=\"M60,120 L100,120 L100,90 L160,90 L160,150 L220,150 L220,95 L280,95 L280,155 L340,155 L340,100 L400,100 L400,160 L460,160 L460,105 L520,105 L520,165 L580,165 L580,110 L640,110\" fill=\"none\" stroke=\"#6db3f2\" stroke-width=\"2.6\"/><text x=\"190\" y=\"178\" fill=\"#e8675f\" font-size=\"9.4\" text-anchor=\"middle\">inspiração: PAS cai &gt;10 mmHg</text><text x=\"460\" y=\"188\" fill=\"#3ddc84\" font-size=\"9.4\" text-anchor=\"middle\">expiração: PAS recupera</text><rect x=\"60\" y=\"224\" width=\"580\" height=\"26\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\"/><text x=\"350\" y=\"242\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\">Mecanismo: interdependência ventricular dentro do saco pericárdico pouco complacente</text></svg>",
+"tampo_conduta":"<svg viewBox=\"0 0 680 260\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"260\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Princípios hemodinâmicos do suporte pré-drenagem</text><rect x=\"24\" y=\"44\" width=\"300\" height=\"90\" rx=\"10\" fill=\"#2b2140\" stroke=\"#3ddc84\"/><text x=\"174\" y=\"66\" fill=\"#3ddc84\" font-weight=\"700\" font-size=\"10.4\" text-anchor=\"middle\">Fazer</text><text x=\"40\" y=\"88\" fill=\"#f1e3e0\" font-size=\"9\">Expansão volêmica cautelosa (ponte)</text><text x=\"40\" y=\"104\" fill=\"#f1e3e0\" font-size=\"9\">Pericardiocentese guiada por eco assim que possível</text><text x=\"40\" y=\"120\" fill=\"#f1e3e0\" font-size=\"9\">Manter respiração espontânea se possível</text><rect x=\"356\" y=\"44\" width=\"300\" height=\"90\" rx=\"10\" fill=\"#2b2140\" stroke=\"#e8675f\"/><text x=\"506\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"10.4\" text-anchor=\"middle\">Evitar</text><text x=\"372\" y=\"88\" fill=\"#f1e3e0\" font-size=\"9\">Ventilação com pressão positiva/intubação</text><text x=\"372\" y=\"104\" fill=\"#f1e3e0\" font-size=\"9\">precoce (piora o retorno venoso)</text><text x=\"372\" y=\"120\" fill=\"#f1e3e0\" font-size=\"9\">Diuréticos e vasodilatadores</text><rect x=\"24\" y=\"150\" width=\"632\" height=\"90\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"40\" y=\"174\" fill=\"#f59f0a\" font-weight=\"700\" font-size=\"10.2\">Nada disso substitui a drenagem</text><text x=\"40\" y=\"196\" fill=\"#f1e3e0\" font-size=\"9\">Volume e cuidados ventilatórios só ganham tempo — o tratamento definitivo</text><text x=\"40\" y=\"212\" fill=\"#f1e3e0\" font-size=\"9\">é sempre a drenagem do líquido pericárdico (pericardiocentese ou janela cirúrgica)</text></svg>"
+});
+</script>
+<script>(function(){ "use strict";
+var A = window.ASVG || {};
+var C = (window.CONTENT = window.CONTENT || {});
+
+C['pericardio|2'] = {
+ name: 'Tamponamento Cardíaco',
+ intro: 'O tamponamento cardíaco é a compressão do coração por líquido pericárdico sob pressão, a ponto de impedir o enchimento diastólico normal — a emergência para a qual todo o raciocínio do módulo de Derrame Pericárdico converge. Reconhecer cedo e drenar é o que separa um choque obstrutivo reversível de uma parada cardíaca.',
+ sub: [
+
+['entendendo','Entendendo do Zero', `
+<p class="ac-p">No módulo anterior, vimos que o pericárdio é uma bolsa fibrosa pouco distensível a curto prazo. Tamponamento é o que acontece quando a pressão dentro dessa bolsa sobe o suficiente para se aproximar (e depois igualar) a pressão dentro das próprias câmaras cardíacas — nesse ponto, o coração para de conseguir se encher direito entre um batimento e outro, porque está sendo espremido de fora para dentro.</p>
+<p class="ac-p">Pense num balão de festa dentro de uma caixa rígida cheia de água: enquanto há folga, o balão enche e esvazia livremente. Se a água aumentar até preencher toda a caixa, o balão passa a competir por espaço com o líquido a cada vez que tenta se expandir — e é exatamente essa competição, entre o volume de sangue tentando entrar no coração e o volume de líquido pericárdico ocupando o mesmo espaço fixo, que define o tamponamento.</p>
+<p class="ac-p">É por isso que o tamponamento é classificado como uma causa de <b>choque obstrutivo</b>: o problema não é bomba fraca (cardiogênico) nem volume insuficiente (hipovolêmico) — é uma barreira mecânica externa impedindo o coração de encher, mesmo que o músculo cardíaco esteja perfeitamente saudável.</p>
+<div class="ac-call"><b>A grande ideia:</b> tamponamento não é sobre o coração falhar em bombear — é sobre o coração ser impedido de encher.</div>
+`],
+
+['fisiopatologia','Fisiopatologia: Igualização das Pressões e Interdependência', `
+<p class="ac-p">À medida que a pressão intrapericárdica sobe, ela passa a se aproximar da pressão diastólica de todas as quatro câmaras cardíacas — átrio direito, ventrículo direito, átrio esquerdo e ventrículo esquerdo tendem a "igualar" suas pressões diastólicas, um achado clássico à monitorização hemodinâmica invasiva (cateterismo direito) que confirma o diagnóstico quando há dúvida.</p>
+<p class="ac-p">Só que o coração ainda precisa lidar com as variações da respiração, e é aí que entra o segundo mecanismo-chave: a <b>interdependência ventricular</b>. Numa inspiração normal, a pressão negativa intratorácica aumenta o retorno venoso para o átrio e ventrículo direitos. Só que, dentro de um pericárdio já cheio e sob pressão, não há espaço extra para o VD crescer sem "roubar" espaço do VE — o septo interventricular literalmente se desloca para dentro do VE. O resultado: o VE enche menos durante a inspiração, ejeta menos volume, e a pressão arterial sistólica cai de forma exagerada.</p>
+${A.tampo_interdependencia||''}
+<p class="ac-p">Essa queda inspiratória exagerada da pressão arterial sistólica (mais de 10 mmHg) é o <b>pulso paradoxal</b> — na verdade não é nada "paradoxal" fisiologicamente (uma pequena queda inspiratória da PAS é normal em qualquer pessoa), o paradoxal é a magnitude exagerada dessa queda, grande o suficiente para, historicamente, sumir a palpação do pulso periférico durante a inspiração.</p>
+${A.tampo_pressoes||''}
+<p class="ac-warn"><b>Pegadinha clássica:</b> o sinal de Kussmaul (aumento da pressão venosa jugular durante a inspiração) é tipicamente <b>ausente</b> no tamponamento — ele é um achado clássico da pericardite constritiva, e essa diferença é um dos pontos mais cobrados na comparação entre as duas condições.</p>
+`],
+
+['etiologias','Etiologias e Fatores de Risco', `
+<p class="ac-p">Qualquer causa de derrame pericárdico pode evoluir para tamponamento — o que muda é o risco relativo. As causas que acumulam líquido <b>rapidamente</b> são as que mais tamponam, mesmo com volumes pequenos: hemopericárdio por dissecção de aorta tipo A, ruptura de parede livre ventricular pós-infarto (geralmente 3 a 7 dias após um IAM transmural extenso), trauma torácico penetrante ou contuso, e complicações iatrogênicas de procedimentos invasivos (cateterismo, implante de marca-passo, ablação).</p>
+<p class="ac-p">Causas inflamatórias e neoplásicas também tamponam, especialmente quando o derrame já é volumoso e algum gatilho acelera o acúmulo (nova infecção, progressão tumoral, anticoagulação concomitante). Um cenário particularmente traiçoeiro é o pós-operatório de cirurgia cardíaca, em que um derrame <b>loculado</b> (compartimentalizado) pode comprimir seletivamente uma única câmara e gerar tamponamento localizado, com quadro clínico e ecocardiográfico atípico em relação ao tamponamento circunferencial clássico.</p>
+<p class="ac-tip"><b>Macete:</b> pense sempre em "quem tampona rápido" — trauma, ruptura, dissecção, iatrogenia — como os cenários de maior alerta na sala de emergência.</p>
+`],
+
+['clinica','Quadro Clínico', `
+<p class="ac-p">A apresentação clássica combina os elementos da <b>tríade de Beck</b>: hipotensão arterial, turgência jugular (pressão venosa central elevada) e bulhas cardíacas hipofonéticas. Na prática, a tríade completa é vista com mais frequência em tamponamentos agudos e graves (como o hemopericárdio traumático); em tamponamentos de instalação mais lenta, os achados podem ser mais sutis e progressivos.</p>
+<p class="ac-p">Taquicardia compensatória e pulso paradoxal (detalhado na fisiopatologia) completam o quadro típico. O paciente frequentemente está ansioso, taquipneico, e pode adotar a <b>posição de Kussmaul</b> — inclinado para frente — na tentativa intuitiva de aliviar o desconforto, num eco do mesmo mecanismo postural já visto na pericardite aguda.</p>
+<p class="ac-p">É essencial lembrar que nem todo tamponamento se apresenta com a tríade completa e pulso paradoxal evidente. Pacientes hipovolêmicos podem desenvolver o chamado <b>tamponamento de baixa pressão</b>, com pressão arterial pouco alterada e pulso paradoxal discreto, apesar de já haver repercussão hemodinâmica significativa — um cenário que exige alto índice de suspeição clínica, não apenas a presença de todos os sinais "de livro".</p>
+`],
+
+['diagnostico','Diagnóstico', `
+<p class="ac-p">O ecocardiograma point-of-care é o exame de escolha na emergência: confirma o derrame, avalia sua distribuição e — o mais importante para o diagnóstico de tamponamento — identifica os sinais de repercussão hemodinâmica. O <b>colapso diastólico do ventrículo direito</b> é um achado sensível, já que o VD é uma câmara de baixa pressão e colaba primeiro quando a pressão externa supera a pressão interna durante a diástole.</p>
+${A.tampo_eco||''}
+<p class="ac-p">O <b>colapso sistólico do átrio direito</b> é ainda mais sensível e costuma aparecer antes do colapso do VD; quando esse colapso dura mais de um terço do ciclo cardíaco, ganha também boa especificidade. Outro achado de apoio é a veia cava inferior pletórica (dilatada) e sem o colabamento inspiratório normal, refletindo a pressão venosa central elevada e represada.</p>
+${A.tampo_pulso_paradoxal||''}
+<p class="ac-p">Quando a dúvida diagnóstica persiste, a monitorização hemodinâmica invasiva confirma a igualização das pressões diastólicas entre as câmaras — mas na prática clínica isso raramente é necessário: a combinação de contexto clínico, tríade de Beck e ecocardiograma à beira do leito já basta para indicar a drenagem na grande maioria dos casos.</p>
+`],
+
+['dd','Diagnóstico Diferencial', `
+<p class="ac-p">Como o tamponamento é uma forma de choque obstrutivo, ele entra no mesmo grupo de diagnóstico diferencial de outras causas obstrutivas de baixo débito — principalmente o <b>pneumotórax hipertensivo</b> (que também cursa com turgência jugular e hipotensão, mas com desvio de traqueia e hipertimpanismo, sem os achados ecocardiográficos de colapso de câmaras) e o <b>tromboembolismo pulmonar maciço</b> (sobrecarga aguda de VD, mas sem derrame pericárdico ao eco).</p>
+<p class="ac-p">A comparação mais cobrada em prova, no entanto, é entre tamponamento e <b>pericardite constritiva</b> (tema de um módulo dedicado): os dois compartilham turgência jugular e sinais de baixo débito, mas se distinguem exatamente pelo sinal de Kussmaul (ausente no tamponamento, presente na constrição) e pelo pulso paradoxal (proeminente no tamponamento, tipicamente ausente ou discreto na constrição pura) — memorizar essa distinção cruzada evita a maior parte dos erros nessa comparação.</p>
+<table class="ac-tbl"><tr><th>Achado</th><th>Tamponamento</th><th>Pericardite constritiva</th></tr>
+<tr><td>Pulso paradoxal</td><td>Proeminente</td><td>Ausente/discreto</td></tr>
+<tr><td>Sinal de Kussmaul</td><td>Ausente</td><td>Presente</td></tr>
+<tr><td>Derrame ao eco</td><td>Presente (geralmente volumoso)</td><td>Pode ser mínimo/ausente</td></tr></table>
+`],
+
+['formas_especiais','Formas Especiais', `
+<p class="ac-p">O <b>tamponamento de baixa pressão</b>, já citado no quadro clínico, merece reforço: ocorre em pacientes hipovolêmicos (desidratação, sangramento concomitante, uso de diuréticos), nos quais as pressões de enchimento já estavam baixas antes do derrame se instalar. A repercussão hemodinâmica aparece com um volume de líquido pericárdico proporcionalmente menor do que o esperado, e a pressão arterial pode estar apenas discretamente reduzida — reforçando que a suspeita clínica não deve depender só da magnitude dos sinais clássicos.</p>
+<p class="ac-p">O <b>tamponamento loculado ou regional</b>, mais comum em pós-operatório de cirurgia cardíaca, comprime seletivamente uma câmara (geralmente o átrio direito, por sua parede mais fina e complacente) sem envolver todo o coração — pode ter ecocardiograma transtorácico enganosamente pouco chamativo, exigindo maior atenção clínica e, às vezes, ecocardiograma transesofágico ou tomografia para confirmação.</p>
+${A.tampo_conduta||''}
+<p class="ac-tip">Em pós-operatório de cirurgia cardíaca com instabilidade e clínica compatível, não esperar um eco transtorácico "clássico" negativo excluir tamponamento — o índice de suspeição clínica continua soberano.</p>
+`],
+
+['tratamento','Tratamento e Conduta', `
+<p class="ac-p">O tratamento definitivo do tamponamento é a <b>drenagem do líquido pericárdico</b>, idealmente por pericardiocentese guiada por ecocardiograma, por via subxifoide. Em cenários específicos — hemopericárdio pós-cirurgia cardíaca recente, dissecção de aorta com necessidade de correção cirúrgica simultânea, ou tamponamento loculado de difícil acesso percutâneo — a drenagem cirúrgica (janela pericárdica) pode ser a via preferida.</p>
+<p class="ac-p">Enquanto a drenagem é preparada, medidas de suporte hemodinâmico servem apenas como <b>ponte temporária</b>, nunca como tratamento definitivo: expansão volêmica cautelosa pode aumentar transitoriamente o retorno venoso e o débito cardíaco, comprando algum tempo. Já diuréticos e vasodilatadores devem ser evitados, pois reduzem ainda mais o volume de enchimento de um coração que já está mecanicamente restrito.</p>
+<p class="ac-p">Um ponto de altíssimo valor prático e de prova: sempre que possível, deve-se <b>evitar intubação orotraqueal e ventilação com pressão positiva</b> antes da drenagem — a pressão positiva intratorácica reduz ainda mais o retorno venoso ao coração direito, podendo precipitar colapso hemodinâmico completo num paciente que já está no limite. Manter a respiração espontânea, sempre que a condição clínica permitir, preserva o principal mecanismo compensatório do paciente até a drenagem.</p>
+<p class="ac-warn"><b>Regra de prova:</b> instabilidade + suspeita de tamponamento = preparar drenagem imediatamente; volume e cuidados com a via aérea são pontes, nunca substitutos da drenagem.</p>
+`]
+
+]};
+
+Object.assign(C['pericardio|2'], {
+
+escores: `<p class="ac-p">Não há um escore numérico validado para tamponamento — o diagnóstico é clínico-ecocardiográfico, combinando os achados abaixo.</p>
+<table class="ac-tbl"><tr><th>Categoria</th><th>Achado</th></tr>
+<tr><td>Clínico</td><td>Tríade de Beck (hipotensão, turgência jugular, bulhas hipofonéticas)</td></tr>
+<tr><td>Clínico</td><td>Pulso paradoxal &gt; 10 mmHg de queda inspiratória da PAS</td></tr>
+<tr><td>Ecocardiográfico</td><td>Colapso diastólico de VD</td></tr>
+<tr><td>Ecocardiográfico</td><td>Colapso sistólico de AD (mais sensível/precoce)</td></tr>
+<tr><td>Ecocardiográfico</td><td>VCI pletórica sem colabamento inspiratório</td></tr>
+<tr><td>Hemodinâmico (cateterismo)</td><td>Igualização das pressões diastólicas entre as câmaras</td></tr></table>`,
+
+dif: `<div class="mm"><div class="mm-card"><h5>Choque obstrutivo (mesmo grupo)</h5><ul><li>Pneumotórax hipertensivo</li><li>TEP maciço</li></ul></div>
+<div class="mm-card"><h5>Diferencial cruzado (mais cobrado)</h5><ul><li>Pericardite constritiva</li><li>Kussmaul: ausente x presente</li><li>Pulso paradoxal: presente x ausente</li></ul></div>
+<div class="mm-card"><h5>Formas especiais</h5><ul><li>Tamponamento de baixa pressão (hipovolêmicos)</li><li>Tamponamento loculado (pós-cirúrgico)</li></ul></div></div>`,
+
+mapa: `<div class="mm">
+<div class="mm-card"><h5>Fisiopatologia</h5><ul><li>Igualização de pressões diastólicas</li><li>Interdependência ventricular</li><li>Pulso paradoxal</li><li>Kussmaul ausente</li></ul></div>
+<div class="mm-card"><h5>Clínica</h5><ul><li>Tríade de Beck</li><li>Taquicardia</li><li>Tamponamento de baixa pressão</li></ul></div>
+<div class="mm-card"><h5>Diagnóstico</h5><ul><li>Eco point-of-care</li><li>Colapso de AD/VD</li><li>VCI pletórica</li></ul></div>
+<div class="mm-card"><h5>Conduta</h5><ul><li>Drenagem = tratamento definitivo</li><li>Volume = ponte</li><li>Evitar pressão positiva</li></ul></div></div>`,
+
+fluxo_dx: `<div class="fx"><div class="fx-node start">Suspeita clínica: choque obstrutivo + tríade de Beck/pulso paradoxal</div><div class="fx-arrow"></div>
+<div class="fx-node">Ecocardiograma point-of-care imediato</div><div class="fx-arrow"></div>
+<div class="fx-node">Confirma derrame + colapso de câmaras (VD diastólico, AD sistólico) + VCI pletórica</div><div class="fx-arrow"></div>
+<div class="fx-node end">Instável → não aguardar mais exames, preparar drenagem</div></div>`,
+
+fluxo_cond: `<div class="fx"><div class="fx-node start">Tamponamento confirmado/altamente suspeito</div><div class="fx-arrow"></div>
+<div class="fx-node">Suporte-ponte: volume cauteloso, evitar pressão positiva/intubação precoce</div><div class="fx-arrow"></div>
+<div class="fx-row">
+<div><div class="fx-node" style="border-color:#3ddc84;color:#3ddc84">Percutâneo: pericardiocentese guiada por eco</div></div>
+<div><div class="fx-node" style="border-color:#f0a93f;color:#f0a93f">Cirúrgico: janela pericárdica (pós-op, loculado, dissecção)</div></div>
+</div><div class="fx-arrow"></div>
+<div class="fx-node end">Tratar a causa de base após estabilização</div></div>`,
+
+vespera: `<p class="ac-call"><b>Tamponamento = choque obstrutivo:</b> o coração não consegue ENCHER, não é problema de força de bombeamento.</p>
+<p class="ac-p">Tríade de Beck: hipotensão + turgência jugular + bulhas hipofonéticas. Pulso paradoxal = queda inspiratória &gt;10mmHg da PAS por interdependência ventricular.</p>
+<p class="ac-tip">Kussmaul <b>ausente</b> no tamponamento (presente na constrictiva) — diferencial mais cobrado.</p>
+<p class="ac-p">Eco: colapso diastólico de VD, colapso sistólico de AD (mais sensível), VCI pletórica.</p>
+<p class="ac-warn">Evitar ventilação com pressão positiva antes de drenar — piora o retorno venoso.</p>
+<p class="ac-p">Tratamento definitivo = drenagem (pericardiocentese ou janela cirúrgica). Volume é só ponte.</p>
+<p class="ac-tip">Tamponamento de baixa pressão (hipovolêmicos) pode não ter todos os sinais clássicos.</p>`,
+
+dicas: `<p class="ac-warn"><b>Erro 1:</b> esperar a tríade de Beck completa para suspeitar — muitos casos são incompletos, principalmente no tamponamento de baixa pressão.</p>
+<p class="ac-warn"><b>Erro 2:</b> confundir tamponamento com pericardite constritiva pelo sinal de Kussmaul — ele é da constritiva, não do tamponamento.</p>
+<p class="ac-warn"><b>Erro 3:</b> intubar/ventilar com pressão positiva antes de garantir a drenagem, sem necessidade absoluta — piora o retorno venoso já comprometido.</p>
+<p class="ac-warn"><b>Erro 4:</b> tratar com diuréticos por causa da turgência jugular — reduz ainda mais o enchimento cardíaco.</p>
+<p class="ac-warn"><b>Erro 5:</b> descartar tamponamento por um eco transtorácico pouco chamativo em pós-operatório de cirurgia cardíaca — pensar em derrame loculado.</p>
+<p class="ac-tip">Colapso sistólico do átrio direito costuma aparecer antes do colapso do VD — fique atento a ele.</p>`,
+
+checklist: [
+ 'Entendo por que o tamponamento é um choque obstrutivo (impede o enchimento, não a ejeção)',
+ 'Sei explicar a igualização das pressões diastólicas entre as câmaras',
+ 'Entendo o mecanismo de interdependência ventricular e do pulso paradoxal',
+ 'Sei que o sinal de Kussmaul é ausente no tamponamento e presente na constritiva',
+ 'Reconheço a tríade de Beck e sei que pode estar incompleta',
+ 'Conheço os sinais ecocardiográficos (colapso de VD e AD, VCI pletórica)',
+ 'Sei diferenciar tamponamento de pericardite constritiva e de outras causas de choque obstrutivo',
+ 'Reconheço as formas especiais (baixa pressão, loculado) e por que exigem atenção redobrada',
+ 'Sei que a drenagem é o tratamento definitivo e por que evitar ventilação com pressão positiva antes dela'
+]
+});
+
+Object.assign(C['pericardio|2'], {
+
+questoes: [
+{stem:'Por que o tamponamento cardíaco é classificado como uma causa de choque obstrutivo, e não cardiogênico?', opts:['Porque o miocárdio está estruturalmente doente','Porque uma barreira mecânica externa impede o enchimento diastólico, não a força de contração','Porque há perda de volume circulante','Porque há vasodilatação sistêmica exagerada'], correct:1, expl:'No tamponamento o músculo cardíaco costuma estar saudável; o problema é a compressão externa impedindo o enchimento diastólico normal — por isso é obstrutivo, não cardiogênico.'},
+{stem:'Qual é o mecanismo fisiopatológico do pulso paradoxal no tamponamento cardíaco?', opts:['Vasoconstrição periférica reflexa durante a inspiração','Interdependência ventricular: o aumento do retorno venoso ao VD na inspiração desloca o septo para o VE, reduzindo seu enchimento','Redução do débito cardíaco por bradicardia inspiratória','Broncoespasmo associado durante a inspiração'], correct:1, expl:'Dentro de um pericárdio pouco complacente, o aumento do retorno venoso ao VD na inspiração desloca o septo interventricular para o VE, reduzindo seu enchimento e causando queda exagerada da PAS.'},
+{stem:'Qual achado diferencia classicamente tamponamento cardíaco de pericardite constritiva?', opts:['Presença de derrame pericárdico em ambos','Sinal de Kussmaul ausente no tamponamento e presente na constritiva','Turgência jugular presente apenas na constritiva','Pulso paradoxal presente apenas na constritiva'], correct:1, expl:'O sinal de Kussmaul (aumento da PVJ na inspiração) é classicamente ausente no tamponamento e presente na pericardite constritiva — um dos diferenciais mais cobrados em prova.'},
+{stem:'Qual é o achado ecocardiográfico considerado mais sensível e precoce para tamponamento cardíaco?', opts:['Colapso diastólico do ventrículo esquerdo','Colapso sistólico do átrio direito','Hipertrofia do ventrículo direito','Dilatação do átrio esquerdo'], correct:1, expl:'O colapso sistólico do átrio direito costuma ser o achado mais sensível e precoce, aparecendo antes do colapso diastólico do ventrículo direito.'},
+{stem:'Homem de 60 anos, 5 dias após IAM anterior extenso, evolui subitamente com hipotensão, turgência jugular e bulhas hipofonéticas. Qual é a hipótese diagnóstica mais provável e sua causa?', opts:['Reinfarto por trombose de stent','Tamponamento cardíaco por ruptura de parede livre ventricular','Embolia pulmonar maciça','Dissecção de aorta espontânea'], correct:1, expl:'A ruptura de parede livre do ventrículo é uma complicação mecânica clássica do IAM, tipicamente entre o 3º e 7º dia, causando hemopericárdio agudo e tamponamento.'},
+{stem:'Por que a ventilação com pressão positiva deve ser evitada, quando possível, antes da drenagem de um tamponamento cardíaco?', opts:['Aumenta o risco de pneumotórax','Reduz ainda mais o retorno venoso ao coração direito, podendo precipitar colapso hemodinâmico','Causa arritmias ventriculares diretamente','Não tem relação com a hemodinâmica do tamponamento'], correct:1, expl:'A pressão positiva intratorácica reduz o retorno venoso, que já está comprometido pelo tamponamento — isso pode precipitar colapso hemodinâmico completo.'},
+{stem:'O que caracteriza o chamado "tamponamento de baixa pressão"?', opts:['Ocorre apenas em pacientes hipertensos crônicos','Ocorre em pacientes hipovolêmicos, com repercussão hemodinâmica apesar de sinais clássicos discretos','É uma forma de tamponamento que nunca requer drenagem','Está associado exclusivamente a derrames muito pequenos'], correct:1, expl:'Em pacientes hipovolêmicos, as pressões de enchimento já eram baixas antes do derrame, então a repercussão hemodinâmica pode ocorrer com sinais clássicos (PA, pulso paradoxal) menos evidentes.'},
+{stem:'Qual é o tratamento definitivo do tamponamento cardíaco?', opts:['Diuréticos endovenosos em altas doses','Expansão volêmica agressiva isolada','Drenagem do líquido pericárdico (pericardiocentese ou janela cirúrgica)','Vasodilatadores associados a betabloqueador'], correct:2, expl:'A drenagem é o único tratamento definitivo; volume e outras medidas de suporte são apenas pontes temporárias até a drenagem.'},
+{stem:'Em qual contexto de pós-operatório de cirurgia cardíaca deve-se suspeitar de tamponamento mesmo com ecocardiograma transtorácico pouco chamativo?', opts:['Derrame circunferencial pequeno e estável','Derrame loculado comprimindo seletivamente uma câmara, geralmente o átrio direito','Ausência total de líquido pericárdico','Presença isolada de atrito pericárdico sem outros sinais'], correct:1, expl:'Derrames loculados pós-cirúrgicos podem comprimir seletivamente uma câmara com ecocardiograma transtorácico enganosamente discreto, exigindo alto índice de suspeição clínica.'},
+{stem:'O que confirma a igualização das pressões diastólicas no tamponamento cardíaco, quando há necessidade de investigação hemodinâmica invasiva?', opts:['Radiografia de tórax seriada','Cateterismo cardíaco direito, mostrando pressões diastólicas semelhantes entre as câmaras','Eletrocardiograma de repouso','Ressonância magnética cardíaca isolada'], correct:1, expl:'O cateterismo direito pode demonstrar a igualização das pressões diastólicas entre átrios e ventrículos, confirmando o diagnóstico em casos de dúvida.'},
+{stem:'Qual das alternativas representa corretamente uma medida de suporte temporário (ponte) no tamponamento cardíaco, até a drenagem?', opts:['Diuréticos de alça em dose plena','Vasodilatadores arteriais potentes','Expansão volêmica cautelosa, mantendo respiração espontânea quando possível','Betabloqueador endovenoso imediato'], correct:2, expl:'Expansão volêmica cautelosa pode aumentar temporariamente o retorno venoso e o débito cardíaco, servindo como ponte enquanto a drenagem é preparada; manter respiração espontânea preserva o principal mecanismo compensatório.'},
+{stem:'Qual mecanismo diferencia o tamponamento de outras causas de choque obstrutivo, como o pneumotórax hipertensivo?', opts:['Ambos apresentam colapso de câmaras cardíacas ao ecocardiograma','O tamponamento apresenta derrame pericárdico e colapso de câmaras ao eco; o pneumotórax hipertensivo apresenta desvio de traqueia e hipertimpanismo, sem derrame pericárdico','O pneumotórax hipertensivo sempre cursa com pulso paradoxal mais intenso que o tamponamento','Não há diferenças clínicas relevantes entre as duas condições'], correct:1, expl:'Apesar de ambos serem causas de choque obstrutivo com turgência jugular e hipotensão, o tamponamento tem derrame pericárdico e colapso de câmaras ao eco, enquanto o pneumotórax hipertensivo tem achados torácicos próprios (desvio de traqueia, hipertimpanismo) e ecocardiograma sem derrame.'}
+],
+
+flashcards: [
+{front:'Por que o tamponamento cardíaco é um choque obstrutivo e não cardiogênico?', back:'Porque uma barreira mecânica externa (o derrame sob pressão) impede o ENCHIMENTO diastólico — o músculo cardíaco costuma estar saudável.', type:'basic'},
+{front:'O que caracteriza a {{tríade de Beck}}?', back:'tríade de Beck', type:'cloze'},
+{front:'Cite os 3 elementos da tríade de Beck.', back:'Hipotensão, turgência jugular e bulhas cardíacas hipofonéticas.', type:'basic'},
+{front:'O que é pulso paradoxal e qual seu mecanismo?', back:'Queda inspiratória exagerada (>10mmHg) da PA sistólica, por interdependência ventricular dentro de um pericárdio pouco complacente.', type:'basic'},
+{front:'O sinal de Kussmaul é {{ausente}} no tamponamento e {{presente}} na pericardite constritiva.', back:'ausente / presente', type:'cloze'},
+{front:'Qual achado ecocardiográfico é o mais sensível/precoce no tamponamento?', back:'Colapso sistólico do átrio direito (geralmente precede o colapso diastólico do VD).', type:'basic'},
+{front:'Cite os 3 principais achados ecocardiográficos do tamponamento.', back:'Colapso diastólico de VD, colapso sistólico de AD, VCI pletórica sem colabamento inspiratório.', type:'basic'},
+{front:'O que é o "tamponamento de baixa pressão" e em quem ocorre?', back:'Ocorre em pacientes hipovolêmicos; repercussão hemodinâmica com sinais clássicos (PA, pulso paradoxal) menos evidentes.', type:'basic'},
+{front:'Por que evitar ventilação com pressão positiva antes de drenar um tamponamento?', back:'Ela reduz ainda mais o retorno venoso ao coração direito, podendo precipitar colapso hemodinâmico.', type:'basic'},
+{front:'Qual é o tratamento definitivo do tamponamento cardíaco?', back:'Drenagem do líquido pericárdico — pericardiocentese guiada por eco ou janela pericárdica cirúrgica.', type:'basic'},
+{front:'Cite 2 causas de hemopericárdio que classicamente tamponam com pequeno volume.', back:'Ruptura de parede livre ventricular pós-IAM (3-7 dias) e dissecção de aorta tipo A.', type:'basic'},
+{front:'O que confirma a igualização das pressões diastólicas no tamponamento, se houver dúvida?', back:'Cateterismo cardíaco direito (monitorização hemodinâmica invasiva).', type:'basic'},
+{front:'Por que o tamponamento loculado pós-cirurgia cardíaca é traiçoeiro?', back:'Comprime seletivamente uma câmara (geralmente AD) e pode ter ecocardiograma transtorácico pouco chamativo.', type:'basic'},
+{front:'Cite 2 medidas de suporte-ponte (não definitivas) no tamponamento.', back:'Expansão volêmica cautelosa e manutenção de respiração espontânea (evitar intubação precoce).', type:'basic'}
+],
+
+casos: [
+{t:'A tríade que não veio completa', stem:'Mulher de 45 anos, desidratada por gastroenterite há 3 dias, desenvolve derrame pericárdico neoplásico conhecido que piora subitamente. Apresenta PA 100x70 (basal era 130x80), taquicardia e discreta turgência jugular, sem pulso paradoxal evidente à palpação.', passos:[
+ {h:'1. Reconhecer o padrão atípico', p:'Hipovolemia prévia pode mascarar os sinais clássicos — tamponamento de baixa pressão.'},
+ {h:'2. Não descartar pelo exame físico incompleto', p:'A ausência de pulso paradoxal evidente não exclui tamponamento nesse contexto.'},
+ {h:'3. Confirmar com eco point-of-care', p:'Buscar colapso de câmaras e VCI pletórica independentemente da magnitude dos sinais clássicos.'},
+ {h:'Lição de prova', p:'Em pacientes hipovolêmicos, o tamponamento pode se apresentar de forma sutil — suspeitar mesmo sem a tríade completa.'}
+]},
+{t:'O paciente que piorou ao ser intubado', stem:'Homem de 58 anos, com tamponamento por derrame neoplásico, está taquipneico e agitado. Antes de providenciar a drenagem, a equipe decide intubá-lo para "estabilizar a via aérea". Após a indução e ventilação com pressão positiva, o paciente evolui com colapso hemodinâmico súbito.', passos:[
+ {h:'1. Reconhecer o erro', p:'A ventilação com pressão positiva reduziu ainda mais o retorno venoso já comprometido pelo tamponamento.'},
+ {h:'2. Priorizar a drenagem', p:'Sempre que possível, a drenagem deve ser priorizada antes de medidas que possam piorar a hemodinâmica.'},
+ {h:'3. Reverter o quadro', p:'Drenagem de emergência (pericardiocentese) para reverter o colapso hemodinâmico precipitado.'},
+ {h:'Lição de prova', p:'Evitar pressão positiva antes da drenagem não é um detalhe — pode ser a diferença entre estabilização e parada cardíaca.'}
+]},
+{t:'O eco "quase normal" do pós-operatório', stem:'Paciente no 2º dia de pós-operatório de troca valvar aórtica apresenta hipotensão progressiva e baixo débito urinário. Ecocardiograma transtorácico é relatado como "sem derrame pericárdico significativo".', passos:[
+ {h:'1. Manter a suspeita clínica', p:'O contexto pós-cirúrgico levanta a possibilidade de derrame loculado, de difícil visualização ao ETT.'},
+ {h:'2. Aprofundar a investigação', p:'Considerar ecocardiograma transesofágico ou tomografia para avaliar coleções loculadas.'},
+ {h:'3. Confirmar e tratar', p:'Identificado o derrame loculado comprimindo uma câmara, proceder à drenagem cirúrgica.'},
+ {h:'Lição de prova', p:'Um ecocardiograma transtorácico "tranquilo" não exclui tamponamento loculado em pós-operatório de cirurgia cardíaca — a suspeita clínica deve prevalecer.'}
 ]}
 ]
 });
