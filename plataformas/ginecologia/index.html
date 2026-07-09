@@ -486,7 +486,7 @@ let uid=null, unsubCentral=null;
 
 // ---------- estado ----------
 let S=loadLocal();
-function blankState(){return {_updated:0, done:{}, srs:{}, cards:[], notes:{}, dia:{}, diaSeen:{}, hl:{}, qSeen:0, qRight:0, xp:0};}
+function blankState(){return {_updated:0, done:{}, srs:{}, cards:[], notes:{}, dia:{}, diaSeen:{}, hl:{}, touch:{}, qSeen:0, qRight:0, xp:0};}
 function loadLocal(){
   let base=blankState();
   try{
@@ -503,7 +503,7 @@ function mergeState(a,b){
   if(!b) return a;
   const out={...a};
   out._updated=Math.max(a._updated||0,b._updated||0);
-  for(const m of ['done','srs','notes','dia','diaSeen','hl']){
+  for(const m of ['done','srs','notes','dia','diaSeen','hl','touch']){
     out[m]={...(a[m]||{}),...(b[m]||{})};        // união de mapas (local vence empate via ordem)
   }
   out.cards=[...(a.cards||[]),...(b.cards||[])].filter((c,i,arr)=>arr.findIndex(x=>x.id===c.id)===i);
@@ -1102,6 +1102,9 @@ if(!document.getElementById('ac-style')){
   .mod-card.done h4{margin:0;text-align:center}
   .mod-card.done .tag-soon{display:none}
   .mod-card.done:hover{box-shadow:0 8px 24px var(--accent-soft)}
+  .mod-status{margin-top:6px;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;border-radius:12px;padding:2px 9px;font-weight:600}
+  .mod-status.st-done{background:rgba(61,220,132,.16);color:#3ddc84}
+  .mod-status.st-progress{background:var(--accent-soft);color:var(--accent)}
   #gate .gate-name{font-family:'Parisienne',cursive!important}
   #gate .gate-supra{font-family:'Cormorant Garamond',serif!important}
   #gate .gate-desc{font-family:'Inter',sans-serif!important}
@@ -1144,14 +1147,16 @@ function chName(ck){ try{return CH[ck]||'';}catch(e){return '';} }
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
 window.viewModule=function(arg){
+  try{ var _ss=S(); _ss.touch=_ss.touch||{}; _ss.touch[arg]=Date.now(); }catch(e){}
   var p=arg.split('|'),ck=p[0],idx=p[1];
   var d=C[arg]; var name=modName(ck,idx);
   if(arg!==mArg){mArg=arg;mTab='teoria';mSub=(d&&d.sub?d.sub[0][0]:'entendendo');}
   var tabsH=MT.map(function(t){return '<div class="tab '+(t[0]===mTab?'active':'')+'" onclick="acTab(\''+arg+'\',\''+t[0]+'\')">'+t[1]+'</div>';}).join('');
   var inner = d ? renderTab(arg,d) : '<div class="placeholder">Conteúdo em breve</div>';
+  var fcTop = (d && d.name) ? d.name : name; // usa o mesmo texto (Title Case) que fccList()/fccCatMap(), evita duplicar matéria no filtro da Central
   return '<div class="view"><div class="page-title">'+gICON()+'<h1>'+name+'</h1></div>'+
     '<p class="page-sub">'+chName(ck)+(d?' · conteúdo atualizado 2025/2026':' · estrutura pronta')+'</p>'+
-    '<div class="fc-create" onclick="acFC(\''+name.replace(/'/g,'')+'\')">＋ Criar flashcard</div>'+
+    '<div class="fc-create" onclick="acFC(\''+fcTop.replace(/'/g,'')+'\')">＋ Criar flashcard</div>'+
     '<div class="tabs">'+tabsH+'</div>'+inner+gfoot()+'</div>';
 };
 window.acTab=function(arg,k){ mTab=k; if(k==='teoria'&&!mSub){var d=C[arg]; mSub=d&&d.sub?d.sub[0][0]:'entendendo';} document.getElementById('main').innerHTML=window.viewModule(arg); };
@@ -1552,7 +1557,9 @@ window.viewModules=function(){
     h+='<div class="mod-div">'+CH[ck].replace(/^\d+\.\s/,'')+'</div><div class="mod-cards">';
     (MODULES[ck]||[]).forEach(function(m,i){
       var arg=ck+'|'+i, done=!!C[arg];
-      if(done) h+='<div class="mod-card done" onclick="navigate(\'module\',\''+arg+'\')"><h4>'+m+'</h4></div>';
+      var frac=done?moduleFraction(arg):0;
+      var status=frac>=0.5?'<span class="mod-status st-done">Concluído</span>':(frac>0?'<span class="mod-status st-progress">Em andamento</span>':'');
+      if(done) h+='<div class="mod-card done" onclick="navigate(\'module\',\''+arg+'\')"><h4>'+m+'</h4>'+status+'</div>';
       else h+='<div class="mod-card" onclick="navigate(\'module\',\''+arg+'\')"><h4>'+m+'</h4><span class="tag-soon">em breve</span></div>';
     });
     h+='</div>';
@@ -1584,6 +1591,7 @@ try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.vie
    isso, qualquer bloco aditivo que os use quebra com ReferenceError. */
 window.S=S; window.save=save; window.ph=ph; window.gfoot=gfoot; window.toast=toast;
 window.colorTool=colorTool; window.clozeFront=clozeFront; window.clozeBack=clozeBack;
+window.moduleFraction=moduleFraction; window.modName=modName; window.chName=chName;
 })();
 
 </script>
@@ -2078,6 +2086,81 @@ if(!document.getElementById('fcc-style')){
   `;
   document.head.appendChild(st);
 }
+
+/* ---- Estudar por filtro + SM-2 (aditivo, skill elid-platform-upgrade #1) ---- */
+var FCC_STUDYING=false, FCC_QUEUE=[], FCC_QIDX=0, fccsSide='front';
+function fccFilteredCards(){
+  return fccList().filter(function(c){
+    if(fccTop!=='__all' && fccNorm(c.top||'Geral')!==fccTop) return false;
+    if(fccDiff!=='__all' && fccDifficulty(c.id)!==fccDiff) return false;
+    if(fccOrigin!=='__all' && c.origin!==fccOrigin) return false;
+    if(fccQ){
+      var hay=(fccStrip(c.front)+' '+fccStrip(c.back)+' '+(c.top||'')).toLowerCase();
+      if(hay.indexOf(fccQ.toLowerCase())<0) return false;
+    }
+    return true;
+  });
+}
+window.fccStartStudy=function(){
+  FCC_QUEUE=fccFilteredCards(); FCC_QIDX=0; fccsSide='front'; FCC_STUDYING=true;
+  document.getElementById('main').innerHTML=viewFcCenter();
+};
+window.fccStudyExit=function(){
+  FCC_STUDYING=false;
+  document.getElementById('main').innerHTML=viewFcCenter();
+};
+function fccStudyRenderCard(){
+  if(FCC_QIDX>=FCC_QUEUE.length){
+    return '<div class="fc-done"><div class="fc-done-i">✓</div><h3>Sessão concluída!</h3>'+
+      '<p class="page-sub">Você revisou '+FCC_QUEUE.length+' card(s) — todos avançaram na Revisão Espaçada.</p>'+
+      '<button class="caso-btn" onclick="fccStudyExit()">Voltar à Central ↩</button></div>';
+  }
+  var c=FCC_QUEUE[FCC_QIDX];
+  return '<p class="page-sub">Card '+(FCC_QIDX+1)+' de '+FCC_QUEUE.length+' · toque para ver a resposta e classifique.</p>'+
+    '<div class="fcwrap fc-enter"><div class="fcx" onclick="fccStudyToggle()"><div class="fcx-card" id="fccs-card">'+
+    '<span class="fcx-tag" id="fccs-tag">frente · toque para virar</span><div class="fcx-c" id="fccs-c">'+c.front+'</div></div></div>'+
+    '<div id="fccs-controls" class="fc-controls"><span class="fc-hint">Toque no card para ver a resposta</span></div></div>';
+}
+window.fccStudyToggle=function(){
+  var card=document.getElementById('fccs-card'); var c=FCC_QUEUE[FCC_QIDX]; if(!card||!c) return;
+  var showBack=(fccsSide==='front');
+  card.classList.remove('fcx-anim'); void card.offsetWidth; card.classList.add('fcx-anim');
+  setTimeout(function(){
+    fccsSide=showBack?'back':'front';
+    var el=document.getElementById('fccs-c'), t=document.getElementById('fccs-tag');
+    if(el) el.innerHTML=showBack?(c.back||''):c.front;
+    if(t) t.textContent=showBack?'verso · toque para voltar':'frente · toque para virar';
+    if(showBack){
+      var ctr=document.getElementById('fccs-controls');
+      if(ctr) ctr.innerHTML='<div class="grade">'+
+        '<button class="g-again" onclick="fccStudyGrade(0)"><b>Errei</b><span>rever já</span></button>'+
+        '<button class="g-hard" onclick="fccStudyGrade(3)"><b>Difícil</b><span>em breve</span></button>'+
+        '<button class="g-good" onclick="fccStudyGrade(4)"><b>Bom</b><span>no prazo</span></button>'+
+        '<button class="g-easy" onclick="fccStudyGrade(5)"><b>Fácil</b><span>+ tempo</span></button></div>';
+    }
+  },160);
+};
+window.fccStudyGrade=function(q){
+  var c=FCC_QUEUE[FCC_QIDX]; if(!c) return;
+  var ss=window.S(); ss.cards=ss.cards||[];
+  if(!ss.cards.some(function(x){return x.id===c.id;})) ss.cards.push({id:c.id,front:c.front,back:c.back,type:c.type||'basic',top:c.top});
+  if(window.__srsReview) window.__srsReview(c.id,q); else window.save();
+  fccsSide='front'; FCC_QIDX++;
+  document.getElementById('main').innerHTML=viewFcCenter();
+};
+function viewFccStudy(){
+  return '<div class="view"><div class="page-title">'+(ICONS.srs||'')+'<h1>Estudando · Central de Flashcards</h1></div>'+
+    '<button class="caso-btn" style="margin-bottom:14px" onclick="fccStudyExit()">← Sair da sessão</button>'+
+    fccStudyRenderCard()+(window.gfoot?window.gfoot():'')+'</div>';
+}
+var _fccOrigView=window.viewFcCenter;
+window.viewFcCenter=function(){
+  if(FCC_STUDYING) return viewFccStudy();
+  var html=_fccOrigView();
+  var n=fccFilteredCards().length;
+  var btn='<button class="caso-btn" style="margin:2px 0 16px" onclick="fccStartStudy()">▶ Estudar estes '+n+' card'+(n===1?'':'s')+'</button>';
+  return html.replace(/(<div class="fcc-toolbar">[\s\S]*?<\/div>)/, '$1'+btn);
+};
 })();</script>
 <script>Object.assign(window.ASVG=window.ASVG||{},{"sop_eixo": "<svg viewBox=\"0 0 680 400\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\">\n<defs><marker id=\"arrowhead\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"3\" orient=\"auto\"><path d=\"M0 0 L6 3 L0 6 Z\" style=\"fill:var(--accent)\"/></marker></defs>\n<text x=\"340\" y=\"24\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"700\" style=\"fill:var(--accent)\">O circulo vicioso da fisiopatologia da SOP</text>\n<rect x=\"20\" y=\"50\" width=\"180\" height=\"60\" rx=\"10\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1.4\"/><text x=\"110.0\" y=\"78.0\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--ink)\">Hipotalamo</text><text x=\"110.0\" y=\"96.0\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--muted)\">pulsos de GnRH acelerados</text>\n<rect x=\"250\" y=\"50\" width=\"180\" height=\"60\" rx=\"10\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.4\"/><text x=\"340.0\" y=\"78.0\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--accent)\">Hipofise</text><text x=\"340.0\" y=\"96.0\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--muted)\">LH \u2b06 desproporcional ao FSH</text>\n<rect x=\"480\" y=\"50\" width=\"180\" height=\"60\" rx=\"10\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1.4\"/><text x=\"570.0\" y=\"78.0\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--ink)\">Ovario \u2014 Teca</text><text x=\"570.0\" y=\"96.0\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--muted)\">LH estimula producao de androgenios</text>\n<path d=\"M200 80 L250 80\" fill=\"none\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" marker-end=\"url(#arrowhead)\"/>\n<path d=\"M430 80 L480 80\" fill=\"none\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" marker-end=\"url(#arrowhead)\"/>\n<rect x=\"480\" y=\"150\" width=\"180\" height=\"60\" rx=\"10\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.4\"/><text x=\"570.0\" y=\"178.0\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--accent)\">Androgenios \u2b06</text><text x=\"570.0\" y=\"196.0\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--muted)\">testosterona, androstenediona</text>\n<path d=\"M570 110 L570 150\" fill=\"none\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" marker-end=\"url(#arrowhead)\"/>\n<rect x=\"250\" y=\"150\" width=\"180\" height=\"60\" rx=\"10\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1.4\"/><text x=\"340.0\" y=\"178.0\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--ink)\">Tecido adiposo / Insulina</text><text x=\"340.0\" y=\"196.0\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--muted)\">hiperinsulinemia sinergiza com LH na teca</text>\n<path d=\"M340 240 L340 180\" fill=\"none\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" marker-end=\"url(#arrowhead)\"/>\n<rect x=\"20\" y=\"150\" width=\"180\" height=\"60\" rx=\"10\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1.4\"/><text x=\"110.0\" y=\"178.0\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--ink)\">Figado</text><text x=\"110.0\" y=\"196.0\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--muted)\">\u2b07 producao de SHBG</text>\n<path d=\"M200 180 L250 180\" fill=\"none\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" marker-end=\"url(#arrowhead)\"/>\n<rect x=\"20\" y=\"240\" width=\"180\" height=\"60\" rx=\"10\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.4\"/><text x=\"110.0\" y=\"268.0\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--accent)\">Testosterona livre \u2b06</text><text x=\"110.0\" y=\"286.0\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--muted)\">menos SHBG = mais fracao livre ativa</text>\n<path d=\"M110 240 L110 210\" fill=\"none\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" marker-end=\"url(#arrowhead)\"/>\n<rect x=\"250\" y=\"240\" width=\"180\" height=\"60\" rx=\"10\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1.4\"/><text x=\"340.0\" y=\"268.0\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--ink)\">Foliculogenese</text><text x=\"340.0\" y=\"286.0\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--muted)\">FSH relativamente baixo trava a maturacao</text>\n<path d=\"M480 180 L430 240\" fill=\"none\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" marker-end=\"url(#arrowhead)\"/>\n<rect x=\"480\" y=\"240\" width=\"180\" height=\"60\" rx=\"10\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1.4\"/><text x=\"570.0\" y=\"268.0\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--ink)\">AMH \u2b06</text><text x=\"570.0\" y=\"286.0\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--muted)\">muitos foliculos antrais acumulados</text>\n<path d=\"M340 270 L250 270\" fill=\"none\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" marker-end=\"url(#arrowhead)\"/>\n<path d=\"M570 210 Q610 270 480 270\" fill=\"none\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" stroke-dasharray=\"4 3\" marker-end=\"url(#arrowhead)\"/>\n<rect x=\"180\" y=\"320\" width=\"340\" height=\"55\" rx=\"14\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.4\"/><text x=\"350.0\" y=\"345.5\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--accent)\">Resultado: anovulacao cronica</text><text x=\"350.0\" y=\"363.5\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--muted)\">estrogenio sem oposicao de progesterona \u2192 risco de hiperplasia/CA de endometrio</text>\n<path d=\"M150 300 L280 320\" fill=\"none\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" marker-end=\"url(#arrowhead)\"/>\n<path d=\"M570 300 L420 320\" fill=\"none\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" marker-end=\"url(#arrowhead)\"/>\n</svg>", "sop_rotterdam": "<svg viewBox=\"0 0 680 380\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\">\n<text x=\"340\" y=\"24\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"700\" style=\"fill:var(--accent)\">Criterios de Rotterdam \u2014 2 de 3, apos excluir mimetizadores</text>\n<circle cx=\"260\" cy=\"200\" r=\"120\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.6\" fill-opacity=\"0.5\"/>\n<circle cx=\"420\" cy=\"200\" r=\"120\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.6\" fill-opacity=\"0.5\"/>\n<circle cx=\"340\" cy=\"330\" r=\"120\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.6\" fill-opacity=\"0.5\"/>\n<text x=\"180\" y=\"140\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--ink)\">Oligo/</text>\n<text x=\"180\" y=\"156\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--ink)\">anovula\u00e7\u00e3o</text>\n<text x=\"500\" y=\"140\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--ink)\">Hiperandrogenismo</text>\n<text x=\"500\" y=\"156\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--muted)\">cl\u00ednico ou laboratorial</text>\n<text x=\"340\" y=\"410\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" style=\"fill:var(--ink)\">PCOM</text>\n<text x=\"340\" y=\"1\" text-anchor=\"middle\"></text>\n<text x=\"340\" y=\"205\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"700\" style=\"fill:var(--accent)\">2 de 3</text>\n<text x=\"340\" y=\"224\" text-anchor=\"middle\" font-size=\"11\" style=\"fill:var(--ink)\">= SOP</text>\n<text x=\"340\" y=\"240\" text-anchor=\"middle\" font-size=\"9.5\" style=\"fill:var(--muted)\">(diagn\u00f3stico de exclus\u00e3o)</text>\n<text x=\"340\" y=\"365\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--muted)\">USG (\u226520 fol\u00edculos/ov\u00e1rio) ou AMH elevado \u2014 s\u00f3 adultas</text>\n</svg>", "sop_fenotipos": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\"><text x=\"340\" y=\"24\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"700\" style=\"fill:var(--accent)\">Fen\u00f3tipos de Rotterdam \u2014 do mais ao menos grave</text><rect x=\"30\" y=\"46\" width=\"150\" height=\"220\" rx=\"14\" style=\"fill:var(--panel);stroke:#e8675f\" stroke-width=\"1.6\"/><circle cx=\"105.0\" cy=\"78\" r=\"20\" style=\"fill:#e8675f\" fill-opacity=\".18\" stroke=\"#e8675f\" stroke-width=\"1.6\"/><text x=\"105.0\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"700\" style=\"fill:#e8675f\">A</text><text x=\"105.0\" y=\"112\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" style=\"fill:var(--ink)\">Cl\u00e1ssico completo</text><text x=\"44\" y=\"136\" font-size=\"10\" style=\"fill:var(--muted)\">Hiperandrog.</text><text x=\"162\" y=\"136\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" style=\"fill:#3ddc84\">\u2713</text><text x=\"44\" y=\"160\" font-size=\"10\" style=\"fill:var(--muted)\">Anovula\u00e7\u00e3o</text><text x=\"162\" y=\"160\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" style=\"fill:#3ddc84\">\u2713</text><text x=\"44\" y=\"184\" font-size=\"10\" style=\"fill:var(--muted)\">PCOM</text><text x=\"162\" y=\"184\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" style=\"fill:#3ddc84\">\u2713</text><rect x=\"50\" y=\"202\" width=\"110\" height=\"50\" rx=\"4\" style=\"fill:#e8675f\" fill-opacity=\".55\"/><text x=\"105.0\" y=\"266\" text-anchor=\"middle\" font-size=\"9\" style=\"fill:var(--muted)\">risco metab\u00f3lico</text><rect x=\"190\" y=\"46\" width=\"150\" height=\"220\" rx=\"14\" style=\"fill:var(--panel);stroke:#f0a93f\" stroke-width=\"1.6\"/><circle cx=\"265.0\" cy=\"78\" r=\"20\" style=\"fill:#f0a93f\" fill-opacity=\".18\" stroke=\"#f0a93f\" stroke-width=\"1.6\"/><text x=\"265.0\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"700\" style=\"fill:#f0a93f\">B</text><text x=\"265.0\" y=\"112\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" style=\"fill:var(--ink)\">Cl\u00e1ssico</text><text x=\"204\" y=\"136\" font-size=\"10\" style=\"fill:var(--muted)\">Hiperandrog.</text><text x=\"322\" y=\"136\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" style=\"fill:#3ddc84\">\u2713</text><text x=\"204\" y=\"160\" font-size=\"10\" style=\"fill:var(--muted)\">Anovula\u00e7\u00e3o</text><text x=\"322\" y=\"160\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" style=\"fill:#3ddc84\">\u2713</text><text x=\"204\" y=\"184\" font-size=\"10\" style=\"fill:var(--muted)\">PCOM</text><text x=\"322\" y=\"184\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" style=\"fill:var(--muted)\">\u2014</text><rect x=\"210\" y=\"212\" width=\"110\" height=\"40\" rx=\"4\" style=\"fill:#f0a93f\" fill-opacity=\".55\"/><text x=\"265.0\" y=\"266\" text-anchor=\"middle\" font-size=\"9\" style=\"fill:var(--muted)\">risco metab\u00f3lico</text><rect x=\"350\" y=\"46\" width=\"150\" height=\"220\" rx=\"14\" style=\"fill:var(--panel);stroke:var(--accent)\" stroke-width=\"1.6\"/><circle cx=\"425.0\" cy=\"78\" r=\"20\" style=\"fill:var(--accent)\" fill-opacity=\".18\" stroke=\"var(--accent)\" stroke-width=\"1.6\"/><text x=\"425.0\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"700\" style=\"fill:var(--accent)\">C</text><text x=\"425.0\" y=\"112\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" style=\"fill:var(--ink)\">Ovulat\u00f3rio</text><text x=\"364\" y=\"136\" font-size=\"10\" style=\"fill:var(--muted)\">Hiperandrog.</text><text x=\"482\" y=\"136\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" style=\"fill:#3ddc84\">\u2713</text><text x=\"364\" y=\"160\" font-size=\"10\" style=\"fill:var(--muted)\">Anovula\u00e7\u00e3o</text><text x=\"482\" y=\"160\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" style=\"fill:var(--muted)\">\u2014</text><text x=\"364\" y=\"184\" font-size=\"10\" style=\"fill:var(--muted)\">PCOM</text><text x=\"482\" y=\"184\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" style=\"fill:#3ddc84\">\u2713</text><rect x=\"370\" y=\"222\" width=\"110\" height=\"30\" rx=\"4\" style=\"fill:var(--accent)\" fill-opacity=\".55\"/><text x=\"425.0\" y=\"266\" text-anchor=\"middle\" font-size=\"9\" style=\"fill:var(--muted)\">risco metab\u00f3lico</text><rect x=\"510\" y=\"46\" width=\"150\" height=\"220\" rx=\"14\" style=\"fill:var(--panel);stroke:#3ddc84\" stroke-width=\"1.6\"/><circle cx=\"585.0\" cy=\"78\" r=\"20\" style=\"fill:#3ddc84\" fill-opacity=\".18\" stroke=\"#3ddc84\" stroke-width=\"1.6\"/><text x=\"585.0\" y=\"84\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"700\" style=\"fill:#3ddc84\">D</text><text x=\"585.0\" y=\"112\" text-anchor=\"middle\" font-size=\"10.5\" font-weight=\"700\" style=\"fill:var(--ink)\">N\u00e3o-hiperandrog\u00eanico</text><text x=\"524\" y=\"136\" font-size=\"10\" style=\"fill:var(--muted)\">Hiperandrog.</text><text x=\"642\" y=\"136\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" style=\"fill:var(--muted)\">\u2014</text><text x=\"524\" y=\"160\" font-size=\"10\" style=\"fill:var(--muted)\">Anovula\u00e7\u00e3o</text><text x=\"642\" y=\"160\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" style=\"fill:#3ddc84\">\u2713</text><text x=\"524\" y=\"184\" font-size=\"10\" style=\"fill:var(--muted)\">PCOM</text><text x=\"642\" y=\"184\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" style=\"fill:#3ddc84\">\u2713</text><rect x=\"530\" y=\"232\" width=\"110\" height=\"20\" rx=\"4\" style=\"fill:#3ddc84\" fill-opacity=\".55\"/><text x=\"585.0\" y=\"266\" text-anchor=\"middle\" font-size=\"9\" style=\"fill:var(--muted)\">risco metab\u00f3lico</text></svg>", "sop_clinica": "<svg viewBox=\"0 0 500 420\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\">\n<text x=\"250\" y=\"22\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"700\" style=\"fill:var(--accent)\">Onde procurar os achados de hiperandrogenismo</text>\n<circle cx=\"250\" cy=\"80\" r=\"34\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1.6\"/>\n<path d=\"M195 150 Q250 120 305 150 L300 320 Q250 345 200 320 Z\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1.6\"/>\n<path d=\"M195 155 L120 220 M305 155 L380 220\" style=\"stroke:var(--line)\" stroke-width=\"1.6\" fill=\"none\"/>\n<circle cx=\"250\" cy=\"65\" r=\"6\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.4\"/>\n<line x1=\"120\" y1=\"86\" x2=\"150\" y2=\"60\" style=\"stroke:var(--accent)\" stroke-width=\"1.4\"/>\n<text x=\"60\" y=\"55\" font-size=\"10.5\" font-weight=\"700\" style=\"fill:var(--accent)\">Hirsutismo / acne</text>\n<text x=\"60\" y=\"68\" font-size=\"9.5\" style=\"fill:var(--muted)\">face \u2014 escala de Ferriman-Gallwey</text>\n<line x1=\"270\" y1=\"112\" x2=\"320\" y2=\"112\" style=\"stroke:var(--accent)\" stroke-width=\"1.4\"/>\n<text x=\"325\" y=\"108\" font-size=\"10.5\" font-weight=\"700\" style=\"fill:var(--accent)\">Acantose nigricans</text>\n<text x=\"325\" y=\"121\" font-size=\"9.5\" style=\"fill:var(--muted)\">pesco\u00e7o e axilas (resist. insul\u00ednica)</text>\n<line x1=\"250\" y1=\"46\" x2=\"250\" y2=\"14\" style=\"stroke:var(--accent)\" stroke-width=\"1.4\"/>\n<text x=\"250\" y=\"8\" text-anchor=\"middle\" font-size=\"0\"></text>\n<line x1=\"220\" y1=\"70\" x2=\"140\" y2=\"140\" style=\"stroke:var(--accent)\" stroke-width=\"1.4\"/>\n<text x=\"40\" y=\"148\" font-size=\"10.5\" font-weight=\"700\" style=\"fill:var(--accent)\">Alopecia</text>\n<text x=\"40\" y=\"161\" font-size=\"9.5\" style=\"fill:var(--muted)\">padr\u00e3o androgen\u00e9tico</text>\n<line x1=\"250\" y1=\"240\" x2=\"330\" y2=\"270\" style=\"stroke:var(--accent)\" stroke-width=\"1.4\"/>\n<text x=\"335\" y=\"266\" font-size=\"10.5\" font-weight=\"700\" style=\"fill:var(--accent)\">Obesidade central</text>\n<text x=\"335\" y=\"279\" font-size=\"9.5\" style=\"fill:var(--muted)\">\u224850% das pacientes</text>\n<line x1=\"250\" y1=\"300\" x2=\"170\" y2=\"330\" style=\"stroke:var(--accent)\" stroke-width=\"1.4\"/>\n<text x=\"30\" y=\"340\" font-size=\"10.5\" font-weight=\"700\" style=\"fill:var(--accent)\">Irregularidade menstrual</text>\n<text x=\"30\" y=\"353\" font-size=\"9.5\" style=\"fill:var(--muted)\">oligo/amenorreia desde a menarca</text>\n<rect x=\"60\" y=\"376\" width=\"380\" height=\"34\" rx=\"10\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.2\"/>\n<text x=\"250\" y=\"397\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--accent)\">+ infertilidade por anovula\u00e7\u00e3o (queixa que costuma trazer a paciente \u00e0 consulta)</text>\n</svg>", "sop_lab": "<svg viewBox=\"0 0 680 260\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\"><text x=\"340\" y=\"22\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"700\" style=\"fill:var(--accent)\">Painel de exclus\u00e3o antes de fechar o diagn\u00f3stico</text><rect x=\"20\" y=\"42\" width=\"210\" height=\"90\" rx=\"12\" style=\"fill:var(--panel);stroke:var(--accent)\" stroke-width=\"1.4\"/><circle cx=\"46\" cy=\"68\" r=\"12\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.3\"/><path d=\"M41 68 l4 4 l7 -8\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"66\" y=\"72\" font-size=\"11.5\" font-weight=\"700\" style=\"fill:var(--ink)\">\u03b2-hCG</text><text x=\"36\" y=\"98\" font-size=\"9.8\" style=\"fill:var(--muted)\">Excluir gravidez</text><rect x=\"240\" y=\"42\" width=\"210\" height=\"90\" rx=\"12\" style=\"fill:var(--panel);stroke:var(--accent)\" stroke-width=\"1.4\"/><circle cx=\"266\" cy=\"68\" r=\"12\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.3\"/><path d=\"M261 68 l4 4 l7 -8\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"286\" y=\"72\" font-size=\"11.5\" font-weight=\"700\" style=\"fill:var(--ink)\">TSH</text><text x=\"256\" y=\"98\" font-size=\"9.8\" style=\"fill:var(--muted)\">Excluir tireoidopatia</text><rect x=\"460\" y=\"42\" width=\"210\" height=\"90\" rx=\"12\" style=\"fill:var(--panel);stroke:var(--accent)\" stroke-width=\"1.4\"/><circle cx=\"486\" cy=\"68\" r=\"12\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.3\"/><path d=\"M481 68 l4 4 l7 -8\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"506\" y=\"72\" font-size=\"11.5\" font-weight=\"700\" style=\"fill:var(--ink)\">Prolactina</text><text x=\"476\" y=\"98\" font-size=\"9.8\" style=\"fill:var(--muted)\">Excluir hiperprolactinemia</text><rect x=\"20\" y=\"144\" width=\"210\" height=\"90\" rx=\"12\" style=\"fill:var(--panel);stroke:var(--accent)\" stroke-width=\"1.4\"/><circle cx=\"46\" cy=\"170\" r=\"12\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.3\"/><path d=\"M41 170 l4 4 l7 -8\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"66\" y=\"174\" font-size=\"11.5\" font-weight=\"700\" style=\"fill:var(--ink)\">17-OH-progesterona</text><text x=\"36\" y=\"200\" font-size=\"9.8\" style=\"fill:var(--muted)\">Excluir HAC n\u00e3o cl\u00e1ssica</text><rect x=\"240\" y=\"144\" width=\"210\" height=\"90\" rx=\"12\" style=\"fill:var(--panel);stroke:var(--accent)\" stroke-width=\"1.4\"/><circle cx=\"266\" cy=\"170\" r=\"12\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.3\"/><path d=\"M261 170 l4 4 l7 -8\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"286\" y=\"174\" font-size=\"11.5\" font-weight=\"700\" style=\"fill:var(--ink)\">DHEAS</text><text x=\"256\" y=\"200\" font-size=\"9.8\" style=\"fill:var(--muted)\">Origem adrenal do androg\u00eanio</text><rect x=\"460\" y=\"144\" width=\"210\" height=\"90\" rx=\"12\" style=\"fill:var(--panel);stroke:var(--accent)\" stroke-width=\"1.4\"/><circle cx=\"486\" cy=\"170\" r=\"12\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.3\"/><path d=\"M481 170 l4 4 l7 -8\" style=\"stroke:var(--accent)\" stroke-width=\"1.8\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><text x=\"506\" y=\"174\" font-size=\"11.5\" font-weight=\"700\" style=\"fill:var(--ink)\">Testosterona livre</text><text x=\"476\" y=\"200\" font-size=\"9.8\" style=\"fill:var(--muted)\">Confirmar hiperandrogenismo</text></svg>", "sop_tto": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\">\n<text x=\"340\" y=\"22\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"700\" style=\"fill:var(--accent)\">Indu\u00e7\u00e3o de ovula\u00e7\u00e3o \u2014 por que letrozol \u00e9 1\u00aa linha na SOP</text>\n<text x=\"170\" y=\"44\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" style=\"fill:var(--muted)\">Taxa de ovula\u00e7\u00e3o</text>\n<rect x=\"90\" y=\"60\" width=\"60\" height=\"140\" rx=\"6\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.3\"/>\n<rect x=\"90\" y=\"120\" width=\"60\" height=\"80\" rx=\"6\" style=\"fill:var(--accent)\"/>\n<text x=\"120\" y=\"112\" text-anchor=\"middle\" font-size=\"10\" style=\"fill:var(--muted)\">Clomifeno</text>\n<text x=\"120\" y=\"215\" text-anchor=\"middle\" font-size=\"9.5\" style=\"fill:var(--muted)\">\u2248 60-70%</text>\n<rect x=\"190\" y=\"60\" width=\"60\" height=\"140\" rx=\"6\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.3\"/>\n<rect x=\"190\" y=\"96\" width=\"60\" height=\"104\" rx=\"6\" style=\"fill:var(--accent)\"/>\n<text x=\"220\" y=\"88\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"700\" style=\"fill:var(--accent)\">Letrozol</text>\n<text x=\"220\" y=\"215\" text-anchor=\"middle\" font-size=\"9.5\" style=\"fill:var(--accent)\">\u2248 75-85%</text>\n<line x1=\"70\" y1=\"200\" x2=\"270\" y2=\"200\" style=\"stroke:var(--line)\" stroke-width=\"1.2\"/>\n<text x=\"500\" y=\"44\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" style=\"fill:var(--muted)\">Nascido vivo</text>\n<rect x=\"420\" y=\"60\" width=\"60\" height=\"140\" rx=\"6\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.3\"/>\n<rect x=\"420\" y=\"150\" width=\"60\" height=\"50\" rx=\"6\" style=\"fill:var(--accent)\"/>\n<text x=\"450\" y=\"142\" text-anchor=\"middle\" font-size=\"10\" style=\"fill:var(--muted)\">Clomifeno</text>\n<text x=\"450\" y=\"215\" text-anchor=\"middle\" font-size=\"9.5\" style=\"fill:var(--muted)\">refer\u00eancia</text>\n<rect x=\"520\" y=\"60\" width=\"60\" height=\"140\" rx=\"6\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.3\"/>\n<rect x=\"520\" y=\"128\" width=\"60\" height=\"72\" rx=\"6\" style=\"fill:var(--accent)\"/>\n<text x=\"550\" y=\"120\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"700\" style=\"fill:var(--accent)\">Letrozol</text>\n<text x=\"550\" y=\"215\" text-anchor=\"middle\" font-size=\"9.5\" style=\"fill:var(--accent)\">superior</text>\n<line x1=\"400\" y1=\"200\" x2=\"600\" y2=\"200\" style=\"stroke:var(--line)\" stroke-width=\"1.2\"/>\n<rect x=\"60\" y=\"240\" width=\"560\" height=\"40\" rx=\"10\" style=\"fill:var(--accent-soft);stroke:var(--accent)\" stroke-width=\"1.2\"/>\n<text x=\"340\" y=\"264\" text-anchor=\"middle\" font-size=\"10.5\" style=\"fill:var(--accent)\">Diretrizes 2018/2023: letrozol supera o clomifeno em ovula\u00e7\u00e3o e nascido vivo na SOP</text>\n</svg>", "sop_seguimento": "<svg viewBox=\"0 0 680 260\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\"><text x=\"340\" y=\"22\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"700\" style=\"fill:var(--accent)\">Rastreio obrigat\u00f3rio no seguimento a longo prazo</text><text x=\"180\" y=\"56\" text-anchor=\"end\" font-size=\"11\" style=\"fill:var(--ink)\">DM2 / pr\u00e9-diabetes</text><rect x=\"190\" y=\"42\" width=\"360\" height=\"20\" rx=\"6\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1\"/><rect x=\"190\" y=\"42\" width=\"350\" height=\"20\" rx=\"6\" style=\"fill:var(--accent)\" fill-opacity=\".7\"/><text x=\"180\" y=\"90\" text-anchor=\"end\" font-size=\"11\" style=\"fill:var(--ink)\">Dislipidemia</text><rect x=\"190\" y=\"76\" width=\"360\" height=\"20\" rx=\"6\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1\"/><rect x=\"190\" y=\"76\" width=\"280\" height=\"20\" rx=\"6\" style=\"fill:var(--accent)\" fill-opacity=\".7\"/><text x=\"180\" y=\"124\" text-anchor=\"end\" font-size=\"11\" style=\"fill:var(--ink)\">Risco cardiovascular</text><rect x=\"190\" y=\"110\" width=\"360\" height=\"20\" rx=\"6\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1\"/><rect x=\"190\" y=\"110\" width=\"280\" height=\"20\" rx=\"6\" style=\"fill:var(--accent)\" fill-opacity=\".7\"/><text x=\"180\" y=\"158\" text-anchor=\"end\" font-size=\"11\" style=\"fill:var(--ink)\">CA de endom\u00e9trio</text><rect x=\"190\" y=\"144\" width=\"360\" height=\"20\" rx=\"6\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1\"/><rect x=\"190\" y=\"144\" width=\"280\" height=\"20\" rx=\"6\" style=\"fill:var(--accent)\" fill-opacity=\".7\"/><text x=\"180\" y=\"192\" text-anchor=\"end\" font-size=\"11\" style=\"fill:var(--ink)\">Apneia do sono</text><rect x=\"190\" y=\"178\" width=\"360\" height=\"20\" rx=\"6\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1\"/><rect x=\"190\" y=\"178\" width=\"210\" height=\"20\" rx=\"6\" style=\"fill:var(--accent)\" fill-opacity=\".7\"/><text x=\"180\" y=\"226\" text-anchor=\"end\" font-size=\"11\" style=\"fill:var(--ink)\">Ansiedade / depress\u00e3o</text><rect x=\"190\" y=\"212\" width=\"360\" height=\"20\" rx=\"6\" style=\"fill:var(--panel);stroke:var(--line)\" stroke-width=\"1\"/><rect x=\"190\" y=\"212\" width=\"280\" height=\"20\" rx=\"6\" style=\"fill:var(--accent)\" fill-opacity=\".7\"/></svg>"});</script>
 <script>(function(){
@@ -2146,41 +2229,53 @@ if(!document.getElementById('cycle-style')){
     border-radius:20px;padding:9px 22px;font-size:.84rem;font-weight:600}
 
   /* ===== Eixo HHO progressivo (reformulação) ===== */
-  .cyc-axis-grid{display:grid;grid-template-columns:150px 1fr 170px;gap:14px;align-items:stretch;margin:16px 0}
+  .cyc-axis-grid{display:grid;grid-template-columns:135px 1fr 155px;gap:12px;align-items:stretch;margin:16px 0}
   @media(max-width:820px){.cyc-axis-grid{grid-template-columns:1fr}}
-  .cyc-hpanel,.cyc-epanel{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:14px}
-  .cyc-hpanel-title,.cyc-epanel-title{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-  .cyc-hpanel-empty{font-size:.78rem;color:var(--muted);line-height:1.5}
-  .cyc-hchip{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:12px;margin-bottom:7px;cursor:pointer;
+  .cyc-hpanel,.cyc-epanel{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:12px}
+  .cyc-hpanel-title,.cyc-epanel-title{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .cyc-hpanel-empty{font-size:.76rem;color:var(--muted);line-height:1.5}
+  .cyc-hchip{display:flex;align-items:center;gap:7px;padding:7px 8px;border-radius:12px;margin-bottom:7px;cursor:pointer;
     background:color-mix(in srgb, var(--hc,var(--accent)) 14%, transparent);transition:transform .15s}
   .cyc-hchip:hover{transform:translateX(2px)}
+  .cyc-hchip:active{transform:scale(.95)}
   .cyc-hchip i{width:10px;height:10px;border-radius:50%;background:var(--hc,var(--accent));flex:none;
     box-shadow:0 0 0 3px color-mix(in srgb, var(--hc,var(--accent)) 22%, transparent);animation:cycChipPulse 1.8s ease-in-out infinite}
-  .cyc-hchip b{font-size:.8rem;color:var(--ink);font-weight:700}
+  .cyc-hchip b{font-size:.76rem;color:var(--ink);font-weight:700}
   @keyframes cycChipPulse{0%,100%{opacity:1}50%{opacity:.45}}
   .cyc-epanel-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-  .cyc-epanel-list li{font-size:.78rem;color:var(--ink);opacity:.9;padding-left:16px;position:relative;line-height:1.4}
+  .cyc-epanel-list li{font-size:.76rem;color:var(--ink);opacity:.9;padding-left:16px;position:relative;line-height:1.4}
   .cyc-epanel-list li::before{content:'✓';position:absolute;left:0;color:#3ddc84;font-weight:700}
   .cyc-epanel-list li:last-child{color:var(--accent);font-weight:700;opacity:1}
-  .cyc-axis-wrap{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:10px;cursor:pointer;
-    position:relative;min-height:260px;display:flex;align-items:center;justify-content:center}
+  .cyc-axis-wrap{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:8px;cursor:pointer;
+    position:relative;min-height:380px;display:flex;align-items:center;justify-content:center}
   .cyc-axis-wrap::after{content:'toque para reviver a animação';position:absolute;bottom:8px;right:14px;
-    font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);opacity:.7}
-  .cyc-axis-svg{width:100%;height:auto;max-width:460px}
-  .cyc-organ{opacity:.25;filter:grayscale(1) brightness(.8);transition:opacity 1s ease,filter 1s ease}
+    font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);opacity:.7}
+  .cyc-axis-svg{width:100%;height:auto;max-width:640px}
+  .cyc-organ{opacity:.22;filter:grayscale(1) brightness(.8);transition:opacity 1s ease,filter 1s ease}
   .cyc-organ.active{opacity:1;filter:none}
-  .cyc-organ.glow{filter:drop-shadow(0 0 6px var(--accent))}
-  .cyc-organ ellipse,.cyc-organ circle.cyc-organ-bg,.cyc-organ>circle,.cyc-organ>path{fill:none;stroke:var(--accent);stroke-width:2}
-  .cyc-lbl{font-size:9px;text-anchor:middle;fill:var(--muted);font-family:inherit}
+  .cyc-organ.glow{filter:drop-shadow(0 0 7px var(--accent))}
+  .cyc-organ ellipse,.cyc-organ rect,.cyc-organ path.cyc-shape,.cyc-organ .cyc-organ-bg{fill:none;stroke:var(--accent);stroke-width:2.2}
+  .cyc-organ .cyc-tube{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-dasharray:2 3;opacity:.7}
+  .cyc-lbl{font-size:10px;text-anchor:middle;fill:var(--muted);font-family:inherit;letter-spacing:.02em}
   .cyc-conn{fill:none;stroke:var(--line);stroke-width:1.6;stroke-dasharray:3 4}
   .cyc-conn-fb-neg{stroke:#e8675f;stroke-dasharray:2 3;animation:cycDash 1.2s linear infinite}
   .cyc-conn-fb-pos{stroke:#3ddc84;stroke-dasharray:2 3;animation:cycDash .8s linear infinite}
   @keyframes cycDash{to{stroke-dashoffset:-12}}
   .cyc-p{opacity:.95}
-  .cyc-p-gnrh{fill:#AB47BC}.cyc-p-fsh{fill:#4FC3F7}.cyc-p-lh{fill:#FFB300}
-  .cyc-p-e2,.cyc-p-e2b{fill:#E91E63}.cyc-p-p4{fill:#8E24AA}
+  .cyc-p-gnrh .cyc-pcore{fill:#AB47BC}.cyc-p-fsh .cyc-pcore{fill:#4FC3F7}.cyc-p-lh .cyc-pcore{fill:#FFB300}
+  .cyc-p-e2 .cyc-pcore,.cyc-p-e2b .cyc-pcore{fill:#E91E63}.cyc-p-p4 .cyc-pcore{fill:#8E24AA}
+  .cyc-p-gnrh .cyc-pspark{stroke:#AB47BC}.cyc-p-fsh .cyc-pspark,.cyc-p-fsh .cyc-phalo{stroke:#4FC3F7}
+  .cyc-p-lh .cyc-pspark{stroke:#FFB300}.cyc-p-e2 .cyc-pspark,.cyc-p-e2b .cyc-pspark{stroke:#E91E63}
+  .cyc-p-p4 .cyc-pspark,.cyc-p-p4 .cyc-phalo{stroke:#8E24AA}
+  .cyc-pspark{fill:none;stroke-width:1.4;stroke-linecap:round;transform-origin:center;animation:cycSparkSpin 1.4s linear infinite}
+  .cyc-phalo{fill:none;stroke-width:1;opacity:.5;transform-origin:center;animation:cycHaloPulse 1.6s ease-in-out infinite}
+  @keyframes cycSparkSpin{to{transform:rotate(360deg)}}
+  @keyframes cycHaloPulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.15;transform:scale(1.5)}}
   .cyc-axis-wrap.replay .cyc-organ.active{animation:cycReveal .6s ease both}
   @keyframes cycReveal{from{transform:scale(.9);opacity:.5}to{transform:scale(1);opacity:1}}
+  .cyc-p-hit .cyc-pcore{animation:cycHit .7s ease 1}
+  @keyframes cycHit{0%,100%{r:3.4}40%{r:8}}
+  .cyc-p-gnrh.cyc-p-hit,.cyc-p-fsh.cyc-p-hit,.cyc-p-lh.cyc-p-hit,.cyc-p-e2.cyc-p-hit,.cyc-p-p4.cyc-p-hit{filter:brightness(1.7)}
   .cyc-chart-empty{font-size:.78rem;color:var(--muted);text-align:center;padding:18px 0}
   `;
   document.head.appendChild(cst);
@@ -2258,40 +2353,71 @@ function stageEvents(dd){ var idx=stageIndex(dd), out=[]; for(var i=0;i<=idx;i++
 function hormonesPanel(dd){
   var items=HORMONES.filter(function(h){return dd>=h.unlock;});
   if(!items.length) return '<div class="cyc-hpanel-empty">Nenhum hormônio liberado ainda — avance nos módulos para desbloquear o eixo hormonal.</div>';
-  return items.map(function(h){ return '<div class="cyc-hchip" style="--hc:'+h.color+'" title="'+h.nm+'"><i></i><b>'+h.nm+'</b></div>'; }).join('');
+  return items.map(function(h){ return '<div class="cyc-hchip" style="--hc:'+h.color+'" title="Tocar '+h.nm+'" onclick="window.pulseHormone&&window.pulseHormone(\''+h.key+'\')"><i></i><b>'+h.nm+'</b></div>'; }).join('');
 }
 function eventsPanel(dd){ return '<ul class="cyc-epanel-list">'+stageEvents(dd).map(function(e){return '<li>'+e+'</li>';}).join('')+'</ul>'; }
 function stripSvgTag(s){ return s.replace(/^<svg[^>]*>/,'').replace(/<\/svg>\s*$/,''); }
+var CYC_SPARK='<g class="cyc-pspark"><line x1="0" y1="-6" x2="0" y2="-9"/><line x1="0" y1="6" x2="0" y2="9"/><line x1="-6" y1="0" x2="-9" y2="0"/><line x1="6" y1="0" x2="9" y2="0"/><line x1="-4.5" y1="-4.5" x2="-6.5" y2="-6.5"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/></g>';
+var CYC_HALO='<circle class="cyc-phalo" r="7.5"/>';
+function cycParticle(cls,dur,path,deco){
+  return '<g class="cyc-p '+cls+'"><animateMotion dur="'+dur+'" repeatCount="indefinite" path="'+path+'"/>'+deco+'<circle class="cyc-pcore" r="3.4"/></g>';
+}
 function hpoAxisSVG(dd){
   var st=stageIndex(dd); function on(n){return st>=n;}
   var fbCls = on(5)?'cyc-conn-fb-pos':(on(4)?'cyc-conn-fb-neg':'');
   var particles='';
-  if(on(1)) particles+='<circle class="cyc-p cyc-p-gnrh" r="3.4"><animateMotion dur="2.6s" repeatCount="indefinite" path="M100,74 L100,148"/></circle>';
-  if(on(2)) particles+='<circle class="cyc-p cyc-p-fsh" r="3.4"><animateMotion dur="2.4s" repeatCount="indefinite" path="M120,162 L358,158"/></circle>';
-  if(on(4)) particles+='<circle class="cyc-p cyc-p-e2" r="3.2"><animateMotion dur="2.8s" repeatCount="indefinite" path="M400,150 C300,55 180,55 106,92"/></circle>'+
-                        '<circle class="cyc-p cyc-p-e2b" r="3" opacity=".85"><animateMotion dur="2.2s" repeatCount="indefinite" path="M405,178 L405,232"/></circle>';
-  if(on(5)) particles+='<circle class="cyc-p cyc-p-lh" r="3.6"><animateMotion dur="1.8s" repeatCount="indefinite" path="M120,158 L358,152"/></circle>';
-  if(on(7)) particles+='<circle class="cyc-p cyc-p-p4" r="3.2"><animateMotion dur="2.6s" repeatCount="indefinite" path="M405,178 L405,232"/></circle>';
-  return '<svg class="cyc-axis-svg" viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">'+
-   '<path class="cyc-conn" d="M100,74 L100,148"/>'+
-   '<path class="cyc-conn" d="M120,162 L358,158"/>'+
-   (on(4)?'<path class="cyc-conn '+fbCls+'" d="M400,150 C300,55 180,55 106,92"/>':'')+
-   '<path class="cyc-conn" d="M405,178 L405,232"/>'+
+  if(on(1)) particles+=cycParticle('cyc-p-gnrh','2.6s','M140,96 L140,150',CYC_SPARK);
+  if(on(2)) particles+=cycParticle('cyc-p-fsh','2.4s','M175,172 C280,172 350,160 412,150',CYC_HALO);
+  if(on(4)) particles+=cycParticle('cyc-p-e2','2.8s','M470,112 C350,10 220,10 150,80',CYC_HALO)+
+                        cycParticle('cyc-p-e2b','2.2s','M470,188 L470,255',CYC_HALO);
+  if(on(5)) particles+=cycParticle('cyc-p-lh','1.8s','M175,168 C280,168 350,158 412,148',CYC_SPARK);
+  if(on(7)) particles+=cycParticle('cyc-p-p4','2.6s','M470,188 L470,255',CYC_HALO);
+  return '<svg class="cyc-axis-svg" viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg">'+
+   '<path class="cyc-conn" d="M140,96 L140,150"/>'+
+   '<path class="cyc-conn" d="M175,172 C280,172 350,160 412,150"/>'+
+   (on(4)?'<path class="cyc-conn '+fbCls+'" d="M470,112 C350,10 220,10 150,80"/>':'')+
+   '<path class="cyc-conn" d="M470,188 L470,255"/>'+
    particles+
-   '<g class="cyc-organ'+(on(1)?' active':'')+'" transform="translate(68,28)">'+
-     '<ellipse cx="30" cy="30" rx="28" ry="24"/><path d="M12 26c4-10 32-10 36 0"/>'+
-     '<text x="30" y="68" class="cyc-lbl">Hipotálamo</text></g>'+
-   '<g class="cyc-organ'+(on(2)?' active':'')+(on(5)?' glow':'')+'" transform="translate(80,138)">'+
-     '<circle cx="20" cy="20" r="18"/><text x="20" y="48" class="cyc-lbl">Hipófise</text></g>'+
-   '<g class="cyc-organ active" transform="translate(352,108)">'+
-     '<circle cx="50" cy="50" r="46" class="cyc-organ-bg"/>'+
-     '<svg x="6" y="6" width="88" height="88" viewBox="0 0 120 120">'+stripSvgTag(follicleSVG(dd))+'</svg>'+
-     '<text x="50" y="112" class="cyc-lbl">Ovário</text></g>'+
-   '<g class="cyc-organ'+(on(4)?' active':'')+'" transform="translate(348,222)">'+
-     '<svg x="0" y="0" width="110" height="60" viewBox="0 0 120 100">'+stripSvgTag(endometrioSVG(dd))+'</svg>'+
-     '<text x="55" y="74" class="cyc-lbl">Endométrio</text></g>'+
+   '<g class="cyc-organ'+(on(1)?' active':'')+'" transform="translate(80,30)">'+
+     '<path class="cyc-shape" d="M10,35 C8,15 35,2 60,5 C90,2 112,18 108,38 C112,55 85,68 58,64 C30,68 6,55 10,35 Z"/>'+
+     '<text x="58" y="84" class="cyc-lbl">Hipotálamo</text></g>'+
+   '<g class="cyc-organ'+(on(2)?' active':'')+(on(5)?' glow':'')+'" transform="translate(105,150)">'+
+     '<rect class="cyc-shape" x="0" y="0" width="70" height="44" rx="22"/>'+
+     '<text x="35" y="60" class="cyc-lbl">Hipófise</text></g>'+
+   '<g class="cyc-organ active" transform="translate(410,110)">'+
+     '<ellipse class="cyc-shape cyc-organ-bg" cx="60" cy="40" rx="58" ry="38" transform="rotate(-12 60 40)"/>'+
+     '<svg x="10" y="-4" width="100" height="88" viewBox="0 0 120 120">'+stripSvgTag(follicleSVG(dd))+'</svg>'+
+     '<text x="60" y="94" class="cyc-lbl">Ovário</text></g>'+
+   '<g class="cyc-organ'+(on(4)?' active':'')+'" transform="translate(400,255)">'+
+     '<path class="cyc-tube" d="M30,20 C15,8 3,10 6,26"/>'+
+     '<path class="cyc-tube" d="M110,20 C125,8 137,10 134,26"/>'+
+     '<path class="cyc-shape" d="M30,20 C15,45 15,80 35,98 C48,108 92,108 105,98 C125,80 125,45 110,20 C95,5 75,0 70,0 C65,0 45,5 30,20 Z"/>'+
+     '<svg x="10" y="14" width="110" height="86" viewBox="0 0 120 100">'+stripSvgTag(endometrioSVG(dd))+'</svg>'+
+     '<text x="70" y="124" class="cyc-lbl">Útero / Endométrio</text></g>'+
    '</svg>';
 }
+var HORMONE_TONE={fsh:440,e2:587,lh:880,p4:330,inhb:494,inha:392};
+function playHormoneTone(key){
+  try{
+    var Ctx=window.AudioContext||window.webkitAudioContext; if(!Ctx) return;
+    var ctx=new Ctx(), t0=ctx.currentTime;
+    var o=ctx.createOscillator(), g=ctx.createGain();
+    o.type='sine'; o.frequency.setValueAtTime(HORMONE_TONE[key]||440,t0);
+    g.gain.setValueAtTime(.0001,t0); g.gain.exponentialRampToValueAtTime(.32,t0+.03); g.gain.exponentialRampToValueAtTime(.0001,t0+.5);
+    o.connect(g); g.connect(ctx.destination); o.start(t0); o.stop(t0+.55);
+  }catch(e){}
+}
+function pulseHormone(key){
+  var svg=document.querySelector('.cyc-axis-svg'); if(!svg) return;
+  var found=false;
+  svg.querySelectorAll('.cyc-p-'+key).forEach(function(el){
+    found=true;
+    var am=el.querySelector('animateMotion'); if(am){ try{ am.beginElement(); }catch(e){} }
+    el.classList.remove('cyc-p-hit'); void el.getBoundingClientRect(); el.classList.add('cyc-p-hit');
+  });
+  if(found) playHormoneTone(key);
+}
+window.pulseHormone=pulseHormone;
 function hormoneChartSVG(curDay){
   var W=680,H=210,padL=8,padR=8,padT=10,padB=10;
   var x=function(dd){ return padL+(dd-1)/27*(W-padL-padR); };
@@ -2500,8 +2626,6 @@ function bindBook(){
   checkOvulationTrigger();
   var ax=document.querySelector('.cyc-axis-wrap');
   if(ax) ax.onclick=replayAxis;
-  var hp=document.querySelector('.cyc-hpanel');
-  if(hp) hp.onclick=replayAxis;
 }
 
 function viewDashboard(nm){
@@ -2540,8 +2664,25 @@ function viewDashboard(nm){
       '<div class="card qa" onclick="navigate(\'srs\')"><h3>Revisão Espaçada</h3><p>Seus flashcards no prazo.</p></div>'+
     '</div>'+
     '<div class="sec-title">Continue de onde parou</div>'+
-    '<div class="card"><p class="page-sub" style="margin:0">Abra "Módulos" no menu para continuar seus estudos.</p></div>'+
+    continueCard()+
     gfootSafe()+'</div>';
+}
+function lastInProgressModule(){
+  try{
+    var touch=(S0().touch)||{}; var best=null, bestT=-1;
+    var mf=window.moduleFraction||function(){return 0;};
+    for(var arg in touch){
+      var f=mf(arg);
+      if(f<0.5 && touch[arg]>bestT){ best=arg; bestT=touch[arg]; }
+    }
+    return best;
+  }catch(e){ return null; }
+}
+function continueCard(){
+  var arg=lastInProgressModule();
+  if(!arg) return '<div class="card"><p class="page-sub" style="margin:0">Abra "Módulos" no menu para continuar seus estudos.</p></div>';
+  var p=arg.split('|'), nm=(window.modName?window.modName(p[0],p[1]):'Módulo'), ch=(window.chName?window.chName(p[0]):'');
+  return '<div class="card qa" onclick="navigate(\'module\',\''+arg+'\')"><h3>'+nm+'</h3><p>'+ch+' · continuar de onde você parou</p></div>';
 }
 
 /* ================= Gatilho de progresso (checklist/questões) ================= */
@@ -2578,4 +2719,170 @@ window.showOvulationPopup = showOvulationPopup;
 
 })();</script>
 
-<
+<!-- ===================================================================
+     HIGHLIGHT DE TEXTO + BUBBLE DE FORMATAÇÃO EM ANOTAÇÕES (aditivo —
+     skill elid-platform-upgrade #2 e #5). Marca texto dentro de .hl-zone
+     (persistido por usuário em S().hl[key], união local+nuvem já existente
+     em blankState/mergeState) sem nunca mutar nós dentro de <svg>; se a
+     seleção cruzar um SVG, ele ganha a classe uhl-svg (nunca os filhos).
+     =================================================================== -->
+<script>(function(){
+"use strict";
+if(!document.getElementById('hl-style')){
+  var hst=document.createElement('style'); hst.id='hl-style';
+  hst.textContent=`
+  mark.uhl{background:#f2e0a2;color:#2d1b0a;border-radius:3px;padding:0 1px;cursor:context-menu}
+  svg.uhl-svg{background:#f2e0a2;border-radius:6px;box-shadow:0 0 0 4px #f2e0a2}
+  .notes-fmt-bubble{position:fixed;transform:translateX(-50%);display:none;gap:4px;
+    background:var(--panel);border:1px solid var(--accent);border-radius:12px;
+    padding:5px 6px;box-shadow:0 8px 24px rgba(0,0,0,.35);z-index:250}
+  .notes-fmt-bubble button{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);
+    background:transparent;color:var(--ink);cursor:pointer;font-weight:700}
+  .notes-fmt-bubble button:hover{border-color:var(--accent)}
+  `;
+  document.head.appendChild(hst);
+}
+
+function hlGet(key){ var ss=window.S?window.S():{}; return (ss.hl&&ss.hl[key])||[]; }
+function hlSave(key,arr){ var ss=window.S?window.S():{}; ss.hl=ss.hl||{}; ss.hl[key]=arr; if(window.save) window.save(); }
+function hlZones(){ return document.querySelectorAll('.hl-zone[data-hlkey]'); }
+function textNodeMap(zone){
+  var walker=document.createTreeWalker(zone, NodeFilter.SHOW_TEXT, null);
+  var map=[], pos=0, node;
+  while((node=walker.nextNode())){
+    var inSvg = !!(node.parentNode && node.parentNode.closest && node.parentNode.closest('svg'));
+    var len=node.nodeValue.length;
+    if(!inSvg) map.push({node:node, start:pos, end:pos+len});
+    pos+=len;
+  }
+  return map;
+}
+function hlTagSvgIds(){
+  hlZones().forEach(function(zone){
+    var i=0; zone.querySelectorAll('svg').forEach(function(s){ if(!s.dataset.svgid) s.dataset.svgid=String(i++); });
+  });
+}
+function hlApplyZone(zone){
+  var key=zone.dataset.hlkey, hs=hlGet(key);
+  var sig=JSON.stringify(hs);
+  if(zone.dataset.hlApplied===sig) return; // já sincronizado — evita duplicar/loop
+  zone.querySelectorAll('mark.uhl').forEach(function(m){
+    var p=m.parentNode; if(!p) return;
+    while(m.firstChild) p.insertBefore(m.firstChild,m);
+    p.removeChild(m);
+  });
+  zone.normalize();
+  if(hs.length){
+    var map=textNodeMap(zone);
+    map.forEach(function(entry){
+      var hits=hs.filter(function(h){return h.s<entry.end && h.e>entry.start;});
+      if(!hits.length) return;
+      hits.sort(function(a,b){return a.s-b.s;});
+      var text=entry.node.nodeValue, frag=document.createDocumentFragment(), cur=0;
+      hits.forEach(function(h){
+        var s=Math.max(0,h.s-entry.start), e=Math.min(text.length,h.e-entry.start);
+        if(s>cur) frag.appendChild(document.createTextNode(text.slice(cur,s)));
+        if(e>s){ var m=document.createElement('mark'); m.className='uhl'; m.dataset.hlid=h.id; m.textContent=text.slice(s,e); frag.appendChild(m); }
+        cur=Math.max(cur,e);
+      });
+      if(cur<text.length) frag.appendChild(document.createTextNode(text.slice(cur)));
+      if(entry.node.parentNode) entry.node.parentNode.replaceChild(frag, entry.node);
+    });
+  }
+  zone.querySelectorAll('svg[data-svgid]').forEach(function(svgEl){
+    var sid=svgEl.dataset.svgid;
+    var hit=hs.some(function(h){return h.svg && h.svgId===sid;});
+    svgEl.classList.toggle('uhl-svg', !!hit);
+  });
+  zone.dataset.hlApplied=sig;
+}
+function hlApplyAll(){ hlTagSvgIds(); hlZones().forEach(hlApplyZone); }
+function hlOffsetInZone(zone, node, offset){
+  var map=textNodeMap(zone);
+  for(var i=0;i<map.length;i++){ if(map[i].node===node) return map[i].start+offset; }
+  return -1;
+}
+
+document.addEventListener('mouseup', function(e){
+  var sel=window.getSelection(); if(!sel||sel.isCollapsed||!sel.rangeCount) return;
+  var range=sel.getRangeAt(0);
+  var zone=e.target.closest && e.target.closest('.hl-zone'); if(!zone) return;
+  if(!zone.contains(range.commonAncestorContainer)) return;
+  var startInSvg = range.startContainer.nodeType===3 && range.startContainer.parentNode && range.startContainer.parentNode.closest && range.startContainer.parentNode.closest('svg');
+  var endInSvg = range.endContainer.nodeType===3 && range.endContainer.parentNode && range.endContainer.parentNode.closest && range.endContainer.parentNode.closest('svg');
+  var s = (range.startContainer.nodeType===3 && !startInSvg) ? hlOffsetInZone(zone, range.startContainer, range.startOffset) : -1;
+  var eOff = (range.endContainer.nodeType===3 && !endInSvg) ? hlOffsetInZone(zone, range.endContainer, range.endOffset) : -1;
+  hlTagSvgIds();
+  var crossedSvg=null;
+  zone.querySelectorAll('svg[data-svgid]').forEach(function(svgEl){ if(!crossedSvg && range.intersectsNode && range.intersectsNode(svgEl)) crossedSvg=svgEl; });
+  if(s<0||eOff<0||eOff<=s){
+    // seleção só cruzou o SVG (sem texto marcável junto) — ainda assim destaca o SVG
+    if(crossedSvg){
+      var key0=zone.dataset.hlkey, hs0=hlGet(key0);
+      hs0.push({id:'h'+Date.now()+Math.floor(Math.random()*1000), s:0, e:0, svg:true, svgId:crossedSvg.dataset.svgid});
+      hlSave(key0,hs0); sel.removeAllRanges(); hlApplyZone(zone);
+      if(window.toast) window.toast('Figura destacada ✓');
+    }
+    return;
+  }
+  var key=zone.dataset.hlkey, hs=hlGet(key);
+  var entry={id:'h'+Date.now()+Math.floor(Math.random()*1000), s:s, e:eOff};
+  if(crossedSvg){ entry.svg=true; entry.svgId=crossedSvg.dataset.svgid; }
+  hs.push(entry); hlSave(key,hs);
+  sel.removeAllRanges();
+  hlApplyZone(zone);
+  if(window.toast) window.toast('Trecho marcado ✓');
+});
+
+document.addEventListener('contextmenu', function(e){
+  var markEl=e.target.closest && e.target.closest('mark.uhl');
+  var svgEl=e.target.closest && e.target.closest('svg.uhl-svg');
+  if(!markEl && !svgEl) return;
+  e.preventDefault();
+  var zone=(markEl||svgEl).closest('.hl-zone'); if(!zone) return;
+  var key=zone.dataset.hlkey, hs=hlGet(key);
+  if(markEl){ var id=markEl.dataset.hlid; hs=hs.filter(function(h){return h.id!==id;}); }
+  else { var sid=svgEl.dataset.svgid; hs=hs.filter(function(h){return !(h.svg && h.svgId===sid);}); }
+  hlSave(key,hs);
+  hlApplyZone(zone);
+  if(window.toast) window.toast('Destaque removido');
+});
+
+var _hlMo=new MutationObserver(function(){ hlApplyAll(); });
+var _hlMain=document.getElementById('main');
+if(_hlMain) _hlMo.observe(_hlMain, {childList:true, subtree:true});
+setTimeout(hlApplyAll, 300);
+
+/* ---- Minhas Anotações: bubble de formatação ao selecionar texto (aditivo #5) ---- */
+function ensureNotesBubble(){
+  var b=document.getElementById('notes-fmt-bubble');
+  if(b) return b;
+  b=document.createElement('div'); b.id='notes-fmt-bubble'; b.className='notes-fmt-bubble';
+  b.innerHTML=
+    '<button onmousedown="event.preventDefault()" onclick="acFmt(\'bold\')"><b>B</b></button>'+
+    '<button onmousedown="event.preventDefault()" onclick="acFmt(\'foreColor\',\'#6db3f2\')" style="color:#6db3f2">A</button>'+
+    '<button onmousedown="event.preventDefault()" onclick="acFmt(\'foreColor\',\'#e8675f\')" style="color:#e8675f">A</button>'+
+    '<button onmousedown="event.preventDefault()" onclick="acFmt(\'foreColor\',\'#f59f0a\')" style="color:#f59f0a">A</button>'+
+    '<button onmousedown="event.preventDefault()" onclick="acFmt(\'foreColor\',\'#cfc2b8\')">A</button>';
+  document.body.appendChild(b);
+  return b;
+}
+document.addEventListener('mouseup', function(e){
+  var ed=e.target.closest && e.target.closest('#notes-ed');
+  var sel=window.getSelection();
+  var b=ensureNotesBubble();
+  if(!ed||!sel||sel.isCollapsed||!sel.rangeCount){ b.style.display='none'; return; }
+  var r=sel.getRangeAt(0).getBoundingClientRect();
+  b.style.left=(r.left+r.width/2)+'px';
+  b.style.top=(r.top-44+window.scrollY)+'px';
+  b.style.display='flex';
+});
+document.addEventListener('mousedown', function(e){
+  if(!e.target.closest || !e.target.closest('#notes-fmt-bubble, #notes-ed')){
+    var b=document.getElementById('notes-fmt-bubble'); if(b) b.style.display='none';
+  }
+});
+})();</script>
+
+</body>
+</html>
