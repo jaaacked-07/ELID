@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -6517,8 +6516,11 @@ document.addEventListener('mouseup', function(e){
   var b = ensureNotesBubble();
   if(!ed || !sel || sel.isCollapsed || !sel.rangeCount){ b.style.display='none'; return; }
   var r = sel.getRangeAt(0).getBoundingClientRect();
+  /* fix: b e position:fixed (coords ja relativas a viewport) -- somar scrollY duplicava o deslocamento
+     e jogava a bubble cada vez mais para fora da tela conforme o usuario rolava a pagina, por isso so
+     "funcionava" perto do topo (scrollY~=0). */
   b.style.left = (r.left + r.width/2) + 'px';
-  b.style.top  = (r.top - 44 + window.scrollY) + 'px';
+  b.style.top  = Math.max(8, r.top - 44) + 'px';
   b.style.display = 'flex';
 });
 document.addEventListener('mousedown', function(e){
@@ -7316,6 +7318,219 @@ try{ if(typeof route!=='undefined' && route &&
    (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
    renderRoute(); }catch(e){}
 })();
+</script>
+
+<!-- ===== MODULO Derrame Pericardico (pericardio|1) - aditivo ===== -->
+<script>Object.assign(window.ASVG=window.ASVG||{},{
+"peric2_anatomia":"<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Espaço pericárdico: normal x derrame</text><rect x=\"24\" y=\"46\" width=\"300\" height=\"220\" rx=\"10\" fill=\"#2b2140\" stroke=\"#3ddc84\"/><text x=\"174\" y=\"70\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Normal (15-50 mL)</text><circle cx=\"174\" cy=\"170\" r=\"70\" fill=\"#e8675f\" fill-opacity=\"0.35\" stroke=\"#e8675f\" stroke-width=\"2.4\"/><circle cx=\"174\" cy=\"170\" r=\"78\" fill=\"none\" stroke=\"#6db3f2\" stroke-width=\"3\"/><text x=\"174\" y=\"250\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\">Folheto visceral colado ao miocárdio</text><text x=\"174\" y=\"264\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\">+ folheto parietal fibroso</text><rect x=\"356\" y=\"46\" width=\"300\" height=\"220\" rx=\"10\" fill=\"#2b2140\" stroke=\"#e8675f\"/><text x=\"506\" y=\"70\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Derrame pericárdico</text><circle cx=\"506\" cy=\"175\" r=\"55\" fill=\"#e8675f\" fill-opacity=\"0.5\" stroke=\"#e8675f\" stroke-width=\"2.4\"/><circle cx=\"506\" cy=\"175\" r=\"95\" fill=\"none\" stroke=\"#f0a93f\" stroke-width=\"3\" stroke-dasharray=\"4 3\"/><text x=\"506\" y=\"258\" fill=\"#f1e3e0\" font-size=\"9\" text-anchor=\"middle\">Líquido além do fisiológico entre os folhetos</text></svg>",
+"peric2_complacencia":"<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Complacência pericárdica: o que importa é a velocidade</text><line x1=\"70\" y1=\"270\" x2=\"640\" y2=\"270\" stroke=\"#cbb9ac\" stroke-width=\"1.4\"/><line x1=\"70\" y1=\"270\" x2=\"70\" y2=\"50\" stroke=\"#cbb9ac\" stroke-width=\"1.4\"/><text x=\"355\" y=\"296\" fill=\"#cbb9ac\" font-size=\"9.5\" text-anchor=\"middle\">Volume de líquido acumulado</text><text x=\"30\" y=\"160\" fill=\"#cbb9ac\" font-size=\"9.5\" text-anchor=\"middle\" transform=\"rotate(-90 30 160)\">Pressão intrapericárdica</text><path d=\"M80,264 C160,262 220,255 260,150 C290,70 320,56 340,54\" fill=\"none\" stroke=\"#e8675f\" stroke-width=\"3\"/><text x=\"300\" y=\"110\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"10.5\">Acúmulo RÁPIDO</text><text x=\"260\" y=\"126\" fill=\"#f1e3e0\" font-size=\"8.8\">(trauma, ruptura, dissecção)</text><text x=\"250\" y=\"142\" fill=\"#f1e3e0\" font-size=\"8.8\">150-200 mL já tamponam</text><path d=\"M80,266 C220,264 400,258 520,200 C580,168 610,120 618,58\" fill=\"none\" stroke=\"#3ddc84\" stroke-width=\"3\"/><text x=\"470\" y=\"235\" fill=\"#3ddc84\" font-weight=\"700\" font-size=\"10.5\">Acúmulo LENTO</text><text x=\"440\" y=\"251\" fill=\"#f1e3e0\" font-size=\"8.8\">(neoplasia, mixedema, urêmico)</text><text x=\"430\" y=\"20\" fill=\"#f1e3e0\" font-size=\"8.8\"></text><rect x=\"24\" y=\"282\" width=\"632\" height=\"0\" fill=\"none\"/></svg>",
+"peric2_etiologias":"<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Etiologias por mecanismo</text><rect x=\"24\" y=\"44\" width=\"200\" height=\"114\" rx=\"10\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"124\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\" font-size=\"10.2\" text-anchor=\"middle\">Inflamatória</text><text x=\"40\" y=\"86\" fill=\"#f1e3e0\" font-size=\"8.8\">Viral/idiopática (+ comum)</text><text x=\"40\" y=\"102\" fill=\"#f1e3e0\" font-size=\"8.8\">Tuberculose</text><text x=\"40\" y=\"118\" fill=\"#f1e3e0\" font-size=\"8.8\">Autoimune (LES, AR)</text><text x=\"40\" y=\"134\" fill=\"#f1e3e0\" font-size=\"8.8\">Purulenta (bacteriana)</text><rect x=\"240\" y=\"44\" width=\"200\" height=\"114\" rx=\"10\" fill=\"#2b2140\" stroke=\"#e8675f\"/><text x=\"340\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"10.2\" text-anchor=\"middle\">Neoplásica</text><text x=\"256\" y=\"86\" fill=\"#f1e3e0\" font-size=\"8.8\">Pulmão, mama, linfoma</text><text x=\"256\" y=\"102\" fill=\"#f1e3e0\" font-size=\"8.8\">Melanoma</text><text x=\"256\" y=\"118\" fill=\"#f1e3e0\" font-size=\"8.8\">Frequente causa de derrame</text><text x=\"256\" y=\"134\" fill=\"#f1e3e0\" font-size=\"8.8\">grande/hemorrágico</text><rect x=\"456\" y=\"44\" width=\"200\" height=\"114\" rx=\"10\" fill=\"#2b2140\" stroke=\"#f0a93f\"/><text x=\"556\" y=\"66\" fill=\"#f0a93f\" font-weight=\"700\" font-size=\"10.2\" text-anchor=\"middle\">Metabólica</text><text x=\"472\" y=\"86\" fill=\"#f1e3e0\" font-size=\"8.8\">Urêmica (DRC)</text><text x=\"472\" y=\"102\" fill=\"#f1e3e0\" font-size=\"8.8\">Mixedema (hipotireoidismo)</text><text x=\"472\" y=\"118\" fill=\"#f1e3e0\" font-size=\"8.8\">Classicamente grande e</text><text x=\"472\" y=\"134\" fill=\"#f1e3e0\" font-size=\"8.8\">sem tamponar (acúmulo lento)</text><rect x=\"24\" y=\"172\" width=\"632\" height=\"106\" rx=\"10\" fill=\"#e8675f\" fill-opacity=\"0.14\" stroke=\"#e8675f\"/><text x=\"40\" y=\"196\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"10.4\">Hemopericárdio (traumática/iatrogênica) — bandeira vermelha</text><text x=\"40\" y=\"218\" fill=\"#f1e3e0\" font-size=\"9\">Dissecção de aorta tipo A, ruptura de parede livre pós-IAM, trauma torácico,</text><text x=\"40\" y=\"236\" fill=\"#f1e3e0\" font-size=\"9\">iatrogênica (pós-cateterismo/marca-passo), anticoagulação</text><text x=\"40\" y=\"258\" fill=\"#f1e3e0\" font-size=\"9\">Acúmulo rápido = tampona com pouco volume. Considerar sempre em contexto agudo.</text></svg>",
+"peric2_classificacao":"<svg viewBox=\"0 0 680 260\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"260\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Classificação ecocardiográfica (separação diastólica)</text><rect x=\"24\" y=\"46\" width=\"190\" height=\"170\" rx=\"10\" fill=\"#2b2140\" stroke=\"#3ddc84\"/><text x=\"119\" y=\"72\" fill=\"#3ddc84\" font-weight=\"700\" font-size=\"11\" text-anchor=\"middle\">Pequeno</text><circle cx=\"119\" cy=\"150\" r=\"46\" fill=\"none\" stroke=\"#3ddc84\" stroke-width=\"5\"/><text x=\"119\" y=\"200\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">&lt; 10 mm</text><rect x=\"245\" y=\"46\" width=\"190\" height=\"170\" rx=\"10\" fill=\"#2b2140\" stroke=\"#f0a93f\"/><text x=\"340\" y=\"72\" fill=\"#f0a93f\" font-weight=\"700\" font-size=\"11\" text-anchor=\"middle\">Moderado</text><circle cx=\"340\" cy=\"150\" r=\"58\" fill=\"none\" stroke=\"#f0a93f\" stroke-width=\"8\"/><text x=\"340\" y=\"200\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">10-20 mm</text><rect x=\"466\" y=\"46\" width=\"190\" height=\"170\" rx=\"10\" fill=\"#2b2140\" stroke=\"#e8675f\"/><text x=\"561\" y=\"72\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"11\" text-anchor=\"middle\">Grande</text><circle cx=\"561\" cy=\"150\" r=\"68\" fill=\"none\" stroke=\"#e8675f\" stroke-width=\"11\"/><text x=\"561\" y=\"200\" fill=\"#f1e3e0\" font-size=\"9.4\" text-anchor=\"middle\">&gt; 20 mm</text></svg>",
+"peric2_alarme":"<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1f1730\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Sinais de alarme: derrame virando emergência</text><rect x=\"24\" y=\"44\" width=\"300\" height=\"220\" rx=\"10\" fill=\"#2b2140\" stroke=\"#6db3f2\"/><text x=\"174\" y=\"68\" fill=\"#6db3f2\" font-weight=\"700\" font-size=\"10.6\" text-anchor=\"middle\">Clínico (Tríade de Beck)</text><text x=\"40\" y=\"92\" fill=\"#f1e3e0\" font-size=\"9\">Hipotensão</text><text x=\"40\" y=\"110\" fill=\"#f1e3e0\" font-size=\"9\">Turgência jugular</text><text x=\"40\" y=\"128\" fill=\"#f1e3e0\" font-size=\"9\">Bulhas hipofonéticas</text><text x=\"40\" y=\"150\" fill=\"#f1e3e0\" font-size=\"9\">+ Taquicardia</text><text x=\"40\" y=\"168\" fill=\"#f1e3e0\" font-size=\"9\">+ Pulso paradoxal</text><text x=\"40\" y=\"196\" fill=\"#cbb9ac\" font-size=\"8.6\">(detalhado no módulo</text><text x=\"40\" y=\"212\" fill=\"#cbb9ac\" font-size=\"8.6\">Tamponamento Cardíaco)</text><rect x=\"356\" y=\"44\" width=\"300\" height=\"220\" rx=\"10\" fill=\"#2b2140\" stroke=\"#e8675f\"/><text x=\"506\" y=\"68\" fill=\"#e8675f\" font-weight=\"700\" font-size=\"10.6\" text-anchor=\"middle\">Ecocardiográfico</text><text x=\"372\" y=\"92\" fill=\"#f1e3e0\" font-size=\"9\">Colapso diastólico de VD</text><text x=\"372\" y=\"110\" fill=\"#f1e3e0\" font-size=\"9\">Colapso sistólico de AD</text><text x=\"372\" y=\"128\" fill=\"#f1e3e0\" font-size=\"9\">VCI pletórica sem variação</text><text x=\"372\" y=\"144\" fill=\"#f1e3e0\" font-size=\"9\">respiratória</text><text x=\"372\" y=\"166\" fill=\"#f1e3e0\" font-size=\"9\">Derrame volumoso e/ou de</text><text x=\"372\" y=\"182\" fill=\"#f1e3e0\" font-size=\"9\">instalação rápida</text><rect x=\"24\" y=\"272\" width=\"0\" height=\"0\"/></svg>"
+});
+</script>
+<script>(function(){ "use strict";
+var A = window.ASVG || {};
+var C = (window.CONTENT = window.CONTENT || {});
+
+C['pericardio|1'] = {
+ name: 'Derrame Pericárdico',
+ intro: 'O derrame pericárdico é o acúmulo de líquido entre os folhetos do pericárdio além do volume fisiológico — pode ser um incidentaloma benigno no ecocardiograma ou o primeiro sinal de uma doença grave. Na prova, o que decide a conduta não é só o tamanho: é a velocidade de acúmulo frente à complacência do pericárdio.',
+ sub: [
+
+['entendendo','Entendendo do Zero', `
+<p class="ac-p">O pericárdio é uma dupla membrana que envolve o coração: um folheto visceral colado ao músculo cardíaco e um folheto parietal, mais externo e fibroso, com um pequeno espaço entre os dois contendo normalmente 15 a 50 mL de líquido lubrificante — o suficiente para o coração deslizar a cada batimento sem atrito. Derrame pericárdico é qualquer acúmulo de líquido nesse espaço além desse volume fisiológico.</p>
+<p class="ac-p">É importante separar dois conceitos que a prova adora confundir: pericardite é a <b>inflamação</b> do pericárdio (o tema do módulo anterior, com dor torácica postural e atrito), enquanto derrame pericárdico é o <b>acúmulo de líquido</b> em si. Os dois podem coexistir (toda pericardite pode cursar com derrame associado), mas também podem existir isoladamente — um derrame crônico idiopático, por exemplo, pode não ter nenhum componente inflamatório ativo, e uma pericardite seca pode não ter derrame relevante.</p>
+<p class="ac-p">Na prática, a maioria dos derrames pequenos e moderados é um achado incidental em um ecocardiograma pedido por outro motivo — o desafio da prova é reconhecer quando esse achado exige investigação e quando ele é apenas um espectador inofensivo.</p>
+${A.peric2_anatomia||''}
+<div class="ac-call"><b>A grande ideia:</b> derrame pericárdico é acúmulo de líquido; pericardite é inflamação. Eles podem andar juntos, mas a conduta de cada um se baseia em lógicas diferentes.</div>
+`],
+
+['fisiopatologia','Fisiopatologia: a Complacência Pericárdica', `
+<p class="ac-p">O pericárdio parietal é uma bolsa fibrosa com capacidade de distensão limitada — mas essa capacidade não é fixa, ela depende do <b>tempo</b>. Pense numa bexiga de borracha nova: se você a enche rapidamente, ela fica tensa e a pressão interna sobe muito rápido; se você a enche devagar, ao longo de semanas, ela vai se acomodando e "cedendo" aos poucos, permitindo um volume final muito maior com pressão interna bem menor.</p>
+<p class="ac-p">É exatamente essa lógica que define se um derrame vai comprimir o coração (tamponar) ou não. Um acúmulo <b>rápido</b> — hemopericárdio por trauma, ruptura de parede livre pós-infarto, dissecção de aorta tipo A rompendo para o saco pericárdico — pode tamponar com apenas 150 a 200 mL, porque o pericárdio não teve tempo de se adaptar. Já um acúmulo <b>lento</b> — neoplasia, mixedema, uremia — pode chegar a 1 a 2 litros sem nenhuma repercussão hemodinâmica, porque o pericárdio se distendeu gradualmente.</p>
+<p class="ac-p">Esse é o ponto mais cobrado do tema: <b>o volume do derrame, isoladamente, não define a gravidade</b> — o que define é a relação entre o volume acumulado e o tempo disponível para o pericárdio se adaptar. A fisiologia completa da compressão cardíaca (igualização de pressões diastólicas, colapso de câmaras) pertence ao módulo de Tamponamento Cardíaco; aqui o que importa é entender por que um derrame "pequeno" pode ser uma emergência e um derrame "enorme" pode ser um achado tranquilo de acompanhar.</p>
+${A.peric2_complacencia||''}
+<p class="ac-warn"><b>Pegadinha clássica:</b> a questão descreve um derrame "volumoso" e espera que você diga "tamponamento" — mas se a instalação foi lenta (semanas a meses) e não há sinais de repercussão hemodinâmica, a resposta correta costuma ser observação, não emergência.</p>
+`],
+
+['etiologias','Etiologias', `
+<p class="ac-p">Em países desenvolvidos, a causa mais comum de derrame pericárdico isolado é <b>idiopática/viral</b> — o mesmo espectro etiológico da pericardite aguda, já que ambos compartilham boa parte dos gatilhos. Mas a lista de diferenciais que a prova cobra é ampla e vale organizar por mecanismo.</p>
+<p class="ac-p">Causas <b>inflamatórias</b>: viral/idiopática (mais comum), tuberculose (importante em áreas endêmicas e imunossuprimidos, tende a gerar derrame volumoso e exsudativo), doenças autoimunes (lúpus, artrite reumatoide) e pericardite purulenta bacteriana (grave, geralmente pós-cirúrgica ou por contiguidade). Causas <b>metabólicas</b>: uremia (insuficiência renal crônica, antes ou durante diálise) e mixedema — hipotireoidismo grave é uma causa clássica de derrame <b>volumoso e crônico sem tamponar</b>, exatamente pelo mecanismo de acúmulo lento explicado acima.</p>
+<p class="ac-p">Causas <b>neoplásicas</b> merecem destaque: pulmão, mama, linfoma e melanoma são os tumores mais associados, seja por acometimento direto do pericárdio, seja por obstrução linfática. Derrames neoplásicos costumam ser volumosos, recorrentes e frequentemente hemorrágicos à análise do líquido. Por fim, as causas <b>traumáticas/iatrogênicas</b> — hemopericárdio por trauma torácico, ruptura de parede livre ventricular pós-infarto, dissecção de aorta tipo A, complicações de cateterismo ou implante de marca-passo, e uso de anticoagulantes — são as que mais tamponam, porque o sangue se acumula rapidamente.</p>
+${A.peric2_etiologias||''}
+<p class="ac-tip"><b>Macete:</b> pense em três grandes gavetas — inflamatória (a mais numerosa), metabólica (a que mais engana por não tamponar apesar do volume) e hemorrágica/traumática (a que mais tampona apesar do volume pequeno).</p>
+`],
+
+['clinica','Quadro Clínico', `
+<p class="ac-p">A maior parte dos derrames pequenos e moderados é <b>assintomática</b>, descoberta de forma incidental em um ecocardiograma solicitado por outro motivo. Quando sintomas aparecem, eles costumam ser de <b>efeito de massa</b> — o líquido acumulado comprimindo estruturas vizinhas — e não necessariamente de comprometimento hemodinâmico.</p>
+<p class="ac-p">Os sintomas compressivos mais cobrados são: dispneia (compressão pulmonar e redução da complacência), desconforto ou peso torácico, tosse, soluços persistentes (irritação do nervo frênico, que passa colado ao pericárdio) e disfagia (compressão esofágica por um derrame muito volumoso). Note que esses sintomas são diferentes dos sinais de baixo débito e congestão sistêmica que caracterizam o tamponamento — aqui o coração ainda está enchendo e ejetando de forma adequada, o incômodo é mecânico/compressivo.</p>
+<p class="ac-p">No exame físico, o achado mais característico é a <b>hipofonese de bulhas</b> (o líquido "abafa" o som cardíaco) e, em derrames muito grandes, aumento da área de macicez à percussão precordial. O atrito pericárdico, quando presente, reflete a <b>inflamação</b> concomitante (pericardite), não o derrame em si — inclusive, um atrito antes audível pode desaparecer à medida que o derrame aumenta e afasta os dois folhetos inflamados um do outro.</p>
+<p class="ac-p">Como o exame físico tem sensibilidade baixa para detectar e quantificar derrame, ele nunca substitui o ecocardiograma — é apenas o gatilho para pedi-lo.</p>
+`],
+
+['classificacao','Classificação Ecocardiográfica', `
+<p class="ac-p">O ecocardiograma é o exame que confirma, quantifica e caracteriza o derrame — e a forma clássica de quantificação (classificação de Horowitz) usa a <b>separação diastólica</b> entre os folhetos pericárdicos, medida ao ecocardiograma transtorácico: pequeno (menor que 10 mm), moderado (10 a 20 mm) e grande (maior que 20 mm).</p>
+<p class="ac-p">Além do tamanho, dois outros aspectos ecocardiográficos mudam a conduta. O primeiro é a <b>distribuição</b>: um derrame circunferencial (envolvendo todo o coração) tende a se comportar de forma mais previsível que um derrame <b>loculado</b> (compartimentalizado, geralmente pós-cirúrgico, purulento ou hemorrágico), que pode comprimir localmente uma única câmara e causar tamponamento mesmo com volume total pequeno — um detalhe que costuma aparecer como pegadinha.</p>
+<p class="ac-p">O segundo é o <b>tempo de evolução</b>: um derrame é considerado crônico quando presente por mais de 3 meses. Essa distinção importa porque um derrame grande e crônico, mesmo assintomático, carrega um risco cumulativo de descompensação súbita ao longo do seguimento — e por isso entra na discussão de drenagem eletiva mesmo sem sintomas, como será visto em tratamento.</p>
+${A.peric2_classificacao||''}
+<table class="ac-tbl"><tr><th>Classificação</th><th>Separação diastólica</th><th>Volume aproximado</th></tr>
+<tr><td>Pequeno</td><td>&lt; 10 mm</td><td>&lt; 300 mL</td></tr>
+<tr><td>Moderado</td><td>10-20 mm</td><td>300-500 mL</td></tr>
+<tr><td>Grande</td><td>&gt; 20 mm</td><td>&gt; 500 mL</td></tr></table>
+`],
+
+['diagnostico','Diagnóstico', `
+<p class="ac-p">O eletrocardiograma pode mostrar baixa voltagem do QRS quando o derrame é volumoso (o líquido "isola" o sinal elétrico do coração até a pele) e, em derrames muito grandes, <b>alternância elétrica</b> — variação batimento a batimento da amplitude do QRS, causada pelo coração literalmente balançando dentro do líquido acumulado. É importante lembrar: alternância elétrica indica derrame volumoso, mas <b>não é sinônimo</b> de tamponamento — ela reflete o tamanho do derrame, não necessariamente a repercussão hemodinâmica.</p>
+<p class="ac-p">O raio-X de tórax pode mostrar aumento da área cardíaca com contorno arredondado, o clássico sinal da "moringa" (water-bottle sign) — mas só fica visível com derrames de pelo menos 200 a 250 mL, e um RX normal não exclui derrames pequenos ou moderados.</p>
+<p class="ac-p">O <b>ecocardiograma</b> é o exame definitivo: confirma a presença de líquido, quantifica o tamanho, avalia se há sinais de repercussão hemodinâmica (colapso de câmaras — detalhado no módulo de Tamponamento) e orienta o planejamento de uma eventual pericardiocentese, incluindo a melhor janela de acesso.</p>
+<p class="ac-p">Definida a presença do derrame, a investigação etiológica direciona a propedêutica: função renal (uremia), TSH (mixedema), sorologias e painel autoimune quando há suspeita clínica, hemoculturas e investigação de tuberculose em contextos de risco, e rastreio oncológico quando a apresentação sugere causa neoplásica. Quando o derrame é drenado, a análise do líquido (celularidade, citologia oncótica, ADA para tuberculose, cultura) frequentemente fecha o diagnóstico etiológico.</p>
+`],
+
+['alarme','Sinais de Alarme (Tamponamento)', `
+<p class="ac-p">Este módulo termina onde começa o módulo de Tamponamento Cardíaco — e é essencial saber reconhecer a fronteira entre os dois. Qualquer paciente com derrame pericárdico que desenvolve sinais de baixo débito e congestão sistêmica deve ser tratado como emergência, independentemente da classificação de tamanho vista antes.</p>
+<p class="ac-p">Clinicamente, a tríade clássica (tríade de Beck) combina hipotensão, turgência jugular e bulhas hipofonéticas, geralmente acompanhada de taquicardia compensatória e pulso paradoxal (queda exagerada da pressão arterial sistólica durante a inspiração). Ao ecocardiograma, os sinais de alarme são o colapso diastólico do ventrículo direito, o colapso sistólico do átrio direito e uma veia cava inferior pletórica e sem variação respiratória — todos eles detalhados com profundidade no módulo específico de Tamponamento Cardíaco.</p>
+${A.peric2_alarme||''}
+<p class="ac-warn"><b>Regra prática para a prova:</b> derrame + instabilidade hemodinâmica = emergência, drenagem imediata, sem esperar a classificação de tamanho ou o resultado de exames etiológicos.</p>
+`],
+
+['tratamento','Tratamento e Conduta', `
+<p class="ac-p">O primeiro pilar do tratamento é sempre <b>tratar a causa de base</b> quando ela é identificável: diálise para o derrame urêmico, reposição hormonal para o mixedema, terapia oncológica específica para a causa neoplásica, esquema antituberculose quando indicado. Em muitos casos, resolver a causa já leva à resolução espontânea do derrame.</p>
+<p class="ac-p">A drenagem (pericardiocentese, preferencialmente guiada por ecocardiograma, por via subxifoide) está indicada em situações específicas: tamponamento cardíaco (emergência, sem adiar), derrame grande e sintomático, suspeita de etiologia purulenta ou neoplásica em que a análise do líquido é necessária para o diagnóstico, e derrame recorrente apesar de tratamento clínico adequado — nesse último caso, pode-se considerar uma solução cirúrgica definitiva, como a janela pericárdica ou a pericardiectomia.</p>
+<p class="ac-p">Derrames pequenos a moderados, assintomáticos, com causa benigna já identificada e tratada, podem ser conduzidos apenas com <b>observação clínica e ecocardiogramas seriados</b>. Já o derrame idiopático crônico (mais de 3 meses) e grande (maior que 20 mm), mesmo sem sintomas, é uma situação controversa mas frequentemente considerada para drenagem eletiva, porque estudos mostram risco relevante de descompensação súbita e imprevisível ao longo do seguimento — nesse cenário específico, o tamanho crônico grande, por si só, já pesa a favor de uma conduta mais ativa.</p>
+<p class="ac-tip"><b>Resumo de conduta:</b> tratar a causa sempre que possível; drenar se houver instabilidade, sintomas importantes, necessidade diagnóstica ou recorrência; observar com seguimento ecocardiográfico o restante.</p>
+`]
+
+]};
+
+Object.assign(C['pericardio|1'], {
+
+escores: `<p class="ac-p">Não existe um escore de risco numérico validado para derrame pericárdico isolado — a estratificação usada na prática e na prova é a classificação ecocardiográfica por tamanho (Horowitz) já detalhada na teoria, combinada com a avaliação de repercussão hemodinâmica.</p>
+<table class="ac-tbl"><tr><th>Parâmetro</th><th>Achado</th><th>Implicação</th></tr>
+<tr><td>Tamanho</td><td>Pequeno / Moderado / Grande</td><td>Orienta indicação de drenagem eletiva</td></tr>
+<tr><td>Velocidade de instalação</td><td>Aguda x Crônica (&gt;3 meses)</td><td>Define risco de tamponamento a qualquer volume</td></tr>
+<tr><td>Distribuição</td><td>Circunferencial x Loculado</td><td>Loculado pode tamponar localmente mesmo pequeno</td></tr>
+<tr><td>Repercussão hemodinâmica</td><td>Ausente x Presente (colapso de câmaras)</td><td>Presente = emergência, drenagem imediata</td></tr></table>
+<p class="ac-call"><b>Grande ideia:</b> a decisão de drenar nasce do cruzamento entre tamanho, tempo de instalação e repercussão — nunca de um único parâmetro isolado.</p>`,
+
+dif: `<div class="mm"><div class="mm-card"><h5>Inflamatória</h5><ul><li>Viral/idiopática (mais comum)</li><li>Tuberculose</li><li>Autoimune (LES, AR)</li><li>Purulenta bacteriana</li></ul></div>
+<div class="mm-card"><h5>Metabólica</h5><ul><li>Urêmica (DRC)</li><li>Mixedema (hipotireoidismo)</li><li>Classicamente grande e sem tamponar</li></ul></div>
+<div class="mm-card"><h5>Neoplásica</h5><ul><li>Pulmão, mama, linfoma, melanoma</li><li>Frequente derrame hemorrágico</li><li>Recorrência é comum</li></ul></div>
+<div class="mm-card"><h5>Hemorrágica/traumática</h5><ul><li>Dissecção de aorta tipo A</li><li>Ruptura de parede livre pós-IAM</li><li>Trauma, iatrogênica, anticoagulação</li><li>Maior risco de tamponar</li></ul></div></div>`,
+
+mapa: `<div class="mm">
+<div class="mm-card"><h5>Fisiopatologia</h5><ul><li>Complacência pericárdica</li><li>Velocidade &gt; volume</li><li>Rápido tampona com pouco</li><li>Lento acomoda muito</li></ul></div>
+<div class="mm-card"><h5>Etiologia</h5><ul><li>Inflamatória</li><li>Metabólica</li><li>Neoplásica</li><li>Hemorrágica/traumática</li></ul></div>
+<div class="mm-card"><h5>Diagnóstico</h5><ul><li>ECG: baixa voltagem, alternância</li><li>RX: sinal da moringa</li><li>Eco: confirma e quantifica</li><li>Investigação etiológica dirigida</li></ul></div>
+<div class="mm-card"><h5>Conduta</h5><ul><li>Tratar a causa</li><li>Drenar se instável/sintomático/recorrente</li><li>Observar se pequeno/assintomático</li><li>Crônico grande = discutir drenagem eletiva</li></ul></div></div>`,
+
+fluxo_dx: `<div class="fx"><div class="fx-node start">Derrame identificado (achado incidental ou suspeita clínica)</div><div class="fx-arrow"></div>
+<div class="fx-node">Avaliar sinais de alarme: hipotensão, turgência jugular, pulso paradoxal, colapso de câmaras ao eco</div><div class="fx-arrow"></div>
+<div class="fx-row">
+<div><div class="fx-node" style="border-color:#e8675f;color:#e8675f">Presentes → tratar como tamponamento (emergência)</div></div>
+<div><div class="fx-node" style="border-color:#3ddc84;color:#3ddc84">Ausentes → seguir investigação eletiva</div></div>
+</div><div class="fx-arrow"></div>
+<div class="fx-node">Investigar etiologia: função renal, TSH, autoimune, rastreio oncológico, PPD/TB conforme contexto</div><div class="fx-arrow"></div>
+<div class="fx-node end">Definir necessidade de drenagem diagnóstica conforme achados</div></div>`,
+
+fluxo_cond: `<div class="fx"><div class="fx-node start">Causa identificada?</div><div class="fx-arrow"></div>
+<div class="fx-node">Tratar a causa de base (diálise, hormônio, oncológico, antiTB)</div><div class="fx-arrow"></div>
+<div class="fx-node">Reavaliar tamanho e sintomas ao eco seriado</div><div class="fx-arrow"></div>
+<div class="fx-row">
+<div><div class="fx-node" style="border-color:#3ddc84;color:#3ddc84">Pequeno/moderado, assintomático → observação clínica</div></div>
+<div><div class="fx-node" style="border-color:#f0a93f;color:#f0a93f">Grande crônico (&gt;3m e &gt;20mm), mesmo assintomático → discutir drenagem eletiva</div></div>
+<div><div class="fx-node" style="border-color:#e8675f;color:#e8675f">Sintomático, purulento, neoplásico ou instável → pericardiocentese</div></div>
+</div><div class="fx-arrow"></div>
+<div class="fx-node end">Recorrente apesar de tratamento → janela pericárdica / pericardiectomia</div></div>`,
+
+vespera: `<p class="ac-call"><b>O que decide a gravidade não é o volume, é a velocidade de acúmulo</b> frente à complacência do pericárdio.</p>
+<p class="ac-p"><b>Rápido</b> (trauma, ruptura de parede livre, dissecção de aorta) → tampona com 150-200 mL. <b>Lento</b> (neoplasia, mixedema, urêmico) → pode chegar a litros sem tamponar.</p>
+<p class="ac-p">Classificação eco: pequeno &lt;10mm, moderado 10-20mm, grande &gt;20mm de separação diastólica.</p>
+<p class="ac-tip">Alternância elétrica = derrame volumoso, NÃO é sinônimo de tamponamento.</p>
+<p class="ac-tip">Mixedema = clássico causador de derrame grande crônico SEM tamponar.</p>
+<p class="ac-warn">Derrame + instabilidade hemodinâmica = emergência, drenar já, sem esperar classificação de tamanho.</p>
+<p class="ac-p">Conduta: tratar a causa; drenar se instável, sintomático, purulento/neoplásico ou recorrente; observar o restante; discutir drenagem eletiva se crônico e grande.</p>`,
+
+dicas: `<p class="ac-warn"><b>Erro 1:</b> achar que "derrame grande = tamponamento". Depende da velocidade de instalação, não só do tamanho.</p>
+<p class="ac-warn"><b>Erro 2:</b> achar que derrame pequeno nunca tampona. Um hemopericárdio agudo de 150-200 mL tampona com facilidade.</p>
+<p class="ac-warn"><b>Erro 3:</b> confundir alternância elétrica com diagnóstico de tamponamento — ela só indica derrame volumoso.</p>
+<p class="ac-warn"><b>Erro 4:</b> esperar atrito pericárdico em todo derrame — o atrito é sinal de inflamação (pericardite), pode até desaparecer quando o derrame aumenta e afasta os folhetos.</p>
+<p class="ac-warn"><b>Erro 5:</b> confiar no RX de tórax normal para excluir derrame — só fica visível acima de 200-250 mL.</p>
+<p class="ac-tip">Derrame loculado pode tamponar localmente mesmo com volume total pequeno — atenção redobrada em pós-operatório de cirurgia cardíaca.</p>`,
+
+checklist: [
+ 'Sei diferenciar derrame pericárdico (líquido) de pericardite (inflamação) e sei que podem coexistir',
+ 'Entendo por que a velocidade de acúmulo importa mais que o volume total (complacência pericárdica)',
+ 'Conheço as principais etiologias por mecanismo (inflamatória, metabólica, neoplásica, hemorrágica/traumática)',
+ 'Sei que mixedema é causa clássica de derrame grande crônico sem tamponar',
+ 'Reconheço os sintomas compressivos (dispneia, soluços, disfagia) e sei que a maioria é assintomática',
+ 'Sei classificar o derrame ao eco (pequeno/moderado/grande) e por que derrame loculado é diferente',
+ 'Reconheço achados de ECG (baixa voltagem, alternância elétrica) e RX (sinal da moringa) e suas limitações',
+ 'Sei reconhecer os sinais de alarme que indicam risco de tamponamento e exigem conduta de emergência',
+ 'Conheço as indicações de pericardiocentese e quando observar com eco seriado é suficiente'
+]
+});
+
+Object.assign(C['pericardio|1'], {
+
+questoes: [
+{stem:'Homem de 68 anos, com adenocarcinoma de pulmão em estadiamento, apresenta derrame pericárdico volumoso identificado em ecocardiograma de rotina, sem sinais de repercussão hemodinâmica. Qual conceito fisiopatológico explica a ausência de tamponamento apesar do grande volume?', opts:['O pericárdio neoplásico é mais complacente que o normal','O acúmulo lento permite adaptação progressiva da complacência pericárdica','Derrames neoplásicos nunca tamponam','A pressão intrapericárdica é sempre negativa em neoplasias'], correct:1, expl:'O acúmulo lento e progressivo permite que o pericárdio se distenda gradualmente, mantendo a pressão intrapericárdica relativamente baixa mesmo com grande volume acumulado — diferente do acúmulo agudo.'},
+{stem:'Qual das seguintes situações está mais associada a tamponamento cardíaco mesmo com pequeno volume de líquido pericárdico?', opts:['Derrame por hipotireoidismo grave','Derrame por insuficiência renal crônica em diálise','Hemopericárdio por ruptura de parede livre pós-infarto','Derrame idiopático crônico de longa data'], correct:2, expl:'O acúmulo rápido de sangue (hemopericárdio agudo) não permite adaptação da complacência pericárdica, tamponando com volumes tão pequenos quanto 150-200 mL.'},
+{stem:'Qual achado eletrocardiográfico está classicamente associado a derrame pericárdico volumoso, sem ser sinônimo de tamponamento?', opts:['Supradesnivelamento difuso do segmento ST','Alternância elétrica do QRS','Onda Q patológica','Prolongamento do intervalo QT'], correct:1, expl:'A alternância elétrica reflete o coração "balançando" dentro de um derrame volumoso — indica tamanho do derrame, não necessariamente repercussão hemodinâmica.'},
+{stem:'Segundo a classificação ecocardiográfica de Horowitz, um derrame pericárdico com separação diastólica de 14 mm é classificado como:', opts:['Pequeno','Moderado','Grande','Não classificável sem RX de tórax'], correct:1, expl:'Pequeno <10mm, moderado 10-20mm, grande >20mm de separação diastólica entre os folhetos pericárdicos.'},
+{stem:'Mulher de 55 anos com hipotireoidismo não tratado há anos apresenta derrame pericárdico volumoso ao ecocardiograma, sem sinais de tamponamento. Qual é a conduta mais apropriada?', opts:['Pericardiocentese de urgência independentemente dos sintomas','Reposição hormonal e reavaliação ecocardiográfica seriada','Pericardiectomia eletiva imediata','Anticoagulação plena empírica'], correct:1, expl:'O mixedema é causa clássica de derrame volumoso e crônico sem tamponamento; o tratamento da causa de base (reposição hormonal) costuma levar à resolução, com acompanhamento ecocardiográfico.'},
+{stem:'Qual é a principal utilidade do ecocardiograma na avaliação inicial do derrame pericárdico?', opts:['É o único exame capaz de detectar líquido pericárdico','Confirma, quantifica e avalia repercussão hemodinâmica, orientando a drenagem','Substitui a necessidade de investigação etiológica','É indicado apenas quando o RX de tórax é normal'], correct:1, expl:'O ecocardiograma é o exame central: confirma o derrame, quantifica seu tamanho, avalia sinais de repercussão hemodinâmica e planeja a melhor via de drenagem, se indicada.'},
+{stem:'Um derrame pericárdico loculado (compartimentalizado), mais comum no contexto pós-operatório de cirurgia cardíaca, tem qual particularidade clínica relevante?', opts:['Nunca causa repercussão hemodinâmica por ser pequeno','Pode causar tamponamento localizado mesmo com volume total pequeno','É sempre de origem infecciosa','Não requer acompanhamento ecocardiográfico'], correct:1, expl:'Derrames loculados podem comprimir seletivamente uma única câmara cardíaca, causando fisiologia de tamponamento localizado mesmo quando o volume total do derrame é pequeno.'},
+{stem:'Qual é a causa mais comum de derrame pericárdico isolado em países desenvolvidos?', opts:['Tuberculose','Neoplasia','Viral/idiopática','Insuficiência renal crônica'], correct:2, expl:'Assim como na pericardite aguda, a causa viral/idiopática é a mais frequente de derrame pericárdico isolado em países desenvolvidos.'},
+{stem:'Por que o atrito pericárdico pode desaparecer à medida que um derrame pericárdico aumenta de volume?', opts:['Porque o derrame sempre resolve a inflamação subjacente','Porque o acúmulo de líquido afasta os folhetos inflamados, reduzindo o contato entre eles','Porque o atrito nunca está relacionado à inflamação pericárdica','Porque o derrame indica ausência de pericardite'], correct:1, expl:'O atrito pericárdico depende do contato entre os folhetos inflamados; quando o líquido se acumula e os afasta, o atrito pode diminuir ou desaparecer, mesmo que a inflamação persista.'},
+{stem:'Homem de 60 anos com derrame pericárdico idiopático, assintomático, de 4 meses de evolução e 24 mm de separação diastólica ao eco. Qual conduta é mais frequentemente discutida nessa situação?', opts:['Observação isolada, sem necessidade de qualquer intervenção','Considerar drenagem eletiva pelo risco cumulativo de descompensação súbita','Pericardiectomia de urgência','Anticoagulação profilática'], correct:1, expl:'Derrame idiopático crônico (>3 meses) e grande (>20mm), mesmo assintomático, carrega risco relevante de descompensação súbita e imprevisível, sendo frequentemente considerado para drenagem eletiva.'},
+{stem:'Qual sinal ao raio-X de tórax está classicamente associado a derrame pericárdico volumoso?', opts:['Sinal do halo','Sinal da moringa (water-bottle sign)','Sinal de Kerley B','Sinal do duplo contorno'], correct:1, expl:'O aumento simétrico e arredondado da silhueta cardíaca, conhecido como sinal da moringa, é visível ao RX apenas em derrames de pelo menos 200-250 mL.'},
+{stem:'Qual das alternativas representa corretamente uma indicação de pericardiocentese?', opts:['Todo derrame pericárdico identificado ao ecocardiograma, independentemente do tamanho','Derrame pequeno e assintomático de causa já identificada e tratada','Suspeita de etiologia purulenta ou neoplásica, para diagnóstico e alívio sintomático','Apenas derrames crônicos com menos de 3 meses de evolução'], correct:2, expl:'A drenagem está indicada em tamponamento, derrame grande sintomático, suspeita purulenta/neoplásica (para análise do líquido) e derrame recorrente refratário — não em todo derrame identificado.'}
+],
+
+flashcards: [
+{front:'O que define se um derrame pericárdico vai tamponar: o volume ou a velocidade de acúmulo?', back:'A <b>velocidade de acúmulo</b> frente à complacência do pericárdio — não o volume isolado.', type:'basic'},
+{front:'Um acúmulo {{rápido}} de líquido pericárdico pode tamponar com apenas 150-200 mL.', back:'rápido', type:'cloze'},
+{front:'Um acúmulo {{lento}} de líquido pericárdico pode chegar a 1-2 litros sem tamponar.', back:'lento', type:'cloze'},
+{front:'Cite 2 causas clássicas de derrame pericárdico volumoso e crônico que raramente tamponam.', back:'Mixedema (hipotireoidismo) e uremia (insuficiência renal crônica) — acúmulo lento.', type:'basic'},
+{front:'Qual achado eletrocardiográfico indica derrame volumoso, sem ser sinônimo de tamponamento?', back:'Alternância elétrica do QRS.', type:'basic'},
+{front:'A separação diastólica ao eco de {{menos de 10 mm}} classifica o derrame como pequeno.', back:'menos de 10 mm', type:'cloze'},
+{front:'A separação diastólica ao eco de {{mais de 20 mm}} classifica o derrame como grande.', back:'mais de 20 mm', type:'cloze'},
+{front:'Por que o RX de tórax pode ser normal mesmo com derrame pericárdico presente?', back:'O sinal da moringa só aparece com pelo menos 200-250 mL de líquido acumulado.', type:'basic'},
+{front:'O que é um derrame pericárdico loculado e por que ele é perigoso mesmo pequeno?', back:'É um derrame compartimentalizado (comum pós-cirurgia cardíaca); pode comprimir localmente uma única câmara, tamponando mesmo com volume total pequeno.', type:'basic'},
+{front:'Cite as 3 causas mais associadas a hemopericárdio agudo.', back:'Dissecção de aorta tipo A, ruptura de parede livre pós-IAM e trauma torácico (também iatrogênica/anticoagulação).', type:'basic'},
+{front:'Por que o atrito pericárdico pode sumir quando o derrame aumenta?', back:'Porque o líquido afasta os folhetos inflamados, reduzindo o contato entre eles — mesmo que a inflamação persista.', type:'basic'},
+{front:'Qual a diferença entre pericardite e derrame pericárdico?', back:'Pericardite = inflamação do pericárdio; derrame = acúmulo de líquido. Podem coexistir ou ocorrer isoladamente.', type:'basic'},
+{front:'Em que situação um derrame idiopático crônico e assintomático costuma ser considerado para drenagem eletiva?', back:'Quando é grande (>20mm) e crônico (>3 meses) — risco cumulativo de descompensação súbita.', type:'basic'},
+{front:'Cite 4 tumores mais associados a derrame pericárdico neoplásico.', back:'Pulmão, mama, linfoma e melanoma.', type:'basic'}
+],
+
+casos: [
+{t:'O derrame que não é o que parece', stem:'Mulher de 71 anos, hipotireoidismo diagnosticado há 5 anos mas sem tratamento regular, é encaminhada por derrame pericárdico volumoso (26mm) achado em ecocardiograma de rotina. Está assintomática, sinais vitais estáveis, sem turgência jugular ou pulso paradoxal.', passos:[
+ {h:'1. Reconhecer o padrão', p:'Derrame volumoso porém em paciente estável, sem sinais de alarme — sugere acúmulo lento, compatível com a causa metabólica já conhecida (mixedema).'},
+ {h:'2. Não tratar como emergência', p:'Ausência de repercussão hemodinâmica não justifica pericardiocentese de urgência apesar do tamanho.'},
+ {h:'3. Tratar a causa de base', p:'Retomar reposição hormonal para o hipotireoidismo, com expectativa de redução progressiva do derrame.'},
+ {h:'4. Acompanhar', p:'Ecocardiogramas seriados para confirmar a resolução e vigiar sinais de alarme durante o seguimento.'},
+ {h:'Lição de prova', p:'Volume grande não é sinônimo de emergência — o contexto de acúmulo lento por causa metabólica muda completamente a conduta.'}
+]},
+{t:'O derrame pequeno que quase foi ignorado', stem:'Homem de 54 anos, vítima de acidente automobilístico com trauma torácico fechado, chega ao pronto-socorro hipotenso, taquicárdico, com turgência jugular. Ecocardiograma point-of-care mostra derrame pericárdico de apenas 12 mm.', passos:[
+ {h:'1. Reconhecer a gravidade apesar do tamanho', p:'Trauma torácico + instabilidade hemodinâmica + derrame de instalação aguda (hemopericárdio) tamponam com volumes pequenos.'},
+ {h:'2. Não se ancorar no tamanho "moderado"', p:'A classificação de tamanho não deve atrasar a conduta diante de sinais clínicos claros de tamponamento.'},
+ {h:'3. Conduzir como emergência', p:'Pericardiocentese ou drenagem cirúrgica imediata, conforme disponibilidade e suspeita de lesão associada.'},
+ {h:'Lição de prova', p:'Contexto clínico (trauma, instalação aguda) pesa mais que o valor numérico da separação diastólica na decisão de emergência.'}
+]},
+{t:'O derrame recorrente sem causa clara', stem:'Mulher de 45 anos tem terceiro episódio de derrame pericárdico moderado a grande em 18 meses, sempre recorrendo após drenagens de alívio. Investigação etiológica extensa (renal, tireoidiana, autoimune, oncológica, infecciosa) permanece negativa.', passos:[
+ {h:'1. Reconhecer o padrão de recorrência', p:'Derrame recorrente apesar de drenagens repetidas e investigação etiológica ampla negativa.'},
+ {h:'2. Reavaliar a necessidade de solução definitiva', p:'Pericardiocentese isolada e repetida não resolve a tendência de reacúmulo.'},
+ {h:'3. Considerar via cirúrgica', p:'Discutir janela pericárdica ou pericardiectomia como solução mais definitiva para derrame recorrente refratário.'},
+ {h:'Lição de prova', p:'Recorrência apesar de tratamento clínico adequado é, por si só, uma indicação para uma abordagem cirúrgica mais definitiva.'}
+]}
+]
+});
+
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+
 </script>
 </body>
 </html>
