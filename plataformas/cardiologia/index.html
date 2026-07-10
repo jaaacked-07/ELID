@@ -9120,5 +9120,729 @@ try{ if(typeof route!=='undefined' && route &&
    (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
    renderRoute(); }catch(e){}
 })();</script>
+
+<!-- ===== MODULO DAC CRONICA (aditivo) ===== -->
+<script>Object.assign(window.ASVG=window.ASVG||{},{"dac_fisiopato": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#191f2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">ANGINA = DESEQUILIBRIO OFERTA x DEMANDA DE O2</text><rect x=\"30\" y=\"46\" width=\"290\" height=\"220\" rx=\"10\" fill=\"#242e46\" stroke=\"#3ddc84\"/><text x=\"44\" y=\"68\" fill=\"#3ddc84\" font-weight=\"700\">Oferta de O2 (reduzida)</text><text x=\"44\" y=\"90\" fill=\"#eef2f7\" font-size=\"10.2\">Placa aterosclerotica estavel</text><text x=\"44\" y=\"106\" fill=\"#eef2f7\" font-size=\"10.2\">obstruindo fixamente a luz</text><text x=\"44\" y=\"122\" fill=\"#eef2f7\" font-size=\"10.2\">(geralmente &gt;70% para sintomas)</text><text x=\"44\" y=\"144\" fill=\"#eef2f7\" font-size=\"10.2\">Capa fibrosa espessa e estavel</text><text x=\"44\" y=\"160\" fill=\"#eef2f7\" font-size=\"10.2\">(diferente da placa instavel da SCA,</text><text x=\"44\" y=\"176\" fill=\"#eef2f7\" font-size=\"10.2\">que rompe e trombosa)</text><text x=\"44\" y=\"202\" fill=\"#eef2f7\" font-size=\"10.2\">Reserva de fluxo coronariano</text><text x=\"44\" y=\"218\" fill=\"#eef2f7\" font-size=\"10.2\">limitada no esforco</text><rect x=\"360\" y=\"46\" width=\"290\" height=\"220\" rx=\"10\" fill=\"#242e46\" stroke=\"#e8675f\"/><text x=\"374\" y=\"68\" fill=\"#e8675f\" font-weight=\"700\">Demanda de O2 (aumentada)</text><text x=\"374\" y=\"90\" fill=\"#eef2f7\" font-size=\"10.2\">Esforco fisico, emocao, frio</text><text x=\"374\" y=\"106\" fill=\"#eef2f7\" font-size=\"10.2\">Taquicardia aumenta consumo</text><text x=\"374\" y=\"122\" fill=\"#eef2f7\" font-size=\"10.2\">e reduz tempo de diastole (quando</text><text x=\"374\" y=\"138\" fill=\"#eef2f7\" font-size=\"10.2\">a coronaria e perfundida)</text><text x=\"374\" y=\"160\" fill=\"#eef2f7\" font-size=\"10.2\">Resultado: dor previsivel ao</text><text x=\"374\" y=\"176\" fill=\"#eef2f7\" font-size=\"10.2\">esforco, alivio com repouso</text><text x=\"374\" y=\"192\" fill=\"#eef2f7\" font-size=\"10.2\">(diferente da dor em repouso</text><text x=\"374\" y=\"208\" fill=\"#eef2f7\" font-size=\"10.2\">da sindrome coronariana aguda)</text><rect x=\"40\" y=\"272\" width=\"0\" height=\"0\"/></svg>", "dac_ccs": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#191f2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">CLASSIFICACAO CCS DA ANGINA (I A IV)</text><rect x=\"30\" y=\"44\" width=\"620\" height=\"40\" rx=\"8\" fill=\"#242e46\" stroke=\"#3ddc84\"/><text x=\"46\" y=\"68\" fill=\"#3ddc84\" font-weight=\"700\">CCS I</text><text x=\"120\" y=\"68\" fill=\"#eef2f7\" font-size=\"10.3\">Angina so em esforcos extenuantes; atividades habituais sem sintomas</text><rect x=\"30\" y=\"90\" width=\"620\" height=\"40\" rx=\"8\" fill=\"#242e46\" stroke=\"#6db3f2\"/><text x=\"46\" y=\"114\" fill=\"#6db3f2\" font-weight=\"700\">CCS II</text><text x=\"120\" y=\"114\" fill=\"#eef2f7\" font-size=\"10.3\">Discreta limitacao; sintomas ao subir escadas rapido, ladeira, apos refeicao</text><rect x=\"30\" y=\"136\" width=\"620\" height=\"40\" rx=\"8\" fill=\"#242e46\" stroke=\"#f59f0a\"/><text x=\"46\" y=\"160\" fill=\"#f59f0a\" font-weight=\"700\">CCS III</text><text x=\"120\" y=\"160\" fill=\"#eef2f7\" font-size=\"10.3\">Limitacao marcada; sintomas ao andar 1-2 quarteiroes ou 1 lance de escada</text><rect x=\"30\" y=\"182\" width=\"620\" height=\"40\" rx=\"8\" fill=\"#242e46\" stroke=\"#e8675f\"/><text x=\"46\" y=\"206\" fill=\"#e8675f\" font-weight=\"700\">CCS IV</text><text x=\"120\" y=\"206\" fill=\"#eef2f7\" font-size=\"10.3\">Incapaz de realizar qualquer atividade sem dor; pode ocorrer em repouso</text><rect x=\"40\" y=\"234\" width=\"600\" height=\"46\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"56\" y=\"258\" fill=\"#eef2f7\" font-size=\"10.3\" font-weight=\"700\">Dor anginosa tipica: retroesternal, desencadeada por esforco/emocao, alivia em ate 20min com repouso ou nitrato.</text></svg>", "dac_probabilidade": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#191f2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">PROBABILIDADE PRE-TESTE ORIENTA O EXAME</text><rect x=\"30\" y=\"46\" width=\"190\" height=\"200\" rx=\"10\" fill=\"#242e46\" stroke=\"#3ddc84\"/><text x=\"125\" y=\"68\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Baixa</text><text x=\"125\" y=\"100\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">Investigar outras</text><text x=\"125\" y=\"116\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">causas de dor;</text><text x=\"125\" y=\"132\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">evitar excesso</text><text x=\"125\" y=\"148\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">de exames</text><rect x=\"245\" y=\"46\" width=\"190\" height=\"200\" rx=\"10\" fill=\"#242e46\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"68\" fill=\"#f59f0a\" font-weight=\"700\" text-anchor=\"middle\">Intermediaria</text><text x=\"340\" y=\"100\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">Teste funcional</text><text x=\"340\" y=\"116\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">(ergometria, eco de</text><text x=\"340\" y=\"132\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">estresse, cintilografia)</text><text x=\"340\" y=\"148\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">OU angioTC coronaria</text><rect x=\"460\" y=\"46\" width=\"190\" height=\"200\" rx=\"10\" fill=\"#242e46\" stroke=\"#e8675f\"/><text x=\"555\" y=\"68\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Alta</text><text x=\"555\" y=\"100\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">Terapia otimizada</text><text x=\"555\" y=\"116\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">direto; considerar</text><text x=\"555\" y=\"132\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">cateterismo se</text><text x=\"555\" y=\"148\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">sintomas refratarios</text><rect x=\"40\" y=\"256\" width=\"600\" height=\"34\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"56\" y=\"278\" fill=\"#eef2f7\" font-size=\"9.8\" font-weight=\"700\">Probabilidade = idade, sexo e caracteristica da dor (tipica, atipica, nao anginosa).</text></svg>", "dac_testes": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#191f2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">TESTES FUNCIONAIS x ANATOMICOS</text><rect x=\"30\" y=\"44\" width=\"300\" height=\"222\" rx=\"10\" fill=\"#242e46\" stroke=\"#6db3f2\"/><text x=\"44\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\">Funcionais (mostram isquemia)</text><text x=\"44\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">ECG de esforco (mais simples,</text><text x=\"44\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">exige ECG basal interpretavel)</text><text x=\"44\" y=\"126\" fill=\"#eef2f7\" font-size=\"10\">Eco de estresse (avalia</text><text x=\"44\" y=\"142\" fill=\"#eef2f7\" font-size=\"10\">contratilidade sob estresse)</text><text x=\"44\" y=\"164\" fill=\"#eef2f7\" font-size=\"10\">Cintilografia de perfusao</text><text x=\"44\" y=\"180\" fill=\"#eef2f7\" font-size=\"10\">(medicina nuclear)</text><text x=\"44\" y=\"202\" fill=\"#eef2f7\" font-size=\"10\">RM cardiaca de estresse</text><text x=\"44\" y=\"224\" fill=\"#eef2f7\" font-size=\"10\">FFR invasivo (fisiologico)</text><rect x=\"350\" y=\"44\" width=\"300\" height=\"222\" rx=\"10\" fill=\"#242e46\" stroke=\"#3ddc84\"/><text x=\"364\" y=\"66\" fill=\"#3ddc84\" font-weight=\"700\">Anatomicos (mostram a placa)</text><text x=\"364\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">AngioTC de coronarias:</text><text x=\"364\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">excelente valor preditivo</text><text x=\"364\" y=\"120\" fill=\"#eef2f7\" font-size=\"10\">negativo (afasta DAC obstrutiva)</text><text x=\"364\" y=\"142\" fill=\"#eef2f7\" font-size=\"10\">Cateterismo (cinecoronariografia):</text><text x=\"364\" y=\"158\" fill=\"#eef2f7\" font-size=\"10\">padrao-ouro anatomico,</text><text x=\"364\" y=\"174\" fill=\"#eef2f7\" font-size=\"10\">indicado se alto risco ou</text><text x=\"364\" y=\"190\" fill=\"#eef2f7\" font-size=\"10\">refratariedade ao tratamento</text><rect x=\"364\" y=\"204\" width=\"272\" height=\"50\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"376\" y=\"224\" fill=\"#eef2f7\" font-size=\"9.6\" font-weight=\"700\">Escore de calcio coronario ajuda</text><text x=\"376\" y=\"240\" fill=\"#eef2f7\" font-size=\"9.6\">a refinar risco em duvida diagnostica</text></svg>", "dac_tratamento": "<svg viewBox=\"0 0 680 310\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"310\" rx=\"16\" fill=\"#191f2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">OS DOIS PILARES DO TRATAMENTO DA DAC CRONICA</text><rect x=\"30\" y=\"44\" width=\"300\" height=\"232\" rx=\"10\" fill=\"#242e46\" stroke=\"#6db3f2\"/><text x=\"44\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\">Alivio de sintomas (antianginosos)</text><text x=\"44\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">Betabloqueador ou bloqueador</text><text x=\"44\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">de canal de calcio (1a linha)</text><text x=\"44\" y=\"126\" fill=\"#eef2f7\" font-size=\"10\">Nitrato de acao curta para</text><text x=\"44\" y=\"142\" fill=\"#eef2f7\" font-size=\"10\">crises (sublingual)</text><text x=\"44\" y=\"164\" fill=\"#eef2f7\" font-size=\"10\">Nitrato de longa acao,</text><text x=\"44\" y=\"180\" fill=\"#eef2f7\" font-size=\"10\">ivabradina ou trimetazidina</text><text x=\"44\" y=\"196\" fill=\"#eef2f7\" font-size=\"10\">se sintomas persistem</text><rect x=\"350\" y=\"44\" width=\"300\" height=\"232\" rx=\"10\" fill=\"#242e46\" stroke=\"#e8675f\"/><text x=\"364\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\">Reducao de eventos (prevencao 2a)</text><text x=\"364\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">Estatina de alta intensidade</text><text x=\"364\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">(meta de LDL baixa)</text><text x=\"364\" y=\"126\" fill=\"#eef2f7\" font-size=\"10\">AAS em dose baixa (antiplaquetario)</text><text x=\"364\" y=\"148\" fill=\"#eef2f7\" font-size=\"10\">IECA/BRA se HAS, DM, DRC</text><text x=\"364\" y=\"164\" fill=\"#eef2f7\" font-size=\"10\">ou disfuncao de VE associadas</text><text x=\"364\" y=\"186\" fill=\"#eef2f7\" font-size=\"10\">Controle de fatores de risco:</text><text x=\"364\" y=\"202\" fill=\"#eef2f7\" font-size=\"10\">HAS, DM, tabagismo, peso, atividade</text><rect x=\"40\" y=\"286\" width=\"0\" height=\"0\"/></svg>"});</script>
+<script>/* CardioAtlas - Conteudo DAC cronica / angina estavel (dac|0). Aditivo. */
+(function(){
+"use strict";
+var A=window.ASVG||{}; var C=(window.CONTENT=window.CONTENT||{});
+C['dac|0']={
+ name:'Doença arterial coronariana crônica (angina estável)',
+ intro:'É a "outra metade" da doença coronariana: enquanto a síndrome coronariana aguda é a placa que rompeu, a DAC crônica é a placa estável que limita o fluxo de forma previsível — e cai muito em prova pela lógica de investigação (quando pedir qual exame) e pelo tratamento em dois pilares.',
+ sub:[
+  ['entendendo','Entendendo do Zero',`
+   <div class="ac-h">A mesma doença, duas faces diferentes</div>
+   <p class="ac-p">A <b>aterosclerose coronariana</b> é um processo lento de acúmulo de gordura, células inflamatórias e tecido fibroso dentro da parede das artérias coronárias, formando <b>placas</b> que progressivamente estreitam a luz do vaso. Quando essa placa é <b>estável</b> — coberta por uma capa fibrosa espessa que resiste à ruptura — o paciente desenvolve sintomas <b>previsíveis e reprodutíveis</b>, sempre relacionados a uma maior necessidade de oxigênio do coração: é a <b>doença arterial coronariana (DAC) crônica</b>, cuja manifestação clássica é a <b>angina estável</b>.</p>
+   <p class="ac-p">A situação muda completamente quando essa mesma placa se torna <b>instável</b>: sua capa fibrosa fica fina, rompe, e um trombo se forma sobre ela de forma súbita — isso é a <b>síndrome coronariana aguda</b> (assunto de outro módulo). Entender essa diferença de <b>mecanismo</b> (obstrução fixa e previsível × ruptura aguda e imprevisível) é o que explica por que a angina estável tem dor <b>desencadeada por esforço e aliviada por repouso</b>, enquanto a síndrome aguda tem dor que aparece <b>em repouso</b> ou muda de padrão subitamente.</p>
+   <p class="ac-p">A nomenclatura mudou nos últimos anos: termos antigos como "doença isquêmica do coração estável" foram substituídos por <b>DAC crônica</b> (ou "síndromes coronarianas crônicas"), justamente para reforçar que é a mesma doença aterosclerótica em um <b>espectro contínuo</b> com a fase aguda — o paciente pode transitar de um estado para o outro ao longo da vida, e o objetivo do tratamento crônico é justamente reduzir a chance dessa transição.</p>
+   ${A.dac_fisiopato}
+   <div class="ac-call"><b>A grande ideia:</b> a DAC crônica nasce de uma placa estável que limita o fluxo de forma previsível. O sintoma (angina) surge quando a demanda de oxigênio supera a oferta limitada pela obstrução — e todo o resto do módulo (diagnóstico e tratamento) decorre dessa lógica.</div>
+   <table class="ac-tbl"><tr><th>Eixo</th><th>O que você vai dominar</th></tr>
+     <tr><td>Mecanismo</td><td>desequilíbrio oferta × demanda de O2 numa placa estável</td></tr>
+     <tr><td>Quadro clínico</td><td>angina típica, classificação CCS (I-IV)</td></tr>
+     <tr><td>Diagnóstico</td><td>probabilidade pré-teste orienta o exame (funcional × anatômico)</td></tr>
+     <tr><td>Estratificação</td><td>quem precisa de mais investigação/revascularização</td></tr>
+     <tr><td>Tratamento</td><td>dois pilares: alívio de sintomas + redução de eventos</td></tr>
+   </table>`],
+  ['quadro_clinico','Quadro Clínico e Classificação CCS',`
+   <div class="ac-h">Reconhecendo a dor anginosa típica</div>
+   <p class="ac-p">A <b>angina típica</b> tem três características que, juntas, aumentam muito a probabilidade de DAC: é uma dor ou desconforto <b>retroesternal</b> (em aperto, peso ou queimação — raramente "em pontada"), é <b>desencadeada por esforço físico ou estresse emocional</b> (porque aumentam a demanda de oxigênio) e <b>alivia em poucos minutos com repouso ou nitrato sublingual</b> (porque a demanda cai de volta ao nível que a oferta limitada consegue suprir). Quando apenas duas dessas características estão presentes, a dor é chamada de <b>atípica</b>; quando nenhuma ou apenas uma está presente, é <b>não anginosa</b> — essa classificação entra diretamente no cálculo da probabilidade pré-teste, discutido na aba de diagnóstico.</p>
+   ${A.dac_ccs}
+   <p class="ac-p">A <b>Canadian Cardiovascular Society (CCS)</b> classifica a intensidade funcional da angina em quatro graus, que servem tanto para comunicar a gravidade quanto para acompanhar a resposta ao tratamento ao longo do tempo. É importante lembrar que sintomas em <b>repouso</b> (CCS IV) já beiram a instabilidade — um paciente que muda de padrão, piora subitamente ou passa a ter dor em repouso deve ser reavaliado com urgência para excluir uma síndrome coronariana aguda sobreposta.</p>
+   <div class="ac-tip"><b>Macete:</b> retroesternal + esforço/emoção + alívio em minutos com repouso/nitrato = angina típica (3 de 3). Perder uma dessas características já reduz a probabilidade de DAC.</div>`],
+  ['fatores_risco','Fatores de Risco',`
+   <div class="ac-h">O que acelera a formação da placa</div>
+   <p class="ac-p">Os fatores de risco cardiovascular se dividem em <b>modificáveis</b> e <b>não modificáveis</b>, e essa distinção importa porque orienta onde a intervenção realmente muda o desfecho. Entre os <b>não modificáveis</b> estão idade, sexo masculino (ou pós-menopausa em mulheres) e história familiar de doença coronariana precoce. Entre os <b>modificáveis</b> — e é aqui que a prevenção age — estão hipertensão arterial, diabetes, dislipidemia (sobretudo LDL elevado), tabagismo, obesidade e sedentarismo.</p>
+   <p class="ac-p">Vale entender o <b>porquê</b> de cada um acelerar a aterosclerose: a hipertensão lesiona cronicamente o endotélio (a camada interna do vaso), facilitando a entrada de lipídeos; o diabetes glica proteínas e agride o endotélio por via metabólica direta; o LDL alto é literalmente o "material de construção" da placa; o tabagismo soma disfunção endotelial, inflamação e um estado pró-trombótico. Por isso, o controle desses fatores não é apenas "bom para a saúde geral" — é a base da <b>prevenção secundária</b> discutida na aba de tratamento, que reduz diretamente o risco de infarto e morte.</p>
+   <div class="ac-warn"><b>Pegadinha:</b> a ausência de fatores de risco clássicos não afasta DAC, especialmente em pacientes com apresentação clínica muito sugestiva — a probabilidade pré-teste combina idade, sexo e característica da dor, não apenas fatores de risco.</div>`],
+  ['diagnostico','Diagnóstico: a Probabilidade Decide o Exame',`
+   <div class="ac-h">Por que não se pede o mesmo exame para todo mundo</div>
+   <p class="ac-p">O primeiro passo diante de uma suspeita de angina estável não é pedir um exame — é calcular a <b>probabilidade pré-teste</b> de DAC obstrutiva, com base em <b>idade, sexo e característica da dor</b> (típica, atípica ou não anginosa). Essa probabilidade decide qual caminho seguir, evitando tanto o subdiagnóstico quanto o excesso de exames desnecessários (que geram achados incidentais, radiação e custo sem benefício real).</p>
+   ${A.dac_probabilidade}
+   <p class="ac-p">Em <b>probabilidade baixa</b>, o racional é investigar outras causas da dor torácica em vez de insistir em exames cardiológicos. Em <b>probabilidade intermediária</b>, entra o teste diagnóstico propriamente dito — que pode ser <b>funcional</b> (mostra se há isquemia: ECG de esforço, ecocardiograma de estresse, cintilografia de perfusão miocárdica ou ressonância de estresse) ou <b>anatômico</b> (mostra a placa diretamente: angiotomografia de coronárias, com excelente valor preditivo negativo para afastar doença obstrutiva). Em <b>probabilidade alta</b>, muitas vezes já se parte direto para terapia otimizada, reservando a investigação invasiva para quem permanece sintomático apesar do tratamento.</p>
+   <div class="ac-tip"><b>Macete:</b> teste funcional pergunta "esse paciente isquemia?"; teste anatômico pergunta "esse paciente tem placa?". As duas perguntas são diferentes e a escolha depende do cenário clínico.</div>`],
+  ['estratificacao','Estratificação de Risco',`
+   <div class="ac-h">Quem se beneficia de ir além do exame inicial</div>
+   <p class="ac-p">Depois de confirmado o diagnóstico de DAC, a próxima pergunta é: esse paciente tem <b>alto risco de eventos</b> (infarto, morte) o suficiente para justificar investigação anatômica mais invasiva e, eventualmente, revascularização? Essa estratificação leva em conta a <b>extensão da isquemia</b> nos testes funcionais (quanto maior a área comprometida, maior o risco), a <b>função ventricular</b> (fração de ejeção reduzida piora o prognóstico) e achados anatômicos de alto risco (lesão de tronco de coronária esquerda, doença triarterial).</p>
+   ${A.dac_testes}
+   <p class="ac-p">Um conceito-chave que mudou a forma de pensar a revascularização é a <b>Fração de Reserva de Fluxo (FFR)</b>, medida durante o cateterismo: em vez de decidir tratar uma lesão apenas pelo seu aspecto anatômico (percentual de obstrução visual), a FFR mede se aquela lesão específica realmente está causando isquemia funcional. Estudos como o <b>ISCHEMIA</b> reforçaram que, em pacientes estáveis, a <b>terapia medicamentosa otimizada</b> isolada já reduz muito o risco de eventos maiores, e a revascularização de rotina (sem critério de alto risco) não necessariamente reduz mortalidade — ela é reservada principalmente para <b>alívio de sintomas refratários</b> ou para <b>anatomias de alto risco</b> específicas.</p>
+   <div class="ac-call"><b>Resumo:</b> a decisão de revascularizar não é "a placa existe", e sim "essa placa causa isquemia funcional relevante E/OU está numa anatomia de alto risco (tronco, triarterial com disfunção de VE ou diabetes)".</div>`],
+  ['tratamento_clinico','Tratamento: os Dois Pilares',`
+   <div class="ac-h">Aliviar sintomas não é a mesma coisa que reduzir risco</div>
+   <p class="ac-p">O tratamento da DAC crônica se apoia em <b>dois pilares independentes</b>, e é importante não confundi-los: um trata o <b>sintoma</b> (a angina em si), outro reduz o <b>risco de eventos futuros</b> (infarto, morte) — um paciente pode precisar dos dois, ou às vezes só do segundo (se estiver assintomático mas com DAC confirmada).</p>
+   ${A.dac_tratamento}
+   <p class="ac-p">Para <b>alívio de sintomas</b>, a primeira linha são os <b>betabloqueadores</b> ou os <b>bloqueadores de canal de cálcio</b> — ambos reduzem a demanda de oxigênio do coração (o primeiro reduzindo frequência cardíaca e contratilidade; o segundo relaxando a musculatura vascular e, no caso dos não-diidropiridínicos, também reduzindo frequência). Os <b>nitratos de ação curta</b> são usados para alívio imediato da crise; se os sintomas persistirem apesar da primeira linha, associam-se nitratos de longa ação, <b>ivabradina</b> ou <b>trimetazidina</b>.</p>
+   <p class="ac-p">Para <b>redução de eventos</b> (prevenção secundária), os pilares são independentes do controle de sintomas: <b>estatina de alta intensidade</b> (reduz LDL e estabiliza a placa, diminuindo risco de ruptura), <b>AAS em dose baixa</b> (antiagregação) e, em pacientes com hipertensão, diabetes, doença renal crônica ou disfunção ventricular associadas, um <b>IECA ou BRA</b>. O controle rigoroso dos fatores de risco modificáveis (pressão, glicemia, tabagismo, peso, atividade física) atravessa os dois pilares.</p>
+   <div class="ac-warn"><b>Pegadinha:</b> betabloqueador e bloqueador de canal de cálcio aliviam sintoma, mas <b>não substituem</b> estatina e AAS na redução de eventos — são pilares diferentes e geralmente somados, não escolhidos um no lugar do outro.</div>`],
+  ['revascularizacao','Revascularização: Quando e Como',`
+   <div class="ac-h">Angioplastia ou cirurgia — e quando nenhuma delas</div>
+   <p class="ac-p">A decisão de revascularizar (por <b>angioplastia coronariana percutânea</b> ou <b>cirurgia de revascularização miocárdica - CRM</b>) depende da combinação entre <b>extensão anatômica</b> da doença, <b>função ventricular</b> e <b>comorbidades</b> como o diabetes. Como regra geral cobrada em prova: lesão de <b>tronco de coronária esquerda</b>, doença <b>triarterial</b> (sobretudo com disfunção de ventrículo esquerdo ou diabetes) e anatomias complexas tendem a se beneficiar mais de <b>cirurgia</b>, enquanto lesões mais simples e de um ou dois vasos, sem essas características de alto risco, costumam ser tratadas por <b>angioplastia</b>.</p>
+   <p class="ac-p">É fundamental lembrar que a revascularização é, na maioria dos pacientes estáveis, uma estratégia para <b>alívio de sintomas refratários</b> ao tratamento clínico otimizado, e não necessariamente para reduzir mortalidade isoladamente (com exceção das anatomias de alto risco citadas, em que o benefício de sobrevida é mais consistente). Isso reforça por que a <b>terapia medicamentosa otimizada</b> deve ser sempre tentada e mantida, mesmo quando o paciente já foi revascularizado.</p>
+   <div class="ac-tip"><b>Macete:</b> "T-D-V" para pensar cirurgia — Tronco, Diabetes (triarterial), disfunção Ventricular associada à doença multiarterial.</div>`],
+  ['seguimento','Seguimento e Sinais de Alerta',`
+   <div class="ac-h">Acompanhando o paciente ao longo do tempo</div>
+   <p class="ac-p">O seguimento da DAC crônica é clínico na maior parte do tempo: reavaliar sintomas (a classe CCS mudou?), reforçar adesão ao tratamento e aos hábitos de vida, e monitorar fatores de risco (perfil lipídico, pressão arterial, controle glicêmico). Exames complementares de rotina não costumam ser repetidos com frequência em pacientes estáveis e assintomáticos — a reinvestigação é guiada por <b>mudança clínica</b>, não por calendário fixo.</p>
+   <p class="ac-p">O ponto mais importante do seguimento, e um clássico de prova, é reconhecer quando um paciente <b>deixou de ser "crônico"</b>: piora do padrão anginoso (mais frequente, mais intensa, com menor esforço), aparecimento de dor em <b>repouso</b>, ou dor que não alivia mais com o nitrato habitual são sinais de <b>instabilização da placa</b>, e o paciente deve ser conduzido como uma possível <b>síndrome coronariana aguda</b> — com ECG, troponina e conduta de urgência, não mais como uma consulta de rotina de DAC crônica.</p>
+   <div class="ac-call"><b>A grande ideia do seguimento:</b> DAC crônica é uma doença de "espectro" — o objetivo do tratamento é justamente evitar a transição para a fase aguda, e qualquer sinal de mudança de padrão exige reclassificar o paciente imediatamente.</div>`],
+ ],
+};
+
+Object.assign(C['dac|0'], {
+ escores:`<div class="ac-h">Classificação CCS (resumo)</div>
+   <table class="ac-tbl"><tr><th>Classe</th><th>Definição</th></tr>
+     <tr><td>CCS I</td><td>Angina só em esforços extenuantes; atividade habitual sem sintomas</td></tr>
+     <tr><td>CCS II</td><td>Discreta limitação (subir escada rápido, ladeira, após refeição)</td></tr>
+     <tr><td>CCS III</td><td>Limitação marcada (1-2 quarteirões, 1 lance de escada)</td></tr>
+     <tr><td>CCS IV</td><td>Incapaz de qualquer atividade sem dor; pode ocorrer em repouso</td></tr>
+   </table>
+   <div class="ac-h" style="margin-top:14px">Probabilidade pré-teste (resumo)</div>
+   <table class="ac-tbl"><tr><th>Probabilidade</th><th>Conduta inicial</th></tr>
+     <tr><td>Baixa</td><td>Investigar outras causas de dor torácica</td></tr>
+     <tr><td>Intermediária</td><td>Teste funcional ou angioTC de coronárias</td></tr>
+     <tr><td>Alta</td><td>Terapia otimizada; cateterismo se refratário</td></tr>
+   </table>`,
+ dif:`<div class="ac-h">Diferenciais</div>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Diferenciar de</th><th>Chave</th></tr>
+     <tr><td>Dor torácica ao esforço, previsível</td><td>Angina estável × síndrome coronariana aguda</td><td>Estável: previsível, alivia com repouso/nitrato. SCA: repouso, mudança de padrão, não alivia</td></tr>
+     <tr><td>Dor torácica atípica</td><td>DAC × causa musculoesquelética/digestiva/pulmonar</td><td>Probabilidade pré-teste baixa direciona para outras causas antes de exame cardiológico extenso</td></tr>
+     <tr><td>Teste funcional positivo</td><td>Isquemia verdadeira × falso-positivo</td><td>Considerar prevalência da doença na população testada; testes anatômicos ajudam a esclarecer</td></tr>
+     <tr><td>Indicação de revascularização</td><td>Alívio sintomático × redução de mortalidade</td><td>Só tronco/triarterial de alto risco com disfunção de VE/DM tem benefício consistente de sobrevida</td></tr>
+   </table>`,
+ mapa:`<div class="ac-h">Mapa mental (cards)</div>
+   <div class="mm">
+     <div class="mm-card"><h5>Mecanismo</h5><ul><li>Placa estável, obstrução fixa</li><li>Oferta x demanda de O2</li><li>Diferente da placa instável da SCA</li></ul></div>
+     <div class="mm-card"><h5>Clínica</h5><ul><li>Angina típica: retroesternal, esforço, alivia em minutos</li><li>CCS I-IV</li></ul></div>
+     <div class="mm-card"><h5>Diagnóstico</h5><ul><li>Probabilidade pré-teste (idade, sexo, dor)</li><li>Funcional (isquemia) x anatômico (placa)</li></ul></div>
+     <div class="mm-card"><h5>Estratificação</h5><ul><li>Extensão da isquemia, FE, anatomia</li><li>FFR; ISCHEMIA trial</li></ul></div>
+     <div class="mm-card"><h5>Tratamento</h5><ul><li>Sintoma: BB/BCC, nitrato</li><li>Evento: estatina, AAS, IECA/BRA</li></ul></div>
+     <div class="mm-card"><h5>Revascularização</h5><ul><li>Tronco/triarterial+DM/disfunção VE → cirurgia</li><li>Demais → angioplastia ou clínico</li></ul></div>
+   </div>`,
+ fluxo_dx:`<div class="ac-h">Fluxograma diagnóstico</div>
+   <div class="fx">
+     <div class="fx-node start">Suspeita de angina estável</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node">Calcular probabilidade pré-teste (idade, sexo, tipo de dor)</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Qual a probabilidade?</div>
+     <div class="fx-row">
+       <div class="fx-node">Baixa → investigar outras causas</div>
+       <div class="fx-node">Intermediária → teste funcional ou angioTC</div>
+       <div class="fx-node end">Alta → terapia otimizada ± cateterismo</div>
+     </div>
+   </div>`,
+ fluxo_cond:`<div class="ac-h">Conduta por cenário</div>
+   <div class="fx">
+     <div class="fx-node start">DAC crônica confirmada</div>
+     <div class="fx-row">
+       <div class="fx-node">Sintomático → BB/BCC + nitrato; associar ivabradina/trimetazidina se refratário</div>
+       <div class="fx-node">Todos os pacientes → estatina de alta intensidade + AAS + controle de fatores de risco</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Alto risco anatômico ou sintomas refratários?</div>
+     <div class="fx-row">
+       <div class="fx-node end">Sim → cateterismo e considerar revascularização (CRM se tronco/triarterial+DM/disfunção VE)</div>
+       <div class="fx-node end">Não → manter tratamento clínico otimizado</div>
+     </div>
+   </div>`,
+ vespera:`<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Mecanismo:</b> placa estável, obstrução fixa; sintoma = oferta x demanda de O2.</div>
+   <div class="ac-call"><b>Angina típica:</b> retroesternal + esforço/emoção + alívio em minutos com repouso/nitrato.</div>
+   <div class="ac-call"><b>Diagnóstico:</b> probabilidade pré-teste decide entre investigar outra causa, teste funcional/anatômico ou terapia direta.</div>
+   <div class="ac-call"><b>Revascularização:</b> tronco, triarterial + DM ou disfunção de VE = maior benefício de sobrevida com cirurgia.</div>
+   <div class="ac-call"><b>Tratamento:</b> sintoma (BB/BCC/nitrato) é pilar separado de redução de eventos (estatina + AAS + IECA/BRA se indicado).</div>
+   <div class="ac-call"><b>Alerta:</b> mudança de padrão ou dor em repouso = pensar em síndrome coronariana aguda, não mais DAC crônica.</div>`,
+ dicas:`<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Sempre classifique a dor em típica/atípica/não anginosa antes de pensar em exame — isso já é metade do raciocínio.</div>
+   <div class="ac-tip">Teste funcional = "há isquemia?"; teste anatômico = "há placa?". Escolha conforme a pergunta clínica.</div>
+   <div class="ac-tip">"T-D-V" para lembrar quando pensar em cirurgia: Tronco, Diabetes (triarterial), disfunção Ventricular.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Achar que betabloqueador/BCC substituem estatina e AAS na prevenção de eventos — são pilares diferentes.</div>
+   <div class="ac-warn">Indicar revascularização de rotina esperando redução de mortalidade fora dos critérios de alto risco (tronco/triarterial+DM/disfunção de VE).</div>
+   <div class="ac-warn">Não reclassificar como síndrome aguda um paciente com DAC crônica que mudou o padrão da dor ou passou a ter dor em repouso.</div>
+   <div class="ac-warn">Pedir exame cardiológico extenso em paciente de baixa probabilidade pré-teste sem antes considerar outras causas de dor torácica.</div>`,
+ checklist:[
+   'Explico a diferença entre placa estável (DAC crônica) e placa instável (SCA)',
+   'Reconheço a angina típica e aplico a classificação CCS (I-IV)',
+   'Cito os principais fatores de risco modificáveis e por que aceleram a aterosclerose',
+   'Calculo a probabilidade pré-teste e escolho entre teste funcional e anatômico',
+   'Diferencio teste funcional (mostra isquemia) de teste anatômico (mostra a placa)',
+   'Sei quando estratificar risco além do teste inicial (FFR, anatomia de alto risco)',
+   'Descrevo os dois pilares do tratamento (alívio de sintomas x redução de eventos)',
+   'Sei quando indicar cirurgia versus angioplastia versus tratamento clínico',
+   'Reconheço sinais de instabilização que exigem conduzir como síndrome coronariana aguda'
+ ],
+});
+
+Object.assign(C['dac|0'], {
+ questoes:[
+  {stem:'Qual característica NÃO faz parte da definição de angina típica?',
+   opts:['Localização retroesternal','Desencadeada por esforço físico ou emoção','Persiste por horas sem alívio com repouso','Alívio em poucos minutos com repouso ou nitrato'],correct:2,
+   expl:'A angina típica <b>alivia em poucos minutos</b> com repouso ou nitrato. Dor que persiste por horas sem alívio sugere síndrome coronariana aguda, não angina estável.'},
+  {stem:'Paciente com angina que ocorre ao subir dois lances de escada rapidamente, mas não durante atividades habituais, é classificado como:',
+   opts:['CCS I','CCS II','CCS III','CCS IV'],correct:1,
+   expl:'<b>CCS II</b>: discreta limitação da atividade habitual, com sintomas em esforços um pouco maiores (subir escada rápido, ladeira, após refeição).'},
+  {stem:'A principal diferença fisiopatológica entre DAC crônica e síndrome coronariana aguda é:',
+   opts:['A DAC crônica não envolve aterosclerose','Na SCA, uma placa instável rompe e forma trombo agudo; na DAC crônica, a placa é estável e obstrui de forma fixa','A DAC crônica ocorre apenas em mulheres','A SCA nunca causa dor torácica'],correct:1,
+   expl:'A DAC crônica decorre de <b>placa estável</b> com obstrução fixa e previsível; a SCA decorre de <b>ruptura de placa instável</b> com trombose aguda sobreposta.'},
+  {stem:'Homem de 55 anos com dor torácica atípica (2 de 3 características de angina típica). Qual é o primeiro passo na investigação?',
+   opts:['Cateterismo cardíaco imediato','Calcular a probabilidade pré-teste de DAC obstrutiva','Iniciar estatina sem investigação','Solicitar ressonância cardíaca de rotina'],correct:1,
+   expl:'O primeiro passo é calcular a <b>probabilidade pré-teste</b> (idade, sexo, característica da dor), que orienta se a investigação deve seguir para outra causa, teste funcional, anatômico ou terapia direta.'},
+  {stem:'Qual exame é classificado como TESTE FUNCIONAL (avalia isquemia, não a placa em si)?',
+   opts:['Angiotomografia de coronárias','Escore de cálcio coronário','Ecocardiograma de estresse','Cateterismo diagnóstico'],correct:2,
+   expl:'O <b>ecocardiograma de estresse</b> avalia alterações de contratilidade induzidas por isquemia, sendo um teste <b>funcional</b>. AngioTC e cateterismo são testes anatômicos.'},
+  {stem:'Qual achado anatômico geralmente indica maior benefício de CIRURGIA (CRM) em vez de angioplastia?',
+   opts:['Lesão única em artéria marginal','Doença triarterial com diabetes ou disfunção de ventrículo esquerdo','Estenose leve em um único vaso','Ausência de sintomas'],correct:1,
+   expl:'Lesão de <b>tronco de coronária esquerda</b> e <b>doença triarterial associada a diabetes ou disfunção de VE</b> tendem a ter maior benefício de sobrevida com cirurgia de revascularização.'},
+  {stem:'Segundo os achados de grandes estudos como o ISCHEMIA, em pacientes estáveis sem critérios de alto risco, a revascularização de rotina:',
+   opts:['Sempre reduz mortalidade em relação à terapia clínica otimizada','Tem benefício principal no alívio de sintomas refratários, sem redução consistente de mortalidade fora de anatomias de alto risco','É contraindicada em qualquer paciente com DAC','Substitui a necessidade de estatina e AAS'],correct:1,
+   expl:'Em pacientes estáveis sem critérios anatômicos de alto risco, a terapia medicamentosa otimizada já reduz muito o risco de eventos, e a revascularização de rotina tem benefício principal no <b>alívio de sintomas</b>, não necessariamente na sobrevida.'},
+  {stem:'Quais são os dois pilares do tratamento da DAC crônica?',
+   opts:['Apenas controle de sintomas','Alívio de sintomas (antianginosos) e redução de eventos (prevenção secundária)','Apenas revascularização precoce','Apenas anticoagulação plena'],correct:1,
+   expl:'O tratamento se apoia em <b>alívio de sintomas</b> (betabloqueador/BCC, nitratos) e <b>redução de eventos</b> (estatina de alta intensidade, AAS, IECA/BRA quando indicado, controle de fatores de risco).'},
+  {stem:'Qual classe de medicamento é considerada primeira linha para alívio de sintomas na angina estável?',
+   opts:['Estatina de alta intensidade','Betabloqueador ou bloqueador de canal de cálcio','Anticoagulante oral','Diurético de alça'],correct:1,
+   expl:'<b>Betabloqueadores</b> e <b>bloqueadores de canal de cálcio</b> reduzem a demanda de oxigênio do coração e são primeira linha para alívio de sintomas anginosos.'},
+  {stem:'Paciente com DAC crônica estável há anos relata, na última semana, dor torácica em repouso, diferente do padrão habitual. A conduta correta é:',
+   opts:['Manter o acompanhamento ambulatorial de rotina, sem mudanças','Reclassificar e conduzir como possível síndrome coronariana aguda, com ECG e troponina','Apenas aumentar a dose do betabloqueador','Agendar teste funcional em 3 meses'],correct:1,
+   expl:'Mudança de padrão com dor em <b>repouso</b> sugere <b>instabilização da placa</b> — o paciente deve ser conduzido com urgência como possível <b>síndrome coronariana aguda</b>.'},
+  {stem:'A Fração de Reserva de Fluxo (FFR), medida no cateterismo, tem qual finalidade principal?',
+   opts:['Medir a pressão arterial sistêmica','Avaliar se uma lesão coronariana específica causa isquemia funcional relevante','Substituir a angiotomografia em todos os pacientes','Diagnosticar hipertensão pulmonar'],correct:1,
+   expl:'A <b>FFR</b> avalia se uma lesão coronariana, além de anatomicamente presente, está realmente causando <b>isquemia funcional</b>, orientando melhor a decisão de revascularizar.'},
+  {stem:'Em relação aos fatores de risco para DAC, qual afirmação está correta?',
+   opts:['Apenas fatores não modificáveis importam para o risco cardiovascular','O LDL elevado é considerado "material de construção" da placa aterosclerótica, sendo alvo central da prevenção','Fatores de risco não influenciam a decisão terapêutica','A hipertensão não tem relação com aterosclerose coronariana'],correct:1,
+   expl:'O <b>LDL</b> é um componente central da formação da placa aterosclerótica, e seu controle rigoroso (estatina de alta intensidade) é um dos pilares da prevenção secundária.'}
+ ],
+ flashcards:[
+  {front:'Diferença de mecanismo: DAC crônica x SCA.',back:'DAC crônica: placa estável, obstrução fixa e previsível. SCA: placa instável rompe e forma trombo agudo.',type:'basic'},
+  {front:'As 3 características da angina típica.',back:'Retroesternal + desencadeada por esforço/emoção + alívio em minutos com repouso/nitrato.',type:'basic'},
+  {front:'Classificação CCS - o que diferencia I de IV?',back:'CCS I: só em esforços extenuantes. CCS IV: incapaz de qualquer atividade sem dor, pode ocorrer em repouso.',type:'basic'},
+  {front:'O que orienta a escolha do exame diagnóstico na DAC?',back:'A {{probabilidade pré-teste}} (idade, sexo, característica da dor).',type:'cloze'},
+  {front:'Teste funcional x teste anatômico.',back:'Funcional (ergometria, eco de estresse, cintilografia): mostra se há isquemia. Anatômico (angioTC, cateterismo): mostra a placa.',type:'basic'},
+  {front:'Para que serve a FFR no cateterismo?',back:'Avalia se uma lesão específica está causando isquemia funcional relevante, orientando a decisão de revascularizar.',type:'basic'},
+  {front:'Quando a cirurgia (CRM) é preferida à angioplastia?',back:'Lesão de tronco de coronária esquerda ou doença triarterial associada a diabetes ou disfunção de ventrículo esquerdo.',type:'basic'},
+  {front:'Os dois pilares do tratamento da DAC crônica.',back:'Alívio de sintomas (betabloqueador/BCC, nitratos) e redução de eventos (estatina de alta intensidade, AAS, IECA/BRA se indicado).',type:'basic'},
+  {front:'Primeira linha para alívio de sintomas na angina estável.',back:'Betabloqueador ou bloqueador de canal de cálcio.',type:'basic'},
+  {front:'Segunda linha se sintomas persistirem apesar da 1a linha.',back:'Nitrato de longa ação, ivabradina ou trimetazidina.',type:'basic'},
+  {front:'O que a prevenção secundária busca reduzir?',back:'O risco de {{eventos futuros}} (infarto, morte), independente do controle de sintomas.',type:'cloze'},
+  {front:'Principal achado de estudos como o ISCHEMIA.',back:'Em pacientes estáveis sem alto risco anatômico, terapia clínica otimizada já reduz muito o risco; revascularização de rotina beneficia principalmente sintomas refratários.',type:'basic'},
+  {front:'Sinal de alerta para instabilização da DAC crônica.',back:'Mudança de padrão da dor, piora com menor esforço, ou dor em repouso — conduzir como possível síndrome coronariana aguda.',type:'basic'},
+  {front:'Por que o LDL alto acelera a aterosclerose?',back:'É um dos principais componentes que se depositam na parede arterial, formando a placa aterosclerótica.',type:'basic'}
+ ],
+ casos:[
+  {t:'Caso 1 — A dor que só aparece na ladeira',
+   stem:'Mulher, 62 anos, hipertensa e dislipidêmica, relata dor retroesternal em aperto ao subir uma ladeira íngreme ou escadas rápido, que cede em cerca de 3 minutos parando e descansando. Atividades habituais não causam sintomas.',
+   passos:[
+    {h:'1. Caracterizar a dor',p:'Retroesternal + esforço + alívio rápido com repouso = <b>angina típica</b>.'},
+    {h:'2. Classificar a limitação funcional',p:'Sintomas apenas em esforços um pouco maiores que o habitual = <b>CCS II</b>.'},
+    {h:'3. Calcular probabilidade e investigar',p:'Idade, sexo e dor típica geram probabilidade pré-teste intermediária/alta → considerar teste funcional ou angioTC de coronárias.'},
+    {h:'Lição de prova',p:'Angina típica com boa capacidade funcional habitual = CCS II; a investigação segue a lógica da probabilidade pré-teste.'}
+   ]},
+  {t:'Caso 2 — Quando o exame "conta a história errada"',
+   stem:'Homem, 58 anos, diabético, dor torácica atípica. AngioTC de coronárias mostra placa calcificada com estenose de 60% em artéria circunflexa. Paciente permanece assintomático em atividades diárias.',
+   passos:[
+    {h:'1. Interpretar o achado anatômico',p:'A presença de placa não significa, isoladamente, que ela está causando isquemia.'},
+    {h:'2. Avaliar significância funcional',p:'Considerar teste funcional ou FFR para saber se essa lesão realmente limita o fluxo de forma relevante.'},
+    {h:'3. Decidir a conduta',p:'Sem isquemia funcional significativa e sem sintomas limitantes, prioriza-se tratamento clínico otimizado (estatina, AAS, controle de fatores de risco) em vez de revascularização imediata.'},
+    {h:'Lição de prova',p:'Achado anatômico isolado não indica revascularização — é preciso significância funcional (isquemia) ou critério de alto risco.'}
+   ]},
+  {t:'Caso 3 — Quando a "crônica" vira aguda',
+   stem:'Homem, 67 anos, com DAC crônica conhecida e angina estável há 3 anos (CCS II, bem controlada). Procura o pronto-socorro relatando dor torácica que começou em repouso há 40 minutos, diferente da dor habitual, sem alívio com o nitrato sublingual.',
+   passos:[
+    {h:'1. Reconhecer a mudança de padrão',p:'Dor em repouso, prolongada e sem alívio com nitrato = sinais de <b>instabilização</b>, não mais compatível com angina estável crônica.'},
+    {h:'2. Reclassificar o cenário',p:'Conduzir imediatamente como possível <b>síndrome coronariana aguda</b>: ECG, troponina seriada, monitorização.'},
+    {h:'3. Não tratar como consulta de rotina',p:'Abandonar a lógica de "ajuste de tratamento crônico" e seguir o protocolo de urgência para dor torácica aguda.'},
+    {h:'Lição de prova',p:'DAC crônica e SCA fazem parte do mesmo espectro; qualquer mudança de padrão exige reclassificação imediata do paciente.'}
+   ]}
+ ],
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+</script>
+
+<!-- ===== MODULO SINCOPE (aditivo) ===== -->
+<script>Object.assign(window.ASVG=window.ASVG||{},{"sinc_definicao": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#241a2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">SINCOPE E UM TIPO DE \"TLOC\"</text><rect x=\"30\" y=\"46\" width=\"620\" height=\"60\" rx=\"10\" fill=\"#362943\" stroke=\"#f59f0a\"/><text x=\"46\" y=\"70\" fill=\"#f59f0a\" font-weight=\"700\">TLOC (perda transitoria de consciencia)</text><text x=\"46\" y=\"90\" fill=\"#eef2f7\" font-size=\"10.2\">Categoria ampla: inclui sincope, convulsao, TCE, causas psicogenicas</text><rect x=\"30\" y=\"118\" width=\"290\" height=\"150\" rx=\"10\" fill=\"#362943\" stroke=\"#3ddc84\"/><text x=\"44\" y=\"140\" fill=\"#3ddc84\" font-weight=\"700\">Sincope (definicao)</text><text x=\"44\" y=\"162\" fill=\"#eef2f7\" font-size=\"10\">Hipoperfusao cerebral GLOBAL</text><text x=\"44\" y=\"178\" fill=\"#eef2f7\" font-size=\"10\">e TRANSITORIA</text><text x=\"44\" y=\"200\" fill=\"#eef2f7\" font-size=\"10\">Inicio rapido, curta duracao,</text><text x=\"44\" y=\"216\" fill=\"#eef2f7\" font-size=\"10\">recuperacao ESPONTANEA</text><text x=\"44\" y=\"238\" fill=\"#eef2f7\" font-size=\"10\">e COMPLETA</text><rect x=\"360\" y=\"118\" width=\"290\" height=\"150\" rx=\"10\" fill=\"#362943\" stroke=\"#e8675f\"/><text x=\"374\" y=\"140\" fill=\"#e8675f\" font-weight=\"700\">NAO e sincope (excluir)</text><text x=\"374\" y=\"162\" fill=\"#eef2f7\" font-size=\"10\">Convulsao (movimentos tonico-</text><text x=\"374\" y=\"178\" fill=\"#eef2f7\" font-size=\"10\">clonicos desde o inicio, confusao</text><text x=\"374\" y=\"194\" fill=\"#eef2f7\" font-size=\"10\">pos-ictal prolongada)</text><text x=\"374\" y=\"216\" fill=\"#eef2f7\" font-size=\"10\">Hipoglicemia, TCE, causa</text><text x=\"374\" y=\"232\" fill=\"#eef2f7\" font-size=\"10\">psicogenica (pseudo-sincope)</text></svg>", "sinc_tipos": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#241a2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">3 GRANDES CAUSAS DE SINCOPE</text><rect x=\"20\" y=\"44\" width=\"205\" height=\"230\" rx=\"10\" fill=\"#362943\" stroke=\"#3ddc84\"/><text x=\"122\" y=\"66\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Reflexa (neuromediada)</text><text x=\"122\" y=\"90\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">A MAIS COMUM</text><text x=\"122\" y=\"112\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Vasovagal, situacional,</text><text x=\"122\" y=\"128\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">seio carotideo</text><text x=\"122\" y=\"150\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Reflexo autonomico</text><text x=\"122\" y=\"166\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">exagerado: bradicardia</text><text x=\"122\" y=\"182\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">+ vasodilatacao</text><text x=\"122\" y=\"204\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Geralmente com</text><text x=\"122\" y=\"220\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">pródromo, bom prognostico</text><rect x=\"237\" y=\"44\" width=\"205\" height=\"230\" rx=\"10\" fill=\"#362943\" stroke=\"#6db3f2\"/><text x=\"339\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Ortostatica</text><text x=\"339\" y=\"90\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Queda de PA ao</text><text x=\"339\" y=\"106\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">ficar em pe</text><text x=\"339\" y=\"128\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Falha do reflexo</text><text x=\"339\" y=\"144\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">compensatorio ou</text><text x=\"339\" y=\"160\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">hipovolemia</text><text x=\"339\" y=\"182\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Causas: drogas,</text><text x=\"339\" y=\"198\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">desidratacao,</text><text x=\"339\" y=\"214\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">disautonomia</text><rect x=\"454\" y=\"44\" width=\"205\" height=\"230\" rx=\"10\" fill=\"#362943\" stroke=\"#e8675f\"/><text x=\"556\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Cardiaca</text><text x=\"556\" y=\"90\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">A MAIS PERIGOSA</text><text x=\"556\" y=\"112\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Arritmica (bradi ou</text><text x=\"556\" y=\"128\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">taquiarritmia) ou</text><text x=\"556\" y=\"144\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">estrutural (EAo, CMH,</text><text x=\"556\" y=\"160\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">TEP, tamponamento)</text><text x=\"556\" y=\"182\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Sem pródromo, ao</text><text x=\"556\" y=\"198\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">esforco, risco de morte</text><text x=\"556\" y=\"214\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">subita</text></svg>", "sinc_reflexa": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#241a2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">O REFLEXO POR TRAS DA SINCOPE VASOVAGAL</text><rect x=\"30\" y=\"46\" width=\"620\" height=\"46\" rx=\"8\" fill=\"#362943\" stroke=\"#6db3f2\"/><text x=\"46\" y=\"70\" fill=\"#eef2f7\" font-size=\"10.4\">Gatilho (dor, medo, calor, ficar em pe por muito tempo) -&gt; menos sangue volta ao coracao</text><text x=\"46\" y=\"86\" fill=\"#eef2f7\" font-size=\"10.4\">-&gt; coracao se contrai \"vazio\" e com forca -&gt; ativa mecanorreceptores no ventriculo</text><rect x=\"30\" y=\"102\" width=\"620\" height=\"46\" rx=\"8\" fill=\"#362943\" stroke=\"#f59f0a\"/><text x=\"46\" y=\"126\" fill=\"#f59f0a\" font-weight=\"700\">Reflexo de Bezold-Jarisch</text><text x=\"46\" y=\"142\" fill=\"#eef2f7\" font-size=\"10.2\">Sinal errado sobe pelo vago ao tronco cerebral -&gt; resposta autonomica exagerada</text><rect x=\"30\" y=\"158\" width=\"300\" height=\"110\" rx=\"8\" fill=\"#362943\" stroke=\"#3ddc84\"/><text x=\"44\" y=\"180\" fill=\"#3ddc84\" font-weight=\"700\">Componente cardioinibitorio</text><text x=\"44\" y=\"200\" fill=\"#eef2f7\" font-size=\"10\">Bradicardia importante,</text><text x=\"44\" y=\"216\" fill=\"#eef2f7\" font-size=\"10\">as vezes ate pausa sinusal</text><text x=\"44\" y=\"238\" fill=\"#eef2f7\" font-size=\"10\">(nervo vago hiperativo)</text><rect x=\"350\" y=\"158\" width=\"300\" height=\"110\" rx=\"8\" fill=\"#362943\" stroke=\"#e8675f\"/><text x=\"364\" y=\"180\" fill=\"#e8675f\" font-weight=\"700\">Componente vasodepressor</text><text x=\"364\" y=\"200\" fill=\"#eef2f7\" font-size=\"10\">Vasodilatacao periferica</text><text x=\"364\" y=\"216\" fill=\"#eef2f7\" font-size=\"10\">(queda do tono simpatico)</text><text x=\"364\" y=\"238\" fill=\"#eef2f7\" font-size=\"10\">Soma-se a bradicardia</text></svg>", "sinc_redflags": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#241a2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">SINAIS DE ALARME (PENSAR EM CAUSA CARDIACA)</text><rect x=\"30\" y=\"44\" width=\"300\" height=\"248\" rx=\"10\" fill=\"#362943\" stroke=\"#e8675f\"/><text x=\"44\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\">Na historia</text><text x=\"44\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">Sincope AOS ESFORCOS</text><text x=\"44\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">Sem pródromo (subita, \"caiu do nada\")</text><text x=\"44\" y=\"120\" fill=\"#eef2f7\" font-size=\"10\">Palpitacoes antes do desmaio</text><text x=\"44\" y=\"136\" fill=\"#eef2f7\" font-size=\"10\">Dor toracica associada</text><text x=\"44\" y=\"152\" fill=\"#eef2f7\" font-size=\"10\">Historia familiar de morte subita</text><text x=\"44\" y=\"168\" fill=\"#eef2f7\" font-size=\"10\">jovem ou canalopatia</text><text x=\"44\" y=\"184\" fill=\"#eef2f7\" font-size=\"10\">Sincope em decubito (deitado)</text><text x=\"44\" y=\"200\" fill=\"#eef2f7\" font-size=\"10\">Cardiopatia estrutural conhecida</text><rect x=\"350\" y=\"44\" width=\"300\" height=\"248\" rx=\"10\" fill=\"#362943\" stroke=\"#f59f0a\"/><text x=\"364\" y=\"66\" fill=\"#f59f0a\" font-weight=\"700\">No exame/ECG</text><text x=\"364\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">Sopro sistolico (estenose aortica,</text><text x=\"364\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">CMH)</text><text x=\"364\" y=\"126\" fill=\"#eef2f7\" font-size=\"10\">QT longo ou curto</text><text x=\"364\" y=\"142\" fill=\"#eef2f7\" font-size=\"10\">Padrao de Brugada</text><text x=\"364\" y=\"158\" fill=\"#eef2f7\" font-size=\"10\">Bloqueio AV avancado ou bloqueio</text><text x=\"364\" y=\"174\" fill=\"#eef2f7\" font-size=\"10\">bifascicular</text><text x=\"364\" y=\"190\" fill=\"#eef2f7\" font-size=\"10\">Onda Q patologica (IAM previo)</text><text x=\"364\" y=\"206\" fill=\"#eef2f7\" font-size=\"10\">Pre-excitacao (WPW)</text><rect x=\"40\" y=\"264\" width=\"600\" height=\"42\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"56\" y=\"288\" fill=\"#eef2f7\" font-size=\"10.2\" font-weight=\"700\">Presenca de qualquer sinal de alarme = investigacao cardiologica ativa e possivel internacao.</text></svg>", "sinc_conduta": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#241a2e\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">CONDUTA CONFORME O TIPO DE SINCOPE</text><rect x=\"20\" y=\"44\" width=\"205\" height=\"230\" rx=\"10\" fill=\"#362943\" stroke=\"#3ddc84\"/><text x=\"122\" y=\"66\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Reflexa</text><text x=\"122\" y=\"90\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Educacao + reconhecer</text><text x=\"122\" y=\"106\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">pródromos</text><text x=\"122\" y=\"128\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Hidratacao/sal;</text><text x=\"122\" y=\"144\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">manobras de contra-</text><text x=\"122\" y=\"160\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">pressao fisica</text><text x=\"122\" y=\"182\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Marcapasso raramente</text><text x=\"122\" y=\"198\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">(cardioinibitoria grave)</text><rect x=\"237\" y=\"44\" width=\"205\" height=\"230\" rx=\"10\" fill=\"#362943\" stroke=\"#6db3f2\"/><text x=\"339\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Ortostatica</text><text x=\"339\" y=\"90\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Rever medicacoes</text><text x=\"339\" y=\"106\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">(anti-hipertensivos)</text><text x=\"339\" y=\"128\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Hidratacao, meias</text><text x=\"339\" y=\"144\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">de compressao</text><text x=\"339\" y=\"166\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Levantar devagar</text><text x=\"339\" y=\"188\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Fludrocortisona ou</text><text x=\"339\" y=\"204\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">midodrina se grave</text><rect x=\"454\" y=\"44\" width=\"205\" height=\"230\" rx=\"10\" fill=\"#362943\" stroke=\"#e8675f\"/><text x=\"556\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Cardiaca</text><text x=\"556\" y=\"90\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Internar e monitorizar</text><text x=\"556\" y=\"112\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Tratar a causa de base:</text><text x=\"556\" y=\"128\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">marcapasso (bradi),</text><text x=\"556\" y=\"144\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">CDI (taqui grave),</text><text x=\"556\" y=\"160\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">correcao estrutural</text><text x=\"556\" y=\"182\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Maior risco de morte</text><text x=\"556\" y=\"198\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">subita entre os 3 tipos</text></svg>"});</script>
+<script>/* CardioAtlas - Conteudo Sincope (sincope|0). Aditivo. */
+(function(){
+"use strict";
+var A=window.ASVG||{}; var C=(window.CONTENT=window.CONTENT||{});
+C['sincope|0']={
+ name:'Síncope',
+ intro:'É um dos temas mais "armados" da prova: o desafio não é reconhecer o desmaio, é separar rapidamente o paciente que vai para casa com orientação (a maioria) do paciente que pode morrer se for liberado sem investigação (a minoria que esconde uma causa cardíaca).',
+ sub:[
+  ['entendendo','Entendendo do Zero',`
+   <div class="ac-h">O que realmente define uma síncope</div>
+   <p class="ac-p">O cérebro depende de um fluxo sanguíneo contínuo para manter a consciência. A <b>síncope</b> é definida como uma <b>perda transitória de consciência causada por hipoperfusão cerebral global</b>: quando, por qualquer motivo, a pressão de perfusão cerebral cai de forma súbita, o cérebro simplesmente "desliga" por alguns segundos. As três características que fecham essa definição são: <b>início rápido</b>, <b>duração curta</b> e <b>recuperação espontânea e completa</b>, sem necessidade de intervenção. Se a recuperação não é completa (fica confusão prolongada) ou não é espontânea (precisou de choque, glicose), o quadro provavelmente não é síncope.</p>
+   <p class="ac-p">A síncope é apenas um dos tipos de <b>TLOC</b> (do inglês, perda transitória de consciência) — uma categoria mais ampla que também inclui <b>crises convulsivas</b>, <b>hipoglicemia</b>, <b>traumatismo cranioencefálico</b> e quadros <b>psicogênicos</b> (a chamada pseudo-síncope, mais comum em pacientes jovens com transtornos de ansiedade). Diferenciar síncope verdadeira desses outros TLOCs já é metade do raciocínio clínico: uma boa história (testemunhas ajudam muito) costuma resolver essa etapa antes mesmo de qualquer exame.</p>
+   ${A.sinc_definicao}
+   <p class="ac-p">Uma vez confirmado que se trata de síncope, o raciocínio se divide em duas perguntas sequenciais, que estruturam o módulo inteiro: <b>"qual é o mecanismo?"</b> (reflexa, ortostática ou cardíaca) e <b>"esse paciente corre risco imediato de morte?"</b> (estratificação de risco). A segunda pergunta é, de longe, a mais cobrada em prova, porque é ela que decide entre alta segura e internação com investigação ativa.</p>
+   <div class="ac-call"><b>A grande ideia:</b> síncope = hipoperfusão cerebral global e transitória, com recuperação espontânea completa. O trabalho clínico real é classificar o mecanismo e, principalmente, rastrear sinais de alto risco que apontem para causa cardíaca.</div>
+   <table class="ac-tbl"><tr><th>Eixo</th><th>O que você vai dominar</th></tr>
+     <tr><td>Definição</td><td>síncope × outros TLOCs (convulsão, hipoglicemia, psicogênica)</td></tr>
+     <tr><td>Classificação</td><td>reflexa, ortostática e cardíaca — mecanismo de cada uma</td></tr>
+     <tr><td>Estratificação</td><td>sinais de alarme que apontam causa cardíaca</td></tr>
+     <tr><td>Investigação</td><td>história e ECG resolvem a maioria; quando pedir mais</td></tr>
+     <tr><td>Conduta</td><td>tratamento conforme o mecanismo identificado</td></tr>
+   </table>`],
+  ['classificacao','As 3 Grandes Causas',`
+   <div class="ac-h">Reflexa, ortostática ou cardíaca</div>
+   <p class="ac-p">Toda síncope pode ser encaixada em uma de três categorias fisiopatológicas, e essa classificação é o esqueleto de todo o módulo. A <b>síncope reflexa (neuromediada)</b> é, disparado, a mais comum na população geral — inclui a vasovagal, a situacional (tosse, micção, defecação) e a hipersensibilidade do seio carotídeo. A <b>síncope ortostática</b> ocorre quando o corpo falha em compensar a queda de pressão que naturalmente acontece ao ficar de pé. E a <b>síncope cardíaca</b> é a mais temida, porque pode ser o primeiro (e único) aviso antes de uma morte súbita — decorre de <b>arritmias</b> (a causa cardíaca mais comum) ou de <b>doença estrutural obstrutiva</b> (estenose aórtica grave, cardiomiopatia hipertrófica, embolia pulmonar maciça, tamponamento).</p>
+   ${A.sinc_tipos}
+   <p class="ac-p">O raciocínio típico de prova usa <b>pistas da história</b> para apontar a categoria mais provável antes mesmo de qualquer exame: síncope <b>reflexa</b> costuma ter um gatilho claro (calor, dor, ficar em pé por muito tempo, ver sangue) e <b>pródromos</b> (sudorese fria, náusea, visão turva) segundos antes do episódio. Síncope <b>ortostática</b> ocorre tipicamente ao <b>levantar</b> de uma posição deitada/sentada. Síncope <b>cardíaca</b> costuma ser <b>súbita, sem pródromo</b>, muitas vezes durante o <b>esforço físico</b> ou em posição deitada — um padrão que deveria acender um alerta imediato.</p>
+   <div class="ac-tip"><b>Macete:</b> "com aviso, sem gravidade" (reflexa, com pródromo) × "sem aviso, com gravidade" (cardíaca, súbita, ao esforço).</div>`],
+  ['reflexa','Síncope Reflexa: o Mecanismo Vasovagal',`
+   <div class="ac-h">Por que o corpo "sabota" a própria pressão</div>
+   <p class="ac-p">A síncope <b>vasovagal</b> (o protótipo da síncope reflexa) nasce de um reflexo autonômico que deveria proteger o coração, mas acaba causando o desmaio. Diante de um gatilho (dor intensa, medo, calor excessivo, ficar em pé parado por muito tempo, ambientes lotados), menos sangue retorna ao coração, que passa a se contrair de forma vigorosa e "vazia". Isso ativa mecanorreceptores dentro do próprio ventrículo, que enviam um sinal (na verdade, um <b>sinal errado</b>, de que o coração estaria "cheio demais") através do nervo vago até o tronco cerebral — esse é o chamado <b>reflexo de Bezold-Jarisch</b>.</p>
+   ${A.sinc_reflexa}
+   <p class="ac-p">A resposta do tronco cerebral a esse sinal equivocado tem dois componentes que se somam: o <b>cardioinibitório</b> (bradicardia intensa, às vezes com pausa sinusal) e o <b>vasodepressor</b> (queda do tônus simpático, causando vasodilatação periférica). A soma de "coração mais lento" com "vasos mais dilatados" derruba a pressão arterial e, consequentemente, a perfusão cerebral — daí o desmaio. Essa é a razão pela qual a síncope vasovagal costuma vir precedida de <b>pródromos</b> (o corpo "avisa" antes de desligar): palidez, sudorese fria, náusea e escurecimento visual, dando tempo para o paciente se sentar ou deitar antes de cair.</p>
+   <div class="ac-tip"><b>Macete:</b> síncope situacional é uma "prima" da vasovagal, com gatilhos específicos (tosse, micção, defecação, deglutição) que também acionam reflexos autonômicos exagerados pelo mesmo mecanismo geral.</div>`],
+  ['ortostatica','Síncope Ortostática',`
+   <div class="ac-h">Quando o corpo não consegue "segurar a pressão" de pé</div>
+   <p class="ac-p">Ao ficar de pé, cerca de 500-800mL de sangue se deslocam por gravidade para as pernas e o abdome, e o corpo normalmente compensa isso em segundos com vasoconstrição reflexa e discreto aumento da frequência cardíaca. A <b>hipotensão ortostática</b> acontece quando esse mecanismo compensatório falha — seja porque o sistema nervoso autônomo está doente (disautonomias, neuropatia diabética, doença de Parkinson), seja porque o volume circulante está reduzido (desidratação, hemorragia, uso excessivo de diuréticos), seja por efeito de medicações que interferem na resposta vascular (anti-hipertensivos, antidepressivos tricíclicos, alfabloqueadores usados para próstata).</p>
+   <p class="ac-p">O critério diagnóstico clássico é uma <b>queda de pressão arterial sistólica ≥20mmHg ou diastólica ≥10mmHg</b> (ou PA sistólica absoluta <90mmHg) dentro de <b>3 minutos</b> após o paciente assumir a posição ortostática, geralmente medida à beira do leito. É um diagnóstico simples de confirmar, mas que exige que alguém <b>pense nele</b> e faça a medida corretamente — um erro comum é medir a pressão apenas na primeira posição e não repetir de pé.</p>
+   <table class="ac-tbl"><tr><th>Causa</th><th>Exemplo</th></tr>
+     <tr><td>Hipovolemia</td><td>Desidratação, hemorragia, uso excessivo de diurético</td></tr>
+     <tr><td>Disautonomia</td><td>Diabetes de longa data, Parkinson, doenças neurodegenerativas</td></tr>
+     <tr><td>Medicamentosa</td><td>Anti-hipertensivos, tricíclicos, alfabloqueadores</td></tr>
+   </table>
+   <div class="ac-warn"><b>Pegadinha:</b> idosos polimedicados são o grupo clássico de hipotensão ortostática — sempre revisar a lista de medicações antes de investigar causas mais raras.</div>`],
+  ['cardiaca','Síncope Cardíaca: a Mais Perigosa',`
+   <div class="ac-h">Por que essa é a categoria que muda a conduta</div>
+   <p class="ac-p">A síncope <b>cardíaca</b> merece atenção redobrada porque pode ser o único sintoma antes de uma <b>morte súbita</b> — reconhecê-la (ou suspeitar fortemente dela) é o que justifica toda a lógica de estratificação de risco do módulo. Ela se divide em dois grandes mecanismos: <b>arrítmico</b> (o mais comum dos cardíacos) e <b>estrutural/obstrutivo</b>. No mecanismo arrítmico, tanto <b>bradiarritmias</b> graves (bloqueio atrioventricular avançado, disfunção do nó sinusal) quanto <b>taquiarritmias</b> (taquicardia ventricular, sobretudo em corações com cicatriz de infarto prévio ou canalopatias) reduzem abruptamente o débito cardíaco a ponto de gerar hipoperfusão cerebral.</p>
+   <p class="ac-p">No mecanismo <b>estrutural/obstrutivo</b>, o problema não é o ritmo, mas uma <b>barreira mecânica</b> ao fluxo sanguíneo: a <b>estenose aórtica grave</b> é o exemplo clássico de síncope <b>aos esforços</b> (porque a demanda de débito aumenta, mas a valva estreitada não permite o aumento de fluxo necessário), a <b>cardiomiopatia hipertrófica</b> pode obstruir dinamicamente a via de saída do VE, o <b>tromboembolismo pulmonar maciço</b> bloqueia o enchimento do coração esquerdo, e o <b>tamponamento cardíaco</b> comprime as câmaras por fora, impedindo o enchimento.</p>
+   <div class="ac-warn"><b>Pegadinha:</b> síncope durante o esforço físico é, até prova em contrário, cardíaca (estrutural obstrutiva) — diferente da síncope reflexa, que tipicamente ocorre após o esforço ou em repouso, com pródromo.</div>`],
+  ['estratificacao','Sinais de Alarme e Estratificação',`
+   <div class="ac-h">O que separa "pode ir para casa" de "precisa investigar agora"</div>
+   <p class="ac-p">Depois de uma história bem feita, a tarefa mais importante é rastrear <b>sinais de alarme (red flags)</b> que sugerem causa cardíaca — porque são eles que decidem entre alta com orientação e internação com investigação ativa. Alguns dos mais cobrados: síncope <b>aos esforços</b>, ausência de <b>pródromo</b> (episódio súbito), <b>palpitações</b> imediatamente antes do desmaio, <b>dor torácica</b> associada, <b>história familiar de morte súbita</b> em jovens (sugerindo canalopatia hereditária), síncope em <b>decúbito</b> (deitado — improvável na reflexa/ortostática) e <b>cardiopatia estrutural</b> conhecida.</p>
+   ${A.sinc_redflags}
+   <p class="ac-p">O <b>ECG de 12 derivações</b> é, junto com a história e o exame físico, a ferramenta mais custo-efetiva da avaliação inicial — ele sozinho resolve ou orienta boa parte dos casos de alto risco. Achados que reforçam a suspeita cardíaca incluem <b>bloqueio atrioventricular avançado</b>, <b>bloqueio bifascicular</b>, <b>QT longo ou curto</b>, <b>padrão de Brugada</b>, <b>onda Q patológica</b> (infarto prévio, substrato para taquicardia ventricular) e sinais de <b>pré-excitação</b> (WPW). Escores clínicos como o <b>Canadian Syncope Risk Score</b> ajudam a sistematizar essa decisão, combinando dados da história, exame e ECG.</p>
+   <div class="ac-call"><b>A grande ideia:</b> a presença de QUALQUER sinal de alarme muda a conduta de "provavelmente benigno" para "investigar ativamente e considerar internação" — não é preciso ter todos os sinais, um já é suficiente para levantar a suspeita.</div>`],
+  ['diagnostico','Investigação: da História ao Tilt Test',`
+   <div class="ac-h">A maioria dos casos se resolve sem exame nenhum sofisticado</div>
+   <p class="ac-p">Um dos pontos mais importantes (e mais mal compreendidos) sobre síncope é que a <b>avaliação inicial</b> — história clínica detalhada (incluindo relato de testemunhas), exame físico completo (com aferição de pressão deitado e em pé) e <b>ECG de 12 derivações</b> — já é suficiente para <b>chegar ao diagnóstico</b> na maioria dos pacientes, sobretudo nos casos de síncope reflexa típica com pródromo e gatilho claros. Pedir uma bateria extensa de exames sem seguir essa lógica é ineficiente e pode até atrasar o diagnóstico correto.</p>
+   <p class="ac-p">Quando a avaliação inicial não fecha o diagnóstico e existe suspeita de causa <b>reflexa</b> recorrente ou de origem incerta, o <b>teste de inclinação (tilt table test)</b> pode reproduzir o reflexo vasovagal em ambiente controlado, ajudando a confirmar o mecanismo. A <b>massagem do seio carotídeo</b> (feita com cautela, monitorização e contraindicada se sopro carotídeo ou AVC recente) investiga a hipersensibilidade do seio carotídeo em pacientes idosos com sincope inexplicada. Já quando a suspeita é <b>arrítmica</b> mas o ECG inicial é normal, a monitorização prolongada — <b>Holter</b> (dias), monitor de eventos, ou <b>looper implantável</b> (para episódios muito espaçados no tempo) — aumenta a chance de capturar o ritmo durante um novo episódio.</p>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Próximo passo</th></tr>
+     <tr><td>Reflexa típica, sem sinais de alarme</td><td>Diagnóstico clínico; sem necessidade de mais exames</td></tr>
+     <tr><td>Suspeita reflexa, diagnóstico incerto</td><td>Teste de inclinação (tilt test)</td></tr>
+     <tr><td>Idoso, sincope inexplicada</td><td>Massagem do seio carotídeo (com cautela)</td></tr>
+     <tr><td>Suspeita arrítmica, ECG inicial normal</td><td>Monitorização prolongada (Holter/looper) conforme frequência dos episódios</td></tr>
+     <tr><td>Sinais de alarme presentes</td><td>Internação, monitorização contínua, ecocardiograma</td></tr>
+   </table>`],
+  ['tratamento','Conduta Conforme o Mecanismo',`
+   <div class="ac-h">O tratamento segue a causa, não o "desmaio" em si</div>
+   <p class="ac-p">Na síncope <b>reflexa</b>, a base do tratamento é <b>educação</b>: ensinar o paciente a reconhecer os pródromos e a se sentar ou deitar imediatamente ao percebê-los (evitando a queda e o trauma associado), orientar hidratação adequada e ingestão de sal (quando não contraindicado), e ensinar <b>manobras de contrapressão física</b> (cruzar as pernas com contração muscular, apertar as mãos com força) que ajudam a manter a pressão arterial no início dos sintomas. Marcapasso é reservado para casos raros e graves, com componente cardioinibitório documentado e recorrência apesar das medidas comportamentais.</p>
+   ${A.sinc_conduta}
+   <p class="ac-p">Na síncope <b>ortostática</b>, o primeiro passo é <b>revisar e ajustar as medicações</b> que possam estar contribuindo (anti-hipertensivos, diuréticos), além de orientar hidratação, uso de meias de compressão e a técnica de <b>levantar-se devagar</b>, em etapas. Em casos mais graves e refratários, medicações como <b>fludrocortisona</b> ou <b>midodrina</b> podem ser adicionadas. Já na síncope <b>cardíaca</b>, a conduta trata diretamente a causa de base: <b>marcapasso</b> para bradiarritmias sintomáticas, <b>cardioversor-desfibrilador implantável (CDI)</b> para taquiarritmias ventriculares graves com risco de morte súbita, e correção da lesão estrutural (por exemplo, troca valvar na estenose aórtica grave sintomática) — sempre com internação e monitorização até a causa ser esclarecida e tratada.</p>
+   <div class="ac-call"><b>Resumo de conduta:</b> reflexa → educação e medidas comportamentais. Ortostática → ajuste de medicações e medidas posturais/volêmicas. Cardíaca → internar, tratar a causa (marcapasso, CDI, correção estrutural).</div>`],
+ ],
+};
+
+Object.assign(C['sincope|0'], {
+ escores:`<div class="ac-h">Classificação e sinais de alarme (resumo)</div>
+   <table class="ac-tbl"><tr><th>Tipo</th><th>Pista clínica principal</th></tr>
+     <tr><td>Reflexa</td><td>Gatilho + pródromo; a mais comum; bom prognóstico</td></tr>
+     <tr><td>Ortostática</td><td>Ao levantar; queda de PA sistólica &ge;20 ou diastólica &ge;10mmHg em 3min</td></tr>
+     <tr><td>Cardíaca</td><td>Súbita, sem pródromo, aos esforços ou em decúbito; maior risco</td></tr>
+   </table>
+   <div class="ac-h" style="margin-top:14px">Sinais de alarme (red flags)</div>
+   <div class="ac-pills"><span class="ac-pill">Aos esforços</span><span class="ac-pill">Sem pródromo</span><span class="ac-pill">Palpitações prévias</span><span class="ac-pill">Dor torácica</span><span class="ac-pill">Morte súbita familiar</span><span class="ac-pill">Em decúbito</span><span class="ac-pill">Cardiopatia estrutural</span><span class="ac-pill">ECG alterado</span></div>`,
+ dif:`<div class="ac-h">Diferenciais</div>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Diferenciar de</th><th>Chave</th></tr>
+     <tr><td>Perda de consciência com abalos</td><td>Síncope convulsiva × crise epiléptica</td><td>Convulsão: abalos DESDE o início, confusão pós-ictal prolongada, mordedura de língua lateral</td></tr>
+     <tr><td>"Desmaio" recorrente em jovem ansioso</td><td>Síncope verdadeira × pseudo-síncope psicogênica</td><td>Pseudo-síncope: episódios frequentes, sem queda real de PA/FC, olhos fechados com resistência à abertura</td></tr>
+     <tr><td>Perda de consciência prolongada</td><td>Síncope × hipoglicemia/TCE</td><td>Síncope tem recuperação rápida e completa; hipoglicemia e TCE não</td></tr>
+     <tr><td>Síncope aos esforços</td><td>Estenose aórtica × cardiomiopatia hipertrófica × arritmia induzida por esforço</td><td>Sopro sistólico ejetivo (EAo), sopro que aumenta com Valsalva (CMH), história familiar (canalopatias)</td></tr>
+   </table>`,
+ mapa:`<div class="ac-h">Mapa mental (cards)</div>
+   <div class="mm">
+     <div class="mm-card"><h5>Definição</h5><ul><li>TLOC por hipoperfusão cerebral global</li><li>Início rápido, recuperação completa</li></ul></div>
+     <div class="mm-card"><h5>Reflexa</h5><ul><li>Mais comum</li><li>Gatilho + pródromo</li><li>Bezold-Jarisch (cardioinibitório + vasodepressor)</li></ul></div>
+     <div class="mm-card"><h5>Ortostática</h5><ul><li>Ao levantar</li><li>Queda &ge;20/10mmHg em 3min</li><li>Drogas, hipovolemia, disautonomia</li></ul></div>
+     <div class="mm-card"><h5>Cardíaca</h5><ul><li>Mais perigosa</li><li>Arrítmica ou estrutural/obstrutiva</li><li>Sem pródromo, aos esforços</li></ul></div>
+     <div class="mm-card"><h5>Red flags</h5><ul><li>Esforço, sem pródromo, dor torácica</li><li>Morte súbita familiar, ECG alterado</li></ul></div>
+     <div class="mm-card"><h5>Investigação</h5><ul><li>História+exame+ECG resolvem a maioria</li><li>Tilt test, Holter/looper se dúvida</li></ul></div>
+   </div>`,
+ fluxo_dx:`<div class="ac-h">Fluxograma: avaliação inicial da síncope</div>
+   <div class="fx">
+     <div class="fx-node start">Paciente com perda transitória de consciência</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node">Confirmar que é síncope (excluir convulsão, hipoglicemia, psicogênica)</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node">História detalhada + exame físico + ECG de 12 derivações</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Há sinais de alarme (red flags)?</div>
+     <div class="fx-row">
+       <div class="fx-node end">Sim → internar, monitorizar, investigar causa cardíaca ativamente</div>
+       <div class="fx-node end">Não, com pródromo/gatilho claro → diagnóstico clínico de síncope reflexa/ortostática, orientar e liberar</div>
+     </div>
+   </div>`,
+ fluxo_cond:`<div class="ac-h">Conduta por tipo</div>
+   <div class="fx">
+     <div class="fx-node start">Mecanismo identificado</div>
+     <div class="fx-row">
+       <div class="fx-node">Reflexa → educação, hidratação/sal, manobras de contrapressão</div>
+       <div class="fx-node">Ortostática → revisar medicações, medidas posturais, fludrocortisona/midodrina se grave</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node end">Cardíaca → internar; marcapasso (bradi), CDI (taqui grave) ou correção estrutural conforme a causa</div>
+   </div>`,
+ vespera:`<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Definição:</b> hipoperfusão cerebral global e transitória, recuperação espontânea e completa.</div>
+   <div class="ac-call"><b>3 tipos:</b> reflexa (mais comum, pródromo), ortostática (ao levantar), cardíaca (mais perigosa, súbita/esforço).</div>
+   <div class="ac-call"><b>Vasovagal:</b> reflexo de Bezold-Jarisch = componente cardioinibitório + vasodepressor.</div>
+   <div class="ac-call"><b>Hipotensão ortostática:</b> queda &ge;20mmHg sistólica ou &ge;10mmHg diastólica em 3 minutos de pé.</div>
+   <div class="ac-call"><b>Red flags:</b> esforço, sem pródromo, palpitações, dor torácica, morte súbita familiar, decúbito, ECG alterado.</div>
+   <div class="ac-call"><b>Investigação:</b> história + exame + ECG resolvem a maioria; tilt test e Holter/looper são de segunda linha.</div>`,
+ dicas:`<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Testemunhas contam mais que exames — sempre pergunte como foi o episódio, se houve pródromo, quanto tempo durou e como foi a recuperação.</div>
+   <div class="ac-tip">Síncope aos esforços é cardíaca até prova em contrário (pensar em estenose aórtica e cardiomiopatia hipertrófica).</div>
+   <div class="ac-tip">O ECG de 12 derivações é o exame mais custo-efetivo — não pule essa etapa em nenhum paciente com síncope.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Pedir bateria extensa de exames antes de fazer uma história detalhada com testemunhas.</div>
+   <div class="ac-warn">Liberar sem investigação um paciente com qualquer sinal de alarme, mesmo que só um esteja presente.</div>
+   <div class="ac-warn">Confundir convulsão (abalos desde o início, confusão pós-ictal prolongada) com síncope convulsiva (abalos breves, já ao final do episódio).</div>
+   <div class="ac-warn">Não medir a pressão em pé (3 minutos) em paciente com suspeita de causa ortostática.</div>`,
+ checklist:[
+   'Defino síncope e diferencio de outros TLOCs (convulsão, hipoglicemia, psicogênica)',
+   'Classifico a síncope em reflexa, ortostática ou cardíaca a partir da história',
+   'Explico o mecanismo da síncope vasovagal (reflexo de Bezold-Jarisch)',
+   'Aplico o critério de hipotensão ortostática (queda de PA em 3 minutos de pé)',
+   'Reconheço os mecanismos de síncope cardíaca (arrítmica e estrutural/obstrutiva)',
+   'Identifico sinais de alarme que exigem investigação cardiológica ativa',
+   'Sei quando a avaliação inicial (história+exame+ECG) já é suficiente e quando pedir mais',
+   'Descrevo a conduta terapêutica conforme o mecanismo identificado'
+ ],
+});
+
+Object.assign(C['sincope|0'], {
+ questoes:[
+  {stem:'Qual conjunto de características define a síncope, segundo a definição clássica?',
+   opts:['Perda de consciência prolongada com confusão pós-ictal','Perda transitória de consciência por hipoperfusão cerebral global, com início rápido e recuperação espontânea completa','Perda de consciência que exige glicose intravenosa para reverter','Perda de consciência acompanhada de abalos tônico-clônicos desde o início'],correct:1,
+   expl:'Síncope é <b>hipoperfusão cerebral global e transitória</b>, com <b>início rápido</b> e <b>recuperação espontânea e completa</b> — sem necessidade de intervenção externa.'},
+  {stem:'Paciente relata desmaio após ficar muito tempo em pé em ambiente quente, precedido de sudorese fria e náusea. Qual o mecanismo mais provável?',
+   opts:['Síncope cardíaca arrítmica','Síncope reflexa vasovagal','Hipotensão ortostática por hipovolemia','Crise convulsiva'],correct:1,
+   expl:'Gatilho (calor, ortostatismo prolongado) + pródromo (sudorese, náusea) são clássicos de <b>síncope reflexa vasovagal</b>.'},
+  {stem:'No reflexo de Bezold-Jarisch, quais são os dois componentes que se somam para causar a queda de pressão?',
+   opts:['Taquicardia e vasoconstrição','Bradicardia (cardioinibitório) e vasodilatação (vasodepressor)','Hipertensão e taquicardia','Broncoespasmo e taquicardia'],correct:1,
+   expl:'O reflexo soma um componente <b>cardioinibitório</b> (bradicardia, às vezes pausa sinusal) com um <b>vasodepressor</b> (vasodilatação por queda do tônus simpático).'},
+  {stem:'Qual é o critério diagnóstico de hipotensão ortostática?',
+   opts:['Queda de PA sistólica >=20mmHg ou diastólica >=10mmHg em até 3 minutos de pé','Queda de PA de qualquer magnitude em 10 minutos de pé','Aumento da frequência cardíaca >=30bpm ao ficar em pé','PA sistólica <120mmHg em qualquer posição'],correct:0,
+   expl:'O critério clássico é queda de <b>PA sistólica &ge;20mmHg ou diastólica &ge;10mmHg</b> dentro de <b>3 minutos</b> após assumir a posição ortostática.'},
+  {stem:'Homem, 68 anos, apresenta síncope durante corrida, sem pródromo. Ausculta revela sopro sistólico em foco aórtico. A hipótese mais provável é:',
+   opts:['Síncope situacional','Síncope vasovagal clássica','Síncope cardíaca por estenose aórtica grave','Hipotensão ortostática por desidratação'],correct:2,
+   expl:'Síncope <b>aos esforços</b>, sem pródromo, com sopro sistólico em foco aórtico sugere <b>estenose aórtica grave</b>, causa clássica de síncope cardíaca estrutural/obstrutiva.'},
+  {stem:'Qual das opções NÃO é considerada um sinal de alarme (red flag) para causa cardíaca de síncope?',
+   opts:['Síncope aos esforços','Presença de pródromo típico com náusea e sudorese antes do episódio','História familiar de morte súbita em jovem','Síncope em decúbito'],correct:1,
+   expl:'A presença de <b>pródromo típico</b> (sudorese, náusea) sugere mecanismo <b>reflexo</b>, e não é um sinal de alarme — pelo contrário, é tranquilizador.'},
+  {stem:'Qual achado no ECG de 12 derivações reforça a suspeita de causa cardíaca arrítmica em um paciente com síncope?',
+   opts:['Ritmo sinusal normal com frequência de 70bpm','Bloqueio atrioventricular avançado ou padrão de pré-excitação (WPW)','PR de 0,16s','Eixo elétrico normal'],correct:1,
+   expl:'<b>Bloqueio AV avançado</b>, <b>bloqueio bifascicular</b>, <b>QT longo/curto</b>, <b>Brugada</b> e <b>pré-excitação</b> são achados de ECG que aumentam a suspeita de causa arrítmica.'},
+  {stem:'Em relação à avaliação inicial da síncope, é correto afirmar que:',
+   opts:['Sempre é necessário Holter de 24h em todos os pacientes','História clínica, exame físico e ECG de 12 derivações já resolvem o diagnóstico na maioria dos casos','O tilt table test deve ser o primeiro exame solicitado','Ressonância magnética cerebral é obrigatória em toda síncope'],correct:1,
+   expl:'A <b>avaliação inicial</b> (história, exame físico incluindo PA deitado/em pé, e ECG) já é suficiente para o diagnóstico na maioria dos pacientes, especialmente na síncope reflexa típica.'},
+  {stem:'Qual é a principal indicação do teste de inclinação (tilt table test)?',
+   opts:['Confirmar mecanismo reflexo em casos de diagnóstico incerto após avaliação inicial','Diagnosticar infarto agudo do miocárdio','Substituir o ECG na avaliação inicial','Diagnosticar hipertensão arterial'],correct:0,
+   expl:'O <b>tilt test</b> reproduz o reflexo vasovagal em ambiente controlado, sendo útil quando a avaliação inicial não esclarece o mecanismo em suspeita de síncope reflexa.'},
+  {stem:'Qual a conduta inicial mais apropriada para um paciente jovem com síncope reflexa recorrente, sem sinais de alarme?',
+   opts:['Implante imediato de marcapasso','Educação sobre reconhecimento de pródromos, hidratação e manobras de contrapressão física','Cardioversor-desfibrilador implantável','Internação hospitalar prolongada'],correct:1,
+   expl:'Na síncope reflexa sem sinais de alarme, o tratamento é primariamente <b>comportamental/educacional</b> — reconhecer pródromos, hidratação, manobras de contrapressão física.'},
+  {stem:'Paciente idoso, polimedicado (uso de anti-hipertensivo e diurético), relata tontura e "escurecimento da visão" ao levantar da cama pela manhã. A investigação prioritária é:',
+   opts:['Cateterismo cardíaco','Aferir a pressão arterial deitado e em pé (3 minutos) e revisar as medicações em uso','Eletroencefalograma','Teste ergométrico'],correct:1,
+   expl:'O quadro sugere <b>hipotensão ortostática</b>, possivelmente medicamentosa — a investigação inicial é a <b>aferição de PA deitado/em pé</b> e a <b>revisão da lista de medicações</b>.'},
+  {stem:'Qual é a principal diferença entre síncope convulsiva e crise epiléptica verdadeira?',
+   opts:['Não existe diferença clínica possível','Na crise epiléptica, os abalos ocorrem desde o início do evento, com confusão pós-ictal prolongada; na síncope convulsiva, os abalos (se presentes) são breves e tardios','Síncope sempre causa mordedura de língua','Crise epiléptica sempre tem recuperação instantânea'],correct:1,
+   expl:'Na <b>epilepsia</b>, os movimentos tônico-clônicos ocorrem <b>desde o início</b>, com confusão pós-ictal prolongada. Na síncope (mesmo "convulsiva"), eventuais abalos são breves, tardios (por hipóxia cerebral), com recuperação mais rápida.'}
+ ],
+ flashcards:[
+  {front:'Definição de síncope.',back:'Perda transitória de consciência por hipoperfusão cerebral global, com início rápido e recuperação espontânea e completa.',type:'basic'},
+  {front:'Síncope é um subtipo de qual categoria mais ampla?',back:'TLOC (perda transitória de consciência), que também inclui convulsão, hipoglicemia, TCE e causas psicogênicas.',type:'basic'},
+  {front:'As 3 grandes causas de síncope.',back:'Reflexa (neuromediada, a mais comum), ortostática, e cardíaca (a mais perigosa).',type:'basic'},
+  {front:'Reflexo de Bezold-Jarisch: os 2 componentes.',back:'Cardioinibitório (bradicardia) + vasodepressor (vasodilatação) — a soma derruba a pressão arterial.',type:'basic'},
+  {front:'Critério de hipotensão ortostática.',back:'Queda de PA sistólica {{>=20mmHg}} ou diastólica >=10mmHg em até 3 minutos de pé.',type:'cloze'},
+  {front:'Causas de síncope cardíaca arrítmica.',back:'Bradiarritmias graves (BAV avançado, disfunção do nó sinusal) e taquiarritmias (TV, sobretudo com cicatriz de infarto ou canalopatias).',type:'basic'},
+  {front:'Causas de síncope cardíaca estrutural/obstrutiva.',back:'Estenose aórtica grave, cardiomiopatia hipertrófica, TEP maciço, tamponamento cardíaco.',type:'basic'},
+  {front:'Síncope aos esforços sugere qual causa até prova em contrário?',back:'Causa cardíaca estrutural/obstrutiva (ex.: estenose aórtica).',type:'basic'},
+  {front:'Liste 4 sinais de alarme (red flags) para causa cardíaca.',back:'Síncope aos esforços, sem pródromo, com palpitações prévias, dor torácica associada, história familiar de morte súbita, ou em decúbito.',type:'basic'},
+  {front:'Exame mais custo-efetivo na avaliação inicial da síncope.',back:'ECG de 12 derivações, junto com história clínica detalhada e exame físico (incluindo PA deitado/em pé).',type:'basic'},
+  {front:'Indicação do tilt table test.',back:'Confirmar mecanismo reflexo quando o diagnóstico permanece incerto após avaliação inicial.',type:'basic'},
+  {front:'Quando usar monitorização prolongada (Holter/looper)?',back:'Quando há suspeita de causa arrítmica mas o ECG inicial é normal — a escolha depende da frequência dos episódios.',type:'basic'},
+  {front:'Tratamento da síncope reflexa.',back:'Educação sobre pródromos, hidratação/sal, manobras de contrapressão física; marcapasso raramente, em casos graves.',type:'basic'},
+  {front:'Tratamento da síncope cardíaca.',back:'Internar e tratar a causa: marcapasso (bradiarritmia), CDI (taquiarritmia grave) ou correção estrutural.',type:'basic'}
+ ],
+ casos:[
+  {t:'Caso 1 — O desmaio "com aviso"',
+   stem:'Mulher, 19 anos, previamente hígida, desmaiou em uma fila no calor, após ficar em pé por 40 minutos. Relata sudorese fria, náusea e visão turva segundos antes de cair. Recuperou-se completamente em menos de 1 minuto, sem confusão.',
+   passos:[
+    {h:'1. Confirmar que é síncope',p:'Início rápido, recuperação espontânea e completa = <b>síncope verdadeira</b>, não convulsão nem outro TLOC.'},
+    {h:'2. Identificar o mecanismo',p:'Gatilho claro (calor, ortostatismo prolongado) + pródromo típico = <b>síncope reflexa vasovagal</b>.'},
+    {h:'3. Rastrear sinais de alarme',p:'Jovem, sem cardiopatia, sem história familiar, ECG normal — sem red flags.'},
+    {h:'Lição de prova',p:'Reflexa típica com pródromo, sem sinais de alarme = diagnóstico clínico, orientar e liberar, sem necessidade de exames extensos.'}
+   ]},
+  {t:'Caso 2 — O desmaio "sem aviso"',
+   stem:'Homem, 54 anos, sem antecedentes conhecidos, desmaiou subitamente durante uma partida de futebol, sem pródromo. Refere ter sentido "o coração disparar" segundos antes. ECG mostra padrão sugestivo de pré-excitação (WPW).',
+   passos:[
+    {h:'1. Reconhecer os sinais de alarme',p:'Síncope <b>aos esforços</b>, <b>sem pródromo</b>, com <b>palpitações</b> prévias = múltiplos red flags.'},
+    {h:'2. Interpretar o ECG',p:'Padrão de pré-excitação sugere risco de taquiarritmia associada à via acessória.'},
+    {h:'3. Conduzir com investigação ativa',p:'Internar, monitorizar e investigar ativamente a causa arrítmica (avaliação eletrofisiológica pode ser necessária).'},
+    {h:'Lição de prova',p:'Síncope ao esforço + sem pródromo + ECG alterado = suspeitar fortemente de causa cardíaca arrítmica e não liberar sem investigação.'}
+   ]},
+  {t:'Caso 3 — O desmaio do idoso polimedicado',
+   stem:'Mulher, 79 anos, hipertensa em uso de 3 anti-hipertensivos, relata dois episódios de tontura com escurecimento visual ao se levantar da cama pela manhã, sem perda completa de consciência em um deles.',
+   passos:[
+    {h:'1. Suspeitar do mecanismo',p:'Sintomas ao <b>levantar</b>, em paciente polimedicada = suspeitar de <b>hipotensão ortostática</b>.'},
+    {h:'2. Confirmar com a medida correta',p:'Aferir PA deitada e após 3 minutos em pé — queda &ge;20/10mmHg confirma o diagnóstico.'},
+    {h:'3. Tratar a causa',p:'Revisar e ajustar a lista de anti-hipertensivos, orientar hidratação e a técnica de levantar-se devagar.'},
+    {h:'Lição de prova',p:'Idoso polimedicado com sintomas posturais = pensar primeiro em hipotensão ortostática e revisar medicações antes de investigações mais complexas.'}
+   ]}
+ ],
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+</script>
+
+<!-- ===== MODULO PERIMIOCARDITE (aditivo) ===== -->
+<script>Object.assign(window.ASVG=window.ASVG||{},{"miop_conceito": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#2a1418\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">PERIMIOCARDITE = PERICARDITE + MIOCARDITE</text><circle cx=\"260\" cy=\"150\" r=\"90\" fill=\"#6db3f2\" fill-opacity=\"0.18\" stroke=\"#6db3f2\"/><circle cx=\"380\" cy=\"150\" r=\"90\" fill=\"#e8675f\" fill-opacity=\"0.18\" stroke=\"#e8675f\"/><text x=\"200\" y=\"110\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Pericardite</text><text x=\"200\" y=\"130\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Dor pleuritica,</text><text x=\"200\" y=\"146\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">atrito pericardico,</text><text x=\"200\" y=\"162\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">supra difuso de ST</text><text x=\"440\" y=\"110\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Miocardite</text><text x=\"440\" y=\"130\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Troponina elevada,</text><text x=\"440\" y=\"146\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">disfuncao de VE,</text><text x=\"440\" y=\"162\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">arritmias</text><text x=\"320\" y=\"150\" fill=\"#f59f0a\" font-weight=\"700\" text-anchor=\"middle\">PERI-</text><text x=\"320\" y=\"166\" fill=\"#f59f0a\" font-weight=\"700\" text-anchor=\"middle\">MIOCARDITE</text><rect x=\"90\" y=\"248\" width=\"500\" height=\"36\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"270\" fill=\"#eef2f7\" font-size=\"10.2\" text-anchor=\"middle\" font-weight=\"700\">A troponina e o \"fiel da balanca\": se sobe, ha componente miocardico</text></svg>", "miop_etiologia": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#2a1418\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">CAUSAS: VIRAL E A MAIS COMUM, DE LONGE</text><rect x=\"30\" y=\"44\" width=\"300\" height=\"222\" rx=\"10\" fill=\"#3d1f24\" stroke=\"#e8675f\"/><text x=\"44\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\">Viral (a mais frequente)</text><text x=\"44\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">Enterovirus (Coxsackie B)</text><text x=\"44\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">Parvovirus B19</text><text x=\"44\" y=\"120\" fill=\"#eef2f7\" font-size=\"10\">Herpesvirus humano 6 (HHV6)</text><text x=\"44\" y=\"136\" fill=\"#eef2f7\" font-size=\"10\">Adenovirus</text><text x=\"44\" y=\"152\" fill=\"#eef2f7\" font-size=\"10\">SARS-CoV-2 (COVID-19)</text><text x=\"44\" y=\"174\" fill=\"#eef2f7\" font-size=\"10\">Mecanismo: lesao viral direta</text><text x=\"44\" y=\"190\" fill=\"#eef2f7\" font-size=\"10\">+ resposta imune exagerada</text><text x=\"44\" y=\"206\" fill=\"#eef2f7\" font-size=\"10\">contra o proprio miocardio</text><rect x=\"350\" y=\"44\" width=\"300\" height=\"222\" rx=\"10\" fill=\"#3d1f24\" stroke=\"#6db3f2\"/><text x=\"364\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\">Outras causas importantes</text><text x=\"364\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">Autoimune (lupus, esclerose</text><text x=\"364\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">sistemica)</text><text x=\"364\" y=\"126\" fill=\"#eef2f7\" font-size=\"10\">Farmacos: inibidores de</text><text x=\"364\" y=\"142\" fill=\"#eef2f7\" font-size=\"10\">checkpoint imunologico</text><text x=\"364\" y=\"158\" fill=\"#eef2f7\" font-size=\"10\">(imunoterapia oncologica)</text><text x=\"364\" y=\"180\" fill=\"#eef2f7\" font-size=\"10\">Pos-vacinal (raro, geralmente</text><text x=\"364\" y=\"196\" fill=\"#eef2f7\" font-size=\"10\">leve e autolimitado)</text><text x=\"364\" y=\"218\" fill=\"#eef2f7\" font-size=\"10\">Celulas gigantes, sarcoidose</text><text x=\"364\" y=\"234\" fill=\"#eef2f7\" font-size=\"10\">(formas raras e graves)</text></svg>", "miop_ecg": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#2a1418\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">ECG: O QUE PROCURAR NA PERIMIOCARDITE</text><rect x=\"30\" y=\"44\" width=\"300\" height=\"222\" rx=\"10\" fill=\"#3d1f24\" stroke=\"#6db3f2\"/><text x=\"44\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\">Componente pericardico</text><text x=\"44\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">Supra de ST DIFUSO, concavo</text><text x=\"44\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">(varias derivacoes, sem</text><text x=\"44\" y=\"120\" fill=\"#eef2f7\" font-size=\"10\">respeitar territorio coronario)</text><text x=\"44\" y=\"142\" fill=\"#eef2f7\" font-size=\"10\">Infra do segmento PR</text><text x=\"44\" y=\"164\" fill=\"#eef2f7\" font-size=\"10\">SEM imagem em espelho</text><text x=\"44\" y=\"180\" fill=\"#eef2f7\" font-size=\"10\">verdadeira (diferente do IAM)</text><rect x=\"350\" y=\"44\" width=\"300\" height=\"222\" rx=\"10\" fill=\"#3d1f24\" stroke=\"#e8675f\"/><text x=\"364\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\">Componente miocardico</text><text x=\"364\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">Pode mimetizar IAM (dor +</text><text x=\"364\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">supra + troponina = MINOCA</text><text x=\"364\" y=\"120\" fill=\"#eef2f7\" font-size=\"10\">se coronarias normais)</text><text x=\"364\" y=\"142\" fill=\"#eef2f7\" font-size=\"10\">Arritmias (extrassistoles,</text><text x=\"364\" y=\"158\" fill=\"#eef2f7\" font-size=\"10\">taquiarritmias, BAV)</text><text x=\"364\" y=\"180\" fill=\"#eef2f7\" font-size=\"10\">Reducao de voltagem/alteracoes</text><text x=\"364\" y=\"196\" fill=\"#eef2f7\" font-size=\"10\">difusas de repolarizacao</text><rect x=\"40\" y=\"272\" width=\"0\" height=\"0\"/></svg>", "miop_llc": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#2a1418\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">CRITERIOS DE LAKE LOUISE (RM CARDIACA, 2018)</text><rect x=\"30\" y=\"46\" width=\"290\" height=\"150\" rx=\"10\" fill=\"#3d1f24\" stroke=\"#6db3f2\"/><text x=\"44\" y=\"68\" fill=\"#6db3f2\" font-weight=\"700\">1) Criterio T2 (edema)</text><text x=\"44\" y=\"90\" fill=\"#eef2f7\" font-size=\"10\">Aumento do T2 global ou regional</text><text x=\"44\" y=\"106\" fill=\"#eef2f7\" font-size=\"10\">OU sinal alto em T2 -&gt;</text><text x=\"44\" y=\"122\" fill=\"#eef2f7\" font-size=\"10\">edema miocardico ATIVO</text><text x=\"44\" y=\"146\" fill=\"#eef2f7\" font-size=\"10\">(processo recente/em curso)</text><rect x=\"360\" y=\"46\" width=\"290\" height=\"150\" rx=\"10\" fill=\"#3d1f24\" stroke=\"#e8675f\"/><text x=\"374\" y=\"68\" fill=\"#e8675f\" font-weight=\"700\">2) Criterio T1 (lesao)</text><text x=\"374\" y=\"90\" fill=\"#eef2f7\" font-size=\"10\">Aumento do T1 miocardico,</text><text x=\"374\" y=\"106\" fill=\"#eef2f7\" font-size=\"10\">realce tardio (LGE) OU</text><text x=\"374\" y=\"122\" fill=\"#eef2f7\" font-size=\"10\">aumento do volume extracelular</text><text x=\"374\" y=\"146\" fill=\"#eef2f7\" font-size=\"10\">(ECV) -&gt; lesao celular/fibrose</text><rect x=\"150\" y=\"210\" width=\"380\" height=\"42\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.16\" stroke=\"#f59f0a\"/><text x=\"340\" y=\"236\" fill=\"#eef2f7\" font-size=\"10.6\" text-anchor=\"middle\" font-weight=\"700\">Diagnostico de miocardite: 1 criterio T2 + 1 criterio T1</text><text x=\"340\" y=\"272\" fill=\"#eef2f7\" font-size=\"9.8\" text-anchor=\"middle\">Criterios de apoio: derrame pericardico e disfuncao sistolica de VE</text></svg>", "miop_conduta": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#2a1418\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">CONDUTA CONFORME A GRAVIDADE</text><rect x=\"20\" y=\"44\" width=\"205\" height=\"230\" rx=\"10\" fill=\"#3d1f24\" stroke=\"#3ddc84\"/><text x=\"122\" y=\"66\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Forma leve</text><text x=\"122\" y=\"90\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Repouso (evitar</text><text x=\"122\" y=\"106\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">esforco fisico)</text><text x=\"122\" y=\"128\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">AINE com cautela</text><text x=\"122\" y=\"144\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">(componente pericardico)</text><text x=\"122\" y=\"166\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Seguimento</text><text x=\"122\" y=\"182\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">ambulatorial</text><rect x=\"237\" y=\"44\" width=\"205\" height=\"230\" rx=\"10\" fill=\"#3d1f24\" stroke=\"#f59f0a\"/><text x=\"339\" y=\"66\" fill=\"#f59f0a\" font-weight=\"700\" text-anchor=\"middle\">Disfuncao de VE</text><text x=\"339\" y=\"90\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Tratar IC conforme</text><text x=\"339\" y=\"106\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">diretriz padrao</text><text x=\"339\" y=\"128\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Internar, monitorizar</text><text x=\"339\" y=\"144\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">ritmo</text><text x=\"339\" y=\"166\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Evitar exercicio</text><text x=\"339\" y=\"182\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">ate liberacao</text><rect x=\"454\" y=\"44\" width=\"205\" height=\"230\" rx=\"10\" fill=\"#3d1f24\" stroke=\"#e8675f\"/><text x=\"556\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Fulminante</text><text x=\"556\" y=\"90\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">UTI, suporte</text><text x=\"556\" y=\"106\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">circulatorio mecanico</text><text x=\"556\" y=\"128\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Considerar biopsia</text><text x=\"556\" y=\"144\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">endomiocardica</text><text x=\"556\" y=\"166\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Imunossupressao se</text><text x=\"556\" y=\"182\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">celulas gigantes/sarcoide</text></svg>"});</script>
+<script>/* CardioAtlas - Conteudo Perimiocardite (miocardio|0). Aditivo. */
+(function(){
+"use strict";
+var A=window.ASVG||{}; var C=(window.CONTENT=window.CONTENT||{});
+C['miocardio|0']={
+ name:'Perimiocardite',
+ intro:'É o módulo que ensina a "olhar duas vezes" para uma dor torácica com supra de ST: nem toda elevação de troponina com alteração de ST é infarto coronariano — pode ser inflamação do próprio músculo e da membrana que o envolve, com conduta e prognóstico bem diferentes.',
+ sub:[
+  ['entendendo','Entendendo do Zero',`
+   <div class="ac-h">Duas estruturas vizinhas, inflamadas ao mesmo tempo</div>
+   <p class="ac-p">O coração é envolvido por uma membrana chamada <b>pericárdio</b>, e seu músculo propriamente dito é o <b>miocárdio</b>. Quando um processo inflamatório (geralmente infeccioso) acomete essas duas estruturas <b>ao mesmo tempo</b> — o que é comum, já que ficam coladas uma na outra —, usamos o termo <b>perimiocardite</b> (ou miopericardite). Na prática, poucos casos são "pericardite pura" ou "miocardite pura": a maioria fica nesse espectro misto, e o que muda é o <b>quanto</b> cada componente predomina no quadro.</p>
+   <p class="ac-p">Essa distinção não é apenas semântica — ela muda a gravidade e a conduta. A <b>pericardite pura</b> costuma ser benigna: dói muito (por causa da inervação rica do pericárdio), mas raramente ameaça a função do coração. Já quando o <b>miocárdio</b> está envolvido, o risco aumenta, porque é o músculo que bombeia o sangue — inflamação miocárdica pode gerar <b>arritmias</b>, <b>disfunção sistólica</b> e, nos casos mais graves, <b>choque cardiogênico</b>. Por isso, diante de qualquer paciente com quadro pericárdico, a primeira pergunta prática é: <b>existe componente miocárdico associado?</b></p>
+   ${A.miop_conceito}
+   <p class="ac-p">A resposta a essa pergunta vem principalmente da <b>troponina</b>: se ela estiver normal, o quadro tende a ser uma pericardite mais "pura" (prognóstico excelente); se estiver elevada, confirma-se o envolvimento miocárdico (perimiocardite), exigindo mais cautela — inclusive quanto à liberação para atividade física, tema retomado na última aba do módulo.</p>
+   <div class="ac-call"><b>A grande ideia:</b> perimiocardite é a inflamação simultânea de pericárdio e miocárdio, geralmente de causa viral. A troponina é o "fiel da balança" que revela o grau de envolvimento muscular e, com ele, o risco do paciente.</div>
+   <table class="ac-tbl"><tr><th>Eixo</th><th>O que você vai dominar</th></tr>
+     <tr><td>Conceito</td><td>overlap pericardite + miocardite; papel da troponina</td></tr>
+     <tr><td>Etiologia</td><td>viral (principal), autoimune, farmacológica</td></tr>
+     <tr><td>ECG</td><td>supra difuso + possível mímica de infarto</td></tr>
+     <tr><td>Diagnóstico</td><td>RM cardíaca (critérios de Lake Louise atualizados)</td></tr>
+     <tr><td>Conduta</td><td>tratamento conforme gravidade; restrição esportiva</td></tr>
+   </table>`],
+  ['etiologia','Etiologia: Por que Acontece',`
+   <div class="ac-h">O vírus como protagonista principal</div>
+   <p class="ac-p">A causa mais comum de perimiocardite, disparadamente, é <b>viral</b>. Os principais agentes incluem os <b>enterovírus</b> (com destaque para o Coxsackievírus B, historicamente o mais associado), o <b>Parvovírus B19</b>, o <b>herpesvírus humano 6</b>, <b>adenovírus</b> e, mais recentemente, o <b>SARS-CoV-2</b> (tanto pela infecção viral direta quanto, mais raramente, associado a vacinas, sobretudo as de RNA mensageiro, em quadros geralmente leves e autolimitados). O mecanismo de dano combina duas fases: primeiro uma <b>lesão viral direta</b> às células do miocárdio, e depois uma <b>resposta imune exagerada</b> contra o próprio tecido cardíaco — é essa segunda fase, na verdade, que costuma causar a maior parte do dano.</p>
+   ${A.miop_etiologia}
+   <p class="ac-p">Além das causas virais, vale conhecer outros grupos etiológicos importantes: doenças <b>autoimunes sistêmicas</b> (lúpus eritematoso sistêmico, esclerose sistêmica) podem cursar com perimiocardite como manifestação cardíaca; <b>medicamentos</b> — com destaque crescente para os <b>inibidores de checkpoint imunológico</b> usados em oncologia, que podem desencadear miocardite imunomediada grave; e formas <b>raras, porém muito graves</b>, como a <b>miocardite de células gigantes</b> e a <b>miocardite sarcoide</b>, que costumam exigir imunossupressão específica e têm prognóstico mais reservado.</p>
+   <div class="ac-tip"><b>Macete:</b> "pensou em pericardite/miocardite em jovem após quadro gripal ou gastrointestinal recente, pense viral primeiro" — é de longe a causa mais prevalente.</div>`],
+  ['quadro_clinico','Quadro Clínico',`
+   <div class="ac-h">Do desconforto leve ao choque cardiogênico</div>
+   <p class="ac-p">O sintoma mais comum é a <b>dor torácica pleurítica</b> — típica de pericardite, piora com a respiração profunda e a tosse, piora ao deitar e melhora ao sentar-se inclinado para frente (posição "prece maometana"). Frequentemente há um <b>pródromo viral</b> nas semanas anteriores: quadro gripal, gastroenterite ou infecção de vias aéreas superiores. Ao exame, pode-se auscultar o <b>atrito pericárdico</b>, um som áspero, característico, que varia com a posição do paciente e com o ciclo respiratório.</p>
+   <p class="ac-p">Quando o componente <b>miocárdico</b> é relevante, o quadro se torna mais heterogêneo e potencialmente mais grave: podem surgir <b>palpitações</b> (por arritmias, desde extrassístoles até taquiarritmias sustentadas), <b>dispneia e sinais de insuficiência cardíaca</b> (se houver disfunção sistólica significativa), e, no extremo mais grave, a <b>miocardite fulminante</b> — uma apresentação de início muito abrupto, com <b>choque cardiogênico</b> e necessidade frequente de suporte circulatório mecânico. Paradoxalmente, apesar do nome assustador, a miocardite fulminante tem prognóstico de recuperação da função ventricular <b>melhor</b> a longo prazo (quando o paciente sobrevive à fase aguda) do que formas subagudas menos dramáticas — provavelmente porque reflete uma resposta imune intensa, mas também mais autolimitada.</p>
+   <div class="ac-warn"><b>Pegadinha:</b> a gravidade inicial (fulminante × subaguda) não prediz diretamente o prognóstico final da função ventricular — os pacientes fulminantes que sobrevivem tendem a recuperar melhor a função do que os subagudos.</div>`],
+  ['ecg_achados','Achados no ECG',`
+   <div class="ac-h">Por que esse traçado pode confundir até o mais experiente</div>
+   <p class="ac-p">O componente <b>pericárdico</b> da perimiocardite costuma gerar um <b>supradesnivelamento de ST difuso e côncavo</b>, presente em múltiplas derivações e que <b>não respeita um território coronariano específico</b> (diferente do infarto, que é localizado por parede). Um achado de apoio característico é o <b>infradesnivelamento do segmento PR</b>, refletindo a inflamação também atingindo o átrio. Diferente do infarto, não há uma <b>imagem em espelho verdadeira</b> proporcional ao supra observado.</p>
+   ${A.miop_ecg}
+   <p class="ac-p">O componente <b>miocárdico</b>, por sua vez, pode ser o grande "armadilha" diagnóstica: em alguns pacientes, o quadro de dor torácica, supra de ST e troponina elevada é <b>clinicamente indistinguível de um infarto agudo do miocárdio</b> à primeira vista — e é exatamente por isso que esses pacientes acabam, com frequência, sendo encaminhados à sala de hemodinâmica. Quando o cateterismo mostra <b>artérias coronárias normais</b> (sem lesão obstrutiva), abre-se a possibilidade de <b>MINOCA</b> (infarto do miocárdio com coronárias não obstrutivas) — e a perimiocardite é uma das causas mais importantes dentro desse diagnóstico diferencial. O componente miocárdico também pode se manifestar como <b>arritmias</b> (de extrassístoles a bloqueios atrioventriculares) e alterações difusas de repolarização.</p>
+   <div class="ac-tip"><b>Macete:</b> supra difuso + PR infra + sem território coronariano específico = pensar em perimiocardite antes de infarto — mas sempre com cautela, porque a apresentação pode se sobrepor.</div>`],
+  ['diagnostico','Diagnóstico: da Clínica à RM Cardíaca',`
+   <div class="ac-h">Combinando pistas até fechar o quadro</div>
+   <p class="ac-p">O diagnóstico combina critérios clínicos (dor pleurítica, atrito pericárdico, pródromo viral), <b>ECG</b> (supra difuso, infra de PR), <b>biomarcadores</b> (troponina elevada confirma o componente miocárdico) e <b>ecocardiograma</b> (avalia função ventricular e derrame pericárdico associado). Quando esses dados não são suficientes para confirmar ou existe dúvida diagnóstica relevante (sobretudo para diferenciar de infarto ou para avaliar a extensão do dano miocárdico), a <b>ressonância magnética cardíaca</b> se tornou a ferramenta central, permitindo visualizar diretamente a inflamação do tecido — sem precisar de biópsia na maioria dos casos.</p>
+   ${A.miop_llc}
+   <p class="ac-p">Os <b>critérios de Lake Louise atualizados (2018)</b> estruturam essa avaliação por ressonância em dois grupos: um <b>critério baseado em T2</b> (mapeamento de T2 aumentado ou hipersinal em T2, refletindo <b>edema miocárdico ativo</b> — ou seja, inflamação em curso) e um <b>critério baseado em T1</b> (T1 nativo aumentado, realce tardio pelo gadolínio, ou aumento do volume extracelular, refletindo <b>lesão celular ou fibrose</b>). O diagnóstico de miocardite por imagem exige <b>pelo menos um critério de cada grupo</b> (1 T2 + 1 T1), com o achado de derrame pericárdico e disfunção sistólica servindo como <b>critérios de apoio</b>. A <b>biópsia endomiocárdica</b> fica reservada para casos graves, fulminantes, refratários ou quando se suspeita de formas específicas (células gigantes, sarcoidose) que mudam radicalmente a conduta terapêutica.</p>
+   <table class="ac-tbl"><tr><th>Ferramenta</th><th>O que avalia</th></tr>
+     <tr><td>ECG</td><td>Supra difuso, infra de PR, arritmias</td></tr>
+     <tr><td>Troponina</td><td>Confirma envolvimento miocárdico</td></tr>
+     <tr><td>Ecocardiograma</td><td>Função ventricular, derrame pericárdico</td></tr>
+     <tr><td>RM cardíaca (Lake Louise)</td><td>1 critério T2 (edema) + 1 critério T1 (lesão/fibrose)</td></tr>
+     <tr><td>Biópsia endomiocárdica</td><td>Casos graves/fulminantes/refratários ou suspeita de causa específica</td></tr>
+   </table>`],
+  ['diferenciais','Diferenciais: o Grande Imitador',`
+   <div class="ac-h">Separando perimiocardite de suas armadilhas</div>
+   <p class="ac-p">O diferencial mais crítico, já mencionado, é a <b>síndrome coronariana aguda</b>: dor torácica + supra de ST + troponina elevada podem ocorrer tanto no infarto quanto na perimiocardite. A diferenciação inicial se apoia na <b>morfologia do supra</b> (difuso e côncavo × localizado e convexo), na <b>ausência de território coronariano específico</b> e no <b>contexto clínico</b> (pródromo viral, dor pleurítica, paciente mais jovem sem fatores de risco cardiovascular clássicos) — mas, na dúvida, especialmente em pacientes com fatores de risco, a <b>cinecoronariografia</b> costuma ser realizada para excluir obstrução coronariana antes de assumir o diagnóstico de perimiocardite.</p>
+   <p class="ac-p">Outro ponto importante é diferenciar a <b>miocardite fulminante</b> de outras causas de choque cardiogênico de início agudo (como o infarto extenso ou a cardiomiopatia de takotsubo) — a história de pródromo viral recente e a idade mais jovem ajudam a levantar a suspeita, mas a confirmação definitiva muitas vezes exige ressonância ou até biópsia em ambiente de terapia intensiva. Por fim, é importante lembrar que <b>pericardite pura</b> (sem elevação de troponina) tem um curso clínico e um prognóstico bem mais benignos que a perimiocardite — a mesma dor pleurítica pode, portanto, representar entidades de gravidade muito diferente.</p>
+   <div class="ac-warn"><b>Pegadinha:</b> jovem com dor torácica pleurítica e supra difuso após quadro gripal não deve ser automaticamente rotulado "só pericardite" sem checar a troponina — o envolvimento miocárdico muda tudo.</div>`],
+  ['tratamento','Tratamento',`
+   <div class="ac-h">Suporte, cautela com anti-inflamatórios, e imunossupressão em casos seletos</div>
+   <p class="ac-p">A base do tratamento nas formas <b>leves</b> é o <b>repouso</b>, com restrição de atividade física até resolução do quadro (detalhado na próxima aba). Para o componente <b>pericárdico</b> (a dor pleurítica), os <b>anti-inflamatórios não esteroidais (AINEs)</b> são úteis — mas aqui está um ponto de atenção importante e frequentemente cobrado: quando há evidência de <b>envolvimento miocárdico ativo</b>, o uso de AINEs em altas doses deve ser feito com <b>cautela</b>, já que modelos experimentais sugerem que podem, em teoria, agravar a lesão miocárdica em curso — por isso muitos serviços preferem doses mais conservadoras ou analgesia alternativa nesse cenário, reservando o AINE pleno para quando o componente miocárdico é mínimo ou ausente.</p>
+   ${A.miop_conduta}
+   <p class="ac-p">Quando há <b>disfunção ventricular</b> associada, o tratamento segue os princípios padrão de <b>insuficiência cardíaca</b> (otimização de volemia, inibidores neuro-hormonais quando estáveis, monitorização de arritmias). Nos casos <b>fulminantes</b>, o paciente deve ser tratado em <b>unidade de terapia intensiva</b>, com suporte hemodinâmico agressivo e, quando necessário, <b>suporte circulatório mecânico</b> (balão intra-aórtico, ECMO) como ponte até a recuperação da função cardíaca. A <b>imunossupressão específica</b> (corticoide e outros agentes) é reservada para formas particulares com substrato imunomediado comprovado por biópsia — como a miocardite de células gigantes, a sarcoidose cardíaca ou a miocardite associada a doença autoimune sistêmica — não sendo rotina nas formas virais comuns.</p>
+   <div class="ac-tip"><b>Macete:</b> AINE "à vontade" só quando o componente miocárdico é mínimo; se a troponina está bem elevada, cautela redobrada e discussão com cardiologia.</div>`],
+  ['seguimento','Seguimento, Restrição Esportiva e Prognóstico',`
+   <div class="ac-h">Por que o coração recém-inflamado não pode voltar ao esporte de imediato</div>
+   <p class="ac-p">Um dos pontos mais cobrados sobre perimiocardite, e um dos mais relevantes na prática (sobretudo em pacientes jovens e atletas), é a necessidade de <b>restrição de atividade física intensa</b> por um período — em geral <b>3 a 6 meses</b> — mesmo após a resolução dos sintomas agudos. A razão é o risco aumentado de <b>morte súbita cardíaca</b> durante o exercício: o miocárdio inflamado é eletricamente instável, e o esforço físico intenso, ao aumentar demanda e estresse hemodinâmico sobre esse tecido vulnerável, pode precipitar <b>arritmias ventriculares malignas</b>. A liberação para retorno ao esporte deve ser individualizada, geralmente exigindo reavaliação clínica, normalização de biomarcadores, ecocardiograma e, muitas vezes, holter e teste ergométrico sem alterações antes de autorizar o retorno gradual.</p>
+   <p class="ac-p">Quanto ao <b>prognóstico</b>, a maioria dos casos de perimiocardite viral em adultos previamente saudáveis evolui com <b>recuperação completa da função ventricular</b> dentro de semanas a poucos meses. Uma minoria, no entanto, evolui de forma desfavorável, com disfunção ventricular persistente que pode configurar uma <b>cardiomiopatia dilatada crônica</b> — por isso o seguimento com ecocardiogramas seriados nos meses seguintes é importante mesmo em quem teve boa evolução inicial. Arritmias residuais também podem persistir em uma parcela dos pacientes, justificando monitorização prolongada em casos selecionados.</p>
+   <div class="ac-call"><b>A grande ideia do seguimento:</b> resolução dos sintomas não é sinônimo de "coração seguro para o esporte" — a restrição temporária de atividade física intensa e o acompanhamento com imagem seriada são parte essencial do cuidado, não um detalhe opcional.</div>`],
+ ],
+};
+
+Object.assign(C['miocardio|0'], {
+ escores:`<div class="ac-h">Critérios de Lake Louise (RM cardíaca, 2018)</div>
+   <table class="ac-tbl"><tr><th>Critério</th><th>O que avalia</th></tr>
+     <tr><td>T2 (edema)</td><td>T2 global/regional aumentado OU hipersinal em T2 → inflamação ativa</td></tr>
+     <tr><td>T1 (lesão)</td><td>T1 nativo aumentado, realce tardio (LGE) ou aumento do ECV → lesão celular/fibrose</td></tr>
+     <tr><td>Diagnóstico</td><td>&ge;1 critério T2 + &ge;1 critério T1</td></tr>
+     <tr><td>Critérios de apoio</td><td>Derrame pericárdico, disfunção sistólica de VE</td></tr>
+   </table>
+   <div class="ac-h" style="margin-top:14px">Restrição esportiva pós-perimiocardite</div>
+   <div class="ac-call">Restrição de atividade física intensa por <b>3-6 meses</b>, com liberação individualizada após reavaliação clínica, laboratorial e de imagem.</div>`,
+ dif:`<div class="ac-h">Diferenciais</div>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Diferenciar de</th><th>Chave</th></tr>
+     <tr><td>Dor torácica + supra de ST + troponina elevada</td><td>Perimiocardite × síndrome coronariana aguda</td><td>Supra difuso/côncavo, sem território coronariano, pródromo viral × supra localizado/convexo com fator de risco cardiovascular; coronariografia elucida (MINOCA)</td></tr>
+     <tr><td>Choque cardiogênico agudo em jovem</td><td>Miocardite fulminante × takotsubo × infarto extenso</td><td>Pródromo viral recente e idade jovem sugerem miocardite; RM/biópsia confirmam</td></tr>
+     <tr><td>Dor pleurítica isolada</td><td>Pericardite pura × perimiocardite</td><td>Troponina normal (pura) × elevada (envolvimento miocárdico, mais cautela)</td></tr>
+     <tr><td>Miocardite refratária/grave</td><td>Viral comum × células gigantes/sarcoidose</td><td>Formas raras exigem biópsia e imunossupressão específica</td></tr>
+   </table>`,
+ mapa:`<div class="ac-h">Mapa mental (cards)</div>
+   <div class="mm">
+     <div class="mm-card"><h5>Conceito</h5><ul><li>Pericardite + miocardite simultâneas</li><li>Troponina define grau de envolvimento muscular</li></ul></div>
+     <div class="mm-card"><h5>Etiologia</h5><ul><li>Viral (principal): Coxsackie B, Parvo B19, COVID</li><li>Autoimune, checkpoint inibidores, pós-vacinal raro</li></ul></div>
+     <div class="mm-card"><h5>Clínica</h5><ul><li>Dor pleurítica, atrito pericárdico</li><li>Arritmias, disfunção de VE, fulminante = choque</li></ul></div>
+     <div class="mm-card"><h5>ECG</h5><ul><li>Supra difuso + infra de PR</li><li>Pode mimetizar IAM (pensar MINOCA)</li></ul></div>
+     <div class="mm-card"><h5>Diagnóstico</h5><ul><li>RM cardíaca: Lake Louise (T2 + T1)</li><li>Biópsia só em casos graves/específicos</li></ul></div>
+     <div class="mm-card"><h5>Conduta</h5><ul><li>Repouso; AINE com cautela se miocárdio ativo</li><li>Restrição esportiva 3-6 meses</li></ul></div>
+   </div>`,
+ fluxo_dx:`<div class="ac-h">Fluxograma diagnóstico</div>
+   <div class="fx">
+     <div class="fx-node start">Dor torácica pleurítica ± pródromo viral</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node">ECG (supra difuso/infra de PR) + troponina + ecocardiograma</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Quadro sugere infarto ou dúvida diagnóstica relevante?</div>
+     <div class="fx-row">
+       <div class="fx-node">Sim → cinecoronariografia (excluir obstrução)</div>
+       <div class="fx-node">Não, típico → seguir avaliação clínica</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node end">Dúvida persiste ou avaliar extensão → RM cardíaca (critérios de Lake Louise)</div>
+   </div>`,
+ fluxo_cond:`<div class="ac-h">Conduta por gravidade</div>
+   <div class="fx">
+     <div class="fx-node start">Perimiocardite confirmada</div>
+     <div class="fx-row">
+       <div class="fx-node">Forma leve → repouso, AINE (cautela se troponina alta), seguimento ambulatorial</div>
+       <div class="fx-node">Disfunção de VE → tratar IC padrão, internar, monitorizar ritmo</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node end">Fulminante → UTI, suporte circulatório mecânico, considerar biópsia/imunossupressão se causa específica</div>
+   </div>`,
+ vespera:`<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Conceito:</b> pericardite + miocardite simultâneas; troponina revela o componente miocárdico.</div>
+   <div class="ac-call"><b>Etiologia:</b> viral é a mais comum (Coxsackie B, Parvo B19, COVID); lesão direta + resposta imune.</div>
+   <div class="ac-call"><b>ECG:</b> supra difuso e côncavo, sem território coronariano, + infra de PR; pode mimetizar IAM.</div>
+   <div class="ac-call"><b>Diagnóstico por RM:</b> Lake Louise = 1 critério T2 (edema) + 1 critério T1 (lesão/fibrose).</div>
+   <div class="ac-call"><b>Tratamento:</b> repouso, AINE com cautela se miocárdio ativo; fulminante = UTI/suporte mecânico.</div>
+   <div class="ac-call"><b>Seguimento:</b> restrição esportiva de 3-6 meses; risco de evolução para cardiomiopatia dilatada em minoria dos casos.</div>`,
+ dicas:`<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Sempre dose a troponina em paciente com quadro pericárdico — ela decide se é "só pericardite" ou perimiocardite.</div>
+   <div class="ac-tip">Supra de ST difuso, côncavo, sem território coronariano + infra de PR = pensar em perimiocardite antes de infarto.</div>
+   <div class="ac-tip">Lembre "3-6 meses" de restrição esportiva como resposta padrão de prova para retorno ao exercício.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Liberar AINE em dose plena sem considerar o envolvimento miocárdico quando a troponina está elevada.</div>
+   <div class="ac-warn">Assumir "só pericardite benigna" sem dosar troponina.</div>
+   <div class="ac-warn">Liberar atleta para esporte competitivo logo após resolução dos sintomas, sem cumprir o período de restrição.</div>
+   <div class="ac-warn">Não considerar MINOCA/perimiocardite diante de coronárias normais em paciente com quadro sugestivo de infarto.</div>`,
+ checklist:[
+   'Explico o conceito de perimiocardite e o papel da troponina como "fiel da balança"',
+   'Cito as principais causas (viral, autoimune, farmacológica, formas raras)',
+   'Reconheço o quadro clínico, do leve ao fulminante',
+   'Identifico os achados de ECG (supra difuso, infra de PR) e sei quando pode mimetizar IAM',
+   'Aplico os critérios de Lake Louise (T2 + T1) na RM cardíaca',
+   'Diferencio perimiocardite de síndrome coronariana aguda e de outras causas de choque',
+   'Descrevo a conduta terapêutica conforme a gravidade, incluindo a cautela com AINE',
+   'Oriento corretamente a restrição de atividade física e o seguimento prognóstico'
+ ],
+});
+
+Object.assign(C['miocardio|0'], {
+ questoes:[
+  {stem:'O que define o termo "perimiocardite"?',
+   opts:['Inflamação isolada do pericárdio, sem qualquer envolvimento miocárdico','Inflamação simultânea do pericárdio e do miocárdio','Infarto do miocárdio com coronárias obstruídas','Derrame pericárdico de qualquer etiologia'],correct:1,
+   expl:'<b>Perimiocardite</b> (miopericardite) é a inflamação que acomete <b>pericárdio e miocárdio simultaneamente</b>, geralmente de causa viral.'},
+  {stem:'Qual biomarcador é o principal indicativo de envolvimento miocárdico em um quadro pericárdico?',
+   opts:['PCR','Troponina','D-dímero','BNP isoladamente'],correct:1,
+   expl:'A <b>troponina elevada</b> confirma o componente miocárdico (lesão de cardiomiócitos), diferenciando perimiocardite de pericardite pura.'},
+  {stem:'Qual é a causa mais comum de perimiocardite?',
+   opts:['Bacteriana','Viral (enterovírus, parvovírus B19, entre outros)','Fúngica','Neoplásica'],correct:1,
+   expl:'A etiologia <b>viral</b> é, disparadamente, a mais comum, com destaque para enterovírus (Coxsackie B), Parvovírus B19, HHV6 e SARS-CoV-2.'},
+  {stem:'Qual achado eletrocardiográfico é mais sugestivo de componente pericárdico na perimiocardite?',
+   opts:['Supra de ST localizado e convexo, restrito a uma parede','Supra de ST difuso e côncavo, sem respeitar território coronariano, com infra de PR','Onda Q patológica isolada','Bloqueio de ramo esquerdo novo'],correct:1,
+   expl:'O componente pericárdico gera <b>supra difuso e côncavo</b>, sem território coronariano específico, associado a <b>infra do segmento PR</b>.'},
+  {stem:'Paciente jovem, após quadro gripal, apresenta dor torácica, supra de ST difuso e troponina elevada. Cateterismo mostra coronárias normais. Qual diagnóstico deve ser considerado?',
+   opts:['Infarto silencioso prévio','MINOCA por provável perimiocardite','Angina estável','Pericardite constritiva'],correct:1,
+   expl:'Quadro sugestivo de infarto, mas com <b>coronárias normais</b> ao cateterismo, configura <b>MINOCA</b>, e a perimiocardite é uma das causas mais importantes desse diagnóstico diferencial.'},
+  {stem:'Segundo os critérios de Lake Louise atualizados (RM cardíaca) para diagnóstico de miocardite, é necessário:',
+   opts:['Apenas um critério T1','Apenas um critério T2','Pelo menos 1 critério T2 (edema) associado a pelo menos 1 critério T1 (lesão/fibrose)','Biópsia obrigatória em todos os casos'],correct:2,
+   expl:'O diagnóstico por imagem exige <b>pelo menos 1 critério T2</b> (edema/inflamação ativa) <b>e pelo menos 1 critério T1</b> (lesão celular/fibrose), com derrame pericárdico e disfunção sistólica como critérios de apoio.'},
+  {stem:'Em relação ao uso de anti-inflamatórios não esteroidais (AINEs) na perimiocardite, é correto afirmar:',
+   opts:['Devem sempre ser usados em dose plena, independentemente da troponina','Devem ser usados com cautela quando há evidência de envolvimento miocárdico ativo (troponina elevada)','São contraindicados em qualquer forma de perimiocardite','Substituem a necessidade de repouso'],correct:1,
+   expl:'Quando há <b>envolvimento miocárdico ativo</b>, o uso de AINE em altas doses deve ser feito com <b>cautela</b>, pois pode, teoricamente, agravar a lesão miocárdica em curso.'},
+  {stem:'Qual é a recomendação padrão sobre atividade física após um episódio de perimiocardite?',
+   opts:['Retorno imediato ao esporte assim que os sintomas melhorarem','Restrição de exercício intenso por cerca de 3-6 meses, com liberação individualizada','Restrição permanente e definitiva de qualquer atividade física','Não há necessidade de qualquer restrição'],correct:1,
+   expl:'Recomenda-se <b>restrição de atividade física intensa por cerca de 3-6 meses</b>, pelo risco de arritmias malignas em miocárdio ainda inflamado, com liberação individualizada após reavaliação.'},
+  {stem:'Qual é a conduta apropriada diante de uma miocardite fulminante com choque cardiogênico?',
+   opts:['Alta hospitalar com anti-inflamatório oral','Internação em UTI com suporte hemodinâmico agressivo e consideração de suporte circulatório mecânico','Observação ambulatorial por 48 horas','Apenas repouso domiciliar'],correct:1,
+   expl:'A miocardite <b>fulminante</b> exige <b>internação em UTI</b>, suporte hemodinâmico intensivo e, se necessário, <b>suporte circulatório mecânico</b> (balão intra-aórtico, ECMO) como ponte até a recuperação.'},
+  {stem:'Em qual situação a imunossupressão específica (corticoide e outros agentes) está indicada na miocardite?',
+   opts:['Rotineiramente em todas as miocardites virais','Apenas em formas com substrato imunomediado comprovado, como miocardite de células gigantes ou sarcoidose cardíaca','Nunca está indicada','Apenas em pacientes assintomáticos'],correct:1,
+   expl:'A imunossupressão é reservada para formas <b>específicas com substrato imunomediado comprovado</b> (células gigantes, sarcoidose, doença autoimune sistêmica), não sendo rotina nas formas virais comuns.'},
+  {stem:'Sobre o prognóstico da perimiocardite viral em adultos previamente saudáveis, é correto afirmar que:',
+   opts:['Todos os casos evoluem para cardiomiopatia dilatada','A maioria evolui com recuperação completa da função ventricular, mas uma minoria pode evoluir para disfunção crônica','O prognóstico é sempre pior nas formas fulminantes em comparação às subagudas','Não há necessidade de seguimento após a alta'],correct:1,
+   expl:'A <b>maioria</b> recupera função ventricular completa em semanas a meses; uma <b>minoria</b> evolui com disfunção persistente, podendo configurar cardiomiopatia dilatada — por isso o seguimento com ecocardiograma seriado é importante.'},
+  {stem:'Qual classe de medicamento oncológico tem sido cada vez mais associada a miocardite imunomediada?',
+   opts:['Quimioterápicos citotóxicos clássicos','Inibidores de checkpoint imunológico','Antieméticos','Fatores estimuladores de colônia'],correct:1,
+   expl:'Os <b>inibidores de checkpoint imunológico</b> (usados em imunoterapia oncológica) podem desencadear miocardite imunomediada, por vezes grave.'}
+ ],
+ flashcards:[
+  {front:'Definição de perimiocardite.',back:'Inflamação simultânea do pericárdio e do miocárdio, geralmente de causa viral.',type:'basic'},
+  {front:'Qual biomarcador diferencia pericardite pura de perimiocardite?',back:'Troponina: normal na pericardite pura; elevada na perimiocardite (envolvimento miocárdico).',type:'basic'},
+  {front:'Principal causa etiológica de perimiocardite.',back:'Viral: enterovírus (Coxsackie B), Parvovírus B19, HHV6, adenovírus, SARS-CoV-2.',type:'basic'},
+  {front:'Mecanismo de dano miocárdico na perimiocardite viral.',back:'Lesão viral direta às células, seguida de resposta imune exagerada contra o próprio tecido cardíaco.',type:'basic'},
+  {front:'Achado ECG do componente pericárdico.',back:'Supra de ST {{difuso e côncavo}}, sem território coronariano específico, com infra de PR.',type:'cloze'},
+  {front:'O que é MINOCA e sua relação com perimiocardite?',back:'Infarto do miocárdio com coronárias não obstrutivas; a perimiocardite é uma das principais causas desse quadro.',type:'basic'},
+  {front:'Critérios de Lake Louise (RM cardíaca) para miocardite.',back:'Pelo menos 1 critério T2 (edema/inflamação ativa) + 1 critério T1 (lesão celular/fibrose); apoio: derrame pericárdico e disfunção sistólica.',type:'basic'},
+  {front:'Cuidado com AINE na perimiocardite.',back:'Usar com cautela em altas doses quando há envolvimento miocárdico ativo (troponina elevada) — pode teoricamente agravar a lesão.',type:'basic'},
+  {front:'Conduta na miocardite fulminante.',back:'UTI, suporte hemodinâmico agressivo, considerar suporte circulatório mecânico (balão intra-aórtico, ECMO).',type:'basic'},
+  {front:'Quando indicar biópsia endomiocárdica?',back:'Casos graves, fulminantes, refratários, ou suspeita de causa específica (células gigantes, sarcoidose).',type:'basic'},
+  {front:'Quando indicar imunossupressão específica na miocardite?',back:'Apenas em formas com substrato imunomediado comprovado (células gigantes, sarcoidose, autoimune) — não é rotina na forma viral.',type:'basic'},
+  {front:'Restrição de atividade física após perimiocardite.',back:'Cerca de {{3 a 6 meses}}, com liberação individualizada, pelo risco de arritmias malignas em miocárdio ainda inflamado.',type:'cloze'},
+  {front:'Prognóstico geral da perimiocardite viral.',back:'Maioria recupera função ventricular completa; minoria evolui com disfunção persistente/cardiomiopatia dilatada.',type:'basic'},
+  {front:'Classe medicamentosa oncológica associada a miocardite imunomediada.',back:'Inibidores de checkpoint imunológico.',type:'basic'}
+ ],
+ casos:[
+  {t:'Caso 1 — O supra que não é infarto',
+   stem:'Homem, 24 anos, previamente hígido, uma semana após quadro gripal, apresenta dor torácica pleurítica que melhora ao inclinar-se para frente. ECG mostra supra de ST difuso e côncavo em várias derivações, com infra de PR. Troponina discretamente elevada.',
+   passos:[
+    {h:'1. Reconhecer o padrão pericárdico',p:'Dor pleurítica, posicional, com supra difuso e côncavo e infra de PR = quadro de <b>pericardite</b>.'},
+    {h:'2. Checar o componente miocárdico',p:'Troponina discretamente elevada confirma envolvimento miocárdico associado = <b>perimiocardite</b>.'},
+    {h:'3. Conduzir conforme a gravidade',p:'Quadro leve: repouso, AINE com cautela (pela troponina alterada), seguimento ambulatorial com ecocardiograma.'},
+    {h:'Lição de prova',p:'Pródromo viral + supra difuso + infra de PR + troponina alterada = perimiocardite, não infarto — mas a troponina exige cautela com AINE.'}
+   ]},
+  {t:'Caso 2 — O infarto que não tinha coronária entupida',
+   stem:'Mulher, 32 anos, dor torácica intensa, ECG com supra de ST em parede anterior, troponina muito elevada. Encaminhada à hemodinâmica, que revela coronárias angiograficamente normais.',
+   passos:[
+    {h:'1. Reinterpretar o quadro',p:'Apresentação inicial sugeria infarto, mas a ausência de obstrução coronariana afasta esse diagnóstico.'},
+    {h:'2. Considerar o diagnóstico correto',p:'Quadro compatível com <b>MINOCA</b>; investigar causas, entre elas a <b>perimiocardite</b>.'},
+    {h:'3. Confirmar com RM cardíaca',p:'Aplicar os critérios de <b>Lake Louise</b> (T2 + T1) para confirmar inflamação miocárdica ativa.'},
+    {h:'Lição de prova',p:'Coronárias normais em quadro "tipo infarto" devem levar à investigação de MINOCA, incluindo perimiocardite como causa provável.'}
+   ]},
+  {t:'Caso 3 — O atleta que queria voltar cedo demais',
+   stem:'Homem, 19 anos, atleta amador, teve perimiocardite viral confirmada por RM cardíaca há 6 semanas, com boa evolução clínica e resolução dos sintomas. Pergunta se já pode retomar os treinos intensos.',
+   passos:[
+    {h:'1. Reconhecer o risco residual',p:'Mesmo assintomático, o miocárdio pode ainda estar eletricamente instável nesse período.'},
+    {h:'2. Orientar a restrição adequada',p:'Recomendar restrição de exercício intenso por, em geral, <b>3 a 6 meses</b> desde o episódio agudo.'},
+    {h:'3. Planejar a liberação',p:'Reavaliação com exame clínico, biomarcadores, ecocardiograma (e eventualmente holter/teste ergométrico) antes de autorizar retorno gradual.'},
+    {h:'Lição de prova',p:'Resolução dos sintomas não equivale a liberação para esporte — a restrição temporária é parte essencial do cuidado.'}
+   ]}
+ ],
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+</script>
 </body>
 </html>
