@@ -8605,5 +8605,520 @@ try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.vie
 })();
 
 </script>
+
+<!-- ===== MODULO ECG 1: ritmo, eixo, sobrecargas e hipertrofias (aditivo) ===== -->
+<script>Object.assign(window.ASVG=window.ASVG||{},{"ecg1_ondas": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#141b2c\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">O TRACADO: ONDAS, SEGMENTOS E INTERVALOS</text><rect x=\"30\" y=\"42\" width=\"620\" height=\"150\" rx=\"10\" fill=\"#212c46\" stroke=\"#3a4666\"/><polyline points=\"50,150 110,150 122,146 132,150 160,150 172,110 184,190 196,70 208,150 240,150 250,132 268,132 280,150 340,150\" fill=\"none\" stroke=\"#3ddc84\" stroke-width=\"2.4\"/><text x=\"122\" y=\"138\" fill=\"#6db3f2\" font-size=\"10\" text-anchor=\"middle\">P</text><text x=\"184\" y=\"205\" fill=\"#e8675f\" font-size=\"10\" text-anchor=\"middle\">QRS</text><text x=\"259\" y=\"122\" fill=\"#f59f0a\" font-size=\"10\" text-anchor=\"middle\">T</text><line x1=\"50\" y1=\"165\" x2=\"340\" y2=\"165\" stroke=\"#465074\" stroke-width=\"1\"/><line x1=\"110\" y1=\"172\" x2=\"160\" y2=\"172\" stroke=\"#6db3f2\" stroke-width=\"1.2\"/><text x=\"135\" y=\"184\" fill=\"#6db3f2\" font-size=\"9\" text-anchor=\"middle\">PR (0.12-0.20s)</text><line x1=\"172\" y1=\"215\" x2=\"196\" y2=\"215\" stroke=\"#e8675f\" stroke-width=\"1.2\"/><text x=\"184\" y=\"227\" fill=\"#e8675f\" font-size=\"9\" text-anchor=\"middle\">QRS (ate 0.10-0.12s)</text><line x1=\"172\" y1=\"238\" x2=\"280\" y2=\"238\" stroke=\"#f59f0a\" stroke-width=\"1.2\"/><text x=\"226\" y=\"250\" fill=\"#f59f0a\" font-size=\"9\" text-anchor=\"middle\">QT (corrigir p/ FC: QTc)</text><rect x=\"370\" y=\"52\" width=\"270\" height=\"130\" rx=\"10\" fill=\"#212c46\" stroke=\"#6db3f2\"/><text x=\"384\" y=\"72\" fill=\"#6db3f2\" font-weight=\"700\">O que cada onda significa</text><text x=\"384\" y=\"92\" fill=\"#eef2f7\" font-size=\"10.3\">P = despolarizacao dos atrios</text><text x=\"384\" y=\"110\" fill=\"#eef2f7\" font-size=\"10.3\">QRS = despolarizacao dos ventriculos</text><text x=\"384\" y=\"128\" fill=\"#eef2f7\" font-size=\"10.3\">T = repolarizacao dos ventriculos</text><text x=\"384\" y=\"146\" fill=\"#eef2f7\" font-size=\"10.3\">(a repolarizacao atrial fica</text><text x=\"384\" y=\"162\" fill=\"#eef2f7\" font-size=\"10.3\">escondida dentro do QRS)</text><rect x=\"40\" y=\"204\" width=\"600\" height=\"88\" rx=\"10\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"56\" y=\"226\" fill=\"#eef2f7\" font-size=\"10.5\" font-weight=\"700\">Papel de ECG (padrao 25mm/s e 10mm/mV):</text><text x=\"56\" y=\"246\" fill=\"#eef2f7\" font-size=\"10.3\">Quadradinho pequeno (1mm) = 0.04s no tempo e 0.1mV na amplitude.</text><text x=\"56\" y=\"264\" fill=\"#eef2f7\" font-size=\"10.3\">Quadrado grande (5mm) = 0.20s. 5 quadrados grandes = 1 segundo.</text><text x=\"56\" y=\"282\" fill=\"#eef2f7\" font-size=\"10.3\">FC rapida: 1500 / numero de quadradinhos entre dois R (RR regular).</text></svg>", "ecg1_derivacoes": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#141b2c\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">12 DERIVACOES = 12 \"CAMERAS\" DO CORACAO</text><rect x=\"30\" y=\"42\" width=\"290\" height=\"222\" rx=\"10\" fill=\"#212c46\" stroke=\"#6db3f2\"/><text x=\"44\" y=\"64\" fill=\"#6db3f2\" font-weight=\"700\">Plano frontal (membros)</text><text x=\"44\" y=\"84\" fill=\"#eef2f7\" font-size=\"10.2\">DI, DII, DIII, aVR, aVL, aVF</text><text x=\"44\" y=\"104\" fill=\"#eef2f7\" font-size=\"10.2\">Olham o coracao de cima/lados</text><text x=\"44\" y=\"124\" fill=\"#eef2f7\" font-size=\"10.2\">(cada uma sob um angulo diferente)</text><text x=\"44\" y=\"150\" fill=\"#3ddc84\" font-weight=\"700\">Plano horizontal (precordiais)</text><text x=\"44\" y=\"170\" fill=\"#eef2f7\" font-size=\"10.2\">V1-V6, do septo (V1-V2)</text><text x=\"44\" y=\"188\" fill=\"#eef2f7\" font-size=\"10.2\">ao ventriculo esquerdo lateral (V5-V6)</text><text x=\"44\" y=\"214\" fill=\"#f59f0a\" font-weight=\"700\">Regra de ouro</text><text x=\"44\" y=\"234\" fill=\"#eef2f7\" font-size=\"10.2\">Derivacoes vizinhas que \"concordam\"</text><text x=\"44\" y=\"250\" fill=\"#eef2f7\" font-size=\"10.2\">= mesma parede do coracao envolvida.</text><rect x=\"335\" y=\"42\" width=\"315\" height=\"222\" rx=\"10\" fill=\"#212c46\" stroke=\"#e8675f\"/><text x=\"349\" y=\"64\" fill=\"#e8675f\" font-weight=\"700\">Parede -&gt; derivacoes -&gt; arteria</text><text x=\"349\" y=\"86\" fill=\"#eef2f7\" font-size=\"10.1\">Septal: V1-V2 -&gt; DA (septais)</text><text x=\"349\" y=\"104\" fill=\"#eef2f7\" font-size=\"10.1\">Anterior: V3-V4 -&gt; DA</text><text x=\"349\" y=\"122\" fill=\"#eef2f7\" font-size=\"10.1\">Lateral: DI, aVL, V5-V6 -&gt; circunflexa</text><text x=\"349\" y=\"140\" fill=\"#eef2f7\" font-size=\"10.1\">Inferior: DII, DIII, aVF -&gt; coronaria direita</text><text x=\"349\" y=\"158\" fill=\"#eef2f7\" font-size=\"10.1\">Posterior (espelho V1-V2): CD ou Cx</text><text x=\"349\" y=\"176\" fill=\"#eef2f7\" font-size=\"10.1\">VD: V3R-V4R -&gt; coronaria direita proximal</text><rect x=\"349\" y=\"196\" width=\"285\" height=\"56\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"362\" y=\"216\" fill=\"#eef2f7\" font-size=\"10\" font-weight=\"700\">Macete: DA = frente (septo+anterior);</text><text x=\"362\" y=\"234\" fill=\"#eef2f7\" font-size=\"10\">CD = baixo (inferior); Cx = lado (lateral).</text></svg>", "ecg1_eixo": "<svg viewBox=\"0 0 680 310\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"310\" rx=\"16\" fill=\"#141b2c\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">EIXO ELETRICO: METODO RAPIDO (DI e aVF)</text><circle cx=\"150\" cy=\"150\" r=\"95\" fill=\"none\" stroke=\"#3a4666\" stroke-width=\"1\"/><line x1=\"55\" y1=\"150\" x2=\"245\" y2=\"150\" stroke=\"#5a6a92\" stroke-width=\"1.2\"/><line x1=\"150\" y1=\"55\" x2=\"150\" y2=\"245\" stroke=\"#5a6a92\" stroke-width=\"1.2\"/><text x=\"252\" y=\"154\" fill=\"#6db3f2\" font-size=\"10\">DI +</text><text x=\"150\" y=\"262\" fill=\"#6db3f2\" font-size=\"10\" text-anchor=\"middle\">aVF +</text><rect x=\"152\" y=\"152\" width=\"88\" height=\"88\" fill=\"#3ddc84\" fill-opacity=\"0.16\"/><text x=\"196\" y=\"196\" fill=\"#3ddc84\" font-size=\"9.5\" text-anchor=\"middle\" font-weight=\"700\">Normal</text><text x=\"196\" y=\"210\" fill=\"#eef2f7\" font-size=\"8.6\" text-anchor=\"middle\">DI+ / aVF+</text><rect x=\"62\" y=\"152\" width=\"88\" height=\"88\" fill=\"#f59f0a\" fill-opacity=\"0.16\"/><text x=\"106\" y=\"196\" fill=\"#f59f0a\" font-size=\"9.5\" text-anchor=\"middle\" font-weight=\"700\">Desvio p/ direita</text><text x=\"106\" y=\"210\" fill=\"#eef2f7\" font-size=\"8.6\" text-anchor=\"middle\">DI- / aVF+</text><rect x=\"152\" y=\"62\" width=\"88\" height=\"88\" fill=\"#e8675f\" fill-opacity=\"0.16\"/><text x=\"196\" y=\"106\" fill=\"#e8675f\" font-size=\"9.5\" text-anchor=\"middle\" font-weight=\"700\">Desvio p/ esquerda</text><text x=\"196\" y=\"120\" fill=\"#eef2f7\" font-size=\"8.6\" text-anchor=\"middle\">DI+ / aVF-</text><rect x=\"62\" y=\"62\" width=\"88\" height=\"88\" fill=\"#9a7bd6\" fill-opacity=\"0.16\"/><text x=\"106\" y=\"106\" fill=\"#9a7bd6\" font-size=\"9.5\" text-anchor=\"middle\" font-weight=\"700\">Extremo (raro)</text><text x=\"106\" y=\"120\" fill=\"#eef2f7\" font-size=\"8.6\" text-anchor=\"middle\">DI- / aVF-</text><rect x=\"360\" y=\"50\" width=\"290\" height=\"212\" rx=\"10\" fill=\"#212c46\" stroke=\"#6db3f2\"/><text x=\"374\" y=\"72\" fill=\"#6db3f2\" font-weight=\"700\">Causas do desvio p/ esquerda</text><text x=\"374\" y=\"90\" fill=\"#eef2f7\" font-size=\"10\">HVE, BDAS (bloqueio da divisao</text><text x=\"374\" y=\"106\" fill=\"#eef2f7\" font-size=\"10\">anterossuperior), IAM inferior antigo</text><text x=\"374\" y=\"128\" fill=\"#3ddc84\" font-weight=\"700\">Causas do desvio p/ direita</text><text x=\"374\" y=\"146\" fill=\"#eef2f7\" font-size=\"10\">HVD, cor pulmonale, TEP agudo,</text><text x=\"374\" y=\"162\" fill=\"#eef2f7\" font-size=\"10\">BDPI (bloqueio da divisao</text><text x=\"374\" y=\"178\" fill=\"#eef2f7\" font-size=\"10\">posteroinferior), pneumopata cronico</text><text x=\"374\" y=\"200\" fill=\"#f59f0a\" font-weight=\"700\">Macete</text><text x=\"374\" y=\"218\" fill=\"#eef2f7\" font-size=\"10\">\"Os dois positivos = tudo bem.\"</text><text x=\"374\" y=\"234\" fill=\"#eef2f7\" font-size=\"10\">DI negativo empurra p/ direita;</text><text x=\"374\" y=\"250\" fill=\"#eef2f7\" font-size=\"10\">aVF negativo empurra p/ esquerda.</text></svg>", "ecg1_sobrecargas": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#141b2c\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">SOBRECARGAS ATRIAIS: A FORMA DA ONDA P</text><rect x=\"30\" y=\"44\" width=\"300\" height=\"216\" rx=\"10\" fill=\"#212c46\" stroke=\"#6db3f2\"/><text x=\"44\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\">SAE - P mitrale (atrio esquerdo)</text><polyline points=\"60,110 90,110 100,96 112,108 122,96 132,110 160,110\" fill=\"none\" stroke=\"#6db3f2\" stroke-width=\"2.2\"/><text x=\"60\" y=\"130\" fill=\"#eef2f7\" font-size=\"9.6\">DII: P alargada e entalhada (&gt;0.12s)</text><text x=\"60\" y=\"148\" fill=\"#eef2f7\" font-size=\"9.6\">\"bimodal\", como duas corcovas</text><text x=\"60\" y=\"172\" fill=\"#eef2f7\" font-size=\"9.6\">V1: fase negativa da P profunda</text><text x=\"60\" y=\"190\" fill=\"#eef2f7\" font-size=\"9.6\">e larga (indice de Morris)</text><text x=\"60\" y=\"214\" fill=\"#eef2f7\" font-size=\"9.6\">Causas: estenose mitral, HAS,</text><text x=\"60\" y=\"232\" fill=\"#eef2f7\" font-size=\"9.6\">qualquer sobrecarga do VE</text><rect x=\"350\" y=\"44\" width=\"300\" height=\"216\" rx=\"10\" fill=\"#212c46\" stroke=\"#3ddc84\"/><text x=\"364\" y=\"66\" fill=\"#3ddc84\" font-weight=\"700\">SAD - P pulmonale (atrio direito)</text><polyline points=\"380,110 405,110 420,84 435,110 460,110\" fill=\"none\" stroke=\"#3ddc84\" stroke-width=\"2.2\"/><text x=\"380\" y=\"130\" fill=\"#eef2f7\" font-size=\"9.6\">DII/DIII/aVF: P apiculada e alta</text><text x=\"380\" y=\"148\" fill=\"#eef2f7\" font-size=\"9.6\">(&gt;2.5mm), simetrica, \"em tenda\"</text><text x=\"380\" y=\"172\" fill=\"#eef2f7\" font-size=\"9.6\">Duracao normal (o problema e</text><text x=\"380\" y=\"190\" fill=\"#eef2f7\" font-size=\"9.6\">a amplitude, nao a largura)</text><text x=\"380\" y=\"214\" fill=\"#eef2f7\" font-size=\"9.6\">Causas: DPOC/cor pulmonale,</text><text x=\"380\" y=\"232\" fill=\"#eef2f7\" font-size=\"9.6\">hipertensao pulmonar, TEP cronico</text></svg>", "ecg1_hipertrofias": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#141b2c\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">HIPERTROFIA VENTRICULAR: OS CRITERIOS QUE MAIS CAEM</text><rect x=\"30\" y=\"44\" width=\"300\" height=\"248\" rx=\"10\" fill=\"#212c46\" stroke=\"#e8675f\"/><text x=\"44\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\">HVE (ventriculo esquerdo)</text><text x=\"44\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">Sokolow-Lyon: S em V1 + R em</text><text x=\"44\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">V5 ou V6 &gt;= 35mm</text><text x=\"44\" y=\"126\" fill=\"#eef2f7\" font-size=\"10\">Cornell: R em aVL + S em V3</text><text x=\"44\" y=\"142\" fill=\"#eef2f7\" font-size=\"10\">&gt;28mm (homem) / &gt;20mm (mulher)</text><text x=\"44\" y=\"164\" fill=\"#eef2f7\" font-size=\"10\">Peguero-Lo Presti: maior S +</text><text x=\"44\" y=\"180\" fill=\"#eef2f7\" font-size=\"10\">maior S de qualquer derivacao</text><text x=\"44\" y=\"196\" fill=\"#eef2f7\" font-size=\"10\">&gt;= 28mm (H) / 23mm (M) - o mais</text><text x=\"44\" y=\"212\" fill=\"#eef2f7\" font-size=\"10\">sensivel em obesos</text><rect x=\"44\" y=\"228\" width=\"272\" height=\"52\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"56\" y=\"248\" fill=\"#eef2f7\" font-size=\"9.6\" font-weight=\"700\">Padrao strain: infra ST descendente +</text><text x=\"56\" y=\"264\" fill=\"#eef2f7\" font-size=\"9.6\">T invertida assimetrica em V5-V6, DI, aVL</text><rect x=\"350\" y=\"44\" width=\"300\" height=\"248\" rx=\"10\" fill=\"#212c46\" stroke=\"#3ddc84\"/><text x=\"364\" y=\"66\" fill=\"#3ddc84\" font-weight=\"700\">HVD (ventriculo direito)</text><text x=\"364\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">R &gt; S em V1 (onda R dominante,</text><text x=\"364\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">sem ser bloqueio de ramo)</text><text x=\"364\" y=\"126\" fill=\"#eef2f7\" font-size=\"10\">Desvio de eixo para a DIREITA</text><text x=\"364\" y=\"142\" fill=\"#eef2f7\" font-size=\"10\">Padrao S1S2S3 (S profunda em</text><text x=\"364\" y=\"158\" fill=\"#eef2f7\" font-size=\"10\">DI, DII e DIII) - sugere sobrecarga</text><text x=\"364\" y=\"174\" fill=\"#eef2f7\" font-size=\"10\">de VD aguda (ex.: TEP)</text><text x=\"364\" y=\"196\" fill=\"#eef2f7\" font-size=\"10\">Costuma vir com P pulmonale</text><text x=\"364\" y=\"212\" fill=\"#eef2f7\" font-size=\"10\">(SAD) associada</text><rect x=\"364\" y=\"228\" width=\"272\" height=\"52\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"376\" y=\"248\" fill=\"#eef2f7\" font-size=\"9.6\" font-weight=\"700\">Macete: em V1, R grande = ramo direito</text><text x=\"376\" y=\"264\" fill=\"#eef2f7\" font-size=\"9.6\">bloqueado OU VD hipertrofiado - olhe o QRS</text></svg>"});</script>
+<script>/* CardioAtlas - Conteudo ECG 1: ritmo, eixo, sobrecargas e hipertrofias (ecg|0). Aditivo. */
+(function(){
+"use strict";
+var A=window.ASVG||{}; var C=(window.CONTENT=window.CONTENT||{});
+C['ecg|0']={
+ name:'ECG: ritmo, eixo, sobrecargas e hipertrofias',
+ intro:'O ECG é o exame mais cobrado da cardiologia porque é barato, rápido e revela em segundos o ritmo, a posição elétrica do coração e sinais indiretos de sobrecarga — a base para interpretar qualquer traçado depois, inclusive isquemia e infarto.',
+ sub:[
+  ['entendendo','Entendendo do Zero',`
+   <div class="ac-h">O que o ECG realmente registra</div>
+   <p class="ac-p">O coração bate porque um estímulo elétrico nasce, se espalha e depois "reseta" em cada célula muscular. O <b>eletrocardiograma</b> não vê o coração se contraindo — ele registra, na pele, a <b>voltagem elétrica</b> gerada por esse estímulo percorrendo o músculo. Toda vez que uma região se despolariza (o estímulo chega e ativa a célula), o aparelho desenha uma onda para cima ou para baixo dependendo da direção desse estímulo em relação a cada eletrodo. É por isso que o mesmo evento elétrico aparece diferente em cada derivação: cada uma "olha" o coração de um ângulo.</p>
+   <p class="ac-p">O estímulo normal nasce no <b>nó sinusal</b>, um pequeno grupo de células no teto do átrio direito que se despolariza sozinho, sem precisar de nenhum estímulo externo (por isso é o "marca-passo natural"). Dali, a onda elétrica se espalha pelos dois átrios — gerando a <b>onda P</b> — e converge no <b>nó atrioventricular (AV)</b>, uma espécie de "pedágio" que atrasa propositalmente o sinal (permitindo que o sangue termine de encher o ventrículo antes dele contrair). Depois do nó AV, o estímulo desce pelo <b>feixe de His</b>, se divide nos <b>ramos direito e esquerdo</b> e termina nas <b>fibras de Purkinje</b>, que espalham o sinal por todo o músculo ventricular quase ao mesmo tempo — gerando o <b>QRS</b>, rápido e de grande amplitude porque o ventrículo tem muito mais massa muscular que o átrio.</p>
+   <p class="ac-p">Depois de se contrair, cada célula precisa "recarregar" — esse processo elétrico de volta ao repouso é a <b>repolarização</b>, e no ventrículo ela aparece como a <b>onda T</b>. A repolarização atrial existe, mas é pequena e fica escondida dentro do QRS (que é muito maior e acontece ao mesmo tempo). Entender essa sequência — <b>P (átrios despolarizam) → QRS (ventrículos despolarizam) → T (ventrículos repolarizam)</b> — é a chave para ler qualquer ECG, porque todo o resto do módulo (ritmo, eixo, sobrecargas, hipertrofias e, depois, isquemia) é apenas "o que muda nessa sequência normal e por quê".</p>
+   ${A.ecg1_ondas}
+   <div class="ac-call"><b>A grande ideia:</b> o ECG é o retrato elétrico do coração ao longo do tempo. Cada onda tem um significado fixo (P = átrio, QRS = ventrículo, T = repolarização), e cada derivação é uma "câmera" com um ângulo próprio — o resto é aprender a cruzar essas duas informações.</div>
+   <table class="ac-tbl"><tr><th>Eixo</th><th>O que você vai dominar</th></tr>
+     <tr><td>Sistema de condução</td><td>nó SA → átrios (P) → nó AV → His/ramos → Purkinje → ventrículos (QRS) → T</td></tr>
+     <tr><td>Derivações</td><td>plano frontal (membros) e horizontal (precordiais); correlação com parede e artéria</td></tr>
+     <tr><td>Ritmo</td><td>os 5 passos da leitura sistemática e o que define "ritmo sinusal"</td></tr>
+     <tr><td>Eixo elétrico</td><td>método rápido DI/aVF, desvios e suas causas</td></tr>
+     <tr><td>Sobrecargas e hipertrofias</td><td>P mitrale × P pulmonale; critérios de HVE e HVD</td></tr>
+   </table>`],
+  ['derivacoes','As 12 Derivações e as Paredes',`
+   <div class="ac-h">Por que 12 "fotos" diferentes do mesmo coração</div>
+   <p class="ac-p">As <b>6 derivações do plano frontal</b> (DI, DII, DIII, aVR, aVL, aVF) são geradas por eletrodos nos braços e na perna, e enxergam o coração de cima, de baixo e dos lados — são elas que usamos para calcular o <b>eixo elétrico</b>. As <b>6 derivações precordiais</b> (V1 a V6) ficam coladas no tórax, num semicírculo que vai do <b>septo</b> (V1-V2) até a <b>parede lateral</b> do ventrículo esquerdo (V5-V6), passando pela <b>parede anterior</b> (V3-V4). Juntas, essas 12 janelas cobrem praticamente todo o músculo cardíaco.</p>
+   <p class="ac-p">A regra prática mais usada na prova é: quando <b>derivações vizinhas concordam</b> (por exemplo, alteração simultânea em V3 e V4), isso aponta para a <b>mesma parede</b> do coração — e cada parede tem uma <b>artéria coronária principal</b> por trás. Saber essa correspondência é o que permite, só olhando o ECG, prever qual vaso provavelmente está entupido num infarto (assunto que será aprofundado no próximo módulo, mas que já começa a fazer sentido aqui).</p>
+   ${A.ecg1_derivacoes}
+   <div class="ac-tip"><b>Macete:</b> "DA" irriga a frente (septo + anterior), a "CD" irriga embaixo (inferior) e a "Cx" irriga o lado (lateral). Fixando isso, qualquer tabela de correlação parede-artéria fica fácil de reconstruir na hora da prova.</div>`],
+  ['ritmo','Ritmo Sinusal: os 5 Passos',`
+   <div class="ac-h">A leitura sistemática (o que fazer sempre, na mesma ordem)</div>
+   <p class="ac-p">Antes de procurar qualquer doença, todo ECG merece uma checagem sistemática de 5 perguntas, sempre na mesma ordem — é isso que evita "viajar" direto para um diagnóstico chamativo e esquecer um achado simples. <b>1) O ritmo é regular?</b> Meça a distância entre os R (intervalo RR); se varia pouco, é regular. <b>2) Qual a frequência cardíaca?</b> Conte quadradinhos entre dois R e aplique 1500/n (ritmo regular) ou conte QRS em 6 segundos x10 (ritmo irregular). <b>3) Existe onda P antes de cada QRS, e ela é normal?</b> <b>4) O intervalo PR está entre 0,12 e 0,20s?</b> <b>5) O QRS é estreito (até 0,10-0,12s)?</b></p>
+   <p class="ac-p">Quando as cinco respostas são "sim, e a P é positiva em DII e negativa em aVR", o traçado é <b>ritmo sinusal normal</b> — ou seja, o estímulo realmente nasceu no nó sinusal e seguiu o caminho fisiológico. Essa checagem da <b>morfologia e do eixo da onda P</b> é o detalhe que mais escapa: uma P positiva em DII e negativa em aVR confirma que o impulso está vindo de cima para baixo e da direita para a esquerda, exatamente a direção esperada do nó sinusal. Se a P for negativa em DII, o estímulo está vindo de outro lugar (ritmo ectópico atrial, por exemplo) — mesmo que a frequência esteja normal.</p>
+   <p class="ac-p">Um detalhe fisiológico comum, sobretudo em jovens: a <b>arritmia sinusal respiratória</b>, em que a frequência varia discretamente com a respiração (acelera na inspiração, desacelera na expiração) mas a morfologia da P continua normal — não é doença, é a variação vagal normal do nó sinusal. As demais alterações de ritmo (taquiarritmias, bradiarritmias, bloqueios, extrassístoles) ganham módulos próprios dentro do bloco de Arritmias; aqui o objetivo é apenas fixar a "régua" que confirma se um traçado é sinusal antes de avançar para eixo e sobrecargas.</p>
+   <table class="ac-tbl"><tr><th>Passo</th><th>Pergunta</th></tr>
+     <tr><td>1</td><td>O ritmo é regular? (RR constante)</td></tr>
+     <tr><td>2</td><td>Qual a frequência? (1500/quadradinhos, se regular)</td></tr>
+     <tr><td>3</td><td>Há P antes de cada QRS, normal (+ em DII, - em aVR)?</td></tr>
+     <tr><td>4</td><td>PR entre 0,12 e 0,20s?</td></tr>
+     <tr><td>5</td><td>QRS estreito (até 0,10-0,12s)?</td></tr>
+   </table>
+   <div class="ac-warn"><b>Pegadinha:</b> frequência normal não é sinônimo de ritmo sinusal — sempre confira a morfologia da onda P antes de "aprovar" o traçado.</div>`],
+  ['eixo','O Eixo Elétrico',`
+   <div class="ac-h">Para onde "aponta" a soma de toda a ativação ventricular</div>
+   <p class="ac-p">O <b>eixo elétrico</b> é a direção média, no plano frontal, para onde a atividade elétrica do QRS está "apontando" no geral. Cada fibra muscular se despolariza numa direção um pouco diferente, mas o ECG soma tudo isso num único vetor resultante — e é a direção desse vetor que chamamos de eixo. No adulto normal, o eixo fica entre <b>-30° e +90°</b>, porque o ventrículo esquerdo (maior e mais grosso) domina o vetor final e ele fica posicionado para baixo e para a esquerda no tórax.</p>
+   <p class="ac-p">Existe um método longo (a "roda" de 360° com todas as derivações) e um <b>método rápido</b> que resolve a maioria das questões de prova: olhar apenas para <b>DI e aVF</b>. Se o QRS é predominantemente positivo (para cima) nas duas, o eixo é normal. Se DI é positivo e aVF é negativo, há desvio para a esquerda. Se DI é negativo e aVF é positivo, há desvio para a direita. Se as duas são negativas, o eixo está no quadrante "extremo" (raro, associado a taquicardia ventricular ou distúrbios graves de condução).</p>
+   ${A.ecg1_eixo}
+   <p class="ac-p">O eixo não é só um número decorado — ele é uma <b>pista diagnóstica</b>. Desvio para a esquerda sugere que o ventrículo esquerdo está "puxando" o vetor (hipertrofia) ou que uma parte do sistema de condução que ativaria a porção inferior do ventrículo está bloqueada (bloqueio da divisão anterossuperior do ramo esquerdo). Desvio para a direita sugere sobrecarga do ventrículo direito (cor pulmonale, hipertensão pulmonar) ou um evento agudo que sobrecarrega subitamente o VD, como o tromboembolismo pulmonar.</p>
+   <div class="ac-tip"><b>Macete:</b> "os dois positivos = tudo bem." Se DI ou aVF ficarem negativos, o eixo desviou na direção daquele que ficou negativo.</div>`],
+  ['sobrecargas','Sobrecargas Atriais',`
+   <div class="ac-h">A onda P conta a história do átrio</div>
+   <p class="ac-p">Quando um átrio precisa trabalhar mais (por pressão alta dentro dele ou por ele mesmo estar dilatado), isso se reflete na <b>forma da onda P</b>, porque a P nada mais é do que a soma da despolarização dos dois átrios sobrepostas. O átrio direito se despolariza primeiro e mais rápido (é menor e mais fino); o átrio esquerdo despolariza um pouco depois e mais devagar (é maior). Por isso, cada sobrecarga distorce a P de um jeito característico e previsível.</p>
+   <p class="ac-p">Na <b>sobrecarga atrial esquerda (SAE)</b>, o componente esquerdo da P fica mais lento e mais tardio, alargando a onda inteira (P > 0,12s) e criando um entalhe — a clássica <b>P mitrale</b>, "bimodal", mais bem vista em DII. Em V1, essa sobrecarga aparece como uma fase negativa da P mais profunda e mais larga (índice de Morris). A causa mais lembrada em prova é a <b>estenose mitral</b> (o átrio esquerdo empurra sangue contra uma valva estreitada), mas qualquer sobrecarga crônica do ventrículo esquerdo (hipertensão arterial, insuficiência mitral) também produz o mesmo padrão.</p>
+   ${A.ecg1_sobrecargas}
+   <p class="ac-p">Na <b>sobrecarga atrial direita (SAD)</b>, o problema não é a duração, e sim a <b>amplitude</b>: a P fica alta e apiculada ("em tenda"), com mais de 2,5mm em DII, DIII ou aVF — a <b>P pulmonale</b>. Isso acontece porque o átrio direito precisa gerar mais força para vencer uma resistência aumentada à sua frente, geralmente no pulmão: DPOC/cor pulmonale, hipertensão pulmonar e tromboembolismo pulmonar crônico são as causas clássicas. Um jeito de não confundir: <b>SAE mexe na largura</b> da P (alarga e entalha); <b>SAD mexe na altura</b> da P (fica pontuda e alta, sem alargar).</p>
+   <div class="ac-warn"><b>Pegadinha:</b> nem toda P entalhada é SAE nem toda P alta é SAD sozinha — as duas podem coexistir (P "bífida e apiculada"), refletindo sobrecarga biatrial, comum em cardiopatias avançadas.</div>`],
+  ['hve','Hipertrofia Ventricular Esquerda',`
+   <div class="ac-h">Quando o QRS fica grande demais</div>
+   <p class="ac-p">A <b>hipertrofia ventricular esquerda (HVE)</b> é o espessamento do músculo do VE, geralmente uma resposta a sobrecarga crônica de pressão (hipertensão arterial mal controlada é a causa mais comum) ou de volume (insuficiência ou estenose valvares). Mais massa muscular gera mais voltagem elétrica — por isso os critérios de HVE no ECG são, no fundo, <b>critérios de amplitude</b>: somamos a profundidade de ondas negativas em uma derivação com a altura de ondas positivas em outra, e comparamos com um valor de corte.</p>
+   <p class="ac-p">Os três critérios mais cobrados são o <b>Sokolow-Lyon</b> (S em V1 + R em V5 ou V6 ≥ 35mm — simples, mas perde sensibilidade em obesos e idosos, cujo tórax "afasta" o coração dos eletrodos), o <b>Cornell</b> (R em aVL + S em V3 > 28mm no homem ou > 20mm na mulher — mais sensível, e nota-se que aqui o corte já diferencia por sexo) e o <b>Peguero-Lo Presti</b>, mais recente e mais sensível em pacientes obesos: soma a onda S mais profunda de qualquer derivação precordial com a onda S mais profunda de V4, usando ≥ 28mm no homem e ≥ 23mm na mulher.</p>
+   ${A.ecg1_hipertrofias}
+   <p class="ac-p">Além da voltagem, existe um achado que preocupa mais: o <b>padrão de "strain"</b> (sobrecarga), um infradesnivelamento do segmento ST descendente com onda T invertida e assimétrica em V5-V6, DI e aVL — o "espelho" de que o músculo hipertrofiado está sofrendo isquemia relativa (porque cresceu mais do que a circulação coronária conseguiu acompanhar). O strain é importante porque, na prova, ele costuma ser usado para diferenciar de isquemia verdadeira: no strain de HVE, a T invertida vem sempre acompanhada de critérios de voltagem aumentada e de um contexto clínico de hipertensão crônica, não de dor torácica aguda.</p>
+   <div class="ac-tip"><b>Macete:</b> três critérios, três nomes, mesma lógica ("soma de amplitudes vs. corte"). Se o enunciado mencionar obesidade, pense em Peguero-Lo Presti primeiro.</div>`],
+  ['hvd','Hipertrofia Ventricular Direita',`
+   <div class="ac-h">O "espelho" no lado direito</div>
+   <p class="ac-p">O ventrículo direito normalmente é bem mais fino que o esquerdo, então seu sinal elétrico costuma ficar "escondido" dentro do vetor dominante do VE. Quando o VD hipertrofia — por hipertensão pulmonar, cor pulmonale (DPOC crônico), algumas cardiopatias congênitas ou estenose pulmonar — ele passa a competir e, às vezes, a vencer essa disputa elétrica. O achado mais direto é uma <b>onda R dominante em V1</b> (R maior que S), já que V1 está posicionado bem próximo ao VD e normalmente registraria uma onda predominantemente negativa.</p>
+   <p class="ac-p">A HVD também <b>empurra o eixo elétrico para a direita</b>, pelo mesmo raciocínio do eixo: o vetor final passa a apontar mais para onde o músculo aumentado está. Um padrão clássico e muito cobrado é o <b>S1S2S3</b> — onda S proeminente em DI, DII e DIII simultaneamente —, que sugere sobrecarga aguda de câmaras direitas, sendo lembrado sobretudo no contexto de <b>tromboembolismo pulmonar</b> (embora seja pouco sensível e nem sempre presente). A HVD costuma vir acompanhada de <b>P pulmonale</b> (SAD), já que o átrio direito também está sob a mesma sobrecarga de pressão.</p>
+   <div class="ac-warn"><b>Diferencial importante:</b> R dominante em V1 também aparece no <b>bloqueio de ramo direito</b> (um distúrbio de condução, não de massa muscular) — nesse caso, porém, o QRS fica alargado (≥0,12s) com morfologia rSR' característica ("orelha de coelho"), enquanto na HVD pura o QRS costuma permanecer relativamente estreito. Bloqueios de ramo têm módulo próprio dentro de Arritmias; aqui o importante é lembrar de olhar a <b>duração do QRS</b> antes de fechar o diagnóstico de HVD.</div>
+   <div class="ac-tip"><b>Macete:</b> em V1, R grande pode ser "ramo direito bloqueado" (QRS largo) OU "VD hipertrofiado" (QRS relativamente estreito) — a duração do QRS decide.</div>`],
+  ['sistematica','Juntando Tudo: a Leitura Sistemática',`
+   <div class="ac-h">O roteiro que resolve qualquer ECG de prova</div>
+   <p class="ac-p">Com ritmo, eixo, sobrecargas e hipertrofias dominados, você já tem o roteiro completo para laudar um ECG "básico" (antes de entrar em isquemia, que ganha módulo próprio). A ordem lógica é sempre a mesma, porque cada etapa depende da anterior: primeiro confirme o <b>ritmo</b> (é sinusal? qual a frequência?); depois calcule o <b>eixo</b> (DI/aVF); em seguida avalie a <b>onda P</b> em busca de sobrecargas atriais; por fim avalie o <b>QRS</b> (voltagem, duração, morfologia) em busca de hipertrofias ou bloqueios.</p>
+   <p class="ac-p">Um erro comum de quem está aprendendo é tentar "adivinhar" o diagnóstico olhando o traçado inteiro de uma vez. A leitura sistemática existe justamente para evitar isso: ela obriga a checar cada elemento na ordem certa, o que reduz a chance de ignorar um achado sutil (como uma P pulmonale discreta) só porque outro achado mais chamativo (como uma HVE evidente) chamou a atenção primeiro. Bancas de residência costumam testar exatamente essa disciplina, colocando mais de um achado no mesmo traçado.</p>
+   <p class="ac-p">Esse roteiro também é a base para o próximo módulo: quando o ECG mostra sinais de <b>isquemia, lesão ou necrose</b>, a mesma sistemática se aplica — só que agora, além de ritmo/eixo/câmaras, você também vai olhar ponto a ponto o segmento ST e a onda T em cada parede, cruzando com a artéria correspondente para reconhecer o infarto e agir rápido.</p>
+   <div class="ac-call"><b>Resumo do módulo:</b> Ritmo sinusal = P normal antes de cada QRS + PR e QRS normais. Eixo = DI/aVF. SAE = P larga e entalhada; SAD = P alta e apiculada. HVE = voltagem alta (Sokolow-Lyon/Cornell/Peguero-Lo Presti) ± strain. HVD = R>S em V1 + eixo direito ± S1S2S3.</div>`],
+ ],
+};
+
+Object.assign(C['ecg|0'], {
+ escores:`<div class="ac-h">Critérios e cortes (resumo rápido)</div>
+   <table class="ac-tbl"><tr><th>Achado</th><th>Critério</th></tr>
+     <tr><td>Ritmo sinusal</td><td>P + em DII e - em aVR; 1 P para cada QRS; PR 0,12-0,20s; QRS &lt;0,12s</td></tr>
+     <tr><td>Eixo normal</td><td>-30° a +90° (DI e aVF positivos)</td></tr>
+     <tr><td>SAE (P mitrale)</td><td>P &gt;0,12s, entalhada em DII; fase negativa larga/profunda em V1</td></tr>
+     <tr><td>SAD (P pulmonale)</td><td>P &gt;2,5mm em DII/DIII/aVF, apiculada, duração normal</td></tr>
+     <tr><td>HVE - Sokolow-Lyon</td><td>S(V1) + R(V5 ou V6) &ge; 35mm</td></tr>
+     <tr><td>HVE - Cornell</td><td>R(aVL) + S(V3) &gt; 28mm (H) / &gt;20mm (M)</td></tr>
+     <tr><td>HVE - Peguero-Lo Presti</td><td>maior S + S(V4) &ge; 28mm (H) / &ge;23mm (M)</td></tr>
+     <tr><td>HVD</td><td>R&gt;S em V1 + eixo direito ± S1S2S3</td></tr>
+   </table>`,
+ dif:`<div class="ac-h">Diferenciais</div>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Diferenciar de</th><th>Chave</th></tr>
+     <tr><td>R dominante em V1</td><td>Bloqueio de ramo direito × HVD</td><td>BRD: QRS &ge;0,12s, rSR'. HVD: QRS relativamente estreito, eixo direito, contexto de sobrecarga de VD</td></tr>
+     <tr><td>P alargada e entalhada</td><td>SAE × atraso interatrial isolado</td><td>SAE clássica soma amplitude aumentada em V1; avaliar contexto (valvopatia mitral, HAS)</td></tr>
+     <tr><td>T invertida em V5-V6/DI/aVL</td><td>Strain de HVE × isquemia</td><td>Strain vem com critério de voltagem e contexto crônico; isquemia costuma ter dor aguda e simetria maior da T</td></tr>
+     <tr><td>Desvio de eixo para esquerda</td><td>HVE × bloqueio da divisão anterossuperior (BDAS)</td><td>HVE costuma ter critério de voltagem associado; BDAS é distúrbio isolado de condução, sem necessariamente aumentar voltagem</td></tr>
+     <tr><td>Desvio de eixo para direita</td><td>HVD × TEP agudo × pneumopata crônico</td><td>TEP: instalação aguda + S1S2S3 + taquicardia; HVD/cor pulmonale: crônico, com P pulmonale associada</td></tr>
+   </table>`,
+ mapa:`<div class="ac-h">Mapa mental (cards)</div>
+   <div class="mm">
+     <div class="mm-card"><h5>Condução</h5><ul><li>Nó SA → átrios (P)</li><li>Nó AV (atraso) → His → ramos → Purkinje</li><li>Ventrículos despolarizam (QRS) e repolarizam (T)</li></ul></div>
+     <div class="mm-card"><h5>Derivações</h5><ul><li>Frontal: DI, DII, DIII, aVR, aVL, aVF (eixo)</li><li>Horizontal: V1-V6 (septo → lateral)</li><li>DA=frente, CD=baixo, Cx=lado</li></ul></div>
+     <div class="mm-card"><h5>Ritmo sinusal</h5><ul><li>5 passos: regularidade, FC, P, PR, QRS</li><li>P + em DII, - em aVR</li></ul></div>
+     <div class="mm-card"><h5>Eixo</h5><ul><li>Método DI/aVF</li><li>Esquerda: HVE, BDAS, IAM inferior antigo</li><li>Direita: HVD, TEP, cor pulmonale</li></ul></div>
+     <div class="mm-card"><h5>Sobrecargas atriais</h5><ul><li>SAE = P mitrale (larga/entalhada)</li><li>SAD = P pulmonale (alta/apiculada)</li></ul></div>
+     <div class="mm-card"><h5>Hipertrofias</h5><ul><li>HVE: Sokolow-Lyon/Cornell/Peguero ± strain</li><li>HVD: R&gt;S em V1 + eixo direito ± S1S2S3</li></ul></div>
+   </div>`,
+ fluxo_dx:`<div class="ac-h">Fluxograma: leitura sistemática de um ECG novo</div>
+   <div class="fx">
+     <div class="fx-node start">ECG na mão: siga sempre a mesma ordem</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node">1) Ritmo é sinusal? (P normal, PR e QRS normais)</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node">2) Calcular o eixo (DI e aVF)</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">A onda P está alterada?</div>
+     <div class="fx-row">
+       <div class="fx-node">Larga/entalhada → SAE (P mitrale)</div>
+       <div class="fx-node">Alta/apiculada → SAD (P pulmonale)</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">O QRS tem voltagem/eixo alterados?</div>
+     <div class="fx-row">
+       <div class="fx-node end">Critério de voltagem à esquerda + eixo esq/normal → HVE</div>
+       <div class="fx-node end">R&gt;S em V1 + eixo direito → HVD</div>
+     </div>
+   </div>`,
+ fluxo_cond:`<div class="ac-h">O que pensar diante de cada achado</div>
+   <div class="fx">
+     <div class="fx-node start">Achado no ECG → hipótese a investigar</div>
+     <div class="fx-row">
+       <div class="fx-node">P mitrale (SAE) → pensar em valvopatia mitral, HAS de longa data</div>
+       <div class="fx-node">P pulmonale (SAD) → pensar em pneumopatia crônica, hipertensão pulmonar</div>
+     </div>
+     <div class="fx-row">
+       <div class="fx-node">HVE + strain → correlacionar com HAS crônica; investigar ecocardiograma</div>
+       <div class="fx-node">HVD + S1S2S3 agudo → pensar em TEP, sobretudo se taquicardia e contexto clínico compatível</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node end">Achados de câmaras SEMPRE pedem correlação clínica e, se possível, ecocardiograma</div>
+   </div>`,
+ vespera:`<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Sequência elétrica:</b> nó SA → P (átrios) → nó AV (atraso) → His/ramos/Purkinje → QRS (ventrículos) → T (repolarização).</div>
+   <div class="ac-call"><b>Ritmo sinusal:</b> P + em DII/- em aVR, 1:1 com QRS, PR 0,12-0,20s, QRS &lt;0,12s.</div>
+   <div class="ac-call"><b>Eixo (DI/aVF):</b> os dois + = normal. DI-/aVF+ = direita. DI+/aVF- = esquerda.</div>
+   <div class="ac-call"><b>SAE × SAD:</b> SAE mexe na largura (P mitrale); SAD mexe na altura (P pulmonale).</div>
+   <div class="ac-call"><b>HVE:</b> Sokolow-Lyon (S V1+R V5/6 &ge;35mm), Cornell, Peguero-Lo Presti (obesos) ± strain.</div>
+   <div class="ac-call"><b>HVD:</b> R&gt;S em V1 + eixo direito ± S1S2S3 (pensar em TEP se agudo).</div>`,
+ dicas:`<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Sempre confira a morfologia da onda P antes de chamar um ritmo de "sinusal" — frequência normal não garante isso.</div>
+   <div class="ac-tip">No eixo, basta olhar DI e aVF: "os dois positivos" resolve a maioria das questões em segundos.</div>
+   <div class="ac-tip">Se o enunciado mencionar obesidade e suspeita de HVE, lembre do critério de Peguero-Lo Presti (mais sensível nesse cenário).</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Confundir SAE com SAD: SAE = onda <b>larga e entalhada</b>; SAD = onda <b>alta e apiculada</b>.</div>
+   <div class="ac-warn">Diagnosticar HVD por R dominante em V1 sem checar a <b>duração do QRS</b> (pode ser bloqueio de ramo direito).</div>
+   <div class="ac-warn">Esquecer que o strain de HVE pode imitar isquemia — sempre correlacionar com o critério de voltagem e o contexto clínico.</div>
+   <div class="ac-warn">Calcular o eixo olhando qualquer derivação, em vez de usar direto DI e aVF.</div>`,
+ checklist:[
+   'Explico a sequência elétrica normal (nó SA → P → nó AV → His/ramos → QRS → T)',
+   'Sei a correlação entre as 12 derivações, as paredes cardíacas e as artérias coronárias',
+   'Aplico os 5 passos para confirmar ritmo sinusal',
+   'Calculo o eixo elétrico pelo método DI/aVF e conheço as causas de desvio',
+   'Diferencio SAE (P mitrale) de SAD (P pulmonale) e suas causas',
+   'Reconheço os critérios de HVE (Sokolow-Lyon, Cornell, Peguero-Lo Presti) e o padrão strain',
+   'Reconheço HVD (R>S em V1, eixo direito, S1S2S3) e diferencio de bloqueio de ramo direito',
+   'Sigo uma leitura sistemática completa antes de fechar qualquer diagnóstico eletrocardiográfico'
+ ],
+});
+
+Object.assign(C['ecg|0'], {
+ questoes:[
+  {stem:'Qual sequência descreve corretamente a ativação elétrica normal do coração?',
+   opts:['Nó AV → nó SA → His → Purkinje','Nó SA → átrios → nó AV → His/ramos → Purkinje → ventrículos','Purkinje → His → nó AV → nó SA','Ventrículos → nó AV → átrios → nó SA'],correct:1,
+   expl:'O estímulo nasce no <b>nó sinusal</b>, despolariza os átrios (P), atravessa o <b>nó AV</b> (com atraso fisiológico), desce pelo <b>feixe de His e ramos</b> e termina nas <b>fibras de Purkinje</b>, despolarizando os ventrículos (QRS).'},
+  {stem:'Em um ECG, DI é positivo e aVF é negativo. Isso indica:',
+   opts:['Eixo normal','Desvio do eixo para a esquerda','Desvio do eixo para a direita','Eixo extremo (indeterminado)'],correct:1,
+   expl:'DI positivo com aVF negativo caracteriza <b>desvio do eixo para a esquerda</b> (causas: HVE, bloqueio da divisão anterossuperior, IAM inferior antigo).'},
+  {stem:'Paciente com estenose mitral apresenta, em DII, onda P alargada (>0,12s) e entalhada ("bimodal"). Esse achado é chamado de:',
+   opts:['P pulmonale','P mitrale','Onda U proeminente','Onda delta'],correct:1,
+   expl:'A <b>P mitrale</b> (sobrecarga atrial esquerda) é uma P alargada e entalhada, clássica na estenose mitral e em qualquer sobrecarga crônica do átrio esquerdo.'},
+  {stem:'Qual achado eletrocardiográfico é sugestivo de sobrecarga atrial direita?',
+   opts:['P alargada e entalhada em DII','P apiculada, >2,5mm, em DII/DIII/aVF, com duração normal','QRS alargado com padrão rSR\' em V1','Infra de ST descendente em V5-V6'],correct:1,
+   expl:'A <b>P pulmonale</b> (SAD) é uma onda P alta e apiculada, sem alargamento significativo, mais bem vista nas derivações inferiores (DII, DIII, aVF).'},
+  {stem:'Qual critério eletrocardiográfico é MAIS sensível para hipertrofia ventricular esquerda em pacientes obesos?',
+   opts:['Sokolow-Lyon','Cornell','Peguero-Lo Presti','S1S2S3'],correct:2,
+   expl:'O critério de <b>Peguero-Lo Presti</b> (soma da maior onda S de qualquer derivação precordial com a S de V4) foi desenvolvido para ser mais sensível em obesos, situação em que o Sokolow-Lyon perde acurácia.'},
+  {stem:'O padrão de "strain" na hipertrofia ventricular esquerda se caracteriza por:',
+   opts:['Supradesnivelamento de ST convexo em V1-V3','Infradesnivelamento de ST descendente com T invertida assimétrica em V5-V6, DI, aVL','Onda Q patológica em parede inferior','P pulmonale associada a QRS estreito'],correct:1,
+   expl:'O <b>strain</b> reflete sobrecarga/isquemia relativa do miocárdio hipertrofiado: infra de ST descendente + T invertida assimétrica nas derivações laterais, sempre associado a critério de voltagem para HVE.'},
+  {stem:'Qual achado sugere hipertrofia ventricular direita?',
+   opts:['R>S em V1 com QRS estreito e desvio de eixo para a direita','QS profundo em V1-V4','R>S em V1 com QRS >=0,12s e morfologia rSR\'','P mitrale isolada'],correct:0,
+   expl:'HVD: onda <b>R dominante em V1</b>, <b>eixo desviado para a direita</b> e QRS relativamente <b>estreito</b> (diferente do bloqueio de ramo direito, que também dá R>S em V1, mas com QRS alargado e morfologia rSR\').'},
+  {stem:'O padrão S1S2S3 (onda S proeminente em DI, DII e DIII) é classicamente associado a:',
+   opts:['Sobrecarga aguda de câmaras direitas (ex.: TEP)','Hipertrofia ventricular esquerda crônica','Sobrecarga atrial esquerda isolada','Ritmo juncional'],correct:0,
+   expl:'O S1S2S3 sugere <b>sobrecarga aguda do ventrículo direito</b>, classicamente lembrado no contexto de tromboembolismo pulmonar, embora seja um achado pouco sensível.'},
+  {stem:'Segundo os critérios de Sokolow-Lyon, o diagnóstico de HVE é sugerido quando:',
+   opts:['R em aVL + S em V3 > 28mm','S em V1 + R em V5 ou V6 >= 35mm','P >2,5mm em DII','QRS >= 0,12s com rSR\' em V1'],correct:1,
+   expl:'O critério de <b>Sokolow-Lyon</b> soma a profundidade da S em V1 com a altura da maior R entre V5 e V6; um total >= 35mm sugere HVE.'},
+  {stem:'Em relação à leitura sistemática do ECG, a ordem correta e mais lógica de avaliação é:',
+   opts:['Onda T → QRS → eixo → ritmo','Ritmo → eixo → onda P (sobrecargas) → QRS (hipertrofias/bloqueios)','Eixo → onda T → ritmo → onda P','QRS → ritmo → onda P → eixo'],correct:1,
+   expl:'A leitura sistemática avalia primeiro o <b>ritmo</b>, depois o <b>eixo</b>, depois a <b>onda P</b> (sobrecargas atriais) e por fim o <b>QRS</b> (hipertrofias e bloqueios), evitando pular etapas e perder achados sutis.'},
+  {stem:'Um traçado mostra frequência regular de 75bpm, mas a onda P é negativa em DII e positiva em aVR. A interpretação correta é:',
+   opts:['Ritmo sinusal normal, pois a frequência está normal','Ritmo não sinusal, pois a morfologia da P é atípica para nó sinusal','Bloqueio atrioventricular de 1º grau','Hipertrofia atrial direita'],correct:1,
+   expl:'Mesmo com frequência normal, uma <b>P negativa em DII e positiva em aVR</b> não é compatível com origem no nó sinusal — é preciso confirmar a morfologia da P, não apenas a frequência, para chamar o ritmo de sinusal.'},
+  {stem:'Qual das opções diferencia corretamente bloqueio de ramo direito de hipertrofia ventricular direita, ambos com R>S em V1?',
+   opts:['O eixo sempre é normal no bloqueio de ramo direito','A duração do QRS: >=0,12s (com rSR\') sugere bloqueio; QRS relativamente estreito sugere hipertrofia','A onda P é sempre normal na hipertrofia','Não há diferença possível pelo ECG'],correct:1,
+   expl:'A <b>duração do QRS</b> é o critério-chave: bloqueio de ramo direito alarga o QRS (>=0,12s) com morfologia rSR\' ("orelha de coelho"); na HVD pura, o QRS costuma permanecer relativamente estreito.'}
+ ],
+ flashcards:[
+  {front:'Sequência elétrica normal do coração.',back:'Nó SA → átrios (onda P) → nó AV (atraso) → feixe de His → ramos → Purkinje → ventrículos (QRS) → repolarização (T).',type:'basic'},
+  {front:'O que cada onda do ECG representa?',back:'P = despolarização atrial. QRS = despolarização ventricular. T = repolarização ventricular.',type:'basic'},
+  {front:'Derivações do plano frontal x horizontal.',back:'Frontal (membros): DI, DII, DIII, aVR, aVL, aVF — usadas para o eixo. Horizontal (precordiais): V1-V6 — do septo à parede lateral.',type:'basic'},
+  {front:'Correlação parede-artéria (resumo).',back:'Septal/Anterior (V1-V4) = DA. Lateral (DI, aVL, V5-V6) = Circunflexa. Inferior (DII, DIII, aVF) = Coronária direita (maioria).',type:'basic'},
+  {front:'Os 5 passos da leitura do ritmo.',back:'1) Regularidade (RR). 2) Frequência. 3) Onda P presente e normal (1 para cada QRS). 4) PR 0,12-0,20s. 5) QRS estreito (<0,12s).',type:'basic'},
+  {front:'Critério de onda P para ritmo sinusal.',back:'P positiva em {{DII}} e negativa em {{aVR}}.',type:'cloze'},
+  {front:'Método rápido do eixo elétrico.',back:'Olhar DI e aVF: os dois positivos = eixo normal. DI-/aVF+ = desvio direita. DI+/aVF- = desvio esquerda.',type:'basic'},
+  {front:'Causas de desvio do eixo para a esquerda.',back:'HVE, bloqueio da divisão anterossuperior (BDAS), IAM inferior antigo.',type:'basic'},
+  {front:'Causas de desvio do eixo para a direita.',back:'HVD, cor pulmonale, TEP agudo, bloqueio da divisão posteroinferior (BDPI), pneumopatia crônica.',type:'basic'},
+  {front:'P mitrale x P pulmonale.',back:'P mitrale (SAE): larga e entalhada (>0,12s), DII. P pulmonale (SAD): alta e apiculada (>2,5mm), duração normal.',type:'basic'},
+  {front:'Critério de Sokolow-Lyon para HVE.',back:'S em V1 + maior R entre V5/V6 {{>= 35mm}}.',type:'cloze'},
+  {front:'Critério de Cornell para HVE.',back:'R em aVL + S em V3 > 28mm (homem) ou > 20mm (mulher).',type:'basic'},
+  {front:'Padrão strain de HVE.',back:'Infra de ST descendente com T invertida assimétrica em V5-V6, DI, aVL — sobrecarga/isquemia relativa do miocárdio hipertrofiado.',type:'basic'},
+  {front:'Como diferenciar HVD de bloqueio de ramo direito (ambos com R>S em V1)?',back:'Duração do QRS: bloqueio tem QRS >=0,12s com rSR\'; HVD pura tem QRS relativamente estreito.',type:'basic'}
+ ],
+ casos:[
+  {t:'Caso 1 — A onda P que muda tudo',
+   stem:'Homem, 58 anos, hipertenso há 20 anos, ECG de rotina mostra frequência 78bpm regular, PR 0,16s, QRS estreito. Em DII a onda P mede 0,13s e é entalhada; em V1, a fase negativa da P é larga e profunda.',
+   passos:[
+    {h:'1. Confirmar ritmo sinusal',p:'Frequência regular, PR e QRS normais, mas é preciso checar a morfologia da P antes de seguir.'},
+    {h:'2. Caracterizar a onda P',p:'P alargada e entalhada em DII, com fase negativa larga/profunda em V1 = <b>P mitrale</b> (sobrecarga atrial esquerda).'},
+    {h:'3. Correlacionar com a clínica',p:'HAS crônica de longa data é causa clássica de sobrecarga do átrio esquerdo, mesmo sem valvopatia mitral associada.'},
+    {h:'Lição de prova',p:'SAE altera a <b>largura</b> da onda P (P mitrale); pensar sempre em sobrecarga crônica do VE/AE como pano de fundo.'}
+   ]},
+  {t:'Caso 2 — O eixo que aponta para o pulmão',
+   stem:'Mulher, 45 anos, DPOC de longa data, ECG mostra P apiculada de 3mm em DII/DIII/aVF, eixo desviado para a direita (DI negativo, aVF positivo) e R>S em V1 com QRS de 0,09s.',
+   passos:[
+    {h:'1. Avaliar a onda P',p:'P alta e apiculada, sem alargamento = <b>P pulmonale</b> (SAD).'},
+    {h:'2. Avaliar o eixo',p:'DI negativo e aVF positivo confirmam <b>desvio para a direita</b>.'},
+    {h:'3. Avaliar o QRS',p:'R>S em V1 com QRS estreito (não alargado) sugere <b>HVD</b>, e não bloqueio de ramo direito.'},
+    {h:'Lição de prova',p:'SAD + eixo direito + R>S em V1 com QRS estreito formam o "trio" clássico de sobrecarga crônica de câmaras direitas, típico de cor pulmonale por pneumopatia.'}
+   ]},
+  {t:'Caso 3 — Voltagem alta, mas o contexto que decide',
+   stem:'Homem, 50 anos, obeso, hipertenso mal controlado, assintomático. ECG: S em V1 (18mm) + R em V4 (14mm) somando 32mm; strain discreto em V5-V6.',
+   passos:[
+    {h:'1. Reconhecer a limitação do Sokolow-Lyon',p:'Em obesos, o tecido adiposo afasta o coração dos eletrodos e reduz a voltagem captada, podendo mascarar HVE pelo Sokolow-Lyon clássico.'},
+    {h:'2. Aplicar o critério adequado',p:'Usar <b>Peguero-Lo Presti</b> (soma das maiores ondas S), mais sensível nesse perfil de paciente.'},
+    {h:'3. Interpretar o strain',p:'O infra de ST com T invertida em V5-V6 reforça a hipótese de HVE com sobrecarga, coerente com HAS mal controlada.'},
+    {h:'Lição de prova',p:'Obesidade + suspeita de HVE = lembrar do critério de Peguero-Lo Presti antes de descartar o diagnóstico por um Sokolow-Lyon negativo.'}
+   ]}
+ ],
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+</script>
+<!-- ===== MODULO ECG 2: isquemia, infarto e disturbios eletroliticos (aditivo) ===== -->
+<script>Object.assign(window.ASVG=window.ASVG||{},{"ecg2_cascata": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1c1620\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">A CASCATA ISQUEMICA (DO MENOR AO MAIOR DANO)</text><rect x=\"30\" y=\"46\" width=\"145\" height=\"200\" rx=\"10\" fill=\"#2c2233\" stroke=\"#6db3f2\"/><text x=\"102\" y=\"68\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">1. Isquemia</text><polyline points=\"55,110 90,110 100,124 112,96 124,110 150,110\" fill=\"none\" stroke=\"#6db3f2\" stroke-width=\"2.2\"/><text x=\"102\" y=\"150\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">T apiculada ou</text><text x=\"102\" y=\"166\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">invertida simetrica</text><text x=\"102\" y=\"188\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Reversivel; sem</text><text x=\"102\" y=\"204\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">necrose ainda</text><rect x=\"185\" y=\"46\" width=\"145\" height=\"200\" rx=\"10\" fill=\"#2c2233\" stroke=\"#f59f0a\"/><text x=\"257\" y=\"68\" fill=\"#f59f0a\" font-weight=\"700\" text-anchor=\"middle\">2. Lesao</text><polyline points=\"210,120 245,120 258,80 272,120 305,120\" fill=\"none\" stroke=\"#f59f0a\" stroke-width=\"2.2\"/><text x=\"257\" y=\"150\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Supra ou infra</text><text x=\"257\" y=\"166\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">de ST</text><text x=\"257\" y=\"188\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Ainda pode ser</text><text x=\"257\" y=\"204\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">revertido (janela!)</text><rect x=\"340\" y=\"46\" width=\"145\" height=\"200\" rx=\"10\" fill=\"#2c2233\" stroke=\"#e8675f\"/><text x=\"412\" y=\"68\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">3. Necrose</text><polyline points=\"365,120 385,120 397,145 415,120 460,120\" fill=\"none\" stroke=\"#e8675f\" stroke-width=\"2.6\"/><text x=\"412\" y=\"150\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Onda Q patologica</text><text x=\"412\" y=\"166\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">(&gt;=0.04s, &gt;=1/3 do R)</text><text x=\"412\" y=\"188\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">Definitiva - marca</text><text x=\"412\" y=\"204\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">infarto ja consolidado</text><rect x=\"495\" y=\"46\" width=\"155\" height=\"200\" rx=\"10\" fill=\"#2c2233\" stroke=\"#3ddc84\"/><text x=\"572\" y=\"68\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Tempo e musculo</text><text x=\"572\" y=\"92\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">\"Tempo e musculo\":</text><text x=\"572\" y=\"108\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">quanto antes reperfundir,</text><text x=\"572\" y=\"124\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">menos necrose e mais</text><text x=\"572\" y=\"140\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">musculo salvo.</text><text x=\"572\" y=\"164\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">A onda Q so aparece</text><text x=\"572\" y=\"180\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">depois de horas - nao</text><text x=\"572\" y=\"196\" fill=\"#eef2f7\" font-size=\"9.6\" text-anchor=\"middle\">espere ela para agir!</text><text x=\"257\" y=\"270\" fill=\"#eaeaf0\" font-size=\"11\" text-anchor=\"middle\">Isquemia -&gt; Lesao -&gt; Necrose = T -&gt; ST -&gt; Q (ordem de gravidade e de tempo)</text></svg>", "ecg2_paredes": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"#1c1620\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">LOCALIZANDO O INFARTO: PAREDE, DERIVACOES E ARTERIA</text><rect x=\"30\" y=\"42\" width=\"620\" height=\"34\" rx=\"8\" fill=\"#2c2233\"/><text x=\"46\" y=\"64\" fill=\"#6db3f2\" font-weight=\"700\">Parede</text><text x=\"220\" y=\"64\" fill=\"#6db3f2\" font-weight=\"700\">Derivacoes com supra</text><text x=\"460\" y=\"64\" fill=\"#6db3f2\" font-weight=\"700\">Arteria culpada</text><line x1=\"30\" y1=\"84\" x2=\"650\" y2=\"84\" stroke=\"#3a4666\"/><text x=\"46\" y=\"102\" fill=\"#eef2f7\" font-size=\"10.3\">Septal</text><text x=\"220\" y=\"102\" fill=\"#eef2f7\" font-size=\"10.3\">V1-V2</text><text x=\"460\" y=\"102\" fill=\"#eef2f7\" font-size=\"10.3\">DA (ramos septais)</text><text x=\"46\" y=\"126\" fill=\"#eef2f7\" font-size=\"10.3\">Anterior</text><text x=\"220\" y=\"126\" fill=\"#eef2f7\" font-size=\"10.3\">V3-V4</text><text x=\"460\" y=\"126\" fill=\"#eef2f7\" font-size=\"10.3\">DA</text><text x=\"46\" y=\"150\" fill=\"#eef2f7\" font-size=\"10.3\">Anterior extenso</text><text x=\"220\" y=\"150\" fill=\"#eef2f7\" font-size=\"10.3\">V1-V6, DI, aVL</text><text x=\"460\" y=\"150\" fill=\"#eef2f7\" font-size=\"10.3\">DA proximal</text><text x=\"46\" y=\"174\" fill=\"#eef2f7\" font-size=\"10.3\">Lateral</text><text x=\"220\" y=\"174\" fill=\"#eef2f7\" font-size=\"10.3\">DI, aVL, V5-V6</text><text x=\"460\" y=\"174\" fill=\"#eef2f7\" font-size=\"10.3\">Circunflexa</text><text x=\"46\" y=\"198\" fill=\"#eef2f7\" font-size=\"10.3\">Inferior</text><text x=\"220\" y=\"198\" fill=\"#eef2f7\" font-size=\"10.3\">DII, DIII, aVF</text><text x=\"460\" y=\"198\" fill=\"#eef2f7\" font-size=\"10.3\">Coronaria direita (maioria)</text><text x=\"46\" y=\"222\" fill=\"#eef2f7\" font-size=\"10.3\">Posterior (dorsal)</text><text x=\"220\" y=\"222\" fill=\"#eef2f7\" font-size=\"10.3\">Infra em V1-V2 (espelho)</text><text x=\"460\" y=\"222\" fill=\"#eef2f7\" font-size=\"10.3\">CD ou circunflexa</text><text x=\"46\" y=\"246\" fill=\"#eef2f7\" font-size=\"10.3\">Ventriculo direito</text><text x=\"220\" y=\"246\" fill=\"#eef2f7\" font-size=\"10.3\">V3R-V4R (supra)</text><text x=\"460\" y=\"246\" fill=\"#eef2f7\" font-size=\"10.3\">CD proximal</text><rect x=\"40\" y=\"264\" width=\"600\" height=\"42\" rx=\"8\" fill=\"#f59f0a\" fill-opacity=\"0.14\" stroke=\"#f59f0a\"/><text x=\"56\" y=\"290\" fill=\"#eef2f7\" font-size=\"10.2\" font-weight=\"700\">Sempre que o IAM for inferior, peca V3R-V4R e V7-V9: pode haver VD ou dorsal juntos.</text></svg>", "ecg2_sgarbossa": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1c1620\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">CRITERIOS DE SGARBOSSA (IAM COM BRE OU MARCA-PASSO)</text><rect x=\"30\" y=\"44\" width=\"290\" height=\"222\" rx=\"10\" fill=\"#2c2233\" stroke=\"#6db3f2\"/><text x=\"44\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\">Sgarbossa original (escore >=3)</text><text x=\"44\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">Supra ST >=1mm CONCORDANTE</text><text x=\"44\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">com o QRS = 5 pontos</text><text x=\"44\" y=\"126\" fill=\"#eef2f7\" font-size=\"10\">Infra ST >=1mm em V1-V3</text><text x=\"44\" y=\"142\" fill=\"#eef2f7\" font-size=\"10\">(concordante) = 3 pontos</text><text x=\"44\" y=\"164\" fill=\"#eef2f7\" font-size=\"10\">Supra ST >=5mm DISCORDANTE</text><text x=\"44\" y=\"180\" fill=\"#eef2f7\" font-size=\"10\">(oposto ao QRS) = 2 pontos</text><text x=\"44\" y=\"206\" fill=\"#eef2f7\" font-size=\"9.6\">Alta especificidade, baixa</text><text x=\"44\" y=\"222\" fill=\"#eef2f7\" font-size=\"9.6\">sensibilidade (perde muitos casos)</text><rect x=\"350\" y=\"44\" width=\"300\" height=\"222\" rx=\"10\" fill=\"#2c2233\" stroke=\"#3ddc84\"/><text x=\"364\" y=\"66\" fill=\"#3ddc84\" font-weight=\"700\">Sgarbossa modificado (Smith)</text><text x=\"364\" y=\"88\" fill=\"#eef2f7\" font-size=\"10\">Troca o 3o criterio (5mm fixo) por</text><text x=\"364\" y=\"104\" fill=\"#eef2f7\" font-size=\"10\">uma PROPORCAO:</text><rect x=\"364\" y=\"116\" width=\"272\" height=\"34\" rx=\"6\" fill=\"#f59f0a\" fill-opacity=\"0.16\" stroke=\"#f59f0a\"/><text x=\"500\" y=\"138\" fill=\"#eef2f7\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">ST discordante / onda S &lt; -0.25</text><text x=\"364\" y=\"170\" fill=\"#eef2f7\" font-size=\"9.8\">(ST muito grande perto de um S</text><text x=\"364\" y=\"186\" fill=\"#eef2f7\" font-size=\"9.8\">pequeno tambem conta - mais</text><text x=\"364\" y=\"202\" fill=\"#eef2f7\" font-size=\"9.8\">sensivel que o original)</text><text x=\"364\" y=\"226\" fill=\"#eef2f7\" font-size=\"9.8\">Vale tambem para ritmo de</text><text x=\"364\" y=\"242\" fill=\"#eef2f7\" font-size=\"9.8\">marca-passo ventricular</text></svg>", "ecg2_hipercalemia": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1c1620\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">HIPERCALEMIA: A PROGRESSAO QUE MATA SE NAO TRATAR</text><rect x=\"20\" y=\"44\" width=\"155\" height=\"200\" rx=\"10\" fill=\"#2c2233\" stroke=\"#3ddc84\"/><text x=\"97\" y=\"64\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"10.5\">K 5.5-6.5</text><polyline points=\"45,120 65,120 78,90 92,120 115,120\" fill=\"none\" stroke=\"#3ddc84\" stroke-width=\"2.2\"/><text x=\"97\" y=\"150\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">T apiculada,</text><text x=\"97\" y=\"164\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">simetrica, \"em tenda\"</text><text x=\"97\" y=\"186\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">QT curto</text><rect x=\"185\" y=\"44\" width=\"155\" height=\"200\" rx=\"10\" fill=\"#2c2233\" stroke=\"#f59f0a\"/><text x=\"262\" y=\"64\" fill=\"#f59f0a\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"10.5\">K 6.5-7.5</text><polyline points=\"210,120 260,120 270,90 285,120 305,120\" fill=\"none\" stroke=\"#f59f0a\" stroke-width=\"2.2\"/><text x=\"262\" y=\"150\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">P achatada e some</text><text x=\"262\" y=\"164\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">PR se alarga</text><text x=\"262\" y=\"186\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">(bloqueio de saida</text><text x=\"262\" y=\"200\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">atrial)</text><rect x=\"350\" y=\"44\" width=\"155\" height=\"200\" rx=\"10\" fill=\"#2c2233\" stroke=\"#e8675f\"/><text x=\"427\" y=\"64\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"10.5\">K 7.5-9.0</text><polyline points=\"370,120 400,120 415,100 430,140 445,90 460,120 480,120\" fill=\"none\" stroke=\"#e8675f\" stroke-width=\"2.4\"/><text x=\"427\" y=\"150\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">QRS alargado</text><text x=\"427\" y=\"164\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">(\"bizarro\"), fusao</text><text x=\"427\" y=\"178\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">com a T</text><rect x=\"515\" y=\"44\" width=\"145\" height=\"200\" rx=\"10\" fill=\"#2c2233\" stroke=\"#e8675f\"/><text x=\"587\" y=\"64\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\" font-size=\"10.5\">K &gt;9.0 (grave)</text><polyline points=\"535,120 555,105 575,135 595,105 615,135 635,120\" fill=\"none\" stroke=\"#e8675f\" stroke-width=\"2.4\"/><text x=\"587\" y=\"150\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">\"Onda sinusoidal\"</text><text x=\"587\" y=\"164\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">= pre-parada</text><text x=\"587\" y=\"186\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">FV/assistolia</text><text x=\"587\" y=\"200\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">iminente</text><text x=\"340\" y=\"270\" fill=\"#eaeaf0\" font-size=\"10.5\" text-anchor=\"middle\">T apiculada -&gt; some a P -&gt; QRS largo -&gt; sinusoidal. Trate pelo ECG, nao espere o laboratorio!</text></svg>", "ecg2_outroseletro": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" font-family=\"Inter,Arial,sans-serif\" font-size=\"11\"><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"#1c1620\"/><text x=\"340\" y=\"26\" fill=\"#f59f0a\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">OUTROS DISTURBIOS: POTASSIO BAIXO E CALCIO</text><rect x=\"30\" y=\"44\" width=\"195\" height=\"222\" rx=\"10\" fill=\"#2c2233\" stroke=\"#6db3f2\"/><text x=\"127\" y=\"66\" fill=\"#6db3f2\" font-weight=\"700\" text-anchor=\"middle\">Hipocalemia</text><polyline points=\"50,110 75,110 88,90 100,110 118,110 130,124 145,102 158,110 195,110\" fill=\"none\" stroke=\"#6db3f2\" stroke-width=\"2\"/><text x=\"127\" y=\"146\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">Onda U proeminente</text><text x=\"127\" y=\"162\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">Infra de ST, T achatada</text><text x=\"127\" y=\"178\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">QT parece longo</text><text x=\"127\" y=\"194\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">(na verdade e U)</text><text x=\"127\" y=\"216\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">Risco de torsades</text><text x=\"127\" y=\"232\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">de pointes</text><rect x=\"242\" y=\"44\" width=\"195\" height=\"222\" rx=\"10\" fill=\"#2c2233\" stroke=\"#3ddc84\"/><text x=\"339\" y=\"66\" fill=\"#3ddc84\" font-weight=\"700\" text-anchor=\"middle\">Hipercalcemia</text><polyline points=\"262,110 285,110 297,90 310,110 320,110 335,110 348,110 365,110 385,110 420,110\" fill=\"none\" stroke=\"#3ddc84\" stroke-width=\"2\"/><text x=\"339\" y=\"146\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">QT CURTO</text><text x=\"339\" y=\"162\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">(ST quase some,</text><text x=\"339\" y=\"178\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">T vem logo apos QRS)</text><text x=\"339\" y=\"200\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">Causa classica:</text><text x=\"339\" y=\"216\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">hiperparatireoidismo,</text><text x=\"339\" y=\"232\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">neoplasia</text><rect x=\"455\" y=\"44\" width=\"195\" height=\"222\" rx=\"10\" fill=\"#2c2233\" stroke=\"#e8675f\"/><text x=\"552\" y=\"66\" fill=\"#e8675f\" font-weight=\"700\" text-anchor=\"middle\">Hipocalcemia</text><polyline points=\"475,110 545,110 558,90 572,110 590,110\" fill=\"none\" stroke=\"#e8675f\" stroke-width=\"2\"/><text x=\"552\" y=\"146\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">QT LONGO</text><text x=\"552\" y=\"162\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">(ST alongado e</text><text x=\"552\" y=\"178\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">retificado, T normal)</text><text x=\"552\" y=\"200\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">Risco de torsades</text><text x=\"552\" y=\"216\" fill=\"#eef2f7\" font-size=\"9.4\" text-anchor=\"middle\">de pointes tambem</text></svg>"});</script>
+<script>/* CardioAtlas - Conteudo ECG 2: isquemia, infarto e disturbios eletroliticos (ecg|1). Aditivo. */
+(function(){
+"use strict";
+var A=window.ASVG||{}; var C=(window.CONTENT=window.CONTENT||{});
+C['ecg|1']={
+ name:'ECG: isquemia, infarto e distúrbios eletrolíticos',
+ intro:'É o módulo que transforma leitura de ECG em decisão clínica imediata: reconhecer isquemia e infarto pelo traçado define quem vai para a hemodinâmica em minutos, e reconhecer distúrbios eletrolíticos no ECG pode salvar uma vida antes mesmo do resultado do laboratório.',
+ sub:[
+  ['entendendo','Entendendo a Isquemia do Zero',`
+   <div class="ac-h">Por que a falta de sangue "desenha" no ECG</div>
+   <p class="ac-p">Quando uma artéria coronária reduz ou interrompe o fluxo de sangue para uma área do músculo cardíaco, essa região passa a sofrer <b>falta de oxigênio</b>, e isso muda a forma como suas células se despolarizam e repolarizam — é essa mudança elétrica que o ECG capta. O processo acontece em <b>graus crescentes de gravidade</b>, e cada grau tem uma assinatura própria no traçado: primeiro vem a <b>isquemia</b> (o músculo ainda está vivo, só "sofrendo"), depois a <b>lesão</b> (o músculo está gravemente comprometido, mas ainda pode ser salvo) e, por fim, a <b>necrose</b> (o músculo morreu e virou tecido cicatricial, uma mudança irreversível).</p>
+   <p class="ac-p">Cada uma dessas fases altera uma onda diferente. A <b>isquemia</b> mexe na <b>repolarização</b> (onda T apiculada ou invertida, simétrica), porque é a etapa mais sensível e reversível da atividade elétrica. A <b>lesão</b> mexe no <b>segmento ST</b> (supra ou infra desnivelamento), representando uma corrente de lesão entre o tecido comprometido e o tecido sadio ao redor. A <b>necrose</b> mexe no <b>QRS</b>, criando uma <b>onda Q patológica</b> (larga e profunda) porque a área morta não gera mais nenhum vetor elétrico — o ECG registra apenas o "buraco" elétrico deixado por ela, permanentemente.</p>
+   ${A.ecg2_cascata}
+   <p class="ac-p">O conceito mais importante de todo este módulo é: <b>"tempo é músculo"</b>. A onda Q, quando aparece, já significa que parte do músculo morreu — ela é tardia (leva horas) e <b>não deve ser esperada</b> para iniciar o tratamento. A decisão de reperfundir (desobstruir a artéria) tem que ser tomada já na fase de <b>supra de ST</b>, quando ainda existe músculo "atordoado" passível de salvamento. Por isso a <b>Definição Universal de Infarto</b> combina elevação/queda de troponina (evidência bioquímica de necrose) com pelo menos um entre: sintomas de isquemia, alteração nova de ST/T ou bloqueio de ramo esquerdo novo, onda Q patológica nova, evidência de imagem de perda de miocárdio viável, ou trombo identificado em angiografia/autópsia.</p>
+   <div class="ac-call"><b>A grande ideia:</b> Isquemia → Lesão → Necrose = T → ST → Q, nessa ordem de tempo e de gravidade. Agir na fase de ST (supra) é o que salva músculo; esperar a onda Q é chegar tarde.</div>
+   <table class="ac-tbl"><tr><th>Eixo</th><th>O que você vai dominar</th></tr>
+     <tr><td>Cascata isquêmica</td><td>T (isquemia) → ST (lesão) → Q (necrose) e por que a sequência importa</td></tr>
+     <tr><td>Localização</td><td>parede × derivações × artéria culpada, incluindo posterior e VD</td></tr>
+     <tr><td>IAMCSST × IAMSSST</td><td>critérios de supra, mimetizadores, transmural × subendocárdico</td></tr>
+     <tr><td>Casos especiais</td><td>Sgarbossa (BRE/marca-passo) e infarto de VD</td></tr>
+     <tr><td>Eletrólitos</td><td>hipercalemia, hipocalemia, hiper e hipocalcemia no ECG</td></tr>
+   </table>`],
+  ['paredes','Localização: Parede, Derivação e Artéria',`
+   <div class="ac-h">Ler o ECG como um mapa do coração</div>
+   <p class="ac-p">Como cada derivação "olha" para uma parede específica do coração, alterações concordantes em derivações vizinhas apontam a <b>localização exata</b> do infarto — e, por consequência, qual <b>artéria coronária</b> provavelmente está ocluída. Essa correlação é uma das informações mais cobradas em prova porque conecta anatomia, fisiologia e conduta: saber a artéria ajuda a prever complicações (por exemplo, infartos extensos de <b>descendente anterior</b> têm mais risco de insuficiência cardíaca e bloqueios; infartos de <b>coronária direita</b> têm mais risco de bradiarritmias e de infarto de ventrículo direito associado).</p>
+   ${A.ecg2_paredes}
+   <p class="ac-p">Um detalhe que costuma confundir: a parede <b>posterior (dorsal)</b> não tem derivação direta olhando para ela no ECG padrão de 12 derivações — ela fica "de costas" para o aparelho. Por isso seu supra de ST aparece <b>invertido, como espelho</b>, nas derivações V1-V2: em vez de supra, vemos <b>infradesnivelamento de ST com onda R alta e T positiva e apiculada</b>. Sempre que houver infra isolado e proeminente em V1-V2 (principalmente acompanhando um infarto inferior ou lateral), deve-se suspeitar de extensão posterior e, se possível, registrar as derivações <b>V7-V9</b> para confirmar o supra "de verdade" nessa parede.</p>
+   <div class="ac-tip"><b>Macete:</b> DA = frente (septal/anterior); CD = embaixo (inferior, geralmente); Cx = lado (lateral). Inferior + infra em V1-V2 = pensar em extensão posterior (pedir V7-V9); inferior isolado = pedir sempre V3R-V4R (VD).</div>`],
+  ['supra','Supradesnivelamento de ST (IAMCSST)',`
+   <div class="ac-h">Quando o supra de ST significa "abrir a artéria agora"</div>
+   <p class="ac-p">O <b>supradesnivelamento de ST</b> é o achado eletrocardiográfico mais urgente da cardiologia porque indica <b>oclusão coronariana aguda e completa</b>, com músculo transmural em risco. Os critérios clássicos exigem supra de ST em <b>pelo menos duas derivações contíguas</b> (que "olham" a mesma parede), medido no <b>ponto J</b> (o início do segmento ST): em geral, ≥1mm na maioria das derivações, com cortes um pouco maiores em V2-V3 (variando por sexo e idade, pois homens jovens têm repolarização precoce fisiológica mais proeminente). Diante de um traçado assim, a conduta não espera exame complementar: o paciente segue direto para <b>reperfusão</b> (angioplastia primária ou, na indisponibilidade, trombólise).</p>
+   <p class="ac-p">A dificuldade real da prova não é reconhecer um supra óbvio, e sim <b>não confundir supra de ST com seus imitadores</b> ("STEMI mimics"). A <b>pericardite aguda</b> costuma dar supra difuso, com concavidade para cima, sem imagem em espelho e acompanhado de infra do segmento PR. A <b>repolarização precoce</b> (comum em jovens saudáveis) mostra supra com entalhe no ponto J, também côncavo, estável ao longo do tempo. O <b>bloqueio de ramo esquerdo</b> e o <b>ritmo de marca-passo</b> distorcem o ST de forma basal, exigindo os critérios de Sgarbossa (próxima aba) em vez dos critérios convencionais. A síndrome de <b>Brugada</b> mostra um supra descendente característico em V1-V2 sem relação com dor isquêmica. E o <b>aneurisma ventricular</b> (sequela de infarto antigo) pode manter supra persistente associado a onda Q já estabelecida.</p>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Como diferenciar</th></tr>
+     <tr><td>IAMCSST verdadeiro</td><td>Supra convexo ("em lápide"), localizado por parede, imagem em espelho contralateral, dor isquêmica típica</td></tr>
+     <tr><td>Pericardite aguda</td><td>Supra difuso, côncavo, sem espelho, infra de PR, dor que piora deitado/melhora sentado</td></tr>
+     <tr><td>Repolarização precoce</td><td>Entalhe no ponto J, côncavo, estável, geralmente jovem assintomático</td></tr>
+     <tr><td>BRE / marca-passo</td><td>QRS alargado basal — usar critérios de Sgarbossa</td></tr>
+   </table>
+   <div class="ac-warn"><b>Pegadinha:</b> "supra de ST" sozinho não fecha diagnóstico — a morfologia (côncavo × convexo), a distribuição (localizada × difusa) e a presença de imagem em espelho são o que diferencia infarto de seus imitadores.</div>`],
+  ['infra','Infradesnivelamento de ST (SCA sem Supra)',`
+   <div class="ac-h">Quando a artéria não fechou de vez</div>
+   <p class="ac-p">O <b>infradesnivelamento de ST</b> (ou a inversão simétrica de onda T) costuma refletir uma <b>obstrução parcial ou intermitente</b> do fluxo coronariano, sem oclusão total — a chamada <b>síndrome coronariana aguda sem supra de ST</b>, que engloba a <b>angina instável</b> e o <b>infarto sem supra (IAMSSST/NSTEMI)</b>. A diferença entre as duas não está no ECG, e sim no <b>laboratório</b>: se houver elevação de <b>troponina</b> (evidência de necrose, mesmo que pequena), é infarto; se a troponina for negativa, é angina instável. Fisiopatologicamente, essa isquemia costuma ser <b>subendocárdica</b> (a camada mais interna do músculo, mais vulnerável porque recebe sangue por último), diferente do infarto transmural do supra de ST.</p>
+   <p class="ac-p">O ECG na SCA sem supra pode ser normal (o que não afasta o diagnóstico — por isso a importância da troponina seriada) ou mostrar infra de ST, inversão de T, ou ambos, em uma ou mais derivações. A conduta aqui não é a reperfusão imediata da sala de hemodinâmica, e sim uma <b>estratificação de risco</b> (clínica, laboratorial e, quando indicado, angiografia em prazo variável conforme o risco), diferente da urgência absoluta do supra de ST — essa estratégia detalhada de conduta é aprofundada no módulo de Síndrome Coronariana Aguda.</p>
+   <div class="ac-tip"><b>Resumo:</b> Supra de ST = oclusão total/transmural = reperfusão imediata. Infra de ST/T invertida = suboclusão/subendocárdica = estratificar risco e usar a troponina para diferenciar angina instável de IAMSSST.</div>`],
+  ['sgarbossa','Casos Especiais: BRE e Infarto de VD',`
+   <div class="ac-h">Quando o ECG "de base" já está distorcido</div>
+   <p class="ac-p">No <b>bloqueio de ramo esquerdo (BRE)</b> e no <b>ritmo de marca-passo ventricular</b>, a despolarização ventricular já segue um caminho anômalo, o que naturalmente distorce o segmento ST e a onda T mesmo sem isquemia (fenômeno chamado <b>discordância apropriada</b>: ST e T tendem a ficar no sentido oposto ao QRS). Isso torna os critérios convencionais de supra inúteis nesse contexto — por isso foram criados os <b>critérios de Sgarbossa</b>, que buscam justamente uma <b>discordância exagerada</b>, incompatível com o BRE isolado.</p>
+   ${A.ecg2_sgarbossa}
+   <p class="ac-p">O critério original soma pontos (supra concordante ≥1mm = 5 pontos; infra concordante em V1-V3 ≥1mm = 3 pontos; supra discordante ≥5mm = 2 pontos), fechando o diagnóstico com ≥3 pontos — muito específico, porém pouco sensível (perde vários infartos verdadeiros). O <b>Sgarbossa modificado</b>, de Smith, resolve essa limitação trocando o terceiro critério (um valor fixo de 5mm, que penaliza QRS pequenos ou favorece QRS grandes) por uma <b>proporção</b>: ST discordante dividido pela onda S deve ser menor que -0,25 para contar como positivo — um ajuste que aumenta bastante a sensibilidade sem perder especificidade relevante.</p>
+   <p class="ac-p">O <b>infarto de ventrículo direito</b> é outro cenário especial: ocorre em cerca de um terço dos infartos <b>inferiores</b> (mesma artéria, a coronária direita, costuma irrigar as duas regiões), e por isso deve ser sempre pesquisado nesse contexto, registrando as derivações <b>V3R e V4R</b> (supra ≥1mm confirma o diagnóstico). Clinicamente, o infarto de VD forma uma tríade característica — <b>hipotensão, turgência jugular e ausência de estase pulmonar</b> — porque o VD perde força de bombeamento e o sangue "represa" antes de chegar ao pulmão. A implicação prática mais cobrada: esses pacientes são <b>muito sensíveis à pré-carga</b>, então <b>nitrato e diuréticos devem ser evitados</b> (podem despencar a pressão), e a hipotensão costuma responder melhor à reposição volêmica.</p>
+   <div class="ac-warn"><b>Pegadinha:</b> IAM inferior + hipotensão = sempre pensar em VD antes de dar nitrato. Registrar V3R-V4R deveria ser reflexo em todo infarto inferior.</div>`],
+  ['estagios','Evolução Temporal do Infarto',`
+   <div class="ac-h">O mesmo infarto, fotografado em momentos diferentes</div>
+   <p class="ac-p">O ECG de um infarto <b>muda de aparência com as horas e os dias</b>, e reconhecer essa evolução ajuda a estimar há quanto tempo o evento começou — informação relevante quando a história clínica é incerta. Na fase <b>hiperaguda</b> (primeiros minutos), a onda T fica alta e apiculada, quase indistinguível da hipercalemia. Em seguida, ainda nas primeiras horas, surge o <b>supradesnivelamento de ST</b>, tipicamente convexo ("em lápide" ou "em guarda-chuva").</p>
+   ${A.ecg2_cascata}
+   <p class="ac-p">Com o passar das horas, começa a aparecer a <b>onda Q patológica</b> (marca de necrose já instalada), enquanto o supra de ST gradualmente regride. Nos dias seguintes, o ST volta à linha de base e a onda T se inverte (fase subaguda). Semanas a meses depois, na fase <b>crônica ("infarto antigo")</b>, o que resta no traçado costuma ser apenas a <b>onda Q patológica</b>, muitas vezes já sem qualquer alteração de ST ou T — um "cicatriz elétrica" permanente, que por si só não indica atividade aguda, mas confirma que houve necrose em algum momento da vida do paciente.</p>
+   <table class="ac-tbl"><tr><th>Fase</th><th>Achado predominante</th></tr>
+     <tr><td>Hiperaguda (minutos)</td><td>T apiculada e alta</td></tr>
+     <tr><td>Aguda (horas)</td><td>Supra de ST convexo; Q começa a aparecer</td></tr>
+     <tr><td>Subaguda (dias)</td><td>ST retorna à linha de base; T se inverte; Q estabelecida</td></tr>
+     <tr><td>Crônica (semanas a anos)</td><td>Onda Q patológica isolada ("infarto antigo")</td></tr>
+   </table>
+   <div class="ac-tip"><b>Macete:</b> supra de ST persistente muitas semanas após o evento, associado a Q, sugere complicação (aneurisma ventricular) e não isquemia ativa nova.</div>`],
+  ['hipercalemia','Hipercalemia: a Urgência Eletrolítica',`
+   <div class="ac-h">Por que o ECG manda mais que o exame de sangue aqui</div>
+   <p class="ac-p">O potássio é o principal responsável por manter o <b>potencial de repouso</b> das células cardíacas. Quando sua concentração sérica sobe, o potencial de repouso fica mais próximo do limiar de disparo, o que inicialmente <b>acelera a repolarização</b> (por isso a primeira mudança é uma onda T alta e apiculada) e, progressivamente, <b>lentifica a condução elétrica</b> pelo músculo e pelo sistema de condução — culminando, nos casos graves, em parada cardíaca. É por isso que, diante de alterações eletrocardiográficas sugestivas, a hipercalemia deve ser tratada <b>com base no ECG</b>, sem esperar a confirmação laboratorial.</p>
+   ${A.ecg2_hipercalemia}
+   <p class="ac-p">A progressão costuma seguir uma ordem previsível conforme o potássio sobe: primeiro surgem <b>ondas T altas, estreitas e simétricas ("em tenda")</b>, com encurtamento do QT; depois a <b>onda P se achata e desaparece</b> (o átrio é mais sensível ao potássio alto que o ventrículo) e o <b>PR se alarga</b>; em seguida o <b>QRS se alarga</b> progressivamente, assumindo um aspecto "bizarro"; e, no extremo, o QRS alargado se funde com a onda T, formando a temida <b>onda sinusoidal</b> — um achado pré-terminal que anuncia fibrilação ventricular ou assistolia iminentes. Vale reforçar que essa é a lógica de reconhecimento no ECG; o protocolo terapêutico detalhado (estabilização de membrana, redistribuição intracelular e remoção do potássio) tem módulo próprio dentro das Emergências Cardiológicas.</p>
+   <div class="ac-call"><b>A grande ideia:</b> T apiculada → some a P/alarga o PR → QRS alarga → onda sinusoidal. Qualquer um desses achados num paciente de risco (insuficiência renal, uso de poupadores de potássio) deve disparar tratamento imediato, mesmo antes do resultado laboratorial.</div>`],
+  ['outros','Outros Distúrbios: K Baixo e Cálcio',`
+   <div class="ac-h">O espelho da hipercalemia e o papel do cálcio</div>
+   <p class="ac-p">A <b>hipocalemia</b> tende a fazer o oposto da hipercalemia na repolarização: a onda T se achata, surge um <b>infradesnivelamento de ST</b> discreto e, o achado mais característico, aparece uma <b>onda U proeminente</b> (uma pequena deflexão positiva logo após a T). Quando a onda U fica grande o suficiente para se fundir visualmente com a T seguinte, o intervalo <b>QT parece alongado</b> nas medidas automáticas do aparelho — mas, na verdade, o que está alongado é o intervalo <b>QU</b>. Esse é um ponto clássico de prova: hipocalemia grave aumenta o risco de arritmias ventriculares, incluindo <b>torsades de pointes</b>.</p>
+   ${A.ecg2_outroseletro}
+   <p class="ac-p">Já o <b>cálcio</b> atua principalmente na <b>duração da fase de platô</b> do potencial de ação, e por isso seu efeito mais marcante é sobre o <b>segmento ST e o intervalo QT</b> (a onda T em si muda pouco). Na <b>hipercalcemia</b>, o platô encurta, o segmento ST praticamente desaparece e o <b>QT fica curto</b> — causas clássicas incluem hiperparatireoidismo primário e doença neoplásica com metástases ósseas ou secreção de PTHrp. Na <b>hipocalcemia</b>, o oposto: o platô se prolonga, o segmento ST se alonga e o <b>QT fica longo</b>, também com risco de torsades de pointes — cenário lembrado em hipoparatireoidismo, pancreatite aguda grave e insuficiência renal crônica.</p>
+   <div class="ac-tip"><b>Macete:</b> Potássio mexe principalmente na onda T e no QRS; Cálcio mexe principalmente no segmento ST e no QT. "Cálcio alto encurta, cálcio baixo alonga" o QT.</div>`],
+ ],
+};
+
+Object.assign(C['ecg|1'], {
+ escores:`<div class="ac-h">Critérios e cortes (resumo rápido)</div>
+   <table class="ac-tbl"><tr><th>Achado</th><th>Critério</th></tr>
+     <tr><td>Cascata isquêmica</td><td>Isquemia (T) → Lesão (ST) → Necrose (Q, &ge;0,04s e &ge;1/3 do R)</td></tr>
+     <tr><td>Supra de ST</td><td>&ge;1mm em 2 derivações contíguas (cortes maiores em V2-V3 conforme sexo/idade)</td></tr>
+     <tr><td>Sgarbossa original</td><td>Concordante &ge;1mm=5pts; infra V1-V3 &ge;1mm=3pts; discordante &ge;5mm=2pts (&ge;3 = positivo)</td></tr>
+     <tr><td>Sgarbossa modificado</td><td>ST discordante / onda S &lt; -0,25</td></tr>
+     <tr><td>IAM de VD</td><td>Supra &ge;1mm em V3R-V4R (pesquisar sempre no IAM inferior)</td></tr>
+     <tr><td>Hipercalemia (progressão)</td><td>T apiculada → some P/alarga PR → QRS largo → sinusoidal</td></tr>
+     <tr><td>Cálcio e QT</td><td>Hipercalcemia = QT curto. Hipocalcemia = QT longo</td></tr>
+   </table>`,
+ dif:`<div class="ac-h">Diferenciais</div>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Diferenciar de</th><th>Chave</th></tr>
+     <tr><td>Supra de ST</td><td>Pericardite × repolarização precoce × Brugada × aneurisma</td><td>Convexo/localizado/espelho = infarto; côncavo/difuso/sem espelho = pericardite ou repol. precoce</td></tr>
+     <tr><td>Infra de ST em V1-V2</td><td>Isquemia anterosseptal × IAM posterior</td><td>Posterior: costuma vir com R alta e T positiva apiculada; confirmar com V7-V9</td></tr>
+     <tr><td>T apiculada</td><td>Fase hiperaguda de IAM × hipercalemia</td><td>Contexto clínico (dor típica × doença renal/uso de poupador de K) e evolução temporal</td></tr>
+     <tr><td>QRS alargado com supra</td><td>BRE novo × BRE antigo</td><td>Sem ECG prévio para comparar, tratar BRE novo com dor típica como possível infarto (usar Sgarbossa)</td></tr>
+     <tr><td>QT longo</td><td>Hipocalcemia × hipocalemia (QU) × drogas</td><td>Hipocalcemia alonga o ST verdadeiro; hipocalemia "finge" QT longo por onda U proeminente</td></tr>
+   </table>`,
+ mapa:`<div class="ac-h">Mapa mental (cards)</div>
+   <div class="mm">
+     <div class="mm-card"><h5>Cascata isquêmica</h5><ul><li>T = isquemia (reversível)</li><li>ST = lesão (ainda salvável)</li><li>Q = necrose (irreversível)</li></ul></div>
+     <div class="mm-card"><h5>Localização</h5><ul><li>Septal/anterior = DA</li><li>Lateral = circunflexa</li><li>Inferior = coronária direita</li><li>Posterior = espelho em V1-V2</li></ul></div>
+     <div class="mm-card"><h5>IAMCSST</h5><ul><li>Supra &ge;1mm, 2 derivações contíguas</li><li>Reperfusão imediata</li><li>Cuidado com mimetizadores</li></ul></div>
+     <div class="mm-card"><h5>IAMSSST/AI</h5><ul><li>Infra/T invertida, subendocárdico</li><li>Troponina diferencia os dois</li><li>Estratificação de risco</li></ul></div>
+     <div class="mm-card"><h5>Casos especiais</h5><ul><li>BRE/marca-passo → Sgarbossa</li><li>IAM inferior → checar VD (V3R-V4R)</li><li>VD: evitar nitrato/diurético</li></ul></div>
+     <div class="mm-card"><h5>Eletrólitos</h5><ul><li>K alto: T apiculada → sinusoidal</li><li>K baixo: onda U, infra ST</li><li>Ca alto = QT curto; Ca baixo = QT longo</li></ul></div>
+   </div>`,
+ fluxo_dx:`<div class="ac-h">Fluxograma: dor torácica + ECG</div>
+   <div class="fx">
+     <div class="fx-node start">Paciente com dor torácica aguda: ECG em até 10 minutos</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Supra de ST em 2 derivações contíguas (ou BRE novo/Sgarbossa+)?</div>
+     <div class="fx-row">
+       <div class="fx-node end">Sim → IAMCSST → reperfusão imediata (angioplastia/trombólise)</div>
+       <div class="fx-node">Não → dosar troponina e observar ST/T</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Troponina alterada?</div>
+     <div class="fx-row">
+       <div class="fx-node">Sim → IAMSSST → estratificar risco</div>
+       <div class="fx-node end">Não, mas dor isquêmica → Angina instável → estratificar risco</div>
+     </div>
+   </div>`,
+ fluxo_cond:`<div class="ac-h">O que fazer diante de cada achado</div>
+   <div class="fx">
+     <div class="fx-node start">Achado no ECG → ação imediata</div>
+     <div class="fx-row">
+       <div class="fx-node">IAM inferior → sempre pedir V3R-V4R (e considerar V7-V9)</div>
+       <div class="fx-node">Suspeita de VD → evitar nitrato e diurético; priorizar volume</div>
+     </div>
+     <div class="fx-row">
+       <div class="fx-node">BRE/marca-passo + dor típica → aplicar Sgarbossa modificado</div>
+       <div class="fx-node">T apiculada + contexto de risco renal → tratar hipercalemia pelo ECG, sem esperar exame</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node end">QRS alargando ou onda sinusoidal → emergência: agir imediatamente</div>
+   </div>`,
+ vespera:`<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Cascata:</b> Isquemia (T) → Lesão (ST) → Necrose (Q). Tempo é músculo — não espere a onda Q.</div>
+   <div class="ac-call"><b>Localização:</b> DA=septal/anterior, Cx=lateral, CD=inferior (checar VD e posterior).</div>
+   <div class="ac-call"><b>Supra de ST:</b> &ge;1mm em 2 derivações contíguas; cuidado com pericardite, repol. precoce, Brugada, aneurisma.</div>
+   <div class="ac-call"><b>Sgarbossa modificado:</b> ST discordante / onda S &lt; -0,25 (mais sensível que o original).</div>
+   <div class="ac-call"><b>IAM de VD:</b> tríade hipotensão + turgência jugular + pulmões limpos; evitar nitrato/diurético.</div>
+   <div class="ac-call"><b>Hipercalemia:</b> T apiculada → some P → QRS largo → sinusoidal. Tratar pelo ECG.</div>
+   <div class="ac-call"><b>Cálcio:</b> alto = QT curto; baixo = QT longo. Potássio baixo = onda U + QT "falso longo".</div>`,
+ dicas:`<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Diante de infra isolado e proeminente em V1-V2, pense sempre em infarto posterior "em espelho" e peça V7-V9.</div>
+   <div class="ac-tip">Todo infarto inferior merece V3R-V4R — o infarto de VD muda a conduta (evitar nitrato).</div>
+   <div class="ac-tip">Use o Sgarbossa modificado (proporção ST/S &lt; -0,25), mais sensível que o critério original de 5mm fixo.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Esperar a onda Q aparecer para iniciar tratamento de reperfusão — ela é tardia e já significa necrose estabelecida.</div>
+   <div class="ac-warn">Dar nitrato de rotina em IAM inferior sem excluir infarto de VD.</div>
+   <div class="ac-warn">Confundir supra de ST difuso e côncavo (pericardite) com infarto convexo e localizado.</div>
+   <div class="ac-warn">Esperar confirmação laboratorial de potássio antes de tratar alterações graves de ECG sugestivas de hipercalemia.</div>
+   <div class="ac-warn">Confundir a onda U da hipocalemia com QT verdadeiramente longo.</div>`,
+ checklist:[
+   'Explico a cascata isquêmica (isquemia → lesão → necrose = T → ST → Q) e por que "tempo é músculo"',
+   'Localizo o infarto por parede, derivações e artéria culpada, incluindo posterior e VD',
+   'Reconheço os critérios de supra de ST e diferencio de seus principais imitadores',
+   'Diferencio IAMSSST de angina instável pelo papel da troponina',
+   'Aplico os critérios de Sgarbossa modificado em BRE/marca-passo',
+   'Reconheço o infarto de VD (V3R-V4R) e sei por que evitar nitrato/diurético',
+   'Reconheço a evolução temporal do infarto no ECG (hiperagudo a crônico)',
+   'Reconheço a progressão da hipercalemia no ECG e trato pela urgência eletrocardiográfica',
+   'Diferencio os efeitos de potássio (T/QRS) e cálcio (ST/QT) no traçado'
+ ],
+});
+
+Object.assign(C['ecg|1'], {
+ questoes:[
+  {stem:'Na cascata isquêmica, qual é a ordem correta de alterações eletrocardiográficas, da mais precoce e reversível para a mais tardia e irreversível?',
+   opts:['QRS (Q) → ST → T','T → ST → QRS (Q)','ST → T → QRS (Q)','QRS (Q) → T → ST'],correct:1,
+   expl:'A sequência é <b>isquemia (onda T) → lesão (segmento ST) → necrose (onda Q)</b>. A onda Q é tardia e representa dano já irreversível.'},
+  {stem:'Paciente com dor torácica e supradesnivelamento de ST em DII, DIII e aVF. Qual artéria é mais provavelmente a culpada?',
+   opts:['Descendente anterior','Circunflexa','Coronária direita','Tronco da coronária esquerda'],correct:2,
+   expl:'Supra em <b>DII, DIII e aVF</b> indica infarto de parede <b>inferior</b>, cuja artéria culpada na maioria dos casos é a <b>coronária direita</b>.'},
+  {stem:'Em um infarto inferior, o infradesnivelamento proeminente de ST em V1-V2 sugere extensão para qual parede?',
+   opts:['Anterior','Lateral alta','Posterior (dorsal)','Septal'],correct:2,
+   expl:'A parede <b>posterior</b> não tem derivação direta no ECG de 12 derivações; seu supra aparece como <b>infra "em espelho" em V1-V2</b>. Deve-se confirmar com V7-V9.'},
+  {stem:'Diante de um infarto inferior, qual conduta de investigação é obrigatória pela relevância clínica?',
+   opts:['Registrar V3R e V4R para avaliar infarto de ventrículo direito','Solicitar ressonância cardíaca de urgência','Repetir o ECG em 24 horas','Aguardar troponina antes de qualquer decisão'],correct:0,
+   expl:'Cerca de 1/3 dos infartos inferiores cursam com <b>infarto de VD</b>; as derivações <b>V3R-V4R</b> devem ser registradas para identificar supra de ST nessa região.'},
+  {stem:'Paciente com IAM inferior e infarto de VD apresenta hipotensão. Qual classe medicamentosa deve ser EVITADA?',
+   opts:['Antiagregantes plaquetários','Nitratos','Estatinas','Betabloqueadores em dose baixa e com cautela'],correct:1,
+   expl:'No infarto de VD, o ventrículo depende de <b>pré-carga</b> para manter o débito. <b>Nitratos</b> (e diuréticos) reduzem a pré-carga e podem precipitar hipotensão grave.'},
+  {stem:'Sobre os critérios de Sgarbossa modificado (Smith) para diagnóstico de infarto em bloqueio de ramo esquerdo, é correto afirmar:',
+   opts:['Substitui o critério de supra discordante fixo de 5mm por uma proporção ST/S < -0,25','Elimina a necessidade de qualquer critério de concordância','Só se aplica a pacientes sem marca-passo','Reduz a sensibilidade em relação ao critério original'],correct:0,
+   expl:'O Sgarbossa modificado troca o critério de <b>5mm fixo</b> por uma <b>proporção (ST discordante/onda S &lt; -0,25)</b>, aumentando a sensibilidade em relação ao escore original.'},
+  {stem:'Qual achado diferencia mais fortemente pericardite aguda de infarto com supra de ST?',
+   opts:['Supra difuso, côncavo, sem imagem em espelho, com infra de PR','Supra localizado e convexo em derivações contíguas','Presença de onda Q patológica precoce','Elevação isolada de troponina'],correct:0,
+   expl:'A pericardite costuma causar supra <b>difuso e côncavo</b>, sem imagem em espelho, acompanhado de <b>infra do segmento PR</b> — diferente do supra localizado e convexo do infarto.'},
+  {stem:'O que diferencia, no ECG, um IAMSSST de uma angina instável?',
+   opts:['O grau de supra de ST','Nada — são a mesma entidade pelo ECG e só a troponina diferencia','A presença de onda Q','A frequência cardíaca de apresentação'],correct:1,
+   expl:'IAMSSST e angina instável podem ter <b>ECG idêntico</b> (infra de ST/T invertida ou até normal); a diferença está na <b>troponina</b> — elevada no IAMSSST, normal na angina instável.'},
+  {stem:'Qual é a primeira alteração eletrocardiográfica esperada na hipercalemia progressiva?',
+   opts:['Ausência da onda P','Onda T alta, estreita e apiculada ("em tenda")','QRS alargado "bizarro"','Onda sinusoidal'],correct:1,
+   expl:'A <b>onda T apiculada e simétrica</b> é a alteração mais precoce e reversível da hipercalemia, refletindo aceleração da repolarização.'},
+  {stem:'Um paciente com insuficiência renal crônica apresenta ECG com ausência de ondas P, QRS alargado e fusão de QRS com a onda T. A conduta é:',
+   opts:['Aguardar o resultado do potássio sérico antes de agir','Tratar como emergência de hipercalemia grave imediatamente, com base no ECG','Solicitar ecocardiograma urgente','Iniciar apenas anti-hipertensivo oral'],correct:1,
+   expl:'Esse padrão sugere <b>onda sinusoidal</b>, achado pré-terminal de hipercalemia grave — o tratamento deve começar imediatamente <b>com base no ECG</b>, sem aguardar confirmação laboratorial.'},
+  {stem:'Onda U proeminente, infradesnivelamento discreto de ST e "QT" aparentemente alongado (na verdade QU) são característicos de:',
+   opts:['Hipercalemia','Hipocalemia','Hipercalcemia','Hipernatremia'],correct:1,
+   expl:'A <b>hipocalemia</b> classicamente produz onda U proeminente, achatamento de T, infra discreto de ST e um "QT" que, na verdade, é o intervalo <b>QU</b> alongado pela fusão visual da U com a T.'},
+  {stem:'Qual alteração eletrolítica está classicamente associada a QT CURTO no ECG?',
+   opts:['Hipocalcemia','Hipercalcemia','Hipocalemia','Hipomagnesemia'],correct:1,
+   expl:'A <b>hipercalcemia</b> encurta a fase de platô do potencial de ação, reduzindo o segmento ST e encurtando o <b>QT</b> — causas clássicas incluem hiperparatireoidismo e neoplasias.'}
+ ],
+ flashcards:[
+  {front:'Cascata isquêmica: ordem e onda correspondente.',back:'Isquemia = onda T. Lesão = segmento ST. Necrose = onda Q (esta última é tardia e irreversível).',type:'basic'},
+  {front:'Conceito central do módulo de infarto.',back:'"Tempo é músculo" — a reperfusão deve ocorrer na fase de supra de ST, antes que a onda Q (necrose) se estabeleça.',type:'basic'},
+  {front:'Parede inferior: derivações e artéria.',back:'DII, DIII, aVF — artéria coronária direita (na maioria dos casos).',type:'basic'},
+  {front:'Parede anterior/septal: derivações e artéria.',back:'V1-V4 — artéria descendente anterior (DA).',type:'basic'},
+  {front:'Parede lateral: derivações e artéria.',back:'DI, aVL, V5-V6 — artéria circunflexa.',type:'basic'},
+  {front:'Como reconhecer infarto posterior no ECG de 12 derivações?',back:'Infra de ST "em espelho" com R alta e T apiculada em V1-V2; confirmar com derivações V7-V9.',type:'basic'},
+  {front:'Critério de supra de ST para IAMCSST.',back:'Elevação do ponto J em {{2 ou mais derivações contíguas}}, com cortes de amplitude variando por derivação, sexo e idade.',type:'cloze'},
+  {front:'Sgarbossa modificado (critério de Smith).',back:'ST discordante dividido pela onda S menor que -0,25 (substitui o corte fixo de 5mm do escore original, aumentando a sensibilidade).',type:'basic'},
+  {front:'Infarto de VD: como investigar e tríade clínica.',back:'Investigar com V3R-V4R (supra ≥1mm). Tríade: hipotensão + turgência jugular + pulmões limpos.',type:'basic'},
+  {front:'Por que evitar nitrato no infarto de VD?',back:'O VD depende de pré-carga para manter o débito; nitrato reduz a pré-carga e pode causar hipotensão grave.',type:'basic'},
+  {front:'Diferença ECG entre IAMSSST e angina instável.',back:'Podem ser idênticos no ECG (infra de ST/T invertida ou normal); a troponina é quem diferencia (elevada = IAMSSST).',type:'basic'},
+  {front:'Progressão eletrocardiográfica da hipercalemia.',back:'T apiculada → P achatada/desaparece e PR alarga → QRS alargado → onda sinusoidal (pré-parada).',type:'basic'},
+  {front:'Efeito do cálcio no QT.',back:'Hipercalcemia = QT {{curto}}. Hipocalcemia = QT longo.',type:'cloze'},
+  {front:'Achado clássico da hipocalemia no ECG.',back:'Onda U proeminente, achatamento de T, infra discreto de ST; risco de torsades de pointes.',type:'basic'}
+ ],
+ casos:[
+  {t:'Caso 1 — Dor torácica típica com ECG "óbvio"',
+   stem:'Homem, 61 anos, dor torácica opressiva há 40 minutos, irradiando para o braço esquerdo. ECG: supra de ST convexo de 3mm em DII, DIII e aVF, com infra em DI e aVL.',
+   passos:[
+    {h:'1. Reconhecer o padrão',p:'Supra de ST convexo, localizado, com imagem em espelho (infra em DI/aVL) = <b>IAMCSST de parede inferior</b>.'},
+    {h:'2. Prever a artéria e investigar VD',p:'A artéria culpada provável é a <b>coronária direita</b>; registrar <b>V3R-V4R</b> para excluir infarto de VD associado.'},
+    {h:'3. Agir rápido',p:'Encaminhar imediatamente para <b>reperfusão</b> (angioplastia primária ou trombólise) — não esperar surgimento de onda Q.'},
+    {h:'Lição de prova',p:'Supra convexo e localizado + espelho contralateral = infarto; agir na fase de ST, não esperar a fase de Q.'}
+   ]},
+  {t:'Caso 2 — O ECG que parece normal (mas não é)',
+   stem:'Mulher, 68 anos, diabética, dor torácica atípica. ECG com BRE (QRS 0,15s) não documentado anteriormente. Em V2, supra de ST discordante de 8mm, com S de 20mm nessa derivação.',
+   passos:[
+    {h:'1. Reconhecer a limitação do ECG basal',p:'O BRE distorce o ST/T mesmo sem isquemia — critérios convencionais de supra não se aplicam diretamente.'},
+    {h:'2. Aplicar Sgarbossa modificado',p:'Calcular a proporção: 8/20 = 0,4, ou seja, mais negativo que -0,25 → critério <b>positivo</b> para infarto.'},
+    {h:'3. Conduzir como IAMCSST',p:'BRE novo (ou presumivelmente novo) com Sgarbossa modificado positivo e dor sugestiva = tratar como infarto com supra, encaminhando para reperfusão.'},
+    {h:'Lição de prova',p:'BRE não é motivo para "descartar" infarto — é motivo para trocar de critério (Sgarbossa modificado).'}
+   ]},
+  {t:'Caso 3 — O potássio que não podia esperar',
+   stem:'Homem, 54 anos, doença renal crônica em diálise, faltou à última sessão. ECG mostra ondas T altas e apiculadas em precordiais, onda P pouco visível e QRS discretamente alargado.',
+   passos:[
+    {h:'1. Reconhecer o padrão eletrocardiográfico',p:'T apiculada + P quase ausente + QRS alargando em paciente com DRC = quadro clássico de <b>hipercalemia progressiva</b>.'},
+    {h:'2. Não esperar o laboratório',p:'Diante desses achados, iniciar tratamento de emergência para hipercalemia <b>imediatamente</b>, com base no ECG.'},
+    {h:'3. Monitorar a progressão',p:'Se o QRS continuar alargando até fundir-se com a T (onda sinusoidal), o risco de fibrilação ventricular é iminente — reforça a urgência de agir cedo.'},
+    {h:'Lição de prova',p:'Em paciente de risco (DRC, uso de poupador de potássio), alterações sugestivas de hipercalemia no ECG mandam mais que qualquer exame pendente.'}
+   ]}
+ ],
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();</script>
 </body>
 </html>
