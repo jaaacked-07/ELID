@@ -3849,6 +3849,1146 @@ try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.vie
 
 <script>(function(){
 "use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['miomatose|0'] = {
+name: "Classificação FIGO e Quadro Clínico",
+intro: "O leiomioma é o tumor benigno mais comum do útero — e onde ele está localizado importa mais para o sintoma do que quantos ele são ou quão grandes ficam.",
+sub: [
+["entendendo","Entendendo do Zero",`
+<div class="ac-h">Um tumor benigno de músculo liso, extremamente comum</div>
+<p class="ac-p">O leiomioma uterino (mioma) é um tumor <b>benigno</b> originado das células de músculo liso do miométrio. É a neoplasia pélvica mais comum em mulheres, com prevalência que pode ultrapassar <b>70% ao longo da vida reprodutiva</b> dependendo da população estudada — muitas vezes assintomático e descoberto incidentalmente.</p>
+<p class="ac-p">Assim como você viu na endometriose, o crescimento do mioma é <b>estrogênio e progesterona-dependente</b>: por isso tende a crescer durante a menacme, estabilizar ou regredir após a menopausa (na ausência de terapia hormonal), e eventualmente aumentar durante a gestação.</p>
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="24" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Útero normal vs. útero com miomas</text>
+<rect x="40" y="50" width="280" height="180" rx="16" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="180" y="76" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--ink)">Útero normal</text>
+<path d="M130 110 Q180 95 230 110 L222 210 Q180 228 138 210 Z" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<rect x="360" y="50" width="280" height="180" rx="16" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="500" y="76" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--ink)">Útero miomatoso</text>
+<path d="M450 110 Q500 95 550 110 L542 210 Q500 228 458 210 Z" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<circle cx="470" cy="130" r="16" style="fill:#8E5A2A" fill-opacity=".5" stroke="var(--accent)" stroke-width="1.3"/>
+<circle cx="520" cy="170" r="22" style="fill:#8E5A2A" fill-opacity=".5" stroke="var(--accent)" stroke-width="1.3"/>
+<circle cx="490" cy="200" r="12" style="fill:#8E5A2A" fill-opacity=".5" stroke="var(--accent)" stroke-width="1.3"/>
+</svg>
+<div class="ac-call"><b>A ideia central deste módulo:</b> não existe "o" quadro clínico do mioma — existe o quadro clínico do mioma <b>naquela localização específica</b>. Por isso, classificar corretamente é o primeiro passo do raciocínio clínico, não um detalhe acadêmico.</div>
+`],
+["figo","Classificação FIGO (PALM-COEIN)",`
+<div class="ac-h">De 0 a 8: a posição do mioma em relação à cavidade e à serosa</div>
+<p class="ac-p">A classificação FIGO (parte do sistema PALM-COEIN, que você já viu no módulo de SUA) descreve o mioma pela sua relação com o <b>endométrio, o miométrio e a serosa</b> — não pelo tamanho. Essa relação é o que determina o impacto clínico.</p>
+<svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Classificação FIGO 0-8</text>
+<rect x="240" y="46" width="200" height="240" rx="16" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.6"/>
+<path d="M280 70 Q340 58 400 70 L392 260 Q340 274 288 260 Z" style="fill:none;stroke:var(--muted)" stroke-width="1.3" stroke-dasharray="3 2"/>
+<circle cx="340" cy="100" r="14" style="fill:#e8675f" fill-opacity=".6" stroke="#e8675f" stroke-width="1.3"/>
+<text x="340" y="128" text-anchor="middle" font-size="9" font-weight="700" style="fill:#e8675f">0</text>
+<circle cx="320" cy="140" r="16" style="fill:#e8675f" fill-opacity=".45" stroke="#e8675f" stroke-width="1.3"/>
+<text x="320" y="170" text-anchor="middle" font-size="9" font-weight="700" style="fill:#e8675f">1</text>
+<circle cx="360" cy="150" r="18" style="fill:#e8675f" fill-opacity=".3" stroke="#e8675f" stroke-width="1.3"/>
+<text x="360" y="184" text-anchor="middle" font-size="9" font-weight="700" style="fill:#e8675f">2</text>
+<circle cx="330" cy="195" r="16" style="fill:var(--accent-soft)" stroke="var(--accent)" stroke-width="1.3"/>
+<text x="330" y="200" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--accent)">3</text>
+<circle cx="355" cy="210" r="14" style="fill:var(--accent-soft)" stroke="var(--accent)" stroke-width="1.3"/>
+<text x="355" y="215" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--accent)">4</text>
+<circle cx="300" cy="235" r="18" style="fill:#4FA8D8" fill-opacity=".35" stroke="#4FA8D8" stroke-width="1.3"/>
+<text x="300" y="240" text-anchor="middle" font-size="9" font-weight="700" style="fill:#2E7FAE">5</text>
+<circle cx="270" cy="200" r="14" style="fill:#4FA8D8" fill-opacity=".3" stroke="#4FA8D8" stroke-width="1.3"/>
+<text x="270" y="205" text-anchor="middle" font-size="9" font-weight="700" style="fill:#2E7FAE">6</text>
+<circle cx="230" cy="180" r="12" style="fill:#4FA8D8" fill-opacity=".2" stroke="#4FA8D8" stroke-width="1.3"/>
+<line x1="242" y1="188" x2="255" y2="200" style="stroke:#4FA8D8" stroke-width="1.2"/>
+<text x="220" y="170" text-anchor="middle" font-size="9" font-weight="700" style="fill:#2E7FAE">7</text>
+<rect x="30" y="46" width="180" height="80" rx="10" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.3"/>
+<text x="120" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">Submucosos (0-2)</text>
+<text x="120" y="86" text-anchor="middle" font-size="9" style="fill:var(--muted)">Cavidade endometrial</text>
+<text x="120" y="100" text-anchor="middle" font-size="9" style="fill:var(--muted)">0=pediculado · 1&lt;50% · 2&#8805;50%</text>
+<rect x="470" y="46" width="180" height="80" rx="10" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="560" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Intramurais (3-4)</text>
+<text x="560" y="86" text-anchor="middle" font-size="9" style="fill:var(--muted)">3=toca endométrio</text>
+<text x="560" y="100" text-anchor="middle" font-size="9" style="fill:var(--muted)">4=sem contato c/ nenhum</text>
+<rect x="30" y="150" width="180" height="80" rx="10" style="fill:var(--panel);stroke:#2E7FAE" stroke-width="1.3"/>
+<text x="120" y="172" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#2E7FAE">Subserosos (5-7)</text>
+<text x="120" y="190" text-anchor="middle" font-size="9" style="fill:var(--muted)">5&#8805;50% intramural</text>
+<text x="120" y="204" text-anchor="middle" font-size="9" style="fill:var(--muted)">6&lt;50% · 7=pediculado</text>
+<rect x="470" y="150" width="180" height="80" rx="10" style="fill:var(--panel);stroke:var(--muted)" stroke-width="1.3"/>
+<text x="560" y="172" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Outros (8)</text>
+<text x="560" y="190" text-anchor="middle" font-size="9" style="fill:var(--muted)">Cervical, ligamento</text>
+<text x="560" y="204" text-anchor="middle" font-size="9" style="fill:var(--muted)">largo, parasitário</text>
+<rect x="150" y="290" width="380" height="26" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.1"/>
+<text x="340" y="308" text-anchor="middle" font-size="9.5" style="fill:var(--accent)">Tipos híbridos existem (ex.: 2-5, toca endométrio E serosa)</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Decorando a lógica, não só os números</div>
+<p class="ac-p">Repare no padrão: quanto <b>menor o número</b>, mais perto da cavidade endometrial o mioma está (0 = totalmente dentro da cavidade). Quanto <b>maior o número</b> (até 7), mais perto da serosa externa ele está (7 = totalmente fora do miométrio, pediculado). O número 8 foge dessa lógica — é a categoria de "localização atípica" (cervical, ligamento largo, parasitário).</p>
+<div class="ac-tip"><b>Tipos híbridos:</b> quando o mioma toca tanto o endométrio quanto a serosa, ele recebe dois números (ex.: "2-5") — o primeiro descrevendo a relação com a cavidade, o segundo com a serosa.</div>
+`],
+["submucoso","Miomas Submucosos (0-2)",`
+<div class="ac-h">Os que mais sangram e os que mais atrapalham engravidar</div>
+<p class="ac-p">Miomas submucosos são os que <b>mais se relacionam com sangramento uterino anormal (SUA)</b> — especificamente com <b>hipermenorreia/menorragia</b> — porque distorcem diretamente a superfície endometrial, aumentam a área de sangramento e interferem na contração miometrial local que normalmente ajuda a conter o sangramento menstrual.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Por que o submucoso sangra tanto</text>
+<rect x="30" y="46" width="270" height="150" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="165" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Mecanismos do sangramento</text>
+<text x="165" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Aumenta área endometrial</text>
+<text x="165" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">exposta ao sangramento</text>
+<text x="165" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Interfere na contração</text>
+<text x="165" y="146" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">miometrial local hemostática</text>
+<text x="165" y="166" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Congestão venosa endometrial</text>
+<rect x="340" y="46" width="270" height="150" rx="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="475" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Por que atrapalha engravidar</text>
+<text x="475" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Distorce a cavidade —</text>
+<text x="475" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">dificulta a implantação</text>
+<text x="475" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Subtipo mais associado a</text>
+<text x="475" y="146" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">infertilidade entre os miomas</text>
+</svg>
+<div class="ac-call"><b>Ponto-chave:</b> entre todos os subtipos, o submucoso é o que tem indicação de tratamento mais consensual quando sintomático — tanto pelo impacto na qualidade de vida (sangramento) quanto pelo impacto reprodutivo.</div>
+<div class="ac-tip"><b>Retomando o módulo de SUA:</b> lembre que "PALM" (Pólipo, Adenomiose, Leiomioma, Malignidade) já apresentou o "L" de forma resumida — este módulo aprofunda especificamente essa letra.</div>
+`],
+["intramural_subseroso","Miomas Intramurais e Subserosos (3-7)",`
+<div class="ac-h">Sintomas de volume, não de sangramento direto</div>
+<p class="ac-p">Miomas <b>intramurais</b> (tipos 3-4) ficam contidos dentro da parede muscular. Quando grandes ou numerosos, também podem contribuir para SUA (por aumentar a superfície endometrial total e alterar a vascularização), mas o mecanismo é menos direto que o submucoso. Miomas <b>subserosos</b> (tipos 5-7) crescem para fora do útero e raramente causam sangramento — o quadro clínico predominante é de <b>efeito de massa</b>.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Sintomas de volume (efeito de massa)</text>
+<rect x="20" y="46" width="145" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="92" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Bexiga</text>
+<text x="92" y="86" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Polaciúria, urgência</text>
+<text x="92" y="100" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">por compressão</text>
+<rect x="175" y="46" width="145" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="247" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Reto/intestino</text>
+<text x="247" y="86" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Constipação,</text>
+<text x="247" y="100" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">sensação de peso</text>
+<rect x="330" y="46" width="145" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="402" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Ureter</text>
+<text x="402" y="86" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Hidronefrose se</text>
+<text x="402" y="100" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">compressão extrínseca</text>
+<rect x="485" y="46" width="145" height="120" rx="10" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.3"/>
+<text x="557" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:#e8675f">Torção (pediculado)</text>
+<text x="557" y="86" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Dor aguda súbita —</text>
+<text x="557" y="100" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">tipo 7 é o de maior risco</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha clássica:</b> mioma subseroso volumoso NÃO costuma causar sangramento aumentado — se a questão associa "subseroso" a "menorragia" como mecanismo direto, desconfie. O sangramento nesse caso, quando presente, costuma ter outra causa concomitante.</div>
+<div class="ac-tip"><b>Mioma pediculado (tipo 7):</b> tem risco específico de <b>torção</b>, causando dor pélvica aguda — um diagnóstico diferencial importante de abdome agudo ginecológico.</div>
+`],
+["degeneracao","Degeneração e Dor Aguda",`
+<div class="ac-h">Quando o mioma "não recebe sangue suficiente"</div>
+<p class="ac-p">Miomas podem crescer mais rápido que seu próprio suprimento sanguíneo, levando a <b>degeneração</b> — um processo isquêmico dentro do próprio tumor que causa dor aguda ou subaguda, tipicamente localizada sobre o mioma.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Degeneração — mais comum na gestação</text>
+<rect x="30" y="46" width="270" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Degeneração "vermelha"</text>
+<text x="165" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">(carnosa) — classicamente</text>
+<text x="165" y="104" text-anchor="middle" font-size="9" style="fill:var(--muted)">associada à gestação, por</text>
+<text x="165" y="118" text-anchor="middle" font-size="9" style="fill:var(--muted)">crescimento rápido do mioma</text>
+<text x="165" y="138" text-anchor="middle" font-size="9" style="fill:var(--muted)">Dor localizada + febre baixa</text>
+<rect x="340" y="46" width="270" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Outras formas</text>
+<text x="475" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Hialina, cística, mixoide,</text>
+<text x="475" y="104" text-anchor="middle" font-size="9" style="fill:var(--muted)">gordurosa, calcificação</text>
+<text x="475" y="124" text-anchor="middle" font-size="9" style="fill:var(--muted)">Achados de imagem variados,</text>
+<text x="475" y="138" text-anchor="middle" font-size="9" style="fill:var(--muted)">nem sempre sintomáticas</text>
+</svg>
+<div class="ac-tip"><b>Cenário clássico de prova:</b> gestante com mioma conhecido que desenvolve dor abdominal localizada e febre baixa no 2º trimestre — pense em degeneração vermelha antes de outras causas obstétricas mais graves, mas sem deixar de excluí-las.</div>
+<div class="ac-warn"><b>Diagnóstico diferencial obrigatório:</b> dor aguda sobre um mioma também pode significar torção (se pediculado) — a conduta e a urgência mudam conforme a hipótese.</div>
+`],
+["sua_infertilidade","SUA e Impacto Reprodutivo",`
+<div class="ac-h">Miomatose dentro do raciocínio maior de SUA e infertilidade</div>
+<p class="ac-p">O impacto do mioma no sangramento e na fertilidade depende diretamente da <b>classificação FIGO</b> — retomando o fio condutor deste módulo.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Risco de SUA e de infertilidade por tipo</text>
+<rect x="30" y="46" width="580" height="130" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="150" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">Submucoso (0-2)</text>
+<text x="150" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Alto risco de SUA</text>
+<text x="150" y="104" text-anchor="middle" font-size="9" style="fill:var(--muted)">Alto risco de infertilidade</text>
+<text x="320" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Intramural (3-4)</text>
+<text x="320" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Risco intermediário de SUA</text>
+<text x="320" y="104" text-anchor="middle" font-size="9" style="fill:var(--muted)">Risco variável (se grande/múltiplo)</text>
+<text x="490" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#2E7FAE">Subseroso (5-7)</text>
+<text x="490" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Baixo risco de SUA</text>
+<text x="490" y="104" text-anchor="middle" font-size="9" style="fill:var(--muted)">Baixo impacto reprodutivo direto</text>
+<text x="320" y="150" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Sempre avaliar tamanho, número e localização em conjunto — não só o tipo isolado</text>
+</svg>
+<div class="ac-call"><b>Fio condutor para o próximo módulo:</b> essa relação FIGO-sintoma é exatamente o que orienta a investigação diagnóstica (qual exame usar para caracterizar cada tipo) e, mais adiante, a escolha do tratamento — cirúrgico especialmente.</div>
+`],
+["diferenciais","Diagnósticos Diferenciais",`
+<div class="ac-h">Nem toda massa uterina é mioma</div>
+<p class="ac-p">Antes de fechar o raciocínio em "mioma", vale lembrar os principais diferenciais de massa/aumento uterino — alguns já vistos em módulos anteriores.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Principais diferenciais</text>
+<rect x="20" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="112" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Adenomiose</text>
+<text x="112" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Útero globoso, difuso,</text>
+<text x="112" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">limites mal definidos</text>
+<rect x="227" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="319" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Gravidez</text>
+<text x="319" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Sempre excluir com</text>
+<text x="319" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">beta-hCG antes de investigar</text>
+<rect x="434" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.3"/>
+<text x="526" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:#e8675f">Leiomiossarcoma</text>
+<text x="526" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Raro, mas crescimento</text>
+<text x="526" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">rápido/pós-menopausa alertam</text>
+</svg>
+<div class="ac-warn"><b>Sinal de alerta que muda a conduta:</b> crescimento rápido de massa uterina, especialmente em mulher <b>pós-menopausa</b> (quando miomas deveriam estar regredindo, não crescendo), levanta a suspeita de leiomiossarcoma — indicação de investigação de imagem detalhada, tema aprofundado no próximo módulo.</div>
+<div class="ac-tip"><b>Coexistência é comum:</b> mioma e adenomiose podem estar presentes na mesma paciente — o quadro clínico muitas vezes é misto, e a imagem (próximo módulo) ajuda a distinguir a contribuição de cada um.</div>
+`]
+]
+};
+Object.assign(C['miomatose|0'], {
+"escores": `<div class="prose">
+<h3>Classificação FIGO — tabela de referência</h3>
+<table class="ac-tbl">
+<tr><th>Tipo</th><th>Descrição</th><th>Categoria</th></tr>
+<tr><td>0</td><td>100% intracavitário, pediculado</td><td rowspan="3">Submucoso</td></tr>
+<tr><td>1</td><td>Componente intramural &lt;50%</td></tr>
+<tr><td>2</td><td>Componente intramural &#8805;50%</td></tr>
+<tr><td>3</td><td>100% intramural, toca o endométrio</td><td rowspan="2">Intramural</td></tr>
+<tr><td>4</td><td>Intramural, sem contato com endométrio ou serosa</td></tr>
+<tr><td>5</td><td>&#8805;50% intramural, toca a serosa</td><td rowspan="3">Subseroso</td></tr>
+<tr><td>6</td><td>&lt;50% intramural</td></tr>
+<tr><td>7</td><td>Pediculado, 100% externo ao miométrio</td></tr>
+<tr><td>8</td><td>Localização atípica (cervical, ligamento largo, parasitário)</td><td>Outro</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">Número baixo = perto da cavidade; número alto (até 7) = perto da serosa. O 8 é a exceção "fora do padrão".</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Diferenciais de massa/aumento uterino</h3>
+<table class="ac-tbl">
+<tr><th>Condição</th><th>Pista diferencial</th></tr>
+<tr><td><strong>Adenomiose</strong></td><td>Útero globoso, difusamente aumentado, limites mal definidos (vs. mioma bem circunscrito)</td></tr>
+<tr><td><strong>Gravidez</strong></td><td>Sempre excluir com beta-hCG antes de prosseguir a investigação</td></tr>
+<tr><td><strong>Leiomiossarcoma</strong></td><td>Raro; suspeitar diante de crescimento rápido, especialmente pós-menopausa</td></tr>
+<tr><td><strong>Massa anexial (ovariana)</strong></td><td>Mioma subseroso pediculado pode simular massa anexial — imagem dirigida esclarece</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Classificação FIGO e Quadro Clínico</div>
+<div class="mm">
+  <div class="mm-card"><h5>🔢 FIGO 0-8</h5><ul><li>0-2 submucoso</li><li>3-4 intramural</li><li>5-7 subseroso</li><li>8 atípico</li><li>Híbridos (ex.: 2-5)</li></ul></div>
+  <div class="mm-card"><h5>🩸 Submucoso</h5><ul><li>Mais SUA/menorragia</li><li>Mais infertilidade</li><li>Distorce a cavidade</li></ul></div>
+  <div class="mm-card"><h5>📦 Intramural/subseroso</h5><ul><li>Efeito de massa</li><li>Subseroso raramente sangra</li><li>Tipo 7: risco de torção</li></ul></div>
+  <div class="mm-card"><h5>🔥 Degeneração</h5><ul><li>Vermelha (gestação)</li><li>Dor localizada + febre baixa</li><li>Diferencial: torção</li></ul></div>
+  <div class="mm-card"><h5>⚠️ Sinais de alarme</h5><ul><li>Crescimento rápido pós-menopausa</li><li>Suspeita de leiomiossarcoma</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Suspeita de mioma (SUA, efeito de massa, ou achado incidental)</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — Anamnese e exame</div><div class="fx-lbl">Caracterizar padrão de sangramento, sintomas de volume, dor; excluir gestação</div><div class="fx-arrow"></div><div class="fx-node">Passo 2 — Correlacionar com localização provável</div><div class="fx-lbl">Sangramento predominante → pensar submucoso; sintomas compressivos → pensar subseroso</div><div class="fx-arrow"></div><div class="fx-lbl">Sinais de alarme (crescimento rápido, pós-menopausa)?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Investigação de imagem prioritária e detalhada (próximo módulo)</div><div class="fx-node end"><b>NÃO:</b> Seguir fluxo diagnóstico padrão (próximo módulo)</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Mioma classificado por localização (FIGO)</div><div class="fx-arrow"></div><div class="fx-lbl">Sintomático (SUA e/ou efeito de massa e/ou infertilidade)?</div><div class="fx-row"><div class="fx-node end"><b>NÃO (assintomático, achado incidental):</b> Conduta expectante, seguimento clínico</div><div class="fx-node"><b>SIM</b> &#8594; encaminhar para módulos de Diagnóstico e Tratamento</div></div><div class="fx-arrow"></div><div class="fx-node">Dor aguda associada?</div><div class="fx-lbl">Considerar degeneração (mais comum na gestação) ou torção (se pediculado) como diagnósticos diferenciais imediatos</div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Classificação FIGO e Quadro Clínico em 60 segundos</h4>
+<ul>
+<li><strong>Mioma</strong> = tumor benigno de músculo liso, estrogênio/progesterona-dependente, altíssima prevalência.</li>
+<li><strong>FIGO 0-8:</strong> 0-2 submucoso (perto da cavidade), 3-4 intramural, 5-7 subseroso (perto da serosa), 8 atípico. Híbridos existem (ex.: 2-5).</li>
+<li><strong>Submucoso (0-2):</strong> mais SUA/menorragia e mais infertilidade — distorce a cavidade.</li>
+<li><strong>Subseroso (5-7):</strong> efeito de massa (bexiga, intestino, ureter); raramente sangra; tipo 7 (pediculado) tem risco de torção.</li>
+<li><strong>Degeneração vermelha:</strong> clássica na gestação, dor localizada + febre baixa.</li>
+<li><strong>Sinal de alarme:</strong> crescimento rápido, especialmente pós-menopausa → suspeitar leiomiossarcoma.</li>
+<li><strong>Diferenciais:</strong> adenomiose (difusa, mal definida), gravidez (sempre excluir), leiomiossarcoma (raro).</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Miomatose</strong> = classificação FIGO 0-8 por relação com cavidade/serosa; submucoso sangra e afeta fertilidade, subseroso comprime, degeneração e torção são as dores agudas clássicas, crescimento rápido pós-menopausa é sinal de alarme.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Se a questão associa sangramento importante a um tipo específico, pense <strong>submucoso (0-2)</strong> primeiro.</li>
+<li>Sintomas compressivos (urinários/intestinais) sem sangramento relevante → pensar <strong>subseroso</strong>.</li>
+<li>Dor aguda em gestante com mioma conhecido → <strong>degeneração vermelha</strong> é o diagnóstico mais lembrado, mas sempre excluir outras causas obstétricas.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Atribuir menorragia importante a um mioma <strong>puramente subseroso</strong> sem outra explicação — mecanismo pouco direto.</li>
+<li>Não pensar em leiomiossarcoma diante de crescimento rápido pós-menopausa.</li>
+<li>Esquecer de excluir gravidez antes de investigar uma massa uterina em mulher em idade reprodutiva.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"Quanto menor o número, mais perto do sangramento."</strong></li>
+<li><strong>"Subseroso empurra, submucoso sangra."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Classificar o mioma só pelo tamanho, ignorando a localização.</li>
+<li>Não considerar torção como diferencial de dor aguda em mioma pediculado.</li>
+<li>Ignorar coexistência de mioma com adenomiose no raciocínio clínico.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico o que é o leiomioma e por que seu crescimento é hormônio-dependente","Descrevo a classificação FIGO 0-8 e a lógica por trás dos números","Explico por que miomas submucosos causam mais SUA e mais infertilidade","Reconheço os sintomas compressivos típicos dos miomas subserosos e o risco de torção do tipo 7","Diferencio degeneração de torção como causas de dor aguda associada a mioma","Sei quando o crescimento de um mioma levanta suspeita de leiomiossarcoma"]
+});
+Object.assign(C['miomatose|0'], {
+"questoes": [
+{"stem":"A classificação FIGO dos leiomiomas uterinos descreve o mioma principalmente com base em qual característica?","opts":["O tamanho absoluto do mioma em centímetros.","A relação do mioma com o endométrio, o miométrio e a serosa uterina.","O número total de miomas presentes no útero.","A idade da paciente no momento do diagnóstico."],"correct":1,"expl":"A classificação FIGO descreve o mioma pela sua <b>relação anatômica</b> com endométrio, miométrio e serosa — não pelo tamanho ou número, que são registrados separadamente."},
+{"stem":"Um mioma classificado como FIGO tipo 0 é caracterizado por:","opts":["Estar 100% dentro do miométrio, sem contato com endométrio ou serosa.","Estar 100% dentro da cavidade endometrial, pediculado.","Estar 100% externo ao miométrio, pediculado, ligado à serosa.","Estar localizado no colo uterino."],"correct":1,"expl":"O tipo 0 é totalmente intracavitário e pediculado (conectado à parede por um pedículo) — é o extremo mais submucoso da classificação."},
+{"stem":"Qual subtipo de mioma está mais fortemente associado a sangramento uterino anormal (menorragia) e a infertilidade?","opts":["Subseroso pediculado (tipo 7).","Submucoso (tipos 0-2).","Localização atípica (tipo 8).","Intramural sem contato com endométrio (tipo 4)."],"correct":1,"expl":"Miomas <b>submucosos</b> distorcem diretamente a cavidade endometrial, aumentando a superfície de sangramento e interferindo na implantação — por isso são os mais associados a SUA e infertilidade."},
+{"stem":"Um mioma subseroso volumoso tipicamente causa qual tipo de sintoma predominante?","opts":["Menorragia intensa como sintoma principal.","Sintomas de efeito de massa, como polaciúria ou constipação, por compressão de órgãos vizinhos.","Infertilidade por distorção da cavidade endometrial.","Amenorreia secundária."],"correct":1,"expl":"Miomas subserosos crescem para fora do útero e raramente distorcem a cavidade — o quadro predominante é de <b>efeito de massa</b> sobre órgãos vizinhos (bexiga, intestino)."},
+{"stem":"Qual subtipo de mioma apresenta maior risco de torção aguda?","opts":["Submucoso tipo 0.","Intramural tipo 4.","Subseroso pediculado tipo 7.","Tipo 8 (cervical)."],"correct":2,"expl":"O tipo 7 é subseroso e pediculado (preso por um pedículo fino, totalmente externo ao miométrio) — essa configuração favorece a <b>torção</b>, causando dor aguda."},
+{"stem":"Gestante com mioma conhecido apresenta dor abdominal localizada de início subagudo e febre baixa no segundo trimestre. A hipótese mais provável é:","opts":["Leiomiossarcoma.","Degeneração vermelha (carnosa) do mioma.","Adenomiose focal.","Mioma tipo 8 assintomático."],"correct":1,"expl":"A <strong>degeneração vermelha</strong> é classicamente associada à gestação, quando o mioma cresce mais rápido que seu suprimento sanguíneo, causando dor localizada e febre baixa."},
+{"stem":"Diante de dor aguda sobre um mioma, qual diagnóstico diferencial deve sempre ser considerado além da degeneração?","opts":["Torção do mioma, especialmente se pediculado.","Menopausa precoce.","Síndrome do ovário policístico.","Vaginose bacteriana."],"correct":0,"expl":"A <b>torção</b> (especialmente em miomas pediculados, tipo 7) é diferencial importante de dor aguda associada a mioma, com implicações distintas de conduta em relação à degeneração."},
+{"stem":"Qual achado clínico deve levantar suspeita de leiomiossarcoma, em vez de leiomioma benigno?","opts":["Crescimento lento e estável ao longo de anos.","Crescimento rápido de massa uterina, especialmente em mulher pós-menopausa.","Regressão espontânea após a menopausa.","Ausência completa de sintomas."],"correct":1,"expl":"Miomas benignos tendem a estabilizar/regredir após a menopausa — <b>crescimento rápido nesse contexto</b> é sinal de alarme para leiomiossarcoma, tumor raro mas com prognóstico distinto."},
+{"stem":"Um mioma classificado como '2-5' na classificação FIGO significa que:","opts":["O mioma tem exatamente 2,5 cm de diâmetro.","É um tipo híbrido, com componente submucoso (2) e componente subseroso (5) simultaneamente.","É o quinto mioma identificado em uma paciente com múltiplos miomas.","Corresponde a uma localização atípica específica."],"correct":1,"expl":"Números duplos como '2-5' indicam miomas <b>híbridos</b>, que tocam tanto o endométrio (primeiro número) quanto a serosa (segundo número)."},
+{"stem":"Antes de investigar uma massa uterina em mulher em idade reprodutiva com atraso menstrual, qual conduta é obrigatória?","opts":["Solicitar diretamente ressonância magnética.","Excluir gravidez com dosagem de beta-hCG.","Iniciar tratamento hormonal empírico sem confirmação diagnóstica.","Indicar histerectomia exploratória."],"correct":1,"expl":"A gravidez é um diferencial obrigatório de massa/aumento uterino em mulher em idade reprodutiva e deve ser <b>sempre excluída</b> antes de prosseguir a investigação."},
+{"stem":"Em relação ao crescimento dos miomas ao longo da vida da mulher, é correto afirmar que:","opts":["São completamente independentes de hormônios sexuais.","Tendem a crescer na menacme e estabilizar ou regredir após a menopausa, na ausência de terapia hormonal.","Sempre regridem espontaneamente durante a gestação.","Aparecem exclusivamente após a menopausa."],"correct":1,"expl":"O crescimento do mioma é <b>estrogênio/progesterona-dependente</b> — por isso tende a ocorrer durante a menacme e a estabilizar/regredir após a menopausa, na ausência de reposição hormonal."},
+{"stem":"Qual das afirmações abaixo melhor resume a lógica da numeração FIGO de 0 a 7?","opts":["Números mais altos sempre indicam maior risco de malignidade.","Números mais baixos indicam proximidade da cavidade endometrial; números mais altos (até 7) indicam proximidade da serosa.","A numeração reflete exclusivamente o tamanho do mioma.","Não existe lógica na numeração, os tipos são arbitrários."],"correct":1,"expl":"A lógica central: <b>números baixos = mais perto da cavidade</b> (submucoso), <b>números altos até 7 = mais perto da serosa</b> (subseroso). O tipo 8 foge dessa lógica por representar localizações atípicas."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Definição</small><br>O que é o leiomioma uterino?","back":"Tumor benigno originado do músculo liso do miométrio, estrogênio/progesterona-dependente — a neoplasia pélvica mais comum em mulheres.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">FIGO</small><br>Quais os tipos submucosos (0-2) e o que os define?","back":"{{Tipo 0: 100% intracavitário, pediculado; Tipo 1: componente intramural <50%; Tipo 2: componente intramural ≥50%.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">FIGO</small><br>Quais os tipos subserosos (5-7)?","back":"{{Tipo 5: ≥50% intramural, toca a serosa; Tipo 6: <50% intramural; Tipo 7: pediculado, 100% externo ao miométrio.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">FIGO</small><br>O que caracteriza o tipo 8?","back":"Localização atípica: cervical, ligamento largo ou parasitário — foge da lógica numérica dos demais tipos.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Clínica</small><br>Por que o mioma submucoso causa mais sangramento?","back":"Aumenta a área endometrial exposta, interfere na contração miometrial hemostática local e causa congestão venosa endometrial.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Clínica</small><br>Qual subtipo de mioma mais afeta a fertilidade e por quê?","back":"O submucoso — distorce diretamente a cavidade endometrial, dificultando a implantação.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Clínica</small><br>Quais sintomas de efeito de massa o mioma subseroso pode causar?","back":"Polaciúria/urgência (compressão vesical), constipação (compressão retal), e hidronefrose se comprimir o ureter.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Complicação</small><br>Qual tipo de mioma tem maior risco de torção e por quê?","back":"Tipo 7 (subseroso pediculado) — preso por um pedículo fino, favorece a torção sobre seu próprio eixo.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Degeneração</small><br>O que é a degeneração vermelha (carnosa) e quando é clássica?","back":"Processo isquêmico dentro do mioma por crescimento mais rápido que o suprimento sanguíneo; clássica na gestação, com dor localizada e febre baixa.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Sinal de alarme</small><br>Que achado levanta suspeita de leiomiossarcoma?","back":"Crescimento rápido de massa uterina, especialmente em mulher pós-menopausa (quando miomas deveriam regredir).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diferencial</small><br>Como diferenciar mioma de adenomiose ao exame/imagem?","back":"Mioma: bem circunscrito, limites definidos. Adenomiose: útero globoso, aumento difuso, limites mal definidos.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Prática</small><br>O que sempre excluir antes de investigar uma massa uterina em mulher em idade reprodutiva?","back":"Gravidez — dosagem de beta-hCG.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">FIGO</small><br>O que significa um mioma classificado como tipo híbrido (ex.: '2-5')?","back":"Toca tanto o endométrio quanto a serosa — primeiro número descreve relação com a cavidade, segundo com a serosa.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tipos 3-4</small><br>Como se diferenciam os tipos intramurais 3 e 4?","back":"Tipo 3: 100% intramural mas toca o endométrio. Tipo 4: intramural, sem contato com endométrio ou serosa.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Sangramento intenso sugerindo mioma submucoso","stem":"Mulher de 34 anos relata menorragia importante há 8 meses, com necessidade de trocar absorvente a cada 1-2 horas nos dias de maior fluxo, sem dor pélvica relevante.","passos":[
+{"h":"Anamnese dirigida","p":"Sangramento predominantemente aumentado em quantidade, sem sintomas compressivos urinários ou intestinais associados."},
+{"h":"Exame físico","p":"Útero discretamente aumentado, contornos regulares à palpação bimanual."},
+{"h":"Raciocínio clínico","p":"O padrão de sangramento importante como sintoma predominante, sem efeito de massa relevante, é mais sugestivo de componente submucoso — o subtipo mais associado a menorragia."},
+{"h":"Hipótese diagnóstica","p":"Leiomiomatose uterina, provável componente submucoso a confirmar por imagem."},
+{"h":"Conduta neste momento","p":"Encaminhar para investigação por imagem dirigida (USTV +/- histeroscopia/SIS) para caracterização precisa do tipo FIGO, conforme detalhado no próximo módulo."}
+]},
+{"t":"Caso 2 — Sintomas compressivos sugerindo mioma subseroso","stem":"Mulher de 42 anos relata sensação de peso pélvico e polaciúria progressiva há 1 ano, com ciclos menstruais regulares e de volume normal.","passos":[
+{"h":"Anamnese dirigida","p":"Ausência de sangramento aumentado; sintomas predominantemente compressivos, sugerindo efeito de massa sobre a bexiga."},
+{"h":"Exame físico","p":"Útero aumentado de forma assimétrica, com massa palpável em região anexial esquerda, contornos bem definidos."},
+{"h":"Raciocínio clínico","p":"A ausência de sangramento aumentado associada a sintomas compressivos é mais compatível com mioma subseroso, que raramente distorce a cavidade endometrial."},
+{"h":"Hipótese diagnóstica","p":"Leiomiomatose uterina, provável componente subseroso, a diferenciar de massa anexial por imagem."},
+{"h":"Conduta neste momento","p":"Solicitar USTV para confirmar origem uterina da massa e caracterizar o tipo FIGO, descartando massa anexial ovariana como diagnóstico alternativo."}
+]},
+{"t":"Caso 3 — Dor aguda em gestante com mioma conhecido","stem":"Gestante de 22 semanas, com mioma intramural de 6 cm já conhecido antes da gestação, desenvolve dor abdominal localizada sobre o mioma, de início subagudo, associada a febre baixa (37,8°C).","passos":[
+{"h":"Anamnese dirigida","p":"Dor bem localizada sobre a topografia do mioma conhecido, sem sinais de trabalho de parto prematuro ou outras queixas obstétricas associadas."},
+{"h":"Exame físico e avaliação inicial","p":"Dor à palpação localizada sobre o mioma, sem sinais de irritação peritoneal difusa; ausculta de batimentos cardiofetais normal; sinais vitais maternos estáveis exceto febre baixa."},
+{"h":"Raciocínio clínico","p":"O quadro de dor localizada com febre baixa em mioma conhecido durante a gestação é o padrão clássico de degeneração vermelha (carnosa), decorrente do crescimento acelerado do mioma frente ao suprimento sanguíneo disponível durante a gravidez."},
+{"h":"Diagnóstico diferencial considerado","p":"Excluídas outras causas obstétricas de dor abdominal (trabalho de parto prematuro, descolamento de placenta) e torção de mioma pediculado, menos prováveis dado o caráter intramural do mioma."},
+{"h":"Conduta neste momento","p":"Manejo conservador com analgesia adequada, observação clínica e monitorização obstétrica, já que a degeneração vermelha é habitualmente autolimitada e não exige intervenção cirúrgica na maioria dos casos."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['miomatose|1'] = {
+name: "Diagnóstico",
+intro: "A USTV resolve a maioria dos casos, mas caracterizar precisamente um mioma submucoso — ou afastar um sarcoma — exige exames complementares dirigidos.",
+sub: [
+["entendendo","Por Onde Começar",`
+<div class="ac-h">Imagem confirma o que a clínica sugere</div>
+<p class="ac-p">A maioria dos miomas é diagnosticada por <b>ultrassonografia transvaginal (USTV)</b>, exame acessível, de baixo custo e com boa acurácia para identificar a maioria dos miomas e estimar sua localização. O desafio não é "achar" o mioma — é <b>caracterizá-lo com precisão suficiente</b> para guiar a conduta, especialmente quando há dúvida sobre o componente submucoso ou suspeita de sarcoma.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<defs><marker id="am1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Do exame inicial à caracterização precisa</text>
+<rect x="30" y="46" width="160" height="70" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="110" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">USTV</text>
+<text x="110" y="90" text-anchor="middle" font-size="9" style="fill:var(--ink)">1ª linha, sempre</text>
+<path d="M190 80 L226 80" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#am1)"/>
+<rect x="228" y="46" width="180" height="70" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="318" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">SIS / histeroscopia</text>
+<text x="318" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">dúvida sobre componente submucoso</text>
+<path d="M408 80 L444 80" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#am1)"/>
+<rect x="446" y="46" width="160" height="70" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="526" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">RM</text>
+<text x="526" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">mapeamento/dúvida diagnóstica</text>
+</svg>
+<div class="ac-tip"><b>Retomando o módulo anterior:</b> o objetivo da imagem aqui é responder duas perguntas centrais — <b>qual o tipo FIGO?</b> e <b>é realmente um mioma benigno?</b> — porque a resposta a essas perguntas é o que direciona toda a conduta dos módulos seguintes.</div>
+`],
+["ustv","Ultrassonografia Transvaginal",`
+<div class="ac-h">O exame de primeira linha</div>
+<p class="ac-p">A USTV identifica a maioria dos miomas, estima tamanho, número e localização aproximada, além de avaliar o restante da pelve (ovários, endométrio). É suficiente para a maior parte das decisões clínicas iniciais.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">O que a USTV faz bem — e onde tem limite</text>
+<rect x="30" y="46" width="270" height="130" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="165" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Faz bem</text>
+<text x="165" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Detectar a maioria dos miomas</text>
+<text x="165" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Estimar tamanho e número</text>
+<text x="165" y="124" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Localização aproximada</text>
+<text x="165" y="140" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Avaliar ovários/endométrio</text>
+<rect x="340" y="46" width="270" height="130" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.4"/>
+<text x="475" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">Tem limite</text>
+<text x="475" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Precisão do grau exato de</text>
+<text x="475" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">invasão submucosa (0 vs 1 vs 2)</text>
+<text x="475" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Útero muito aumentado ou</text>
+<text x="475" y="140" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">com miomas muito numerosos</text>
+</svg>
+<div class="ac-warn"><b>Quando a USTV isolada não basta:</b> se há dúvida sobre o grau exato de componente intracavitário (tipo 0 vs. 1 vs. 2) — informação crucial para planejar uma miomectomia histeroscópica — ou se o útero é muito aumentado/multimiomatoso, dificultando o mapeamento completo, é hora de complementar a investigação.</div>
+`],
+["sis_histero","SIS e Histeroscopia",`
+<div class="ac-h">Caracterizando o componente submucoso com precisão</div>
+<p class="ac-p">Para definir com exatidão o grau de invasão intracavitária de um mioma suspeito de ser submucoso, dois exames se destacam: a <b>sonohisterografia com infusão salina (SIS)</b> e a <b>histeroscopia diagnóstica</b>.</p>
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">SIS vs. histeroscopia</text>
+<rect x="30" y="46" width="290" height="150" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="175" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">SIS</text>
+<text x="175" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Infunde soro fisiológico na</text>
+<text x="175" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">cavidade durante a USTV</text>
+<text x="175" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Distende a cavidade e delimita</text>
+<text x="175" y="140" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">bem o componente intracavitário</text>
+<text x="175" y="164" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Ambulatorial, menos invasivo</text>
+<rect x="360" y="46" width="290" height="150" rx="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="505" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Histeroscopia diagnóstica</text>
+<text x="505" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Visualização direta da</text>
+<text x="505" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">cavidade endometrial</text>
+<text x="505" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Padrão mais preciso para</text>
+<text x="505" y="140" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">planejar ressecção</text>
+<text x="505" y="164" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Pode ser diagnóstica + terapêutica</text>
+</svg>
+<div class="ac-tip"><b>Por que isso importa na prática:</b> saber se um mioma é tipo 0, 1 ou 2 muda diretamente a viabilidade e a técnica da miomectomia histeroscópica — informação que a USTV isolada frequentemente não define com segurança suficiente.</div>
+`],
+["rm","Ressonância Magnética",`
+<div class="ac-h">Quando o mapeamento precisa ser mais completo</div>
+<p class="ac-p">A ressonância magnética (RM) entra como exame complementar em cenários específicos: <b>útero multimiomatoso</b> (planejamento cirúrgico complexo), <b>dúvida diagnóstica</b> com adenomiose, ou <b>suspeita de leiomiossarcoma</b>.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Quando pedir RM</text>
+<rect x="20" y="46" width="190" height="130" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="115" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Planejamento cirúrgico</text>
+<text x="115" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">Útero multimiomatoso,</text>
+<text x="115" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">mapeamento antes de</text>
+<text x="115" y="120" text-anchor="middle" font-size="9" style="fill:var(--muted)">miomectomia complexa</text>
+<rect x="225" y="46" width="190" height="130" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="320" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Dúvida diagnóstica</text>
+<text x="320" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">Diferenciar de</text>
+<text x="320" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">adenomiose focal</text>
+<text x="320" y="120" text-anchor="middle" font-size="9" style="fill:var(--muted)">quando USTV é ambígua</text>
+<rect x="430" y="46" width="190" height="130" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.5"/>
+<text x="525" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">Suspeita de sarcoma</text>
+<text x="525" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">Crescimento rápido,</text>
+<text x="525" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">pós-menopausa, ou</text>
+<text x="525" y="120" text-anchor="middle" font-size="9" style="fill:var(--muted)">achados atípicos</text>
+</svg>
+<div class="ac-warn"><b>Retomando o módulo anterior:</b> nenhum exame de imagem confirma sarcoma com 100% de certeza pré-operatoriamente — a RM ajuda a estimar o risco (sinais como necrose central irregular, margens infiltrativas, restrição à difusão), mas a confirmação definitiva costuma ser histopatológica.</div>
+`],
+["sarcoma","Rastreando o Leiomiossarcoma",`
+<div class="ac-h">Raro, mas mudando toda a conduta quando presente</div>
+<p class="ac-p">O leiomiossarcoma é <b>raro</b>, mas sua distinção pré-operatória de um mioma benigno é um dos pontos mais tensos da propedêutica em miomatose, porque muda completamente a via cirúrgica adequada (evitar morcelamento, por exemplo, que poderia disseminar células malignas).</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Sinais de alerta para sarcoma</text>
+<rect x="30" y="46" width="580" height="130" rx="14" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.4"/>
+<text x="320" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">Combinação de fatores aumenta a suspeita</text>
+<text x="320" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Crescimento rápido, especialmente pós-menopausa</text>
+<text x="320" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Dor pélvica de início recente associada à massa</text>
+<text x="320" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Achados de imagem atípicos (necrose irregular, margens infiltrativas)</text>
+<text x="320" y="148" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Ausência de fatores de risco típicos de mioma simples</text>
+</svg>
+<div class="ac-tip"><b>Nenhum critério isolado é definitivo:</b> a suspeita se constrói pela <b>combinação</b> de fatores clínicos e de imagem — não existe um único achado que, isoladamente, confirme ou exclua sarcoma antes da cirurgia.</div>
+<div class="ac-call"><b>Por que isso muda o módulo de tratamento cirúrgico:</b> quando a suspeita de sarcoma é relevante, técnicas que fragmentam o tumor (morcelamento) devem ser evitadas, preferindo-se retirada em peça única — detalhe que você vai reencontrar no próximo módulo.</div>
+`],
+["marcadores","Exames Laboratoriais Complementares",`
+<div class="ac-h">Papel de apoio, não de diagnóstico</div>
+<p class="ac-p">Diferente do que se poderia esperar, não existe um exame de sangue que diagnostique mioma. Os exames laboratoriais entram para avaliar <b>repercussões</b> da doença, não para confirmá-la.</p>
+<svg viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Exames de apoio (não diagnósticos)</text>
+<rect x="30" y="46" width="270" height="100" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Hemograma</text>
+<text x="165" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Avaliar anemia por</text>
+<text x="165" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">sangramento crônico</text>
+<rect x="340" y="46" width="270" height="100" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Beta-hCG</text>
+<text x="475" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Excluir gravidez, como</text>
+<text x="475" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">visto no módulo anterior</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha de prova:</b> não existe marcador sérico validado para diagnóstico ou rastreio de mioma — se a questão sugere um "exame de sangue confirmatório", está incorreta.</div>
+`],
+["integrando","Integrando: Do Achado à Conduta",`
+<div class="ac-h">Fechando o raciocínio diagnóstico</div>
+<p class="ac-p">Ao final da investigação, você deve ter três informações essenciais para decidir a conduta: <b>tipo FIGO</b> (localização), <b>tamanho e número</b>, e <b>grau de suspeita de malignidade</b>. Essas três informações, junto com o desejo reprodutivo da paciente, são o que definem o caminho terapêutico dos próximos módulos.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">As 3 informações que fecham o diagnóstico</text>
+<rect x="30" y="46" width="180" height="110" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="120" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Tipo FIGO</text>
+<text x="120" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Localização precisa</text>
+<rect x="230" y="46" width="180" height="110" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="320" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Tamanho e número</text>
+<text x="320" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Viabilidade técnica</text>
+<rect x="430" y="46" width="180" height="110" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="520" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Suspeita de malignidade</text>
+<text x="520" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Define técnica cirúrgica</text>
+<rect x="150" y="170" width="340" height="26" rx="8" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.1"/>
+<text x="320" y="188" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">+ desejo reprodutivo da paciente = plano terapêutico</text>
+</svg>
+<div class="ac-call"><b>Fechando o raciocínio do módulo:</b> USTV é sempre o primeiro exame → SIS/histeroscopia caracterizam o componente submucoso quando há dúvida → RM entra para mapeamento complexo ou suspeita de sarcoma → nenhum exame laboratorial diagnostica mioma → a combinação de tipo FIGO + tamanho/número + suspeita de malignidade + desejo reprodutivo direciona os módulos de tratamento.</div>
+`]
+]
+};
+Object.assign(C['miomatose|1'], {
+"escores": `<div class="prose">
+<h3>Exames de imagem — indicação e papel</h3>
+<table class="ac-tbl">
+<tr><th>Exame</th><th>Papel</th><th>Quando usar</th></tr>
+<tr><td>USTV</td><td>1ª linha, sempre</td><td>Toda suspeita de mioma</td></tr>
+<tr><td>SIS</td><td>Caracteriza componente submucoso</td><td>Dúvida sobre grau de invasão intracavitária</td></tr>
+<tr><td>Histeroscopia diagnóstica</td><td>Visualização direta da cavidade</td><td>Planejamento de miomectomia histeroscópica</td></tr>
+<tr><td>RM</td><td>Mapeamento completo</td><td>Útero multimiomatoso, dúvida com adenomiose, suspeita de sarcoma</td></tr>
+</table>
+</div>`,
+"dif": `<div class="prose">
+<h3>Achados de imagem — mioma vs. diferenciais</h3>
+<table class="ac-tbl">
+<tr><th>Condição</th><th>Achado típico</th></tr>
+<tr><td><strong>Mioma benigno</strong></td><td>Bem circunscrito, pseudocápsula definida, crescimento lento</td></tr>
+<tr><td><strong>Adenomiose</strong></td><td>Miométrio heterogêneo difuso, limites mal definidos, sem pseudocápsula</td></tr>
+<tr><td><strong>Leiomiossarcoma</strong></td><td>Necrose central irregular, margens infiltrativas, crescimento rápido, restrição à difusão na RM</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Diagnóstico</div>
+<div class="mm">
+  <div class="mm-card"><h5>🩻 USTV</h5><ul><li>1ª linha sempre</li><li>Limite: grau exato de invasão submucosa</li></ul></div>
+  <div class="mm-card"><h5>💧 SIS/Histeroscopia</h5><ul><li>Caracteriza tipo 0/1/2</li><li>Guia miomectomia histeroscópica</li></ul></div>
+  <div class="mm-card"><h5>🧲 RM</h5><ul><li>Útero multimiomatoso</li><li>Dúvida c/ adenomiose</li><li>Suspeita de sarcoma</li></ul></div>
+  <div class="mm-card"><h5>⚠️ Sarcoma</h5><ul><li>Combinação de sinais, não 1 critério isolado</li><li>Evitar morcelamento se suspeita</li></ul></div>
+  <div class="mm-card"><h5>🧪 Laboratório</h5><ul><li>Sem marcador diagnóstico</li><li>Hemograma (anemia) e beta-hCG (excluir gravidez)</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Suspeita clínica de mioma (módulo anterior)</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — USTV</div><div class="fx-lbl">Identifica maioria dos miomas, estima tipo/tamanho/número</div><div class="fx-arrow"></div><div class="fx-lbl">Dúvida sobre componente submucoso ou útero complexo/suspeita de sarcoma?</div><div class="fx-row"><div class="fx-node end"><b>Dúvida submucosa:</b> SIS ou histeroscopia diagnóstica</div><div class="fx-node end"><b>Complexo/suspeita sarcoma:</b> RM</div><div class="fx-node end"><b>Nenhuma dúvida:</b> Seguir direto para módulo de tratamento</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Diagnóstico completo: tipo FIGO + tamanho/número + suspeita de malignidade</div><div class="fx-arrow"></div><div class="fx-lbl">Suspeita relevante de leiomiossarcoma?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Priorizar avaliação cirúrgica especializada, planejar via que evite morcelamento</div><div class="fx-node"><b>NÃO (mioma benigno)</b> &#8594; seguir para módulos de Tratamento Clínico/Cirúrgico</div></div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Diagnóstico em 60 segundos</h4>
+<ul>
+<li><strong>USTV</strong> = sempre primeiro exame; boa para maioria dos casos, limitada para grau exato de invasão submucosa.</li>
+<li><strong>SIS/histeroscopia</strong> = caracterizam com precisão tipo 0/1/2, essencial para planejar miomectomia histeroscópica.</li>
+<li><strong>RM</strong> = útero multimiomatoso, dúvida com adenomiose, ou suspeita de sarcoma.</li>
+<li><strong>Sarcoma:</strong> suspeita por combinação de sinais (crescimento rápido/pós-menopausa, dor nova, achados de imagem atípicos) — nenhum exame confirma com certeza pré-operatória; evitar morcelamento se suspeita relevante.</li>
+<li><strong>Laboratório:</strong> não existe marcador diagnóstico de mioma; hemograma avalia anemia, beta-hCG exclui gravidez.</li>
+<li><strong>Fecha o diagnóstico:</strong> tipo FIGO + tamanho/número + suspeita de malignidade + desejo reprodutivo → direciona tratamento.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Diagnóstico de mioma</strong> = USTV sempre primeiro, SIS/histeroscopia para componente submucoso, RM para casos complexos/suspeita de sarcoma, sem marcador laboratorial diagnóstico — tudo convergindo para tipo FIGO + tamanho/número + risco de malignidade.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Se a questão fala em planejar <strong>miomectomia histeroscópica</strong>, o exame-chave é SIS ou histeroscopia, não USTV isolada.</li>
+<li>Suspeita de sarcoma nunca se baseia em um único achado — sempre combinação de fatores.</li>
+<li>Não existe exame de sangue que diagnostique mioma — armadilha clássica.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que a USTV isolada sempre define com precisão o tipo FIGO exato.</li>
+<li>Indicar RM de rotina para todo mioma simples, sem indicação específica.</li>
+<li>Confiar em um único sinal de imagem para "descartar" sarcoma com certeza.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"USTV vê, SIS/histeroscopia confirma o submucoso, RM mapeia o complexo."</strong></li>
+<li><strong>Sarcoma = suspeita por soma de sinais, nunca por 1 achado isolado.</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Não solicitar SIS/histeroscopia antes de planejar via histeroscópica.</li>
+<li>Ignorar sinais de alarme para sarcoma em mulher pós-menopausa com massa crescente.</li>
+<li>Solicitar CA-125 ou outro marcador com intenção de diagnosticar mioma.</li>
+</ul></div>
+</div>`,
+"checklist": ["Sei por que a USTV é sempre o exame inicial e reconheço suas limitações","Diferencio SIS de histeroscopia diagnóstica e sei quando cada uma é indicada","Sei quando a RM é indicada como exame complementar","Reconheço os sinais de alerta que levantam suspeita de leiomiossarcoma","Explico por que não existe marcador laboratorial diagnóstico para mioma","Sei quais 3 informações fecham o raciocínio diagnóstico antes de definir a conduta"]
+});
+Object.assign(C['miomatose|1'], {
+"questoes": [
+{"stem":"Qual exame de imagem é indicado como primeira linha diante de suspeita clínica de mioma uterino?","opts":["Ressonância magnética.","Ultrassonografia transvaginal (USTV).","Tomografia computadorizada de abdome.","Histeroscopia diagnóstica."],"correct":1,"expl":"A USTV é o exame de <b>primeira linha</b>, acessível e com boa acurácia para identificar a maioria dos miomas e sua localização aproximada."},
+{"stem":"Em qual situação a USTV isolada apresenta maior limitação diagnóstica?","opts":["Na detecção de miomas muito grandes.","Na definição precisa do grau de invasão intracavitária (diferenciar tipo 0, 1 ou 2).","Na avaliação dos ovários.","Na exclusão de gravidez."],"correct":1,"expl":"A USTV pode ter dificuldade em definir com precisão o <b>grau exato de componente intracavitário</b>, informação essencial para planejar miomectomia histeroscópica."},
+{"stem":"A sonohisterografia com infusão salina (SIS) tem qual papel principal na investigação de miomas?","opts":["Substituir a USTV como exame de rotina em todos os casos.","Distender a cavidade endometrial com soro fisiológico para delimitar melhor o componente submucoso.","Diagnosticar leiomiossarcoma com certeza.","Avaliar exclusivamente a permeabilidade tubária."],"correct":1,"expl":"A SIS infunde soro fisiológico na cavidade durante a USTV, distendendo-a e permitindo delimitar com mais precisão o componente submucoso do mioma."},
+{"stem":"Qual das situações abaixo é uma indicação apropriada para solicitar ressonância magnética na investigação de miomas?","opts":["Mioma único, pequeno, assintomático, com USTV conclusiva.","Útero multimiomatoso complexo, para planejamento cirúrgico detalhado.","Como exame de rotina em toda paciente com mioma, independentemente do contexto.","Para substituir a necessidade de exame físico."],"correct":1,"expl":"A RM é indicada em cenários específicos: útero multimiomatoso complexo (planejamento cirúrgico), dúvida diagnóstica com adenomiose, ou suspeita de leiomiossarcoma — não como exame de rotina."},
+{"stem":"Quais achados, em combinação, aumentam a suspeita de leiomiossarcoma em vez de mioma benigno?","opts":["Crescimento lento e estável por vários anos, em mulher jovem.","Crescimento rápido de massa uterina, especialmente pós-menopausa, associado a achados de imagem atípicos.","Regressão espontânea da massa após a menopausa.","Ausência completa de qualquer sintoma."],"correct":1,"expl":"A suspeita de sarcoma se constrói pela <b>combinação</b> de fatores: crescimento rápido (sobretudo pós-menopausa), dor de início recente e achados de imagem atípicos (necrose irregular, margens infiltrativas)."},
+{"stem":"Por que a suspeita de leiomiossarcoma é particularmente importante de ser identificada antes da cirurgia?","opts":["Porque não influencia a escolha da técnica cirúrgica.","Porque técnicas que fragmentam o tumor (morcelamento) devem ser evitadas nesse cenário, pelo risco de disseminação de células malignas.","Porque exige apenas acompanhamento clínico, sem cirurgia.","Porque garante cura espontânea sem necessidade de tratamento."],"correct":1,"expl":"Quando há suspeita relevante de sarcoma, deve-se evitar o <b>morcelamento</b> (fragmentação do tumor durante a retirada), pelo risco de disseminar células malignas na cavidade abdominal."},
+{"stem":"Existe algum exame de sangue validado para diagnóstico ou rastreio de mioma uterino?","opts":["Sim, o CA-125 é validado para essa finalidade.","Não — não existe marcador sérico validado para diagnóstico ou rastreio de mioma.","Sim, a dosagem de estrogênio sérico confirma o diagnóstico.","Sim, o hemograma completo confirma o diagnóstico isoladamente."],"correct":1,"expl":"Não existe marcador laboratorial validado para diagnosticar mioma — exames de sangue (hemograma, beta-hCG) têm papel de <b>apoio</b>, não diagnóstico direto."},
+{"stem":"Qual o papel do hemograma na avaliação de uma paciente com mioma sintomático?","opts":["Confirmar o diagnóstico de mioma diretamente.","Avaliar a presença de anemia decorrente de sangramento uterino crônico.","Substituir a necessidade de exame de imagem.","Determinar o tipo FIGO do mioma."],"correct":1,"expl":"O hemograma tem papel de avaliar <b>repercussão</b> da doença (anemia por sangramento crônico), não de diagnosticar o mioma em si."},
+{"stem":"Antes de investigar uma massa uterina em mulher em idade reprodutiva, qual exame laboratorial é obrigatório para exclusão de diagnóstico diferencial importante?","opts":["CA-125.","Beta-hCG, para excluir gravidez.","Hormônio antimülleriano.","Prolactina sérica."],"correct":1,"expl":"Retomando o módulo anterior: a gravidez deve sempre ser excluída com <b>beta-hCG</b> antes de prosseguir a investigação de uma massa uterina em mulher em idade reprodutiva."},
+{"stem":"Qual exame permite tanto visualização direta quanto potencial tratamento simultâneo de um mioma submucoso?","opts":["Ultrassonografia transvaginal.","Ressonância magnética.","Histeroscopia (diagnóstica podendo ser também terapêutica).","Tomografia computadorizada."],"correct":2,"expl":"A histeroscopia permite visualização direta da cavidade e, no mesmo procedimento ou em tempo posterior planejado, o tratamento (ressecção) do componente submucoso."},
+{"stem":"Uma paciente com mioma conhecido apresenta, em USTV de rotina, aumento de tamanho da lesão em ritmo mais acelerado que o esperado, sem outros sintomas novos. A conduta mais prudente é:","opts":["Ignorar o achado, pois miomas sempre crescem de forma imprevisível.","Considerar investigação adicional (RM) para melhor caracterização, avaliando também o contexto (idade, status menopausal).","Indicar histerectomia de urgência imediatamente.","Repetir a USTV em 5 anos, sem qualquer outra conduta."],"correct":1,"expl":"Crescimento acelerado, mesmo isolado, justifica avaliação adicional — o contexto (especialmente status menopausal) ajuda a calibrar o grau de suspeita e a necessidade de RM."},
+{"stem":"Quais três informações, ao final da investigação diagnóstica, são essenciais para definir a conduta terapêutica em miomatose?","opts":["Apenas o tamanho do maior mioma.","Tipo FIGO (localização), tamanho/número dos miomas, e grau de suspeita de malignidade — associados ao desejo reprodutivo da paciente.","Somente a idade da paciente.","Exclusivamente o resultado do hemograma."],"correct":1,"expl":"A conduta terapêutica é definida pela combinação de <b>tipo FIGO, tamanho/número, suspeita de malignidade</b> e desejo reprodutivo — não por um único fator isolado."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">USTV</small><br>Qual o exame de primeira linha na investigação de mioma?","back":"Ultrassonografia transvaginal (USTV) — acessível, boa acurácia para identificar a maioria dos miomas e localização aproximada.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">USTV</small><br>Qual a principal limitação da USTV isolada?","back":"Definir com precisão o grau exato de invasão intracavitária (diferenciar tipo 0, 1 ou 2).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">SIS</small><br>Como funciona a sonohisterografia com infusão salina (SIS)?","back":"Infunde soro fisiológico na cavidade endometrial durante a USTV, distendendo-a para delimitar melhor o componente submucoso.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Histeroscopia</small><br>Qual vantagem da histeroscopia sobre a SIS?","back":"Permite visualização direta da cavidade e pode ser diagnóstica e terapêutica no mesmo procedimento.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">RM</small><br>Em quais 3 cenários a RM é indicada na investigação de miomas?","back":"{{Útero multimiomatoso complexo (planejamento cirúrgico); dúvida diagnóstica com adenomiose; suspeita de leiomiossarcoma.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Sarcoma</small><br>Como se constrói a suspeita de leiomiossarcoma na investigação pré-operatória?","back":"Pela combinação de fatores (crescimento rápido especialmente pós-menopausa, dor nova, achados de imagem atípicos) — nenhum critério isolado é definitivo.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Sarcoma</small><br>Por que evitar morcelamento quando há suspeita de sarcoma?","back":"Risco de disseminar células malignas na cavidade abdominal ao fragmentar o tumor durante a retirada.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Laboratório</small><br>Existe marcador sérico validado para diagnóstico de mioma?","back":"NÃO — não existe exame de sangue que diagnostique ou rastreie mioma.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Laboratório</small><br>Qual o papel do hemograma e do beta-hCG na investigação de mioma?","back":"Hemograma avalia anemia por sangramento crônico; beta-hCG exclui gravidez — nenhum diagnostica o mioma em si.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diferencial</small><br>Como a RM ajuda a diferenciar mioma de adenomiose?","back":"Mioma: bem circunscrito, pseudocápsula definida. Adenomiose: miométrio heterogêneo difuso, sem limites definidos.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Integração</small><br>Quais 3 informações fecham o raciocínio diagnóstico antes de definir a conduta?","back":"{{Tipo FIGO (localização); tamanho e número dos miomas; grau de suspeita de malignidade — associados ao desejo reprodutivo da paciente.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Prática</small><br>Antes de planejar uma miomectomia histeroscópica, qual exame é essencial?","back":"SIS ou histeroscopia diagnóstica, para definir com precisão o tipo FIGO submucoso (0, 1 ou 2).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Achados de imagem</small><br>Quais achados de RM sugerem leiomiossarcoma?","back":"Necrose central irregular, margens infiltrativas e restrição à difusão.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Prática</small><br>Um USTV que descreve apenas 'útero com mioma' é suficiente para planejar qualquer conduta?","back":"Não necessariamente — falta caracterizar tipo FIGO exato, tamanho/número e afastar sinais de alarme, conforme o contexto clínico.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Planejamento de miomectomia histeroscópica","stem":"Mulher de 30 anos com menorragia importante e USTV mostrando mioma com componente intracavitário aparente, mas de difícil definição exata do grau de invasão.","passos":[
+{"h":"Avaliação inicial","p":"USTV sugere mioma submucoso, mas não define com segurança se é tipo 1 ou tipo 2, informação relevante para o planejamento cirúrgico."},
+{"h":"Conduta diagnóstica complementar","p":"Solicitada histeroscopia diagnóstica para caracterização precisa do grau de invasão intracavitária."},
+{"h":"Resultado","p":"Histeroscopia confirma mioma tipo 1 (componente intramural menor que 50%), com boa margem de tecido saudável circundante visualizável."},
+{"h":"Raciocínio clínico","p":"A definição precisa do tipo FIGO por histeroscopia permite planejar adequadamente a viabilidade técnica da ressecção histeroscópica, evitando surpresas intraoperatórias."},
+{"h":"Conduta neste momento","p":"Encaminhar para miomectomia histeroscópica, procedimento a ser detalhado no módulo de Tratamento Cirúrgico."}
+]},
+{"t":"Caso 2 — Suspeita de leiomiossarcoma em paciente pós-menopausa","stem":"Mulher de 58 anos, na pós-menopausa há 6 anos, sem uso de terapia hormonal, apresenta em USTV de rotina um mioma que aumentou significativamente de tamanho em relação a exame de 8 meses antes, associado a dor pélvica de início recente.","passos":[
+{"h":"Análise do contexto","p":"Crescimento de massa uterina na pós-menopausa é um achado atípico, já que miomas deveriam estabilizar ou regredir nesse período sem terapia hormonal."},
+{"h":"Conduta diagnóstica","p":"Diante da combinação de crescimento rápido pós-menopausa e dor nova, solicitada ressonância magnética para melhor caracterização e avaliação de sinais de atipia."},
+{"h":"Resultado da RM","p":"RM demonstra área de necrose central irregular e margens parcialmente infiltrativas, aumentando a suspeita de leiomiossarcoma."},
+{"h":"Raciocínio clínico","p":"A combinação de fatores clínicos (crescimento rápido pós-menopausa, dor nova) com achados de imagem atípicos eleva significativamente a suspeita, mesmo sem diagnóstico histopatológico ainda confirmado."},
+{"h":"Conduta neste momento","p":"Encaminhar para avaliação cirúrgica especializada com planejamento de via que evite morcelamento, dada a suspeita relevante de malignidade — confirmação definitiva será histopatológica após a retirada em peça única."}
+]},
+{"t":"Caso 3 — Investigação sem achados alarmantes","stem":"Mulher de 45 anos, assintomática, com mioma intramural de 3 cm identificado incidentalmente em USTV de rotina, estável em relação a exame realizado 2 anos antes.","passos":[
+{"h":"Avaliação do achado","p":"Mioma pequeno, estável ao longo do tempo, sem sintomas associados (sem SUA, sem efeito de massa relevante)."},
+{"h":"Consideração de exames adicionais","p":"Diante da estabilidade e ausência de sinais de alarme, não há indicação de RM ou de investigação complementar adicional neste momento."},
+{"h":"Raciocínio clínico","p":"Nem todo mioma identificado exige investigação extensa — a ausência de sintomas, crescimento estável e características de imagem típicas de benignidade permitem conduta conservadora."},
+{"h":"Hipótese diagnóstica","p":"Leiomioma intramural, provavelmente benigno, assintomático."},
+{"h":"Conduta neste momento","p":"Seguimento clínico com USTV de controle periódico, sem necessidade de tratamento neste momento — reavaliar se surgirem sintomas ou alteração de crescimento."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['miomatose|2'] = {
+name: "Tratamento Clínico",
+intro: "Assim como na endometriose, o tratamento clínico controla sintomas — mas aqui a ferramenta hormonal mais potente (GnRH) é usada sobretudo como ponte para a cirurgia, não como solução definitiva.",
+sub: [
+["principios","Princípios do Tratamento",`
+<div class="ac-h">O que decide a conduta: sintoma predominante + contexto da paciente</div>
+<p class="ac-p">Assim como você viu no tratamento clínico da endometriose, nenhuma terapia medicamentosa <b>elimina</b> o mioma de forma definitiva e permanente — o objetivo é controlar o <b>sintoma predominante</b> (sangramento ou efeito de massa) e, com frequência, servir de <b>ponte</b> até uma decisão cirúrgica ou até a menopausa (quando o mioma tende a regredir espontaneamente).</p>
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">O que guia a escolha do tratamento clínico</text>
+<rect x="20" y="46" width="150" height="130" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="95" y="70" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Sintoma predominante</text>
+<text x="95" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">Sangramento ou</text>
+<text x="95" y="108" text-anchor="middle" font-size="9" style="fill:var(--muted)">efeito de massa</text>
+<rect x="185" y="46" width="150" height="130" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="260" y="70" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Desejo reprodutivo</text>
+<text x="260" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">Muda a lógica,</text>
+<text x="260" y="108" text-anchor="middle" font-size="9" style="fill:var(--muted)">assim como na</text>
+<text x="260" y="122" text-anchor="middle" font-size="9" style="fill:var(--muted)">endometriose</text>
+<rect x="350" y="46" width="150" height="130" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="425" y="70" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Tipo FIGO</text>
+<text x="425" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">Submucoso responde</text>
+<text x="425" y="108" text-anchor="middle" font-size="9" style="fill:var(--muted)">menos bem a hormônio</text>
+<text x="425" y="122" text-anchor="middle" font-size="9" style="fill:var(--muted)">isolado</text>
+<rect x="515" y="46" width="150" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="590" y="70" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Ponte vs. definitivo</text>
+<text x="590" y="94" text-anchor="middle" font-size="9" style="fill:var(--ink)">Pré-operatório ou</text>
+<text x="590" y="108" text-anchor="middle" font-size="9" style="fill:var(--ink)">até a menopausa</text>
+</svg>
+<div class="ac-warn"><b>Diferença importante em relação à endometriose:</b> um mioma <b>submucoso</b> que distorce a cavidade responde mal a tratamentos que dependem do endométrio (como o DIU-LNG) — a distorção anatômica limita a eficácia hormonal, algo que não se aplica à endometriose peritoneal.</div>
+`],
+["sangramento","Manejo do Sangramento (SUA)",`
+<div class="ac-h">Primeira linha para quem sangra muito</div>
+<p class="ac-p">Para controle da hemorragia sem necessariamente reduzir o volume do mioma, as opções de primeira linha incluem <b>ácido tranexâmico</b> (antifibrinolítico, usado só durante o sangramento), <b>AINEs</b> e terapia <b>hormonal</b> (ACO combinado, progestágenos, DIU-LNG).</p>
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Opções de 1ª linha para sangramento</text>
+<rect x="20" y="46" width="200" height="140" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="120" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Ácido tranexâmico</text>
+<text x="120" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">Antifibrinolítico</text>
+<text x="120" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">Só durante o sangramento</text>
+<text x="120" y="126" text-anchor="middle" font-size="9" style="fill:var(--muted)">Não é hormonal — opção se</text>
+<text x="120" y="140" text-anchor="middle" font-size="9" style="fill:var(--muted)">hormônio for contraindicado</text>
+<rect x="240" y="46" width="200" height="140" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="340" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Hormonal (ACO/progestágeno)</text>
+<text x="340" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">Reduz sangramento</text>
+<text x="340" y="108" text-anchor="middle" font-size="9" style="fill:var(--muted)">Não reduz o volume</text>
+<text x="340" y="122" text-anchor="middle" font-size="9" style="fill:var(--muted)">do mioma</text>
+<rect x="460" y="46" width="200" height="140" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.4"/>
+<text x="560" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">DIU-LNG</text>
+<text x="560" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">Boa opção SE a cavidade</text>
+<text x="560" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">não estiver distorcida</text>
+<text x="560" y="126" text-anchor="middle" font-size="9" style="fill:var(--muted)">Eficácia reduzida em mioma</text>
+<text x="560" y="140" text-anchor="middle" font-size="9" style="fill:var(--muted)">submucoso significativo</text>
+</svg>
+<div class="ac-tip"><b>Retomando o princípio geral:</b> essas opções controlam o <b>sintoma</b> (sangramento), mas nenhuma delas reduz de forma relevante o tamanho do mioma — para isso, entram as terapias hormonais mais potentes das próximas abas.</div>
+`],
+["gnrh_agonista","Agonistas de GnRH",`
+<div class="ac-h">A ferramenta clássica — sobretudo como preparo pré-cirúrgico</div>
+<p class="ac-p">Os agonistas de GnRH induzem um estado hipoestrogênico (mesmo mecanismo já visto na endometriose), levando a <b>redução real do volume do mioma</b> (diferente das opções da aba anterior) e a amenorreia temporária, que corrige a anemia antes de uma cirurgia.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<defs><marker id="am2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Por que o agonista de GnRH é usado antes da cirurgia</text>
+<rect x="30" y="46" width="160" height="70" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="110" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Hipoestrogenismo</text>
+<text x="110" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">induzido</text>
+<path d="M190 80 L226 80" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#am2)"/>
+<rect x="228" y="46" width="180" height="70" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="318" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Reduz volume do mioma</text>
+<text x="318" y="90" text-anchor="middle" font-size="9" style="fill:var(--ink)">e corrige anemia (amenorreia)</text>
+<path d="M408 80 L444 80" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#am2)"/>
+<rect x="446" y="46" width="160" height="70" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="526" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Cirurgia facilitada</text>
+<text x="526" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">menor sangramento</text>
+</svg>
+<div class="ac-warn"><b>Retomando a endometriose:</b> o mesmo limite de tempo se aplica aqui — uso prolongado sem add-back traz risco de perda de densidade óssea. Por isso o agonista de GnRH é indicado sobretudo como <b>terapia pré-operatória de curto prazo</b>, não como solução crônica.</div>
+`],
+["gnrh_antagonista","Antagonistas de GnRH (Terapia Combinada Oral)",`
+<div class="ac-h">A novidade oral — reduz sangramento, mas não o volume</div>
+<p class="ac-p">Antagonistas de GnRH orais (associados a baixa dose de estradiol e progestágeno, terapia "add-back" combinada em um único comprimido) são uma opção mais recente, aprovada especificamente para <b>sangramento menstrual intenso associado a miomas</b>.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">O que a terapia combinada oral faz — e não faz</text>
+<rect x="30" y="46" width="270" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="165" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Faz bem</text>
+<text x="165" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Reduz significativamente o</text>
+<text x="165" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">sangramento menstrual intenso</text>
+<text x="165" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Melhora qualidade de vida</text>
+<text x="165" y="140" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Via oral, sem efeito flare</text>
+<rect x="340" y="46" width="270" height="130" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.4"/>
+<text x="475" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">Não faz bem</text>
+<text x="475" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Não produz redução</text>
+<text x="475" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">clinicamente relevante do</text>
+<text x="475" y="120" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">VOLUME do mioma</text>
+<text x="475" y="140" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Segurança óssea a longo prazo</text>
+<text x="475" y="154" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">ainda em consolidação</text>
+</svg>
+<div class="ac-tip"><b>Diferença-chave que a prova pode explorar:</b> esse é um ponto sutil e importante — a terapia combinada com antagonista de GnRH é excelente para <b>sangramento</b>, mas, ao contrário do agonista clássico, <b>não encolhe o mioma de forma clinicamente relevante</b>. Não confunda "controla o sintoma" com "reduz o tumor".</div>
+<div class="ac-warn"><b>Cautela reconhecida na literatura:</b> apesar da boa eficácia em reduzir sangramento, ainda há necessidade de mais dados de segurança óssea em longo prazo — por isso a prescrição pede avaliação individualizada, não uso indiscriminado.</div>
+`],
+["sprm","Moduladores Seletivos do Receptor de Progesterona",`
+<div class="ac-h">Ulipristal: eficaz, mas com alerta de segurança relevante</div>
+<p class="ac-p">O acetato de ulipristal, modulador seletivo do receptor de progesterona (SPRM), demonstrou eficácia em reduzir sangramento e volume do mioma. No entanto, seu uso sofreu <b>restrições regulatórias importantes</b> em diversos países, por relatos de <b>hepatotoxicidade grave</b>, incluindo casos que evoluíram para necessidade de transplante hepático.</p>
+<svg viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Ulipristal: eficácia vs. segurança</text>
+<rect x="30" y="46" width="270" height="100" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Eficácia demonstrada</text>
+<text x="165" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">Reduz sangramento e</text>
+<text x="165" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">volume do mioma</text>
+<rect x="340" y="46" width="270" height="100" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.5"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">Alerta de segurança</text>
+<text x="475" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">Hepatotoxicidade grave</text>
+<text x="475" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">Uso restrito/monitorado</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha de prova:</b> se a questão descreve o ulipristal como opção de primeira linha "sem ressalvas" para uso prolongado e irrestrito, está desatualizada — o alerta de hepatotoxicidade mudou significativamente o perfil de uso dessa classe, exigindo monitorização e indicação criteriosa.</div>
+`],
+["escolha","Escolhendo a Terapia Certa",`
+<div class="ac-h">Juntando os fios: qual terapia para qual paciente</div>
+<p class="ac-p">A escolha combina <b>sintoma predominante</b>, <b>tipo FIGO</b>, <b>desejo reprodutivo</b> e <b>proximidade da menopausa</b> — os mesmos eixos de decisão vistos na endometriose, adaptados à lógica do mioma.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Guia rápido de decisão</text>
+<rect x="20" y="46" width="290" height="150" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Sangramento é o sintoma principal</text>
+<text x="165" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Ácido tranexâmico, hormonal</text>
+<text x="165" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">de 1ª linha, ou terapia</text>
+<text x="165" y="122" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">combinada com antagonista</text>
+<rect x="330" y="46" width="290" height="150" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Cirurgia planejada em breve</text>
+<text x="475" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Agonista de GnRH por curto</text>
+<text x="475" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">prazo — reduz volume e</text>
+<text x="475" y="122" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">corrige anemia pré-operatória</text>
+</svg>
+<div class="ac-call"><b>Ponto-chave:</b> se o objetivo é reduzir o mioma antes de operar, agonista de GnRH continua sendo a escolha mais consistente; se o objetivo é controlar sangramento por mais tempo sem cirurgia iminente, as opções orais (hormonal de 1ª linha ou terapia combinada com antagonista) fazem mais sentido.</div>
+`],
+["seguimento","Falha Terapêutica e Encaminhamento",`
+<div class="ac-h">Quando o tratamento clínico não é mais suficiente</div>
+<p class="ac-p">Assim como no módulo de endometriose, antes de rotular "falha", é preciso confirmar <b>tempo adequado, dose correta e adesão</b>. Mas alguns cenários já direcionam para tratamento cirúrgico/procedimentos, independentemente da resposta hormonal.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Quando encaminhar para o próximo módulo</text>
+<rect x="30" y="46" width="580" height="130" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="320" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Sinais de que é hora de considerar procedimento</text>
+<text x="320" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Anemia persistente apesar de tratamento clínico otimizado</text>
+<text x="320" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Efeito de massa significativo (sintomas urinários/intestinais importantes)</text>
+<text x="320" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Infertilidade atribuída a mioma submucoso (limitação intrínseca do hormônio)</text>
+<text x="320" y="148" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Desejo da paciente por solução definitiva</text>
+</svg>
+<div class="ac-warn"><b>Retomando a aba de submucoso do módulo anterior:</b> mioma submucoso causando infertilidade dificilmente vai se resolver só com hormônio — a distorção anatômica da cavidade é o problema estrutural, e hormônio não corrige anatomia.</div>
+<div class="ac-call"><b>Fechando o raciocínio do módulo:</b> ácido tranexâmico/AINE/hormonal de 1ª linha controlam sangramento sem reduzir volume → agonista de GnRH reduz volume mas por tempo limitado (ponte pré-operatória) → antagonista de GnRH oral combinado controla bem o sangramento, mas não o volume → ulipristal é eficaz porém com alerta de hepatotoxicidade → falha real ou limitação estrutural (submucoso com infertilidade, efeito de massa importante) encaminha para o módulo de Tratamento Cirúrgico e Embolização.</div>
+`]
+]
+};
+Object.assign(C['miomatose|2'], {
+"escores": `<div class="prose">
+<h3>Opções de tratamento clínico — comparativo</h3>
+<table class="ac-tbl">
+<tr><th>Opção</th><th>Reduz sangramento?</th><th>Reduz volume do mioma?</th><th>Limitação principal</th></tr>
+<tr><td>Ácido tranexâmico</td><td>Sim</td><td>Não</td><td>Só durante o sangramento</td></tr>
+<tr><td>ACO/progestágeno/DIU-LNG</td><td>Sim</td><td>Não</td><td>DIU-LNG menos eficaz se cavidade distorcida</td></tr>
+<tr><td>Agonista de GnRH</td><td>Sim (amenorreia)</td><td>Sim</td><td>Uso limitado no tempo (perda óssea)</td></tr>
+<tr><td>Antagonista de GnRH oral combinado</td><td>Sim, robusto</td><td>Não de forma relevante</td><td>Segurança óssea longo prazo em consolidação</td></tr>
+<tr><td>Ulipristal (SPRM)</td><td>Sim</td><td>Sim</td><td>Risco de hepatotoxicidade grave — uso restrito</td></tr>
+</table>
+</div>`,
+"dif": `<div class="prose">
+<h3>Antes de escalar — o que confirmar</h3>
+<table class="ac-tbl">
+<tr><th>Cenário</th><th>Considerar antes de trocar terapia</th></tr>
+<tr><td>Sangramento persiste nas primeiras semanas</td><td>Tempo insuficiente de tratamento</td></tr>
+<tr><td>Anemia não corrige</td><td>Reforço com ferro/suplementação associada, além do controle hormonal</td></tr>
+<tr><td>Infertilidade em mioma submucoso</td><td>Hormônio não resolve — limitação estrutural, considerar procedimento</td></tr>
+<tr><td>Efeito de massa progressivo</td><td>Hormônio tem pouco efeito sobre volume (exceto agonista de GnRH/ulipristal)</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Tratamento Clínico</div>
+<div class="mm">
+  <div class="mm-card"><h5>🎯 Princípio</h5><ul><li>Controla sintoma, não cura</li><li>Ponte até cirurgia/menopausa</li><li>Submucoso responde menos a hormônio</li></ul></div>
+  <div class="mm-card"><h5>🩸 Sangramento</h5><ul><li>Ác. tranexâmico, AINE</li><li>ACO/progestágeno/DIU-LNG</li><li>Nenhum reduz volume</li></ul></div>
+  <div class="mm-card"><h5>💉 Agonista GnRH</h5><ul><li>Reduz volume real</li><li>Ponte pré-operatória</li><li>Limitado no tempo</li></ul></div>
+  <div class="mm-card"><h5>💊 Antagonista oral</h5><ul><li>Excelente p/ sangramento</li><li>NÃO reduz volume relevante</li><li>Segurança óssea em estudo</li></ul></div>
+  <div class="mm-card"><h5>⚠️ Ulipristal</h5><ul><li>Eficaz (sangramento + volume)</li><li>Risco de hepatotoxicidade</li><li>Uso restrito/monitorado</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Mioma sintomático, sem indicação cirúrgica imediata</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — Identificar sintoma predominante</div><div class="fx-lbl">Sangramento vs. efeito de massa vs. infertilidade</div><div class="fx-arrow"></div><div class="fx-lbl">Sangramento é o principal problema?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Ácido tranexâmico/hormonal de 1ª linha ou antagonista de GnRH oral combinado</div><div class="fx-node end"><b>Efeito de massa/infertilidade (submucoso):</b> hormônio tem papel limitado — considerar módulo cirúrgico</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Cirurgia já planejada (miomectomia ou histerectomia)</div><div class="fx-arrow"></div><div class="fx-lbl">Paciente anêmica ou mioma muito volumoso, dificultando a técnica?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Considerar agonista de GnRH por curto prazo antes da cirurgia (reduz volume, corrige anemia)</div><div class="fx-node end"><b>NÃO:</b> Seguir direto para o módulo de Tratamento Cirúrgico e Embolização</div></div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Tratamento Clínico em 60 segundos</h4>
+<ul>
+<li><strong>Princípio:</strong> controla sintoma, é ponte até cirurgia/menopausa; submucoso responde mal a hormônio (problema estrutural).</li>
+<li><strong>1ª linha p/ sangramento:</strong> ácido tranexâmico, AINE, ACO/progestágeno/DIU-LNG — controlam sangramento, NÃO reduzem volume. DIU-LNG menos eficaz se cavidade distorcida.</li>
+<li><strong>Agonista de GnRH:</strong> reduz volume real + amenorreia — ponte pré-operatória de curto prazo (limite por perda óssea).</li>
+<li><strong>Antagonista de GnRH oral combinado:</strong> excelente para sangramento, mas NÃO reduz volume de forma clinicamente relevante; segurança óssea longo prazo ainda em consolidação.</li>
+<li><strong>Ulipristal (SPRM):</strong> eficaz em sangramento E volume, mas risco de hepatotoxicidade grave — uso restrito e monitorado.</li>
+<li><strong>Encaminhar para cirurgia:</strong> anemia persistente, efeito de massa importante, infertilidade por submucoso, ou desejo de solução definitiva.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Tratamento clínico do mioma</strong> = controla sangramento (1ª linha, antagonista oral) ou reduz volume temporariamente (agonista GnRH, ulipristal com ressalva de segurança), mas não resolve o problema estrutural do submucoso nem substitui cirurgia quando indicada.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Distinga sempre: o que <strong>controla sangramento</strong> nem sempre <strong>reduz volume</strong> — essa é a pegadinha mais recorrente do módulo.</li>
+<li>Ulipristal com "sem ressalvas de segurança" é sinal de questão desatualizada.</li>
+<li>Mioma submucoso + infertilidade = hormônio não resolve, pensa em procedimento.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que antagonista de GnRH oral combinado encolhe o mioma como o agonista clássico.</li>
+<li>Prescrever DIU-LNG como 1ª linha em mioma submucoso volumoso sem considerar a distorção de cavidade.</li>
+<li>Ignorar o alerta de hepatotoxicidade do ulipristal.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"Agonista encolhe, antagonista só estanca."</strong></li>
+<li><strong>"Hormônio não desfaz distorção de cavidade."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Usar agonista de GnRH cronicamente sem add-back nem limite de tempo.</li>
+<li>Prescrever ulipristal sem monitorização hepática.</li>
+<li>Esperar redução de volume com terapia combinada de antagonista de GnRH.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico por que nenhuma terapia clínica elimina o mioma definitivamente","Sei quais opções controlam sangramento sem reduzir o volume do mioma","Explico por que o agonista de GnRH é usado sobretudo como preparo pré-operatório","Diferencio o efeito do antagonista de GnRH oral combinado (sangramento) do agonista clássico (volume)","Conheço o alerta de segurança do ulipristal e por que seu uso é restrito","Sei reconhecer quando o tratamento clínico não é mais suficiente e encaminhar para o módulo cirúrgico"]
+});
+Object.assign(C['miomatose|2'], {
+"questoes": [
+{"stem":"Qual é o objetivo realista do tratamento clínico do mioma uterino?","opts":["Eliminar definitivamente o mioma em todos os casos.","Controlar o sintoma predominante (sangramento ou efeito de massa), servindo frequentemente como ponte até a cirurgia ou a menopausa.","Substituir totalmente a necessidade de qualquer avaliação cirúrgica futura.","Curar definitivamente a infertilidade associada a mioma submucoso."],"correct":1,"expl":"Assim como na endometriose, o tratamento clínico controla sintomas sem eliminar o mioma — frequentemente funcionando como <b>ponte</b> até cirurgia ou menopausa."},
+{"stem":"Por que o DIU com levonorgestrel (DIU-LNG) pode ter eficácia reduzida em mioma submucoso volumoso?","opts":["Porque o DIU-LNG é contraindicado em qualquer paciente com mioma.","Porque a distorção anatômica da cavidade endometrial pelo componente submucoso limita a eficácia do dispositivo.","Porque o DIU-LNG aumenta o tamanho do mioma.","Porque não existe qualquer relação entre mioma submucoso e DIU-LNG."],"correct":1,"expl":"A distorção da cavidade pelo mioma submucoso pode prejudicar o posicionamento e a eficácia do DIU-LNG — uma limitação estrutural que o hormônio não resolve."},
+{"stem":"Qual opção de tratamento clínico é capaz de reduzir de forma relevante o VOLUME do mioma, além de controlar o sangramento?","opts":["Ácido tranexâmico isolado.","Agonista de GnRH.","DIU-LNG isolado.","AINEs isolados."],"correct":1,"expl":"O agonista de GnRH, ao induzir hipoestrogenismo, promove <b>redução real do volume</b> do mioma, diferente das opções de primeira linha que só controlam sangramento."},
+{"stem":"Por que o uso do agonista de GnRH no tratamento do mioma é preferencialmente de curto prazo?","opts":["Porque perde efeito rapidamente sem qualquer relação com segurança.","Porque o uso prolongado sem add-back associa-se a risco de perda de densidade mineral óssea.","Porque é o único tratamento disponível e deve ser reservado para emergências.","Porque causa aumento paradoxal do volume do mioma se usado por mais de 1 mês."],"correct":1,"expl":"Assim como na endometriose, o estado hipoestrogênico prolongado sem add-back traz risco de perda óssea — por isso o agonista de GnRH é usado sobretudo como terapia pré-operatória de curto prazo."},
+{"stem":"Em relação à terapia combinada oral com antagonista de GnRH (associada a add-back) para miomas, é correto afirmar que:","opts":["Reduz significativamente tanto o sangramento quanto o volume do mioma.","Reduz significativamente o sangramento, mas não produz redução clinicamente relevante do volume do mioma.","Não tem qualquer efeito sobre o sangramento menstrual.","É contraindicada em qualquer paciente com mioma sintomático."],"correct":1,"expl":"Esse é um ponto-chave: a terapia combinada com antagonista de GnRH controla bem o <b>sangramento</b>, mas, diferente do agonista clássico, não reduz o volume do mioma de forma clinicamente relevante."},
+{"stem":"Qual preocupação de segurança a longo prazo ainda está em consolidação para a terapia combinada oral com antagonista de GnRH?","opts":["Risco de sangramento uterino aumentado.","Segurança da densidade mineral óssea em uso prolongado.","Risco de infertilidade permanente.","Risco de hepatotoxicidade grave."],"correct":1,"expl":"Apesar da boa eficácia para sangramento, os dados de segurança óssea em longo prazo dessa terapia ainda estão em consolidação, exigindo avaliação individualizada."},
+{"stem":"O acetato de ulipristal (modulador seletivo do receptor de progesterona) teve seu uso restrito em diversos países principalmente por qual motivo?","opts":["Falta de eficácia clínica comprovada.","Relatos de hepatotoxicidade grave, incluindo casos com necessidade de transplante hepático.","Custo elevado sem qualquer benefício adicional.","Interação medicamentosa com ácido tranexâmico."],"correct":1,"expl":"O ulipristal teve restrições regulatórias por relatos de <b>hepatotoxicidade grave</b>, incluindo casos graves com necessidade de transplante hepático — por isso seu uso hoje exige monitorização."},
+{"stem":"Uma paciente com mioma submucoso e infertilidade associada busca tratamento clínico hormonal com intenção de resolver a infertilidade. A conduta mais apropriada é:","opts":["Prescrever agonista de GnRH prolongado como solução definitiva para a infertilidade.","Explicar que o hormônio não corrige a distorção anatômica da cavidade, e que a infertilidade nesse contexto tende a exigir abordagem estrutural (procedimento).","Prescrever DIU-LNG como tratamento definitivo da infertilidade.","Garantir que qualquer tratamento clínico resolverá a infertilidade em poucos meses."],"correct":1,"expl":"Hormônio não desfaz distorção anatômica — infertilidade por mioma submucoso tende a exigir abordagem estrutural (miomectomia), tema do próximo módulo."},
+{"stem":"Quais achados justificam considerar tratamento cirúrgico/procedimento em vez de manter apenas tratamento clínico do mioma?","opts":["Sangramento leve, bem controlado com ácido tranexâmico ocasional.","Anemia persistente apesar de tratamento clínico otimizado, efeito de massa significativo, ou infertilidade por mioma submucoso.","Mioma pequeno e assintomático em achado incidental.","Preferência inicial da paciente por qualquer tratamento, sem sintomas relevantes."],"correct":1,"expl":"Anemia persistente, efeito de massa relevante e infertilidade estrutural (submucoso) são sinais claros de que o tratamento clínico isolado não é mais suficiente."},
+{"stem":"Em qual cenário o agonista de GnRH é classicamente utilizado no manejo pré-operatório de miomas?","opts":["Para aumentar o tamanho do mioma antes da cirurgia, facilitando sua localização.","Para reduzir o volume do mioma e corrigir anemia antes da cirurgia, facilitando a técnica e reduzindo sangramento intraoperatório.","Para substituir completamente a necessidade de cirurgia.","Para ser usado exclusivamente após a cirurgia, nunca antes."],"correct":1,"expl":"O agonista de GnRH pré-operatório reduz o volume do mioma e corrige a anemia (via amenorreia induzida), facilitando a técnica cirúrgica e reduzindo o sangramento intraoperatório."},
+{"stem":"O ácido tranexâmico, usado no manejo do sangramento por mioma, atua por qual mecanismo?","opts":["Supressão do eixo hipotálamo-hipófise-ovário.","Ação antifibrinolítica, usada apenas durante o período de sangramento.","Bloqueio da aromatase local no mioma.","Indução de hipoestrogenismo sistêmico prolongado."],"correct":1,"expl":"O ácido tranexâmico é um <b>antifibrinolítico</b>, usado pontualmente durante o sangramento — não é hormonal e não reduz o volume do mioma."},
+{"stem":"Antes de considerar 'falha' do tratamento clínico do sangramento por mioma e escalar a conduta, o que deve ser confirmado?","opts":["Apenas a preferência inicial da paciente, sem qualquer outro critério.","Tempo adequado de uso, dose correta e adesão ao tratamento prescrito.","Se a paciente completou pelo menos 10 anos de tratamento.","Nada — qualquer sangramento persistente já indica falha imediata."],"correct":1,"expl":"Assim como na endometriose, antes de rotular falha terapêutica é preciso confirmar tempo adequado, dose e adesão — não apenas a persistência isolada do sintoma."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Princípio</small><br>Qual o objetivo do tratamento clínico do mioma?","back":"Controlar o sintoma predominante (sangramento ou efeito de massa), funcionando como ponte até cirurgia ou menopausa — não elimina o mioma.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">DIU-LNG</small><br>Por que o DIU-LNG pode ter eficácia reduzida em mioma submucoso?","back":"A distorção anatômica da cavidade endometrial pelo componente submucoso prejudica seu posicionamento e eficácia.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">1ª linha</small><br>Quais opções controlam sangramento SEM reduzir o volume do mioma?","back":"{{Ácido tranexâmico; AINEs; ACO combinado/progestágeno/DIU-LNG.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Agonista GnRH</small><br>Por que o agonista de GnRH é útil no pré-operatório de miomas?","back":"Reduz volume real do mioma e induz amenorreia, corrigindo anemia — facilita a técnica cirúrgica e reduz sangramento intraoperatório.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Agonista GnRH</small><br>Por que o uso do agonista de GnRH é limitado no tempo?","back":"Risco de perda de densidade mineral óssea com uso prolongado sem add-back.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Antagonista GnRH</small><br>O que a terapia combinada oral com antagonista de GnRH faz e não faz?","back":"Reduz significativamente o sangramento, mas NÃO produz redução clinicamente relevante do volume do mioma.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Antagonista GnRH</small><br>Que aspecto de segurança da terapia combinada oral ainda está em consolidação?","back":"A segurança da densidade mineral óssea em uso prolongado.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Ulipristal</small><br>Por que o uso do ulipristal (SPRM) foi restrito em diversos países?","back":"Relatos de hepatotoxicidade grave, incluindo casos com necessidade de transplante hepático.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Ulipristal</small><br>O ulipristal reduz sangramento e volume do mioma?","back":"Sim, ambos — mas seu uso exige monitorização por causa do risco de hepatotoxicidade.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Infertilidade</small><br>O tratamento hormonal resolve a infertilidade causada por mioma submucoso?","back":"NÃO — hormônio não corrige a distorção anatômica da cavidade; a solução costuma ser estrutural (procedimento/miomectomia).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Escalonamento</small><br>Quais achados justificam considerar tratamento cirúrgico em vez de manter só tratamento clínico?","back":"{{Anemia persistente apesar de tratamento otimizado; efeito de massa significativo; infertilidade por mioma submucoso; desejo de solução definitiva.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Ácido tranexâmico</small><br>Qual o mecanismo de ação do ácido tranexâmico?","back":"Ação antifibrinolítica — usado pontualmente durante o período de sangramento, não é hormonal.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Escolha</small><br>Se o objetivo é reduzir o mioma antes de uma cirurgia, qual opção é mais consistente?","back":"Agonista de GnRH por curto prazo — reduz volume real e corrige anemia via amenorreia.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Escolha</small><br>Se o objetivo é controlar sangramento sem cirurgia iminente, quais opções orais fazem mais sentido?","back":"Hormonal de 1ª linha (ACO/progestágeno/DIU-LNG) ou terapia combinada com antagonista de GnRH.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Controle de sangramento sem cirurgia iminente","stem":"Mulher de 38 anos com mioma intramural de 4 cm e menorragia moderada, sem desejo gestacional atual, sem plano cirúrgico definido no momento.","passos":[
+{"h":"Avaliação inicial","p":"Sangramento é o sintoma predominante; sem efeito de massa relevante; sem indicação cirúrgica imediata."},
+{"h":"Discussão de opções","p":"Apresentadas opções de primeira linha: ACO combinado, progestágeno sistêmico ou DIU-LNG (viável, já que não há distorção significativa de cavidade nesse caso intramural)."},
+{"h":"Decisão compartilhada","p":"Paciente opta por DIU-LNG, também por conveniência contraceptiva."},
+{"h":"Raciocínio clínico","p":"Como o mioma é intramural (tipo 3-4) e não distorce a cavidade de forma relevante, o DIU-LNG mantém boa eficácia esperada nesse cenário, diferente do que ocorreria em mioma submucoso volumoso."},
+{"h":"Conduta neste momento","p":"Inserção do DIU-LNG, com reavaliação de resposta em 3-6 meses e monitorização de hemoglobina."}
+]},
+{"t":"Caso 2 — Preparo pré-operatório com agonista de GnRH","stem":"Mulher de 41 anos com mioma volumoso de 9 cm e anemia importante (hemoglobina 8,5 g/dL), já com indicação de miomectomia programada.","passos":[
+{"h":"Avaliação pré-operatória","p":"Anemia significativa e volume tumoral elevado, que podem dificultar a técnica cirúrgica e aumentar o risco de sangramento intraoperatório."},
+{"h":"Conduta proposta","p":"Iniciado agonista de GnRH por período limitado (curto prazo) antes da cirurgia, com objetivo de reduzir o volume do mioma e induzir amenorreia para corrigir a anemia."},
+{"h":"Raciocínio clínico","p":"Esse é exatamente o cenário clássico de indicação do agonista de GnRH — uso pré-operatório de curto prazo, não como solução crônica, evitando os riscos de perda óssea associados ao uso prolongado."},
+{"h":"Reavaliação","p":"Após o período de tratamento, hemoglobina melhorada e redução mensurável do volume do mioma à USTV de controle."},
+{"h":"Conduta neste momento","p":"Prosseguir com a miomectomia programada, agora em condições clínicas e técnicas mais favoráveis."}
+]},
+{"t":"Caso 3 — Uso criterioso de terapia combinada com antagonista de GnRH","stem":"Mulher de 45 anos com sangramento menstrual intenso por múltiplos miomas intramurais, sem desejo cirúrgico imediato, buscando alternativa às opções hormonais de primeira linha já tentadas sem sucesso adequado.","passos":[
+{"h":"Revisão do tratamento prévio","p":"ACO combinado tentado por tempo adequado, com melhora parcial insuficiente do sangramento; paciente deseja evitar cirurgia no momento."},
+{"h":"Discussão de opções de segunda linha","p":"Apresentada a terapia combinada oral com antagonista de GnRH, explicando claramente que essa opção controla bem o sangramento, mas não deve ser esperada redução relevante do volume dos miomas."},
+{"h":"Decisão compartilhada","p":"Paciente opta por iniciar a terapia combinada, compreendendo suas expectativas realistas quanto ao efeito sobre o volume tumoral."},
+{"h":"Raciocínio clínico","p":"A escolha é apropriada para o objetivo principal (controle de sangramento sem cirurgia imediata), mas exige acompanhamento periódico dado que os dados de segurança óssea em longo prazo ainda estão em consolidação."},
+{"h":"Conduta neste momento","p":"Iniciar terapia combinada com antagonista de GnRH, com reavaliação clínica programada e monitorização, mantendo a discussão sobre opções cirúrgicas/procedimentos como alternativa futura se necessário."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['miomatose|3'] = {
+name: "Tratamento Cirúrgico e Embolização",
+intro: "A escolha entre miomectomia, histerectomia, embolização ou ultrassom focalizado depende, acima de tudo, de uma pergunta: essa paciente ainda deseja engravidar?",
+sub: [
+["principios","Princípios da Escolha Terapêutica",`
+<div class="ac-h">A pergunta que organiza todo o módulo</div>
+<p class="ac-p">Diferente do tratamento cirúrgico da endometriose (onde a excisão é quase sempre a regra), em miomatose a primeira pergunta prática é: <b>a paciente deseja preservar a fertilidade/o útero?</b> Essa resposta divide o leque de opções em dois grandes grupos.</p>
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Duas grandes vias de decisão</text>
+<rect x="30" y="46" width="290" height="150" rx="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="175" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Deseja preservar útero/fertilidade</text>
+<text x="175" y="96" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Miomectomia (histeroscópica,</text>
+<text x="175" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">laparoscópica ou aberta)</text>
+<text x="175" y="132" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Embolização (com ressalvas</text>
+<text x="175" y="146" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">para desejo gestacional)</text>
+<rect x="360" y="46" width="290" height="150" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.5"/>
+<text x="505" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--ink)">Prole completa / sem desejo futuro</text>
+<text x="505" y="96" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Histerectomia (solução</text>
+<text x="505" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">definitiva)</text>
+<text x="505" y="132" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Embolização ou MRgFUS</text>
+<text x="505" y="146" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">(preserva o útero, sem foco</text>
+<text x="505" y="160" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">reprodutivo)</text>
+</svg>
+<div class="ac-call"><b>Segunda pergunta, sempre feita em conjunto:</b> qual o <b>tipo FIGO</b>, tamanho e número dos miomas? Isso define a via técnica dentro de cada grande grupo — exatamente o fio condutor que vem dos módulos 0 e 1.</div>
+`],
+["miomectomia_histero","Miomectomia Histeroscópica",`
+<div class="ac-h">A via de escolha para o submucoso</div>
+<p class="ac-p">Para miomas <b>submucosos (tipos 0, 1 e, com ressalvas, 2)</b>, a miomectomia histeroscópica é a técnica de escolha quando há desejo de preservar o útero: aborda o mioma pela via natural, sem incisão abdominal.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Miomectomia histeroscópica</text>
+<rect x="30" y="46" width="270" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Vantagens</text>
+<text x="165" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Sem incisão abdominal</text>
+<text x="165" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Recuperação rápida</text>
+<text x="165" y="120" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Resolve a distorção de</text>
+<text x="165" y="134" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">cavidade (melhora fertilidade)</text>
+<rect x="340" y="46" width="270" height="130" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.4"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">Limitações técnicas</text>
+<text x="475" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Tipo 2 (componente</text>
+<text x="475" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">intramural &#8805;50%) é mais</text>
+<text x="475" y="120" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">desafiador, às vezes exige</text>
+<text x="475" y="134" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">mais de um tempo cirúrgico</text>
+</svg>
+<div class="ac-tip"><b>Retomando o módulo de diagnóstico:</b> é exatamente por isso que a SIS/histeroscopia diagnóstica prévia é tão importante — definir com precisão se é tipo 0, 1 ou 2 muda a viabilidade técnica dessa cirurgia em tempo único.</div>
+<div class="ac-warn"><b>Complicação a vigiar:</b> sobrecarga de fluido (quando meios líquidos de distensão são usados em grande volume) é uma complicação intraoperatória a monitorar ativamente durante histeroscopias cirúrgicas prolongadas.</div>
+`],
+["miomectomia_lap","Miomectomia Laparoscópica e Aberta",`
+<div class="ac-h">Para intramurais e subserosos, com desejo de preservar o útero</div>
+<p class="ac-p">Miomas <b>intramurais e subserosos</b> sintomáticos, em paciente que deseja preservar o útero, são abordados por miomectomia <b>laparoscópica</b> (minimamente invasiva) ou <b>aberta</b> (laparotomia), a depender de tamanho, número e localização.</p>
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Laparoscópica vs. aberta</text>
+<rect x="30" y="46" width="290" height="150" rx="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="175" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Laparoscópica</text>
+<text x="175" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Recuperação mais rápida,</text>
+<text x="175" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">menor morbidade</text>
+<text x="175" y="128" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Preferida quando tecnicamente</text>
+<text x="175" y="142" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">viável (número/tamanho limitados)</text>
+<rect x="360" y="46" width="290" height="150" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.5"/>
+<text x="505" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Aberta (laparotomia)</text>
+<text x="505" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Miomas muito numerosos,</text>
+<text x="505" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">volumosos ou localização</text>
+<text x="505" y="122" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">tecnicamente complexa</text>
+<text x="505" y="142" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Maior morbidade, recuperação</text>
+<text x="505" y="156" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">mais longa</text>
+</svg>
+<div class="ac-warn"><b>Cuidado com morcelamento:</b> retomando o módulo de diagnóstico — se há qualquer suspeita relevante de leiomiossarcoma, técnicas que fragmentam o tecido (morcelamento, comum na via laparoscópica) devem ser evitadas, preferindo retirada em peça única.</div>
+<div class="ac-tip"><b>Após miomectomia com desejo gestacional:</b> dependendo da profundidade da incisão miometrial, pode haver recomendação de via de parto específica (cesárea eletiva) em gestação futura — informação que deve constar no relatório cirúrgico.</div>
+`],
+["histerectomia","Histerectomia",`
+<div class="ac-h">Solução definitiva, para quem não deseja mais engravidar</div>
+<p class="ac-p">A histerectomia é o único tratamento verdadeiramente <b>definitivo</b> para miomatose — elimina o risco de recidiva de novos miomas, já que remove o próprio órgão-alvo. É indicada para pacientes com prole completa/sem desejo reprodutivo futuro e sintomas significativos.</p>
+<svg viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Histerectomia: quando considerar</text>
+<rect x="30" y="46" width="580" height="110" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="320" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Cenários típicos</text>
+<text x="320" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Prole completa / sem desejo reprodutivo futuro</text>
+<text x="320" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Sintomas significativos refratários a outras abordagens</text>
+<text x="320" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Miomatose extensa/múltiplos miomas tornando miomectomia inviável</text>
+</svg>
+<div class="ac-call"><b>Diferença-chave em relação à miomectomia:</b> a miomectomia remove os miomas atuais, mas <b>novos miomas podem se formar</b> no tecido miometrial remanescente — só a histerectomia elimina essa possibilidade, por remover o órgão inteiro.</div>
+<div class="ac-tip"><b>Retomando o módulo de tratamento cirúrgico da endometriose:</b> a lógica de "último recurso apenas quando não há mais desejo reprodutivo" é a mesma — mas aqui a histerectomia é considerada bem mais cedo na escada terapêutica quando não há desejo de fertilidade, já que oferece resolução completa e definitiva especificamente para o problema do mioma.</div>
+`],
+["embolizacao","Embolização da Artéria Uterina (UAE)",`
+<div class="ac-h">Alternativa que preserva o útero, sem ser cirurgia</div>
+<p class="ac-p">A embolização da artéria uterina (UAE) é um procedimento radiológico intervencionista que oclui os vasos que nutrem o mioma, causando sua necrose isquêmica e redução progressiva de volume — preservando o útero, mas sem retirar o tecido miomatoso.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Embolização: vantagens e ressalva reprodutiva</text>
+<rect x="30" y="46" width="270" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Vantagens</text>
+<text x="165" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Preserva o útero</text>
+<text x="165" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Sem incisão cirúrgica</text>
+<text x="165" y="120" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Recuperação geralmente</text>
+<text x="165" y="134" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">mais rápida que cirurgia aberta</text>
+<rect x="340" y="46" width="270" height="130" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.4"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">Ressalva reprodutiva</text>
+<text x="475" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Não é a primeira escolha</text>
+<text x="475" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">se há desejo gestacional</text>
+<text x="475" y="120" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">futuro — desfechos</text>
+<text x="475" y="134" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">obstétricos menos estabelecidos</text>
+</svg>
+<div class="ac-warn"><b>Por que essa ressalva existe:</b> a embolização pode afetar a vascularização ovariana/uterina de forma menos previsível que a miomectomia cirúrgica, com dados obstétricos futuros (risco de insuficiência ovariana, complicações placentárias) menos consolidados — por isso costuma ser reservada para quem não planeja engravidar, ou discutida com essa ressalva explícita.</div>
+`],
+["mrgfus","Ultrassom Focalizado Guiado por RM (MRgFUS)",`
+<div class="ac-h">A opção não invasiva — e suas limitações práticas</div>
+<p class="ac-p">O MRgFUS (ablação por ultrassom de alta intensidade guiada por ressonância magnética) é uma alternativa <b>não invasiva</b>, que usa energia focalizada para necrosar o tecido do mioma sem qualquer incisão ou punção.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">MRgFUS: não invasivo, mas com critérios de seleção</text>
+<rect x="30" y="46" width="270" height="130" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Vantagem central</text>
+<text x="165" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Nenhuma incisão ou</text>
+<text x="165" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">punção — totalmente</text>
+<text x="165" y="120" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">não invasivo</text>
+<rect x="340" y="46" width="270" height="130" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.4"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">Limitações práticas</text>
+<text x="475" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Depende de características</text>
+<text x="475" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">específicas do mioma</text>
+<text x="475" y="120" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">(localização, tamanho,</text>
+<text x="475" y="134" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">acesso pela via do feixe)</text>
+</svg>
+<div class="ac-tip"><b>Por que não é para todos os casos:</b> nem todo mioma é tecnicamente acessível ao feixe de ultrassom focalizado (localização, presença de cicatrizes na parede abdominal, distância da pele) — a seleção de candidatas é criteriosa, tornando essa opção menos amplamente disponível que as demais.</div>
+`],
+["escolha_final","Síntese: Escolhendo Entre as Opções",`
+<div class="ac-h">Juntando desejo reprodutivo + tipo FIGO + tamanho/número</div>
+<p class="ac-p">Fechando o módulo, a escolha final combina os três eixos que você já viu se repetirem: <b>desejo reprodutivo</b>, <b>tipo FIGO</b> e <b>tamanho/número</b> dos miomas.</p>
+<svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Guia de síntese</text>
+<rect x="20" y="46" width="200" height="170" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="120" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Deseja engravidar</text>
+<text x="120" y="86" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">+ submucoso</text>
+<text x="120" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Miomectomia histeroscópica</text>
+<rect x="240" y="46" width="200" height="170" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="340" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Deseja engravidar</text>
+<text x="340" y="86" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">+ intramural/subseroso</text>
+<text x="340" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Miomectomia lap./aberta</text>
+<rect x="460" y="46" width="200" height="170" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="560" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Sem desejo futuro</text>
+<text x="560" y="86" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Sintomas importantes</text>
+<text x="560" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Histerectomia (definitivo) ou</text>
+<text x="560" y="124" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">UAE/MRgFUS (preserva útero,</text>
+<text x="560" y="138" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">sem foco reprodutivo)</text>
+</svg>
+<div class="ac-call"><b>Fechando o raciocínio de toda a Miomatose:</b> classificação FIGO (módulo 0) → diagnóstico confirma tipo/tamanho/suspeita de malignidade (módulo 1) → tratamento clínico controla sintomas e serve de ponte (módulo 2) → tratamento definitivo (este módulo) é escolhido combinando desejo reprodutivo, tipo FIGO e extensão da doença, com miomectomia para quem deseja preservar fertilidade, histerectomia como solução definitiva, e UAE/MRgFUS como alternativas não cirúrgicas que preservam o útero para quem não tem foco reprodutivo.</div>
+`]
+]
+};
+Object.assign(C['miomatose|3'], {
+"escores": `<div class="prose">
+<h3>Opções de tratamento definitivo/procedimento — comparativo</h3>
+<table class="ac-tbl">
+<tr><th>Opção</th><th>Preserva útero?</th><th>Indicada se desejo reprodutivo?</th><th>Melhor para</th></tr>
+<tr><td>Miomectomia histeroscópica</td><td>Sim</td><td>Sim (primeira escolha)</td><td>Submucoso (tipos 0-2)</td></tr>
+<tr><td>Miomectomia laparoscópica/aberta</td><td>Sim</td><td>Sim</td><td>Intramural/subseroso sintomático</td></tr>
+<tr><td>Histerectomia</td><td>Não</td><td>Não</td><td>Prole completa, sintomas refratários</td></tr>
+<tr><td>Embolização (UAE)</td><td>Sim</td><td>Não é 1ª escolha</td><td>Sem desejo gestacional, quer evitar cirurgia</td></tr>
+<tr><td>MRgFUS</td><td>Sim</td><td>Dados limitados</td><td>Casos tecnicamente elegíveis, não invasivo</td></tr>
+</table>
+</div>`,
+"dif": `<div class="prose">
+<h3>Riscos técnicos a considerar por via</h3>
+<table class="ac-tbl">
+<tr><th>Técnica</th><th>Risco/cuidado específico</th></tr>
+<tr><td>Miomectomia histeroscópica</td><td>Sobrecarga de fluido em cirurgias prolongadas</td></tr>
+<tr><td>Miomectomia laparoscópica</td><td>Evitar morcelamento se suspeita de sarcoma</td></tr>
+<tr><td>Miomectomia (geral)</td><td>Possível recomendação de cesárea eletiva em gestação futura, conforme profundidade da incisão</td></tr>
+<tr><td>Embolização</td><td>Desfechos obstétricos futuros menos estabelecidos</td></tr>
+<tr><td>MRgFUS</td><td>Nem todo mioma é tecnicamente elegível</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Tratamento Cirúrgico e Embolização</div>
+<div class="mm">
+  <div class="mm-card"><h5>🎯 Pergunta central</h5><ul><li>Deseja preservar útero/fertilidade?</li><li>+ tipo FIGO + tamanho/número</li></ul></div>
+  <div class="mm-card"><h5>🔬 Miomectomia histeroscópica</h5><ul><li>Submucoso 0-1-2</li><li>Sem incisão abdominal</li><li>Cuidado: sobrecarga de fluido</li></ul></div>
+  <div class="mm-card"><h5>🔪 Miomectomia lap./aberta</h5><ul><li>Intramural/subseroso</li><li>Evitar morcelamento se suspeita de sarcoma</li></ul></div>
+  <div class="mm-card"><h5>🏁 Histerectomia</h5><ul><li>Definitiva</li><li>Prole completa</li><li>Elimina risco de recidiva</li></ul></div>
+  <div class="mm-card"><h5>🩸 Embolização (UAE)</h5><ul><li>Preserva útero</li><li>Não 1ª escolha se desejo gestacional</li></ul></div>
+  <div class="mm-card"><h5>🔊 MRgFUS</h5><ul><li>Não invasivo</li><li>Seleção criteriosa de candidatas</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Indicação de tratamento definitivo/procedimento confirmada</div><div class="fx-arrow"></div><div class="fx-lbl">Deseja preservar útero/fertilidade futura?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Miomectomia (via conforme tipo FIGO) ou, com ressalvas, UAE/MRgFUS</div><div class="fx-node end"><b>NÃO:</b> Histerectomia, UAE ou MRgFUS, conforme preferência e perfil de sintomas</div></div><div class="fx-arrow"></div><div class="fx-node">Definir via técnica pelo tipo FIGO</div><div class="fx-lbl">Submucoso (0-2) → histeroscópica; intramural/subseroso → laparoscópica/aberta</div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Suspeita relevante de leiomiossarcoma (do módulo de Diagnóstico)</div><div class="fx-arrow"></div><div class="fx-node">Planejamento cirúrgico especializado</div><div class="fx-lbl">Evitar morcelamento; preferir retirada em peça única; confirmação histopatológica definitiva</div><div class="fx-arrow"></div><div class="fx-lbl">Ausência de suspeita relevante de malignidade?</div><div class="fx-row"><div class="fx-node end">Seguir fluxo padrão de escolha entre miomectomia, histerectomia, UAE ou MRgFUS conforme desejo reprodutivo e tipo FIGO</div></div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Tratamento Cirúrgico e Embolização em 60 segundos</h4>
+<ul>
+<li><strong>Pergunta central:</strong> deseja preservar útero/fertilidade? Isso divide as opções em dois grandes grupos.</li>
+<li><strong>Miomectomia histeroscópica:</strong> submucoso (0-2), sem incisão, cuidado com sobrecarga de fluido.</li>
+<li><strong>Miomectomia laparoscópica/aberta:</strong> intramural/subseroso; evitar morcelamento se suspeita de sarcoma; possível cesárea eletiva em gestação futura.</li>
+<li><strong>Histerectomia:</strong> única solução definitiva (elimina risco de novos miomas); reservada para prole completa/sintomas refratários.</li>
+<li><strong>Embolização (UAE):</strong> preserva útero, mas não é primeira escolha se há desejo gestacional futuro (dados obstétricos menos consolidados).</li>
+<li><strong>MRgFUS:</strong> não invasivo, mas seleção de candidatas é criteriosa (nem todo mioma é tecnicamente acessível).</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Tratamento definitivo do mioma</strong> = miomectomia (histeroscópica para submucoso, laparoscópica/aberta para intramural/subseroso) se há desejo reprodutivo; histerectomia é a única solução definitiva; UAE e MRgFUS preservam o útero mas com ressalvas reprodutivas/técnicas.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Desejo reprodutivo é sempre a <strong>primeira pergunta</strong> antes de escolher a via cirúrgica.</li>
+<li>"Histerectomia cura definitivamente e evita recidiva" — verdadeiro; miomectomia pode ter <strong>novos</strong> miomas no futuro.</li>
+<li>Embolização/MRgFUS não são primeira escolha para quem ainda quer engravidar.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Indicar embolização como primeira linha em paciente com desejo gestacional forte.</li>
+<li>Usar morcelamento rotineiramente sem considerar suspeita prévia de sarcoma.</li>
+<li>Achar que miomectomia elimina definitivamente o risco de novos miomas.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"Quer filho, tira só o mioma. Não quer mais, tira o útero."</strong></li>
+<li><strong>"UAE e MRgFUS preservam o útero, não necessariamente o plano reprodutivo."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Não perguntar sobre desejo reprodutivo antes de definir a via cirúrgica.</li>
+<li>Esquecer o risco de sobrecarga de fluido em histeroscopias cirúrgicas prolongadas.</li>
+<li>Indicar MRgFUS sem avaliar critérios técnicos de elegibilidade.</li>
+</ul></div>
+</div>`,
+"checklist": ["Sei por que o desejo reprodutivo é a primeira pergunta na escolha do tratamento definitivo","Explico quando a miomectomia histeroscópica é indicada e seu principal risco técnico","Diferencio miomectomia laparoscópica de aberta e sei quando evitar morcelamento","Explico por que a histerectomia é a única solução verdadeiramente definitiva","Reconheço a ressalva reprodutiva da embolização da artéria uterina","Sei o que é o MRgFUS e por que nem toda paciente é candidata"]
+});
+Object.assign(C['miomatose|3'], {
+"questoes": [
+{"stem":"Qual é a primeira pergunta prática que orienta a escolha entre as opções de tratamento definitivo do mioma?","opts":["A cor do resultado da última USTV.","Se a paciente deseja preservar o útero/a fertilidade futura.","O valor do CA-125.","A presença de dismenorreia leve."],"correct":1,"expl":"O desejo de preservar útero/fertilidade divide as opções em dois grandes grupos: miomectomia/procedimentos conservadores versus histerectomia."},
+{"stem":"A miomectomia histeroscópica é a técnica de escolha para qual tipo de mioma?","opts":["Subseroso pediculado (tipo 7).","Submucoso (tipos 0, 1 e, com ressalvas, 2).","Localização atípica (tipo 8).","Intramural sem contato com endométrio (tipo 4)."],"correct":1,"expl":"A miomectomia histeroscópica aborda o mioma pela via natural (sem incisão abdominal), sendo a técnica de escolha para miomas submucosos, que estão total ou parcialmente dentro da cavidade."},
+{"stem":"Qual complicação intraoperatória deve ser vigiada ativamente durante miomectomias histeroscópicas prolongadas?","opts":["Sobrecarga de fluido pelo meio de distensão utilizado.","Hipertensão arterial induzida pelo procedimento.","Infecção do trato urinário imediata.","Perda auditiva temporária."],"correct":0,"expl":"O uso de grandes volumes de meio líquido de distensão em histeroscopias cirúrgicas prolongadas pode levar à sobrecarga de fluido — complicação a ser monitorada ativamente."},
+{"stem":"Por que se deve evitar o morcelamento durante miomectomia laparoscópica quando há suspeita relevante de leiomiossarcoma?","opts":["Porque aumenta o tempo cirúrgico sem qualquer outro risco.","Porque a fragmentação do tumor pode disseminar células malignas na cavidade abdominal.","Porque o morcelamento é sempre proibido, independentemente do contexto.","Porque reduz a eficácia anestésica."],"correct":1,"expl":"Assim como discutido no módulo de diagnóstico, o morcelamento fragmenta o tumor e pode disseminar células malignas — deve ser evitado quando há suspeita relevante de sarcoma, preferindo retirada em peça única."},
+{"stem":"Qual é a única opção de tratamento verdadeiramente DEFINITIVA para a miomatose, eliminando o risco de novos miomas?","opts":["Miomectomia laparoscópica.","Embolização da artéria uterina.","Histerectomia.","MRgFUS."],"correct":2,"expl":"A histerectomia remove o próprio órgão-alvo, sendo a única opção que elimina completamente o risco de <b>novos</b> miomas — diferente da miomectomia, que pode ser seguida de recidiva em tecido miometrial remanescente."},
+{"stem":"A histerectomia para miomatose é apropriadamente indicada em qual cenário?","opts":["Em toda paciente com mioma, independentemente do desejo reprodutivo.","Em pacientes com prole completa/sem desejo reprodutivo futuro e sintomas significativos.","Apenas em pacientes assintomáticas.","Exclusivamente em mulheres com menos de 25 anos."],"correct":1,"expl":"A histerectomia é reservada para pacientes sem desejo reprodutivo futuro (prole completa), com sintomas significativos que justificam a solução definitiva."},
+{"stem":"Sobre a embolização da artéria uterina (UAE) no tratamento de miomas, é correto afirmar que:","opts":["É sempre a primeira escolha para pacientes com forte desejo gestacional futuro.","Preserva o útero, mas não é considerada primeira escolha quando há desejo gestacional futuro relevante, devido a desfechos obstétricos menos estabelecidos.","Remove cirurgicamente o tecido do mioma, assim como a miomectomia.","É contraindicada em qualquer paciente com mioma sintomático."],"correct":1,"expl":"A UAE preserva o útero ocluindo os vasos que nutrem o mioma, mas não é a primeira escolha para quem deseja engravidar futuramente, pelos desfechos obstétricos menos consolidados."},
+{"stem":"O mecanismo de ação da embolização da artéria uterina consiste em:","opts":["Retirada cirúrgica direta do tecido miomatoso.","Oclusão dos vasos que nutrem o mioma, causando necrose isquêmica e redução progressiva de volume.","Indução de hipoestrogenismo sistêmico prolongado.","Ablação térmica direta guiada por endoscopia."],"correct":1,"expl":"A UAE ocorre pela oclusão vascular seletiva dos vasos nutridores do mioma, levando à necrose isquêmica e à redução progressiva do volume tumoral, com preservação do útero."},
+{"stem":"O que caracteriza o MRgFUS (ablação por ultrassom focalizado guiado por ressonância) como opção terapêutica?","opts":["É um procedimento cirúrgico aberto convencional.","É uma opção não invasiva, mas com seleção criteriosa de candidatas conforme características do mioma.","Exige sempre internação hospitalar prolongada superior a 2 semanas.","É indicado universalmente para qualquer tipo e localização de mioma."],"correct":1,"expl":"O MRgFUS é totalmente não invasivo (sem incisão ou punção), mas nem todo mioma é tecnicamente acessível ao feixe de ultrassom — a seleção de candidatas é criteriosa."},
+{"stem":"Mulher de 33 anos com mioma submucoso tipo 1 e desejo gestacional futuro procura tratamento. Qual conduta é mais alinhada aos princípios discutidos neste módulo?","opts":["Histerectomia imediata, por ser a solução mais definitiva.","Miomectomia histeroscópica, preservando o útero e corrigindo a distorção da cavidade.","Embolização da artéria uterina, como primeira escolha.","Nenhum tratamento, independentemente dos sintomas."],"correct":1,"expl":"Diante de desejo gestacional e mioma submucoso, a miomectomia histeroscópica é a via de escolha — preserva o útero e resolve a distorção anatômica da cavidade, favorecendo a fertilidade."},
+{"stem":"Após uma miomectomia com incisão miometrial profunda, qual orientação obstétrica futura pode ser relevante para uma gestação subsequente?","opts":["Nenhuma orientação especial é necessária em qualquer caso.","Pode haver recomendação de via de parto específica (cesárea eletiva), conforme a profundidade da incisão.","Contraindicação absoluta e permanente de qualquer gestação futura.","Necessidade de nova miomectomia antes de qualquer tentativa de gravidez."],"correct":1,"expl":"Dependendo da profundidade da incisão miometrial durante a miomectomia, pode haver recomendação de via de parto específica (cesárea eletiva) em gestação futura, informação que deve constar no relatório cirúrgico."},
+{"stem":"Diante de uma paciente com múltiplos miomas intramurais volumosos, sem desejo reprodutivo futuro, mas que deseja evitar histerectomia se possível, qual opção pode ser discutida como alternativa que preserva o útero?","opts":["Nenhuma alternativa existe — histerectomia é obrigatória nesse cenário.","Embolização da artéria uterina ou MRgFUS, conforme elegibilidade técnica.","Miomectomia histeroscópica, independentemente da localização intramural.","Tratamento hormonal isolado como solução definitiva."],"correct":1,"expl":"Para quem não deseja mais engravidar mas quer preservar o útero, embolização ou MRgFUS (se tecnicamente elegível) são alternativas discutíveis à histerectomia, cada uma com suas particularidades já vistas neste módulo."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Princípio</small><br>Qual a primeira pergunta que orienta a escolha do tratamento definitivo do mioma?","back":"Se a paciente deseja preservar o útero/a fertilidade futura — divide as opções em dois grandes grupos.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Miomectomia histeroscópica</small><br>Para qual tipo de mioma é a técnica de escolha?","back":"Submucoso (tipos 0, 1 e, com ressalvas, 2) — sem incisão abdominal.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Miomectomia histeroscópica</small><br>Qual complicação intraoperatória deve ser monitorada?","back":"Sobrecarga de fluido pelo meio líquido de distensão, em cirurgias prolongadas.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Miomectomia lap./aberta</small><br>Por que evitar morcelamento se há suspeita de sarcoma?","back":"Fragmentar o tumor pode disseminar células malignas na cavidade abdominal.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Histerectomia</small><br>Por que a histerectomia é a única solução verdadeiramente definitiva?","back":"Remove o próprio órgão-alvo, eliminando o risco de novos miomas — a miomectomia pode ser seguida de recidiva no tecido remanescente.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Embolização (UAE)</small><br>Qual o mecanismo de ação da embolização da artéria uterina?","back":"Oclusão dos vasos que nutrem o mioma, causando necrose isquêmica e redução progressiva de volume, preservando o útero.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Embolização (UAE)</small><br>Por que a UAE não é a primeira escolha para quem deseja engravidar?","back":"Desfechos obstétricos futuros (risco de insuficiência ovariana, complicações placentárias) são menos estabelecidos que com miomectomia.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">MRgFUS</small><br>O que é o MRgFUS e qual sua principal limitação prática?","back":"Ablação por ultrassom focalizado guiado por RM, não invasiva; nem todo mioma é tecnicamente acessível ao feixe (localização, tamanho, distância da pele).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Pós-operatório</small><br>Que orientação obstétrica pode ser necessária após miomectomia com incisão miometrial profunda?","back":"Recomendação de via de parto específica (cesárea eletiva) em gestação futura, conforme a profundidade da incisão.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Síntese</small><br>Quais 3 eixos combinam para definir o tratamento definitivo do mioma?","back":"{{Desejo reprodutivo; tipo FIGO (localização); tamanho e número dos miomas.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Vias de miomectomia</small><br>Quando a via laparoscópica é preferida em relação à aberta?","back":"Quando tecnicamente viável (número/tamanho limitados) — menor morbidade e recuperação mais rápida que a laparotomia.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Comparação</small><br>Qual a diferença central entre miomectomia e histerectomia quanto à recidiva?","back":"Miomectomia remove os miomas atuais, mas novos podem se formar; histerectomia elimina essa possibilidade por remover o útero inteiro.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Escolha final</small><br>Para mioma intramural/subseroso sintomático com desejo reprodutivo, qual a via preferida?","back":"Miomectomia laparoscópica (ou aberta se número/tamanho tornarem a laparoscopia inviável).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Escolha final</small><br>Para miomatose extensa refratária, sem desejo reprodutivo, o que costuma pesar a favor da histerectomia?","back":"Extensão da doença tornando a miomectomia tecnicamente complexa, com maior risco de recidiva precoce e refratariedade ao tratamento clínico.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Miomectomia histeroscópica com desejo reprodutivo","stem":"Mulher de 29 anos, nuligesta, com mioma submucoso tipo 1 de 2,5 cm, menorragia importante e desejo gestacional nos próximos 2 anos.","passos":[
+{"h":"Avaliação do caso","p":"Componente submucoso confirmado por histeroscopia diagnóstica prévia (módulo de Diagnóstico), com desejo reprodutivo relevante e claro."},
+{"h":"Discussão de opções","p":"Diante do desejo reprodutivo e da localização submucosa, a miomectomia histeroscópica é apresentada como a opção de escolha, preservando o útero e corrigindo a distorção da cavidade."},
+{"h":"Raciocínio clínico","p":"O tipo 1 (componente intramural menor que 50%) é tecnicamente favorável para ressecção histeroscópica em tempo único, diferente do que ocorreria com um tipo 2 mais extenso."},
+{"h":"Conduta cirúrgica","p":"Realizada miomectomia histeroscópica, com monitorização cuidadosa do balanço de fluidos durante o procedimento."},
+{"h":"Conduta neste momento","p":"Orientação sobre período de recuperação antes de tentativa gestacional, com reavaliação da cavidade endometrial em consulta de retorno."}
+]},
+{"t":"Caso 2 — Escolha entre embolização e miomectomia sem desejo gestacional","stem":"Mulher de 46 anos, com prole completa, sem desejo reprodutivo futuro, apresenta múltiplos miomas intramurais sintomáticos (menorragia e sensação de peso), desejando evitar histerectomia se possível.","passos":[
+{"h":"Avaliação do contexto","p":"Ausência de desejo reprodutivo futuro, mas preferência explícita da paciente por preservar o útero, evitando histerectomia."},
+{"h":"Discussão de opções","p":"Apresentadas como alternativas: miomectomia (laparoscópica ou aberta, conforme número/tamanho) ou embolização da artéria uterina — ambas preservando o útero."},
+{"h":"Raciocínio clínico","p":"Como não há desejo gestacional futuro, a ressalva reprodutiva da embolização deixa de ser um fator limitante relevante nessa decisão específica, tornando-a uma opção tecnicamente adequada a ser considerada ao lado da miomectomia."},
+{"h":"Decisão compartilhada","p":"Após discussão de riscos e recuperação esperada de cada técnica, paciente opta por embolização da artéria uterina."},
+{"h":"Conduta neste momento","p":"Encaminhamento para radiologia intervencionista para realização do procedimento, com acompanhamento clínico programado para avaliar resposta sintomática."}
+]},
+{"t":"Caso 3 — Indicação de histerectomia em miomatose extensa refratária","stem":"Mulher de 49 anos, com prole completa, miomatose extensa com múltiplos miomas de diversos tamanhos e localizações, sintomas significativos (menorragia grave e efeito de massa) refratários a tratamento clínico otimizado, e mioma pediculado com episódio prévio sugestivo de torção.","passos":[
+{"h":"Revisão do quadro","p":"Miomatose extensa, com múltiplas localizações tornando a miomectomia tecnicamente complexa e com maior risco de recidiva precoce dada a extensão da doença."},
+{"h":"Discussão de opções","p":"Diante da extensão da doença, ausência de desejo reprodutivo futuro e sintomas refratários, discutida a histerectomia como opção mais consistente com resolução definitiva."},
+{"h":"Raciocínio clínico","p":"A combinação de miomatose extensa, refratariedade ao tratamento clínico e ausência de desejo reprodutivo torna a histerectomia a opção que melhor equilibra resolução completa dos sintomas com menor risco de necessidade de nova intervenção futura."},
+{"h":"Aconselhamento","p":"Paciente orientada sobre a natureza definitiva do procedimento e sobre as alternativas conservadoras (miomectomia extensa, embolização) e suas limitações nesse cenário específico, antes da decisão final."},
+{"h":"Conduta neste momento","p":"Programada histerectomia, com planejamento pré-operatório adequado dado o volume uterino aumentado pela miomatose extensa."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+
+<script>(function(){
+"use strict";
 
 /* ================= CSS do Ciclo Menstrual ================= */
 if(!document.getElementById('cycle-style')){
