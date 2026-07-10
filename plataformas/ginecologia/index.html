@@ -2609,6 +2609,1244 @@ Object.assign(C['endometriose|0'], {
 try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
 })();</script>
 
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['endometriose|1'] = {
+name: "Diagnóstico e Estadiamento",
+intro: "Nos últimos anos a lógica diagnóstica se inverteu: hoje a imagem vem primeiro, e a cirurgia é reservada para situações específicas — não mais a rotina de confirmação.",
+sub: [
+["entendendo","A Virada Diagnóstica",`
+<div class="ac-h">De "só se opera para saber" a "a imagem já responde"</div>
+<p class="ac-p">Durante décadas, o diagnóstico definitivo de endometriose exigia <b>laparoscopia com biópsia</b> — o exame de imagem servia só de "pista", e a confirmação vinha do bisturi. A diretriz ESHRE 2022 inverteu essa lógica: hoje, na maioria dos casos, a <b>ultrassonografia transvaginal (USTV) com protocolo dirigido</b> e a <b>ressonância magnética (RM)</b> conseguem diagnosticar a doença com acurácia comparável à cirurgia, especialmente para endometrioma e doença infiltrativa profunda (DIE).</p>
+<p class="ac-p">Isso muda a prática de um jeito importante: a <b>laparoscopia deixou de ser rotina diagnóstica</b>. Ela é reservada para quando a imagem é inconclusiva, quando a paciente já vai ser operada por outro motivo, ou quando o tratamento empírico (do módulo anterior) falha e ainda há dúvida diagnóstica relevante.</p>
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<defs><marker id="arrhead4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Lógica antiga vs. lógica atual (ESHRE 2022)</text>
+<rect x="20" y="46" width="290" height="90" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="165" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--muted)">Antes</text>
+<text x="165" y="92" text-anchor="middle" font-size="10" style="fill:var(--muted)">Suspeita clínica</text>
+<path d="M165 98 L165 112" style="stroke:var(--muted)" stroke-width="1.4" marker-end="url(#arrhead4)"/>
+<text x="165" y="126" text-anchor="middle" font-size="10" style="fill:var(--muted)">Laparoscopia p/ confirmar</text>
+<rect x="370" y="46" width="290" height="90" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="515" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Agora (ESHRE 2022)</text>
+<text x="515" y="92" text-anchor="middle" font-size="10" style="fill:var(--ink)">Suspeita clínica</text>
+<path d="M515 98 L515 112" style="stroke:var(--accent)" stroke-width="1.4" marker-end="url(#arrhead4)"/>
+<text x="515" y="126" text-anchor="middle" font-size="10" style="fill:var(--ink)">USTV/RM confirmam a maioria</text>
+<rect x="150" y="166" width="380" height="70" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="340" y="188" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Laparoscopia hoje</text>
+<text x="340" y="206" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">reservada: imagem inconclusiva, falha do</text>
+<text x="340" y="220" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">tratamento empírico, ou cirurgia já indicada</text>
+</svg>
+<div class="ac-call"><b>Ponto-chave:</b> a mudança não reduziu o rigor diagnóstico — ela reconheceu que exame de imagem bem feito, nas mãos certas, é tão bom quanto abrir a barriga para ver. Isso poupa a paciente de uma cirurgia desnecessária.</div>
+`],
+["clinico","Quando Investigar",`
+<div class="ac-h">Retomando: quem entra na investigação</div>
+<p class="ac-p">Como você viu no módulo anterior, o gatilho para investigar é a <b>suspeita clínica</b> — dismenorreia progressiva, dispareunia de profundidade, dor pélvica crônica, sintomas cíclicos intestinais/urinários ou infertilidade. A ESHRE 2022 reforça que essa investigação <b>não precisa esperar</b> uma cirurgia: pode (e deve) começar por imagem assim que a suspeita for razoável.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<defs><marker id="arrhead5" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Do sintoma à investigação dirigida</text>
+<rect x="20" y="46" width="150" height="60" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="95" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Sintomas</text>
+<text x="95" y="88" text-anchor="middle" font-size="9" style="fill:var(--muted)">dismenorreia, dispareunia...</text>
+<path d="M170 76 L206 76" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead5)"/>
+<rect x="208" y="46" width="150" height="60" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="283" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Anamnese + exame</text>
+<text x="283" y="88" text-anchor="middle" font-size="9" style="fill:var(--muted)">rastrear todos os sítios</text>
+<path d="M358 76 L394 76" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead5)"/>
+<rect x="396" y="46" width="150" height="60" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="471" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Imagem dirigida</text>
+<text x="471" y="88" text-anchor="middle" font-size="9" style="fill:var(--ink)">USTV +/- RM</text>
+<rect x="150" y="140" width="340" height="56" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="320" y="162" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Antes de pedir o exame</text>
+<text x="320" y="180" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">avise o setor de imagem sobre a suspeita: o protocolo</text>
+</svg>
+<div class="ac-tip"><b>Detalhe prático que muda o resultado do exame:</b> a USTV para endometriose <b>não é o mesmo exame</b> de rotina obstétrica/ginecológica — precisa ser pedida como "USTV com protocolo para endometriose" (ou "protocolo IDEA"), para que o examinador avalie ativamente sinais de aderência e DIE, não apenas útero e ovários.</div>
+<div class="ac-warn"><b>Cuidado:</b> um USTV de rotina, sem o protocolo dirigido, tem sensibilidade muito menor — um resultado "normal" nesse contexto <b>não afasta</b> a doença.</div>
+`],
+["imagem","Ultrassonografia (Protocolo IDEA)",`
+<div class="ac-h">USTV dirigida — exame de primeira linha</div>
+<p class="ac-p">A ultrassonografia transvaginal com protocolo dirigido (conhecido pela sigla <b>IDEA — International Deep Endometriosis Analysis</b>) é hoje o exame de <b>primeira linha</b>. Em mãos experientes, alcança acurácia diagnóstica comparável à cirurgia para <b>endometrioma e doença infiltrativa profunda</b>.</p>
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Protocolo IDEA — 4 passos</text>
+<rect x="20" y="42" width="150" height="120" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="95" y="64" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">1. Útero e anexos</text>
+<text x="95" y="84" text-anchor="middle" font-size="9" style="fill:var(--muted)">avaliação de rotina +</text>
+<text x="95" y="98" text-anchor="middle" font-size="9" style="fill:var(--muted)">sinais de adenomiose</text>
+<rect x="185" y="42" width="150" height="120" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="260" y="64" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">2. Endometriomas</text>
+<text x="260" y="84" text-anchor="middle" font-size="9" style="fill:var(--muted)">cisto com conteúdo</text>
+<text x="260" y="98" text-anchor="middle" font-size="9" style="fill:var(--muted)">em "vidro fosco"</text>
+<rect x="350" y="42" width="150" height="120" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="425" y="64" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">3. Sinal do "sliding"</text>
+<text x="425" y="84" text-anchor="middle" font-size="9" style="fill:var(--muted)">útero desliza livre</text>
+<text x="425" y="98" text-anchor="middle" font-size="9" style="fill:var(--muted)">sobre o reto? (dinâmico)</text>
+<rect x="515" y="42" width="150" height="120" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="590" y="64" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">4. Nódulos DIE</text>
+<text x="590" y="84" text-anchor="middle" font-size="9" style="fill:var(--muted)">uterossacros, septo,</text>
+<text x="590" y="98" text-anchor="middle" font-size="9" style="fill:var(--muted)">intestino, bexiga</text>
+<rect x="90" y="192" width="500" height="80" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="340" y="216" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Sliding sign negativo = suspeita forte de aderências</text>
+<text x="340" y="236" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">(útero "grudado" ao reto/fundo de saco — sugere obliteração</text>
+<text x="340" y="250" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">do fundo de saco posterior por doença infiltrativa profunda)</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">O que o exame procura em cada passo</div>
+<p class="ac-p">O passo 1 é a avaliação convencional de útero e anexos, já buscando sinais indiretos de <b>adenomiose</b> (miométrio heterogêneo, cistos miometriais, espessamento assimétrico). O passo 2 caracteriza os <b>ovários</b>, buscando o padrão típico do endometrioma. O passo 3 é o mais peculiar: o examinador aplica pressão suave com o transdutor e observa se o útero <b>desliza livremente</b> sobre o reto — se não desliza ("sliding sign negativo"), é sinal de aderências firmes no fundo de saco posterior. O passo 4 mapeia ativamente <b>nódulos de DIE</b> em ligamentos uterossacros, septo retovaginal, parede intestinal e bexiga.</p>
+<div class="ac-tip"><b>Por que isso importa na prática:</b> um USTV que só descreve "útero e ovários normais", sem mencionar os passos 3 e 4, provavelmente não seguiu o protocolo dirigido — vale reforçar ao radiologista/ultrassonografista qual é a suspeita clínica.</div>
+`],
+["rm","Ressonância Magnética",`
+<div class="ac-h">Quando a USTV não basta</div>
+<p class="ac-p">A ressonância magnética (RM) não substitui a USTV dirigida como primeira linha — ela entra como <b>complemento</b>, em duas situações principais: quando a USTV é <b>inconclusiva</b> (por exemplo, em pacientes com biotipo que dificulta a técnica, ou achados duvidosos) e quando é preciso um <b>mapeamento cirúrgico detalhado</b> da doença infiltrativa profunda antes de uma cirurgia complexa (para o cirurgião planejar a abordagem de múltiplos compartimentos).</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Papel complementar da RM</text>
+<rect x="30" y="46" width="260" height="130" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="160" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--ink)">USTV inconclusiva</text>
+<text x="160" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">biotipo dificulta o exame,</text>
+<text x="160" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">achado duvidoso, dúvida</text>
+<text x="160" y="120" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">entre endometrioma e</text>
+<text x="160" y="134" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">outro cisto ovariano</text>
+<rect x="350" y="46" width="260" height="130" rx="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="480" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Mapeamento pré-cirúrgico</text>
+<text x="480" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">visão panorâmica de múltiplos</text>
+<text x="480" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">compartimentos (intestino,</text>
+<text x="480" y="120" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">bexiga, ureter) — orienta o</text>
+<text x="480" y="134" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">planejamento cirúrgico</text>
+</svg>
+<div class="ac-warn"><b>Não confunda "complementar" com "melhor":</b> a RM não é superior à USTV dirigida feita por examinador experiente para a maioria dos achados — o valor dela está em situações específicas, não como substituta de rotina (custo e disponibilidade também pesam nessa escolha).</div>
+`],
+["laboratorio","CA-125 e Outros Marcadores",`
+<div class="ac-h">Por que não existe um "exame de sangue" para endometriose</div>
+<p class="ac-p">O <b>CA-125</b> é um marcador tumoral sérico que pode estar elevado na endometriose, mas seu desempenho como teste diagnóstico é ruim: a sensibilidade é baixa (em torno de <b>20–50% nos estádios I–II</b>) e a especificidade também — ele se eleva em situações completamente benignas e comuns, como <b>menstruação, cisto funcional, miomas, gravidez, DIP</b>, além de neoplasias ovarianas.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">CA-125: por que não serve para rastrear/diagnosticar</text>
+<circle cx="220" cy="130" r="90" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4" fill-opacity=".7"/>
+<circle cx="340" cy="130" r="90" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4" fill-opacity=".7"/>
+<text x="180" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Menstruação</text>
+<text x="180" y="146" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Cisto funcional</text>
+<text x="180" y="162" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Miomas / DIP</text>
+<text x="380" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Neoplasia</text>
+<text x="380" y="146" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">ovariana</text>
+<text x="280" y="130" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">CA-125</text>
+<text x="280" y="146" text-anchor="middle" font-size="9" style="fill:var(--muted)">elevado</text>
+<text x="280" y="192" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">endometriose é só mais uma causa entre várias</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Onde o CA-125 ainda tem algum papel</div>
+<p class="ac-p">O uso do CA-125 hoje é <b>restrito</b>: pode ajudar no acompanhamento de uma paciente com endometriose já diagnosticada quando outras ferramentas são insuficientes, ou entra na avaliação de uma <b>massa anexial com características ultrassonográficas atípicas</b>, como parte do raciocínio para diferenciar endometrioma de neoplasia ovariana (junto com outros dados, nunca isolado).</p>
+<div class="ac-warn"><b>Pegadinha clássica:</b> não existe indicação de solicitar CA-125 como exame de rastreio ou triagem inicial para endometriose. Se a questão sugere isso como conduta padrão, está errada.</div>
+<p class="ac-p">Outros biomarcadores (microRNAs, painéis inflamatórios) estão em investigação, mas nenhum tem uso clínico validado e recomendado nas diretrizes atuais.</p>
+`],
+["classificacao","Estadiamento: ASRM vs. #Enzian",`
+<div class="ac-h">Dois sistemas, dois propósitos diferentes</div>
+<p class="ac-p">Depois de confirmado o diagnóstico (por imagem ou cirurgia), a doença pode ser <b>classificada</b>. Existem dois sistemas complementares, e a prova adora testar a diferença entre eles.</p>
+<svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">ASRM (r-ASRM) vs. #Enzian</text>
+<rect x="20" y="46" width="300" height="200" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.5"/>
+<text x="170" y="70" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--ink)">r-ASRM</text>
+<text x="170" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Sistema de pontos por extensão</text>
+<text x="170" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">e profundidade de implantes/</text>
+<text x="170" y="122" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">aderências (peritônio/ovário)</text>
+<text x="170" y="146" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">4 estágios:</text>
+<text x="170" y="164" text-anchor="middle" font-size="9" style="fill:var(--muted)">I (1-5) mínima · II (6-15) leve</text>
+<text x="170" y="178" text-anchor="middle" font-size="9" style="fill:var(--muted)">III (16-40) moderada</text>
+<text x="170" y="192" text-anchor="middle" font-size="9" style="fill:var(--muted)">IV (&gt;40) grave</text>
+<text x="170" y="216" text-anchor="middle" font-size="9" style="fill:#e8675f">Não captura bem a DIE</text>
+<text x="170" y="230" text-anchor="middle" font-size="9" style="fill:#e8675f">Não correlaciona com a dor</text>
+<rect x="360" y="46" width="300" height="200" rx="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="510" y="70" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--accent)">#Enzian</text>
+<text x="510" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Sistema de compartimentos,</text>
+<text x="510" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">não de estágio único —</text>
+<text x="510" y="122" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">descreve cada área acometida</text>
+<text x="510" y="146" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Compartimentos (ex.):</text>
+<text x="510" y="164" text-anchor="middle" font-size="9" style="fill:var(--muted)">A: septo retovaginal/vagina</text>
+<text x="510" y="178" text-anchor="middle" font-size="9" style="fill:var(--muted)">B: uterossacros/parede pélvica</text>
+<text x="510" y="192" text-anchor="middle" font-size="9" style="fill:var(--muted)">C: reto/sigmoide</text>
+<text x="510" y="216" text-anchor="middle" font-size="9" style="fill:var(--accent)">Feito sob medida para DIE</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">r-ASRM (revised American Society for Reproductive Medicine)</div>
+<p class="ac-p">Sistema de <b>pontuação</b> criado originalmente para prever fertilidade pós-cirúrgica, hoje usado de forma mais ampla para descrever a extensão da doença peritoneal e ovariana. Some pontos conforme tamanho e profundidade dos implantes e aderências, chegando a 4 estágios: <b>I (mínima, 1-5 pontos), II (leve, 6-15), III (moderada, 16-40), IV (grave, &gt;40)</b>.</p>
+<div class="ac-warn"><b>Limitação importante:</b> o estágio r-ASRM <b>não se correlaciona bem com a intensidade da dor</b> (lembra do módulo anterior — dor depende de sensibilização, não de extensão) e <b>subestima sistematicamente a doença infiltrativa profunda</b>, já que foi desenhado pensando em implantes peritoneais e ovarianos, não em nódulos profundos de uterossacros, intestino ou bexiga.</p>
+<div class="ac-h" style="margin-top:14px">#Enzian</div>
+<p class="ac-p">Criado especificamente para preencher essa lacuna, o #Enzian descreve a <b>DIE por compartimentos anatômicos</b>, usando letras (não um estágio único): por exemplo, comprometimento do septo retovaginal/vagina, dos ligamentos uterossacros/parede pélvica lateral, e do intestino (reto/sigmoide), além de compartimentos adicionais para adenomiose e outros órgãos (bexiga, ureter). Pode ser aplicado tanto por imagem (RM/USTV dirigida) quanto na cirurgia, complementando — não substituindo — o r-ASRM.</p>
+<div class="ac-tip"><b>Macete de prova:</b> se a questão fala em "estágio I a IV", é <b>r-ASRM</b>. Se fala em "compartimentos" ou letras para descrever doença profunda, é <b>#Enzian</b>.</div>
+`],
+["laparoscopia","O Papel Atual da Laparoscopia",`
+<div class="ac-h">De exame de rotina a ferramenta reservada</div>
+<p class="ac-p">A laparoscopia continua sendo o método que permite <b>visualização direta e biópsia</b> — historicamente chamada de "padrão-ouro". Mas com a acurácia da imagem dirigida, seu papel mudou: hoje ela é indicada em situações específicas, não como primeiro passo para "confirmar" a suspeita clínica.</p>
+<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Quando a laparoscopia entra em cena hoje</text>
+<rect x="30" y="46" width="180" height="90" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="120" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Imagem inconclusiva</text>
+<text x="120" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">e persiste dúvida</text>
+<text x="120" y="104" text-anchor="middle" font-size="9" style="fill:var(--muted)">diagnóstica relevante</text>
+<rect x="230" y="46" width="180" height="90" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="320" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Falha do tratamento</text>
+<text x="320" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">empírico, sem</text>
+<text x="320" y="104" text-anchor="middle" font-size="9" style="fill:var(--muted)">diagnóstico confirmado</text>
+<rect x="430" y="46" width="180" height="90" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="520" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Cirurgia já indicada</text>
+<text x="520" y="90" text-anchor="middle" font-size="9" style="fill:var(--ink)">por outro motivo</text>
+<text x="520" y="104" text-anchor="middle" font-size="9" style="fill:var(--ink)">(ex.: infertilidade, DIE sintomática)</text>
+<rect x="130" y="160" width="380" height="70" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="320" y="184" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Nesses cenários, diagnóstico + tratamento</text>
+<text x="320" y="202" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">podem ocorrer no mesmo tempo cirúrgico</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Diagnóstico e tratamento no mesmo tempo</div>
+<p class="ac-p">Quando a laparoscopia é indicada, ela costuma unir as duas finalidades: <b>confirmar</b> (biópsia com histopatológico) e, na mesma cirurgia, <b>tratar</b> (excisão dos focos, liberação de aderências) — o que evita submeter a paciente a duas cirurgias. Os detalhes técnicos da abordagem cirúrgica (excisão vs. ablação, manejo do endometrioma, DIE) são o assunto do módulo de <b>Tratamento Cirúrgico</b>.</p>
+<div class="ac-call"><b>Fechando o raciocínio do módulo:</b> suspeita clínica (módulo 1) → imagem dirigida como primeira linha (USTV/IDEA, RM se necessário) → CA-125 tem papel muito limitado → classificação por r-ASRM e/ou #Enzian quando há confirmação → laparoscopia reservada para cenários específicos, unindo diagnóstico e tratamento.</div>
+`]
+]
+};
+Object.assign(C['endometriose|1'], {
+"escores": `<div class="prose">
+<h3>r-ASRM vs. #Enzian — comparação rápida</h3>
+<table class="ac-tbl">
+<tr><th>Característica</th><th>r-ASRM</th><th>#Enzian</th></tr>
+<tr><td><strong>Formato</strong></td><td>Pontuação numérica → 4 estágios (I-IV)</td><td>Compartimentos anatômicos por letras</td></tr>
+<tr><td><strong>Foco</strong></td><td>Implantes peritoneais/ovarianos e aderências</td><td>Doença infiltrativa profunda (DIE)</td></tr>
+<tr><td><strong>Correlação com dor</strong></td><td>Fraca/ausente</td><td>Descreve localização, não substitui avaliação de dor</td></tr>
+<tr><td><strong>Uso</strong></td><td>Histórico/prognóstico de fertilidade pós-cirúrgica</td><td>Planejamento cirúrgico de DIE, complementa r-ASRM</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">Os dois sistemas são <strong>complementares</strong>, não concorrentes — muitos serviços registram ambos no laudo cirúrgico.</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Diferenciais no achado de imagem</h3>
+<table class="ac-tbl">
+<tr><th>Achado na USTV/RM</th><th>Principal diferencial</th><th>Pista</th></tr>
+<tr><td>Cisto ovariano com conteúdo em "vidro fosco"</td><td>Cisto hemorrágico funcional</td><td>Endometrioma persiste em reavaliação; funcional regride em 6-8 semanas</td></tr>
+<tr><td>Massa anexial atípica</td><td>Neoplasia ovariana</td><td>Vascularização, septos espessos, componente sólido — avaliar com CA-125 e critérios de risco (IOTA)</td></tr>
+<tr><td>Espessamento miometrial heterogêneo</td><td>Adenomiose vs. leiomioma</td><td>Adenomiose = limites mal definidos; leiomioma = nódulo bem delimitado</td></tr>
+<tr><td>Sliding sign negativo</td><td>Aderências por DIP prévia</td><td>Contexto clínico (história de IST/infecção) ajuda a diferenciar</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Diagnóstico e Estadiamento</div>
+<div class="mm">
+  <div class="mm-card"><h5>🔄 A virada</h5><ul><li>ESHRE 2022: imagem primeiro</li><li>Laparoscopia não é mais rotina</li><li>Reservada p/ casos específicos</li></ul></div>
+  <div class="mm-card"><h5>🩻 USTV (IDEA)</h5><ul><li>1ª linha</li><li>4 passos (útero/anexos, endometrioma, sliding sign, DIE)</li><li>Precisa ser "dirigida"</li></ul></div>
+  <div class="mm-card"><h5>🧲 RM</h5><ul><li>USTV inconclusiva</li><li>Mapeamento pré-cirúrgico de DIE</li></ul></div>
+  <div class="mm-card"><h5>🧪 CA-125</h5><ul><li>Sensibilidade/especificidade baixas</li><li>NÃO é rastreio</li><li>Papel restrito (seguimento, massa atípica)</li></ul></div>
+  <div class="mm-card"><h5>📊 Classificação</h5><ul><li>r-ASRM: estágios I-IV, não capta DIE</li><li>#Enzian: compartimentos, feito p/ DIE</li></ul></div>
+  <div class="mm-card"><h5>🔬 Laparoscopia hoje</h5><ul><li>Imagem inconclusiva</li><li>Falha do tratamento empírico</li><li>Cirurgia já indicada — diagnóstico+tratamento juntos</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Suspeita clínica de endometriose (módulo anterior)</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — USTV com protocolo dirigido (IDEA)</div><div class="fx-lbl">Avalia útero/anexos, endometrioma, sliding sign, nódulos de DIE</div><div class="fx-arrow"></div><div class="fx-lbl">Resultado conclusivo?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Diagnóstico confirmado por imagem — classificar (r-ASRM/#Enzian) e seguir para conduta</div><div class="fx-node"><b>NÃO/duvidoso</b> &#8594; RM como complemento</div></div><div class="fx-arrow"></div><div class="fx-lbl">RM esclarece?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Diagnóstico confirmado por imagem</div><div class="fx-node end"><b>NÃO/dúvida persistente:</b> considerar laparoscopia diagnóstica (com biópsia)</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Diagnóstico confirmado (imagem ou laparoscopia) e classificado</div><div class="fx-arrow"></div><div class="fx-node">Definir prioridade da paciente</div><div class="fx-lbl">Controle de dor? Desejo reprodutivo? Achado incidental assintomático?</div><div class="fx-row"><div class="fx-node end"><b>Dor predominante:</b> encaminhar para módulo "Tratamento Clínico" (abordagem hormonal/analgésica)</div><div class="fx-node end"><b>Infertilidade/desejo gestacional:</b> encaminhar para módulo "Endometriose e Infertilidade"</div></div><div class="fx-arrow"></div><div class="fx-lbl">Doença extensa, refratária ou com indicação cirúrgica clara (DIE sintomática, endometrioma grande)?</div><div class="fx-row"><div class="fx-node end">Encaminhar para módulo "Tratamento Cirúrgico"</div></div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Diagnóstico e Estadiamento em 60 segundos</h4>
+<ul>
+<li><strong>ESHRE 2022 inverteu a lógica:</strong> imagem primeiro, laparoscopia reservada (imagem inconclusiva, falha de tratamento empírico, ou cirurgia já indicada).</li>
+<li><strong>USTV com protocolo IDEA</strong> = 1ª linha. 4 passos: útero/anexos, endometrioma, <em>sliding sign</em>, nódulos de DIE. Precisa ser pedida como "dirigida" — USTV de rotina tem sensibilidade menor.</li>
+<li><strong>RM</strong> = complementar: USTV inconclusiva ou mapeamento pré-cirúrgico de DIE.</li>
+<li><strong>CA-125:</strong> sensibilidade baixa (20-50% em I-II), inespecífico (menstruação, cisto funcional, mioma, DIP, gravidez). NÃO é rastreio. Papel restrito: seguimento ou massa anexial atípica.</li>
+<li><strong>r-ASRM:</strong> pontos → estágios I-IV. Não correlaciona com dor, subestima DIE.</li>
+<li><strong>#Enzian:</strong> compartimentos (letras), feito para DIE. Complementa, não substitui, o r-ASRM.</li>
+<li><strong>Laparoscopia hoje</strong> costuma unir diagnóstico (biópsia) + tratamento (excisão) no mesmo tempo cirúrgico.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Diagnóstico</strong> = USTV dirigida (IDEA) primeiro, RM se necessário, CA-125 quase sem papel, laparoscopia reservada; <strong>estadiamento</strong> = r-ASRM (estágios, não capta DIE) + #Enzian (compartimentos, feito para DIE).</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Se a questão descreve conduta em que a <strong>laparoscopia é o primeiro passo</strong> diante de suspeita clínica isolada, desconfie — hoje isso é considerado ultrapassado pela ESHRE 2022.</li>
+<li>"Estágio I a IV" = r-ASRM. "Compartimentos"/letras = #Enzian.</li>
+<li>USTV "normal" sem menção a sliding sign/nódulos provavelmente não foi dirigida — não exclui a doença.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que <strong>CA-125 normal exclui</strong> endometriose, ou que CA-125 elevado confirma — nenhuma das duas é verdade.</li>
+<li>Confundir r-ASRM com #Enzian nas questões que descrevem "letras por compartimento".</li>
+<li>Esquecer que <strong>estágio avançado (r-ASRM IV) não significa mais dor</strong> — já visto no módulo de fisiopatologia.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"IDEA"</strong> = <em>I</em>nternational <em>D</em>eep <em>E</em>ndometriosis <em>A</em>nalysis — 4 passos, USTV dirigida.</li>
+<li><strong>"r-ASRM conta, #Enzian localiza."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Pedir CA-125 como exame de triagem inicial.</li>
+<li>Indicar laparoscopia diagnóstica de rotina sem antes tentar imagem dirigida.</li>
+<li>Não especificar "protocolo para endometriose" ao solicitar a USTV.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico por que a ESHRE 2022 mudou a lógica diagnóstica (imagem primeiro, laparoscopia reservada)","Descrevo os 4 passos do protocolo IDEA na USTV dirigida e o que é o sliding sign","Sei quando a RM é indicada como exame complementar","Explico por que o CA-125 não serve como exame de rastreio/diagnóstico e onde ele ainda tem papel","Diferencio o r-ASRM (estágios I-IV) do #Enzian (compartimentos para DIE)","Sei em quais 3 cenários a laparoscopia é indicada hoje"]
+});
+Object.assign(C['endometriose|1'], {
+"questoes": [
+{"stem":"Segundo a diretriz ESHRE 2022, qual mudança fundamental ocorreu na abordagem diagnóstica da endometriose?","opts":["A laparoscopia passou a ser obrigatória em todos os casos suspeitos.","A imagem (USTV dirigida/RM) passou a ser de primeira linha, com a laparoscopia reservada para situações específicas.","O CA-125 tornou-se o exame de rastreio padrão.","A biópsia endometrial substituiu a laparoscopia como padrão-ouro."],"correct":1,"expl":"A ESHRE 2022 inverteu a lógica anterior: hoje a <b>imagem dirigida é de primeira linha</b>, e a laparoscopia é reservada para imagem inconclusiva, falha de tratamento empírico ou quando a cirurgia já está indicada por outro motivo."},
+{"stem":"O protocolo IDEA de ultrassonografia transvaginal dirigida para endometriose NÃO avalia rotineiramente:","opts":["Sinais de endometrioma ovariano.","O sliding sign (deslizamento do útero sobre o reto).","Nódulos de doença infiltrativa profunda em uterossacros e intestino.","Níveis séricos de CA-125."],"correct":3,"expl":"O protocolo IDEA é um exame de imagem (USTV), avaliando útero/anexos, endometrioma, sliding sign e nódulos de DIE — não inclui dosagens laboratoriais como CA-125."},
+{"stem":"Durante uma USTV dirigida, o examinador observa que o útero não desliza livremente sobre o reto ao aplicar pressão suave com o transdutor. Esse achado (sliding sign negativo) sugere:","opts":["Endometrioma ovariano isolado.","Aderências pélvicas, sugestivas de obliteração do fundo de saco posterior por DIE.","Adenomiose leve.","Ausência de qualquer doença pélvica."],"correct":1,"expl":"O <b>sliding sign negativo</b> indica que estruturas estão aderidas entre si, tipicamente por doença infiltrativa profunda obliterando o fundo de saco posterior."},
+{"stem":"Em relação à ressonância magnética no diagnóstico da endometriose, é correto afirmar que:","opts":["Deve substituir a USTV como exame de primeira linha em todos os casos.","Tem papel complementar, indicada quando a USTV é inconclusiva ou para mapeamento pré-cirúrgico detalhado de DIE.","Não agrega nenhuma informação além da USTV.","É contraindicada em suspeita de endometriose."],"correct":1,"expl":"A RM entra como <b>complemento</b>, não substituto — útil quando a USTV é inconclusiva ou quando o cirurgião precisa de mapeamento detalhado de múltiplos compartimentos antes de uma cirurgia complexa."},
+{"stem":"Sobre o uso do CA-125 na investigação de endometriose, assinale a alternativa CORRETA:","opts":["É um exame com alta sensibilidade e especificidade, recomendado como rastreio inicial.","Tem sensibilidade baixa nos estádios iniciais e pode se elevar em diversas condições benignas, não sendo recomendado para rastreio ou diagnóstico.","Só se eleva em casos de câncer de ovário coexistente.","Deve ser solicitado antes de qualquer exame de imagem."],"correct":1,"expl":"O CA-125 tem sensibilidade baixa (20-50% em estádios I-II) e é inespecífico, elevando-se em menstruação, cistos funcionais, miomas, DIP e gravidez — não deve ser usado como rastreio."},
+{"stem":"O CA-125 pode ter alguma utilidade clínica em qual das situações abaixo?","opts":["Como exame de rotina em toda consulta ginecológica de rastreio.","Na avaliação de uma massa anexial com características ultrassonográficas atípicas, como parte da diferenciação com neoplasia ovariana.","Para substituir a USTV dirigida na suspeita inicial de endometriose.","Como único critério para indicar cirurgia."],"correct":1,"expl":"O papel do CA-125 é restrito: pode auxiliar no seguimento de doença já diagnosticada ou compor a avaliação de uma <b>massa anexial atípica</b>, sempre em conjunto com outros achados — nunca isolado."},
+{"stem":"A classificação r-ASRM (revised American Society for Reproductive Medicine) para endometriose:","opts":["Usa letras para descrever compartimentos anatômicos de doença infiltrativa profunda.","Atribui pontos conforme extensão/profundidade de implantes e aderências, resultando em 4 estágios (I a IV).","Foi desenvolvida especificamente para mapear doença infiltrativa profunda.","Correlaciona-se fortemente com a intensidade da dor relatada pela paciente."],"correct":1,"expl":"O r-ASRM é um sistema de <b>pontuação numérica</b> que resulta em 4 estágios (I mínima a IV grave), mas não captura bem a DIE e não se correlaciona com a intensidade da dor."},
+{"stem":"Qual classificação foi desenvolvida especificamente para descrever, por compartimentos anatômicos, a doença infiltrativa profunda que o r-ASRM não capta adequadamente?","opts":["Classificação de Bethesda.","Classificação FIGO.","#Enzian.","Classificação de Amsterdam."],"correct":2,"expl":"O <b>#Enzian</b> foi criado justamente para preencher essa lacuna do r-ASRM, descrevendo a DIE por compartimentos (ex.: septo retovaginal, uterossacros, intestino) usando letras, não estágios numéricos."},
+{"stem":"Uma paciente com estágio r-ASRM IV (doença extensa) apresenta dor pélvica leve, enquanto outra com estágio I relata dor incapacitante. Essa discrepância é esperada porque:","opts":["Indica erro de estadiamento que deve ser refeito.","O r-ASRM não se correlaciona bem com a intensidade da dor, que depende mais de mecanismos de sensibilização do que da extensão anatômica.","Significa que uma das duas pacientes não tem endometriose.","O r-ASRM sempre superestima a dor em estágios avançados."],"correct":1,"expl":"Retomando o módulo de fisiopatologia: a dor correlaciona-se com <b>densidade de fibras nervosas e sensibilização</b>, não com a extensão/estágio da doença — por isso essa discrepância é esperada e não indica erro."},
+{"stem":"Em qual das situações abaixo a laparoscopia é apropriadamente indicada, segundo a lógica diagnóstica atual?","opts":["Como primeiro exame diante de qualquer suspeita clínica de endometriose.","Quando a imagem dirigida é inconclusiva e a dúvida diagnóstica persiste.","Rotineiramente antes de iniciar tratamento hormonal empírico.","Em toda paciente assintomática com fator de risco familiar."],"correct":1,"expl":"A laparoscopia é reservada para cenários específicos: imagem inconclusiva com dúvida relevante, falha do tratamento empírico sem diagnóstico confirmado, ou quando a cirurgia já está indicada por outro motivo."},
+{"stem":"Quando a laparoscopia é realizada em uma paciente com suspeita de endometriose e achados compatíveis, a conduta mais racional é:","opts":["Apenas biopsiar e reoperar posteriormente para tratar.","Unir diagnóstico (biópsia/histopatológico) e tratamento (excisão de focos) no mesmo tempo cirúrgico, quando possível.","Sempre realizar histerectomia total.","Aguardar seis meses antes de qualquer intervenção terapêutica."],"correct":1,"expl":"Na prática atual, quando a laparoscopia é indicada, ela costuma <b>unir diagnóstico e tratamento</b> no mesmo procedimento, evitando uma segunda cirurgia — os detalhes técnicos são do módulo de Tratamento Cirúrgico."},
+{"stem":"Uma USTV solicitada como exame de rotina (não dirigido para endometriose) resulta em laudo descrevendo apenas 'útero e ovários de aspecto normal'. Diante de forte suspeita clínica, a conduta mais adequada é:","opts":["Descartar definitivamente a hipótese de endometriose.","Reconhecer que o exame pode ter sensibilidade reduzida por não ter sido dirigido, e considerar repetir com protocolo específico (IDEA) ou avançar na investigação.","Indicar histerectomia empírica.","Solicitar apenas CA-125 para confirmar."],"correct":1,"expl":"Uma USTV sem protocolo dirigido tem sensibilidade bem menor, especialmente para DIE e sliding sign — um resultado 'normal' nesse contexto <b>não afasta</b> a doença diante de suspeita clínica forte."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diagnóstico</small><br>O que a ESHRE 2022 mudou na lógica diagnóstica da endometriose?","back":"Inverteu a ordem: imagem (USTV dirigida/RM) passou a ser de primeira linha; laparoscopia ficou reservada para situações específicas, não mais rotina.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">USTV</small><br>O que significa a sigla IDEA no contexto do ultrassom para endometriose?","back":"International Deep Endometriosis Analysis — protocolo dirigido de 4 passos para investigar endometriose por USTV.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">USTV</small><br>Quais os 4 passos do protocolo IDEA?","back":"{{Útero e anexos (rotina + adenomiose); endometriomas; sliding sign (deslizamento uterossacral); nódulos de doença infiltrativa profunda.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">USTV</small><br>O que é o sliding sign negativo e o que ele sugere?","back":"Útero não desliza livremente sobre o reto ao exame dinâmico — sugere aderências/obliteração do fundo de saco posterior por doença infiltrativa profunda.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">RM</small><br>Quando a ressonância magnética é indicada na investigação de endometriose?","back":"Quando a USTV dirigida é inconclusiva, ou para mapeamento pré-cirúrgico detalhado de doença infiltrativa profunda antes de cirurgia complexa.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">CA-125</small><br>Por que o CA-125 não é recomendado como rastreio para endometriose?","back":"Sensibilidade baixa (20-50% em estádios I-II) e inespecífico — eleva-se em menstruação, cisto funcional, miomas, DIP e gravidez.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">CA-125</small><br>Em quais situações o CA-125 ainda tem algum papel clínico?","back":"Seguimento de doença já diagnosticada quando outras ferramentas são insuficientes, ou avaliação de massa anexial com características atípicas (diferencial com neoplasia ovariana).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Classificação</small><br>Como funciona o sistema r-ASRM?","back":"Pontuação numérica conforme extensão/profundidade de implantes e aderências peritoneais/ovarianas, resultando em 4 estágios: I (mínima) a IV (grave).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Classificação</small><br>Qual a principal limitação do r-ASRM?","back":"Não se correlaciona bem com a intensidade da dor e subestima a doença infiltrativa profunda (DIE).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Classificação</small><br>O que é o #Enzian e para que serve?","back":"Sistema de classificação por compartimentos anatômicos (letras), desenvolvido especificamente para descrever doença infiltrativa profunda — complementa o r-ASRM.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Laparoscopia</small><br>Em quais 3 cenários a laparoscopia é indicada na abordagem diagnóstica atual?","back":"{{Imagem inconclusiva com dúvida relevante; falha do tratamento empírico sem diagnóstico confirmado; cirurgia já indicada por outro motivo.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Laparoscopia</small><br>Quando indicada, o que a laparoscopia costuma unir no mesmo tempo cirúrgico?","back":"Diagnóstico (biópsia com histopatológico) e tratamento (excisão de focos, liberação de aderências), evitando uma segunda cirurgia.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Prática</small><br>Por que é importante pedir a USTV como \"protocolo para endometriose\" e não como exame de rotina?","back":"O exame de rotina tem sensibilidade menor — não avalia ativamente sliding sign e nódulos de DIE; um resultado normal nesse contexto não afasta a doença.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">CA-125</small><br>O CA-125 deve ser solicitado como primeiro exame diante de suspeita inicial de endometriose?","back":"NÃO — não tem papel de rastreio/triagem; a investigação inicial deve seguir por USTV dirigida (protocolo IDEA).","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Investigação inicial com USTV dirigida","stem":"Mulher de 27 anos com dismenorreia progressiva e dispareunia profunda (quadro já reconhecido no módulo anterior) é encaminhada para investigação por imagem.","passos":[
+{"h":"Conduta inicial","p":"Solicitada USTV transvaginal com protocolo dirigido para endometriose (IDEA), explicitando a suspeita clínica na requisição."},
+{"h":"Resultado do exame","p":"USTV identifica cisto ovariano à esquerda com conteúdo em 'vidro fosco', de 3,5 cm, e sliding sign negativo, sugerindo aderências no fundo de saco posterior."},
+{"h":"Raciocínio clínico","p":"O padrão do cisto é sugestivo de endometrioma; o sliding sign negativo reforça a suspeita de doença infiltrativa profunda associada, mesmo sem nódulo diretamente visualizado."},
+{"h":"Classificação","p":"Achados permitem estimar extensão (ovariana + provável comprometimento de fundo de saco), a confirmar/detalhar melhor se houver indicação cirúrgica futura (r-ASRM/#Enzian conforme achados cirúrgicos)."},
+{"h":"Conduta neste momento","p":"Diagnóstico considerado confirmado por imagem, sem necessidade de laparoscopia neste momento. Encaminhar conforme prioridade da paciente (dor vs. desejo reprodutivo) para os módulos de tratamento correspondentes."}
+]},
+{"t":"Caso 2 — USTV inconclusiva, necessidade de RM","stem":"Mulher de 30 anos com dor pélvica crônica e sintomas intestinais cíclicos realiza USTV dirigida, mas o exame é limitado por biotipo e o examinador não consegue caracterizar adequadamente o fundo de saco posterior.","passos":[
+{"h":"Limitação do exame inicial","p":"USTV relatada como 'de difícil janela acústica', sem conclusão sobre sliding sign ou nódulos de DIE."},
+{"h":"Conduta","p":"Diante da suspeita clínica mantida e da limitação técnica do USTV, solicitada ressonância magnética de pelve com protocolo para endometriose."},
+{"h":"Resultado da RM","p":"RM identifica nódulo de aproximadamente 2 cm em parede retal anterior, compatível com doença infiltrativa profunda de intestino."},
+{"h":"Raciocínio clínico","p":"A RM cumpriu exatamente seu papel complementar: esclarecer um caso em que a USTV foi tecnicamente limitada, além de fornecer mapeamento útil para eventual planejamento cirúrgico multidisciplinar (ginecologista + coloproctologista)."},
+{"h":"Conduta neste momento","p":"Diagnóstico confirmado por imagem. Dado o envolvimento intestinal, encaminhar para avaliação conjunta e discussão no módulo 'Tratamento Cirúrgico', considerando também abordagem clínica inicial conforme sintomas."}
+]},
+{"t":"Caso 3 — Uso inadequado do CA-125 e correção de conduta","stem":"Mulher de 25 anos com dismenorreia leve procura atendimento; o médico assistente solicita CA-125 como primeiro exame para 'rastrear' endometriose, sem outros exames complementares.","passos":[
+{"h":"Análise da conduta inicial","p":"CA-125 isolado como primeiro exame não é uma conduta apropriada — o marcador tem sensibilidade e especificidade baixas para esse propósito."},
+{"h":"Resultado obtido","p":"CA-125 discretamente elevado (45 U/mL). Isoladamente, esse achado é inespecífico e pode refletir menstruação recente, cisto funcional ou diversas outras causas benignas."},
+{"h":"Raciocínio clínico","p":"Diante de sintomas leves e um exame de baixo valor preditivo isolado, a conduta correta é reorientar a investigação: anamnese detalhada, exame físico e, se a suspeita se mantiver, USTV com protocolo dirigido — não repetir ou basear conduta no CA-125 isolado."},
+{"h":"Hipótese diagnóstica neste momento","p":"Dismenorreia leve a esclarecer — CA-125 isolado não confirma nem exclui endometriose; diagnóstico permanece em aberto até investigação adequada."},
+{"h":"Conduta neste momento","p":"Solicitar USTV transvaginal dirigida para endometriose como próximo passo apropriado; reservar qualquer nova dosagem de CA-125 apenas para seguimento futuro caso o diagnóstico se confirme e surja necessidade específica (ex.: massa anexial atípica)."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['endometriose|2'] = {
+name: "Tratamento Clínico",
+intro: "O tratamento hormonal controla sintomas e frequentemente pode começar de forma empírica, sem esperar confirmação cirúrgica — mas não cura a doença nem elimina as lesões.",
+sub: [
+["principios","Princípios do Tratamento",`
+<div class="ac-h">Controlar, não curar — e isso muda a conversa com a paciente</div>
+<p class="ac-p">Nenhum tratamento clínico hoje disponível <b>elimina</b> as lesões endometrióticas de forma definitiva. O objetivo realista do tratamento clínico é <b>suprimir a atividade hormonal cíclica</b> que alimenta a inflamação e a dor — reduzindo sintomas, melhorando qualidade de vida e, em muitos casos, evitando ou postergando uma cirurgia.</p>
+<p class="ac-p">Como você viu no módulo de fisiopatologia, a base racional é simples: se o estrogênio (sistêmico e o produzido localmente pela própria lesão) sustenta a inflamação e a neuroangiogênese, então <b>suprimir a flutuação ou a produção de estrogênio</b> tende a reduzir a atividade da doença. É exatamente essa lógica que organiza toda a escada terapêutica deste módulo.</p>
+<svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<defs><marker id="arrhead6" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">A escada terapêutica clínica</text>
+<rect x="30" y="50" width="150" height="60" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="105" y="78" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">AINEs</text>
+<text x="105" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">analgesia/adjuvante</text>
+<path d="M180 80 L216 80" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead6)"/>
+<rect x="218" y="50" width="150" height="60" rx="10" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="293" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">1ª linha hormonal</text>
+<text x="293" y="88" text-anchor="middle" font-size="9" style="fill:var(--muted)">ACO / progestágenos</text>
+<text x="293" y="100" text-anchor="middle" font-size="9" style="fill:var(--muted)">/ DIU-LNG</text>
+<path d="M368 80 L404 80" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead6)"/>
+<rect x="406" y="50" width="150" height="60" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="481" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">2ª linha hormonal</text>
+<text x="481" y="88" text-anchor="middle" font-size="9" style="fill:var(--ink)">análogos/antagonistas</text>
+<text x="481" y="100" text-anchor="middle" font-size="9" style="fill:var(--ink)">GnRH, inib. aromatase</text>
+<path d="M556 80 L592 80" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead6)"/>
+<rect x="594" y="50" width="66" height="60" rx="10" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.5"/>
+<text x="627" y="76" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:#e8675f">Cirurgia</text>
+<text x="627" y="92" text-anchor="middle" font-size="8" style="fill:var(--muted)">refratária</text>
+<rect x="100" y="150" width="480" height="60" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="340" y="174" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Escolha guiada por decisão compartilhada</text>
+<text x="340" y="192" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">desejo reprodutivo, comorbidades, efeitos adversos, preferência da paciente</text>
+</svg>
+<div class="ac-call"><b>Ponto-chave (retomando o módulo de fisiopatologia):</b> como a lesão produz seu próprio estrogênio via aromatase local, a resposta ao tratamento hormonal sistêmico pode ser <b>parcial</b> em alguns casos — isso é esperado, não é falha de conduta, e ajuda a explicar por que inibidores de aromatase têm papel em casos refratários.</div>
+<div class="ac-tip"><b>Retomando o módulo de fisiopatologia:</b> tratamento empírico (início hormonal antes mesmo da confirmação por imagem/cirurgia) é apropriado quando o quadro é sugestivo e não há sinais de alarme — não é preciso esperar o diagnóstico definitivo para começar a tratar a dor.</div>
+`],
+["analgesia","AINEs e Analgesia",`
+<div class="ac-h">Primeira ferramenta, mas com objetivo limitado</div>
+<p class="ac-p">Os anti-inflamatórios não esteroidais (AINEs) atuam inibindo a síntese de <b>prostaglandinas</b> — moléculas centrais na gênese da dor menstrual e na inflamação local da lesão endometriótica (lembra da aba "Da Lesão à Doença" do módulo 1?). São uma opção razoável para <b>alívio sintomático</b>, sobretudo quando a terapia hormonal não é desejada, não é tolerada ou está temporariamente contraindicada (por exemplo, desejo gestacional imediato).</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Onde os AINEs entram</text>
+<rect x="30" y="46" width="260" height="120" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="160" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Bom para</text>
+<text x="160" y="90" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Alívio sintomático agudo</text>
+<text x="160" y="104" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Adjuvante à terapia hormonal</text>
+<text x="160" y="118" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Quando hormônio não é opção</text>
+<text x="160" y="132" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">no momento</text>
+<rect x="350" y="46" width="260" height="120" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.4"/>
+<text x="480" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">Não faz</text>
+<text x="480" y="90" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Não modifica a evolução</text>
+<text x="480" y="104" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">biológica da doença</text>
+<text x="480" y="118" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Não substitui terapia</text>
+<text x="480" y="132" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">hormonal como base do tratamento</text>
+</svg>
+<div class="ac-warn"><b>Não esqueça:</b> uso crônico e prolongado de AINEs traz riscos (gástricos, renais) — por isso, quando a dor é recorrente e previsível (ciclo após ciclo), a terapia hormonal de base é preferível como estratégia principal, com o AINE reservado para picos de dor.</div>
+`],
+["hormonal1","1ª Linha: ACO e Progestágenos",`
+<div class="ac-h">O ponto de partida hormonal na maioria dos casos</div>
+<p class="ac-p">Contraceptivos hormonais combinados (ACO) e progestágenos — sistêmicos (via oral, por exemplo dienogeste) ou locais (DIU com levonorgestrel, o DIU-LNG) — são recomendados como <b>primeira linha</b> de tratamento hormonal para dor associada à endometriose, por serem eficazes e terem perfil de segurança favorável para uso prolongado.</p>
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Opções de primeira linha</text>
+<rect x="20" y="46" width="200" height="180" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="120" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">ACO combinado</text>
+<text x="120" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Uso contínuo (sem</text>
+<text x="120" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">pausa) reduz mais</text>
+<text x="120" y="122" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">a recorrência da dor</text>
+<text x="120" y="122" text-anchor="middle" font-size="9.5" style="fill:var(--muted)"></text>
+<text x="120" y="146" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">que o uso cíclico</text>
+<text x="120" y="170" text-anchor="middle" font-size="9" style="fill:var(--muted)">Vantagem: também</text>
+<text x="120" y="184" text-anchor="middle" font-size="9" style="fill:var(--muted)">contracepção</text>
+<rect x="240" y="46" width="200" height="180" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="340" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Progestágeno sistêmico</text>
+<text x="340" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Ex.: dienogeste oral</text>
+<text x="340" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Reduz dismenorreia,</text>
+<text x="340" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">dispareunia e pode</text>
+<text x="340" y="140" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">reduzir tamanho de</text>
+<text x="340" y="154" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">endometrioma</text>
+<text x="340" y="178" text-anchor="middle" font-size="9" style="fill:var(--muted)">Efeito colateral comum:</text>
+<text x="340" y="192" text-anchor="middle" font-size="9" style="fill:var(--muted)">sangramento irregular</text>
+<rect x="460" y="46" width="200" height="180" rx="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="560" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">DIU-LNG</text>
+<text x="560" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Progestágeno local</text>
+<text x="560" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">(levonorgestrel)</text>
+<text x="560" y="132" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Boa adesão (não</text>
+<text x="560" y="146" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">depende de tomar</text>
+<text x="560" y="160" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">diariamente)</text>
+<text x="560" y="184" text-anchor="middle" font-size="9" style="fill:var(--ink)">Contracepção de longa</text>
+<text x="560" y="198" text-anchor="middle" font-size="9" style="fill:var(--ink)">duração incluída</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Uso contínuo vs. cíclico do ACO</div>
+<p class="ac-p">Uma escolha prática importante: usar o ACO combinado de forma <b>contínua</b> (sem pausa/placebo) tende a ser mais eficaz para controlar a dor do que o esquema cíclico tradicional, já que evita a queda hormonal que dispara a menstruação (e, com ela, a dor).</p>
+<div class="ac-tip"><b>Escolha guiada por contexto:</b> se a paciente também precisa de contracepção, ACO ou DIU-LNG resolvem as duas necessidades ao mesmo tempo — vale sempre perguntar sobre desejo contraceptivo ao escolher a opção.</div>
+`],
+["hormonal2","2ª Linha: Análogos de GnRH",`
+<div class="ac-h">Quando a primeira linha não é suficiente</div>
+<p class="ac-p">Cerca de <b>até 1/3 das pacientes</b> não responde adequadamente aos tratamentos de primeira linha (ACO/progestágenos). Para esses casos, os <b>agonistas de GnRH</b> são uma opção de segunda linha bem estabelecida: eles dessensibilizam a hipófise após estímulo inicial, suprimindo a secreção de FSH/LH e, com isso, a produção ovariana de estrogênio — criando um estado hipoestrogênico que reduz a atividade da doença.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<defs><marker id="arrhead7" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Agonista de GnRH + add-back</text>
+<rect x="20" y="46" width="160" height="70" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="100" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Agonista de GnRH</text>
+<text x="100" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">dessensibiliza hipófise</text>
+<path d="M180 80 L216 80" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead7)"/>
+<rect x="218" y="46" width="160" height="70" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="298" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Hipoestrogenismo</text>
+<text x="298" y="90" text-anchor="middle" font-size="9" style="fill:var(--ink)">reduz atividade da lesão</text>
+<path d="M378 80 L414 80" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead7)"/>
+<rect x="416" y="46" width="200" height="70" rx="10" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.4"/>
+<text x="516" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:#e8675f">Efeitos hipoestrogênicos</text>
+<text x="516" y="86" text-anchor="middle" font-size="9" style="fill:var(--muted)">fogachos, perda de massa</text>
+<text x="516" y="100" text-anchor="middle" font-size="9" style="fill:var(--muted)">óssea se prolongado</text>
+<rect x="120" y="150" width="400" height="56" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="320" y="172" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Add-back therapy corrige isso</text>
+<text x="320" y="190" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">baixa dose de estrogênio/progestágeno associada, sem perder o efeito</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Por que o "add-back" existe e por que há limite de tempo</div>
+<p class="ac-p">O estado hipoestrogênico induzido pelo agonista controla a dor, mas causa efeitos indesejados — fogachos, ressecamento vaginal e, se prolongado, <b>perda de densidade mineral óssea</b>. A terapia "add-back" (adição de baixa dose de estrogênio, geralmente combinada a um progestágeno) neutraliza esses efeitos sem anular o benefício terapêutico. Mesmo assim, recomenda-se limitar o uso a <b>6 meses se usado isoladamente</b> ou até <b>1 ano se associado ao add-back</b>, justamente para não comprometer a saúde óssea.</p>
+<div class="ac-warn"><b>Pegadinha de prova:</b> um agonista de GnRH usado por tempo prolongado <b>sem add-back</b> é conduta inadequada — o risco de perda óssea clinicamente relevante aumenta.</div>
+`],
+["hormonal3","Antagonistas de GnRH e Inibidores de Aromatase",`
+<div class="ac-h">Opções mais recentes para casos refratários</div>
+<p class="ac-p">Duas classes adicionais completam o arsenal de segunda linha, cada uma com uma lógica própria.</p>
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Antagonistas de GnRH vs. inibidores de aromatase</text>
+<rect x="20" y="46" width="300" height="190" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="170" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Antagonistas de GnRH</text>
+<text x="170" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Suprimem FSH/LH de forma</text>
+<text x="170" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">dose-dependente (sem o</text>
+<text x="170" y="122" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">"flare" inicial do agonista)</text>
+<text x="170" y="146" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Vantagens práticas:</text>
+<text x="170" y="164" text-anchor="middle" font-size="9" style="fill:var(--muted)">via oral, efeito rápido e</text>
+<text x="170" y="178" text-anchor="middle" font-size="9" style="fill:var(--muted)">rapidamente reversível</text>
+<text x="170" y="192" text-anchor="middle" font-size="9" style="fill:var(--muted)">(retorno da menstruação</text>
+<text x="170" y="206" text-anchor="middle" font-size="9" style="fill:var(--muted)">em ~3-5 semanas)</text>
+<rect x="360" y="46" width="300" height="190" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="510" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Inibidores de aromatase</text>
+<text x="510" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Bloqueiam a conversão</text>
+<text x="510" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">periférica em estrogênio —</text>
+<text x="510" y="122" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">inclusive a produção</text>
+<text x="510" y="136" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">LOCAL pela própria lesão</text>
+<text x="510" y="160" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Uso:</text>
+<text x="510" y="178" text-anchor="middle" font-size="9" style="fill:var(--muted)">reservados para falha de</text>
+<text x="510" y="192" text-anchor="middle" font-size="9" style="fill:var(--muted)">outras terapias; associados a</text>
+<text x="510" y="206" text-anchor="middle" font-size="9" style="fill:var(--muted)">ACO/progestágeno (evitar</text>
+<text x="510" y="220" text-anchor="middle" font-size="9" style="fill:var(--muted)">estímulo ovariano paradoxal)</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Antagonistas de GnRH — a novidade prática</div>
+<p class="ac-p">Diferente dos agonistas (que causam um estímulo inicial transitório — o "efeito flare" — antes de suprimir o eixo), os antagonistas suprimem FSH/LH <b>diretamente e de forma dose-dependente</b>, sem esse efeito inicial. São administrados por via oral, têm ação rápida e são <b>rapidamente reversíveis</b> ao suspender — a maioria das pacientes retoma a menstruação em poucas semanas. Representam uma alternativa relevante para quem não respondeu à primeira linha ou não tolera os efeitos adversos do agonista.</p>
+<div class="ac-h" style="margin-top:14px">Inibidores de aromatase — atacando a fonte local do estrogênio</div>
+<p class="ac-p">Lembrando o mecanismo central do módulo de fisiopatologia: a lesão endometriótica expressa <b>aromatase</b> e produz seu próprio estrogênio localmente. Os inibidores de aromatase bloqueiam essa via — tanto a periférica quanto a local — sendo úteis em <b>doença refratária</b> às demais terapias hormonais. Como podem estimular o desenvolvimento folicular ovariano se usados isoladamente (efeito paradoxal em mulheres na pré-menopausa), costumam ser combinados a um ACO ou progestágeno.</p>
+<div class="ac-tip"><b>Fio condutor:</b> observe como cada classe hormonal ataca o mesmo alvo (estrogênio) por um caminho diferente — central (agonista/antagonista de GnRH) ou periférico/local (inibidor de aromatase). Entender essa lógica evita decorar a lista sem compreender.</div>
+`],
+["refrataria","Dor Refratária: Quando Escalar",`
+<div class="ac-h">Reconhecendo a falha terapêutica</div>
+<p class="ac-p">Nem toda dor persistente após início do tratamento hormonal significa "falha" — pode levar algumas semanas para o efeito pleno aparecer, e ajustes de dose/via são comuns. Mas quando a dor permanece <b>incapacitante apesar de terapia hormonal adequada e bem conduzida</b> (dose certa, tempo suficiente, adesão confirmada), é hora de reconsiderar a estratégia.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Antes de rotular como "refratária"</text>
+<rect x="30" y="46" width="580" height="150" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="320" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Confirme antes de escalar:</text>
+<text x="320" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Tempo adequado de uso (não julgar em poucos dias)</text>
+<text x="320" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Adesão real ao tratamento prescrito</text>
+<text x="320" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Dose/via adequadas para o caso</text>
+<text x="320" y="148" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Considerar comorbidades de sensibilização (SII,</text>
+<text x="320" y="164" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">bexiga dolorosa) que também precisam de manejo</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Manejo multimodal da dor</div>
+<p class="ac-p">Como a dor crônica envolve sensibilização central (revisando o módulo de fisiopatologia), o manejo eficaz muitas vezes vai além do hormônio: fisioterapia pélvica, abordagem multidisciplinar da dor crônica e, quando indicado, encaminhamento psicológico compõem o cuidado integral — não são "extras", são parte do tratamento de dor pélvica crônica bem conduzido.</p>
+<div class="ac-warn"><b>Quando pensar em cirurgia:</b> falha real de tratamento hormonal otimizado, doença infiltrativa profunda sintomática com impacto significativo em órgãos vizinhos, ou endometrioma volumoso são cenários que costumam justificar avaliação cirúrgica — assunto do próximo módulo, "Tratamento Cirúrgico".</div>
+`],
+["seguimento","Seguimento e Reavaliação",`
+<div class="ac-h">Tratamento não é "prescrever e esquecer"</div>
+<p class="ac-p">O acompanhamento da resposta terapêutica deve ser estruturado: reavaliar o controle da dor, a tolerância aos efeitos adversos e, quando aplicável, o tamanho de endometriomas em exames de imagem de seguimento. A escolha do método também deve ser revisitada ao longo do tempo, considerando mudanças no desejo reprodutivo, tolerância e resposta clínica.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Ciclo de reavaliação</text>
+<rect x="30" y="50" width="160" height="60" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="110" y="76" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Iniciar tratamento</text>
+<text x="110" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">escolhido de forma compartilhada</text>
+<rect x="240" y="50" width="160" height="60" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="320" y="76" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Reavaliar em semanas</text>
+<text x="320" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">dor, efeitos adversos, adesão</text>
+<rect x="450" y="50" width="160" height="60" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="530" y="76" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Ajustar ou manter</text>
+<text x="530" y="94" text-anchor="middle" font-size="9" style="fill:var(--ink)">trocar classe, otimizar dose</text>
+<path d="M110 110 L110 150 L530 150 L530 110" fill="none" style="stroke:var(--muted)" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="320" y="168" text-anchor="middle" font-size="9" style="fill:var(--muted)">reavaliações periódicas ao longo do tratamento</text>
+</svg>
+<div class="ac-call"><b>Fechando o raciocínio do módulo:</b> AINEs para alívio pontual → ACO/progestágenos/DIU-LNG como base de primeira linha → agonistas/antagonistas de GnRH e inibidores de aromatase reservados para falha ou refratariedade → dor persistente apesar de tratamento otimizado direciona para avaliação cirúrgica (próximo módulo) → tratamento clínico permanece um processo dinâmico de reavaliação, não uma prescrição única e definitiva.</div>
+`]
+]
+};
+Object.assign(C['endometriose|2'], {
+"escores": `<div class="prose">
+<h3>Escada terapêutica clínica — visão comparativa</h3>
+<table class="ac-tbl">
+<tr><th>Linha</th><th>Opção</th><th>Mecanismo</th><th>Limitação principal</th></tr>
+<tr><td>Adjuvante</td><td>AINEs</td><td>Inibem síntese de prostaglandinas</td><td>Não modifica a doença; uso crônico traz riscos</td></tr>
+<tr><td>1ª linha</td><td>ACO combinado (contínuo preferível)</td><td>Supressão do eixo, estabilidade hormonal</td><td>Sangramento de escape, contraindicações a estrogênio</td></tr>
+<tr><td>1ª linha</td><td>Progestágeno sistêmico (dienogeste)</td><td>Efeito antiproliferativo/anti-inflamatório endometrial</td><td>Sangramento irregular</td></tr>
+<tr><td>1ª linha</td><td>DIU-LNG</td><td>Progestágeno local contínuo</td><td>Não trata doença extrapélvica extensa isoladamente</td></tr>
+<tr><td>2ª linha</td><td>Agonista de GnRH + add-back</td><td>Hipoestrogenismo central</td><td>Limite de 6-12 meses (perda óssea)</td></tr>
+<tr><td>2ª linha</td><td>Antagonista de GnRH</td><td>Supressão dose-dependente de FSH/LH, sem flare</td><td>Experiência clínica mais recente</td></tr>
+<tr><td>2ª linha (refratária)</td><td>Inibidor de aromatase</td><td>Bloqueia estrogênio central e local (na lesão)</td><td>Requer associação a ACO/progestágeno</td></tr>
+</table>
+</div>`,
+"dif": `<div class="prose">
+<h3>Antes de rotular "falha de tratamento" — diferenciais a considerar</h3>
+<table class="ac-tbl">
+<tr><th>Cenário</th><th>O que investigar antes de trocar de classe</th></tr>
+<tr><td>Dor persiste nas primeiras semanas</td><td>Tempo de tratamento ainda insuficiente para efeito pleno</td></tr>
+<tr><td>Dor melhora e piora de forma inconsistente</td><td>Adesão real ao esquema prescrito</td></tr>
+<tr><td>Dor generalizada, difícil de localizar</td><td>Comorbidade de sensibilização cruzada (SII, bexiga dolorosa) não tratada isoladamente</td></tr>
+<tr><td>Dor associada a sangramento irregular importante</td><td>Ajuste de dose/via antes de trocar classe medicamentosa</td></tr>
+<tr><td>Dor refratária real, confirmada</td><td>Avaliar doença infiltrativa profunda ou endometrioma volumoso — indicação cirúrgica</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Tratamento Clínico</div>
+<div class="mm">
+  <div class="mm-card"><h5>🎯 Princípio</h5><ul><li>Controla, não cura</li><li>Suprime flutuação/produção de estrogênio</li><li>Decisão compartilhada</li></ul></div>
+  <div class="mm-card"><h5>💊 AINEs</h5><ul><li>Alívio sintomático</li><li>Não modifica a doença</li><li>Uso crônico tem riscos</li></ul></div>
+  <div class="mm-card"><h5>🥇 1ª linha</h5><ul><li>ACO contínuo &gt; cíclico</li><li>Progestágeno sistêmico (dienogeste)</li><li>DIU-LNG</li></ul></div>
+  <div class="mm-card"><h5>🥈 2ª linha</h5><ul><li>Agonista GnRH + add-back (6-12 meses)</li><li>Antagonista GnRH (oral, rápido, reversível)</li><li>Inibidor de aromatase (refratária, + ACO/progestágeno)</li></ul></div>
+  <div class="mm-card"><h5>🔺 Refratária</h5><ul><li>Confirmar adesão/tempo/dose antes</li><li>Manejo multimodal da dor</li><li>Indica avaliação cirúrgica</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Diagnóstico confirmado (ou suspeita forte, tratamento empírico) — dor como sintoma predominante</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — AINEs conforme necessário</div><div class="fx-lbl">Alívio sintomático agudo, isolado ou associado à terapia de base</div><div class="fx-arrow"></div><div class="fx-node">Passo 2 — Terapia hormonal de 1ª linha</div><div class="fx-lbl">ACO combinado contínuo, progestágeno sistêmico ou DIU-LNG, conforme desejo contraceptivo e preferência</div><div class="fx-arrow"></div><div class="fx-lbl">Resposta adequada após tempo/dose/adesão confirmados?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Manter e reavaliar periodicamente</div><div class="fx-node"><b>NÃO</b> &#8594; escalar para 2ª linha</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Falha confirmada da 1ª linha hormonal (tempo/dose/adesão adequados)</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — Agonista ou antagonista de GnRH</div><div class="fx-lbl">Agonista sempre com add-back; limite 6 meses isolado / 12 meses com add-back. Antagonista como alternativa oral de ação rápida</div><div class="fx-arrow"></div><div class="fx-lbl">Ainda refratária, ou doença estrutural relevante (DIE sintomática, endometrioma volumoso)?</div><div class="fx-row"><div class="fx-node end"><b>Refratária sem doença estrutural relevante:</b> considerar inibidor de aromatase associado a ACO/progestágeno</div><div class="fx-node end"><b>Doença estrutural relevante ou falha completa:</b> encaminhar para módulo "Tratamento Cirúrgico"</div></div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Tratamento Clínico em 60 segundos</h4>
+<ul>
+<li><strong>Objetivo:</strong> controlar sintomas suprimindo a flutuação/produção de estrogênio — não cura, não elimina lesões.</li>
+<li><strong>AINEs:</strong> alívio sintomático, não modifica a doença; uso crônico tem riscos.</li>
+<li><strong>1ª linha:</strong> ACO combinado (contínuo &gt; cíclico), progestágeno sistêmico (dienogeste) ou DIU-LNG.</li>
+<li><strong>2ª linha:</strong> agonista de GnRH + add-back (limite 6 meses isolado/12 meses com add-back, por risco de perda óssea); antagonista de GnRH (oral, ação rápida, reversível, sem "flare").</li>
+<li><strong>Refratária:</strong> inibidor de aromatase, sempre associado a ACO/progestágeno (evita estímulo ovariano paradoxal) — ataca a produção LOCAL de estrogênio pela própria lesão.</li>
+<li><strong>Antes de rotular "falha":</strong> confirmar tempo adequado, adesão, dose/via, e afastar comorbidades de sensibilização cruzada.</li>
+<li><strong>Refratariedade real ou doença estrutural</strong> (DIE sintomática, endometrioma volumoso) → avaliação cirúrgica.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Tratamento clínico</strong> = escada terapêutica (AINEs → ACO/progestágeno/DIU-LNG → agonista/antagonista de GnRH → inibidor de aromatase), guiada por decisão compartilhada, sempre suprimindo estrogênio para controlar (não curar) a doença; refratariedade real encaminha para cirurgia.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>ACO/progestágeno/DIU-LNG são <strong>primeira linha</strong> — qualquer questão que pule direto para GnRH sem justificar falha prévia está descrevendo conduta inadequada.</li>
+<li>Agonista de GnRH <strong>sempre</strong> com add-back se uso prolongado — questão que descreve uso isolado por muitos meses sem add-back está testando esse conceito.</li>
+<li>Inibidor de aromatase nunca isolado em mulher na pré-menopausa — sempre associado a ACO/progestágeno.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que o tratamento clínico <strong>cura</strong> a endometriose — ele controla sintomas, não elimina lesões.</li>
+<li>Confundir agonista com antagonista de GnRH: agonista tem "flare" inicial e ação mais lenta para suprimir; antagonista suprime direto, sem flare, e é rapidamente reversível.</li>
+<li>Julgar "falha de tratamento" sem confirmar tempo, dose e adesão antes de escalar.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"Sem flare, sem espera"</strong> = antagonista de GnRH (ação rápida, sem efeito flare inicial).</li>
+<li><strong>"Add-back protege o osso."</strong></li>
+<li><strong>Ordem da escada:</strong> AINE → hormonal 1ª linha → hormonal 2ª linha → cirurgia.</li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Prescrever agonista de GnRH sem add-back por tempo prolongado.</li>
+<li>Não perguntar sobre desejo contraceptivo/reprodutivo ao escolher a terapia hormonal.</li>
+<li>Escalar para 2ª linha sem confirmar adesão real ao tratamento de 1ª linha.</li>
+<li>Usar inibidor de aromatase isolado, sem ACO/progestágeno associado.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico por que o tratamento clínico controla, mas não cura, a endometriose","Sei quando os AINEs são indicados e reconheço que não modificam a evolução da doença","Descrevo as opções de 1ª linha hormonal (ACO contínuo, progestágeno sistêmico, DIU-LNG) e por que uso contínuo do ACO é preferível ao cíclico","Explico o mecanismo do agonista de GnRH, por que precisa de add-back e qual o limite de tempo de uso","Diferencio antagonista de GnRH do agonista (sem flare, ação rápida, reversível)","Sei quando o inibidor de aromatase é indicado e por que deve ser associado a outro hormonal","Reconheço os passos para confirmar falha real de tratamento antes de escalar, e quando encaminhar para cirurgia"]
+});
+Object.assign(C['endometriose|2'], {
+"questoes": [
+{"stem":"Qual é o objetivo realista do tratamento clínico (hormonal) da endometriose?","opts":["Eliminar definitivamente todas as lesões endometrióticas.","Suprimir a flutuação/produção de estrogênio para controlar sintomas, sem curar a doença.","Substituir completamente a necessidade de qualquer avaliação cirúrgica futura.","Reverter permanentemente a sensibilização central já estabelecida."],"correct":1,"expl":"Nenhum tratamento clínico atual elimina as lesões — o objetivo é <b>suprimir a atividade hormonal cíclica</b> que sustenta a inflamação e a dor, controlando sintomas e melhorando qualidade de vida."},
+{"stem":"Em relação aos AINEs no tratamento da endometriose, é correto afirmar que:","opts":["Modificam a evolução biológica da doença a longo prazo.","São úteis para alívio sintomático agudo, mas não substituem a terapia hormonal de base quando a dor é recorrente.","Devem ser a única terapia utilizada, independentemente da frequência da dor.","São contraindicados em qualquer paciente com endometriose."],"correct":1,"expl":"Os AINEs aliviam a dor ao inibir prostaglandinas, mas não alteram a biologia da doença — para dor recorrente/previsível, a terapia hormonal de base é preferível, com o AINE reservado para picos de dor."},
+{"stem":"Qual das opções abaixo é recomendada como tratamento hormonal de PRIMEIRA linha para dor associada à endometriose?","opts":["Agonista de GnRH isolado, sem add-back.","Inibidor de aromatase isolado.","Contraceptivo hormonal combinado ou progestágeno (sistêmico ou DIU-LNG).","Danazol em altas doses por tempo indeterminado."],"correct":2,"expl":"ACO combinado e progestágenos (sistêmicos ou via DIU-LNG) são recomendados como <b>primeira linha</b>, por eficácia e perfil de segurança favorável para uso prolongado."},
+{"stem":"Em relação ao uso do contraceptivo oral combinado no tratamento da dor por endometriose, o esquema:","opts":["Cíclico tradicional é sempre superior ao contínuo.","Contínuo (sem pausa) tende a ser mais eficaz que o cíclico para reduzir a recorrência da dor.","Não tem diferença de eficácia entre contínuo e cíclico.","Deve ser sempre associado a um agonista de GnRH desde o início."],"correct":1,"expl":"O uso <b>contínuo</b> do ACO evita a queda hormonal que dispara a menstruação (e a dor associada), sendo geralmente mais eficaz que o esquema cíclico tradicional para essa finalidade."},
+{"stem":"Uma paciente inicia agonista de GnRH para dor refratária à primeira linha. Qual conduta associada é indicada para evitar perda de densidade mineral óssea?","opts":["Suplementação isolada de cálcio, sem qualquer ajuste hormonal.","Terapia 'add-back' com baixa dose de estrogênio/progestágeno associada.","Aumentar a dose do agonista de GnRH.","Associar um segundo agonista de GnRH de outra classe."],"correct":1,"expl":"A terapia <b>add-back</b> (baixa dose de estrogênio, geralmente combinada a progestágeno) neutraliza os efeitos hipoestrogênicos do agonista, incluindo a perda óssea, sem anular o benefício terapêutico."},
+{"stem":"Qual o tempo máximo recomendado de uso de agonista de GnRH quando administrado ISOLADAMENTE (sem add-back), pelo risco de perda óssea?","opts":["1 mês.","6 meses.","5 anos.","Sem limite, desde que a dor esteja controlada."],"correct":1,"expl":"Recomenda-se limitar o uso do agonista de GnRH a <b>6 meses se isolado</b>, ou até <b>1 ano se associado a add-back</b>, para evitar redução clinicamente relevante da densidade mineral óssea."},
+{"stem":"Em relação aos antagonistas de GnRH no tratamento da endometriose, é correto afirmar que:","opts":["Causam um efeito 'flare' inicial de estimulação hormonal, assim como os agonistas.","Suprimem FSH/LH de forma dose-dependente, sem o efeito flare inicial, com ação rápida e reversibilidade também rápida.","Têm ação irreversível após a suspensão.","Só podem ser administrados por via injetável de depósito mensal."],"correct":1,"expl":"Diferente dos agonistas, os antagonistas suprimem FSH/LH diretamente e de forma dose-dependente, <b>sem efeito flare</b>; são orais, de ação rápida e rapidamente reversíveis (retorno da menstruação em poucas semanas)."},
+{"stem":"O mecanismo de ação dos inibidores de aromatase no tratamento da endometriose envolve:","opts":["Bloqueio direto dos receptores de progesterona no endométrio.","Bloqueio da conversão periférica E local (na própria lesão) de andrógenos em estrogênio.","Estímulo direto da secreção hipofisária de FSH e LH.","Ação exclusivamente sobre receptores de prostaglandina."],"correct":1,"expl":"Os inibidores de aromatase bloqueiam a conversão em estrogênio tanto perifericamente quanto <b>localmente na lesão</b> (que expressa aromatase própria) — por isso são úteis em doença refratária às demais terapias hormonais."},
+{"stem":"Por que os inibidores de aromatase geralmente são associados a um ACO ou progestágeno em mulheres na pré-menopausa?","opts":["Para potencializar o efeito flare do agonista de GnRH.","Porque, usados isoladamente, podem estimular o desenvolvimento folicular ovariano de forma paradoxal.","Porque não têm nenhum efeito quando usados isoladamente.","Para reduzir o custo do tratamento."],"correct":1,"expl":"Em mulheres na pré-menopausa, o inibidor de aromatase isolado pode estimular paradoxalmente o desenvolvimento folicular ovariano — por isso costuma ser associado a um ACO ou progestágeno."},
+{"stem":"Uma paciente relata dor pélvica persistente após apenas 10 dias de uso de progestágeno oral recém-iniciado. A conduta mais apropriada neste momento é:","opts":["Trocar imediatamente para agonista de GnRH, pois houve falha de primeira linha.","Reconhecer que o tempo de uso ainda é insuficiente para avaliar resposta plena, e reavaliar em algumas semanas.","Indicar cirurgia imediatamente.","Suspender qualquer tratamento hormonal."],"correct":1,"expl":"Dor persistente nos primeiros dias não caracteriza falha terapêutica — é preciso tempo adequado de uso antes de julgar a resposta, além de confirmar adesão e dose antes de escalar a conduta."},
+{"stem":"Além da terapia hormonal, qual abordagem complementar é reconhecida como parte do manejo integral da dor pélvica crônica associada à endometriose, especialmente quando há sensibilização central?","opts":["Repouso absoluto prolongado, sem qualquer atividade.","Manejo multimodal incluindo fisioterapia pélvica e abordagem multidisciplinar da dor crônica.","Uso exclusivo de opioides de longa duração como primeira escolha.","Suspensão de todo acompanhamento médico até resolução espontânea."],"correct":1,"expl":"Como a dor crônica envolve sensibilização central, o manejo eficaz vai além do hormônio: fisioterapia pélvica, abordagem multidisciplinar da dor e suporte psicológico fazem parte do cuidado integral."},
+{"stem":"Qual cenário abaixo justifica encaminhamento para avaliação cirúrgica, segundo a lógica de escalonamento terapêutico?","opts":["Dor leve, bem controlada com AINE ocasional.","Falha real de tratamento hormonal otimizado (tempo, dose e adesão confirmados) ou doença infiltrativa profunda sintomática/endometrioma volumoso.","Início recente de progestágeno, ainda sem tempo suficiente de resposta.","Preferência inicial da paciente por qualquer método hormonal, sem tentativa prévia."],"correct":1,"expl":"A avaliação cirúrgica é indicada diante de falha real de tratamento clínico bem conduzido, ou de achados estruturais relevantes como DIE sintomática ou endometrioma volumoso — não diante de tratamento ainda em fase inicial."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Princípio</small><br>Qual o objetivo realista do tratamento clínico da endometriose?","back":"Suprimir a flutuação/produção de estrogênio para controlar sintomas — não cura a doença nem elimina as lesões.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">AINEs</small><br>Qual o papel dos AINEs no tratamento da endometriose?","back":"Alívio sintomático agudo (inibem prostaglandinas); não modificam a evolução biológica da doença.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">1ª linha</small><br>Quais as 3 principais opções hormonais de primeira linha?","back":"{{Contraceptivo hormonal combinado (ACO, preferencialmente contínuo); progestágeno sistêmico (ex.: dienogeste); DIU com levonorgestrel (DIU-LNG).}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">1ª linha</small><br>Por que o uso contínuo do ACO é preferível ao cíclico para dor por endometriose?","back":"Evita a queda hormonal que dispara a menstruação e a dor associada, sendo geralmente mais eficaz para reduzir recorrência.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">2ª linha</small><br>Como agem os agonistas de GnRH no tratamento da endometriose?","back":"Dessensibilizam a hipófise após estímulo inicial, suprimindo FSH/LH e a produção ovariana de estrogênio (estado hipoestrogênico).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">2ª linha</small><br>Por que o agonista de GnRH precisa de terapia 'add-back' e qual o limite de tempo?","back":"Para evitar perda de densidade mineral óssea por hipoestrogenismo prolongado; limite de 6 meses isolado ou 12 meses com add-back.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">2ª linha</small><br>Qual a diferença central entre agonista e antagonista de GnRH?","back":"O agonista tem efeito 'flare' inicial e ação mais lenta; o antagonista suprime FSH/LH direto e de forma dose-dependente, sem flare, com ação rápida e reversibilidade rápida.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">2ª linha</small><br>Como agem os inibidores de aromatase na endometriose?","back":"Bloqueiam a conversão de andrógenos em estrogênio tanto perifericamente quanto localmente na própria lesão (que expressa aromatase).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">2ª linha</small><br>Por que o inibidor de aromatase deve ser associado a ACO/progestágeno em pré-menopausa?","back":"Porque, isolado, pode estimular paradoxalmente o desenvolvimento folicular ovariano.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Refratariedade</small><br>O que confirmar antes de rotular um tratamento como 'falha terapêutica'?","back":"{{Tempo adequado de uso; adesão real ao tratamento; dose/via corretas; presença de comorbidades de sensibilização cruzada não tratadas.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Manejo integral</small><br>Além da terapia hormonal, o que compõe o manejo multimodal da dor crônica na endometriose?","back":"Fisioterapia pélvica, abordagem multidisciplinar da dor crônica e, quando indicado, suporte psicológico.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Escalonamento</small><br>Quais cenários justificam encaminhamento para avaliação cirúrgica?","back":"Falha real de tratamento hormonal otimizado (tempo/dose/adesão confirmados) ou doença estrutural relevante (DIE sintomática, endometrioma volumoso).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">1ª linha</small><br>Cite um efeito colateral comum do dienogeste (progestágeno oral).","back":"Sangramento irregular/de escape.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">AINEs</small><br>Qual o risco do uso crônico e prolongado de AINEs?","back":"Riscos gástricos e renais — por isso não substituem a terapia hormonal de base quando a dor é recorrente/previsível.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Início de tratamento de primeira linha","stem":"Mulher de 24 anos com endometriose confirmada por imagem (do módulo anterior), sem desejo gestacional imediato, relata dismenorreia intensa e dispareunia.","passos":[
+{"h":"Avaliação de contexto","p":"Paciente sem contraindicações a estrogênio, sem desejo gestacional nos próximos anos, buscando também método contraceptivo eficaz."},
+{"h":"Discussão compartilhada","p":"Apresentadas as opções de primeira linha: ACO combinado contínuo, progestágeno oral isolado, ou DIU-LNG. Discutidos perfis de efeitos adversos e praticidade de cada opção."},
+{"h":"Decisão","p":"Paciente opta por ACO combinado em uso contínuo, por já desejar esse método também como contracepção e preferir não ter DIU no momento."},
+{"h":"Raciocínio clínico","p":"O uso contínuo (sem pausa) é preferido ao cíclico por reduzir mais eficazmente a recorrência da dor, evitando a queda hormonal que dispara a menstruação."},
+{"h":"Conduta neste momento","p":"Iniciar ACO combinado contínuo, associar AINE para picos de dor se necessário, e agendar reavaliação em 8-12 semanas para checar resposta e tolerância."}
+]},
+{"t":"Caso 2 — Escalonamento para segunda linha com add-back","stem":"Mulher de 29 anos em uso de dienogeste há 4 meses, com adesão confirmada, mantém dismenorreia incapacitante e dispareunia importante.","passos":[
+{"h":"Confirmação de falha real","p":"Tempo de uso adequado (4 meses), adesão confirmada em consulta, dose padrão utilizada — critérios para considerar falha real de primeira linha estão preenchidos."},
+{"h":"Discussão de opções de segunda linha","p":"Apresentadas as opções: agonista de GnRH com add-back obrigatório, ou antagonista de GnRH oral."},
+{"h":"Decisão compartilhada","p":"Optado por agonista de GnRH associado a add-back com baixa dose de estrogênio/progestágeno, dada disponibilidade e preferência da paciente, com plano de reavaliação da densidade óssea se uso ultrapassar 6 meses."},
+{"h":"Raciocínio clínico","p":"O add-back é indicado desde o início do agonista, não apenas se surgirem sintomas — previne a perda óssea que ocorreria com o estado hipoestrogênico não compensado."},
+{"h":"Conduta neste momento","p":"Iniciar agonista de GnRH + add-back, com limite planejado de até 12 meses de uso associado, reavaliação clínica periódica e orientação sobre sinais de hipoestrogenismo não controlado."}
+]},
+{"t":"Caso 3 — Refratariedade real e indicação de avaliação cirúrgica","stem":"Mulher de 34 anos com endometrioma de 6 cm e suspeita de doença infiltrativa profunda de retossigmoide (RM prévia), já tratada com ACO contínuo e, posteriormente, agonista de GnRH com add-back por 6 meses, mantendo dor incapacitante e sintomas intestinais cíclicos.","passos":[
+{"h":"Revisão do tratamento prévio","p":"Confirmada adesão e adequação de ambas as linhas de tratamento hormonal já tentadas, por tempo suficiente, sem melhora significativa da dor ou dos sintomas intestinais."},
+{"h":"Consideração de inibidor de aromatase","p":"Discutida a opção de inibidor de aromatase associado a progestágeno, mas ponderado que a presença de endometrioma volumoso e DIE sintomática de intestino já constitui indicação estrutural para avaliação cirúrgica, independentemente de nova tentativa medicamentosa."},
+{"h":"Raciocínio clínico","p":"Diante de falha real de tratamento clínico otimizado associada a achados estruturais relevantes (endometrioma volumoso + DIE sintomática), a escalada para uma terceira linha medicamentosa tende a postergar sem necessariamente resolver o problema estrutural."},
+{"h":"Hipótese/situação clínica","p":"Endometriose refratária ao tratamento clínico, com componente estrutural relevante (endometrioma volumoso e DIE intestinal sintomática)."},
+{"h":"Conduta neste momento","p":"Encaminhar para avaliação cirúrgica multidisciplinar (ginecologista + coloproctologista), conforme detalhado no módulo 'Tratamento Cirúrgico', mantendo controle analgésico enquanto aguarda a avaliação."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['endometriose|3'] = {
+name: "Tratamento Cirúrgico",
+intro: "A cirurgia entra quando o tratamento clínico falha ou quando há doença estrutural relevante — mas a técnica certa depende do sítio, do tamanho da lesão e do desejo reprodutivo da paciente.",
+sub: [
+["principios","Princípios da Cirurgia",`
+<div class="ac-h">Excisão é a regra — e o "onde" opera importa</div>
+<p class="ac-p">A diretriz ESHRE 2022 recomenda, de forma geral, a <b>excisão (retirada completa) das lesões</b> em vez da simples <b>ablação</b> (destruição da lesão por energia, sem retirá-la) — a excisão permite confirmação histopatológica e tende a reduzir mais a recidiva de sintomas. A via <b>laparoscópica (minimamente invasiva)</b> é preferida à laparotomia aberta, pela recuperação mais rápida e menor morbidade, sempre que tecnicamente viável.</p>
+<svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Excisão vs. ablação — a regra geral</text>
+<rect x="30" y="46" width="280" height="160" rx="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="170" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Excisão</text>
+<text x="170" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Retira a lesão por completo</text>
+<text x="170" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Permite histopatológico</text>
+<text x="170" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Menor recidiva de sintomas</text>
+<text x="170" y="148" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Preferida na maioria dos casos</text>
+<rect x="370" y="46" width="280" height="160" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.5"/>
+<text x="510" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--ink)">Ablação</text>
+<text x="510" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Destrói a lesão com energia,</text>
+<text x="510" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">sem retirá-la</text>
+<text x="510" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Sem material p/ histopatológico</text>
+<text x="510" y="144" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Pode poupar tecido saudável</text>
+<text x="510" y="162" text-anchor="middle" font-size="9.5" style="fill:var(--accent)">Reservada p/ situações específicas</text>
+</svg>
+<div class="ac-call"><b>Exceção importante que a prova adora cobrar:</b> no ovário, quando há preocupação com dano folicular — doença bilateral, reserva ovariana já diminuída — técnicas ablativas (como vaporização a laser) podem ser preferíveis à cistectomia clássica, mesmo sendo o ovário um cenário em que, de outra forma, a excisão também é padrão. Você vai ver esse detalhe na aba do endometrioma.</div>
+<div class="ac-tip"><b>Centro de referência:</b> para doença infiltrativa profunda, a diretriz recomenda cirurgia em <b>centro com expertise</b> no manejo dessa condição, com aconselhamento detalhado da paciente sobre riscos, benefícios e efeitos de longo prazo antes da decisão.</div>
+`],
+["peritoneal","Doença Peritoneal Superficial",`
+<div class="ac-h">O cenário mais simples, mas ainda com regra clara</div>
+<p class="ac-p">Para implantes peritoneais superficiais, a recomendação segue o princípio geral: <b>excisão</b> (ou vaporização a laser completa da lesão, quando tecnicamente equivalente) é preferível à simples coagulação superficial, que tende a deixar doença residual não visível a olho nu logo abaixo da superfície.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Por que "só coagular" não é suficiente</text>
+<rect x="30" y="46" width="270" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Implante visível</text>
+<circle cx="165" cy="100" r="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="165" y="130" text-anchor="middle" font-size="9" style="fill:var(--muted)">o que se vê na superfície</text>
+<rect x="340" y="46" width="270" height="120" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.4"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">Doença subclínica</text>
+<circle cx="475" cy="100" r="24" style="fill:#e8675f" fill-opacity=".18" stroke="#e8675f" stroke-width="1.3" stroke-dasharray="3 2"/>
+<text x="475" y="130" text-anchor="middle" font-size="9" style="fill:var(--muted)">extensão real, abaixo da superfície</text>
+</svg>
+<div class="ac-warn"><b>Retomando o módulo de fisiopatologia:</b> a extensão vista na superfície peritoneal pode <b>subestimar</b> a doença real — por isso a excisão, que remove profundidade além do que é visível, tende a ser mais eficaz que a ablação superficial.</div>
+`],
+["endometrioma","Manejo do Endometrioma",`
+<div class="ac-h">O equilíbrio entre tratar a doença e preservar o ovário</div>
+<p class="ac-p">Para endometriomas sintomáticos, a <b>cistectomia laparoscópica</b> (retirada completa da cápsula do cisto) é considerada o <b>padrão-ouro</b>: oferece melhor alívio da dor e menor taxa de recidiva a longo prazo do que drenagem isolada ou coagulação da parede do cisto.</p>
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Cistectomia vs. técnica ablativa (vaporização a laser)</text>
+<rect x="20" y="46" width="300" height="190" rx="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="170" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Cistectomia (padrão-ouro)</text>
+<text x="170" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Retira toda a cápsula do cisto</text>
+<text x="170" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Melhor alívio de dor</text>
+<text x="170" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Menor recidiva a longo prazo</text>
+<text x="170" y="154" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:#e8675f">Risco: pode remover tecido</text>
+<text x="170" y="168" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:#e8675f">ovariano saudável junto</text>
+<rect x="360" y="46" width="300" height="190" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.5"/>
+<text x="510" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--ink)">Vaporização a laser (CO2)</text>
+<text x="510" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Destrói a parede do cisto</text>
+<text x="510" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">sem removê-la em bloco</text>
+<text x="510" y="136" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Preferível quando:</text>
+<text x="510" y="154" text-anchor="middle" font-size="9" style="fill:var(--ink)">doença bilateral</text>
+<text x="510" y="168" text-anchor="middle" font-size="9" style="fill:var(--ink)">reserva ovariana já diminuída</text>
+<text x="510" y="182" text-anchor="middle" font-size="9" style="fill:var(--ink)">risco desproporcional ao tecido</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Por que essa exceção existe</div>
+<p class="ac-p">A cistectomia, apesar de mais eficaz, pode remover <b>tecido ovariano saudável</b> junto com a cápsula do cisto (o plano de clivagem nem sempre é perfeito), reduzindo a reserva ovariana. Por isso, em cenários de <b>doença bilateral</b> ou <b>reserva ovariana já comprometida</b> — situações em que cada folículo importa mais — a diretriz reconhece que técnicas <b>ablativas</b> (como a vaporização a laser de CO2) podem ser mais apropriadas, priorizando a preservação de tecido em detrimento de uma excisão mais completa.</p>
+<div class="ac-tip"><b>Como a prova costuma testar isso:</b> "cistectomia é sempre superior" está errado quando o cenário descrito envolve reserva ovariana comprometida ou doença bilateral — nesses casos, a resposta correta reconhece o valor da técnica ablativa.</div>
+`],
+["die_intestino","DIE Intestinal: Shaving, Disco ou Ressecção",`
+<div class="ac-h">Três técnicas, critério de escolha pelo tamanho e profundidade</div>
+<p class="ac-p">Para doença infiltrativa profunda do reto/sigmoide, existem três técnicas cirúrgicas reconhecidas, escolhidas conforme o tamanho, a profundidade e a extensão circunferencial da lesão.</p>
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Shaving → Ressecção em disco → Ressecção segmentar</text>
+<rect x="20" y="46" width="200" height="190" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="120" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Shaving</text>
+<text x="120" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">"Raspagem" da lesão,</text>
+<text x="120" y="104" text-anchor="middle" font-size="9" style="fill:var(--muted)">sem abrir a luz intestinal</text>
+<text x="120" y="128" text-anchor="middle" font-size="9" style="fill:var(--muted)">Lesão superficial/pequena</text>
+<text x="120" y="142" text-anchor="middle" font-size="9" style="fill:var(--muted)">Menor risco de fístula</text>
+<text x="120" y="166" text-anchor="middle" font-size="9" style="fill:#e8675f">Maior risco de doença</text>
+<text x="120" y="180" text-anchor="middle" font-size="9" style="fill:#e8675f">residual/recidiva</text>
+<rect x="240" y="46" width="200" height="190" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="340" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Ressecção em disco</text>
+<text x="340" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Retira um disco de</text>
+<text x="340" y="104" text-anchor="middle" font-size="9" style="fill:var(--muted)">parede intestinal e fecha</text>
+<text x="340" y="128" text-anchor="middle" font-size="9" style="fill:var(--muted)">Lesão única, profunda,</text>
+<text x="340" y="142" text-anchor="middle" font-size="9" style="fill:var(--muted)">&lt; 3 cm, área limitada</text>
+<rect x="460" y="46" width="200" height="190" rx="14" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.5"/>
+<text x="560" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">Ressecção segmentar</text>
+<text x="560" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Remove um segmento</text>
+<text x="560" y="104" text-anchor="middle" font-size="9" style="fill:var(--muted)">inteiro do intestino</text>
+<text x="560" y="128" text-anchor="middle" font-size="9" style="fill:var(--muted)">Doença extensa/</text>
+<text x="560" y="142" text-anchor="middle" font-size="9" style="fill:var(--muted)">estenosante, multifocal</text>
+<text x="560" y="166" text-anchor="middle" font-size="9" style="fill:#e8675f">Maior morbidade</text>
+<text x="560" y="180" text-anchor="middle" font-size="9" style="fill:#e8675f">(disfunção intestinal/urinária)</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Critério prático de escolha</div>
+<p class="ac-p">Shaving e ressecção em disco costumam ser indicados para lesões <b>unifocais, menores que 3 cm</b>. Quando a infiltração é extensa, com <b>estenose ou distorção irreversível</b> da luz intestinal, a ressecção segmentar se torna inevitável — apesar de estar associada a maior morbidade de longo prazo, incluindo disfunção intestinal e urinária.</p>
+<div class="ac-warn"><b>Trade-off que a prova cobra:</b> o shaving tem <b>menor</b> risco de fístula retovaginal e de deiscência comparado ao disco e à ressecção segmentar, mas carrega <b>maior</b> risco de doença residual (recidiva), por não retirar profundidade tecidual tão ampla.</p></div>
+`],
+["die_outros","DIE de Bexiga, Ureter e Septo Retovaginal",`
+<div class="ac-h">Outros compartimentos da doença infiltrativa profunda</div>
+<p class="ac-p">Além do intestino, a DIE pode acometer bexiga, ureter e septo retovaginal — cada um exigindo abordagem específica e, com frequência, avaliação multidisciplinar.</p>
+<svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">DIE fora do intestino</text>
+<rect x="20" y="46" width="185" height="170" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="112" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Bexiga</text>
+<text x="112" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">Excisão parcial da</text>
+<text x="112" y="108" text-anchor="middle" font-size="9" style="fill:var(--muted)">parede vesical acometida</text>
+<text x="112" y="132" text-anchor="middle" font-size="9" style="fill:var(--muted)">Sutura em camadas +</text>
+<text x="112" y="146" text-anchor="middle" font-size="9" style="fill:var(--muted)">drenagem vesical no</text>
+<text x="112" y="160" text-anchor="middle" font-size="9" style="fill:var(--muted)">pós-operatório</text>
+<rect x="227" y="46" width="185" height="170" rx="14" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.5"/>
+<text x="319" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">Ureter</text>
+<text x="319" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">Risco de hidronefrose</text>
+<text x="319" y="108" text-anchor="middle" font-size="9" style="fill:var(--muted)">silenciosa (já visto)</text>
+<text x="319" y="132" text-anchor="middle" font-size="9" style="fill:var(--muted)">Liberação (ureterólise)</text>
+<text x="319" y="146" text-anchor="middle" font-size="9" style="fill:var(--muted)">ou ressecção segmentar</text>
+<text x="319" y="160" text-anchor="middle" font-size="9" style="fill:var(--muted)">com reimplante, se grave</text>
+<rect x="434" y="46" width="185" height="170" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="526" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Septo retovaginal</text>
+<text x="526" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">Excisão cuidadosa</text>
+<text x="526" y="108" text-anchor="middle" font-size="9" style="fill:var(--muted)">próxima ao reto e vagina</text>
+<text x="526" y="132" text-anchor="middle" font-size="9" style="fill:var(--muted)">Risco de lesão retal</text>
+<text x="526" y="146" text-anchor="middle" font-size="9" style="fill:var(--muted)">concomitante — avaliação</text>
+<text x="526" y="160" text-anchor="middle" font-size="9" style="fill:var(--muted)">cuidadosa do plano</text>
+</svg>
+<div class="ac-warn"><b>Retomando o módulo de fisiopatologia:</b> o comprometimento ureteral pode ser silencioso — por isso, antes de qualquer cirurgia de DIE extensa, a avaliação pré-operatória (imagem detalhada, eventualmente avaliação urológica) precisa mapear ativamente o trajeto ureteral, evitando lesão iatrogênica não reconhecida durante a cirurgia.</div>
+<div class="ac-call"><b>Por que "centro de referência" importa aqui:</b> cirurgia de DIE multicompartimental frequentemente exige equipe multidisciplinar (ginecologista especializado, coloproctologista, urologista) trabalhando junto — reforçando a recomendação da ESHRE de concentrar esses casos em centros com expertise.</div>
+`],
+["pos_operatorio","Pós-operatório e Prevenção de Recidiva",`
+<div class="ac-h">A cirurgia não é o fim da história</div>
+<p class="ac-p">Mesmo após excisão bem-sucedida, a endometriose pode recidivar — novos focos podem se desenvolver ou focos microscópicos não visíveis durante a cirurgia podem progredir. Por isso, a diretriz recomenda <b>terapia hormonal de manutenção pós-operatória</b> em pacientes sem desejo gestacional imediato.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<defs><marker id="arrhead8" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Prevenção secundária pós-cirurgia de endometrioma</text>
+<rect x="30" y="46" width="180" height="70" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="120" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Cirurgia de endometrioma</text>
+<text x="120" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">(cistectomia/ablação)</text>
+<path d="M210 80 L246 80" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead8)"/>
+<rect x="248" y="46" width="180" height="70" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="338" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Sem desejo gestacional</text>
+<text x="338" y="90" text-anchor="middle" font-size="9" style="fill:var(--ink)">imediato?</text>
+<path d="M428 80 L464 80" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead8)"/>
+<rect x="466" y="46" width="150" height="70" rx="10" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="541" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">ACO de manutenção</text>
+<text x="541" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">prevenção secundária</text>
+<rect x="120" y="140" width="400" height="46" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.2"/>
+<text x="320" y="164" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Reduz recorrência de endometrioma e de sintomas dolorosos</text>
+</svg>
+<div class="ac-tip"><b>Ligando com o módulo anterior:</b> os mesmos hormônios de primeira linha (ACO combinado, progestágenos) usados no tratamento clínico primário voltam aqui com um segundo papel: <b>prevenção secundária</b> da recidiva após a cirurgia.</div>
+<div class="ac-warn"><b>Exceção óbvia:</b> se a paciente deseja engravidar logo após a cirurgia (situação comum quando a indicação foi infertilidade), a terapia hormonal de manutenção é adiada — esse cenário específico é aprofundado no módulo "Endometriose e Infertilidade".</div>
+`],
+["extremos","Casos Extremos e Histerectomia",`
+<div class="ac-h">Quando tudo mais falhou</div>
+<p class="ac-p">A <b>histerectomia</b> (com ou sem ooforectomia associada) é reservada para um cenário bem específico: mulheres com <b>doença extensa e sintomas refratários a todas as demais abordagens</b>, que já completaram sua prole ou não desejam mais engravidar, e para quem outras opções de excisão conservadora não trouxeram controle adequado.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Histerectomia — último recurso, não primeira opção</text>
+<rect x="40" y="46" width="560" height="150" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="320" y="72" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Considerar apenas quando:</text>
+<text x="320" y="96" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Doença extensa e sintomas refratários a tratamento clínico</text>
+<text x="320" y="114" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Excisão conservadora prévia sem controle adequado</text>
+<text x="320" y="132" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Prole completa / sem desejo reprodutivo futuro</text>
+<text x="320" y="150" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Decisão compartilhada, com aconselhamento sobre riscos</text>
+<text x="320" y="168" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">e sobre a NÃO garantia de resolução completa da dor</text>
+</svg>
+<div class="ac-warn"><b>Cuidado com um mito comum:</b> a histerectomia (mesmo com ooforectomia bilateral) <b>não garante</b> resolução completa dos sintomas se houver doença extrauterina residual (DIE em intestino/bexiga, por exemplo) — o útero e os ovários não são os únicos sítios possíveis da doença. Isso precisa ser discutido claramente com a paciente antes da decisão.</p></div>
+<div class="ac-call"><b>Fechando o raciocínio do módulo:</b> excisão é preferida à ablação na maioria dos cenários (exceção relevante: endometrioma com reserva ovariana comprometida) → DIE intestinal escolhe entre shaving/disco/ressecção segmentar conforme tamanho e extensão → DIE de bexiga/ureter/septo exige avaliação cuidadosa e, com frequência, equipe multidisciplinar → terapia hormonal de manutenção pós-cirurgia de endometrioma reduz recidiva → histerectomia é reservada para doença extensa refratária, sem desejo reprodutivo futuro, e não garante cura completa se houver doença extrauterina residual.</div>
+`]
+]
+};
+Object.assign(C['endometriose|3'], {
+"escores": `<div class="prose">
+<h3>Técnicas cirúrgicas — comparativo rápido</h3>
+<table class="ac-tbl">
+<tr><th>Sítio</th><th>Técnica preferida</th><th>Alternativa/exceção</th></tr>
+<tr><td>Peritônio superficial</td><td>Excisão completa</td><td>Vaporização a laser equivalente</td></tr>
+<tr><td>Ovário (endometrioma)</td><td>Cistectomia (padrão-ouro)</td><td>Vaporização a laser se bilateral/reserva diminuída</td></tr>
+<tr><td>Intestino (DIE, unifocal &lt;3cm)</td><td>Shaving ou ressecção em disco</td><td>Ressecção segmentar se estenose/doença extensa</td></tr>
+<tr><td>Bexiga</td><td>Excisão parcial da parede vesical</td><td>-</td></tr>
+<tr><td>Ureter</td><td>Ureterólise</td><td>Ressecção segmentar + reimplante se grave</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">A regra geral é <strong>excisão &gt; ablação</strong> — mas o ovário com reserva comprometida é a principal exceção cobrada em prova.</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Trade-offs técnicos por sítio</h3>
+<table class="ac-tbl">
+<tr><th>Decisão</th><th>Prós</th><th>Contras</th></tr>
+<tr><td>Cistectomia de endometrioma</td><td>Melhor alívio da dor, menor recidiva</td><td>Pode remover tecido ovariano saudável</td></tr>
+<tr><td>Vaporização a laser do endometrioma</td><td>Preserva mais tecido ovariano</td><td>Possível maior recidiva</td></tr>
+<tr><td>Shaving intestinal</td><td>Menor risco de fístula/deiscência</td><td>Maior risco de doença residual</td></tr>
+<tr><td>Ressecção segmentar intestinal</td><td>Remove doença extensa/estenosante</td><td>Maior morbidade (disfunção intestinal/urinária)</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Tratamento Cirúrgico</div>
+<div class="mm">
+  <div class="mm-card"><h5>⚖️ Princípio geral</h5><ul><li>Excisão &gt; ablação (regra)</li><li>Via laparoscópica preferida</li><li>DIE em centro de referência</li></ul></div>
+  <div class="mm-card"><h5>🫧 Peritônio</h5><ul><li>Excisão completa</li><li>Coagulação superficial deixa doença residual</li></ul></div>
+  <div class="mm-card"><h5>🥚 Endometrioma</h5><ul><li>Cistectomia = padrão-ouro</li><li>Exceção: bilateral/reserva ↓ → ablação a laser</li></ul></div>
+  <div class="mm-card"><h5>🩹 DIE intestinal</h5><ul><li>Shaving/disco (unifocal, &lt;3cm)</li><li>Segmentar (extensa/estenosante)</li><li>Trade-off: fístula vs. recidiva</li></ul></div>
+  <div class="mm-card"><h5>🫘 Bexiga/ureter</h5><ul><li>Excisão parcial vesical</li><li>Ureterólise / ressecção + reimplante</li><li>Risco de hidronefrose silenciosa</li></ul></div>
+  <div class="mm-card"><h5>🔄 Pós-operatório</h5><ul><li>ACO de manutenção reduz recidiva</li><li>Adiado se desejo gestacional imediato</li></ul></div>
+  <div class="mm-card"><h5>🏁 Histerectomia</h5><ul><li>Último recurso</li><li>Prole completa + refratariedade</li><li>NÃO garante cura se doença extrauterina</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Indicação cirúrgica confirmada (falha clínica ou doença estrutural relevante)</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — Mapeamento pré-operatório completo</div><div class="fx-lbl">Revisar imagem (USTV/RM), avaliar trajeto ureteral, considerar equipe multidisciplinar se DIE multicompartimental</div><div class="fx-arrow"></div><div class="fx-node">Passo 2 — Escolha da técnica por sítio</div><div class="fx-lbl">Peritônio: excisão. Ovário: cistectomia (ou ablação se reserva comprometida/bilateral). Intestino: shaving/disco/segmentar conforme tamanho e extensão</div><div class="fx-arrow"></div><div class="fx-lbl">Doença multicompartimental complexa?</div><div class="fx-row"><div class="fx-node end">Encaminhar/operar em centro de referência com equipe multidisciplinar</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Pós-operatório de excisão/cistectomia de endometriose</div><div class="fx-arrow"></div><div class="fx-lbl">Paciente deseja engravidar imediatamente?</div><div class="fx-row"><div class="fx-node end"><b>NÃO:</b> iniciar terapia hormonal de manutenção (ACO/progestágeno) para prevenção secundária de recidiva</div><div class="fx-node end"><b>SIM:</b> adiar terapia hormonal de manutenção — seguir conforme módulo "Endometriose e Infertilidade"</div></div><div class="fx-arrow"></div><div class="fx-lbl">Doença extensa refratária a todas as abordagens, prole completa?</div><div class="fx-row"><div class="fx-node end">Considerar histerectomia (+/- ooforectomia) como último recurso, com aconselhamento claro sobre limites de resultado</div></div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Tratamento Cirúrgico em 60 segundos</h4>
+<ul>
+<li><strong>Regra geral:</strong> excisão &gt; ablação; via laparoscópica preferida; DIE em centro de referência.</li>
+<li><strong>Peritônio superficial:</strong> excisão completa (coagulação isolada deixa doença residual).</li>
+<li><strong>Endometrioma:</strong> cistectomia = padrão-ouro (melhor dor, menor recidiva). Exceção: doença bilateral ou reserva ovariana diminuída → ablação a laser preserva mais tecido.</li>
+<li><strong>DIE intestinal:</strong> shaving/ressecção em disco para lesão unifocal &lt;3cm (menor fístula, maior recidiva); ressecção segmentar se extensa/estenosante (maior morbidade).</li>
+<li><strong>Bexiga/ureter:</strong> excisão parcial vesical; ureterólise ou ressecção+reimplante se ureter gravemente acometido — lembrar do risco de hidronefrose silenciosa.</li>
+<li><strong>Pós-operatório:</strong> ACO/progestágeno de manutenção reduz recidiva, exceto se desejo gestacional imediato.</li>
+<li><strong>Histerectomia:</strong> último recurso, prole completa, refratariedade total — NÃO garante cura se houver doença extrauterina residual.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Tratamento cirúrgico</strong> = excisão preferida à ablação (exceto endometrioma com reserva comprometida), técnica por sítio conforme tamanho/extensão, DIE complexa em centro de referência, ACO de manutenção pós-operatório reduz recidiva, histerectomia é último recurso e não garante cura completa.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>"Excisão é sempre superior" é verdade como regra geral, MAS tem exceção clássica no <strong>endometrioma bilateral/reserva ovariana diminuída</strong>.</li>
+<li>Shaving = menor fístula, maior recidiva. Ressecção segmentar = oposto. Esse trade-off é testado com frequência.</li>
+<li>Histerectomia não é a resposta padrão para endometriose — é <strong>último recurso</strong>, com condições específicas.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que histerectomia (mesmo com ooforectomia) <strong>sempre resolve</strong> a dor — não resolve se houver doença extrauterina residual.</li>
+<li>Indicar cistectomia sem considerar reserva ovariana em doença bilateral.</li>
+<li>Esquecer a terapia hormonal de manutenção pós-operatória em quem não deseja engravidar de imediato.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"Cistectomia cura mais, mas custa reserva."</strong></li>
+<li><strong>"Shaving raspa e recidiva; ressecção resseca e machuca."</strong></li>
+<li><strong>DIE complexa = time multidisciplinar, sempre.</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Optar por ablação de rotina no peritônio, sem justificativa.</li>
+<li>Não avaliar o trajeto ureteral antes de cirurgia de DIE extensa.</li>
+<li>Prometer resolução total da dor com a cirurgia, sem discutir limites e riscos.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico por que a excisão é preferida à ablação na maioria dos cenários cirúrgicos","Sei quando a técnica ablativa é preferível no manejo do endometrioma (bilateral/reserva ovariana diminuída)","Diferencio shaving, ressecção em disco e ressecção segmentar para DIE intestinal, e seus trade-offs","Reconheço os cuidados específicos na DIE de bexiga e ureter, incluindo o risco de hidronefrose silenciosa","Explico o papel da terapia hormonal de manutenção pós-operatória na prevenção de recidiva","Sei quando a histerectomia é indicada como último recurso e por que ela não garante resolução completa da dor"]
+});
+Object.assign(C['endometriose|3'], {
+"questoes": [
+{"stem":"Segundo a diretriz ESHRE 2022, qual abordagem cirúrgica geral é preferida para lesões de endometriose, na maioria dos cenários?","opts":["Ablação (coagulação/vaporização), por ser mais rápida.","Excisão completa da lesão, por permitir confirmação histopatológica e reduzir mais a recidiva.","Drenagem isolada, sem qualquer remoção tecidual.","Observação sem intervenção cirúrgica em todos os casos."],"correct":1,"expl":"A ESHRE 2022 recomenda, de forma geral, a <b>excisão</b> das lesões em vez da ablação — permite confirmação histopatológica e tende a reduzir mais a recidiva de sintomas."},
+{"stem":"Para endometriomas ovarianos sintomáticos, qual técnica é considerada o padrão-ouro, oferecendo melhor alívio de dor e menor recidiva a longo prazo?","opts":["Drenagem isolada do cisto.","Coagulação da parede do cisto.","Cistectomia laparoscópica (retirada completa da cápsula).","Punção guiada por ultrassom, sem cirurgia."],"correct":2,"expl":"A <b>cistectomia laparoscópica</b> é o padrão-ouro para endometriomas sintomáticos, com melhor alívio de dor e menor recidiva comparada a drenagem ou coagulação isolada."},
+{"stem":"Em qual cenário a técnica ABLATIVA (ex.: vaporização a laser) pode ser preferível à cistectomia clássica no manejo do endometrioma?","opts":["Em qualquer paciente jovem, independentemente de outros fatores.","Em doença bilateral ou quando há preocupação com reserva ovariana já diminuída.","Sempre que a paciente deseja engravidar nos próximos 5 anos.","Nunca — a cistectomia é superior em todos os cenários."],"correct":1,"expl":"Em doença <b>bilateral</b> ou com <b>reserva ovariana já comprometida</b>, técnicas ablativas podem ser preferíveis, pois a cistectomia pode remover tecido ovariano saudável junto com a cápsula do cisto."},
+{"stem":"Para uma lesão de doença infiltrativa profunda em retossigmoide, unifocal, medindo 2 cm, sem estenose da luz intestinal, qual das técnicas abaixo é mais apropriada como primeira escolha?","opts":["Ressecção segmentar ampla, independentemente do tamanho.","Shaving ou ressecção em disco, conforme profundidade da lesão.","Histerectomia total com anexectomia bilateral.","Nenhuma intervenção cirúrgica, apenas observação."],"correct":1,"expl":"Lesões unifocais menores que 3 cm, sem estenose, são candidatas a <b>shaving ou ressecção em disco</b> — técnicas menos mórbidas que a ressecção segmentar, reservada para doença extensa/estenosante."},
+{"stem":"Comparado à ressecção segmentar e à ressecção em disco, o shaving intestinal apresenta:","opts":["Maior risco de fístula retovaginal e menor risco de recidiva.","Menor risco de fístula retovaginal, mas maior risco de doença residual/recidiva.","Os mesmos riscos de fístula e recidiva que as demais técnicas.","Contraindicação absoluta em qualquer cenário de DIE."],"correct":1,"expl":"O shaving evita abrir a luz intestinal, reduzindo o risco de fístula/deiscência, mas por não remover tanta profundidade tecidual, carrega <b>maior risco de doença residual</b> comparado às demais técnicas."},
+{"stem":"Antes de uma cirurgia de doença infiltrativa profunda extensa, por que é importante mapear ativamente o trajeto ureteral no pré-operatório?","opts":["Porque o ureter nunca é acometido pela endometriose.","Porque o comprometimento ureteral pode ser silencioso, sem sintomas urinários evidentes, aumentando o risco de lesão iatrogênica não reconhecida.","Porque isso substitui a necessidade de avaliação por imagem prévia.","Porque reduz o tempo cirúrgico em qualquer caso."],"correct":1,"expl":"O acometimento ureteral pode ser assintomático (hidronefrose silenciosa) — mapear o trajeto no pré-operatório reduz o risco de lesão iatrogênica não reconhecida durante a cirurgia."},
+{"stem":"Uma paciente sem desejo gestacional imediato é submetida à cistectomia de endometrioma. Qual conduta pós-operatória é recomendada para prevenção secundária de recidiva?","opts":["Nenhuma intervenção adicional é necessária.","Terapia hormonal de manutenção (ex.: ACO combinado ou progestágeno).","Nova cirurgia de rotina em 3 meses, independentemente de sintomas.","Histerectomia profilática imediata."],"correct":1,"expl":"A diretriz recomenda <b>terapia hormonal de manutenção pós-operatória</b> em pacientes sem desejo gestacional imediato, reduzindo a recorrência de endometrioma e de sintomas dolorosos."},
+{"stem":"Em qual situação a terapia hormonal de manutenção pós-cirurgia de endometrioma deve ser adiada?","opts":["Quando a paciente deseja engravidar imediatamente após a cirurgia.","Quando a cirurgia foi realizada por via laparoscópica.","Quando a paciente é assintomática antes da cirurgia.","Em todos os casos, independentemente do contexto."],"correct":0,"expl":"Se a indicação cirúrgica foi relacionada a infertilidade e a paciente deseja engravidar logo após, a terapia hormonal de manutenção é adiada — cenário aprofundado no módulo de infertilidade."},
+{"stem":"A histerectomia no tratamento da endometriose é apropriadamente considerada:","opts":["Como primeira linha de tratamento em qualquer paciente sintomática.","Como último recurso, reservada a doença extensa e refratária, em mulheres sem desejo reprodutivo futuro.","Como procedimento de rotina associado a toda cirurgia de endometrioma.","Como tratamento definitivo que sempre elimina a dor pélvica."],"correct":1,"expl":"A histerectomia é reservada para doença extensa e sintomas refratários a outras abordagens, em pacientes que já completaram a prole — não é primeira linha nem garante resolução total da dor."},
+{"stem":"Uma paciente com endometriose extensa é submetida à histerectomia com ooforectomia bilateral por dor refratária. No pós-operatório, a dor pélvica persiste. A explicação mais provável é:","opts":["Erro cirúrgico obrigatório em todos os casos semelhantes.","Possível doença extrauterina residual (ex.: DIE intestinal ou vesical não tratada), já que útero e ovários não são os únicos sítios possíveis.","A histerectomia nunca é eficaz para qualquer sintoma de endometriose.","Reação alérgica ao procedimento cirúrgico."],"correct":1,"expl":"A histerectomia (mesmo com ooforectomia) não garante resolução completa se houver <b>doença extrauterina residual</b> — por isso esse limite deve ser discutido com a paciente antes da decisão."},
+{"stem":"Por que a diretriz ESHRE recomenda que a cirurgia de doença infiltrativa profunda seja realizada em centro de referência com expertise?","opts":["Porque reduz o custo do procedimento na maioria dos sistemas de saúde.","Porque frequentemente exige abordagem multidisciplinar (ginecologista especializado, coloproctologista, urologista) e maior experiência técnica reduz complicações.","Porque é obrigatório por lei em todos os países.","Porque simplifica o pós-operatório, eliminando a necessidade de seguimento."],"correct":1,"expl":"Cirurgia de DIE multicompartimental é tecnicamente complexa e frequentemente exige equipe multidisciplinar — centros com expertise têm melhores desfechos e menor taxa de complicações."},
+{"stem":"Em relação à via de acesso cirúrgico para o tratamento da endometriose, a diretriz recomenda preferencialmente:","opts":["Laparotomia aberta em todos os casos, por permitir melhor visualização.","Via laparoscópica (minimamente invasiva), sempre que tecnicamente viável.","Acesso vaginal exclusivo, independentemente do sítio da doença.","Não há preferência entre as vias de acesso."],"correct":1,"expl":"A via <b>laparoscópica</b> é preferida à laparotomia aberta, pela recuperação mais rápida e menor morbidade, sempre que tecnicamente viável."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Princípio</small><br>Qual a regra geral entre excisão e ablação na cirurgia de endometriose?","back":"Excisão é preferida à ablação na maioria dos cenários — permite histopatológico e reduz mais a recidiva.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Endometrioma</small><br>Qual é o padrão-ouro para endometriomas sintomáticos?","back":"Cistectomia laparoscópica (retirada completa da cápsula do cisto) — melhor alívio de dor e menor recidiva.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Endometrioma</small><br>Em quais cenários a técnica ablativa é preferível à cistectomia?","back":"Doença bilateral ou reserva ovariana já diminuída — evita remover tecido ovariano saudável junto com a cápsula.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">DIE intestinal</small><br>Quais as 3 técnicas cirúrgicas para DIE de retossigmoide?","back":"{{Shaving (raspagem, sem abrir a luz intestinal); ressecção em disco (retira disco de parede e fecha); ressecção segmentar (remove segmento inteiro).}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">DIE intestinal</small><br>Qual o trade-off entre shaving e as demais técnicas intestinais?","back":"Shaving: menor risco de fístula/deiscência, mas maior risco de doença residual/recidiva.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">DIE intestinal</small><br>Quando a ressecção segmentar se torna inevitável?","back":"Quando há infiltração extensa com estenose ou distorção irreversível da luz intestinal.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Ureter</small><br>Por que mapear o trajeto ureteral antes de cirurgia de DIE extensa?","back":"O acometimento ureteral pode ser silencioso (hidronefrose sem sintomas) — reduz risco de lesão iatrogênica não reconhecida.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Pós-operatório</small><br>O que é recomendado após cirurgia de endometrioma em quem não deseja engravidar de imediato?","back":"Terapia hormonal de manutenção (ACO combinado ou progestágeno) para prevenção secundária de recidiva.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Histerectomia</small><br>Quando a histerectomia é indicada no tratamento da endometriose?","back":"Como último recurso: doença extensa e refratária, em mulheres sem desejo reprodutivo futuro, após falha de abordagens conservadoras.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Histerectomia</small><br>A histerectomia (mesmo com ooforectomia) garante resolução completa da dor?","back":"NÃO — se houver doença extrauterina residual (ex.: DIE intestinal/vesical), a dor pode persistir. Isso deve ser discutido antes da cirurgia.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Via de acesso</small><br>Qual via cirúrgica é preferida no tratamento da endometriose?","back":"Laparoscópica (minimamente invasiva), pela recuperação mais rápida e menor morbidade, sempre que tecnicamente viável.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Centro de referência</small><br>Por que a DIE complexa deve ser operada em centro de referência?","back":"Frequentemente exige equipe multidisciplinar (ginecologista, coloproctologista, urologista) e maior experiência reduz complicações.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Peritônio</small><br>Por que a coagulação superficial isolada é inferior à excisão no peritônio?","back":"A extensão real da doença costuma ir além do que é visível na superfície — coagular só a superfície deixa doença subclínica residual.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Bexiga</small><br>Como é abordada cirurgicamente a DIE de bexiga?","back":"Excisão parcial da parede vesical acometida, com sutura em camadas e drenagem vesical no pós-operatório.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Endometrioma bilateral com preocupação de reserva ovariana","stem":"Mulher de 32 anos com endometriomas bilaterais de 4 cm cada, dor refratária ao tratamento clínico, e reserva ovariana já discretamente reduzida (hormônio antimülleriano baixo para a idade), com desejo reprodutivo futuro.","passos":[
+{"h":"Avaliação pré-operatória","p":"Confirmada refratariedade ao tratamento clínico otimizado (módulo anterior) e reserva ovariana reduzida, além do desejo reprodutivo futuro relevante."},
+{"h":"Discussão da técnica cirúrgica","p":"Considerando a bilateralidade e a reserva já comprometida, discutida a preferência por técnica ablativa (vaporização a laser) em vez de cistectomia clássica, para minimizar perda adicional de tecido ovariano saudável."},
+{"h":"Raciocínio clínico","p":"Embora a cistectomia seja o padrão-ouro geral, o cenário específico (bilateral + reserva já diminuída + desejo reprodutivo futuro) é exatamente a exceção reconhecida pela diretriz para priorizar preservação sobre excisão completa."},
+{"h":"Conduta cirúrgica","p":"Optado por vaporização a laser de CO2 em ambos os ovários, com técnica cuidadosa para minimizar dano térmico ao tecido adjacente."},
+{"h":"Conduta neste momento","p":"Pós-operatório sem terapia hormonal de manutenção imediata, dado o desejo reprodutivo — encaminhamento para avaliação de fertilidade conforme detalhado no módulo 'Endometriose e Infertilidade'."}
+]},
+{"t":"Caso 2 — DIE intestinal extensa exigindo ressecção segmentar","stem":"Mulher de 36 anos com dor pélvica crônica, disquezia cíclica intensa e RM demonstrando nódulo de 5 cm em retossigmoide, com sinais de estenose parcial da luz intestinal, sem desejo reprodutivo futuro.","passos":[
+{"h":"Avaliação multidisciplinar","p":"Caso discutido em conjunto entre ginecologista especializado em DIE e coloproctologista, dado o tamanho da lesão e a estenose já identificada em imagem."},
+{"h":"Escolha da técnica","p":"Optado por ressecção segmentar do retossigmoide, já que shaving e ressecção em disco não seriam adequados para uma lesão extensa e estenosante."},
+{"h":"Raciocínio clínico","p":"O tamanho (5 cm, acima do limite de 3 cm geralmente aceito para shaving/disco) e a estenose já estabelecida tornam a ressecção segmentar a opção tecnicamente apropriada, apesar da maior morbidade potencial associada."},
+{"h":"Aconselhamento pré-operatório","p":"Paciente orientada sobre os riscos específicos da ressecção segmentar, incluindo possível disfunção intestinal e urinária no pós-operatório, além do tempo de recuperação esperado."},
+{"h":"Conduta neste momento","p":"Cirurgia realizada em centro de referência com equipe multidisciplinar; pós-operatório com terapia hormonal de manutenção iniciada após recuperação cirúrgica adequada, dado ausência de desejo gestacional."}
+]},
+{"t":"Caso 3 — Decisão sobre histerectomia em doença refratária extensa","stem":"Mulher de 43 anos, prole completa, com múltiplas cirurgias prévias por endometriose (duas excisões laparoscópicas), dor pélvica crônica persistente apesar de tratamento clínico otimizado entre as cirurgias, e doença multifocal extensa em nova avaliação de imagem.","passos":[
+{"h":"Revisão do histórico terapêutico","p":"Confirmadas duas cirurgias conservadoras prévias, múltiplas linhas de tratamento hormonal já tentadas e otimizadas, sem controle adequado da dor a longo prazo."},
+{"h":"Discussão de opções remanescentes","p":"Diante de prole completa, ausência de desejo reprodutivo futuro e falha de múltiplas abordagens conservadoras, discutida a histerectomia com possível ooforectomia bilateral como opção."},
+{"h":"Aconselhamento cuidadoso","p":"Paciente orientada explicitamente de que a histerectomia não garante resolução completa da dor caso exista doença extrauterina residual (por exemplo, focos intestinais ou vesicais não completamente tratados nas cirurgias anteriores)."},
+{"h":"Decisão compartilhada","p":"Após discussão detalhada de riscos, benefícios e limitações, paciente opta por prosseguir com histerectomia com ooforectomia bilateral, ciente da possibilidade de dor residual."},
+{"h":"Conduta neste momento","p":"Mapeamento completo pré-operatório de toda a extensão da doença (incluindo possíveis focos extrauterinos) antes da cirurgia definitiva, com plano de tratar cirurgicamente todos os focos identificados no mesmo tempo operatório, quando tecnicamente viável."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['endometriose|4'] = {
+name: "Endometriose e Infertilidade",
+intro: "A relação entre endometriose e infertilidade não é só mecânica — envolve inflamação, reserva ovariana e receptividade endometrial. E aqui, tratamento hormonal e cirurgia seguem uma lógica diferente da que você viu nos módulos anteriores.",
+sub: [
+["entendendo","Por que Endometriose Causa Infertilidade",`
+<div class="ac-h">Mais de um mecanismo agindo ao mesmo tempo</div>
+<p class="ac-p">Como você viu no módulo de fisiopatologia, a infertilidade pode ser a <b>única queixa</b> em até 20-25% das pacientes com endometriose. O impacto na fertilidade não tem uma causa única — combina fatores <b>mecânicos, inflamatórios, ovarianos e endometriais</b>, que podem coexistir na mesma paciente.</p>
+<svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">4 mecanismos de infertilidade na endometriose</text>
+<rect x="20" y="46" width="300" height="90" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="170" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Mecânico/anatômico</text>
+<text x="170" y="90" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Aderências distorcem trompas/</text>
+<text x="170" y="104" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">ovários, dificultam captação do óvulo</text>
+<rect x="360" y="46" width="300" height="90" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="510" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Inflamatório (peritoneal)</text>
+<text x="510" y="90" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Líquido peritoneal inflamado é</text>
+<text x="510" y="104" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">tóxico para gametas/embrião</text>
+<rect x="20" y="150" width="300" height="90" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="170" y="174" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Ovariano</text>
+<text x="170" y="194" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Endometrioma pode reduzir</text>
+<text x="170" y="208" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">reserva ovariana (folicular)</text>
+<rect x="360" y="150" width="300" height="90" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="510" y="174" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Endometrial</text>
+<text x="510" y="194" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Possível alteração de</text>
+<text x="510" y="208" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">receptividade endometrial</text>
+</svg>
+<div class="ac-call"><b>Ponto-chave:</b> como os mecanismos são múltiplos e variam de paciente para paciente, a investigação e a conduta precisam ser <b>individualizadas</b> — não existe uma resposta única de "o que fazer" diante de endometriose + infertilidade.</div>
+`],
+["avaliacao","Avaliação do Casal Infértil",`
+<div class="ac-h">Não trate só a endometriose — trate o casal</div>
+<p class="ac-p">Diante de endometriose associada a infertilidade, a avaliação segue os mesmos princípios da investigação de qualquer casal infértil (você viu isso no módulo de Infertilidade): é essencial <b>não assumir</b> que a endometriose é a única causa, sem avaliar outros fatores.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Avaliação completa, não só ginecológica</text>
+<rect x="30" y="46" width="170" height="130" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="115" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Fator feminino</text>
+<text x="115" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">Reserva ovariana</text>
+<text x="115" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">Permeabilidade tubária</text>
+<text x="115" y="120" text-anchor="middle" font-size="9" style="fill:var(--muted)">Cavidade uterina</text>
+<text x="115" y="134" text-anchor="middle" font-size="9" style="fill:var(--muted)">Extensão da endometriose</text>
+<rect x="235" y="46" width="170" height="130" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="320" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Fator masculino</text>
+<text x="320" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">Espermograma</text>
+<text x="320" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">Não pode ser</text>
+<text x="320" y="120" text-anchor="middle" font-size="9" style="fill:var(--muted)">assumido como normal</text>
+<text x="320" y="134" text-anchor="middle" font-size="9" style="fill:var(--muted)">sem avaliação</text>
+<rect x="440" y="46" width="170" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="525" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Fator temporal</text>
+<text x="525" y="92" text-anchor="middle" font-size="9" style="fill:var(--ink)">Idade da paciente</text>
+<text x="525" y="106" text-anchor="middle" font-size="9" style="fill:var(--ink)">Tempo de tentativa</text>
+<text x="525" y="120" text-anchor="middle" font-size="9" style="fill:var(--ink)">Gestação prévia</text>
+<text x="525" y="134" text-anchor="middle" font-size="9" style="fill:var(--ink)">(pesam na decisão)</text>
+</svg>
+<div class="ac-tip"><b>Por que isso muda a conduta:</b> a idade da paciente e o tempo de infertilidade influenciam diretamente a urgência da decisão — em mulheres mais velhas ou com tentativa prolongada, o tempo perdido em abordagens sequenciais (cirurgia → esperar → tentar naturalmente → só depois considerar FIV) pode ser mais prejudicial do que ir direto para reprodução assistida.</div>
+`],
+["efi","Índice de Fertilidade da Endometriose (EFI)",`
+<div class="ac-h">Uma ferramenta melhor que o r-ASRM para prever fertilidade</div>
+<p class="ac-p">Lembra do módulo de Diagnóstico e Estadiamento, onde vimos que o <b>r-ASRM não se correlaciona bem com a dor</b>? Ele também tem capacidade preditiva limitada para <b>fertilidade pós-cirúrgica</b>. Para essa finalidade específica, existe uma ferramenta melhor: o <b>Índice de Fertilidade da Endometriose (EFI — Endometriosis Fertility Index)</b>.</p>
+<svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Como o EFI é construído</text>
+<rect x="30" y="46" width="270" height="150" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="165" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Fatores históricos</text>
+<text x="165" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Idade da paciente</text>
+<text x="165" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Anos de infertilidade</text>
+<text x="165" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Gestação prévia (sim/não)</text>
+<rect x="340" y="46" width="270" height="150" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="475" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Fatores cirúrgicos</text>
+<text x="475" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Achados na laparoscopia:</text>
+<text x="475" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">função de trompas, fímbrias</text>
+<text x="475" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">e ovários (o "pior" lado)</text>
+<rect x="150" y="204" width="340" height="30" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.2"/>
+<text x="320" y="224" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Escore de 0 a 10 — quanto maior, melhor o prognóstico</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Por que o EFI é mais útil que o r-ASRM aqui</div>
+<p class="ac-p">O EFI combina dados <b>clínicos</b> (idade, tempo de infertilidade, história obstétrica prévia) com dados <b>cirúrgicos</b> (função residual das trompas, fímbrias e ovários, avaliados na laparoscopia) — captando fatores que o r-ASRM, focado só na extensão anatômica, ignora. Quanto maior o escore (até 10), melhor a chance de gravidez espontânea após a cirurgia.</p>
+<div class="ac-tip"><b>Aplicação prática:</b> um escore EFI baixo sugere que a chance de concepção espontânea pós-cirúrgica é reduzida — reforçando a indicação de encaminhamento mais precoce para reprodução assistida, em vez de esperar por tentativa natural prolongada.</div>
+`],
+["cirurgia_fertilidade","Cirurgia com Intuito Reprodutivo",`
+<div class="ac-h">Aqui a lógica cirúrgica muda em relação ao módulo anterior</div>
+<p class="ac-p">No módulo de Tratamento Cirúrgico, a indicação girava em torno do controle da <b>dor</b>. Quando o objetivo é <b>fertilidade</b>, a equação muda: a diretriz ESHRE 2022 é clara em afirmar que a <b>cirurgia de rotina antes da reprodução assistida não é recomendada</b> para doença em estágio r-ASRM I/II ou para endometrioma isolado, pois <b>não há benefício comprovado</b> na taxa de nascidos vivos.</p>
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Cirurgia antes da FIV: quando SIM, quando NÃO</text>
+<rect x="20" y="46" width="300" height="190" rx="14" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.5"/>
+<text x="170" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:#e8675f">Rotina — NÃO recomendada</text>
+<text x="170" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">r-ASRM I/II isolado</text>
+<text x="170" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Endometrioma isolado, sem</text>
+<text x="170" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">outra indicação específica</text>
+<text x="170" y="150" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:#e8675f">Por quê:</text>
+<text x="170" y="168" text-anchor="middle" font-size="9" style="fill:var(--muted)">Sem ganho comprovado em</text>
+<text x="170" y="182" text-anchor="middle" font-size="9" style="fill:var(--muted)">nascidos vivos; cistectomia</text>
+<text x="170" y="196" text-anchor="middle" font-size="9" style="fill:var(--muted)">reduz reserva ovariana</text>
+<rect x="360" y="46" width="300" height="190" rx="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="510" y="70" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Indicada em cenários específicos</text>
+<text x="510" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Hidrossalpinge</text>
+<text x="510" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Dor significativa associada</text>
+<text x="510" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Crescimento rápido do</text>
+<text x="510" y="140" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">endometrioma</text>
+<text x="510" y="156" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Lesão volumosa dificultando</text>
+<text x="510" y="170" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">acesso aos folículos na punção</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">O custo real da cistectomia na reserva ovariana</div>
+<p class="ac-p">Esse é um dado que a prova adora explorar: a cistectomia reduz a reserva ovariana em cerca de <b>30% após procedimento unilateral</b> e até <b>44% após procedimento bilateral</b> (medido por queda do hormônio antimülleriano). Por isso, "operar tudo antes de tentar engravidar" deixou de ser a conduta padrão — a decisão precisa pesar esse custo contra o benefício esperado, caso a caso.</p>
+<div class="ac-warn"><b>Retomando o módulo de Tratamento Cirúrgico:</b> hidrossalpinge é uma indicação clássica de cirurgia pré-FIV independente da endometriose — o líquido tubário refluído para a cavidade uterina é tóxico ao embrião e reduz a taxa de implantação.</div>
+`],
+["hormonal_fertilidade","Por que Hormônio Supressivo Não Ajuda a Engravidar",`
+<div class="ac-h">O paradoxo que a prova adora testar</div>
+<p class="ac-p">Aqui está um ponto que costuma confundir: todo o arsenal hormonal do módulo de <b>Tratamento Clínico</b> (ACO, progestágenos, análogos de GnRH) funciona <b>suprimindo a ovulação</b> — e é exatamente por isso que controla a dor. Só que, para uma paciente tentando engravidar, <b>suprimir a ovulação é o oposto do que se quer</b>.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">O paradoxo do tratamento hormonal supressivo</text>
+<rect x="30" y="46" width="260" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="160" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Para controlar dor</text>
+<text x="160" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Suprimir ovulação</text>
+<text x="160" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">= objetivo desejado</text>
+<rect x="350" y="46" width="260" height="120" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="480" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Para engravidar</text>
+<text x="480" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Suprimir ovulação</text>
+<text x="480" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">= objetivo contrário</text>
+</svg>
+<div class="ac-warn"><b>Regra prática:</b> tratamento hormonal supressivo (ACO, progestágeno contínuo, análogo de GnRH) <b>NÃO deve ser prescrito com a intenção de melhorar a fertilidade</b> — não existe evidência de benefício reprodutivo, e o mecanismo de ação é literalmente contraceptivo.</div>
+<div class="ac-h" style="margin-top:14px">E o pré-tratamento com agonista de GnRH antes da FIV?</div>
+<p class="ac-p">Por um tempo, alguns protocolos usavam agonista de GnRH em "down-regulation" prolongada antes da FIV, na tentativa de suprimir a atividade da endometriose e melhorar o ambiente para a implantação. As evidências mais recentes não sustentam esse benefício de forma consistente — esse pré-tratamento longo <b>não é mais usado de forma rotineira</b>, e alguns estudos mostram até taxa de nascidos vivos menor no grupo pré-tratado, comparado ao grupo que vai direto para o protocolo padrão de FIV.</p>
+<div class="ac-tip"><b>Fio condutor:</b> perceba a diferença de lógica entre os módulos — no tratamento da <b>dor</b>, suprimir hormônio é a estratégia; no tratamento da <b>infertilidade</b>, é preciso permitir a ovulação (naturalmente ou estimulada) para haver chance de gravidez.</div>
+`],
+["fiv","Fertilização In Vitro",`
+<div class="ac-h">Quando encaminhar diretamente para reprodução assistida</div>
+<p class="ac-p">Diante de endometriose associada a infertilidade, a fertilização in vitro (FIV) é frequentemente a via mais eficiente — especialmente quando há <b>fator tuboperitoneal significativo, idade mais avançada, reserva ovariana reduzida, EFI baixo, ou falha de tentativa espontânea/cirúrgica prévia</b>.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Protocolo de FIV na endometriose</text>
+<rect x="40" y="46" width="560" height="130" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="320" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Não há protocolo único "preferido" pela ESHRE</text>
+<text x="320" y="96" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Protocolo com antagonista de GnRH OU agonista de GnRH</text>
+<text x="320" y="114" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">podem ser usados — escolha conforme preferência da</text>
+<text x="320" y="132" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">paciente e do médico assistente, sem superioridade</text>
+<text x="320" y="150" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">definitiva comprovada de um sobre o outro</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Particularidades técnicas a considerar</div>
+<p class="ac-p">A presença de endometrioma pode dificultar tecnicamente a <b>punção folicular</b> (risco de puncionar o cisto acidentalmente, contaminação do líquido folicular), o que é um dos poucos cenários em que a cirurgia prévia pode ser considerada — não para "tratar" a endometriose, mas para <b>facilitar o acesso técnico</b> aos folículos durante a coleta de oócitos.</p>
+<div class="ac-call"><b>Decisão individualizada:</b> a escolha entre tentar cirurgia + concepção espontânea, ou ir direto para FIV, depende de idade, EFI, reserva ovariana, presença de outros fatores de infertilidade e tempo já decorrido de tentativa — exatamente os elementos que você viu na aba de avaliação do casal.</div>
+`],
+["preservacao","Preservação de Fertilidade",`
+<div class="ac-h">Pensando à frente em doença ovariana extensa</div>
+<p class="ac-p">Em casos de <b>endometriose ovariana extensa</b> — especialmente bilateral, com necessidade cirúrgica repetida ou reserva ovariana já em declínio — vale a pena discutir proativamente com a paciente a opção de <b>criopreservação de oócitos</b>, mesmo antes de qualquer intervenção cirúrgica adicional.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Quando discutir criopreservação de oócitos</text>
+<rect x="30" y="46" width="580" height="130" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="320" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Cenários que motivam a discussão</text>
+<text x="320" y="96" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Endometriose ovariana bilateral extensa</text>
+<text x="320" y="114" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Necessidade de cirurgia ovariana repetida</text>
+<text x="320" y="132" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Reserva ovariana já em declínio, sem desejo gestacional imediato</text>
+<text x="320" y="150" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">✓ Antes de nova cirurgia que possa reduzir ainda mais a reserva</text>
+</svg>
+<div class="ac-tip"><b>Por que "antes" importa:</b> como cada cirurgia ovariana subsequente tem potencial de reduzir ainda mais a reserva (lembrando os números da aba de cirurgia: ~30% unilateral, ~44% bilateral), discutir a criopreservação <b>antes</b> de uma nova intervenção — não depois — preserva mais opções para a paciente.</div>
+<div class="ac-call"><b>Fechando o raciocínio do módulo:</b> infertilidade na endometriose tem causas múltiplas (mecânica, inflamatória, ovariana, endometrial) → avaliação deve ser completa, não só ginecológica → EFI prevê melhor a fertilidade pós-cirúrgica que o r-ASRM → cirurgia de rotina antes da FIV não é recomendada (exceto cenários específicos) → tratamento hormonal supressivo não deve ser usado com intenção reprodutiva → FIV é frequentemente a via mais eficiente, sem protocolo único preferido → criopreservação de oócitos deve ser discutida proativamente em doença ovariana extensa.</div>
+`]
+]
+};
+Object.assign(C['endometriose|4'], {
+"escores": `<div class="prose">
+<h3>EFI vs. r-ASRM para prever fertilidade</h3>
+<table class="ac-tbl">
+<tr><th>Característica</th><th>r-ASRM</th><th>EFI (Endometriosis Fertility Index)</th></tr>
+<tr><td><strong>Foco</strong></td><td>Extensão anatômica da doença</td><td>Prognóstico de gravidez espontânea pós-cirúrgica</td></tr>
+<tr><td><strong>Componentes</strong></td><td>Só achados cirúrgicos</td><td>Achados cirúrgicos + fatores históricos (idade, tempo de infertilidade, gestação prévia)</td></tr>
+<tr><td><strong>Faixa de escore</strong></td><td>Pontos → 4 estágios</td><td>0 a 10 (maior = melhor prognóstico)</td></tr>
+<tr><td><strong>Utilidade em infertilidade</strong></td><td>Limitada</td><td>Melhor capacidade preditiva</td></tr>
+</table>
+</div>`,
+"dif": `<div class="prose">
+<h3>Fatores a diferenciar na investigação do casal</h3>
+<table class="ac-tbl">
+<tr><th>Cenário</th><th>Não assumir que é só endometriose — avaliar também</th></tr>
+<tr><td>Infertilidade em casal com endometriose confirmada</td><td>Fator masculino (espermograma) sempre deve ser avaliado</td></tr>
+<tr><td>Endometrioma + infertilidade</td><td>Reserva ovariana real (não presumir normal só pela idade)</td></tr>
+<tr><td>Dor + infertilidade coexistentes</td><td>Tratamento de dor (supressivo) é incompatível com tentativa imediata de concepção</td></tr>
+<tr><td>Falha de tentativa espontânea prolongada</td><td>Reavaliar EFI e considerar encaminhamento para FIV mais precoce</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Endometriose e Infertilidade</div>
+<div class="mm">
+  <div class="mm-card"><h5>🧩 Mecanismos</h5><ul><li>Mecânico/anatômico</li><li>Inflamatório peritoneal</li><li>Ovariano (reserva)</li><li>Endometrial (receptividade)</li></ul></div>
+  <div class="mm-card"><h5>🔍 Avaliação</h5><ul><li>Não só ginecológica</li><li>Fator masculino sempre</li><li>Idade e tempo de tentativa pesam</li></ul></div>
+  <div class="mm-card"><h5>📊 EFI</h5><ul><li>0 a 10</li><li>Histórico + cirúrgico</li><li>Melhor que r-ASRM p/ fertilidade</li></ul></div>
+  <div class="mm-card"><h5>🔪 Cirurgia</h5><ul><li>Rotina NÃO recomendada (I/II, endometrioma isolado)</li><li>Exceções: hidrossalpinge, dor, crescimento rápido, acesso à punção</li><li>Cistectomia: -30%/-44% reserva</li></ul></div>
+  <div class="mm-card"><h5>💊 Hormônio</h5><ul><li>Supressivo NÃO ajuda fertilidade</li><li>Agonista GnRH pré-FIV não é mais rotina</li></ul></div>
+  <div class="mm-card"><h5>🧪 FIV</h5><ul><li>Via eficiente na maioria dos casos</li><li>Sem protocolo único preferido</li><li>Endometrioma pode dificultar punção</li></ul></div>
+  <div class="mm-card"><h5>❄️ Preservação</h5><ul><li>Criopreservação de oócitos</li><li>Discutir ANTES de nova cirurgia</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Casal com endometriose confirmada e infertilidade</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — Avaliação completa do casal</div><div class="fx-lbl">Reserva ovariana, permeabilidade tubária, cavidade uterina, espermograma, extensão da doença</div><div class="fx-arrow"></div><div class="fx-node">Passo 2 — Calcular/estimar prognóstico</div><div class="fx-lbl">EFI (se cirurgia prévia/planejada), idade, tempo de infertilidade</div><div class="fx-arrow"></div><div class="fx-lbl">Fator tuboperitoneal significativo, EFI baixo, idade avançada ou outro fator de infertilidade associado?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Encaminhamento mais precoce para FIV</div><div class="fx-node end"><b>NÃO (doença mínima, EFI alto, casal jovem):</b> Tentativa espontânea por tempo limitado pode ser razoável, com reavaliação programada</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Definida necessidade de FIV ou de cirurgia com intuito reprodutivo</div><div class="fx-arrow"></div><div class="fx-lbl">Há indicação específica para cirurgia pré-FIV? (hidrossalpinge, dor significativa, crescimento rápido do endometrioma, lesão dificultando acesso à punção)</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Considerar cirurgia dirigida a essa indicação específica antes da FIV</div><div class="fx-node end"><b>NÃO (r-ASRM I/II isolado ou endometrioma sem outra indicação):</b> Seguir direto para FIV, sem cirurgia de rotina</div></div><div class="fx-arrow"></div><div class="fx-node">Discutir preservação de fertilidade se doença ovariana extensa/bilateral</div><div class="fx-lbl">Especialmente antes de qualquer nova cirurgia ovariana</div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Endometriose e Infertilidade em 60 segundos</h4>
+<ul>
+<li><strong>4 mecanismos:</strong> mecânico/anatômico, inflamatório (líquido peritoneal tóxico), ovariano (reserva), endometrial (receptividade).</li>
+<li><strong>Avaliação completa do casal:</strong> nunca assumir que é só endometriose — sempre avaliar fator masculino.</li>
+<li><strong>EFI (0-10):</strong> combina fatores históricos (idade, tempo de infertilidade, gestação prévia) + cirúrgicos (função residual de trompas/ovários) — mais preditivo de fertilidade que o r-ASRM.</li>
+<li><strong>Cirurgia pré-FIV de rotina NÃO recomendada</strong> para r-ASRM I/II ou endometrioma isolado — sem ganho comprovado em nascidos vivos. Exceções: hidrossalpinge, dor significativa, crescimento rápido, dificuldade de acesso à punção.</li>
+<li><strong>Cistectomia reduz reserva ovariana:</strong> ~30% unilateral, ~44% bilateral (AMH).</li>
+<li><strong>Tratamento hormonal supressivo NÃO deve ser usado com intenção reprodutiva</strong> — suprime ovulação, efeito contraceptivo.</li>
+<li><strong>Pré-tratamento longo com agonista de GnRH antes da FIV</strong> não é mais rotina — sem benefício consistente comprovado.</li>
+<li><strong>FIV:</strong> sem protocolo único preferido (antagonista ou agonista); via eficiente na maioria dos casos.</li>
+<li><strong>Criopreservação de oócitos:</strong> discutir proativamente em doença ovariana extensa/bilateral, antes de nova cirurgia.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Endometriose e infertilidade</strong> = mecanismos múltiplos, avaliação completa do casal, EFI prevê melhor que r-ASRM, cirurgia pré-FIV só em cenários específicos (não de rotina), hormônio supressivo não ajuda a engravidar, FIV é frequentemente a via mais eficiente, e criopreservação deve ser discutida cedo em doença ovariana extensa.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Se a questão descreve conduta de "operar sempre antes da FIV" em endometrioma isolado sem outra indicação, está desatualizada/incorreta.</li>
+<li>Tratamento hormonal supressivo (ACO, progestágeno, GnRH) prescrito "para melhorar a fertilidade" é <strong>sempre</strong> uma pegadinha — o mecanismo é contraceptivo.</li>
+<li>EFI &#8800; r-ASRM: se a questão fala em prognóstico de gravidez após cirurgia, pensa em EFI.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Assumir que toda infertilidade em paciente com endometriose é <strong>só</strong> por causa da endometriose, sem avaliar fator masculino ou outros fatores.</li>
+<li>Indicar cistectomia bilateral de rotina antes da FIV sem pesar o impacto de ~44% na reserva ovariana.</li>
+<li>Confundir a lógica de tratamento de <strong>dor</strong> (suprimir hormônio) com a de <strong>fertilidade</strong> (permitir ovulação).</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"EFI prediz fertilidade; r-ASRM só descreve extensão."</strong></li>
+<li><strong>"Hormônio que trata a dor, atrapalha a gravidez."</strong></li>
+<li><strong>Cirurgia pré-FIV só com motivo específico: hidrossalpinge, dor, crescimento rápido, acesso à punção.</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Não avaliar fator masculino em casal com endometriose feminina já diagnosticada.</li>
+<li>Prescrever tratamento hormonal supressivo com intenção de "ajudar a engravidar".</li>
+<li>Adiar excessivamente o encaminhamento para FIV em pacientes com EFI baixo ou idade mais avançada.</li>
+<li>Não discutir criopreservação de oócitos antes de nova cirurgia ovariana em doença extensa.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico os 4 mecanismos pelos quais a endometriose pode causar infertilidade","Sei por que a avaliação do casal infértil com endometriose deve ser completa, incluindo fator masculino","Descrevo o que é o EFI e por que ele prevê melhor a fertilidade pós-cirúrgica do que o r-ASRM","Sei quando a cirurgia pré-FIV é indicada e por que não é mais rotina para r-ASRM I/II ou endometrioma isolado","Explico por que o tratamento hormonal supressivo não deve ser usado com intenção de melhorar fertilidade","Reconheço quando discutir criopreservação de oócitos com a paciente"]
+});
+Object.assign(C['endometriose|4'], {
+"questoes": [
+{"stem":"Quais são os principais mecanismos pelos quais a endometriose pode causar infertilidade?","opts":["Apenas mecânico, por distorção anatômica das trompas.","Mecânico/anatômico, inflamatório peritoneal, ovariano (reserva) e endometrial (receptividade).","Exclusivamente hormonal, por excesso de progesterona.","Apenas por obstrução tubária bilateral completa em todos os casos."],"correct":1,"expl":"A infertilidade na endometriose combina múltiplos mecanismos: distorção anatômica, inflamação peritoneal tóxica a gametas/embriões, redução de reserva ovariana (especialmente com endometrioma) e possível alteração de receptividade endometrial."},
+{"stem":"Diante de um casal com endometriose feminina confirmada e infertilidade, qual conduta é apropriada?","opts":["Assumir que a endometriose é a única causa e iniciar tratamento cirúrgico imediato sem outras avaliações.","Realizar avaliação completa do casal, incluindo espermograma, sem assumir que o fator masculino está excluído.","Investigar apenas a paciente, pois o fator masculino é irrelevante quando há endometriose.","Aguardar pelo menos 5 anos antes de iniciar qualquer investigação."],"correct":1,"expl":"A avaliação deve ser completa, incluindo o fator masculino — não se deve assumir que a endometriose é a única causa de infertilidade do casal."},
+{"stem":"O Índice de Fertilidade da Endometriose (EFI) se diferencia do r-ASRM porque:","opts":["Usa apenas achados cirúrgicos, exatamente como o r-ASRM.","Combina achados cirúrgicos com fatores históricos (idade, tempo de infertilidade, gestação prévia), tendo melhor capacidade preditiva para fertilidade pós-cirúrgica.","Foi desenvolvido exclusivamente para avaliar dor pélvica.","Não pode ser aplicado após laparoscopia."],"correct":1,"expl":"O EFI combina dados clínicos (idade, tempo de infertilidade, gestação prévia) com achados cirúrgicos (função residual de trompas/ovários), tendo melhor capacidade preditiva de fertilidade do que o r-ASRM."},
+{"stem":"Segundo a diretriz ESHRE 2022, a cirurgia de rotina antes da reprodução assistida é recomendada para:","opts":["Toda paciente com endometriose, independentemente do estágio.","Doença em estágio r-ASRM I/II isolada ou endometrioma isolado, sem outra indicação específica.","Nenhuma das situações acima — cirurgia de rotina não é recomendada nesses cenários por falta de benefício comprovado em nascidos vivos.","Apenas em pacientes com menos de 25 anos."],"correct":2,"expl":"A ESHRE 2022 não recomenda cirurgia de rotina antes da FIV para r-ASRM I/II ou endometrioma isolado, pois não há benefício comprovado na taxa de nascidos vivos."},
+{"stem":"Em quais cenários a cirurgia antes da FIV pode ser apropriadamente considerada?","opts":["Presença de hidrossalpinge, dor significativa, crescimento rápido do endometrioma, ou lesão dificultando o acesso aos folículos na punção.","Apenas quando a paciente solicita, independentemente de indicação clínica.","Em toda paciente com qualquer grau de endometriose, como rotina.","Nunca — a cirurgia é sempre contraindicada antes da FIV."],"correct":0,"expl":"Cenários específicos como hidrossalpinge, dor significativa, crescimento rápido do endometrioma ou lesão que dificulta a punção folicular são indicações válidas de cirurgia pré-FIV — não a rotina generalizada."},
+{"stem":"A cistectomia de endometrioma tem qual impacto aproximado na reserva ovariana (medida por AMH)?","opts":["Nenhum impacto mensurável.","Redução de aproximadamente 30% após procedimento unilateral e 44% após bilateral.","Aumento da reserva ovariana em todos os casos.","Impacto exclusivamente positivo na função tubária."],"correct":1,"expl":"A cistectomia reduz a reserva ovariana em cerca de 30% após procedimento unilateral e até 44% após bilateral — dado importante na decisão sobre operar ou não antes da FIV."},
+{"stem":"Uma paciente com endometriose e dor pélvica, tentando engravidar, pergunta se pode usar contraceptivo hormonal combinado de forma contínua para 'tratar a endometriose enquanto tenta engravidar'. A resposta correta é:","opts":["Sim, o ACO contínuo melhora as chances de gravidez.","Não — tratamento hormonal supressivo não deve ser usado com intenção de melhorar a fertilidade, pois seu mecanismo suprime a ovulação.","Sim, desde que associado a um agonista de GnRH.","Não há problema, pois o ACO não interfere na ovulação."],"correct":1,"expl":"O tratamento hormonal supressivo (incluindo ACO) tem mecanismo contraceptivo — suprime a ovulação — e não deve ser usado com intenção de melhorar a fertilidade."},
+{"stem":"Em relação ao pré-tratamento prolongado com agonista de GnRH antes da FIV em pacientes com endometriose, a evidência atual mostra que:","opts":["É considerado obrigatório e deve ser usado rotineiramente em todos os casos.","Não é mais usado de forma rotineira, sem benefício consistente comprovado, com alguns estudos mostrando até menor taxa de nascidos vivos comparado à ausência de pré-tratamento.","Deve ser mantido por no mínimo 2 anos antes de qualquer tentativa de FIV.","É a única forma de garantir sucesso na FIV em pacientes com endometriose."],"correct":1,"expl":"O pré-tratamento longo com agonista de GnRH antes da FIV não é mais usado rotineiramente — as evidências recentes não sustentam benefício consistente, com alguns estudos mostrando até desfecho pior."},
+{"stem":"Sobre o protocolo de FIV recomendado para pacientes com endometriose, a ESHRE 2022 estabelece que:","opts":["O protocolo com agonista de GnRH é obrigatório em todos os casos.","O protocolo com antagonista de GnRH é o único aceitável.","Não há protocolo único preferido — tanto antagonista quanto agonista de GnRH podem ser usados, conforme preferência da paciente e do médico.","FIV é contraindicada em qualquer paciente com endometriose."],"correct":2,"expl":"A ESHRE não recomenda um protocolo específico — tanto o protocolo com antagonista quanto com agonista de GnRH podem ser usados, sem superioridade definitiva comprovada de um sobre o outro."},
+{"stem":"A presença de um grande endometrioma pode dificultar tecnicamente qual etapa da fertilização in vitro?","opts":["A transferência do embrião.","A punção folicular (coleta de oócitos), pelo risco de puncionar o cisto ou contaminar o líquido folicular.","O cultivo embrionário em laboratório.","A dosagem hormonal basal, exclusivamente."],"correct":1,"expl":"Endometriomas volumosos podem dificultar a punção folicular, com risco de puncionar acidentalmente o cisto — um dos poucos cenários em que a cirurgia prévia pode ser considerada, com objetivo técnico, não terapêutico."},
+{"stem":"Em qual cenário é especialmente importante discutir proativamente a criopreservação de oócitos com a paciente?","opts":["Em qualquer mulher jovem sem qualquer diagnóstico ginecológico.","Em endometriose ovariana extensa/bilateral, necessidade de cirurgia repetida, ou reserva ovariana já em declínio, antes de nova intervenção cirúrgica.","Apenas após a paciente completar 40 anos, independentemente do quadro.","Nunca — essa discussão não é indicada na endometriose."],"correct":1,"expl":"Em doença ovariana extensa/bilateral, com risco de cirurgias repetidas e reserva já em declínio, a criopreservação deve ser discutida proativamente, idealmente antes de nova cirurgia que possa reduzir ainda mais a reserva."},
+{"stem":"Uma paciente de 38 anos, com endometriose confirmada, EFI calculado em 3 (baixo) após cirurgia prévia, e 2 anos de tentativa espontânea sem sucesso, procura reavaliação. A conduta mais apropriada é:","opts":["Aguardar mais 3-5 anos de tentativa espontânea antes de qualquer nova intervenção.","Considerar encaminhamento mais precoce para FIV, dado o EFI baixo associado à idade mais avançada.","Repetir a cirurgia de rotina antes de qualquer outra conduta.","Iniciar tratamento hormonal supressivo para 'preparar' o útero antes de tentar novamente."],"correct":1,"expl":"Com EFI baixo (prognóstico reduzido de concepção espontânea) e idade mais avançada, o encaminhamento mais precoce para FIV é a conduta mais racional, evitando perda de tempo reprodutivo."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Mecanismos</small><br>Quais os 4 mecanismos de infertilidade na endometriose?","back":"{{Mecânico/anatômico (distorção de trompas/ovários); inflamatório (líquido peritoneal tóxico a gametas/embrião); ovariano (redução de reserva); endometrial (receptividade alterada).}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Avaliação</small><br>Por que não se deve assumir que a endometriose é a única causa de infertilidade do casal?","back":"Porque outros fatores (masculino, idade, outros fatores femininos) podem coexistir e precisam ser avaliados de forma completa.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">EFI</small><br>O que é o EFI e qual sua faixa de escore?","back":"Endometriosis Fertility Index — combina fatores históricos e cirúrgicos para prever fertilidade pós-cirúrgica; escore de 0 a 10, quanto maior melhor o prognóstico.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">EFI</small><br>Por que o EFI prevê fertilidade melhor que o r-ASRM?","back":"Combina achados cirúrgicos (função residual de trompas/ovários) com fatores históricos (idade, tempo de infertilidade, gestação prévia), que o r-ASRM não considera.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Cirurgia</small><br>A cirurgia de rotina antes da FIV é recomendada para r-ASRM I/II ou endometrioma isolado?","back":"NÃO — sem benefício comprovado em taxa de nascidos vivos, segundo ESHRE 2022.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Cirurgia</small><br>Em quais cenários a cirurgia pré-FIV é indicada?","back":"Hidrossalpinge, dor significativa, crescimento rápido do endometrioma, ou lesão dificultando o acesso aos folículos na punção.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Cirurgia</small><br>Qual o impacto da cistectomia na reserva ovariana (AMH)?","back":"Redução de ~30% após procedimento unilateral e ~44% após bilateral.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Hormônio</small><br>Por que o tratamento hormonal supressivo não deve ser usado com intenção reprodutiva?","back":"Seu mecanismo de ação suprime a ovulação (efeito contraceptivo) — o oposto do que se busca ao tentar engravidar.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">FIV</small><br>O pré-tratamento longo com agonista de GnRH antes da FIV ainda é rotina?","back":"NÃO — evidências recentes não mostram benefício consistente; alguns estudos mostram até taxa de nascidos vivos menor com esse pré-tratamento.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">FIV</small><br>Há um protocolo de FIV preferido pela ESHRE para endometriose?","back":"NÃO — tanto protocolo com antagonista quanto com agonista de GnRH podem ser usados, conforme preferência da paciente/médico.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">FIV</small><br>Como um endometrioma grande pode dificultar a FIV?","back":"Pode dificultar tecnicamente a punção folicular, com risco de puncionar o cisto ou contaminar o líquido folicular.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Avaliação</small><br>Cite 3 fatores 'temporais' que pesam na decisão sobre a via reprodutiva a seguir.","back":"{{Idade da paciente; tempo de tentativa/infertilidade; gestação prévia.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Mecanismos</small><br>Qual mecanismo de infertilidade explica por que o líquido peritoneal pode prejudicar a concepção?","back":"Inflamação peritoneal — o líquido inflamado é tóxico para gametas e embriões.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Preservação</small><br>Quando discutir criopreservação de oócitos na endometriose?","back":"Em doença ovariana extensa/bilateral, necessidade de cirurgia repetida ou reserva já em declínio — idealmente antes de nova cirurgia ovariana.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Avaliação completa antes de assumir causa única","stem":"Casal com mulher de 29 anos, endometriose peritoneal confirmada por imagem (r-ASRM I estimado), tentando engravidar há 14 meses. O ginecologista assistente considera iniciar diretamente tratamento cirúrgico da endometriose como conduta exclusiva.","passos":[
+{"h":"Análise da conduta proposta","p":"Iniciar tratamento cirúrgico como única medida, sem avaliar o parceiro, não segue os princípios de avaliação completa do casal infértil."},
+{"h":"Conduta corrigida","p":"Solicitado espermograma do parceiro e avaliação de reserva ovariana da paciente antes de qualquer decisão terapêutica."},
+{"h":"Resultado da avaliação","p":"Espermograma dentro da normalidade; reserva ovariana preservada; doença classificada como r-ASRM I (mínima) na imagem."},
+{"h":"Raciocínio clínico","p":"Diante de doença mínima, casal jovem e sem outros fatores de infertilidade identificados, cirurgia de rotina não traria benefício comprovado adicional — a ESHRE não recomenda esse tipo de intervenção de rotina nesse cenário."},
+{"h":"Conduta neste momento","p":"Orientar tentativa espontânea por período limitado com reavaliação programada, evitando intervenção cirúrgica desnecessária neste momento."}
+]},
+{"t":"Caso 2 — Endometrioma dificultando punção folicular","stem":"Mulher de 33 anos com endometrioma volumoso de 7 cm, unilateral, em programação para FIV devido a fator tuboperitoneal associado.","passos":[
+{"h":"Avaliação pré-FIV","p":"Endometrioma de tamanho considerável, localizado de forma a potencialmente dificultar o acesso técnico aos folículos durante a punção guiada por ultrassom."},
+{"h":"Discussão de conduta","p":"Diferente do cenário de rotina, aqui existe uma indicação técnica específica: o tamanho e a localização do cisto podem comprometer a segurança e a eficácia da coleta de oócitos."},
+{"h":"Raciocínio clínico","p":"Essa é exatamente uma das exceções reconhecidas para considerar cirurgia antes da FIV — não para 'tratar' a endometriose em si, mas para viabilizar tecnicamente o procedimento de reprodução assistida."},
+{"h":"Aconselhamento","p":"Paciente orientada sobre o possível impacto da cistectomia na reserva ovariana (redução unilateral estimada em torno de 30%), ponderado contra o risco técnico de manter o cisto durante a punção."},
+{"h":"Conduta neste momento","p":"Optado por cistectomia prévia à FIV, dado o tamanho e a dificuldade técnica esperada, com encaminhamento para ciclo de FIV após recuperação cirúrgica adequada."}
+]},
+{"t":"Caso 3 — Discussão proativa de criopreservação","stem":"Mulher de 30 anos com endometriose ovariana bilateral extensa, já submetida a uma cirurgia ovariana prévia, sem desejo gestacional imediato mas com desejo reprodutivo futuro claro, e sinais de reserva ovariana em declínio.","passos":[
+{"h":"Avaliação da situação reprodutiva","p":"Histórico de cirurgia ovariana prévia, doença bilateral extensa e reserva ovariana já reduzida — combinação que levanta preocupação sobre fertilidade futura mesmo sem tentativa de gravidez no momento."},
+{"h":"Discussão proativa","p":"Antes de qualquer nova intervenção cirúrgica potencialmente necessária no futuro (por dor refratária, por exemplo), discutida com a paciente a opção de criopreservação de oócitos como estratégia de preservação de fertilidade."},
+{"h":"Raciocínio clínico","p":"Como cada nova cirurgia ovariana carrega risco adicional de redução de reserva, antecipar essa discussão — antes de uma eventual nova cirurgia — preserva mais opções reprodutivas para a paciente do que esperar até que a necessidade cirúrgica se torne urgente."},
+{"h":"Decisão compartilhada","p":"Paciente optou por prosseguir com ciclo de criopreservação de oócitos antes de considerar qualquer nova intervenção cirúrgica eletiva."},
+{"h":"Conduta neste momento","p":"Encaminhamento para centro de reprodução assistida para criopreservação, mantendo acompanhamento ginecológico regular para monitorar sintomas e decidir sobre eventual necessidade cirúrgica futura."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
 <script>(function(){
 "use strict";
 
