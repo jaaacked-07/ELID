@@ -2242,6 +2242,372 @@ Object.assign(C['endocrino|1'], {"questoes": [{"stem": "Mulher de 25 anos refere
 try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
 })();</script>
 
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['endometriose|0'] = {
+name: "Fisiopatologia e Quadro Clínico",
+intro: "Doença inflamatória crônica estrogênio-dependente que atinge cerca de 10% das mulheres em idade reprodutiva — e até 35–50% das que investigam dor pélvica crônica ou infertilidade.",
+sub: [
+["entendendo","Entendendo do Zero",`
+<div class="ac-h">Tecido parecido com endométrio, no lugar errado</div>
+<p class="ac-p">Endometriose e a presenca de tecido <b>histologicamente semelhante ao endometrio</b> (glandulas e estroma) <b>fora da cavidade uterina</b> — mais comumente no peritonio pelvico, nos ovarios e no septo retovaginal, mas ocasionalmente em locais distantes. Esse tecido ectopico responde aos hormonios do ciclo (principalmente ao estrogenio) de forma parecida com o endometrio normal, so que sem ter para onde descamar — e e exatamente esse descompasso que gera a doenca.</p>
+<p class="ac-p">A prevalencia estimada e de <b>cerca de 10% das mulheres em idade reprodutiva</b>, mas esse numero sobe muito quando se olha para populacoes sintomaticas: entre mulheres com <b>dor pelvica cronica ou infertilidade</b>, a prevalencia chega a <b>35–50%</b>. E uma das doencas ginecologicas mais subdiagnosticadas — o tempo medio entre o inicio dos sintomas e o diagnostico definitivo costuma ultrapassar <b>7 anos</b>, porque a dismenorreia (o sintoma mais comum) e frequentemente normalizada como "calica forte" tanto pela paciente quanto, as vezes, pelo proprio servico de saude.</p>
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="24" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Endometrio eutopico (normal) vs. tecido ectopico (endometriose)</text>
+<rect x="40" y="50" width="280" height="210" rx="16" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="180" y="76" text-anchor="middle" font-size="12.5" font-weight="700" style="fill:var(--ink)">Dentro do utero (eutopico)</text>
+<path d="M110 110 Q180 95 250 110 L245 220 Q180 240 115 220 Z" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="180" y="255" text-anchor="middle" font-size="10" style="fill:var(--muted)">descama e sai pela menstruacao</text>
+<rect x="360" y="50" width="280" height="210" rx="16" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="500" y="76" text-anchor="middle" font-size="12.5" font-weight="700" style="fill:var(--ink)">Fora do utero (ectopico)</text>
+<circle cx="440" cy="150" r="16" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="440" y="180" text-anchor="middle" font-size="9" style="fill:var(--muted)">peritonio</text>
+<circle cx="500" cy="190" r="20" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="500" y="222" text-anchor="middle" font-size="9" style="fill:var(--muted)">ovario</text>
+<circle cx="565" cy="140" r="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="565" y="167" text-anchor="middle" font-size="9" style="fill:var(--muted)">ligamento</text>
+<text x="500" y="245" text-anchor="middle" font-size="10" style="fill:var(--muted)">sangra por dentro: inflamacao e dor</text>
+</svg>
+<div class="ac-call"><b>A grande ideia:</b> a endometriose nao e so um problema anatomico de "pedacinho de endometrio fora do lugar" — e uma <b>doenca inflamatoria cronica, estrogenio-dependente</b>, com repercussao hormonal, imunologica e neurologica. Guarde isso: vai explicar tudo que vem nas proximas abas.</p></div>
+<div class="ac-tip"><b>Nao confundir:</b> endometriose (tecido ectopico <i>fora</i> do utero) e <b>adenomiose</b> (glandulas endometriais infiltrando o <i>miometrio</i>, a parede do proprio utero) sao entidades diferentes, embora possam coexistir na mesma paciente e compartilhar mecanismos.</div>
+`],
+["teorias","Teorias da Origem",`
+<div class="ac-h">Nenhuma teoria isolada explica tudo — e isso cai em prova</div>
+<p class="ac-p">A causa exata da endometriose ainda e desconhecida. As diretrizes atuais (ESHRE 2022) sao claras: <b>nenhuma teoria isolada explica todos os casos</b> — existem varios mecanismos propostos, provavelmente atuando em combinacao.</p>
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Tres caminhos propostos ate a lesao endometriotica</text>
+<rect x="20" y="46" width="200" height="100" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="120" y="70" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--ink)">Menstruacao retrograda</text>
+<text x="120" y="90" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">(Sampson)</text>
+<text x="120" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">sangue menstrual reflui</text>
+<text x="120" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">pelas trompas ate o peritonio</text>
+<rect x="240" y="46" width="200" height="100" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="340" y="70" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--ink)">Metaplasia celomica</text>
+<text x="340" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">celulas peritoneais se</text>
+<text x="340" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">transformam diretamente</text>
+<text x="340" y="120" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">em tecido endometrial-like</text>
+<rect x="460" y="46" width="200" height="100" rx="12" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="560" y="70" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--ink)">Disseminacao</text>
+<text x="560" y="86" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">vascular/linfatica e</text>
+<text x="560" y="100" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">celulas-tronco</text>
+<text x="560" y="120" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">explica focos a distancia</text>
+<path d="M120 146 L280 190" fill="none" style="stroke:var(--accent)" stroke-width="1.6"/>
+<path d="M340 146 L320 190" fill="none" style="stroke:var(--accent)" stroke-width="1.6"/>
+<path d="M560 146 L370 190" fill="none" style="stroke:var(--accent)" stroke-width="1.6"/>
+<rect x="200" y="196" width="280" height="48" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="340" y="216" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Lesao endometriotica</text>
+<text x="340" y="232" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">so se instala se escapar da vigilancia imune</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Menstruacao retrograda (Sampson) — a mais aceita, mas incompleta</div>
+<p class="ac-p">Durante a menstruacao, fragmentos de endometrio refluem pelas <b>trompas de Falopio</b> ate a cavidade peritoneal (em vez de sair pela vagina), aderem ao peritonio e se implantam. O problema e que a <b>menstruacao retrograda ocorre em ate 90% das mulheres</b> — e so uma fracao bem menor desenvolve endometriose. Isso mostra que refluxo sozinho nao basta: precisa haver uma <b>falha na vigilancia imunologica</b> que deveria eliminar esse tecido ectopico antes que ele se implante.</p>
+<div class="ac-h" style="margin-top:14px">Metaplasia celomica</div>
+<p class="ac-p">Celulas do peritonio (que compartilham origem embriologica com o endometrio, ambos derivados do epitelio celomico) podem se <b>transformar diretamente</b> em tecido semelhante ao endometrial sob estimulos hormonais ou inflamatorios. Essa teoria ajuda a explicar casos raros em mulheres sem utero, sem menstruacao (pre-menarca) ou em homens em tratamento com estrogenio.</p>
+<div class="ac-h" style="margin-top:14px">Disseminacao vascular/linfatica e celulas-tronco</div>
+<p class="ac-p">Celulas endometriais podem viajar por via <b>linfatica ou hematogenica</b>, o que explica focos <b>extra-pelvicos raros</b> (pulmao/diafragma, cicatriz de cesarea, umbigo). Celulas-tronco da medula ossea tambem sao apontadas como fonte adicional de celulas capazes de originar lesoes a distancia.</p>
+<div class="ac-warn"><b>Pegadinha classica de prova:</b> perguntas do tipo "qual e A teoria da endometriose" quase sempre estao erradas por definicao — a resposta certa reconhece que <b>multiplos mecanismos coexistem</b>, sem um unico vencedor.</div>
+`],
+["mecanismo","Da Lesão à Doença",`
+<div class="ac-h">Por que o implante nao so sobrevive, como cresce e di</div>
+<p class="ac-p">Ter um implante ectopico e so o primeiro passo. Para virar doenca sintomatica, esse tecido precisa <b>escapar da resposta imune</b>, <b>se vascularizar</b> e conseguir <b>producao hormonal propria</b> — tres eventos que se retroalimentam e formam um circulo vicioso autossustentado, parecido em logica com o que voce ja viu em outras doencas endocrino-inflamatorias.</p>
+<svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<defs><marker id="arrhead2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">O circulo vicioso da lesao endometriotica</text>
+<rect x="250" y="40" width="180" height="56" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="340" y="64" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Implante ectopico</text>
+<text x="340" y="80" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">escapa da vigilancia imune</text>
+<path d="M340 96 L340 130" fill="none" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead2)"/>
+<rect x="250" y="132" width="180" height="56" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="340" y="156" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--ink)">Aromatase local</text>
+<text x="340" y="172" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">producao propria de estrogenio</text>
+<path d="M340 188 L340 222" fill="none" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead2)"/>
+<rect x="250" y="224" width="180" height="56" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="340" y="248" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--ink)">Inflamacao cronica</text>
+<text x="340" y="264" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">citocinas, prostaglandinas</text>
+<path d="M430 252 Q560 252 560 190" fill="none" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead2)"/>
+<rect x="470" y="132" width="180" height="56" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="560" y="156" text-anchor="middle" font-size="11.5" font-weight="700" style="fill:var(--accent)">Neuroangiogenese</text>
+<text x="560" y="172" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">NGF, VEGF: novos vasos e nervos</text>
+<path d="M470 160 L430 160" fill="none" style="stroke:var(--accent)" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#arrhead2)"/>
+<rect x="180" y="300" width="320" height="34" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="340" y="322" text-anchor="middle" font-size="10.5" style="fill:var(--accent)">Resultado: dor, fibrose/aderencias e crescimento da lesao</text>
+<path d="M340 280 L340 300" fill="none" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead2)"/>
+</svg>
+<div class="ac-h" style="margin-top:14px">Producao hormonal autonoma — a lesao "fabrica seu proprio combustivel"</div>
+<p class="ac-p">Um dos achados mais importantes: o tecido endometriotico expressa <b>aromatase</b> em niveis anormalmente altos, produzindo <b>estrogenio localmente</b>, de forma relativamente independente do eixo hipotalamo-hipofise-ovario. Isso explica por que a doenca pode persistir mesmo com manipulacao hormonal sistemica e por que os <b>inibidores da aromatase</b> tem papel terapeutico em casos refratarios (assunto do modulo de tratamento).</p>
+<div class="ac-h" style="margin-top:14px">Inflamacao cronica local</div>
+<p class="ac-p">O microambiente ao redor do implante se enche de <b>macrofagos ativados, citocinas (IL-6, IL-8, TNF-alfa) e prostaglandinas</b>. Essa inflamacao persistente e a base fisiopatologica tanto da <b>dor</b> quanto da <b>formacao de fibrose e aderencias</b> — o "grude" entre estruturas pelvicas que caracteriza a doenca mais avancada.</p>
+<div class="ac-h" style="margin-top:14px">Neuroangiogenese — a chave para entender a dor</div>
+<p class="ac-p">Fatores de crescimento liberados nesse ambiente inflamatorio (fator de crescimento do nervo — NGF, BDNF, e o fator de crescimento vascular — VEGF) estimulam simultaneamente a formacao de <b>novos vasos sanguineos e novas fibras nervosas</b> dentro e ao redor da lesao. E esse aumento real da <b>densidade de fibras nervosas</b> no tecido — mais do que o tamanho da lesao em si — que melhor se correlaciona com a intensidade da dor relatada pela paciente (voce vai aprofundar isso na aba "Por que Doi").</p>
+<div class="ac-call"><b>Conceito-chave:</b> a endometriose nao e uma doenca puramente anatomica-mecanica. E uma <b>doenca inflamatoria, hormonalmente autonoma e neurologicamente ativa</b> — por isso o tratamento eficaz combina supressao hormonal, controle da inflamacao e, muitas vezes, manejo especifico da dor cronica.</div>
+`],
+["localizacoes","Localizações e Formas Anatômicas",`
+<div class="ac-h">Nem toda endometriose e igual — tres formas anatomicas</div>
+<p class="ac-p">Classicamente, a endometriose se apresenta em <b>tres formas anatomicas</b>, que nao sao excludentes (a mesma paciente pode ter as tres simultaneamente) e que tem impacto clinico e cirurgico bem diferente.</p>
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">As tres formas anatomicas da endometriose</text>
+<rect x="20" y="42" width="200" height="196" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.5"/>
+<text x="120" y="66" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--ink)">Peritoneal superficial</text>
+<circle cx="80" cy="110" r="8" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<circle cx="130" cy="130" r="6" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<circle cx="160" cy="95" r="5" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="120" y="180" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">implantes pequenos</text>
+<text x="120" y="194" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">na superficie peritoneal</text>
+<text x="120" y="215" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">forma mais leve/comum</text>
+<rect x="240" y="42" width="200" height="196" rx="14" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="340" y="66" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--accent)">Ovariana (endometrioma)</text>
+<circle cx="340" cy="130" r="42" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<circle cx="340" cy="130" r="24" style="fill:#8E5A2A" fill-opacity=".55"/>
+<text x="340" y="188" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">"cisto de chocolate"</text>
+<text x="340" y="203" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">sangue antigo acumulado</text>
+<text x="340" y="218" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">reduz a reserva ovariana</text>
+<rect x="460" y="42" width="200" height="196" rx="14" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.6"/>
+<text x="560" y="66" text-anchor="middle" font-size="12" font-weight="700" style="fill:#e8675f">Infiltrativa profunda (DIE)</text>
+<path d="M520 110 Q560 90 600 110 L595 165 Q560 185 525 165 Z" style="fill:#e8675f" fill-opacity=".22" stroke="#e8675f" stroke-width="1.6"/>
+<text x="560" y="196" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">infiltra &gt;=5 mm sob o peritonio</text>
+<text x="560" y="210" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">ligamentos, septo retovaginal,</text>
+<text x="560" y="224" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">intestino, bexiga, ureter</text>
+</svg>
+<table class="ac-tbl"><tr><th>Forma</th><th>Definicao</th><th>Correlacao clinica</th></tr>
+<tr><td><b>Peritoneal superficial</b></td><td>Implantes &lt; 5 mm na superficie do peritonio</td><td>Forma mais comum; pode ser assintomatica ou causar dor desproporcional ao tamanho</td></tr>
+<tr><td><b>Ovariana (endometrioma)</b></td><td>Cisto ovariano com sangue antigo acumulado ("cisto de chocolate")</td><td>Pode reduzir a reserva ovariana; associada a infertilidade</td></tr>
+<tr><td><b>Infiltrativa profunda (DIE)</b></td><td>Infiltra <b>&#8805; 5 mm</b> abaixo da superficie peritoneal (definicao ESHRE)</td><td>Forma mais sintomatica/complexa; acomete ligamentos uterossacros, septo retovaginal, intestino, bexiga, ureter</td></tr>
+</table>
+<div class="ac-h" style="margin-top:14px">Sitios extra-pelvicos raros</div>
+<p class="ac-p">Embora incomuns, existem focos <b>fora da pelve</b> — toracico/diafragmatico (pode causar <b>pneumotorax catamenial</b>, coincidindo com a menstruacao), em cicatriz de cesarea ou episiotomia, e umbilical. Sao achados de baixa frequencia, mas classicos em questoes que testam a teoria da disseminacao vascular/linfatica.</p>
+<div class="ac-warn"><b>Cuidado:</b> a extensao da doenca vista na superficie peritoneal durante uma laparoscopia pode <b>subestimar</b> a real gravidade — um implante superficial discreto pode coexistir com um nodulo infiltrativo profundo por baixo, que so e identificado com palpacao cuidadosa ou imagem dirigida.</div>
+`],
+["dor","Por que Dói",`
+<div class="ac-h">A intensidade da dor nao segue o tamanho da lesao — e isso muda a prova</div>
+<p class="ac-p">Um dos pontos mais cobrados e menos intuitivos da endometriose: a <b>gravidade da dor nao se correlaciona bem com a extensao anatomica da doenca</b>. Pacientes com poucos implantes minusculos podem ter dor incapacitante, enquanto outras com doenca extensa relatam pouco desconforto. Entender o mecanismo da dor explica esse paradoxo.</p>
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<defs><marker id="arrhead3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Da lesao a dor cronica generalizada</text>
+<rect x="20" y="50" width="150" height="70" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="95" y="78" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Lesao</text>
+<text x="95" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">fibras nervosas novas</text>
+<path d="M170 85 L210 85" fill="none" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead3)"/>
+<rect x="212" y="50" width="150" height="70" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="287" y="78" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Sensibilizacao periferica</text>
+<text x="287" y="96" text-anchor="middle" font-size="9" style="fill:var(--muted)">nervo local hiperativo</text>
+<path d="M362 85 L402 85" fill="none" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead3)"/>
+<rect x="404" y="50" width="150" height="70" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="479" y="78" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Sensibilizacao central</text>
+<text x="479" y="96" text-anchor="middle" font-size="9" style="fill:var(--muted)">SNC amplifica o sinal</text>
+<path d="M479 120 L479 150" fill="none" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#arrhead3)"/>
+<rect x="330" y="152" width="298" height="60" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="479" y="176" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Sensibilizacao cruzada</text>
+<text x="479" y="194" text-anchor="middle" font-size="9" style="fill:var(--muted)">bexiga, intestino tambem doem (organos vizinhos)</text>
+<rect x="40" y="222" width="600" height="30" rx="8" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.2"/>
+<text x="340" y="242" text-anchor="middle" font-size="10" style="fill:var(--muted)">Gravidade da dor correlaciona com densidade de fibras nervosas, NAO com extensao/estadio da doenca</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Sensibilizacao periferica</div>
+<p class="ac-p">Como visto na aba anterior, a lesao endometriotica atrai novas fibras nervosas (neuroangiogenese). Essas fibras ficam <b>hiperativas</b>, respondendo de forma exagerada a estimulos que normalmente nao doeriam.</p>
+<div class="ac-h" style="margin-top:14px">Sensibilizacao central</div>
+<p class="ac-p">Com a dor persistente, o proprio <b>sistema nervoso central</b> passa a amplificar os sinais dolorosos — um fenomeno chamado sensibilizacao central, presente em cerca de <b>40% das pacientes com endometriose</b> e associado de forma independente a dor pelvica cronica moderada a grave. E por isso que, em doenca de longa data, a dor pode persistir <b>mesmo apos a remocao cirurgica completa das lesoes visiveis</b> — o sistema nervoso "aprendeu" a doer.</p>
+<div class="ac-h" style="margin-top:14px">Sensibilizacao cruzada (cross-organ)</div>
+<p class="ac-p">Como os orgaos pelvicos compartilham vias sensitivas, a sensibilizacao pode "vazar" para orgaos vizinhos — explicando por que <b>sindrome do intestino irritavel, sindrome da bexiga dolorosa/cistite intersticial e vulvodinia</b> sao comorbidades tao frequentes em quem tem endometriose. Isso tambem explica por que a dor pode ficar generalizada e dificil de localizar num unico orgao.</p>
+<div class="ac-tip"><b>Macete de prova:</b> se a questao descreve doenca minima na laparoscopia mas dor intensa (ou o inverso: doenca extensa com pouca dor), a resposta certa quase sempre invoca os <b>mecanismos de sensibilizacao (periferica/central/cruzada)</b>, nao "erro de estadiamento".</div>
+`],
+["clinica","Quadro Clínico",`
+<div class="ac-h">A tetrade classica — e o que foge dela</div>
+<p class="ac-p">A apresentacao classica combina quatro sintomas centrais, mas a endometriose e camaleonica: os sintomas variam conforme a <b>localizacao</b> das lesoes, e uma parcela relevante das pacientes e <b>assintomatica</b>.</p>
+<svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="250" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Onde os sintomas aparecem</text>
+<circle cx="250" cy="90" r="30" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.6"/>
+<path d="M205 150 Q250 125 295 150 L288 290 Q250 310 212 290 Z" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.6"/>
+<line x1="250" y1="60" x2="250" y2="30" style="stroke:var(--accent)" stroke-width="1.3"/>
+<text x="250" y="20" text-anchor="middle" font-size="0"></text>
+<line x1="220" y1="160" x2="120" y2="140" style="stroke:var(--accent)" stroke-width="1.3"/>
+<text x="30" y="136" font-size="10.5" font-weight="700" style="fill:var(--accent)">Dismenorreia progressiva</text>
+<text x="30" y="149" font-size="9.5" style="fill:var(--muted)">piora com o tempo, pouca resposta a AINE</text>
+<line x1="250" y1="210" x2="370" y2="200" style="stroke:var(--accent)" stroke-width="1.3"/>
+<text x="375" y="196" font-size="10.5" font-weight="700" style="fill:var(--accent)">Dispareunia de profundidade</text>
+<text x="375" y="209" font-size="9.5" style="fill:var(--muted)">dor a penetracao profunda</text>
+<line x1="230" y1="250" x2="110" y2="260" style="stroke:var(--accent)" stroke-width="1.3"/>
+<text x="20" y="256" font-size="10.5" font-weight="700" style="fill:var(--accent)">Dor pelvica cronica</text>
+<text x="20" y="269" font-size="9.5" style="fill:var(--muted)">nao ciclica, &gt;=6 meses</text>
+<line x1="270" y1="270" x2="380" y2="290" style="stroke:var(--accent)" stroke-width="1.3"/>
+<text x="385" y="286" font-size="10.5" font-weight="700" style="fill:var(--accent)">Disquezia ciclica</text>
+<text x="385" y="299" font-size="9.5" style="fill:var(--muted)">DIE de retossigmoide</text>
+<line x1="255" y1="180" x2="140" y2="200" style="stroke:var(--accent)" stroke-width="1.3"/>
+<text x="30" y="196" font-size="10.5" font-weight="700" style="fill:var(--accent)">Disuria/hematuria ciclica</text>
+<text x="30" y="209" font-size="9.5" style="fill:var(--muted)">DIE de bexiga</text>
+<rect x="60" y="336" width="380" height="46" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.2"/>
+<text x="250" y="356" text-anchor="middle" font-size="10.5" style="fill:var(--accent)">+ infertilidade — pode ser a UNICA queixa que leva a paciente ao consultorio</text>
+<text x="250" y="372" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">~20-25% e assintomatica (achado incidental)</text>
+</svg>
+<div class="ac-h" style="margin-top:14px">Dismenorreia progressiva</div>
+<p class="ac-p">O sintoma mais comum. O ponto-chave e o carater <b>progressivo</b> — piora ao longo dos anos e responde cada vez menos a analgesicos/AINE habituais, ao contrario da dismenorreia primaria simples, que tende a ser estavel desde a menarca.</p>
+<div class="ac-h" style="margin-top:14px">Dispareunia de profundidade</div>
+<p class="ac-p">Dor a <b>penetracao profunda</b> (nao a entrada), sugestiva de comprometimento do fundo de saco posterior e dos ligamentos uterossacros — um sinal que aponta para doenca infiltrativa profunda.</p>
+<div class="ac-h" style="margin-top:14px">Dor pelvica cronica</div>
+<p class="ac-p">Dor nao necessariamente ciclica, presente ha pelo menos <b>6 meses</b>, que reflete a sensibilizacao central discutida na aba anterior — por isso pode persistir independente da fase do ciclo.</p>
+<div class="ac-h" style="margin-top:14px">Sintomas ciclicos especificos por localizacao</div>
+<p class="ac-p">Quando ha DIE de <b>retossigmoide</b>: disquezia (dor para evacuar) ciclica, as vezes com sangramento retal perimenstrual. Quando ha DIE de <b>bexiga</b>: disuria e hematuria ciclicas. Comprometimento <b>ureteral</b> e mais raro, mas temido, porque pode causar <b>hidronefrose silenciosa</b> sem sintomas urinarios evidentes — motivo pelo qual a avaliacao de trato urinario e sistematica em doenca infiltrativa extensa.</p>
+<div class="ac-h" style="margin-top:14px">Infertilidade e apresentacao assintomatica</div>
+<p class="ac-p">A infertilidade pode ser a <b>unica queixa</b>, mesmo sem dor relevante. E cerca de <b>20-25% das mulheres com endometriose comprovada sao assintomaticas</b>, sendo diagnosticadas incidentalmente durante cirurgia por outro motivo ou investigacao de infertilidade — reforcando que <b>ausencia de dor nao exclui doenca</b>.</p>
+<div class="ac-call"><b>Sintoma sentinela:</b> dismenorreia progressiva e refrataria em adolescente/mulher jovem e o gatilho classico de prova para levantar a hipotese de endometriose.</div>
+`],
+["exame","Exame Físico",`
+<div class="ac-h">Exame normal NAO exclui a doenca</div>
+<p class="ac-p">O exame fisico tem papel de apoio, mas suas limitacoes precisam ficar claras desde ja: em muitos casos, especialmente de doenca peritoneal superficial, o <b>exame pode ser inteiramente normal</b>. Isso nao afasta a hipotese diagnostica quando a historia clinica e sugestiva.</p>
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Achados classicos ao toque bimanual</text>
+<ellipse cx="320" cy="150" rx="130" ry="90" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.5"/>
+<path d="M270 120 Q320 100 370 120 L365 190 Q320 210 275 190 Z" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="320" y="90" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Utero fixo/retrovertido</text>
+<text x="320" y="103" text-anchor="middle" font-size="9" style="fill:var(--muted)">(aderencias)</text>
+<circle cx="230" cy="200" r="18" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="170" y="240" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Massa anexial</text>
+<text x="170" y="253" text-anchor="middle" font-size="9" style="fill:var(--muted)">sugere endometrioma</text>
+<rect x="270" y="205" width="100" height="24" rx="8" style="fill:#e8675f" fill-opacity=".3" stroke="#e8675f" stroke-width="1.4"/>
+<text x="470" y="215" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">Nodularidade dolorosa</text>
+<text x="470" y="228" text-anchor="middle" font-size="9" style="fill:var(--muted)">fundo de saco posterior /</text>
+<text x="470" y="241" text-anchor="middle" font-size="9" style="fill:var(--muted)">ligamentos uterossacros</text>
+<line x1="370" y1="217" x2="410" y2="217" style="stroke:#e8675f" stroke-width="1.3"/>
+</svg>
+<div class="ac-h" style="margin-top:14px">Achados classicos quando presentes</div>
+<p class="ac-p"><b>Utero fixo, retrovertido e pouco movel</b> (por aderencias pelvicas); <b>nodularidade dolorosa em fundo de saco posterior e/ou ligamentos uterossacros</b>, palpavel ao toque vaginal/retal combinado; e <b>massa anexial</b>, sugestiva de endometrioma quando cistica e aderida.</p>
+<div class="ac-tip"><b>Detalhe que muda a sensibilidade do exame:</b> a nodularidade uterossacra costuma ser <b>mais dolorosa e mais facilmente palpavel durante o periodo menstrual</b> — vale considerar o momento do ciclo ao agendar o exame em caso de suspeita.</div>
+<div class="ac-h" style="margin-top:14px">Exame especular</div>
+<p class="ac-p">Geralmente inespecifico, mas em casos raros de infiltracao vaginal pode revelar lesoes visiveis no <b>fundo de saco vaginal posterior</b>, azuladas ou avermelhadas.</p>
+<div class="ac-warn"><b>Nao esqueca:</b> um exame fisico normal <b>nao exclui endometriose</b>, sobretudo a forma peritoneal superficial. A confirmacao por imagem dirigida e, quando indicado, laparoscopia com biopsia — alem do estadiamento formal (ASRM) — sao o tema do proximo modulo, "Diagnostico e Estadiamento".</div>
+`]
+]
+};
+Object.assign(C['endometriose|0'], {
+"escores": `<div class="prose">
+<h3>Formas anatomicas — tabela comparativa</h3>
+<table class="ac-tbl">
+<tr><th>Forma</th><th>Definicao</th><th>Local mais comum</th><th>Observacao</th></tr>
+<tr><td><strong>Peritoneal superficial</strong></td><td>Implantes &lt; 5 mm na superficie peritoneal</td><td>Fossa ovarica, ligamento largo, fundo de saco</td><td>Forma mais frequente; pode ser assintomatica</td></tr>
+<tr><td><strong>Ovariana (endometrioma)</strong></td><td>Cisto com conteudo hemorragico antigo ("chocolate")</td><td>Ovario (uni ou bilateral)</td><td>Associada a queda de reserva ovariana</td></tr>
+<tr><td><strong>Infiltrativa profunda (DIE)</strong></td><td>Infiltra &#8805; 5 mm abaixo do peritonio (ESHRE)</td><td>Ligamentos uterossacros, septo retovaginal, retossigmoide, bexiga, ureter</td><td>Forma mais sintomatica; maior complexidade cirurgica</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">As tres formas <strong>coexistem com frequencia</strong> na mesma paciente — encontrar uma nao exclui as outras.</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Diagnosticos diferenciais da dor pelvica ciclica/cronica</h3>
+<table class="ac-tbl">
+<tr><th>Condicao</th><th>Pista que diferencia</th></tr>
+<tr><td><strong>Adenomiose</strong></td><td>Utero globoso e amolecido; dismenorreia + sangramento aumentado; glandulas endometriais no MIOMETRIO (nao fora do utero)</td></tr>
+<tr><td><strong>Doenca inflamatoria pelvica (sequela)</strong></td><td>Historia de IST/infeccao previa, aderencias por processo infeccioso, nao ciclico</td></tr>
+<tr><td><strong>Sindrome do intestino irritavel</strong></td><td>Dor associada a alteracao do habito intestinal, alivio parcial com evacuacao, nao estritamente ciclica</td></tr>
+<tr><td><strong>Sindrome da bexiga dolorosa/cistite intersticial</strong></td><td>Urgencia e dor suprapubica relacionadas ao enchimento vesical, frequencia aumentada</td></tr>
+<tr><td><strong>Mioma uterino</strong></td><td>Sangramento aumentado, massa palpavel, dor mais por efeito de massa que ciclica</td></tr>
+<tr><td><strong>Vulvodinia</strong></td><td>Dor localizada na vulva/introito, dispareunia de entrada (nao de profundidade)</td></tr>
+<tr><td><strong>Aderencias pelvicas pos-cirurgicas</strong></td><td>Historia cirurgica previa, dor mais posicional/mecanica</td></tr>
+</table>
+<div class="ac-warn"><h4>⚠️ Atencao</h4><p class="ac-p">Varias dessas condicoes sao <strong>comorbidas</strong> com a endometriose (via sensibilizacao cruzada), nao apenas diferenciais isolados — por isso o quadro clinico pode ser misto.</p></div>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Endometriose (fisiopatologia e clinica)</div>
+<div class="mm">
+  <div class="mm-card"><h5>🧬 Teorias</h5><ul><li>Menstruacao retrograda (Sampson)</li><li>Metaplasia celomica</li><li>Disseminacao vascular/linfatica</li><li>Nenhuma isolada explica tudo</li></ul></div>
+  <div class="mm-card"><h5>🔥 Mecanismo</h5><ul><li>Aromatase local &#8594; estrogenio propio</li><li>Inflamacao cronica (citocinas)</li><li>Neuroangiogenese (NGF/VEGF)</li><li>Fibrose e aderencias</li></ul></div>
+  <div class="mm-card"><h5>📍 Formas anatomicas</h5><ul><li>Peritoneal superficial</li><li>Ovariana (endometrioma)</li><li>Infiltrativa profunda (DIE &#8805;5mm)</li></ul></div>
+  <div class="mm-card"><h5>⚡ Mecanismo da dor</h5><ul><li>Sensibilizacao periferica</li><li>Sensibilizacao central (~40%)</li><li>Sensibilizacao cruzada</li><li>Dor &#8800; extensao da doenca</li></ul></div>
+  <div class="mm-card"><h5>🩺 Clinica</h5><ul><li>Dismenorreia progressiva</li><li>Dispareunia de profundidade</li><li>Dor pelvica cronica</li><li>Disquezia/disuria ciclicas</li><li>Infertilidade / ~20-25% assintomatica</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Dismenorreia progressiva e/ou dispareunia profunda e/ou dor pelvica cronica e/ou infertilidade</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — Anamnese dirigida</div><div class="fx-lbl">Rastrear sintomas ciclicos intestinais (disquezia) e urinarios (disuria/hematuria); historia familiar; impacto na qualidade de vida</div><div class="fx-arrow"></div><div class="fx-node">Passo 2 — Exame fisico</div><div class="fx-lbl">Buscar nodularidade em fundo de saco posterior/uterossacros, utero fixo, massa anexial — lembrar que exame normal NAO exclui</div><div class="fx-arrow"></div><div class="fx-lbl">Quadro sugestivo (isolado ou combinado)?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Suspeita clinica de endometriose — encaminhar para investigacao por imagem dirigida (ver modulo "Diagnostico e Estadiamento")</div><div class="fx-node"><b>Duvida/outros achados</b> &#8594; investigar diferenciais (adenomiose, SII, bexiga dolorosa, DIP)</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Suspeita clinica de dor sugestiva de endometriose, sem sinais de alarme</div><div class="fx-arrow"></div><div class="fx-node">Abordagem inicial (empirica)</div><div class="fx-lbl">ESHRE 2022: tratamento hormonal empirico pode ser oferecido com base em sintomas/sinais, sem exigir confirmacao cirurgica previa</div><div class="fx-arrow"></div><div class="fx-lbl">Ha sinais de alarme? (massa anexial suspeita, sintomas intestinais/urinarios graves, infertilidade, falha terapeutica)</div><div class="fx-row"><div class="fx-node end"><b>NAO:</b> Analgesia + terapia hormonal empirica (detalhes no modulo "Tratamento Clinico"). Reavaliar resposta.</div><div class="fx-node end"><b>SIM:</b> Investigacao por imagem dirigida e avaliacao especializada antes de definir conduta (proximo modulo)</div></div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Fisiopatologia e Clínica em 60 segundos</h4>
+<ul>
+<li><strong>Definicao:</strong> tecido semelhante ao endometrio fora do utero. Prevalencia ~10% (ate 35-50% em inferteis/dor cronica).</li>
+<li><strong>Teorias:</strong> menstruacao retrograda (Sampson, mais aceita mas incompleta — 90% tem refluxo, poucas adoecem), metaplasia celomica, disseminacao vascular/linfatica. <strong>Nenhuma isolada explica tudo.</strong></li>
+<li><strong>Mecanismo:</strong> aromatase local (estrogenio proprio) &#8594; inflamacao cronica (citocinas/PGs) &#8594; neuroangiogenese (NGF/VEGF) &#8594; dor e fibrose.</li>
+<li><strong>3 formas:</strong> peritoneal superficial, ovariana (endometrioma), infiltrativa profunda (DIE &#8805;5mm — ligamentos uterossacros, septo retovaginal, intestino, bexiga, ureter).</li>
+<li><strong>Dor &#8800; extensao:</strong> correlaciona com densidade de fibras nervosas e sensibilizacao (periferica/central ~40%/cruzada), nao com estadio.</li>
+<li><strong>Clinica:</strong> dismenorreia progressiva, dispareunia profunda, dor pelvica cronica, disquezia/disuria ciclicas (conforme local), infertilidade. <strong>~20-25% assintomatica.</strong></li>
+<li><strong>Exame:</strong> utero fixo/retrovertido, nodularidade em fundo de saco/uterossacros (melhor palpada na menstruacao), massa anexial. <strong>Normal NAO exclui.</strong></li>
+</ul></div>
+<h3>Resumo ultrarrapido (one-liner)</h3>
+<p class="ac-p"><strong>Endometriose</strong> = doenca inflamatoria estrogenio-dependente com tecido ectopico; mecanismo combina <strong>hormonio local + inflamacao + neuroangiogenese</strong>; dor <strong>nao</strong> segue extensao; clinica = <strong>dismenorreia progressiva + dispareunia profunda + dor cronica + infertilidade</strong>, podendo ser assintomatica.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Questao com dismenorreia <strong>progressiva</strong> e refrataria a AINE em mulher jovem &#8594; pense endometriose primeiro.</li>
+<li>Se o enunciado contrapoe "doenca minima" com "dor intensa" (ou o inverso), a resposta certa fala de <strong>sensibilizacao</strong>, nao de erro de estadiamento.</li>
+<li>Perguntas sobre "a teoria" da endometriose: desconfie de alternativa que cita só uma teoria como única correta.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que <strong>exame fisico normal exclui</strong> a doenca — nao exclui, especialmente a forma peritoneal superficial.</li>
+<li>Confundir <strong>endometriose com adenomiose</strong> — endometriose e ectopica (fora do utero); adenomiose e no miometrio.</li>
+<li>Esquecer que <strong>infertilidade pode ser a unica queixa</strong>, sem dor relevante.</li>
+<li>Nao pensar em <strong>DIE de bexiga/intestino</strong> diante de disuria ou disquezia ciclicas.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"3 T" das teorias:</strong> Trans-tubária (retrógrada), Transformação (metaplasia), Trânsito (vascular/linfático).</li>
+<li><strong>Tétrade clínica:</strong> <em>D</em>ismenorreia, <em>D</em>ispareunia, <em>D</em>or crônica, <em>D</em>ificuldade para engravidar (os "4 Ds").</li>
+<li><strong>"Dói mais quem sente mais nervo, não quem tem mais lesão."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Tratar dismenorreia intensa sempre como "normal" e postergar a investigação.</li>
+<li>Assumir que ausência de achados ao exame afasta o diagnóstico.</li>
+<li>Confundir endometriose com adenomiose ou com DIP na anamnese.</li>
+<li>Ignorar sintomas intestinais/urinários cíclicos como possível DIE.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico por que nenhuma teoria isolada (Sampson, metaplasia celômica, disseminação vascular/linfática) explica todos os casos de endometriose","Descrevo o mecanismo da lesão: aromatase local, inflamação crônica e neuroangiogênese, e por que isso gera dor e fibrose","Diferencio as 3 formas anatômicas (peritoneal superficial, ovariana/endometrioma, infiltrativa profunda) e sei onde a DIE costuma se localizar","Explico por que a intensidade da dor não se correlaciona com a extensão da doença (sensibilização periférica, central e cruzada)","Reconheço a tétrade clínica clássica e os sintomas cíclicos específicos por localização (disquezia, disúria)","Sei os achados clássicos do exame físico e por que um exame normal não exclui a doença"]
+});
+Object.assign(C['endometriose|0'], {
+"questoes": [
+{"stem":"Mulher de 26 anos relata dismenorreia que iniciou leve na adolescência e vem piorando progressivamente nos últimos anos, com pouca resposta a anti-inflamatórios. Refere também dispareunia de profundidade. Qual hipótese diagnóstica deve ser priorizada?","opts":["Dismenorreia primária simples.","Endometriose.","Doença inflamatória pélvica aguda.","Síndrome do intestino irritável isolada."],"correct":1,"expl":"O caráter <b>progressivo</b> da dismenorreia, associado à <b>dispareunia de profundidade</b>, é o padrão clássico que diferencia a endometriose da dismenorreia primária (que costuma ser estável desde a menarca)."},
+{"stem":"Sobre as teorias da origem da endometriose, é correto afirmar que:","opts":["A menstruação retrógrada explica isoladamente todos os casos, pois ocorre em praticamente todas as mulheres com a doença.","Nenhuma teoria isolada explica todos os casos; múltiplos mecanismos (retrógrado, metaplásico, vascular/linfático) provavelmente coexistem.","A metaplasia celômica foi descartada pelas diretrizes atuais.","A disseminação vascular/linfática só ocorre em homens.","A menstruação retrógrada é exclusiva de mulheres com endometriose."],"correct":1,"expl":"As diretrizes atuais reconhecem que <b>nenhuma teoria isolada</b> explica todos os casos. A menstruação retrógrada ocorre em até <b>90% das mulheres</b> (a maioria sem endometriose), reforçando que fatores adicionais (falha imunológica) são necessários."},
+{"stem":"O principal motivo pelo qual a menstruação retrógrada, isoladamente, não explica por que a endometriose se desenvolve apenas em algumas mulheres é:","opts":["Porque a menstruação retrógrada é rara na população geral.","Porque exige necessariamente cirurgia prévia.","Porque depende de uma falha na vigilância imunológica que permita a implantação do tecido refluído.","Porque só ocorre em mulheres com trompas obstruídas."],"correct":2,"expl":"A menstruação retrógrada é comum (~90%), mas só uma fração das mulheres desenvolve endometriose — a diferença está numa provável <b>falha imunológica</b> que permite a sobrevivência e implantação do tecido ectópico."},
+{"stem":"O tecido endometriótico ectópico expressa altos níveis de qual enzima, permitindo produção estrogênica local relativamente independente do eixo hipotálamo-hipófise-ovário?","opts":["5-alfa-redutase.","Aromatase.","17-beta-hidroxiesteroide desidrogenase tipo 1 apenas no fígado.","Fosfodiesterase-5."],"correct":1,"expl":"A <b>aromatase</b> é expressa em excesso no tecido ectópico, permitindo produção local de estrogênio que sustenta a lesão de forma relativamente autônoma — base racional para o uso de inibidores da aromatase em casos refratários."},
+{"stem":"Qual definição melhor caracteriza a endometriose infiltrativa profunda (DIE), segundo a diretriz ESHRE?","opts":["Qualquer implante visível na superfície peritoneal.","Cisto ovariano de conteúdo hemorrágico antigo.","Lesão que infiltra 5 mm ou mais abaixo da superfície peritoneal.","Endometriose restrita ao ovário bilateral."],"correct":2,"expl":"A ESHRE define DIE como infiltração de <b>&#8805; 5 mm abaixo do peritônio</b>. É a forma mais associada a sintomas intensos e comprometimento de órgãos vizinhos (uterossacros, septo retovaginal, intestino, bexiga, ureter)."},
+{"stem":"Paciente com endometriose relata disquezia e discreto sangramento retal, ambos cíclicos, coincidindo com a menstruação. Isso sugere comprometimento de qual estrutura?","opts":["Ureter.","Bexiga.","Retossigmoide.","Ovário isolado."],"correct":2,"expl":"Disquezia (dor para evacuar) e sangramento retal cíclicos apontam para <b>DIE de retossigmoide</b>. Comprometimento vesical cursaria com disúria/hematúria cíclicas; o ureteral costuma ser silencioso."},
+{"stem":"Por que o comprometimento ureteral pela endometriose é considerado particularmente preocupante?","opts":["Porque sempre causa dor lombar intensa e imediata.","Porque pode causar hidronefrose silenciosa, sem sintomas urinários evidentes.","Porque é a apresentação mais comum da doença.","Porque impede qualquer tratamento clínico posterior."],"correct":1,"expl":"O acometimento ureteral pode ser <b>assintomático</b> e evoluir para <b>hidronefrose silenciosa</b>, com risco de perda funcional renal — por isso a avaliação sistemática do trato urinário é recomendada em doença infiltrativa extensa."},
+{"stem":"Sobre o mecanismo da dor na endometriose, assinale a afirmativa CORRETA:","opts":["A intensidade da dor correlaciona-se diretamente com o estadiamento cirúrgico da doença.","A dor depende exclusivamente do tamanho do implante peritoneal.","A densidade de fibras nervosas na lesão correlaciona-se melhor com a dor do que a extensão anatômica da doença.","Sensibilização central está presente em praticamente 100% das pacientes."],"correct":2,"expl":"A <b>densidade de fibras nervosas</b> (fruto da neuroangiogênese) correlaciona-se melhor com a intensidade da dor do que a extensão/estadiamento da doença. A sensibilização central está presente em cerca de <b>40%</b> das pacientes, não na totalidade."},
+{"stem":"Uma paciente com endometriose apresenta, além da dor pélvica, sintomas compatíveis com síndrome do intestino irritável e síndrome da bexiga dolorosa. O melhor conceito fisiopatológico para explicar essa sobreposição é:","opts":["Coincidência estatística sem relação fisiopatológica.","Sensibilização cruzada (cross-organ), decorrente de vias sensitivas compartilhadas entre órgãos pélvicos.","Efeito colateral obrigatório de qualquer tratamento hormonal.","Sinal de que o diagnóstico de endometriose está incorreto."],"correct":1,"expl":"A <b>sensibilização cruzada</b> explica por que órgãos pélvicos vizinhos, que compartilham vias sensitivas, desenvolvem hipersensibilidade conjunta — tornando comorbidades como SII e síndrome da bexiga dolorosa frequentes na endometriose."},
+{"stem":"Mulher de 31 anos, assintomática, é diagnosticada com endometriose peritoneal incidentalmente durante investigação de infertilidade. Esse cenário é:","opts":["Impossível, pois toda endometriose causa dor.","Compatível com a doença, já que cerca de 20-25% das pacientes são assintomáticas.","Sinal de erro diagnóstico, pois exige biópsia confirmatória sempre.","Exclusivo de mulheres na menopausa."],"correct":1,"expl":"Cerca de <b>20-25% das mulheres com endometriose comprovada são assintomáticas</b>, muitas vezes diagnosticadas durante investigação de infertilidade ou cirurgia por outro motivo — reforça que ausência de sintomas não exclui a doença."},
+{"stem":"Ao exame físico de uma paciente com suspeita de endometriose infiltrativa profunda, qual achado é mais característico de comprometimento dos ligamentos uterossacros?","opts":["Colo uterino puntiforme.","Nodularidade dolorosa em fundo de saco posterior, mais evidente durante a menstruação.","Secreção vaginal purulenta.","Hiperemia do colo uterino."],"correct":1,"expl":"A <b>nodularidade dolorosa em fundo de saco posterior/ligamentos uterossacros</b>, mais sensível durante o período menstrual, é o achado clássico de doença infiltrativa profunda nessa topografia."},
+{"stem":"Um exame físico ginecológico completamente normal em uma paciente com dismenorreia progressiva e dispareunia profunda:","opts":["Exclui definitivamente endometriose.","Não exclui endometriose, especialmente a forma peritoneal superficial.","Indica que o diagnóstico correto é sempre dismenorreia primária.","Só pode ocorrer em endometriose ovariana."],"correct":1,"expl":"O exame físico tem sensibilidade limitada, sobretudo para a <b>forma peritoneal superficial</b>. Um exame normal <b>não afasta</b> a hipótese diagnóstica diante de história clínica sugestiva."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Definição</small><br>O que é endometriose?","back":"Presença de tecido histologicamente semelhante ao endométrio (glândulas e estroma) fora da cavidade uterina — mais comum no peritônio pélvico, ovários e septo retovaginal.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Epidemiologia</small><br>Qual a prevalência da endometriose na população geral e em inférteis/dor crônica?","back":"~10% das mulheres em idade reprodutiva na população geral; até 35–50% entre as que investigam infertilidade ou dor pélvica crônica.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Teorias</small><br>Quais as 3 principais teorias da origem da endometriose?","back":"{{Menstruação retrógrada (Sampson); metaplasia celômica; disseminação vascular/linfática (células-tronco). Nenhuma isolada explica todos os casos.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Teorias</small><br>Por que a menstruação retrógrada não explica sozinha a doença?","back":"Ocorre em até 90% das mulheres, mas só uma fração desenvolve endometriose — depende de falha na vigilância imunológica que permite a implantação do tecido.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Mecanismo</small><br>Qual enzima permite produção estrogênica local pela lesão endometriótica?","back":"Aromatase — expressa em excesso no tecido ectópico, sustentando a lesão de forma relativamente autônoma do eixo hormonal sistêmico.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Mecanismo</small><br>O que é neuroangiogênese e por que importa na endometriose?","back":"Crescimento simultâneo de novos vasos e fibras nervosas na lesão (via NGF, BDNF, VEGF) — a densidade de fibras nervosas se correlaciona com a intensidade da dor.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Formas anatômicas</small><br>Quais as 3 formas anatômicas da endometriose?","back":"{{Peritoneal superficial; ovariana (endometrioma); infiltrativa profunda (DIE, ≥5mm abaixo do peritônio).}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">DIE</small><br>Onde a endometriose infiltrativa profunda costuma se localizar?","back":"Ligamentos uterossacros, septo retovaginal, retossigmoide, bexiga e, mais raramente, ureter.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Dor</small><br>A intensidade da dor na endometriose correlaciona com o quê?","back":"Com a densidade de fibras nervosas na lesão (neuroangiogênese) e com sensibilização periférica/central/cruzada — NÃO com a extensão anatômica da doença.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Dor</small><br>O que é sensibilização cruzada (cross-organ) e qual sua relevância clínica?","back":"Vias sensitivas compartilhadas entre órgãos pélvicos levam à hipersensibilidade conjunta, explicando comorbidades como síndrome do intestino irritável e síndrome da bexiga dolorosa.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Clínica</small><br>Quais os 4 sintomas centrais (tétrade) da endometriose?","back":"Dismenorreia progressiva, dispareunia de profundidade, dor pélvica crônica e infertilidade.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Clínica</small><br>Que percentual de mulheres com endometriose é assintomático?","back":"Cerca de 20–25% — diagnosticadas incidentalmente em cirurgia ou investigação de infertilidade.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Exame físico</small><br>Quais os achados clássicos ao toque bimanual?","back":"Útero fixo/retrovertido, nodularidade dolorosa em fundo de saco posterior/ligamentos uterossacros (mais evidente na menstruação), massa anexial.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Exame físico</small><br>Um exame físico normal exclui endometriose?","back":"NÃO. Especialmente na forma peritoneal superficial, o exame pode ser inteiramente normal mesmo com doença presente.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Apresentação clássica com dismenorreia progressiva","stem":"Mulher de 24 anos relata dismenorreia que começou leve aos 13 anos e vem piorando nos últimos 4 anos, hoje pouco responsiva a AINE. Refere também dispareunia de profundidade há 1 ano. Ciclos regulares.","passos":[
+{"h":"Anamnese dirigida","p":"Nega alteração do hábito intestinal ou sintomas urinários cíclicos. Sem história de ISTs. Refere absenteísmo escolar recorrente durante a menstruação desde a adolescência."},
+{"h":"Exame físico","p":"Útero em anteroversoflexão, discretamente pouco móvel. Dor à palpação de fundo de saco posterior, sem nodularidade nitidamente palpável. Anexos sem alterações."},
+{"h":"Raciocínio clínico","p":"Dismenorreia progressiva + dispareunia de profundidade é o padrão clássico de endometriose. A ausência de nodularidade franca ao exame não afasta a hipótese — o exame físico tem sensibilidade limitada, sobretudo em doença peritoneal superficial."},
+{"h":"Hipótese diagnóstica","p":"Endometriose (provável forma peritoneal superficial, a confirmar por imagem no módulo seguinte)."},
+{"h":"Conduta neste momento","p":"Explicar a hipótese diagnóstica, orientar sobre a possibilidade de abordagem empírica (tema do módulo de tratamento) e encaminhar para investigação por imagem dirigida — conteúdo do próximo módulo, 'Diagnóstico e Estadiamento'."}
+]},
+{"t":"Caso 2 — Sintomas cíclicos intestinais sugerindo DIE","stem":"Mulher de 33 anos com dismenorreia intensa há anos procura atendimento por dor para evacuar (disquezia) que piora nitidamente no período menstrual, associada a leve sangramento retal cíclico. Refere também dispareunia profunda.","passos":[
+{"h":"Anamnese dirigida","p":"Sintomas intestinais estritamente cíclicos, coincidindo com a menstruação — diferente do padrão persistente e não-cíclico da síndrome do intestino irritável isolada."},
+{"h":"Exame físico","p":"Nodularidade dolorosa palpável em ligamentos uterossacros e fundo de saco posterior, mais evidente durante o exame realizado próximo ao período menstrual."},
+{"h":"Raciocínio clínico","p":"Disquezia e sangramento retal cíclicos, somados à nodularidade uterossacra, apontam para comprometimento de retossigmoide — sugerindo endometriose infiltrativa profunda (DIE), a forma mais associada a sintomas intensos e complexidade cirúrgica."},
+{"h":"Hipótese diagnóstica","p":"Endometriose infiltrativa profunda (DIE) com provável acometimento de retossigmoide."},
+{"h":"Conduta neste momento","p":"Encaminhar para imagem dirigida (ultrassom com preparo intestinal ou ressonância, conforme protocolo do módulo seguinte) para mapeamento da extensão antes de qualquer decisão terapêutica, dado o potencial envolvimento intestinal."}
+]},
+{"t":"Caso 3 — Achado incidental em investigação de infertilidade","stem":"Mulher de 29 anos, nuligesta, procura investigação após 14 meses tentando engravidar sem sucesso. Nega dismenorreia relevante ou dispareunia. Ciclos regulares.","passos":[
+{"h":"Anamnese dirigida","p":"Ausência quase completa de sintomas dolorosos, o que inicialmente reduz a suspeita clínica de endometriose na anamnese isolada."},
+{"h":"Exame físico e propedêutica inicial","p":"Exame físico sem alterações relevantes. Espermograma do parceiro normal. Histerossalpingografia com trompas pérvias."},
+{"h":"Raciocínio clínico","p":"Mesmo sem dor, a infertilidade sem outra causa identificada é motivo suficiente para investigar endometriose — cerca de 20-25% das pacientes com a doença são assintomáticas do ponto de vista álgico, e a infertilidade pode ser a única manifestação."},
+{"h":"Hipótese diagnóstica","p":"Infertilidade sem causa aparente até o momento; endometriose assintomática entre as hipóteses a investigar."},
+{"h":"Conduta neste momento","p":"Prosseguir a investigação com imagem pélvica dirigida e, conforme o caso, avaliação laparoscópica — decisões detalhadas no módulo 'Diagnóstico e Estadiamento' e, se confirmado, no módulo 'Endometriose e Infertilidade'."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();</script>
 
 <script>(function(){
 "use strict";
