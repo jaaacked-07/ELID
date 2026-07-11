@@ -10299,5 +10299,1153 @@ try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.vie
 })();
 </script>
 
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['infeccoes|0'] = {
+name: "HPV — Infecção, Vacina e Rastreio",
+intro: "O HPV é a infecção sexualmente transmissível mais prevalente do mundo — a grande maioria das pessoas sexualmente ativas se infecta ao menos uma vez na vida. A chave para entender rastreio e vacina é uma ideia simples: quase toda infecção é eliminada pelo sistema imune em um a dois anos, e é só a minoria que persiste com um tipo oncogênico que importa para o risco de câncer.",
+sub: [
+["entendendo","Entendendo do Zero",`
+<div class="ac-h">Um vírus tão comum que quase toda pessoa sexualmente ativa se infecta alguma vez</div>
+<p class="ac-p">O HPV (papilomavírus humano) é um vírus de DNA de dupla fita, sem envelope, com tropismo por células epiteliais da pele e mucosas. Existem mais de 200 tipos descritos, e a transmissão ocorre por contato direto pele a pele ou mucosa a mucosa — não depende exclusivamente de penetração, o que explica infecção mesmo com uso correto de preservativo.</p>
+<p class="ac-p">O ponto mais importante deste módulo, que organiza tudo o que vem depois: a maioria das infecções por HPV é <b>transitória</b>. O sistema imunológico elimina cerca de 90% das infecções em até dois anos, sem deixar sequela. Apenas uma minoria evolui para <b>persistência</b> — e é essa persistência, não a infecção em si, que é a condição necessária para o desenvolvimento de lesões precursoras e câncer.</p>
+<svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">História natural da infecção por HPV</text>
+<rect x="30" y="50" width="200" height="70" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="130" y="80" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Infecção por HPV</text>
+<text x="130" y="100" text-anchor="middle" font-size="9" style="fill:var(--muted)">contato pele/mucosa</text>
+<line x1="230" y1="85" x2="280" y2="85" style="stroke:var(--muted)" stroke-width="1.5" marker-end="url(#a1)"/>
+<rect x="290" y="50" width="200" height="70" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="390" y="80" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Eliminação espontânea</text>
+<text x="390" y="100" text-anchor="middle" font-size="9" style="fill:var(--ink)">cerca de 90% em 1-2 anos</text>
+<line x1="230" y1="85" x2="280" y2="170" style="stroke:var(--muted)" stroke-width="1.5"/>
+<rect x="290" y="150" width="200" height="70" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.5"/>
+<text x="390" y="180" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">Persistência</text>
+<text x="390" y="200" text-anchor="middle" font-size="9" style="fill:var(--muted)">minoria, tipo oncogênico</text>
+<line x1="490" y1="185" x2="540" y2="185" style="stroke:#e8675f" stroke-width="1.5"/>
+<rect x="540" y="150" width="80" height="70" rx="10" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.3"/>
+<text x="580" y="178" text-anchor="middle" font-size="9" font-weight="700" style="fill:#e8675f">Lesão</text>
+<text x="580" y="192" text-anchor="middle" font-size="9" font-weight="700" style="fill:#e8675f">precursora</text>
+<defs><marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" style="fill:var(--muted)"/></marker></defs>
+</svg>
+<div class="ac-call"><b>A ideia central deste módulo:</b> rastreio de câncer de colo, condutas diante de lesões e vacinação só fazem sentido quando você entende que o alvo real é a <b>persistência de tipos oncogênicos</b>, não a infecção transitória que a maioria das pessoas terá e resolverá sozinha.</div>
+`],
+["tipos","Tipos de HPV: Baixo e Alto Risco",`
+<div class="ac-h">Nem todo HPV é igual — o risco depende do tipo</div>
+<p class="ac-p">Os tipos de HPV são classificados por seu potencial oncogênico. Os tipos de <b>baixo risco</b>, principalmente 6 e 11, não se associam a câncer e são responsáveis pela quase totalidade dos casos de condiloma acuminado (verruga genital), tema do próximo módulo. Os tipos de <b>alto risco (oncogênicos)</b> — 16, 18, 31, 33, 45, 52, 58 entre outros — são os que, quando persistem, podem evoluir para lesões precursoras e câncer.</p>
+<p class="ac-p">Os tipos 16 e 18 sozinhos respondem por aproximadamente 70% dos casos de câncer de colo do útero no mundo, além de parcela relevante dos cânceres de vulva, vagina, ânus, pênis e orofaringe associados a HPV. É por isso que a vacina prioriza justamente esses tipos.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Baixo risco vs. alto risco oncogênico</text>
+<rect x="30" y="46" width="270" height="150" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="165" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Baixo risco (6, 11)</text>
+<text x="165" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Não associados a câncer</text>
+<text x="165" y="112" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Causam quase todos os</text>
+<text x="165" y="128" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">condilomas acuminados</text>
+<text x="165" y="150" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Também na papilomatose</text>
+<text x="165" y="166" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">respiratória recorrente</text>
+<rect x="340" y="46" width="270" height="150" rx="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="475" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Alto risco (16, 18, 31...)</text>
+<text x="475" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Podem persistir e evoluir</text>
+<text x="475" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">para lesão precursora</text>
+<text x="475" y="132" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">16 e 18 = cerca de 70% dos</text>
+<text x="475" y="148" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">cânceres de colo do útero</text>
+<text x="475" y="170" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Também ânus, vulva, orofaringe</text>
+</svg>
+<div class="ac-tip"><b>Coinfecção é comum:</b> a mesma pessoa pode estar infectada por mais de um tipo de HPV ao mesmo tempo — a presença de condiloma (tipo baixo risco) não exclui coinfecção por tipo oncogênico.</div>
+<div class="ac-warn"><b>Pegadinha:</b> ter condiloma acuminado não significa maior risco de câncer de colo por si só — os tipos que causam condiloma raramente são os mesmos que causam câncer.</div>
+`],
+["clinica","Manifestações Clínicas",`
+<div class="ac-h">A maioria das infecções não dá nenhum sinal visível</div>
+<p class="ac-p">A forma mais comum de infecção por HPV é a <b>subclínica</b> — sem lesão visível a olho nu, detectada apenas indiretamente por citologia alterada ou teste de HPV-DNA positivo. Uma parcela menor de infecções se manifesta clinicamente, e aqui existem dois caminhos bem diferentes, conforme o tipo de HPV envolvido.</p>
+<p class="ac-p">Quando o tipo é de baixo risco (6, 11), a manifestação clínica típica é o <b>condiloma acuminado</b>, uma lesão exofítica visível — tema aprofundado no próximo módulo. Quando o tipo é oncogênico e persiste, o resultado é uma <b>lesão precursora</b> no colo, vagina ou vulva — em geral assintomática, raramente sangrando quando volumosa, e detectada pelo rastreio.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Possíveis desfechos da infecção por HPV</text>
+<rect x="20" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="112" y="70" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Subclínica</text>
+<text x="112" y="90" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Sem lesão visível</text>
+<text x="112" y="104" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Achado apenas em exames</text>
+<text x="112" y="118" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">A forma mais frequente</text>
+<rect x="227" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="319" y="70" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Condiloma acuminado</text>
+<text x="319" y="90" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Tipos 6, 11 (baixo risco)</text>
+<text x="319" y="104" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Lesão exofítica visível</text>
+<text x="319" y="118" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Detalhado no próximo módulo</text>
+<rect x="434" y="46" width="185" height="120" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="526" y="70" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Lesão precursora</text>
+<text x="526" y="90" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Tipos oncogênicos persistentes</text>
+<text x="526" y="104" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Geralmente assintomática</text>
+<text x="526" y="118" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Detectada pelo rastreio</text>
+</svg>
+<div class="ac-call"><b>Fio condutor:</b> é justamente por a maioria das lesões precursoras serem silenciosas que existe rastreio populacional — sem ele, a doença só se manifestaria clinicamente na fase de câncer já estabelecido.</div>
+`],
+["rastreio","Rastreio do Câncer de Colo do Útero",`
+<div class="ac-h">Por que rastrear entre 25 e 64 anos, e não antes</div>
+<p class="ac-p">No Brasil, o Ministério da Saúde e o INCA recomendam iniciar o rastreio do câncer de colo do útero com <b>citologia oncótica (Papanicolaou)</b> aos 25 anos, em mulheres que já tiveram atividade sexual, e manter até os 64 anos. Após dois exames anuais consecutivos normais, o intervalo passa a ser de <b>três em três anos</b>.</p>
+<p class="ac-p">A razão para não rastrear antes dos 25 anos é a mesma ideia do primeiro tópico deste módulo: em mulheres jovens, a prevalência de infecção transitória é altíssima e a maior parte regride sozinha. Rastrear cedo demais gera muitos resultados alterados que nunca evoluiriam, levando a colposcopias e tratamentos desnecessários. O teste de HPV-DNA como método primário de rastreio, com intervalos mais espaçados, já é usado em outros países e vem sendo incorporado progressivamente no Brasil.</p>
+<svg viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Linha do tempo do rastreio (Brasil)</text>
+<line x1="60" y1="100" x2="580" y2="100" style="stroke:var(--line)" stroke-width="2"/>
+<circle cx="100" cy="100" r="7" style="fill:var(--accent)"/>
+<text x="100" y="130" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">25 anos</text>
+<text x="100" y="146" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">início</text>
+<circle cx="250" cy="100" r="7" style="fill:var(--accent)"/>
+<text x="250" y="130" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">2 exames anuais</text>
+<text x="250" y="146" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">se normais</text>
+<circle cx="420" cy="100" r="7" style="fill:var(--accent)"/>
+<text x="420" y="130" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">a cada 3 anos</text>
+<text x="420" y="146" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">rotina</text>
+<circle cx="560" cy="100" r="7" style="fill:var(--accent)"/>
+<text x="560" y="130" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">64 anos</text>
+<text x="560" y="146" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">encerramento</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha clássica de prova:</b> não se rastreia rotineiramente antes dos 25 anos, mesmo com início precoce da vida sexual — o excesso de investigação em adolescentes gera mais dano do que benefício.</div>
+`],
+["colposcopia_lesoes","Lesões Precursoras: NIC e Conduta",`
+<div class="ac-h">Do resultado da citologia à decisão de tratar</div>
+<p class="ac-p">A citologia é relatada pelo sistema de Bethesda (ASC-US, ASC-H, LSIL, HSIL, AGC), que se correlaciona com o achado histológico obtido por biópsia guiada por colposcopia, descrito como neoplasia intraepitelial cervical (NIC ou CIN) grau 1, 2 ou 3. Nem toda citologia alterada exige colposcopia imediata — depende do grau de alteração e da idade.</p>
+<p class="ac-p">A conduta diante da NIC segue a lógica do risco de progressão: <b>NIC 1</b> tem alta taxa de regressão espontânea e geralmente é conduzida com observação (repetição de exames). <b>NIC 2 e NIC 3</b> têm maior risco de progressão para câncer invasor e, na maioria dos casos, são tratadas — por excisão (cirurgia de alta frequência, CAF/LEEP, ou conização) ou, em casos selecionados, por métodos ablativos.</p>
+<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Do grau de NIC à conduta</text>
+<rect x="30" y="42" width="170" height="140" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="115" y="66" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">NIC 1</text>
+<text x="115" y="86" text-anchor="middle" font-size="9" style="fill:var(--muted)">Alta regressão</text>
+<text x="115" y="100" text-anchor="middle" font-size="9" style="fill:var(--muted)">espontânea</text>
+<text x="115" y="124" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Observação</text>
+<rect x="235" y="42" width="170" height="140" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="320" y="66" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">NIC 2</text>
+<text x="320" y="86" text-anchor="middle" font-size="9" style="fill:var(--ink)">Risco intermediário</text>
+<text x="320" y="100" text-anchor="middle" font-size="9" style="fill:var(--ink)">de progressão</text>
+<text x="320" y="124" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Tratar (individualizar)</text>
+<rect x="440" y="42" width="170" height="140" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.4"/>
+<text x="525" y="66" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">NIC 3</text>
+<text x="525" y="86" text-anchor="middle" font-size="9" style="fill:var(--muted)">Maior risco de</text>
+<text x="525" y="100" text-anchor="middle" font-size="9" style="fill:var(--muted)">progressão a câncer</text>
+<text x="525" y="124" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:#e8675f">Tratar (excisão)</text>
+</svg>
+<div class="ac-tip"><b>Excisão também diagnostica:</b> a peça da CAF/conização permite avaliar margens e excluir invasão já estabelecida, unindo diagnóstico definitivo e tratamento no mesmo procedimento.</div>
+`],
+["vacina","Vacina HPV: Esquema e Indicações",`
+<div class="ac-h">Prevenção primária: vacinar antes da exposição</div>
+<p class="ac-p">A vacina usada no Programa Nacional de Imunizações (PNI) é a quadrivalente, que protege contra os tipos 6, 11, 16 e 18 — cobrindo tanto os principais tipos causadores de condiloma quanto os dois tipos oncogênicos mais associados a câncer de colo. É uma vacina <b>profilática</b>, ou seja, previne novas infecções pelos tipos vacinais, mas não trata infecção já estabelecida nem lesão já existente.</p>
+<p class="ac-p">Desde 2024, o esquema para a população geral de 9 a 14 anos passou a ser de <b>dose única</b>, ampliada em 2025 para adolescentes de 15 a 19 anos. Para grupos com maior vulnerabilidade imunológica — pessoas vivendo com HIV, pacientes oncológicos e transplantados — o esquema permanece em <b>três doses</b>, independentemente da idade, e a faixa etária de indicação é ampliada (9 a 45 anos). Outros grupos prioritários incluem vítimas de violência sexual, usuários de PrEP e pacientes com papilomatose respiratória recorrente.</p>
+<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Esquemas vacinais HPV — PNI</text>
+<rect x="30" y="42" width="270" height="150" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="66" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">População geral</text>
+<text x="165" y="88" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">9 a 19 anos, meninos e meninas</text>
+<text x="165" y="110" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Dose única</text>
+<text x="165" y="132" text-anchor="middle" font-size="9" style="fill:var(--muted)">Vacina quadrivalente</text>
+<text x="165" y="150" text-anchor="middle" font-size="9" style="fill:var(--muted)">tipos 6, 11, 16, 18</text>
+<rect x="340" y="42" width="270" height="150" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="475" y="66" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Imunocomprometidos</text>
+<text x="475" y="88" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">HIV, oncológicos, transplantados</text>
+<text x="475" y="110" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Três doses (0-2-6 meses)</text>
+<text x="475" y="132" text-anchor="middle" font-size="9" style="fill:var(--ink)">Faixa etária ampliada</text>
+<text x="475" y="150" text-anchor="middle" font-size="9" style="fill:var(--ink)">9 a 45 anos</text>
+</svg>
+<div class="ac-warn"><b>Não confunda:</b> a vacina não substitui o rastreio — mesmo mulheres vacinadas devem seguir o calendário de citologia, pois a vacina não cobre todos os tipos oncogênicos possíveis.</div>
+`],
+["prevencao_seguimento","Prevenção e Seguimento Pós-Tratamento",`
+<div class="ac-h">Reduzir risco, tratar quando indicado, e não perder o seguimento</div>
+<p class="ac-p">O preservativo reduz, mas não elimina o risco de transmissão do HPV, porque o contágio ocorre por contato de pele e mucosa em áreas não necessariamente cobertas pelo preservativo. A vacinação antes do início da vida sexual continua sendo a estratégia de prevenção primária mais eficaz.</p>
+<p class="ac-p">Após o tratamento de NIC 2 ou 3, o seguimento é essencial: a recomendação geral é repetir citologia (associada ou não a teste de HPV) em torno de 6 e 12 meses após o procedimento, seguida de rastreio anual até a normalização, antes de retornar ao intervalo trienal padrão. O objetivo é identificar precocemente eventual doença residual ou recorrente.</p>
+<svg viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Seguimento após tratamento de NIC 2/3</text>
+<line x1="60" y1="100" x2="580" y2="100" style="stroke:var(--line)" stroke-width="2"/>
+<circle cx="100" cy="100" r="7" style="fill:var(--accent)"/>
+<text x="100" y="130" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Tratamento</text>
+<circle cx="270" cy="100" r="7" style="fill:var(--accent)"/>
+<text x="270" y="130" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">6 meses</text>
+<text x="270" y="146" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">citologia +/- HPV</text>
+<circle cx="440" cy="100" r="7" style="fill:var(--accent)"/>
+<text x="440" y="130" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">12 meses</text>
+<text x="440" y="146" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">reavaliação</text>
+<circle cx="580" cy="100" r="7" style="fill:var(--accent)"/>
+<text x="560" y="130" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Retorno à rotina</text>
+<text x="560" y="146" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">se normal</text>
+</svg>
+<div class="ac-call"><b>Conectando com os próximos módulos:</b> o mesmo vírus, dependendo do tipo, explica tanto o condiloma acuminado (próximo módulo) quanto o espectro de lesões precursoras deste módulo — e a doença inflamatória pélvica (módulo seguinte) mostra outro grupo de agentes que ascendem pelo trato genital, com lógica de rastreio e prevenção bem diferente.</div>
+`]
+]
+};
+Object.assign(C['infeccoes|0'], {
+"escores": `<div class="prose">
+<h3>Correlação Bethesda (citologia) x NIC (histologia)</h3>
+<table class="ac-tbl">
+<tr><th>Citologia (Bethesda)</th><th>Histologia (NIC)</th><th>Conduta geral</th></tr>
+<tr><td>ASC-US</td><td>Geralmente normal ou NIC 1</td><td>Repetir citologia ou pesquisar HPV, conforme idade</td></tr>
+<tr><td>LSIL</td><td>Correlaciona com NIC 1</td><td>Repetir citologia; colposcopia se persistente</td></tr>
+<tr><td>ASC-H</td><td>Maior chance de NIC 2/3</td><td>Colposcopia</td></tr>
+<tr><td>HSIL</td><td>Correlaciona com NIC 2/3</td><td>Colposcopia com biópsia; tratar conforme achado</td></tr>
+<tr><td>AGC (células glandulares atípicas)</td><td>Investigar canal endocervical e endométrio</td><td>Colposcopia + avaliação endocervical/endometrial</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">NIC 1 = observar (alta regressão espontânea). NIC 2/3 = tratar (maior risco de progressão).</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Causas de colo uterino/citologia alterados além do HPV oncogênico</h3>
+<table class="ac-tbl">
+<tr><th>Condição</th><th>Pista diferencial</th></tr>
+<tr><td><strong>Cervicite (gonococo, clamídia)</strong></td><td>Inflamação, corrimento mucopurulento, colo friável; citologia pode mostrar atipia reativa, não neoplásica</td></tr>
+<tr><td><strong>Ectopia cervical (mácula rubra)</strong></td><td>Variante fisiológica, mais comum em jovens e em uso de anticoncepcional hormonal; não é lesão</td></tr>
+<tr><td><strong>Pólipo endocervical</strong></td><td>Lesão exofítica benigna, friável, sangramento de contato; achado à especuloscopia</td></tr>
+<tr><td><strong>Atrofia (pós-menopausa)</strong></td><td>Pode mimetizar atipia na citologia; contexto hormonal esclarece</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — HPV, Vacina e Rastreio</div>
+<div class="mm">
+  <div class="mm-card"><h5>🦠 Vírus</h5><ul><li>DNA, tropismo epitelial</li><li>Contato pele/mucosa</li><li>~90% eliminação espontânea</li></ul></div>
+  <div class="mm-card"><h5>🎯 Tipos</h5><ul><li>Baixo risco 6, 11 → condiloma</li><li>Alto risco 16, 18... → câncer</li><li>16+18 = ~70% dos cânceres</li></ul></div>
+  <div class="mm-card"><h5>🔬 Rastreio</h5><ul><li>Citologia dos 25 aos 64 anos</li><li>A cada 3 anos (após 2 normais)</li><li>HPV-DNA em expansão</li></ul></div>
+  <div class="mm-card"><h5>🧫 NIC</h5><ul><li>NIC 1: observar</li><li>NIC 2/3: tratar (excisão)</li><li>Bethesda correlaciona</li></ul></div>
+  <div class="mm-card"><h5>💉 Vacina</h5><ul><li>Quadrivalente (6,11,16,18)</li><li>Dose única 9-19 anos</li><li>3 doses se imunocomprometido</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Citologia de rastreio realizada (25-64 anos, intervalo trienal)</div><div class="fx-arrow"></div><div class="fx-node">Resultado alterado?</div><div class="fx-row"><div class="fx-node end"><b>Normal:</b> manter rotina trienal</div><div class="fx-node"><b>ASC-US/LSIL:</b> repetir citologia ou pesquisar HPV conforme idade</div></div><div class="fx-arrow"></div><div class="fx-node">ASC-H, HSIL ou persistência de alteração menor</div><div class="fx-lbl">Encaminhar para colposcopia com biópsia dirigida</div><div class="fx-arrow"></div><div class="fx-node end">Resultado histológico define grau de NIC e conduta</div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">NIC confirmada por biópsia</div><div class="fx-arrow"></div><div class="fx-lbl">Qual o grau?</div><div class="fx-row"><div class="fx-node end"><b>NIC 1:</b> observação, repetição de exames (alta regressão espontânea)</div><div class="fx-node"><b>NIC 2/3:</b> tratamento excisional (CAF/LEEP ou conização)</div></div><div class="fx-arrow"></div><div class="fx-node">Após tratamento de NIC 2/3</div><div class="fx-lbl">Seguimento com citologia +/- HPV aos 6 e 12 meses, depois anual até normalizar</div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — HPV, Vacina e Rastreio em 60 segundos</h4>
+<ul>
+<li><strong>HPV</strong> = vírus de DNA, contato pele/mucosa; cerca de 90% das infecções são eliminadas espontaneamente em 1-2 anos.</li>
+<li><strong>Baixo risco (6, 11):</strong> condiloma acuminado. <strong>Alto risco (16, 18...):</strong> lesões precursoras e câncer; 16+18 = ~70% dos cânceres de colo.</li>
+<li><strong>Rastreio:</strong> citologia dos 25 aos 64 anos, a cada 3 anos após 2 exames anuais normais. Não rastrear antes dos 25.</li>
+<li><strong>NIC 1</strong> = observar. <strong>NIC 2/3</strong> = tratar (excisão).</li>
+<li><strong>Vacina quadrivalente</strong> (6,11,16,18): dose única para 9-19 anos; 3 doses se imunocomprometido (9-45 anos).</li>
+<li><strong>Vacina não substitui rastreio</strong> — mesmo vacinadas, seguir citologia de rotina.</li>
+<li>Seguimento pós-tratamento de NIC 2/3: citologia aos 6 e 12 meses, depois anual até normalizar.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>HPV</strong> = infecção transitória na maioria, persistência de tipo oncogênico é o que importa; rastreio trienal dos 25-64 anos, NIC 1 observa e NIC 2/3 trata, vacina quadrivalente em dose única para adolescentes e 3 doses se imunocomprometido.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Se a questão fala em rastreio antes dos 25 anos, geralmente é pegadinha — a recomendação é não rastrear rotineiramente nessa faixa.</li>
+<li>Associe sempre: <strong>tipos 6/11 → condiloma; tipos 16/18 → câncer</strong>.</li>
+<li>NIC 1 = conduta conservadora; NIC 2/3 = conduta ativa (excisão).</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que ter condiloma aumenta diretamente o risco de câncer de colo — os tipos costumam ser diferentes.</li>
+<li>Achar que a vacina trata infecção ou lesão já existente — ela é exclusivamente profilática.</li>
+<li>Esquecer que a vacinação não dispensa o rastreio de rotina.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"6 e 11 fazem verruga, 16 e 18 fazem câncer."</strong></li>
+<li><strong>"NIC 1 observa, NIC alto trata."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Confundir citologia (Bethesda) com histologia (NIC) como se fossem a mesma classificação.</li>
+<li>Esquecer o esquema diferenciado (3 doses) para pacientes imunocomprometidos.</li>
+<li>Não considerar AGC como achado que exige investigação endocervical/endometrial além da colposcopia padrão.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico por que a maioria das infecções por HPV é transitória e por que isso importa","Diferencio tipos de baixo risco (condiloma) e alto risco oncogênico (câncer)","Sei as idades e o intervalo do rastreio de câncer de colo no Brasil","Explico a correlação entre Bethesda e NIC e a conduta por grau","Descrevo o esquema vacinal atual (dose única vs. 3 doses) e suas indicações","Sei que a vacina não trata infecção existente nem substitui o rastreio","Descrevo o seguimento adequado após tratamento de NIC 2/3"]
+});
+Object.assign(C['infeccoes|0'], {
+"questoes": [
+{"stem":"Em relação à história natural da infecção por HPV, é correto afirmar que:","opts":["A maioria das infecções persiste indefinidamente, independentemente do tipo viral.","Cerca de 90% das infecções são eliminadas espontaneamente pelo sistema imune em até dois anos.","Todas as infecções por HPV evoluem obrigatoriamente para lesão precursora.","A eliminação espontânea só ocorre em pessoas vacinadas."],"correct":1,"expl":"A maioria das infecções por HPV (cerca de 90%) é <b>eliminada espontaneamente</b> pelo sistema imunológico em até dois anos — é a persistência, não a infecção em si, que importa para o risco oncológico."},
+{"stem":"Quais tipos de HPV são classicamente responsáveis pela maior parte dos casos de condiloma acuminado?","opts":["16 e 18.","31 e 33.","6 e 11.","45 e 52."],"correct":2,"expl":"Os tipos <b>6 e 11</b>, classificados como de baixo risco oncogênico, respondem pela quase totalidade dos casos de condiloma acuminado."},
+{"stem":"Aproximadamente qual proporção dos casos de câncer de colo do útero está associada aos tipos de HPV 16 e 18?","opts":["Cerca de 10%.","Cerca de 30%.","Cerca de 50%.","Cerca de 70%."],"correct":3,"expl":"Os tipos 16 e 18 respondem por aproximadamente <b>70%</b> dos casos de câncer de colo do útero no mundo, justificando sua priorização nas vacinas."},
+{"stem":"Segundo as recomendações vigentes no Brasil, o rastreio de câncer de colo do útero com citologia deve, de forma geral:","opts":["Iniciar aos 18 anos e ser repetido anualmente por toda a vida.","Iniciar aos 25 anos, com repetição a cada 3 anos após dois exames anuais normais, até os 64 anos.","Iniciar apenas após a menopausa.","Ser realizado uma única vez na vida, aos 30 anos."],"correct":1,"expl":"O rastreio recomendado inicia aos <b>25 anos</b>, com intervalo de <strong>3 em 3 anos</strong> após dois exames anuais consecutivos normais, estendendo-se até os <b>64 anos</b>."},
+{"stem":"Por que o rastreio de câncer de colo do útero não é recomendado rotineiramente antes dos 25 anos?","opts":["Porque o exame é mais doloroso em mulheres jovens.","Porque a maioria das alterações citológicas nessa faixa etária corresponde a infecções transitórias que regridem espontaneamente, gerando sobretratamento.","Porque o HPV não infecta mulheres jovens.","Porque a citologia não é validada para essa faixa etária."],"correct":1,"expl":"Em mulheres jovens, a prevalência de infecção transitória é altíssima; rastrear cedo demais leva a mais colposcopias e tratamentos desnecessários sem reduzir mortalidade por câncer."},
+{"stem":"A conduta preferencial diante de um resultado histológico de NIC 1 (neoplasia intraepitelial cervical grau 1) é:","opts":["Histerectomia imediata.","Conização de urgência.","Observação clínica, dado o alto potencial de regressão espontânea.","Radioterapia pélvica."],"correct":2,"expl":"NIC 1 tem alta taxa de <b>regressão espontânea</b> e geralmente é conduzida com observação e repetição de exames, evitando tratamento excessivo."},
+{"stem":"Em relação à NIC 2 e NIC 3, a conduta geralmente indicada é:","opts":["Observação exclusiva, sem necessidade de tratamento.","Tratamento excisional (CAF/LEEP ou conização), dado o maior risco de progressão.","Apenas repetição anual de citologia por 5 anos.","Uso isolado de vacina terapêutica contra HPV."],"correct":1,"expl":"NIC 2 e NIC 3 têm maior risco de progressão para câncer invasor e, na maioria dos casos, são tratadas por <b>excisão</b>, que também permite avaliação de margens."},
+{"stem":"Qual vacina contra HPV é utilizada no Programa Nacional de Imunizações (PNI) do Brasil?","opts":["Bivalente (16, 18).","Quadrivalente (6, 11, 16, 18).","Nonavalente exclusivamente.","Vacina de vírus vivo atenuado."],"correct":1,"expl":"O PNI utiliza a vacina <b>quadrivalente</b>, que protege contra os tipos 6, 11, 16 e 18, cobrindo os principais tipos causadores de condiloma e os dois tipos oncogênicos mais relevantes."},
+{"stem":"Desde 2024, qual o esquema vacinal contra HPV para adolescentes de 9 a 19 anos da população geral no Brasil?","opts":["Três doses (0, 2 e 6 meses).","Duas doses com intervalo de 6 meses.","Dose única.","Quatro doses anuais."],"correct":2,"expl":"Desde 2024, o Brasil adotou o esquema de <b>dose única</b> para a população geral de 9 a 14 anos, ampliado em 2025 para adolescentes de 15 a 19 anos."},
+{"stem":"Para pessoas vivendo com HIV, pacientes oncológicos e transplantados, o esquema vacinal contra HPV recomendado é:","opts":["Dose única, igual à população geral.","Duas doses, independentemente da idade.","Três doses, independentemente da idade, com faixa etária de indicação ampliada.","Essa vacina é contraindicada nesses grupos."],"correct":2,"expl":"Em pessoas imunocomprometidas, o esquema permanece em <b>três doses</b> independentemente da idade, com indicação ampliada até 45 anos, pela menor resposta imunológica esperada."},
+{"stem":"Sobre a vacina contra HPV, é correto afirmar que:","opts":["Trata infecções e lesões por HPV já estabelecidas.","É uma vacina exclusivamente profilática, prevenindo novas infecções pelos tipos vacinais.","Dispensa a necessidade de rastreio citológico em mulheres vacinadas.","Está contraindicada em usuários de PrEP."],"correct":1,"expl":"A vacina é <b>profilática</b> — previne novas infecções pelos tipos vacinais, mas não trata infecção ou lesão já existente, e não substitui o rastreio."},
+{"stem":"Um resultado citológico de AGC (células glandulares atípicas) exige, além da colposcopia, qual conduta adicional?","opts":["Nenhuma conduta adicional é necessária.","Avaliação do canal endocervical e, quando indicado, do endométrio.","Repetição exclusiva da citologia em 5 anos.","Vacinação imediata contra HPV."],"correct":1,"expl":"O achado de AGC exige avaliação mais ampla, incluindo <b>canal endocervical</b> e, conforme idade e fatores de risco, <b>endométrio</b>, além da colposcopia padrão."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Definição</small><br>O que é o HPV e como se transmite?","back":"Vírus de DNA com tropismo por células epiteliais; transmitido por contato direto pele a pele ou mucosa a mucosa, não exclusivamente por penetração.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">História natural</small><br>Qual proporção das infecções por HPV é eliminada espontaneamente?","back":"{{Cerca de 90% em até dois anos — é a persistência, não a infecção em si, que importa para o risco de câncer.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tipos</small><br>Quais tipos de HPV de baixo risco causam condiloma?","back":"Principalmente os tipos 6 e 11.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tipos</small><br>Quais tipos de HPV oncogênicos respondem por cerca de 70% dos cânceres de colo?","back":"{{Tipos 16 e 18.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Rastreio</small><br>Qual a idade de início e o intervalo do rastreio de câncer de colo no Brasil?","back":"Início aos 25 anos, intervalo de 3 em 3 anos após dois exames anuais consecutivos normais, até os 64 anos.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Rastreio</small><br>Por que não se rastreia rotineiramente antes dos 25 anos?","back":"Porque a maior parte das alterações nessa faixa é transitória e regride sozinha; rastrear cedo gera sobretratamento.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Classificação</small><br>Qual sistema classifica a citologia e qual classifica a histologia cervical?","back":"Citologia: sistema de Bethesda (ASC-US, LSIL, HSIL etc). Histologia: NIC (neoplasia intraepitelial cervical) 1, 2 ou 3.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Conduta</small><br>Qual a conduta geral para NIC 1?","back":"Observação clínica, dado o alto potencial de regressão espontânea.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Conduta</small><br>Qual a conduta geral para NIC 2 e NIC 3?","back":"Tratamento excisional (CAF/LEEP ou conização), pelo maior risco de progressão.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Vacina</small><br>Qual vacina HPV é usada no PNI e quais tipos ela cobre?","back":"Vacina quadrivalente, cobrindo os tipos 6, 11, 16 e 18.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Vacina</small><br>Qual o esquema vacinal atual (2024-2025) para a população geral de 9 a 19 anos?","back":"{{Dose única.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Vacina</small><br>Qual o esquema vacinal para pessoas imunocomprometidas (HIV, oncológicos, transplantados)?","back":"Três doses, independentemente da idade, com indicação ampliada até 45 anos.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Prática</small><br>A vacina contra HPV trata infecção ou lesão já existente?","back":"Não — é exclusivamente profilática, prevenindo novas infecções pelos tipos vacinais.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Seguimento</small><br>Como é o seguimento após tratamento de NIC 2/3?","back":"Citologia +/- HPV aos 6 e 12 meses, depois anual até normalizar, antes de retornar ao rastreio trienal padrão.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Adolescente e a vacina contra HPV","stem":"Mãe leva filha de 12 anos à consulta e pergunta sobre a vacina contra HPV, relatando dúvidas sobre número de doses e se a vacina protege contra todos os tipos de câncer de colo.","passos":[
+{"h":"Anamnese dirigida","p":"Adolescente saudável, sem imunossupressão conhecida, ainda sem início de vida sexual."},
+{"h":"Esclarecimento sobre o esquema vacinal","p":"Para essa faixa etária (9-19 anos) e sem imunossupressão, o esquema atual é de dose única, com a vacina quadrivalente (tipos 6, 11, 16, 18)."},
+{"h":"Esclarecimento sobre proteção","p":"A vacina protege contra os tipos vacinais, especialmente 16 e 18, responsáveis por cerca de 70% dos cânceres de colo — mas não cobre 100% dos tipos oncogênicos possíveis."},
+{"h":"Orientação complementar","p":"Reforçar que a vacinação não dispensa o rastreio citológico a partir dos 25 anos na vida adulta, pois não há proteção completa contra todos os tipos."},
+{"h":"Conduta neste momento","p":"Aplicar dose única da vacina quadrivalente conforme calendário vigente, orientando a família sobre a importância do rastreio futuro."}
+]},
+{"t":"Caso 2 — Citologia alterada em rastreio de rotina","stem":"Mulher de 32 anos, assintomática, realiza citologia de rotina que resulta em HSIL (lesão intraepitelial escamosa de alto grau).","passos":[
+{"h":"Anamnese dirigida","p":"Sem sintomas, sem sangramento de contato, história de dois parceiros sexuais nos últimos anos, sem uso regular de preservativo."},
+{"h":"Interpretação do resultado","p":"HSIL correlaciona-se histologicamente com maior probabilidade de NIC 2/3, exigindo investigação adicional antes de qualquer tratamento."},
+{"h":"Conduta diagnóstica","p":"Encaminhamento para colposcopia com biópsia dirigida das áreas suspeitas para confirmação histológica do grau da lesão."},
+{"h":"Resultado da biópsia","p":"Biópsia confirma NIC 3, sem sinais de invasão nas margens avaliadas."},
+{"h":"Conduta terapêutica","p":"Indicação de tratamento excisional (CAF/LEEP), com seguimento posterior por citologia aos 6 e 12 meses."}
+]},
+{"t":"Caso 3 — Mulher vivendo com HIV e indicação vacinal","stem":"Mulher de 28 anos, vivendo com HIV, em uso regular de terapia antirretroviral, pergunta se ainda pode ser vacinada contra HPV e qual seria o esquema adequado.","passos":[
+{"h":"Anamnese dirigida","p":"Diagnóstico de HIV há 3 anos, carga viral indetectável, sem histórico prévio de vacinação contra HPV."},
+{"h":"Avaliação da indicação vacinal","p":"Pessoas vivendo com HIV fazem parte do grupo de indicação ampliada da vacina contra HPV, independentemente da idade dentro da faixa 9-45 anos."},
+{"h":"Definição do esquema vacinal","p":"Por se tratar de paciente imunocomprometida, o esquema indicado é de três doses (0, 2 e 6 meses), diferente da dose única da população geral."},
+{"h":"Orientação complementar","p":"Reforçar que a vacinação não substitui o rastreio citológico de rotina, que deve continuar sendo realizado conforme calendário apropriado para mulheres vivendo com HIV."},
+{"h":"Conduta neste momento","p":"Iniciar esquema de três doses da vacina quadrivalente e manter seguimento clínico e citológico de rotina em conjunto com a equipe de infectologia."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['infeccoes|1'] = {
+name: "Condiloma Acuminado (Verrugas Genitais)",
+intro: "O condiloma acuminado é a manifestação clínica mais visível e mais frequente da infecção por HPV — uma lesão benigna, altamente transmissível, causada quase sempre pelos tipos de baixo risco oncogênico. Entender bem sua clínica evita dois erros opostos: tratar como se fosse câncer, ou ignorar diagnósticos diferenciais importantes.",
+sub: [
+["entendendo","Entendendo do Zero",`
+<div class="ac-h">A verruga genital: benigna, mas nem por isso simples de manejar</div>
+<p class="ac-p">O condiloma acuminado (também chamado verruga genital) é causado, em mais de 90% dos casos, pelos tipos 6 e 11 do HPV — os mesmos tipos de baixo risco que você viu no módulo anterior. O período de incubação é variável, podendo levar de semanas a meses entre o contato e o aparecimento da lesão, o que dificulta identificar com precisão o momento da transmissão.</p>
+<p class="ac-p">A transmissão ocorre por contato direto pele a pele ou mucosa a mucosa, sendo a relação sexual (vaginal, anal ou oral) a principal via, mas não a única — contato genital sem penetração também transmite. É uma lesão altamente contagiosa: a maioria dos parceiros sexuais de pessoas com condiloma também terá sido exposta ao vírus, ainda que nem todos desenvolvam lesão visível.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Do contato à lesão visível</text>
+<rect x="30" y="50" width="170" height="90" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="115" y="80" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Contato</text>
+<text x="115" y="98" text-anchor="middle" font-size="9" style="fill:var(--muted)">pele/mucosa com</text>
+<text x="115" y="112" text-anchor="middle" font-size="9" style="fill:var(--muted)">HPV 6 ou 11</text>
+<line x1="200" y1="95" x2="250" y2="95" style="stroke:var(--muted)" stroke-width="1.5"/>
+<rect x="260" y="50" width="170" height="90" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="345" y="80" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Incubação</text>
+<text x="345" y="98" text-anchor="middle" font-size="9" style="fill:var(--muted)">semanas a meses</text>
+<text x="345" y="112" text-anchor="middle" font-size="9" style="fill:var(--muted)">tempo variável</text>
+<line x1="430" y1="95" x2="480" y2="95" style="stroke:var(--muted)" stroke-width="1.5"/>
+<rect x="490" y="50" width="130" height="90" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="555" y="80" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Condiloma</text>
+<text x="555" y="98" text-anchor="middle" font-size="9" style="fill:var(--ink)">lesão exofítica</text>
+<text x="555" y="112" text-anchor="middle" font-size="9" style="fill:var(--ink)">visível</text>
+</svg>
+<div class="ac-call"><b>A ideia central deste módulo:</b> condiloma é uma lesão benigna causada por tipos de baixo risco — o desafio clínico não é oncológico, é reconhecer o padrão morfológico, diferenciar de outras lesões e escolher a modalidade de tratamento certa para cada situação.</div>
+`],
+["clinica_diagnostico","Manifestações Clínicas e Diagnóstico",`
+<div class="ac-h">O diagnóstico é clínico, pela morfologia característica</div>
+<p class="ac-p">O condiloma acuminado se apresenta como lesões papulares ou verrucosas, únicas ou múltiplas, de coloração semelhante à pele ou levemente acastanhada, com superfície que pode ser lisa, granulosa ou em couve-flor. Podem ser pequenas e isoladas ou coalescerem em placas extensas. Os sítios mais comuns são vulva, vagina, colo do útero, região perianal e, com menor frequência, uretra e cavidade oral.</p>
+<p class="ac-p">O diagnóstico é essencialmente <b>clínico</b>, baseado na inspeção visual da lesão característica. Biópsia não é rotineiramente necessária, mas está indicada em situações específicas: dúvida diagnóstica, lesão que não responde ao tratamento habitual, lesão pigmentada, ulcerada, fixa ou endurecida, e em pacientes imunossuprimidos — situações em que se deve excluir neoplasia intraepitelial ou outra lesão.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Quando biopsiar um condiloma</text>
+<rect x="30" y="46" width="270" height="130" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Diagnóstico habitual</text>
+<text x="165" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">Clínico, por inspeção</text>
+<text x="165" y="108" text-anchor="middle" font-size="9" style="fill:var(--muted)">Morfologia típica</text>
+<text x="165" y="124" text-anchor="middle" font-size="9" style="fill:var(--muted)">(exofítica, em couve-flor)</text>
+<rect x="340" y="46" width="270" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Indicações de biópsia</text>
+<text x="475" y="90" text-anchor="middle" font-size="8.7" style="fill:var(--ink)">Dúvida diagnóstica</text>
+<text x="475" y="104" text-anchor="middle" font-size="8.7" style="fill:var(--ink)">Sem resposta ao tratamento</text>
+<text x="475" y="118" text-anchor="middle" font-size="8.7" style="fill:var(--ink)">Pigmentada, ulcerada, fixa</text>
+<text x="475" y="132" text-anchor="middle" font-size="8.7" style="fill:var(--ink)">Paciente imunossuprimido</text>
+</svg>
+<div class="ac-tip"><b>Sem exame confirmatório de rotina:</b> diferente de outras IST, não existe teste laboratorial padrão necessário para confirmar condiloma — a morfologia típica já basta na maioria dos casos.</div>
+`],
+["locais_especiais","Sítios Especiais: Perianal, Oral e Laríngeo",`
+<div class="ac-h">Nem toda lesão perianal significa relação anal</div>
+<p class="ac-p">Condiloma perianal pode ocorrer por autoinoculação e disseminação contígua a partir de lesões genitais, sem que necessariamente tenha havido relação anal — um ponto importante para não gerar suposições incorretas sobre a história sexual da paciente. Lesões orais também podem ocorrer por contato orogenital.</p>
+<p class="ac-p">Um cenário particular e grave é a <b>papilomatose respiratória recorrente juvenil</b>: recém-nascidos podem adquirir HPV 6/11 durante a passagem pelo canal de parto de mãe com condiloma, desenvolvendo posteriormente papilomas laríngeos que podem causar rouquidão e obstrução de via aérea. Apesar desse risco, a presença de condiloma isolado NÃO é indicação de cesárea eletiva, já que o risco absoluto de transmissão é baixo.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Sítios especiais de condiloma</text>
+<rect x="20" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="112" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Perianal</text>
+<text x="112" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Autoinoculação/</text>
+<text x="112" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">disseminação contígua</text>
+<text x="112" y="116" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Não implica coito anal</text>
+<rect x="227" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="319" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Oral</text>
+<text x="319" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Contato orogenital</text>
+<rect x="434" y="46" width="185" height="120" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="526" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Laríngeo (RN)</text>
+<text x="526" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Transmissão no parto</text>
+<text x="526" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Papilomatose recorrente</text>
+<text x="526" y="116" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Não indica cesárea eletiva</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha clássica:</b> condiloma isolado na gestação NÃO é indicação de cesárea — a via de parto é decidida por critérios obstétricos habituais, exceto se a lesão obstruir mecanicamente o canal de parto.</div>
+`],
+["diferenciais","Diagnósticos Diferenciais",`
+<div class="ac-h">Nem toda lesão papulosa genital é condiloma</div>
+<p class="ac-p">O diferencial mais importante em prova é o <b>condiloma plano (lata)</b> da sífilis secundária: diferente do condiloma acuminado, é uma lesão plana, úmida, de superfície lisa e altamente infectante, associada a outros sinais de sífilis secundária. A distinção é crucial porque muda completamente a investigação e o tratamento.</p>
+<p class="ac-p">Outros diferenciais incluem o molusco contagioso (pápulas umbilicadas, de causa viral distinta), acrocórdons (lesões pedunculadas benignas da pele, sem relação com HPV), a micropapilomatose labial e as pápulas peroladas do pênis (variantes anatômicas normais, simétricas, não contagiosas) e as glândulas sebáceas ectópicas (manchas de Fordyce).</p>
+<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Condiloma acuminado x condiloma plano (sífilis)</text>
+<rect x="30" y="44" width="270" height="140" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="165" y="68" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Condiloma acuminado</text>
+<text x="165" y="90" text-anchor="middle" font-size="9" style="fill:var(--ink)">Exofítico, verrucoso</text>
+<text x="165" y="106" text-anchor="middle" font-size="9" style="fill:var(--ink)">Superfície em couve-flor</text>
+<text x="165" y="122" text-anchor="middle" font-size="9" style="fill:var(--ink)">Causa: HPV 6/11</text>
+<rect x="340" y="44" width="270" height="140" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.4"/>
+<text x="475" y="68" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">Condiloma plano (lata)</text>
+<text x="475" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Plano, úmido, liso</text>
+<text x="475" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">Altamente infectante</text>
+<text x="475" y="122" text-anchor="middle" font-size="9" style="fill:var(--muted)">Causa: sífilis secundária</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha de prova:</b> lesão "plana e úmida" na genitália deve levantar suspeita de sífilis secundária, não de condiloma acuminado — sempre considere sorologia para sífilis diante desse padrão.</div>
+`],
+["tratamento_domiciliar","Tratamento Domiciliar (Autoaplicado)",`
+<div class="ac-h">Opções que a própria paciente aplica em casa</div>
+<p class="ac-p">Duas medicações são as principais opções de tratamento autoaplicado: a <b>podofilotoxina</b> (solução ou creme a 0,15-0,5%), com ação antimitótica direta sobre as células da lesão, e o <b>imiquimode</b> creme a 5%, um imunomodulador tópico que estimula a resposta imune local contra o vírus, com aplicação em dias alternados.</p>
+<p class="ac-p">Ambas exigem orientação cuidadosa sobre técnica de aplicação (evitando pele sã ao redor) e podem causar irritação local, eritema e ardor. É fundamental lembrar: <b>nenhuma das duas é indicada na gestação</b>, pela ausência de segurança estabelecida — nesse contexto, o tratamento deve ser ambulatorial, tema do próximo tópico.</p>
+<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Opções de tratamento domiciliar</text>
+<rect x="30" y="46" width="270" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Podofilotoxina</text>
+<text x="165" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Ação antimitótica</text>
+<text x="165" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">Ciclos de aplicação</text>
+<text x="165" y="122" text-anchor="middle" font-size="9" style="fill:#e8675f" font-weight="700">Contraindicada na gestação</text>
+<rect x="340" y="46" width="270" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Imiquimode</text>
+<text x="475" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Imunomodulador tópico</text>
+<text x="475" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">Dias alternados</text>
+<text x="475" y="122" text-anchor="middle" font-size="9" style="fill:#e8675f" font-weight="700">Contraindicado na gestação</text>
+</svg>
+<div class="ac-tip"><b>Adesão é o grande desafio:</b> tratamentos domiciliares dependem de aplicação correta e regular pela própria paciente — orientação clara reduz falha terapêutica e efeitos adversos por aplicação incorreta.</div>
+`],
+["tratamento_ambulatorial","Tratamento Ambulatorial (Aplicado pelo Profissional)",`
+<div class="ac-h">Opções realizadas no consultório, inclusive na gestação</div>
+<p class="ac-p">O <b>ácido tricloroacético (ATA)</b> a 80-90%, aplicado diretamente sobre a lesão pelo profissional, promove destruição química por coagulação de proteínas — é a opção tópica considerada segura na gestação. Outras modalidades ambulatoriais incluem a <b>crioterapia</b> (destruição por congelamento) e métodos excisionais, como a <b>eletrocauterização</b> ou exérese cirúrgica, indicados especialmente para lesões volumosas, numerosas ou refratárias ao tratamento tópico.</p>
+<p class="ac-p">Para lesões muito extensas ou de difícil acesso, o laser de CO2 é uma opção adicional. A escolha entre as modalidades considera tamanho, número e localização das lesões, disponibilidade do serviço, gestação e preferência da paciente — não existe uma única resposta certa, e sim a opção mais adequada ao contexto.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Opções ambulatoriais (aplicadas pelo profissional)</text>
+<rect x="20" y="46" width="185" height="130" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="112" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">ATA 80-90%</text>
+<text x="112" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Coagulação química</text>
+<text x="112" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Seguro na gestação</text>
+<rect x="227" y="46" width="185" height="130" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="319" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Crioterapia</text>
+<text x="319" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Destruição por</text>
+<text x="319" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">congelamento</text>
+<rect x="434" y="46" width="185" height="130" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="526" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Excisão/eletrocautério</text>
+<text x="526" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Lesões volumosas,</text>
+<text x="526" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">numerosas ou refratárias</text>
+</svg>
+<div class="ac-call"><b>Fio condutor:</b> a existência de múltiplas modalidades eficazes reflete que o condiloma, apesar de benigno, tem alta taxa de recidiva — nenhum método isolado elimina definitivamente o vírus do organismo.</div>
+`],
+["gestacao_seguimento","Gestação, Recidiva e Seguimento",`
+<div class="ac-h">Gestação muda o tratamento, não muda a via de parto por si só</div>
+<p class="ac-p">Na gestação, as lesões de condiloma podem crescer mais rapidamente, provavelmente por alterações imunológicas e vasculares próprias do período gestacional. O tratamento de escolha nesse contexto é o ATA ou métodos excisionais/crioterapia — nunca podofilotoxina ou imiquimode. A via de parto continua sendo decidida por critérios obstétricos habituais; cesárea eletiva é reservada para os raros casos em que a lesão obstrui mecanicamente o canal de parto.</p>
+<p class="ac-p">A recidiva é comum mesmo após tratamento bem-sucedido, pois nenhuma modalidade elimina o vírus do organismo — apenas remove a lesão visível. Por isso, o seguimento clínico após o tratamento é importante, e a avaliação e orientação do(s) parceiro(s) sexual(is) deve ser sempre oferecida, ainda que o tratamento do parceiro assintomático não seja obrigatório para o sucesso terapêutico da paciente.</p>
+<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Condiloma na gestação — pontos-chave</text>
+<rect x="30" y="46" width="270" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Tratamento permitido</text>
+<text x="165" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">ATA, crioterapia,</text>
+<text x="165" y="108" text-anchor="middle" font-size="9" style="fill:var(--muted)">excisão/eletrocautério</text>
+<rect x="340" y="46" width="270" height="120" rx="12" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.3"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">Contraindicados</text>
+<text x="475" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">Podofilotoxina</text>
+<text x="475" y="108" text-anchor="middle" font-size="9" style="fill:var(--muted)">Imiquimode</text>
+</svg>
+<div class="ac-warn"><b>Reforçando a pegadinha:</b> condiloma isolado não é indicação de cesárea eletiva — só se houver obstrução mecânica relevante do canal de parto.</div>
+`]
+]
+};
+Object.assign(C['infeccoes|1'], {
+"escores": `<div class="prose">
+<h3>Modalidades terapêuticas do condiloma acuminado</h3>
+<table class="ac-tbl">
+<tr><th>Modalidade</th><th>Quem aplica</th><th>Mecanismo</th><th>Uso na gestação</th></tr>
+<tr><td>Podofilotoxina</td><td>Paciente (domiciliar)</td><td>Antimitótico</td><td>Contraindicada</td></tr>
+<tr><td>Imiquimode 5%</td><td>Paciente (domiciliar)</td><td>Imunomodulador</td><td>Contraindicada</td></tr>
+<tr><td>ATA 80-90%</td><td>Profissional (ambulatorial)</td><td>Coagulação química</td><td>Permitida</td></tr>
+<tr><td>Crioterapia</td><td>Profissional (ambulatorial)</td><td>Destruição por frio</td><td>Permitida</td></tr>
+<tr><td>Excisão/eletrocautério</td><td>Profissional (ambulatorial)</td><td>Remoção mecânica/térmica</td><td>Permitida</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">Gestante = ATA, crio ou excisão. Nunca podofilotoxina ou imiquimode na gestação.</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Diagnósticos diferenciais do condiloma acuminado</h3>
+<table class="ac-tbl">
+<tr><th>Condição</th><th>Pista diferencial</th></tr>
+<tr><td><strong>Condiloma plano (lata) — sífilis secundária</strong></td><td>Lesão plana, úmida, lisa, altamente infectante; associada a outros sinais de sífilis</td></tr>
+<tr><td><strong>Molusco contagioso</strong></td><td>Pápulas umbilicadas, causadas por poxvírus, não por HPV</td></tr>
+<tr><td><strong>Acrocórdons</strong></td><td>Lesões pedunculadas benignas da pele, sem relação com HPV</td></tr>
+<tr><td><strong>Micropapilomatose labial / pápulas peroladas do pênis</strong></td><td>Variantes anatômicas normais, simétricas, não contagiosas</td></tr>
+<tr><td><strong>Manchas de Fordyce</strong></td><td>Glândulas sebáceas ectópicas, puntiformes, amarelo-claras</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Condiloma Acuminado</div>
+<div class="mm">
+  <div class="mm-card"><h5>🦠 Causa</h5><ul><li>HPV 6 e 11 (>90%)</li><li>Contato pele/mucosa</li><li>Incubação variável</li></ul></div>
+  <div class="mm-card"><h5>👁️ Clínica</h5><ul><li>Lesão exofítica/couve-flor</li><li>Diagnóstico clínico</li><li>Biópsia se atípica</li></ul></div>
+  <div class="mm-card"><h5>🔀 Diferenciais</h5><ul><li>Condiloma lata (sífilis)</li><li>Molusco contagioso</li><li>Variantes anatômicas normais</li></ul></div>
+  <div class="mm-card"><h5>💊 Domiciliar</h5><ul><li>Podofilotoxina</li><li>Imiquimode</li><li>Contraindicados na gestação</li></ul></div>
+  <div class="mm-card"><h5>🏥 Ambulatorial</h5><ul><li>ATA (seguro gestação)</li><li>Crioterapia</li><li>Excisão/eletrocautério</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Lesão papulosa/verrucosa em genitália ou região perianal</div><div class="fx-arrow"></div><div class="fx-node">Morfologia típica em couve-flor?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> diagnóstico clínico de condiloma acuminado</div><div class="fx-node"><b>Atípica (plana, ulcerada, pigmentada, fixa):</b> considerar diferenciais e biópsia</div></div><div class="fx-arrow"></div><div class="fx-node">Paciente imunossuprimida ou sem resposta ao tratamento habitual?</div><div class="fx-lbl">Reforça indicação de biópsia para excluir outra lesão</div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Condiloma acuminado confirmado</div><div class="fx-arrow"></div><div class="fx-lbl">Paciente está gestante?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> ATA, crioterapia ou excisão/eletrocautério</div><div class="fx-node"><b>NÃO:</b> domiciliar (podofilotoxina/imiquimode) ou ambulatorial, conforme preferência e extensão</div></div><div class="fx-arrow"></div><div class="fx-node">Lesões volumosas, numerosas ou refratárias?</div><div class="fx-lbl">Preferir métodos excisionais ou laser de CO2</div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Condiloma Acuminado em 60 segundos</h4>
+<ul>
+<li><strong>Causa:</strong> HPV 6 e 11 (baixo risco) em mais de 90% dos casos; lesão benigna.</li>
+<li><strong>Clínica:</strong> lesão exofítica, verrucosa, em couve-flor; diagnóstico clínico, biópsia só se atípica.</li>
+<li><strong>Perianal não implica coito anal</strong> — pode ser autoinoculação/disseminação contígua.</li>
+<li><strong>Papilomatose respiratória recorrente:</strong> transmissão no parto; condiloma isolado NÃO indica cesárea eletiva.</li>
+<li><strong>Diferencial principal:</strong> condiloma plano (lata) da sífilis secundária — lesão plana e úmida.</li>
+<li><strong>Domiciliar:</strong> podofilotoxina e imiquimode — contraindicados na gestação.</li>
+<li><strong>Ambulatorial (inclusive gestação):</strong> ATA, crioterapia, excisão/eletrocautério.</li>
+<li><strong>Recidiva é comum</strong> — nenhum método elimina o vírus do organismo.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Condiloma acuminado</strong> = HPV 6/11, lesão exofítica benigna, diagnóstico clínico; tratamento domiciliar (podofilotoxina/imiquimode) fora da gestação, ambulatorial (ATA/crio/excisão) inclusive na gestação; recidiva comum, cesárea não indicada por condiloma isolado.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Lesão em couve-flor, exofítica = condiloma acuminado. Lesão plana e úmida = pense em sífilis (condiloma lata).</li>
+<li>Gestante com condiloma: pense sempre em ATA como primeira opção segura.</li>
+<li>Perianal em criança ou sem relato de coito anal: pense em autoinoculação, não presuma abuso sem outros achados.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Indicar cesárea eletiva apenas por causa de condiloma — errado, salvo obstrução mecânica.</li>
+<li>Prescrever podofilotoxina ou imiquimode para gestante — contraindicado.</li>
+<li>Achar que condiloma tratado nunca mais recidiva — recidiva é frequente.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"Verrugou, é HPV 6/11. Achatou e molhou, pensa em sífilis."</strong></li>
+<li><strong>"Na gestação, só ATA, crio ou faca — nunca pomada domiciliar."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Confundir condiloma acuminado com condiloma plano da sífilis.</li>
+<li>Esquecer que o diagnóstico é clínico na maioria dos casos, sem necessidade de biópsia sistemática.</li>
+<li>Não orientar sobre a alta taxa de recidiva, gerando expectativa irreal de cura definitiva.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico a causa e a via de transmissão do condiloma acuminado","Descrevo a morfologia típica e quando biópsia é necessária","Sei por que lesão perianal não implica necessariamente coito anal","Diferencio condiloma acuminado de condiloma plano (sífilis) e outros diferenciais","Sei quais tratamentos são domiciliares e quais são contraindicados na gestação","Sei quais tratamentos são seguros na gestação","Explico por que condiloma isolado não indica cesárea eletiva"]
+});
+Object.assign(C['infeccoes|1'], {
+"questoes": [
+{"stem":"Os condilomas acuminados são causados, na grande maioria dos casos, por quais tipos de HPV?","opts":["16 e 18.","31 e 33.","6 e 11.","45 e 52."],"correct":2,"expl":"Mais de 90% dos condilomas acuminados são causados pelos tipos <b>6 e 11</b>, classificados como de baixo risco oncogênico."},
+{"stem":"O diagnóstico do condiloma acuminado é, na maioria dos casos:","opts":["Exclusivamente sorológico.","Clínico, pela morfologia característica da lesão.","Sempre dependente de biópsia.","Baseado em cultura viral de rotina."],"correct":1,"expl":"O diagnóstico é essencialmente <b>clínico</b>, pela inspeção da lesão exofítica característica — biópsia é reservada a situações específicas."},
+{"stem":"Qual das situações abaixo é uma indicação de biópsia de uma lesão sugestiva de condiloma?","opts":["Lesão típica em couve-flor, sem outras características.","Lesão pigmentada, ulcerada ou sem resposta ao tratamento habitual.","Presença de mais de uma lesão no mesmo paciente.","Lesão localizada exclusivamente na vulva."],"correct":1,"expl":"Lesões pigmentadas, ulceradas, fixas, endurecidas ou sem resposta ao tratamento exigem biópsia para excluir outras condições, incluindo neoplasia."},
+{"stem":"Condiloma acuminado em região perianal, na ausência de relato de relação anal, deve ser interpretado como:","opts":["Prova definitiva de abuso sexual.","Possível autoinoculação ou disseminação contígua a partir de lesões genitais.","Sempre indicativo de má técnica de coleta de história clínica.","Contraindicação absoluta para investigação adicional."],"correct":1,"expl":"O condiloma perianal pode ocorrer por <b>autoinoculação ou disseminação contígua</b> a partir de lesões genitais, sem necessariamente haver relação anal."},
+{"stem":"Recém-nascidos de mães com condiloma acuminado apresentam risco (embora baixo) de desenvolver qual condição?","opts":["Sífilis congênita.","Papilomatose respiratória recorrente juvenil.","Herpes neonatal.","Icterícia neonatal precoce."],"correct":1,"expl":"A transmissão de HPV 6/11 durante o parto pode levar à <b>papilomatose respiratória recorrente juvenil</b>, com papilomas laríngeos."},
+{"stem":"A presença isolada de condiloma acuminado na gestação, sem obstrução do canal de parto, indica:","opts":["Cesárea eletiva obrigatória.","Interrupção da gestação.","Manutenção da via de parto por critérios obstétricos habituais.","Isolamento do recém-nascido por 30 dias após o parto."],"correct":2,"expl":"Condiloma isolado NÃO é indicação de cesárea eletiva — a via de parto segue critérios obstétricos habituais, salvo obstrução mecânica relevante."},
+{"stem":"Qual lesão é o principal diagnóstico diferencial do condiloma acuminado, exigindo investigação sorológica específica?","opts":["Molusco contagioso.","Condiloma plano (lata) da sífilis secundária.","Acrocórdon.","Manchas de Fordyce."],"correct":1,"expl":"O <b>condiloma plano (lata)</b>, lesão plana e úmida da sífilis secundária, é o principal diferencial e exige investigação para sífilis."},
+{"stem":"Quais medicações tópicas de aplicação domiciliar são utilizadas no tratamento do condiloma acuminado?","opts":["Aciclovir e valaciclovir.","Podofilotoxina e imiquimode.","Ceftriaxona e doxiciclina.","Metronidazol e clindamicina."],"correct":1,"expl":"<b>Podofilotoxina</b> (antimitótica) e <b>imiquimode</b> (imunomodulador) são as principais opções de tratamento autoaplicado pela paciente."},
+{"stem":"Em relação ao tratamento do condiloma acuminado na gestação, é correto afirmar que:","opts":["Podofilotoxina e imiquimode são as primeiras opções.","ATA, crioterapia e métodos excisionais são as opções seguras.","O tratamento deve ser sempre adiado até após o parto.","Não existe tratamento seguro durante a gestação."],"correct":1,"expl":"Na gestação, as opções seguras são <b>ATA, crioterapia e métodos excisionais</b> — podofilotoxina e imiquimode são contraindicados."},
+{"stem":"Sobre a recidiva do condiloma acuminado após tratamento, é correto afirmar que:","opts":["É rara, ocorrendo em menos de 1% dos casos.","É comum, pois nenhuma modalidade elimina o vírus do organismo.","Só ocorre em pacientes imunossuprimidos.","Indica sempre falha na técnica do tratamento realizado."],"correct":1,"expl":"A recidiva é <b>comum</b>, porque o tratamento remove a lesão visível, mas não elimina o vírus do organismo."},
+{"stem":"Qual mecanismo de ação caracteriza o ácido tricloroacético (ATA) no tratamento do condiloma?","opts":["Imunomodulação da resposta antiviral local.","Ação antimitótica direta sobre as células da lesão.","Destruição por coagulação química das proteínas da lesão.","Inibição da replicação do DNA viral."],"correct":2,"expl":"O ATA age por <b>coagulação química das proteínas</b> da lesão, sendo considerado seguro para uso na gestação."},
+{"stem":"Diante de uma lesão genital pápulo-verrucosa em paciente imunossuprimida, a conduta mais prudente é:","opts":["Tratar empiricamente sem qualquer avaliação adicional, pois o diagnóstico é sempre óbvio.","Considerar biópsia, dada a maior necessidade de excluir outras lesões nesse grupo de pacientes.","Aguardar resolução espontânea sem qualquer intervenção.","Iniciar antibioticoterapia sistêmica de amplo espectro."],"correct":1,"expl":"Em pacientes imunossuprimidos, a <b>biópsia</b> deve ser considerada com mais frequência, pela maior necessidade de excluir outras lesões, incluindo neoplásicas."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Causa</small><br>Quais tipos de HPV causam a maioria dos condilomas acuminados?","back":"Tipos 6 e 11 (baixo risco oncogênico), em mais de 90% dos casos.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Clínica</small><br>Como é a morfologia típica do condiloma acuminado?","back":"{{Lesão exofítica, papular ou verrucosa, superfície lisa, granulosa ou em couve-flor.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diagnóstico</small><br>O diagnóstico do condiloma acuminado é geralmente feito como?","back":"Clinicamente, por inspeção visual da lesão característica; biópsia apenas em situações específicas.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diagnóstico</small><br>Cite três indicações de biópsia diante de lesão sugestiva de condiloma.","back":"Dúvida diagnóstica, ausência de resposta ao tratamento, lesão pigmentada/ulcerada/fixa, ou paciente imunossuprimida.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Sítios especiais</small><br>Condiloma perianal sempre indica relação anal?","back":"Não — pode ocorrer por autoinoculação ou disseminação contígua a partir de lesões genitais.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Sítios especiais</small><br>Qual complicação neonatal está associada à transmissão de HPV no parto?","back":"{{Papilomatose respiratória recorrente juvenil.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Obstetrícia</small><br>Condiloma isolado na gestação indica cesárea eletiva?","back":"Não, salvo obstrução mecânica relevante do canal de parto — a via de parto segue critérios obstétricos habituais.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diferencial</small><br>Qual é o principal diagnóstico diferencial do condiloma acuminado?","back":"Condiloma plano (lata) da sífilis secundária — lesão plana, úmida e altamente infectante.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diferencial</small><br>Cite dois diferenciais benignos e não infecciosos de lesão genital papulosa.","back":"Acrocórdons e manchas de Fordyce (glândulas sebáceas ectópicas).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tratamento</small><br>Quais são os dois tratamentos domiciliares (autoaplicados) do condiloma?","back":"Podofilotoxina e imiquimode.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tratamento</small><br>Qual tratamento tópico é seguro na gestação e qual seu mecanismo?","back":"{{Ácido tricloroacético (ATA) — coagulação química das proteínas da lesão.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tratamento</small><br>Quais tratamentos são contraindicados na gestação?","back":"Podofilotoxina e imiquimode.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Evolução</small><br>Por que o condiloma pode recidivar mesmo após tratamento bem-sucedido?","back":"Porque o tratamento remove a lesão visível, mas não elimina o vírus HPV do organismo.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Conduta</small><br>O tratamento do parceiro sexual assintomático é obrigatório para o sucesso terapêutico?","back":"Não — a avaliação e orientação do parceiro devem ser oferecidas, mas não são obrigatórias para o sucesso do tratamento da paciente.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Gestante com lesões vulvares em couve-flor","stem":"Gestante de 24 semanas apresenta múltiplas lesões papulares e verrucosas na vulva, de crescimento progressivo nas últimas semanas, sem dor associada.","passos":[
+{"h":"Anamnese dirigida","p":"Lesões surgiram há cerca de 2 meses e cresceram mais rapidamente nas últimas semanas, sem sangramento ou prurido intenso."},
+{"h":"Exame físico","p":"Lesões exofíticas, múltiplas, coalescendo em placas na vulva, com morfologia característica em couve-flor."},
+{"h":"Hipótese diagnóstica","p":"Condiloma acuminado, com crescimento acelerado esperado no contexto gestacional pelas alterações imunológicas e vasculares da gravidez."},
+{"h":"Escolha terapêutica","p":"Como a paciente está gestante, os tratamentos domiciliares (podofilotoxina, imiquimode) estão contraindicados; opta-se por ATA aplicado em consultório."},
+{"h":"Orientação sobre via de parto","p":"Explicar que a presença de condiloma isolado não indica cesárea eletiva, mantendo-se os critérios obstétricos habituais para definição da via de parto."}
+]},
+{"t":"Caso 2 — Lesão perianal em mulher sem relato de coito anal","stem":"Mulher de 27 anos apresenta lesões verrucosas na região perianal e também na vulva, negando história de relação anal.","passos":[
+{"h":"Anamnese dirigida","p":"Relata lesões vulvares há alguns meses, com surgimento mais recente de lesões semelhantes na região perianal."},
+{"h":"Exame físico","p":"Lesões de mesma morfologia (exofíticas, verrucosas) tanto na vulva quanto na região perianal, sugerindo continuidade anatômica."},
+{"h":"Raciocínio clínico","p":"A presença de lesões perianais, mesmo sem relato de coito anal, é compatível com autoinoculação ou disseminação contígua a partir das lesões genitais — não deve ser interpretada automaticamente como evidência de prática sexual não relatada."},
+{"h":"Conduta diagnóstica","p":"Confirmação do diagnóstico pela morfologia típica, sem necessidade de biópsia neste caso, dada a ausência de atipia."},
+{"h":"Conduta terapêutica","p":"Discutir opções domiciliares (podofilotoxina ou imiquimode) e ambulatoriais (ATA, crioterapia), conforme extensão das lesões e preferência da paciente."}
+]},
+{"t":"Caso 3 — Lesão atípica levantando diferencial com sífilis","stem":"Mulher de 30 anos apresenta lesões planas, de superfície lisa e aspecto úmido na região vulvar, associadas a exantema palmoplantar recente.","passos":[
+{"h":"Anamnese dirigida","p":"Relata lesão cutânea generalizada há cerca de duas semanas, incluindo palmas e plantas, além das lesões genitais planas e úmidas."},
+{"h":"Exame físico","p":"Lesões vulvares planas, de superfície lisa (diferente do aspecto verrucoso/couve-flor do condiloma acuminado), associadas a exantema maculopapular em tronco, palmas e plantas."},
+{"h":"Raciocínio clínico","p":"O padrão morfológico plano e úmido, associado a exantema palmoplantar, é muito mais sugestivo de condiloma plano (lata) da sífilis secundária do que de condiloma acuminado por HPV."},
+{"h":"Conduta diagnóstica","p":"Solicitar sorologia para sífilis (teste treponêmico e não treponêmico) para confirmação diagnóstica."},
+{"h":"Conduta terapêutica","p":"Diante de confirmação sorológica de sífilis, tratar conforme protocolo específico para sífilis secundária, distinto do tratamento do condiloma acuminado por HPV."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['infeccoes|2'] = {
+name: "DIP — Doença Inflamatória Pélvica",
+intro: "A doença inflamatória pélvica (DIP) é a infecção do trato genital superior — útero, tubas e estruturas adjacentes — que resulta da ascensão de micro-organismos a partir do colo uterino. É uma das principais causas evitáveis de infertilidade por fator tubário, e o raciocínio clínico que você vai construir aqui gira em torno de uma ideia simples: o diagnóstico é clínico e o tratamento deve começar cedo, porque esperar confirmação laboratorial perfeita custa fertilidade futura.",
+sub: [
+["entendendo","Entendendo do Zero",`
+<div class="ac-h">Uma infecção que sobe do colo para tubas, ovários e peritônio pélvico</div>
+<p class="ac-p">A DIP é definida como a infecção e inflamação do trato genital superior feminino, incluindo endométrio (endometrite), tubas uterinas (salpingite), ovários (ooforite) e, em casos mais graves, o peritônio pélvico (pelviperitonite) e formação de abscesso tubo-ovariano. O mecanismo central é a <b>ascensão de micro-organismos</b> a partir do colo uterino e da vagina em direção às estruturas superiores.</p>
+<p class="ac-p">Por que isso importa tanto clinicamente? Porque o dano causado pela inflamação das tubas — mesmo quando a infecção é tratada e resolvida — pode deixar sequelas permanentes: aderências, obstrução tubária, infertilidade por fator tubário e risco aumentado de gravidez ectópica em gestações futuras. Cada episódio de DIP aumenta cumulativamente esse risco, o que torna o diagnóstico precoce e o tratamento imediato prioridades absolutas.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Infecção ascendente do trato genital</text>
+<rect x="250" y="46" width="140" height="150" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="320" y="66" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Peritônio pélvico</text>
+<text x="320" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Tubas / Ovários</text>
+<text x="320" y="120" text-anchor="middle" font-size="9" style="fill:var(--muted)">Endométrio</text>
+<text x="320" y="160" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--accent)">Colo do útero</text>
+<line x1="320" y1="196" x2="320" y2="60" style="stroke:var(--accent)" stroke-width="2" marker-end="url(#a2)"/>
+<defs><marker id="a2" markerWidth="9" markerHeight="9" refX="4" refY="8" orient="auto"><path d="M0,8 L4,0 L8,8 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="460" y="120" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Ascensão de micro-organismos</text>
+<text x="460" y="136" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">a partir do colo/vagina</text>
+</svg>
+<div class="ac-call"><b>A ideia central deste módulo:</b> DIP não é só uma infecção a tratar — é uma corrida contra o tempo para preservar a fertilidade. Isso justifica a lógica de diagnóstico clínico e tratamento empírico precoce que você vai ver nos próximos tópicos.</div>
+`],
+["etiologia_fatores_risco","Etiologia e Fatores de Risco",`
+<div class="ac-h">Uma infecção tipicamente polimicrobiana</div>
+<p class="ac-p">A DIP é classicamente <b>polimicrobiana</b>. Os agentes iniciadores mais associados são <i>Neisseria gonorrhoeae</i> e <i>Chlamydia trachomatis</i>, que rompem as barreiras de defesa cervicais e permitem a ascensão de flora vaginal endógena — anaeróbios, <i>Gardnerella vaginalis</i>, estreptococos e outros. <i>Mycoplasma genitalium</i> também vem sendo cada vez mais reconhecido como agente relevante.</p>
+<p class="ac-p">Os principais fatores de risco incluem idade jovem (adolescentes e mulheres até cerca de 25 anos), múltiplos parceiros sexuais ou parceiro novo recente, história prévia de IST ou de DIP, não uso de método de barreira, e o período logo após inserção de DIU (as primeiras três semanas concentram a maior parte do risco associado ao procedimento, não o uso do DIU em si a longo prazo).</p>
+<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Agentes e fatores de risco</text>
+<rect x="30" y="44" width="270" height="140" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="66" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Agentes envolvidos</text>
+<text x="165" y="88" text-anchor="middle" font-size="9" style="fill:var(--muted)">N. gonorrhoeae, C. trachomatis</text>
+<text x="165" y="104" text-anchor="middle" font-size="9" style="fill:var(--muted)">Flora vaginal endógena/anaeróbios</text>
+<text x="165" y="120" text-anchor="middle" font-size="9" style="fill:var(--muted)">Mycoplasma genitalium</text>
+<rect x="340" y="44" width="270" height="140" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="475" y="66" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Fatores de risco</text>
+<text x="475" y="86" text-anchor="middle" font-size="9" style="fill:var(--ink)">Idade jovem, múltiplos parceiros</text>
+<text x="475" y="102" text-anchor="middle" font-size="9" style="fill:var(--ink)">DIP ou IST prévia</text>
+<text x="475" y="118" text-anchor="middle" font-size="9" style="fill:var(--ink)">Sem método de barreira</text>
+<text x="475" y="134" text-anchor="middle" font-size="9" style="fill:var(--ink)">3 semanas pós-inserção de DIU</text>
+</svg>
+<div class="ac-tip"><b>Sobre o DIU:</b> o risco elevado se concentra nas primeiras três semanas após a inserção, provavelmente relacionado ao próprio procedimento — o uso do DIU a longo prazo não é fator de risco relevante para DIP.</div>
+`],
+["clinica_criterios","Quadro Clínico e Critérios Diagnósticos",`
+<div class="ac-h">Um diagnóstico essencialmente clínico</div>
+<p class="ac-p">O quadro clássico é dor pélvica ou em baixo ventre, geralmente bilateral, de início durante ou logo após a menstruação, associada a corrimento vaginal anormal, podendo haver sangramento intermenstrual, dispareunia e febre. Como nenhum exame isolado tem sensibilidade e especificidade suficientes, o diagnóstico apoia-se em <b>critérios clínicos</b>.</p>
+<p class="ac-p">O Ministério da Saúde adota critérios semelhantes aos de Hager: <b>critérios maiores</b> (dor em baixo ventre, dor à mobilização do colo, dor à palpação anexial) precisam estar todos presentes; a presença de pelo menos um <b>critério menor</b> (temperatura maior que 37,8°C, corrimento vaginal ou cervical anormal, massa pélvica, mais de 5 leucócitos por campo em secreção vaginal, leucocitose, VHS/PCR elevados, comprovação laboratorial de infecção cervical por gonococo/clamídia) reforça o diagnóstico. Critérios <b>elaborados</b> (biópsia com endometrite, imagem com abscesso tubo-ovariano, laparoscopia compatível) confirmam com maior certeza, mas raramente são necessários para iniciar tratamento.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Critérios diagnósticos de DIP</text>
+<rect x="20" y="44" width="185" height="150" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="112" y="66" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Maiores (todos)</text>
+<text x="112" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Dor em baixo ventre</text>
+<text x="112" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Dor à mobilização do colo</text>
+<text x="112" y="116" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Dor à palpação anexial</text>
+<rect x="227" y="44" width="185" height="150" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="319" y="66" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Menores (&#8805;1)</text>
+<text x="319" y="86" text-anchor="middle" font-size="8.3" style="fill:var(--muted)">Febre &gt;37,8°C</text>
+<text x="319" y="100" text-anchor="middle" font-size="8.3" style="fill:var(--muted)">Corrimento anormal</text>
+<text x="319" y="114" text-anchor="middle" font-size="8.3" style="fill:var(--muted)">Leucocitose, VHS/PCR altos</text>
+<text x="319" y="128" text-anchor="middle" font-size="8.3" style="fill:var(--muted)">Gonococo/clamídia +</text>
+<rect x="434" y="44" width="185" height="150" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="526" y="66" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Elaborados</text>
+<text x="526" y="86" text-anchor="middle" font-size="8.3" style="fill:var(--muted)">Biópsia com endometrite</text>
+<text x="526" y="100" text-anchor="middle" font-size="8.3" style="fill:var(--muted)">Imagem com abscesso</text>
+<text x="526" y="114" text-anchor="middle" font-size="8.3" style="fill:var(--muted)">Laparoscopia compatível</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha clássica:</b> não é necessário aguardar confirmação laboratorial ou de imagem para iniciar tratamento — os critérios clínicos maiores já autorizam o início empírico, dado o custo reprodutivo do atraso.</div>
+`],
+["diferenciais","Diagnósticos Diferenciais",`
+<div class="ac-h">Dor pélvica aguda tem muitos suspeitos</div>
+<p class="ac-p">A dor pélvica aguda em mulher em idade reprodutiva exige sempre excluir gravidez (beta-hCG) antes de qualquer investigação adicional, pela possibilidade de <b>gravidez ectópica</b> — condição potencialmente fatal que pode mimetizar DIP. Outros diferenciais importantes incluem apendicite aguda (especialmente quando a dor é predominantemente à direita), torção ou rotura de cisto ovariano, endometriose e infecção do trato urinário.</p>
+<p class="ac-p">A distinção nem sempre é simples clinicamente, e por isso, diante de dúvida diagnóstica relevante ou de sinais de abdome agudo, a investigação de imagem (ultrassonografia transvaginal) e, eventualmente, a laparoscopia diagnóstica podem ser necessárias — sem que isso deva atrasar o início do tratamento empírico quando os critérios clínicos de DIP estão presentes.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Principais diferenciais de dor pélvica aguda</text>
+<rect x="20" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.3"/>
+<text x="112" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:#e8675f">Gravidez ectópica</text>
+<text x="112" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Sempre excluir com</text>
+<text x="112" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">beta-hCG primeiro</text>
+<rect x="227" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="319" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Apendicite aguda</text>
+<text x="319" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Dor predominante à</text>
+<text x="319" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">direita, sinais de irritação</text>
+<rect x="434" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="526" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Torção/cisto ovariano</text>
+<text x="526" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Dor súbita, unilateral</text>
+<text x="526" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">USTV esclarece</text>
+</svg>
+<div class="ac-call"><b>Fio condutor:</b> excluir ectópica é sempre o primeiro passo — depois disso, os critérios clínicos de DIP orientam o início do tratamento sem esperar exclusão perfeita de todos os outros diferenciais.</div>
+`],
+["tratamento_ambulatorial","Tratamento Ambulatorial",`
+<div class="ac-h">O esquema tríplice do PCDT-IST 2022</div>
+<p class="ac-p">O esquema ambulatorial recomendado pelo Ministério da Saúde (PCDT-IST 2022) é a combinação de três antimicrobianos: <b>ceftriaxona 500 mg intramuscular em dose única</b> + <b>doxiciclina 100 mg via oral a cada 12 horas por 14 dias</b> + <b>metronidazol 500 mg via oral a cada 12 horas por 14 dias</b>. A cobertura tripla se justifica pela natureza polimicrobiana da DIP: a ceftriaxona cobre gonococo, a doxiciclina cobre clamídia (e Mycoplasma), e o metronidazol cobre anaeróbios.</p>
+<p class="ac-p">Toda paciente em tratamento ambulatorial deve ser <b>reavaliada em 72 horas</b>. Se não houver melhora clínica importante nesse prazo, deve-se reconsiderar o diagnóstico, investigar complicações (como abscesso tubo-ovariano) e considerar internação para tratamento parenteral.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Esquema ambulatorial (PCDT-IST 2022)</text>
+<rect x="20" y="44" width="185" height="130" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="112" y="66" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Ceftriaxona</text>
+<text x="112" y="86" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">500 mg IM</text>
+<text x="112" y="100" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">dose única</text>
+<text x="112" y="118" text-anchor="middle" font-size="8.3" style="fill:var(--muted)">Cobre gonococo</text>
+<rect x="227" y="44" width="185" height="130" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="319" y="66" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Doxiciclina</text>
+<text x="319" y="86" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">100 mg VO 12/12h</text>
+<text x="319" y="100" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">14 dias</text>
+<text x="319" y="118" text-anchor="middle" font-size="8.3" style="fill:var(--muted)">Cobre clamídia</text>
+<rect x="434" y="44" width="185" height="130" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="526" y="66" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Metronidazol</text>
+<text x="526" y="86" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">500 mg VO 12/12h</text>
+<text x="526" y="100" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">14 dias</text>
+<text x="526" y="118" text-anchor="middle" font-size="8.3" style="fill:var(--muted)">Cobre anaeróbios</text>
+</svg>
+<div class="ac-tip"><b>Reavaliação em 72 horas:</b> é parte obrigatória do esquema ambulatorial — não é opcional, é o mecanismo de segurança que detecta falha terapêutica precocemente.</div>
+`],
+["tratamento_hospitalar","Critérios de Internação e Tratamento Hospitalar",`
+<div class="ac-h">Quando o tratamento oral não é suficiente ou seguro</div>
+<p class="ac-p">A internação hospitalar está indicada em situações específicas: abscesso tubo-ovariano, gestação, ausência de resposta clínica ao tratamento oral após 72 horas, impossibilidade de exclusão de emergência cirúrgica (como apendicite), intolerância ou impossibilidade de uso da via oral, e quadro clínico grave (sinais de pelviperitonite, febre alta, toxemia).</p>
+<p class="ac-p">O esquema hospitalar padrão é <b>ceftriaxona 1 g endovenosa uma vez ao dia</b> + <b>doxiciclina 100 mg via oral a cada 12 horas</b> + <b>metronidazol 400 mg endovenoso a cada 12 horas</b>, por 14 dias. Um esquema alternativo é <b>clindamicina 900 mg endovenosa a cada 8 horas</b> + <b>gentamicina 3-5 mg/kg endovenosa ou intramuscular uma vez ao dia</b>, também por 14 dias — combinação particularmente útil quando há suspeita de abscesso tubo-ovariano.</p>
+<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Critérios de internação</text>
+<rect x="30" y="44" width="580" height="150" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="150" y="70" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Abscesso tubo-ovariano</text>
+<text x="150" y="90" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Gestação</text>
+<text x="150" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Sem resposta em 72h</text>
+<text x="470" y="70" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Emergência cirúrgica não excluída</text>
+<text x="470" y="90" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Intolerância à via oral</text>
+<text x="470" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Quadro clínico grave/toxemia</text>
+<text x="320" y="150" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Ceftriaxona EV + Doxiciclina VO + Metronidazol EV</text>
+<text x="320" y="170" text-anchor="middle" font-size="9" style="fill:var(--muted)">ou Clindamicina + Gentamicina EV/IM (14 dias)</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha:</b> gestação com DIP é sempre indicação de internação — não se trata DIP em gestante ambulatorialmente, pelo maior risco materno-fetal.</div>
+`],
+["complicacoes_seguimento","Complicações e Seguimento",`
+<div class="ac-h">Por que DIP é uma prioridade de saúde reprodutiva</div>
+<p class="ac-p">As principais complicações incluem o <b>abscesso tubo-ovariano</b> (coleção purulenta que pode exigir drenagem), a <b>síndrome de Fitz-Hugh-Curtis</b> (peri-hepatite por disseminação da infecção ao longo da goteira parietocólica, causando dor em hipocôndrio direito e aderências "em corda de violino" entre fígado e peritônio), <b>infertilidade por fator tubário</b> (por obstrução e aderências), <b>dor pélvica crônica</b> e risco aumentado de <b>gravidez ectópica</b> em gestações futuras — todas consequências do dano tubário cumulativo.</p>
+<p class="ac-p">O seguimento inclui reavaliação em 72 horas no tratamento ambulatorial, orientação de abstinência sexual durante o tratamento, e tratamento dos parceiros sexuais dos últimos 60 dias, independentemente de estarem sintomáticos, dado o papel de gonococo e clamídia como agentes iniciadores frequentes. Quanto mais episódios de DIP a mulher tiver, maior o risco cumulativo de infertilidade — reforçando a importância da prevenção e do tratamento precoce.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Complicações da DIP</text>
+<rect x="20" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="112" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Abscesso tubo-ovariano</text>
+<text x="112" y="90" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Pode exigir drenagem</text>
+<rect x="227" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="319" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Fitz-Hugh-Curtis</text>
+<text x="319" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Peri-hepatite</text>
+<text x="319" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Dor em hipocôndrio direito</text>
+<rect x="434" y="46" width="185" height="120" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="526" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Fertilidade</text>
+<text x="526" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Infertilidade tubária</text>
+<text x="526" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Risco de ectópica futura</text>
+</svg>
+<div class="ac-call"><b>Fechando o módulo:</b> assim como no HPV o alvo era a persistência viral, na DIP o alvo é o tempo — tratar rápido e tratar o parceiro reduz diretamente o risco de infertilidade, o desfecho que mais importa a longo prazo.</div>
+`]
+]
+};
+Object.assign(C['infeccoes|2'], {
+"escores": `<div class="prose">
+<h3>Critérios diagnósticos de DIP (Ministério da Saúde, semelhantes aos de Hager)</h3>
+<table class="ac-tbl">
+<tr><th>Categoria</th><th>Critérios</th><th>Regra</th></tr>
+<tr><td>Maiores</td><td>Dor em baixo ventre; dor à mobilização do colo; dor à palpação anexial</td><td>Todos os três precisam estar presentes</td></tr>
+<tr><td>Menores</td><td>Febre &gt;37,8°C; corrimento vaginal/cervical anormal; massa pélvica; &gt;5 leucócitos/campo em secreção vaginal; leucocitose; VHS/PCR elevados; gonococo/clamídia positivos</td><td>Pelo menos 1 reforça o diagnóstico</td></tr>
+<tr><td>Elaborados</td><td>Biópsia com evidência histopatológica de endometrite; imagem com abscesso tubo-ovariano/coleção; laparoscopia com achados compatíveis</td><td>Confirmam com maior certeza, raramente necessários</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">3 critérios maiores presentes já autorizam iniciar tratamento empírico — não é preciso esperar exame de imagem ou laboratório.</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Diagnósticos diferenciais de dor pélvica aguda</h3>
+<table class="ac-tbl">
+<tr><th>Condição</th><th>Pista diferencial</th></tr>
+<tr><td><strong>Gravidez ectópica</strong></td><td>Sempre excluir com beta-hCG antes de prosseguir a investigação — condição potencialmente fatal</td></tr>
+<tr><td><strong>Apendicite aguda</strong></td><td>Dor predominante em fossa ilíaca direita, sinais de irritação peritoneal localizada</td></tr>
+<tr><td><strong>Torção/rotura de cisto ovariano</strong></td><td>Dor súbita, geralmente unilateral; USTV esclarece</td></tr>
+<tr><td><strong>Endometriose</strong></td><td>Dor cíclica crônica, dismenorreia progressiva, história recorrente</td></tr>
+<tr><td><strong>Infecção do trato urinário</strong></td><td>Sintomas urinários predominantes (disúria, polaciúria), sem dor à mobilização do colo</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — DIP</div>
+<div class="mm">
+  <div class="mm-card"><h5>⬆️ Mecanismo</h5><ul><li>Infecção ascendente</li><li>Colo → endométrio → tubas</li><li>Polimicrobiana</li></ul></div>
+  <div class="mm-card"><h5>🧫 Agentes</h5><ul><li>Gonococo, clamídia (iniciadores)</li><li>Anaeróbios, flora endógena</li><li>Mycoplasma genitalium</li></ul></div>
+  <div class="mm-card"><h5>✅ Diagnóstico</h5><ul><li>Clínico (critérios maiores)</li><li>Menores reforçam</li><li>Elaborados confirmam</li></ul></div>
+  <div class="mm-card"><h5>💊 Tratamento</h5><ul><li>Ambulatorial: ceftriaxona+doxi+metronidazol</li><li>Reavaliar em 72h</li><li>Hospitalar se critérios de gravidade</li></ul></div>
+  <div class="mm-card"><h5>⚠️ Complicações</h5><ul><li>Abscesso tubo-ovariano</li><li>Fitz-Hugh-Curtis</li><li>Infertilidade, ectópica futura</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Mulher em idade reprodutiva com dor pélvica</div><div class="fx-arrow"></div><div class="fx-node">Excluir gravidez (beta-hCG)</div><div class="fx-arrow"></div><div class="fx-node">Critérios maiores presentes (dor baixo ventre + mobilização do colo + palpação anexial)?</div><div class="fx-row"><div class="fx-node end"><b>NÃO:</b> investigar outros diferenciais</div><div class="fx-node"><b>SIM:</b> diagnóstico clínico de DIP — iniciar tratamento empírico</div></div><div class="fx-arrow"></div><div class="fx-lbl">Critérios menores e elaborados reforçam/confirmam, mas não são obrigatórios para iniciar tratamento</div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">DIP diagnosticada clinicamente</div><div class="fx-arrow"></div><div class="fx-lbl">Critérios de internação presentes? (abscesso, gestação, sem resposta em 72h, emergência cirúrgica não excluída, intolerância oral, quadro grave)</div><div class="fx-row"><div class="fx-node end"><b>NÃO:</b> tratamento ambulatorial (ceftriaxona + doxiciclina + metronidazol) com reavaliação em 72h</div><div class="fx-node"><b>SIM:</b> internação, tratamento parenteral (ceftriaxona/doxiciclina/metronidazol EV ou clindamicina+gentamicina)</div></div><div class="fx-arrow"></div><div class="fx-node end">Tratar parceiros dos últimos 60 dias; orientar abstinência sexual durante o tratamento</div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — DIP em 60 segundos</h4>
+<ul>
+<li><strong>DIP</strong> = infecção ascendente do trato genital superior; polimicrobiana (gonococo, clamídia, anaeróbios).</li>
+<li><strong>Diagnóstico clínico:</strong> 3 critérios maiores (dor baixo ventre, dor à mobilização do colo, dor à palpação anexial) já autorizam tratar.</li>
+<li><strong>Sempre excluir gravidez ectópica</strong> antes de investigar dor pélvica aguda.</li>
+<li><strong>Ambulatorial:</strong> ceftriaxona 500mg IM dose única + doxiciclina 100mg 12/12h 14 dias + metronidazol 500mg 12/12h 14 dias. Reavaliar em 72h.</li>
+<li><strong>Internação:</strong> abscesso tubo-ovariano, gestação, sem resposta em 72h, emergência cirúrgica não excluída, quadro grave.</li>
+<li><strong>Hospitalar:</strong> ceftriaxona EV + doxiciclina VO + metronidazol EV, ou clindamicina + gentamicina.</li>
+<li><strong>Complicações:</strong> abscesso tubo-ovariano, Fitz-Hugh-Curtis, infertilidade tubária, dor pélvica crônica, ectópica futura.</li>
+<li>Tratar parceiros dos últimos 60 dias, independente de sintomas.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>DIP</strong> = infecção ascendente polimicrobiana, diagnóstico clínico por critérios de Hager, tratamento ambulatorial tríplice com reavaliação em 72h, internação se gravidade/gestação/abscesso, complicação-chave é infertilidade por fator tubário.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Dor pélvica + dor à mobilização do colo + dor anexial = já pode tratar DIP empiricamente, sem esperar exames.</li>
+<li>Gestante com DIP = sempre internar, nunca tratar ambulatorialmente.</li>
+<li>Dor em hipocôndrio direito em mulher jovem com DIP = pense em Fitz-Hugh-Curtis antes de colecistite.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que é preciso confirmação laboratorial de gonococo/clamídia para iniciar tratamento — não é.</li>
+<li>Esquecer de excluir gravidez ectópica antes de fechar o diagnóstico de DIP.</li>
+<li>Tratar apenas a paciente e esquecer de tratar os parceiros dos últimos 60 dias.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"3 maiores fecham o diagnóstico; 1 menor já reforça."</strong></li>
+<li><strong>"Ceftriaxona pro gono, doxiciclina pra clamídia, metronidazol pros anaeróbios."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Atrasar o tratamento empírico esperando confirmação microbiológica.</li>
+<li>Não reavaliar em 72 horas o tratamento ambulatorial.</li>
+<li>Não considerar internação em gestante com diagnóstico de DIP.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico o mecanismo de infecção ascendente da DIP e por que isso importa para a fertilidade","Cito os principais agentes etiológicos e por que a infecção é polimicrobiana","Aplico os critérios diagnósticos maiores, menores e elaborados","Cito os principais diagnósticos diferenciais de dor pélvica aguda","Descrevo o esquema ambulatorial completo (drogas, doses, duração) e a reavaliação em 72h","Reconheço os critérios de internação e o esquema hospitalar","Cito as principais complicações da DIP, incluindo Fitz-Hugh-Curtis e infertilidade"]
+});
+Object.assign(C['infeccoes|2'], {
+"questoes": [
+{"stem":"A doença inflamatória pélvica (DIP) é definida como:","opts":["Infecção exclusiva da vulva e vagina.","Infecção e inflamação do trato genital superior, incluindo endométrio, tubas e estruturas adjacentes.","Infecção urinária associada a atividade sexual.","Infecção fúngica recorrente do trato genital inferior."],"correct":1,"expl":"A DIP corresponde à infecção/inflamação do <b>trato genital superior</b> — endométrio, tubas, ovários e, em casos graves, peritônio pélvico — por ascensão de micro-organismos a partir do colo."},
+{"stem":"Em relação à etiologia da DIP, é correto afirmar que:","opts":["É causada exclusivamente por Neisseria gonorrhoeae.","É tipicamente polimicrobiana, envolvendo gonococo, clamídia, anaeróbios e flora vaginal endógena.","É causada exclusivamente por fungos.","Nunca envolve micro-organismos anaeróbios."],"correct":1,"expl":"A DIP é <b>polimicrobiana</b>: gonococo e clamídia costumam iniciar o processo, permitindo ascensão de anaeróbios e flora vaginal endógena."},
+{"stem":"Em relação ao uso de DIU e risco de DIP, é correto afirmar que:","opts":["O risco é constante e elevado durante todo o período de uso do DIU.","O risco se concentra principalmente nas primeiras três semanas após a inserção.","O DIU nunca está associado a qualquer risco de DIP.","O risco só existe após 5 anos de uso contínuo."],"correct":1,"expl":"O risco elevado de DIP associado ao DIU concentra-se nas <b>primeiras três semanas</b> após a inserção, relacionado ao próprio procedimento."},
+{"stem":"Segundo os critérios diagnósticos adotados pelo Ministério da Saúde, quais critérios maiores devem estar TODOS presentes para o diagnóstico clínico de DIP?","opts":["Febre, leucocitose e corrimento vaginal.","Dor em baixo ventre, dor à mobilização do colo e dor à palpação anexial.","Massa pélvica, VHS elevado e PCR elevado.","Sangramento intermenstrual, dispareunia e febre alta."],"correct":1,"expl":"Os três critérios maiores — <b>dor em baixo ventre, dor à mobilização do colo e dor à palpação anexial</b> — precisam estar todos presentes para o diagnóstico clínico."},
+{"stem":"Antes de firmar o diagnóstico de DIP em mulher com dor pélvica aguda, qual condição deve ser sempre excluída primeiro?","opts":["Endometriose.","Gravidez ectópica.","Infecção urinária.","Vaginose bacteriana."],"correct":1,"expl":"A <b>gravidez ectópica</b> é potencialmente fatal e deve ser sempre excluída com beta-hCG antes de prosseguir a investigação de dor pélvica aguda."},
+{"stem":"Qual é o esquema ambulatorial recomendado pelo PCDT-IST 2022 para tratamento da DIP?","opts":["Azitromicina 1g dose única isolada.","Ceftriaxona 500mg IM dose única + doxiciclina 100mg VO 12/12h por 14 dias + metronidazol 500mg VO 12/12h por 14 dias.","Penicilina benzatina 2.400.000 UI IM dose única.","Fluconazol 150mg VO dose única."],"correct":1,"expl":"O esquema ambulatorial é a tríplice combinação: <b>ceftriaxona 500mg IM</b> dose única + <b>doxiciclina</b> + <b>metronidazol</b>, ambos por 14 dias via oral."},
+{"stem":"Toda paciente em tratamento ambulatorial para DIP deve ser reavaliada em qual prazo?","opts":["24 horas.","72 horas.","7 dias.","30 dias."],"correct":1,"expl":"A reavaliação em <b>72 horas</b> é parte obrigatória do esquema ambulatorial, permitindo identificar precocemente falha terapêutica."},
+{"stem":"Qual das situações abaixo é uma indicação de internação hospitalar para tratamento de DIP?","opts":["Corrimento vaginal isolado, sem outros sintomas.","Abscesso tubo-ovariano identificado por imagem.","Dor pélvica leve, sem febre.","Paciente jovem sem comorbidades."],"correct":1,"expl":"O <b>abscesso tubo-ovariano</b> é uma das indicações claras de internação hospitalar para tratamento parenteral de DIP."},
+{"stem":"Gestante com diagnóstico de DIP deve ser conduzida da seguinte forma:","opts":["Tratamento ambulatorial padrão, igual ao de não gestantes.","Internação hospitalar obrigatória para tratamento parenteral.","Aguardar o parto para iniciar qualquer tratamento.","Tratamento exclusivo com antifúngicos tópicos."],"correct":1,"expl":"Gestação é critério de <b>internação obrigatória</b> para tratamento de DIP, pelo maior risco materno-fetal associado."},
+{"stem":"A síndrome de Fitz-Hugh-Curtis, complicação da DIP, caracteriza-se por:","opts":["Obstrução intestinal por aderências pélvicas.","Peri-hepatite com dor em hipocôndrio direito, por disseminação da infecção ao longo da goteira parietocólica.","Insuficiência renal aguda secundária à infecção pélvica.","Trombose venosa profunda em membros inferiores."],"correct":1,"expl":"A síndrome de Fitz-Hugh-Curtis é uma <b>peri-hepatite</b> com dor em hipocôndrio direito, causada pela disseminação da infecção pélvica ao longo da goteira parietocólica."},
+{"stem":"Qual das seguintes é uma consequência reprodutiva de longo prazo associada a episódios repetidos de DIP?","opts":["Aumento da fertilidade por estímulo inflamatório tubário.","Infertilidade por fator tubário e maior risco de gravidez ectópica futura.","Redução do risco de câncer de ovário.","Nenhuma consequência reprodutiva é esperada."],"correct":1,"expl":"O dano tubário cumulativo de episódios repetidos de DIP aumenta o risco de <b>infertilidade por fator tubário</b> e de <b>gravidez ectópica</b> em gestações futuras."},
+{"stem":"Em relação ao tratamento dos parceiros sexuais de uma paciente com DIP, é correto afirmar que:","opts":["Só devem ser tratados se apresentarem sintomas.","Parceiros dos últimos 60 dias devem ser tratados, independentemente de sintomas.","O tratamento do parceiro nunca é indicado.","Apenas parceiros com teste positivo para gonococo devem ser tratados."],"correct":1,"expl":"Parceiros sexuais dos <b>últimos 60 dias</b> devem ser tratados independentemente de sintomas, dado o papel de gonococo e clamídia como agentes iniciadores frequentes."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Definição</small><br>O que é a DIP e qual seu mecanismo central?","back":"Infecção/inflamação do trato genital superior (endométrio, tubas, ovários, peritônio pélvico) por ascensão de micro-organismos a partir do colo/vagina.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Etiologia</small><br>Quais são os principais agentes iniciadores da DIP?","back":"{{Neisseria gonorrhoeae e Chlamydia trachomatis, seguidos de ascensão de flora vaginal endógena e anaeróbios.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Fator de risco</small><br>Quando o risco de DIP associado ao DIU é maior?","back":"Nas primeiras três semanas após a inserção — não no uso a longo prazo.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diagnóstico</small><br>Quais os três critérios maiores para diagnóstico clínico de DIP?","back":"{{Dor em baixo ventre, dor à mobilização do colo e dor à palpação anexial — todos precisam estar presentes.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diferencial</small><br>Qual condição deve sempre ser excluída antes de firmar diagnóstico de DIP?","back":"Gravidez ectópica, com dosagem de beta-hCG.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tratamento</small><br>Qual o esquema ambulatorial completo (drogas e doses) para DIP?","back":"Ceftriaxona 500mg IM dose única + doxiciclina 100mg VO 12/12h por 14 dias + metronidazol 500mg VO 12/12h por 14 dias.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Seguimento</small><br>Em quanto tempo a paciente em tratamento ambulatorial deve ser reavaliada?","back":"Em 72 horas.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Internação</small><br>Cite três critérios de internação hospitalar para DIP.","back":"Abscesso tubo-ovariano, gestação, ausência de resposta em 72h ao tratamento oral (também: emergência cirúrgica não excluída, intolerância à via oral, quadro grave).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tratamento hospitalar</small><br>Qual o esquema hospitalar padrão para DIP?","back":"Ceftriaxona 1g EV 1x/dia + doxiciclina 100mg VO 12/12h + metronidazol 400mg EV 12/12h, por 14 dias.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tratamento hospitalar</small><br>Qual o esquema hospitalar alternativo, útil se houver abscesso tubo-ovariano?","back":"Clindamicina 900mg EV 8/8h + gentamicina 3-5mg/kg EV ou IM 1x/dia, por 14 dias.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Complicação</small><br>O que é a síndrome de Fitz-Hugh-Curtis?","back":"{{Peri-hepatite por disseminação da infecção pélvica ao longo da goteira parietocólica, causando dor em hipocôndrio direito.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Complicação</small><br>Quais as principais sequelas reprodutivas de longo prazo da DIP?","back":"Infertilidade por fator tubário, dor pélvica crônica e maior risco de gravidez ectópica futura.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Conduta</small><br>Quais parceiros sexuais devem ser tratados diante de um caso de DIP?","back":"Parceiros dos últimos 60 dias, independentemente de sintomas.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Clínica</small><br>Qual o quadro clínico clássico de apresentação da DIP?","back":"Dor pélvica/em baixo ventre bilateral, iniciada durante ou logo após a menstruação, com corrimento vaginal anormal, podendo haver sangramento intermenstrual, dispareunia e febre.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Dor pélvica bilateral em mulher jovem","stem":"Mulher de 22 anos procura atendimento com dor em baixo ventre há 4 dias, iniciada após a menstruação, associada a corrimento vaginal amarelado e febre de 38°C.","passos":[
+{"h":"Anamnese dirigida","p":"Múltiplos parceiros sexuais nos últimos meses, sem uso regular de preservativo; nega atraso menstrual."},
+{"h":"Exame físico","p":"Dor à palpação em baixo ventre, dor importante à mobilização do colo uterino e à palpação de anexos bilateralmente."},
+{"h":"Exclusão de diferencial obrigatório","p":"Beta-hCG negativo, afastando gravidez ectópica antes de prosseguir o raciocínio diagnóstico."},
+{"h":"Raciocínio clínico","p":"Presença dos três critérios maiores (dor em baixo ventre, dor à mobilização do colo, dor anexial) associada a febre (critério menor) confirma o diagnóstico clínico de DIP, sem necessidade de exames adicionais para iniciar tratamento."},
+{"h":"Conduta terapêutica","p":"Iniciar esquema ambulatorial com ceftriaxona 500mg IM dose única + doxiciclina 100mg 12/12h por 14 dias + metronidazol 500mg 12/12h por 14 dias, com reavaliação agendada em 72 horas."}
+]},
+{"t":"Caso 2 — Ausência de melhora após tratamento ambulatorial","stem":"Mulher de 26 anos, em tratamento ambulatorial para DIP há 72 horas, retorna para reavaliação relatando piora da dor e persistência da febre.","passos":[
+{"h":"Reavaliação clínica","p":"Mantém dor em baixo ventre importante, agora associada a massa palpável em região anexial direita e febre persistente de 38,5°C."},
+{"h":"Raciocínio clínico","p":"A ausência de melhora clínica em 72 horas de tratamento ambulatorial adequado exige reavaliação da hipótese diagnóstica e investigação de complicações."},
+{"h":"Investigação complementar","p":"Solicitar ultrassonografia transvaginal para avaliar a massa anexial palpada, com suspeita de abscesso tubo-ovariano."},
+{"h":"Resultado da investigação","p":"Ultrassonografia confirma coleção compatível com abscesso tubo-ovariano à direita."},
+{"h":"Conduta terapêutica","p":"Indicar internação hospitalar para tratamento parenteral (ceftriaxona EV + doxiciclina + metronidazol EV, ou clindamicina + gentamicina), com possível necessidade de drenagem conforme evolução."}
+]},
+{"t":"Caso 3 — Gestante com quadro sugestivo de DIP","stem":"Gestante de 10 semanas apresenta dor pélvica, corrimento vaginal anormal e febre baixa, com exame físico compatível com critérios maiores de DIP.","passos":[
+{"h":"Anamnese dirigida","p":"Confirma gestação em curso por beta-hCG positivo e ultrassonografia prévia; refere corrimento vaginal alterado há alguns dias."},
+{"h":"Exame físico","p":"Dor à mobilização do colo e à palpação anexial, além de dor em baixo ventre, preenchendo os critérios maiores de DIP."},
+{"h":"Raciocínio clínico","p":"Apesar do diagnóstico clínico de DIP ser semelhante ao de não gestantes, a presença de gestação muda imediatamente a conduta quanto ao local de tratamento."},
+{"h":"Definição da conduta","p":"Gestação é critério obrigatório de internação hospitalar para tratamento de DIP, pelo maior risco materno-fetal envolvido."},
+{"h":"Conduta terapêutica","p":"Internar a paciente e iniciar esquema parenteral apropriado, com acompanhamento conjunto da equipe obstétrica durante todo o tratamento."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['infeccoes|3'] = {
+name: "Cervicites",
+intro: "A cervicite é a inflamação do epitélio colunar endocervical — muitas vezes silenciosa, mas com potencial de ascender e causar DIP se não for identificada e tratada a tempo. Diferenciá-la das vaginites é o primeiro passo do raciocínio.",
+sub: [
+["entendendo","Entendendo do Zero",`
+<div class="ac-h">Inflamação do epitélio colunar, não do epitélio escamoso vaginal</div>
+<p class="ac-p">A cervicite é a inflamação da mucosa endocervical, revestida por <b>epitélio colunar (glandular)</b> — diferente do epitélio escamoso estratificado que reveste a vagina e a ectocérvice. Essa diferença histológica explica por que os agentes causadores de cervicite são, em geral, diferentes dos agentes causadores de vaginite: os patógenos clássicos da cervicite (gonococo, clamídia) têm tropismo específico por células colunares.</p>
+<p class="ac-p">Entender essa distinção anatômica é o primeiro passo para não confundir cervicite com vaginite na prática clínica: embora ambas possam causar corrimento vaginal, a origem, os agentes envolvidos, a gravidade potencial (a cervicite pode ascender e causar DIP) e o tratamento são diferentes.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Cervicite x Vaginite — epitélios diferentes</text>
+<rect x="30" y="50" width="270" height="140" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="165" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Endocérvice</text>
+<text x="165" y="94" text-anchor="middle" font-size="9" style="fill:var(--ink)">Epitélio colunar (glandular)</text>
+<text x="165" y="110" text-anchor="middle" font-size="9" style="fill:var(--ink)">Alvo de gonococo/clamídia</text>
+<text x="165" y="126" text-anchor="middle" font-size="9" style="fill:var(--ink)">= CERVICITE</text>
+<rect x="340" y="50" width="270" height="140" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="475" y="72" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Vagina/ectocérvice</text>
+<text x="475" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">Epitélio escamoso estratificado</text>
+<text x="475" y="110" text-anchor="middle" font-size="9" style="fill:var(--muted)">Alvo de Candida, Gardnerella,</text>
+<text x="475" y="126" text-anchor="middle" font-size="9" style="fill:var(--muted)">Trichomonas = VAGINITE</text>
+</svg>
+<div class="ac-call"><b>A ideia central deste módulo:</b> cervicite não tratada é o principal ponto de partida da DIP — reconhecer e tratar precocemente é uma estratégia direta de prevenção de infertilidade.</div>
+`],
+["etiologia","Etiologia",`
+<div class="ac-h">Dois agentes centrais, e outros coadjuvantes importantes</div>
+<p class="ac-p"><b>Chlamydia trachomatis</b> e <b>Neisseria gonorrhoeae</b> são os agentes classicamente associados à cervicite, sendo responsáveis pela maioria dos casos de cervicite mucopurulenta. <b>Mycoplasma genitalium</b> é cada vez mais reconhecido como causa relevante, especialmente em casos recorrentes ou refratários ao tratamento padrão.</p>
+<p class="ac-p"><b>Trichomonas vaginalis</b>, embora classicamente associado a vaginite, também pode causar cervicite, produzindo o clássico "colo em framboesa/morango" (colpite tigróide) — pequenas hemorragias puntiformes no colo, visíveis à especuloscopia. O herpes simples também pode causar cervicite ulcerativa, geralmente acompanhada de lesões vulvares dolorosas características.</p>
+<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Principais agentes causadores de cervicite</text>
+<rect x="20" y="46" width="290" height="140" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="165" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Agentes clássicos</text>
+<text x="165" y="90" text-anchor="middle" font-size="9" style="fill:var(--ink)">Chlamydia trachomatis</text>
+<text x="165" y="106" text-anchor="middle" font-size="9" style="fill:var(--ink)">Neisseria gonorrhoeae</text>
+<text x="165" y="122" text-anchor="middle" font-size="9" style="fill:var(--ink)">Maioria dos casos</text>
+<rect x="330" y="46" width="290" height="140" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="475" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Agentes adicionais</text>
+<text x="475" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Mycoplasma genitalium</text>
+<text x="475" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">Trichomonas vaginalis</text>
+<text x="475" y="122" text-anchor="middle" font-size="9" style="fill:var(--muted)">Herpes simples (ulcerativa)</text>
+</svg>
+<div class="ac-tip"><b>Macete:</b> "colo em framboesa/morango" (colpite tigróide) é achado clássico de tricomoníase — pode ser cobrado tanto no contexto de vaginite quanto de cervicite.</div>
+`],
+["quadro_clinico","Quadro Clínico",`
+<div class="ac-h">Frequentemente silenciosa — e por isso perigosa</div>
+<p class="ac-p">A grande maioria dos casos de cervicite é <b>assintomática</b>, o que é particularmente verdadeiro para infecções por clamídia. Quando presentes, os sintomas incluem corrimento vaginal (de origem cervical, mucopurulento), sangramento intermenstrual ou pós-coital (sinusiorragia — sangramento após relação sexual, pela friabilidade do epitélio inflamado), dispareunia profunda e, ocasionalmente, disúria quando há uretrite concomitante.</p>
+<p class="ac-p">A sinusiorragia é um sinal de alerta particularmente importante: embora possa ter outras causas (incluindo neoplasia cervical), em uma paciente jovem sexualmente ativa deve sempre levantar a suspeita de cervicite infecciosa antes de assumir causas mais raras.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Quadro clínico da cervicite</text>
+<rect x="20" y="46" width="290" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="165" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Frequentemente assintomática</text>
+<text x="165" y="90" text-anchor="middle" font-size="9" style="fill:var(--ink)">Especialmente clamídia</text>
+<text x="165" y="106" text-anchor="middle" font-size="9" style="fill:var(--ink)">Risco de progressão silenciosa</text>
+<text x="165" y="122" text-anchor="middle" font-size="9" style="fill:var(--ink)">para DIP</text>
+<rect x="330" y="46" width="290" height="130" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="475" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Quando sintomática</text>
+<text x="475" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Corrimento mucopurulento</text>
+<text x="475" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">Sinusiorragia, dispareunia</text>
+<text x="475" y="122" text-anchor="middle" font-size="9" style="fill:var(--muted)">Disúria (se uretrite associada)</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha clássica:</b> mulher assintomática com achado incidental de cervicite ao exame ginecológico de rotina não deve ser negligenciada — o silêncio clínico não significa ausência de risco de ascensão da infecção.</div>
+`],
+["diagnostico","Diagnóstico",`
+<div class="ac-h">Do exame especular ao diagnóstico sindrômico</div>
+<p class="ac-p">Ao exame especular, os achados sugestivos de cervicite incluem <b>corrimento mucopurulento</b> exteriorizando-se pelo orifício externo do colo, <b>friabilidade</b> do colo (sangramento fácil ao toque da espátula ou swab) e, ocasionalmente, edema e eritema da zona de transformação. O teste do cotonete (inserir um swab no canal endocervical e observar se há sangramento ou secreção purulenta) auxilia na caracterização.</p>
+<p class="ac-p">Idealmente, a confirmação etiológica seria feita por testes de amplificação de ácidos nucleicos (NAAT/PCR) para gonococo e clamídia, ou cultura — porém, no Brasil, a disponibilidade desses testes na rede pública ainda é limitada. Por isso, o Ministério da Saúde preconiza a <b>abordagem sindrômica</b>: diante de critérios clínicos e/ou de risco compatíveis, trata-se empiricamente para os dois agentes principais sem aguardar confirmação laboratorial.</p>
+<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Achados ao exame especular</text>
+<rect x="30" y="46" width="270" height="140" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Achados sugestivos</text>
+<text x="165" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Corrimento mucopurulento</text>
+<text x="165" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">pelo orifício externo</text>
+<text x="165" y="122" text-anchor="middle" font-size="9" style="fill:var(--muted)">Friabilidade ao toque</text>
+<text x="165" y="138" text-anchor="middle" font-size="9" style="fill:var(--muted)">Edema/eritema da ZT</text>
+<rect x="340" y="46" width="270" height="140" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="475" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Abordagem sindrômica (Brasil)</text>
+<text x="475" y="90" text-anchor="middle" font-size="9" style="fill:var(--ink)">NAAT/cultura pouco</text>
+<text x="475" y="106" text-anchor="middle" font-size="9" style="fill:var(--ink)">disponíveis na rede pública</text>
+<text x="475" y="122" text-anchor="middle" font-size="9" style="fill:var(--ink)">Tratar empiricamente GC+CT</text>
+<text x="475" y="138" text-anchor="middle" font-size="9" style="fill:var(--ink)">sem aguardar confirmação</text>
+</svg>
+<div class="ac-tip"><b>Ponto-chave de prova:</b> a lógica sindrômica prioriza tratar rápido para prevenir DIP, mesmo sabendo que isso significa tratar alguns casos sem confirmação laboratorial — o custo de esperar é maior que o custo de tratar empiricamente.</div>
+`],
+["tratamento_sindromico","Tratamento Sindrômico",`
+<div class="ac-h">Cobrir gonococo e clamídia ao mesmo tempo, sempre</div>
+<p class="ac-p">O tratamento sindrômico da cervicite, segundo o PCDT IST 2022, cobre simultaneamente os dois agentes principais: <b>ceftriaxona 500 mg intramuscular em dose única</b> (gonococo) + <b>azitromicina 500 mg, 2 comprimidos via oral em dose única, totalizando 1 g</b> (clamídia). Essa combinação de dose única para ambos os componentes favorece a adesão ao tratamento, importante em uma condição frequentemente assintomática.</p>
+<p class="ac-p">A doxiciclina 100 mg de 12/12 horas por 7 dias é uma alternativa à azitromicina para cobertura de clamídia em situações específicas. Parceiros sexuais dos últimos 60 dias devem ser tratados (abordagem de parceria sexual), e deve-se orientar abstinência sexual até completar o tratamento e a resolução dos sintomas, para evitar reinfecção e transmissão.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Tratamento sindrômico da cervicite</text>
+<rect x="30" y="46" width="270" height="130" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Ceftriaxona</text>
+<text x="165" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">500mg IM</text>
+<text x="165" y="104" text-anchor="middle" font-size="9" style="fill:var(--muted)">dose única</text>
+<text x="165" y="120" text-anchor="middle" font-size="8" style="fill:var(--accent)">cobre gonococo</text>
+<rect x="340" y="46" width="270" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="475" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Azitromicina</text>
+<text x="475" y="90" text-anchor="middle" font-size="9" style="fill:var(--ink)">500mg, 2cp VO</text>
+<text x="475" y="104" text-anchor="middle" font-size="9" style="fill:var(--ink)">dose única (1g)</text>
+<text x="475" y="120" text-anchor="middle" font-size="8" style="fill:var(--accent)">cobre clamídia</text>
+</svg>
+<div class="ac-call"><b>Vantagem prática:</b> as duas drogas em dose única permitem tratamento supervisionado na própria consulta, eliminando o risco de abandono de esquemas prolongados — especialmente relevante numa condição muitas vezes assintomática.</div>
+`],
+["diferencial_vaginites","Diferencial com Vaginites",`
+<div class="ac-h">Corrimento vaginal não é sinônimo de vaginite</div>
+<p class="ac-p">Diante de uma queixa de corrimento vaginal, é fundamental diferenciar se a origem é <b>vaginal</b> (vaginose bacteriana, candidíase, tricomoníase) ou <b>cervical</b> (cervicite por gonococo/clamídia). O exame especular cuidadoso, observando de onde exatamente vem a secreção (do colo ou das paredes vaginais), é a ferramenta central dessa diferenciação.</p>
+<p class="ac-p">Testes complementares simples ajudam: o <b>pH vaginal</b> (elevado na vaginose bacteriana e tricomoníase, normal na candidíase), o <b>teste das aminas/whiff test</b> (positivo na vaginose bacteriana — odor de peixe ao adicionar KOH), e a <b>microscopia a fresco</b> (clue cells na vaginose, hifas na candidíase, protozoários móveis na tricomoníase). Nenhum desses testes, porém, confirma ou exclui cervicite, que permanece um diagnóstico predominantemente clínico e sindrômico.</p>
+<svg viewBox="0 0 660 210" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="330" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Cervicite x principais vaginites</text>
+<rect x="20" y="46" width="150" height="140" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="95" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Cervicite</text>
+<text x="95" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">GC/CT</text>
+<text x="95" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Secreção do colo</text>
+<text x="95" y="116" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Friabilidade</text>
+<rect x="185" y="46" width="150" height="140" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.2"/>
+<text x="260" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Vaginose bacteriana</text>
+<text x="260" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">pH elevado</text>
+<text x="260" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Whiff test +</text>
+<text x="260" y="116" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Clue cells</text>
+<rect x="350" y="46" width="150" height="140" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.2"/>
+<text x="425" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Candidíase</text>
+<text x="425" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">pH normal</text>
+<text x="425" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Hifas na microscopia</text>
+<text x="425" y="116" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Prurido intenso</text>
+<rect x="515" y="46" width="130" height="140" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.2"/>
+<text x="580" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Tricomoníase</text>
+<text x="580" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">pH elevado</text>
+<text x="580" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Protozoários móveis</text>
+<text x="580" y="116" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Colo em framboesa</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha:</b> a tricomoníase é a única causa clássica de vaginite que também produz um achado cervical característico (colo em framboesa) — por isso pode ser cobrada tanto como vaginite quanto como cervicite.</div>
+`],
+["seguimento_complicacoes","Seguimento e Complicações",`
+<div class="ac-h">O que acontece se a cervicite não for tratada a tempo</div>
+<p class="ac-p">A principal complicação da cervicite não tratada é a <b>ascensão da infecção</b>, causando doença inflamatória pélvica — com todas as suas potenciais sequelas reprodutivas (infertilidade, gravidez ectópica, dor pélvica crônica). Por isso, mesmo em pacientes assintomáticas identificadas por rastreio ou achado incidental, o tratamento deve ser instituído prontamente.</p>
+<p class="ac-p">Em gestantes, a cervicite por clamídia ou gonococo tem implicações adicionais: risco de conjuntivite neonatal e pneumonia por clamídia no recém-nascido (transmissão vertical durante o parto), além de associação com maior risco de ruptura prematura de membranas e parto pré-termo. O rastreio de cervicite (e outras ISTs) faz parte do pré-natal de rotina. A gonorreia é doença de notificação compulsória no Brasil; já a infecção por clamídia não tem notificação compulsória individual isolada na rotina nacional atual, mas ambas exigem tratamento do parceiro e orientação sobre reinfecção.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Consequências da cervicite não tratada</text>
+<rect x="20" y="46" width="290" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="165" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Fora da gestação</text>
+<text x="165" y="90" text-anchor="middle" font-size="9" style="fill:var(--ink)">Ascensão → DIP</text>
+<text x="165" y="106" text-anchor="middle" font-size="9" style="fill:var(--ink)">Infertilidade, ectópica,</text>
+<text x="165" y="122" text-anchor="middle" font-size="9" style="fill:var(--ink)">dor pélvica crônica</text>
+<rect x="330" y="46" width="290" height="130" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="475" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Na gestação</text>
+<text x="475" y="90" text-anchor="middle" font-size="9" style="fill:var(--muted)">Conjuntivite/pneumonia neonatal</text>
+<text x="475" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">RPMO, parto pré-termo</text>
+<text x="475" y="122" text-anchor="middle" font-size="9" style="fill:var(--muted)">Rastreio no pré-natal</text>
+</svg>
+<div class="ac-tip"><b>Fio condutor:</b> essa cadeia de consequências é exatamente o motivo pelo qual o módulo anterior de DIP começa dizendo que ela é, na prática, uma complicação evitável — evitável começando aqui, no tratamento da cervicite.</div>
+`]
+]
+};
+Object.assign(C['infeccoes|3'], {
+"escores": `<div class="prose">
+<h3>Cervicite x vaginites — diferenciação rápida</h3>
+<table class="ac-tbl">
+<tr><th>Condição</th><th>pH vaginal</th><th>Achado característico</th></tr>
+<tr><td>Cervicite (GC/CT)</td><td>Não se altera diretamente</td><td>Corrimento mucopurulento do colo, friabilidade</td></tr>
+<tr><td>Vaginose bacteriana</td><td>Elevado (&gt;4,5)</td><td>Whiff test positivo, clue cells</td></tr>
+<tr><td>Candidíase</td><td>Normal (&lt;4,5)</td><td>Hifas, prurido intenso</td></tr>
+<tr><td>Tricomoníase</td><td>Elevado (&gt;4,5)</td><td>Protozoários móveis, colo em framboesa</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">Secreção saindo do orifício do colo = pense cervicite; secreção cobrindo as paredes vaginais = pense vaginite.</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Diagnóstico diferencial de corrimento vaginal</h3>
+<table class="ac-tbl">
+<tr><th>Condição</th><th>Pista diferencial</th></tr>
+<tr><td><strong>Cervicite (GC/CT)</strong></td><td>Corrimento do orifício cervical, friabilidade, frequentemente assintomática</td></tr>
+<tr><td><strong>Vaginose bacteriana</strong></td><td>Corrimento acinzentado, odor de peixe, whiff test+</td></tr>
+<tr><td><strong>Candidíase</strong></td><td>Corrimento grumoso, prurido intenso, pH normal</td></tr>
+<tr><td><strong>Tricomoníase</strong></td><td>Corrimento amarelo-esverdeado, bolhoso, colo em framboesa</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Cervicites</div>
+<div class="mm">
+  <div class="mm-card"><h5>🧬 Anatomia</h5><ul><li>Epitélio colunar endocervical</li><li>Diferente do epitélio vaginal escamoso</li></ul></div>
+  <div class="mm-card"><h5>🦠 Etiologia</h5><ul><li>Chlamydia trachomatis</li><li>Neisseria gonorrhoeae</li><li>Mycoplasma genitalium, Trichomonas</li></ul></div>
+  <div class="mm-card"><h5>👁️ Clínica</h5><ul><li>Frequentemente assintomática</li><li>Sinusiorragia, corrimento mucopurulento</li></ul></div>
+  <div class="mm-card"><h5>🔬 Diagnóstico</h5><ul><li>Exame especular</li><li>Abordagem sindrômica no Brasil</li></ul></div>
+  <div class="mm-card"><h5>💊 Tratamento</h5><ul><li>Ceftriaxona 500mg IM dose única</li><li>Azitromicina 1g VO dose única</li></ul></div>
+  <div class="mm-card"><h5>⚠️ Complicação</h5><ul><li>Ascensão → DIP</li><li>Transmissão vertical na gestação</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Corrimento vaginal ou achado ao exame especular</div><div class="fx-arrow"></div><div class="fx-lbl">Secreção mucopurulenta originando-se do orifício do colo, com friabilidade?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Cervicite — tratar sindromicamente para GC + CT</div><div class="fx-node end"><b>NÃO (paredes vaginais):</b> Investigar vaginite (pH, whiff test, microscopia)</div></div><div class="fx-arrow"></div><div class="fx-node">Lembrar: tricomoníase pode causar colo em framboesa mesmo sendo classicamente vaginite</div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Cervicite diagnosticada (clínica/sindrômica)</div><div class="fx-arrow"></div><div class="fx-node">Tratar: ceftriaxona 500mg IM dose única + azitromicina 500mg 2cp VO dose única (1g)</div><div class="fx-arrow"></div><div class="fx-node">Tratar parceiros dos últimos 60 dias + orientar abstinência até completar tratamento</div><div class="fx-arrow"></div><div class="fx-lbl">Sinais de DIP associados (dor à mobilização do colo, dor anexial)?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Tratar como DIP (ver módulo específico)</div><div class="fx-node end"><b>NÃO:</b> Seguimento ambulatorial habitual</div></div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Cervicites em 60 segundos</h4>
+<ul>
+<li><strong>Cervicite</strong> = inflamação do epitélio colunar endocervical, diferente da vaginite (epitélio escamoso).</li>
+<li><strong>Etiologia:</strong> Chlamydia trachomatis e Neisseria gonorrhoeae principais; também Mycoplasma genitalium e Trichomonas.</li>
+<li><strong>Clínica:</strong> frequentemente assintomática; quando sintomática — corrimento mucopurulento, sinusiorragia, dispareunia.</li>
+<li><strong>Diagnóstico:</strong> exame especular + abordagem sindrômica (Brasil), sem aguardar NAAT/cultura.</li>
+<li><strong>Tratamento:</strong> ceftriaxona 500mg IM dose única + azitromicina 500mg 2cp VO dose única (1g).</li>
+<li><strong>Tratar parceiros</strong> dos últimos 60 dias, orientar abstinência até completar tratamento.</li>
+<li><strong>Complicação:</strong> ascensão para DIP se não tratada; na gestação, risco de transmissão vertical (conjuntivite/pneumonia neonatal).</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Cervicite</strong> = inflamação do epitélio colunar por GC/CT, frequentemente assintomática, diagnóstico sindrômico, tratamento com ceftriaxona + azitromicina em dose única, sempre tratando parceiros e vigiando ascensão para DIP.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Sinusiorragia em mulher jovem sexualmente ativa → pense <strong>cervicite</strong> antes de neoplasia.</li>
+<li>Tratamento sindrômico da cervicite = <strong>ceftriaxona + azitromicina</strong>, ambos dose única.</li>
+<li>"Colo em framboesa" é tricomoníase, mesmo sendo classicamente descrita como vaginite.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que corrimento vaginal é sempre vaginite — pode ser de origem cervical.</li>
+<li>Não tratar cervicite assintomática identificada por achado incidental — <strong>deve</strong> ser tratada.</li>
+<li>Esquecer de tratar o parceiro sexual, perpetuando o ciclo de reinfecção.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"Colo mucopurulento e friável = pensa GC/CT."</strong></li>
+<li><strong>"1 IM + 1 VO, ambos dose única"</strong> — ceftriaxona IM, azitromicina VO.</li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Não diferenciar cervicite de vaginite pelo exame especular cuidadoso.</li>
+<li>Aguardar confirmação laboratorial antes de tratar, atrasando o tratamento sindrômico.</li>
+<li>Esquecer o rastreio de cervicite no pré-natal.</li>
+</ul></div>
+</div>`,
+"checklist": ["Diferencio cervicite de vaginite pela histologia do epitélio acometido","Conheço os principais agentes etiológicos da cervicite","Reconheço que a cervicite é frequentemente assintomática e por que isso é perigoso","Aplico a abordagem sindrômica preconizada no Brasil para diagnóstico e tratamento","Prescrevo corretamente o esquema de ceftriaxona + azitromicina","Explico a relação da cervicite não tratada com DIP e com complicações na gestação"]
+});
+Object.assign(C['infeccoes|3'], {
+"questoes": [
+{"stem":"A cervicite é definida como a inflamação de qual estrutura, revestida por qual tipo de epitélio?","opts":["Vagina, revestida por epitélio colunar.","Endocérvice, revestida por epitélio colunar (glandular).","Vulva, revestida por epitélio escamoso queratinizado.","Ectocérvice, revestida exclusivamente por epitélio escamoso não queratinizado."],"correct":1,"expl":"A cervicite acomete a <b>endocérvice</b>, revestida por <b>epitélio colunar (glandular)</b> — diferente do epitélio escamoso da vagina e ectocérvice, o que explica a diferença de agentes causadores entre cervicite e vaginite."},
+{"stem":"Quais são os dois principais agentes etiológicos classicamente associados à cervicite mucopurulenta?","opts":["Candida albicans e Gardnerella vaginalis.","Chlamydia trachomatis e Neisseria gonorrhoeae.","Treponema pallidum e Haemophilus ducreyi.","Herpes simples e HPV."],"correct":1,"expl":"<b>Chlamydia trachomatis</b> e <b>Neisseria gonorrhoeae</b> são os agentes classicamente associados à cervicite, responsáveis pela maioria dos casos."},
+{"stem":"Qual achado clássico ao exame especular está associado à cervicite por Trichomonas vaginalis?","opts":["Colo em framboesa/morango (colpite tigróide).","Placas esbranquiçadas aderidas à parede vaginal.","Úlceras genitais múltiplas e dolorosas.","Ausência completa de alterações visíveis."],"correct":0,"expl":"O <b>colo em framboesa/morango</b> (colpite tigróide), com pequenas hemorragias puntiformes, é achado clássico da cervicite por Trichomonas vaginalis."},
+{"stem":"Em relação à apresentação clínica da cervicite, é correto afirmar que:","opts":["É sempre sintomática, com corrimento abundante em todos os casos.","É frequentemente assintomática, especialmente nas infecções por clamídia.","Nunca cursa com sangramento pós-coital.","Sempre se acompanha de febre alta."],"correct":1,"expl":"A cervicite é <b>frequentemente assintomática</b>, especialmente quando causada por Chlamydia trachomatis, o que aumenta o risco de progressão silenciosa para DIP."},
+{"stem":"O que é a sinusiorragia e por que é um sinal de alerta importante?","opts":["Dor abdominal cíclica associada à menstruação, sem relação com cervicite.","Sangramento após relação sexual, pela friabilidade do epitélio inflamado, que deve levantar suspeita de cervicite em mulher jovem sexualmente ativa.","Corrimento vaginal com odor fétido característico da vaginose bacteriana.","Ausência completa de sangramento menstrual."],"correct":1,"expl":"A <b>sinusiorragia</b> (sangramento pós-coital) ocorre pela friabilidade do epitélio cervical inflamado e deve levantar suspeita de cervicite infecciosa em mulher jovem sexualmente ativa."},
+{"stem":"No contexto brasileiro, qual abordagem é preconizada pelo Ministério da Saúde para o diagnóstico e tratamento da cervicite, diante da limitada disponibilidade de testes moleculares na rede pública?","opts":["Abordagem sindrômica, tratando empiricamente para gonococo e clamídia sem aguardar confirmação laboratorial.","Aguardar sempre resultado de cultura antes de iniciar qualquer tratamento.","Tratar apenas quando há confirmação por biópsia cervical.","Não tratar até que a paciente apresente sintomas exuberantes."],"correct":0,"expl":"O Ministério da Saúde preconiza a <b>abordagem sindrômica</b>: diante de critérios clínicos compatíveis, trata-se empiricamente para os dois agentes principais, sem aguardar confirmação laboratorial, priorizando a prevenção de complicações."},
+{"stem":"Qual é o esquema de tratamento sindrômico recomendado pelo PCDT IST 2022 para cervicite?","opts":["Penicilina benzatina 2,4 milhões UI IM dose única isolada.","Ceftriaxona 500mg IM dose única + azitromicina 500mg (2 comprimidos, 1g) VO dose única.","Fluconazol 150mg VO dose única isolada.","Metronidazol 2g VO dose única isolada."],"correct":1,"expl":"O esquema sindrômico combina <b>ceftriaxona 500mg IM dose única</b> (cobre gonococo) e <b>azitromicina 1g VO dose única</b> (cobre clamídia)."},
+{"stem":"Qual é a principal vantagem prática do esquema de ceftriaxona + azitromicina, ambos em dose única, para o tratamento da cervicite?","opts":["Menor custo em relação a qualquer outro esquema disponível.","Possibilidade de tratamento supervisionado na própria consulta, reduzindo o risco de abandono terapêutico.","Ausência total de efeitos adversos.","Eliminação da necessidade de tratar o parceiro sexual."],"correct":1,"expl":"O esquema de dose única para ambos os componentes permite <b>tratamento supervisionado</b> na própria consulta, o que é especialmente relevante numa condição frequentemente assintomática, reduzindo o risco de abandono."},
+{"stem":"Diante de uma queixa de corrimento vaginal, qual conduta ajuda a diferenciar se a origem é cervical (cervicite) ou vaginal (vaginite)?","opts":["Solicitar hemograma completo, isoladamente.","Exame especular cuidadoso, observando se a secreção se origina do orifício cervical ou das paredes vaginais.","Dosar beta-hCG em todos os casos.","Realizar apenas anamnese, sem exame físico."],"correct":1,"expl":"O <b>exame especular cuidadoso</b>, observando a origem exata da secreção (colo versus paredes vaginais), é a ferramenta central para diferenciar cervicite de vaginite."},
+{"stem":"Qual é a principal complicação de uma cervicite por gonococo ou clamídia não tratada?","opts":["Regressão espontânea sem qualquer risco associado.","Ascensão da infecção, levando à doença inflamatória pélvica (DIP) e suas sequelas reprodutivas.","Transformação maligna direta do epitélio cervical.","Desenvolvimento imediato de miomatose uterina."],"correct":1,"expl":"A principal complicação é a <b>ascensão da infecção</b> para o trato genital superior, causando DIP, com risco de infertilidade, gravidez ectópica e dor pélvica crônica."},
+{"stem":"Em uma gestante com cervicite por clamídia não tratada, qual é um risco relevante para o recém-nascido durante o parto vaginal?","opts":["Cardiopatia congênita estrutural.","Conjuntivite neonatal e pneumonia por transmissão vertical.","Displasia do desenvolvimento do quadril.","Icterícia hemolítica por incompatibilidade Rh."],"correct":1,"expl":"A transmissão vertical de clamídia durante o parto vaginal pode causar <b>conjuntivite neonatal e pneumonia</b> no recém-nascido, reforçando a importância do rastreio e tratamento no pré-natal."},
+{"stem":"Em relação ao manejo dos parceiros sexuais de uma paciente diagnosticada com cervicite por gonococo/clamídia, é correto afirmar que:","opts":["Não há necessidade de qualquer conduta em relação aos parceiros.","Os parceiros sexuais dos últimos 60 dias devem ser tratados, independentemente de apresentarem sintomas.","Apenas parceiros com sintomas evidentes devem ser tratados.","O tratamento do parceiro é contraindicado enquanto não houver confirmação laboratorial na paciente índice."],"correct":1,"expl":"Os <b>parceiros sexuais dos últimos 60 dias</b> devem ser tratados como parte da abordagem sindrômica, independentemente de apresentarem sintomas, para reduzir reinfecção e transmissão."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Definição</small><br>O que é cervicite e qual epitélio é acometido?","back":"Inflamação da endocérvice, revestida por epitélio colunar (glandular) — diferente do epitélio escamoso da vagina.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Etiologia</small><br>Quais os dois principais agentes causadores de cervicite?","back":"{{Chlamydia trachomatis e Neisseria gonorrhoeae.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Etiologia</small><br>Que outros agentes podem causar cervicite além dos dois principais?","back":"Mycoplasma genitalium, Trichomonas vaginalis (colo em framboesa) e herpes simples (cervicite ulcerativa).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Clínica</small><br>A cervicite costuma ser sintomática?","back":"Não — é frequentemente assintomática, especialmente por clamídia, o que aumenta o risco de progressão silenciosa para DIP.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Clínica</small><br>O que é sinusiorragia e o que ela sugere?","back":"Sangramento pós-coital pela friabilidade do epitélio inflamado; sugere cervicite em mulher jovem sexualmente ativa.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diagnóstico</small><br>Quais achados ao exame especular sugerem cervicite?","back":"{{Corrimento mucopurulento pelo orifício externo do colo e friabilidade ao toque.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diagnóstico</small><br>Que abordagem o Brasil preconiza diante da baixa disponibilidade de NAAT/cultura?","back":"Abordagem sindrômica — tratar empiricamente para gonococo e clamídia sem aguardar confirmação laboratorial.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tratamento</small><br>Qual o esquema sindrômico da cervicite (PCDT 2022)?","back":"Ceftriaxona 500mg IM dose única + azitromicina 500mg (2 comprimidos, 1g) VO dose única.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tratamento</small><br>Qual a vantagem prática do esquema de dose única para ambas as drogas?","back":"Permite tratamento supervisionado na consulta, reduzindo risco de abandono — relevante numa condição frequentemente assintomática.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Manejo</small><br>Quais parceiros sexuais devem ser tratados?","back":"Os parceiros dos últimos 60 dias, independentemente de sintomas.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diferencial</small><br>Como diferenciar cervicite de vaginite ao exame especular?","back":"Observar se a secreção se origina do orifício cervical (cervicite) ou cobre as paredes vaginais (vaginite).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Complicação</small><br>Qual é a principal complicação da cervicite não tratada?","back":"Ascensão da infecção para o trato genital superior, causando DIP e suas sequelas reprodutivas.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Gestação</small><br>Quais os riscos neonatais da cervicite por clamídia não tratada na gestante?","back":"Conjuntivite neonatal e pneumonia por transmissão vertical durante o parto vaginal.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Achado clínico</small><br>O que caracteriza o colo em framboesa/morango (colpite tigróide)?","back":"Pequenas hemorragias puntiformes no colo, achado clássico da cervicite/vaginite por Trichomonas vaginalis, visível à especuloscopia.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Achado incidental em exame de rotina","stem":"Mulher de 26 anos, assintomática, comparece para consulta ginecológica de rotina. Ao exame especular, nota-se corrimento mucopurulento saindo do orifício externo do colo, com friabilidade ao toque do swab.","passos":[
+{"h":"Anamnese dirigida","p":"Paciente nega corrimento percebido, dor ou sangramento; múltiplos parceiros sexuais nos últimos meses, uso inconsistente de preservativo."},
+{"h":"Exame físico","p":"Corrimento mucopurulento originando-se especificamente do orifício cervical, com sangramento fácil ao toque do swab (friabilidade); paredes vaginais sem alterações."},
+{"h":"Raciocínio clínico","p":"Achado típico de cervicite mucopurulenta, mesmo na ausência de sintomas relatados pela paciente — reforçando que a cervicite é frequentemente assintomática."},
+{"h":"Conduta diagnóstica","p":"Diagnóstico clínico de cervicite, provavelmente por gonococo e/ou clamídia; adotar abordagem sindrômica sem aguardar exames confirmatórios."},
+{"h":"Conduta terapêutica","p":"Tratar com ceftriaxona 500mg IM dose única + azitromicina 500mg (2 comprimidos, 1g) VO dose única, e orientar tratamento dos parceiros dos últimos 60 dias."}
+]},
+{"t":"Caso 2 — Sinusiorragia em mulher jovem","stem":"Mulher de 22 anos relata sangramento após relações sexuais nas últimas semanas, sem outros sintomas relevantes.","passos":[
+{"h":"Anamnese dirigida","p":"Sangramento consistentemente após relação sexual, sem sangramento espontâneo fora desse contexto, ciclos menstruais regulares."},
+{"h":"Exame físico","p":"Ao exame especular, colo com friabilidade evidente, sangrando ao toque leve do swab, com discreto corrimento mucopurulento do orifício cervical."},
+{"h":"Raciocínio clínico","p":"Sinusiorragia associada a friabilidade cervical em mulher jovem sexualmente ativa é altamente sugestiva de cervicite infecciosa, devendo ser priorizada antes de investigar causas mais raras como neoplasia."},
+{"h":"Conduta diagnóstica","p":"Diagnóstico sindrômico de cervicite; considerar coleta de citologia oncótica de rotina, sem que isso atrase o início do tratamento para cervicite."},
+{"h":"Conduta terapêutica","p":"Iniciar tratamento sindrômico (ceftriaxona + azitromicina), orientar abstinência sexual até completar o tratamento e reavaliar em caso de persistência do sangramento."}
+]},
+{"t":"Caso 3 — Cervicite em gestante","stem":"Gestante de 16 semanas, em pré-natal de rotina, apresenta ao exame especular corrimento mucopurulento do colo, com friabilidade, sem sintomas relatados pela paciente.","passos":[
+{"h":"Anamnese dirigida","p":"Gestação sem intercorrências até o momento, paciente assintomática, sem relato de corrimento ou sangramento percebido."},
+{"h":"Exame físico","p":"Corrimento mucopurulento do orifício cervical, friabilidade ao toque, sem outras alterações ao exame obstétrico."},
+{"h":"Raciocínio clínico","p":"Cervicite identificada em rastreio de pré-natal, mesmo assintomática, deve ser tratada prontamente pelo risco de transmissão vertical (conjuntivite/pneumonia neonatal) e de complicações obstétricas como ruptura prematura de membranas."},
+{"h":"Conduta terapêutica","p":"Tratar com esquema sindrômico apropriado para gestação, cobrindo gonococo e clamídia, e orientar tratamento do parceiro sexual."},
+{"h":"Seguimento","p":"Reforçar acompanhamento pré-natal regular, orientar sinais de alerta obstétricos e programar avaliação neonatal para prevenção/detecção precoce de conjuntivite ou pneumonia por transmissão vertical."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
 </body>
 </html>
