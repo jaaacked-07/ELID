@@ -9162,5 +9162,1142 @@ try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.vie
 })();
 </script>
 
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['infertilidade|0'] = {
+name: "Investigação do Casal Infértil",
+intro: "Infertilidade é uma definição por tempo, não uma sensação — e por isso os dois parceiros entram na investigação juntos, desde o primeiro dia.",
+sub: [
+["entendendo","Definindo Infertilidade",`
+<div class="ac-h">Uma definição por tempo, baseada na fecundabilidade mensal</div>
+<p class="ac-p">Infertilidade é definida como a <b>incapacidade de conceber após 12 meses de relações sexuais regulares (2-3x/semana) e desprotegidas</b>, em casal em idade reprodutiva. Essa definição não é arbitrária: ela nasce da <b>fecundabilidade</b> — a chance de engravidar em um único ciclo menstrual — que em um casal jovem e saudável gira em torno de <b>20-25% por ciclo</b>. Somando essa chance mês a mês, cerca de 85% dos casais engravidam espontaneamente dentro de 12 meses de tentativa.</p>
+<p class="ac-p">Por isso, 12 meses sem sucesso já identifica a minoria de casais (~15%) em que vale a pena investigar uma causa — nem cedo demais (o que geraria investigação desnecessária na maioria que engravidaria sozinha), nem tarde demais (o que atrasaria o diagnóstico de uma causa tratável).</p>
+<svg viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Fecundabilidade cumulativa ao longo do tempo de tentativa</text>
+<rect x="50" y="50" width="540" height="150" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<line x1="80" y1="180" x2="560" y2="180" style="stroke:var(--muted)" stroke-width="1.2"/>
+<line x1="80" y1="60" x2="80" y2="180" style="stroke:var(--muted)" stroke-width="1.2"/>
+<path d="M80 175 Q200 100 320 75 Q440 62 560 58" style="fill:none;stroke:var(--accent)" stroke-width="2.5"/>
+<circle cx="320" cy="75" r="5" style="fill:var(--accent)"/>
+<text x="320" y="66" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">~85% em 12 meses</text>
+<text x="80" y="196" text-anchor="middle" font-size="9" style="fill:var(--muted)">0</text>
+<text x="320" y="196" text-anchor="middle" font-size="9" style="fill:var(--muted)">12 meses</text>
+<text x="560" y="196" text-anchor="middle" font-size="9" style="fill:var(--muted)">24 meses</text>
+<text x="60" y="185" text-anchor="end" font-size="9" style="fill:var(--muted)">0%</text>
+<text x="60" y="65" text-anchor="end" font-size="9" style="fill:var(--muted)">100%</text>
+</svg>
+<div class="ac-call"><b>Ideia central:</b> 12 meses de tentativa desprotegida sem gravidez é o ponto de corte que separa a maioria (que ainda engravidaria sozinha) da minoria que se beneficia de investigação.</div>
+<div class="ac-h" style="margin-top:14px">Palavras parecidas, significados diferentes na prova</div>
+<p class="ac-p"><b>Infertilidade primária:</b> casal nunca conseguiu engravidar, em nenhuma tentativa anterior. <b>Infertilidade secundária:</b> o casal já teve ao menos uma gestação prévia (incluindo aborto ou gravidez ectópica, não necessariamente um nascido vivo), mas não consegue conceber novamente. Essa distinção importa porque direciona a hipótese diagnóstica: infertilidade secundária levanta a suspeita de uma causa adquirida após a gestação anterior (ex.: sequela infecciosa de parto/aborto, aderências pós-cirúrgicas).</p>
+<p class="ac-p"><b>Esterilidade</b> é um conceito diferente de infertilidade: refere-se à incapacidade <b>absoluta e definitiva</b> de conceber (ex.: laqueadura tubária bilateral sem reversão, azoospermia obstrutiva definitiva, agenesia mülleriana), enquanto infertilidade descreve uma dificuldade que pode ou não ter solução. Na prática clínica e nas provas, os termos às vezes são usados de forma intercambiável, mas vale reconhecer a diferença conceitual.</p>
+<div class="ac-tip"><b>Pista de prova:</b> infertilidade secundária + antecedente de parto complicado, curetagem ou DIP puerperal → pense em causa adquirida (sinéquias, obstrução tubária).</div>
+`],
+["quando_investigar","Quando Iniciar a Investigação",`
+<div class="ac-h">A regra dos 12 meses tem exceções importantes</div>
+<p class="ac-p">A regra geral é iniciar a investigação após <b>12 meses</b> de tentativa desprotegida sem sucesso. Porém, essa janela de espera <b>encurta para 6 meses quando a mulher tem 35 anos ou mais</b> — porque a reserva ovariana declina de forma progressiva e acelerada a partir dessa faixa etária, e cada mês de espera adicional tem um custo biológico maior.</p>
+<p class="ac-p">Além da idade, existem situações em que a investigação deve começar <b>imediatamente</b>, independentemente do tempo de tentativa, porque a história já aponta para uma causa provável: ciclos menstruais irregulares ou amenorreia (sugerindo anovulação), história conhecida de doença inflamatória pélvica (DIP) ou endometriose, cirurgia pélvica/abdominal prévia, fator masculino já identificado, idade ≥ 40 anos, ou perdas gestacionais de repetição.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Quando iniciar a investigação</text>
+<rect x="30" y="46" width="270" height="70" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Mulher &lt; 35 anos</text>
+<text x="165" y="86" text-anchor="middle" font-size="9" style="fill:var(--muted)">12 meses sem sucesso</text>
+<rect x="340" y="46" width="270" height="70" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="475" y="68" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Mulher &#8805; 35 anos</text>
+<text x="475" y="86" text-anchor="middle" font-size="9" style="fill:var(--ink)">6 meses sem sucesso</text>
+<rect x="30" y="132" width="580" height="70" rx="10" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.3"/>
+<text x="320" y="154" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">Investigar já, sem esperar (fast-track)</text>
+<text x="320" y="172" text-anchor="middle" font-size="9" style="fill:var(--muted)">Anovulação evidente, DIP/endometriose conhecida, cirurgia pélvica prévia,</text>
+<text x="320" y="186" text-anchor="middle" font-size="9" style="fill:var(--muted)">fator masculino já identificado, idade &#8805; 40, perdas gestacionais de repetição</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha clássica:</b> a questão pode testar se você sabe que a idade da mulher (não a do homem) é o principal determinante do tempo de espera antes de investigar.</div>
+`],
+["fatores","Distribuição dos Fatores Etiológicos",`
+<div class="ac-h">Por que os dois parceiros são investigados juntos, desde o início</div>
+<p class="ac-p">A distribuição aproximada das causas de infertilidade no casal é: <b>fator feminino isolado em torno de um terço</b> dos casos, <b>fator masculino isolado em torno de um terço</b>, <b>fator combinado (ambos contribuindo)</b> em uma proporção relevante, e uma parcela sem causa identificável mesmo após investigação completa — a chamada <b>infertilidade sem causa aparente (ISCA)</b>.</p>
+<p class="ac-p">Essa distribuição é o argumento central para um princípio prático fundamental: como o fator masculino é tão prevalente quanto o feminino, <b>a investigação de ambos os parceiros começa simultaneamente</b>, nunca de forma sequencial (investigar só a mulher, e só depois o homem se nada for encontrado). Atrasar a avaliação masculina atrasa igualmente o diagnóstico em metade dos casais.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Distribuição aproximada dos fatores etiológicos</text>
+<rect x="30" y="50" width="150" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="105" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Fator feminino</text>
+<text x="105" y="96" text-anchor="middle" font-size="16" font-weight="700" style="fill:var(--accent)">~1/3</text>
+<rect x="195" y="50" width="150" height="120" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="270" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Fator masculino</text>
+<text x="270" y="96" text-anchor="middle" font-size="16" font-weight="700" style="fill:var(--accent)">~1/3</text>
+<rect x="360" y="50" width="150" height="120" rx="10" style="fill:var(--panel);stroke:#2E7FAE" stroke-width="1.3"/>
+<text x="435" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:#2E7FAE">Combinado</text>
+<text x="435" y="96" text-anchor="middle" font-size="16" font-weight="700" style="fill:#2E7FAE">variável</text>
+<rect x="525" y="50" width="90" height="120" rx="10" style="fill:var(--panel);stroke:var(--muted)" stroke-width="1.3"/>
+<text x="570" y="72" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--ink)">ISCA</text>
+<text x="570" y="140" text-anchor="middle" font-size="9" style="fill:var(--muted)">~10-15%</text>
+</svg>
+<div class="ac-call"><b>Consequência prática:</b> pedir espermograma é sempre um dos primeiros passos, não uma etapa reservada para "depois que descartar a mulher".</div>
+`],
+["abordagem_casal","Abordagem Inicial do Casal",`
+<div class="ac-h">Anamnese e exame físico dirigidos aos dois parceiros</div>
+<p class="ac-p">A consulta inicial de infertilidade avalia ambos os parceiros na mesma visita, sempre que possível. Na mulher: idade, características do ciclo menstrual (regularidade sugere ciclos ovulatórios), história sexual (frequência e momento das relações), antecedentes cirúrgicos e infecciosos pélvicos, IST prévias, hábitos (tabagismo, índice de massa corporal extremos) e uso de medicações. No homem: história de criptorquidia, trauma ou cirurgia genital, infecções urogenitais, exposição a calor/toxinas/quimioterapia, tabagismo, álcool e uso de anabolizantes.</p>
+<p class="ac-p">O exame físico complementa a anamnese: na mulher, IMC, sinais de hiperandrogenismo (que sugerem SOP) e exame pélvico; no homem, exame genital com atenção ao volume testicular e à pesquisa de varicocele. Essa consulta inicial também é o momento de iniciar o <b>aconselhamento pré-concepcional</b>: suplementação de ácido fólico, atualização vacinal, rastreio de ISTs e otimização de comorbidades antes de qualquer tentativa de tratamento.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Avaliação inicial em paralelo, não em série</text>
+<rect x="40" y="50" width="250" height="140" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="165" y="74" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Parceira</text>
+<text x="165" y="96" text-anchor="middle" font-size="9" style="fill:var(--muted)">Ciclo menstrual, cirurgias/</text>
+<text x="165" y="110" text-anchor="middle" font-size="9" style="fill:var(--muted)">infecções pélvicas, IMC,</text>
+<text x="165" y="124" text-anchor="middle" font-size="9" style="fill:var(--muted)">sinais de hiperandrogenismo</text>
+<rect x="350" y="50" width="250" height="140" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="475" y="74" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Parceiro</text>
+<text x="475" y="96" text-anchor="middle" font-size="9" style="fill:var(--ink)">Criptorquidia, trauma/cirurgia</text>
+<text x="475" y="110" text-anchor="middle" font-size="9" style="fill:var(--ink)">genital, exposição a calor/</text>
+<text x="475" y="124" text-anchor="middle" font-size="9" style="fill:var(--ink)">toxinas, varicocele ao exame</text>
+</svg>
+<div class="ac-tip"><b>Aconselhamento pré-concepcional</b> começa nessa primeira consulta, independentemente do resultado da investigação: ácido fólico, vacinas e rastreio de ISTs não esperam o diagnóstico.</div>
+`],
+["sequencia_fem","Sequência de Exames na Mulher",`
+<div class="ac-h">Do menos invasivo para o mais invasivo, guiado pela história</div>
+<p class="ac-p">A investigação feminina básica cobre três grandes áreas: <b>fator ovulatório</b> (a mulher está ovulando?), <b>reserva ovariana</b> (quantos óvulos ainda restam, e de que qualidade?) e <b>fator tuboperitoneal/uterino</b> (as trompas estão pérvias e a cavidade uterina é normal?). A ordem lógica começa pelos exames mais simples e menos invasivos: história menstrual e dosagem de progesterona na fase lútea média confirmam ou não a ovulação; AMH e contagem de folículos antrais por USTV avaliam a reserva; a histerossalpingografia (HSG) avalia trompas e cavidade uterina de forma minimamente invasiva.</p>
+<p class="ac-p">A laparoscopia, por ser um procedimento cirúrgico, fica reservada para situações específicas — suspeita de endometriose, aderências pélvicas ou quando a HSG sugere alteração tubária que precisa de confirmação e eventual correção no mesmo tempo cirúrgico. Esses exames são detalhados no próximo módulo.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<defs><marker id="am0f" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Ordem lógica da investigação feminina</text>
+<rect x="20" y="50" width="130" height="80" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="85" y="74" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Ovulação</text>
+<text x="85" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">História + progesterona</text>
+<line x1="150" y1="90" x2="185" y2="90" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#am0f)"/>
+<rect x="190" y="50" width="130" height="80" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="255" y="74" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Reserva ovariana</text>
+<text x="255" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">AMH + CFA</text>
+<line x1="320" y1="90" x2="355" y2="90" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#am0f)"/>
+<rect x="360" y="50" width="130" height="80" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="425" y="74" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Trompas/cavidade</text>
+<text x="425" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">HSG</text>
+<line x1="490" y1="90" x2="525" y2="90" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#am0f)"/>
+<rect x="530" y="50" width="90" height="80" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="575" y="74" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--accent)">Laparoscopia</text>
+<text x="575" y="92" text-anchor="middle" font-size="8" style="fill:var(--ink)">se indicada</text>
+</svg>
+<div class="ac-tip">Essa sequência é apresentada com detalhe no módulo "Fator Ovulatório e Tuboperitoneal".</div>
+`],
+["sequencia_masc","Sequência de Exames no Homem",`
+<div class="ac-h">O espermograma é o exame inicial, sempre</div>
+<p class="ac-p">Como o fator masculino responde por cerca de um terço dos casos isoladamente e contribui em outra parcela combinada, o <b>espermograma</b> é solicitado desde a primeira consulta, junto com a avaliação feminina. É um exame barato, não invasivo e de alto rendimento diagnóstico. Se o resultado vier alterado, a recomendação é <b>repetir o exame após 2-3 meses</b> antes de tirar conclusões — porque o ciclo completo de espermatogênese dura cerca de 74 dias, e um resultado isolado alterado pode refletir um evento transitório (febre, uso de medicação, abstinência inadequada) e não necessariamente uma condição permanente.</p>
+<p class="ac-p">Se a alteração se confirmar na repetição, o passo seguinte é o encaminhamento ao urologista para investigação dirigida das causas (detalhado no módulo de Fator Masculino).</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<defs><marker id="am0m" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Fluxo da investigação masculina inicial</text>
+<rect x="30" y="50" width="170" height="80" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="115" y="74" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Espermograma</text>
+<text x="115" y="94" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">1ª consulta, sempre</text>
+<line x1="200" y1="90" x2="235" y2="90" style="stroke:var(--accent)" stroke-width="1.6" marker-end="url(#am0m)"/>
+<rect x="240" y="50" width="170" height="80" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="325" y="74" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Normal</text>
+<text x="325" y="94" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Sem repetição necessária</text>
+<rect x="240" y="140" width="170" height="50" rx="10" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.3"/>
+<text x="325" y="168" text-anchor="middle" font-size="9" style="fill:#e8675f">Alterado → repetir em 2-3 meses</text>
+<line x1="410" y1="165" x2="445" y2="120" style="stroke:#e8675f" stroke-width="1.5" marker-end="url(#am0m)"/>
+<rect x="450" y="90" width="160" height="50" rx="10" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.3"/>
+<text x="530" y="118" text-anchor="middle" font-size="9" style="fill:#e8675f">Confirmado → urologista</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha:</b> concluir "infertilidade masculina" a partir de um único espermograma alterado, sem repetir o exame, é erro comum em questões de prova.</div>
+`],
+["quando_encaminhar","Quando Encaminhar ao Especialista",`
+<div class="ac-h">Nem todo casal precisa esperar a investigação básica se esgotar</div>
+<p class="ac-p">Algumas situações justificam encaminhamento precoce a um serviço especializado em reprodução humana, antes mesmo de completar toda a investigação básica: <b>idade materna avançada</b> (a partir de 35 anos, e com maior urgência a partir de 38-40 anos, dado o declínio acelerado da reserva ovariana), <b>fator grave já identificado</b> (azoospermia, obstrução tubária bilateral confirmada, insuficiência ovariana precoce), ou quando a <b>investigação básica não encontrou causa</b> após avaliação completa e ordenada dos dois parceiros.</p>
+<p class="ac-p">Também é apropriado encaminhar após <b>falha de tratamentos de baixa complexidade</b> (coito programado, inseminação intrauterina) depois de um número razoável de ciclos, como será visto no módulo de Técnicas de Reprodução Assistida. A lógica geral é: quanto mais tempo passa sem resolver a causa, menor a janela reprodutiva restante — por isso o encaminhamento não deve ser adiado desnecessariamente.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Gatilhos para encaminhamento precoce</text>
+<rect x="20" y="46" width="290" height="60" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="70" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Idade &#8805; 35-38 anos</text>
+<text x="165" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Reserva ovariana em declínio</text>
+<rect x="330" y="46" width="290" height="60" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="475" y="70" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Fator grave identificado</text>
+<text x="475" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Azoospermia, obstrução bilateral</text>
+<rect x="20" y="120" width="290" height="60" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="165" y="144" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Investigação sem causa</text>
+<text x="165" y="162" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Após avaliação completa dos dois</text>
+<rect x="330" y="120" width="290" height="60" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="475" y="144" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Falha de baixa complexidade</text>
+<text x="475" y="162" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Vários ciclos de coito/IIU sem êxito</text>
+</svg>
+<div class="ac-call"><b>Fio condutor:</b> este raciocínio de investigação organizada é a base para os próximos módulos — fator ovulatório/tuboperitoneal, fator masculino em detalhe e, por fim, as técnicas de reprodução assistida.</div>
+`]
+]
+};
+Object.assign(C['infertilidade|0'], {
+"escores": `<div class="prose">
+<h3>Tempo para iniciar investigação — tabela de referência</h3>
+<table class="ac-tbl">
+<tr><th>Situação</th><th>Quando investigar</th></tr>
+<tr><td>Mulher &lt; 35 anos, sem fatores de risco</td><td>Após 12 meses de tentativa desprotegida</td></tr>
+<tr><td>Mulher &#8805; 35 anos</td><td>Após 6 meses de tentativa desprotegida</td></tr>
+<tr><td>Anovulação evidente (oligo/amenorreia)</td><td>Imediatamente</td></tr>
+<tr><td>DIP/endometriose/cirurgia pélvica prévia conhecida</td><td>Imediatamente</td></tr>
+<tr><td>Fator masculino já conhecido</td><td>Imediatamente</td></tr>
+<tr><td>Idade &#8805; 40 anos ou perdas gestacionais de repetição</td><td>Imediatamente</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">"12 pela regra, 6 se 35+, 0 se história já aponta a causa."</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Conceitos que a prova gosta de confundir</h3>
+<table class="ac-tbl">
+<tr><th>Termo</th><th>Definição</th></tr>
+<tr><td><strong>Infertilidade primária</strong></td><td>Casal nunca engravidou</td></tr>
+<tr><td><strong>Infertilidade secundária</strong></td><td>Casal já teve gestação prévia (incluindo aborto/ectópica) e não consegue engravidar novamente</td></tr>
+<tr><td><strong>Esterilidade</strong></td><td>Incapacidade absoluta e definitiva de conceber (ex.: laqueadura sem reversão, azoospermia obstrutiva definitiva)</td></tr>
+<tr><td><strong>Subfertilidade</strong></td><td>Termo por vezes usado como sinônimo de infertilidade, descrevendo redução (não ausência) da capacidade reprodutiva</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Investigação do Casal Infértil</div>
+<div class="mm">
+  <div class="mm-card"><h5>⏱️ Definição</h5><ul><li>12 meses sem gravidez</li><li>Relações regulares desprotegidas</li><li>Baseada em fecundabilidade ~20-25%/ciclo</li></ul></div>
+  <div class="mm-card"><h5>📅 Quando investigar</h5><ul><li>12m se &lt;35a</li><li>6m se &#8805;35a</li><li>Já, se fator de risco conhecido</li></ul></div>
+  <div class="mm-card"><h5>⚖️ Fatores</h5><ul><li>~1/3 feminino</li><li>~1/3 masculino</li><li>Combinado + ISCA</li></ul></div>
+  <div class="mm-card"><h5>👫 Abordagem</h5><ul><li>Sempre os dois, juntos</li><li>Anamnese + exame físico dirigidos</li><li>Aconselhamento pré-concepcional</li></ul></div>
+  <div class="mm-card"><h5>🔬 Sequência</h5><ul><li>Mulher: ovulação → reserva → trompas/cavidade</li><li>Homem: espermograma sempre 1º</li></ul></div>
+  <div class="mm-card"><h5>🚀 Encaminhar</h5><ul><li>Idade &#8805; 35-38</li><li>Fator grave</li><li>Sem causa após investigação</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Casal relata dificuldade para engravidar</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — Definir se já é caso de investigar</div><div class="fx-lbl">12 meses (&lt;35a) ou 6 meses (&#8805;35a) de tentativa desprotegida, OU fator de risco conhecido (fast-track)</div><div class="fx-arrow"></div><div class="fx-node">Passo 2 — Avaliação simultânea dos dois parceiros</div><div class="fx-lbl">Anamnese e exame físico dirigidos; espermograma solicitado já na 1ª consulta</div><div class="fx-arrow"></div><div class="fx-row"><div class="fx-node end">Mulher: ovulação → reserva ovariana → HSG (trompas/cavidade)</div><div class="fx-node end">Homem: espermograma (repetir se alterado)</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Investigação básica em curso ou concluída</div><div class="fx-arrow"></div><div class="fx-lbl">Fator grave identificado ou idade &#8805; 35-38 anos?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Encaminhar precocemente ao especialista em reprodução</div><div class="fx-node"><b>NÃO:</b> Concluir investigação básica</div></div><div class="fx-arrow"></div><div class="fx-lbl">Causa identificada?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Tratar a causa específica (módulos seguintes)</div><div class="fx-node end"><b>NÃO (ISCA):</b> Discutir técnicas de reprodução assistida</div></div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Investigação do Casal Infértil em 60 segundos</h4>
+<ul>
+<li><strong>Infertilidade</strong> = sem gravidez após 12 meses de relações regulares desprotegidas (fecundabilidade ~20-25%/ciclo).</li>
+<li><strong>Investigar em 6 meses</strong> se mulher &#8805; 35 anos; <strong>imediatamente</strong> se anovulação evidente, DIP/endometriose conhecida, fator masculino já identificado, idade &#8805; 40 ou perdas de repetição.</li>
+<li><strong>Primária</strong> (nunca engravidou) x <strong>secundária</strong> (gestação prévia) x <strong>esterilidade</strong> (incapacidade absoluta).</li>
+<li><strong>Fatores:</strong> ~1/3 feminino, ~1/3 masculino, combinado + ISCA completam o restante — por isso os dois parceiros são investigados juntos, desde o início.</li>
+<li><strong>Espermograma</strong> sempre entra na 1ª consulta; se alterado, repetir em 2-3 meses antes de concluir.</li>
+<li><strong>Sequência feminina:</strong> ovulação → reserva ovariana → trompas/cavidade (HSG) → laparoscopia se indicada.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Investigação do casal infértil</strong> = 12 meses (6 se &#8805;35a) de tentativa desprotegida sem gravidez ativa avaliação simultânea dos dois parceiros, começando pelo espermograma e pela avaliação ovulatória/reserva/tuboperitoneal, com encaminhamento precoce se idade avançada ou fator grave.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Se a questão menciona mulher &#8805; 35 anos, o corte de tempo para investigar cai para <strong>6 meses</strong>.</li>
+<li>Espermograma é solicitado <strong>desde a primeira consulta</strong>, nunca "depois de esgotar a investigação feminina".</li>
+<li>Ciclos menstruais irregulares na história já autorizam investigar sem esperar o tempo padrão.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Confundir infertilidade secundária com "menos grave" — pode indicar causa adquirida específica (ex.: sinéquias pós-parto).</li>
+<li>Concluir infertilidade masculina a partir de um único espermograma alterado sem repetição.</li>
+<li>Achar que só a mulher precisa ser investigada inicialmente.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"12 pela regra, 6 se 35+, 0 se a história já entrega a causa."</strong></li>
+<li><strong>"Um terço, um terço, e o resto combinado ou sem causa."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Atrasar o encaminhamento ao especialista em mulheres com idade avançada.</li>
+<li>Não considerar o fator masculino desde o início da investigação.</li>
+<li>Ignorar o aconselhamento pré-concepcional (ácido fólico, vacinas) na primeira consulta.</li>
+</ul></div>
+</div>`,
+"checklist": ["Defino infertilidade pelo critério de 12 meses e explico a lógica da fecundabilidade cumulativa","Diferencio infertilidade primária, secundária e esterilidade","Sei quando encurtar a espera para 6 meses e quando investigar imediatamente (fast-track)","Reconheço a distribuição aproximada dos fatores etiológicos e por que os dois parceiros são avaliados juntos","Descrevo a sequência lógica de exames na mulher e por que o espermograma é sempre precoce no homem","Sei quando encaminhar precocemente ao especialista em reprodução humana"]
+});
+Object.assign(C['infertilidade|0'], {
+"questoes": [
+{"stem":"Qual é a definição padrão de infertilidade em um casal em idade reprodutiva, sem fatores de risco conhecidos?","opts":["Ausência de gravidez após 3 meses de tentativa desprotegida.","Ausência de gravidez após 6 meses de tentativa desprotegida, independentemente da idade.","Ausência de gravidez após 12 meses de relações sexuais regulares e desprotegidas.","Ausência de gravidez após 24 meses de tentativa desprotegida."],"correct":2,"expl":"A definição padrão é <b>12 meses</b> de relações regulares desprotegidas sem concepção, baseada na fecundabilidade cumulativa mensal de um casal saudável."},
+{"stem":"Em qual situação a investigação de infertilidade deve começar após apenas 6 meses de tentativa, em vez de 12?","opts":["Quando o homem tem mais de 40 anos.","Quando a mulher tem 35 anos ou mais.","Quando o casal tem menos de 2 anos de união.","Quando há uso prévio de método contraceptivo hormonal."],"correct":1,"expl":"A partir dos <b>35 anos</b>, a reserva ovariana declina de forma mais acelerada, justificando encurtar a janela de espera para 6 meses."},
+{"stem":"Uma mulher com ciclos menstruais irregulares (oligomenorreia) procura investigação de infertilidade após apenas 4 meses de tentativa. A conduta mais apropriada é:","opts":["Orientar que é preciso completar 12 meses antes de qualquer avaliação.","Iniciar a investigação imediatamente, pois a irregularidade menstrual já sugere anovulação.","Aguardar até completar 6 meses, independentemente da idade.","Encaminhar diretamente para fertilização in vitro sem investigação prévia."],"correct":1,"expl":"Ciclos irregulares sugerindo anovulação são um <b>fator de risco que justifica investigação imediata</b>, sem necessidade de aguardar o tempo padrão de tentativa."},
+{"stem":"Qual das alternativas descreve corretamente a infertilidade secundária?","opts":["Casal nunca conseguiu engravidar em nenhuma tentativa.","Casal já teve ao menos uma gestação prévia (incluindo aborto ou ectópica) e agora não consegue conceber novamente.","Incapacidade absoluta e definitiva de conceber, como após laqueadura tubária sem reversão.","Infertilidade diagnosticada exclusivamente por fator masculino."],"correct":1,"expl":"Infertilidade <b>secundária</b> pressupõe gestação prévia (qualquer desfecho, incluindo aborto ou ectópica) seguida de dificuldade para engravidar novamente."},
+{"stem":"Sobre a distribuição dos fatores etiológicos de infertilidade no casal, é correto afirmar que:","opts":["O fator masculino é raro, respondendo por menos de 5% dos casos.","O fator feminino responde por praticamente 100% dos casos identificáveis.","Fator feminino e fator masculino têm prevalência aproximadamente semelhante, cada um respondendo por cerca de um terço dos casos isoladamente.","Não existe infertilidade sem causa aparente; toda investigação completa encontra uma etiologia."],"correct":2,"expl":"Fator feminino e masculino têm prevalência <b>semelhante</b> (cerca de 1/3 cada isoladamente), o que justifica a investigação simultânea de ambos os parceiros."},
+{"stem":"Por que o espermograma deve ser solicitado já na primeira consulta do casal infértil, e não apenas após a investigação feminina completa?","opts":["Porque o fator masculino é tão prevalente quanto o feminino, e investigar sequencialmente atrasaria o diagnóstico em metade dos casais.","Porque o espermograma é um exame de alto custo que precisa ser justificado previamente.","Porque a legislação brasileira exige a ordem sequencial de investigação.","Porque o espermograma só é confiável após a mulher completar a investigação hormonal."],"correct":0,"expl":"Como o fator masculino é tão comum quanto o feminino, investigar apenas a mulher primeiro atrasaria desnecessariamente o diagnóstico correto em uma parcela relevante dos casais."},
+{"stem":"Um homem realiza espermograma como parte da investigação inicial e o resultado vem alterado. Qual a conduta mais apropriada antes de concluir o diagnóstico?","opts":["Encaminhar imediatamente para ICSI, sem necessidade de confirmação.","Repetir o exame após 2-3 meses, dado o tempo do ciclo de espermatogênese, antes de firmar o diagnóstico.","Considerar o resultado definitivo e iniciar tratamento imediatamente.","Repetir o exame no mesmo dia, em outro laboratório."],"correct":1,"expl":"O ciclo de espermatogênese dura cerca de 74 dias; por isso, um resultado alterado deve ser <b>confirmado com repetição em 2-3 meses</b> antes de conclusões definitivas."},
+{"stem":"Qual é a ordem lógica recomendada para a investigação básica feminina de infertilidade?","opts":["Laparoscopia, seguida de histerossalpingografia, seguida de avaliação da ovulação.","Avaliação da ovulação e reserva ovariana, seguida de avaliação tubária/uterina (HSG), reservando a laparoscopia para casos específicos.","Ressonância magnética pélvica como primeiro exame, sempre.","Biópsia endometrial como primeiro exame de rotina."],"correct":1,"expl":"A lógica é do menos para o mais invasivo: <b>ovulação/reserva ovariana primeiro</b>, depois avaliação tubária/uterina por HSG, reservando a laparoscopia (cirúrgica) para indicações específicas."},
+{"stem":"Uma mulher de 41 anos procura avaliação por infertilidade primária há 7 meses. Qual a conduta mais adequada?","opts":["Orientar que ainda não completou o tempo mínimo de tentativa e aguardar mais 5 meses.","Iniciar investigação e considerar encaminhamento precoce ao especialista em reprodução, dada a idade.","Solicitar apenas espermograma do parceiro, sem avaliação feminina.","Contraindicar qualquer investigação após os 40 anos."],"correct":1,"expl":"Idade &#8805; 40 anos é critério de investigação imediata e de <b>encaminhamento precoce</b> ao especialista, dado o declínio acelerado da reserva ovariana nessa faixa etária."},
+{"stem":"O que caracteriza especificamente o termo 'esterilidade', diferenciando-o de 'infertilidade'?","opts":["Esterilidade é sinônimo exato de infertilidade, sem qualquer distinção conceitual.","Esterilidade descreve incapacidade absoluta e definitiva de conceber, enquanto infertilidade descreve uma dificuldade que pode ou não ter solução.","Esterilidade só se aplica a homens, e infertilidade só a mulheres.","Esterilidade é um termo usado exclusivamente em pacientes acima de 40 anos."],"correct":1,"expl":"Esterilidade implica impossibilidade <strong>absoluta e definitiva</strong> (ex.: laqueadura sem reversão), enquanto infertilidade é uma dificuldade potencialmente investigável e tratável."},
+{"stem":"O que deve compor o aconselhamento pré-concepcional já na primeira consulta do casal infértil?","opts":["Apenas a solicitação de exames de imagem.","Suplementação de ácido fólico, atualização vacinal, rastreio de ISTs e otimização de comorbidades, independentemente do resultado da investigação.","Encaminhamento direto para reprodução assistida, sem investigação prévia.","Apenas orientações dietéticas, sem outras intervenções."],"correct":1,"expl":"O aconselhamento pré-concepcional (ácido fólico, vacinas, rastreio de ISTs, controle de comorbidades) deve começar já na <b>primeira consulta</b>, independentemente do diagnóstico final."},
+{"stem":"Um casal completa investigação básica completa e ordenada, incluindo avaliação ovulatória, de reserva ovariana, tuboperitoneal e espermograma normal, sem identificação de causa. Esse cenário é classificado como:","opts":["Infertilidade secundária.","Esterilidade definitiva.","Infertilidade sem causa aparente (ISCA).","Erro de investigação, que deve ser reiniciada do zero."],"correct":2,"expl":"Quando a investigação completa e bem conduzida não identifica etiologia, o quadro é classificado como <b>infertilidade sem causa aparente (ISCA)</b>, situação que direciona para discussão de técnicas de reprodução assistida."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Definição</small><br>Como se define infertilidade em um casal em idade reprodutiva?","back":"Ausência de gravidez após 12 meses de relações sexuais regulares (2-3x/semana) e desprotegidas.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Fisiologia</small><br>Por que 12 meses é o ponto de corte usado?","back":"{{A fecundabilidade mensal de um casal saudável é ~20-25% por ciclo, o que soma cerca de 85% de chance cumulativa de gravidez em 12 meses.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Exceção</small><br>Quando o tempo de investigação cai para 6 meses?","back":"Quando a mulher tem 35 anos ou mais, pelo declínio acelerado da reserva ovariana.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Fast-track</small><br>Cite 3 situações em que se investiga imediatamente, sem esperar o tempo padrão.","back":"{{Anovulação evidente (oligo/amenorreia), DIP/endometriose conhecida ou cirurgia pélvica prévia, e fator masculino já identificado (também: idade ≥40 e perdas gestacionais de repetição).}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Conceitos</small><br>Diferencie infertilidade primária de secundária.","back":"Primária: nunca engravidou. Secundária: já teve gestação prévia (incl. aborto/ectópica) e não consegue engravidar novamente.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Conceitos</small><br>O que é esterilidade, diferente de infertilidade?","back":"Incapacidade absoluta e definitiva de conceber (ex.: laqueadura sem reversão, azoospermia obstrutiva definitiva).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Epidemiologia</small><br>Qual a distribuição aproximada dos fatores etiológicos de infertilidade?","back":"~1/3 fator feminino isolado, ~1/3 fator masculino isolado, restante combinado ou sem causa aparente (ISCA).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Princípio</small><br>Por que os dois parceiros são investigados simultaneamente desde o início?","back":"Porque o fator masculino é tão prevalente quanto o feminino — investigar em série atrasaria o diagnóstico em metade dos casos.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Espermograma</small><br>O que fazer se o espermograma inicial vier alterado?","back":"Repetir em 2-3 meses (ciclo de espermatogênese ~74 dias) antes de concluir o diagnóstico.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Sequência</small><br>Qual a ordem lógica da investigação básica feminina?","back":"Ovulação → reserva ovariana → trompas/cavidade uterina (HSG) → laparoscopia se indicada.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Pré-concepcional</small><br>O que deve ser oferecido já na primeira consulta, independentemente do diagnóstico?","back":"Suplementação de ácido fólico, atualização vacinal, rastreio de ISTs e otimização de comorbidades.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Encaminhamento</small><br>Cite 3 gatilhos para encaminhamento precoce ao especialista em reprodução.","back":"{{Idade materna ≥35-38 anos, fator grave já identificado (azoospermia, obstrução tubária bilateral), e investigação básica sem causa identificada.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Exame físico</small><br>O que buscar no exame físico masculino na consulta inicial?","back":"Exame genital com atenção ao volume testicular e à pesquisa de varicocele.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">ISCA</small><br>O que é infertilidade sem causa aparente (ISCA)?","back":"Ausência de etiologia identificável mesmo após investigação básica completa e bem conduzida dos dois parceiros.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Casal jovem, tentativa recente","stem":"Mulher de 28 anos e parceiro de 30 anos procuram atendimento relatando 8 meses de tentativa de gravidez sem sucesso, ciclos menstruais regulares, sem antecedentes cirúrgicos ou infecciosos relevantes em nenhum dos dois.","passos":[
+{"h":"Avaliação do tempo de tentativa","p":"8 meses de tentativa desprotegida em mulher com 28 anos, sem fatores de risco identificados na história."},
+{"h":"Raciocínio sobre o critério temporal","p":"Como a mulher tem menos de 35 anos e não há fatores de risco que justifiquem investigação imediata, o critério padrão de 12 meses ainda não foi atingido."},
+{"h":"Conduta neste momento","p":"Orientar o casal sobre a normalidade da fecundabilidade mensal e reforçar orientações sobre período fértil e hábitos saudáveis, sem iniciar investigação laboratorial extensa ainda."},
+{"h":"Aconselhamento associado","p":"Iniciar aconselhamento pré-concepcional (ácido fólico, atualização vacinal) independentemente da decisão de investigar, já que são medidas de baixo custo e alto benefício."},
+{"h":"Plano de seguimento","p":"Reavaliar o casal caso completem 12 meses de tentativa sem sucesso, quando então será indicada investigação completa e simultânea dos dois parceiros."}
+]},
+{"t":"Caso 2 — Mulher com ciclos irregulares","stem":"Mulher de 27 anos relata 4 meses de tentativa de gravidez, com ciclos menstruais irregulares desde a menarca, variando de 40 a 60 dias, associados a sinais de hirsutismo leve.","passos":[
+{"h":"Anamnese dirigida","p":"Irregularidade menstrual crônica desde a menarca, com intervalo entre ciclos sugestivo de oligomenorreia, associada a sinais clínicos de hiperandrogenismo."},
+{"h":"Raciocínio sobre o critério temporal","p":"Apesar de apenas 4 meses de tentativa, a história de ciclos irregulares já sugere fortemente anovulação — um dos critérios de investigação imediata (fast-track), independentemente do tempo de tentativa."},
+{"h":"Conduta neste momento","p":"Iniciar investigação já, com avaliação hormonal dirigida à função ovulatória e à provável síndrome dos ovários policísticos, sem aguardar os 12 meses padrão."},
+{"h":"Avaliação simultânea do parceiro","p":"Solicitar espermograma do parceiro na mesma consulta, mantendo o princípio de investigação simultânea dos dois membros do casal."},
+{"h":"Encaminhamento e plano","p":"Seguir a investigação conforme o fluxo do módulo de Fator Ovulatório, com eventual encaminhamento para manejo específico da anovulação identificada."}
+]},
+{"t":"Caso 3 — Mulher de 39 anos, infertilidade secundária","stem":"Mulher de 39 anos, com um filho de 8 anos de um parceiro anterior, tenta engravidar há 5 meses com o parceiro atual, sem sucesso. Relata curetagem uterina após aborto espontâneo há 3 anos.","passos":[
+{"h":"Classificação do quadro","p":"Trata-se de infertilidade secundária, já que houve gestação prévia (o filho de 8 anos), associada a antecedente de curetagem uterina após aborto."},
+{"h":"Raciocínio sobre o critério temporal e etário","p":"Idade de 39 anos já justifica investigar com apenas 6 meses de tentativa — e, neste caso, mesmo antes de completar esse prazo, a combinação de idade avançada com antecedente de curetagem (risco de sinéquias uterinas) justifica não postergar a avaliação."},
+{"h":"Hipóteses a considerar","p":"Além do declínio de reserva ovariana esperado pela idade, deve-se investigar ativamente a cavidade uterina, dado o antecedente de curetagem, que é fator de risco para sinéquias intrauterinas (síndrome de Asherman)."},
+{"h":"Conduta neste momento","p":"Iniciar investigação completa e simultânea dos dois parceiros sem demora, incluindo avaliação de reserva ovariana e avaliação dirigida da cavidade uterina."},
+{"h":"Plano de encaminhamento","p":"Dada a idade materna, considerar encaminhamento precoce e paralelo a um serviço especializado em reprodução humana, para não perder tempo reprodutivo relevante durante a investigação básica."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['infertilidade|1'] = {
+name: "Fator Ovulatório e Tuboperitoneal",
+intro: "Confirmar que existe ovulação, medir quantos óvulos ainda restam e garantir que o caminho até o útero está livre — esse é o tripé da investigação feminina.",
+sub: [
+["entendendo","Por Que Investigar Ovulação e Trompas",`
+<div class="ac-h">Sem óvulo liberado e sem caminho livre, não há concepção</div>
+<p class="ac-p">Para uma gravidez espontânea acontecer, três condições precisam ser verdadeiras ao mesmo tempo: a mulher precisa <b>ovular</b> (liberar um óvulo maduro), precisa ter uma <b>reserva ovariana</b> suficiente para sustentar tentativas futuras, e o óvulo e o espermatozoide precisam ter um <b>caminho anatômico livre</b> — trompas pérvias e cavidade uterina normal — para se encontrarem e para o embrião se implantar.</p>
+<p class="ac-p">O fator ovulatório responde por uma parcela importante da infertilidade feminina (frequentemente citado como a causa mais comum isolada), e o fator tuboperitoneal (trompas obstruídas ou aderências pélvicas) é a segunda grande causa. Investigar essas duas frentes de forma organizada é o cerne da avaliação da mulher infértil.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">O tripé da fertilidade feminina</text>
+<rect x="20" y="50" width="185" height="130" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="112" y="74" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Ovulação</text>
+<text x="112" y="96" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Liberação regular</text>
+<text x="112" y="110" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">de óvulo maduro</text>
+<rect x="227" y="50" width="185" height="130" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="319" y="74" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Reserva ovariana</text>
+<text x="319" y="96" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Quantidade e qualidade</text>
+<text x="319" y="110" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">de óvulos remanescentes</text>
+<rect x="434" y="50" width="185" height="130" rx="10" style="fill:var(--panel);stroke:#2E7FAE" stroke-width="1.3"/>
+<text x="526" y="74" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#2E7FAE">Trompas/cavidade</text>
+<text x="526" y="96" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Caminho anatômico</text>
+<text x="526" y="110" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">livre e funcional</text>
+</svg>
+<div class="ac-call"><b>Ideia central:</b> cada um dos três pilares tem exames próprios — e um resultado alterado em qualquer um deles já muda completamente a conduta.</div>
+`],
+["ovulacao_metodos","Avaliação da Ovulação",`
+<div class="ac-h">Confirmar ovulação: da história ao exame laboratorial</div>
+<p class="ac-p">O primeiro indício de ovulação é a <b>regularidade do ciclo menstrual</b> (geralmente entre 24-35 dias): ciclos regulares são fortemente sugestivos de ciclos ovulatórios, enquanto oligomenorreia ou amenorreia sugerem anovulação. Para confirmação objetiva, o exame mais usado é a <b>dosagem de progesterona na fase lútea média</b> (cerca de 7 dias antes da menstruação esperada, ou por volta do 21º-23º dia em ciclo de 28 dias): um valor elevado confirma que houve ovulação, porque só o corpo lúteo (formado após a ruptura folicular) produz progesterona em quantidade relevante.</p>
+<p class="ac-p">Outros métodos existem, mas com papéis mais limitados: <b>curva de temperatura basal corporal (BBT)</b> mostra elevação após a ovulação, mas é pouco prática e sujeita a erro; <b>kits urinários de LH</b> detectam o pico de LH que precede a ovulação em cerca de 24-36 horas, úteis para programar relações ou procedimentos; e a <b>ultrassonografia transvaginal seriada</b> permite acompanhar o crescimento folicular e confirmar a ruptura do folículo dominante, sendo o método mais direto, porém mais trabalhoso.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Métodos de confirmação da ovulação</text>
+<rect x="20" y="46" width="140" height="130" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="90" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Progesterona</text>
+<text x="90" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)" dy="0"></text>
+<text x="90" y="86" text-anchor="middle" font-size="8" style="fill:var(--ink)">fase lútea média</text>
+<text x="90" y="102" text-anchor="middle" font-size="8" style="fill:var(--ink)">Padrão mais usado</text>
+<rect x="175" y="46" width="140" height="130" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="245" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">BBT</text>
+<text x="245" y="86" text-anchor="middle" font-size="8" style="fill:var(--muted)">Elevação pós-ovulatória</text>
+<text x="245" y="102" text-anchor="middle" font-size="8" style="fill:var(--muted)">Pouco prática</text>
+<rect x="330" y="46" width="140" height="130" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="400" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Kit LH urinário</text>
+<text x="400" y="86" text-anchor="middle" font-size="8" style="fill:var(--muted)">Detecta pico pré-ovulatório</text>
+<text x="400" y="102" text-anchor="middle" font-size="8" style="fill:var(--muted)">Útil p/ programar relações</text>
+<rect x="485" y="46" width="140" height="130" rx="10" style="fill:var(--panel);stroke:#2E7FAE" stroke-width="1.3"/>
+<text x="555" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:#2E7FAE">USTV seriada</text>
+<text x="555" y="86" text-anchor="middle" font-size="8" style="fill:var(--muted)">Acompanha folículo</text>
+<text x="555" y="102" text-anchor="middle" font-size="8" style="fill:var(--muted)">Mais direto, mais trabalhoso</text>
+</svg>
+<div class="ac-tip"><b>Lógica por trás do exame:</b> a progesterona só sobe de forma relevante depois que o folículo se rompe e vira corpo lúteo — por isso ela é, na prática, uma "prova" indireta de que a ovulação aconteceu naquele ciclo.</div>
+`],
+["reserva_ovariana","Reserva Ovariana",`
+<div class="ac-h">Quantos óvulos ainda restam — e por que isso não é sinônimo de "qualidade"</div>
+<p class="ac-p">A reserva ovariana reflete o número de folículos remanescentes no ovário, que diminui de forma fisiológica e irreversível ao longo da vida reprodutiva, com aceleração após os 35 anos. Os exames de reserva estimam <b>quantidade</b>, não qualidade oocitária (que se relaciona mais diretamente com a idade cronológica) — essa distinção é frequentemente cobrada em provas.</p>
+<p class="ac-p">O <b>hormônio antimülleriano (AMH)</b>, produzido pelas células da granulosa de folículos pré-antrais e antrais pequenos, é hoje o exame mais usado: pode ser dosado em qualquer dia do ciclo (não depende de fase menstrual), e valores baixos indicam reserva reduzida. A <b>contagem de folículos antrais (CFA)</b> por ultrassonografia transvaginal, feita na fase folicular inicial, é outro método direto e confiável. O <b>FSH e o estradiol basais</b> (dosados entre o 2º e o 4º dia do ciclo) também estimam reserva: FSH elevado nessa fase sugere reserva reduzida, mas é um marcador mais tardio e menos sensível que o AMH.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Exames de reserva ovariana</text>
+<rect x="30" y="46" width="180" height="140" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="120" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">AMH</text>
+<text x="120" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Qualquer dia do ciclo</text>
+<text x="120" y="108" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Mais usado atualmente</text>
+<text x="120" y="124" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Baixo = reserva reduzida</text>
+<rect x="230" y="46" width="180" height="140" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="320" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">CFA (USTV)</text>
+<text x="320" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Fase folicular inicial</text>
+<text x="320" y="108" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Contagem direta de</text>
+<text x="320" y="124" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">folículos antrais</text>
+<rect x="430" y="46" width="180" height="140" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="520" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">FSH/estradiol basais</text>
+<text x="520" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Dia 2-4 do ciclo</text>
+<text x="520" y="108" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">FSH alto = reserva baixa</text>
+<text x="520" y="124" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Menos sensível que AMH</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha clássica:</b> reserva ovariana baixa não significa infertilidade absoluta, apenas menor probabilidade e menor janela de tempo — e reserva normal não garante boa qualidade oocitária, especialmente em idade avançada.</div>
+`],
+["hsg","Histerossalpingografia (HSG)",`
+<div class="ac-h">O exame de primeira linha para trompas e cavidade uterina</div>
+<p class="ac-p">A histerossalpingografia é um exame radiológico contrastado no qual um meio de contraste é injetado através do colo uterino, preenchendo a cavidade uterina e as tubas, permitindo avaliar simultaneamente a <b>morfologia da cavidade uterina</b> (pólipos, miomas submucosos, septos, sinéquias) e a <b>permeabilidade tubária</b> (o contraste deve fluir livremente e "espalhar-se" na cavidade peritoneal quando as trompas estão pérvias).</p>
+<p class="ac-p">É considerada o exame de <b>primeira linha</b> para avaliação tuboperitoneal por ser relativamente acessível, ambulatorial e informativo sobre as duas estruturas ao mesmo tempo. É realizada preferencialmente na <b>fase folicular precoce</b> (após o término da menstruação e antes da ovulação), para evitar interferir com uma gravidez inicial e minimizar sangramento que atrapalharia a interpretação. Há inclusive um discreto efeito terapêutico descrito, com aumento de taxa de gravidez espontânea nos meses seguintes ao exame, atribuído à "lavagem" mecânica de debris tubários leves.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">HSG — contraste e interpretação</text>
+<rect x="180" y="50" width="280" height="150" rx="16" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<path d="M270 80 Q320 70 370 80 L362 160 Q320 172 278 160 Z" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<line x1="278" y1="110" x2="220" y2="95" style="stroke:var(--accent)" stroke-width="2"/>
+<line x1="362" y1="110" x2="420" y2="95" style="stroke:var(--accent)" stroke-width="2"/>
+<circle cx="205" cy="90" r="10" style="fill:var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+<circle cx="435" cy="90" r="10" style="fill:var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+<text x="205" y="70" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Contraste livre</text>
+<text x="205" y="70" text-anchor="middle" font-size="8.5" style="fill:var(--muted)" dy="0"></text>
+<text x="435" y="70" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">= tubas pérvias</text>
+<text x="320" y="190" text-anchor="middle" font-size="9" style="fill:var(--ink)">Cavidade preenchida por contraste</text>
+</svg>
+<div class="ac-tip"><b>Momento ideal:</b> realizar na fase folicular precoce, após o fim do sangramento menstrual e antes da ovulação — evita interferir com uma gestação inicial e melhora a qualidade da imagem.</div>
+`],
+["outros_exames_tubarios","Histerossonografia e Outros Exames Complementares",`
+<div class="ac-h">Alternativas e complementos à HSG</div>
+<p class="ac-p">A <b>histerossonografia (SIS, sonohisterografia com infusão salina)</b> consiste na injeção de solução salina na cavidade uterina durante uma ultrassonografia transvaginal, distendendo a cavidade e permitindo visualizar pólipos, miomas submucosos e sinéquias com boa resolução — sendo particularmente útil quando a HSG sugere alteração intracavitária que precisa de melhor caracterização, ou como alternativa quando o contraste radiológico não é desejado (ex.: alergia a iodo).</p>
+<p class="ac-p">Existe também a <b>histerossalpingografia com contraste por ultrassom (HyCoSy)</b>, que usa um meio de contraste específico para avaliar permeabilidade tubária sob visão ultrassonográfica, evitando exposição à radiação — uma alternativa em centros que dispõem da tecnologia. Nenhum desses métodos substitui completamente a avaliação direta que só a laparoscopia oferece, mas todos são úteis para triagem inicial, sendo bem menos invasivos.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Exames complementares de cavidade e trompas</text>
+<rect x="30" y="46" width="270" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Histerossonografia (SIS)</text>
+<text x="165" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Solução salina + USTV</text>
+<text x="165" y="108" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Melhor detalhe de cavidade</text>
+<text x="165" y="124" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Sem radiação/contraste iodado</text>
+<rect x="340" y="46" width="270" height="120" rx="10" style="fill:var(--panel);stroke:#2E7FAE" stroke-width="1.3"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#2E7FAE">HyCoSy</text>
+<text x="475" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Contraste por ultrassom</text>
+<text x="475" y="108" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Avalia permeabilidade tubária</text>
+<text x="475" y="124" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Sem radiação</text>
+</svg>
+<div class="ac-call"><b>Quando usar cada um:</b> HSG segue como exame de triagem inicial mais amplamente disponível; SIS/HyCoSy entram quando é preciso detalhar um achado suspeito ou evitar contraste iodado.</div>
+`],
+["laparoscopia","Laparoscopia e Cromotubagem",`
+<div class="ac-h">O padrão-ouro para avaliação direta da cavidade pélvica</div>
+<p class="ac-p">A <b>laparoscopia com cromotubagem</b> (injeção de corante azul de metileno através do colo uterino, observando sua saída pelas fímbrias por visão direta) é considerada o <b>padrão-ouro</b> para avaliação tuboperitoneal, porque permite visualizar diretamente as trompas, os ovários e o peritônio pélvico — algo que nenhum exame de imagem indireto consegue oferecer. Além de diagnóstica, tem potencial <b>terapêutico</b> no mesmo tempo cirúrgico: lise de aderências, ressecção de focos de endometriose, ou correção de alterações tubárias identificadas.</p>
+<p class="ac-p">Por ser um procedimento cirúrgico (com riscos anestésicos e de complicações relacionados à laparoscopia), não é exame de rotina inicial — reserva-se para situações específicas: suspeita clínica de endometriose (dor pélvica, dismenorreia importante), suspeita de aderências pélvicas (antecedente de cirurgia ou infecção pélvica), ou quando a HSG sugere alteração tubária que precisa de confirmação e eventual correção.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Cromotubagem — princípio do exame</text>
+<rect x="200" y="46" width="240" height="130" rx="14" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<path d="M280 70 Q320 62 360 70 L354 140 Q320 150 286 140 Z" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<line x1="286" y1="95" x2="240" y2="85" style="stroke:#2E7FAE" stroke-width="2.5"/>
+<line x1="354" y1="95" x2="400" y2="85" style="stroke:#2E7FAE" stroke-width="2.5"/>
+<circle cx="230" cy="82" r="7" style="fill:#2E7FAE"/>
+<circle cx="410" cy="82" r="7" style="fill:#2E7FAE"/>
+<text x="320" y="160" text-anchor="middle" font-size="9" style="fill:var(--ink)">Corante azul visualizado saindo pelas fímbrias = trompa pérvia</text>
+</svg>
+<div class="ac-tip"><b>Não é exame de rotina:</b> a laparoscopia é indicada por suspeita clínica dirigida (endometriose, aderências, dor pélvica) ou para confirmar/corrigir um achado já sugerido pela HSG — não como triagem inicial de todas as pacientes.</div>
+`],
+["fator_tuboperitoneal","Causas de Fator Tuboperitoneal",`
+<div class="ac-h">Doença inflamatória pélvica, endometriose e cirurgia prévia</div>
+<p class="ac-p">A causa mais clássica de obstrução tubária é a <b>sequela de doença inflamatória pélvica (DIP)</b>, geralmente por infecção prévia por Chlamydia trachomatis ou Neisseria gonorrhoeae: o processo inflamatório na tuba causa fibrose, aglutinação das fímbrias e obstrução — muitas vezes silenciosa, sem episódio agudo lembrado pela paciente. A <b>endometriose</b> é outra causa importante, gerando aderências pélvicas e distorcendo a anatomia entre ovário, tuba e útero, mesmo sem obstruir diretamente a luz tubária.</p>
+<p class="ac-p"><b>Cirurgias pélvicas ou abdominais prévias</b> (apendicectomia complicada, cirurgias ginecológicas, cesáreas) também predispõem a aderências que podem envolver as trompas. Outra causa relevante é a <b>gravidez ectópica prévia tratada cirurgicamente</b> ou a própria história de infertilidade tubária anterior. Reconhecer esses antecedentes na anamnese já direciona a suspeita antes mesmo de realizar os exames de imagem.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Principais causas de fator tuboperitoneal</text>
+<rect x="20" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.3"/>
+<text x="112" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:#e8675f">DIP prévia</text>
+<text x="112" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Clamídia/gonococo</text>
+<text x="112" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Fibrose e obstrução</text>
+<rect x="227" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.3"/>
+<text x="319" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Endometriose</text>
+<text x="319" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Aderências pélvicas</text>
+<text x="319" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Distorção anatômica</text>
+<rect x="434" y="46" width="185" height="120" rx="10" style="fill:var(--panel);stroke:#2E7FAE" stroke-width="1.3"/>
+<text x="526" y="68" text-anchor="middle" font-size="10" font-weight="700" style="fill:#2E7FAE">Cirurgia prévia</text>
+<text x="526" y="88" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Apendicite, cesárea,</text>
+<text x="526" y="102" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">ectópica tratada</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha:</b> muitas mulheres com obstrução tubária por DIP silenciosa nunca tiveram diagnóstico prévio de infecção — a ausência de história de DIP não afasta a possibilidade.</div>
+`]
+]
+};
+Object.assign(C['infertilidade|1'], {
+"escores": `<div class="prose">
+<h3>Exames da investigação ovulatória e tuboperitoneal</h3>
+<table class="ac-tbl">
+<tr><th>Exame</th><th>Avalia</th><th>Momento ideal</th></tr>
+<tr><td>Progesterona sérica</td><td>Confirma ovulação (indireto)</td><td>Fase lútea média (~dia 21-23)</td></tr>
+<tr><td>AMH</td><td>Reserva ovariana</td><td>Qualquer dia do ciclo</td></tr>
+<tr><td>CFA (USTV)</td><td>Reserva ovariana</td><td>Fase folicular inicial</td></tr>
+<tr><td>FSH/estradiol basais</td><td>Reserva ovariana</td><td>Dia 2-4 do ciclo</td></tr>
+<tr><td>Histerossalpingografia (HSG)</td><td>Cavidade uterina + permeabilidade tubária</td><td>Fase folicular precoce</td></tr>
+<tr><td>Histerossonografia (SIS)</td><td>Cavidade uterina (detalhe)</td><td>Fase folicular inicial</td></tr>
+<tr><td>Laparoscopia + cromotubagem</td><td>Padrão-ouro: trompas, ovários, peritônio</td><td>Conforme indicação clínica</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">"AMH conta o estoque; progesterona confirma que a fábrica funcionou; HSG mostra a estrada; laparoscopia é o padrão-ouro que enxerga tudo direto."</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Diferenciais dentro do fator ovulatório/tuboperitoneal</h3>
+<table class="ac-tbl">
+<tr><th>Achado</th><th>Interpretação</th></tr>
+<tr><td>Ciclos irregulares + progesterona baixa na fase lútea</td><td>Anovulação — investigar causa (SOP, distúrbio de tireoide, hiperprolactinemia)</td></tr>
+<tr><td>AMH muito baixo + CFA reduzida</td><td>Reserva ovariana diminuída — considerar encaminhamento precoce</td></tr>
+<tr><td>HSG com falha de preenchimento intracavitário</td><td>Pólipo, mioma submucoso ou sinéquia — considerar histeroscopia/SIS</td></tr>
+<tr><td>HSG sem espalhamento peritoneal do contraste</td><td>Sugere obstrução tubária — considerar laparoscopia confirmatória</td></tr>
+<tr><td>Dor pélvica cíclica + infertilidade</td><td>Pensar em endometriose — laparoscopia tem papel diagnóstico e terapêutico</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Fator Ovulatório e Tuboperitoneal</div>
+<div class="mm">
+  <div class="mm-card"><h5>🥚 Ovulação</h5><ul><li>Ciclo regular = pista inicial</li><li>Progesterona fase lútea média</li><li>BBT/LH urinário/USTV seriada</li></ul></div>
+  <div class="mm-card"><h5>📉 Reserva ovariana</h5><ul><li>AMH (qualquer dia)</li><li>CFA por USTV</li><li>FSH/estradiol dia 2-4</li></ul></div>
+  <div class="mm-card"><h5>🩻 HSG</h5><ul><li>1ª linha para trompas/cavidade</li><li>Fase folicular precoce</li><li>Efeito terapêutico leve</li></ul></div>
+  <div class="mm-card"><h5>🔍 SIS/HyCoSy</h5><ul><li>Detalha cavidade</li><li>Alternativa sem contraste iodado</li></ul></div>
+  <div class="mm-card"><h5>🔦 Laparoscopia</h5><ul><li>Padrão-ouro</li><li>Cromotubagem</li><li>Diagnóstica + terapêutica</li></ul></div>
+  <div class="mm-card"><h5>🦠 Causas tuboperitoneais</h5><ul><li>DIP prévia (Clamídia)</li><li>Endometriose</li><li>Cirurgia pélvica prévia</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Investigação feminina básica indicada</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — Avaliar ovulação</div><div class="fx-lbl">História menstrual + progesterona em fase lútea média</div><div class="fx-arrow"></div><div class="fx-node">Passo 2 — Avaliar reserva ovariana</div><div class="fx-lbl">AMH e/ou contagem de folículos antrais (USTV)</div><div class="fx-arrow"></div><div class="fx-node">Passo 3 — Avaliar trompas e cavidade</div><div class="fx-lbl">Histerossalpingografia (HSG) como exame de 1ª linha</div><div class="fx-arrow"></div><div class="fx-lbl">Suspeita de endometriose, aderências, ou HSG alterada?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Laparoscopia com cromotubagem (padrão-ouro)</div><div class="fx-node end"><b>NÃO:</b> Seguir investigação (fator masculino e demais etapas)</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Alteração identificada na investigação</div><div class="fx-arrow"></div><div class="fx-lbl">Anovulação confirmada?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Investigar causa específica (SOP, tireoide, prolactina) e considerar indução de ovulação</div><div class="fx-node"><b>NÃO</b> &#8594; avaliar trompas/cavidade</div></div><div class="fx-arrow"></div><div class="fx-lbl">Obstrução tubária bilateral confirmada?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Encaminhar para FIV (trompas não são recuperáveis na maioria dos casos)</div><div class="fx-node end"><b>NÃO:</b> Considerar correção cirúrgica (se unilateral/leve) ou tratamento de baixa complexidade</div></div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Fator Ovulatório e Tuboperitoneal em 60 segundos</h4>
+<ul>
+<li><strong>Ovulação:</strong> ciclo regular sugere; progesterona em fase lútea média confirma; BBT/LH urinário/USTV seriada são complementares.</li>
+<li><strong>Reserva ovariana:</strong> AMH (qualquer dia do ciclo) e CFA por USTV são os principais; FSH/estradiol basais (dia 2-4) são mais tardios e menos sensíveis.</li>
+<li><strong>HSG</strong> = exame de 1ª linha para trompas e cavidade uterina; feita na fase folicular precoce; tem discreto efeito terapêutico.</li>
+<li><strong>SIS/HyCoSy</strong> detalham a cavidade sem radiação/contraste iodado.</li>
+<li><strong>Laparoscopia + cromotubagem</strong> = padrão-ouro, reservada para suspeita de endometriose/aderências ou confirmação de achado da HSG.</li>
+<li><strong>Causas tuboperitoneais:</strong> DIP prévia (Clamídia/gonococo), endometriose, cirurgia pélvica prévia.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Fator ovulatório/tuboperitoneal</strong> = confirmar ovulação (progesterona), medir reserva (AMH/CFA), avaliar trompas/cavidade (HSG como 1ª linha), reservando laparoscopia com cromotubagem (padrão-ouro) para suspeita dirigida de endometriose/aderências.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Progesterona dosada na fase lútea média é o exame clássico de <strong>confirmação</strong> de ovulação em prova.</li>
+<li>AMH é o marcador de reserva mais valorizado hoje, justamente por não depender do dia do ciclo.</li>
+<li>HSG sempre aparece como exame de <strong>1ª linha</strong> para trompas — laparoscopia é reservada, não rotina.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que ciclo regular garante ovulação normal em 100% dos casos — é apenas um forte indício, não uma certeza.</li>
+<li>Confundir reserva ovariana baixa com infertilidade absoluta — reduz probabilidade, não a zera.</li>
+<li>Esquecer que ausência de história de DIP não afasta obstrução tubária (infecção pode ter sido silenciosa).</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"Progesterona prova que ovulou; AMH conta quanto ainda resta."</strong></li>
+<li><strong>"HSG primeiro, laparoscopia só se a história ou a HSG apontarem para algo mais."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Solicitar laparoscopia como exame inicial de rotina, sem indicação dirigida.</li>
+<li>Não considerar o momento ideal do ciclo para realizar HSG ou dosagens hormonais.</li>
+<li>Interpretar FSH normal isoladamente como garantia de boa reserva ovariana.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico por que ovulação, reserva ovariana e trompas/cavidade formam o tripé da avaliação feminina","Descrevo os métodos de confirmação de ovulação e por que a progesterona em fase lútea média é o mais usado","Diferencio AMH, CFA e FSH/estradiol basais como marcadores de reserva ovariana","Explico o que a HSG avalia e por que é o exame de 1ª linha para trompas e cavidade","Sei quando indicar histerossonografia/HyCoSy versus laparoscopia com cromotubagem","Reconheço as principais causas de fator tuboperitoneal (DIP, endometriose, cirurgia prévia)"]
+});
+Object.assign(C['infertilidade|1'], {
+"questoes": [
+{"stem":"Qual exame é classicamente usado para confirmar que houve ovulação em determinado ciclo menstrual?","opts":["Dosagem de FSH no dia 2 do ciclo.","Dosagem de progesterona sérica na fase lútea média.","Ultrassonografia no primeiro dia da menstruação.","Dosagem de prolactina em jejum."],"correct":1,"expl":"A <b>progesterona em fase lútea média</b> confirma ovulação porque só o corpo lúteo, formado após a ruptura folicular, produz progesterona em quantidade relevante."},
+{"stem":"Sobre o hormônio antimülleriano (AMH) como marcador de reserva ovariana, é correto afirmar que:","opts":["Só pode ser dosado no 2º dia do ciclo menstrual.","Pode ser dosado em qualquer dia do ciclo, pois não sofre variação cíclica relevante.","É produzido exclusivamente pelo corpo lúteo.","Reflete diretamente a qualidade oocitária, e não a quantidade."],"correct":1,"expl":"O AMH é produzido por folículos pré-antrais e antrais pequenos de forma relativamente estável ao longo do ciclo, podendo ser dosado <b>a qualquer momento</b>, o que é uma vantagem prática importante."},
+{"stem":"Qual é o exame de primeira linha para avaliação simultânea da cavidade uterina e da permeabilidade tubária?","opts":["Ressonância magnética pélvica.","Histerossalpingografia (HSG).","Laparoscopia diagnóstica.","Dosagem sérica de CA-125."],"correct":1,"expl":"A <b>HSG</b> é o exame de primeira linha por avaliar simultaneamente cavidade uterina e permeabilidade tubária, sendo acessível e ambulatorial."},
+{"stem":"Em qual momento do ciclo menstrual a histerossalpingografia deve ser preferencialmente realizada?","opts":["Durante o sangramento menstrual intenso.","Na fase lútea, próximo à menstruação seguinte.","Na fase folicular precoce, após o término do sangramento e antes da ovulação.","Apenas em ciclos de reposição hormonal."],"correct":2,"expl":"A HSG deve ser feita na <b>fase folicular precoce</b> para evitar interferência com uma gestação inicial e minimizar sangramento que atrapalharia a interpretação da imagem."},
+{"stem":"Qual procedimento é considerado o padrão-ouro para avaliação direta de trompas, ovários e peritônio pélvico, com potencial diagnóstico e terapêutico simultâneo?","opts":["Ultrassonografia transvaginal simples.","Histerossalpingografia.","Laparoscopia com cromotubagem.","Ressonância magnética sem contraste."],"correct":2,"expl":"A <b>laparoscopia com cromotubagem</b> permite visualização direta das estruturas pélvicas e, além de diagnóstica, oferece potencial terapêutico (lise de aderências, ressecção de endometriose) no mesmo tempo cirúrgico."},
+{"stem":"Qual é a indicação mais apropriada para solicitar laparoscopia diagnóstica na investigação de infertilidade?","opts":["Como exame de rotina em toda paciente infértil, independentemente da história.","Quando há suspeita clínica de endometriose, aderências pélvicas, ou necessidade de confirmar achado sugerido pela HSG.","Apenas em mulheres acima de 40 anos.","Substituindo a avaliação hormonal de ovulação."],"correct":1,"expl":"A laparoscopia não é exame de rotina inicial — é reservada para <b>suspeita clínica dirigida</b> (endometriose, aderências) ou confirmação de achado prévio da HSG."},
+{"stem":"Qual é a causa mais clássica de obstrução tubária relacionada a infecção prévia?","opts":["Vaginose bacteriana recorrente.","Sequela de doença inflamatória pélvica (DIP), frequentemente por Chlamydia trachomatis.","Candidíase vulvovaginal de repetição.","Tricomoníase tratada adequadamente."],"correct":1,"expl":"A <b>DIP</b>, especialmente por Chlamydia trachomatis ou Neisseria gonorrhoeae, é a causa clássica de fibrose e obstrução tubária, muitas vezes silenciosa."},
+{"stem":"Uma paciente relata história de apendicectomia complicada na adolescência. Como esse antecedente se relaciona à investigação de infertilidade?","opts":["Não tem nenhuma relevância para a investigação tuboperitoneal.","Pode predispor a aderências pélvicas que envolvem as trompas, sendo relevante para o fator tuboperitoneal.","Indica exclusivamente causa de fator ovulatório.","Contraindica a realização de HSG."],"correct":1,"expl":"Cirurgias abdominais/pélvicas complicadas predispõem a <b>aderências</b> que podem envolver as trompas, sendo um antecedente relevante na anamnese direcionada ao fator tuboperitoneal."},
+{"stem":"Qual achado na histerossalpingografia sugere obstrução tubária?","opts":["Espalhamento livre do contraste na cavidade peritoneal.","Ausência de espalhamento peritoneal do contraste, sugerindo bloqueio ao fluxo.","Preenchimento homogêneo apenas da cavidade uterina, sem avaliação tubária possível.","Presença de folículos antrais visíveis no exame."],"correct":1,"expl":"Quando o contraste não consegue fluir livremente das trompas para a cavidade peritoneal, isso sugere <b>obstrução tubária</b>, achado que pode indicar necessidade de investigação confirmatória por laparoscopia."},
+{"stem":"Qual das seguintes é uma vantagem da histerossonografia (SIS) em relação à histerossalpingografia convencional?","opts":["A SIS avalia permeabilidade tubária com maior acurácia que a HSG.","A SIS não utiliza contraste iodado, sendo alternativa em pacientes com alergia a iodo, e detalha bem a cavidade uterina.","A SIS é o único exame capaz de diagnosticar endometriose.","A SIS substitui completamente a necessidade de HSG em todos os casos."],"correct":1,"expl":"A histerossonografia usa solução salina, sem contraste iodado, sendo útil para pacientes com alergia a iodo e para detalhar melhor achados intracavitários (pólipos, miomas submucosos, sinéquias)."},
+{"stem":"Reserva ovariana reduzida (AMH baixo, CFA baixa) em uma mulher de 33 anos significa, do ponto de vista clínico, que:","opts":["Ela está definitivamente estéril e não há possibilidade de gravidez espontânea.","A probabilidade de gravidez está reduzida e a janela de tempo reprodutivo é menor, mas não significa impossibilidade absoluta.","A qualidade oocitária está necessariamente normal, apesar da quantidade reduzida.","Não há necessidade de qualquer mudança de conduta."],"correct":1,"expl":"Reserva ovariana reduzida diminui a <b>probabilidade</b> e encurta a janela de tempo disponível para engravidar, mas não representa impossibilidade absoluta — por isso costuma acelerar o encaminhamento, não descartar o tratamento."},
+{"stem":"Por que a ausência de história prévia de doença inflamatória pélvica não afasta a possibilidade de obstrução tubária como causa de infertilidade?","opts":["Porque a DIP é sempre sintomática e facilmente diagnosticada quando ocorre.","Porque infecções como a por Chlamydia trachomatis podem cursar de forma silenciosa, causando dano tubário sem episódio agudo identificado.","Porque a obstrução tubária nunca está relacionada a infecção.","Porque todo caso de DIP é tratado antes de causar sequela tubária."],"correct":1,"expl":"Infecções por Chlamydia trachomatis frequentemente são <b>assintomáticas ou oligossintomáticas</b>, podendo causar dano tubário silencioso sem que a paciente jamais tenha recebido diagnóstico prévio de DIP."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Ovulação</small><br>Qual exame confirma ovulação e em que momento do ciclo é dosado?","back":"Progesterona sérica, dosada na fase lútea média (~dia 21-23 de um ciclo de 28 dias).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Ovulação</small><br>Por que a progesterona confirma que houve ovulação?","back":"{{Porque só o corpo lúteo, formado após a ruptura folicular, produz progesterona em quantidade relevante.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Reserva ovariana</small><br>Qual a principal vantagem prática do AMH sobre o FSH?","back":"Pode ser dosado em qualquer dia do ciclo, sem depender de fase menstrual específica.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Reserva ovariana</small><br>Cite os 3 principais marcadores de reserva ovariana.","back":"{{AMH, contagem de folículos antrais (CFA) por ultrassom, e FSH/estradiol basais (dia 2-4 do ciclo).}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">HSG</small><br>O que a histerossalpingografia avalia simultaneamente?","back":"Morfologia da cavidade uterina e permeabilidade tubária.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">HSG</small><br>Em que momento do ciclo a HSG deve ser realizada?","back":"Na fase folicular precoce, após o fim da menstruação e antes da ovulação.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">HSG</small><br>Que efeito secundário benéfico já foi descrito após a HSG?","back":"Discreto efeito terapêutico, com aumento da taxa de gravidez espontânea nos meses seguintes.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Laparoscopia</small><br>Por que a laparoscopia com cromotubagem é considerada padrão-ouro?","back":"Permite visualização direta de trompas, ovários e peritônio, com potencial diagnóstico e terapêutico no mesmo procedimento.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Laparoscopia</small><br>Cite 3 indicações para solicitar laparoscopia na investigação de infertilidade.","back":"{{Suspeita de endometriose, suspeita de aderências pélvicas, ou confirmação/correção de achado sugerido pela HSG.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">SIS</small><br>O que é a histerossonografia (SIS) e quando é indicada?","back":"Ultrassom com infusão de solução salina na cavidade uterina; indicada para detalhar achados intracavitários ou como alternativa sem contraste iodado.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Causas</small><br>Qual o principal agente relacionado a sequela tubária por DIP?","back":"Chlamydia trachomatis (também Neisseria gonorrhoeae).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Causas</small><br>Por que a endometriose causa fator tuboperitoneal mesmo sem obstruir diretamente a luz tubária?","back":"Gera aderências pélvicas que distorcem a anatomia entre ovário, tuba e útero, prejudicando a captação do óvulo.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Pegadinha</small><br>Ciclo menstrual regular garante ovulação normal com 100% de certeza?","back":"Não — é um forte indício, mas a confirmação objetiva requer dosagem de progesterona em fase lútea média.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Reserva x qualidade</small><br>Reserva ovariana normal garante boa qualidade oocitária?","back":"Não — os exames de reserva estimam quantidade de folículos, enquanto a qualidade oocitária se relaciona mais diretamente com a idade cronológica.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Investigação de fator ovulatório","stem":"Mulher de 30 anos, ciclos menstruais regulares de 29 dias, tenta engravidar há 13 meses sem sucesso. Espermograma do parceiro normal.","passos":[
+{"h":"Anamnese dirigida","p":"Ciclos regulares, sem sinais clínicos de hiperandrogenismo ou disfunção tireoidiana; fator masculino já descartado por espermograma normal."},
+{"h":"Raciocínio clínico inicial","p":"Ciclos regulares sugerem ciclos ovulatórios, mas isso deve ser confirmado objetivamente antes de avançar na investigação."},
+{"h":"Exame solicitado","p":"Dosagem de progesterona sérica em fase lútea média (dia 22 de um ciclo de 29 dias)."},
+{"h":"Resultado e interpretação","p":"Progesterona elevada, compatível com ciclo ovulatório — o fator ovulatório está, portanto, confirmado como normal neste ciclo avaliado."},
+{"h":"Conduta neste momento","p":"Prosseguir a investigação para reserva ovariana (AMH/CFA) e avaliação tuboperitoneal (HSG), já que o fator ovulatório não explica a dificuldade para engravidar."}
+]},
+{"t":"Caso 2 — Suspeita de fator tuboperitoneal por antecedente infeccioso","stem":"Mulher de 32 anos relata infertilidade primária há 18 meses, ciclos regulares, mas com antecedente de episódio de dor pélvica aguda tratado como DIP há 5 anos.","passos":[
+{"h":"Anamnese dirigida","p":"Antecedente relevante de DIP tratada, levantando suspeita de sequela tubária como causa provável da infertilidade."},
+{"h":"Raciocínio clínico","p":"O histórico de DIP é um fator de risco clássico para obstrução tubária por fibrose e aglutinação de fímbrias — a investigação deve priorizar a avaliação tuboperitoneal."},
+{"h":"Exame solicitado","p":"Histerossalpingografia (HSG) como exame de primeira linha, realizada na fase folicular precoce."},
+{"h":"Resultado e interpretação","p":"HSG mostra ausência de espalhamento peritoneal do contraste à direita, sugerindo obstrução tubária unilateral; trompa esquerda pérvia."},
+{"h":"Conduta neste momento","p":"Encaminhar para laparoscopia com cromotubagem para confirmar o achado e avaliar possibilidade de correção cirúrgica, considerando também a trompa contralateral pérvia como fator favorável."}
+]},
+{"t":"Caso 3 — Reserva ovariana reduzida em investigação de rotina","stem":"Mulher de 36 anos, ciclos regulares, tenta engravidar há 7 meses. Investigação inicial revela AMH de 0,5 ng/mL (baixo) e contagem de folículos antrais de 4 (reduzida).","passos":[
+{"h":"Interpretação dos exames","p":"AMH e CFA reduzidos indicam reserva ovariana diminuída, achado esperado ser mais frequente a partir dessa faixa etária, mas que aqui parece mais acentuado que o esperado apenas pela idade."},
+{"h":"Raciocínio clínico","p":"Reserva reduzida não significa impossibilidade de gravidez, mas indica probabilidade menor por ciclo e menor janela de tempo disponível — informação que deve ser comunicada com clareza à paciente."},
+{"h":"Avaliação complementar","p":"Prosseguir avaliação de ovulação (progesterona em fase lútea) e trompas/cavidade (HSG), já que reserva baixa não descarta outros fatores associados."},
+{"h":"Aconselhamento","p":"Discutir com a paciente, de forma transparente, o impacto da reserva reduzida no tempo disponível para tentativa espontânea e nas taxas de sucesso de tratamentos futuros."},
+{"h":"Conduta neste momento","p":"Encaminhamento precoce a serviço especializado em reprodução humana, dado o achado de reserva ovariana reduzida associado à idade, para não perder tempo reprodutivo relevante."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['infertilidade|2'] = {
+name: "Fator Masculino (Visão Geral)",
+intro: "O espermograma é barato, rápido e responde por metade do raciocínio do casal infértil — por isso nunca é um exame de segunda linha.",
+sub: [
+["entendendo","A Importância do Fator Masculino",`
+<div class="ac-h">Tão prevalente quanto o fator feminino, e frequentemente subinvestigado</div>
+<p class="ac-p">O fator masculino contribui para a infertilidade do casal em cerca de <b>um terço dos casos isoladamente</b>, e participa em uma fração adicional relevante quando combinado a fatores femininos — somando-se, o homem está envolvido em <b>metade ou mais dos casos</b> de infertilidade do casal. Apesar disso, historicamente a investigação masculina era relegada a segundo plano, um erro que hoje é reconhecido e corrigido pelas diretrizes atuais.</p>
+<p class="ac-p">A avaliação masculina básica é simples, barata e não invasiva: o <b>espermograma</b> (análise seminal) é o exame central, capaz de identificar a maioria dos casos de alteração relevante com um único procedimento ambulatorial de baixo custo. Por isso, ele integra a primeira consulta do casal, junto com a avaliação inicial da mulher.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Fator masculino no raciocínio do casal infértil</text>
+<rect x="30" y="46" width="270" height="120" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Isolado</text>
+<text x="165" y="94" text-anchor="middle" font-size="16" font-weight="700" style="fill:var(--accent)">~1/3</text>
+<text x="165" y="116" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">dos casos de infertilidade</text>
+<rect x="340" y="46" width="270" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Combinado</text>
+<text x="475" y="94" text-anchor="middle" font-size="16" font-weight="700" style="fill:var(--ink)">+</text>
+<text x="475" y="116" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">soma a fatores femininos</text>
+</svg>
+<div class="ac-call"><b>Ideia central:</b> nunca investigar apenas a mulher primeiro — o espermograma é um dos exames de maior custo-benefício de toda a propedêutica de infertilidade.</div>
+`],
+["espermograma","O Espermograma: Coleta e Técnica",`
+<div class="ac-h">Como o exame deve ser coletado para ser confiável</div>
+<p class="ac-p">O espermograma exige preparo padronizado para gerar resultados interpretáveis: <b>abstinência sexual de 2 a 5 dias</b> antes da coleta (nem menos, o que reduziria o volume e a concentração, nem mais, o que aumentaria a proporção de espermatozoides envelhecidos e menos móveis). A amostra deve ser colhida por masturbação, em recipiente estéril, idealmente no próprio laboratório ou entregue em até 1 hora se colhida em casa, mantendo temperatura próxima à corporal durante o transporte.</p>
+<p class="ac-p">Como há variabilidade natural entre ejaculados do mesmo homem (influenciada por febre recente, estresse, uso de medicações, exposição a calor), a recomendação é sempre <b>confirmar um resultado alterado com uma segunda amostra</b>, coletada após um intervalo de cerca de 2-3 meses — tempo aproximado de um ciclo completo de espermatogênese (em torno de 74 dias).</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Preparo correto para a coleta</text>
+<rect x="30" y="46" width="270" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Abstinência</text>
+<text x="165" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">2 a 5 dias</text>
+<text x="165" y="108" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Nem menos, nem mais</text>
+<rect x="340" y="46" width="270" height="120" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Transporte</text>
+<text x="475" y="92" text-anchor="middle" font-size="9" style="fill:var(--ink)">Até 1h, temperatura corporal</text>
+<text x="475" y="108" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Idealmente colhido no local</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha:</b> um único espermograma alterado nunca fecha diagnóstico — a variabilidade natural exige confirmação com uma segunda amostra.</div>
+`],
+["interpretacao","Interpretando o Espermograma",`
+<div class="ac-h">Valores de referência da OMS (6ª edição, 2021) e o vocabulário das alterações</div>
+<p class="ac-p">Os valores de referência mais usados atualmente (OMS, 6ª edição) representam o <b>5º percentil</b> de uma população de homens férteis — ou seja, valores abaixo da referência não significam necessariamente infertilidade, apenas menor probabilidade estatística de concepção espontânea rápida. Os principais parâmetros e seus limiares inferiores: volume ejaculado ≥1,4 mL; concentração espermática ≥16 milhões/mL; concentração total ≥39 milhões por ejaculado; motilidade total ≥42%; motilidade progressiva ≥30%; vitalidade ≥54%; morfologia normal ≥4% (critério estrito de Kruger).</p>
+<p class="ac-p">O vocabulário das alterações segue a lógica do parâmetro afetado: <b>oligozoospermia</b> (concentração reduzida), <b>astenozoospermia</b> (motilidade reduzida), <b>teratozoospermia</b> (morfologia alterada), e combinações como <b>oligoastenoteratozoospermia (OAT)</b> quando os três estão alterados simultaneamente. <b>Azoospermia</b> é a ausência completa de espermatozoides no ejaculado — a alteração mais grave, que exige investigação dirigida sobre sua origem (obstrutiva ou não obstrutiva).</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Vocabulário das alterações seminais</text>
+<rect x="20" y="46" width="140" height="110" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="90" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Oligozoospermia</text>
+<text x="90" y="88" text-anchor="middle" font-size="8" style="fill:var(--muted)">Concentração reduzida</text>
+<rect x="175" y="46" width="140" height="110" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="245" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Astenozoospermia</text>
+<text x="245" y="88" text-anchor="middle" font-size="8" style="fill:var(--muted)">Motilidade reduzida</text>
+<rect x="330" y="46" width="140" height="110" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="400" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Teratozoospermia</text>
+<text x="400" y="88" text-anchor="middle" font-size="8" style="fill:var(--muted)">Morfologia alterada</text>
+<rect x="485" y="46" width="140" height="110" rx="10" style="fill:#e8675f" fill-opacity=".12" stroke="#e8675f" stroke-width="1.4"/>
+<text x="555" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:#e8675f">Azoospermia</text>
+<text x="555" y="88" text-anchor="middle" font-size="8" style="fill:var(--ink)">Ausência total</text>
+<text x="555" y="102" text-anchor="middle" font-size="8" style="fill:var(--ink)">de espermatozoides</text>
+</svg>
+<div class="ac-tip"><b>Macete de nomenclatura:</b> "oligo" = pouco (concentração), "asteno" = sem força (motilidade), "terato" = forma anormal (morfologia), "a-" = ausência total (azoospermia).</div>
+`],
+["causas_pretesticulares","Causas Pré-Testiculares",`
+<div class="ac-h">Quando o problema está no comando hormonal, não no testículo</div>
+<p class="ac-p">As causas pré-testiculares envolvem falha no <b>eixo hipotálamo-hipófise-gonadal</b> que comanda a produção de testosterona e a espermatogênese — o testículo em si é potencialmente normal, mas não recebe o estímulo hormonal adequado (FSH e LH) para funcionar. O quadro típico é o <b>hipogonadismo hipogonadotrófico</b>: FSH e LH baixos ou inapropriadamente normais, associados a testosterona baixa.</p>
+<p class="ac-p">Causas incluem tumores hipofisários (especialmente prolactinomas, já que a hiperprolactinemia suprime o eixo), síndromes genéticas como a síndrome de Kallmann (hipogonadismo hipogonadotrófico associado a anosmia), uso de esteroides anabolizantes exógenos (que suprimem o eixo por feedback negativo) e doenças sistêmicas crônicas graves. Essa é a categoria mais tratável do fator masculino, já que a reposição hormonal dirigida pode restaurar a espermatogênese em muitos casos.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Eixo hipotálamo-hipófise-testículo</text>
+<rect x="30" y="50" width="150" height="70" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="105" y="76" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Hipotálamo/Hipófise</text>
+<text x="105" y="94" text-anchor="middle" font-size="8" style="fill:var(--ink)">GnRH → FSH/LH</text>
+<line x1="185" y1="85" x2="240" y2="85" style="stroke:var(--accent)" stroke-width="1.8"/>
+<rect x="245" y="50" width="150" height="70" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="320" y="76" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Testículo</text>
+<text x="320" y="94" text-anchor="middle" font-size="8" style="fill:var(--muted)">Espermatogênese normal</text>
+<rect x="200" y="140" width="240" height="50" rx="10" style="fill:#e8675f" fill-opacity=".12" stroke="#e8675f" stroke-width="1.3"/>
+<text x="320" y="168" text-anchor="middle" font-size="9" style="fill:#e8675f">Falha aqui = pré-testicular (FSH/LH baixos)</text>
+</svg>
+<div class="ac-call"><b>Ponto-chave:</b> pré-testicular é a categoria mais tratável, porque o "hardware" testicular funciona — falta apenas o estímulo hormonal correto.</div>
+`],
+["causas_testiculares","Causas Testiculares",`
+<div class="ac-h">A varicocele é a causa corrigível mais comum do fator masculino</div>
+<p class="ac-p">As causas testiculares envolvem dano direto ao tecido produtor de espermatozoides. A <b>varicocele</b> (dilatação varicosa do plexo pampiniforme, mais comum à esquerda pela drenagem venosa) é a causa <b>corrigível mais frequente</b> de infertilidade masculina, prejudicando a espermatogênese por aumento da temperatura testicular local e estase venosa. Outras causas incluem <b>criptorquidia</b> (testículo não descido, mesmo corrigido cirurgicamente na infância, associado a risco aumentado de subfertilidade e de tumor testicular), <b>infecções (orquite, incluindo caxumba pós-puberal)</b>, <b>quimioterapia e radioterapia prévias</b>, e <b>causas genéticas</b> como a síndrome de Klinefelter (cariótipo 47,XXY), causa genética mais comum de azoospermia não obstrutiva.</p>
+<p class="ac-p">Nessas causas, o eixo hormonal tenta compensar a falha testicular, gerando o padrão característico de <b>hipogonadismo hipergonadotrófico</b>: FSH e LH elevados (o hipotálamo/hipófise "gritam mais alto" tentando estimular um testículo que não responde), com testosterona normal ou baixa.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Principais causas testiculares</text>
+<rect x="20" y="46" width="140" height="120" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="90" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Varicocele</text>
+<text x="90" y="88" text-anchor="middle" font-size="8" style="fill:var(--ink)">Mais comum e</text>
+<text x="90" y="100" text-anchor="middle" font-size="8" style="fill:var(--ink)">corrigível</text>
+<rect x="175" y="46" width="140" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="245" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Criptorquidia</text>
+<text x="245" y="88" text-anchor="middle" font-size="8" style="fill:var(--muted)">Risco mesmo se</text>
+<text x="245" y="100" text-anchor="middle" font-size="8" style="fill:var(--muted)">corrigida na infância</text>
+<rect x="330" y="46" width="140" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="400" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Quimio/radioterapia</text>
+<text x="400" y="88" text-anchor="middle" font-size="8" style="fill:var(--muted)">Dano gonadal direto</text>
+<rect x="485" y="46" width="140" height="120" rx="10" style="fill:var(--panel);stroke:#2E7FAE" stroke-width="1.3"/>
+<text x="555" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:#2E7FAE">Klinefelter (47,XXY)</text>
+<text x="555" y="88" text-anchor="middle" font-size="8" style="fill:var(--muted)">Causa genética mais</text>
+<text x="555" y="100" text-anchor="middle" font-size="8" style="fill:var(--muted)">comum de azoospermia</text>
+</svg>
+<div class="ac-tip"><b>Padrão hormonal:</b> causa testicular = FSH/LH altos (hipergonadotrófico); causa pré-testicular = FSH/LH baixos (hipogonadotrófico). Esse contraste é frequentemente cobrado em prova.</div>
+`],
+["causas_postesticulares","Causas Pós-Testiculares",`
+<div class="ac-h">Quando a produção é normal, mas o transporte está bloqueado</div>
+<p class="ac-p">As causas pós-testiculares envolvem obstrução do trajeto que o espermatozoide percorre entre o testículo e a uretra, apesar de a espermatogênese estar preservada. A <b>vasectomia prévia</b> é a causa mais comum e mais óbvia dessa categoria. Outra causa relevante é a <b>ausência congênita bilateral dos vasos deferentes (ACBVD)</b>, fortemente associada a mutações no gene da fibrose cística (CFTR) — mesmo em homens sem outras manifestações clínicas da doença, o que torna o aconselhamento genético relevante nesses casos.</p>
+<p class="ac-p">Infecções urogenitais prévias (uretrites, epididimites) também podem causar obstrução cicatricial do epidídimo ou dos ductos. O achado laboratorial característico dessa categoria é a combinação de <b>volume seminal baixo com azoospermia, mas com hormônios (FSH, LH, testosterona) normais</b> — porque a produção testicular está preservada, apenas o transporte está impedido.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Causas pós-testiculares — obstrução do trajeto</text>
+<rect x="30" y="46" width="270" height="120" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Vasectomia prévia</text>
+<text x="165" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Causa mais comum</text>
+<text x="165" y="106" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">e mais óbvia</text>
+<rect x="340" y="46" width="270" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Agenesia de vasos deferentes</text>
+<text x="475" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Associada a mutações CFTR</text>
+<text x="475" y="106" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">(fibrose cística)</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha:</b> azoospermia com hormônios normais e volume testicular normal sugere causa obstrutiva (pós-testicular) — diferente de azoospermia com FSH/LH elevados, que sugere causa testicular (não obstrutiva).</div>
+`],
+["quando_encaminhar","Quando Encaminhar ao Urologista",`
+<div class="ac-h">Sinais que aceleram o encaminhamento especializado</div>
+<p class="ac-p">Algumas situações justificam encaminhamento precoce ao urologista especializado em reprodução masculina, sem esperar repetições adicionais de exame: <b>azoospermia</b> (que sempre exige investigação dirigida da causa, obstrutiva ou não), <b>alterações graves e persistentes</b> confirmadas em duas amostras (oligoastenoteratozoospermia importante), <b>varicocele palpável</b> ao exame físico associada a alteração seminal, <b>volume testicular reduzido</b> ou assimetria significativa, e <b>história de criptorquidia, quimioterapia/radioterapia ou cirurgia genital prévia</b>.</p>
+<p class="ac-p">O urologista aprofunda a investigação com exame físico dirigido (volume testicular, presença de varicocele, deferentes palpáveis), dosagens hormonais (FSH, LH, testosterona, prolactina), e, quando indicado, exames genéticos (cariótipo, pesquisa de microdeleções do cromossomo Y, teste para mutações CFTR) — direcionando o tratamento específico ou a indicação de técnicas de reprodução assistida com uso de sêmen do próprio parceiro, inclusive por recuperação cirúrgica de espermatozoides quando necessário.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Gatilhos para encaminhamento ao urologista</text>
+<rect x="20" y="46" width="185" height="110" rx="10" style="fill:var(--panel);stroke:#e8675f" stroke-width="1.3"/>
+<text x="112" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:#e8675f">Azoospermia</text>
+<text x="112" y="88" text-anchor="middle" font-size="8" style="fill:var(--muted)">Sempre investigar</text>
+<text x="112" y="100" text-anchor="middle" font-size="8" style="fill:var(--muted)">a causa</text>
+<rect x="227" y="46" width="185" height="110" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="319" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Varicocele palpável</text>
+<text x="319" y="88" text-anchor="middle" font-size="8" style="fill:var(--muted)">+ alteração seminal</text>
+<rect x="434" y="46" width="185" height="110" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="526" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Alteração grave</text>
+<text x="526" y="88" text-anchor="middle" font-size="8" style="fill:var(--muted)">confirmada em</text>
+<text x="526" y="100" text-anchor="middle" font-size="8" style="fill:var(--muted)">2 amostras</text>
+</svg>
+<div class="ac-call"><b>Fio condutor:</b> uma vez identificado o fator masculino, o casal segue para discussão de técnicas de reprodução assistida adequadas à gravidade do achado — tema do próximo módulo.</div>
+`]
+]
+};
+Object.assign(C['infertilidade|2'], {
+"escores": `<div class="prose">
+<h3>Valores de referência do espermograma (OMS, 6ª edição, 2021)</h3>
+<table class="ac-tbl">
+<tr><th>Parâmetro</th><th>Limite inferior de referência</th></tr>
+<tr><td>Volume ejaculado</td><td>&#8805; 1,4 mL</td></tr>
+<tr><td>Concentração espermática</td><td>&#8805; 16 milhões/mL</td></tr>
+<tr><td>Número total de espermatozoides</td><td>&#8805; 39 milhões/ejaculado</td></tr>
+<tr><td>Motilidade total</td><td>&#8805; 42%</td></tr>
+<tr><td>Motilidade progressiva</td><td>&#8805; 30%</td></tr>
+<tr><td>Vitalidade</td><td>&#8805; 54%</td></tr>
+<tr><td>Morfologia normal (Kruger estrito)</td><td>&#8805; 4%</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">Esses valores representam o 5º percentil de homens férteis — abaixo deles, a chance de concepção espontânea diminui, mas não é zero.</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Padrão hormonal por categoria de causa</h3>
+<table class="ac-tbl">
+<tr><th>Categoria</th><th>FSH/LH</th><th>Testosterona</th><th>Exemplo</th></tr>
+<tr><td><strong>Pré-testicular</strong></td><td>Baixos (hipogonadotrófico)</td><td>Baixa</td><td>Prolactinoma, síndrome de Kallmann</td></tr>
+<tr><td><strong>Testicular</strong></td><td>Altos (hipergonadotrófico)</td><td>Normal/baixa</td><td>Varicocele, Klinefelter, criptorquidia</td></tr>
+<tr><td><strong>Pós-testicular</strong></td><td>Normais</td><td>Normal</td><td>Vasectomia, agenesia de vasos deferentes</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Fator Masculino</div>
+<div class="mm">
+  <div class="mm-card"><h5>🧪 Espermograma</h5><ul><li>Abstinência 2-5 dias</li><li>Repetir se alterado (2-3 meses)</li><li>OMS 2021: valores de referência</li></ul></div>
+  <div class="mm-card"><h5>📖 Vocabulário</h5><ul><li>Oligo = concentração</li><li>Asteno = motilidade</li><li>Terato = morfologia</li><li>Azoospermia = ausência total</li></ul></div>
+  <div class="mm-card"><h5>🧠 Pré-testicular</h5><ul><li>FSH/LH baixos</li><li>Prolactinoma, Kallmann</li><li>Mais tratável</li></ul></div>
+  <div class="mm-card"><h5>🩺 Testicular</h5><ul><li>FSH/LH altos</li><li>Varicocele (mais comum e corrigível)</li><li>Klinefelter (47,XXY)</li></ul></div>
+  <div class="mm-card"><h5>🚧 Pós-testicular</h5><ul><li>Hormônios normais</li><li>Vasectomia, agenesia de deferentes (CFTR)</li></ul></div>
+  <div class="mm-card"><h5>🚀 Encaminhar</h5><ul><li>Azoospermia sempre</li><li>Varicocele palpável</li><li>Alteração grave confirmada</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Espermograma solicitado na 1ª consulta do casal</div><div class="fx-arrow"></div><div class="fx-node">Resultado normal?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Fator masculino improvável isoladamente</div><div class="fx-node"><b>NÃO</b> &#8594; repetir em 2-3 meses</div></div><div class="fx-arrow"></div><div class="fx-node">Alteração confirmada na 2ª amostra?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Encaminhar ao urologista</div><div class="fx-node end"><b>Azoospermia:</b> encaminhar sempre, mesmo sem 2ª amostra prévia</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Alteração seminal confirmada</div><div class="fx-arrow"></div><div class="fx-lbl">Dosar FSH, LH, testosterona</div><div class="fx-arrow"></div><div class="fx-row"><div class="fx-node end"><b>FSH/LH baixos:</b> pensar causa pré-testicular (hormonal) — tratável</div><div class="fx-node end"><b>FSH/LH altos:</b> pensar causa testicular (varicocele, genética)</div><div class="fx-node end"><b>Hormônios normais + azoospermia:</b> pensar causa pós-testicular (obstrutiva)</div></div><div class="fx-arrow"></div><div class="fx-lbl">Conduta dirigida à causa (urologista) ou encaminhamento para técnicas de reprodução assistida conforme gravidade</div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Fator Masculino em 60 segundos</h4>
+<ul>
+<li><strong>Espermograma</strong> é sempre solicitado na 1ª consulta; abstinência de 2-5 dias; repetir se alterado após 2-3 meses.</li>
+<li><strong>Valores OMS 2021 (5º percentil):</strong> volume &#8805;1,4mL, concentração &#8805;16 mi/mL, motilidade total &#8805;42%, progressiva &#8805;30%, morfologia &#8805;4%.</li>
+<li><strong>Vocabulário:</strong> oligo (concentração), asteno (motilidade), terato (morfologia), azoospermia (ausência total).</li>
+<li><strong>Pré-testicular</strong> = FSH/LH baixos (hipogonadotrófico), mais tratável.</li>
+<li><strong>Testicular</strong> = FSH/LH altos (hipergonadotrófico); varicocele é a causa corrigível mais comum; Klinefelter é a causa genética mais comum de azoospermia.</li>
+<li><strong>Pós-testicular</strong> = hormônios normais + obstrução (vasectomia, agenesia de deferentes ligada a CFTR).</li>
+<li><strong>Encaminhar sempre</strong> em azoospermia, varicocele palpável com alteração seminal, ou alteração grave confirmada.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Fator masculino</strong> = espermograma sempre desde a 1ª consulta, repetido se alterado, classificado em pré-testicular (FSH/LH baixos), testicular (FSH/LH altos, varicocele/Klinefelter) e pós-testicular (hormônios normais, obstrução), com encaminhamento urológico dirigido pela gravidade e pelo padrão hormonal.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>FSH/LH altos + testículo pequeno → pense em causa <strong>testicular</strong> (ex.: Klinefelter).</li>
+<li>Azoospermia + hormônios normais + testículos de tamanho normal → pense em causa <strong>obstrutiva (pós-testicular)</strong>.</li>
+<li>Varicocele é sempre lembrada como a causa <strong>corrigível</strong> mais comum — clássica em prova.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Fechar diagnóstico de infertilidade masculina com um único espermograma alterado.</li>
+<li>Esquecer que agenesia de vasos deferentes está associada a mutações do gene CFTR (fibrose cística).</li>
+<li>Confundir o padrão hormonal: hipogonadotrófico (baixo) é pré-testicular; hipergonadotrófico (alto) é testicular.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"FSH baixo, problema lá em cima (hipófise); FSH alto, problema lá embaixo (testículo)."</strong></li>
+<li><strong>"Oligo pouco, asteno sem força, terato torto, azoo nenhum."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Não solicitar espermograma já na primeira consulta do casal.</li>
+<li>Não repetir o exame antes de encaminhar ou tranquilizar o casal.</li>
+<li>Deixar de examinar fisicamente o parceiro (volume testicular, varicocele).</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico por que o espermograma é solicitado já na primeira consulta do casal","Descrevo o preparo correto para coleta e por que se repete um exame alterado","Cito os principais valores de referência do espermograma (OMS 2021) e o vocabulário das alterações","Diferencio causas pré-testiculares, testiculares e pós-testiculares pelo padrão hormonal","Reconheço a varicocele como causa corrigível mais comum e Klinefelter como causa genética mais comum de azoospermia","Sei quando encaminhar precocemente ao urologista especializado em reprodução"]
+});
+Object.assign(C['infertilidade|2'], {
+"questoes": [
+{"stem":"Em que momento da investigação do casal infértil o espermograma deve ser solicitado?","opts":["Apenas após a investigação feminina completa não revelar causa.","Já na primeira consulta, simultaneamente à avaliação inicial da parceira.","Somente após 2 anos de tentativa sem sucesso.","Apenas se houver suspeita clínica evidente de causa masculina."],"correct":1,"expl":"Como o fator masculino é tão prevalente quanto o feminino, o espermograma deve ser solicitado <b>já na primeira consulta</b>, junto com a avaliação inicial da parceira."},
+{"stem":"Qual é o período de abstinência sexual recomendado antes da coleta do espermograma?","opts":["Menos de 24 horas.","2 a 5 dias.","10 a 15 dias.","Não há necessidade de abstinência prévia."],"correct":1,"expl":"A abstinência de <b>2 a 5 dias</b> equilibra volume/concentração adequados sem acumular espermatozoides envelhecidos, que ocorreria com abstinência muito prolongada."},
+{"stem":"Segundo os valores de referência da OMS (6ª edição, 2021), qual o limite inferior de concentração espermática considerado normal?","opts":["≥ 5 milhões/mL.","≥ 16 milhões/mL.","≥ 50 milhões/mL.","≥ 100 milhões/mL."],"correct":1,"expl":"O limite inferior de referência (5º percentil de homens férteis) para concentração espermática é de <b>≥16 milhões/mL</b>, segundo a 6ª edição do manual da OMS."},
+{"stem":"O termo 'astenozoospermia' refere-se a alteração em qual parâmetro do espermograma?","opts":["Concentração de espermatozoides.","Motilidade dos espermatozoides.","Morfologia dos espermatozoides.","Volume do ejaculado."],"correct":1,"expl":"Astenozoospermia designa <b>redução da motilidade</b> espermática — o prefixo 'asteno' remete a falta de força/movimento."},
+{"stem":"Um homem apresenta azoospermia com FSH e LH elevados e volume testicular reduzido. Esse padrão é mais compatível com qual categoria de causa?","opts":["Causa pré-testicular (hipogonadismo hipogonadotrófico).","Causa testicular (hipogonadismo hipergonadotrófico).","Causa pós-testicular (obstrutiva).","Causa exclusivamente psicogênica, sem substrato hormonal."],"correct":1,"expl":"FSH/LH elevados com testículo pequeno indicam <b>falha testicular direta</b> (hipergonadotrófico) — o eixo hipotálamo-hipófise tenta compensar estimulando mais um testículo que não responde."},
+{"stem":"Qual é a causa corrigível mais comum de infertilidade masculina?","opts":["Síndrome de Klinefelter.","Varicocele.","Agenesia de vasos deferentes.","Síndrome de Kallmann."],"correct":1,"expl":"A <b>varicocele</b> é a causa corrigível mais frequente de infertilidade masculina, atuando por aumento da temperatura testicular local e estase venosa."},
+{"stem":"Qual é a causa genética mais comum de azoospermia não obstrutiva?","opts":["Fibrose cística (mutação CFTR).","Síndrome de Klinefelter (47,XXY).","Síndrome de Kallmann.","Microdeleção isolada do gene SRY."],"correct":1,"expl":"A <b>síndrome de Klinefelter</b> (cariótipo 47,XXY) é a causa genética mais comum de azoospermia não obstrutiva, cursando com hipogonadismo hipergonadotrófico."},
+{"stem":"Um homem apresenta azoospermia, mas FSH, LH e testosterona normais, com volume testicular preservado. Qual a hipótese mais provável?","opts":["Causa pré-testicular por hipogonadismo hipogonadotrófico.","Causa testicular por falha primária da espermatogênese.","Causa pós-testicular (obstrutiva), como agenesia de vasos deferentes ou vasectomia prévia.","Erro de coleta da amostra, sem significado clínico."],"correct":2,"expl":"Hormônios normais associados a azoospermia sugerem que a <b>produção testicular está preservada</b>, e o problema está no transporte — causa pós-testicular (obstrutiva)."},
+{"stem":"A ausência congênita bilateral dos vasos deferentes está associada a mutações em qual gene?","opts":["Gene CFTR (fibrose cística).","Gene BRCA1.","Gene SRY.","Gene FMR1 (X frágil)."],"correct":0,"expl":"A ausência congênita bilateral dos vasos deferentes tem forte associação com mutações no gene <b>CFTR</b>, mesmo em homens sem outras manifestações da fibrose cística."},
+{"stem":"Qual é a conduta apropriada diante de um primeiro espermograma alterado, antes de encaminhar o paciente ao urologista?","opts":["Encaminhar imediatamente, sem necessidade de confirmação.","Repetir o exame após 2-3 meses, respeitando o tempo do ciclo de espermatogênese.","Repetir no mesmo dia em outro laboratório para comparação imediata.","Iniciar tratamento empírico com testosterona exógena."],"correct":1,"expl":"A repetição após <b>2-3 meses</b> (aproximadamente um ciclo de espermatogênese, ~74 dias) é necessária antes de confirmar o diagnóstico, dada a variabilidade natural entre amostras."},
+{"stem":"Qual achado ao exame físico do homem infértil deve acelerar o encaminhamento ao urologista?","opts":["Presença de varicocele palpável associada a alteração seminal.","Ausência de qualquer alteração ao exame físico.","IMC dentro da faixa de normalidade.","Frequência sexual regular relatada pelo casal."],"correct":0,"expl":"<b>Varicocele palpável associada a alteração seminal</b> é um gatilho clássico para encaminhamento precoce, já que é a causa corrigível mais comum de infertilidade masculina."},
+{"stem":"Sobre a interpretação dos valores de referência do espermograma segundo a OMS, é correto afirmar que:","opts":["Valores abaixo da referência significam infertilidade masculina definitiva.","Os valores representam o 5º percentil de homens férteis, e resultados abaixo deles reduzem a probabilidade de concepção espontânea rápida, sem representar impossibilidade absoluta.","Os valores de referência são fixos e não sofrem revisões ao longo do tempo.","A morfologia espermática não é considerada um parâmetro relevante nas diretrizes atuais."],"correct":1,"expl":"Os valores de referência representam o <b>5º percentil</b> de uma população fértil — abaixo deles a chance de concepção espontânea diminui, mas isoladamente não define infertilidade absoluta."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Prevalência</small><br>Qual a contribuição aproximada do fator masculino na infertilidade do casal?","back":"Cerca de 1/3 dos casos isoladamente, participando de metade ou mais quando somado a fatores combinados.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Coleta</small><br>Qual o período de abstinência recomendado antes do espermograma?","back":"{{2 a 5 dias — nem menos (reduz volume/concentração) nem mais (aumenta espermatozoides envelhecidos).}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Repetição</small><br>Por que se repete um espermograma alterado após 2-3 meses?","back":"Porque o ciclo de espermatogênese dura cerca de 74 dias, e há variabilidade natural entre amostras.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Valores OMS 2021</small><br>Cite os limites inferiores de concentração e motilidade progressiva.","back":"{{Concentração ≥16 milhões/mL; motilidade progressiva ≥30%.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Vocabulário</small><br>O que significam oligozoospermia, astenozoospermia e teratozoospermia?","back":"Oligo = concentração reduzida; asteno = motilidade reduzida; terato = morfologia alterada.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Vocabulário</small><br>O que é azoospermia?","back":"Ausência completa de espermatozoides no ejaculado.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Pré-testicular</small><br>Qual o padrão hormonal e um exemplo de causa pré-testicular?","back":"FSH/LH baixos (hipogonadismo hipogonadotrófico); exemplo: prolactinoma, síndrome de Kallmann.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Testicular</small><br>Qual a causa corrigível mais comum de infertilidade masculina?","back":"Varicocele.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Testicular</small><br>Qual a causa genética mais comum de azoospermia não obstrutiva?","back":"Síndrome de Klinefelter (cariótipo 47,XXY).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Pós-testicular</small><br>Qual a causa mais comum de infertilidade pós-testicular?","back":"Vasectomia prévia.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Pós-testicular</small><br>Ausência congênita bilateral dos vasos deferentes está associada a que gene?","back":"Gene CFTR (fibrose cística), mesmo sem outras manifestações da doença.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diferencial hormonal</small><br>Como diferenciar causa testicular de pós-testicular em um homem com azoospermia?","back":"{{Causa testicular: FSH/LH altos. Causa pós-testicular: hormônios normais, pois a produção está preservada.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Encaminhamento</small><br>Cite 3 gatilhos para encaminhar precocemente ao urologista.","back":"Azoospermia, varicocele palpável com alteração seminal, e alteração grave confirmada em 2 amostras.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Investigação urológica</small><br>Que exames complementares o urologista pode solicitar em azoospermia?","back":"Cariótipo, pesquisa de microdeleções do cromossomo Y, e teste para mutações do gene CFTR.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Espermograma alterado na primeira avaliação","stem":"Homem de 33 anos, sem antecedentes relevantes, realiza espermograma na primeira consulta do casal e o resultado mostra concentração de 8 milhões/mL (oligozoospermia).","passos":[
+{"h":"Interpretação inicial","p":"Concentração abaixo do limite de referência (≥16 milhões/mL), configurando oligozoospermia neste exame."},
+{"h":"Raciocínio clínico","p":"Um único resultado alterado não é suficiente para conclusão diagnóstica, dada a variabilidade natural entre amostras e possíveis fatores transitórios (febre recente, estresse, abstinência inadequada)."},
+{"h":"Conduta neste momento","p":"Orientar repetição do espermograma após 2-3 meses, respeitando o preparo adequado (abstinência de 2-5 dias)."},
+{"h":"Resultado da repetição","p":"Segundo exame confirma concentração reduzida (9 milhões/mL), consistente com o primeiro achado."},
+{"h":"Conduta após confirmação","p":"Encaminhar ao urologista para investigação dirigida da causa (exame físico com pesquisa de varicocele, dosagens hormonais)."}
+]},
+{"t":"Caso 2 — Azoospermia com hormônios elevados","stem":"Homem de 29 anos com espermograma mostrando azoospermia em duas amostras, testículos pequenos ao exame físico, FSH e LH elevados, testosterona no limite inferior da normalidade.","passos":[
+{"h":"Interpretação do padrão hormonal","p":"FSH e LH elevados associados a testículos pequenos sugerem falha testicular primária (hipogonadismo hipergonadotrófico)."},
+{"h":"Raciocínio clínico","p":"O padrão é compatível com causa testicular, e não obstrutiva — o eixo hormonal está tentando compensar uma produção testicular deficiente."},
+{"h":"Hipótese diagnóstica a investigar","p":"Considerar causa genética, como síndrome de Klinefelter (47,XXY), a causa genética mais comum de azoospermia não obstrutiva."},
+{"h":"Investigação complementar","p":"Encaminhar para urologista especializado, com solicitação de cariótipo e avaliação genética dirigida."},
+{"h":"Conduta e aconselhamento","p":"Discutir com o casal as opções reprodutivas possíveis, incluindo eventual recuperação cirúrgica de espermatozoides testiculares associada a técnicas de reprodução assistida, conforme detalhado no próximo módulo."}
+]},
+{"t":"Caso 3 — Azoospermia com hormônios normais e antecedente cirúrgico","stem":"Homem de 36 anos com azoospermia confirmada em duas amostras, FSH, LH e testosterona normais, volume testicular normal, relatando vasectomia realizada há 6 anos por decisão pessoal prévia, agora em novo relacionamento com desejo de nova paternidade.","passos":[
+{"h":"Interpretação do padrão hormonal","p":"Hormônios normais e volume testicular preservado, associados a azoospermia, sugerem produção testicular normal com obstrução do trajeto — causa pós-testicular."},
+{"h":"Raciocínio clínico","p":"O antecedente de vasectomia é diretamente compatível com o quadro apresentado, sendo a causa mais comum e esperada de azoospermia obstrutiva nesse contexto."},
+{"h":"Discussão de opções","p":"Duas alternativas principais podem ser discutidas: reversão cirúrgica da vasectomia (vasovasostomia) ou recuperação cirúrgica de espermatozoides diretamente do testículo/epidídimo associada a técnica de reprodução assistida."},
+{"h":"Fatores a considerar na decisão","p":"Tempo desde a vasectomia, idade da parceira e sua reserva ovariana, e preferência do casal influenciam a escolha entre as duas abordagens."},
+{"h":"Conduta neste momento","p":"Encaminhamento ao urologista especializado para discutir detalhadamente as opções, em conjunto com avaliação simultânea da parceira quanto à reserva ovariana e demais fatores."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['infertilidade|3'] = {
+name: "Técnicas de Reprodução Assistida",
+intro: "Da relação sexual cronometrada até a fecundação em laboratório: a complexidade da técnica deve ser proporcional à gravidade da causa encontrada, nunca maior nem menor.",
+sub: [
+["entendendo","Baixa e Alta Complexidade",`
+<div class="ac-h">Onde a fecundação acontece define a complexidade da técnica</div>
+<p class="ac-p">As técnicas de reprodução assistida se dividem em duas grandes categorias, conforme o local onde a fecundação ocorre. Na <b>baixa complexidade</b>, a fecundação continua acontecendo <b>dentro do corpo da mulher (in vivo)</b> — como no coito programado e na inseminação intrauterina — exigindo, portanto, que ao menos uma trompa esteja pérvia e funcional. Na <b>alta complexidade</b>, a fecundação ocorre <b>em laboratório (in vitro)</b>, como na fertilização in vitro (FIV) e na injeção intracitoplasmática de espermatozoide (ICSI), contornando completamente a necessidade de trompas pérvias.</p>
+<p class="ac-p">Essa distinção não é apenas técnica: ela orienta diretamente a indicação. Causas que preservam a via tubária e envolvem alterações leves (fator masculino leve, disfunção ovulatória leve, infertilidade sem causa aparente recente) costumam começar pela baixa complexidade; causas que eliminam a via tubária (obstrução bilateral) ou fator masculino grave exigem alta complexidade desde o início.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Onde a fecundação acontece</text>
+<rect x="30" y="50" width="270" height="140" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="165" y="74" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Baixa complexidade</text>
+<text x="165" y="98" text-anchor="middle" font-size="9" style="fill:var(--muted)">Fecundação in vivo</text>
+<text x="165" y="114" text-anchor="middle" font-size="9" style="fill:var(--muted)">(dentro do corpo)</text>
+<text x="165" y="136" text-anchor="middle" font-size="9" style="fill:var(--muted)">Exige trompa pérvia</text>
+<text x="165" y="152" text-anchor="middle" font-size="9" style="fill:var(--muted)">Coito programado, IIU</text>
+<rect x="340" y="50" width="270" height="140" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="475" y="74" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Alta complexidade</text>
+<text x="475" y="98" text-anchor="middle" font-size="9" style="fill:var(--ink)">Fecundação in vitro</text>
+<text x="475" y="114" text-anchor="middle" font-size="9" style="fill:var(--ink)">(em laboratório)</text>
+<text x="475" y="136" text-anchor="middle" font-size="9" style="fill:var(--ink)">Não depende das trompas</text>
+<text x="475" y="152" text-anchor="middle" font-size="9" style="fill:var(--ink)">FIV, ICSI</text>
+</svg>
+<div class="ac-call"><b>Ideia central:</b> a técnica escolhida deve corresponder à gravidade do fator identificado — usar alta complexidade em caso leve é excesso; usar baixa complexidade em obstrução tubária bilateral simplesmente não funciona.</div>
+`],
+["coito_programado","Coito Programado",`
+<div class="ac-h">A técnica mais simples: acertar o momento certo</div>
+<p class="ac-p">O coito programado consiste em identificar a <b>janela fértil</b> da mulher (por meio de monitoramento do crescimento folicular via ultrassonografia seriada, kits urinários de LH, ou cálculo baseado na regularidade do ciclo) e orientar o casal a ter relações sexuais nos dias de maior probabilidade de concepção — geralmente no dia do pico de LH e nos dois dias seguintes. Pode ser realizado em ciclo natural ou associado a indução leve da ovulação com medicações orais (como citrato de clomifeno ou letrozol), que aumentam a chance de haver um folículo dominante bem definido.</p>
+<p class="ac-p">É a técnica de <b>menor complexidade e menor custo</b>, indicada para casais com <b>infertilidade sem causa aparente de curta duração</b>, <b>disfunção ovulatória leve</b> já em indução, ou <b>fator masculino muito leve</b> — sempre exigindo que ambas as trompas estejam pérvias (ou ao menos uma) e que o espermograma não tenha alteração relevante.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Coito programado — lógica do momento certo</text>
+<rect x="30" y="46" width="250" height="120" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="155" y="70" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Identificar janela fértil</text>
+<text x="155" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">USTV seriada, kit LH urinário,</text>
+<text x="155" y="106" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">ou cálculo por regularidade</text>
+<rect x="340" y="46" width="250" height="120" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="465" y="70" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Relação no momento certo</text>
+<text x="465" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Dia do pico de LH e</text>
+<text x="465" y="106" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">os 2 dias seguintes</text>
+</svg>
+<div class="ac-tip"><b>Pré-requisito indispensável:</b> ao menos uma trompa pérvia e espermograma sem alteração relevante — sem isso, o coito programado não tem como funcionar, independentemente do timing.</div>
+`],
+["iiu","Inseminação Intrauterina (IIU)",`
+<div class="ac-h">Aproximando o espermatozoide processado do óvulo</div>
+<p class="ac-p">Na inseminação intrauterina, o sêmen é coletado, processado em laboratório (técnica de "capacitação espermática", que seleciona os espermatozoides mais móveis e remove plasma seminal e debris) e depositado diretamente na cavidade uterina, próximo ao momento da ovulação, por meio de um cateter fino através do colo uterino. O objetivo é reduzir a distância que o espermatozoide precisa percorrer e concentrar espermatozoides de boa qualidade no momento certo.</p>
+<p class="ac-p">É indicada para: <b>fator masculino leve a moderado</b> (oligoastenozoospermia leve, ainda com número suficiente de espermatozoides móveis após o processamento), <b>fator cervical</b> (muco cervical hostil ou insuficiente), <b>infertilidade sem causa aparente</b> refratária ao coito programado, e casos que necessitam de <b>sêmen de doador</b> (casais homoafetivos femininos, mulheres sem parceiro, ou azoospermia sem possibilidade de recuperação espermática). O <b>pré-requisito indispensável é que ao menos uma trompa esteja pérvia</b> — sem isso, o espermatozoide processado não tem como alcançar o óvulo.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Etapas da inseminação intrauterina</text>
+<rect x="20" y="46" width="180" height="110" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="110" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">1. Coleta e capacitação</text>
+<text x="110" y="88" text-anchor="middle" font-size="8" style="fill:var(--muted)">Seleciona espermatozoides</text>
+<text x="110" y="100" text-anchor="middle" font-size="8" style="fill:var(--muted)">mais móveis</text>
+<rect x="230" y="46" width="180" height="110" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="320" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">2. Momento certo</text>
+<text x="320" y="88" text-anchor="middle" font-size="8" style="fill:var(--muted)">Próximo à ovulação</text>
+<text x="320" y="100" text-anchor="middle" font-size="8" style="fill:var(--muted)">(natural ou induzida)</text>
+<rect x="440" y="46" width="180" height="110" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="530" y="68" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">3. Deposição intrauterina</text>
+<text x="530" y="88" text-anchor="middle" font-size="8" style="fill:var(--ink)">Cateter fino via colo</text>
+<text x="530" y="100" text-anchor="middle" font-size="8" style="fill:var(--ink)">Exige trompa pérvia</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha clássica:</b> IIU não é indicada para fator masculino grave — se o número de espermatozoides móveis após o processamento for muito baixo, a técnica perde eficácia e a indicação passa a ser FIV/ICSI.</div>
+`],
+["fiv","Fertilização in Vitro (FIV)",`
+<div class="ac-h">Quando a fecundação precisa acontecer fora do corpo</div>
+<p class="ac-p">A FIV envolve várias etapas sequenciais: <b>estimulação ovariana controlada</b> (medicações injetáveis que recrutam múltiplos folículos simultaneamente, monitorados por USTV seriada e dosagem de estradiol), <b>indução da maturação final</b> (uso de hCG ou agonista de GnRH para completar a maturação oocitária no momento certo), <b>punção folicular guiada por ultrassom</b> (coleta dos óvulos maduros, procedimento ambulatorial sob sedação), <b>fecundação em laboratório</b> (colocando óvulos e espermatozoides juntos em placa, permitindo fecundação espontânea), <b>cultivo embrionário</b> por alguns dias, e finalmente a <b>transferência embrionária</b> para a cavidade uterina (podendo ser a fresco ou em ciclo posterior, com embriões congelados).</p>
+<p class="ac-p">É indicada para: <b>obstrução tubária bilateral</b> (situação em que baixa complexidade simplesmente não tem como funcionar), <b>endometriose moderada a grave</b>, <b>idade materna avançada</b>, <b>fator masculino grave</b>, <b>falha de tentativas prévias de baixa complexidade</b> (geralmente após 3-4 ciclos de IIU sem sucesso), e <b>infertilidade sem causa aparente refratária</b>.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<defs><marker id="amfiv" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" style="fill:var(--accent)"/></marker></defs>
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">As etapas da FIV</text>
+<rect x="10" y="46" width="115" height="100" rx="8" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.2"/>
+<text x="67" y="66" text-anchor="middle" font-size="8.5" font-weight="700" style="fill:var(--ink)">Estimulação</text>
+<text x="67" y="82" text-anchor="middle" font-size="7.5" style="fill:var(--muted)">ovariana</text>
+<text x="67" y="96" text-anchor="middle" font-size="7.5" style="fill:var(--muted)">controlada</text>
+<line x1="125" y1="96" x2="150" y2="96" style="stroke:var(--accent)" stroke-width="1.4" marker-end="url(#amfiv)"/>
+<rect x="153" y="46" width="115" height="100" rx="8" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.2"/>
+<text x="210" y="66" text-anchor="middle" font-size="8.5" font-weight="700" style="fill:var(--ink)">Punção</text>
+<text x="210" y="82" text-anchor="middle" font-size="7.5" style="fill:var(--muted)">folicular</text>
+<text x="210" y="96" text-anchor="middle" font-size="7.5" style="fill:var(--muted)">guiada por USTV</text>
+<line x1="268" y1="96" x2="293" y2="96" style="stroke:var(--accent)" stroke-width="1.4" marker-end="url(#amfiv)"/>
+<rect x="296" y="46" width="115" height="100" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="353" y="66" text-anchor="middle" font-size="8.5" font-weight="700" style="fill:var(--accent)">Fecundação</text>
+<text x="353" y="82" text-anchor="middle" font-size="7.5" style="fill:var(--ink)">em laboratório</text>
+<line x1="411" y1="96" x2="436" y2="96" style="stroke:var(--accent)" stroke-width="1.4" marker-end="url(#amfiv)"/>
+<rect x="439" y="46" width="115" height="100" rx="8" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.2"/>
+<text x="496" y="66" text-anchor="middle" font-size="8.5" font-weight="700" style="fill:var(--ink)">Cultivo</text>
+<text x="496" y="82" text-anchor="middle" font-size="7.5" style="fill:var(--muted)">embrionário</text>
+<line x1="554" y1="96" x2="579" y2="96" style="stroke:var(--accent)" stroke-width="1.4" marker-end="url(#amfiv)"/>
+<text x="595" y="100" text-anchor="middle" font-size="8" font-weight="700" style="fill:var(--accent)">Trans-</text>
+<text x="595" y="112" text-anchor="middle" font-size="8" font-weight="700" style="fill:var(--accent)">ferência</text>
+</svg>
+<div class="ac-call"><b>Ponto-chave:</b> ao contrário da baixa complexidade, a FIV não depende de trompas pérvias — os óvulos são coletados diretamente do ovário por punção, sem passar pela trompa.</div>
+`],
+["icsi","ICSI — Injeção Intracitoplasmática de Espermatozoide",`
+<div class="ac-h">Quando escolher e injetar um único espermatozoide diretamente no óvulo</div>
+<p class="ac-p">A ICSI é uma variação da fecundação laboratorial em que, em vez de colocar óvulos e espermatozoides juntos para fecundação espontânea (como na FIV convencional), um <b>único espermatozoide é selecionado e injetado diretamente no citoplasma do óvulo</b> com auxílio de micromanipulação. Todas as demais etapas (estimulação, punção, cultivo, transferência) são as mesmas da FIV — a diferença está exclusivamente no método de fecundação.</p>
+<p class="ac-p">A indicação central da ICSI é o <b>fator masculino grave</b> (oligoastenoteratozoospermia severa, número muito reduzido de espermatozoides móveis viáveis), especialmente quando o número disponível seria insuficiente para uma FIV convencional ter boa taxa de fecundação. Também é indicada em <b>falha de fecundação prévia com FIV convencional</b>, no uso de <b>espermatozoides obtidos por recuperação cirúrgica</b> (TESA/TESE, em casos de azoospermia obstrutiva ou não obstrutiva), e quando há necessidade de <b>diagnóstico genético pré-implantacional (PGT)</b>, que exige controle rigoroso sobre o momento exato da fecundação.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">FIV convencional x ICSI</text>
+<rect x="30" y="46" width="270" height="130" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">FIV convencional</text>
+<text x="165" y="94" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Óvulo + espermatozoides</text>
+<text x="165" y="108" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">juntos em placa</text>
+<text x="165" y="126" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Fecundação espontânea</text>
+<rect x="340" y="46" width="270" height="130" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">ICSI</text>
+<text x="475" y="94" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">1 espermatozoide</text>
+<text x="475" y="108" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">injetado diretamente</text>
+<text x="475" y="126" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">no citoplasma do óvulo</text>
+</svg>
+<div class="ac-tip"><b>Macete:</b> ICSI resolve o problema de "poucos espermatozoides bons" — ao injetar diretamente, garante a fecundação mesmo quando restam poucas células viáveis.</div>
+`],
+["estimulacao_riscos","Estimulação Ovariana e Síndrome de Hiperestimulação",`
+<div class="ac-h">O principal risco da estimulação ovariana controlada</div>
+<p class="ac-p">A estimulação ovariana controlada, usada tanto em ciclos de baixa quanto de alta complexidade, busca recrutar múltiplos folículos simultaneamente usando gonadotrofinas exógenas. O risco mais relevante dessa etapa é a <b>síndrome de hiperestimulação ovariana (SHO)</b>: uma resposta exagerada, na qual os ovários aumentam muito de volume e há extravasamento de líquido para o terceiro espaço (ascite, podendo haver derrame pleural em casos graves), por aumento da permeabilidade vascular mediado principalmente pelo VEGF liberado por múltiplos folículos/corpos lúteos.</p>
+<p class="ac-p">O principal fator de risco para SHO é a <b>síndrome dos ovários policísticos (SOP)</b>, pela alta contagem de folículos antrais e resposta exagerada às gonadotrofinas — retomando o que já foi visto no módulo de SOP. A administração de hCG (que tem meia-vida longa e mantém a estimulação do corpo lúteo) piora o quadro, por isso protocolos modernos frequentemente usam agonista de GnRH para o gatilho final em pacientes de alto risco, reduzindo a incidência de SHO grave.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Síndrome de hiperestimulação ovariana (SHO)</text>
+<rect x="30" y="46" width="270" height="130" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="165" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Mecanismo</text>
+<text x="165" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Múltiplos folículos → VEGF</text>
+<text x="165" y="106" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">↑ permeabilidade vascular</text>
+<text x="165" y="120" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">Extravasamento p/ 3º espaço</text>
+<rect x="340" y="46" width="270" height="130" rx="10" style="fill:#e8675f" fill-opacity=".12" stroke="#e8675f" stroke-width="1.4"/>
+<text x="475" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:#e8675f">Principal fator de risco</text>
+<text x="475" y="92" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">SOP (alta contagem</text>
+<text x="475" y="106" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">de folículos antrais)</text>
+<text x="475" y="126" text-anchor="middle" font-size="8.5" style="fill:var(--ink)">Piora com hCG</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha clássica:</b> em paciente com SOP, o protocolo de gatilho final com <b>agonista de GnRH</b> (em vez de hCG) reduz significativamente o risco de SHO grave — detalhe frequentemente cobrado em prova.</div>
+`],
+["resultados_considera","Resultados, Idade e Criopreservação",`
+<div class="ac-h">O fator que mais influencia o sucesso, e o que fazer com o excedente</div>
+<p class="ac-p">Entre todos os fatores que influenciam a taxa de sucesso das técnicas de reprodução assistida, a <b>idade da mulher</b> é o mais determinante — reflexo direto do declínio de quantidade e qualidade oocitária ao longo do tempo. As taxas de sucesso por ciclo de FIV/ICSI caem de forma progressiva a partir dos 35 anos, com queda mais acentuada após os 38-40 anos, independentemente da técnica utilizada.</p>
+<p class="ac-p">Quando o ciclo de estimulação gera mais embriões viáveis do que os transferidos naquele momento, os excedentes podem ser <b>criopreservados (vitrificação)</b> para uso em ciclos futuros, sem necessidade de nova estimulação ovariana completa. A criopreservação também é oferecida de forma <b>eletiva</b> (preservação de fertilidade) para mulheres que desejam adiar a maternidade por razões pessoais ou que enfrentam tratamentos que ameaçam a reserva ovariana (quimioterapia, cirurgia ovariana repetida), sendo mais eficaz quanto mais jovem for a mulher no momento da coleta.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Idade materna e taxa de sucesso</text>
+<rect x="50" y="46" width="540" height="130" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<line x1="80" y1="160" x2="560" y2="160" style="stroke:var(--muted)" stroke-width="1.2"/>
+<path d="M80 90 Q250 100 350 120 Q470 145 560 158" style="fill:none;stroke:var(--accent)" stroke-width="2.5"/>
+<text x="100" y="80" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">&lt;35a</text>
+<text x="320" y="80" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">35-38a</text>
+<text x="540" y="80" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">&gt;40a</text>
+<text x="320" y="188" text-anchor="middle" font-size="9" style="fill:var(--ink)">Taxa de sucesso por ciclo cai progressivamente com a idade</text>
+</svg>
+<div class="ac-call"><b>Fio condutor do módulo:</b> toda a lógica de escolha de técnica — do coito programado à ICSI — converge para um princípio comum: quanto mais avança a idade materna ou mais grave o fator identificado, menos tempo há para escalonar gradualmente, e mais cedo a técnica de maior complexidade deve ser considerada.</div>
+`]
+]
+};
+Object.assign(C['infertilidade|3'], {
+"escores": `<div class="prose">
+<h3>Técnicas de reprodução assistida — indicações principais</h3>
+<table class="ac-tbl">
+<tr><th>Técnica</th><th>Complexidade</th><th>Indicação típica</th><th>Pré-requisito</th></tr>
+<tr><td>Coito programado</td><td>Baixa</td><td>ISCA recente, disfunção ovulatória leve, fator masculino muito leve</td><td>≥1 trompa pérvia, espermograma normal</td></tr>
+<tr><td>Inseminação intrauterina (IIU)</td><td>Baixa</td><td>Fator masculino leve-moderado, fator cervical, sêmen de doador</td><td>≥1 trompa pérvia</td></tr>
+<tr><td>FIV</td><td>Alta</td><td>Obstrução tubária bilateral, endometriose grave, idade avançada, falha de IIU</td><td>Nenhum (não depende de trompas)</td></tr>
+<tr><td>ICSI</td><td>Alta</td><td>Fator masculino grave, falha de fecundação prévia, sêmen cirúrgico (TESA/TESE)</td><td>Nenhum</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">"Se as trompas não servem para nada, só alta complexidade resolve — baixa complexidade sempre depende delas."</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Escolhendo a técnica pela causa identificada</h3>
+<table class="ac-tbl">
+<tr><th>Achado</th><th>Técnica mais indicada</th></tr>
+<tr><td>ISCA de curta duração, trompas pérvias</td><td>Coito programado (eventualmente com indução leve)</td></tr>
+<tr><td>Fator masculino leve, trompa pérvia</td><td>Inseminação intrauterina (IIU)</td></tr>
+<tr><td>Obstrução tubária bilateral</td><td>FIV (baixa complexidade não funciona)</td></tr>
+<tr><td>Fator masculino grave (OAT severa)</td><td>ICSI</td></tr>
+<tr><td>Falha de fecundação em FIV convencional prévia</td><td>ICSI em ciclo subsequente</td></tr>
+<tr><td>Espermatozoides obtidos por TESA/TESE</td><td>ICSI (obrigatório, dado o número limitado de células)</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Técnicas de Reprodução Assistida</div>
+<div class="mm">
+  <div class="mm-card"><h5>⚖️ Complexidade</h5><ul><li>Baixa: fecundação in vivo</li><li>Alta: fecundação in vitro</li><li>Baixa exige trompa pérvia</li></ul></div>
+  <div class="mm-card"><h5>📅 Coito programado</h5><ul><li>Identifica janela fértil</li><li>±indução leve</li><li>ISCA/fator leve</li></ul></div>
+  <div class="mm-card"><h5>💉 IIU</h5><ul><li>Sêmen processado</li><li>Depositado no útero</li><li>Exige trompa pérvia</li></ul></div>
+  <div class="mm-card"><h5>🧫 FIV</h5><ul><li>Estimulação → punção → fecundação → cultivo → transferência</li><li>Não depende de trompas</li></ul></div>
+  <div class="mm-card"><h5>🔬 ICSI</h5><ul><li>1 espermatozoide injetado</li><li>Fator masculino grave</li><li>TESA/TESE</li></ul></div>
+  <div class="mm-card"><h5>⚠️ SHO</h5><ul><li>Risco da estimulação</li><li>SOP é fator de risco</li><li>Gatilho c/ GnRH reduz risco</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Casal com indicação de tratamento (após investigação básica)</div><div class="fx-arrow"></div><div class="fx-lbl">Ao menos uma trompa pérvia e espermograma sem alteração grave?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Considerar baixa complexidade (coito programado ou IIU)</div><div class="fx-node end"><b>NÃO:</b> Indicar alta complexidade (FIV/ICSI) diretamente</div></div><div class="fx-arrow"></div><div class="fx-node">Falha após ciclos de baixa complexidade (geralmente 3-4 de IIU)?</div><div class="fx-lbl">Reavaliar e escalonar para FIV/ICSI</div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Indicação de alta complexidade definida</div><div class="fx-arrow"></div><div class="fx-lbl">Fator masculino grave, falha de fecundação prévia, ou sêmen cirúrgico (TESA/TESE)?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> ICSI</div><div class="fx-node end"><b>NÃO:</b> FIV convencional</div></div><div class="fx-arrow"></div><div class="fx-lbl">Paciente de alto risco para SHO (ex.: SOP)?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Considerar gatilho final com agonista de GnRH em vez de hCG</div><div class="fx-node end"><b>NÃO:</b> Protocolo padrão com hCG</div></div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Técnicas de Reprodução Assistida em 60 segundos</h4>
+<ul>
+<li><strong>Baixa complexidade</strong> (coito programado, IIU) = fecundação in vivo, exige trompa pérvia.</li>
+<li><strong>Alta complexidade</strong> (FIV, ICSI) = fecundação in vitro, não depende de trompas.</li>
+<li><strong>Coito programado:</strong> identifica janela fértil; indicado para ISCA recente e fatores leves.</li>
+<li><strong>IIU:</strong> sêmen processado depositado no útero; indicado para fator masculino leve-moderado, fator cervical, sêmen de doador.</li>
+<li><strong>FIV:</strong> estimulação → punção → fecundação em laboratório → cultivo → transferência; indicada em obstrução tubária bilateral, endometriose grave, idade avançada, falha de IIU.</li>
+<li><strong>ICSI:</strong> injeção direta de 1 espermatozoide no óvulo; indicada em fator masculino grave, falha prévia de fecundação, sêmen de TESA/TESE.</li>
+<li><strong>SHO</strong> = principal risco da estimulação; SOP é o maior fator de risco; gatilho com agonista de GnRH reduz o risco.</li>
+<li><strong>Idade materna</strong> é o principal determinante da taxa de sucesso.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Técnicas de reprodução assistida</strong> = baixa complexidade (coito programado, IIU — exige trompa pérvia) para casos leves, e alta complexidade (FIV, ICSI — não depende de trompas) para obstrução tubária, fator masculino grave ou falha de baixa complexidade, sempre monitorando o risco de SHO na estimulação ovariana.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Obstrução tubária <strong>bilateral</strong> confirmada é indicação direta de FIV — baixa complexidade não tem como funcionar.</li>
+<li>ICSI é a escolha quando o número de espermatozoides móveis viáveis é muito baixo, inclusive em sêmen obtido cirurgicamente (TESA/TESE).</li>
+<li>SOP é o principal fator de risco para síndrome de hiperestimulação ovariana durante a estimulação.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Indicar IIU em fator masculino grave — a técnica não tem eficácia nesse cenário, o correto é ICSI.</li>
+<li>Esquecer que a IIU exige ao menos uma trompa pérvia, assim como o coito programado.</li>
+<li>Confundir o mecanismo da SHO: é extravasamento de líquido para terceiro espaço por aumento de permeabilidade vascular mediado por VEGF, não simplesmente "muitos folículos".</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"Baixa complexidade precisa de estrada livre (trompa); alta complexidade constrói a própria estrada em laboratório."</strong></li>
+<li><strong>"ICSI é para quando sobra pouco espermatozoide bom — injeta o melhor direto no óvulo."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Escalonar a técnica sem considerar a gravidade real do fator identificado.</li>
+<li>Não monitorar sinais precoces de SHO em pacientes de alto risco (SOP).</li>
+<li>Subestimar o impacto da idade materna na taxa de sucesso, independentemente da técnica escolhida.</li>
+</ul></div>
+</div>`,
+"checklist": ["Diferencio baixa complexidade (in vivo) de alta complexidade (in vitro) e explico por que a primeira exige trompa pérvia","Descrevo as indicações e a técnica do coito programado e da inseminação intrauterina","Explico as etapas da FIV, da estimulação ovariana até a transferência embrionária","Diferencio FIV convencional de ICSI e sei quando cada uma é indicada","Reconheço a síndrome de hiperestimulação ovariana como principal risco da estimulação e seu principal fator de risco","Sei explicar por que a idade materna é o principal determinante da taxa de sucesso"]
+});
+Object.assign(C['infertilidade|3'], {
+"questoes": [
+{"stem":"Qual a principal diferença conceitual entre técnicas de baixa e alta complexidade em reprodução assistida?","opts":["A baixa complexidade é sempre mais cara que a alta complexidade.","Na baixa complexidade a fecundação ocorre dentro do corpo da mulher (in vivo); na alta complexidade, em laboratório (in vitro).","A alta complexidade nunca envolve estimulação ovariana.","A baixa complexidade é indicada exclusivamente para fator masculino grave."],"correct":1,"expl":"A distinção central é o <b>local da fecundação</b>: in vivo (baixa complexidade, exige trompa pérvia) versus in vitro (alta complexidade, não depende das trompas)."},
+{"stem":"Por que o coito programado e a inseminação intrauterina exigem que ao menos uma trompa esteja pérvia?","opts":["Porque a fecundação nessas técnicas ocorre dentro do corpo da mulher, geralmente na trompa.","Porque o exame de HSG é obrigatório antes de qualquer procedimento de baixa complexidade.","Porque as trompas são necessárias apenas para a implantação do embrião.","Não há relação entre permeabilidade tubária e essas técnicas."],"correct":0,"expl":"Ambas são técnicas <b>in vivo</b> — o encontro entre óvulo e espermatozoide ocorre dentro do corpo, tipicamente na trompa, o que torna a permeabilidade tubária um pré-requisito indispensável."},
+{"stem":"Qual das seguintes é uma indicação apropriada para inseminação intrauterina (IIU)?","opts":["Obstrução tubária bilateral confirmada.","Fator masculino grave, com número muito reduzido de espermatozoides móveis.","Fator masculino leve a moderado, com número suficiente de espermatozoides móveis após processamento.","Falha de fecundação em ciclo prévio de FIV convencional."],"correct":2,"expl":"A IIU é indicada para <b>fator masculino leve a moderado</b>, fator cervical, ISCA refratária ao coito programado e uso de sêmen de doador — sempre exigindo trompa pérvia."},
+{"stem":"Em qual situação clínica a fertilização in vitro (FIV) é indicada de forma direta, sem tentativa prévia de baixa complexidade?","opts":["Infertilidade sem causa aparente de início recente.","Obstrução tubária bilateral confirmada.","Fator masculino muito leve, com espermograma quase normal.","Ciclos menstruais regulares sem outras alterações."],"correct":1,"expl":"Na <b>obstrução tubária bilateral</b>, técnicas de baixa complexidade não têm como funcionar (dependem de trompa pérvia), justificando indicação direta de FIV."},
+{"stem":"Qual é a diferença técnica fundamental entre FIV convencional e ICSI?","opts":["Na FIV convencional, óvulo e espermatozoides são colocados juntos para fecundação espontânea; na ICSI, um único espermatozoide é injetado diretamente no citoplasma do óvulo.","A ICSI não requer estimulação ovariana prévia.","A FIV convencional é indicada exclusivamente para fator masculino grave.","A ICSI é uma técnica de baixa complexidade."],"correct":0,"expl":"A diferença está exclusivamente no <b>método de fecundação</b>: espontânea em placa (FIV) versus injeção direta de um espermatozoide selecionado (ICSI). As demais etapas são as mesmas."},
+{"stem":"Qual é a principal indicação da ICSI?","opts":["Infertilidade sem causa aparente de curta duração.","Fator masculino grave, incluindo uso de espermatozoides obtidos por recuperação cirúrgica (TESA/TESE).","Disfunção ovulatória leve, já respondendo a indução com clomifeno.","Fator cervical isolado, com demais parâmetros normais."],"correct":1,"expl":"A ICSI é indicada principalmente para <b>fator masculino grave</b>, incluindo casos de recuperação cirúrgica de espermatozoides, onde o número de células disponíveis é limitado."},
+{"stem":"Qual é o mecanismo fisiopatológico central da síndrome de hiperestimulação ovariana (SHO)?","opts":["Deficiência de progesterona na fase lútea.","Aumento da permeabilidade vascular mediado principalmente por VEGF, causando extravasamento de líquido para o terceiro espaço.","Obstrução mecânica das trompas por múltiplos folículos.","Redução da produção de estradiol pelos ovários estimulados."],"correct":1,"expl":"A SHO decorre de <b>aumento da permeabilidade vascular</b>, mediado principalmente por VEGF liberado por múltiplos folículos/corpos lúteos, causando extravasamento para o terceiro espaço (ascite, podendo haver derrame pleural)."},
+{"stem":"Qual é o principal fator de risco para o desenvolvimento de síndrome de hiperestimulação ovariana?","opts":["Idade materna avançada (&#8805;40 anos).","Síndrome dos ovários policísticos (SOP).","Obstrução tubária bilateral.","Fator masculino grave isolado."],"correct":1,"expl":"A <b>SOP</b>, pela alta contagem de folículos antrais e resposta exagerada às gonadotrofinas, é o principal fator de risco para SHO."},
+{"stem":"Em uma paciente de alto risco para SHO submetida a estimulação ovariana, qual estratégia de gatilho final da maturação oocitária reduz o risco de SHO grave?","opts":["Uso de hCG em dose elevada.","Uso de agonista de GnRH, em vez de hCG.","Suspender completamente a medicação sem gatilho final.","Aumentar a dose de gonadotrofina no dia do gatilho."],"correct":1,"expl":"O gatilho com <strong>agonista de GnRH</strong> (em vez de hCG, que tem meia-vida longa e mantém a estimulação do corpo lúteo) reduz significativamente o risco de SHO grave em pacientes de alto risco."},
+{"stem":"Qual é o fator isolado mais determinante da taxa de sucesso das técnicas de reprodução assistida?","opts":["O tipo de técnica utilizada (baixa versus alta complexidade).","A idade da mulher no momento do tratamento.","O número de ciclos menstruais prévios documentados.","O local geográfico onde o tratamento é realizado."],"correct":1,"expl":"A <b>idade da mulher</b> é o fator mais determinante, refletindo o declínio progressivo de quantidade e qualidade oocitária, com queda mais acentuada a partir dos 38-40 anos."},
+{"stem":"Qual é a utilidade da criopreservação de embriões excedentes após um ciclo de FIV/ICSI?","opts":["Não tem utilidade prática, sendo um procedimento raramente realizado.","Permite uso em ciclos futuros sem necessidade de nova estimulação ovariana completa.","É obrigatória em todos os ciclos, independentemente do número de embriões formados.","Substitui a necessidade de transferência embrionária no ciclo atual."],"correct":1,"expl":"Embriões excedentes podem ser <b>criopreservados (vitrificação)</b> para uso futuro, evitando a necessidade de repetir toda a estimulação ovariana em uma nova tentativa."},
+{"stem":"Um casal realiza 4 ciclos de inseminação intrauterina sem sucesso, com espermograma leve a moderadamente alterado e trompas pérvias confirmadas. Qual a conduta mais apropriada?","opts":["Repetir indefinidamente ciclos de IIU, já que a técnica ainda é tecnicamente viável.","Reavaliar o casal e considerar escalonamento para FIV/ICSI, dado o número de tentativas de baixa complexidade sem sucesso.","Suspender definitivamente qualquer tentativa de tratamento.","Trocar para coito programado, técnica de menor complexidade que a IIU."],"correct":1,"expl":"Após um número razoável de ciclos de baixa complexidade sem sucesso (geralmente 3-4 de IIU), a conduta apropriada é <b>reavaliar e escalonar</b> para técnicas de alta complexidade."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Conceito</small><br>Qual a diferença entre baixa e alta complexidade em reprodução assistida?","back":"Baixa complexidade: fecundação in vivo (dentro do corpo). Alta complexidade: fecundação in vitro (em laboratório).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Pré-requisito</small><br>Por que coito programado e IIU exigem trompa pérvia?","back":"{{Porque a fecundação nessas técnicas ocorre dentro do corpo da mulher, tipicamente na trompa.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Coito programado</small><br>Como se identifica a janela fértil nessa técnica?","back":"USTV seriada, kits urinários de LH, ou cálculo baseado na regularidade do ciclo.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">IIU</small><br>O que é a 'capacitação espermática'?","back":"Processamento laboratorial que seleciona os espermatozoides mais móveis e remove plasma seminal e debris.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">IIU</small><br>Cite 3 indicações de inseminação intrauterina.","back":"{{Fator masculino leve-moderado, fator cervical, e uso de sêmen de doador (também: ISCA refratária ao coito programado).}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">FIV</small><br>Liste as etapas principais da FIV em ordem.","back":"Estimulação ovariana → indução da maturação final → punção folicular → fecundação em laboratório → cultivo embrionário → transferência.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">FIV</small><br>Por que a FIV não depende de trompas pérvias?","back":"Os óvulos são coletados diretamente do ovário por punção guiada por ultrassom, sem passar pela trompa.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">ICSI</small><br>O que diferencia a ICSI da FIV convencional?","back":"Na ICSI, um único espermatozoide é injetado diretamente no citoplasma do óvulo, em vez de fecundação espontânea em placa.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">ICSI</small><br>Qual a principal indicação da ICSI?","back":"Fator masculino grave, incluindo uso de espermatozoides obtidos por recuperação cirúrgica (TESA/TESE).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">SHO</small><br>Qual o mecanismo fisiopatológico central da síndrome de hiperestimulação ovariana?","back":"Aumento da permeabilidade vascular mediado por VEGF, causando extravasamento de líquido para o terceiro espaço.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">SHO</small><br>Qual o principal fator de risco para SHO e como reduzi-lo no gatilho final?","back":"{{SOP é o principal fator de risco; usar agonista de GnRH em vez de hCG como gatilho final reduz o risco de SHO grave.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Sucesso</small><br>Qual o fator isolado mais determinante da taxa de sucesso da reprodução assistida?","back":"A idade da mulher no momento do tratamento.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Criopreservação</small><br>O que é feito com embriões excedentes de um ciclo de FIV/ICSI?","back":"Podem ser criopreservados (vitrificação) para uso em ciclos futuros, sem nova estimulação ovariana completa.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Escalonamento</small><br>Após quantos ciclos de IIU sem sucesso geralmente se considera escalonar para FIV/ICSI?","back":"Geralmente após 3-4 ciclos sem sucesso.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Indicação de coito programado","stem":"Casal com infertilidade sem causa aparente há 13 meses, mulher de 29 anos com ciclos regulares, ambas as trompas pérvias na HSG, espermograma do parceiro normal.","passos":[
+{"h":"Revisão da investigação","p":"Investigação básica completa e normal em ambos os parceiros: ovulação confirmada, trompas pérvias, espermograma normal — configurando infertilidade sem causa aparente."},
+{"h":"Raciocínio sobre escolha de técnica","p":"Trompas pérvias e espermograma normal preenchem os pré-requisitos para uma técnica de baixa complexidade, começando pela mais simples."},
+{"h":"Conduta proposta","p":"Iniciar coito programado, com monitoramento da janela fértil por USTV seriada ou kit urinário de LH, orientando relações nos dias de maior probabilidade."},
+{"h":"Discussão de expectativas","p":"Explicar ao casal que essa é a técnica de menor complexidade e menor custo, com boa relação custo-benefício antes de escalonar para técnicas mais complexas."},
+{"h":"Plano de seguimento","p":"Reavaliar após alguns ciclos sem sucesso, considerando progressão para inseminação intrauterina caso a gravidez não ocorra."}
+]},
+{"t":"Caso 2 — Indicação de FIV por obstrução tubária bilateral","stem":"Mulher de 33 anos com antecedente de duas cirurgias abdominais complicadas, investigação revela HSG com ausência de espalhamento peritoneal bilateral, confirmada por laparoscopia como obstrução tubária bilateral. Espermograma do parceiro normal.","passos":[
+{"h":"Revisão do achado","p":"Obstrução tubária bilateral confirmada por dois métodos (HSG e laparoscopia), eliminando a via natural de encontro entre óvulo e espermatozoide."},
+{"h":"Raciocínio sobre escolha de técnica","p":"Como técnicas de baixa complexidade dependem de ao menos uma trompa pérvia, e ambas estão obstruídas, essas técnicas não têm como funcionar neste caso."},
+{"h":"Conduta proposta","p":"Indicar diretamente fertilização in vitro (FIV), já que a punção folicular coleta os óvulos diretamente do ovário, sem depender da trompa."},
+{"h":"Discussão sobre uso de ICSI ou FIV convencional","p":"Como o espermograma do parceiro é normal, a fecundação pode ser tentada por FIV convencional, reservando ICSI para eventual falha de fecundação nesse primeiro ciclo."},
+{"h":"Plano de tratamento","p":"Iniciar estimulação ovariana controlada com monitoramento seriado, seguida de punção folicular, fecundação em laboratório e transferência embrionária."}
+]},
+{"t":"Caso 3 — ICSI por fator masculino grave e risco de SHO","stem":"Casal com mulher de 31 anos com síndrome dos ovários policísticos, ciclos irregulares, e parceiro com espermograma mostrando oligoastenoteratozoospermia severa (concentração de 2 milhões/mL, motilidade progressiva de 8%, morfologia normal de 1%).","passos":[
+{"h":"Revisão do fator masculino","p":"Alteração seminal grave e combinada (concentração, motilidade e morfologia todas comprometidas), inviabilizando técnicas de baixa complexidade e mesmo FIV convencional com boa taxa de fecundação."},
+{"h":"Raciocínio sobre escolha de técnica","p":"Diante da gravidade do fator masculino, a ICSI é a técnica indicada, já que permite fecundação mesmo com número muito reduzido de espermatozoides viáveis."},
+{"h":"Avaliação do risco de SHO","p":"A presença de SOP na parceira é um fator de risco importante para síndrome de hiperestimulação ovariana durante a fase de estimulação do ciclo de FIV/ICSI."},
+{"h":"Adaptação do protocolo","p":"Planejar protocolo de estimulação com monitoramento cuidadoso e, no momento do gatilho final, considerar uso de agonista de GnRH em vez de hCG, reduzindo o risco de SHO grave."},
+{"h":"Conduta neste momento","p":"Prosseguir com ciclo de ICSI, com estimulação ovariana ajustada ao risco de SHO e fecundação por injeção intracitoplasmática de espermatozoide selecionado."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
 </body>
 </html>
