@@ -11447,5 +11447,1129 @@ try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.vie
 })();
 </script>
 
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['metodoscontracep|0'] = {
+name: "Métodos Comportamentais",
+intro: "Os métodos comportamentais (ou naturais) evitam a gravidez identificando e evitando o período fértil do ciclo, sem hormônios, dispositivos ou barreiras — mas sua eficácia depende quase inteiramente da disciplina do casal e da regularidade do ciclo.",
+sub: [
+["entendendo","Entendendo do Zero",`
+<div class="ac-h">A lógica é simples: evitar contato no período fértil</div>
+<p class="ac-p">Todos os métodos comportamentais partem da mesma ideia: identificar quando a mulher está fértil e evitar relação sexual (ou usar outro método de barreira) nesses dias. Para entender por que isso é mais difícil do que parece, é preciso lembrar de dois fatos de fisiologia reprodutiva. O óvulo, depois de liberado na ovulação, sobrevive fértil por apenas cerca de <b>24 horas</b>. Já o espermatozoide, quando encontra um muco cervical favorável (fértil), pode sobreviver dentro do trato genital feminino por até <b>3 a 5 dias</b>.</p>
+<p class="ac-p">Somando essas duas janelas, a <b>janela fértil real</b> do ciclo não é um único dia — são aproximadamente <b>6 dias</b>: os 5 dias que antecedem a ovulação mais o dia da própria ovulação. É esse intervalo que todo método comportamental tenta identificar e evitar, cada um usando uma estratégia diferente (contagem de dias, temperatura, muco, ou combinação de sinais).</p>
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="24" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Ciclo de 28 dias e a janela fértil</text>
+<rect x="40" y="60" width="600" height="50" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<rect x="280" y="60" width="140" height="50" rx="0" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="120" y="90" text-anchor="middle" font-size="10.5" style="fill:var(--muted)">Dias 1-13</text>
+<text x="350" y="90" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Janela fértil (~6 dias)</text>
+<text x="560" y="90" text-anchor="middle" font-size="10.5" style="fill:var(--muted)">Dias 22-28</text>
+<line x1="350" y1="60" x2="350" y2="110" style="stroke:var(--ink)" stroke-width="1.6" stroke-dasharray="2 2"/>
+<text x="350" y="130" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Ovulação (~dia 14)</text>
+<text x="120" y="150" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Óvulo viável</text>
+<text x="120" y="164" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">~24h após ovulação</text>
+<text x="560" y="150" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Espermatozoide viável</text>
+<text x="560" y="164" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">até 3-5 dias em muco fértil</text>
+<text x="340" y="196" text-anchor="middle" font-size="10" style="fill:var(--accent)">5 dias antes da ovulação + dia da ovulação = janela de risco</text>
+</svg>
+<div class="ac-call"><b>Por que isso importa para a prova:</b> a maior fragilidade de todo método comportamental é assumir que o ciclo se comporta de forma previsível. Estresse, doença, viagens e variações individuais deslocam a ovulação — e é justamente essa variabilidade que explica por que a eficácia teórica (uso perfeito) é sempre muito maior que a eficácia real (uso típico) nesses métodos.</div>
+`],
+["tabelinha","Tabelinha (Ogino-Knaus)",`
+<div class="ac-h">Contar dias com base no histórico de ciclos anteriores</div>
+<p class="ac-p">O método do calendário, também chamado de <b>tabelinha</b> ou método de Ogino-Knaus, calcula o período fértil a partir do registro dos <b>6 a 12 ciclos anteriores</b> da mulher. A lógica assume que a ovulação ocorre, em média, 14 dias antes do início da próxima menstruação — e usa o ciclo mais curto e o mais longo já registrados para estimar os limites da janela de risco.</p>
+<p class="ac-p">A fórmula clássica é: <b>primeiro dia fértil = duração do ciclo mais curto menos 18</b>; <b>último dia fértil = duração do ciclo mais longo menos 11</b>. Por exemplo, se uma mulher tem ciclos variando entre 26 e 32 dias, o primeiro dia fértil é o dia 8 (26-18) e o último é o dia 21 (32-11) — ou seja, ela deveria evitar relação desprotegida entre os dias 8 e 21, um intervalo bem mais largo do que os 6 dias biológicos reais.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Exemplo de cálculo (ciclos de 26 a 32 dias)</text>
+<rect x="40" y="50" width="260" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="170" y="74" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Ciclo mais curto: 26 dias</text>
+<text x="170" y="98" text-anchor="middle" font-size="10" style="fill:var(--muted)">1º dia fértil =</text>
+<text x="170" y="116" text-anchor="middle" font-size="10" style="fill:var(--muted)">26 - 18 = dia 8</text>
+<text x="170" y="144" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Evitar a partir do dia 8</text>
+<rect x="340" y="50" width="260" height="120" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="470" y="74" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Ciclo mais longo: 32 dias</text>
+<text x="470" y="98" text-anchor="middle" font-size="10" style="fill:var(--ink)">Último dia fértil =</text>
+<text x="470" y="116" text-anchor="middle" font-size="10" style="fill:var(--ink)">32 - 11 = dia 21</text>
+<text x="470" y="144" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Evitar até o dia 21</text>
+<text x="320" y="200" text-anchor="middle" font-size="10.5" style="fill:var(--muted)">Janela de abstinência estimada: dias 8 a 21 (14 dias)</text>
+</svg>
+<div class="ac-warn"><b>A limitação central:</b> quanto mais irregular o ciclo (maior a diferença entre ciclo mais curto e mais longo), maior a janela de abstinência recomendada — e pior a aceitabilidade do método. Em mulheres com ciclos muito irregulares, a tabelinha simplesmente não deve ser recomendada como método isolado.</div>
+`],
+["temperatura","Temperatura Basal",`
+<div class="ac-h">A progesterona esquenta o corpo depois que o óvulo já saiu</div>
+<p class="ac-p">Depois da ovulação, o corpo lúteo passa a produzir progesterona em quantidade crescente. A progesterona tem efeito termogênico central, elevando a temperatura corporal basal em cerca de <b>0,3 a 0,5°C</b>. Esse aumento cria um padrão <b>bifásico</b> na curva de temperatura: temperaturas mais baixas na fase folicular (pré-ovulatória) e temperaturas mais altas e sustentadas na fase lútea (pós-ovulatória), até a próxima menstruação.</p>
+<p class="ac-p">A mulher afere a temperatura basal (oral, vaginal ou retal) todas as manhãs, antes de sair da cama, sempre no mesmo horário e com o mesmo método. Quando ela observa um aumento sustentado por <b>3 dias consecutivos</b>, considera-se que a ovulação já ocorreu — e o período fértil está encerrado a partir da noite do terceiro dia de temperatura elevada.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Curva bifásica de temperatura basal</text>
+<polyline points="50,140 100,138 150,142 200,136 250,140 280,132 300,90 330,80 360,78 400,76 450,78 500,76 550,80 600,78" style="fill:none;stroke:var(--accent)" stroke-width="2.4"/>
+<line x1="290" y1="50" x2="290" y2="190" style="stroke:var(--muted)" stroke-width="1.2" stroke-dasharray="3 2"/>
+<text x="290" y="205" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--ink)">Ovulação</text>
+<rect x="40" y="160" width="240" height="20" rx="6" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.1"/>
+<text x="160" y="174" text-anchor="middle" font-size="9" style="fill:var(--muted)">Fase folicular — temperatura mais baixa</text>
+<rect x="330" y="60" width="270" height="20" rx="6" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.1"/>
+<text x="465" y="74" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--accent)">Fase lútea — 0,3-0,5°C mais alta (progesterona)</text>
+</svg>
+<div class="ac-warn"><b>A limitação central:</b> a temperatura basal só confirma a ovulação <b>depois</b> que ela já aconteceu — é um método <b>retrospectivo</b>, não preditivo. Sozinho, não protege o período fértil antes da elevação da temperatura; por isso, na prática, costuma ser combinado a outro indicador (método sintotérmico).</div>
+`],
+["muco","Muco Cervical (Billings)",`
+<div class="ac-h">O estrogênio deixa o muco filante perto da ovulação</div>
+<p class="ac-p">O muco cervical muda de característica ao longo do ciclo por ação hormonal. No início do ciclo, sob predomínio de baixos níveis hormonais, o muco é escasso e espesso, funcionando como uma barreira que dificulta a ascensão de espermatozoides. À medida que o estrogênio se eleva perto da ovulação, o muco se torna progressivamente mais abundante, claro, elástico e filante — o clássico <b>"muco tipo clara de ovo"</b>, que facilita a penetração e sobrevida dos espermatozoides.</p>
+<p class="ac-p">No método de Billings, a mulher observa diariamente as características do muco na vulva. O <b>dia do pico</b> é o último dia em que o muco apresenta essa característica fértil (elástico, transparente, escorregadio) — a ovulação geralmente ocorre muito próxima a esse dia. Depois do pico, sob ação da progesterona, o muco volta a ficar espesso e opaco, sinalizando o fim do período fértil (geralmente confirmado após 3-4 dias de muco seco/espesso).</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Evolução do muco cervical no ciclo</text>
+<rect x="30" y="50" width="140" height="100" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="100" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Pós-menstrual</text>
+<text x="100" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">Escasso, espesso</text>
+<text x="100" y="108" text-anchor="middle" font-size="9" style="fill:var(--muted)">"dias secos"</text>
+<rect x="185" y="50" width="140" height="100" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="255" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Pré-ovulatório</text>
+<text x="255" y="94" text-anchor="middle" font-size="9" style="fill:var(--ink)">Aumenta, fica</text>
+<text x="255" y="108" text-anchor="middle" font-size="9" style="fill:var(--ink)">elástico e claro</text>
+<rect x="340" y="50" width="150" height="100" rx="10" style="fill:#e8675f" fill-opacity=".18" stroke="#e8675f" stroke-width="1.4"/>
+<text x="415" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:#e8675f">Dia do pico (ovulação)</text>
+<text x="415" y="94" text-anchor="middle" font-size="9" style="fill:var(--ink)">"Clara de ovo":</text>
+<text x="415" y="108" text-anchor="middle" font-size="9" style="fill:var(--ink)">filante, transparente</text>
+<rect x="505" y="50" width="120" height="100" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="565" y="72" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--ink)">Pós-pico</text>
+<text x="565" y="94" text-anchor="middle" font-size="9" style="fill:var(--muted)">Progesterona:</text>
+<text x="565" y="108" text-anchor="middle" font-size="9" style="fill:var(--muted)">volta a espessar</text>
+<text x="320" y="180" text-anchor="middle" font-size="10" style="fill:var(--accent)">Fim do período fértil: ~3-4 dias após o dia do pico</text>
+</svg>
+<div class="ac-tip"><b>Combinação frequente na prova:</b> o método sintotérmico soma o registro do muco cervical à temperatura basal (e, às vezes, à posição/consistência do colo uterino) — múltiplos sinais aumentam a precisão em identificar a janela fértil e elevam a eficácia em relação a qualquer indicador isolado.</div>
+`],
+["lam","LAM e Método Sintotérmico",`
+<div class="ac-h">Amamentação exclusiva também é contracepção — sob 3 condições rígidas</div>
+<p class="ac-p">O <b>Método da Lactação e Amenorreia (LAM)</b> se baseia no fato de que a amamentação frequente e exclusiva suprime a pulsatilidade de GnRH, inibindo a ovulação. Para ser considerado eficaz como método contraceptivo, o LAM exige que <b>três critérios</b> estejam simultaneamente presentes: <b>(1)</b> amamentação exclusiva ou quase exclusiva (sem uso de fórmula ou outros alimentos regulares), em livre demanda, dia e noite; <b>(2)</b> amenorreia persistente (sem sangramento vaginal após o 56º dia pós-parto); e <b>(3)</b> menos de <b>6 meses</b> pós-parto.</p>
+<p class="ac-p">Quando os três critérios são rigorosamente cumpridos, o LAM tem eficácia comparável a métodos hormonais. Se qualquer um dos três falhar — a mulher volta a menstruar, o intervalo entre mamadas aumenta, introduz-se alimentação complementar regular, ou o bebê completa 6 meses — a proteção contraceptiva do LAM deixa de ser confiável e outro método deve ser iniciado.</p>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Os 3 critérios do LAM — todos precisam estar presentes</text>
+<circle cx="220" cy="120" r="80" style="fill:var(--accent-soft);fill-opacity:.55;stroke:var(--accent)" stroke-width="1.4"/>
+<circle cx="340" cy="120" r="80" style="fill:#4FA8D8;fill-opacity:.35;stroke:#2E7FAE" stroke-width="1.4"/>
+<circle cx="280" cy="190" r="80" style="fill:#e8675f;fill-opacity:.28;stroke:#e8675f" stroke-width="1.4"/>
+<text x="170" y="90" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Amamentação</text>
+<text x="170" y="104" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">exclusiva</text>
+<text x="390" y="90" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:#2E7FAE">Amenorreia</text>
+<text x="280" y="235" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:#e8675f">&lt; 6 meses pós-parto</text>
+<text x="280" y="145" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">LAM eficaz</text>
+</svg>
+<div class="ac-call"><b>Sintotérmico:</b> une temperatura basal + muco cervical (± posição do colo, sintomas ovulatórios como Mittelschmerz) num único registro diário. Como não depende de um único sinal, é o método comportamental com melhor desempenho quando bem executado — mas ainda exige alta motivação e treinamento do casal.</div>
+`],
+["coito","Coito Interrompido",`
+<div class="ac-h">Retirar antes da ejaculação: o método mais antigo, também um dos menos confiáveis</div>
+<p class="ac-p">O coito interrompido (retirada, ou <i>coitus interruptus</i>) consiste em retirar o pênis da vagina antes da ejaculação, depositando o sêmen fora do trato genital feminino. É o método comportamental mais praticado no mundo, provavelmente por não exigir nenhum planejamento prévio, registro de ciclo ou insumo — mas isso também é sua maior fraqueza.</p>
+<p class="ac-p">Duas razões explicam a alta taxa de falha. Primeiro, o <b>líquido pré-ejaculatório</b> pode conter espermatozoides viáveis em quantidade suficiente para engravidar, mesmo sem ejaculação intravaginal completa. Segundo, o método depende inteiramente do <b>autocontrole e do timing preciso</b> do parceiro no momento de maior excitação — o que, na prática, falha com frequência.</p>
+<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Por que o coito interrompido falha tanto</text>
+<rect x="30" y="46" width="280" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="170" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Fator biológico</text>
+<text x="170" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Líquido pré-ejaculatório</text>
+<text x="170" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">pode conter espermatozoides</text>
+<text x="170" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">viáveis, independente da vontade</text>
+<rect x="330" y="46" width="280" height="120" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="470" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Fator comportamental</text>
+<text x="470" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Exige timing perfeito no</text>
+<text x="470" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">pico da excitação sexual —</text>
+<text x="470" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">alta chance de falha humana</text>
+</svg>
+<div class="ac-warn"><b>Não confundir com proteção contra ISTs:</b> mesmo quando "bem executado" para fins contraceptivos, o coito interrompido não oferece nenhuma proteção contra infecções sexualmente transmissíveis, já que há contato genital direto sem barreira.</div>
+`],
+["eficacia","Eficácia Real vs Teórica",`
+<div class="ac-h">Índice de Pearl: o número que separa a teoria da prática</div>
+<p class="ac-p">O <b>Índice de Pearl</b> mede quantas gestações não planejadas ocorrem a cada 100 mulheres que usam um método por 1 ano. Ele é calculado sempre em dois cenários: <b>uso perfeito</b> (o método aplicado exatamente como preconizado, sem erro humano) e <b>uso típico</b> (o que acontece na vida real, com esquecimentos, atrasos e erros de execução).</p>
+<p class="ac-p">Nos métodos comportamentais, essa diferença é enorme — muito maior do que em métodos hormonais ou de longa duração, que dependem pouco ou nada da ação diária do usuário. Isso acontece porque toda a eficácia dos métodos comportamentais depende de três coisas simultâneas: ciclo regular e previsível, registro diário disciplinado, e abstinência (ou uso de barreira) rigorosa durante toda a janela fértil identificada. Qualquer falha em um desses elos derruba a eficácia real.</p>
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Índice de Pearl — uso perfeito x uso típico</text>
+<text x="70" y="45" font-size="9.5" style="fill:var(--muted)">Tabelinha</text>
+<rect x="150" y="34" width="10" height="14" style="fill:var(--accent)"/>
+<rect x="150" y="34" width="100" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="260" y="45" font-size="9" style="fill:var(--muted)">5 (perfeito) → 24 (típico)</text>
+<text x="70" y="75" font-size="9.5" style="fill:var(--muted)">Muco cervical</text>
+<rect x="150" y="64" width="10" height="14" style="fill:var(--accent)"/>
+<rect x="150" y="64" width="100" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="260" y="75" font-size="9" style="fill:var(--muted)">3 (perfeito) → 24 (típico)</text>
+<text x="70" y="105" font-size="9.5" style="fill:var(--muted)">Sintotérmico</text>
+<rect x="150" y="94" width="5" height="14" style="fill:var(--accent)"/>
+<rect x="150" y="94" width="30" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="190" y="105" font-size="9" style="fill:var(--muted)">0,4 (perfeito) → 2 (típico)</text>
+<text x="70" y="135" font-size="9.5" style="fill:var(--muted)">LAM (critérios OK)</text>
+<rect x="150" y="124" width="5" height="14" style="fill:var(--accent)"/>
+<rect x="150" y="124" width="20" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="180" y="135" font-size="9" style="fill:var(--muted)">0,5 (perfeito) → 2 (típico)</text>
+<text x="70" y="165" font-size="9.5" style="fill:var(--muted)">Coito interrompido</text>
+<rect x="150" y="154" width="10" height="14" style="fill:var(--accent)"/>
+<rect x="150" y="154" width="95" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="255" y="165" font-size="9" style="fill:var(--muted)">4 (perfeito) → 20-22 (típico)</text>
+<rect x="30" y="200" width="620" height="46" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.2"/>
+<text x="340" y="220" text-anchor="middle" font-size="10" style="fill:var(--ink)">Quanto mais o método depende de execução diária humana perfeita,</text>
+<text x="340" y="236" text-anchor="middle" font-size="10" style="fill:var(--ink)">maior a distância entre "perfeito" e "típico"</text>
+</svg>
+<div class="ac-call"><b>Ponto central para a prova:</b> métodos comportamentais são adequados para casais muito motivados, com ciclos regulares e que aceitam um risco de falha maior do que métodos hormonais ou dispositivos de longa duração. Não são a primeira escolha para quem tem contraindicação absoluta à gravidez ou baixa tolerância ao risco de falha.</div>
+`]
+],
+};
+Object.assign(C['metodoscontracep|0'], {
+"escores": `<div class="prose">
+<h3>Índice de Pearl dos métodos comportamentais (por 100 mulheres/ano)</h3>
+<table class="ac-tbl">
+<tr><th>Método</th><th>Uso perfeito</th><th>Uso típico</th></tr>
+<tr><td>Tabelinha (Ogino-Knaus)</td><td>~5</td><td>~24</td></tr>
+<tr><td>Temperatura basal isolada</td><td>~1-3</td><td>~24 ou mais</td></tr>
+<tr><td>Muco cervical (Billings)</td><td>~3</td><td>~24</td></tr>
+<tr><td>Método sintotérmico</td><td>~0,4</td><td>~2</td></tr>
+<tr><td>LAM (critérios rigorosos)</td><td>~0,5</td><td>~2</td></tr>
+<tr><td>Coito interrompido</td><td>~4</td><td>~20-22</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">Sintotérmico e LAM (quando bem indicado) são os métodos comportamentais mais eficazes; tabelinha e muco isolados são os menos confiáveis em uso típico.</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Diferenciando os métodos comportamentais</h3>
+<table class="ac-tbl">
+<tr><th>Método</th><th>O que identifica</th><th>Principal limitação</th></tr>
+<tr><td><strong>Tabelinha</strong></td><td>Calendário/estatística de ciclos prévios</td><td>Inútil em ciclos irregulares</td></tr>
+<tr><td><strong>Temperatura basal</strong></td><td>Confirma ovulação (retrospectivo)</td><td>Não prediz, só confirma depois</td></tr>
+<tr><td><strong>Muco cervical</strong></td><td>Mudança hormonal do muco (prospectivo)</td><td>Interpretação subjetiva, requer treino</td></tr>
+<tr><td><strong>Sintotérmico</strong></td><td>Combinação de sinais</td><td>Exige alta disciplina diária</td></tr>
+<tr><td><strong>LAM</strong></td><td>Supressão hormonal pela lactação</td><td>Só válido com 3 critérios simultâneos</td></tr>
+<tr><td><strong>Coito interrompido</strong></td><td>Nenhum sinal fisiológico — depende do parceiro</td><td>Líquido pré-ejaculatório + falha humana</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Métodos Comportamentais</div>
+<div class="mm">
+  <div class="mm-card"><h5>🎯 Janela fértil</h5><ul><li>~6 dias: 5 antes + dia da ovulação</li><li>Óvulo vive ~24h</li><li>Espermatozoide vive 3-5 dias</li></ul></div>
+  <div class="mm-card"><h5>📅 Tabelinha</h5><ul><li>6-12 ciclos prévios</li><li>1º fértil = curto - 18</li><li>Último fértil = longo - 11</li></ul></div>
+  <div class="mm-card"><h5>🌡️ Temperatura</h5><ul><li>Progesterona eleva 0,3-0,5°C</li><li>Bifásica</li><li>Retrospectiva (3 dias)</li></ul></div>
+  <div class="mm-card"><h5>💧 Muco (Billings)</h5><ul><li>"Clara de ovo" no pico</li><li>Prospectivo</li><li>Volta a espessar pós-pico</li></ul></div>
+  <div class="mm-card"><h5>🤱 LAM</h5><ul><li>Amamentação exclusiva</li><li>Amenorreia</li><li>&lt; 6 meses pós-parto</li></ul></div>
+  <div class="mm-card"><h5>⚠️ Menos confiáveis</h5><ul><li>Coito interrompido</li><li>Tabelinha/muco isolados</li><li>Ciclo irregular = contraindicação relativa</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Casal deseja método comportamental (natural)</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — Avaliar regularidade do ciclo</div><div class="fx-lbl">Ciclos regulares nos últimos 6-12 meses? Sem uso recente de hormônios que mascarem o padrão?</div><div class="fx-arrow"></div><div class="fx-node">Passo 2 — Avaliar motivação e capacidade de registro diário</div><div class="fx-lbl">Casal disposto a registrar temperatura/muco diariamente e respeitar abstinência na janela fértil?</div><div class="fx-arrow"></div><div class="fx-lbl">Ciclos irregulares OU baixa motivação OU alto risco se falhar?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Desencorajar como método isolado; oferecer método mais eficaz (barreira/hormonal/LARC)</div><div class="fx-node end"><b>NÃO:</b> Orientar método sintotérmico (combinação de sinais) para melhor eficácia possível</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Relação desprotegida durante a janela fértil identificada (falha do método)</div><div class="fx-arrow"></div><div class="fx-lbl">Ocorreu dentro do prazo para contracepção de emergência (até 5 dias)?</div><div class="fx-row"><div class="fx-node"><b>SIM:</b> Discutir contracepção de emergência com a paciente (tema do próximo módulo)</div><div class="fx-node end"><b>NÃO:</b> Orientar sinais de atraso menstrual e teste de gravidez se aplicável</div></div><div class="fx-arrow"></div><div class="fx-node">Reforçar com o casal a necessidade de reavaliar o método escolhido</div><div class="fx-lbl">Falhas repetidas indicam necessidade de método com menor dependência do usuário</div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Métodos Comportamentais em 60 segundos</h4>
+<ul>
+<li><strong>Janela fértil real:</strong> ~6 dias (5 antes da ovulação + dia da ovulação).</li>
+<li><strong>Tabelinha:</strong> 1º dia fértil = ciclo mais curto - 18; último = ciclo mais longo - 11. Inútil em ciclo irregular.</li>
+<li><strong>Temperatura basal:</strong> sobe 0,3-0,5°C após ovulação (progesterona) — método <em>retrospectivo</em>.</li>
+<li><strong>Muco cervical (Billings):</strong> "clara de ovo" no pico, perto da ovulação — método <em>prospectivo</em>.</li>
+<li><strong>Sintotérmico</strong> (combina sinais) é o mais eficaz entre os comportamentais.</li>
+<li><strong>LAM:</strong> só é eficaz com os 3 critérios juntos — amamentação exclusiva + amenorreia + &lt;6 meses pós-parto.</li>
+<li><strong>Coito interrompido:</strong> falha por líquido pré-ejaculatório + erro humano; não protege contra ISTs.</li>
+<li><strong>Índice de Pearl:</strong> gestações/100 mulheres-ano; gap perfeito x típico é enorme nos comportamentais.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Métodos comportamentais</strong> identificam a janela fértil (~6 dias) por calendário, temperatura, muco ou combinação (sintotérmico); LAM é eficaz só com 3 critérios simultâneos; todos têm grande diferença entre eficácia teórica e real por dependerem de execução humana perfeita.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Se a questão descreve elevação sustentada de temperatura por 3 dias, pense em <strong>confirmação retrospectiva de ovulação</strong>, não predição.</li>
+<li>"Muco tipo clara de ovo" = pista clássica para <strong>método de Billings</strong> e proximidade da ovulação.</li>
+<li>Pergunta sobre LAM sempre testa os <strong>3 critérios simultâneos</strong> — se faltar um, o método não é confiável.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que a tabelinha funciona bem em ciclos irregulares — é justamente o cenário de <strong>maior falha</strong>.</li>
+<li>Confundir uso perfeito com uso típico ao responder sobre eficácia — a prova costuma cobrar o número de <strong>uso típico</strong> (realidade).</li>
+<li>Achar que coito interrompido protege contra ISTs — não protege, há contato genital direto.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"Temperatura confirma o passado, muco anuncia o presente."</strong></li>
+<li><strong>"LAM só vale com os 3 juntos: mama, sem regra, antes dos 6 meses."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Recomendar método comportamental isolado para paciente com contraindicação absoluta à gestação.</li>
+<li>Ignorar a necessidade de registro de 6-12 ciclos antes de aplicar a tabelinha.</li>
+<li>Não orientar sobre contracepção de emergência após falha identificada do método.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico por que a janela fértil real dura cerca de 6 dias","Calculo o período fértil pelo método da tabelinha (Ogino-Knaus)","Diferencio o caráter retrospectivo da temperatura basal do caráter prospectivo do muco cervical","Descrevo os 3 critérios obrigatórios do LAM e por que todos precisam estar presentes","Explico por que o coito interrompido tem alta taxa de falha","Interpreto a diferença entre índice de Pearl de uso perfeito e uso típico nesses métodos"]
+});
+Object.assign(C['metodoscontracep|0'], {
+"questoes": [
+{"stem":"A janela fértil do ciclo menstrual é estimada em aproximadamente 6 dias porque:","opts":["O óvulo permanece viável por até 6 dias após a ovulação.","O óvulo é viável por ~24h e o espermatozoide pode sobreviver até 3-5 dias em muco cervical fértil.","A menstruação dura em média 6 dias.","O corpo lúteo produz progesterona por 6 dias antes de degenerar."],"correct":1,"expl":"A soma da sobrevida do espermatozoide (até 3-5 dias em muco favorável) com a viabilidade do óvulo (~24h pós-ovulação) resulta em uma janela fértil de aproximadamente 6 dias."},
+{"stem":"No método da tabelinha (Ogino-Knaus), o primeiro dia fértil é calculado subtraindo-se 18 do:","opts":["Ciclo mais longo já registrado.","Ciclo mais curto já registrado.","Ciclo médio dos últimos 3 meses.","Dia da última menstruação."],"correct":1,"expl":"A fórmula usa o ciclo mais curto registrado menos 18 para estimar o primeiro dia fértil, e o ciclo mais longo menos 11 para o último dia fértil."},
+{"stem":"Uma mulher com ciclos variando entre 24 e 35 dias nos últimos 12 meses deseja usar a tabelinha como método contraceptivo isolado. A conduta mais adequada é:","opts":["Aplicar normalmente a fórmula, pois a variação não interfere na eficácia.","Desencorajar o método, já que a grande irregularidade do ciclo compromete sua confiabilidade.","Recomendar apenas para os ciclos de 24 dias.","Reduzir o registro para apenas 3 ciclos anteriores."],"correct":1,"expl":"Quanto maior a diferença entre o ciclo mais curto e o mais longo, maior a janela de abstinência recomendada e menor a confiabilidade — em ciclos muito irregulares, a tabelinha não deve ser o método isolado."},
+{"stem":"O aumento da temperatura corporal basal após a ovulação é causado principalmente por qual mecanismo?","opts":["Efeito termogênico do estrogênio na fase folicular.","Efeito termogênico da progesterona produzida pelo corpo lúteo.","Elevação do hormônio luteinizante (LH).","Redução da prolactina sérica."],"correct":1,"expl":"A progesterona, produzida pelo corpo lúteo após a ovulação, tem efeito termogênico central que eleva a temperatura basal em cerca de 0,3-0,5°C, criando o padrão bifásico da curva."},
+{"stem":"Sobre o método da temperatura basal como indicador do período fértil, é correto afirmar que:","opts":["Prediz a ovulação com vários dias de antecedência.","Confirma a ovulação de forma retrospectiva, após elevação sustentada por 3 dias.","É o método comportamental mais eficaz quando usado isoladamente.","Deve ser aferida em qualquer horário do dia, sem padronização."],"correct":1,"expl":"A temperatura basal só confirma que a ovulação já ocorreu, após 3 dias consecutivos de elevação — não prediz o início do período fértil, sendo por isso um método retrospectivo."},
+{"stem":"O muco cervical do tipo 'clara de ovo' (elástico, transparente, filante), característico do dia do pico no método de Billings, reflete qual mudança hormonal?","opts":["Aumento da progesterona no início do ciclo.","Aumento do estrogênio próximo à ovulação.","Queda abrupta do FSH.","Aumento da prolactina."],"correct":1,"expl":"A elevação do estrogênio próxima à ovulação torna o muco cervical mais abundante, elástico e transparente, facilitando a penetração e sobrevida dos espermatozoides."},
+{"stem":"Para que o Método da Lactação e Amenorreia (LAM) seja considerado eficaz como contracepção, é necessário que estejam presentes simultaneamente:","opts":["Amamentação exclusiva, amenorreia e menos de 6 meses pós-parto.","Amamentação de qualquer intensidade e mais de 6 meses pós-parto.","Apenas amenorreia, independentemente do tipo de aleitamento.","Uso de fórmula complementar e amamentação parcial."],"correct":0,"expl":"O LAM exige simultaneamente: amamentação exclusiva/quase exclusiva em livre demanda, amenorreia persistente e menos de 6 meses de pós-parto. A ausência de qualquer um desses critérios compromete a eficácia."},
+{"stem":"Uma puérpera de 4 meses, em amamentação exclusiva e ainda em amenorreia, apresenta pequeno sangramento vaginal. Sobre a confiabilidade do LAM nesse momento, é correto afirmar que:","opts":["O LAM continua totalmente confiável, já que os outros dois critérios permanecem presentes.","A confiabilidade do LAM fica comprometida, pois a amenorreia deixou de estar presente.","O LAM só perde eficácia após os 6 meses, independentemente do sangramento.","O sangramento não tem relação com a eficácia do método."],"correct":1,"expl":"O retorno do sangramento vaginal indica que a amenorreia não está mais presente — um dos três critérios obrigatórios do LAM deixou de ser cumprido, comprometendo sua confiabilidade."},
+{"stem":"A principal razão pela qual o coito interrompido apresenta alta taxa de falha na prática é:","opts":["A ausência completa de espermatozoides no líquido pré-ejaculatório.","A combinação entre presença eventual de espermatozoides no líquido pré-ejaculatório e a dependência do controle preciso do parceiro.","A incompatibilidade do método com qualquer fase do ciclo menstrual.","A necessidade de uso concomitante de espermicida."],"correct":1,"expl":"O líquido pré-ejaculatório pode conter espermatozoides viáveis, e o método depende inteiramente do controle e timing precisos do parceiro no momento de maior excitação sexual, favorecendo falhas."},
+{"stem":"Em relação à proteção contra infecções sexualmente transmissíveis (ISTs), o coito interrompido:","opts":["Oferece proteção parcial, semelhante ao preservativo.","Não oferece nenhuma proteção, pois há contato genital direto sem barreira física.","Protege totalmente contra ISTs virais, mas não bacterianas.","Só protege se associado à tabelinha."],"correct":1,"expl":"Como há contato genital direto durante toda a relação, sem qualquer barreira física, o coito interrompido não confere nenhuma proteção contra ISTs."},
+{"stem":"O índice de Pearl é utilizado para expressar:","opts":["O número de gestações não planejadas a cada 100 mulheres usando um método por 1 ano.","A porcentagem de mulheres que abandonam o método em 5 anos.","O número de ciclos necessários para engravidar sem contracepção.","A proporção de mulheres com ciclos regulares em uma população."],"correct":0,"expl":"O índice de Pearl mede o número de gestações não planejadas a cada 100 mulheres-ano de uso do método, sendo calculado tanto para uso perfeito quanto para uso típico."},
+{"stem":"Por que a diferença entre o índice de Pearl de uso perfeito e uso típico costuma ser muito maior nos métodos comportamentais do que em métodos hormonais de longa duração?","opts":["Porque os métodos comportamentais são mais caros.","Porque os métodos comportamentais dependem inteiramente de registro diário disciplinado e abstinência rigorosa, com grande margem para erro humano.","Porque os métodos hormonais de longa duração não têm índice de Pearl calculado.","Porque os métodos comportamentais não podem ser usados por casais motivados."],"correct":1,"expl":"Métodos comportamentais dependem de execução humana diária perfeita (registro de sinais, cálculo, abstinência), enquanto métodos de longa duração (implantes, DIU) praticamente não dependem do usuário no dia a dia — por isso a diferença entre eficácia teórica e real é muito maior nos primeiros."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Fisiologia</small><br>Por que a janela fértil dura cerca de 6 dias?","back":"Óvulo viável por ~24h após a ovulação, somado à sobrevida do espermatozoide de até 3-5 dias em muco cervical fértil.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tabelinha</small><br>Qual a fórmula do primeiro e do último dia fértil no método de Ogino-Knaus?","back":"{{1º dia fértil = ciclo mais curto - 18; último dia fértil = ciclo mais longo - 11.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Tabelinha</small><br>Quantos ciclos anteriores são necessários para aplicar a tabelinha com segurança?","back":"6 a 12 ciclos menstruais registrados previamente.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Temperatura basal</small><br>Qual hormônio eleva a temperatura basal após a ovulação e por quanto?","back":"Progesterona (produzida pelo corpo lúteo), elevando cerca de 0,3-0,5°C.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Temperatura basal</small><br>O método da temperatura basal é preditivo ou retrospectivo?","back":"Retrospectivo — só confirma que a ovulação já ocorreu, após elevação sustentada por 3 dias.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Muco cervical</small><br>O que caracteriza o 'dia do pico' no método de Billings?","back":"Último dia de muco cervical elástico, transparente e filante (tipo clara de ovo) — ovulação ocorre próxima a esse dia.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Muco cervical</small><br>Qual hormônio torna o muco filante e transparente perto da ovulação?","back":"Estrogênio, em ascensão na fase pré-ovulatória.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Sintotérmico</small><br>Por que o método sintotérmico é o mais eficaz entre os comportamentais?","back":"Porque combina múltiplos sinais (temperatura, muco, e às vezes posição do colo), reduzindo a dependência de um único indicador falho.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">LAM</small><br>Quais os 3 critérios obrigatórios e simultâneos do LAM?","back":"{{Amamentação exclusiva/quase exclusiva em livre demanda; amenorreia persistente; menos de 6 meses pós-parto.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">LAM</small><br>O que acontece com a confiabilidade do LAM se apenas um dos 3 critérios falhar?","back":"A proteção contraceptiva deixa de ser confiável — é necessário iniciar outro método.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Coito interrompido</small><br>Quais os dois motivos principais de falha do coito interrompido?","back":"Presença eventual de espermatozoides no líquido pré-ejaculatório e dependência do timing preciso do parceiro.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Coito interrompido</small><br>O coito interrompido protege contra ISTs?","back":"Não — há contato genital direto sem qualquer barreira física durante toda a relação.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Índice de Pearl</small><br>O que o índice de Pearl mede?","back":"O número de gestações não planejadas a cada 100 mulheres usando o método por 1 ano, em uso perfeito e em uso típico.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Índice de Pearl</small><br>Por que a diferença entre uso perfeito e uso típico é tão grande nos métodos comportamentais?","back":"Porque toda a eficácia depende de execução humana diária perfeita (registro, cálculo e abstinência), com grande margem de erro.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Tentativa de tabelinha em ciclo irregular","stem":"Mulher de 27 anos, ciclos menstruais variando entre 22 e 36 dias nos últimos 8 meses, deseja usar exclusivamente a tabelinha como método contraceptivo, sem outro método associado.","passos":[
+{"h":"Anamnese dirigida","p":"Confirmar duração exata dos ciclos registrados e ausência de uso hormonal recente que possa mascarar a real regularidade."},
+{"h":"Cálculo teórico pela fórmula","p":"Primeiro dia fértil = 22-18 = dia 4; último dia fértil = 36-11 = dia 25 — uma janela de abstinência de 22 dias, praticamente todo o ciclo."},
+{"h":"Raciocínio clínico","p":"A grande variação entre o ciclo mais curto e o mais longo (14 dias de diferença) torna a tabelinha pouco prática e pouco confiável nesse caso — a janela de abstinência recomendada se aproxima da duração total do ciclo."},
+{"h":"Conduta na consulta","p":"Orientar a paciente sobre a baixa confiabilidade da tabelinha isolada em ciclos tão irregulares e apresentar alternativas mais eficazes, incluindo métodos de barreira, hormonais ou de longa duração."},
+{"h":"Conduta neste momento","p":"Caso a paciente mantenha preferência por método comportamental, sugerir o método sintotérmico com acompanhamento especializado, deixando claro o risco de falha aumentado."}
+]},
+{"t":"Caso 2 — LAM com critério perdido","stem":"Puérpera de 5 meses, em amamentação predominantemente exclusiva, ainda em amenorreia, relata que passou a introduzir fórmula láctea complementar duas vezes ao dia devido a retorno ao trabalho.","passos":[
+{"h":"Anamnese dirigida","p":"Confirmar frequência e exclusividade da amamentação após a mudança de rotina; verificar se a amenorreia persiste."},
+{"h":"Avaliação dos critérios do LAM","p":"O critério de amamentação exclusiva não está mais totalmente cumprido, já que houve introdução regular de fórmula complementar."},
+{"h":"Raciocínio clínico","p":"Mesmo com amenorreia mantida e menos de 6 meses pós-parto, a quebra do critério de exclusividade da amamentação compromete a confiabilidade do LAM como método contraceptivo isolado."},
+{"h":"Orientação à paciente","p":"Explicar que o LAM não deve mais ser considerado suficiente isoladamente, dado que apenas 2 dos 3 critérios permanecem presentes."},
+{"h":"Conduta neste momento","p":"Iniciar método contraceptivo complementar compatível com amamentação (por exemplo, progestagênio isolado), conforme abordado no módulo de contraceptivos hormonais."}
+]},
+{"t":"Caso 3 — Falha do coito interrompido","stem":"Casal relata uso exclusivo de coito interrompido como método contraceptivo há 1 ano. A mulher, com ciclos regulares, procura atendimento com atraso menstrual de 10 dias após relação em que o parceiro relata dúvida sobre o controle da retirada.","passos":[
+{"h":"Anamnese dirigida","p":"Investigar data da última menstruação, regularidade prévia dos ciclos e detalhes da relação em que houve dúvida sobre o timing da retirada."},
+{"h":"Raciocínio sobre o método","p":"O coito interrompido depende do controle preciso do parceiro e da ausência de espermatozoides no líquido pré-ejaculatório — ambos fatores não garantidos, mesmo com boa intenção do casal."},
+{"h":"Conduta imediata","p":"Solicitar teste de gravidez (beta-hCG) para investigar o atraso menstrual antes de qualquer outra conduta."},
+{"h":"Orientação sobre o método utilizado","p":"Explicar ao casal que o coito interrompido tem alta taxa de falha em uso típico e não é recomendado como método isolado para quem deseja alta proteção contraceptiva."},
+{"h":"Conduta neste momento","p":"Independentemente do resultado do teste, orientar transição para método mais eficaz e discutir, se aplicável, contracepção de emergência em futuras relações desprotegidas dentro do prazo adequado."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['metodoscontracep|1'] = {
+name: "Métodos de Barreira",
+intro: "Os métodos de barreira impedem fisicamente ou quimicamente o encontro entre espermatozoide e óvulo — e são os únicos métodos contraceptivos, junto com a abstinência, que também reduzem a transmissão de infecções sexualmente transmissíveis.",
+sub: [
+["entendendo","Entendendo do Zero",`
+<div class="ac-h">Bloquear o caminho do espermatozoide, física ou quimicamente</div>
+<p class="ac-p">Métodos de barreira funcionam criando um obstáculo entre o sêmen e o colo uterino. Esse obstáculo pode ser <b>mecânico</b> (uma película física, como o preservativo ou o diafragma) ou <b>químico</b> (um espermicida que imobiliza ou destrói os espermatozoides). Muitas vezes os dois mecanismos são combinados, o que aumenta a eficácia em relação ao uso isolado de qualquer um deles.</p>
+<p class="ac-p">O que diferencia essa categoria de todas as outras é a <b>dupla função</b>: além de evitar gravidez, os métodos de barreira que cobrem a mucosa genital (preservativos) também reduzem a exposição a secreções e ao contato direto entre mucosas, diminuindo a transmissão de diversas ISTs. Nenhum método hormonal ou comportamental oferece essa proteção adicional.</p>
+<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Dois mecanismos de barreira</text>
+<rect x="40" y="50" width="260" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="170" y="74" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Barreira mecânica</text>
+<text x="170" y="98" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Preservativo masc./fem.</text>
+<text x="170" y="114" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Diafragma</text>
+<text x="170" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Impede contato físico direto</text>
+<rect x="340" y="50" width="260" height="120" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="470" y="74" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Barreira química</text>
+<text x="470" y="98" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Espermicidas</text>
+<text x="470" y="114" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Imobiliza/destrói espermatozoides</text>
+<text x="470" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Frequentemente associada à mecânica</text>
+</svg>
+<div class="ac-call"><b>A ideia central deste módulo:</b> preservativos são os únicos métodos contraceptivos com <b>dupla proteção</b> comprovada (gravidez + ISTs); os demais métodos de barreira (diafragma, espermicida isolado) protegem apenas contra gestação, e de forma limitada.</div>
+`],
+["preservativo_masc","Preservativo Masculino",`
+<div class="ac-h">Uma película de látex que impede o contato entre sêmen e mucosa</div>
+<p class="ac-p">O preservativo masculino é uma capa fina, geralmente de látex (ou poliuretano/poliisopreno para alérgicos ao látex), colocada sobre o pênis ereto antes de qualquer contato genital, retendo o sêmen e impedindo o contato direto de mucosas. É o único método, junto ao preservativo feminino, comprovadamente eficaz na redução da transmissão de HIV e da maioria das outras ISTs.</p>
+<p class="ac-p">A técnica correta de uso é decisiva para a eficácia: colocar antes de qualquer penetração (não apenas antes da ejaculação, já que o líquido pré-ejaculatório também pode conter patógenos e espermatozoides), deixar espaço na ponta (reservatório) para reter o sêmen sem estourar, usar apenas lubrificantes à base de água ou silicone com látex (lubrificantes oleosos degradam o látex e aumentam o risco de ruptura), e retirar o pênis ainda ereto, segurando a base do preservativo, logo após a ejaculação.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Erros de uso que aumentam a falha</text>
+<rect x="30" y="46" width="280" height="130" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="170" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Erros comuns</text>
+<text x="170" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Colocar só antes da ejaculação</text>
+<text x="170" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Usar lubrificante oleoso</text>
+<text x="170" y="124" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Não deixar reservatório na ponta</text>
+<text x="170" y="140" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Retirar já flácido, sem segurar a base</text>
+<rect x="330" y="46" width="280" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="470" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Uso correto</text>
+<text x="470" y="92" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Colocar antes de qualquer contato</text>
+<text x="470" y="108" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Lubrificante à base de água/silicone</text>
+<text x="470" y="124" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Deixar espaço na ponta</text>
+<text x="470" y="140" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Retirar ereto, segurando a base</text>
+</svg>
+<div class="ac-tip"><b>Ponto de prova:</b> o índice de Pearl do preservativo masculino é de aproximadamente 2 em uso perfeito e 13 em uso típico — a maior parte das falhas na vida real decorre de erro de técnica, não de defeito do material.</div>
+`],
+["preservativo_fem","Preservativo Feminino",`
+<div class="ac-h">Controle sob o corpo da mulher, com anéis nas duas extremidades</div>
+<p class="ac-p">O preservativo feminino é um tubo de poliuretano ou nitrila, com um anel flexível em cada extremidade: um anel interno, que é inserido na vagina e ajuda a fixar o dispositivo próximo ao colo uterino, e um anel externo, que permanece fora da vagina cobrindo parte da vulva. Diferente do preservativo masculino, pode ser inserido <b>até algumas horas antes</b> da relação, o que dá à mulher mais autonomia sobre o momento da proteção.</p>
+<p class="ac-p">Assim como o masculino, o preservativo feminino oferece proteção contra ISTs, incluindo HIV, já que cobre também parte da região vulvar externa — em teoria, oferecendo até uma cobertura um pouco maior de mucosa exposta em algumas ISTs cutâneas (como HPV e herpes) do que o preservativo masculino. Não deve ser usado simultaneamente ao preservativo masculino, pelo risco de atrito entre os dois materiais, deslocamento e ruptura.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Estrutura do preservativo feminino</text>
+<rect x="200" y="50" width="240" height="90" rx="40" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<ellipse cx="210" cy="95" rx="22" ry="30" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="150" y="99" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Anel interno</text>
+<text x="150" y="113" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">fixa perto do colo</text>
+<ellipse cx="430" cy="95" rx="26" ry="34" style="fill:var(--panel);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="490" y="99" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Anel externo</text>
+<text x="490" y="113" text-anchor="middle" font-size="8.5" style="fill:var(--muted)">cobre parte da vulva</text>
+<text x="320" y="175" text-anchor="middle" font-size="10" style="fill:var(--ink)">Pode ser inserido até algumas horas antes da relação</text>
+</svg>
+<div class="ac-warn"><b>Nunca associar os dois:</b> preservativo masculino e feminino não devem ser usados na mesma relação — o atrito entre os materiais aumenta o risco de ruptura ou deslocamento de ambos.</div>
+`],
+["diafragma","Diafragma",`
+<div class="ac-h">Uma cúpula de silicone que cobre o colo uterino</div>
+<p class="ac-p">O diafragma é uma cúpula flexível de silicone (antigamente látex), inserida na vagina para cobrir completamente o colo uterino, funcionando como barreira mecânica que impede a ascensão dos espermatozoides ao útero. Diferente do preservativo, não protege o parceiro nem cobre o pênis — sua ação é localizada e depende do encaixe correto contra o colo.</p>
+<p class="ac-p">O diafragma deve ser <b>ajustado ao tamanho individual</b> por um profissional (o tamanho pode variar após gestações, ganho ou perda de peso relevante, ou cirurgias pélvicas), inserido antes da relação (idealmente sempre associado a espermicida na cúpula, para aumentar a eficácia) e mantido no local por pelo menos <b>6 a 8 horas após</b> a última relação — nunca mais que 24 horas seguidas, pelo risco teórico de síndrome do choque tóxico associada ao uso prolongado de dispositivos vaginais.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Posicionamento do diafragma</text>
+<rect x="220" y="40" width="200" height="140" rx="16" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<path d="M260 60 Q320 48 380 60 L372 160 Q320 176 268 160 Z" style="fill:none;stroke:var(--muted)" stroke-width="1.2" stroke-dasharray="3 2"/>
+<ellipse cx="320" cy="150" rx="46" ry="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="320" y="155" text-anchor="middle" font-size="9" font-weight="700" style="fill:var(--accent)">Diafragma cobre o colo</text>
+<text x="150" y="70" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Ajuste individual</text>
+<text x="150" y="86" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">por profissional</text>
+<text x="500" y="70" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Manter 6-8h</text>
+<text x="500" y="86" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">após a relação</text>
+<text x="500" y="106" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Máximo 24h contínuas</text>
+</svg>
+<div class="ac-tip"><b>Ponto de prova:</b> o diafragma isolado tem baixa eficácia; sempre combinado com espermicida na prática clínica, ainda assim seu índice de Pearl em uso típico (~17) é bem mais alto do que o de métodos hormonais.</div>
+`],
+["espermicidas","Espermicidas",`
+<div class="ac-h">Substâncias químicas que imobilizam ou destroem o espermatozoide</div>
+<p class="ac-p">Os espermicidas são substâncias químicas (o mais usado é o <b>nonoxinol-9</b>) que danificam a membrana celular do espermatozoide, imobilizando-o ou destruindo-o antes que consiga alcançar o óvulo. Estão disponíveis em géis, cremes, espumas, filmes ou óvulos vaginais, aplicados na vagina antes da relação sexual.</p>
+<p class="ac-p">Quando usados <b>isoladamente</b>, os espermicidas têm eficácia relativamente baixa, sendo por isso recomendados principalmente como <b>método complementar</b> associado a uma barreira mecânica (diafragma, capuz cervical ou, em alguns protocolos, preservativo). Um ponto importante para a prova: o uso frequente de nonoxinol-9 pode causar irritação e microlesões na mucosa vaginal, o que paradoxalmente pode <b>aumentar</b> o risco de transmissão de HIV e outras ISTs em usuárias de alta frequência — por isso não deve ser recomendado como estratégia isolada de prevenção de ISTs.</p>
+<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Espermicida: uso isolado x associado</text>
+<rect x="30" y="46" width="280" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="170" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Isolado</text>
+<text x="170" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Eficácia baixa</text>
+<text x="170" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Uso frequente pode</text>
+<text x="170" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">irritar mucosa vaginal</text>
+<rect x="330" y="46" width="280" height="120" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="470" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Associado à barreira mecânica</text>
+<text x="470" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Eficácia bem maior</text>
+<text x="470" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Uso padrão com diafragma</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha clássica:</b> irritação de mucosa por nonoxinol-9 usado com alta frequência pode <b>aumentar</b> (não reduzir) o risco de transmissão de HIV — não confundir espermicida com proteção contra ISTs.</div>
+`],
+["associacoes","Combinando Métodos de Barreira",`
+<div class="ac-h">Combinar barreiras aumenta eficácia, mas nem toda combinação é segura</div>
+<p class="ac-p">Na prática clínica, é comum orientar a associação de métodos de barreira para elevar a eficácia contraceptiva total, especialmente quando nenhum método hormonal está disponível ou é desejado pela paciente. A combinação clássica é <b>diafragma + espermicida</b>, em que a barreira mecânica cobre o colo e o espermicida neutraliza os espermatozoides que eventualmente contornem a borda do diafragma.</p>
+<p class="ac-p">Por outro lado, algumas combinações são <b>contraindicadas</b> por interação física entre materiais: preservativo masculino e feminino usados juntos aumentam o atrito e o risco de ruptura de ambos; e o uso de lubrificantes oleosos junto a preservativos ou diafragmas de látex degrada o material de látex, tornando-o mais frágil e propenso a rupturas.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">O que combinar e o que evitar</text>
+<rect x="30" y="46" width="280" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="170" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Combinações recomendadas</text>
+<text x="170" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Diafragma + espermicida</text>
+<text x="170" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Preservativo + espermicida</text>
+<text x="170" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">(vaginal, se compatível)</text>
+<rect x="330" y="46" width="280" height="130" rx="12" style="fill:#e8675f" fill-opacity=".16" stroke="#e8675f" stroke-width="1.4"/>
+<text x="470" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">Combinações a evitar</text>
+<text x="470" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Preservativo masc. + fem. juntos</text>
+<text x="470" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Lubrificante oleoso + látex</text>
+<text x="470" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">(degrada o material)</text>
+</svg>
+<div class="ac-call"><b>Ponto central:</b> combinar barreira mecânica com química eleva a eficácia; combinar duas barreiras mecânicas concorrentes (dois preservativos) ou usar material incompatível (óleo + látex) piora a proteção em vez de melhorar.</div>
+`],
+["eficacia_protecao","Eficácia e Dupla Proteção",`
+<div class="ac-h">Nem todo método de barreira protege contra ISTs</div>
+<p class="ac-p">É essencial diferenciar, na hora de orientar uma paciente, quais métodos de barreira oferecem <b>dupla proteção</b> (gravidez + ISTs) e quais protegem apenas contra gravidez. Os preservativos (masculino e feminino) são os únicos com essa dupla função comprovada. Diafragma e espermicida isolado reduzem o risco de gestação, mas <b>não substituem</b> o preservativo quando o objetivo inclui prevenção de ISTs — inclusive podem, no caso do espermicida em uso frequente, aumentar o risco de algumas infecções por irritação de mucosa.</p>
+<p class="ac-p">Em termos de eficácia contraceptiva pura (índice de Pearl), os métodos de barreira, de forma geral, são menos eficazes que métodos hormonais e muito menos eficazes que métodos de longa duração (implante, DIU) — mas continuam sendo opções valiosas para casais que preferem métodos não hormonais, de uso intermitente, ou que precisam de proteção adicional contra ISTs mesmo já usando outro método contraceptivo de base.</p>
+<svg viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Índice de Pearl — métodos de barreira (uso típico)</text>
+<text x="70" y="50" font-size="9.5" style="fill:var(--muted)">Preservativo masculino</text>
+<rect x="220" y="39" width="65" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="300" y="50" font-size="9" style="fill:var(--muted)">~13</text>
+<text x="70" y="80" font-size="9.5" style="fill:var(--muted)">Preservativo feminino</text>
+<rect x="220" y="69" width="105" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="335" y="80" font-size="9" style="fill:var(--muted)">~21</text>
+<text x="70" y="110" font-size="9.5" style="fill:var(--muted)">Diafragma + espermicida</text>
+<rect x="220" y="99" width="85" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="315" y="110" font-size="9" style="fill:var(--muted)">~17</text>
+<text x="70" y="140" font-size="9.5" style="fill:var(--muted)">Espermicida isolado</text>
+<rect x="220" y="129" width="105" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="335" y="140" font-size="9" style="fill:var(--muted)">~21</text>
+<rect x="30" y="170" width="620" height="46" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.2"/>
+<text x="340" y="192" text-anchor="middle" font-size="10" style="fill:var(--ink)">Apenas preservativos (masculino e feminino) oferecem dupla proteção</text>
+<text x="340" y="207" text-anchor="middle" font-size="10" style="fill:var(--ink)">contra gravidez e ISTs</text>
+</svg>
+<div class="ac-tip"><b>Mensagem para a prática e para a prova:</b> mesmo usando um método hormonal ou de longa duração altamente eficaz, o preservativo deve continuar sendo recomendado sempre que houver risco de exposição a ISTs.</div>
+`]
+],
+};
+Object.assign(C['metodoscontracep|1'], {
+"escores": `<div class="prose">
+<h3>Índice de Pearl dos métodos de barreira (por 100 mulheres/ano)</h3>
+<table class="ac-tbl">
+<tr><th>Método</th><th>Uso perfeito</th><th>Uso típico</th></tr>
+<tr><td>Preservativo masculino</td><td>~2</td><td>~13</td></tr>
+<tr><td>Preservativo feminino</td><td>~5</td><td>~21</td></tr>
+<tr><td>Diafragma + espermicida</td><td>~6</td><td>~17</td></tr>
+<tr><td>Espermicida isolado</td><td>~18</td><td>~21-28</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">Preservativo masculino é o mais eficaz entre os métodos de barreira em uso típico; espermicida isolado é o menos eficaz e não deve ser recomendado sozinho.</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Diferenciando os métodos de barreira</h3>
+<table class="ac-tbl">
+<tr><th>Método</th><th>Cobre</th><th>Protege contra ISTs?</th></tr>
+<tr><td><strong>Preservativo masculino</strong></td><td>Pênis</td><td>Sim — melhor evidência</td></tr>
+<tr><td><strong>Preservativo feminino</strong></td><td>Vagina + parte da vulva</td><td>Sim</td></tr>
+<tr><td><strong>Diafragma</strong></td><td>Colo uterino</td><td>Não</td></tr>
+<tr><td><strong>Espermicida</strong></td><td>Vagina (química)</td><td>Não — uso frequente pode aumentar risco de HIV</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Métodos de Barreira</div>
+<div class="mm">
+  <div class="mm-card"><h5>🧴 Mecanismos</h5><ul><li>Mecânico: preservativo, diafragma</li><li>Químico: espermicida</li><li>Combinação eleva eficácia</li></ul></div>
+  <div class="mm-card"><h5>🛡️ Dupla proteção</h5><ul><li>Só preservativos (masc./fem.)</li><li>Único método com proteção ISTs comprovada</li></ul></div>
+  <div class="mm-card"><h5>🎯 Diafragma</h5><ul><li>Ajuste individual</li><li>Sempre com espermicida</li><li>Manter 6-8h pós-relação</li></ul></div>
+  <div class="mm-card"><h5>⚗️ Espermicida</h5><ul><li>Nonoxinol-9</li><li>Baixa eficácia isolado</li><li>Uso frequente irrita mucosa</li></ul></div>
+  <div class="mm-card"><h5>❌ Combinações a evitar</h5><ul><li>2 preservativos juntos</li><li>Óleo + látex</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Paciente busca método de barreira</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — Avaliar necessidade de proteção contra ISTs</div><div class="fx-lbl">Múltiplos parceiros, novo relacionamento, IST prévia?</div><div class="fx-arrow"></div><div class="fx-lbl">Necessita dupla proteção (gravidez + ISTs)?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Indicar preservativo masculino ou feminino (única opção com dupla proteção)</div><div class="fx-node end"><b>NÃO (só contracepção):</b> Diafragma + espermicida é opção válida, com orientação de ajuste individual</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Suspeita de falha do método de barreira (ruptura, deslocamento)</div><div class="fx-arrow"></div><div class="fx-lbl">Ocorreu dentro de 5 dias e a paciente não deseja gestação?</div><div class="fx-row"><div class="fx-node"><b>SIM:</b> Discutir contracepção de emergência (próximo módulo)</div><div class="fx-node end"><b>NÃO aplicável:</b> Orientar teste de gravidez se atraso menstrual</div></div><div class="fx-arrow"></div><div class="fx-node">Investigar exposição a ISTs</div><div class="fx-lbl">Se preservativo rompeu com parceiro de status sorológico desconhecido, avaliar profilaxia pós-exposição conforme protocolo local</div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Métodos de Barreira em 60 segundos</h4>
+<ul>
+<li><strong>Mecanismo:</strong> mecânico (preservativo, diafragma) ou químico (espermicida).</li>
+<li><strong>Dupla proteção</strong> (gravidez + ISTs) é exclusiva dos <em>preservativos</em>.</li>
+<li><strong>Preservativo masculino:</strong> colocar antes de qualquer contato; lubrificante à base de água/silicone; retirar ereto segurando a base.</li>
+<li><strong>Preservativo feminino:</strong> pode ser inserido horas antes; nunca associar ao masculino.</li>
+<li><strong>Diafragma:</strong> ajuste individual; sempre com espermicida; manter 6-8h pós-relação, máximo 24h.</li>
+<li><strong>Espermicida (nonoxinol-9):</strong> baixa eficácia isolado; uso frequente pode aumentar risco de HIV por irritação de mucosa.</li>
+<li>Índice de Pearl uso típico: preservativo masc. ~13, diafragma+espermicida ~17, preservativo fem./espermicida isolado ~21.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Métodos de barreira</strong> bloqueiam física ou quimicamente o encontro entre espermatozoide e óvulo; só os preservativos oferecem dupla proteção contra gravidez e ISTs; diafragma exige ajuste individual e uso com espermicida; espermicida isolado tem baixa eficácia e uso frequente pode até aumentar risco de HIV.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Se a questão menciona "prevenção de ISTs", a resposta quase sempre aponta para <strong>preservativo</strong>, não diafragma ou espermicida.</li>
+<li>Lubrificante <strong>oleoso + látex</strong> é combinação clássica de pegadinha — degrada o material e aumenta risco de ruptura.</li>
+<li>Diafragma sempre "anda de mãos dadas" com <strong>espermicida</strong> na prática — raramente é indicado isolado.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que espermicida (nonoxinol-9) protege contra HIV — pelo contrário, uso frequente pode <strong>aumentar</strong> o risco por irritação de mucosa.</li>
+<li>Recomendar uso simultâneo de preservativo masculino e feminino — aumenta risco de ruptura.</li>
+<li>Esquecer de reavaliar o tamanho do diafragma após gestação ou variação ponderal relevante.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"Só camisinha cobre dois riscos: gravidez e IST."</strong></li>
+<li><strong>"Diafragma sem espermicida é só metade da proteção."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Colocar o preservativo masculino só antes da ejaculação, em vez de antes de qualquer contato genital.</li>
+<li>Manter o diafragma por mais de 24 horas contínuas.</li>
+<li>Confiar em espermicida isolado como método de alta eficácia.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico os dois mecanismos de ação dos métodos de barreira (mecânico e químico)","Descrevo a técnica correta de uso do preservativo masculino e os erros mais comuns","Diferencio o preservativo feminino do masculino em estrutura e momento de inserção","Explico a necessidade de ajuste individual e uso associado a espermicida no diafragma","Reconheço por que o uso frequente de espermicida pode aumentar o risco de HIV","Identifico quais métodos de barreira oferecem dupla proteção (gravidez + ISTs)"]
+});
+Object.assign(C['metodoscontracep|1'], {
+"questoes": [
+{"stem":"Qual é a principal diferença funcional entre os métodos de barreira mecânicos e os químicos?","opts":["Os mecânicos impedem fisicamente o contato entre espermatozoide e óvulo, enquanto os químicos imobilizam ou destroem o espermatozoide.","Os químicos são sempre mais eficazes que os mecânicos.","Os mecânicos só podem ser usados por homens.","Os químicos protegem contra ISTs e os mecânicos não."],"correct":0,"expl":"Métodos mecânicos (preservativo, diafragma) criam uma barreira física, enquanto os químicos (espermicidas) agem danificando a membrana do espermatozoide, imobilizando-o ou destruindo-o."},
+{"stem":"Qual é o principal erro de técnica que compromete a eficácia do preservativo masculino contra ISTs?","opts":["Usar lubrificante à base de água.","Colocar o preservativo apenas pouco antes da ejaculação, e não antes de qualquer contato genital.","Deixar espaço na ponta (reservatório).","Retirar o pênis ainda ereto após a ejaculação."],"correct":1,"expl":"O líquido pré-ejaculatório também pode conter patógenos e espermatozoides; colocar o preservativo apenas antes da ejaculação permite exposição prévia desprotegida, comprometendo tanto a contracepção quanto a proteção contra ISTs."},
+{"stem":"Por que lubrificantes oleosos não devem ser usados com preservativos ou diafragmas de látex?","opts":["Porque aumentam o atrito e o prazer sexual de forma indesejada.","Porque degradam o látex, tornando-o mais frágil e propenso à ruptura.","Porque reduzem a eficácia do espermicida associado.","Porque aumentam o risco de alergia ao látex."],"correct":1,"expl":"Lubrificantes oleosos degradam quimicamente o látex, comprometendo sua integridade estrutural e aumentando o risco de ruptura do preservativo ou do diafragma."},
+{"stem":"Em relação ao preservativo feminino, é correto afirmar que:","opts":["Deve ser inserido apenas nos segundos que antecedem a penetração.","Pode ser inserido até algumas horas antes da relação sexual, dando mais autonomia à mulher.","Não oferece nenhuma proteção contra ISTs.","Deve ser usado sempre em associação ao preservativo masculino para maior segurança."],"correct":1,"expl":"O preservativo feminino pode ser inserido com antecedência (até algumas horas antes), o que é uma vantagem prática em relação ao masculino; não deve ser associado ao masculino pelo risco de atrito e ruptura."},
+{"stem":"Sobre a estrutura do preservativo feminino, é correto afirmar que:","opts":["Possui apenas um anel, na extremidade externa.","Possui dois anéis: um interno, que auxilia a fixação próxima ao colo, e um externo, que cobre parte da vulva.","É feito exclusivamente de látex.","Deve ser reutilizado em até 3 relações sexuais."],"correct":1,"expl":"O preservativo feminino tem um anel interno (fixação próxima ao colo uterino) e um anel externo (cobre parte da vulva), sendo de uso único, geralmente em poliuretano ou nitrila."},
+{"stem":"Qual é a principal característica que diferencia o diafragma do preservativo em termos de mecanismo de proteção?","opts":["O diafragma cobre o colo uterino, mas não cobre o pênis, não protegendo o parceiro nem contra ISTs.","O diafragma protege contra ISTs de forma equivalente ao preservativo.","O diafragma é inserido pelo parceiro, nunca pela própria mulher.","O diafragma dispensa qualquer ajuste de tamanho."],"correct":0,"expl":"O diafragma age localmente cobrindo o colo uterino, sem cobrir o pênis ou impedir contato direto de mucosas — por isso não oferece proteção contra ISTs, diferentemente do preservativo."},
+{"stem":"Por quanto tempo, no mínimo, o diafragma deve ser mantido na vagina após a última relação sexual?","opts":["1 hora.","6 a 8 horas.","48 horas.","Não há necessidade de mantê-lo após a relação."],"correct":1,"expl":"O diafragma deve permanecer no local por pelo menos 6 a 8 horas após a última relação para garantir a eficácia contraceptiva, sem ultrapassar 24 horas contínuas."},
+{"stem":"O uso frequente do espermicida nonoxinol-9 tem sido associado a qual efeito paradoxal relevante para a saúde sexual?","opts":["Redução da fertilidade permanente.","Aumento do risco de transmissão de HIV, por causar irritação e microlesões na mucosa vaginal.","Proteção adicional contra todas as ISTs bacterianas.","Aumento da eficácia contraceptiva com o uso contínuo."],"correct":1,"expl":"O uso frequente de nonoxinol-9 pode causar irritação e microlesões na mucosa vaginal, o que paradoxalmente pode aumentar o risco de transmissão de HIV e de outras ISTs."},
+{"stem":"Em relação à eficácia do espermicida isolado como método contraceptivo, é correto afirmar que:","opts":["É um dos métodos de barreira mais eficazes quando usado sozinho.","Tem eficácia relativamente baixa quando usado isoladamente, sendo recomendado como método complementar.","Sua eficácia é superior à do preservativo masculino.","Deve substituir a contracepção hormonal em mulheres de alto risco de gravidez."],"correct":1,"expl":"Espermicidas isolados têm eficácia relativamente baixa; são recomendados principalmente como complemento a uma barreira mecânica, como o diafragma."},
+{"stem":"Por que preservativo masculino e feminino não devem ser usados simultaneamente na mesma relação sexual?","opts":["Porque juntos eles reduzem o prazer sexual de forma significativa.","Porque o atrito entre os dois materiais aumenta o risco de ruptura ou deslocamento de ambos.","Porque isso configura uso indevido segundo a bula, sem risco físico real.","Porque a combinação aumenta o risco de alergia ao látex em qualquer usuário."],"correct":1,"expl":"O atrito mecânico entre os dois dispositivos aumenta a probabilidade de ruptura ou deslocamento, comprometendo a eficácia de ambos."},
+{"stem":"Entre os métodos de barreira, quais são os únicos com evidência comprovada de dupla proteção (gravidez e ISTs)?","opts":["Diafragma e espermicida.","Preservativo masculino e preservativo feminino.","Apenas o diafragma associado a espermicida.","Espermicida isolado em qualquer apresentação."],"correct":1,"expl":"Somente os preservativos (masculino e feminino), por cobrirem a mucosa genital e impedirem contato direto de secreções, têm evidência comprovada de reduzir a transmissão de ISTs além de prevenir gravidez."},
+{"stem":"Comparando os índices de Pearl em uso típico, qual método de barreira apresenta, em geral, a maior eficácia contraceptiva?","opts":["Espermicida isolado.","Preservativo feminino.","Preservativo masculino.","Diafragma sem espermicida."],"correct":2,"expl":"Em uso típico, o preservativo masculino apresenta índice de Pearl mais baixo (~13) em comparação ao preservativo feminino (~21), ao diafragma associado a espermicida (~17) e ao espermicida isolado (~21 ou mais)."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Mecanismo</small><br>Quais os dois mecanismos de ação dos métodos de barreira?","back":"{{Mecânico (barreira física, como preservativo e diafragma) e químico (espermicida, que imobiliza/destrói o espermatozoide).}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Preservativo masc.</small><br>Quando deve ser colocado o preservativo masculino?","back":"Antes de qualquer contato genital, não apenas antes da ejaculação — o líquido pré-ejaculatório também pode conter espermatozoides e patógenos.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Preservativo masc.</small><br>Que tipo de lubrificante é compatível com preservativo de látex?","back":"Lubrificantes à base de água ou silicone — lubrificantes oleosos degradam o látex.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Preservativo fem.</small><br>Quais as duas estruturas anatômicas do preservativo feminino e suas funções?","back":"Anel interno (fixa próximo ao colo) e anel externo (cobre parte da vulva).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Preservativo fem.</small><br>Por que não usar preservativo masculino e feminino juntos?","back":"O atrito entre os materiais aumenta o risco de ruptura ou deslocamento de ambos.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diafragma</small><br>O que o diafragma cobre e o que ele NÃO protege?","back":"Cobre o colo uterino; não cobre o pênis, portanto não protege contra ISTs.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diafragma</small><br>Por quanto tempo mínimo e máximo o diafragma deve permanecer após a relação?","back":"Mínimo 6-8 horas após a relação; máximo 24 horas contínuas.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Diafragma</small><br>Por que o diafragma precisa de ajuste individual periódico?","back":"O tamanho pode variar após gestações, mudança de peso relevante ou cirurgias pélvicas.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Espermicida</small><br>Qual a substância química mais usada como espermicida?","back":"Nonoxinol-9.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Espermicida</small><br>Qual efeito paradoxal o uso frequente de nonoxinol-9 pode causar?","back":"Irritação e microlesões da mucosa vaginal, aumentando o risco de transmissão de HIV e outras ISTs.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Combinação</small><br>Qual é a combinação clássica recomendada entre barreira mecânica e química?","back":"Diafragma associado a espermicida na cúpula.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Dupla proteção</small><br>Quais métodos de barreira oferecem dupla proteção comprovada (gravidez + ISTs)?","back":"Apenas os preservativos, masculino e feminino.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Eficácia</small><br>Qual método de barreira tem, em geral, o menor índice de Pearl em uso típico?","back":"O preservativo masculino (~13), mais eficaz que preservativo feminino, diafragma+espermicida e espermicida isolado.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Prática</small><br>O que orientar mesmo quando a paciente já usa um método hormonal altamente eficaz?","back":"Manter o uso do preservativo sempre que houver risco de exposição a ISTs, já que métodos hormonais não protegem contra infecções.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Falha por lubrificante inadequado","stem":"Casal relata uso consistente de preservativo masculino de látex, mas com uso frequente de lubrificante oleoso (óleo de amêndoas) para maior conforto. Preservativo rompeu durante a relação.","passos":[
+{"h":"Anamnese dirigida","p":"Confirmar tipo de lubrificante utilizado regularmente e frequência de rupturas anteriores do preservativo."},
+{"h":"Raciocínio clínico","p":"O lubrificante oleoso degrada o látex, tornando-o mais frágil — essa é a explicação mais provável para a ruptura recorrente, independente da técnica de colocação."},
+{"h":"Orientação imediata","p":"Explicar ao casal que lubrificantes oleosos são incompatíveis com látex e orientar substituição por lubrificante à base de água ou silicone."},
+{"h":"Avaliação de risco após a falha","p":"Investigar momento do ciclo menstrual da parceira para avaliar necessidade de contracepção de emergência, e status sorológico do casal para eventual necessidade de profilaxia pós-exposição."},
+{"h":"Conduta neste momento","p":"Orientar contracepção de emergência se dentro do prazo e risco de gravidez indesejada, e reforçar escolha de lubrificante compatível para relações futuras."}
+]},
+{"t":"Caso 2 — Diafragma sem reavaliação de tamanho","stem":"Mulher de 33 anos, usuária de diafragma há 5 anos, apresenta atraso menstrual de 2 semanas. Relata ganho de peso de 12 kg no último ano e nunca retornou para reavaliação do dispositivo.","passos":[
+{"h":"Anamnese dirigida","p":"Confirmar uso correto do diafragma (associação com espermicida, tempo de permanência) e data da última reavaliação de ajuste."},
+{"h":"Raciocínio clínico","p":"O ganho ponderal relevante pode ter alterado a anatomia pélvica, comprometendo o encaixe do diafragma previamente ajustado e reduzindo sua eficácia contraceptiva."},
+{"h":"Conduta diagnóstica imediata","p":"Solicitar teste de gravidez (beta-hCG) para investigar o atraso menstrual."},
+{"h":"Orientação sobre o método","p":"Reforçar a necessidade de reavaliação periódica do tamanho do diafragma, especialmente após variações ponderais relevantes, gestações ou cirurgias pélvicas."},
+{"h":"Conduta neste momento","p":"Encaminhar para reavaliação e reajuste do diafragma independentemente do resultado do teste, e discutir métodos alternativos com menor dependência de ajuste manual, se a paciente preferir."}
+]},
+{"t":"Caso 3 — Uso isolado de espermicida em relação com múltiplos parceiros","stem":"Mulher de 24 anos relata uso exclusivo de espermicida vaginal como método contraceptivo, com múltiplos parceiros sexuais nos últimos meses e sem uso de preservativo.","passos":[
+{"h":"Anamnese dirigida","p":"Investigar frequência de uso do espermicida, número de parceiros e histórico de sintomas sugestivos de IST."},
+{"h":"Raciocínio clínico sobre eficácia contraceptiva","p":"O uso isolado de espermicida tem eficácia contraceptiva relativamente baixa, o que já representa risco aumentado de gravidez não planejada."},
+{"h":"Raciocínio clínico sobre risco de ISTs","p":"A ausência de preservativo em contexto de múltiplos parceiros representa risco elevado de ISTs, incluindo HIV; o uso frequente do próprio espermicida pode ainda aumentar esse risco por irritação de mucosa."},
+{"h":"Orientação à paciente","p":"Explicar que o espermicida isolado não confere proteção contra ISTs e que seu uso frequente pode paradoxalmente aumentar a vulnerabilidade da mucosa vaginal a infecções."},
+{"h":"Conduta neste momento","p":"Recomendar fortemente a introdução do preservativo em todas as relações, oferecer rastreio de ISTs, e discutir associação a método contraceptivo mais eficaz conforme preferência da paciente."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['metodoscontracep|2'] = {
+name: "Contraceptivos Hormonais",
+intro: "Os contraceptivos hormonais são o grupo mais amplo e mais cobrado em prova: combinam estrogênio e progestagênio, ou usam apenas progestagênio, em diferentes vias e formulações — cada uma com mecanismo, eficácia e perfil de contraindicações próprios.",
+sub: [
+["entendendo","Entendendo do Zero",`
+<div class="ac-h">Dois hormônios, dois papéis diferentes no bloqueio da ovulação</div>
+<p class="ac-p">Todo contraceptivo hormonal age, em maior ou menor grau, suprimindo o eixo hipotálamo-hipófise-ovário. O <b>estrogênio</b> suprime principalmente o FSH, impedindo o recrutamento e a seleção do folículo dominante. O <b>progestagênio</b> suprime o pico de LH (bloqueando a ovulação propriamente dita), espessa o muco cervical (dificultando a ascensão de espermatozoides) e torna o endométrio menos receptivo à implantação.</p>
+<p class="ac-p">Essa divisão de trabalho explica por que existem dois grandes grupos de métodos: os <b>combinados</b> (estrogênio + progestagênio), que dependem da soma dos dois efeitos para uma supressão ovulatória muito consistente, e os <b>de progestagênio isolado</b>, que dependem principalmente do espessamento do muco cervical e, em doses mais altas ou formulações mais recentes, também de supressão ovulatória — úteis quando o estrogênio é contraindicado.</p>
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Papel de cada hormônio no eixo HHO</text>
+<rect x="40" y="50" width="280" height="130" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="180" y="74" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Estrogênio</text>
+<text x="180" y="98" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Suprime FSH</text>
+<text x="180" y="114" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Impede seleção do</text>
+<text x="180" y="128" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">folículo dominante</text>
+<text x="180" y="150" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Estabiliza o endométrio</text>
+<rect x="360" y="50" width="280" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="500" y="74" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Progestagênio</text>
+<text x="500" y="98" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Suprime pico de LH</text>
+<text x="500" y="114" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Bloqueia a ovulação</text>
+<text x="500" y="130" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Espessa o muco cervical</text>
+<text x="500" y="150" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Atrofia endometrial</text>
+</svg>
+<div class="ac-call"><b>A ideia central deste módulo:</b> a presença ou ausência de estrogênio na formulação é o que define a maior parte das contraindicações — métodos combinados carregam o risco trombótico do estrogênio; métodos de progestagênio isolado são a alternativa quando esse risco existe.</div>
+`],
+["combinados_orais","Combinados Orais (COC)",`
+<div class="ac-h">O contraceptivo mais estudado da medicina, e o mais cobrado em prova</div>
+<p class="ac-p">A pílula combinada oral (COC) associa um estrogênio (geralmente etinilestradiol, em doses que variam de 15 a 35 mcg) a um progestagênio sintético (variando conforme a geração: levonorgestrel, desogestrel, drospirenona, entre outros). Tomada diariamente, no mesmo horário, seu mecanismo principal é a <b>supressão da ovulação</b>, reforçada pelo espessamento do muco cervical e pela atrofia endometrial.</p>
+<p class="ac-p">A eficácia teórica é altíssima (índice de Pearl ~0,3), mas cai bastante em uso típico (~7) — a maior causa de falha é o <b>esquecimento de comprimidos</b>, especialmente nos primeiros dias após a pausa (ou dos comprimidos placebo), quando o eixo hipotálamo-hipófise-ovário está mais próximo de retomar sua atividade. Os regimes atuais tendem a reduzir ou eliminar o intervalo livre de hormônio justamente para diminuir esse risco.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Por que o esquecimento no início/fim da cartela é mais grave</text>
+<rect x="30" y="46" width="580" height="40" rx="8" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<rect x="30" y="46" width="80" height="40" style="fill:#e8675f" fill-opacity=".22"/>
+<rect x="510" y="46" width="100" height="40" style="fill:#e8675f" fill-opacity=".22"/>
+<text x="70" y="70" text-anchor="middle" font-size="9" font-weight="700" style="fill:#e8675f">Início cartela</text>
+<text x="560" y="70" text-anchor="middle" font-size="9" font-weight="700" style="fill:#e8675f">Pausa/placebo</text>
+<text x="320" y="70" text-anchor="middle" font-size="9" style="fill:var(--muted)">Meio da cartela — hormônio consistente</text>
+<text x="320" y="120" text-anchor="middle" font-size="10" style="fill:var(--ink)">Esquecer perto da pausa aumenta o risco de recrutamento</text>
+<text x="320" y="136" text-anchor="middle" font-size="10" style="fill:var(--ink)">folicular e ovulação de escape</text>
+</svg>
+<div class="ac-tip"><b>Ponto de prova:</b> a orientação padrão diante de esquecimento é considerar o número de comprimidos esquecidos e o momento da cartela — esquecimentos no início ou no fim da cartela exigem mais cautela e, com frequência, uso de método de barreira associado e avaliação de contracepção de emergência.</div>
+`],
+["combinados_outras_vias","Adesivo, Anel Vaginal e Injetável Mensal",`
+<div class="ac-h">Mesma combinação hormonal, vias diferentes de administração</div>
+<p class="ac-p">O <b>adesivo transdérmico combinado</b> libera estrogênio e progestagênio continuamente pela pele, trocado semanalmente por 3 semanas seguidas de 1 semana de pausa. O <b>anel vaginal combinado</b> é inserido na vagina e permanece por 3 semanas, liberando os hormônios localmente com absorção sistêmica, seguido de 1 semana sem o anel. O <b>injetável mensal combinado</b> associa um estrogênio de depósito a um progestagênio de depósito, administrado por via intramuscular a cada 30 dias.</p>
+<p class="ac-p">Todas essas vias compartilham o mesmo mecanismo central (supressão da ovulação) e o mesmo perfil de contraindicações dos combinados orais, já que carregam estrogênio sistêmico. A vantagem prática está na <b>menor dependência de adesão diária</b>: como a administração é semanal (adesivo, anel) ou mensal (injetável), o risco de erro por esquecimento cai bastante, aproximando a eficácia de uso típico da eficácia de uso perfeito.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Vias alternativas do combinado — menos dependência diária</text>
+<rect x="30" y="46" width="180" height="110" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="120" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Adesivo</text>
+<text x="120" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">Trocar 1x/semana</text>
+<text x="120" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">3 semanas + 1 pausa</text>
+<rect x="230" y="46" width="180" height="110" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="320" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">Anel vaginal</text>
+<text x="320" y="92" text-anchor="middle" font-size="9" style="fill:var(--ink)">Inserir 1x/mês</text>
+<text x="320" y="106" text-anchor="middle" font-size="9" style="fill:var(--ink)">3 semanas + 1 pausa</text>
+<rect x="430" y="46" width="180" height="110" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="520" y="70" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Injetável mensal</text>
+<text x="520" y="92" text-anchor="middle" font-size="9" style="fill:var(--muted)">IM a cada 30 dias</text>
+<text x="520" y="106" text-anchor="middle" font-size="9" style="fill:var(--muted)">Estrogênio + progest. depósito</text>
+<text x="320" y="180" text-anchor="middle" font-size="10" style="fill:var(--accent)">Todos carregam estrogênio — mesmas contraindicações do COC</text>
+</svg>
+<div class="ac-warn"><b>Atenção às contraindicações compartilhadas:</b> por conterem estrogênio sistêmico, adesivo, anel e injetável mensal têm o mesmo perfil de risco trombótico e as mesmas contraindicações absolutas dos combinados orais.</div>
+`],
+["minipilula","Minipílula e Progestagênio Isolado",`
+<div class="ac-h">Sem estrogênio: a alternativa para quem não pode usar combinado</div>
+<p class="ac-p">A minipílula (pílula de progestagênio isolado, POP) contém apenas progestagênio, em dose baixa e contínua, sem intervalo de pausa. As formulações clássicas (como as de noretisterona ou levonorgestrel em dose baixa) atuam principalmente espessando o muco cervical, exigindo horário rigoroso de tomada (janela de tolerância de apenas 3 horas na maioria das formulações antigas); já formulações mais modernas, com <b>desogestrel</b> em dose mais alta, também suprimem a ovulação de forma consistente, oferecendo maior janela de tolerância (até 12 horas) e maior eficácia.</p>
+<p class="ac-p">Por não conter estrogênio, a minipílula é a opção hormonal combinada-compatível para mulheres com contraindicação ao estrogênio (por exemplo, história de trombose, enxaqueca com aura, lactantes) — sendo, junto ao injetável trimestral e ao implante, um dos pilares da contracepção hormonal na amamentação, já que não compromete a produção de leite.</p>
+<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Minipílula clássica x desogestrel</text>
+<rect x="30" y="46" width="280" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="170" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Clássica (levonorgestrel/noretisterona)</text>
+<text x="170" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Ação: muco cervical</text>
+<text x="170" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Janela de tolerância: 3h</text>
+<text x="170" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Ovulação nem sempre suprimida</text>
+<rect x="330" y="46" width="280" height="120" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="470" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Desogestrel (dose mais alta)</text>
+<text x="470" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Ação: suprime ovulação</text>
+<text x="470" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Janela de tolerância: 12h</text>
+<text x="470" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Maior eficácia</text>
+</svg>
+<div class="ac-call"><b>Ponto de prova frequente:</b> a minipílula clássica é compatível com amamentação e depende de horário rigoroso; a diferença de janela de tolerância entre formulações é um detalhe muito cobrado.</div>
+`],
+["injetavel_trimestral","Injetável Trimestral (DMPA)",`
+<div class="ac-h">Acetato de medroxiprogesterona de depósito: alta eficácia, retorno de fertilidade mais lento</div>
+<p class="ac-p">O injetável trimestral, cujo princípio ativo é o <b>acetato de medroxiprogesterona de depósito (DMPA)</b>, é aplicado por via intramuscular (ou, em formulação mais recente, subcutânea) a cada <b>90 dias (12-13 semanas)</b>. Em dose de depósito, ele suprime a ovulação de forma consistente, além de espessar o muco cervical e atrofiar o endométrio — por isso sua eficácia contraceptiva é uma das mais altas entre os métodos hormonais, com pouca diferença entre uso perfeito e uso típico, já que não depende de adesão diária.</p>
+<p class="ac-p">Dois pontos são especialmente cobrados em prova: primeiro, o <b>retorno da fertilidade pode demorar de 6 a 12 meses</b> após a última aplicação, mesmo depois que o efeito hormonal já deveria ter cessado — isso deve ser discutido com quem planeja engravidar em breve. Segundo, o uso prolongado (geralmente acima de 2 anos) está associado à <b>redução da densidade mineral óssea</b>, um efeito parcialmente reversível após a suspensão, que exige atenção especial em adolescentes e mulheres com outros fatores de risco para osteoporose.</p>
+<svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Dois pontos-chave do DMPA</text>
+<rect x="30" y="46" width="280" height="130" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="170" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Retorno da fertilidade</text>
+<text x="170" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Pode levar 6-12 meses</text>
+<text x="170" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">após a última aplicação</text>
+<text x="170" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Discutir com quem quer</text>
+<text x="170" y="142" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">engravidar em breve</text>
+<rect x="330" y="46" width="280" height="130" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="470" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Densidade óssea</text>
+<text x="470" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Uso prolongado (&gt;2 anos)</text>
+<text x="470" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">reduz densidade mineral óssea</text>
+<text x="470" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Parcialmente reversível</text>
+<text x="470" y="142" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">após suspensão</text>
+</svg>
+<div class="ac-tip"><b>Ponto de prova:</b> DMPA é compatível com amamentação e pode ser usado em mulheres com contraindicação a estrogênio, mas exige aconselhamento sobre o atraso no retorno da fertilidade.</div>
+`],
+["implante","Implante Subdérmico",`
+<div class="ac-h">O contraceptivo hormonal mais eficaz que existe</div>
+<p class="ac-p">O implante subdérmico é um bastonete flexível, contendo <b>etonogestrel</b>, inserido sob a pele da face interna do braço (região do tríceps), liberando o hormônio de forma contínua por até <b>3 anos</b>. Seu mecanismo principal é a supressão consistente da ovulação, complementada por espessamento do muco cervical, o que explica por que ele figura entre os métodos reversíveis mais eficazes disponíveis, com índice de Pearl próximo de <b>0,05</b> — praticamente sem diferença entre uso perfeito e uso típico, já que, uma vez inserido, não depende de nenhuma ação da usuária.</p>
+<p class="ac-p">O efeito colateral mais frequente e mais relevante clinicamente é a alteração do padrão de sangramento — que pode variar de amenorreia a sangramento irregular prolongado, sendo a principal causa de descontinuação do método. A inserção e a remoção exigem técnica e treinamento específicos; a fertilidade retorna rapidamente após a remoção, diferentemente do injetável trimestral.</p>
+<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Implante subdérmico — visão geral</text>
+<rect x="230" y="60" width="180" height="26" rx="13" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.6"/>
+<text x="320" y="78" text-anchor="middle" font-size="9.5" font-weight="700" style="fill:var(--accent)">Etonogestrel</text>
+<text x="120" y="74" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Face interna</text>
+<text x="120" y="88" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">do braço</text>
+<text x="520" y="74" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Duração:</text>
+<text x="520" y="88" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">até 3 anos</text>
+<rect x="30" y="120" width="580" height="50" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.2"/>
+<text x="320" y="142" text-anchor="middle" font-size="10" style="fill:var(--ink)">Índice de Pearl ~0,05 — método reversível mais eficaz</text>
+<text x="320" y="158" text-anchor="middle" font-size="10" style="fill:var(--ink)">Principal efeito colateral: alteração do padrão de sangramento</text>
+</svg>
+<div class="ac-call"><b>Ponto central para a prova:</b> o implante é o exemplo clássico de método de longa duração (LARC) reversível — alta eficácia porque não depende de adesão diária, retorno rápido de fertilidade após remoção, mas alta taxa de descontinuação por sangramento irregular se a paciente não for bem orientada previamente.</div>
+`],
+["elegibilidade","Contraindicações e Critérios de Elegibilidade (OMS)",`
+<div class="ac-h">Categorias 1 a 4: do "pode usar" ao "nunca use"</div>
+<p class="ac-p">A Organização Mundial da Saúde organiza a segurança de cada método, para cada condição clínica, em <b>4 categorias</b>: categoria 1 (sem restrição de uso), categoria 2 (as vantagens superam os riscos teóricos ou comprovados), categoria 3 (os riscos teóricos ou comprovados geralmente superam as vantagens — uso requer avaliação clínica cuidadosa e, muitas vezes, evitar se houver alternativa) e categoria 4 (risco inaceitável — contraindicação absoluta).</p>
+<p class="ac-p">O ponto mais cobrado é que o <b>estrogênio</b> é o principal responsável pelas contraindicações mais graves dos combinados: tabagismo em mulher &gt;35 anos, enxaqueca com aura, hipertensão não controlada, trombofilias (incluindo síndrome antifosfolipídica), história de tromboembolismo venoso, doença cardiovascular, lúpus com anticorpos antifosfolípides positivos, e adenoma hepático são, em geral, categoria 4 para métodos combinados. Nessas situações, o progestagênio isolado (minipílula, injetável trimestral ou implante) costuma ser categoria 2, já que não carrega o risco trombótico do estrogênio — sendo por isso a alternativa preferencial.</p>
+<svg viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Mesma condição, métodos diferentes</text>
+<rect x="30" y="46" width="300" height="150" rx="12" style="fill:#e8675f" fill-opacity=".16" stroke="#e8675f" stroke-width="1.4"/>
+<text x="180" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">Trombofilia / TEV prévio</text>
+<text x="180" y="96" text-anchor="middle" font-size="10" style="fill:var(--ink)">Combinado (com estrogênio)</text>
+<text x="180" y="114" text-anchor="middle" font-size="12" font-weight="700" style="fill:#e8675f">Categoria 4 — contraindicado</text>
+<text x="180" y="140" text-anchor="middle" font-size="10" style="fill:var(--ink)">Progestagênio isolado</text>
+<text x="180" y="158" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--accent)">Categoria 2 — pode usar</text>
+<rect x="350" y="46" width="300" height="150" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="500" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Categorias OMS</text>
+<text x="500" y="96" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">1 = sem restrição</text>
+<text x="500" y="114" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">2 = vantagens &gt; riscos</text>
+<text x="500" y="132" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">3 = riscos &gt; vantagens (cautela)</text>
+<text x="500" y="150" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">4 = contraindicação absoluta</text>
+</svg>
+<div class="ac-warn"><b>Sinal de alerta que muda a conduta:</b> enxaqueca com aura em qualquer idade é categoria 4 para combinados (risco de AVC), mas categoria 2 para progestagênio isolado — uma das trocas mais cobradas em prova.</div>
+`]
+],
+};
+Object.assign(C['metodoscontracep|2'], {
+"escores": `<div class="prose">
+<h3>Índice de Pearl dos contraceptivos hormonais (por 100 mulheres/ano)</h3>
+<table class="ac-tbl">
+<tr><th>Método</th><th>Uso perfeito</th><th>Uso típico</th></tr>
+<tr><td>Combinado oral (COC)</td><td>~0,3</td><td>~7</td></tr>
+<tr><td>Adesivo / Anel vaginal</td><td>~0,3</td><td>~7</td></tr>
+<tr><td>Injetável mensal combinado</td><td>~0,05</td><td>~3</td></tr>
+<tr><td>Minipílula (progestagênio isolado)</td><td>~0,3</td><td>~7-9</td></tr>
+<tr><td>Injetável trimestral (DMPA)</td><td>~0,2</td><td>~4</td></tr>
+<tr><td>Implante subdérmico</td><td>~0,05</td><td>~0,05</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">Quanto menos o método depende da usuária no dia a dia (implante &gt; injetável &gt; oral diário), menor a diferença entre uso perfeito e uso típico.</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Combinado x progestagênio isolado — quando trocar</h3>
+<table class="ac-tbl">
+<tr><th>Situação clínica</th><th>Combinado</th><th>Progestagênio isolado</th></tr>
+<tr><td>Enxaqueca com aura</td><td>Categoria 4 (contraindicado)</td><td>Categoria 2</td></tr>
+<tr><td>Trombofilia / TEV prévio</td><td>Categoria 4</td><td>Categoria 2</td></tr>
+<tr><td>Tabagismo &gt;35 anos</td><td>Categoria 3-4</td><td>Categoria 1-2</td></tr>
+<tr><td>Amamentação (&lt;6 semanas pós-parto)</td><td>Categoria 4</td><td>Categoria 2-3 conforme o tempo</td></tr>
+<tr><td>Adenoma hepático</td><td>Categoria 4</td><td>Categoria 3</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Contraceptivos Hormonais</div>
+<div class="mm">
+  <div class="mm-card"><h5>⚙️ Mecanismo</h5><ul><li>Estrogênio: suprime FSH</li><li>Progestagênio: suprime LH, muco, endométrio</li></ul></div>
+  <div class="mm-card"><h5>💊 Combinados</h5><ul><li>Oral, adesivo, anel, injetável mensal</li><li>Mesmas contraindicações (estrogênio)</li></ul></div>
+  <div class="mm-card"><h5>🟢 Progestagênio isolado</h5><ul><li>Minipílula, DMPA, implante</li><li>Alternativa se estrogênio contraindicado</li></ul></div>
+  <div class="mm-card"><h5>🏆 Implante</h5><ul><li>Pearl ~0,05</li><li>3 anos</li><li>Retorno rápido de fertilidade</li></ul></div>
+  <div class="mm-card"><h5>💉 DMPA</h5><ul><li>Trimestral</li><li>Atraso na fertilidade 6-12 meses</li><li>Densidade óssea (uso &gt;2 anos)</li></ul></div>
+  <div class="mm-card"><h5>⚠️ Categoria 4 combinados</h5><ul><li>Enxaqueca c/ aura</li><li>Trombofilia/TEV</li><li>Tabagismo &gt;35a</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Paciente deseja método hormonal</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — Rastrear contraindicações ao estrogênio</div><div class="fx-lbl">Enxaqueca com aura, tabagismo &gt;35a, trombofilia/TEV prévio, HAS não controlada, amamentação precoce?</div><div class="fx-arrow"></div><div class="fx-lbl">Alguma contraindicação presente?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Indicar progestagênio isolado (minipílula, DMPA ou implante)</div><div class="fx-node end"><b>NÃO:</b> Combinado é opção segura — escolher via conforme preferência (oral, adesivo, anel)</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Sangramento irregular em uso de método hormonal</div><div class="fx-arrow"></div><div class="fx-lbl">Uso recente (primeiros 3-6 meses)?</div><div class="fx-row"><div class="fx-node"><b>SIM:</b> Tranquilizar — comum no período de adaptação, reavaliar se persistir</div><div class="fx-node end"><b>NÃO (persistente/tardio):</b> Investigar adesão, interações medicamentosas e causas orgânicas</div></div><div class="fx-arrow"></div><div class="fx-node">Excluídas causas orgânicas e adesão confirmada?</div><div class="fx-lbl">Considerar troca de formulação ou de método se o sangramento comprometer a continuidade do uso</div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Contraceptivos Hormonais em 60 segundos</h4>
+<ul>
+<li><strong>Estrogênio:</strong> suprime FSH. <strong>Progestagênio:</strong> suprime LH/ovulação, espessa muco, atrofia endométrio.</li>
+<li><strong>COC:</strong> Pearl 0,3 (perfeito) x 7 (típico); falha principal = esquecimento perto da pausa.</li>
+<li><strong>Adesivo/anel/injetável mensal:</strong> mesmo mecanismo e contraindicações do COC, menos dependência diária.</li>
+<li><strong>Minipílula:</strong> sem estrogênio; clássica = janela de 3h (ação: muco); desogestrel = janela de 12h (ação: ovulação).</li>
+<li><strong>DMPA (trimestral):</strong> aplicação a cada 90 dias; retorno de fertilidade em 6-12 meses; risco de perda de densidade óssea em uso &gt;2 anos.</li>
+<li><strong>Implante:</strong> etonogestrel, 3 anos, Pearl ~0,05 (o mais eficaz reversível), principal efeito colateral = sangramento irregular.</li>
+<li><strong>OMS:</strong> categorias 1 (livre) a 4 (contraindicado); enxaqueca c/ aura, trombofilia/TEV e tabagismo &gt;35a são categoria 4 para combinados, mas categoria 2 para progestagênio isolado.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Contraceptivos hormonais</strong> combinados (oral, adesivo, anel, injetável mensal) carregam estrogênio e suas contraindicações trombóticas; progestagênio isolado (minipílula, DMPA, implante) é a alternativa quando o estrogênio é contraindicado, com o implante sendo o método reversível mais eficaz e o DMPA associado a atraso no retorno da fertilidade e perda de densidade óssea.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Toda vez que a questão citar <strong>enxaqueca com aura</strong>, pense em contraindicação absoluta a <strong>combinados</strong>, mas liberação para progestagênio isolado.</li>
+<li>"Atraso no retorno da fertilidade após suspensão" é a assinatura do <strong>DMPA</strong> (injetável trimestral).</li>
+<li>"Mais eficaz entre os reversíveis, Pearl ~0,05" aponta para <strong>implante subdérmico</strong>.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Confundir minipílula clássica (janela de 3h, ação sobre muco) com a de desogestrel (janela de 12h, suprime ovulação).</li>
+<li>Prescrever combinado para tabagista &gt;35 anos sem considerar a categoria 3-4 da OMS.</li>
+<li>Esquecer que amamentação nas primeiras 6 semanas pós-parto é contraindicação a combinados (categoria 4).</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"Estrogênio trombosa, progestagênio não."</strong></li>
+<li><strong>"DMPA atrasa quem quer engravidar depois."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Não perguntar sobre enxaqueca com aura antes de prescrever combinado.</li>
+<li>Ignorar o risco de perda óssea no uso prolongado de DMPA em adolescentes.</li>
+<li>Não orientar sobre sangramento irregular esperado nos primeiros meses de implante, levando a descontinuação precoce.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico o mecanismo de ação do estrogênio e do progestagênio no eixo HHO","Diferencio combinados (oral, adesivo, anel, injetável mensal) de progestagênio isolado (minipílula, DMPA, implante)","Reconheço as principais contraindicações absolutas (categoria 4) dos combinados","Explico por que o progestagênio isolado é a alternativa quando o estrogênio é contraindicado","Descrevo o atraso no retorno da fertilidade e o risco de perda óssea associados ao DMPA","Identifico o implante subdérmico como o método reversível de maior eficácia"]
+});
+Object.assign(C['metodoscontracep|2'], {
+"questoes": [
+{"stem":"O mecanismo de ação do componente estrogênico nos contraceptivos hormonais combinados é principalmente:","opts":["Espessar o muco cervical.","Suprimir o FSH, impedindo a seleção do folículo dominante.","Suprimir diretamente o pico de LH.","Promover atrofia endometrial isolada."],"correct":1,"expl":"O estrogênio atua suprimindo o FSH, impedindo o recrutamento e a seleção do folículo dominante, complementando o efeito do progestagênio sobre o LH."},
+{"stem":"Qual é o principal mecanismo do progestagênio nos contraceptivos hormonais?","opts":["Suprimir o pico de LH, bloqueando a ovulação, além de espessar o muco cervical.","Aumentar a produção de FSH.","Estimular a proliferação endometrial.","Reduzir a viscosidade do muco cervical."],"correct":0,"expl":"O progestagênio suprime o pico de LH (bloqueando a ovulação), espessa o muco cervical (dificultando a ascensão de espermatozoides) e reduz a receptividade endometrial."},
+{"stem":"Em relação à falha da pílula combinada oral, o momento de maior risco para ovulação de escape após esquecimento de comprimidos é:","opts":["No meio da cartela, entre os dias 10 e 15.","Perto do intervalo de pausa (início ou fim da cartela).","Apenas se o esquecimento ocorrer após o 21º dia de uso contínuo.","Não existe diferença de risco conforme o momento da cartela."],"correct":1,"expl":"Esquecimentos perto da pausa (início ou fim da cartela) são mais graves porque o eixo hipotálamo-hipófise-ovário está mais próximo de retomar sua atividade, aumentando o risco de recrutamento folicular e ovulação de escape."},
+{"stem":"O adesivo transdérmico e o anel vaginal combinados compartilham qual característica em relação aos combinados orais?","opts":["Não contêm estrogênio, sendo mais seguros.","Compartilham o mesmo mecanismo de ação e o mesmo perfil de contraindicações, por conterem estrogênio sistêmico.","São indicados exclusivamente para mulheres com contraindicação a hormônios orais.","Têm eficácia muito inferior à da pílula oral."],"correct":1,"expl":"Por conterem estrogênio sistêmico, adesivo e anel vaginal compartilham o mecanismo de ação e as contraindicações dos combinados orais, com a vantagem de menor dependência de adesão diária."},
+{"stem":"Qual a principal diferença de mecanismo entre a minipílula clássica (levonorgestrel/noretisterona) e a minipílula de desogestrel?","opts":["A clássica suprime a ovulação de forma consistente; a de desogestrel atua apenas no muco cervical.","A clássica atua principalmente no muco cervical (janela de tolerância de 3h); a de desogestrel, em dose mais alta, também suprime a ovulação (janela de 12h).","Ambas têm exatamente o mesmo mecanismo e janela de tolerância.","A de desogestrel contém estrogênio em baixa dose."],"correct":1,"expl":"A minipílula clássica depende principalmente do espessamento do muco cervical, com janela de tolerância de apenas 3 horas; a formulação com desogestrel, em dose mais alta, também suprime a ovulação de forma consistente, com janela de 12 horas."},
+{"stem":"Em relação ao injetável trimestral (DMPA), é correto afirmar que:","opts":["O retorno da fertilidade após a suspensão costuma ser imediato.","O retorno da fertilidade pode demorar de 6 a 12 meses após a última aplicação.","É contraindicado durante a amamentação.","Deve ser aplicado a cada 30 dias."],"correct":1,"expl":"Um dos pontos mais cobrados sobre o DMPA é que, mesmo após o efeito hormonal cessar, o retorno da fertilidade pode demorar de 6 a 12 meses, o que deve ser discutido com quem planeja engravidar em breve."},
+{"stem":"O uso prolongado do injetável trimestral (DMPA), geralmente acima de 2 anos, está associado a qual efeito relevante para a prática clínica?","opts":["Aumento da densidade mineral óssea.","Redução da densidade mineral óssea, parcialmente reversível após suspensão.","Aumento irreversível do risco de trombose venosa.","Nenhum efeito ósseo foi descrito."],"correct":1,"expl":"O uso prolongado de DMPA está associado à redução da densidade mineral óssea, efeito parcialmente reversível após a suspensão, exigindo atenção especial em adolescentes e mulheres com outros fatores de risco para osteoporose."},
+{"stem":"Qual é o princípio ativo do implante subdérmico contraceptivo mais utilizado?","opts":["Levonorgestrel.","Etonogestrel.","Acetato de medroxiprogesterona.","Drospirenona."],"correct":1,"expl":"O implante subdérmico contém etonogestrel, liberado continuamente por até 3 anos, sendo inserido na face interna do braço."},
+{"stem":"Por que o implante subdérmico apresenta índice de Pearl praticamente igual entre uso perfeito e uso típico?","opts":["Porque exige aplicação diária rigorosa pela usuária.","Porque, uma vez inserido, não depende de nenhuma ação da usuária no dia a dia.","Porque contém estrogênio em alta dose.","Porque precisa ser reinserido semanalmente."],"correct":1,"expl":"Como o implante, uma vez inserido, libera hormônio continuamente sem depender de qualquer ação da usuária, praticamente não há diferença entre a eficácia teórica (uso perfeito) e a eficácia real (uso típico)."},
+{"stem":"Qual é o principal motivo de descontinuação do implante subdérmico relatado pelas usuárias?","opts":["Ganho de peso importante e imediato.","Alteração do padrão de sangramento (de amenorreia a sangramento irregular prolongado).","Dor abdominal intensa persistente.","Perda completa e permanente da fertilidade."],"correct":1,"expl":"A alteração do padrão de sangramento, que pode variar de amenorreia a sangramento irregular prolongado, é o efeito colateral mais frequente e a principal causa de descontinuação do implante."},
+{"stem":"Segundo os Critérios de Elegibilidade da OMS, uma mulher com história de tromboembolismo venoso (TEV) prévio que deseja contracepção hormonal deve, preferencialmente, receber:","opts":["Contraceptivo combinado oral, categoria 1.","Contraceptivo combinado, já que o TEV prévio não é contraindicação.","Progestagênio isolado (minipílula, DMPA ou implante), já que combinados são categoria 4 nesse contexto.","Qualquer método hormonal, sem distinção."],"correct":2,"expl":"TEV prévio é contraindicação absoluta (categoria 4) para métodos combinados devido ao risco trombótico do estrogênio; o progestagênio isolado, sem esse risco, é categoria 2 e a alternativa preferencial."},
+{"stem":"Mulher de 32 anos com enxaqueca com aura deseja iniciar contracepção hormonal. A conduta mais adequada, segundo os critérios de elegibilidade da OMS, é:","opts":["Prescrever contraceptivo combinado oral sem restrições.","Contraindicar qualquer método hormonal.","Contraindicar métodos combinados (categoria 4, risco de AVC) e considerar progestagênio isolado (categoria 2).","Prescrever apenas o injetável mensal combinado, por ser mais seguro que o oral."],"correct":2,"expl":"Enxaqueca com aura é contraindicação absoluta (categoria 4) para métodos combinados pelo risco aumentado de AVC associado ao estrogênio; progestagênio isolado é categoria 2 e pode ser oferecido com segurança."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Mecanismo</small><br>Qual o papel do estrogênio e do progestagênio na contracepção hormonal?","back":"{{Estrogênio suprime o FSH (impede seleção folicular); progestagênio suprime o LH (bloqueia ovulação), espessa o muco cervical e atrofia o endométrio.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">COC</small><br>Qual o momento de maior risco de falha por esquecimento na pílula combinada?","back":"Perto do intervalo de pausa/placebo (início ou fim da cartela).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Vias alternativas</small><br>O que adesivo, anel vaginal e injetável mensal combinado têm em comum com o COC?","back":"Mesmo mecanismo de ação e mesmo perfil de contraindicações, por conterem estrogênio sistêmico.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Minipílula</small><br>Qual a janela de tolerância da minipílula clássica e a de desogestrel?","back":"Clássica: 3 horas (ação sobre muco). Desogestrel: 12 horas (também suprime ovulação).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Minipílula</small><br>Por que a minipílula é indicada na amamentação?","back":"Não contém estrogênio e não compromete a produção de leite.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">DMPA</small><br>Qual o princípio ativo e a periodicidade do injetável trimestral?","back":"Acetato de medroxiprogesterona de depósito (DMPA), aplicado a cada 90 dias.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">DMPA</small><br>Quanto tempo pode demorar o retorno da fertilidade após suspender o DMPA?","back":"6 a 12 meses após a última aplicação.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">DMPA</small><br>Que efeito ósseo o uso prolongado (&gt;2 anos) de DMPA pode causar?","back":"Redução da densidade mineral óssea, parcialmente reversível após suspensão.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Implante</small><br>Qual o princípio ativo e a duração do implante subdérmico?","back":"Etonogestrel, com duração de até 3 anos.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Implante</small><br>Qual o índice de Pearl aproximado do implante e por que é tão baixo?","back":"~0,05 — porque não depende de nenhuma ação diária da usuária após a inserção.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Implante</small><br>Qual o principal motivo de descontinuação do implante?","back":"Alteração do padrão de sangramento (amenorreia a sangramento irregular prolongado).","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">OMS</small><br>O que significam as categorias 1 a 4 dos Critérios de Elegibilidade da OMS?","back":"1 = sem restrição; 2 = vantagens superam riscos; 3 = riscos geralmente superam vantagens; 4 = contraindicação absoluta.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">OMS</small><br>Enxaqueca com aura é categoria 4 para qual grupo de métodos e categoria 2 para qual outro?","back":"Categoria 4 para combinados (risco de AVC); categoria 2 para progestagênio isolado.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">OMS</small><br>Cite três condições que tornam os combinados categoria 4.","back":"Trombofilia/TEV prévio, enxaqueca com aura, tabagismo em mulher &gt;35 anos (entre outras: HAS não controlada, adenoma hepático).","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Enxaqueca com aura em usuária de combinado","stem":"Mulher de 29 anos, em uso de pílula combinada oral há 2 anos, relata início recente de episódios de enxaqueca precedidos por alterações visuais (aura) nas últimas 6 semanas.","passos":[
+{"h":"Anamnese dirigida","p":"Caracterizar os episódios de aura (duração, tipo de sintoma visual) e confirmar se são recorrentes, além de rever histórico pessoal e familiar de eventos trombóticos ou cardiovasculares."},
+{"h":"Raciocínio clínico","p":"O surgimento de enxaqueca com aura durante o uso de contraceptivo combinado é sinal de alerta, já que essa condição está associada a maior risco de acidente vascular cerebral quando associada ao estrogênio."},
+{"h":"Classificação pelos critérios de elegibilidade","p":"Enxaqueca com aura é categoria 4 da OMS para métodos combinados, independentemente da idade da paciente — contraindicação absoluta à continuidade do estrogênio."},
+{"h":"Conduta imediata","p":"Suspender o contraceptivo combinado e orientar transição para método de progestagênio isolado (minipílula, DMPA ou implante), categoria 2 nesse contexto."},
+{"h":"Conduta neste momento","p":"Orientar seguimento clínico e neurológico se os episódios de aura persistirem mesmo após a suspensão do estrogênio, e reforçar a importância de comunicar sintomas neurológicos novos em qualquer uso futuro de hormônios."}
+]},
+{"t":"Caso 2 — Planejamento de gravidez após DMPA","stem":"Mulher de 26 anos, usuária de injetável trimestral (DMPA) há 3 anos, relata desejo de engravidar nos próximos 2 meses e questiona se deve suspender o método agora.","passos":[
+{"h":"Anamnese dirigida","p":"Confirmar data da última aplicação do DMPA e histórico menstrual prévio ao uso do método."},
+{"h":"Raciocínio clínico","p":"O retorno da fertilidade após suspensão do DMPA pode demorar de 6 a 12 meses, mesmo após o efeito hormonal ter cessado — informação essencial para o planejamento reprodutivo da paciente."},
+{"h":"Orientação sobre expectativa de tempo","p":"Explicar à paciente que, diferentemente de métodos como o implante ou a pílula, a fertilidade pode não retornar imediatamente após a última aplicação."},
+{"h":"Discussão de alternativas","p":"Caso o desejo de engravidar seja em prazo curto (2 meses), discutir a possibilidade de troca para um método com retorno mais rápido de fertilidade, se a paciente ainda não estiver na janela de aplicação da próxima dose."},
+{"h":"Conduta neste momento","p":"Orientar suspensão do método, reforçar que a concepção pode não ocorrer de imediato, e programar acompanhamento pré-concepcional (ácido fólico, avaliação de comorbidades) enquanto aguarda o retorno da ovulação regular."}
+]},
+{"t":"Caso 3 — Sangramento irregular após implante","stem":"Mulher de 22 anos, 2 meses após inserção de implante subdérmico de etonogestrel, retorna à consulta relatando sangramento vaginal irregular e prolongado, insatisfeita e considerando remoção precoce.","passos":[
+{"h":"Anamnese dirigida","p":"Caracterizar o padrão de sangramento (intensidade, duração, impacto na qualidade de vida) e excluir outras causas de sangramento, como IST ou gestação."},
+{"h":"Exame físico e avaliação inicial","p":"Exame ginecológico sem alterações; teste de gravidez negativo; sem sinais de infecção genital."},
+{"h":"Raciocínio clínico","p":"A alteração do padrão de sangramento é o efeito colateral mais comum do implante subdérmico, especialmente nos primeiros meses de uso, sendo a principal causa de descontinuação precoce quando a paciente não é adequadamente orientada previamente."},
+{"h":"Orientação e aconselhamento","p":"Explicar que o padrão de sangramento tende a se estabilizar ao longo dos meses e discutir opções para manejo do sangramento, se necessário, antes de considerar a remoção."},
+{"h":"Conduta neste momento","p":"Reforçar os benefícios do método (alta eficácia, ausência de dependência diária) e propor reavaliação em alguns meses antes de decidir pela remoção definitiva, respeitando a autonomia da paciente caso o desconforto persista."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+C['metodoscontracep|3'] = {
+name: "Contracepção Definitiva",
+intro: "Laqueadura tubária e vasectomia são métodos cirúrgicos considerados definitivos — no Brasil, sua indicação não é uma decisão puramente médica, mas segue critérios rígidos definidos pela Lei 9.263/96, atualizada pela Lei 14.443/2022.",
+sub: [
+["entendendo","Entendendo do Zero",`
+<div class="ac-h">Definitivo significa que a reversão não é garantida</div>
+<p class="ac-p">Diferente de todos os métodos vistos até aqui, a esterilização cirúrgica voluntária não é pensada para ser interrompida. A laqueadura tubária interrompe a continuidade das tubas uterinas, impedindo o encontro entre óvulo e espermatozoide; a vasectomia interrompe os ductos deferentes, impedindo que os espermatozoides produzidos nos testículos alcancem o sêmen ejaculado. Ambas são altamente eficazes — entre os métodos mais eficazes que existem — mas devem ser encaradas pela paciente e pelo médico como <b>decisões permanentes</b>.</p>
+<p class="ac-p">Por isso, no Brasil, a esterilização cirúrgica voluntária não é regulada apenas pela boa prática médica — é regulada por <b>lei federal específica</b> (Lei 9.263/96), que estabelece critérios de idade, número de filhos, prazo de reflexão obrigatório e documentação de consentimento informado. Entender essa lei em detalhe é o ponto mais cobrado deste módulo em provas brasileiras.</p>
+<svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="22" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Dois procedimentos, dois alvos anatômicos</text>
+<rect x="40" y="50" width="280" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="180" y="74" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Laqueadura tubária</text>
+<text x="180" y="98" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Interrompe as tubas uterinas</text>
+<text x="180" y="114" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Impede encontro óvulo-</text>
+<text x="180" y="128" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">espermatozoide</text>
+<rect x="360" y="50" width="280" height="120" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="500" y="74" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Vasectomia</text>
+<text x="500" y="98" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Interrompe os ductos deferentes</text>
+<text x="500" y="114" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Impede a passagem de</text>
+<text x="500" y="128" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">espermatozoides ao sêmen</text>
+</svg>
+<div class="ac-call"><b>A ideia central deste módulo:</b> a esterilização cirúrgica é altamente eficaz e segura, mas a decisão de indicá-la envolve tanto critérios médicos (técnica, risco cirúrgico) quanto critérios legais rígidos, criados justamente para proteger contra esterilizações precoces ou não consentidas.</div>
+`],
+["lei9263","Lei 9.263/96 — Critérios Legais",`
+<div class="ac-h">Idade, número de filhos e prazo de reflexão: os três pilares da lei</div>
+<p class="ac-p">A Lei 9.263/96 regula o planejamento familiar no Brasil e, em seu artigo 10, define as únicas situações em que a esterilização voluntária é permitida. Após a atualização trazida pela <b>Lei 14.443/2022</b>, a esterilização voluntária é permitida em homens e mulheres com <b>capacidade civil plena</b> e que tenham <b>21 anos de idade completos</b> (idade reduzida dos antigos 25 anos) <b>ou</b>, alternativamente, pelo menos <b>2 filhos vivos</b>, independentemente da idade.</p>
+<p class="ac-p">Em qualquer um dos dois casos, é obrigatório respeitar um <b>prazo mínimo de 60 dias</b> entre a manifestação de vontade (assinatura do termo de consentimento) e a realização do ato cirúrgico. Esse período existe justamente para <b>desencorajar a esterilização precoce</b> e garantir acesso a aconselhamento por equipe multidisciplinar sobre os métodos reversíveis disponíveis antes da decisão definitiva. A segunda situação prevista em lei — independente de idade ou número de filhos — é o <b>risco à vida ou à saúde da mulher ou do futuro concepto</b>, testemunhado em relatório escrito e assinado por dois médicos.</p>
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Critérios da Lei 9.263/96 (atualizada pela Lei 14.443/2022)</text>
+<rect x="30" y="46" width="300" height="140" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="180" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Via 1 — Idade ou prole</text>
+<text x="180" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">≥21 anos e capacidade civil plena</text>
+<text x="180" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">OU pelo menos 2 filhos vivos</text>
+<text x="180" y="132" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--accent)">+ prazo mínimo de 60 dias</text>
+<text x="180" y="150" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">entre manifestação e cirurgia</text>
+<rect x="350" y="46" width="300" height="140" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="500" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Via 2 — Risco à saúde</text>
+<text x="500" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Risco à vida/saúde da mulher</text>
+<text x="500" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">ou do futuro concepto</text>
+<text x="500" y="132" text-anchor="middle" font-size="10.5" font-weight="700" style="fill:var(--ink)">Relatório escrito</text>
+<text x="500" y="150" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">assinado por 2 médicos</text>
+</svg>
+<div class="ac-tip"><b>Mudança recente relevante:</b> a Lei 14.443/2022 também revogou a exigência de <b>consentimento do cônjuge</b> — a decisão de esterilização passou a depender apenas da manifestação de vontade da própria pessoa interessada.</div>
+`],
+["laqueadura","Laqueadura Tubária",`
+<div class="ac-h">Interromper a continuidade das tubas — várias técnicas, mesmo objetivo</div>
+<p class="ac-p">A laqueadura tubária pode ser realizada por diferentes técnicas cirúrgicas (laqueadura com ligadura simples, técnica de Pomeroy, uso de clipes, anéis ou eletrocoagulação), geralmente por via laparoscópica ou por minilaparotomia, interrompendo a continuidade da tuba uterina e impedindo a fecundação. O momento da cirurgia pode ser <b>no intervalo</b> (fora do contexto de parto ou aborto) ou <b>no puerpério imediato</b> (aproveitando a laparotomia, se cesárea, ou por minilaparotomia após parto vaginal).</p>
+<p class="ac-p">A lei brasileira é especialmente rígida quanto ao momento da cirurgia: a esterilização cirúrgica <b>durante os períodos de parto ou aborto</b> só é permitida se respeitado o prazo mínimo de 60 dias entre a manifestação de vontade e o parto, e mediante condições médicas adequadas — não pode ser uma decisão tomada no calor do momento durante o trabalho de parto. Também é expressamente <b>vedada</b> a esterilização por meio de histerectomia ou ooforectomia como método contraceptivo, e a cesárea indicada com finalidade exclusiva de esterilização é proibida e configura agravante penal.</p>
+<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Laqueadura: quando pode e quando não pode</text>
+<rect x="30" y="46" width="280" height="120" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="170" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Permitido</text>
+<text x="170" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">No intervalo (fora do parto)</text>
+<text x="170" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">No parto, se manifestação de</text>
+<text x="170" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">vontade ≥60 dias antes</text>
+<rect x="330" y="46" width="280" height="120" rx="12" style="fill:#e8675f" fill-opacity=".16" stroke="#e8675f" stroke-width="1.4"/>
+<text x="470" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">Vedado</text>
+<text x="470" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Histerectomia/ooforectomia</text>
+<text x="470" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">como método contraceptivo</text>
+<text x="470" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Cesárea só p/ fim de esterilização</text>
+</svg>
+<div class="ac-warn"><b>Ponto de prova clássico:</b> laqueadura durante cesárea sem manifestação de vontade prévia registrada com 60 dias de antecedência é ilegal — o parto não pode ser usado como oportunidade não planejada para esterilização.</div>
+`],
+["vasectomia","Vasectomia",`
+<div class="ac-h">Procedimento ambulatorial simples, mas eficácia não é imediata</div>
+<p class="ac-p">A vasectomia é a secção e ligadura (ou outra forma de interrupção) dos ductos deferentes, geralmente realizada sob anestesia local, em regime ambulatorial, com recuperação rápida. É tecnicamente mais simples, mais segura e com menor taxa de complicações do que a laqueadura tubária, que exige acesso à cavidade abdominal.</p>
+<p class="ac-p">Um ponto crucial, muito cobrado em prova: a vasectomia <b>não torna o homem estéril imediatamente</b>. Espermatozoides já armazenados além do ponto de secção continuam presentes no sêmen por um período que pode durar semanas a poucos meses. Por isso, é necessário <b>confirmar a azoospermia</b> por espermograma (geralmente realizado após cerca de 8 a 12 semanas ou um número mínimo de ejaculações, conforme o protocolo do serviço) antes de liberar o casal do uso de outro método contraceptivo.</p>
+<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Vasectomia não é eficácia imediata</text>
+<rect x="30" y="46" width="580" height="46" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.3"/>
+<text x="320" y="66" text-anchor="middle" font-size="10" style="fill:var(--ink)">Cirurgia (secção dos ductos deferentes)</text>
+<text x="320" y="82" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Espermatozoides residuais ainda presentes no sêmen</text>
+<rect x="30" y="106" width="580" height="46" rx="10" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.4"/>
+<text x="320" y="126" text-anchor="middle" font-size="10" font-weight="700" style="fill:var(--accent)">Manter outro método contraceptivo</text>
+<text x="320" y="142" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">até confirmação de azoospermia por espermograma (~8-12 semanas)</text>
+</svg>
+<div class="ac-call"><b>Ponto central para a prova:</b> orientar o casal a manter outro método contraceptivo até a confirmação laboratorial de azoospermia é conduta obrigatória — é um dos erros mais cobrados quando a questão testa "conduta após a vasectomia".</div>
+`],
+["arrependimento","Arrependimento e Reversão",`
+<div class="ac-h">Definitivo na intenção, incerto na reversão técnica</div>
+<p class="ac-p">Apesar de a esterilização cirúrgica ser planejada como definitiva, procedimentos de reversão existem — reanastomose tubária (recanalização das tubas) e vasovasostomia (reconexão dos ductos deferentes) — mas seu sucesso é <b>variável e não garantido</b>, dependendo de fatores como técnica original utilizada, tempo decorrido desde a cirurgia, idade da mulher (no caso da reversão tubária) e extensão do segmento removido. Mesmo quando a reversão anatômica é bem-sucedida, a taxa de gravidez subsequente é significativamente menor do que a fertilidade prévia à esterilização.</p>
+<p class="ac-p">Por isso, o arrependimento é uma das complicações mais relevantes da esterilização cirúrgica — e é justamente para reduzir sua incidência que a lei exige o prazo mínimo de 60 dias de reflexão e o aconselhamento multidisciplinar prévio, apresentando à pessoa interessada todas as opções de contracepção reversível existentes antes de confirmar a decisão pela via definitiva.</p>
+<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="320" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Por que a lei exige aconselhamento e prazo</text>
+<rect x="30" y="46" width="280" height="120" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="170" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Reversão cirúrgica</text>
+<text x="170" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Sucesso variável, não garantido</text>
+<text x="170" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Fertilidade pós-reversão menor</text>
+<text x="170" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">que a fertilidade prévia</text>
+<rect x="330" y="46" width="280" height="120" rx="12" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+<text x="470" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--accent)">Prevenção do arrependimento</text>
+<text x="470" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Prazo mínimo de 60 dias</text>
+<text x="470" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Aconselhamento multidisciplinar</text>
+<text x="470" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">sobre métodos reversíveis</text>
+</svg>
+<div class="ac-warn"><b>Pegadinha de prova:</b> reversão da laqueadura ou da vasectomia não restaura necessariamente a fertilidade prévia — a esterilização deve sempre ser apresentada e decidida como método <b>definitivo</b>, nunca como algo "facilmente reversível se a pessoa mudar de ideia".</div>
+`],
+["aspectos_eticos","Aspectos Éticos e Legais",`
+<div class="ac-h">Consentimento informado, vedações e proteção de grupos vulneráveis</div>
+<p class="ac-p">A Lei 9.263/96 estabelece um conjunto de proteções que vão além dos critérios de idade e prazo. É condição obrigatória o <b>registro de manifestação expressa de vontade em documento escrito e firmado</b>, após informação clara sobre riscos da cirurgia, possíveis efeitos colaterais, dificuldades de reversão e opções de contracepção reversível existentes. Essa manifestação de vontade <b>não é válida</b> se expressa durante alteração da capacidade de discernimento por álcool, drogas, estados emocionais alterados ou incapacidade mental temporária ou permanente.</p>
+<p class="ac-p">Em pessoas <b>absolutamente incapazes</b>, a esterilização cirúrgica só pode ocorrer mediante <b>autorização judicial</b>, regulamentada por lei — nunca por decisão isolada de familiares ou da equipe médica. A lei também proíbe expressamente a indução ou instigamento à esterilização (individual ou coletiva, sendo genocídio se contra uma coletividade), veda a exigência de atestado de esterilização ou teste de gravidez para qualquer finalidade, e prevê penalidades criminais (reclusão) para quem realizar esterilização em desacordo com os critérios legais, aumentadas em situações agravantes como esterilização durante parto/aborto fora das exceções previstas, por histerectomia/ooforectomia, ou em pessoa absolutamente incapaz sem autorização judicial.</p>
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Proteções legais da esterilização voluntária</text>
+<rect x="30" y="46" width="300" height="150" rx="12" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.4"/>
+<text x="180" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:var(--ink)">Consentimento válido exige</text>
+<text x="180" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Documento escrito e firmado</text>
+<text x="180" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Informação sobre riscos/reversão</text>
+<text x="180" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">Discernimento pleno (sem álcool,</text>
+<text x="180" y="142" text-anchor="middle" font-size="9.5" style="fill:var(--muted)">drogas, alteração emocional)</text>
+<rect x="350" y="46" width="300" height="150" rx="12" style="fill:#e8675f" fill-opacity=".16" stroke="#e8675f" stroke-width="1.4"/>
+<text x="500" y="70" text-anchor="middle" font-size="11" font-weight="700" style="fill:#e8675f">Vedações expressas</text>
+<text x="500" y="94" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Induzir/instigar esterilização</text>
+<text x="500" y="110" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Exigir atestado de esterilização</text>
+<text x="500" y="126" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">Esterilizar incapaz sem</text>
+<text x="500" y="142" text-anchor="middle" font-size="9.5" style="fill:var(--ink)">autorização judicial</text>
+</svg>
+<div class="ac-call"><b>Ponto de prova:</b> desde a Lei 14.443/2022, o consentimento do cônjuge deixou de ser exigido — a decisão é exclusivamente da pessoa que deseja se esterilizar, desde que preenchidos os demais critérios legais.</div>
+`],
+["comparacao","Comparando com Outros Métodos",`
+<div class="ac-h">Altíssima eficácia, decisão que não deve ser tomada isoladamente</div>
+<p class="ac-p">Tanto a laqueadura tubária quanto a vasectomia estão entre os métodos contraceptivos mais eficazes disponíveis, com índices de Pearl comparáveis ou superiores aos de métodos hormonais de longa duração. A vasectomia, quando confirmada a azoospermia, é ligeiramente mais eficaz e mais segura tecnicamente do que a laqueadura, já que não envolve acesso à cavidade abdominal.</p>
+<p class="ac-p">Na prática clínica e na prova, a decisão pela esterilização deve sempre ser comparada com as alternativas reversíveis de longa duração (implante, DIU, SIU-LNG), que hoje oferecem eficácia semelhante sem a irreversibilidade — sendo, por isso, frequentemente apresentadas como alternativa a ser discutida antes de confirmar a opção pelo método definitivo, especialmente em pacientes jovens ou com dúvidas sobre desejo reprodutivo futuro.</p>
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif">
+<text x="340" y="20" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--accent)">Eficácia comparada (índice de Pearl, uso típico)</text>
+<text x="70" y="50" font-size="9.5" style="fill:var(--muted)">Laqueadura tubária</text>
+<rect x="220" y="39" width="10" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="240" y="50" font-size="9" style="fill:var(--muted)">~0,5</text>
+<text x="70" y="80" font-size="9.5" style="fill:var(--muted)">Vasectomia (pós-confirmação)</text>
+<rect x="220" y="69" width="4" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="234" y="80" font-size="9" style="fill:var(--muted)">~0,1-0,15</text>
+<text x="70" y="110" font-size="9.5" style="fill:var(--muted)">Implante subdérmico</text>
+<rect x="220" y="99" width="4" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="234" y="110" font-size="9" style="fill:var(--muted)">~0,05</text>
+<text x="70" y="140" font-size="9.5" style="fill:var(--muted)">DIU de cobre / SIU-LNG</text>
+<rect x="220" y="129" width="8" height="14" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1"/>
+<text x="238" y="140" font-size="9" style="fill:var(--muted)">~0,1-0,8</text>
+<rect x="30" y="170" width="620" height="40" rx="10" style="fill:var(--panel);stroke:var(--line)" stroke-width="1.2"/>
+<text x="340" y="194" text-anchor="middle" font-size="10" style="fill:var(--ink)">Métodos LARC reversíveis atingem eficácia comparável à definitiva, sem irreversibilidade</text>
+</svg>
+<div class="ac-tip"><b>Ponto de prova:</b> quando a questão apresentar uma paciente jovem em dúvida entre laqueadura e método reversível de longa duração, a conduta esperada é apresentar o LARC como alternativa eficaz e reversível antes de confirmar a via definitiva.</div>
+`]
+],
+};
+Object.assign(C['metodoscontracep|3'], {
+"escores": `<div class="prose">
+<h3>Eficácia comparada (índice de Pearl, por 100 mulheres/ano)</h3>
+<table class="ac-tbl">
+<tr><th>Método</th><th>Uso típico (aproximado)</th></tr>
+<tr><td>Laqueadura tubária</td><td>~0,5</td></tr>
+<tr><td>Vasectomia (pós-confirmação de azoospermia)</td><td>~0,1-0,15</td></tr>
+<tr><td>Implante subdérmico (referência)</td><td>~0,05</td></tr>
+<tr><td>DIU de cobre / SIU-LNG (referência)</td><td>~0,1-0,8</td></tr>
+</table>
+<div class="ac-tip"><h4>💡 Macete</h4><p class="ac-p">Vasectomia é tecnicamente mais simples e ligeiramente mais eficaz que a laqueadura, mas nenhuma das duas tem efeito imediato absoluto — a laqueadura exige técnica adequada e a vasectomia exige confirmação de azoospermia.</p></div>
+</div>`,
+"dif": `<div class="prose">
+<h3>Laqueadura x vasectomia — comparando</h3>
+<table class="ac-tbl">
+<tr><th>Aspecto</th><th>Laqueadura tubária</th><th>Vasectomia</th></tr>
+<tr><td>Via de acesso</td><td>Abdominal (laparoscopia/minilaparotomia)</td><td>Escrotal, ambulatorial</td></tr>
+<tr><td>Anestesia</td><td>Geral ou regional</td><td>Local</td></tr>
+<tr><td>Efeito imediato?</td><td>Sim, se técnica correta</td><td>Não — aguardar confirmação de azoospermia</td></tr>
+<tr><td>Complexidade/risco</td><td>Maior (acesso à cavidade)</td><td>Menor</td></tr>
+</table>
+</div>`,
+"mapa": `<div class="ac-h">Mapa mental — Contracepção Definitiva</div>
+<div class="mm">
+  <div class="mm-card"><h5>⚖️ Lei 9.263/96</h5><ul><li>≥21 anos OU 2 filhos vivos</li><li>Prazo mínimo 60 dias</li><li>Ou risco à vida/saúde (2 médicos)</li></ul></div>
+  <div class="mm-card"><h5>✂️ Vedações</h5><ul><li>Sem histerectomia/ooforectomia</li><li>Sem cesárea só p/ esterilizar</li><li>Sem consentimento do cônjuge (2022)</li></ul></div>
+  <div class="mm-card"><h5>🔪 Laqueadura</h5><ul><li>Interrompe tubas</li><li>Intervalo ou puerpério (com prazo)</li></ul></div>
+  <div class="mm-card"><h5>✂️ Vasectomia</h5><ul><li>Ambulatorial, local</li><li>Não é imediata</li><li>Confirmar azoospermia</li></ul></div>
+  <div class="mm-card"><h5>↩️ Reversão</h5><ul><li>Sucesso não garantido</li><li>Fertilidade pós-reversão menor</li></ul></div>
+  <div class="mm-card"><h5>🔒 Incapazes</h5><ul><li>Só com autorização judicial</li></ul></div>
+</div>`,
+"fluxo_dx": `<div class="fx"><div class="fx-node start">Paciente solicita esterilização cirúrgica voluntária</div><div class="fx-arrow"></div><div class="fx-node">Passo 1 — Verificar critérios legais</div><div class="fx-lbl">Capacidade civil plena e (≥21 anos OU ≥2 filhos vivos)? OU risco à vida/saúde documentado por 2 médicos?</div><div class="fx-arrow"></div><div class="fx-node">Passo 2 — Aconselhamento multidisciplinar</div><div class="fx-lbl">Apresentar riscos, dificuldades de reversão e alternativas reversíveis (LARC)</div><div class="fx-arrow"></div><div class="fx-lbl">Critérios preenchidos e prazo de 60 dias respeitado?</div><div class="fx-row"><div class="fx-node end"><b>SIM:</b> Proceder ao procedimento (laqueadura ou vasectomia) conforme técnica adequada</div><div class="fx-node end"><b>NÃO:</b> Não realizar; orientar método reversível até que critérios sejam preenchidos</div></div></div>`,
+"fluxo_cond": `<div class="fx"><div class="fx-node start">Pós-operatório de esterilização cirúrgica</div><div class="fx-arrow"></div><div class="fx-node">Vasectomia?</div><div class="fx-row"><div class="fx-node"><b>SIM:</b> Manter outro método contraceptivo até espermograma confirmar azoospermia</div><div class="fx-node end"><b>NÃO (laqueadura):</b> Eficácia considerada imediata se técnica adequada</div></div><div class="fx-arrow"></div><div class="fx-node">Paciente relata arrependimento futuro</div><div class="fx-lbl">Discutir possibilidade de reversão cirúrgica, deixando claro que o sucesso não é garantido e a fertilidade pode não ser restaurada</div></div>`,
+"vespera": `<div class="prose">
+<div class="qbox"><h4>⚡ Revisão de Véspera — Contracepção Definitiva em 60 segundos</h4>
+<ul>
+<li><strong>Lei 9.263/96 (atualizada pela Lei 14.443/2022):</strong> permitida em ≥21 anos com capacidade civil plena OU ≥2 filhos vivos, com prazo mínimo de 60 dias entre manifestação de vontade e cirurgia.</li>
+<li><strong>Outra via legal:</strong> risco à vida/saúde da mulher ou do futuro concepto, testemunhado por relatório de 2 médicos.</li>
+<li><strong>Não exige mais</strong> consentimento do cônjuge (revogado em 2022).</li>
+<li><strong>Vedado:</strong> histerectomia/ooforectomia como método contraceptivo; cesárea com fim exclusivo de esterilização.</li>
+<li><strong>Laqueadura no parto</strong> só é permitida se manifestação de vontade ≥60 dias antes do parto.</li>
+<li><strong>Vasectomia:</strong> não é imediata — confirmar azoospermia por espermograma antes de suspender outro método.</li>
+<li><strong>Incapazes:</strong> esterilização só com autorização judicial.</li>
+<li><strong>Reversão:</strong> sucesso não garantido — sempre tratar como método definitivo.</li>
+</ul></div>
+<h3>Resumo ultrarrápido (one-liner)</h3>
+<p class="ac-p"><strong>Contracepção definitiva</strong> (laqueadura e vasectomia) é altamente eficaz, mas regulada pela Lei 9.263/96: ≥21 anos ou ≥2 filhos vivos, prazo de 60 dias, sem exigência de consentimento do cônjuge, vedada por histerectomia/ooforectomia ou cesárea de conveniência, e a vasectomia exige confirmação de azoospermia antes de suspender outro método.</p>
+</div>`,
+"dicas": `<div class="prose">
+<div class="ac-tip"><h4>💡 Dicas de prova</h4><ul>
+<li>Decore os números: <strong>21 anos, 2 filhos vivos, 60 dias, 2 médicos</strong> (para risco à vida/saúde).</li>
+<li>Se a questão menciona laqueadura durante cesárea sem manifestação prévia registrada, pense em <strong>ilegalidade</strong>.</li>
+<li>"Sêmen ainda com espermatozoides logo após a vasectomia" é pista clássica para orientar <strong>manutenção de outro método</strong> até confirmação de azoospermia.</li>
+</ul></div>
+<div class="ac-warn"><h4>⚠️ Pegadinhas clássicas</h4><ul>
+<li>Achar que ainda é necessário consentimento do cônjuge — foi <strong>revogado</strong> pela Lei 14.443/2022.</li>
+<li>Confundir laqueadura com histerectomia — a histerectomia como método contraceptivo é <strong>vedada por lei</strong>.</li>
+<li>Achar que a vasectomia torna o homem estéril imediatamente após a cirurgia.</li>
+</ul></div>
+<div class="ac-call"><h4>🧠 Macetes & mnemônicos</h4><ul>
+<li><strong>"21 ou 2: idade ou filhos, uma das duas portas."</strong></li>
+<li><strong>"Vasectomia não é 'já', é 'depois de confirmar'."</strong></li>
+</ul></div>
+<div class="ac-warn"><h4>❌ Erros mais comuns</h4><ul>
+<li>Não verificar o prazo de 60 dias antes de indicar laqueadura no parto.</li>
+<li>Esquecer de solicitar espermograma de controle após vasectomia.</li>
+<li>Apresentar a esterilização como facilmente reversível caso a pessoa se arrependa.</li>
+</ul></div>
+</div>`,
+"checklist": ["Explico os critérios da Lei 9.263/96 para esterilização voluntária, incluindo a atualização de 2022","Descrevo o prazo mínimo de 60 dias e sua finalidade","Diferencio laqueadura tubária de vasectomia quanto à técnica e ao momento de eficácia","Explico por que a vasectomia exige confirmação de azoospermia antes de suspender outro método","Reconheço as vedações legais (histerectomia/ooforectomia, cesárea de conveniência)","Explico por que a reversão cirúrgica não garante retorno da fertilidade prévia"]
+});
+Object.assign(C['metodoscontracep|3'], {
+"questoes": [
+{"stem":"Segundo a Lei 9.263/96, atualizada pela Lei 14.443/2022, a esterilização voluntária é permitida em homens e mulheres com capacidade civil plena que tenham:","opts":["25 anos completos, sem outra alternativa possível.","21 anos completos ou, alternativamente, pelo menos 2 filhos vivos.","18 anos completos, independentemente de outros critérios.","30 anos completos e pelo menos 3 filhos vivos."],"correct":1,"expl":"A Lei 14.443/2022 reduziu a idade mínima de 25 para 21 anos, mantendo a alternativa de pelo menos 2 filhos vivos, independentemente da idade."},
+{"stem":"Qual é o prazo mínimo exigido por lei entre a manifestação de vontade e a realização do ato cirúrgico de esterilização?","opts":["15 dias.","30 dias.","60 dias.","90 dias."],"correct":2,"expl":"A lei exige um prazo mínimo de 60 dias entre a manifestação de vontade e o ato cirúrgico, período no qual é oferecido acesso a aconselhamento multidisciplinar, para desencorajar a esterilização precoce."},
+{"stem":"Além do critério de idade/número de filhos, qual é a outra situação prevista em lei que permite a esterilização voluntária, independentemente desses critérios?","opts":["Solicitação exclusiva do cônjuge.","Risco à vida ou à saúde da mulher ou do futuro concepto, testemunhado em relatório escrito assinado por dois médicos.","Qualquer desejo expresso verbalmente pela paciente.","Indicação de qualquer médico assistente, isoladamente."],"correct":1,"expl":"A segunda via legal para a esterilização voluntária é o risco à vida ou à saúde da mulher ou do futuro concepto, documentado em relatório escrito e assinado por dois médicos."},
+{"stem":"Desde a Lei 14.443/2022, a esterilização cirúrgica em pessoa casada:","opts":["Continua exigindo consentimento expresso de ambos os cônjuges.","Não exige mais o consentimento do cônjuge, bastando a manifestação de vontade da pessoa interessada.","Passou a exigir também autorização judicial em todos os casos.","Só pode ser realizada com autorização do Ministério Público."],"correct":1,"expl":"A Lei 14.443/2022 revogou o parágrafo que exigia consentimento expresso de ambos os cônjuges — a decisão passou a depender exclusivamente da manifestação de vontade da pessoa interessada."},
+{"stem":"Segundo a legislação brasileira, a esterilização cirúrgica como método contraceptivo é expressamente vedada por meio de:","opts":["Laqueadura tubária por laparoscopia.","Vasectomia sob anestesia local.","Histerectomia e ooforectomia.","Laqueadura no puerpério, quando os critérios legais são preenchidos."],"correct":2,"expl":"A lei veda expressamente a esterilização cirúrgica como método contraceptivo por meio de histerectomia ou ooforectomia, técnicas desproporcionais ao objetivo contraceptivo e com riscos adicionais relevantes."},
+{"stem":"Uma cesárea indicada com finalidade exclusiva de esterilização, sem justificativa obstétrica, é:","opts":["Uma prática recomendada para otimizar dois procedimentos em um só ato.","Proibida por lei e configura agravante penal.","Permitida desde que a paciente concorde verbalmente no momento do parto.","Permitida apenas em hospitais universitários."],"correct":1,"expl":"A cesária indicada exclusivamente para fim de esterilização é proibida e, segundo a lei, configura circunstância que aumenta a pena em um terço no caso de esterilização irregular."},
+{"stem":"Para que a laqueadura tubária seja realizada durante o período de parto, é necessário que:","opts":["A manifestação de vontade tenha ocorrido durante o próprio trabalho de parto.","Tenha sido respeitado o prazo mínimo de 60 dias entre a manifestação de vontade e o parto, além de condições médicas adequadas.","Baste a solicitação verbal da paciente no momento da cesárea.","Não existam critérios específicos além dos aplicáveis à esterilização no intervalo."],"correct":1,"expl":"A esterilização cirúrgica durante o parto é garantida à solicitante se observado o prazo mínimo de 60 dias entre a manifestação de vontade e o parto e as devidas condições médicas — não pode ser decidida no momento do próprio parto."},
+{"stem":"Após a realização de uma vasectomia, a orientação correta em relação à contracepção é:","opts":["Suspender imediatamente qualquer outro método contraceptivo, já que a eficácia é imediata.","Manter outro método contraceptivo até a confirmação de azoospermia por espermograma.","Aguardar apenas 48 horas antes de suspender outros métodos.","Não é necessário nenhum exame de controle após o procedimento."],"correct":1,"expl":"A vasectomia não torna o homem estéril imediatamente, pois espermatozoides residuais podem permanecer no sêmen por semanas a meses — é necessário confirmar a azoospermia por espermograma antes de suspender outro método contraceptivo."},
+{"stem":"Em relação à reversão cirúrgica da laqueadura tubária ou da vasectomia, é correto afirmar que:","opts":["O sucesso é garantido em praticamente 100% dos casos.","O sucesso é variável e não garantido, e a fertilidade pós-reversão costuma ser menor que a fertilidade prévia.","A reversão restaura sempre a fertilidade exatamente como antes da esterilização.","Não existem técnicas de reversão disponíveis para nenhum dos dois procedimentos."],"correct":1,"expl":"Embora existam técnicas de reversão (reanastomose tubária, vasovasostomia), o sucesso é variável e não garantido, e a fertilidade após a reversão costuma ser menor que a fertilidade prévia à esterilização."},
+{"stem":"Segundo a Lei 9.263/96, a esterilização cirúrgica em pessoa absolutamente incapaz só pode ocorrer mediante:","opts":["Autorização exclusiva dos familiares mais próximos.","Autorização judicial, regulamentada na forma da lei.","Parecer favorável de qualquer médico assistente.","Solicitação por escrito do responsável legal, sem necessidade de outros trâmites."],"correct":1,"expl":"A esterilização cirúrgica em pessoas absolutamente incapazes só pode ocorrer mediante autorização judicial, regulamentada na forma da lei — nunca por decisão isolada de familiares ou da equipe médica."},
+{"stem":"A manifestação de vontade para esterilização cirúrgica NÃO é considerada válida quando expressa:","opts":["Após informação completa sobre riscos e alternativas reversíveis.","Durante alteração da capacidade de discernimento por álcool, drogas ou estados emocionais alterados.","Em documento escrito e firmado pela pessoa interessada.","Após decorrido o prazo mínimo de reflexão de 60 dias."],"correct":1,"expl":"A lei determina que não será considerada válida a manifestação de vontade expressa durante alterações na capacidade de discernimento por influência de álcool, drogas, estados emocionais alterados ou incapacidade mental temporária ou permanente."},
+{"stem":"Comparando laqueadura tubária e vasectomia em termos de complexidade e segurança do procedimento, é correto afirmar que:","opts":["A vasectomia é tecnicamente mais complexa e exige anestesia geral.","A laqueadura é tecnicamente mais simples que a vasectomia, sendo sempre ambulatorial.","A vasectomia é tecnicamente mais simples, ambulatorial, sob anestesia local, com menor risco em comparação à laqueadura, que exige acesso à cavidade abdominal.","Ambos os procedimentos têm exatamente a mesma complexidade técnica e risco cirúrgico."],"correct":2,"expl":"A vasectomia é um procedimento ambulatorial simples sob anestesia local, com menor taxa de complicações; a laqueadura tubária exige acesso à cavidade abdominal (laparoscopia ou minilaparotomia), sendo tecnicamente mais complexa."}
+],
+"flashcards": [
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Lei 9.263/96</small><br>Quais os dois critérios alternativos de idade/prole para esterilização voluntária?","back":"{{21 anos completos com capacidade civil plena OU, alternativamente, pelo menos 2 filhos vivos, independentemente da idade.}}","type":"cloze"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Lei 9.263/96</small><br>Qual o prazo mínimo entre manifestação de vontade e o ato cirúrgico?","back":"60 dias, período em que é oferecido aconselhamento multidisciplinar sobre métodos reversíveis.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Lei 9.263/96</small><br>Qual a segunda via legal, independente de idade/prole, para esterilização?","back":"Risco à vida ou à saúde da mulher ou do futuro concepto, testemunhado por relatório escrito assinado por 2 médicos.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Lei 14.443/2022</small><br>O que mudou em relação ao consentimento do cônjuge?","back":"Foi revogado — não é mais exigido consentimento do cônjuge para a esterilização.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Vedações</small><br>Quais técnicas são expressamente vedadas como método de esterilização contraceptiva?","back":"Histerectomia e ooforectomia.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Vedações</small><br>Cesárea indicada apenas para fim de esterilização é permitida?","back":"Não — é proibida e configura agravante penal.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Parto</small><br>Sob qual condição a laqueadura pode ser feita durante o período de parto?","back":"Se respeitado o prazo mínimo de 60 dias entre a manifestação de vontade e o parto, além de condições médicas adequadas.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Vasectomia</small><br>A vasectomia torna o homem estéril imediatamente?","back":"Não — espermatozoides residuais podem persistir por semanas a meses; exige confirmação de azoospermia por espermograma.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Vasectomia</small><br>O que orientar ao casal enquanto se aguarda confirmação de azoospermia?","back":"Manter outro método contraceptivo até a confirmação laboratorial.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Reversão</small><br>A reversão cirúrgica (reanastomose/vasovasostomia) garante retorno da fertilidade?","back":"Não — o sucesso é variável e não garantido, e a fertilidade pós-reversão costuma ser menor que a prévia.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Incapazes</small><br>Como pode ocorrer esterilização em pessoa absolutamente incapaz?","back":"Somente mediante autorização judicial, regulamentada na forma da lei.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Consentimento</small><br>Em que situações a manifestação de vontade para esterilização NÃO é considerada válida?","back":"Quando expressa sob alteração da capacidade de discernimento por álcool, drogas, estados emocionais alterados ou incapacidade mental temporária ou permanente.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Comparação</small><br>Qual procedimento é tecnicamente mais simples e seguro, laqueadura ou vasectomia?","back":"Vasectomia — ambulatorial, sob anestesia local, sem necessidade de acesso à cavidade abdominal.","type":"basic"},
+{"front":"<small style=\"opacity:.62;letter-spacing:.04em;text-transform:uppercase\">Alternativas</small><br>O que deve ser apresentado à paciente antes de confirmar a via de esterilização definitiva?","back":"As alternativas reversíveis de longa duração (LARC: implante, DIU, SIU-LNG), com eficácia comparável e sem irreversibilidade.","type":"basic"}
+],
+"casos": [
+{"t":"Caso 1 — Solicitação de laqueadura no parto sem manifestação prévia","stem":"Gestante de 39 semanas, em trabalho de parto ativo, 24 anos, com 1 filho vivo, solicita laqueadura tubária durante a cesárea que está sendo indicada por sofrimento fetal, sem qualquer registro prévio de manifestação de vontade sobre esterilização.","passos":[
+{"h":"Avaliação dos critérios legais","p":"Verificar se a paciente preenche os critérios de idade/prole (21 anos ou 2 filhos vivos) — nesse caso, tem 24 anos e apenas 1 filho vivo, preenchendo o critério de idade."},
+{"h":"Avaliação do prazo de manifestação de vontade","p":"Não há registro de manifestação de vontade prévia com pelo menos 60 dias de antecedência ao parto, requisito obrigatório para realizar a esterilização durante o período de parto."},
+{"h":"Raciocínio clínico e legal","p":"Mesmo preenchendo o critério de idade, a ausência do prazo mínimo de 60 dias entre a manifestação de vontade e o parto torna a realização da laqueadura nesse momento ilegal, independente da indicação obstétrica da cesárea."},
+{"h":"Conduta imediata","p":"Não realizar a laqueadura durante essa cesárea, explicando à paciente os motivos legais, e proceder apenas com o parto cirúrgico indicado pelo sofrimento fetal."},
+{"h":"Conduta neste momento","p":"Orientar a paciente sobre o processo correto para futura solicitação de esterilização (manifestação de vontade documentada, aconselhamento multidisciplinar e respeito ao prazo de 60 dias) e discutir métodos contraceptivos reversíveis eficazes para o puerpério imediato."}
+]},
+{"t":"Caso 2 — Vasectomia com relação sexual desprotegida precoce","stem":"Homem de 30 anos, realizou vasectomia há 3 semanas, relata ter tido relação sexual sem uso de outro método contraceptivo por acreditar que já estava estéril, e questiona se deve se preocupar.","passos":[
+{"h":"Anamnese dirigida","p":"Confirmar tempo decorrido desde a cirurgia e se já foi realizado espermograma de controle."},
+{"h":"Raciocínio clínico","p":"Três semanas após a vasectomia é tempo insuficiente para garantir a ausência completa de espermatozoides no sêmen, já que espermatozoides residuais podem persistir por semanas a meses."},
+{"h":"Orientação imediata","p":"Explicar ao paciente e à parceira que a vasectomia não confere esterilidade imediata e que a relação desprotegida representa risco real de gravidez."},
+{"h":"Conduta diagnóstica","p":"Solicitar espermograma de controle no prazo adequado (geralmente 8-12 semanas ou conforme protocolo do serviço) para confirmar azoospermia antes de liberar o casal do uso de outro método."},
+{"h":"Conduta neste momento","p":"Orientar o casal a manter método contraceptivo adicional até a confirmação laboratorial da azoospermia, e discutir com a parceira a necessidade de atenção a atraso menstrual nesse intervalo."}
+]},
+{"t":"Caso 3 — Arrependimento após laqueadura e desejo de nova gestação","stem":"Mulher de 34 anos, submetida a laqueadura tubária há 5 anos, após novo relacionamento, deseja engravidar novamente e procura avaliação sobre possibilidade de reversão do procedimento.","passos":[
+{"h":"Anamnese dirigida","p":"Investigar a técnica utilizada na laqueadura original, tempo decorrido e histórico reprodutivo desde então."},
+{"h":"Avaliação de expectativas","p":"Explicar à paciente que a reversão cirúrgica (reanastomose tubária) é tecnicamente possível, mas seu sucesso depende de múltiplos fatores e não é garantido."},
+{"h":"Raciocínio clínico","p":"Mesmo em caso de reversão anatômica bem-sucedida, a taxa de gravidez subsequente é geralmente menor do que a fertilidade prévia à esterilização, e há risco aumentado de gravidez ectópica após reanastomose."},
+{"h":"Discussão de alternativas","p":"Apresentar a fertilização in vitro como alternativa à reversão cirúrgica, especialmente se a técnica original da laqueadura for desfavorável à reversão (por exemplo, extensa ressecção tubária)."},
+{"h":"Conduta neste momento","p":"Encaminhar para avaliação especializada em reprodução assistida e cirurgia tubária, deixando claro que ambas as opções (reversão ou fertilização in vitro) têm taxas de sucesso variáveis e devem ser discutidas de forma individualizada."}
+]}
+]
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
 </body>
 </html>
