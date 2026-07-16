@@ -24318,5 +24318,915 @@ try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.vie
 })();
 </script>
 
+
+<script>
+/* ELID Ginecologia — Conteúdo Incontinência Urinária (1/3): Fisiologia da Continência (incontinencia|0).
+   Aditivo. Explicações aprofundadas para provas de residência (ENARE, ENAMED, Revalida, PSU-MG, SES-RJ, UERJ, UFRJ). */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+var SVG_ANATOMIA = `<svg viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+ <linearGradient id="fisBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf4ff"/><stop offset="1" stop-color="#ede9fe"/></linearGradient>
+ <linearGradient id="fisBladder" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#93c5fd"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+ <linearGradient id="fisUrethra" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5abfc"/><stop offset="1" stop-color="#a21caf"/></linearGradient>
+ <linearGradient id="fisVagina" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fda4af"/><stop offset="1" stop-color="#be123c"/></linearGradient>
+ <linearGradient id="fisRectum" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d8b48d"/><stop offset="1" stop-color="#8a5a34"/></linearGradient>
+ <linearGradient id="fisLevator" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fca5a5"/><stop offset="1" stop-color="#b91c1c"/></linearGradient>
+ <linearGradient id="fisBone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#cbd5e1"/></linearGradient>
+ <filter id="fisShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#3b0764" flood-opacity="0.22"/></filter>
+</defs>
+<rect x="4" y="4" width="672" height="432" rx="18" fill="url(#fisBg)"/>
+<text x="340" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#4c1d95">Assoalho pélvico — corte sagital esquemático</text>
+<g filter="url(#fisShadow)">
+ <path d="M108 96 C90 80 92 56 116 48 C138 40 158 56 154 78 C150 100 128 114 108 96 Z" fill="url(#fisBone)" stroke="#94a3b8" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+ <text x="128" y="76" text-anchor="middle" font-size="10" fill="#475569">Sínfise</text>
+ <text x="128" y="87" text-anchor="middle" font-size="10" fill="#475569">púbica</text>
+</g>
+<path d="M560 70 C596 66 620 92 610 126 C602 154 566 168 542 150 C522 134 524 100 560 70 Z" fill="url(#fisBone)" stroke="#94a3b8" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+<text x="572" y="112" text-anchor="middle" font-size="10" fill="#475569">Sacro/cóccix</text>
+<g filter="url(#fisShadow)">
+ <path d="M180 110 C170 84 210 62 260 66 C312 70 340 100 330 140 C322 172 280 190 236 182 C196 176 190 138 180 110 Z" fill="url(#fisBladder)"/>
+</g>
+<text x="248" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#eff6ff">Bexiga</text>
+<path d="M240 178 C232 210 226 244 224 276 C222 300 224 322 232 340 C238 352 250 358 258 348 C266 336 266 310 264 284 C262 250 258 214 256 182 C254 176 244 174 240 178 Z" fill="url(#fisUrethra)" stroke="#86198f" stroke-width="1" vector-effect="non-scaling-stroke"/>
+<text x="300" y="270" font-size="12" font-weight="700" fill="#701a75">Uretra</text>
+<path d="M340 176 C356 214 366 254 368 292 C370 320 366 346 354 366 C346 378 332 380 324 368 C314 352 314 320 314 288 C314 250 320 208 312 182 C316 176 334 172 340 176 Z" fill="url(#fisVagina)" stroke="#9f1239" stroke-width="1" vector-effect="non-scaling-stroke"/>
+<text x="388" y="290" font-size="12" font-weight="700" fill="#881337">Vagina</text>
+<path d="M430 160 C458 190 476 232 480 278 C484 318 476 356 456 380 C444 394 424 394 416 378 C406 358 412 320 414 282 C416 240 412 196 404 168 C412 160 424 156 430 160 Z" fill="url(#fisRectum)" stroke="#78350f" stroke-width="1" vector-effect="non-scaling-stroke"/>
+<text x="500" y="300" font-size="12" font-weight="700" fill="#451a03">Reto</text>
+<g filter="url(#fisShadow)">
+ <path d="M96 372 C160 336 230 320 300 322 C360 324 410 336 460 356 C510 374 552 392 598 384 C566 414 500 428 430 424 C346 420 260 416 190 406 C144 400 108 392 96 372 Z" fill="url(#fisLevator)"/>
+</g>
+<text x="330" y="396" text-anchor="middle" font-size="13" font-weight="700" fill="#fef2f2">Músculo levantador do ânus (feixe puborretal)</text>
+<path d="M240 340 C238 350 238 358 240 366" stroke="#6b21a8" stroke-width="4" fill="none" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
+<path d="M132 205 L132 165" stroke="#4c1d95" stroke-width="4" fill="none" vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#fisArrow)"/>
+<defs><marker id="fisArrow" markerWidth="8" markerHeight="8" refX="4" refY="0" orient="auto"><path d="M0,6 L4,0 L8,6 Z" fill="#4c1d95"/></marker></defs>
+<text x="70" y="196" font-size="11" fill="#4c1d95" font-weight="700">↑ Pabd</text>
+<text x="70" y="208" font-size="10" fill="#4c1d95">(esforço)</text>
+<text x="340" y="424" text-anchor="middle" font-size="10.5" fill="#581c87">Suporte íntegro: aumento da pressão abdominal comprime a uretra contra o "hammock" e mantém a continência.</text>
+</svg>`;
+
+var SVG_HAMMOCK = `<svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+ <linearGradient id="hmBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0f9ff"/><stop offset="1" stop-color="#e0e7ff"/></linearGradient>
+ <linearGradient id="hmUrethraOk" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f5abfc"/><stop offset="1" stop-color="#a21caf"/></linearGradient>
+ <linearGradient id="hmUrethraBad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fca5a5"/><stop offset="1" stop-color="#dc2626"/></linearGradient>
+ <linearGradient id="hmSlingOk" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#0d9488"/></linearGradient>
+ <linearGradient id="hmSlingBad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fde68a"/><stop offset="1" stop-color="#d97706"/></linearGradient>
+ <filter id="hmShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#1e1b4b" flood-opacity="0.2"/></filter>
+</defs>
+<rect x="4" y="4" width="672" height="392" rx="18" fill="url(#hmBg)"/>
+<text x="340" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#312e81">Teoria integral — o efeito "hammock" (rede de suporte)</text>
+<text x="176" y="54" text-anchor="middle" font-size="13" font-weight="700" fill="#0f766e">Suporte íntegro</text>
+<g filter="url(#hmShadow)">
+ <path d="M96 150 C96 130 130 118 176 118 C222 118 256 130 256 150 C256 172 222 186 176 186 C130 186 96 172 96 150 Z" fill="url(#hmUrethraOk)"/>
+</g>
+<text x="176" y="155" text-anchor="middle" font-size="11" fill="#fdf4ff" font-weight="700">Uretra</text>
+<path d="M70 210 C100 190 140 182 176 182 C212 182 252 190 282 210 C260 240 214 254 176 254 C138 254 92 240 70 210 Z" fill="url(#hmSlingOk)" filter="url(#hmShadow)"/>
+<text x="176" y="222" text-anchor="middle" font-size="10.5" fill="#f0fdfa" font-weight="700">Parede vaginal anterior</text>
+<text x="176" y="235" text-anchor="middle" font-size="10.5" fill="#f0fdfa" font-weight="700">+ fáscia endopélvica + m. pubococcígeo</text>
+<path d="M176 92 L176 116" stroke="#312e81" stroke-width="4" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke" marker-end="url(#hmArrow1)"/>
+<defs><marker id="hmArrow1" markerWidth="8" markerHeight="8" refX="4" refY="0" orient="auto"><path d="M0,6 L4,0 L8,6 Z" fill="#312e81"/></marker></defs>
+<text x="176" y="86" text-anchor="middle" font-size="10.5" fill="#312e81">Pabd ↑ (tosse)</text>
+<path d="M96 150 C60 168 58 200 70 210" stroke="#0f766e" stroke-width="3" fill="none" stroke-dasharray="2 5" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
+<text x="176" y="280" text-anchor="middle" font-size="11" fill="#0f766e" font-weight="700">Uretra comprimida contra rede firme = fecha</text>
+<text x="176" y="296" text-anchor="middle" font-size="11" fill="#0f766e" font-weight="700">→ CONTINÊNCIA mantida</text>
+<line x1="340" y1="60" x2="340" y2="340" stroke="#a5b4fc" stroke-width="2" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/>
+<text x="504" y="54" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">Suporte deficiente</text>
+<g filter="url(#hmShadow)">
+ <path d="M424 158 C424 138 456 128 504 132 C548 136 578 152 574 172 C570 194 534 204 490 200 C448 196 424 178 424 158 Z" fill="url(#hmUrethraBad)"/>
+</g>
+<text x="500" y="166" text-anchor="middle" font-size="11" fill="#fef2f2" font-weight="700">Uretra hipermóvel</text>
+<path d="M400 220 C430 214 470 216 504 224 C540 232 576 246 598 268 C572 292 528 300 490 296 C450 292 410 278 396 254 C390 240 394 228 400 220 Z" fill="url(#hmSlingBad)" filter="url(#hmShadow)"/>
+<text x="498" y="256" text-anchor="middle" font-size="10.5" fill="#78350f" font-weight="700">Rede frouxa / rota</text>
+<text x="498" y="269" text-anchor="middle" font-size="10.5" fill="#78350f" font-weight="700">(parto, hipoestrogenismo, colágeno)</text>
+<path d="M504 96 L504 128" stroke="#78350f" stroke-width="4" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke" marker-end="url(#hmArrow2)"/>
+<defs><marker id="hmArrow2" markerWidth="8" markerHeight="8" refX="4" refY="0" orient="auto"><path d="M0,6 L4,0 L8,6 Z" fill="#78350f"/></marker></defs>
+<text x="504" y="90" text-anchor="middle" font-size="10.5" fill="#78350f">Pabd ↑ (tosse)</text>
+<path d="M424 158 C460 176 470 208 460 224" stroke="#b91c1c" stroke-width="3" fill="none" stroke-dasharray="2 5" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
+<text x="504" y="330" text-anchor="middle" font-size="11" fill="#b45309" font-weight="700">Uretra desce e roda, não se fecha</text>
+<text x="504" y="346" text-anchor="middle" font-size="11" fill="#b45309" font-weight="700">→ PERDA URINÁRIA aos esforços</text>
+</svg>`;
+
+C['incontinencia|0'] = {
+ name: 'Fisiologia da Continência',
+ intro: 'É a base de todo o tema: quem entende por que a mulher normalmente NÃO perde urina entende, de graça, por que ela passa a perder na IUE e na bexiga hiperativa — as duas próximas paradas.',
+ sub: [
+  ['entendendo','Entendendo do Zero', `
+   <div class="ac-h">Continência é um equilíbrio de pressões, não um "músculo forte" isolado</div>
+   <p class="ac-p">Ficar continente parece simples ("segurar o xixi"), mas por trás disso existe um sistema fino de equilíbrio de pressões. Para não perder urina, a <b>pressão dentro da uretra</b> precisa ser, o tempo todo, <b>maior do que a pressão dentro da bexiga</b>. Enquanto essa desigualdade se mantém, a uretra fica fechada como uma torneira fechada e a urina não sai — mesmo com a bexiga cheia. No momento em que a pressão vesical ultrapassa a uretral (por uma contração da bexiga na hora errada, ou por um aumento súbito de pressão abdominal que a uretra não consegue acompanhar), a urina escapa. Basicamente toda a incontinência urinária feminina pode ser reduzida a essa equação: alguma coisa fez a pressão vesical vencer a uretral.</p>
+   <p class="ac-p">Essa "vitória" da uretra sobre a bexiga depende de três sistemas trabalhando juntos, e vale a pena guardar os três porque cada um deles, quando falha isoladamente, gera um tipo diferente de incontinência cobrado em prova. O primeiro é o <b>suporte anatômico</b>: a uretra e o colo vesical precisam estar bem "ancorados" por ligamentos, fáscia e músculo, para que um aumento de pressão abdominal (tossir, espirrar, pular) seja transmitido de forma <b>igual</b> para a bexiga e para a uretra — se o suporte falha, a uretra se desloca e a pressão deixa de ser transmitida de forma simétrica, e é aí que nasce a <b>incontinência urinária de esforço (IUE)</b>. O segundo é o <b>esfíncter uretral</b> propriamente dito: a musculatura lisa e estriada que compõe a parede da uretra e mantém um tônus de repouso constante, fechando a luz uretral; se esse esfíncter for intrinsecamente fraco, a mulher perde urina mesmo com pouquíssimo suporte comprometido. O terceiro é o <b>controle neurológico</b>: o sistema nervoso central inibe a bexiga durante a fase de enchimento e só permite a contração do detrusor quando a pessoa decide urinar; quando esse freio neural falha ou fica hipersensível, a bexiga contrai sozinha e sem aviso, o que caracteriza a <b>bexiga hiperativa</b>.</p>
+   <p class="ac-p">Por que estudar fisiologia antes de entrar em IUE e bexiga hiperativa? Porque as provas de residência adoram testar se o candidato entende o <b>mecanismo</b>, não só o nome da doença. Uma pergunta clássica descreve uma paciente que perde urina ao tossir e pede o mecanismo mais provável — quem entende que existe suporte anatômico (hipermobilidade) e esfíncter (deficiência intrínseca) como dois mecanismos distintos de IUE acerta a questão; quem decorou só "IUE = perda ao esforço" erra a pergunta seguinte, que testa a fisiopatologia. Este módulo é a "gramática" que torna os dois próximos módulos muito mais fáceis de entender e de reter.</p>
+   ${SVG_ANATOMIA}
+   <div class="ac-call"><b>A grande ideia:</b> continência = pressão uretral &gt; pressão vesical, sustentada por três pilares — <b>suporte anatômico</b>, <b>esfíncter uretral</b> e <b>controle neurológico</b>. Cada pilar que falha gera um tipo diferente de incontinência.</div>
+   <table class="ac-tbl"><tr><th>Eixo</th><th>O que você vai dominar</th></tr>
+    <tr><td>Anatomia do assoalho pélvico</td><td>Levantador do ânus, fáscia endopélvica, corpo perineal</td></tr>
+    <tr><td>Esfíncter uretral</td><td>Componentes de fechamento (mucosa, m. liso, m. estriado, plexo vascular)</td></tr>
+    <tr><td>Controle neurológico</td><td>Centro pontino, centro sacral, reflexo de enchimento x reflexo de micção</td></tr>
+    <tr><td>Teoria integral / hammock</td><td>Como o suporte transmite a pressão abdominal para fechar a uretra</td></tr>
+    <tr><td>Fatores de risco</td><td>Parto vaginal, hipoestrogenismo, obesidade, tosse crônica</td></tr>
+   </table>`],
+  ['anatomia','Anatomia do Assoalho Pélvico', `
+   <div class="ac-h">O "andaime" que sustenta bexiga, uretra, útero, vagina e reto</div>
+   <p class="ac-p">O assoalho pélvico é um conjunto de músculos e fáscias que fecha a parte inferior da pelve, como uma rede que sustenta todas as vísceras pélvicas contra a gravidade e contra os aumentos de pressão abdominal do dia a dia. A peça central é o <b>músculo levantador do ânus</b>, na verdade um grupo de três feixes musculares: o <b>puborretal</b> (o mais importante para continência — forma uma alça em "U" atrás do reto e da vagina, puxando-os para frente contra o púbis), o <b>pubococcígeo</b> e o <b>iliococcígeo</b>. Juntos, formam uma espécie de "tigela" muscular que fica em tônus contínuo (contração de repouso) durante todo o dia, e que se contrai ainda mais forte de forma reflexa sempre que a pressão abdominal aumenta (tossir, rir, levantar peso).</p>
+   <p class="ac-p">Além do músculo, existe a <b>fáscia endopélvica</b>, uma camada de tecido conjuntivo que envolve os órgãos pélvicos e os prende às paredes laterais da pelve (arco tendíneo da fáscia pélvica). A fáscia funciona como as "cordas" que amarram um andaime, enquanto o levantador do ânus é a "base" que sustenta. Essa dupla — músculo + fáscia — é o que os autores chamam de <b>sistema de suporte</b>, e é justamente esse sistema que, quando lesado (tipicamente no parto vaginal), abre caminho para a hipermobilidade uretral e para o prolapso de órgãos pélvicos.</p>
+   <p class="ac-p">Um ponto de referência clássico em provas mais avançadas é a divisão de <b>DeLancey</b> em três níveis de suporte vaginal: o <b>nível I</b> (suporte apical, pelos ligamentos uterossacros e cardinais, sustenta o ápice vaginal/colo uterino), o <b>nível II</b> (suporte da parede vaginal média, pela fáscia pubocervical anteriormente e retovaginal posteriormente — é o nível mais relevante para a uretra e a bexiga) e o <b>nível III</b> (fusão distal da vagina ao corpo perineal e à musculatura do períneo). Perceba que a uretra "descansa" justamente sobre a fáscia do <b>nível II</b>; um defeito nesse nível explica a hipermobilidade uretral que aparece na IUE.</p>
+   <div class="ac-tip"><b>Macete:</b> pense no assoalho pélvico como uma cama elástica (levantador do ânus) presa por cordas às paredes da pelve (fáscia endopélvica). A uretra "deita" sobre essa cama elástica — é esse encontro que dá nome à teoria do "hammock" (rede/cama suspensa), que você verá em detalhe mais adiante nesta aba.</div>`],
+  ['esfincter','O Esfíncter Uretral', `
+   <div class="ac-h">A uretra fechada não é só "um músculo apertado"</div>
+   <p class="ac-p">Diferente do que a palavra "esfíncter" sugere, o fechamento da uretra feminina não depende de um único músculo circular, mas de <b>quatro camadas somadas</b>, cada uma contribuindo com uma fração da pressão de fechamento uretral. A mais interna é a <b>mucosa e submucosa uretral</b>, rica em um <b>plexo vascular</b> (um "colchão" de vasos sanguíneos) que se enche de sangue e ajuda a coaptar (fechar hermeticamente) as paredes da uretra, de forma parecida com um tecido erétil. Esse componente vascular é <b>estrogênio-dependente</b> — e é exatamente por isso que a queda de estrogênio na menopausa reduz esse "colchão" e piora a continência em algumas mulheres.</p>
+   <p class="ac-p">Envolvendo a mucosa, existe uma camada de <b>musculatura lisa</b> (controle involuntário, autonômico, tônus contínuo) e, mais externamente, uma camada de <b>musculatura estriada</b> — o chamado <b>esfíncter uretral externo (rabdoesfíncter)</b>, sob controle voluntário parcial pelo <b>nervo pudendo</b>. É essa camada estriada que a mulher consciente contrai quando faz um "aperto" voluntário (a base do exercício de Kegel) e que também se contrai de forma reflexa e muito rápida, um instante antes de uma tosse ou espirro, antecipando o aumento de pressão abdominal — um mecanismo chamado de <b>contração pré-esforço</b>.</p>
+   <p class="ac-p">A soma de todas essas camadas — vascular, muscular lisa e muscular estriada, mais o próprio colágeno e a elasticidade da parede uretral — define o que se chama de <b>pressão de fechamento uretral</b>. Quando essa pressão intrínseca está reduzida (por exemplo, por lesão direta do esfíncter em cirurgias prévias, por denervação, por atrofia relacionada à idade ou por hipoestrogenismo grave), a uretra "não segura" mesmo com o suporte anatômico normal — é o mecanismo chamado <b>deficiência esfincteriana intrínseca (DEI/ISD)</b>, que você vai reencontrar como uma das duas causas de IUE no próximo módulo.</p>
+   <div class="ac-warn"><b>Pegadinha clássica:</b> não confunda "esfíncter uretral" com um único músculo circular tipo esfíncter anal. É a soma de mucosa + plexo vascular + músculo liso + músculo estriado. Uma prova pode testar isso perguntando por que atrofia da mucosa vaginal/uretral (hipoestrogenismo) também piora incontinência — resposta: o plexo vascular submucoso é estrogênio-dependente.</div>`],
+  ['neuro','Controle Neurológico da Continência', `
+   <div class="ac-h">Dois "centros" que se revezam: guardar urina x liberar urina</div>
+   <p class="ac-p">O ciclo miccional tem duas fases que se excluem mutuamente: a <b>fase de enchimento</b> (a bexiga se enche e o corpo precisa manter a uretra fechada e o detrusor relaxado) e a <b>fase de esvaziamento</b> (a pessoa decide urinar, o detrusor se contrai e a uretra relaxa). Esse revezamento é comandado por um "interruptor" central: o <b>centro pontino da micção</b>, localizado no tronco encefálico. Enquanto o córtex cerebral mantém esse centro <b>inibido</b> (situação social inadequada para urinar, bexiga ainda não muito cheia), prevalece a fase de enchimento. Quando a pessoa decide conscientemente urinar (ou quando a bexiga está excessivamente cheia e o córtex "perde a batalha"), o centro pontino é liberado e dispara a fase de esvaziamento.</p>
+   <p class="ac-p">Na fase de <b>enchimento</b>, o sistema <b>simpático</b> (nervo hipogástrico, via receptores beta-adrenérgicos no corpo do detrusor e alfa-adrenérgicos no colo vesical/uretra proximal) mantém o detrusor <b>relaxado</b> e o colo vesical <b>fechado</b>, enquanto o <b>nervo pudendo</b> (somático, controle voluntário) mantém o esfíncter estriado <b>contraído</b>. É um trabalho conjunto de "relaxar a bexiga" e "fechar a saída". Na fase de <b>esvaziamento</b>, o sistema <b>parassimpático</b> (nervo pélvico, via receptores muscarínicos M2/M3 no detrusor) promove a <b>contração</b> vigorosa e coordenada do detrusor, enquanto simpático e pudendo são inibidos, relaxando a saída. Entender essa troca de comando explica, de forma direta, por que os <b>antimuscarínicos</b> (bloqueiam receptor M3) e os <b>agonistas beta-3</b> (relaxam o detrusor) funcionam no tratamento farmacológico da bexiga hiperativa — eles atuam exatamente nesses receptores da fase de enchimento.</p>
+   <p class="ac-p">Existe ainda um reflexo protetor muito cobrado: o <b>reflexo de guarda (guarding reflex)</b>. À medida que a bexiga enche, receptores de estiramento na parede vesical disparam sinais aferentes que sobem pela medula sacral (S2-S4) até o centro pontino; enquanto o córtex mantiver o comando de "não é hora", esse mesmo arco reflexo <b>aumenta</b> a atividade do nervo pudendo, reforçando a contração do esfíncter estriado — ou seja, quanto mais a bexiga enche (dentro do limite fisiológico), mais forte fica o fechamento voluntário/reflexo da uretra, até o limiar em que a pessoa sente urgência para urinar. Lesões medulares acima do centro sacral (trauma raquimedular, esclerose múltipla) rompem essa comunicação e geram bexiga neurogênica, com perda de coordenação entre detrusor e esfíncter (dissinergia detrusor-esfincteriana) — tema correlato que pode aparecer como diferencial em provas mais avançadas.</p>
+   <table class="ac-tbl"><tr><th>Fase</th><th>Sistema dominante</th><th>Efeito no detrusor</th><th>Efeito na saída (colo/esfíncter)</th></tr>
+    <tr><td>Enchimento</td><td>Simpático (hipogástrico) + pudendo</td><td>Relaxado</td><td>Fechado/contraído</td></tr>
+    <tr><td>Esvaziamento</td><td>Parassimpático (pélvico)</td><td>Contraído</td><td>Relaxado</td></tr>
+   </table>
+   <div class="ac-tip"><b>Macete:</b> "enche relaxando a bexiga e fechando a saída; esvazia contraindo a bexiga e abrindo a saída" — é sempre um movimento coordenado e recíproco, nunca os dois lados fazendo a mesma coisa ao mesmo tempo (se fizerem, é disfunção/dissinergia).</div>`],
+  ['teoriaintegral','A Teoria Integral e o Efeito "Hammock"', `
+   <div class="ac-h">Por que uma tosse normalmente não causa perda de urina</div>
+   <p class="ac-p">A <b>teoria integral da continência</b>, proposta por Petros e Ulmsten, e a <b>teoria do hammock ("rede suspensa")</b>, de DeLancey, são hoje o modelo mais aceito para explicar a continência ao esforço — e ambas apontam para a mesma ideia central: a uretra <b>não se fecha sozinha</b> durante um esforço; ela é <b>comprimida contra uma camada de suporte firme</b> localizada abaixo dela. Essa camada é formada pela parede vaginal anterior, pela fáscia endopélvica (fáscia pubocervical) e pelo músculo pubococcígeo — juntos, formam literalmente uma "rede" (hammock) sobre a qual a uretra repousa, presa nas laterais pelo arco tendíneo da fáscia pélvica.</p>
+   <p class="ac-p">Quando a pressão abdominal aumenta subitamente (tosse, espirro, salto), essa mesma pressão é transmitida para dentro da pelve e empurra a uretra <b>de cima para baixo</b>, contra essa rede de suporte. Se a rede estiver firme e bem ancorada, a uretra é <b>comprimida entre a pressão que vem de cima e a resistência que vem de baixo</b> — o resultado é o <b>fechamento</b> da luz uretral, exatamente no momento em que a bexiga também está sob pressão aumentada. Ou seja: em condições normais, o mesmo esforço que aumenta a pressão vesical também aumenta a força de fechamento da uretra — as duas pressões sobem juntas e a continência se mantém.</p>
+   <p class="ac-p">O problema aparece quando essa rede de suporte fica frouxa ou rompida — tipicamente após lesão do parto vaginal, com o envelhecimento e a perda de colágeno, ou pela queda de estrogênio na menopausa. Sem uma base firme para se apoiar, a uretra, ao receber o aumento de pressão abdominal, simplesmente <b>desce e gira (hipermobilidade uretral)</b> em vez de ser comprimida e fechada. A pressão vesical sobe, mas a pressão de fechamento uretral não acompanha — e a urina escapa. Esse é, em uma frase, o mecanismo mais comum de <b>incontinência urinária de esforço</b>, que você vai estudar em detalhe no próximo módulo.</p>
+   ${SVG_HAMMOCK}
+   <div class="ac-call"><b>A grande ideia:</b> a continência ao esforço depende de a uretra ter uma base firme para "bater" contra ela quando a pressão abdominal sobe. Suporte firme = fecha = continência. Suporte frouxo = hipermobilidade = perda de urina ao esforço.</div>`],
+  ['dinamica','Dinâmica da Continência ao Esforço', `
+   <div class="ac-h">A "corrida" entre pressão vesical e pressão uretral em milissegundos</div>
+   <p class="ac-p">Vale a pena visualizar o que acontece em uma fração de segundo durante uma tosse. Primeiro, o cérebro antecipa o esforço e dispara, pelo nervo pudendo, uma <b>contração pré-programada do esfíncter estriado e do assoalho pélvico</b> — a chamada contração pré-esforço, que ocorre uma fração de segundo <b>antes</b> do pico de pressão abdominal. Em seguida, a contração da musculatura abdominal e do diafragma aumenta subitamente a pressão intra-abdominal, que é transmitida à bexiga (aumentando a pressão vesical) e, se o suporte estiver íntegro, também à uretra (aumentando a pressão de fechamento uretral, pelo efeito hammock somado à contração muscular voluntária/reflexa).</p>
+   <p class="ac-p">Em uma mulher continente, a pressão uretral sobe tanto ou mais do que a pressão vesical durante todo o esforço — o chamado <b>perfil de pressão de transmissão positivo</b>. Esse é justamente o parâmetro medido no estudo urodinâmico quando se investiga IUE: mede-se quanto da pressão abdominal aplicada é "transmitida" para dentro da uretra. Quando esse percentual de transmissão cai (suporte comprometido) ou quando a pressão uretral basal já é baixa antes mesmo do esforço (deficiência esfincteriana), a urina escapa durante o pico de pressão abdominal — o padrão típico da IUE, com perda imediata, sincronizada ao esforço, e que cessa assim que o esforço termina (diferente da urgência, que você verá ter um padrão temporal diferente no módulo de bexiga hiperativa).</p>
+   <div class="ac-tip"><b>Macete de prova:</b> IUE = perda "no meio" do esforço (tosse, espirro, subir escada), sem aviso prévio de vontade de urinar, cessando junto com o esforço. Se a paciente descreve uma "vontade forte e súbita" antes de perder, mesmo que o gatilho pareça esforço, pense em urgência/bexiga hiperativa, não em IUE pura.</div>`],
+  ['fatores','Fatores que Comprometem a Continência', `
+   <div class="ac-h">O que "desmonta" o suporte, o esfíncter ou o controle neural</div>
+   <p class="ac-p">Como a continência depende de três pilares (suporte, esfíncter, controle neural), os fatores de risco fazem sentido quando você pergunta qual pilar cada um ataca. O <b>parto vaginal</b> é o fator mais estudado: o trabalho de parto pode lesar diretamente a fáscia endopélvica e o levantador do ânus (lesão mecânica do suporte) e também estirar/lesar o nervo pudendo (lesão neurológica do esfíncter estriado) — partos múltiplos, fetos macrossômicos, período expulsivo prolongado e uso de fórceps aumentam esse risco. Já a <b>menopausa/hipoestrogenismo</b> reduz o plexo vascular submucoso da uretra e a qualidade do colágeno de todo o assoalho pélvico, enfraquecendo tanto o esfíncter quanto o suporte.</p>
+   <p class="ac-p">Fatores que <b>aumentam a pressão abdominal de forma crônica</b> sobrecarregam o suporte com o tempo — é o caso da <b>obesidade</b>, da <b>tosse crônica</b> (DPOC, tabagismo) e da <b>constipação crônica com esforço evacuatório repetido</b>. Cirurgias pélvicas prévias (histerectomia, cirurgias antiincontinência ou de prolapso mal-sucedidas) podem lesar diretamente nervos ou fáscias de suporte. Doenças do tecido conjuntivo (como síndrome de Ehlers-Danlos) predispõem por fragilidade intrínseca do colágeno que forma a fáscia. Por fim, atividades de alto impacto repetitivo (corrida, saltos, levantamento de peso) e a própria idade avançada (perda de massa muscular e de colágeno) somam-se ao risco.</p>
+   <table class="ac-tbl"><tr><th>Fator de risco</th><th>Pilar principal afetado</th></tr>
+    <tr><td>Parto vaginal (múltiplos, macrossomia, fórceps)</td><td>Suporte (fáscia/músculo) + esfíncter (nervo pudendo)</td></tr>
+    <tr><td>Menopausa / hipoestrogenismo</td><td>Esfíncter (plexo vascular) + suporte (colágeno)</td></tr>
+    <tr><td>Obesidade, tosse crônica, constipação</td><td>Suporte (sobrecarga crônica de pressão abdominal)</td></tr>
+    <tr><td>Cirurgia pélvica prévia</td><td>Suporte e/ou esfíncter (lesão direta)</td></tr>
+    <tr><td>Idade avançada</td><td>Todos os três pilares</td></tr>
+   </table>
+   <div class="ac-warn"><b>Erro comum:</b> achar que "fator de risco de IUE" e "fator de risco de bexiga hiperativa" são sempre os mesmos. Parto vaginal e hipoestrogenismo pesam mais para IUE (mecanismo de suporte/esfíncter); idade avançada, obstrução infravesical e doenças neurológicas pesam mais para bexiga hiperativa (mecanismo de controle neural/detrusor) — os dois grupos se sobrepõem, mas o raciocínio fisiopatológico é diferente.</div>`],
+  ['exameclinico','Avaliação Clínica da Função do Assoalho Pélvico', `
+   <div class="ac-h">Como "medir" o assoalho pélvico no consultório</div>
+   <p class="ac-p">Antes de investigar qualquer tipo específico de incontinência, o exame físico ginecológico deve avaliar a integridade do assoalho pélvico. Isso inclui inspeção da vulva e da parede vaginal em busca de sinais de hipoestrogenismo (mucosa pálida, fina, com perda de rugosidade) e de <b>prolapso de órgãos pélvicos</b> associado (a mesma lesão de suporte que causa IUE também pode causar cistocele, retocele ou prolapso uterino/de cúpula — eles caminham juntos). Pede-se então à paciente que faça uma <b>contração voluntária</b> do assoalho pélvico ("aperte como se estivesse segurando o xixi ou o gás"), avaliando força, duração e simetria da contração ao toque bidigital.</p>
+   <p class="ac-p">Essa força é classicamente graduada pela <b>escala de Oxford modificada</b> (0 a 5, de nenhuma contração palpável até contração forte com elevação evidente contra o dedo do examinador) — ferramenta simples e muito usada tanto na consulta inicial quanto para acompanhar a evolução da fisioterapia pélvica, que é a base do tratamento conservador de quase todos os tipos de incontinência. Também se avalia a <b>manobra de Valsalva</b> (pedir para a paciente fazer força como se estivesse evacuando, observando descida de paredes vaginais ou perda de urina) e, quando há queixa específica de perda ao esforço, o <b>teste de esforço direto (stress test)</b>, que você vai estudar em detalhe no módulo de IUE.</p>
+   <div class="ac-tip"><b>Por que isso importa:</b> a avaliação da força e da integridade do assoalho pélvico não é só "checklist de exame físico" — ela decide a conduta inicial. Uma paciente com boa força muscular e suporte íntegro provavelmente responde bem à fisioterapia isolada; uma paciente com suporte muito comprometido ou prolapso associado pode precisar de avaliação cirúrgica mais precoce.</div>`],
+ ],
+};
+
+Object.assign(C['incontinencia|0'], {
+ escores: `<div class="ac-h">Escala de Oxford modificada (força do assoalho pélvico)</div>
+   <table class="ac-tbl"><tr><th>Grau</th><th>Achado à palpação</th></tr>
+    <tr><td>0</td><td>Nenhuma contração palpável</td></tr>
+    <tr><td>1</td><td>Contração leve, "flicker" (tremor)</td></tr>
+    <tr><td>2</td><td>Contração fraca</td></tr>
+    <tr><td>3</td><td>Contração moderada, com leve elevação</td></tr>
+    <tr><td>4</td><td>Contração boa, com elevação nítida contra resistência</td></tr>
+    <tr><td>5</td><td>Contração forte, elevação vigorosa e sustentada</td></tr>
+   </table>
+   <div class="ac-h" style="margin-top:14px">Esquema PERFECT (avaliação funcional do assoalho pélvico)</div>
+   <div class="ac-pills">
+    <span class="ac-pill">P — Power (força, Oxford)</span><span class="ac-pill">E — Endurance (sustentação, seg.)</span>
+    <span class="ac-pill">R — Repetitions (repetições)</span><span class="ac-pill">F — Fast (contrações rápidas)</span>
+    <span class="ac-pill">E — Every contraction timed</span>
+   </div>
+   <div class="ac-call"><b>Uso prático:</b> a escala de Oxford e o esquema PERFECT orientam a prescrição e o acompanhamento da fisioterapia pélvica — o tratamento conservador de primeira linha comum a IUE e a componentes de bexiga hiperativa.</div>`,
+ dif: `<div class="ac-h">Qual pilar falhou? (raciocínio que separa os tipos de incontinência)</div>
+   <table class="ac-tbl"><tr><th>Mecanismo comprometido</th><th>Tipo de incontinência gerada</th><th>Padrão clínico</th></tr>
+    <tr><td>Suporte anatômico (hipermobilidade uretral)</td><td>IUE (mecanismo mais comum)</td><td>Perda súbita, sincronizada ao esforço, sem urgência prévia</td></tr>
+    <tr><td>Esfíncter uretral (deficiência intrínseca)</td><td>IUE (mecanismo mais grave/refratário)</td><td>Perda com esforços mínimos ou mesmo em repouso/mudança postural</td></tr>
+    <tr><td>Controle neurológico (hiperatividade detrusora)</td><td>Bexiga hiperativa / incontinência de urgência</td><td>Urgência súbita seguida de perda, frequência e noctúria</td></tr>
+    <tr><td>Suporte + neural combinados</td><td>Incontinência mista</td><td>Sintomas de esforço e de urgência coexistindo</td></tr>
+   </table>`,
+ mapa: `<div class="ac-h">Fisiologia da continência em mapa</div>
+   <div class="mm">
+    <div class="mm-card"><h5>Suporte anatômico</h5><ul><li>Levantador do ânus (feixe puborretal)</li><li>Fáscia endopélvica (níveis de DeLancey)</li><li>Efeito hammock: uretra comprimida contra base firme</li></ul></div>
+    <div class="mm-card"><h5>Esfíncter uretral</h5><ul><li>Mucosa/plexo vascular (estrogênio-dependente)</li><li>Músculo liso (tônus involuntário)</li><li>Músculo estriado (nervo pudendo, contração pré-esforço)</li></ul></div>
+    <div class="mm-card"><h5>Controle neural</h5><ul><li>Centro pontino comanda a troca de fase</li><li>Enchimento: simpático + pudendo (relaxa bexiga, fecha saída)</li><li>Esvaziamento: parassimpático (contrai bexiga, abre saída)</li></ul></div>
+    <div class="mm-card"><h5>Fatores de risco</h5><ul><li>Parto vaginal, hipoestrogenismo</li><li>Obesidade, tosse crônica, constipação</li><li>Cirurgia pélvica prévia, idade</li></ul></div>
+   </div>`,
+ fluxo_dx: `<div class="ac-h">Abordagem inicial de qualquer queixa de perda urinária</div>
+   <div class="fx">
+    <div class="fx-node start">Queixa de perda urinária</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Anamnese dirigida: quando perde? (esforço x urgência x ambos), quanto, desde quando, impacto</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Diário miccional (3 dias) + exame físico (força/Oxford, prolapso, atrofia)</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Excluir causas orgânicas/transitórias primeiro</div>
+    <div class="fx-row">
+     <div class="fx-node">EAS/urocultura (ITU), glicemia (poliúria), avaliar fármacos/constipação</div>
+     <div class="fx-node">Sem achado orgânico → seguir para caracterização do padrão</div>
+    </div>
+    <div class="fx-arrow"></div>
+    <div class="fx-row">
+     <div class="fx-node end">Padrão de esforço puro → investigar IUE (módulo seguinte)</div>
+     <div class="fx-node end">Padrão de urgência → investigar bexiga hiperativa (módulo seguinte)</div>
+    </div>
+   </div>`,
+ fluxo_cond: `<div class="ac-h">Base conservadora comum a quase todos os tipos</div>
+   <div class="fx">
+    <div class="fx-node start">Qualquer tipo de incontinência confirmada</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Medidas comportamentais: perda de peso, controle de líquidos/cafeína, tratar constipação e tosse crônica</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Fisioterapia do assoalho pélvico (treinamento muscular, biofeedback) — 1ª linha em praticamente todos os cenários</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node end">Falha ou caso específico → tratamento direcionado por tipo (ver módulos de IUE e bexiga hiperativa)</div>
+   </div>`,
+ vespera: `<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Ponto 1:</b> continência = pressão uretral &gt; pressão vesical, sustentada por suporte anatômico + esfíncter uretral + controle neurológico.</div>
+   <div class="ac-call"><b>Ponto 2:</b> teoria do hammock — a uretra é comprimida contra a parede vaginal anterior + fáscia + pubococcígeo quando a pressão abdominal sobe; se essa base fica frouxa, a uretra desce e gira em vez de fechar.</div>
+   <div class="ac-call"><b>Ponto 3:</b> o esfíncter uretral é a soma de mucosa/plexo vascular (estrogênio-dependente) + músculo liso + músculo estriado (nervo pudendo).</div>
+   <div class="ac-call"><b>Ponto 4:</b> enchimento = simpático + pudendo relaxando a bexiga e fechando a saída; esvaziamento = parassimpático contraindo a bexiga e abrindo a saída.</div>
+   <div class="ac-call"><b>Ponto 5:</b> parto vaginal e hipoestrogenismo pesam mais para lesão de suporte/esfíncter (IUE); fatores neurológicos e idade pesam mais para hiperatividade detrusora (bexiga hiperativa).</div>`,
+ dicas: `<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Sempre que uma questão descrever o mecanismo de uma incontinência, identifique primeiro QUAL pilar falhou (suporte, esfíncter ou neural) — isso já aponta o tipo mais provável antes mesmo de ler as alternativas.</div>
+   <div class="ac-tip">"Hammock" e "teoria integral" são nomes técnicos para a mesma ideia central: suporte firme comprime e fecha a uretra durante o esforço. Se a prova citar qualquer um dos dois nomes, pense na mesma figura.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Achar que o esfíncter uretral é um único anel muscular — ele é a soma de quatro camadas, e isso explica por que hipoestrogenismo isolado (sem nenhuma lesão mecânica) já pode causar ou piorar incontinência.</div>
+   <div class="ac-warn">Confundir a fase de enchimento com a de esvaziamento nos receptores/nervos — decore a tabela simpático/pudendo (enche) x parassimpático (esvazia), pois questões trocam esses papéis de propósito.</div>`,
+ checklist: [
+  'Sei explicar a equação de continência (pressão uretral x pressão vesical)',
+  'Conheço os três pilares da continência (suporte, esfíncter, controle neural)',
+  'Sei descrever a anatomia do levantador do ânus e da fáscia endopélvica',
+  'Entendo os quatro componentes do fechamento uretral',
+  'Sei explicar a teoria integral / efeito hammock com minhas próprias palavras',
+  'Conheço os nervos e receptores das fases de enchimento e esvaziamento',
+  'Sei relacionar fatores de risco ao pilar que eles comprometem',
+  'Sei usar a escala de Oxford modificada no exame físico'
+ ],
+});
+
+Object.assign(C['incontinencia|0'], {
+ questoes: [
+  {stem:'Para que a continência urinária seja mantida durante um esforço físico (tosse), é necessário que:', opts:['A pressão vesical seja sempre maior que a uretral','A pressão uretral seja maior ou igual à pressão vesical durante todo o esforço','O detrusor se contraia simultaneamente ao esforço','O nervo pudendo seja inibido durante o esforço'], correct:1,
+   expl:'A continência depende de a <b>pressão uretral permanecer maior que a vesical</b> durante todo o esforço — inclusive no pico de pressão abdominal, graças à transmissão de pressão pelo suporte anatômico (efeito hammock) e à contração reflexa do esfíncter estriado.'},
+  {stem:'O principal componente muscular responsável pelo suporte anatômico da uretra e do colo vesical é:', opts:['Músculo obturador interno','Músculo levantador do ânus (feixe puborretal)','Músculo piriforme','Músculo psoas maior'], correct:1,
+   expl:'O <b>levantador do ânus</b>, sobretudo seu feixe <b>puborretal</b>, forma a base muscular de suporte que sustenta bexiga, uretra, vagina e reto, funcionando como o "andaime" sobre o qual a uretra se apoia.'},
+  {stem:'De acordo com a teoria do "hammock" (DeLancey), a compressão da uretra durante o esforço ocorre porque ela é comprimida contra:', opts:['O músculo obturador interno diretamente','A parede vaginal anterior e a fáscia endopélvica/pubococcígeo','O ligamento redondo','A bexiga em contração'], correct:1,
+   expl:'A uretra "repousa" sobre uma camada de suporte formada pela <b>parede vaginal anterior, fáscia endopélvica (pubocervical) e músculo pubococcígeo</b>. Quando a pressão abdominal aumenta, a uretra é comprimida contra essa base, fechando sua luz.'},
+  {stem:'O componente do fechamento uretral mais diretamente dependente do estrogênio é:', opts:['O músculo estriado periuretral','O plexo vascular submucoso','O ligamento pubouretral','O nervo pudendo'], correct:1,
+   expl:'O <b>plexo vascular submucoso</b> da uretra é estrogênio-dependente e contribui como um "colchão" para a coaptação da luz uretral; sua atrofia na menopausa reduz a pressão de fechamento uretral.'},
+  {stem:'Durante a fase de enchimento vesical, o sistema nervoso autônomo predominante e seu efeito são:', opts:['Parassimpático, contraindo o detrusor','Simpático, relaxando o detrusor e fechando o colo vesical','Parassimpático, relaxando o esfíncter estriado','Simpático, contraindo o detrusor'], correct:1,
+   expl:'Na fase de <b>enchimento</b>, predomina o <b>simpático</b> (nervo hipogástrico): relaxa o corpo do detrusor (receptores beta) e contrai o colo vesical/uretra proximal (receptores alfa), enquanto o nervo pudendo mantém o esfíncter estriado contraído.'},
+  {stem:'O centro encefálico responsável por coordenar a troca entre a fase de enchimento e a fase de esvaziamento vesical é:', opts:['Centro pontino da micção','Córtex motor primário','Cerebelo','Hipotálamo lateral'], correct:0,
+   expl:'O <b>centro pontino da micção</b>, no tronco encefálico, funciona como o "interruptor" que, liberado da inibição cortical, dispara a fase de esvaziamento coordenando a contração do detrusor com o relaxamento do esfíncter.'},
+  {stem:'Uma paciente relata perda de urina "no meio" de um acesso de tosse, sem nenhuma sensação prévia de vontade de urinar, cessando assim que a tosse termina. Esse padrão temporal é mais característico de falha em qual mecanismo?', opts:['Controle neurológico (hiperatividade detrusora)','Suporte anatômico/esfíncter uretral (mecanismo de esforço)','Plexo vascular submucoso isoladamente','Reflexo de guarda medular'], correct:1,
+   expl:'Perda sincronizada ao esforço, sem urgência prévia e que cessa com o fim do esforço é o padrão clássico da <b>incontinência urinária de esforço</b>, decorrente de falha do suporte anatômico e/ou do esfíncter uretral — não do controle neural do detrusor.'},
+  {stem:'O parto vaginal é fator de risco para incontinência urinária principalmente porque pode causar:', opts:['Hipertrofia do detrusor','Lesão da fáscia endopélvica/levantador do ânus e/ou estiramento do nervo pudendo','Aumento do plexo vascular submucoso','Hiperestimulação do centro pontino'], correct:1,
+   expl:'O trabalho de parto vaginal pode lesar mecanicamente a <b>fáscia endopélvica e o levantador do ânus</b> (comprometendo o suporte) e estirar o <b>nervo pudendo</b> (comprometendo a inervação do esfíncter estriado) — os dois pilares mais relacionados à IUE.'},
+  {stem:'Na escala de Oxford modificada para avaliação da força do assoalho pélvico, uma contração forte, com elevação vigorosa e sustentada contra o dedo do examinador, corresponde ao grau:', opts:['Grau 2','Grau 3','Grau 5','Grau 0'], correct:2,
+   expl:'A escala vai de 0 (nenhuma contração) a <b>5</b> (contração forte, com elevação vigorosa e sustentada), sendo usada tanto na avaliação inicial quanto no acompanhamento da fisioterapia pélvica.'},
+  {stem:'Segundo a divisão de DeLancey em níveis de suporte vaginal, o nível mais relacionado ao suporte da uretra e da bexiga é:', opts:['Nível I (suporte apical)','Nível II (suporte médio, fáscia pubocervical)','Nível III (fusão distal ao corpo perineal)','Nenhum nível se relaciona à uretra'], correct:1,
+   expl:'O <b>nível II</b> de DeLancey, sustentado principalmente pela fáscia pubocervical, é a camada sobre a qual a uretra e a base da bexiga se apoiam — um defeito nesse nível favorece hipermobilidade uretral.'},
+  {stem:'Sobre a "contração pré-esforço" do assoalho pélvico, é correto afirmar que:', opts:['Ocorre alguns segundos depois do pico de pressão abdominal','É uma contração reflexa e antecipatória do esfíncter estriado, um instante antes do pico de pressão abdominal','Depende exclusivamente do sistema parassimpático','Só ocorre em mulheres treinadas em fisioterapia pélvica'], correct:1,
+   expl:'A contração pré-esforço é um reflexo <b>antecipatório</b>, mediado pelo nervo pudendo, que reforça o fechamento uretral uma fração de segundo <b>antes</b> do aumento de pressão abdominal (por exemplo, antes de uma tosse), contribuindo para a continência.'},
+  {stem:'Um fator de risco que compromete a continência principalmente por sobrecarga crônica e repetida do suporte anatômico, sem lesão neural direta, é:', opts:['Esclerose múltipla','Tosse crônica por DPOC/tabagismo','Lesão medular traumática','Doença de Parkinson'], correct:1,
+   expl:'A <b>tosse crônica</b> gera aumentos repetidos e sustentados de pressão abdominal, sobrecarregando mecanicamente a fáscia e o músculo de suporte ao longo do tempo, favorecendo hipermobilidade uretral — mecanismo distinto das causas neurológicas listadas nas demais alternativas.'},
+ ],
+ flashcards: [
+  {front:'Qual a condição de pressões necessária para a continência urinária?', back:'Pressão uretral maior que a pressão vesical, mantida durante todo o enchimento e também durante esforços.', type:'basic'},
+  {front:'Quais são os três pilares da continência urinária?', back:'Suporte anatômico, esfíncter uretral (mucosa/músculo liso/músculo estriado) e controle neurológico.', type:'basic'},
+  {front:'A continência ao esforço depende do {{efeito hammock}}, em que a uretra é comprimida contra a parede vaginal anterior e a fáscia endopélvica.', back:'efeito hammock', type:'cloze'},
+  {front:'Qual feixe do levantador do ânus é mais relevante para a continência urinária?', back:'O feixe puborretal.', type:'basic'},
+  {front:'Cite os quatro componentes que somam a pressão de fechamento uretral.', back:'Mucosa/plexo vascular submucoso (estrogênio-dependente), músculo liso, músculo estriado (esfíncter externo) e a própria elasticidade/colágeno da parede.', type:'basic'},
+  {front:'O plexo vascular submucoso da uretra, responsável por parte do fechamento uretral, é dependente de {{estrogênio}}.', back:'estrogênio', type:'cloze'},
+  {front:'Durante a fase de enchimento vesical, qual sistema autônomo predomina e qual seu efeito no detrusor?', back:'Simpático (nervo hipogástrico); relaxa o detrusor e contrai o colo vesical/uretra proximal.', type:'basic'},
+  {front:'Durante a fase de esvaziamento, qual sistema predomina e qual seu efeito?', back:'Parassimpático (nervo pélvico); contrai o detrusor via receptores muscarínicos M2/M3, enquanto simpático e pudendo são inibidos.', type:'basic'},
+  {front:'O centro encefálico que coordena a troca entre enchimento e esvaziamento vesical é o {{centro pontino da micção}}.', back:'centro pontino da micção', type:'cloze'},
+  {front:'O que é o "reflexo de guarda" (guarding reflex)?', back:'Reflexo em que o estiramento vesical crescente reforça, via nervo pudendo, a contração do esfíncter estriado, enquanto o córtex mantém a inibição da micção.', type:'basic'},
+  {front:'Segundo DeLancey, qual nível de suporte vaginal está mais relacionado à uretra e à bexiga?', back:'Nível II, sustentado pela fáscia pubocervical.', type:'basic'},
+  {front:'A contração {{pré-esforço}} do assoalho pélvico ocorre um instante antes do pico de pressão abdominal, reforçando o fechamento uretral.', back:'pré-esforço', type:'cloze'},
+  {front:'Cite dois fatores de risco que lesam predominantemente o suporte anatômico/esfíncter (mais associados a IUE).', back:'Parto vaginal (lesão de fáscia/levantador do ânus e do nervo pudendo) e hipoestrogenismo (atrofia do plexo vascular e do colágeno).', type:'basic'},
+  {front:'Na escala de Oxford modificada, qual grau corresponde a "nenhuma contração palpável"?', back:'Grau 0.', type:'basic'},
+ ],
+ casos: [
+  {t:'Caso 1 — A "cama elástica" que ficou frouxa', stem:'Mulher de 52 anos, 3 partos vaginais, refere perda de pequenas quantidades de urina ao tossir e ao levantar sacolas de compras, sem nenhuma sensação de urgência prévia. Exame: força de assoalho pélvico grau 2 na escala de Oxford; parede vaginal anterior com discreto abaulamento ao Valsalva.', passos:[
+    {h:'1. Reconhecer o padrão', p:'Perda sincronizada ao esforço, sem urgência prévia, é o padrão clássico de falha do mecanismo de esforço — não de hiperatividade detrusora.'},
+    {h:'2. Identificar o pilar comprometido', p:'História de múltiplos partos vaginais + força de Oxford reduzida + abaulamento de parede vaginal anterior apontam para lesão do suporte anatômico (fáscia endopélvica/levantador do ânus), com hipermobilidade uretral provável.'},
+    {h:'3. Relacionar à fisiopatologia', p:'Pelo efeito hammock, uma base de suporte frouxa não permite que a uretra seja comprimida e fechada quando a pressão abdominal sobe — ela desce e gira em vez de fechar.'},
+    {h:'4. Conduta inicial', p:'Fisioterapia do assoalho pélvico é a primeira linha, já que existe força residual (grau 2) a ser trabalhada; medidas comportamentais (peso, cafeína) complementam.'},
+    {h:'Lição de prova', p:'Perda ao esforço + fator de risco de suporte (multiparidade vaginal) + achado de exame compatível = pensar primeiro em comprometimento do suporte anatômico, mecanismo mais comum de IUE.'}
+  ]},
+  {t:'Caso 2 — Quando o "aviso" muda tudo', stem:'Mulher de 61 anos relata que, várias vezes ao dia, sente uma vontade muito forte e súbita de urinar e, se não chegar rápido ao banheiro, perde urina antes de conseguir. Nega perda ao tossir ou espirrar isoladamente. Refere também acordar 3 vezes à noite para urinar.', passos:[
+    {h:'1. Reconhecer o padrão temporal', p:'A perda é precedida por urgência intensa e súbita, não por um esforço físico isolado — padrão diferente do observado no Caso 1.'},
+    {h:'2. Levantar a hipótese de mecanismo', p:'Urgência + frequência + noctúria sugerem falha do controle neurológico da fase de enchimento, com contrações involuntárias do detrusor não inibidas pelo centro pontino/córtex.'},
+    {h:'3. Diferenciar do caso anterior', p:'Não há relato de perda sincronizada a esforço puro; o gatilho é a sensação de urgência, não a tosse/espirro — isso desloca o raciocínio do eixo "suporte/esfíncter" para o eixo "neural/detrusor".'},
+    {h:'4. Próximo passo', p:'Esse quadro será aprofundado no módulo de bexiga hiperativa, incluindo diário miccional e avaliação de causas orgânicas antes de fechar o diagnóstico.'},
+    {h:'Lição de prova', p:'Urgência + frequência + noctúria = pensar em hiperatividade detrusora; perda "no meio" do esforço sem urgência = pensar em suporte/esfíncter. Separar os dois padrões é a habilidade central deste bloco.'}
+  ]},
+  {t:'Caso 3 — Uma queixa, dois mecanismos possíveis', stem:'Mulher de 68 anos, diabética, relata perda de urina tanto ao tossir quanto precedida de urgência súbita, com frequência aumentada durante o dia. Você precisa explicar à equipe por que essa paciente pode ter os dois mecanismos coexistindo.', passos:[
+    {h:'1. Reconhecer a coexistência', p:'A presença de sintomas de esforço E de urgência no mesmo indivíduo sugere que mais de um pilar da continência pode estar comprometido simultaneamente.'},
+    {h:'2. Explicar o racional fisiopatológico', p:'A idade avançada e o diabetes podem comprometer tanto o suporte/esfíncter (colágeno, atrofia) quanto o controle neural (neuropatia autonômica diabética afetando a inervação vesical).'},
+    {h:'3. Nomear a condição', p:'Quando os dois mecanismos coexistem clinicamente, chama-se incontinência urinária mista — tema que será retomado com mais profundidade na sequência dos módulos de IUE e bexiga hiperativa.'},
+    {h:'4. Implicação prática', p:'A investigação precisa caracterizar qual componente predomina (diário miccional, exame físico, eventualmente urodinâmica), pois o tratamento inicial costuma mirar o componente mais incômodo para a paciente primeiro.'},
+    {h:'Lição de prova', p:'Nem toda incontinência é "pura" — questões de prova podem descrever sintomas mistos exatamente para testar se o candidato reconhece a sobreposição dos mecanismos, em vez de forçar uma única categoria.'}
+  ]},
+ ],
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>
+/* ELID Ginecologia — Conteúdo Incontinência Urinária (2/3): Incontinência Urinária de Esforço — IUE (incontinencia|1).
+   Aditivo. Explicações aprofundadas para provas de residência (ENARE, ENAMED, Revalida, PSU-MG, SES-RJ, UERJ, UFRJ). */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+var SVG_MECANISMOS = `<svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+ <linearGradient id="iueBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#fef2f2"/></linearGradient>
+ <linearGradient id="iueUrOk" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#93c5fd"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+ <linearGradient id="iueUrHiper" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fdba74"/><stop offset="1" stop-color="#c2410c"/></linearGradient>
+ <linearGradient id="iueUrIsd" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fca5a5"/><stop offset="1" stop-color="#991b1b"/></linearGradient>
+ <linearGradient id="iueSuporte" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#0f766e"/></linearGradient>
+ <filter id="iueShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#7c2d12" flood-opacity="0.2"/></filter>
+</defs>
+<rect x="4" y="4" width="672" height="412" rx="18" fill="url(#iueBg)"/>
+<text x="340" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">Dois mecanismos de IUE</text>
+<text x="164" y="58" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1d4ed8">Hipermobilidade uretral</text>
+<g filter="url(#iueShadow)">
+ <path d="M110 120 C110 100 140 90 164 92 C190 94 214 106 210 128 C206 150 176 160 148 156 C124 152 110 140 110 120 Z" fill="url(#iueUrOk)"/>
+</g>
+<text x="160" y="126" text-anchor="middle" font-size="10.5" fill="#eff6ff" font-weight="700">Uretra (repouso normal)</text>
+<path d="M60 176 C96 166 132 164 164 170 C198 176 230 188 250 208 C226 232 184 240 148 236 C110 232 70 216 58 196 C54 188 56 180 60 176 Z" fill="url(#iueSuporte)" filter="url(#iueShadow)"/>
+<text x="154" y="204" text-anchor="middle" font-size="10" fill="#f0fdfa" font-weight="700">Suporte frouxo (parto, hipoestrogenismo)</text>
+<path d="M160 156 C210 176 236 208 224 236 C216 254 190 260 168 250" fill="none" stroke="#c2410c" stroke-width="3" stroke-dasharray="1 6" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
+<g filter="url(#iueShadow)">
+ <path d="M186 236 C222 244 252 262 260 284 C266 302 254 316 234 312 C210 306 186 288 178 268 C174 254 178 242 186 236 Z" fill="url(#iueUrHiper)"/>
+</g>
+<text x="220" y="278" text-anchor="middle" font-size="10" fill="#7c2d12" font-weight="700">Desce e roda ao esforço</text>
+<text x="160" y="340" text-anchor="middle" font-size="10.5" fill="#1e3a8a">Pressão de fechamento uretral BASAL normal.</text>
+<text x="160" y="356" text-anchor="middle" font-size="10.5" fill="#1e3a8a">Falha só quando o suporte não segura a rotação/descida.</text>
+<line x1="340" y1="50" x2="340" y2="380" stroke="#fdba74" stroke-width="2" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/>
+<text x="512" y="58" text-anchor="middle" font-size="12.5" font-weight="700" fill="#991b1b">Deficiência esfincteriana intrínseca (ISD)</text>
+<g filter="url(#iueShadow)">
+ <path d="M462 130 C462 112 490 102 512 106 C536 110 552 126 544 146 C536 164 508 172 486 164 C468 158 462 146 462 130 Z" fill="url(#iueUrIsd)"/>
+</g>
+<text x="502" y="136" text-anchor="middle" font-size="10.5" fill="#fef2f2" font-weight="700">Uretra "aberta"</text>
+<text x="502" y="149" text-anchor="middle" font-size="9.5" fill="#fef2f2" font-weight="700">(fechamento intrínseco fraco)</text>
+<path d="M420 190 C452 182 486 182 512 188 C542 194 570 206 588 224 C568 246 528 254 494 250 C458 246 424 232 412 212 C408 202 412 196 420 190 Z" fill="url(#iueSuporte)" filter="url(#iueShadow)"/>
+<text x="500" y="216" text-anchor="middle" font-size="10" fill="#f0fdfa" font-weight="700">Suporte pode estar até íntegro</text>
+<text x="502" y="300" text-anchor="middle" font-size="10.5" fill="#7f1d1d">Pressão de fechamento uretral BASAL já baixa.</text>
+<text x="502" y="316" text-anchor="middle" font-size="10.5" fill="#7f1d1d">Perda com mínimos esforços, mudança de posição</text>
+<text x="502" y="332" text-anchor="middle" font-size="10.5" fill="#7f1d1d">ou até em repouso (tipo III de Blaivas).</text>
+<text x="340" y="404" text-anchor="middle" font-size="11" fill="#78350f">Os dois mecanismos podem coexistir na mesma paciente e somam gravidade.</text>
+</svg>`;
+
+C['incontinencia|1'] = {
+ name: 'Incontinência Urinária de Esforço (IUE)',
+ intro: 'É o tipo de incontinência mais associado a parto vaginal e a mais cobrada em cirurgia ginecológica — entender hipermobilidade uretral versus deficiência esfincteriana intrínseca resolve a maioria das questões.',
+ sub: [
+  ['entendendo','Entendendo do Zero', `
+   <div class="ac-h">A definição que a prova cobra ao pé da letra</div>
+   <p class="ac-p">A <b>incontinência urinária de esforço (IUE)</b> é definida pela International Continence Society como a <b>queixa de perda involuntária de urina aos esforços físicos ou à exertação</b> — típico de atividades esportivas — <b>ou ao tossir e espirrar</b>. Repare que a definição fala em "esforço/exertação" de forma ampla: não é só tosse; inclui rir, subir escadas, correr, levantar peso, pular. O ponto comum a todos esses gatilhos é o mesmo que você já estudou no módulo de fisiologia: um <b>aumento súbito da pressão abdominal</b> que, em condições normais, seria acompanhado por um aumento equivalente da pressão de fechamento uretral — e na IUE, não é.</p>
+   <p class="ac-p">A IUE é o tipo mais prevalente de incontinência em mulheres mais jovens e de meia-idade, e o mais fortemente associado a <b>parto vaginal</b> — por isso aparece com frequência em provas de Ginecologia e Obstetrícia associada a cenários de multiparidade, grandes fetos, ou período expulsivo prolongado. É importante diferenciá-la, já na anamnese, da bexiga hiperativa (módulo seguinte): na IUE clássica não há sensação de urgência precedendo a perda — a urina sai "no ato" do esforço, geralmente em pequena quantidade, e cessa assim que o esforço termina.</p>
+   <p class="ac-p">Existem dois mecanismos fisiopatológicos que geram esse mesmo sintoma, e essa distinção é o coração do módulo: a <b>hipermobilidade uretral</b> (falha do suporte anatômico, o mecanismo mais comum, já introduzido no módulo anterior pela teoria do hammock) e a <b>deficiência esfincteriana intrínseca (DEI, ou ISD)</b>, em que o próprio esfíncter uretral é fraco, independentemente do suporte. Saber diferenciar esses dois mecanismos direciona a escolha cirúrgica quando o tratamento conservador falha — um ponto frequentemente cobrado em provas de residência com foco cirúrgico.</p>
+   <div class="ac-call"><b>A grande ideia:</b> IUE = perda sincronizada ao esforço, sem urgência prévia, por falha de suporte (hipermobilidade) e/ou falha intrínseca do esfíncter (DEI). O diagnóstico é essencialmente clínico, confirmado pelo teste de esforço.</div>
+   <table class="ac-tbl"><tr><th>Eixo</th><th>O que você vai dominar</th></tr>
+    <tr><td>Fisiopatologia</td><td>Hipermobilidade x deficiência esfincteriana intrínseca (DEI)</td></tr>
+    <tr><td>Clínica</td><td>Padrão de perda, gatilhos, gravidade (Stamey)</td></tr>
+    <tr><td>Exame/teste de esforço</td><td>Stress test, pad test, Q-tip test</td></tr>
+    <tr><td>Avaliação complementar</td><td>Diário miccional, indicações de urodinâmica</td></tr>
+    <tr><td>Tratamento</td><td>Fisioterapia, pessário, sling, Burch, agentes de preenchimento</td></tr>
+   </table>`],
+  ['fisiopato','Fisiopatologia', `
+   <div class="ac-h">Dois caminhos para o mesmo sintoma</div>
+   <p class="ac-p">O mecanismo mais frequente de IUE é a <b>hipermobilidade uretral</b>, que você já estudou em detalhe no módulo de fisiologia: o suporte formado pela fáscia endopélvica, pelo levantador do ânus e pela parede vaginal anterior fica frouxo ou lesado, e a uretra deixa de ter uma base firme para ser comprimida contra ela durante o esforço. Em vez de fechar, a uretra <b>desce e roda</b> (rotação e descida do colo vesical/uretra proximal) quando a pressão abdominal aumenta — a pressão vesical sobe, mas a pressão de fechamento uretral não acompanha, e a urina escapa. Nesse mecanismo, a <b>pressão de fechamento uretral em repouso costuma ser normal ou apenas discretamente reduzida</b>; o problema aparece especificamente durante o esforço.</p>
+   <p class="ac-p">O segundo mecanismo é a <b>deficiência esfincteriana intrínseca (DEI, do inglês intrinsic sphincter deficiency — ISD)</b>: aqui o próprio esfíncter uretral (mucosa/plexo vascular, músculo liso, músculo estriado) é intrinsecamente fraco, de forma que a <b>pressão de fechamento uretral já está baixa em repouso</b>, mesmo sem nenhum esforço. Isso ocorre tipicamente após lesão direta do esfíncter (cirurgias antiincontinência prévias malsucedidas, radioterapia pélvica, trauma), denervação (lesão do nervo pudendo) ou atrofia acentuada relacionada à idade/hipoestrogenismo grave. Na DEI pura, mesmo com o suporte anatômico relativamente preservado, a paciente perde urina com <b>esforços mínimos</b> — e nos casos mais graves, até em repouso ou apenas com a mudança de posição (de deitada para de pé), no que se chama de <b>incontinência urinária de esforço grau III (tipo III de Blaivas)</b>.</p>
+   ${SVG_MECANISMOS}
+   <p class="ac-p">Na prática clínica, os dois mecanismos frequentemente <b>coexistem</b> em graus variados na mesma paciente — é raro encontrar uma hipermobilidade "pura" ou uma DEI "pura" isoladas. Essa distinção importa principalmente quando o tratamento conservador falha e se discute cirurgia: casos com <b>DEI predominante</b> tendem a responder menos aos procedimentos que apenas restauram o suporte (como a colposuspensão de Burch) e se beneficiam mais de técnicas de <b>sling (faixa) mediouretral</b> ou de agentes de preenchimento periuretral, que atuam diretamente aumentando a resistência ao fluxo na própria uretra.</p>
+   <div class="ac-tip"><b>Macete:</b> hipermobilidade = "a base é que falhou, a torneira em si é boa"; DEI = "a torneira em si já não fecha direito, com ou sem base firme". Perda com esforços mínimos ou em repouso é a bandeira vermelha para DEI.</div>`],
+  ['fatoresrisco','Fatores de Risco', `
+   <div class="ac-h">Quem tem maior chance de desenvolver IUE</div>
+   <p class="ac-p">Os fatores de risco de IUE seguem diretamente da fisiopatologia: tudo que lesa o suporte ou o esfíncter aumenta o risco. O <b>parto vaginal</b> é o fator mais fortemente associado, sobretudo quando há <b>multiparidade</b>, <b>macrossomia fetal</b>, <b>período expulsivo prolongado</b>, uso de <b>fórceps</b> ou lacerações perineais extensas — todos esses cenários aumentam a chance de lesão mecânica da fáscia/levantador do ânus e de estiramento do nervo pudendo. É importante saber que a cesárea eletiva (antes do trabalho de parto) reduz, mas não elimina esse risco — a própria gestação, independente da via de parto, já aumenta a pressão sobre o assoalho pélvico.</p>
+   <p class="ac-p">A <b>idade avançada</b> e a <b>menopausa</b> somam risco pela perda de colágeno e pela atrofia do plexo vascular submucoso estrogênio-dependente. A <b>obesidade</b> aumenta cronicamente a pressão intra-abdominal, sobrecarregando o suporte. <b>Tabagismo</b> (por tosse crônica e por efeito direto do fumo sobre o colágeno) e a <b>constipação crônica</b> com esforço evacuatório repetido também elevam o risco. <b>Cirurgias pélvicas prévias</b> (histerectomia, cirurgias de prolapso) podem lesar diretamente nervos ou fáscias de suporte. Por fim, atividades físicas de alto impacto repetitivo e certas doenças do tecido conjuntivo (como Ehlers-Danlos) predispõem por fragilidade intrínseca do colágeno.</p>
+   <table class="ac-tbl"><tr><th>Fator de risco</th><th>Mecanismo predominante</th></tr>
+    <tr><td>Parto vaginal (multiparidade, macrossomia, fórceps)</td><td>Lesão de suporte + nervo pudendo</td></tr>
+    <tr><td>Menopausa / idade avançada</td><td>Atrofia do esfíncter + perda de colágeno</td></tr>
+    <tr><td>Obesidade, tosse crônica, constipação</td><td>Sobrecarga crônica do suporte</td></tr>
+    <tr><td>Cirurgia pélvica prévia, radioterapia</td><td>Lesão direta do esfíncter/suporte (DEI)</td></tr>
+   </table>
+   <div class="ac-warn"><b>Pegadinha:</b> cirurgia pélvica prévia malsucedida ou radioterapia apontam mais para DEI do que para hipermobilidade — guarde essa associação para questões que pedem o mecanismo mais provável.</div>`],
+  ['clinica','Quadro Clínico', `
+   <div class="ac-h">Como a paciente descreve a perda</div>
+   <p class="ac-p">A queixa típica é a perda de <b>pequenas a moderadas quantidades de urina</b>, de forma súbita, <b>sincronizada</b> a um esforço físico identificável: tossir, espirrar, rir, correr, pular, levantar peso, subir escadas. A perda <b>cessa junto com o esforço</b> — não há um "gotejamento contínuo" depois, nem uma sensação de urgência que precede o episódio. Muitas mulheres relatam que a gravidade progride ao longo do tempo: no início perdem apenas com esforços intensos (correr, pular); com a progressão, passam a perder com esforços cada vez menores (tossir, rir, e nos casos mais graves, apenas ao levantar-se ou mudar de posição).</p>
+   <p class="ac-p">É fundamental, na anamnese, perguntar ativamente sobre sintomas de <b>urgência, frequência e noctúria</b>, porque a presença desses sintomas junto com a perda ao esforço sugere <b>incontinência mista</b> (esforço + urgência), que muda a abordagem terapêutica. Também vale investigar o <b>impacto na qualidade de vida</b> (uso de absorventes/fraldas, restrição de atividades sociais e físicas, impacto na vida sexual), pois a gravidade percebida pela paciente nem sempre se correlaciona linearmente com achados objetivos, e é esse impacto que frequentemente determina a decisão por tratamento cirúrgico.</p>
+   <div class="ac-tip"><b>Macete:</b> "perde no ato, sem aviso, e para quando o esforço para" = IUE. Se aparecer qualquer menção a "vontade forte que vem antes" ou "não dá tempo de chegar ao banheiro", pense em componente de urgência associado (mista).</div>`],
+  ['exame','Exame Físico e Teste de Esforço', `
+   <div class="ac-h">Como confirmar clinicamente o diagnóstico</div>
+   <p class="ac-p">O exame físico começa pela avaliação geral já descrita no módulo de fisiologia (força de assoalho pélvico pela escala de Oxford, sinais de atrofia genital, presença de prolapso associado). O teste mais específico e mais cobrado é o <b>teste de esforço (stress test)</b>: com a bexiga <b>moderadamente cheia</b> (idealmente com volume conhecido, cerca de 200-300 mL), pede-se à paciente para tossir vigorosamente, primeiro em posição <b>supina (litotomia)</b> e, se negativo, repetir em <b>posição ortostática (de pé)</b> — a posição de pé aumenta a sensibilidade do teste. O teste é considerado <b>positivo</b> quando se observa a saída de urina pelo meato uretral <b>de forma simultânea e imediata</b> à tosse; um jato tardio ou um gotejamento contínuo sugere outra causa (como hiperatividade detrusora desencadeada pela tosse, ou perda por transbordamento).</p>
+   <p class="ac-p">O <b>pad test (teste do absorvente)</b> quantifica objetivamente a perda: a paciente usa um absorvente pré-pesado durante um período padronizado (1 hora com protocolo de atividades padronizadas, ou 24 horas em ambiente domiciliar), e o absorvente é pesado novamente ao final — um ganho de peso acima de determinado limiar (por exemplo, mais de 1 g na hora, ou mais de 4 g em 24h, conforme o protocolo) confirma perda urinária objetiva e ajuda a graduar a gravidade e a monitorar a resposta ao tratamento. Já o <b>teste do cotonete (Q-tip test)</b> avalia a mobilidade uretral: introduz-se um cotonete lubrificado na uretra até a junção uretrovesical e mede-se o ângulo de deslocamento do cotonete em relação à horizontal durante a manobra de Valsalva — um ângulo maior que 30 graus sugere <b>hipermobilidade uretral significativa</b>, reforçando esse mecanismo como o predominante.</p>
+   <div class="ac-warn"><b>Pegadinha:</b> o teste de esforço deve ser feito com a bexiga <b>nem vazia nem hipercheia</b> — bexiga vazia pode gerar falso-negativo, e um enchimento excessivo pode desencadear uma contração detrusora e confundir com hiperatividade. Sempre repita em pé se o teste deitado for negativo e a suspeita clínica for forte.</div>`],
+  ['avaliacaocomplementar','Avaliação Complementar', `
+   <div class="ac-h">Diário miccional, exames laboratoriais e o papel (limitado) da urodinâmica</div>
+   <p class="ac-p">O <b>diário miccional</b> de 3 dias — em que a paciente registra horários e volumes das micções, ingesta hídrica e episódios de perda com seu gatilho — é uma ferramenta simples, barata e muito valorizada nas diretrizes atuais (incluindo o protocolo da FEBRASGO), pois traz informações que a anamnese isolada frequentemente não captura, além de ajudar a diferenciar padrões de esforço puro de padrões mistos. O <b>exame de urina (EAS) e a urocultura</b> devem ser solicitados para <b>excluir infecção urinária</b>, que pode mimetizar ou agravar sintomas de perda urinária e sempre deve ser tratada antes de se avançar na investigação.</p>
+   <p class="ac-p">Quanto ao <b>estudo urodinâmico</b>, o ponto mais importante para a prova é que ele <b>não é obrigatório em todos os casos</b>: em uma paciente com quadro clínico típico de IUE pura (sem sintomas de urgência, sem prolapso significativo, sem cirurgia pélvica prévia), com teste de esforço positivo, muitas diretrizes atuais (incluindo recomendações da FEBRASGO e de sociedades internacionais) permitem indicar o tratamento — inclusive cirúrgico, quando indicado — <b>sem urodinâmica prévia</b>, já que estudos mostram desfechos cirúrgicos semelhantes com ou sem essa avaliação em casos não complicados. A urodinâmica passa a ser <b>recomendada</b> em cenários mais complexos: suspeita de <b>incontinência mista</b>, discordância entre sintomas e achados de exame, <b>falha de cirurgia anti-incontinência prévia</b>, suspeita de disfunção miccional/retenção associada, ou antes de cirurgias mais complexas.</p>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Urodinâmica</th></tr>
+    <tr><td>IUE clínica típica, sem sinais de alerta</td><td>Não obrigatória antes do tratamento</td></tr>
+    <tr><td>Suspeita de incontinência mista</td><td>Recomendada (diferenciar componente predominante)</td></tr>
+    <tr><td>Cirurgia anti-incontinência prévia sem sucesso</td><td>Recomendada</td></tr>
+    <tr><td>Discordância clínica/exame ou suspeita de retenção</td><td>Recomendada</td></tr>
+   </table>
+   <div class="ac-tip"><b>Atalho para prova:</b> "caso simples de IUE = pode operar sem urodinâmica"; "caso duvidoso, misto ou já operado antes = pedir urodinâmica".</div>`],
+  ['diagnostico','Diagnóstico Diferencial', `
+   <div class="ac-h">O que mais pode simular perda urinária "ao esforço"</div>
+   <p class="ac-p">O diagnóstico de IUE é essencialmente <b>clínico</b>: história compatível + teste de esforço positivo, na ausência de sinais de alarme. Ainda assim, é essencial excluir diagnósticos diferenciais antes de rotular o quadro como IUE isolada. A <b>bexiga hiperativa/incontinência de urgência</b> (módulo seguinte) é o principal diferencial, distinguida pela presença de urgência precedendo a perda, frequência aumentada e noctúria. A <b>incontinência mista</b> combina os dois padrões na mesma paciente.</p>
+   <p class="ac-p">A <b>incontinência por transbordamento (overflow)</b> ocorre em bexigas com retenção urinária crônica (por obstrução ou por bexiga hipocontrátil, como na neuropatia diabética), nas quais a bexiga fica cronicamente muito distendida e "verte" pequenas quantidades de urina continuamente — o padrão aqui é de <b>gotejamento constante</b>, sem relação nítida com esforço, muitas vezes com resíduo pós-miccional elevado à medida do volume residual. A <b>fístula vesicovaginal ou ureterovaginal</b> (lembrar de história de cirurgia pélvica prévia, radioterapia ou parto obstruído prolongado em contextos de menor acesso a cesárea) causa perda <b>contínua, dia e noite, independente de esforço ou de posição</b> — é a "bandeira vermelha" clássica que diferencia fístula de IUE em provas.</p>
+   <table class="ac-tbl"><tr><th>Condição</th><th>Padrão de perda</th><th>Pista-chave</th></tr>
+    <tr><td>IUE</td><td>Sincronizada ao esforço, cessa com ele</td><td>Teste de esforço positivo, sem urgência prévia</td></tr>
+    <tr><td>Bexiga hiperativa</td><td>Precedida de urgência súbita</td><td>Frequência, noctúria, urgência</td></tr>
+    <tr><td>Mista</td><td>Ambos os padrões</td><td>Diário miccional ajuda a definir predomínio</td></tr>
+    <tr><td>Transbordamento</td><td>Gotejamento contínuo</td><td>Resíduo pós-miccional elevado</td></tr>
+    <tr><td>Fístula (vesicovaginal)</td><td>Contínua, dia e noite</td><td>Cirurgia/radioterapia/parto prolongado prévios</td></tr>
+   </table>
+   <div class="ac-warn"><b>Erro que reprova:</b> rotular como IUE qualquer perda urinária sem investigar o padrão temporal. Perda contínua e constante NUNCA é IUE isolada — pense sempre em fístula nesse cenário.</div>`],
+  ['tratamento','Tratamento', `
+   <div class="ac-h">Do conservador ao cirúrgico, na ordem certa</div>
+   <p class="ac-p">A <b>primeira linha de tratamento</b> para IUE, em praticamente todas as diretrizes atuais (FEBRASGO, ACOG, AUGS), é <b>conservadora</b>: perda de peso (quando indicada), redução de fatores agravantes (tratar tosse crônica e constipação), e principalmente a <b>fisioterapia do assoalho pélvico</b> — o treinamento muscular do assoalho pélvico (exercícios de Kegel supervisionados, com ou sem biofeedback) é a técnica com <b>maiores índices de sucesso</b> entre as opções não cirúrgicas, funcionando tanto por hipertrofia muscular quanto por melhora do reflexo de contração pré-esforço. O <b>pessário</b> (dispositivo vaginal de suporte) é uma opção não invasiva, sobretudo útil em pacientes que não desejam ou não podem operar, ou como medida temporária.</p>
+   <p class="ac-p">O papel <b>farmacológico</b> na IUE é limitado — diferente da bexiga hiperativa, não existe uma classe medicamentosa de primeira linha amplamente eficaz e bem tolerada para IUE isolada; agentes como a duloxetina (que aumenta o tônus do esfíncter estriado por ação sobre o núcleo de Onuf) têm eficácia modesta e uso restrito por efeitos colaterais. Quando o tratamento conservador falha e a paciente deseja resolução definitiva, entra-se na fase <b>cirúrgica</b>, hoje dominada pelas <b>faixas (slings) mediouretrais sintéticas</b> — via <b>retropúbica (TVT)</b> ou <b>transobturatória (TOT/TVT-O)</b> — consideradas o <b>padrão-ouro</b> atual por sua eficácia elevada, baixa morbidade e procedimento minimamente invasivo.</p>
+   <table class="ac-tbl"><tr><th>Situação</th><th>Tratamento</th></tr>
+    <tr><td>Primeira linha (qualquer gravidade)</td><td>Fisioterapia do assoalho pélvico + medidas comportamentais</td></tr>
+    <tr><td>Não cirúrgico / contraindicação a cirurgia</td><td>Pessário</td></tr>
+    <tr><td>Falha do conservador, hipermobilidade predominante</td><td>Sling mediouretral (TVT/TOT) — padrão-ouro; colposuspensão de Burch como alternativa</td></tr>
+    <tr><td>Deficiência esfincteriana intrínseca / paciente frágil</td><td>Agentes de preenchimento periuretral (uso mais restrito/excepcional) ou sling</td></tr>
+   </table>
+   <p class="ac-p">A <b>colposuspensão de Burch</b> (fixação cirúrgica dos tecidos periuretrais aos ligamentos de Cooper, por via aberta ou laparoscópica) foi por décadas o padrão-ouro e ainda é uma alternativa válida, sobretudo quando há indicação de cirurgia abdominal concomitante; hoje, porém, os slings mediouretrais assumiram a posição de primeira escolha cirúrgica pela menor morbidade. Nos casos de <b>deficiência esfincteriana intrínseca predominante</b>, especialmente em pacientes mais idosas, frágeis ou com múltiplas cirurgias prévias sem sucesso, os <b>agentes de preenchimento periuretral (bulking agents)</b>, injetados para aumentar a coaptação da luz uretral, são reservados para <b>casos excepcionais</b>, com eficácia mais modesta e temporária, conforme reforça o protocolo da FEBRASGO.</p>
+   <div class="ac-call"><b>Por que fisioterapia primeiro?</b> Porque é eficaz, sem risco cirúrgico, e reforça exatamente os dois pilares comprometidos na IUE (tônus muscular do assoalho pélvico e reflexo de contração pré-esforço) — mesmo quando a cirurgia é eventualmente necessária, a fisioterapia pré e pós-operatória melhora os desfechos.</div>`],
+ ],
+};
+
+Object.assign(C['incontinencia|1'], {
+ escores: `<div class="ac-h">Classificação de gravidade de Stamey</div>
+   <table class="ac-tbl"><tr><th>Grau</th><th>Perda ocorre</th></tr>
+    <tr><td>I</td><td>Apenas com esforços intensos (tosse, espirro)</td></tr>
+    <tr><td>II</td><td>Com esforços moderados (caminhar, subir escadas, levantar-se)</td></tr>
+    <tr><td>III</td><td>Com esforços mínimos ou em posição ortostática, sem esforço adicional</td></tr>
+   </table>
+   <div class="ac-h" style="margin-top:14px">Classificação de Blaivas-Olsson (tipos de IUE)</div>
+   <table class="ac-tbl"><tr><th>Tipo</th><th>Mecanismo</th></tr>
+    <tr><td>Tipo 0</td><td>Sintomas presentes, sem hipermobilidade demonstrável em repouso; perda só sob esforço grande</td></tr>
+    <tr><td>Tipo I</td><td>Hipermobilidade leve, colo vesical fechado em repouso</td></tr>
+    <tr><td>Tipo II</td><td>Hipermobilidade significativa, colo vesical abre e desce ao esforço (mecanismo mais comum)</td></tr>
+    <tr><td>Tipo III</td><td>Deficiência esfincteriana intrínseca — colo vesical/uretra proximal já abertos em repouso</td></tr>
+   </table>
+   <div class="ac-h" style="margin-top:14px">ICIQ-SF (questionário de sintomas e impacto)</div>
+   <p class="ac-p">Questionário validado que avalia frequência, quantidade da perda e impacto na qualidade de vida, muito usado tanto na triagem quanto na pesquisa clínica.</p>`,
+ dif: `<div class="ac-h">Diferenciais</div>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Diferenciar de</th><th>Chave</th></tr>
+    <tr><td>Perda ao esforço</td><td>Bexiga hiperativa/urgência</td><td>IUE: sem urgência prévia. Urgência: sensação forte antes da perda</td></tr>
+    <tr><td>Perda ao esforço + urgência</td><td>Incontinência mista</td><td>Diário miccional define o componente predominante</td></tr>
+    <tr><td>Perda contínua, gotejamento</td><td>Incontinência por transbordamento</td><td>Resíduo pós-miccional elevado, bexiga hipocontrátil/obstrução</td></tr>
+    <tr><td>Perda contínua dia e noite</td><td>Fístula vesicovaginal</td><td>Cirurgia/radioterapia/parto prolongado prévio</td></tr>
+    <tr><td>IUE que não melhora com sling</td><td>DEI subdiagnosticada ou componente misto não tratado</td><td>Reavaliar com urodinâmica</td></tr>
+   </table>`,
+ mapa: `<div class="ac-h">IUE em mapa</div>
+   <div class="mm">
+    <div class="mm-card"><h5>Definição</h5><ul><li>Perda ao esforço/tosse/espirro (ICS)</li><li>Sem urgência prévia</li><li>Cessa com o fim do esforço</li></ul></div>
+    <div class="mm-card"><h5>Mecanismos</h5><ul><li>Hipermobilidade uretral (mais comum)</li><li>Deficiência esfincteriana intrínseca (DEI)</li><li>Podem coexistir</li></ul></div>
+    <div class="mm-card"><h5>Diagnóstico</h5><ul><li>Clínico + teste de esforço positivo</li><li>Pad test, Q-tip test</li><li>Urodinâmica só em casos complexos</li></ul></div>
+    <div class="mm-card"><h5>Tratamento</h5><ul><li>1ª linha: fisioterapia + medidas comportamentais</li><li>Pessário (não cirúrgico)</li><li>Sling mediouretral = padrão-ouro cirúrgico</li></ul></div>
+   </div>`,
+ fluxo_dx: `<div class="ac-h">Fluxograma diagnóstico da IUE</div>
+   <div class="fx">
+    <div class="fx-node start">Perda urinária sincronizada ao esforço, sem urgência prévia</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Excluir ITU (EAS/urocultura) e outras causas orgânicas</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Exame físico + teste de esforço (deitada e, se negativo, em pé) com bexiga moderadamente cheia</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Teste de esforço positivo + quadro clínico típico?</div>
+    <div class="fx-row">
+     <div class="fx-node end">Sim, sem sinais de alerta → diagnóstico clínico de IUE, pode tratar sem urodinâmica</div>
+     <div class="fx-node end">Misto, refratário, ou cirurgia prévia → complementar com urodinâmica</div>
+    </div>
+   </div>`,
+ fluxo_cond: `<div class="ac-h">Conduta escalonada na IUE</div>
+   <div class="fx">
+    <div class="fx-node start">IUE confirmada</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Fisioterapia do assoalho pélvico + medidas comportamentais (peso, tosse, constipação)</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Melhora satisfatória?</div>
+    <div class="fx-row">
+     <div class="fx-node end">Sim → manter conservador, reavaliar periodicamente</div>
+     <div class="fx-node">Não → considerar pessário (se não cirúrgico) ou avaliação cirúrgica</div>
+    </div>
+    <div class="fx-arrow"></div>
+    <div class="fx-row">
+     <div class="fx-node end">Hipermobilidade predominante → sling mediouretral (padrão-ouro) ou Burch</div>
+     <div class="fx-node end">DEI predominante/paciente frágil → sling ou agente de preenchimento (excepcional)</div>
+    </div>
+   </div>`,
+ vespera: `<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Ponto 1:</b> IUE = perda involuntária ao esforço físico, tosse ou espirro, sem urgência prévia, cessando com o fim do esforço.</div>
+   <div class="ac-call"><b>Ponto 2:</b> dois mecanismos — hipermobilidade uretral (mais comum, falha de suporte) e deficiência esfincteriana intrínseca/DEI (falha do próprio esfíncter, pressão basal já baixa).</div>
+   <div class="ac-call"><b>Ponto 3:</b> diagnóstico é clínico + teste de esforço positivo; urodinâmica NÃO é obrigatória em casos típicos e não complicados.</div>
+   <div class="ac-call"><b>Ponto 4:</b> primeira linha sempre conservadora (fisioterapia do assoalho pélvico); sling mediouretral (TVT/TOT) é o padrão-ouro cirúrgico atual.</div>
+   <div class="ac-call"><b>Ponto 5:</b> perda contínua, dia e noite, independente de esforço = pensar em fístula, não em IUE.</div>`,
+ dicas: `<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Toda vez que a questão descrever "perda sincronizada à tosse/espirro, sem urgência antes", já pense IUE e procure na história qual mecanismo (parto vaginal → hipermobilidade; cirurgia prévia/radioterapia → DEI).</div>
+   <div class="ac-tip">Se a questão perguntar "qual o exame confirmatório mais simples", a resposta costuma ser o teste de esforço clínico, não a urodinâmica.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Indicar urodinâmica como obrigatória em todo caso de IUE — isso é falso para casos típicos e não complicados, segundo as diretrizes atuais.</div>
+   <div class="ac-warn">Confundir perda contínua (fístula) ou por gotejamento com resíduo elevado (transbordamento) com IUE — o padrão temporal é a chave para não errar essas questões.</div>`,
+ checklist: [
+  'Sei a definição da ICS para IUE',
+  'Diferencio hipermobilidade uretral de deficiência esfincteriana intrínseca (DEI)',
+  'Conheço os fatores de risco e a que mecanismo cada um se associa',
+  'Sei realizar e interpretar o teste de esforço, o pad test e o Q-tip test',
+  'Sei quando a urodinâmica é (ou não) obrigatória',
+  'Diferencio IUE de bexiga hiperativa, mista, transbordamento e fístula',
+  'Conheço a sequência de tratamento: fisioterapia → pessário → cirurgia (sling/Burch/preenchimento)'
+ ],
+});
+
+Object.assign(C['incontinencia|1'], {
+ questoes: [
+  {stem:'Segundo a definição da International Continence Society, a incontinência urinária de esforço é caracterizada por:', opts:['Perda urinária precedida de urgência súbita','Perda urinária involuntária aos esforços físicos, tosse ou espirro','Perda urinária contínua, independente de posição ou esforço','Perda urinária associada a resíduo pós-miccional elevado'], correct:1,
+   expl:'A IUE é definida como a queixa de <b>perda involuntária de urina aos esforços físicos/exertação, tosse ou espirro</b>, sem relação com urgência precedente.'},
+  {stem:'O mecanismo fisiopatológico mais comum de IUE é:', opts:['Deficiência esfincteriana intrínseca isolada','Hiperatividade do detrusor','Hipermobilidade uretral por falha do suporte anatômico','Obstrução infravesical'], correct:2,
+   expl:'A <b>hipermobilidade uretral</b>, decorrente de falha do suporte (fáscia endopélvica/levantador do ânus), é o mecanismo mais frequente de IUE, embora a deficiência esfincteriana intrínseca também contribua, muitas vezes de forma associada.'},
+  {stem:'Uma paciente apresenta perda urinária mesmo com esforços mínimos, como apenas ao ficar em pé, sem tosse ou espirro associado. Esse achado é mais sugestivo de:', opts:['Hipermobilidade uretral leve','Deficiência esfincteriana intrínseca (DEI)','Bexiga hiperativa','Fístula vesicovaginal'], correct:1,
+   expl:'Perda com esforços mínimos ou apenas com a mudança postural sugere que a <b>pressão de fechamento uretral basal já está reduzida</b> — achado típico da deficiência esfincteriana intrínseca (IUE grau III de Stamey / tipo III de Blaivas).'},
+  {stem:'No teste de esforço (stress test) para IUE, é correto afirmar que:', opts:['Deve ser feito sempre com a bexiga vazia','A sensibilidade aumenta ao repetir o teste em posição ortostática se o teste deitado for negativo','Um jato tardio após a tosse confirma o diagnóstico de IUE','Não deve ser repetido se o resultado inicial for negativo'], correct:1,
+   expl:'O teste deve ser feito com bexiga moderadamente cheia; se negativo em posição supina, deve ser <b>repetido em pé</b>, o que aumenta a sensibilidade. Perda simultânea e imediata à tosse é o achado positivo; jato tardio sugere outro mecanismo.'},
+  {stem:'O Q-tip test (teste do cotonete) avalia especificamente:', opts:['A força de contração do detrusor','A mobilidade da junção uretrovesical','A presença de infecção urinária','O resíduo pós-miccional'], correct:1,
+   expl:'O Q-tip test mede o ângulo de deslocamento de um cotonete posicionado na uretra durante o Valsalva; um ângulo maior que 30° sugere <b>hipermobilidade uretral</b> significativa.'},
+  {stem:'Em relação ao estudo urodinâmico na investigação da IUE, é correto afirmar que:', opts:['É obrigatório em todos os casos antes de qualquer tratamento','Pode ser dispensado em casos clínicos típicos e não complicados, mesmo antes de cirurgia','Só deve ser solicitado após falha da cirurgia, nunca antes','Substitui o teste de esforço clínico como primeira abordagem'], correct:1,
+   expl:'Em casos <b>típicos e não complicados</b> de IUE, diretrizes atuais permitem indicar tratamento (inclusive cirúrgico) sem urodinâmica prévia; ela é reservada para casos mistos, discordantes ou com cirurgia anti-incontinência prévia sem sucesso.'},
+  {stem:'O tratamento de primeira linha para incontinência urinária de esforço, independentemente da gravidade inicial, é:', opts:['Cirurgia de sling mediouretral','Agentes de preenchimento periuretral','Fisioterapia do assoalho pélvico associada a medidas comportamentais','Antimuscarínicos orais'], correct:2,
+   expl:'A <b>fisioterapia do assoalho pélvico</b> (treinamento muscular, com ou sem biofeedback) associada a medidas comportamentais é a primeira linha de tratamento em praticamente todas as diretrizes atuais, incluindo o protocolo da FEBRASGO.'},
+  {stem:'O procedimento cirúrgico atualmente considerado padrão-ouro para o tratamento da IUE é:', opts:['Colposuspensão de Burch por via aberta','Sling mediouretral sintético (TVT/TOT)','Histerectomia vaginal','Injeção de agente de preenchimento periuretral'], correct:1,
+   expl:'Os <b>slings mediouretrais sintéticos</b> (retropúbico/TVT ou transobturatório/TOT) tornaram-se o padrão-ouro cirúrgico por sua alta eficácia e baixa morbidade, superando a colposuspensão de Burch como primeira escolha na maioria dos cenários.'},
+  {stem:'Os agentes de preenchimento periuretral (bulking agents) no tratamento da IUE são indicados preferencialmente para:', opts:['Todas as pacientes como primeira opção cirúrgica','Casos excepcionais, como deficiência esfincteriana intrínseca em pacientes frágeis ou com múltiplas falhas cirúrgicas prévias','Pacientes jovens com hipermobilidade uretral leve','Substituir a fisioterapia do assoalho pélvico'], correct:1,
+   expl:'Segundo o protocolo da FEBRASGO, os agentes de preenchimento periuretral devem ser usados apenas em <b>casos excepcionais</b>, como pacientes com DEI predominante, idade avançada, fragilidade clínica ou falhas cirúrgicas prévias, dada sua eficácia mais modesta e temporária.'},
+  {stem:'Uma mulher relata perda urinária constante, dia e noite, independentemente de esforço ou posição, seis semanas após um parto vaginal prolongado e obstruído. O diagnóstico mais provável é:', opts:['IUE tipo II','Fístula vesicovaginal','Bexiga hiperativa','Incontinência por transbordamento'], correct:1,
+   expl:'Perda <b>contínua, dia e noite, independente de esforço</b>, após parto obstruído/prolongado, é o quadro clássico de <b>fístula vesicovaginal</b> — diagnóstico diferencial obrigatório que não deve ser confundido com IUE.'},
+  {stem:'Qual das alternativas abaixo é um fator de risco mais associado ao mecanismo de deficiência esfincteriana intrínseca do que à hipermobilidade uretral?', opts:['Parto vaginal com fórceps','Radioterapia pélvica prévia','Obesidade','Tosse crônica'], correct:1,
+   expl:'A <b>radioterapia pélvica</b> lesa diretamente o tecido esfincteriano/periuretral, favorecendo DEI, diferente dos demais fatores listados, que sobrecarregam predominantemente o suporte anatômico.'},
+  {stem:'Na classificação de gravidade de Stamey, uma paciente que perde urina apenas ao caminhar ou subir escadas, mas não em repouso, é classificada como:', opts:['Grau I','Grau II','Grau III','Grau 0'], correct:1,
+   expl:'O <b>grau II</b> de Stamey corresponde à perda com esforços moderados (caminhar, subir escadas, levantar-se), diferente do grau I (apenas esforços intensos como tosse/espirro) e do grau III (esforços mínimos ou em repouso).'},
+ ],
+ flashcards: [
+  {front:'Qual a definição da ICS para incontinência urinária de esforço?', back:'Queixa de perda involuntária de urina aos esforços físicos/exertação, ou ao tossir e espirrar.', type:'basic'},
+  {front:'Quais são os dois mecanismos fisiopatológicos principais de IUE?', back:'Hipermobilidade uretral (mais comum, falha de suporte) e deficiência esfincteriana intrínseca (DEI, falha do próprio esfíncter).', type:'basic'},
+  {front:'Na {{hipermobilidade uretral}}, a pressão de fechamento uretral em repouso costuma ser normal, falhando apenas durante o esforço.', back:'hipermobilidade uretral', type:'cloze'},
+  {front:'Na deficiência esfincteriana intrínseca (DEI), como está a pressão de fechamento uretral em repouso?', back:'Já está baixa em repouso, independentemente de esforço — por isso a perda ocorre com esforços mínimos ou até em repouso.', type:'basic'},
+  {front:'Como se realiza o teste de esforço (stress test) para IUE?', back:'Bexiga moderadamente cheia; pede-se tosse vigorosa em posição supina e, se negativo, repete-se em pé; positivo se houver saída de urina simultânea e imediata à tosse.', type:'basic'},
+  {front:'O {{Q-tip test}} avalia a mobilidade da junção uretrovesical pelo ângulo de deslocamento de um cotonete durante o Valsalva (positivo se >30°).', back:'Q-tip test', type:'cloze'},
+  {front:'O estudo urodinâmico é obrigatório antes do tratamento de todo caso de IUE?', back:'Não — em casos clínicos típicos e não complicados, o tratamento pode ser indicado sem urodinâmica prévia.', type:'basic'},
+  {front:'Cite três situações em que a urodinâmica é recomendada na investigação de IUE.', back:'Suspeita de incontinência mista, falha de cirurgia anti-incontinência prévia, e discordância entre clínica e exame físico (ou suspeita de retenção).', type:'basic'},
+  {front:'Qual é a primeira linha de tratamento para IUE, independentemente da gravidade?', back:'Fisioterapia do assoalho pélvico associada a medidas comportamentais.', type:'basic'},
+  {front:'O {{sling mediouretral}} (TVT/TOT) é hoje o padrão-ouro cirúrgico para IUE, substituindo a colposuspensão de Burch como primeira escolha.', back:'sling mediouretral', type:'cloze'},
+  {front:'Quando os agentes de preenchimento periuretral (bulking agents) são indicados na IUE?', back:'Em casos excepcionais, como deficiência esfincteriana intrínseca em pacientes frágeis, idosas ou com falhas cirúrgicas prévias.', type:'basic'},
+  {front:'Qual o padrão de perda urinária típico de uma fístula vesicovaginal, diferenciando-a de IUE?', back:'Perda contínua, dia e noite, independente de esforço ou posição — diferente da perda sincronizada ao esforço da IUE.', type:'basic'},
+  {front:'Na classificação de Stamey, o grau III corresponde a que tipo de perda?', back:'Perda com esforços mínimos ou apenas em posição ortostática, sem esforço adicional.', type:'basic'},
+  {front:'Por que a colposuspensão de Burch ainda é uma alternativa válida no tratamento cirúrgico da IUE?', back:'Porque continua eficaz, sobretudo quando há indicação de cirurgia abdominal concomitante, mesmo não sendo mais a primeira escolha isolada.', type:'basic'},
+ ],
+ casos: [
+  {t:'Caso 1 — A corredora que parou de correr', stem:'Mulher de 34 anos, nulípara, corredora amadora, relata perda de pequenas quantidades de urina apenas durante corridas de alta intensidade, há 6 meses, sem urgência associada. Nega cirurgias prévias. Exame físico com força de assoalho pélvico Oxford grau 3.', passos:[
+    {h:'1. Caracterizar o padrão', p:'Perda apenas com esforço intenso, sem urgência, sugere IUE leve — compatível com grau I de Stamey.'},
+    {h:'2. Levantar hipótese de mecanismo', p:'Nulípara, sem cirurgias, com força de assoalho pélvico razoável (Oxford 3): mecanismo provável é uma hipermobilidade leve ou apenas insuficiência do reflexo de contração pré-esforço, sem lesão estrutural importante.'},
+    {h:'3. Confirmar', p:'Teste de esforço clínico (deitada e em pé) com bexiga moderadamente cheia; considerar Q-tip test se houver dúvida quanto à mobilidade uretral.'},
+    {h:'4. Conduta', p:'Fisioterapia do assoalho pélvico é a primeira e provavelmente única linha necessária neste momento, dado o grau leve e a ausência de fatores estruturais graves.'},
+    {h:'Lição de prova', p:'Nem toda IUE precisa de avaliação complexa: quadros leves, em pacientes sem fatores de risco estruturais importantes, respondem bem à fisioterapia isolada, sem necessidade de urodinâmica ou cirurgia.'}
+  ]},
+  {t:'Caso 2 — Quando a fisioterapia não é suficiente', stem:'Mulher de 58 anos, 4 partos vaginais, obesa, relata perda urinária progressiva há 3 anos, hoje ocorrendo até ao levantar-se da cadeira, apesar de 6 meses de fisioterapia pélvica regular e bem realizada. Teste de esforço positivo em posição supina, sem necessidade de repetir em pé.', passos:[
+    {h:'1. Reconhecer a gravidade', p:'Perda com esforços mínimos (levantar-se) e teste de esforço positivo já deitada sugerem IUE grau III de Stamey — mecanismo provavelmente com componente importante de deficiência esfincteriana intrínseca.'},
+    {h:'2. Reconhecer a falha do tratamento conservador', p:'Fisioterapia bem realizada por 6 meses sem melhora indica necessidade de escalonar a conduta.'},
+    {h:'3. Definir avaliação complementar', p:'Dado o grau de gravidade e a possível DEI associada, considerar estudo urodinâmico para caracterizar melhor o mecanismo antes de definir a técnica cirúrgica.'},
+    {h:'4. Conduta', p:'Encaminhar para avaliação cirúrgica; sling mediouretral é a opção de escolha na maioria dos cenários, mesmo com componente de DEI associado, avaliando individualmente a necessidade de outras técnicas.'},
+    {h:'Lição de prova', p:'Falha de fisioterapia bem conduzida + perda com esforços mínimos deve levantar a suspeita de deficiência esfincteriana intrínseca e justificar avaliação mais aprofundada antes da cirurgia.'}
+  ]},
+  {t:'Caso 3 — A paciente já operada antes', stem:'Mulher de 63 anos, submetida a colposuspensão de Burch há 8 anos, volta a apresentar perda urinária ao esforço há 1 ano, agora associada a episódios ocasionais de urgência. Deseja nova avaliação para tratamento definitivo.', passos:[
+    {h:'1. Levantar hipóteses', p:'Recidiva de IUE após cirurgia prévia, possível componente de urgência associado (incontinência mista), ou falha de mecanismo diferente do inicialmente tratado.'},
+    {h:'2. Reconhecer indicação de urodinâmica', p:'Cirurgia anti-incontinência prévia sem sucesso é uma das indicações clássicas de estudo urodinâmico antes de nova intervenção.'},
+    {h:'3. Investigar', p:'Diário miccional para caracterizar o padrão predominante (esforço x urgência), urodinâmica para reavaliar o mecanismo (hipermobilidade residual, DEI, ou hiperatividade detrusora associada).'},
+    {h:'4. Planejar conduta', p:'Se predominar componente de esforço com DEI, sling mediouretral é uma opção válida mesmo após Burch prévio; se houver hiperatividade detrusora relevante, o componente de urgência precisa ser tratado antes ou junto (ver módulo de bexiga hiperativa).'},
+    {h:'Lição de prova', p:'Cirurgia prévia sem sucesso muda o algoritmo: torna a urodinâmica obrigatória e obriga a reinvestigar se surgiu um componente de urgência que não estava presente no primeiro episódio.'}
+  ]},
+ ],
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>
+/* ELID Ginecologia — Conteúdo Incontinência Urinária (3/3): Bexiga Hiperativa (incontinencia|2).
+   Aditivo. Explicações aprofundadas para provas de residência (ENARE, ENAMED, Revalida, PSU-MG, SES-RJ, UERJ, UFRJ). */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+var SVG_DETRUSOR = `<svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+ <linearGradient id="oabBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eff6ff"/><stop offset="1" stop-color="#f5f3ff"/></linearGradient>
+ <linearGradient id="oabBladderOk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a7f3d0"/><stop offset="1" stop-color="#059669"/></linearGradient>
+ <linearGradient id="oabBladderBad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fca5a5"/><stop offset="1" stop-color="#b91c1c"/></linearGradient>
+ <linearGradient id="oabNerve" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fde047"/><stop offset="1" stop-color="#ca8a04"/></linearGradient>
+ <linearGradient id="oabBrain" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#6d28d9"/></linearGradient>
+ <filter id="oabShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#1e1b4b" flood-opacity="0.2"/></filter>
+</defs>
+<rect x="4" y="4" width="672" height="412" rx="18" fill="url(#oabBg)"/>
+<text x="340" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#312e81">Enchimento normal x hiperatividade detrusora</text>
+<text x="164" y="56" text-anchor="middle" font-size="12.5" font-weight="700" fill="#059669">Enchimento normal (inibido)</text>
+<g filter="url(#oabShadow)">
+ <path d="M120 150 C110 120 138 96 172 96 C208 96 236 120 228 152 C222 178 190 194 160 190 C132 186 128 172 120 150 Z" fill="url(#oabBladderOk)"/>
+</g>
+<text x="174" y="146" text-anchor="middle" font-size="11" fill="#f0fdf4" font-weight="700">Detrusor relaxado</text>
+<text x="174" y="160" text-anchor="middle" font-size="9.5" fill="#f0fdf4" font-weight="700">(enchendo sem contrair)</text>
+<path d="M172 90 C160 76 160 60 172 48" stroke="url(#oabNerve)" stroke-width="4" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+<g filter="url(#oabShadow)">
+ <ellipse cx="172" cy="40" rx="30" ry="20" fill="url(#oabBrain)"/>
+</g>
+<text x="172" y="44" text-anchor="middle" font-size="9.5" fill="#faf5ff" font-weight="700">Córtex/ponte inibem</text>
+<path d="M136 176 C110 190 96 214 100 234" stroke="#059669" stroke-width="3" fill="none" stroke-dasharray="2 5" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
+<text x="120" y="256" font-size="10" fill="#065f46" font-weight="700">Sinal aferente fraco,</text>
+<text x="120" y="270" font-size="10" fill="#065f46" font-weight="700">sensação controlada</text>
+<text x="174" y="310" text-anchor="middle" font-size="11" fill="#065f46" font-weight="700">Enche sem urgência súbita</text>
+<text x="174" y="326" text-anchor="middle" font-size="11" fill="#065f46" font-weight="700">→ continência preservada</text>
+<line x1="340" y1="50" x2="340" y2="380" stroke="#c4b5fd" stroke-width="2" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/>
+<text x="512" y="56" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b91c1c">Hiperatividade detrusora</text>
+<g filter="url(#oabShadow)">
+ <path d="M468 150 C456 118 486 92 522 92 C560 92 590 118 580 152 C572 180 536 198 504 192 C474 186 476 174 468 150 Z" fill="url(#oabBladderBad)"/>
+</g>
+<text x="524" y="146" text-anchor="middle" font-size="11" fill="#fef2f2" font-weight="700">Detrusor contrai sozinho</text>
+<text x="524" y="160" text-anchor="middle" font-size="9.5" fill="#fef2f2" font-weight="700">(fase de enchimento!)</text>
+<path d="M480 176 C460 196 452 220 458 240" stroke="#b91c1c" stroke-width="4" fill="none" stroke-dasharray="1 4" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
+<text x="470" y="262" font-size="10" fill="#7f1d1d" font-weight="700">Aferência exagerada</text>
+<text x="470" y="276" font-size="10" fill="#7f1d1d" font-weight="700">(urotélio hiperssensível)</text>
+<path d="M522 90 C512 76 512 60 522 48" stroke="url(#oabNerve)" stroke-width="4" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+<g filter="url(#oabShadow)">
+ <ellipse cx="522" cy="40" rx="30" ry="20" fill="url(#oabBrain)"/>
+</g>
+<text x="522" y="44" text-anchor="middle" font-size="9" fill="#faf5ff" font-weight="700">Inibição insuficiente</text>
+<text x="524" y="310" text-anchor="middle" font-size="11" fill="#7f1d1d" font-weight="700">Urgência súbita e intensa</text>
+<text x="524" y="326" text-anchor="middle" font-size="11" fill="#7f1d1d" font-weight="700">→ incontinência de urgência</text>
+<text x="340" y="404" text-anchor="middle" font-size="11" fill="#4c1d95">Bexiga hiperativa = síndrome clínica; hiperatividade detrusora = achado urodinâmico associado.</text>
+</svg>`;
+
+C['incontinencia|2'] = {
+ name: 'Bexiga Hiperativa',
+ intro: 'É a "outra metade" da incontinência urinária feminina — quem confunde o padrão de urgência com o padrão de esforço erra sistematicamente as questões que comparam os dois tipos.',
+ sub: [
+  ['entendendo','Entendendo do Zero', `
+   <div class="ac-h">Uma síndrome de sintomas, não um exame</div>
+   <p class="ac-p">A <b>bexiga hiperativa (BH, ou OAB — overactive bladder)</b> é definida pela International Continence Society como uma <b>síndrome clínica</b>: <b>urgência urinária</b> (a queixa central — uma vontade súbita e difícil de adiar de urinar), geralmente acompanhada de <b>aumento da frequência urinária diurna</b> e de <b>noctúria</b>, <b>com ou sem incontinência de urgência</b>, <b>na ausência de infecção urinária comprovada ou outra causa óbvia</b>. Repare no ponto mais importante desta definição: BH é um diagnóstico <b>clínico, por sintomas</b> — não depende de nenhum exame de imagem ou urodinâmico para ser definida. É perfeitamente possível (e frequente) ter bexiga hiperativa sem jamais perder urina — a urgência isolada, com frequência e noctúria, já fecha o diagnóstico sindrômico.</p>
+   <p class="ac-p">Isso é diferente do achado urodinâmico chamado <b>hiperatividade detrusora</b>, que é um <b>termo urodinâmico</b>: contrações involuntárias do detrusor durante a fase de enchimento vesical, documentadas objetivamente no exame. Muitas mulheres com bexiga hiperativa clínica têm hiperatividade detrusora no exame urodinâmico, mas nem sempre — os dois termos <b>não são sinônimos</b>, e essa distinção (síndrome clínica x achado urodinâmico) é um ponto clássico de prova.</p>
+   <p class="ac-p">Por que a bexiga hiperativa é tão prevalente e tão cobrada? Porque afeta uma parcela expressiva das mulheres, aumenta muito com a idade, tem grande impacto na qualidade de vida (interrompe o sono, limita atividades sociais, aumenta risco de quedas em idosas por causa das idas noturnas ao banheiro) e, principalmente, porque a prova adora comparar seu quadro clínico com o da IUE (módulo anterior) — a habilidade de diferenciar os dois padrões, ou reconhecer quando coexistem (incontinência mista), é testada com frequência.</p>
+   <div class="ac-call"><b>A grande ideia:</b> bexiga hiperativa é uma síndrome clínica de <b>urgência</b> (+ frequência + noctúria, com ou sem incontinência de urgência), diagnosticada por sintomas, depois de excluir causas orgânicas óbvias como infecção. O achado fisiopatológico associado, quando presente, é a hiperatividade do detrusor durante o enchimento.</div>
+   <table class="ac-tbl"><tr><th>Eixo</th><th>O que você vai dominar</th></tr>
+    <tr><td>Definição e fisiopatologia</td><td>Urgência como sintoma central; mecanismos miogênico e neurogênico/urotelial</td></tr>
+    <tr><td>Clínica</td><td>Urgência, frequência, noctúria, incontinência de urgência</td></tr>
+    <tr><td>Diferencial</td><td>IUE, ITU, poliúria, neoplasia vesical (sinais de alarme)</td></tr>
+    <tr><td>Avaliação</td><td>Diário miccional, quando pedir urodinâmica</td></tr>
+    <tr><td>Tratamento</td><td>Comportamental → farmacológico (antimuscarínico/beta-3) → refratário (botox/neuromodulação)</td></tr>
+   </table>`],
+  ['fisiopatologia','Fisiopatologia', `
+   <div class="ac-h">Por que o detrusor "decide" contrair na hora errada</div>
+   <p class="ac-p">A base fisiopatológica da bexiga hiperativa é a perda do controle inibitório normal sobre o detrusor durante a fase de enchimento — lembre do módulo de fisiologia: nessa fase, o sistema simpático deveria manter o detrusor relaxado, sob supervisão do centro pontino e do córtex. Na BH, esse controle falha e o detrusor gera <b>contrações involuntárias</b> antes do momento apropriado, gerando a sensação de urgência (e, se a contração for forte o bastante para vencer a resistência uretral, incontinência de urgência).</p>
+   <p class="ac-p">Existem, hoje, duas teorias complementares (não excludentes) para explicar essa perda de controle. A <b>teoria miogênica</b> propõe que alterações intrínsecas nas próprias células musculares lisas do detrusor (por isquemia relativa, envelhecimento, denervação parcial) tornam essas células mais excitáveis e mais propensas a se despolarizar e contrair espontaneamente, de forma coordenada localmente mesmo sem comando neural central adequado. A <b>teoria neurogênica/urotelial (sensorial)</b>, mais recente e cada vez mais valorizada, propõe que o <b>urotélio</b> (camada que reveste internamente a bexiga) não é apenas uma barreira passiva, mas um tecido <b>sensorial ativo</b>: ele libera mediadores químicos (ATP, óxido nítrico, entre outros) em resposta ao estiramento, que estimulam terminações nervosas aferentes <b>sensibilizadas</b> logo abaixo do urotélio, amplificando o sinal de "bexiga cheia" muito antes do volume vesical normal — o cérebro recebe um sinal de urgência desproporcional ao volume real, e o próprio reflexo de contração do detrusor pode ser deflagrado precocemente.</p>
+   ${SVG_DETRUSOR}
+   <p class="ac-p">Vale destacar que a bexiga hiperativa pode ser <b>idiopática</b> (sem causa identificável, a mais comum) ou <b>neurogênica</b>, quando há uma doença neurológica de base que rompe a via de controle central sobre a bexiga — lesão medular, esclerose múltipla, doença de Parkinson, acidente vascular cerebral. Na forma neurogênica, o mecanismo é a perda da <b>inibição supraespinal</b> sobre o arco reflexo sacral da micção, deixando o reflexo "descontrolado" e disparando contrações do detrusor de forma automática e frequente. Esse conceito ajuda a entender por que doenças neurológicas entram na lista de diagnóstico diferencial e de investigação quando a bexiga hiperativa surge de forma atípica (início súbito, associada a outros sintomas neurológicos).</p>
+   <div class="ac-tip"><b>Macete:</b> "miogênica" = o próprio músculo fica hiperexcitável; "urotelial/sensorial" = o revestimento da bexiga manda sinal de alarme cedo demais; "neurogênica" = o freio central que deveria conter o reflexo sacral está rompido por doença neurológica. As três convergem no mesmo resultado: contração do detrusor antes da hora.</div>`],
+  ['etiologia','Causas e Fatores Associados', `
+   <div class="ac-h">Idiopática na maioria, mas sempre pensando nos gatilhos</div>
+   <p class="ac-p">Na grande maioria das mulheres, a bexiga hiperativa é <b>idiopática</b>, sem uma causa estrutural ou neurológica identificável — associada principalmente ao <b>envelhecimento</b> (perda de elasticidade vesical, alterações do urotélio, redução da capacidade funcional da bexiga) e a fatores que aumentam a sensibilidade vesical, como obesidade, tabagismo, ingestão excessiva de cafeína e álcool (ambos irritantes vesicais diretos e diuréticos, que aumentam volume e sensibilidade ao mesmo tempo).</p>
+   <p class="ac-p">Causas <b>secundárias</b> importantes a lembrar incluem a <b>obstrução infravesical</b> (mais clássica em homens por hiperplasia prostática, mas pode ocorrer em mulheres após cirurgias anti-incontinência muito obstrutivas ou prolapsos volumosos que angulam a uretra), doenças <b>neurológicas</b> (lesão medular, esclerose múltipla, Parkinson, AVC, mielomeningocele — configurando a bexiga hiperativa neurogênica), e causas <b>metabólicas/renais</b> que aumentam o volume urinário, como o <b>diabetes mellitus descompensado</b> (poliúria osmótica) e a <b>diabetes insipidus</b>. É importante lembrar que sintomas de urgência e frequência também podem ser <b>secundários a irritação local</b>, como em infecções urinárias de repetição, cálculos vesicais e, mais raramente, neoplasia vesical.</p>
+   <table class="ac-tbl"><tr><th>Categoria</th><th>Exemplos</th></tr>
+    <tr><td>Idiopática (mais comum)</td><td>Envelhecimento, sem causa estrutural identificável</td></tr>
+    <tr><td>Neurogênica</td><td>Lesão medular, esclerose múltipla, Parkinson, AVC</td></tr>
+    <tr><td>Obstrutiva</td><td>Prolapso volumoso, cirurgia anti-incontinência obstrutiva prévia</td></tr>
+    <tr><td>Metabólica/poliúrica</td><td>Diabetes mellitus descompensado, diabetes insipidus</td></tr>
+    <tr><td>Irritativa local</td><td>ITU de repetição, cálculo vesical, neoplasia vesical</td></tr>
+   </table>
+   <div class="ac-warn"><b>Sinal de alarme:</b> hematúria, dor pélvica persistente, início súbito em paciente tabagista, ou sintomas refratários ao tratamento padrão devem levantar suspeita de causa secundária (sobretudo neoplasia vesical) e motivar investigação adicional antes de rotular como BH idiopática.</div>`],
+  ['clinica','Quadro Clínico', `
+   <div class="ac-h">A tétrade de sintomas e como diferenciá-la da IUE</div>
+   <p class="ac-p">O sintoma <b>obrigatório e central</b> para o diagnóstico é a <b>urgência</b>: uma vontade súbita e forte de urinar, difícil ou impossível de adiar. Em torno dela, gravitam três outros sintomas que costumam (mas não precisam obrigatoriamente) estar presentes: <b>frequência urinária diurna aumentada</b> (geralmente definida como mais de 8 micções em 24 horas), <b>noctúria</b> (acordar uma ou mais vezes à noite para urinar) e a <b>incontinência de urgência</b>, quando a urgência é tão intensa que a paciente não consegue chegar ao banheiro a tempo e perde urina — tipicamente em <b>quantidade maior</b> do que na IUE, e sem relação com esforço físico.</p>
+   <p class="ac-p">O padrão temporal é o que mais diferencia a bexiga hiperativa da IUE em questões de prova: na BH, a perda (quando ocorre) é <b>precedida por uma sensação de urgência</b> que a paciente reconhece e tenta conter, muitas vezes por vários segundos, antes de eventualmente perder o controle; na IUE, a perda ocorre <b>no exato momento do esforço</b>, sem nenhuma sensação prévia de vontade. Vale reforçar novamente: BH é definida por sintomas, e pode haver bexiga hiperativa <b>sem nenhuma perda de urina</b> ("bexiga hiperativa seca", apenas com urgência/frequência/noctúria), assim como pode haver incontinência de urgência sem os outros sintomas serem tão proeminentes.</p>
+   <div class="ac-tip"><b>Macete:</b> "sente vontade forte, corre para o banheiro, às vezes não chega a tempo" = urgência/BH. "Perde no ato do esforço, sem sentir vontade antes" = IUE. Se os dois padrões coexistem na mesma paciente, pense em incontinência mista.</div>`],
+  ['diferencial','Diferencial com IUE e Outras Causas de Urgência', `
+   <div class="ac-h">Antes de rotular como bexiga hiperativa, excluir o que imita ela</div>
+   <p class="ac-p">O diagnóstico diferencial mais cobrado, e o que fecha o arco deste bloco de módulos, é justamente com a <b>IUE</b>: os dois quadros compartilham o desfecho final (perda urinária), mas divergem completamente no mecanismo e no padrão temporal, como já detalhado. Quando os dois padrões coexistem — episódios de perda ao esforço E episódios precedidos de urgência súbita — o diagnóstico é <b>incontinência urinária mista</b>, e o tratamento inicial costuma mirar o componente que mais incomoda a paciente, com o diário miccional ajudando a quantificar qual predomina.</p>
+   <p class="ac-p">Antes de fechar o diagnóstico de BH idiopática, é obrigatório excluir causas que <b>mimetizam</b> urgência e frequência. A <b>infecção do trato urinário</b> é a causa mais comum de urgência/frequência de início recente e deve sempre ser afastada por EAS/urocultura antes de rotular como BH — por definição da própria ICS, a presença de infecção comprovada exclui o diagnóstico de bexiga hiperativa até que seja tratada. A <b>poliúria</b> (por ingesta hídrica excessiva, diabetes mellitus descompensado ou diabetes insipidus) também gera frequência e noctúria, mas por um mecanismo de <b>volume aumentado</b>, não de hiperatividade — o diário miccional revela grandes volumes urinados a cada micção, diferente dos pequenos volumes frequentes da BH verdadeira. A <b>neoplasia vesical</b> deve sempre ser lembrada, sobretudo diante de hematúria, tabagismo ou sintomas refratários e de início súbito em paciente sem fatores de risco típicos para BH idiopática.</p>
+   <table class="ac-tbl"><tr><th>Condição</th><th>Como diferenciar</th></tr>
+    <tr><td>IUE</td><td>Perda sincronizada ao esforço, sem urgência prévia</td></tr>
+    <tr><td>Incontinência mista</td><td>Ambos os padrões coexistem</td></tr>
+    <tr><td>Infecção urinária</td><td>EAS/urocultura positivos; sintomas agudos, disúria, por vezes febre</td></tr>
+    <tr><td>Poliúria (DM, ingesta excessiva)</td><td>Diário miccional mostra grandes volumes por micção</td></tr>
+    <tr><td>Neoplasia vesical</td><td>Hematúria, tabagismo, sintomas refratários/atípicos</td></tr>
+   </table>
+   <div class="ac-warn"><b>Erro que reprova:</b> tratar urgência/frequência como bexiga hiperativa sem excluir infecção urinária primeiro — pela própria definição da ICS, isso invalida o diagnóstico até a infecção ser tratada e os sintomas reavaliados.</div>`],
+  ['avaliacao','Avaliação Diagnóstica', `
+   <div class="ac-h">Diagnóstico clínico, exames para excluir o que não é BH</div>
+   <p class="ac-p">Como já destacado, a bexiga hiperativa é um diagnóstico <b>essencialmente clínico</b>, baseado na história de urgência com ou sem os demais sintomas associados. A anamnese deve investigar ativamente frequência diurna, noctúria, quantidade e circunstância dos episódios de perda (se houver), uso de medicações que afetam a bexiga, ingestão de líquidos/cafeína/álcool, e sintomas de alarme (hematúria, dor). O <b>diário miccional</b> de 2 a 3 dias é a ferramenta mais valiosa: confirma o padrão de pequenos volumes frequentes (compatível com BH) versus grandes volumes (sugerindo poliúria), documenta a noctúria e quantifica a frequência real, muitas vezes mais confiável do que a percepção subjetiva da paciente.</p>
+   <p class="ac-p">Exames complementares mínimos incluem <b>EAS e urocultura</b> (excluir infecção, obrigatório antes de rotular como BH), <b>glicemia</b> quando há suspeita de diabetes, e <b>resíduo pós-miccional</b> (para excluir retenção urinária/esvaziamento incompleto como causa de frequência). O <b>estudo urodinâmico não é necessário na maioria dos casos</b> de BH não complicada, já que o tratamento inicial (comportamental e farmacológico) é o mesmo independentemente de haver ou não hiperatividade detrusora documentada objetivamente; ele passa a ser útil em casos <b>refratários ao tratamento</b>, antes de terapias mais invasivas (toxina botulínica, neuromodulação), em suspeita de incontinência mista com dúvida diagnóstica, ou quando há suspeita de disfunção miccional/doença neurológica associada.</p>
+   <table class="ac-tbl"><tr><th>Exame</th><th>Objetivo</th></tr>
+    <tr><td>Diário miccional (2-3 dias)</td><td>Confirmar padrão, quantificar frequência/noctúria, diferenciar de poliúria</td></tr>
+    <tr><td>EAS + urocultura</td><td>Excluir infecção urinária (obrigatório)</td></tr>
+    <tr><td>Resíduo pós-miccional</td><td>Excluir retenção/esvaziamento incompleto</td></tr>
+    <tr><td>Urodinâmica</td><td>Reservada a casos refratários ou antes de terapia de 3ª linha</td></tr>
+   </table>
+   <div class="ac-tip"><b>Atalho para prova:</b> "urgência + frequência + noctúria, sem infecção, sem hematúria" já basta para iniciar tratamento de BH — não é necessário aguardar urodinâmica.</div>`],
+  ['tratamento1','Tratamento — Primeira e Segunda Linha', `
+   <div class="ac-h">Comportamental primeiro, depois farmacológico</div>
+   <p class="ac-p">A <b>primeira linha</b> de tratamento da bexiga hiperativa é sempre <b>comportamental/conservadora</b>: orientações gerais sobre hábitos de vida, redução da ingestão de irritantes vesicais (cafeína, álcool, bebidas gaseificadas), controle do volume de líquidos ingeridos (sem restrição excessiva, que pode causar desidratação), perda de peso quando indicada, e duas técnicas centrais — o <b>treinamento vesical</b> (a paciente é orientada a urinar em intervalos programados e progressivamente maiores, "reeducando" a bexiga a tolerar volumes maiores antes de sentir urgência) e a <b>fisioterapia do assoalho pélvico</b>, que também tem papel aqui: a contração voluntária do assoalho pélvico no momento da urgência pode inibir reflexamente a contração do detrusor (mecanismo de inibição reflexa), ajudando a "segurar" o episódio até chegar ao banheiro.</p>
+   <p class="ac-p">Quando as medidas comportamentais isoladas não são suficientes, avança-se para a <b>segunda linha farmacológica</b>, com duas classes principais que atuam nos mesmos receptores estudados no módulo de fisiologia. Os <b>antimuscarínicos</b> (oxibutinina, tolterodina, darifenacina, solifenacina, entre outros) bloqueiam os receptores muscarínicos M2/M3 do detrusor, reduzindo a contratilidade involuntária durante o enchimento — são eficazes, mas seus efeitos colaterais anticolinérgicos (boca seca, constipação, visão turva, e, especialmente em idosas, risco de comprometimento cognitivo com uso prolongado) limitam a tolerabilidade e exigem cautela, sobretudo em pacientes idosas ou com múltiplas comorbidades. O <b>mirabegrona</b>, um agonista beta-3 adrenérgico, promove relaxamento direto do detrusor pela via simpática (lembra o módulo de fisiologia: receptores beta relaxam o detrusor na fase de enchimento) com um perfil de efeitos colaterais mais favorável, sem os efeitos anticolinérgicos — sendo hoje uma alternativa importante, sobretudo em pacientes idosas ou que não toleram antimuscarínicos, ainda que o custo possa ser uma limitação de acesso.</p>
+   <table class="ac-tbl"><tr><th>Linha</th><th>Tratamento</th><th>Observação</th></tr>
+    <tr><td>1ª linha</td><td>Treinamento vesical + fisioterapia + redução de irritantes vesicais</td><td>Base de todo o tratamento, mantida mesmo com fármacos</td></tr>
+    <tr><td>2ª linha</td><td>Antimuscarínicos (oxibutinina, tolterodina, solifenacina, darifenacina)</td><td>Efeitos anticolinérgicos limitam uso, sobretudo em idosas</td></tr>
+    <tr><td>2ª linha (alternativa)</td><td>Mirabegrona (agonista beta-3)</td><td>Menos efeitos anticolinérgicos; pode ser combinado a antimuscarínico</td></tr>
+   </table>
+   <div class="ac-call"><b>Por que o mirabegrona não causa boca seca?</b> Porque não age nos receptores muscarínicos das glândulas salivares/intestino — ele relaxa o detrusor por uma via completamente diferente (beta-3 adrenérgica), o que explica seu perfil de efeitos colaterais mais favorável em relação aos antimuscarínicos.</div>`],
+  ['tratamento2','Tratamento Refratário (Terceira Linha)', `
+   <div class="ac-h">Quando comportamento e fármacos não resolvem</div>
+   <p class="ac-p">Estima-se que uma parcela relevante das pacientes (em torno de um terço a 40% em alguns estudos) não responde de forma satisfatória à primeira e à segunda linha de tratamento, seja por ineficácia, seja por intolerância aos efeitos colaterais. Para esses casos, existem opções de <b>terceira linha</b>, mais invasivas, mas com boa eficácia documentada. A <b>toxina onabotulínica A intradetrusora</b> é aplicada por via cistoscópica, em múltiplos pontos da parede vesical, e age bloqueando a liberação de acetilcolina nas terminações nervosas que estimulam o detrusor, reduzindo as contrações involuntárias por um período de meses (geralmente repetindo-se a aplicação periodicamente); o principal risco a monitorar é a <b>retenção urinária</b>, que pode exigir cateterismo intermitente temporário — por isso a paciente deve ser orientada e estar disposta a esse risco antes do procedimento.</p>
+   <p class="ac-p">A <b>neuromodulação</b> é a outra grande opção de terceira linha, disponível em duas modalidades: a <b>neuromodulação sacral</b>, em que um dispositivo implantável estimula continuamente as raízes sacrais (geralmente S3), modulando a via reflexa entre bexiga e medula/encéfalo de forma mais fisiológica; e a <b>neuroestimulação do nervo tibial posterior</b>, uma técnica minimamente invasiva (agulha fina próxima ao maléolo medial, com sessões semanais), que estimula indiretamente as mesmas raízes sacrais por via aferente, com boa eficácia e menor invasividade, embora exija sessões repetidas de manutenção.</p>
+   <p class="ac-p">Em casos extremamente refratários a todas as opções anteriores, a <b>cirurgia de ampliação vesical (cistoplastia de ampliação)</b>, usando um segmento intestinal para aumentar a capacidade e reduzir a pressão vesical, é reservada como <b>último recurso</b>, dada sua maior morbidade e as possíveis complicações metabólicas e de esvaziamento associadas ao uso de segmento intestinal.</p>
+   <div class="ac-tip"><b>Macete de prova:</b> ordem de escalonamento — comportamental → antimuscarínico ou beta-3 → toxina botulínica ou neuromodulação (sacral/tibial posterior) → ampliação vesical (excepcional). "Refratária a fármacos" na questão é a senha para pensar em botox ou neuromodulação, não em cirurgia de ampliação de imediato.</div>`],
+ ],
+};
+
+Object.assign(C['incontinencia|2'], {
+ escores: `<div class="ac-h">Definição sindrômica (ICS) — os quatro sintomas</div>
+   <div class="ac-pills">
+    <span class="ac-pill">Urgência (obrigatório)</span><span class="ac-pill">Frequência diurna (&gt;8x/24h)</span>
+    <span class="ac-pill">Noctúria</span><span class="ac-pill">Incontinência de urgência (opcional)</span>
+   </div>
+   <div class="ac-h" style="margin-top:14px">Questionários validados</div>
+   <table class="ac-tbl"><tr><th>Instrumento</th><th>Uso</th></tr>
+    <tr><td>OAB-V8</td><td>Triagem rápida de sintomas de bexiga hiperativa (8 itens)</td></tr>
+    <tr><td>ICIQ-OAB</td><td>Avalia frequência, noctúria, urgência e incontinência de urgência</td></tr>
+    <tr><td>Diário miccional (2-3 dias)</td><td>Documenta volumes, horários e episódios — padrão-ouro para caracterização objetiva</td></tr>
+   </table>
+   <div class="ac-call"><b>Critério prático:</b> mais de 8 micções em 24h costuma definir frequência aumentada; noctúria é qualquer despertar para urinar (uma ou mais vezes já conta).</div>`,
+ dif: `<div class="ac-h">Diferenciais</div>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Diferenciar de</th><th>Chave</th></tr>
+    <tr><td>Urgência + perda</td><td>IUE</td><td>BH: urgência precede a perda. IUE: perda simultânea ao esforço, sem aviso</td></tr>
+    <tr><td>Urgência + perda</td><td>Incontinência mista</td><td>Ambos os padrões coexistem; diário miccional define predomínio</td></tr>
+    <tr><td>Urgência/frequência de início recente</td><td>Infecção urinária</td><td>EAS/urocultura positivos, disúria, possível febre</td></tr>
+    <tr><td>Frequência + noctúria com grandes volumes</td><td>Poliúria (DM, ingesta excessiva)</td><td>Diário miccional mostra volumes grandes por micção</td></tr>
+    <tr><td>Sintomas refratários/hematúria</td><td>Neoplasia vesical</td><td>Hematúria, tabagismo, sintomas atípicos → investigar</td></tr>
+   </table>`,
+ mapa: `<div class="ac-h">Bexiga hiperativa em mapa</div>
+   <div class="mm">
+    <div class="mm-card"><h5>Definição</h5><ul><li>Síndrome clínica (ICS)</li><li>Urgência ± frequência, noctúria, incontinência de urgência</li><li>Diagnóstico por sintomas, sem infecção</li></ul></div>
+    <div class="mm-card"><h5>Fisiopatologia</h5><ul><li>Teoria miogênica (músculo hiperexcitável)</li><li>Teoria urotelial/sensorial (aferência amplificada)</li><li>Forma neurogênica: perda de inibição central</li></ul></div>
+    <div class="mm-card"><h5>Diferencial</h5><ul><li>IUE: perda sincronizada ao esforço, sem urgência</li><li>Excluir ITU sempre antes de rotular BH</li><li>Poliúria e neoplasia vesical como diferenciais</li></ul></div>
+    <div class="mm-card"><h5>Tratamento</h5><ul><li>1ª linha: comportamental + treinamento vesical</li><li>2ª linha: antimuscarínico ou mirabegrona</li><li>3ª linha: botox intradetrusor ou neuromodulação</li></ul></div>
+   </div>`,
+ fluxo_dx: `<div class="ac-h">Fluxograma diagnóstico da bexiga hiperativa</div>
+   <div class="fx">
+    <div class="fx-node start">Urgência urinária, com ou sem frequência/noctúria/perda</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Sinais de alarme? (hematúria, dor, início súbito atípico)</div>
+    <div class="fx-row">
+     <div class="fx-node">Sim → investigar causa orgânica (imagem/cistoscopia conforme suspeita)</div>
+     <div class="fx-node">Não → seguir investigação de rotina</div>
+    </div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">EAS/urocultura (excluir ITU) + diário miccional (2-3 dias)</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Sem infecção, volumes pequenos e frequentes, sem sinais de alarme?</div>
+    <div class="fx-row">
+     <div class="fx-node end">Sim → diagnóstico clínico de bexiga hiperativa, iniciar tratamento</div>
+     <div class="fx-node end">Refratário ou dúvida (misto) → considerar urodinâmica</div>
+    </div>
+   </div>`,
+ fluxo_cond: `<div class="ac-h">Escalonamento terapêutico da bexiga hiperativa</div>
+   <div class="fx">
+    <div class="fx-node start">Bexiga hiperativa confirmada</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">1ª linha: treinamento vesical + fisioterapia + redução de cafeína/álcool + ajuste de líquidos</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Resposta insuficiente após período adequado?</div>
+    <div class="fx-row">
+     <div class="fx-node end">Não, houve melhora → manter e reforçar medidas comportamentais</div>
+     <div class="fx-node">Sim → 2ª linha: antimuscarínico OU mirabegrona (agonista beta-3)</div>
+    </div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Refratária ou intolerante à 2ª linha?</div>
+    <div class="fx-row">
+     <div class="fx-node end">Não → manter fármaco, reavaliar periodicamente</div>
+     <div class="fx-node end">Sim → 3ª linha: toxina botulínica intradetrusora ou neuromodulação (sacral/tibial posterior)</div>
+    </div>
+   </div>`,
+ vespera: `<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Ponto 1:</b> bexiga hiperativa = síndrome clínica de urgência ± frequência/noctúria/incontinência de urgência, diagnosticada por sintomas, sem infecção comprovada.</div>
+   <div class="ac-call"><b>Ponto 2:</b> hiperatividade detrusora é o achado urodinâmico associado, mas os dois termos não são sinônimos.</div>
+   <div class="ac-call"><b>Ponto 3:</b> fisiopatologia combina teoria miogênica (músculo hiperexcitável) e urotelial/sensorial (aferência amplificada); forma neurogênica por perda de inibição central em doenças neurológicas.</div>
+   <div class="ac-call"><b>Ponto 4:</b> excluir infecção urinária SEMPRE antes de rotular como bexiga hiperativa; urodinâmica não é obrigatória na maioria dos casos.</div>
+   <div class="ac-call"><b>Ponto 5:</b> tratamento escalonado — comportamental → antimuscarínico ou mirabegrona → toxina botulínica/neuromodulação → ampliação vesical (excepcional).</div>
+   <div class="ac-call"><b>Ponto 6:</b> diferencial com IUE pelo padrão temporal — urgência precede a perda na BH; na IUE a perda é simultânea ao esforço, sem aviso.</div>`,
+ dicas: `<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Se a questão descreve "vontade súbita e forte, às vezes não dá tempo de chegar ao banheiro", pense sempre em urgência/BH primeiro, mesmo que o enunciado também mencione algum esforço como "gatilho" (a urgência precedendo é o que importa).</div>
+   <div class="ac-tip">Mirabegrona é a resposta clássica quando a questão descreve uma idosa com contraindicação/intolerância a efeitos anticolinérgicos (ex.: já em uso de outros anticolinérgicos, risco de piora cognitiva).</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Tratar toda queixa de urgência como bexiga hiperativa sem excluir infecção urinária — pela definição da ICS, isso invalida o diagnóstico.</div>
+   <div class="ac-warn">Confundir "bexiga hiperativa" com "hiperatividade detrusora" como se fossem sinônimos — uma é síndrome clínica, a outra é achado urodinâmico; podem coexistir ou não.</div>`,
+ checklist: [
+  'Sei a definição sindrômica da ICS para bexiga hiperativa',
+  'Diferencio bexiga hiperativa (clínica) de hiperatividade detrusora (urodinâmica)',
+  'Conheço as teorias miogênica e urotelial/sensorial da fisiopatologia',
+  'Sei quando suspeitar de causa neurogênica ou secundária (sinais de alarme)',
+  'Diferencio o padrão temporal de BH e de IUE',
+  'Sei a sequência diagnóstica, incluindo quando excluir ITU e poliúria',
+  'Conheço o escalonamento terapêutico completo (comportamental → fármacos → 3ª linha)'
+ ],
+});
+
+Object.assign(C['incontinencia|2'], {
+ questoes: [
+  {stem:'A definição da International Continence Society para bexiga hiperativa exige a presença obrigatória de qual sintoma?', opts:['Incontinência de urgência','Urgência urinária','Noctúria','Resíduo pós-miccional elevado'], correct:1,
+   expl:'A <b>urgência urinária</b> é o sintoma central e obrigatório da definição; frequência, noctúria e incontinência de urgência costumam acompanhá-la, mas não são obrigatórios para o diagnóstico sindrômico.'},
+  {stem:'É correto afirmar sobre bexiga hiperativa e hiperatividade detrusora que:', opts:['São termos sinônimos e sempre coexistem','Bexiga hiperativa é diagnóstico clínico; hiperatividade detrusora é achado urodinâmico, e nem sempre coexistem','Hiperatividade detrusora é sempre necessária para o diagnóstico de bexiga hiperativa','Ambos os termos exigem confirmação por cistoscopia'], correct:1,
+   expl:'Bexiga hiperativa é uma <b>síndrome clínica</b> definida por sintomas; hiperatividade detrusora é um <b>achado urodinâmico</b> objetivo. Muitas pacientes com BH clínica não apresentam hiperatividade detrusora documentada no exame.'},
+  {stem:'A teoria urotelial (sensorial) da fisiopatologia da bexiga hiperativa propõe que:', opts:['O urotélio é uma barreira passiva sem função sensorial','O urotélio libera mediadores que amplificam a sinalização aferente de bexiga cheia, gerando urgência precoce','A hiperatividade depende exclusivamente de lesão medular','O detrusor perde toda capacidade contrátil'], correct:1,
+   expl:'A teoria urotelial propõe que o urotélio é um tecido <b>sensorial ativo</b>, liberando mediadores (como ATP) que sensibilizam terminações aferentes, amplificando o sinal de enchimento vesical e gerando urgência antes do volume normalmente esperado.'},
+  {stem:'Antes de firmar o diagnóstico de bexiga hiperativa idiopática, é obrigatório excluir qual condição, segundo a própria definição da ICS?', opts:['Diabetes mellitus','Infecção do trato urinário','Prolapso de órgãos pélvicos','Menopausa'], correct:1,
+   expl:'A definição da ICS exclui explicitamente a bexiga hiperativa na presença de <b>infecção urinária comprovada</b> ou outra causa óbvia — por isso EAS/urocultura são obrigatórios antes de rotular o quadro como BH.'},
+  {stem:'Uma paciente relata episódios de perda urinária sempre precedidos por uma vontade súbita e intensa de urinar, que ela tenta conter sem sucesso. Esse padrão é característico de:', opts:['Incontinência urinária de esforço','Incontinência de urgência (bexiga hiperativa)','Incontinência por transbordamento','Fístula vesicovaginal'], correct:1,
+   expl:'A perda <b>precedida por urgência súbita e intensa</b> é o padrão característico da incontinência de urgência associada à bexiga hiperativa, diferente da IUE, em que a perda é simultânea ao esforço, sem aviso prévio.'},
+  {stem:'O estudo urodinâmico é indicado de forma rotineira em qual situação relacionada à bexiga hiperativa?', opts:['Em todos os casos, antes de qualquer tratamento','Em casos refratários ao tratamento farmacológico, antes de terapias de terceira linha','Apenas em mulheres jovens','Nunca é indicado em bexiga hiperativa'], correct:1,
+   expl:'A urodinâmica não é necessária na maioria dos casos de BH não complicada; torna-se útil em casos <b>refratários</b>, antes de terapias mais invasivas de terceira linha, ou quando há dúvida diagnóstica (por exemplo, suspeita de componente misto).'},
+  {stem:'A primeira linha de tratamento para bexiga hiperativa consiste em:', opts:['Antimuscarínicos orais','Toxina botulínica intradetrusora','Treinamento vesical, fisioterapia e redução de irritantes vesicais','Neuromodulação sacral'], correct:2,
+   expl:'A <b>primeira linha</b> é sempre comportamental/conservadora: treinamento vesical, fisioterapia do assoalho pélvico e redução de irritantes vesicais como cafeína e álcool.'},
+  {stem:'O mecanismo de ação do mirabegrona no tratamento da bexiga hiperativa é:', opts:['Bloqueio de receptores muscarínicos M3 no detrusor','Agonismo de receptores beta-3 adrenérgicos, promovendo relaxamento direto do detrusor','Bloqueio da liberação de acetilcolina nas terminações nervosas vesicais','Estimulação elétrica das raízes sacrais'], correct:1,
+   expl:'O mirabegrona é um <b>agonista beta-3 adrenérgico</b> que promove relaxamento direto do detrusor pela mesma via simpática ativa na fase fisiológica de enchimento, sem os efeitos anticolinérgicos dos antimuscarínicos.'},
+  {stem:'Uma vantagem do mirabegrona em relação aos antimuscarínicos no tratamento da bexiga hiperativa em idosas é:', opts:['Maior eficácia comprovada em todos os estudos','Menor incidência de efeitos anticolinérgicos, como boca seca e comprometimento cognitivo','Ausência total de efeitos colaterais','Ser a única opção aprovada para uso em idosas'], correct:1,
+   expl:'Por atuar em receptores beta-3 e não em receptores muscarínicos, o mirabegrona tem <b>menor incidência de efeitos anticolinérgicos</b> (boca seca, constipação, comprometimento cognitivo), sendo especialmente relevante em pacientes idosas.'},
+  {stem:'A toxina onabotulínica A intradetrusora, usada no tratamento de terceira linha da bexiga hiperativa refratária, tem como principal risco a ser monitorado:', opts:['Hipertensão arterial grave','Retenção urinária, podendo exigir cateterismo intermitente','Insuficiência renal aguda','Hemorragia digestiva'], correct:1,
+   expl:'Ao reduzir a contratilidade do detrusor de forma mais intensa, a toxina botulínica intradetrusora pode causar <b>retenção urinária</b>, exigindo que a paciente seja orientada e esteja disposta a realizar cateterismo intermitente se necessário.'},
+  {stem:'Uma mulher com queixa de frequência urinária e noctúria apresenta, no diário miccional, grandes volumes urinados a cada micção, sem urgência intensa referida. Esse achado sugere principalmente:', opts:['Bexiga hiperativa idiopática típica','Poliúria (por exemplo, diabetes mellitus descompensado)','Incontinência urinária de esforço','Deficiência esfincteriana intrínseca'], correct:1,
+   expl:'Grandes volumes urinados a cada micção sugerem <b>poliúria</b> como causa da frequência/noctúria (por exemplo, diabetes descompensado), mecanismo diferente da bexiga hiperativa, em que o padrão típico é de pequenos volumes frequentes.'},
+  {stem:'A neuromodulação do nervo tibial posterior, usada como opção de terceira linha na bexiga hiperativa refratária, atua por meio de:', opts:['Estimulação direta do detrusor por via cistoscópica','Estimulação aferente indireta das raízes sacrais via um nervo periférico do membro inferior','Bloqueio muscarínico sistêmico','Ampliação cirúrgica da capacidade vesical'], correct:1,
+   expl:'A neuroestimulação do nervo tibial posterior utiliza uma agulha fina próxima ao maléolo medial para estimular indiretamente, por via aferente, as mesmas raízes sacrais moduladas pela neuromodulação sacral direta, com técnica menos invasiva.'},
+ ],
+ flashcards: [
+  {front:'Qual o sintoma obrigatório para o diagnóstico de bexiga hiperativa, segundo a ICS?', back:'Urgência urinária.', type:'basic'},
+  {front:'A bexiga hiperativa é um diagnóstico {{clínico}}, baseado em sintomas, e não depende de confirmação urodinâmica.', back:'clínico', type:'cloze'},
+  {front:'Qual a diferença entre bexiga hiperativa e hiperatividade detrusora?', back:'Bexiga hiperativa é uma síndrome clínica (sintomas); hiperatividade detrusora é um achado urodinâmico objetivo (contrações involuntárias do detrusor no enchimento). Não são sinônimos.', type:'basic'},
+  {front:'Cite as duas teorias principais da fisiopatologia da bexiga hiperativa idiopática.', back:'Teoria miogênica (hiperexcitabilidade das células musculares do detrusor) e teoria urotelial/sensorial (urotélio libera mediadores que amplificam a sinalização aferente).', type:'basic'},
+  {front:'Que condição deve ser SEMPRE excluída antes de firmar o diagnóstico de bexiga hiperativa?', back:'Infecção do trato urinário (por definição da ICS).', type:'basic'},
+  {front:'Qual o padrão temporal que diferencia a incontinência de urgência da IUE?', back:'Na incontinência de urgência, a perda é precedida por sensação súbita e intensa de urgência; na IUE, a perda é simultânea ao esforço, sem aviso prévio.', type:'basic'},
+  {front:'O diário miccional com volumes urinados grandes por micção, mais do que pequenos e frequentes, sugere {{poliúria}} em vez de bexiga hiperativa.', back:'poliúria', type:'cloze'},
+  {front:'Qual é a primeira linha de tratamento da bexiga hiperativa?', back:'Medidas comportamentais: treinamento vesical, fisioterapia do assoalho pélvico e redução de irritantes vesicais (cafeína, álcool).', type:'basic'},
+  {front:'Quais as duas classes farmacológicas de segunda linha para bexiga hiperativa?', back:'Antimuscarínicos (oxibutinina, tolterodina, solifenacina, darifenacina) e agonista beta-3 adrenérgico (mirabegrona).', type:'basic'},
+  {front:'Por que o mirabegrona causa menos efeitos anticolinérgicos que os antimuscarínicos?', back:'Porque atua por agonismo de receptores beta-3 adrenérgicos, e não por bloqueio de receptores muscarínicos.', type:'basic'},
+  {front:'Cite as duas principais opções de terceira linha para bexiga hiperativa refratária.', back:'Toxina onabotulínica A intradetrusora e neuromodulação (sacral ou do nervo tibial posterior).', type:'basic'},
+  {front:'Qual o principal risco da toxina botulínica intradetrusora a ser monitorado?', back:'Retenção urinária, podendo exigir cateterismo intermitente.', type:'basic'},
+  {front:'A {{cistoplastia de ampliação}} vesical é reservada como último recurso em bexiga hiperativa extremamente refratária a todas as outras opções.', back:'cistoplastia de ampliação', type:'cloze'},
+  {front:'Cite dois sinais de alarme que exigem investigação de causa secundária antes de rotular como bexiga hiperativa idiopática.', back:'Hematúria e sintomas refratários/atípicos de início súbito (levantando suspeita de neoplasia vesical ou outra causa orgânica).', type:'basic'},
+ ],
+ casos: [
+  {t:'Caso 1 — A vontade que não espera', stem:'Mulher de 45 anos relata, há 8 meses, episódios diários de vontade súbita e intensa de urinar, que às vezes não consegue conter, perdendo pequena quantidade de urina antes de chegar ao banheiro. Nega disúria ou hematúria. Urina 10 vezes ao dia e acorda 2 vezes à noite. EAS normal.', passos:[
+    {h:'1. Reconhecer o sintoma central', p:'Urgência súbita e intensa, com frequência aumentada (10x/dia) e noctúria (2x) — tétrade compatível com bexiga hiperativa.'},
+    {h:'2. Confirmar a exclusão de infecção', p:'EAS normal já exclui infecção urinária, requisito necessário pela definição da ICS antes de firmar o diagnóstico.'},
+    {h:'3. Diferenciar de IUE', p:'A perda é sempre precedida de urgência, nunca associada isoladamente a esforço físico — reforça o padrão de bexiga hiperativa, não de IUE.'},
+    {h:'4. Conduta inicial', p:'Iniciar tratamento comportamental de primeira linha: treinamento vesical, fisioterapia e orientação sobre redução de cafeína, antes de considerar fármacos.'},
+    {h:'Lição de prova', p:'Urgência precedendo a perda + frequência + noctúria + EAS normal fecha o quadro clínico de bexiga hiperativa, sem necessidade de exames adicionais para iniciar o tratamento de primeira linha.'}
+  ]},
+  {t:'Caso 2 — Quando o comportamental não basta', stem:'A mesma paciente do Caso 1 retorna após 3 meses de treinamento vesical e fisioterapia bem realizados, sem melhora significativa dos sintomas. Ela tem 45 anos, sem comorbidades relevantes, e deseja uma opção mais efetiva.', passos:[
+    {h:'1. Reconhecer a falha da primeira linha', p:'Tratamento comportamental adequado sem resposta satisfatória indica necessidade de avançar para a segunda linha.'},
+    {h:'2. Escolher a classe farmacológica', p:'Como a paciente é relativamente jovem e sem contraindicações relevantes, tanto antimuscarínico quanto mirabegrona são opções razoáveis; a escolha pode considerar preferência da paciente e perfil de efeitos colaterais.'},
+    {h:'3. Orientar sobre efeitos esperados', p:'Se optar por antimuscarínico, alertar sobre boca seca e constipação; se optar por mirabegrona, explicar o perfil de menos efeitos anticolinérgicos.'},
+    {h:'4. Planejar seguimento', p:'Reavaliar resposta em algumas semanas; se não houver melhora ou surgirem efeitos colaterais limitantes, considerar trocar de classe ou associar as duas antes de escalar para terceira linha.'},
+    {h:'Lição de prova', p:'A segunda linha farmacológica (antimuscarínico ou mirabegrona) só entra após tentativa adequada da primeira linha comportamental, e a escolha entre as duas classes é individualizada pelo perfil de efeitos colaterais.'}
+  ]},
+  {t:'Caso 3 — A paciente idosa que não pode arriscar confusão mental', stem:'Mulher de 78 anos, com leve declínio cognitivo prévio, refratária a treinamento vesical, com urgência e incontinência de urgência importantes, limitando muito sua qualidade de vida. Já usa outros medicamentos com efeito anticolinérgico para outra condição.', passos:[
+    {h:'1. Reconhecer o risco', p:'Idosa com declínio cognitivo prévio e já em uso de fármacos anticolinérgicos tem risco aumentado de piora cognitiva se receber um antimuscarínico adicional.'},
+    {h:'2. Escolher a segunda linha mais segura', p:'O mirabegrona é a opção preferencial neste cenário, por não ter efeito anticolinérgico central, reduzindo o risco de piora cognitiva.'},
+    {h:'3. Planejar caso haja falha', p:'Se mesmo assim os sintomas permanecerem refratários e muito limitantes, considerar avaliação para terceira linha (toxina botulínica intradetrusora ou neuromodulação), pesando o risco de retenção urinária e a capacidade da paciente de aderir a cateterismo intermitente, se necessário.'},
+    {h:'4. Envolver a paciente na decisão', p:'Discutir expectativas realistas e o impacto na qualidade de vida, já que a idade avançada e a fragilidade cognitiva pesam na escolha entre as opções de terceira linha.'},
+    {h:'Lição de prova', p:'Em idosas com risco cognitivo, o mirabegrona deve ser priorizado sobre antimuscarínicos — questões de prova adoram testar esse raciocínio de segurança medicamentosa individualizada.'}
+  ]},
+ ],
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+</script>
+
 </body>
 </html>
