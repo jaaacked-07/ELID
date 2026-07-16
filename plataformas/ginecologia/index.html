@@ -25228,5 +25228,789 @@ try{ if(typeof route!=='undefined' && route &&
 })();
 </script>
 
+
+<script>
+/* ELID Ginecologia — Conteúdo Incontinência Urinária (4/6): Incontinência Mista (incontinencia|3).
+   Aditivo. Explicações aprofundadas para provas de residência (ENARE, ENAMED, Revalida, PSU-MG, SES-RJ, UERJ, UFRJ). */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+var SVG_MISTA = `<svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+ <linearGradient id="mistBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5f3ff"/><stop offset="1" stop-color="#fdf2f8"/></linearGradient>
+ <linearGradient id="mistLeft" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#93c5fd"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+ <linearGradient id="mistRight" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#6d28d9"/></linearGradient>
+ <radialGradient id="mistOverlap" cx="0.5" cy="0.5" r="0.6"><stop offset="0" stop-color="#fdba74"/><stop offset="1" stop-color="#c2410c"/></radialGradient>
+ <filter id="mistShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#3b0764" flood-opacity="0.2"/></filter>
+</defs>
+<rect x="4" y="4" width="672" height="392" rx="18" fill="url(#mistBg)"/>
+<text x="340" y="28" text-anchor="middle" font-size="15.5" font-weight="700" fill="#4c1d95">Incontinência mista: dois padrões na mesma paciente</text>
+<g filter="url(#mistShadow)" opacity="0.88">
+ <path d="M255 75 C330 78 385 130 388 205 C391 280 335 335 260 336 C185 337 128 283 126 208 C124 133 180 72 255 75 Z" fill="url(#mistLeft)" vector-effect="non-scaling-stroke"/>
+</g>
+<g filter="url(#mistShadow)" opacity="0.88">
+ <path d="M425 75 C500 72 556 133 554 208 C552 283 495 337 420 336 C345 335 289 280 292 205 C295 130 350 78 425 75 Z" fill="url(#mistRight)" vector-effect="non-scaling-stroke"/>
+</g>
+<ellipse cx="340" cy="206" rx="52" ry="92" fill="url(#mistOverlap)" opacity="0.88"/>
+<text x="185" y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Componente de esforço (IUE)</text>
+<text x="178" y="128" text-anchor="middle" font-size="10" fill="#eff6ff" font-weight="700">Perde ao tossir, rir,</text>
+<text x="178" y="142" text-anchor="middle" font-size="10" fill="#eff6ff" font-weight="700">esforço físico</text>
+<text x="178" y="300" text-anchor="middle" font-size="10" fill="#eff6ff" font-weight="700">Sem urgência antes</text>
+<text x="178" y="314" text-anchor="middle" font-size="10" fill="#eff6ff" font-weight="700">da perda</text>
+<text x="495" y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#4c1d95">Componente de urgência (BH)</text>
+<text x="500" y="128" text-anchor="middle" font-size="10" fill="#faf5ff" font-weight="700">Vontade súbita</text>
+<text x="500" y="142" text-anchor="middle" font-size="10" fill="#faf5ff" font-weight="700">e difícil de adiar</text>
+<text x="500" y="300" text-anchor="middle" font-size="10" fill="#faf5ff" font-weight="700">Frequência e</text>
+<text x="500" y="314" text-anchor="middle" font-size="10" fill="#faf5ff" font-weight="700">noctúria associadas</text>
+<text x="340" y="196" text-anchor="middle" font-size="11" fill="#fff7ed" font-weight="700">MISTA</text>
+<text x="340" y="212" text-anchor="middle" font-size="8.5" fill="#fff7ed" font-weight="700">os dois padrões</text>
+<text x="340" y="224" text-anchor="middle" font-size="8.5" fill="#fff7ed" font-weight="700">coexistem</text>
+<text x="340" y="372" text-anchor="middle" font-size="11" fill="#581c87">O diário miccional revela qual componente predomina e direciona o tratamento inicial.</text>
+</svg>`;
+
+C['incontinencia|3'] = {
+ name: 'Incontinência Mista',
+ intro: 'É a combinação dos dois módulos anteriores na mesma paciente — a pergunta que a prova mais adora fazer aqui é "qual componente tratar primeiro", e a resposta certa depende de método, não de intuição.',
+ sub: [
+  ['entendendo','Entendendo do Zero', `
+   <div class="ac-h">Quando os dois padrões coexistem na mesma mulher</div>
+   <p class="ac-p">A <b>incontinência urinária mista (IUM)</b> é definida pela International Continence Society como a <b>queixa de perda involuntária de urina associada tanto à urgência quanto ao esforço físico, à tosse ou ao espirro</b>. Ou seja: não é um terceiro mecanismo novo — é a coexistência, na mesma paciente, do padrão de <b>incontinência urinária de esforço (IUE)</b> que você estudou dois módulos atrás com o padrão de <b>incontinência de urgência</b> associada à bexiga hiperativa que você acabou de estudar. É extremamente comum: estudos populacionais mostram que cerca de um terço a metade das mulheres com incontinência urinária relatam sintomas mistos, e essa proporção tende a aumentar com a idade, já que os fatores de risco de ambos os tipos (parto vaginal, hipoestrogenismo, envelhecimento do assoalho pélvico e da bexiga) se acumulam ao longo da vida.</p>
+   <p class="ac-p">O motivo de a IUM merecer um módulo próprio, e não apenas ser tratada como "a soma dos dois anteriores", é que ela muda a lógica da investigação e, principalmente, da conduta terapêutica. Quando os dois componentes coexistem, tratar apenas um deles de forma isolada — por exemplo, operar a IUE sem nunca ter perguntado sobre urgência — pode deixar a paciente insatisfeita mesmo com uma cirurgia tecnicamente bem-sucedida, porque o componente não tratado continua incomodando. Por isso a avaliação da IUM exige uma pergunta adicional que não existe nos outros dois módulos: <b>qual componente predomina e mais incomoda esta paciente, agora?</b></p>
+   <div class="ac-call"><b>A grande ideia:</b> IUM = IUE + bexiga hiperativa na mesma paciente. O diagnóstico usa as mesmas ferramentas dos dois módulos anteriores; a diferença está em identificar qual componente é predominante e decidir por qual começar o tratamento.</div>
+   <table class="ac-tbl"><tr><th>Eixo</th><th>O que você vai dominar</th></tr>
+    <tr><td>Definição e prevalência</td><td>Por que a IUM é tão frequente e cresce com a idade</td></tr>
+    <tr><td>Avaliação</td><td>Como o diário miccional define o componente predominante</td></tr>
+    <tr><td>Decisão terapêutica</td><td>Qual componente tratar primeiro, e por quê</td></tr>
+    <tr><td>Cirurgia em contexto misto</td><td>Risco de urgência persistente/de novo após sling</td></tr>
+   </table>`],
+  ['fisiopato','Fisiopatologia', `
+   <div class="ac-h">Dois mecanismos, uma mesma bexiga</div>
+   <p class="ac-p">Não existe um mecanismo fisiopatológico único e exclusivo da IUM — o que ocorre é a sobreposição dos mecanismos que você já estudou. De um lado, o <b>suporte anatômico da uretra e do colo vesical</b> pode estar comprometido (hipermobilidade uretral) ou o próprio esfíncter pode estar intrinsecamente fraco (deficiência esfincteriana intrínseca), gerando o componente de esforço. De outro lado, o <b>detrusor</b> pode apresentar contrações involuntárias durante a fase de enchimento (hiperatividade detrusora) ou a paciente pode ter urgência sensorial mesmo sem essa hiperatividade documentada, gerando o componente de urgência.</p>
+   <p class="ac-p">Existe ainda uma via fisiopatológica interessante que liga os dois componentes: em algumas mulheres, a própria perda de urina pelo colo vesical durante o esforço (fenômeno mecânico da IUE) pode <b>desencadear reflexamente uma contração do detrusor</b> — o que se chama de incontinência de urgência "induzida pelo esforço". Isso explica por que, em uma parcela relevante das pacientes com IUM, corrigir cirurgicamente o componente de esforço (com um sling, por exemplo) também melhora o componente de urgência: ao eliminar o gatilho mecânico, elimina-se também a contração reflexa que ele desencadeava. Esse é um dos fatos mais cobrados sobre IUM em provas de residência com foco cirúrgico.</p>
+   ${SVG_MISTA}
+   <div class="ac-tip"><b>Macete:</b> a IUM não é "mais grave" por definição — ela é mais complexa de investigar e de tratar, porque exige decidir prioridades, e não apenas confirmar um diagnóstico.</div>`],
+  ['fatoresrisco','Fatores de Risco', `
+   <div class="ac-h">A soma dos dois módulos anteriores, mais a idade</div>
+   <p class="ac-p">Os fatores de risco da IUM são, essencialmente, a <b>soma</b> dos fatores de risco de IUE e de bexiga hiperativa: parto vaginal, multiparidade, obesidade, tabagismo e constipação crônica (que sobrecarregam o suporte pélvico) somam-se a envelhecimento, hipoestrogenismo, diabetes mellitus, doenças neurológicas leves e obesidade (que também favorecem hiperatividade detrusora e urgência). O fator de risco mais consistentemente associado à IUM especificamente é a <b>idade avançada</b>: a prevalência de sintomas mistos aumenta de forma constante a partir da perimenopausa, superando a prevalência isolada de IUE pura nas faixas etárias mais avançadas.</p>
+   <p class="ac-p">Também merece destaque a <b>cirurgia anti-incontinência prévia</b> como fator de risco para o aparecimento (ou piora) do componente de urgência: uma paciente operada de IUE que, meses depois, passa a relatar urgência e frequência que não tinha antes, pode estar desenvolvendo bexiga hiperativa <b>de novo</b> relacionada ao procedimento — um cenário clínico clássico de prova, detalhado no módulo de tratamento.</p>
+   <div class="ac-warn"><b>Pegadinha:</b> não assuma que toda urgência que aparece após uma cirurgia de sling é necessariamente "causada" pela cirurgia — pode ser um componente misto que já existia e não havia sido investigado antes da operação. Por isso a anamnese pré-operatória completa (incluindo urgência) é obrigatória mesmo quando a queixa principal é claramente de esforço.</div>`],
+  ['clinica','Quadro Clínico', `
+   <div class="ac-h">Reconhecendo os dois padrões na mesma história</div>
+   <p class="ac-p">A paciente com IUM relata, na mesma entrevista, elementos dos dois padrões: perde urina ao tossir, espirrar ou se exercitar (padrão de esforço) <b>e também</b> apresenta episódios de vontade súbita e intensa de urinar que às vezes não consegue conter a tempo (padrão de urgência), muitas vezes acompanhados de aumento da frequência diurna e de noctúria. É fundamental, na anamnese, não se contentar com a queixa espontânea inicial — muitas mulheres relatam apenas o sintoma que mais as incomoda ou que consideram "o problema", e cabe ao examinador perguntar ativamente pelo outro padrão (perguntar especificamente sobre urgência quando a queixa é de esforço, e vice-versa).</p>
+   <p class="ac-p">Um ponto central da entrevista clínica na IUM é identificar qual dos dois componentes é <b>predominante</b> e qual mais <b>incomoda</b> a paciente — esses dois julgamentos nem sempre coincidem: uma paciente pode ter mais episódios de esforço em número absoluto, mas considerar a urgência o sintoma mais limitante socialmente (por exemplo, por medo de não encontrar banheiro em tempo hábil). Questionários validados como o <b>ICIQ-SF</b> ajudam a quantificar o impacto, mas a ferramenta mais valiosa para separar os dois componentes objetivamente é o diário miccional, discutido a seguir.</p>
+   <div class="ac-call"><b>Pergunta que resolve a maioria das questões de prova sobre IUM:</b> "qual sintoma mais incomoda a senhora no dia a dia?" — a resposta orienta por qual componente começar o tratamento.</div>`],
+  ['diagnostico','Diagnóstico e Diário Miccional', `
+   <div class="ac-h">Por que o diário miccional é ainda mais importante aqui</div>
+   <p class="ac-p">Nos módulos de IUE e de bexiga hiperativa isoladas, o diagnóstico costuma ser essencialmente clínico, e o diário miccional é um complemento útil, mas não indispensável em casos típicos. Na IUM, o diário miccional de 3 dias ganha um papel <b>central</b>: é ele quem documenta, de forma objetiva e ao longo do tempo, quantos episódios de perda estão associados a esforço e quantos estão associados a urgência, além de registrar volumes urinados, frequência, ingesta hídrica e horário dos episódios — informações que a memória da paciente na consulta, sozinha, frequentemente não reproduz com fidelidade.</p>
+   <p class="ac-p">O <b>estudo urodinâmico</b> também tem um peso maior na IUM do que nos dois tipos "puros": diante de sintomas mistos, ele ajuda a esclarecer se existe hiperatividade detrusora documentada objetivamente (o que reforça a decisão de tratar o componente de urgência com prioridade) e a mensurar o grau de comprometimento esfincteriano, sendo particularmente valioso <b>antes de uma decisão cirúrgica</b>, quando o achado pode mudar a estratégia (por exemplo, evitar operar isoladamente a IUE em uma paciente com hiperatividade detrusora intensa e não controlada, pelo risco de resultado insatisfatório mesmo com a cirurgia tecnicamente correta).</p>
+   <table class="ac-tbl"><tr><th>Ferramenta</th><th>Papel na IUM</th></tr>
+    <tr><td>Diário miccional (3 dias)</td><td>Quantifica objetivamente o predomínio de cada componente</td></tr>
+    <tr><td>ICIQ-SF</td><td>Mede o impacto e o quanto cada sintoma incomoda</td></tr>
+    <tr><td>Urodinâmica</td><td>Mais valiosa aqui do que nos tipos puros; recomendada antes de decisão cirúrgica</td></tr>
+   </table>
+   <div class="ac-tip"><b>Atalho para prova:</b> se a questão descreve "perda ao esforço E urgência com frequência/noctúria", pense IUM e procure no enunciado qual componente é descrito como mais incômodo — essa é a senha para a próxima pergunta, sobre conduta.</div>`],
+  ['abordagem','Qual Componente Tratar Primeiro', `
+   <div class="ac-h">A decisão mais cobrada sobre IUM</div>
+   <p class="ac-p">A recomendação consolidada em diretrizes atuais (FEBRASGO, ACOG, ICS) é tratar <b>primeiro o componente que mais incomoda a paciente</b> ("most bothersome symptom"), depois de uma tentativa inicial comum a ambos: as medidas <b>conservadoras</b> (fisioterapia do assoalho pélvico e treinamento vesical) beneficiam simultaneamente os dois componentes e devem sempre ser a primeira etapa, independentemente de qual predomina. É a mesma lógica dos dois módulos anteriores, apenas aplicada aos dois padrões ao mesmo tempo.</p>
+   <p class="ac-p">Quando o tratamento conservador não é suficiente e é necessário avançar, a maioria dos protocolos prioriza, na dúvida, <b>tratar primeiro o componente de urgência</b> antes de considerar cirurgia para o componente de esforço — por dois motivos práticos: primeiro, o tratamento farmacológico da urgência (antimuscarínico ou mirabegrona) é reversível, de baixo risco, e pode ser suspenso se não funcionar, ao contrário de uma cirurgia; segundo, uma cirurgia de sling realizada em uma paciente com componente de urgência não controlado pode deixar essa urgência inalterada (ou, mais raramente, agravá-la), gerando insatisfação mesmo com a perda ao esforço corrigida. Já quando o componente de <b>esforço é claramente predominante</b> e o de urgência é leve ou ausente, é razoável avançar diretamente para avaliação cirúrgica do componente de esforço, sem que seja necessário "esgotar" antes o tratamento da urgência.</p>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Conduta inicial</th></tr>
+    <tr><td>Ambos os componentes, sem predomínio claro</td><td>Conservador para ambos (fisioterapia + treinamento vesical) primeiro</td></tr>
+    <tr><td>Urgência predominante/mais incômoda</td><td>Tratar a urgência primeiro (comportamental → farmacológico) antes de considerar cirurgia para esforço</td></tr>
+    <tr><td>Esforço claramente predominante, urgência leve</td><td>Pode avançar para avaliação cirúrgica do componente de esforço</td></tr>
+   </table>
+   <div class="ac-warn"><b>Erro que reprova:</b> indicar cirurgia de sling como primeira conduta em uma paciente com IUM cujo componente de urgência é o mais incômodo e ainda não foi tratado. A ordem lógica é sempre tratar o que mais incomoda, e a urgência não tratada compromete a satisfação com a cirurgia do componente de esforço.</div>`],
+  ['cirurgia','Cirurgia na Incontinência Mista', `
+   <div class="ac-h">O que esperar do sling quando existe componente de urgência associado</div>
+   <p class="ac-p">Quando, após tratamento adequado do componente de urgência (ou em pacientes com esforço claramente predominante e urgência leve), opta-se por cirurgia de sling mediouretral para o componente de esforço, é importante saber que essa cirurgia também pode impactar o componente de urgência — em ambas as direções, e esse é um ponto frequentemente cobrado. Em uma parcela relevante das pacientes com IUM operadas de sling, o componente de urgência <b>melhora ou desaparece</b> junto com o de esforço, sobretudo quando a urgência tinha um componente "induzido pelo esforço" (mecanismo explicado na fisiopatologia). Em uma minoria, no entanto, a urgência <b>persiste inalterada</b> apesar da cura do componente de esforço, ou surge urgência <b>de novo</b> que a paciente não tinha antes — achado descrito em uma proporção não desprezível das operadas, mesmo entre as sem sintomas de urgência prévios.</p>
+   <p class="ac-p">Por isso, o aconselhamento pré-operatório de toda paciente com IUM (ou mesmo IUE pura) candidata a sling deve incluir, de forma explícita, a possibilidade de <b>persistência ou surgimento de urgência</b> após a cirurgia, para que a expectativa da paciente sobre o resultado seja realista. Esse aconselhamento, aliado à urodinâmica pré-operatória em casos selecionados, é uma das razões pelas quais a avaliação da IUM antes de indicar cirurgia é mais cautelosa do que na IUE pura.</p>
+   <div class="ac-call"><b>Por que isso importa na prova:</b> uma questão que descreve "paciente operada de sling, satisfeita quanto à perda ao esforço, mas ainda incomodada por urgência" não representa necessariamente uma falha cirúrgica — pode ser a manifestação esperada de um componente de urgência que não foi completamente resolvido pela cirurgia do componente de esforço, e que agora precisa de tratamento dirigido (ver módulo de tratamento).</div>`],
+  ['prognostico','Prognóstico e Seguimento', `
+   <div class="ac-h">O que esperar ao longo do tempo</div>
+   <p class="ac-p">O prognóstico da incontinência mista tratada de forma escalonada e correta é, em geral, bom: a maior parte das pacientes obtém melhora significativa da qualidade de vida com a combinação de medidas conservadoras e, quando necessário, tratamento dirigido ao componente predominante. Ainda assim, é importante que tanto a paciente quanto o examinador tenham expectativas realistas: a <b>cura completa e simultânea dos dois componentes</b> é menos frequente do que a cura isolada de um tipo puro de incontinência, e o objetivo terapêutico muitas vezes é definido como <b>melhora satisfatória e controle</b>, e não necessariamente ausência total de qualquer sintoma.</p>
+   <p class="ac-p">O <b>seguimento</b> deve reavaliar periodicamente os dois componentes — não apenas aquele que motivou a última intervenção — usando as mesmas ferramentas da avaliação inicial (diário miccional, ICIQ-SF) para monitorar se um componente antes controlado voltou a se manifestar, ou se um componente residual, antes tolerado, passou a incomodar mais a paciente. Esse acompanhamento é especialmente relevante em pacientes que já foram operadas do componente de esforço, nas quais a urgência residual ou de novo deve ser ativamente rastreada nas consultas de retorno.</p>
+   <div class="ac-tip"><b>Macete:</b> em toda consulta de retorno de uma paciente com histórico de IUM, pergunte separadamente pelos dois componentes — "e a urgência, como está?" e "e a perda ao esforço, como está?" — mesmo que a queixa espontânea mencione só um deles.</div>`],
+ ],
+};
+
+Object.assign(C['incontinencia|3'], {
+ escores: `<div class="ac-h">ICIQ-SF na incontinência mista</div>
+   <p class="ac-p">O ICIQ-SF (International Consultation on Incontinence Questionnaire — Short Form) não distingue por si só o tipo de incontinência, mas quantifica frequência, quantidade da perda e impacto na qualidade de vida — é útil para acompanhar a resposta ao tratamento de ambos os componentes ao longo do tempo, sendo aplicado antes e depois das intervenções.</p>
+   <div class="ac-h" style="margin-top:14px">Diário miccional — o "escore" mais importante da IUM</div>
+   <table class="ac-tbl"><tr><th>O que registrar</th><th>Por que importa na IUM</th></tr>
+    <tr><td>Horário e volume de cada micção</td><td>Detecta frequência aumentada e noctúria (sugere urgência)</td></tr>
+    <tr><td>Episódios de perda e o gatilho (esforço x urgência)</td><td>Quantifica objetivamente qual componente predomina</td></tr>
+    <tr><td>Ingesta hídrica</td><td>Exclui poliúria como causa de frequência</td></tr>
+   </table>`,
+ dif: `<div class="ac-h">Diferenciais dentro do próprio espectro</div>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Diferenciar de</th><th>Chave</th></tr>
+    <tr><td>IUM com esforço predominante</td><td>IUE pura</td><td>Presença de urgência/frequência/noctúria associadas, mesmo que discretas</td></tr>
+    <tr><td>IUM com urgência predominante</td><td>Bexiga hiperativa pura</td><td>Presença de perda sincronizada ao esforço, mesmo que ocasional</td></tr>
+    <tr><td>Urgência que surge após sling</td><td>Urgência de novo pós-operatória</td><td>Ausente antes da cirurgia, atribuível ao procedimento</td></tr>
+    <tr><td>Urgência que persiste após sling</td><td>Componente de urgência pré-existente não resolvido</td><td>Já estava presente na avaliação pré-operatória</td></tr>
+   </table>`,
+ mapa: `<div class="ac-h">IUM em mapa</div>
+   <div class="mm">
+    <div class="mm-card"><h5>Definição</h5><ul><li>Perda ao esforço + perda por urgência na mesma paciente</li><li>Prevalência cresce com a idade</li></ul></div>
+    <div class="mm-card"><h5>Avaliação</h5><ul><li>Diário miccional é central</li><li>Urodinâmica tem peso maior aqui</li><li>Definir qual componente mais incomoda</li></ul></div>
+    <div class="mm-card"><h5>Conduta</h5><ul><li>Conservador para ambos primeiro</li><li>Depois, tratar o componente mais incômodo</li><li>Urgência costuma vir antes da cirurgia de esforço</li></ul></div>
+    <div class="mm-card"><h5>Cirurgia</h5><ul><li>Sling pode melhorar também a urgência</li><li>Mas pode deixar urgência residual ou de novo</li><li>Aconselhamento pré-operatório é obrigatório</li></ul></div>
+   </div>`,
+ fluxo_dx: `<div class="ac-h">Fluxograma diagnóstico da incontinência mista</div>
+   <div class="fx">
+    <div class="fx-node start">Paciente relata perda ao esforço E episódios de urgência/frequência/noctúria</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Excluir ITU; investigar ativamente o componente não espontaneamente relatado</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Diário miccional de 3 dias + ICIQ-SF (quantificar predomínio e impacto)</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Vai indicar cirurgia para o componente de esforço?</div>
+    <div class="fx-row">
+     <div class="fx-node end">Sim → urodinâmica recomendada antes de operar</div>
+     <div class="fx-node end">Não, tratamento conservador/farmacológico → urodinâmica dispensável na maioria dos casos</div>
+    </div>
+   </div>`,
+ fluxo_cond: `<div class="ac-h">Qual componente tratar primeiro</div>
+   <div class="fx">
+    <div class="fx-node start">Incontinência mista confirmada</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Conservador para ambos: fisioterapia do assoalho pélvico + treinamento vesical</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Melhora satisfatória de ambos?</div>
+    <div class="fx-row">
+     <div class="fx-node end">Sim → manter conservador, reavaliar periodicamente</div>
+     <div class="fx-node">Não → identificar componente mais incômodo</div>
+    </div>
+    <div class="fx-arrow"></div>
+    <div class="fx-row">
+     <div class="fx-node end">Urgência predominante → farmacológico (antimuscarínico/mirabegrona) antes de considerar cirurgia</div>
+     <div class="fx-node end">Esforço claramente predominante, urgência leve → avaliação cirúrgica (sling) já pode avançar</div>
+    </div>
+   </div>`,
+ vespera: `<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Ponto 1:</b> IUM = perda ao esforço + perda por urgência coexistindo na mesma paciente (definição da ICS).</div>
+   <div class="ac-call"><b>Ponto 2:</b> o diário miccional é a ferramenta central para quantificar qual componente predomina — mais importante aqui do que nos tipos puros.</div>
+   <div class="ac-call"><b>Ponto 3:</b> tratar sempre primeiro o conservador (fisioterapia + treinamento vesical), que beneficia os dois componentes.</div>
+   <div class="ac-call"><b>Ponto 4:</b> se não houver predomínio claro de esforço, tratar a urgência antes de indicar cirurgia para o esforço.</div>
+   <div class="ac-call"><b>Ponto 5:</b> o sling pode melhorar a urgência associada, mas pode deixá-la residual ou até causar urgência de novo — informe a paciente antes da cirurgia.</div>`,
+ dicas: `<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Sempre que a questão mencionar "perda ao esforço" E "urgência/frequência/noctúria" no mesmo enunciado, pense IUM e procure a pista de qual componente é descrito como mais incômodo.</div>
+   <div class="ac-tip">Se a pergunta for "qual a conduta inicial", a resposta quase sempre é conservador para ambos, não cirurgia direto.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Indicar sling como primeira conduta em paciente com urgência predominante e não tratada — a ordem lógica é tratar antes o que mais incomoda.</div>
+   <div class="ac-warn">Achar que toda urgência após sling significa complicação cirúrgica — pode ser componente misto persistente/de novo, esperado e explicado no aconselhamento pré-operatório.</div>`,
+ checklist: [
+  'Sei a definição da ICS para incontinência mista',
+  'Entendo por que corrigir o esforço às vezes também melhora a urgência (mecanismo induzido pelo esforço)',
+  'Sei usar o diário miccional para definir o componente predominante',
+  'Sei decidir qual componente tratar primeiro',
+  'Sei quando a urodinâmica é mais valiosa na IUM do que nos tipos puros',
+  'Sei aconselhar a paciente sobre o risco de urgência persistente/de novo após sling'
+ ],
+});
+
+Object.assign(C['incontinencia|3'], {
+ questoes: [
+  {stem:'Segundo a definição da International Continence Society, a incontinência urinária mista é caracterizada por:', opts:['Perda urinária apenas com esforços intensos','Perda urinária associada tanto à urgência quanto ao esforço físico, tosse ou espirro','Perda urinária contínua, independente de posição','Perda urinária associada exclusivamente a resíduo pós-miccional elevado'], correct:1,
+   expl:'A IUM é definida pela coexistência, na mesma paciente, de <b>perda associada à urgência</b> e de <b>perda associada ao esforço físico, tosse ou espirro</b>.'},
+  {stem:'Em relação à prevalência da incontinência mista, é correto afirmar que:', opts:['É rara e ocorre em menos de 5% das mulheres com incontinência','Sua prevalência tende a aumentar com a idade, superando a IUE pura em faixas etárias mais avançadas','Ocorre exclusivamente em mulheres nulíparas','É mais comum em mulheres jovens do que em mulheres na perimenopausa'], correct:1,
+   expl:'A prevalência de sintomas mistos <b>aumenta com a idade</b>, à medida que se acumulam fatores de risco tanto de IUE quanto de bexiga hiperativa.'},
+  {stem:'O mecanismo pelo qual a correção cirúrgica do componente de esforço pode também melhorar o componente de urgência na incontinência mista é:', opts:['Efeito farmacológico direto do material do sling sobre o detrusor','Eliminação do gatilho mecânico que desencadeava contração reflexa do detrusor (urgência induzida pelo esforço)','Redução da capacidade vesical total','Bloqueio dos receptores muscarínicos pelo material da tela'], correct:1,
+   expl:'Em parte das pacientes, a perda pelo colo vesical durante o esforço desencadeia reflexamente uma contração detrusora; corrigir o componente de esforço remove esse gatilho e pode melhorar a urgência associada.'},
+  {stem:'Diante de uma paciente com incontinência mista, sem predomínio claro entre os dois componentes, a conduta inicial mais adequada é:', opts:['Cirurgia de sling imediata','Antimuscarínico isolado, sem medidas comportamentais','Tratamento conservador comum a ambos os componentes: fisioterapia do assoalho pélvico e treinamento vesical','Estudo urodinâmico obrigatório antes de qualquer conduta'], correct:2,
+   expl:'O tratamento conservador (fisioterapia do assoalho pélvico + treinamento vesical) beneficia simultaneamente os dois componentes e deve ser sempre a primeira etapa.'},
+  {stem:'Uma paciente com incontinência mista relata que o sintoma mais incômodo é a urgência, com episódios frequentes que a impedem de sair de casa. A conduta mais adequada, após falha do tratamento conservador, é:', opts:['Indicar sling mediouretral imediatamente','Tratar o componente de urgência (farmacológico) antes de considerar cirurgia para o componente de esforço','Indicar colposuspensão de Burch de imediato','Aguardar sem tratamento até reavaliação em 1 ano'], correct:1,
+   expl:'Quando a urgência é o componente predominante/mais incômodo, a recomendação é tratá-la primeiro, já que a cirurgia do componente de esforço pode não resolver — e raramente pode agravar — a urgência não controlada.'},
+  {stem:'O papel do diário miccional na avaliação da incontinência mista, em comparação com a IUE ou a bexiga hiperativa puras, é:', opts:['Menos importante, pois o diagnóstico é sempre urodinâmico','Igualmente dispensável nos três cenários','Mais central, pois quantifica objetivamente qual componente predomina','Restrito a casos de suspeita de infecção urinária'], correct:2,
+   expl:'Na IUM, o diário miccional assume papel <b>central</b> ao documentar objetivamente a proporção de episódios associados a esforço versus urgência, informação decisiva para a conduta.'},
+  {stem:'Em relação ao estudo urodinâmico na incontinência mista, é correto afirmar que:', opts:['Nunca deve ser solicitado nesse tipo de incontinência','Tem peso diagnóstico menor do que na IUE ou na bexiga hiperativa isoladas','É particularmente valioso antes de uma decisão cirúrgica para o componente de esforço','Substitui completamente o diário miccional'], correct:2,
+   expl:'A urodinâmica tem peso maior na IUM do que nos tipos puros e é especialmente recomendada <b>antes de cirurgia</b>, ajudando a documentar hiperatividade detrusora e orientar a estratégia terapêutica.'},
+  {stem:'Uma paciente é submetida a sling mediouretral por incontinência mista com esforço predominante. No pós-operatório, permanece satisfeita quanto à perda ao esforço, mas segue incomodada por urgência que já tinha antes da cirurgia. A interpretação mais adequada é:', opts:['Falha técnica da cirurgia, indicando revisão imediata','Componente de urgência pré-existente que não foi completamente resolvido pela cirurgia do componente de esforço, necessitando tratamento dirigido','Infecção urinária pós-operatória obrigatória','Rejeição do material sintético do sling'], correct:1,
+   expl:'A persistência de urgência pré-existente após o sling não representa necessariamente falha cirúrgica — é um desfecho esperado em parte das pacientes e deve ser tratado especificamente, conforme o módulo de bexiga hiperativa.'},
+  {stem:'O termo "urgência de novo" após cirurgia de sling refere-se a:', opts:['Urgência que já existia antes da cirurgia e piorou','Urgência que surge após a cirurgia em paciente que não a apresentava previamente','Recidiva do componente de esforço','Infecção urinária recorrente'], correct:1,
+   expl:'"Urgência de novo" designa sintomas de urgência que <b>surgem após a cirurgia</b> em paciente sem esse sintoma antes, achado descrito em proporção não desprezível de operadas de sling e que deve constar do aconselhamento pré-operatório.'},
+  {stem:'Em relação ao aconselhamento pré-operatório de uma paciente com incontinência mista candidata a sling, é correto:', opts:['Não é necessário mencionar o componente de urgência, pois a cirurgia trata apenas o esforço','Deve incluir a possibilidade de persistência ou surgimento de urgência após a cirurgia','Deve garantir a cura completa de ambos os componentes em 100% dos casos','É desnecessário quando a urodinâmica pré-operatória é normal'], correct:1,
+   expl:'O aconselhamento adequado inclui informar a paciente sobre a possibilidade de <b>persistência ou surgimento de urgência</b> após o sling, para alinhar expectativas antes da cirurgia.'},
+  {stem:'Um fator de risco mais associado especificamente ao surgimento de incontinência mista, em comparação aos tipos puros, é:', opts:['Nuliparidade','Idade avançada, com acúmulo de fatores de risco de ambos os componentes','Atividade física de baixo impacto','Ausência de comorbidades'], correct:1,
+   expl:'A <b>idade avançada</b> favorece o acúmulo simultâneo de fatores de risco tanto para hipermobilidade/deficiência esfincteriana (esforço) quanto para hiperatividade detrusora (urgência), explicando a maior prevalência de IUM em mulheres mais velhas.'},
+  {stem:'Sobre a lógica geral de tratamento da incontinência mista, é correto afirmar que:', opts:['Cirurgia deve sempre ser a primeira opção, independentemente do componente predominante','O tratamento conservador é comum aos dois componentes e deve preceder intervenções mais invasivas','O componente de esforço deve sempre ser tratado antes do componente de urgência','Não existe recomendação sobre ordem de tratamento na literatura atual'], correct:1,
+   expl:'As medidas conservadoras (fisioterapia do assoalho pélvico e treinamento vesical) beneficiam ambos os componentes e devem ser a base inicial do tratamento antes de qualquer escalonamento.'},
+ ],
+ flashcards: [
+  {front:'Qual a definição da ICS para incontinência urinária mista?', back:'Queixa de perda involuntária de urina associada tanto à urgência quanto ao esforço físico, tosse ou espirro.', type:'basic'},
+  {front:'O que acontece com a prevalência da incontinência mista à medida que a idade avança?', back:'Aumenta, chegando a superar a prevalência de IUE pura nas faixas etárias mais avançadas, por acúmulo de fatores de risco dos dois componentes.', type:'basic'},
+  {front:'Explique o mecanismo de "urgência induzida pelo esforço" na IUM.', back:'A perda mecânica de urina pelo colo vesical durante o esforço pode desencadear reflexamente uma contração do detrusor; corrigir cirurgicamente o esforço remove esse gatilho e pode melhorar a urgência.', type:'basic'},
+  {front:'Na IUM, o {{diário miccional}} assume papel central por quantificar objetivamente qual dos dois componentes predomina.', back:'diário miccional', type:'cloze'},
+  {front:'Qual é a conduta inicial recomendada para incontinência mista, independentemente do componente predominante?', back:'Tratamento conservador comum a ambos: fisioterapia do assoalho pélvico e treinamento vesical.', type:'basic'},
+  {front:'Se, após o conservador, o componente de urgência é o mais incômodo, qual a próxima conduta antes de considerar cirurgia para o esforço?', back:'Tratamento farmacológico da urgência (antimuscarínico ou mirabegrona), antes de avançar para cirurgia do componente de esforço.', type:'basic'},
+  {front:'Quando é razoável avançar diretamente para avaliação cirúrgica do componente de esforço em uma paciente com IUM?', back:'Quando o componente de esforço é claramente predominante e o componente de urgência é leve ou ausente.', type:'basic'},
+  {front:'Por que o estudo urodinâmico tem peso maior na IUM do que na IUE ou na bexiga hiperativa isoladas?', back:'Porque ajuda a esclarecer o grau de hiperatividade detrusora e a orientar a estratégia terapêutica, sendo particularmente valioso antes de decisão cirúrgica.', type:'basic'},
+  {front:'O que é "urgência de novo" após cirurgia de sling?', back:'Urgência que surge após a cirurgia em paciente que não apresentava esse sintoma antes do procedimento.', type:'basic'},
+  {front:'O que deve constar obrigatoriamente no aconselhamento pré-operatório de uma paciente com IUM candidata a sling?', back:'A possibilidade de persistência ou de surgimento (de novo) de urgência após a cirurgia, mesmo com sucesso no componente de esforço.', type:'basic'},
+  {front:'Uma cirurgia de sling tecnicamente bem-sucedida, com perda ao esforço corrigida, mas com urgência residual: isso é sempre {{falha cirúrgica}}?', back:'Não — pode ser componente de urgência pré-existente não resolvido pela cirurgia do esforço, esperado em parte dos casos.', type:'cloze'},
+  {front:'Cite dois fatores de risco que somam risco tanto para o componente de esforço quanto para o componente de urgência na IUM.', back:'Idade avançada e obesidade (contribuem tanto para falha de suporte/esfíncter quanto para hiperatividade detrusora).', type:'basic'},
+  {front:'Qual ferramenta ajuda a diferenciar se o predomínio percebido pela paciente coincide com o número absoluto de episódios de cada tipo?', back:'O diário miccional, comparado ao relato subjetivo/ICIQ-SF sobre qual sintoma mais incomoda.', type:'basic'},
+  {front:'Cirurgia anti-incontinência prévia é fator de risco para o surgimento de qual componente, de forma característica?', back:'Componente de urgência (bexiga hiperativa de novo relacionada ao procedimento).', type:'basic'},
+ ],
+ casos: [
+  {t:'Caso 1 — A dona de casa que não sai mais sem saber onde é o banheiro', stem:'Mulher de 52 anos relata, há 2 anos, perda de pequenas quantidades de urina ao tossir e também episódios de urgência intensa, algumas vezes seguidos de perda antes de chegar ao banheiro, com frequência urinária diurna aumentada. Refere que o que mais a incomoda é a urgência, pois evita sair de casa por medo de não encontrar banheiro a tempo.', passos:[
+    {h:'1. Reconhecer o padrão misto', p:'Perda ao esforço (tosse) associada a urgência com incontinência e frequência aumentada caracteriza incontinência urinária mista.'},
+    {h:'2. Identificar o componente mais incômodo', p:'A própria paciente relata que a urgência é o sintoma mais limitante, apesar de também ter perda ao esforço.'},
+    {h:'3. Definir avaliação inicial', p:'Diário miccional de 3 dias para quantificar a proporção de episódios de cada tipo; EAS/urocultura para excluir infecção.'},
+    {h:'4. Conduta', p:'Iniciar conservador (fisioterapia + treinamento vesical) para ambos; se insuficiente, priorizar tratamento farmacológico da urgência antes de considerar cirurgia para o componente de esforço.'},
+    {h:'Lição de prova', p:'Quando a própria paciente identifica a urgência como o sintoma mais incômodo, a conduta escalonada prioriza tratá-la antes de indicar cirurgia para o componente de esforço.'}
+  ]},
+  {t:'Caso 2 — Esforço predominante, urgência discreta', stem:'Mulher de 45 anos, dois partos vaginais, relata perda urinária moderada ao tossir, espirrar e correr, praticamente diária, com fisioterapia do assoalho pélvico bem realizada por 6 meses sem melhora relevante. Refere raros episódios leves de urgência, sem impacto significativo na rotina.', passos:[
+    {h:'1. Classificar o predomínio', p:'Componente de esforço é claramente predominante e mais incômodo; urgência é leve e sem impacto relevante — quadro compatível com IUM de esforço predominante.'},
+    {h:'2. Reconhecer a falha do conservador', p:'Fisioterapia bem conduzida por tempo adequado sem melhora do componente de esforço justifica escalonar a conduta.'},
+    {h:'3. Decidir sobre avaliação cirúrgica', p:'Como o esforço é claramente predominante e a urgência é leve, é razoável avançar para avaliação cirúrgica do componente de esforço sem esgotar tratamento farmacológico da urgência.'},
+    {h:'4. Preparo pré-operatório', p:'Considerar urodinâmica (peso maior aqui do que na IUE pura) e realizar aconselhamento sobre possibilidade de persistência ou surgimento de urgência após o sling.'},
+    {h:'Lição de prova', p:'Nem toda IUM exige tratar a urgência antes — quando o esforço é claramente predominante e a urgência é leve, a avaliação cirúrgica do componente de esforço pode avançar mais cedo.'}
+  ]},
+  {t:'Caso 3 — Urgência que aparece depois da cirurgia', stem:'Mulher de 60 anos, operada de sling mediouretral há 4 meses por IUE, hoje sem nenhuma perda ao esforço, mas relatando urgência e frequência urinária que não tinha antes da cirurgia. Nega infecção urinária (EAS normal).', passos:[
+    {h:'1. Nomear o achado', p:'Urgência sem perda ao esforço, surgida após a cirurgia e ausente antes dela, corresponde a urgência "de novo" pós-sling.'},
+    {h:'2. Excluir diferenciais', p:'EAS normal já exclui infecção; também vale considerar resíduo pós-miccional elevado (obstrução pelo sling) como causa de sintomas irritativos.'},
+    {h:'3. Reforçar o aconselhamento retrospectivo', p:'Explicar à paciente que esse achado é uma possibilidade conhecida e descrita mesmo em quem não tinha urgência antes da cirurgia, e não indica necessariamente falha técnica.'},
+    {h:'4. Conduzir o novo componente', p:'Tratar como bexiga hiperativa: medidas comportamentais primeiro, depois farmacológico (antimuscarínico ou mirabegrona) se necessário, seguindo o mesmo algoritmo do módulo de bexiga hiperativa.'},
+    {h:'Lição de prova', p:'Urgência de novo após sling não é sinônimo de complicação cirúrgica grave — é um desfecho conhecido, que deve ser investigado (excluir obstrução/infecção) e tratado com o algoritmo padrão de bexiga hiperativa.'}
+  ]},
+ ],
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>
+/* ELID Ginecologia — Conteúdo Incontinência Urinária (5/6): Diagnóstico — síntese integrada (incontinencia|4).
+   Aditivo. Explicações aprofundadas para provas de residência (ENARE, ENAMED, Revalida, PSU-MG, SES-RJ, UERJ, UFRJ). */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+var SVG_URODINAMICA = `<svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+ <linearGradient id="udnBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0f9ff"/><stop offset="1" stop-color="#ecfeff"/></linearGradient>
+ <linearGradient id="udnBladder" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a5f3fc"/><stop offset="1" stop-color="#0891b2"/></linearGradient>
+ <linearGradient id="udnCath" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fde68a"/><stop offset="1" stop-color="#b45309"/></linearGradient>
+ <linearGradient id="udnCurveOk" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#86efac"/><stop offset="1" stop-color="#15803d"/></linearGradient>
+ <linearGradient id="udnCurveBad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fca5a5"/><stop offset="1" stop-color="#b91c1c"/></linearGradient>
+ <filter id="udnShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#0c4a6e" flood-opacity="0.22"/></filter>
+</defs>
+<rect x="4" y="4" width="672" height="412" rx="18" fill="url(#udnBg)"/>
+<text x="340" y="28" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0c4a6e">Estudo urodinâmico: o que a curva de cistometria mostra</text>
+<g filter="url(#udnShadow)">
+ <path d="M150 90 C120 88 98 118 100 152 C102 188 130 214 168 212 C204 210 226 182 222 150 C218 118 182 92 150 90 Z" fill="url(#udnBladder)"/>
+</g>
+<text x="160" y="152" text-anchor="middle" font-size="10.5" fill="#083344" font-weight="700">Bexiga</text>
+<text x="160" y="166" text-anchor="middle" font-size="9" fill="#083344" font-weight="700">(cateter vesical)</text>
+<path d="M222 150 C260 148 300 148 330 150" stroke="url(#udnCath)" stroke-width="6" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+<text x="270" y="138" text-anchor="middle" font-size="9" fill="#78350f" font-weight="700">registra pressão vesical</text>
+<path d="M168 214 C158 240 158 262 168 280" stroke="url(#udnCath)" stroke-width="6" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+<text x="128" y="250" font-size="9" fill="#78350f" font-weight="700">cateter retal</text>
+<text x="128" y="262" font-size="9" fill="#78350f" font-weight="700">(pressão abdominal)</text>
+<text x="330" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="#15803d">Curva normal (enchimento)</text>
+<path d="M350 100 L620 100" stroke="url(#udnCurveOk)" stroke-width="4" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+<text x="330" y="118" text-anchor="middle" font-size="9.5" fill="#166534">Detrusor estável até a</text>
+<text x="330" y="130" text-anchor="middle" font-size="9.5" fill="#166534">capacidade cistométrica</text>
+<text x="330" y="188" text-anchor="middle" font-size="11.5" font-weight="700" fill="#b91c1c">Hiperatividade detrusora</text>
+<path d="M350 220 C380 220 385 190 410 190 C435 190 440 220 465 220 C490 220 495 190 520 190 C545 190 550 220 620 220" stroke="url(#udnCurveBad)" stroke-width="4" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+<text x="330" y="240" text-anchor="middle" font-size="9.5" fill="#7f1d1d">Contrações involuntárias</text>
+<text x="330" y="252" text-anchor="middle" font-size="9.5" fill="#7f1d1d">na fase de enchimento</text>
+<text x="330" y="300" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0c4a6e">Teste de esforço urodinâmico</text>
+<path d="M350 330 L500 330 L500 300 L520 300 L520 330 L620 330" stroke="#0369a1" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+<text x="330" y="352" text-anchor="middle" font-size="9.5" fill="#0c4a6e">Perda de urina no momento</text>
+<text x="330" y="364" text-anchor="middle" font-size="9.5" fill="#0c4a6e">exato do aumento de pressão abdominal</text>
+<text x="340" y="400" text-anchor="middle" font-size="11" fill="#0c4a6e">A urodinâmica não é obrigatória em todo caso — reservada a cenários mistos, refratários ou pré-cirúrgicos complexos.</text>
+</svg>`;
+
+C['incontinencia|4'] = {
+ name: 'Diagnóstico',
+ intro: 'É a visão integrada de tudo que você já estudou nos quatro módulos anteriores: como conduzir, na ordem certa, do interrogatório inicial até a decisão sobre pedir (ou não) urodinâmica.',
+ sub: [
+  ['entendendo','Entendendo do Zero', `
+   <div class="ac-h">O diagnóstico de incontinência urinária é, antes de tudo, clínico</div>
+   <p class="ac-p">Depois de estudar fisiologia da continência, IUE, bexiga hiperativa e incontinência mista separadamente, este módulo amarra tudo em um único caminho diagnóstico. A ideia central que a prova mais cobra, e que resume os quatro módulos anteriores, é esta: a <b>história clínica bem colhida, associada a um exame físico direcionado e a um diário miccional, já classifica corretamente a maioria das pacientes</b> em IUE, bexiga hiperativa ou incontinência mista, sem necessidade de exames sofisticados. Exames complementares — do EAS ao estudo urodinâmico — são usados para <b>confirmar, quantificar ou destravar dúvidas</b>, não para substituir o raciocínio clínico inicial.</p>
+   <p class="ac-p">Essa lógica escalonada — do mais simples e barato para o mais complexo e invasivo — é a espinha dorsal deste módulo: (1) anamnese dirigida e diário miccional; (2) exame físico e testes clínicos (teste de esforço, pad test, Q-tip test); (3) exames laboratoriais básicos (EAS, urocultura, resíduo pós-miccional); (4) apenas quando indicado, estudo urodinâmico e, excepcionalmente, exames de imagem/endoscopia. Dominar essa sequência, e principalmente saber <b>quando pular direto para o tratamento sem precisar de mais exames</b>, é o que diferencia quem realmente entendeu o tema de quem apenas decorou definições isoladas.</p>
+   <div class="ac-call"><b>A grande ideia:</b> investigar incontinência urinária é um funil — a maioria das pacientes se resolve com anamnese + exame + diário miccional; poucas, selecionadas por critérios específicos, precisam avançar até a urodinâmica.</div>
+   <table class="ac-tbl"><tr><th>Etapa</th><th>Ferramenta</th></tr>
+    <tr><td>1. Clínica</td><td>Anamnese dirigida, questionários (ICIQ-SF), diário miccional</td></tr>
+    <tr><td>2. Exame</td><td>Exame físico, teste de esforço, pad test, Q-tip test</td></tr>
+    <tr><td>3. Laboratório básico</td><td>EAS, urocultura, resíduo pós-miccional</td></tr>
+    <tr><td>4. Seletivo</td><td>Estudo urodinâmico, imagem, cistoscopia</td></tr>
+   </table>`],
+  ['anamnese','Anamnese Dirigida', `
+   <div class="ac-h">As perguntas que já classificam a paciente</div>
+   <p class="ac-p">A anamnese em uroginecologia precisa ser <b>dirigida e ativa</b> — muitas mulheres não relatam espontaneamente todos os sintomas, seja por vergonha, seja por não considerarem relevante mencionar um sintoma "leve" quando outro é mais incômodo. As perguntas-chave, revisitando os três módulos de tipos de incontinência, são: a perda ocorre <b>ao esforço</b> (tossir, espirrar, rir, correr, levantar peso)? A perda é precedida de uma <b>vontade súbita e difícil de adiar</b> (urgência)? Há aumento da <b>frequência diurna</b> ou <b>noctúria</b>? A perda é <b>contínua</b>, independentemente de esforço ou urgência? Cada resposta posiciona a paciente em um ponto do espectro estudado nos módulos anteriores.</p>
+   <p class="ac-p">Além do padrão de perda, é essencial investigar: <b>tempo de evolução e progressão</b> dos sintomas; <b>fatores de risco</b> (partos vaginais, cirurgias pélvicas prévias, radioterapia, doenças neurológicas, diabetes, obesidade, tabagismo, constipação); <b>medicações em uso</b> (diuréticos, sedativos, alfa-bloqueadores podem interferir); e o <b>impacto na qualidade de vida</b>, que frequentemente determina a intensidade da investigação e do tratamento propostos. Questionários validados como o <b>ICIQ-SF</b> padronizam essa coleta e são úteis tanto na consulta inicial quanto no acompanhamento da resposta terapêutica.</p>
+   <div class="ac-warn"><b>Sinais de alarme a sempre perguntar ativamente:</b> hematúria, dor pélvica persistente, perda urinária contínua dia e noite (pensar em fístula), sintomas neurológicos associados (fraqueza, alteração de sensibilidade em membros inferiores ou região perineal) e sintomas obstrutivos/retenção — todos mudam o rumo da investigação e podem exigir avaliação especializada mais precoce.</div>`],
+  ['diario','Diário Miccional', `
+   <div class="ac-h">A ferramenta mais barata com maior retorno diagnóstico</div>
+   <p class="ac-p">O <b>diário miccional</b>, tipicamente preenchido por <b>3 dias</b> (podendo variar conforme o protocolo do serviço), pede que a paciente registre o horário de cada micção, o volume urinado (quando possível, com um recipiente graduado), a ingesta hídrica, e os episódios de perda urinária com o gatilho associado (esforço, urgência, ou sem gatilho identificável). É uma ferramenta simples e de baixo custo, mas com um retorno diagnóstico desproporcionalmente alto: revela padrões que a memória da paciente na consulta frequentemente distorce, como a real frequência diurna, a presença de noctúria, o volume urinado por micção (que ajuda a diferenciar polaciúria por pequenos volumes de poliúria por grandes volumes) e, principalmente, a <b>proporção de episódios associados a cada gatilho</b> — informação decisiva quando se suspeita de incontinência mista.</p>
+   <p class="ac-p">O diário também ajuda a identificar <b>poliúria</b> (produção urinária de 24h aumentada, por ingesta excessiva de líquidos, diabetes não controlado ou poliúria noturna do idoso) como contribuinte para frequência e noctúria, um diagnóstico diferencial importante que muda completamente a conduta (tratar a causa da poliúria, e não necessariamente a bexiga). É uma das ferramentas mais valorizadas pelas diretrizes atuais, incluindo o protocolo da FEBRASGO, exatamente por ser barata, reprodutível e informativa.</p>
+   <div class="ac-tip"><b>Macete:</b> se a questão apresentar um "quadro de diário miccional" com dados de volume e horário, ela está testando se você sabe extrair, dali, se o padrão predominante é de esforço, urgência ou poliúria — leia a tabela com calma antes de responder.</div>`],
+  ['exame','Exame Físico', `
+   <div class="ac-h">O que procurar, na ordem certa</div>
+   <p class="ac-p">O exame físico geral deve avaliar <b>IMC</b> (obesidade como fator de risco e agravante), sinais de doenças sistêmicas relevantes (diabetes, doenças neurológicas) e, quando pertinente, um exame neurológico perineal breve (sensibilidade em dermátomos sacrais, reflexo bulbocavernoso, tônus do esfíncter anal) em casos com suspeita de componente neurogênico. O exame ginecológico deve avaliar sinais de <b>atrofia genital</b> (mucosa pálida, seca, perda de rugosidade — hipoestrogenismo agrava tanto IUE quanto urgência), presença e grau de <b>prolapso de órgãos pélvicos</b> associado (que pode mascarar ou agravar a incontinência), e a <b>força do assoalho pélvico</b>, avaliada pela palpação digital e classificada pela <b>escala de Oxford</b> (0 a 5).</p>
+   <p class="ac-p">O <b>teste de esforço (stress test)</b>, já detalhado no módulo de IUE, permanece o teste clínico mais específico para confirmar perda ao esforço: bexiga moderadamente cheia, tosse vigorosa primeiro deitada e, se negativa, repetida em pé — positivo quando há saída de urina simultânea e imediata à tosse. É importante lembrar que um teste de esforço negativo <b>não exclui</b> IUE, sobretudo se realizado com a bexiga vazia ou pouco cheia, devendo ser repetido em condições mais favoráveis antes de descartar o diagnóstico.</p>
+   <table class="ac-tbl"><tr><th>Achado do exame</th><th>O que sugere</th></tr>
+    <tr><td>Teste de esforço positivo, sem urgência prévia</td><td>Reforça IUE</td></tr>
+    <tr><td>Atrofia genital importante</td><td>Agrava tanto IUE quanto urgência (indicação de estrogênio tópico)</td></tr>
+    <tr><td>Prolapso associado (POP significativo)</td><td>Pode mascarar IUE (IUE oculta/latente); considerar redução do prolapso durante o teste</td></tr>
+    <tr><td>Assoalho pélvico Oxford baixo</td><td>Reforça indicação de fisioterapia como primeira linha</td></tr>
+   </table>
+   <div class="ac-warn"><b>Pegadinha clássica:</b> em prolapsos importantes, o prolapso pode "acotovelar" a uretra e mascarar uma IUE que só aparece quando o prolapso é reduzido durante o exame (IUE oculta) — lembrar de testar com redução do prolapso em pacientes com POP significativo.</div>`],
+  ['testes','Testes Complementares e Laboratório Básico', `
+   <div class="ac-h">Confirmando e quantificando, sem sofisticação desnecessária</div>
+   <p class="ac-p">O <b>EAS (exame de urina) e a urocultura</b> devem ser solicitados em toda paciente com queixa de incontinência antes de avançar na investigação — infecção urinária pode mimetizar ou agravar sintomas de urgência/frequência, e sempre deve ser tratada e reavaliada antes de rotular o quadro como bexiga hiperativa ou IUE definitiva. O <b>resíduo pós-miccional (RPM)</b>, medido por ultrassonografia (bladder scan) ou por cateterismo pós-miccional, exclui retenção urinária crônica com incontinência por transbordamento — um diagnóstico diferencial importante, sobretudo em pacientes com diabetes, doenças neurológicas ou uso de medicações com efeito anticolinérgico.</p>
+   <p class="ac-p">O <b>pad test (teste do absorvente)</b>, com protocolo de 1 hora ou de 24 horas, quantifica objetivamente a perda urinária pela diferença de peso do absorvente antes e depois, útil tanto para confirmar perda subjetivamente duvidosa quanto para monitorar a resposta ao tratamento ao longo do tempo. O <b>Q-tip test</b> avalia especificamente a mobilidade da junção uretrovesical (ângulo maior que 30° ao Valsalva sugere hipermobilidade uretral significativa), reforçando esse mecanismo como predominante quando presente.</p>
+   <table class="ac-tbl"><tr><th>Exame</th><th>Objetivo principal</th></tr>
+    <tr><td>EAS + urocultura</td><td>Excluir infecção urinária (sempre, antes de avançar)</td></tr>
+    <tr><td>Resíduo pós-miccional</td><td>Excluir retenção/transbordamento</td></tr>
+    <tr><td>Pad test</td><td>Quantificar objetivamente a perda</td></tr>
+    <tr><td>Q-tip test</td><td>Avaliar mobilidade uretral</td></tr>
+   </table>`],
+  ['urodinamica','Estudo Urodinâmico', `
+   <div class="ac-h">O exame que a prova mais gosta de testar "quando pedir"</div>
+   <p class="ac-p">O estudo urodinâmico avalia objetivamente a função vesical e uretral durante as fases de enchimento e esvaziamento, combinando <b>cistometria</b> (mede pressão vesical durante o enchimento, detectando contrações involuntárias do detrusor — hiperatividade detrusora), <b>estudo de pressão-fluxo/fluxometria</b> (avalia o esvaziamento vesical e rastreia obstrução infravesical) e, em alguns serviços, o <b>perfil pressórico uretral</b> (mede a pressão de fechamento uretral ao longo do trajeto, útil para caracterizar deficiência esfincteriana intrínseca). A <b>videourodinâmica</b> associa esses parâmetros a imagem fluoroscópica simultânea, sendo reservada para casos mais complexos.</p>
+   ${SVG_URODINAMICA}
+   <p class="ac-p">O ponto mais cobrado em prova é que a urodinâmica <b>não é obrigatória em todos os casos</b>: em uma paciente com quadro clínico típico e não complicado — seja de IUE, seja de bexiga hiperativa — o tratamento (incluindo cirúrgico, em casos selecionados de IUE) pode ser indicado sem esse exame, já que estudos mostram desfechos semelhantes com ou sem urodinâmica prévia em cenários simples. A urodinâmica passa a ser <b>recomendada</b> nos seguintes cenários, que valem a pena memorizar como uma lista única e integrada de todo o tópico: suspeita de <b>incontinência mista</b> com dúvida sobre o componente predominante; <b>discordância</b> entre a clínica e os achados de exame; <b>falha de cirurgia anti-incontinência prévia</b>; suspeita de <b>disfunção miccional ou retenção</b> associada; antes de <b>cirurgias mais complexas</b> ou em prolapsos avançados associados; e suspeita de <b>doença neurológica</b> subjacente (bexiga neurogênica).</p>
+   <div class="ac-tip"><b>Atalho para prova:</b> "caso simples, típico, sem sinais de alerta" → pode tratar sem urodinâmica. "Caso misto, duvidoso, refratário, já operado antes, ou com suspeita de retenção/neurogênico" → pedir urodinâmica.</div>`],
+  ['imagem','Imagem e Endoscopia', `
+   <div class="ac-h">Papel limitado e reservado a indicações específicas</div>
+   <p class="ac-p">Exames de imagem e endoscópicos <b>não fazem parte da investigação de rotina</b> da incontinência urinária não complicada, mas têm indicações pontuais que a prova gosta de testar isoladamente. A <b>ultrassonografia pélvica/transvaginal ou perineal</b> pode ser usada para avaliar mobilidade do colo vesical, mensurar resíduo pós-miccional de forma não invasiva, ou avaliar prolapsos associados, mas não substitui o diagnóstico clínico ou a urodinâmica quando esta é indicada. A <b>ressonância magnética pélvica</b> tem papel bastante restrito, reservado a casos muito específicos de avaliação de assoalho pélvico complexo ou pré-operatório de reconstruções extensas.</p>
+   <p class="ac-p">A <b>cistoscopia</b> não é exame de rotina para incontinência, mas está indicada diante de sinais de alarme específicos: <b>hematúria</b> (excluir neoplasia vesical ou cálculo), suspeita de <b>corpo estranho</b> (por exemplo, fio de sutura ou fragmento de tela migrado para a luz vesical após cirurgia prévia), suspeita de <b>fístula</b> (visualizar o trajeto fistuloso) ou sintomas irritativos refratários e inexplicados que levantam suspeita de lesão vesical estrutural. Reconhecer essas indicações pontuais, sem generalizar a cistoscopia como parte da rotina, é o que a prova cobra sobre este tópico.</p>
+   <div class="ac-warn"><b>Erro que reprova:</b> solicitar cistoscopia ou ressonância magnética como investigação inicial de rotina em incontinência não complicada — isso não está indicado e sinaliza desconhecimento do algoritmo escalonado.</div>`],
+  ['sintese','Síntese Diagnóstica Integrada', `
+   <div class="ac-h">Juntando os quatro módulos em um único raciocínio</div>
+   <p class="ac-p">Ao final deste percurso, o raciocínio diagnóstico de qualquer paciente com queixa de perda urinária pode ser resumido em cinco perguntas sequenciais, que revisitam tudo que foi estudado: (1) o padrão de perda é de esforço, de urgência, misto, contínuo ou por transbordamento? (2) há sinais de alarme que mudem a rota (hematúria, dor, suspeita de fístula, sintomas neurológicos)? (3) o EAS/urocultura excluem infecção e o RPM exclui retenção? (4) o exame físico e o teste de esforço confirmam a hipótese clínica? (5) este é um caso simples que já pode ser tratado, ou um caso que preenche algum critério para avançar até a urodinâmica antes da conduta?</p>
+   <p class="ac-p">Essa sequência de perguntas é exatamente o que separa um raciocínio clínico maduro de uma lista solta de exames decorados — e é precisamente esse raciocínio integrado, não a memorização isolada de cada exame, que as provas de residência mais valorizam neste tema.</p>
+   <div class="ac-call"><b>A grande ideia final:</b> anamnese e diário miccional classificam; exame físico e testes clínicos confirmam; laboratório básico exclui diferenciais; urodinâmica é seletiva, reservada a casos mistos, duvidosos, refratários ou pré-operatórios complexos.</div>`],
+ ],
+};
+
+Object.assign(C['incontinencia|4'], {
+ escores: `<div class="ac-h">Ferramentas de avaliação — resumo integrado</div>
+   <table class="ac-tbl"><tr><th>Ferramenta</th><th>O que mede</th><th>Quando usar</th></tr>
+    <tr><td>ICIQ-SF</td><td>Frequência, quantidade de perda, impacto na qualidade de vida</td><td>Triagem inicial e acompanhamento</td></tr>
+    <tr><td>Diário miccional (3 dias)</td><td>Frequência, volumes, gatilhos de perda</td><td>Todo caso, especialmente suspeita de mista ou poliúria</td></tr>
+    <tr><td>Pad test</td><td>Quantidade objetiva de perda (peso do absorvente)</td><td>Confirmação objetiva e monitoramento</td></tr>
+    <tr><td>Q-tip test</td><td>Mobilidade da junção uretrovesical</td><td>Caracterizar hipermobilidade uretral</td></tr>
+    <tr><td>Escala de Oxford</td><td>Força do assoalho pélvico</td><td>Todo exame físico ginecológico direcionado</td></tr>
+   </table>`,
+ dif: `<div class="ac-h">Diferenciais a excluir antes de fechar o diagnóstico</div>
+   <table class="ac-tbl"><tr><th>Condição</th><th>Exame que exclui/confirma</th></tr>
+    <tr><td>Infecção urinária</td><td>EAS + urocultura</td></tr>
+    <tr><td>Retenção/transbordamento</td><td>Resíduo pós-miccional</td></tr>
+    <tr><td>Poliúria (não é problema vesical)</td><td>Diário miccional (volumes de 24h)</td></tr>
+    <tr><td>Fístula vesicovaginal</td><td>Padrão de perda contínua + cistoscopia se necessário</td></tr>
+    <tr><td>Bexiga neurogênica</td><td>Exame neurológico perineal + urodinâmica</td></tr>
+    <tr><td>Neoplasia vesical (hematúria)</td><td>Cistoscopia</td></tr>
+   </table>`,
+ mapa: `<div class="ac-h">Diagnóstico em mapa</div>
+   <div class="mm">
+    <div class="mm-card"><h5>Clínico</h5><ul><li>Anamnese dirigida</li><li>Diário miccional</li><li>ICIQ-SF</li></ul></div>
+    <div class="mm-card"><h5>Exame</h5><ul><li>Teste de esforço</li><li>Oxford, atrofia, prolapso</li><li>Q-tip test</li></ul></div>
+    <div class="mm-card"><h5>Laboratório básico</h5><ul><li>EAS/urocultura sempre</li><li>Resíduo pós-miccional</li><li>Pad test</li></ul></div>
+    <div class="mm-card"><h5>Seletivo</h5><ul><li>Urodinâmica: mista, dúvida, falha cirúrgica, retenção, neurogênico</li><li>Cistoscopia: hematúria, corpo estranho, fístula</li></ul></div>
+   </div>`,
+ fluxo_dx: `<div class="ac-h">Fluxograma diagnóstico integrado do tópico</div>
+   <div class="fx">
+    <div class="fx-node start">Queixa de perda urinária</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Anamnese dirigida + diário miccional: esforço, urgência, ambos, contínua ou transbordamento?</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">EAS/urocultura (excluir ITU) + resíduo pós-miccional (excluir retenção)</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Exame físico + teste de esforço direcionado pela hipótese</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Caso típico, sem sinais de alerta, sem indicação de urodinâmica?</div>
+    <div class="fx-row">
+     <div class="fx-node end">Sim → diagnóstico clínico fechado, iniciar tratamento (ver módulo Tratamento)</div>
+     <div class="fx-node end">Não (misto/dúvida/refratário/cirurgia prévia/retenção/neurogênico) → complementar com urodinâmica (± imagem/cistoscopia se sinal de alerta específico)</div>
+    </div>
+   </div>`,
+ fluxo_cond: `<div class="ac-h">Quando pular direto para o tratamento</div>
+   <div class="fx">
+    <div class="fx-node start">Padrão clínico definido (IUE, BH ou mista)</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Existe algum sinal de alarme ou critério de complexidade?</div>
+    <div class="fx-row">
+     <div class="fx-node">Hematúria, dor pélvica persistente, perda contínua, suspeita neurológica</div>
+     <div class="fx-node">Mista com dúvida, refratário, cirurgia anti-incontinência prévia, suspeita de retenção</div>
+    </div>
+    <div class="fx-arrow"></div>
+    <div class="fx-row">
+     <div class="fx-node end">Presente → investigação direcionada adicional (cistoscopia/imagem/urodinâmica) antes de tratar</div>
+     <div class="fx-node end">Ausente → tratar de acordo com o tipo definido clinicamente, sem mais exames</div>
+    </div>
+   </div>`,
+ vespera: `<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Ponto 1:</b> o diagnóstico de incontinência urinária é predominantemente clínico — anamnese, exame físico e diário miccional classificam a maioria dos casos.</div>
+   <div class="ac-call"><b>Ponto 2:</b> EAS/urocultura sempre, resíduo pós-miccional sempre que houver suspeita de retenção — laboratório básico exclui diferenciais antes de tratar.</div>
+   <div class="ac-call"><b>Ponto 3:</b> urodinâmica não é obrigatória em casos típicos; é recomendada em mista com dúvida, falha cirúrgica prévia, discordância clínica ou suspeita de retenção/neurogênico.</div>
+   <div class="ac-call"><b>Ponto 4:</b> cistoscopia e imagem avançada são exames pontuais (hematúria, corpo estranho, fístula), não exames de rotina.</div>
+   <div class="ac-call"><b>Ponto 5:</b> perda contínua dia e noite nunca é IUE isolada — pense em fístula; gotejamento com resíduo elevado é transbordamento, não IUE ou urgência.</div>`,
+ dicas: `<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Antes de escolher "pedir urodinâmica" em uma questão, verifique se o caso descreve algum dos critérios clássicos (misto/dúvida/refratário/cirurgia prévia/retenção/neurogênico) — se não descrever nenhum, a resposta certa costuma ser tratar sem o exame.</div>
+   <div class="ac-tip">Toda vez que o enunciado trouxer uma tabela de diário miccional, extraia primeiro o padrão predominante antes de olhar as alternativas.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Pedir urodinâmica, cistoscopia ou imagem como investigação inicial de rotina em caso simples — o algoritmo é escalonado, do clínico para o complementar.</div>
+   <div class="ac-warn">Esquecer de excluir infecção urinária antes de rotular o quadro como bexiga hiperativa ou IUE definitiva — é sempre o primeiro exame laboratorial.</div>`,
+ checklist: [
+  'Sei conduzir a anamnese dirigida cobrindo os quatro padrões de perda',
+  'Sei orientar e interpretar um diário miccional de 3 dias',
+  'Sei realizar e interpretar o teste de esforço, o pad test e o Q-tip test',
+  'Sempre excluo ITU e retenção antes de avançar na investigação',
+  'Sei listar os critérios que indicam estudo urodinâmico',
+  'Sei quando cistoscopia/imagem são indicadas (e que não são rotina)',
+  'Consigo montar o algoritmo diagnóstico completo do tópico, do simples ao complexo'
+ ],
+});
+
+Object.assign(C['incontinencia|4'], {
+ questoes: [
+  {stem:'Em relação ao diagnóstico de incontinência urinária feminina, é correto afirmar que:', opts:['É sempre necessário estudo urodinâmico antes de qualquer conduta','A anamnese, o exame físico e o diário miccional classificam corretamente a maioria dos casos, sem necessidade de exames sofisticados','A cistoscopia é exame de rotina em toda investigação','O diagnóstico depende exclusivamente de exames de imagem'], correct:1,
+   expl:'O diagnóstico é predominantemente <b>clínico</b>: anamnese dirigida, exame físico e diário miccional já classificam a maioria dos casos; exames complementares confirmam ou destravam dúvidas específicas.'},
+  {stem:'O diário miccional, em relação ao diagnóstico de incontinência urinária, tem como principal utilidade:', opts:['Substituir completamente o exame físico','Documentar objetivamente frequência, volumes e a proporção de episódios associados a cada gatilho de perda','Diagnosticar infecção urinária','Medir diretamente a pressão de fechamento uretral'], correct:1,
+   expl:'O diário miccional documenta de forma objetiva os padrões de frequência, volume e gatilho dos episódios de perda, sendo especialmente valioso para diferenciar componentes de esforço e urgência.'},
+  {stem:'Uma paciente apresenta, no diário miccional, grandes volumes urinários tanto de dia quanto à noite, com frequência aumentada. Esse achado sugere primariamente:', opts:['Bexiga hiperativa isolada','Poliúria, que deve ser investigada como causa da frequência/noctúria','Deficiência esfincteriana intrínseca','Fístula vesicovaginal'], correct:1,
+   expl:'Grandes volumes urinados de forma persistente sugerem <b>poliúria</b> (ingesta excessiva, diabetes não controlado, poliúria noturna do idoso) como causa da frequência, e não necessariamente disfunção vesical primária.'},
+  {stem:'Em uma paciente com prolapso genital importante (POP avançado), o exame para pesquisa de IUE deve considerar que:', opts:['O prolapso nunca interfere no teste de esforço','O prolapso pode mascarar uma IUE que só se manifesta quando ele é reduzido durante o exame (IUE oculta)','A presença de prolapso exclui a possibilidade de IUE associada','O teste de esforço deve ser abandonado nesses casos'], correct:1,
+   expl:'Prolapsos importantes podem "acotovelar" a uretra e mascarar a IUE, que se manifesta apenas quando o prolapso é reduzido durante o exame — fenômeno conhecido como IUE oculta ou latente.'},
+  {stem:'Antes de rotular um quadro de urgência e frequência urinária como bexiga hiperativa, é obrigatório:', opts:['Realizar estudo urodinâmico completo','Excluir infecção urinária com EAS e urocultura','Realizar cistoscopia','Solicitar ressonância magnética pélvica'], correct:1,
+   expl:'A infecção urinária pode mimetizar ou agravar sintomas de urgência/frequência e deve ser sempre excluída com <b>EAS e urocultura</b> antes de rotular o quadro como bexiga hiperativa.'},
+  {stem:'O resíduo pós-miccional (RPM) elevado, na investigação de incontinência urinária, sugere principalmente:', opts:['Deficiência esfincteriana intrínseca','Retenção urinária, com possível incontinência por transbordamento','Fístula vesicovaginal','Hipermobilidade uretral'], correct:1,
+   expl:'Um resíduo pós-miccional elevado indica esvaziamento vesical incompleto, compatível com retenção urinária crônica e possível <b>incontinência por transbordamento</b>, diagnóstico diferencial a excluir antes de tratar como IUE ou urgência.'},
+  {stem:'Assinale a alternativa que reúne corretamente critérios que indicam a realização de estudo urodinâmico:', opts:['Caso clínico típico de IUE, sem sinais de alerta, primeira avaliação','Suspeita de incontinência mista com dúvida sobre o componente predominante, falha de cirurgia anti-incontinência prévia, suspeita de retenção urinária','Toda paciente antes de iniciar fisioterapia do assoalho pélvico','Toda paciente com IMC normal'], correct:1,
+   expl:'A urodinâmica é recomendada em cenários específicos: suspeita de mista com dúvida diagnóstica, falha de cirurgia prévia, discordância clínica/exame, ou suspeita de retenção/disfunção miccional — não em casos típicos e não complicados.'},
+  {stem:'A cistoscopia, na investigação da incontinência urinária, está indicada principalmente diante de:', opts:['Todo caso de IUE, como rotina inicial','Hematúria, suspeita de corpo estranho intravesical ou suspeita de fístula','Toda paciente com bexiga hiperativa, antes de iniciar tratamento','Nuliparidade'], correct:1,
+   expl:'A cistoscopia é reservada a indicações pontuais como <b>hematúria</b>, suspeita de corpo estranho (por exemplo, fio de sutura migrado) ou suspeita de fístula, não fazendo parte da rotina diagnóstica.'},
+  {stem:'A cistometria, componente do estudo urodinâmico, tem como principal objetivo:', opts:['Medir a pressão de fechamento uretral em repouso','Detectar contrações involuntárias do detrusor durante a fase de enchimento (hiperatividade detrusora)','Avaliar diretamente a força do assoalho pélvico','Excluir infecção urinária'], correct:1,
+   expl:'A cistometria registra a pressão vesical durante o enchimento, permitindo identificar <b>contrações involuntárias do detrusor</b>, achado urodinâmico associado à hiperatividade detrusora.'},
+  {stem:'Uma paciente com quadro clínico típico e não complicado de IUE, sem sinais de alerta, deseja avaliação para cirurgia. A conduta mais adequada em relação à urodinâmica é:', opts:['É obrigatória antes de qualquer cirurgia, sem exceção','Pode ser dispensada, pois estudos mostram desfechos semelhantes com ou sem o exame em casos simples','Deve ser substituída por ressonância magnética','Só pode ser realizada após a cirurgia'], correct:1,
+   expl:'Em casos <b>típicos e não complicados</b>, a urodinâmica pode ser dispensada mesmo antes de cirurgia, já que os desfechos cirúrgicos são semelhantes com ou sem esse exame prévio nesse cenário.'},
+  {stem:'Uma mulher relata perda urinária contínua, dia e noite, seis semanas após parto vaginal prolongado e obstruído. A investigação diagnóstica mais indicada nesse cenário inclui:', opts:['Apenas diário miccional, sem outros exames','Avaliação para fístula vesicovaginal, incluindo eventual cistoscopia','Apenas fisioterapia do assoalho pélvico, sem investigação adicional','Estudo urodinâmico isolado, sem outros exames'], correct:1,
+   expl:'Perda contínua, dia e noite, após parto obstruído/prolongado, é altamente sugestiva de <b>fístula vesicovaginal</b>, exigindo investigação dirigida, incluindo eventualmente cistoscopia para confirmar o trajeto fistuloso.'},
+  {stem:'Em relação à sequência lógica de investigação da incontinência urinária, a ordem correta, do menos para o mais invasivo, é:', opts:['Urodinâmica → anamnese → exame físico → diário miccional','Anamnese e diário miccional → exame físico e testes clínicos → laboratório básico → urodinâmica seletiva','Cistoscopia → anamnese → tratamento','Ressonância magnética → anamnese → exame físico'], correct:1,
+   expl:'A investigação segue um funil escalonado: <b>clínica e diário miccional</b> primeiro, depois <b>exame físico e testes clínicos</b>, depois <b>laboratório básico</b>, reservando a <b>urodinâmica</b> (e exames ainda mais invasivos) para critérios específicos.'},
+ ],
+ flashcards: [
+  {front:'Qual é a base do diagnóstico da incontinência urinária feminina, segundo a lógica escalonada do tópico?', back:'Anamnese dirigida, exame físico e diário miccional, que classificam a maioria dos casos sem necessidade de exames complexos.', type:'basic'},
+  {front:'Quais quatro exames laboratoriais/clínicos básicos devem ser considerados em toda investigação inicial?', back:'EAS, urocultura, resíduo pós-miccional e teste de esforço clínico.', type:'basic'},
+  {front:'O {{diário miccional}} de 3 dias documenta horário, volume, ingesta hídrica e gatilho de cada episódio de perda.', back:'diário miccional', type:'cloze'},
+  {front:'O que sugere um diário miccional com grandes volumes urinados dia e noite?', back:'Poliúria, que deve ser investigada como causa de frequência/noctúria, e não necessariamente disfunção vesical primária.', type:'basic'},
+  {front:'O que é IUE oculta (ou latente)?', back:'IUE mascarada por um prolapso genital importante, que só se manifesta ao teste de esforço quando o prolapso é reduzido durante o exame.', type:'basic'},
+  {front:'Por que se deve sempre excluir infecção urinária antes de rotular um quadro como bexiga hiperativa?', back:'Porque a infecção urinária pode mimetizar ou agravar sintomas de urgência e frequência.', type:'basic'},
+  {front:'O que um resíduo pós-miccional elevado sugere na investigação de incontinência?', back:'Retenção urinária crônica, com possível incontinência por transbordamento.', type:'basic'},
+  {front:'Cite quatro critérios que indicam a realização de estudo urodinâmico.', back:'Suspeita de incontinência mista com dúvida diagnóstica, falha de cirurgia anti-incontinência prévia, discordância entre clínica e exame, e suspeita de retenção/disfunção miccional ou doença neurológica.', type:'basic'},
+  {front:'O que a {{cistometria}} avalia no estudo urodinâmico?', back:'A pressão vesical durante o enchimento, detectando contrações involuntárias do detrusor.', type:'cloze'},
+  {front:'Quando a cistoscopia é indicada na investigação de incontinência urinária?', back:'Diante de hematúria, suspeita de corpo estranho intravesical (por exemplo, fio de sutura migrado) ou suspeita de fístula.', type:'basic'},
+  {front:'A urodinâmica é obrigatória antes de cirurgia em toda paciente com IUE?', back:'Não — pode ser dispensada em casos clínicos típicos e não complicados, com desfechos cirúrgicos semelhantes com ou sem o exame.', type:'basic'},
+  {front:'Qual o padrão de perda que sempre deve levantar suspeita de fístula vesicovaginal?', back:'Perda urinária contínua, dia e noite, independente de esforço ou posição, geralmente após cirurgia pélvica, radioterapia ou parto obstruído.', type:'basic'},
+  {front:'Cite três sinais de alarme que devem ser ativamente investigados na anamnese de incontinência urinária.', back:'Hematúria, dor pélvica persistente e sintomas neurológicos associados (fraqueza ou alteração de sensibilidade perineal/membros inferiores).', type:'basic'},
+  {front:'Ressonância magnética pélvica é exame de rotina na investigação de incontinência urinária?', back:'Não — tem papel restrito, reservado a casos específicos de avaliação de assoalho pélvico complexo ou pré-operatório de reconstruções extensas.', type:'basic'},
+ ],
+ casos: [
+  {t:'Caso 1 — O funil diagnóstico em ação', stem:'Mulher de 47 anos relata perda urinária ao tossir há 1 ano, sem urgência associada. Nega hematúria, dor pélvica ou sintomas neurológicos. Exame físico com teste de esforço positivo em pé, sem prolapso relevante.', passos:[
+    {h:'1. Classificar clinicamente', p:'Perda sincronizada ao esforço, sem urgência prévia, teste de esforço positivo: quadro clínico típico de IUE.'},
+    {h:'2. Checar sinais de alerta', p:'Ausência de hematúria, dor ou sinais neurológicos — nenhum sinal de alarme presente.'},
+    {h:'3. Excluir diferenciais básicos', p:'Solicitar EAS/urocultura para excluir infecção antes de fechar o diagnóstico.'},
+    {h:'4. Decidir sobre urodinâmica', p:'Caso típico e não complicado, sem nenhum dos critérios que indicam urodinâmica — pode ser dispensada mesmo diante de eventual indicação cirúrgica futura.'},
+    {h:'Lição de prova', p:'Um caso clínico "limpo", sem sinais de alerta e sem critérios de complexidade, não precisa de mais exames além do básico — a resposta correta costuma ser tratar diretamente.'}
+  ]},
+  {t:'Caso 2 — Quando o diário miccional muda a suspeita inicial', stem:'Mulher de 55 anos, diabética, relata frequência urinária diurna e noctúria importantes, sem perda associada a esforço. Diário miccional revela volumes urinários grandes tanto de dia quanto à noite, com ingesta hídrica elevada e uso recente de diurético para hipertensão.', passos:[
+    {h:'1. Suspeitar do diagnóstico inicial mais óbvio', p:'À primeira vista, o quadro sugere bexiga hiperativa pela frequência e noctúria.'},
+    {h:'2. Reinterpretar com o diário miccional', p:'Os grandes volumes urinados, tanto de dia quanto à noite, apontam para poliúria (ingesta hídrica elevada, diurético, possível controle glicêmico inadequado), e não necessariamente para hiperatividade detrusora.'},
+    {h:'3. Investigar a causa da poliúria', p:'Revisar uso de diurético, avaliar controle glicêmico, orientar sobre ingesta hídrica adequada.'},
+    {h:'4. Reavaliar após corrigir a causa', p:'Reaplicar o diário miccional após ajustes; se a frequência persistir mesmo com poliúria controlada, aí sim reconsiderar bexiga hiperativa.'},
+    {h:'Lição de prova', p:'Nem toda frequência urinária é bexiga hiperativa — o diário miccional é a ferramenta que evita esse erro diagnóstico, ao revelar poliúria como causa alternativa.'}
+  ]},
+  {t:'Caso 3 — A paciente que já foi operada e não melhorou', stem:'Mulher de 61 anos, submetida a sling mediouretral há 2 anos, retorna com perda urinária ao esforço que não melhorou após a cirurgia, associada a episódios ocasionais de urgência que já existiam antes da operação, mas não haviam sido investigados.', passos:[
+    {h:'1. Reconhecer o critério de complexidade', p:'Falha de cirurgia anti-incontinência prévia é um dos critérios clássicos que indicam estudo urodinâmico antes de qualquer nova conduta.'},
+    {h:'2. Reavaliar clinicamente com diário miccional', p:'Quantificar novamente a proporção de episódios de esforço e de urgência, já que a urgência não foi investigada na avaliação inicial.'},
+    {h:'3. Excluir diferenciais básicos novamente', p:'EAS/urocultura e resíduo pós-miccional, para excluir infecção e obstrução relacionada ao sling.'},
+    {h:'4. Solicitar urodinâmica', p:'Avaliar se persiste hipermobilidade/deficiência esfincteriana não corrigida pelo sling e se há hiperatividade detrusora associada, para definir a próxima estratégia terapêutica.'},
+    {h:'Lição de prova', p:'Falha de cirurgia prévia muda o algoritmo diagnóstico: torna a urodinâmica obrigatória e exige reinvestigar componentes que não foram avaliados na primeira consulta.'}
+  ]},
+ ],
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>
+/* ELID Ginecologia — Conteúdo Incontinência Urinária (6/6): Tratamento — síntese integrada (incontinencia|5).
+   Aditivo. Explicações aprofundadas para provas de residência (ENARE, ENAMED, Revalida, PSU-MG, SES-RJ, UERJ, UFRJ). */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+var SVG_SLING = `<svg viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+ <linearGradient id="slBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1f2"/><stop offset="1" stop-color="#eff6ff"/></linearGradient>
+ <linearGradient id="slPelvis" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fed7aa"/><stop offset="1" stop-color="#c2410c"/></linearGradient>
+ <linearGradient id="slUretra" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfdbfe"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+ <linearGradient id="slTape" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e2e8f0"/><stop offset="1" stop-color="#64748b"/></linearGradient>
+ <linearGradient id="slRetro" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a7f3d0"/><stop offset="1" stop-color="#047857"/></linearGradient>
+ <linearGradient id="slObt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ddd6fe"/><stop offset="1" stop-color="#6d28d9"/></linearGradient>
+ <filter id="slShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#7c2d12" flood-opacity="0.2"/></filter>
+</defs>
+<rect x="4" y="4" width="672" height="432" rx="18" fill="url(#slBg)"/>
+<text x="340" y="28" text-anchor="middle" font-size="15.5" font-weight="700" fill="#7c2d12">Sling mediouretral: duas rotas para a mesma faixa de suporte</text>
+<g filter="url(#slShadow)">
+ <path d="M240 90 C220 88 205 108 208 130 C211 152 232 166 260 164 C290 162 310 144 306 120 C302 96 264 92 240 90 Z" fill="url(#slPelvis)"/>
+</g>
+<text x="256" y="130" text-anchor="middle" font-size="9.5" fill="#7c2d12" font-weight="700">Sínfise púbica</text>
+<path d="M260 165 C258 190 258 215 260 240" stroke="url(#slUretra)" stroke-width="16" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+<text x="300" y="205" text-anchor="middle" font-size="10" fill="#1e3a8a" font-weight="700">Uretra</text>
+<path d="M180 250 C220 236 300 236 340 250" stroke="url(#slTape)" stroke-width="12" fill="none" stroke-linecap="round" vector-effect="non-scaling-stroke" filter="url(#slShadow)"/>
+<text x="260" y="272" text-anchor="middle" font-size="9.5" fill="#334155" font-weight="700">Faixa (sling) sob a uretra média</text>
+<path d="M195 245 C180 200 178 150 190 108" stroke="url(#slRetro)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="2 6" vector-effect="non-scaling-stroke"/>
+<text x="150" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="#047857">TVT — retropúbico</text>
+<text x="150" y="335" text-anchor="middle" font-size="9.5" fill="#065f46">Agulha sobe pelo espaço</text>
+<text x="150" y="349" text-anchor="middle" font-size="9.5" fill="#065f46">retropúbico até o abdome</text>
+<text x="150" y="367" text-anchor="middle" font-size="9.5" fill="#065f46">Risco maior: perfuração vesical</text>
+<path d="M330 248 C365 232 395 210 405 175" stroke="url(#slObt)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="2 6" vector-effect="non-scaling-stroke"/>
+<text x="470" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6d28d9">TOT/TVT-O — transobturatório</text>
+<text x="470" y="335" text-anchor="middle" font-size="9.5" fill="#4c1d95">Agulha passa lateralmente pelo</text>
+<text x="470" y="349" text-anchor="middle" font-size="9.5" fill="#4c1d95">forame obturador até a coxa</text>
+<text x="470" y="367" text-anchor="middle" font-size="9.5" fill="#4c1d95">Risco maior: dor inguinal/coxa</text>
+<line x1="340" y1="50" x2="340" y2="400" stroke="#fdba74" stroke-width="2" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/>
+<text x="340" y="412" text-anchor="middle" font-size="11" fill="#78350f">Mesmo princípio (efeito hammock dinâmico); via de passagem diferente muda o perfil de complicações.</text>
+</svg>`;
+
+C['incontinencia|5'] = {
+ name: 'Tratamento',
+ intro: 'É a síntese terapêutica de todo o tópico — do conservador comum a todos os tipos até a cirurgia de sling, a técnica cirúrgica mais cobrada em provas de Ginecologia e ainda não detalhada nos módulos anteriores.',
+ sub: [
+  ['entendendo','Entendendo do Zero', `
+   <div class="ac-h">Um princípio único guia todo o tratamento</div>
+   <p class="ac-p">Depois de percorrer fisiologia, IUE, bexiga hiperativa e incontinência mista, este módulo final amarra o tratamento de todo o espectro de incontinência urinária feminina em um único princípio organizador: <b>sempre começar pelo tratamento menos invasivo e mais reversível, e escalonar apenas quando necessário</b>. Essa lógica vale para os três tipos de incontinência estudados, ainda que o conteúdo específico de cada etapa mude conforme o tipo predominante (esforço, urgência ou misto).</p>
+   <p class="ac-p">Em todos os tipos, a <b>fisioterapia do assoalho pélvico</b> e as medidas comportamentais formam a base comum do tratamento inicial — por isso costumam ser a resposta certa em questões que perguntam "qual a primeira conduta", independentemente do tipo de incontinência descrito. A partir daí, os caminhos se diferenciam: a bexiga hiperativa tem uma escada farmacológica bem definida (antimuscarínico/beta-3 → toxina botulínica/neuromodulação), enquanto a IUE, quando o conservador falha, avança diretamente para a cirurgia — hoje dominada pelo <b>sling mediouretral</b>, que é o foco principal deste módulo, por ser a técnica cirúrgica mais cobrada e a que ainda não foi detalhada nos módulos anteriores.</p>
+   <div class="ac-call"><b>A grande ideia:</b> conservador sempre primeiro, independentemente do tipo; farmacológico escalonado na urgência; cirúrgico (sling mediouretral) como padrão-ouro quando o conservador falha na IUE.</div>
+   <table class="ac-tbl"><tr><th>Eixo</th><th>O que você vai dominar</th></tr>
+    <tr><td>Conservador</td><td>Fisioterapia, treinamento vesical, pessário — comum a todos os tipos</td></tr>
+    <tr><td>Farmacológico</td><td>Antimuscarínicos/beta-3 (urgência), duloxetina (esforço, uso restrito)</td></tr>
+    <tr><td>Cirúrgico IUE</td><td>Sling mediouretral (TVT x TOT), Burch, agentes de preenchimento</td></tr>
+    <tr><td>Refratário na BH</td><td>Toxina botulínica, neuromodulação sacral/tibial posterior</td></tr>
+    <tr><td>Complicações</td><td>Reconhecimento e manejo das complicações do sling</td></tr>
+   </table>`],
+  ['conservador','Tratamento Conservador', `
+   <div class="ac-h">A base comum, independentemente do tipo</div>
+   <p class="ac-p">A <b>fisioterapia do assoalho pélvico</b> (treinamento muscular, com ou sem biofeedback, incluindo exercícios de Kegel supervisionados) é a intervenção de primeira linha com maior evidência de eficácia entre as opções não farmacológicas e não cirúrgicas, atuando tanto na IUE (hipertrofia muscular e reflexo de contração pré-esforço) quanto na bexiga hiperativa (a contração voluntária do assoalho pélvico inibe reflexamente a contração do detrusor). O <b>treinamento vesical</b> (micções em intervalos programados e progressivamente maiores) é a medida comportamental específica para o componente de urgência, "reeducando" a bexiga a tolerar volumes maiores antes de disparar a sensação de urgência.</p>
+   <p class="ac-p">Medidas gerais complementares incluem <b>perda de peso</b> (reduz a pressão intra-abdominal crônica), controle da <b>tosse crônica</b> e da <b>constipação</b> (reduzem o esforço repetitivo sobre o assoalho pélvico), redução de <b>irritantes vesicais</b> (cafeína, álcool, bebidas gaseificadas — relevante sobretudo para urgência) e ajuste de ingesta hídrica. A <b>terapia estrogênica tópica vaginal</b> (não sistêmica) é uma medida de suporte importante em mulheres com atrofia genital, melhorando a qualidade do tecido periuretral e vaginal, com benefício tanto sobre sintomas de esforço quanto de urgência, embora não substitua as intervenções específicas de cada tipo. O <b>pessário</b> (dispositivo vaginal de suporte) é uma opção não invasiva especialmente útil para IUE em pacientes que não desejam ou não podem operar, ou como medida temporária/de prova antes da cirurgia.</p>
+   <table class="ac-tbl"><tr><th>Medida</th><th>Benefício principal</th></tr>
+    <tr><td>Fisioterapia do assoalho pélvico</td><td>Melhora IUE e urgência (reflexo de inibição)</td></tr>
+    <tr><td>Treinamento vesical</td><td>Específico para urgência/frequência</td></tr>
+    <tr><td>Estrogênio tópico vaginal</td><td>Melhora atrofia; suporte para ambos os tipos</td></tr>
+    <tr><td>Pessário</td><td>Opção não cirúrgica específica para IUE (e prolapso associado)</td></tr>
+   </table>
+   <div class="ac-tip"><b>Macete:</b> se a questão perguntar "qual a primeira conduta" em qualquer tipo de incontinência urinária feminina, a resposta quase sempre envolve fisioterapia do assoalho pélvico e medidas comportamentais.</div>`],
+  ['farmacologico','Tratamento Farmacológico', `
+   <div class="ac-h">Forte na urgência, limitado no esforço</div>
+   <p class="ac-p">O arsenal farmacológico é muito mais robusto para o componente de <b>urgência</b> do que para o componente de <b>esforço</b>. Na bexiga hiperativa, a segunda linha (após falha do comportamental) inclui os <b>antimuscarínicos</b> (oxibutinina, tolterodina, solifenacina, darifenacina, entre outros), que bloqueiam receptores M2/M3 do detrusor, e o <b>mirabegrona</b>, agonista beta-3 adrenérgico que relaxa o detrusor por via diferente, com perfil de efeitos colaterais mais favorável (sem os efeitos anticolinérgicos de boca seca, constipação e risco cognitivo em idosas) — esse conteúdo já foi detalhado no módulo de bexiga hiperativa e permanece válido aqui.</p>
+   <p class="ac-p">Para o componente de <b>esforço</b>, não existe uma classe farmacológica de primeira linha amplamente eficaz e bem tolerada: a <b>duloxetina</b> (inibidor da recaptação de serotonina e noradrenalina) aumenta o tônus do esfíncter uretral estriado por ação sobre o núcleo de Onuf na medula sacral, reduzindo em torno de 50-60% os episódios de perda em alguns estudos, mas seu uso é limitado por efeitos colaterais gastrointestinais e neuropsiquiátricos, sendo reservada a situações específicas (por exemplo, contraindicação cirúrgica temporária ou recusa da paciente à cirurgia), e não como alternativa equivalente ao sling.</p>
+   <div class="ac-warn"><b>Pegadinha:</b> não confunda a robustez do arsenal farmacológico da urgência com o do esforço — para IUE, o tratamento definitivo mais eficaz continua sendo cirúrgico quando o conservador falha, e a farmacoterapia (duloxetina) é apenas uma opção de exceção.</div>`],
+  ['cirurgia_iue','Cirurgia da IUE — Sling Mediouretral', `
+   <div class="ac-h">O padrão-ouro cirúrgico, em detalhe</div>
+   <p class="ac-p">Quando o tratamento conservador falha e a paciente com IUE deseja resolução definitiva, o procedimento cirúrgico atualmente considerado <b>padrão-ouro</b> é a colocação de uma <b>faixa (sling) mediouretral sintética</b>, feita de tela de polipropileno macroporoso e monofilamentar, posicionada sem tensão excessiva por baixo da uretra média. O princípio é reproduzir artificialmente o "hammock" (rede de suporte) que, na hipermobilidade uretral, está frouxo: durante o esforço, o aumento da pressão abdominal comprime a uretra contra essa faixa de suporte, fechando-a — o mesmo mecanismo fisiológico estudado no módulo de fisiologia, agora recriado cirurgicamente.</p>
+   <p class="ac-p">Existem duas vias principais de passagem da faixa, e a diferença entre elas é um dos pontos mais cobrados em prova. A técnica <b>retropúbica (TVT — tension-free vaginal tape)</b>, histórica e original, passa a faixa por uma incisão vaginal, ascendendo pelo <b>espaço retropúbico</b> (espaço de Retzius) até sair por duas pequenas incisões suprapúbicas — essa trajetória passa próxima à bexiga, o que explica seu principal risco intraoperatório: a <b>perfuração vesical</b> (por isso realiza-se cistoscopia intraoperatória de rotina nessa via, para confirmar a integridade vesical antes de finalizar o procedimento). A técnica <b>transobturatória (TOT ou TVT-O)</b>, desenvolvida posteriormente, passa a faixa lateralmente através do <b>forame obturador</b>, saindo por pequenas incisões na região inguinal/coxa — essa trajetória evita o espaço retropúbico e reduz drasticamente o risco de perfuração vesical, mas aumenta o risco de <b>dor inguinal/de coxa</b> e de lesão do nervo/vasos obturadores.</p>
+   ${SVG_SLING}
+   <p class="ac-p">Em termos de <b>eficácia</b>, ambas as técnicas apresentam taxas de cura elevadas e comparáveis na maioria dos estudos (geralmente entre 80-90% em seguimento de médio prazo), sendo a hipermobilidade uretral predominante o cenário com melhor resposta a ambas. A escolha entre TVT e TOT costuma considerar o perfil de risco individual da paciente (por exemplo, evitar a via retropúbica em cirurgias abdominais/pélvicas extensas prévias com aderências, ou evitar a via obturatória em pacientes com maior risco de dor pélvica crônica) mais do que uma superioridade absoluta de uma técnica sobre a outra.</p>
+   <table class="ac-tbl"><tr><th>Característica</th><th>TVT (retropúbico)</th><th>TOT/TVT-O (transobturatório)</th></tr>
+    <tr><td>Trajeto</td><td>Espaço retropúbico, sai suprapúbico</td><td>Forame obturador, sai na coxa/região inguinal</td></tr>
+    <tr><td>Risco principal</td><td>Perfuração vesical (requer cistoscopia intraoperatória de rotina)</td><td>Dor inguinal/coxa, lesão de nervo/vasos obturadores</td></tr>
+    <tr><td>Sangramento/hematoma</td><td>Discretamente maior</td><td>Discretamente menor</td></tr>
+    <tr><td>Eficácia global</td><td>Elevada e comparável</td><td>Elevada e comparável</td></tr>
+   </table>
+   <div class="ac-tip"><b>Atalho para prova:</b> "perfuração de bexiga" → pensar em TVT retropúbico; "dor na virilha/coxa" → pensar em TOT transobturatório. Cistoscopia intraoperatória é rotina no TVT justamente por esse risco.</div>`],
+  ['outras_cirurgias','Outras Opções Cirúrgicas para IUE', `
+   <div class="ac-h">Quando o sling não é a primeira escolha</div>
+   <p class="ac-p">A <b>colposuspensão de Burch</b> (fixação cirúrgica dos tecidos periuretrais/paravaginais aos ligamentos de Cooper, por via aberta ou laparoscópica) foi por décadas o padrão-ouro cirúrgico da IUE e continua sendo uma alternativa válida e eficaz, sobretudo em cenários com <b>indicação concomitante de cirurgia abdominal</b> (por exemplo, junto a uma histerectomia abdominal) ou em contextos de contraindicação/indisponibilidade de tela sintética. Sua eficácia de longo prazo é bem documentada, mas apresenta morbidade discretamente maior e recuperação mais prolongada em comparação ao sling mediouretral minimamente invasivo, o que explica por que perdeu a posição de primeira escolha isolada.</p>
+   <p class="ac-p">O <b>sling autólogo (pubovaginal, tradicionalmente confeccionado com fáscia do reto abdominal)</b> é uma opção de segunda linha ou para casos selecionados, sobretudo quando há contraindicação ao uso de tela sintética (por exemplo, histórico de extrusão/erosão de tela prévia) — apresenta boa eficácia, mas com maior morbidade cirúrgica (necessidade de incisão para coleta do enxerto) e maior risco de disfunção miccional pós-operatória. Os <b>agentes de preenchimento periuretral (bulking agents)</b>, injetados por via transuretral ou periuretral para aumentar a coaptação da luz uretral, são reservados para <b>casos excepcionais</b> — deficiência esfincteriana intrínseca predominante em pacientes idosas, frágeis, com múltiplas falhas cirúrgicas prévias ou que não desejam/não podem se submeter a uma cirurgia maior —, dado que sua eficácia é mais modesta e tende a diminuir com o tempo, exigindo reaplicações.</p>
+   <table class="ac-tbl"><tr><th>Técnica</th><th>Indicação típica</th></tr>
+    <tr><td>Sling mediouretral (TVT/TOT)</td><td>Primeira escolha cirúrgica na maioria dos cenários</td></tr>
+    <tr><td>Colposuspensão de Burch</td><td>Cirurgia abdominal concomitante; alternativa válida</td></tr>
+    <tr><td>Sling autólogo (fáscia)</td><td>Contraindicação a tela sintética; segunda linha selecionada</td></tr>
+    <tr><td>Agentes de preenchimento periuretral</td><td>DEI em paciente frágil/múltiplas falhas prévias; uso excepcional</td></tr>
+   </table>
+   <div class="ac-call"><b>Por que o sling desbancou o Burch como primeira escolha?</b> Porque é um procedimento minimamente invasivo, mais rápido, com recuperação mais curta e eficácia comparável — a mesma lógica de menor morbidade com eficácia mantida que guia toda a escalada terapêutica deste tópico.</div>`],
+  ['refratario','Tratamento Refratário da Bexiga Hiperativa', `
+   <div class="ac-h">Revisão integrada da terceira linha</div>
+   <p class="ac-p">Retomando o que foi detalhado no módulo de bexiga hiperativa: uma parcela relevante das pacientes (estimada em torno de um terço a 40% em alguns estudos) não responde satisfatoriamente à primeira linha comportamental nem à segunda linha farmacológica, exigindo opções de <b>terceira linha</b>. A <b>toxina onabotulínica A intradetrusora</b>, aplicada por cistoscopia em múltiplos pontos da parede vesical, bloqueia a liberação de acetilcolina nas terminações nervosas do detrusor, reduzindo as contrações involuntárias por período de meses — seu principal risco a monitorar é a <b>retenção urinária</b>, que pode exigir cateterismo intermitente temporário.</p>
+   <p class="ac-p">A <b>neuromodulação sacral</b> (dispositivo implantável que estimula continuamente as raízes sacrais, geralmente S3) e a <b>neuroestimulação do nervo tibial posterior</b> (técnica minimamente invasiva, com sessões semanais de agulha fina próxima ao maléolo medial) são as outras grandes opções de terceira linha, modulando por vias diferentes o mesmo arco reflexo entre bexiga e sistema nervoso central. A ampliação vesical cirúrgica é reservada a casos excepcionais e extremamente refratários, praticamente não sendo abordada em provas de residência de Ginecologia com o mesmo peso das opções anteriores.</p>
+   <div class="ac-tip"><b>Macete de revisão integrada:</b> comportamental → antimuscarínico/mirabegrona → botox intradetrusor ou neuromodulação (sacral/tibial posterior). Essa é a escada da urgência; a escada do esforço é conservador → sling mediouretral (ou Burch/preenchimento em cenários específicos).</div>`],
+  ['complicacoes','Complicações e Manejo', `
+   <div class="ac-h">Reconhecendo o que pode dar errado após o sling</div>
+   <p class="ac-p">A <b>retenção urinária pós-operatória</b> é a complicação precoce mais comum após sling mediouretral, geralmente por posicionamento levemente mais tensionado da faixa — manifesta-se por dificuldade de esvaziamento completo ou jato urinário fraco nos primeiros dias; o manejo inicial costuma ser conservador (cateterismo intermitente temporário), e apenas casos persistentes e significativos podem exigir revisão cirúrgica com afrouxamento ou secção parcial da faixa. A <b>perfuração vesical intraoperatória</b>, mais associada à via retropúbica, é habitualmente identificada e corrigida no próprio ato cirúrgico graças à cistoscopia de rotina, sem grandes repercussões quando reconhecida a tempo.</p>
+   <p class="ac-p">A <b>erosão ou extrusão da tela</b> (exposição do material sintético na mucosa vaginal, ou mais raramente na uretra ou bexiga) é uma complicação tardia que pode se manifestar como corrimento vaginal persistente, dor, dispareunia ou sangramento, exigindo avaliação especializada e, com frequência, remoção cirúrgica parcial do segmento exposto. A <b>dor inguinal/de coxa crônica</b>, mais associada à via transobturatória, e a <b>disfunção miccional persistente</b> (jato fraco, esvaziamento incompleto crônico, ou até urgência de novo) completam o quadro de complicações que toda paciente candidata a sling deve conhecer antes da cirurgia, conforme já discutido no módulo de incontinência mista.</p>
+   <table class="ac-tbl"><tr><th>Complicação</th><th>Via mais associada</th><th>Manejo inicial</th></tr>
+    <tr><td>Retenção urinária</td><td>Ambas</td><td>Cateterismo intermitente; revisão se persistente</td></tr>
+    <tr><td>Perfuração vesical</td><td>Retropúbica (TVT)</td><td>Identificação e correção intraoperatória (cistoscopia de rotina)</td></tr>
+    <tr><td>Dor inguinal/coxa</td><td>Transobturatória (TOT)</td><td>Analgesia; investigar lesão nervosa se persistente</td></tr>
+    <tr><td>Erosão/extrusão de tela</td><td>Ambas</td><td>Avaliação especializada; remoção parcial se necessário</td></tr>
+    <tr><td>Urgência de novo/persistente</td><td>Ambas</td><td>Tratar como bexiga hiperativa (ver módulo específico)</td></tr>
+   </table>
+   <div class="ac-warn"><b>Erro que reprova:</b> tratar toda queixa pós-operatória de dificuldade miccional como "normal e transitória" sem reavaliar — retenção persistente e disfunção miccional prolongada exigem investigação e, se necessário, revisão da faixa.</div>`],
+  ['sintese','Síntese Terapêutica Final', `
+   <div class="ac-h">O algoritmo completo do tópico, em uma só visão</div>
+   <p class="ac-p">Ao final dos seis módulos, o tratamento de qualquer paciente com incontinência urinária pode ser resumido no seguinte raciocínio integrado: (1) definir o tipo predominante (esforço, urgência ou misto) pela avaliação clínica já estudada; (2) iniciar sempre pelo conservador — fisioterapia do assoalho pélvico e medidas comportamentais, comuns a todos os tipos; (3) se urgência predominar ou estiver presente de forma relevante, escalonar farmacologicamente (antimuscarínico/mirabegrona) antes de considerar qualquer cirurgia para o componente de esforço; (4) se esforço predominar e o conservador falhar, avançar para avaliação cirúrgica, com o sling mediouretral (TVT ou TOT) como primeira escolha na maioria dos cenários; (5) reservar Burch, sling autólogo e agentes de preenchimento para situações específicas; (6) se a urgência for refratária ao farmacológico, considerar toxina botulínica ou neuromodulação; (7) em todos os cenários cirúrgicos, aconselhar a paciente sobre riscos específicos da técnica e sobre a possibilidade de sintomas residuais ou de novo.</p>
+   <p class="ac-p">Esse fluxo integrado — que você agora é capaz de reconstruir sozinho, sem depender de decorar cada módulo isoladamente — é exatamente o tipo de raciocínio clínico que separa quem apenas memorizou fatos soltos de quem realmente compreendeu a incontinência urinária feminina como um espectro contínuo de mecanismos, investigação e tratamento.</p>
+   <div class="ac-call"><b>A grande ideia final do tópico:</b> conservador sempre primeiro; tratar o componente mais incômodo antes de operar; sling mediouretral é o padrão-ouro cirúrgico da IUE; toda cirurgia exige aconselhamento sobre riscos e sobre sintomas residuais/de novo.</div>`],
+ ],
+};
+
+Object.assign(C['incontinencia|5'], {
+ escores: `<div class="ac-h">Escalonamento terapêutico — resumo por tipo</div>
+   <table class="ac-tbl"><tr><th>Tipo</th><th>1ª linha</th><th>2ª linha</th><th>3ª linha</th></tr>
+    <tr><td>IUE</td><td>Fisioterapia do assoalho pélvico</td><td>Pessário (não cirúrgico) ou avaliação cirúrgica</td><td>Sling mediouretral (padrão-ouro); Burch/preenchimento em cenários específicos</td></tr>
+    <tr><td>Bexiga hiperativa</td><td>Treinamento vesical + fisioterapia</td><td>Antimuscarínico ou mirabegrona</td><td>Toxina botulínica intradetrusora ou neuromodulação</td></tr>
+    <tr><td>Mista</td><td>Conservador comum a ambos</td><td>Tratar o componente mais incômodo (geralmente urgência primeiro)</td><td>Sling se esforço persistente predominante; escada de BH se urgência persistente</td></tr>
+   </table>`,
+ dif: `<div class="ac-h">Escolhendo a técnica cirúrgica certa</div>
+   <table class="ac-tbl"><tr><th>Cenário</th><th>Técnica preferida</th><th>Por quê</th></tr>
+    <tr><td>Hipermobilidade uretral predominante, sem cirurgia abdominal concomitante</td><td>Sling mediouretral (TVT ou TOT)</td><td>Menos invasivo, eficácia elevada e comparável</td></tr>
+    <tr><td>Indicação de cirurgia abdominal concomitante</td><td>Colposuspensão de Burch</td><td>Aproveita o mesmo acesso cirúrgico</td></tr>
+    <tr><td>Extrusão prévia de tela sintética</td><td>Sling autólogo (fáscia)</td><td>Evita novo material sintético</td></tr>
+    <tr><td>DEI em paciente idosa/frágil, múltiplas falhas prévias</td><td>Agente de preenchimento periuretral</td><td>Menor morbidade, procedimento ambulatorial</td></tr>
+    <tr><td>Aderências pélvicas extensas prévias</td><td>Preferir via transobturatória (TOT)</td><td>Evita o espaço retropúbico potencialmente aderido</td></tr>
+   </table>`,
+ mapa: `<div class="ac-h">Tratamento em mapa</div>
+   <div class="mm">
+    <div class="mm-card"><h5>Conservador</h5><ul><li>Fisioterapia do assoalho pélvico</li><li>Treinamento vesical</li><li>Estrogênio tópico, pessário</li></ul></div>
+    <div class="mm-card"><h5>Farmacológico</h5><ul><li>Antimuscarínico/mirabegrona (urgência)</li><li>Duloxetina (esforço, uso restrito)</li></ul></div>
+    <div class="mm-card"><h5>Cirurgia da IUE</h5><ul><li>Sling mediouretral = padrão-ouro</li><li>TVT (retropúbico) x TOT (obturatório)</li><li>Burch, sling autólogo, preenchimento</li></ul></div>
+    <div class="mm-card"><h5>Refratário (BH)</h5><ul><li>Toxina botulínica intradetrusora</li><li>Neuromodulação sacral/tibial posterior</li></ul></div>
+   </div>`,
+ fluxo_dx: `<div class="ac-h">Do diagnóstico à decisão terapêutica</div>
+   <div class="fx">
+    <div class="fx-node start">Tipo definido: IUE, bexiga hiperativa ou mista</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-node">Iniciar conservador: fisioterapia do assoalho pélvico + medidas comportamentais (comum a todos)</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Qual componente predomina/mais incomoda?</div>
+    <div class="fx-row">
+     <div class="fx-node">Urgência → farmacológico (antimuscarínico/mirabegrona)</div>
+     <div class="fx-node">Esforço → avaliação cirúrgica se conservador falhar</div>
+    </div>
+   </div>`,
+ fluxo_cond: `<div class="ac-h">Algoritmo cirúrgico da IUE</div>
+   <div class="fx">
+    <div class="fx-node start">Falha do conservador na IUE, paciente deseja resolução definitiva</div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Existe indicação de cirurgia abdominal concomitante?</div>
+    <div class="fx-row">
+     <div class="fx-node end">Sim → considerar colposuspensão de Burch</div>
+     <div class="fx-node">Não → sling mediouretral (primeira escolha)</div>
+    </div>
+    <div class="fx-arrow"></div>
+    <div class="fx-lbl">Escolha da via do sling</div>
+    <div class="fx-row">
+     <div class="fx-node end">Sem fatores de risco específicos → TVT (retropúbico) ou TOT (obturatório), eficácia comparável</div>
+     <div class="fx-node end">DEI grave/paciente frágil/múltiplas falhas prévias → considerar agente de preenchimento periuretral</div>
+    </div>
+   </div>`,
+ vespera: `<div class="ac-h">Revisão de véspera</div>
+   <div class="ac-call"><b>Ponto 1:</b> conservador (fisioterapia + comportamental) é sempre a primeira linha, em qualquer tipo de incontinência.</div>
+   <div class="ac-call"><b>Ponto 2:</b> a escada farmacológica é robusta para urgência (antimuscarínico/mirabegrona → botox/neuromodulação) e limitada para esforço (duloxetina, uso restrito).</div>
+   <div class="ac-call"><b>Ponto 3:</b> sling mediouretral (TVT ou TOT) é o padrão-ouro cirúrgico da IUE; TVT (retropúbico) tem maior risco de perfuração vesical, TOT (obturatório) tem maior risco de dor inguinal/coxa.</div>
+   <div class="ac-call"><b>Ponto 4:</b> Burch, sling autólogo e agentes de preenchimento são reservados para cenários específicos, não são primeira escolha isolada.</div>
+   <div class="ac-call"><b>Ponto 5:</b> toda paciente candidata a sling deve ser aconselhada sobre retenção, dor, erosão de tela e possibilidade de urgência residual/de novo.</div>`,
+ dicas: `<div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">"Perfuração vesical" no enunciado de uma cirurgia de sling aponta para a via retropúbica (TVT); "dor na virilha/coxa" aponta para a via transobturatória (TOT).</div>
+   <div class="ac-tip">Cistoscopia intraoperatória de rotina é característica do TVT retropúbico, não do TOT.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Indicar sling mediouretral como primeira conduta, pulando o tratamento conservador — sempre tentar fisioterapia antes.</div>
+   <div class="ac-warn">Tratar toda retenção urinária pós-sling com revisão cirúrgica imediata — a primeira conduta costuma ser conservadora (cateterismo intermitente), reservando a revisão para casos persistentes.</div>`,
+ checklist: [
+  'Sei que o conservador é sempre a primeira linha, em qualquer tipo',
+  'Domino a escada farmacológica da bexiga hiperativa e sei por que não existe equivalente robusto para o esforço',
+  'Sei explicar o mecanismo do sling mediouretral e a diferença entre TVT e TOT',
+  'Sei quando escolher Burch, sling autólogo ou agente de preenchimento em vez do sling padrão',
+  'Reconheço e sei conduzir as principais complicações do sling',
+  'Consigo reconstruir o algoritmo terapêutico completo do tópico, do conservador à cirurgia'
+ ],
+});
+
+Object.assign(C['incontinencia|5'], {
+ questoes: [
+  {stem:'O tratamento de primeira linha para incontinência urinária, independentemente do tipo predominante (esforço, urgência ou mista), é:', opts:['Sling mediouretral','Antimuscarínico oral','Fisioterapia do assoalho pélvico associada a medidas comportamentais','Toxina botulínica intradetrusora'], correct:2,
+   expl:'A <b>fisioterapia do assoalho pélvico</b> associada a medidas comportamentais é a base do tratamento inicial em todos os tipos de incontinência urinária feminina, antes de qualquer escalonamento.'},
+  {stem:'Em relação ao tratamento farmacológico da incontinência urinária, é correto afirmar que:', opts:['Existe uma classe farmacológica de primeira linha tão eficaz para o esforço quanto para a urgência','O arsenal farmacológico é mais robusto para o componente de urgência do que para o de esforço','A duloxetina é o tratamento de escolha inicial para IUE em todos os casos','Antimuscarínicos são indicados para o tratamento da IUE'], correct:1,
+   expl:'A urgência conta com classes farmacológicas eficazes e bem estabelecidas (antimuscarínicos, mirabegrona); para o esforço, não há equivalente robusto, sendo a duloxetina uma opção de eficácia modesta e uso restrito.'},
+  {stem:'O procedimento cirúrgico atualmente considerado padrão-ouro para o tratamento da incontinência urinária de esforço, após falha do tratamento conservador, é:', opts:['Colposuspensão de Burch por via aberta','Sling mediouretral sintético (TVT ou TOT)','Ampliação vesical cirúrgica','Injeção intradetrusora de toxina botulínica'], correct:1,
+   expl:'O <b>sling mediouretral sintético</b> (via retropúbica/TVT ou transobturatória/TOT) é hoje o padrão-ouro cirúrgico para IUE, por sua eficácia elevada e menor morbidade em relação às técnicas anteriores.'},
+  {stem:'O princípio fisiopatológico que o sling mediouretral reproduz cirurgicamente é:', opts:['O bloqueio farmacológico dos receptores muscarínicos','O efeito hammock, comprimindo a uretra contra uma faixa de suporte durante o esforço','A ablação do detrusor hiperativo','O aumento da capacidade vesical total'], correct:1,
+   expl:'O sling recria artificialmente o "hammock" de suporte uretral: durante o esforço, o aumento da pressão abdominal comprime a uretra contra a faixa, fechando-a — o mesmo princípio fisiológico da continência normal.'},
+  {stem:'Em relação à via de passagem do sling mediouretral, a técnica retropúbica (TVT) apresenta como principal risco intraoperatório:', opts:['Dor inguinal/coxa crônica','Perfuração vesical, motivo pelo qual se realiza cistoscopia intraoperatória de rotina','Lesão do nervo obturador','Retenção urinária definitiva'], correct:1,
+   expl:'A via retropúbica passa próxima à bexiga, elevando o risco de <b>perfuração vesical</b> — por isso a cistoscopia intraoperatória é rotina nessa técnica, para confirmar a integridade vesical.'},
+  {stem:'Em relação à técnica transobturatória (TOT/TVT-O) de sling mediouretral, é correto afirmar que:', opts:['Tem maior risco de perfuração vesical do que a via retropúbica','Reduz o risco de perfuração vesical, mas aumenta o risco de dor inguinal/de coxa','É contraindicada em qualquer paciente com IUE','Não requer nenhum tipo de tela ou material sintético'], correct:1,
+   expl:'A via transobturatória evita o espaço retropúbico, reduzindo o risco de perfuração vesical, mas aumenta o risco de <b>dor inguinal/de coxa</b> por sua trajetória pelo forame obturador.'},
+  {stem:'A colposuspensão de Burch permanece uma alternativa cirúrgica válida para IUE especialmente quando:', opts:['A paciente deseja o procedimento menos invasivo possível','Há indicação de cirurgia abdominal concomitante','Há contraindicação absoluta a qualquer tipo de anestesia','A paciente tem menos de 30 anos'], correct:1,
+   expl:'A colposuspensão de Burch continua sendo uma alternativa válida, sobretudo quando há <b>indicação de cirurgia abdominal concomitante</b>, aproveitando o mesmo acesso cirúrgico.'},
+  {stem:'Os agentes de preenchimento periuretral (bulking agents) no tratamento cirúrgico da IUE são indicados preferencialmente para:', opts:['Toda paciente jovem como primeira opção','Casos excepcionais, como deficiência esfincteriana intrínseca em pacientes frágeis ou com múltiplas falhas cirúrgicas prévias','Substituir a fisioterapia do assoalho pélvico','Pacientes sem nenhum fator de risco para IUE'], correct:1,
+   expl:'Os agentes de preenchimento periuretral são reservados a <b>casos excepcionais</b>, dado que sua eficácia é mais modesta e tende a diminuir com o tempo, exigindo reaplicações.'},
+  {stem:'A complicação precoce mais comum após a colocação de sling mediouretral, geralmente manejada de forma conservadora, é:', opts:['Perfuração intestinal','Retenção urinária pós-operatória','Insuficiência renal aguda','Rejeição imunológica sistêmica ao material'], correct:1,
+   expl:'A <b>retenção urinária</b> é a complicação precoce mais comum, geralmente manejada inicialmente com cateterismo intermitente temporário, reservando a revisão cirúrgica para casos persistentes.'},
+  {stem:'Uma paciente evolui com corrimento vaginal persistente, dispareunia e sangramento vaginal 8 meses após colocação de sling mediouretral. A hipótese diagnóstica mais provável é:', opts:['Recidiva da IUE','Erosão/extrusão da tela sintética','Infecção urinária baixa não complicada','Fístula vesicovaginal'], correct:1,
+   expl:'Corrimento persistente, dispareunia e sangramento tardios após sling sugerem <b>erosão/extrusão da tela</b>, exigindo avaliação especializada e, frequentemente, remoção parcial do segmento exposto.'},
+  {stem:'Na bexiga hiperativa refratária à segunda linha farmacológica, as opções de terceira linha incluem:', opts:['Colposuspensão de Burch e sling mediouretral','Toxina onabotulínica A intradetrusora e neuromodulação (sacral ou tibial posterior)','Apenas aumento da dose de antimuscarínico','Estrogênio tópico isolado'], correct:1,
+   expl:'A terceira linha da bexiga hiperativa refratária inclui <b>toxina botulínica intradetrusora</b> e <b>neuromodulação</b> (sacral ou do nervo tibial posterior), técnicas mais invasivas reservadas para falha das linhas anteriores.'},
+  {stem:'Em relação ao aconselhamento pré-operatório de uma paciente candidata a sling mediouretral, é correto afirmar que deve incluir:', opts:['Garantia de resolução completa de todos os sintomas urinários em 100% dos casos','Informação sobre riscos específicos da técnica escolhida e sobre a possibilidade de sintomas urinários residuais ou de novo, incluindo urgência','Apenas informações sobre o tempo de internação hospitalar','Dispensa de qualquer explicação, pois o procedimento é considerado seguro'], correct:1,
+   expl:'O aconselhamento adequado deve incluir os riscos específicos da via escolhida (perfuração vesical no TVT, dor inguinal no TOT) e a possibilidade de sintomas residuais ou de novo, como urgência, mesmo com sucesso técnico da cirurgia.'},
+ ],
+ flashcards: [
+  {front:'Qual é sempre a primeira linha de tratamento da incontinência urinária, independentemente do tipo?', back:'Fisioterapia do assoalho pélvico associada a medidas comportamentais.', type:'basic'},
+  {front:'Por que o arsenal farmacológico é mais robusto para urgência do que para esforço?', back:'Porque existem classes eficazes e bem estabelecidas para urgência (antimuscarínicos, mirabegrona), enquanto para o esforço não há equivalente robusto (apenas duloxetina, de eficácia modesta e uso restrito).', type:'basic'},
+  {front:'Qual é o padrão-ouro cirúrgico atual para IUE após falha do tratamento conservador?', back:'Sling mediouretral sintético (via retropúbica/TVT ou transobturatória/TOT).', type:'basic'},
+  {front:'O {{sling mediouretral}} reproduz cirurgicamente o efeito hammock, comprimindo a uretra contra uma faixa de suporte durante o esforço.', back:'sling mediouretral', type:'cloze'},
+  {front:'Explique a trajetória do TVT (técnica retropúbica) e seu principal risco.', back:'A faixa ascende pelo espaço retropúbico até sair por incisões suprapúbicas; o principal risco é perfuração vesical, por isso se faz cistoscopia intraoperatória de rotina.', type:'basic'},
+  {front:'Explique a trajetória do TOT/TVT-O (técnica transobturatória) e seu principal risco.', back:'A faixa passa lateralmente pelo forame obturador até sair na região inguinal/coxa; o principal risco é dor inguinal/de coxa crônica, por lesão de nervo/vasos obturadores.', type:'basic'},
+  {front:'Quando a colposuspensão de Burch é preferida em vez do sling mediouretral?', back:'Quando há indicação de cirurgia abdominal concomitante, aproveitando o mesmo acesso cirúrgico.', type:'basic'},
+  {front:'Quando os agentes de preenchimento periuretral são indicados no tratamento da IUE?', back:'Em casos excepcionais, como deficiência esfincteriana intrínseca em pacientes frágeis, idosas ou com múltiplas falhas cirúrgicas prévias.', type:'basic'},
+  {front:'Qual a complicação precoce mais comum após sling mediouretral, e qual seu manejo inicial?', back:'Retenção urinária pós-operatória; manejo inicial conservador com cateterismo intermitente temporário.', type:'basic'},
+  {front:'A {{erosão/extrusão da tela}} do sling é uma complicação tardia que pode causar corrimento persistente, dor, dispareunia ou sangramento.', back:'erosão/extrusão da tela', type:'cloze'},
+  {front:'Cite as duas principais opções de terceira linha para bexiga hiperativa refratária.', back:'Toxina onabotulínica A intradetrusora e neuromodulação (sacral ou do nervo tibial posterior).', type:'basic'},
+  {front:'O que deve constar do aconselhamento pré-operatório de toda paciente candidata a sling?', back:'Riscos específicos da via escolhida (perfuração vesical no TVT, dor inguinal no TOT) e possibilidade de sintomas urinários residuais ou de novo, incluindo urgência.', type:'basic'},
+  {front:'Qual medida de suporte, comum a todos os tipos de incontinência, é especialmente indicada em mulheres com atrofia genital?', back:'Terapia estrogênica tópica vaginal (não sistêmica).', type:'basic'},
+  {front:'Em qual cenário é preferível escolher a via transobturatória (TOT) sobre a retropúbica (TVT)?', back:'Em pacientes com aderências pélvicas extensas prévias, evitando o espaço retropúbico potencialmente aderido.', type:'basic'},
+ ],
+ casos: [
+  {t:'Caso 1 — Decidindo entre TVT e TOT', stem:'Mulher de 50 anos, IUE por hipermobilidade uretral confirmada, sem melhora após 6 meses de fisioterapia bem realizada. Antecedente de duas cirurgias abdominais prévias por endometriose profunda, com relato de aderências pélvicas extensas na última laparoscopia.', passos:[
+    {h:'1. Confirmar indicação cirúrgica', p:'Falha de fisioterapia bem conduzida em paciente com IUE por hipermobilidade confirma indicação de avaliação cirúrgica.'},
+    {h:'2. Considerar Burch?', p:'Não há indicação de cirurgia abdominal concomitante no momento, então o sling mediouretral minimamente invasivo é preferível ao Burch.'},
+    {h:'3. Escolher a via do sling', p:'O antecedente de aderências pélvicas extensas por cirurgias abdominais prévias aumenta o risco de complicações na via retropúbica (TVT), que passa pelo espaço retropúbico potencialmente aderido.'},
+    {h:'4. Decisão', p:'Optar pela via transobturatória (TOT), que evita o espaço retropúbico e reduz o risco relacionado às aderências prévias.'},
+    {h:'Lição de prova', p:'A escolha entre TVT e TOT não é aleatória — antecedentes cirúrgicos abdominais/pélvicos extensos favorecem a via transobturatória, evitando a manipulação de um espaço retropúbico potencialmente aderido.'}
+  ]},
+  {t:'Caso 2 — A paciente com dificuldade miccional após a cirurgia', stem:'Mulher de 48 anos, no terceiro dia pós-operatório de sling mediouretral (via TVT), relata jato urinário fraco e sensação de esvaziamento incompleto, sem dor importante ou febre.', passos:[
+    {h:'1. Nomear a complicação', p:'Dificuldade de esvaziamento nos primeiros dias após sling sugere retenção urinária pós-operatória, a complicação precoce mais comum dessa cirurgia.'},
+    {h:'2. Avaliar a gravidade', p:'Ausência de febre ou dor importante sugere quadro não complicado nesse momento; medir resíduo pós-miccional para quantificar objetivamente.'},
+    {h:'3. Definir a conduta inicial', p:'Manejo conservador com cateterismo intermitente temporário, orientando a paciente sobre a técnica e reavaliando a evolução nos dias seguintes.'},
+    {h:'4. Planejar caso persista', p:'Se a retenção persistir além de um período razoável, considerar revisão cirúrgica com afrouxamento ou secção parcial da faixa.'},
+    {h:'Lição de prova', p:'Retenção urinária pós-sling não exige revisão cirúrgica imediata — a primeira conduta é conservadora, reservando a revisão para casos persistentes e significativos.'}
+  ]},
+  {t:'Caso 3 — Escolhendo entre sling e agente de preenchimento', stem:'Mulher de 78 anos, múltiplas comorbidades (insuficiência cardíaca compensada, fragilidade), com IUE grave por deficiência esfincteriana intrínseca, já submetida a duas cirurgias anti-incontinência sem sucesso no passado. Deseja alguma melhora, mas tem receio de nova cirurgia de grande porte.', passos:[
+    {h:'1. Reconhecer o perfil de risco', p:'Paciente idosa, frágil, com múltiplas falhas cirúrgicas prévias e comorbidades relevantes — perfil que favorece opções de menor morbidade.'},
+    {h:'2. Reconhecer o mecanismo predominante', p:'Deficiência esfincteriana intrínseca grave, cenário clássico para considerar agentes de preenchimento periuretral em vez de um novo sling.'},
+    {h:'3. Discutir expectativas', p:'Explicar que a eficácia dos agentes de preenchimento é mais modesta e tende a diminuir com o tempo, podendo exigir reaplicações, mas com menor morbidade que uma nova cirurgia maior.'},
+    {h:'4. Decisão compartilhada', p:'Optar por agente de preenchimento periuretral como abordagem inicial, reservando um novo sling ou outra técnica para eventual falha e reavaliação futura.'},
+    {h:'Lição de prova', p:'Idade avançada, fragilidade, DEI grave e múltiplas falhas cirúrgicas prévias formam o conjunto clássico de indicação para agentes de preenchimento periuretral, mesmo sabendo de sua eficácia mais modesta e temporária.'}
+  ]},
+ ],
+});
+
+try{ if(typeof route!=='undefined' && route &&
+   (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs'))
+   renderRoute(); }catch(e){}
+})();
+</script>
+
 </body>
 </html>
