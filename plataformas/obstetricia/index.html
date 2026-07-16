@@ -20,19 +20,19 @@
   --ivory:#faf6f0; --soft-mauve:#c9a0b0; --credit-rose:#b06a75;
   --correct:#3ddc84; --correct-soft:rgba(61,220,132,.16);
   --bg:#2d1b2e; --ink:#faf6f0; --muted:rgba(250,246,240,.6);
-  --panel:rgba(229,57,53,.05); --line:rgba(229,57,53,.16);
+  --panel:rgba(224,2,180,.05); --line:rgba(224,2,180,.16);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
   font-family:'Inter',sans-serif; color:var(--ink);
   background:
-    radial-gradient(900px 600px at 85% 8%, rgba(229,57,53,.10), transparent 60%),
+    radial-gradient(900px 600px at 85% 8%, rgba(224,2,180,.10), transparent 60%),
     linear-gradient(160deg,#2d1b2e 0%, #34203a 60%, #2a1828 100%);
   overflow-x:hidden;
 }
 body.light{ --bg:#faf6f0; --ink:#2d1b2e; --muted:rgba(45,27,46,.65);
-  --panel:rgba(229,57,53,.07); --line:rgba(229,57,53,.22);
+  --panel:rgba(224,2,180,.07); --line:rgba(224,2,180,.22);
   background:linear-gradient(160deg,#faf6f0,#efe5d6);}
 ::-webkit-scrollbar{width:9px;height:9px}
 ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:6px}
@@ -170,13 +170,13 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 /* card inicial = capa do livro (chamativo) */
 .hero-cover{position:relative;width:194px;height:256px;flex:none;cursor:pointer;border-radius:5px 13px 13px 5px;
   background:linear-gradient(135deg,#3a2330,#241420 60%,#2d1b2e);
-  box-shadow:0 20px 44px rgba(0,0,0,.5),inset 0 0 0 1px rgba(229,57,53,.3);
-  border-left:9px solid rgba(229,57,53,.55);
+  box-shadow:0 20px 44px rgba(0,0,0,.5),inset 0 0 0 1px rgba(224,2,180,.3);
+  border-left:9px solid rgba(224,2,180,.55);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;text-align:center;
   transition:.35s cubic-bezier(.34,1.3,.64,1)}
 .hero-cover:hover{transform:translateY(-5px) rotateY(-9deg);box-shadow:0 30px 56px rgba(0,0,0,.55)}
-.hero-cover .hc-border{position:absolute;inset:12px;border:1.4px solid rgba(229,57,53,.45);border-radius:9px}
-.hero-cover .hc-border::after{content:'';position:absolute;inset:6px;border:1px solid rgba(229,57,53,.22);border-radius:6px}
+.hero-cover .hc-border{position:absolute;inset:12px;border:1.4px solid rgba(224,2,180,.45);border-radius:9px}
+.hero-cover .hc-border::after{content:'';position:absolute;inset:6px;border:1px solid rgba(224,2,180,.22);border-radius:6px}
 .hero-cover .hcv-logo{position:relative;width:78px;height:78px;color:var(--accent)}
 .hero-cover .hcv-logo svg{width:78px;height:78px}.hero-cover .sb-glow{inset:-12%}
 .hero-cover .hcv-ttl{font-family:'Parisienne',cursive;font-size:1.55rem;color:var(--accent);line-height:1.05}
@@ -191,7 +191,7 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 .book-ind{font-size:.78rem;color:var(--muted);letter-spacing:.06em;min-width:120px;text-align:center}
 .book-wrap{perspective:2200px;display:flex;justify-content:center}
 .book{position:relative;width:100%;max-width:880px;min-height:520px;border-radius:18px;
-  background:linear-gradient(135deg,rgba(229,57,53,.07),rgba(45,27,46,.25));
+  background:linear-gradient(135deg,rgba(224,2,180,.07),rgba(45,27,46,.25));
   border:1px solid var(--line);box-shadow:0 30px 60px rgba(0,0,0,.35);overflow:hidden}
 .book::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--line);opacity:.5}
 .bpage{padding:40px 44px;animation:flip .55s cubic-bezier(.4,.1,.3,1) both;transform-origin:left center}
@@ -213,7 +213,7 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
     repeating-linear-gradient(0deg,rgba(120,90,40,.022) 0 2px,transparent 2px 5px),
     radial-gradient(130% 130% at 82% 8%,#fdf6e3,#f4e8c9 68%,#ead9b0);
   box-shadow:inset 0 0 70px rgba(150,110,50,.14),0 30px 60px rgba(0,0,0,.42);
-  border:1px solid #e2d1a6;border-left:11px solid rgba(229,57,53,.55);
+  border:1px solid #e2d1a6;border-left:11px solid rgba(224,2,180,.55);
   padding:34px 42px;color:#3a2a1e;overflow:hidden}
 .bookpages::before{content:'';position:absolute;left:0;top:0;bottom:0;width:30px;
   background:linear-gradient(90deg,rgba(90,60,20,.16),transparent);pointer-events:none}
@@ -221,11 +221,11 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
   transition:transform .9s cubic-bezier(.6,.02,.2,1),box-shadow .9s;transform:rotateY(0);
   backface-visibility:hidden;z-index:5;cursor:pointer;
   background:linear-gradient(135deg,#3a2330,#241420 60%,#2d1b2e);
-  box-shadow:0 30px 60px rgba(0,0,0,.5),inset 0 0 0 1px rgba(229,57,53,.28)}
+  box-shadow:0 30px 60px rgba(0,0,0,.5),inset 0 0 0 1px rgba(224,2,180,.28)}
 .hardcover.opened{transform:rotateY(-164deg);box-shadow:0 8px 26px rgba(0,0,0,.3)}
 .hc-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:30px;text-align:center}
-.hc-border{position:absolute;inset:18px;border:1.5px solid rgba(229,57,53,.45);border-radius:12px;pointer-events:none}
-.hc-border::after{content:'';position:absolute;inset:7px;border:1px solid rgba(229,57,53,.22);border-radius:9px}
+.hc-border{position:absolute;inset:18px;border:1.5px solid rgba(224,2,180,.45);border-radius:12px;pointer-events:none}
+.hc-border::after{content:'';position:absolute;inset:7px;border:1px solid rgba(224,2,180,.22);border-radius:9px}
 .hc-logo{position:relative;width:118px;height:118px;color:var(--accent)}
 .hc-logo svg{width:118px;height:118px}.hc-logo .sb-glow{inset:-18%}
 .hc-title{font-family:'Parisienne',cursive;font-size:2.7rem;color:var(--accent);line-height:1}
@@ -235,14 +235,14 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 @keyframes pageturn{from{opacity:0;transform:rotateY(-20deg)}to{opacity:1;transform:none}}
 .bk-nav{margin-bottom:16px}
 .bk-back{cursor:pointer;border:1px solid rgba(150,110,50,.4);color:#6b4a1a;border-radius:16px;padding:5px 13px;font-size:.78rem;display:inline-block;transition:.2s}
-.bk-back:hover{border-color:var(--accent);color:#8a1f1c;background:rgba(229,57,53,.08)}
+.bk-back:hover{border-color:var(--accent);color:#8a1f1c;background:rgba(224,2,180,.08)}
 .bk-h{font-family:'Parisienne',cursive;font-size:2.4rem;color:var(--accent);text-align:center}
 .bk-h2{font-family:'Fraunces',serif;font-size:1.5rem;color:#6b3f10;text-align:center;margin-bottom:2px}
 .bk-sub2{text-align:center;color:#8a6a36;font-size:.8rem;margin-bottom:20px}
 .idx{max-width:440px;margin:14px auto}
 .idx-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;cursor:pointer;
   border:1px solid rgba(150,110,50,.28);margin-bottom:10px;transition:.2s;color:#3a2a1e;font-family:'Fraunces',serif;font-size:1.05rem}
-.idx-item:hover{border-color:var(--accent);background:rgba(229,57,53,.08);transform:translateX(4px)}
+.idx-item:hover{border-color:var(--accent);background:rgba(224,2,180,.08);transform:translateX(4px)}
 .idx-box{width:18px;height:18px;border:1.6px solid var(--accent);border-radius:4px;flex:none}
 .idx-count{margin-left:auto;font-size:.74rem;color:#9a7a4a;font-family:'Inter',sans-serif}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:14px}
@@ -250,7 +250,7 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;
   color:#5a4020;font-size:.78rem;text-align:center;padding:10px;transition:.2s}
 .pcard.locked{filter:grayscale(.6);opacity:.72}
-.pcard:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 20px rgba(229,57,53,.18)}
+.pcard:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 20px rgba(224,2,180,.18)}
 .pcard .lk{width:30px;height:30px;color:var(--accent)}
 .pcard .sil{width:46px;height:46px;color:#b08a44}
 .agent-wrap{display:flex;gap:28px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:6px}
@@ -279,13 +279,13 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 .heat-rank{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--accent);width:30px;flex:none;text-align:center}
 .heat-body{flex:1;min-width:0}
 .heat-body b{font-size:.92rem;color:var(--ink);display:block}
-.heat-track{height:7px;border-radius:5px;background:rgba(229,57,53,.15);overflow:hidden;margin-top:6px}
+.heat-track{height:7px;border-radius:5px;background:rgba(224,2,180,.15);overflow:hidden;margin-top:6px}
 .heat-track>i{display:block;height:100%;background:var(--accent);border-radius:5px}
 .heat-prio{font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);flex:none}
 .heat-stars{font-size:.8rem;color:var(--accent);flex:none;letter-spacing:1px}
 .hero-rank{display:inline-block;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
   border:1px solid var(--line);border-radius:20px;padding:4px 12px;margin:6px 0 14px}
-.prog{height:8px;border-radius:6px;background:rgba(229,57,53,.15);overflow:hidden;margin-top:6px}
+.prog{height:8px;border-radius:6px;background:rgba(224,2,180,.15);overflow:hidden;margin-top:6px}
 .prog>i{display:block;height:100%;background:var(--accent);border-radius:6px;transition:width .6s}
 
 .grid{display:grid;gap:18px}
@@ -336,86 +336,66 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 </style>
 </head>
 <body>
-<div class="bgart"><svg viewBox="0 0 520 1500" xmlns="http://www.w3.org/2000/svg" fill="none"><g transform="translate(-350,-20) scale(20)">
+<div class="bgart"><svg viewBox="0 0 520 900" xmlns="http://www.w3.org/2000/svg" fill="none">
+<!-- Silhueta lateral de gestante: cabeça, pescoço, costas, ventre, pernas -->
 <path d="
-M30 6
-C 26.5 6 24 8.8 24 12.5
-C 24 15 25.2 17 27 18.3
-L 27 20
-C 24.5 21 22.8 23.4 22.5 26
-C 22.1 29.4 23.4 31 23.6 33.4
-C 23.8 36 22.6 37.6 22.2 40.4
-C 21.6 44.6 22.6 49 25.4 52.6
-C 23.6 54.4 22.4 57 22.6 59.8
-C 24.6 59.9 26.4 59.6 27.6 58.6
-C 27.6 57 27.4 55.4 27 54
-C 30 56.4 33 57.4 35.6 57.2
-C 34.6 55.2 34 53 34.1 50.8
-C 38 47.6 40.1 42.6 39.3 37.2
-C 38.5 32.4 35.6 29.2 33.5 26.2
-C 32.3 24.5 31.7 22.7 31.8 21
-C 33 20 33.8 18.6 34.2 17
-C 34.8 17.2 35.6 17.3 36.4 17.1
-C 35.9 16 35.6 14.7 35.7 13.4
-C 35.9 9.4 33.4 6 30 6 Z"
- stroke="currentColor" stroke-width=".22" stroke-linejoin="round"/>
-</g>
-<!-- uterus outline (transparent) inside the belly -->
-<ellipse cx="345" cy="770" rx="105" ry="165" stroke="currentColor" stroke-width="2.2" stroke-dasharray="2 8" opacity=".8"/>
-<!-- placenta disc on the upper uterine wall -->
-<ellipse cx="300" cy="650" rx="42" ry="26" stroke="currentColor" stroke-width="2" opacity=".85" transform="rotate(-18 300 650)"/>
-<path d="M282 642 C292 648 300 642 310 648 M280 654 C290 660 300 654 314 660" stroke="currentColor" stroke-width="1.1" opacity=".55"/>
-<!-- umbilical cord (gentle spiral) from placenta to fetal abdomen -->
-<path d="M312 660 C 330 672 316 688 334 700 C 350 710 338 726 354 736 C 366 744 360 756 368 764"
- stroke="currentColor" stroke-width="2.2" opacity=".85"/>
-<!-- fetus, curled fetal position -->
+M300 70
+C 274 70 254 90 254 116
+C 254 132 262 145 274 153
+L 274 168
+C 250 178 232 200 226 228
+C 219 262 233 282 236 310
+C 239 336 226 352 231 380
+C 240 430 268 468 300 486
+C 296 520 300 552 320 578
+C 300 600 292 628 296 654
+C 300 690 322 722 358 742
+C 380 754 404 758 424 754
+C 414 736 408 716 410 696
+C 452 674 476 632 468 588
+C 461 550 434 522 412 494
+C 398 476 392 456 394 436
+C 410 424 422 406 428 386
+C 440 388 450 386 460 382
+C 454 366 452 348 456 330
+C 462 296 442 262 406 250
+C 396 214 396 178 384 154
+C 374 132 356 118 336 112
+C 340 100 338 86 328 76
+C 320 70 310 68 300 70 Z"
+fill="currentColor" fill-opacity=".05" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" opacity=".85"/>
+<!-- utero (transparencia) -->
+<ellipse cx="330" cy="470" rx="88" ry="118" stroke="currentColor" stroke-width="1.8" stroke-dasharray="2 7" opacity=".75"/>
+<!-- placenta -->
+<ellipse cx="300" cy="380" rx="36" ry="22" stroke="currentColor" stroke-width="1.6" opacity=".8" transform="rotate(-14 300 380)"/>
+<path d="M284 374 C293 379 300 374 309 379 M282 385 C291 390 300 385 312 390" stroke="currentColor" stroke-width="1" opacity=".5"/>
+<!-- cordao umbilical em espiral -->
+<path d="M308 388 C 324 398 312 412 328 422 C 342 430 332 444 346 452 C 356 458 350 468 358 476"
+stroke="currentColor" stroke-width="1.8" opacity=".8"/>
+<!-- feto em posicao fetal -->
 <path d="
-M368 764
-C 400 750 428 768 432 800
-C 436 830 414 850 420 876
-C 424 898 406 912 378 910
-C 350 908 328 892 320 866
-C 312 840 322 812 346 796
-C 354 790 362 780 368 764 Z"
- stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" opacity=".92"/>
-<circle cx="392" cy="792" r="30" stroke="currentColor" stroke-width="2.2" opacity=".92"/>
-<!-- amniotic fluid -->
-<circle cx="270" cy="720" r="3.4" fill="currentColor" opacity=".5"/>
-<circle cx="255" cy="820" r="2.6" fill="currentColor" opacity=".45"/>
-<circle cx="410" cy="700" r="3" fill="currentColor" opacity=".5"/>
-<circle cx="430" cy="860" r="2.4" fill="currentColor" opacity=".4"/>
-<circle cx="270" cy="880" r="2.8" fill="currentColor" opacity=".45"/>
-<circle cx="300" cy="900" r="2.2" fill="currentColor" opacity=".4"/></svg></div>
+M358 476
+C 386 464 410 480 414 508
+C 418 534 398 552 404 574
+C 408 592 392 604 368 602
+C 344 600 324 586 317 564
+C 310 542 319 518 340 504
+C 347 499 353 490 358 476 Z"
+stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" opacity=".9"/>
+<circle cx="378" cy="500" r="26" stroke="currentColor" stroke-width="2" opacity=".9"/>
+<!-- liquido amniotico -->
+<circle cx="270" cy="420" r="3" fill="currentColor" opacity=".45"/>
+<circle cx="258" cy="500" r="2.4" fill="currentColor" opacity=".4"/>
+<circle cx="392" cy="410" r="2.8" fill="currentColor" opacity=".45"/>
+<circle cx="404" cy="548" r="2.2" fill="currentColor" opacity=".38"/>
+<circle cx="266" cy="560" r="2.6" fill="currentColor" opacity=".4"/>
+<circle cx="288" cy="580" r="2" fill="currentColor" opacity=".36"/>
+</svg></div>
 
 <!-- ===================== GATE ===================== -->
 <div id="gate">
   <div class="gate-card">
-    <div class="gate-logo"><span class="gate-glow"></span><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round"><path d="
-M30 6
-C 26.5 6 24 8.8 24 12.5
-C 24 15 25.2 17 27 18.3
-L 27 20
-C 24.5 21 22.8 23.4 22.5 26
-C 22.1 29.4 23.4 31 23.6 33.4
-C 23.8 36 22.6 37.6 22.2 40.4
-C 21.6 44.6 22.6 49 25.4 52.6
-C 23.6 54.4 22.4 57 22.6 59.8
-C 24.6 59.9 26.4 59.6 27.6 58.6
-C 27.6 57 27.4 55.4 27 54
-C 30 56.4 33 57.4 35.6 57.2
-C 34.6 55.2 34 53 34.1 50.8
-C 38 47.6 40.1 42.6 39.3 37.2
-C 38.5 32.4 35.6 29.2 33.5 26.2
-C 32.3 24.5 31.7 22.7 31.8 21
-C 33 20 33.8 18.6 34.2 17
-C 34.8 17.2 35.6 17.3 36.4 17.1
-C 35.9 16 35.6 14.7 35.7 13.4
-C 35.9 9.4 33.4 6 30 6 Z"
- stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-miterlimit="4"/>
-<path d="M27.2 18.6 C 29 19.6 31.4 19.6 33.6 18.4" stroke="currentColor" stroke-width=".9" opacity=".55"/>
-<path d="M23.4 33.6 C 27.4 35.6 34.6 35.4 38.4 30.6" stroke="currentColor" stroke-width=".9" opacity=".55"/>
-<path d="M22.2 40.6 C 27.4 43.4 35.6 43 39 37.6" stroke="currentColor" stroke-width=".9" opacity=".5"/>
-<circle cx="31.4" cy="37.4" r="1.15" fill="currentColor" opacity=".85"/></svg></div>
+    <div class="gate-logo"><span class="gate-glow"></span><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" style="display:block;overflow:visible"><defs><mask id="bsymGate"><rect x="0" y="0" width="64" height="64" fill="#000"/><path d="M25 30 C21 34 20 41 24 47 C27 51 37 51 40 47 C44 41 43 34 39 30 C37 28 35 27.6 32 27.6 C29 27.6 27 28 25 30 Z" fill="#fff"/><circle cx="32" cy="19" r="8.2" fill="#fff"/><circle cx="32.3" cy="10.8" r="2.4" fill="#fff"/><path d="M27.8 18.8 q1.9 1.5 3.6 0" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M32.6 18.8 q1.9 1.5 3.6 0" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M28.3 29.4 C30.4 31 33.6 31 35.7 29.4" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M24 36 C30 39 36 40 41 38" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M24.6 42 C31 45 37 45 40.4 43" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/></mask></defs><rect x="0" y="0" width="64" height="64" fill="currentColor" mask="url(#bsymGate)"/><path d="M51 9.6 C51 12.68 52.32 14 55.4 14 C52.32 14 51 15.32 51 18.4 C51 15.32 49.68 14 46.6 14 C49.68 14 51 12.68 51 9.6 Z" fill="var(--accent)"/><path d="M13.5 12.8 C13.5 15.04 14.46 16 16.7 16 C14.46 16 13.5 16.96 13.5 19.2 C13.5 16.96 12.54 16 10.3 16 C12.54 16 13.5 15.04 13.5 12.8 Z" fill="var(--champagne)"/><path d="M50 49.2 C46.8 46 46.8 43.12 48.4 43.12 C49.52 43.12 50 44.24 50 45.04 C50 44.24 50.48 43.12 51.6 43.12 C53.2 43.12 53.2 46 50 49.2 Z" fill="var(--accent)"/></svg></div>
     <div class="gate-supra">Acesso pelo ELID</div>
     <div class="gate-name">Atlas de Obstetrícia</div>
     <div class="elid-credit" style="margin-top:4px"><b>E</b>LI<b>D</b> · <b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div>
@@ -449,32 +429,7 @@ C 35.9 9.4 33.4 6 30 6 Z"
 
   <aside class="sidebar" id="sidebar">
     <div class="sb-head">
-      <div class="sb-logo"><span class="sb-glow"></span><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round"><path d="
-M30 6
-C 26.5 6 24 8.8 24 12.5
-C 24 15 25.2 17 27 18.3
-L 27 20
-C 24.5 21 22.8 23.4 22.5 26
-C 22.1 29.4 23.4 31 23.6 33.4
-C 23.8 36 22.6 37.6 22.2 40.4
-C 21.6 44.6 22.6 49 25.4 52.6
-C 23.6 54.4 22.4 57 22.6 59.8
-C 24.6 59.9 26.4 59.6 27.6 58.6
-C 27.6 57 27.4 55.4 27 54
-C 30 56.4 33 57.4 35.6 57.2
-C 34.6 55.2 34 53 34.1 50.8
-C 38 47.6 40.1 42.6 39.3 37.2
-C 38.5 32.4 35.6 29.2 33.5 26.2
-C 32.3 24.5 31.7 22.7 31.8 21
-C 33 20 33.8 18.6 34.2 17
-C 34.8 17.2 35.6 17.3 36.4 17.1
-C 35.9 16 35.6 14.7 35.7 13.4
-C 35.9 9.4 33.4 6 30 6 Z"
- stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-miterlimit="4"/>
-<path d="M27.2 18.6 C 29 19.6 31.4 19.6 33.6 18.4" stroke="currentColor" stroke-width=".9" opacity=".55"/>
-<path d="M23.4 33.6 C 27.4 35.6 34.6 35.4 38.4 30.6" stroke="currentColor" stroke-width=".9" opacity=".55"/>
-<path d="M22.2 40.6 C 27.4 43.4 35.6 43 39 37.6" stroke="currentColor" stroke-width=".9" opacity=".5"/>
-<circle cx="31.4" cy="37.4" r="1.15" fill="currentColor" opacity=".85"/></svg></div>
+      <div class="sb-logo"><span class="sb-glow"></span><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" style="display:block;overflow:visible"><defs><mask id="bsymSidebar"><rect x="0" y="0" width="64" height="64" fill="#000"/><path d="M25 30 C21 34 20 41 24 47 C27 51 37 51 40 47 C44 41 43 34 39 30 C37 28 35 27.6 32 27.6 C29 27.6 27 28 25 30 Z" fill="#fff"/><circle cx="32" cy="19" r="8.2" fill="#fff"/><circle cx="32.3" cy="10.8" r="2.4" fill="#fff"/><path d="M27.8 18.8 q1.9 1.5 3.6 0" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M32.6 18.8 q1.9 1.5 3.6 0" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M28.3 29.4 C30.4 31 33.6 31 35.7 29.4" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M24 36 C30 39 36 40 41 38" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M24.6 42 C31 45 37 45 40.4 43" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/></mask></defs><rect x="0" y="0" width="64" height="64" fill="currentColor" mask="url(#bsymSidebar)"/><path d="M51 9.6 C51 12.68 52.32 14 55.4 14 C52.32 14 51 15.32 51 18.4 C51 15.32 49.68 14 46.6 14 C49.68 14 51 12.68 51 9.6 Z" fill="var(--accent)"/><path d="M13.5 12.8 C13.5 15.04 14.46 16 16.7 16 C14.46 16 13.5 16.96 13.5 19.2 C13.5 16.96 12.54 16 10.3 16 C12.54 16 13.5 15.04 13.5 12.8 Z" fill="var(--champagne)"/><path d="M50 49.2 C46.8 46 46.8 43.12 48.4 43.12 C49.52 43.12 50 44.24 50 45.04 C50 44.24 50.48 43.12 51.6 43.12 C53.2 43.12 53.2 46 50 49.2 Z" fill="var(--accent)"/></svg></div>
       <div class="sb-name">Atlas de Obstetrícia</div>
       <div class="sb-credit elid-credit"><b>E</b>LI<b>D</b> · <b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div>
     </div>
@@ -1766,7 +1721,7 @@ if(!document.getElementById('heart-style')){
   .heart-legend{margin-top:22px}
   .heart-cat{margin-bottom:12px}
   .heart-cat-h{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px}
-  .heart-cat-track{height:6px;border-radius:4px;background:rgba(229,57,53,.15);overflow:hidden}
+  .heart-cat-track{height:6px;border-radius:4px;background:rgba(224,2,180,.15);overflow:hidden}
   .heart-cat-track>i{display:block;height:100%;background:var(--accent);transition:width .6s}
   .heart-hero-cover{width:200px;height:230px;display:flex;align-items:center;justify-content:center;overflow:hidden}
   .heart-hero-cover .heart-mini-wrap{width:150px;height:150px;pointer-events:none}
@@ -2615,7 +2570,7 @@ if(!document.getElementById('ecgalgo-style')){
   .eba-c-fa .eba-leaf-t{color:#e8675f}
   .eba-c-tsv{border-color:#f0a93f;background:rgba(240,169,63,.10)}
   .eba-c-tsv .eba-leaf-t{color:#f0a93f}
-  .eba-c-vt{border-color:#e53935;background:rgba(229,57,53,.10)}
+  .eba-c-vt{border-color:#e53935;background:rgba(224,2,180,.10)}
   .eba-c-vt .eba-leaf-t{color:#e53935}
   .eba-c-tdp{border-color:#ec4899;background:rgba(236,72,153,.10)}
   .eba-c-tdp .eba-leaf-t{color:#ec4899}
@@ -3043,8 +2998,13 @@ document.addEventListener('mousedown', function(e){
 .preg-wk.reached{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:700}
 .preg-wk.sel{box-shadow:0 0 0 2px var(--accent);border-color:var(--accent)}
 .preg-wk.visit::after{content:'';position:absolute;top:3px;right:3px;width:6px;height:6px;border-radius:50%;background:#f0a93f;box-shadow:0 0 6px #f0a93f}
-.preg-wk.current{border-color:#3ddc84}
+.preg-wk.current{border-color:#3ddc84;box-shadow:0 0 10px rgba(61,220,132,.45)}
 .preg-wk .tri-tag{position:absolute;bottom:2px;font-size:.55rem;opacity:.6}
+.preg-wk.locked{background:var(--bg2);color:var(--muted);opacity:.55;cursor:default;filter:grayscale(.6)}
+.preg-wk.locked:hover{border-color:var(--line)}
+.preg-wk.locked span{visibility:hidden}
+.preg-wk.locked::before{content:'\1F512';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.85rem;visibility:visible;opacity:.75}
+.preg-wk.locked .tri-tag{display:none}
 .preg-detail{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px}
 .preg-detail h3{font-family:'Fraunces',serif;color:var(--accent);margin:0 0 10px;font-size:1.2rem}
 .preg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
@@ -3066,13 +3026,15 @@ document.addEventListener('mousedown', function(e){
 .preg-card-row b{color:var(--ink)}
 .preg-card-empty{font-size:.82rem;color:var(--muted);font-style:italic}
 .preg-unlock-img{width:100%;max-width:320px;margin:0 auto 14px;display:block;border-radius:14px;overflow:hidden}
+.preg-locked-msg{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:40px 20px;color:var(--muted)}
+.preg-locked-msg .lk-ic{width:54px;height:54px;color:var(--accent);opacity:.8}
+.preg-locked-msg b{color:var(--ink);font-family:'Fraunces',serif;font-size:1.1rem}
 </style>
 
 
 <script>(function(){
 "use strict";
 var C = (window.CONTENT = window.CONTENT || {});
-var PREG_MONITOR_SVG = "<svg viewBox=\"0 0 400 300\" xmlns=\"http://www.w3.org/2000/svg\"> <defs>   <radialGradient id=\"glow\" cx=\"50%\" cy=\"40%\" r=\"70%\">     <stop offset=\"0%\" stop-color=\"#e002b4\" stop-opacity=\".35\"/>     <stop offset=\"100%\" stop-color=\"#e002b4\" stop-opacity=\"0\"/>   </radialGradient> </defs> <rect width=\"400\" height=\"300\" fill=\"#1c1424\"/> <circle cx=\"200\" cy=\"140\" r=\"150\" fill=\"url(#glow)\"/> <!-- sparkles --> <g fill=\"#f7e7ce\" opacity=\".9\"> <path d=\"M40 40 l4 12 l12 4 l-12 4 l-4 12 l-4 -12 l-12 -4 l12 -4 Z\"/> <path d=\"M360 60 l3 9 l9 3 l-9 3 l-3 9 l-3 -9 l-9 -3 l9 -3 Z\" opacity=\".7\"/> <path d=\"M355 220 l3 9 l9 3 l-9 3 l-3 9 l-3 -9 l-9 -3 l9 -3 Z\" opacity=\".6\"/> <circle cx=\"60\" cy=\"230\" r=\"2.4\"/> <circle cx=\"330\" cy=\"40\" r=\"2\"/> <circle cx=\"30\" cy=\"150\" r=\"2\"/> </g> <!-- monitor body --> <rect x=\"70\" y=\"30\" width=\"260\" height=\"200\" rx=\"16\" fill=\"#0e0a14\" stroke=\"#caa8c9\" stroke-width=\"3\"/> <rect x=\"86\" y=\"46\" width=\"228\" height=\"150\" rx=\"8\" fill=\"#050308\" stroke=\"#3a2140\" stroke-width=\"1.5\"/> <!-- stand --> <path d=\"M180 230 L160 268 L240 268 L220 230 Z\" fill=\"#0e0a14\" stroke=\"#caa8c9\" stroke-width=\"3\" stroke-linejoin=\"round\"/> <rect x=\"140\" y=\"266\" width=\"120\" height=\"10\" rx=\"4\" fill=\"#0e0a14\" stroke=\"#caa8c9\" stroke-width=\"2.5\"/> <!-- depth scale ticks on screen edge --> <g stroke=\"#7c5c86\" stroke-width=\"1.2\"> <line x1=\"90\" y1=\"60\" x2=\"98\" y2=\"60\"/><line x1=\"90\" y1=\"80\" x2=\"96\" y2=\"80\"/> <line x1=\"90\" y1=\"100\" x2=\"98\" y2=\"100\"/><line x1=\"90\" y1=\"120\" x2=\"96\" y2=\"120\"/> <line x1=\"90\" y1=\"140\" x2=\"98\" y2=\"140\"/><line x1=\"90\" y1=\"160\" x2=\"96\" y2=\"160\"/> <line x1=\"90\" y1=\"180\" x2=\"98\" y2=\"180\"/> </g> <!-- scan sector (ultrassom cone) --> <path d=\"M200 52 L140 190 A80 80 0 0 0 260 190 Z\" fill=\"#180e22\" opacity=\".85\"/> <!-- fetus silhouette curled, centered on screen --> <g transform=\"translate(148,78) scale(1.05)\" opacity=\".95\"> <path d=\" M60 30 C 84 22 104 36 106 58 C 108 80 92 95 96 112 C 99 128 86 138 66 136 C 46 134 30 122 24 104 C 18 86 26 66 44 54 C 50 50 56 42 60 30 Z\"  fill=\"none\" stroke=\"#f2d9ef\" stroke-width=\"2.6\" stroke-linejoin=\"round\"/> <circle cx=\"76\" cy=\"52\" r=\"21\" fill=\"none\" stroke=\"#f2d9ef\" stroke-width=\"2.4\"/> </g> <!-- technical readout marks --> <text x=\"98\" y=\"188\" font-family=\"monospace\" font-size=\"9\" fill=\"#9c7aa8\">12.4cm</text> <text x=\"250\" y=\"60\" font-family=\"monospace\" font-size=\"9\" fill=\"#9c7aa8\">FR 28Hz</text> <circle cx=\"304\" cy=\"56\" r=\"4\" fill=\"#e8675f\"/> <text x=\"292\" y=\"70\" font-family=\"monospace\" font-size=\"7\" fill=\"#e8675f\">REC</text> <!-- power LED --> <circle cx=\"320\" cy=\"222\" r=\"3\" fill=\"#3ddc84\"/> </svg> ";
 window.PREG_WEEKS = [{"w": 1, "tri": 1, "size": "—", "weight": "—", "fruit": "—", "milestone": "Semana do ciclo menstrual (ainda sem concepção) — a IG obstétrica conta a partir da DUM, antes mesmo da ovulação.", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica."}, {"w": 2, "tri": 1, "size": "—", "weight": "—", "fruit": "—", "milestone": "Ovulação e fecundação na ampola tubária: união do óvulo com o espermatozoide forma o zigoto.", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica."}, {"w": 3, "tri": 1, "size": "0,1–0,2mm", "weight": "<1g", "fruit": "uma semente de papoula", "milestone": "Mórula vira blastocisto e migra até a cavidade uterina; início da nidação (6–12 dias pós-fecundação).", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica."}, {"w": 4, "tri": 1, "size": "0,2mm", "weight": "<1g", "fruit": "uma semente de papoula", "milestone": "Nidação completa; disco embrionário bilaminar; início da produção de β-hCG pelo sinciciotrofoblasto.", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica.", "achievement": "Nidação completa"}, {"w": 5, "tri": 1, "size": "0,3cm", "weight": "<1g", "fruit": "uma semente de gergelim", "milestone": "Disco trilaminar (gastrulação); início da formação do tubo neural (fechamento entre 4ª–6ª semana).", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica.", "achievement": "Início do fechamento do tubo neural"}, {"w": 6, "tri": 1, "size": "0,5cm", "weight": "<1g", "fruit": "uma lentilha", "milestone": "Coração primitivo começa a bater (~110–120bpm, arrítmico); broto dos membros superiores.", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica.", "achievement": "Início dos batimentos cardíacos"}, {"w": 7, "tri": 1, "size": "1,0cm", "weight": "1g", "fruit": "um mirtilo", "milestone": "Placas de mão e pé; encéfalo se divide em 3 vesículas primárias; olhos e narinas em formação.", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica."}, {"w": 8, "tri": 1, "size": "1,6cm", "weight": "1g", "fruit": "uma framboesa", "milestone": "Todos os órgãos essenciais já iniciados (organogênese em curso); face humana reconhecível; movimentos espontâneos iniciais.", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica.", "visit": {"motivo": "1ª consulta de pré-natal", "anamnese": "Confirmação da gravidez, DUM, antecedentes obstétricos e clínicos, hábitos de vida.", "exame": "Peso/altura (IMC de base), PA, exame ginecológico se indicado.", "au": "Não palpável (útero ainda pélvico)", "bcf": "Ainda não audível ao sonar", "mov": "Não referida", "apres": "Não avaliável", "edema": "Ausente", "exames": ["Tipagem ABO/Rh (+Coombs indireto se Rh negativo)", "Hemograma completo", "Glicemia de jejum", "EAS + urocultura", "VDRL/teste rápido para sífilis, HIV, HBsAg, HCV, HTLV", "Toxoplasmose IgG/IgM", "Ácido fólico 0,4mg/dia (já iniciado)"]}}, {"w": 9, "tri": 1, "size": "2,3cm", "weight": "2g", "fruit": "uma cereja", "milestone": "Dedos das mãos se separam; pálpebras começam a se formar; genitália externa ainda indiferenciada.", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica."}, {"w": 10, "tri": 1, "size": "3,1cm", "weight": "4g", "fruit": "um morango", "milestone": "Fim do período embrionário — organogênese completa; a partir de agora é \"feto\"; unhas começam a crescer.", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica.", "achievement": "Fim da organogênese (transição embrião→feto)"}, {"w": 11, "tri": 1, "size": "4,1cm", "weight": "7g", "fruit": "um figo", "milestone": "Genitália externa inicia diferenciação (ainda indistinguível ao USG); alças intestinais retornam à cavidade abdominal.", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica."}, {"w": 12, "tri": 1, "size": "5,4cm", "weight": "14g", "fruit": "uma lima", "milestone": "Reflexos e movimentos espontâneos (a mãe ainda não sente); rins produzem urina; fim do 1º trimestre.", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica.", "achievement": "Fim do 1º trimestre", "visit": {"motivo": "Rastreio de aneuploidias / fim do 1º trimestre", "anamnese": "Evolução dos sintomas do 1º trimestre, uso de suplementação.", "exame": "PA, peso, ausculta ainda não confiável ao Pinard.", "au": "Não confiável (útero ainda intrapélvico/próximo à sínfise)", "bcf": "Sonar Doppler: 150–170bpm", "mov": "Não referida (percebida só pelo médico via USG)", "apres": "Não se aplica", "edema": "Ausente", "exames": ["USG translucência nucal (11–14 semanas)", "PAPP-A e β-hCG livre (se rastreio combinado disponível)"]}}, {"w": 13, "tri": 1, "size": "7,4cm", "weight": "23g", "fruit": "uma vagem", "milestone": "Cordas vocais se formam; impressões digitais aparecem; corpo cresce mais rápido que a cabeça.", "hormones": "β-hCG em ascensão (pico 8–10ª semana, produzido pelo sinciciotrofoblasto) sustenta o corpo lúteo; progesterona e estrogênios em elevação; por volta da 7ª–9ª semana ocorre a transição luteoplacentária.", "maternal": "Fadiga, sonolência e labilidade emocional; náuseas/vômitos (pico 8ª–10ª semana); polaciúria; mamas tensas e sensíveis (tubérculos de Montgomery, sinal de Hunter); paladar e olfato alterados.", "symptoms": "Náuseas matinais, sensibilidade mamária, sonolência, polaciúria, sialorreia leve.", "risks": "Abortamento espontâneo precoce, gravidez ectópica, doença trofoblástica gestacional (mola), hiperêmese gravídica.", "conduct": "Confirmar gravidez (β-hCG/USG), datar corretamente (CCN), iniciar/manter ácido fólico, solicitar rotina T.E.S.T.A.R., orientar sinais de alarme (sangramento, dor pélvica intensa).", "examTopics": "Diagnóstico de gravidez, sinais de presunção/probabilidade/certeza, cinética do β-hCG, datação por CCN, regra de Naegele, mola hidatiforme, gravidez ectópica."}, {"w": 14, "tri": 2, "size": "8,7cm", "weight": "43g", "fruit": "um pêssego", "milestone": "Sexo pode começar a ser sugerido ao USG; lanugo (penugem fina) cobre a pele; face expressiva (careteamento).", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação."}, {"w": 15, "tri": 2, "size": "10,1cm", "weight": "70g", "fruit": "uma maçã", "milestone": "Ossos continuam a endurecer (ossificação); o feto pode perceber luminosidade através da parede abdominal.", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação."}, {"w": 16, "tri": 2, "size": "11,6cm", "weight": "100g", "fruit": "um abacate", "milestone": "BCF audível ao sonar Doppler (10–12s já dava, clássico 16–20s); face bem formada; pescoço definido.", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação.", "visit": {"motivo": "Consulta de rotina do 2º trimestre", "anamnese": "Início da percepção de movimentos fetais (quickening), sintomas gerais.", "exame": "PA, peso, AU em ascensão.", "au": "14–16cm", "bcf": "Sonar: 140–160bpm", "mov": "Início da percepção pela mãe (primigestas costumam notar um pouco mais tarde)", "apres": "Variável (ainda muda muito)", "edema": "Ausente", "exames": ["Reavaliação de sorologias se rotina incompleta", "Orientação para USG morfológico"]}}, {"w": 17, "tri": 2, "size": "13,0cm", "weight": "140g", "fruit": "uma pera", "milestone": "Gordura marrom começa a se formar (termorregulação); cordão umbilical fica mais espesso e forte.", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação."}, {"w": 18, "tri": 2, "size": "14,2cm", "weight": "190g", "fruit": "um pimentão", "milestone": "Orelhas em posição final; USG morfológico de 2º trimestre já pode ser iniciado; \"quickening\" (mãe começa a sentir movimentos, 18–20s).", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação.", "achievement": "Início da percepção dos movimentos fetais (quickening)"}, {"w": 19, "tri": 2, "size": "15,3cm", "weight": "240g", "fruit": "um tomate", "milestone": "Vérnix caseoso cobre a pele; sentidos se desenvolvendo (paladar, olfato, audição já capta sons externos).", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação."}, {"w": 20, "tri": 2, "size": "16,4cm", "weight": "300g", "fruit": "uma banana", "milestone": "Metade da gestação; USG morfológico de 2º trimestre (janela 20–24s); movimentos fetais bem percebidos pela mãe.", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação.", "visit": {"motivo": "USG morfológico de 2º trimestre", "anamnese": "Metade da gestação; avaliar movimentos fetais, ganho ponderal.", "exame": "PA, peso, AU≈IG, ausculta com sonar já bem nítida.", "au": "~20cm", "bcf": "140–160bpm, rítmico", "mov": "Presentes e bem percebidos", "apres": "Variável", "edema": "Ausente a leve", "exames": ["USG morfológico de 2º trimestre (anatomia fetal detalhada)", "Ecocardiograma fetal se fator de risco"]}}, {"w": 21, "tri": 2, "size": "26,7cm*", "weight": "360g", "fruit": "uma cenoura", "milestone": "Movimentos de deglutição de líquido amniótico; medula óssea assume produção de células sanguíneas.", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação."}, {"w": 22, "tri": 2, "size": "27,8cm*", "weight": "430g", "fruit": "um mamão papaia", "milestone": "Sobrancelhas e pálpebras distintas; lábios bem definidos; pele ainda enrugada (pouca gordura subcutânea).", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação."}, {"w": 23, "tri": 2, "size": "28,9cm*", "weight": "501g", "fruit": "uma manga grande", "milestone": "Vasos pulmonares se desenvolvem; padrão de sono/vigília se organiza; audição mais sensível a sons graves.", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação."}, {"w": 24, "tri": 2, "size": "30,0cm*", "weight": "600g", "fruit": "uma espiga de milho", "milestone": "Limiar de viabilidade fetal; início da produção de surfactante pulmonar; TOTG 75g nesta janela (24–28s).", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação.", "achievement": "Viabilidade fetal (limiar)", "visit": {"motivo": "Rastreio de diabetes gestacional", "anamnese": "Sintomas de polidipsia/poliúria, ganho de peso, movimentos fetais.", "exame": "PA, peso, AU≈IG, BCF presente.", "au": "~24cm", "bcf": "140–160bpm", "mov": "Presentes, regulares", "apres": "Variável", "edema": "Leve, vespertino", "exames": ["TOTG 75g (jejum/1h/2h — 92/180/153)", "Hemograma (rastreio de anemia)"]}}, {"w": 25, "tri": 2, "size": "34,6cm*", "weight": "660g", "fruit": "uma couve-flor pequena", "milestone": "Cabelo visível no couro cabeludo; resposta a estímulos sonoros mais consistente; capilares pulmonares aumentam.", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação."}, {"w": 26, "tri": 2, "size": "35,6cm*", "weight": "760g", "fruit": "um maço de acelga", "milestone": "Olhos começam a abrir; padrão respiratório fetal (movimentos torácicos) mais regular.", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação."}, {"w": 27, "tri": 2, "size": "36,6cm*", "weight": "875g", "fruit": "uma couve-flor", "milestone": "Fim do 2º trimestre; cérebro em fase de crescimento acelerado; mais tecido adiposo sob a pele.", "hormones": "hPL (lactogênio placentário) em ascensão, promovendo resistência periférica à insulina (estado diabetogênico); relaxina relaxa ligamentos e colo; progesterona/estrogênios placentários dominam.", "maternal": "Queda da resistência vascular periférica (placenta = fístula arteriovenosa) com tendência à queda da PA; débito cardíaco sobe 40–50%; útero ultrapassa a cicatriz umbilical (~20–24s); \"quickening\" (mãe sente o bebê).", "symptoms": "Melhora das náuseas, aumento do apetite, leve dispneia fisiológica, congestão nasal, cãibras nos membros inferiores.", "risks": "Pré-eclâmpsia precoce (rastreio), restrição de crescimento fetal de início precoce, incompetência istmocervical, diabetes gestacional (TOTG 24–28s).", "conduct": "USG morfológico de 2º trimestre (20–24s), TOTG 75g (24–28s), reforçar suplementação de ferro a partir de 20s, vacina dTpa, monitorar altura uterina (AU≈IG entre 18–30s).", "examTopics": "Pré-eclâmpsia (fisiopatologia/rastreio), diabetes gestacional (diagnóstico e conduta), USG morfológico, adaptações cardiovasculares e metabólicas da gestação."}, {"w": 28, "tri": 3, "size": "37,6cm*", "weight": "1005g", "fruit": "uma berinjela", "milestone": "Início do 3º trimestre; pálpebras abrem e fecham; imunoglobulinas maternas (IgG) cruzam a placenta.", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto.", "achievement": "Início do 3º trimestre", "visit": {"motivo": "Início do 3º trimestre / imunoprofilaxia Rh", "anamnese": "Sinais de alarme (cefaleia, escotomas, edema súbito, sangramento), movimentos fetais.", "exame": "PA (rastreio de pré-eclâmpsia), peso, AU≈IG+2, BCF, manobras de Leopold iniciais.", "au": "~28cm", "bcf": "130–150bpm", "mov": "Presentes e regulares (a mãe já reconhece o padrão)", "apres": "Ainda pode variar", "edema": "Leve a moderado", "exames": ["Imunoglobulina anti-D se Rh negativo não sensibilizada", "Repetir hemograma, sorologias (HIV/sífilis/HBsAg) no 3º tri", "dTpa se ainda não realizada"]}}, {"w": 29, "tri": 3, "size": "38,6cm*", "weight": "1150g", "fruit": "uma abóbora moranga pequena", "milestone": "Cérebro cresce rapidamente; ossos formados porém ainda maleáveis (fontanelas abertas).", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto."}, {"w": 30, "tri": 3, "size": "39,9cm*", "weight": "1319g", "fruit": "um repolho", "milestone": "Medula óssea já produz hemácias sozinha; olhos conseguem focar; líquido amniótico próximo do pico relativo.", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto."}, {"w": 31, "tri": 3, "size": "41,1cm*", "weight": "1502g", "fruit": "um coco", "milestone": "Todos os cinco sentidos já funcionam; movimentos mais coordenados; ganho de peso acelera.", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto."}, {"w": 32, "tri": 3, "size": "42,4cm*", "weight": "1702g", "fruit": "uma jicama", "milestone": "Unhas alcançam quase a ponta dos dedos; ossos do crânio permanecem moles/flexíveis para o parto.", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto.", "visit": {"motivo": "Consulta quinzenal do 3º trimestre", "anamnese": "Contrações (Braxton-Hicks x trabalho de parto), movimentos fetais, edema.", "exame": "PA, peso, AU≈IG, BCF, Leopold (situação e apresentação).", "au": "~30–31cm", "bcf": "130–150bpm", "mov": "Presentes, padrão já reconhecido pela mãe", "apres": "Cefálica na maioria; ainda pode variar", "edema": "Leve a moderado (MMII)", "exames": ["Avaliação clínica de crescimento fetal (suspeita de RCF/macrossomia)"]}}, {"w": 33, "tri": 3, "size": "43,7cm*", "weight": "1918g", "fruit": "um abacaxi", "milestone": "Sistema imunológico amadurece; pupilas reagem à luz; menos espaço para grandes movimentos.", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto."}, {"w": 34, "tri": 3, "size": "45,0cm*", "weight": "2146g", "fruit": "um melão cantalupo", "milestone": "Surfactante pulmonar em quantidade crescente; unhas completas; gordura subcutânea se acumula.", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto.", "achievement": "Maturação pulmonar acelerando", "visit": {"motivo": "Consulta quinzenal — vigilância de prematuridade", "anamnese": "Sinais de trabalho de parto prematuro, perda de líquido, sangramento.", "exame": "PA, peso, AU≈IG, BCF, toque vaginal se sintomas.", "au": "~32–33cm", "bcf": "130–150bpm", "mov": "Presentes e regulares", "apres": "Predominantemente cefálica", "edema": "Leve a moderado", "exames": ["Considerar corticoterapia antenatal se risco iminente de parto prematuro (24–34s)"]}}, {"w": 35, "tri": 3, "size": "46,2cm*", "weight": "2383g", "fruit": "um melão honeydew", "milestone": "Rins totalmente maduros; maior parte do desenvolvimento físico está completa.", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto."}, {"w": 36, "tri": 3, "size": "47,4cm*", "weight": "2622g", "fruit": "uma alface romana", "milestone": "Lanugo praticamente desaparece; feto continua ganhando gordura; rastreio de Streptococcus do grupo B (35–37s).", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto.", "visit": {"motivo": "Rastreio de Streptococcus do grupo B (GBS)", "anamnese": "Preparação para o parto, plano de parto, sinais de trabalho de parto.", "exame": "PA, peso, AU≈IG, BCF, Leopold (situação/apresentação/posição).", "au": "~34–35cm", "bcf": "120–150bpm", "mov": "Presentes, padrão habitual", "apres": "Cefálica (confirmar); pélvica indica avaliar via de parto", "edema": "Moderado (frequente)", "exames": ["Swab vaginal e retal para Streptococcus agalactiae (GBS), 35–37 semanas"]}}, {"w": 37, "tri": 3, "size": "48,6cm*", "weight": "2859g", "fruit": "um mamão papaia grande", "milestone": "Termo precoce (37–38⁶/⁷); reflexo de preensão (grasp) presente; pulmões em maturação final.", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto.", "achievement": "Termo precoce alcançado", "visit": {"motivo": "Consulta semanal — termo precoce", "anamnese": "Sinais de trabalho de parto, contagem de movimentos fetais, perdas vaginais.", "exame": "PA, peso, AU≈IG, BCF, toque vaginal (Bishop) se indicado.", "au": "~35–36cm", "bcf": "120–150bpm", "mov": "Presentes e regulares — orientar mobilograma diário", "apres": "Cefálica (confirmar)", "edema": "Moderado", "exames": ["Índice de Bishop se necessidade de programar indução", "Cardiotocografia se gestação de risco"]}}, {"w": 38, "tri": 3, "size": "49,8cm*", "weight": "3083g", "fruit": "um alho-poró", "milestone": "Termo completo se aproxima; acúmulo contínuo de gordura; vérnix e lanugo praticamente ausentes.", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto.", "visit": {"motivo": "Consulta semanal — termo completo se aproxima", "anamnese": "Sinais de trabalho de parto iminente, mobilograma.", "exame": "PA, peso, AU≈IG, BCF, Leopold.", "au": "~36–37cm", "bcf": "120–150bpm", "mov": "Presentes", "apres": "Cefálica", "edema": "Moderado", "exames": ["Cardiotocografia/perfil biofísico se gestação de risco"]}}, {"w": 39, "tri": 3, "size": "50,7cm*", "weight": "3288g", "fruit": "uma melancia pequena", "milestone": "Termo completo (39–40⁶/⁷); órgãos prontos para a vida extrauterina; produção de surfactante adequada.", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto.", "visit": {"motivo": "Consulta semanal — termo completo", "anamnese": "Sinais de trabalho de parto, avaliação de bem-estar fetal.", "exame": "PA, peso, AU≈IG, BCF, toque vaginal (Bishop).", "au": "~37–38cm", "bcf": "120–150bpm", "mov": "Presentes", "apres": "Cefálica", "edema": "Moderado a importante", "exames": ["Cardiotocografia/perfil biofísico se indicado"]}}, {"w": 40, "tri": 3, "size": "51,2cm*", "weight": "3462g", "fruit": "uma abóbora pequena / melancia", "milestone": "Termo tardio se inicia (>41s = pós-termo); a qualquer momento pode iniciar o trabalho de parto espontâneo.", "hormones": "Ocitocina com sensibilidade uterina crescente; prolactina em ascensão (preparo para lactação); prostaglandinas aumentam progressivamente perto do termo, contribuindo para o amadurecimento cervical.", "maternal": "Alcalose respiratória compensada (dispneia fisiológica), edema de membros inferiores, lombalgia e marcha anserina, contrações de Braxton-Hicks, maior frequência urinária (compressão vesical).", "symptoms": "Lombalgia, edema de tornozelos, contrações irregulares (Braxton-Hicks), pirose, insônia, falta de ar aos esforços.", "risks": "Trabalho de parto prematuro, RPMO, placenta prévia/acretismo, DPP, pré-eclâmpsia/HELLP, macrossomia, pós-datismo.", "conduct": "Consultas mais frequentes (quinzenais 28–36s, semanais após 36s), rastreio de Streptococcus do grupo B (35–37s), avaliação de apresentação fetal e índice de Bishop perto do termo, orientar sinais de trabalho de parto.", "examTopics": "Hemorragias da 2ª metade (DPP, placenta prévia), prematuridade e RPMO, vitalidade fetal (CTG/PBF/Doppler), mecanismo de parto e distócias, hemorragia pós-parto.", "visit": {"motivo": "Consulta semanal — vigilância de pós-datismo", "anamnese": "Ausência de trabalho de parto espontâneo, movimentos fetais, planejamento de indução se >41s.", "exame": "PA, peso, AU≈IG, BCF, Bishop para indução se necessário.", "au": "~38cm", "bcf": "120–150bpm", "mov": "Presentes — vigilância redobrada após 41 semanas", "apres": "Cefálica", "edema": "Importante", "exames": ["Cardiotocografia/perfil biofísico e/ou Doppler se pós-datismo", "Programar indução se ultrapassar 41 semanas"]}}];
 function pwByWeek(w){ for(var i=0;i<PREG_WEEKS.length;i++) if(PREG_WEEKS[i].w===w) return PREG_WEEKS[i]; return null; }
 
@@ -3095,33 +3057,47 @@ function currentPregWeek(){
   var w=Math.ceil(p*40);
   return Math.max(1, Math.min(40, w||1));
 }
+/* semana mais alta desbloqueada = semana atual da jornada (o progresso de estudo É o motor do desbloqueio) */
+function obUnlockedWeek(){ return currentPregWeek(); }
+window.currentPregWeek = currentPregWeek;
+window.obGestProgress = obGestProgress;
+window.obUnlockedWeek = obUnlockedWeek;
 
 function pregIllustrationSVG(cur){
-  var frac=cur/40, r=8+frac*46, op=(.35+frac*.6).toFixed(2);
+  var frac=cur/40, r=10+frac*44, op=(.45+frac*.5).toFixed(2);
   var late = cur>=20;
   var fetusShape = late
     ? '<path d="M0 -'+(r*.5)+' C '+(r*.6)+' -'+(r*.6)+' '+(r*.75)+' -'+(r*.1)+' '+(r*.55)+' '+(r*.25)+' C '+(r*.4)+' '+(r*.55)+' 0 '+(r*.6)+' -'+(r*.3)+' '+(r*.4)+' C -'+(r*.6)+' '+(r*.15)+' -'+(r*.5)+' -'+(r*.3)+' 0 -'+(r*.5)+' Z" fill="var(--accent)" opacity="'+op+'"/>'
     : '<circle r="'+r+'" fill="var(--accent)" opacity="'+op+'"/>';
   return '<svg viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round">'+
+    '<defs><radialGradient id="pregCoverGlow" cx="50%" cy="60%" r="65%"><stop offset="0%" stop-color="var(--accent)" stop-opacity=".22"/><stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></radialGradient></defs>'+
+    '<circle cx="118" cy="150" r="98" fill="url(#pregCoverGlow)"/>'+
+    '<path d="M46 30 l3 9 l9 3 l-9 3 l-3 9 l-3 -9 l-9 -3 l9 -3 Z" fill="var(--champagne)" opacity=".85"/>'+
+    '<path d="M182 46 l2.4 7 l7 2.4 l-7 2.4 l-2.4 7 l-2.4 -7 l-7 -2.4 l7 -2.4 Z" fill="var(--accent)" opacity=".8"/>'+
     '<path d="M110 14 C92 14 79 27 79 45 C79 56 84 65 92 71 L92 78 C78 84 69 98 67 114 C64 132 71 140 72 152 C73 165 65 173 63 189 C60 212 71 234 96 250 C120 264 148 268 168 262 C163 250 160 236 161 222 C186 206 198 178 191 150 C185 126 168 108 156 92 C149 82 146 72 147 62 C154 58 159 51 161 43 C168 44 173 43 178 41 C175 33 174 24 175 16"'+
-    ' stroke="var(--accent)" stroke-width="3" stroke-linejoin="round" opacity=".55"/>'+
+    ' fill="var(--accent)" fill-opacity=".08" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round" opacity=".7"/>'+
     '<g transform="translate(122,168)">'+fetusShape+'</g>'+
-    '<circle cx="110" cy="168" r="58" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="'+(frac*364).toFixed(0)+' 364" stroke-linecap="round" transform="rotate(-90 110 168)" opacity=".8"/>'+
+    '<circle cx="110" cy="168" r="58" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="'+(frac*364).toFixed(0)+' 364" stroke-linecap="round" transform="rotate(-90 110 168)" opacity=".85"/>'+
     '<text x="110" y="174" text-anchor="middle" font-family="Fraunces,serif" font-size="26" fill="var(--accent)">'+cur+'</text>'+
     '<text x="110" y="192" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="var(--muted)">de 40 semanas</text>'+
     '</svg>';
 }
+window.pregIllustrationSVG = pregIllustrationSVG;
 
 function pregTimelineHTML(cur, sel){
   var h='';
   for(var w=1; w<=40; w++){
     var wk=pwByWeek(w);
+    var locked = w>cur;
     var cls='preg-wk';
-    if(w<=cur) cls+=' reached';
+    if(!locked) cls+=' reached';
     if(w===cur) cls+=' current';
-    if(w===sel) cls+=' sel';
-    if(wk.visit) cls+=' visit';
-    h+='<div class="'+cls+'" onclick="selectPregWeek('+w+')" title="Semana '+w+'">'+
+    if(w===sel && !locked) cls+=' sel';
+    if(wk.visit && !locked) cls+=' visit';
+    if(locked) cls+=' locked';
+    var onclick = locked ? '' : ' onclick="selectPregWeek('+w+')"';
+    var title = locked ? 'Semana '+w+' — bloqueada' : 'Semana '+w;
+    h+='<div class="'+cls+'"'+onclick+' title="'+title+'">'+
        '<span>'+w+'</span><span class="tri-tag">T'+wk.tri+'</span></div>';
   }
   return h;
@@ -3148,12 +3124,22 @@ function pregVisitHTML(w, wk){
     '<div class="ac-h" style="font-size:1rem;margin-top:10px">Exames indicados nesta consulta</div>'+
     '<ul class="preg-exames-list">'+examesHtml+'</ul>'+
     (done
-      ? '<p style="color:#3ddc84;font-size:.85rem;font-weight:600">✓ Consulta concluída — registrada no cartão de pré-natal.</p>'
-      : '<button class="btn-primary" onclick="pregCompleteVisit('+w+')">Concluir consulta e atualizar cartão</button>')+
+      ? '<p style="color:#3ddc84;font-size:.85rem;font-weight:600">✓ Consulta registrada automaticamente no cartão de pré-natal.</p>'
+      : '<button class="btn-primary" onclick="pregCompleteVisit('+w+')">Registrar consulta no cartão</button>')+
   '</div>';
 }
 
+function pregLockedHTML(w){
+  return '<div class="preg-detail"><div class="preg-locked-msg">'+
+    '<svg class="lk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>'+
+    '<b>Semana '+w+' ainda bloqueada</b>'+
+    '<p>Continue estudando os módulos e concluindo os checklists para avançar a jornada e desbloquear esta semana.</p>'+
+    '</div></div>';
+}
+
 function pregDetailHTML(w){
+  var cur=currentPregWeek();
+  if(w>cur) return pregLockedHTML(w);
   var wk=pwByWeek(w);
   var h='<div class="preg-detail">'+
     '<h3>Semana '+w+' · '+w+'ª semana gestacional · '+wk.tri+'º trimestre</h3>'+
@@ -3178,7 +3164,7 @@ function pregCardHTML(){
   var weeks=Object.keys(card).map(Number).sort(function(a,b){return a-b;});
   var h='<div class="preg-card"><h4>Cartão de Pré-Natal Digital</h4>';
   if(!weeks.length){
-    h+='<p class="preg-card-empty">Nenhuma consulta registrada ainda. Conclua uma consulta de pré-natal na linha do tempo para preencher o cartão.</p>';
+    h+='<p class="preg-card-empty">Nenhuma consulta registrada ainda. Avance na jornada estudando os módulos para desbloquear e preencher o cartão automaticamente.</p>';
   }else{
     weeks.forEach(function(w){
       var wk=pwByWeek(w);
@@ -3193,10 +3179,10 @@ function pregCardHTML(){
 
 window.viewPregnancyJourney=function(selArg){
   var cur=currentPregWeek();
-  var sel=parseInt(selArg,10); if(!sel||sel<1||sel>40) sel=cur;
+  var sel=parseInt(selArg,10); if(!sel||sel<1||sel>cur) sel=cur;
   return '<div class="view">'+
     '<div class="page-title">'+(window.ICONS&&ICONS.collection?ICONS.collection:'')+'<h1>Jornada da Gestação</h1></div>'+
-    '<p class="page-sub">Acompanhe as 40 semanas da gestação: desenvolvimento fetal, alterações maternas e as consultas de pré-natal — a linha do tempo avança conforme você estuda e conclui os checklists dos módulos.</p>'+
+    '<p class="page-sub">Sua jornada é uma recompensa pelo estudo: a cada módulo e checklist concluído, uma nova semana da gestação é desbloqueada — com desenvolvimento fetal, alterações maternas, exames e (quando for o caso) uma consulta de pré-natal completa.</p>'+
     '<div class="preg-top">'+
       '<div class="preg-illus">'+pregIllustrationSVG(cur)+'<div class="preg-illus-cap">Progresso atual da jornada</div></div>'+
       '<div class="preg-hero"><h2>Semana '+cur+' de 40</h2>'+
@@ -3212,7 +3198,11 @@ window.viewPregnancyJourney=function(selArg){
     '</div>';
 };
 
-window.selectPregWeek=function(w){ navigate('collection', w); };
+window.selectPregWeek=function(w){
+  var cur=currentPregWeek();
+  if(w>cur) w=cur; /* semanas bloqueadas nao sao navegaveis */
+  navigate('collection', w);
+};
 window.pregCompleteVisit=function(w){
   var ss=S(); ss.obCard=ss.obCard||{}; ss.obCard[w]=true; save();
   navigate('collection', w);
@@ -3226,7 +3216,6 @@ function playDopplerSound(){
     var ctx=window.__unlockAudioCtx||(window.__unlockAudioCtx=new Ctx());
     if(ctx.state==='suspended' && ctx.resume) ctx.resume();
     var now=ctx.currentTime;
-    /* ruido de fundo tipo "whoosh" (fluxo sanguineo), suave */
     var bufSize=ctx.sampleRate*1.8;
     var buf=ctx.createBuffer(1,bufSize,ctx.sampleRate);
     var data=buf.getChannelData(0);
@@ -3238,7 +3227,6 @@ function playDopplerSound(){
     ng.gain.exponentialRampToValueAtTime(0.0001,now+1.7);
     noise.connect(bp); bp.connect(ng); ng.connect(ctx.destination);
     noise.start(now); noise.stop(now+1.8);
-    /* batimentos "tum-tum" ritmados ~150bpm, abafados */
     function thump(t,freq,dur,peak){
       var osc=ctx.createOscillator(), g=ctx.createGain(), lp=ctx.createBiquadFilter();
       lp.type='lowpass'; lp.frequency.value=320;
@@ -3250,7 +3238,7 @@ function playDopplerSound(){
       osc.connect(lp); lp.connect(g); g.connect(ctx.destination);
       osc.start(t); osc.stop(t+dur+.03);
     }
-    var beatInterval=0.4; /* ~150bpm */
+    var beatInterval=0.4;
     for(var b=0;b<4;b++){
       var t0=now+.1+b*beatInterval;
       thump(t0,120,.11,.42);
@@ -3262,11 +3250,12 @@ function playDopplerSound(){
 var PREG_MILESTONE_SHOWN = {};
 function showPregAchievement(wk){
   var ov=document.createElement('div'); ov.className='unlock-ov';
+  var visitNote = wk.visit ? '<div class="unlock-sub" style="margin-top:6px"><b>Consulta de pré-natal desbloqueada</b> — cartão preenchido automaticamente.</div>' : '';
   ov.innerHTML='<div class="unlock-card">'+
     '<div class="preg-unlock-img">'+PREG_MONITOR_SVG+'</div>'+
-    '<div class="unlock-t">Nova conquista da jornada!</div>'+
-    '<div class="unlock-n">Semana '+wk.w+' — '+wk.achievement+'</div>'+
-    '<div class="unlock-sub">'+wk.milestone+'</div>'+
+    '<div class="unlock-t">Semana '+wk.w+' desbloqueada!</div>'+
+    '<div class="unlock-n">'+(wk.achievement||('Semana '+wk.w+' da jornada'))+'</div>'+
+    '<div class="unlock-sub">'+wk.milestone+'</div>'+visitNote+
     '<button class="btn-primary" onclick="this.closest(\'.unlock-ov\').remove()">Continuar</button>'+
     '<button class="caso-btn" style="margin-left:8px" onclick="this.closest(\'.unlock-ov\').remove();navigate(\'collection\','+wk.w+')">Ver semana '+wk.w+'</button>'+
     '</div>';
@@ -3278,10 +3267,14 @@ function showPregAchievement(wk){
 function checkPregMilestones(beforeW, afterW){
   for(var w=beforeW+1; w<=afterW; w++){
     var wk=pwByWeek(w);
-    if(wk && wk.achievement && !PREG_MILESTONE_SHOWN[w]){
-      PREG_MILESTONE_SHOWN[w]=true;
-      showPregAchievement(wk);
+    if(!wk || PREG_MILESTONE_SHOWN[w]) continue;
+    PREG_MILESTONE_SHOWN[w]=true;
+    /* desbloqueio da semana = preenche automaticamente o cartao de pre-natal se for semana de consulta */
+    if(wk.visit){
+      var ss=S(); ss.obCard=ss.obCard||{};
+      if(!ss.obCard[w]){ ss.obCard[w]=true; save(); }
     }
+    showPregAchievement(wk);
   }
 }
 

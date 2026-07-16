@@ -141,3 +141,7 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Claude/Cowork GitHub credentials (nunca commitar)
+.claude-github-token
+.git-credentials
