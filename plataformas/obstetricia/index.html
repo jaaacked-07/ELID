@@ -2975,6 +2975,32 @@ document.addEventListener('mousedown', function(e){
 .preg-locked-msg{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:40px 20px;color:var(--muted)}
 .preg-locked-msg .lk-ic{width:54px;height:54px;color:var(--accent);opacity:.8}
 .preg-locked-msg b{color:var(--ink);font-family:'Fraunces',serif;font-size:1.1rem}
+
+:root{
+  --primary:#ff4fd8; --secondary:#ff85df; --glow:rgba(255,79,216,.25);
+  --uterus:#ff7bcf; --fetus:#ffd2ef;
+}
+.preg-illus svg{max-height:320px}
+.preg-figure{transition:all .8s cubic-bezier(.4,0,.2,1)}
+.heart-hero-cover{width:236px !important;height:266px !important}
+.heart-hero-cover .heart-mini-wrap{width:200px !important;height:200px !important}
+
+/* ---- diferencial visual da consulta de pre-natal ---- */
+.preg-visit{margin-top:20px;border:1px solid var(--uterus);border-radius:16px;padding:18px 20px;
+  background:linear-gradient(160deg,rgba(255,123,207,.10),rgba(255,123,207,.02));
+  box-shadow:0 8px 24px rgba(255,79,216,.08);position:relative;overflow:hidden}
+.preg-visit::before{content:'';position:absolute;top:-40%;right:-15%;width:180px;height:180px;
+  background:radial-gradient(circle,var(--glow),transparent 70%);pointer-events:none}
+.preg-visit-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px;position:relative}
+.preg-visit-hdr .stetho-ic{width:26px;height:26px;color:var(--uterus);flex:0 0 auto;
+  filter:drop-shadow(0 0 6px var(--glow))}
+.preg-visit-hdr .badge{background:linear-gradient(120deg,var(--primary),var(--uterus));color:#fff;
+  font-size:.66rem;padding:4px 11px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;
+  font-weight:700;box-shadow:0 2px 10px var(--glow)}
+.preg-wk.visit::after{width:8px;height:8px;background:var(--uterus);box-shadow:0 0 8px var(--uterus);
+  animation:pregVisitPulse 1.8s ease-in-out infinite}
+@keyframes pregVisitPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(1.35)}}
+
 </style>
 
 
@@ -3010,24 +3036,99 @@ window.currentPregWeek = currentPregWeek;
 window.obGestProgress = obGestProgress;
 window.obUnlockedWeek = obUnlockedWeek;
 
+var PREG_TORSO_PATH = "M255.00 38.00 C264.33 39.00 277.17 50.67 283.00 58.00 C288.83 65.33 290.50 73.67 290.00 82.00 C289.50 90.33 283.83 100.67 280.00 108.00 C276.17 115.33 267.33 119.33 267.00 126.00 C266.67 132.67 275.33 139.67 278.00 148.00 C280.67 156.33 282.00 167.00 283.00 176.00 C284.00 185.00 282.83 193.67 284.00 202.00 C285.17 210.33 288.50 217.67 290.00 226.00 C291.50 234.33 293.33 243.33 293.00 252.00 C292.67 260.67 290.17 269.67 288.00 278.00 C285.83 286.33 282.33 294.67 280.00 302.00 C277.67 309.33 276.50 312.33 274.00 322.00 C271.50 331.67 267.67 347.00 265.00 360.00 C262.33 373.00 260.50 387.33 258.00 400.00 C255.50 412.67 247.83 427.33 250.00 436.00 C252.17 444.67 266.17 447.67 271.00 452.00 C275.83 456.33 280.33 458.67 279.00 462.00 C277.67 465.33 271.33 471.33 263.00 472.00 C254.67 472.67 233.67 470.33 229.00 466.00 C224.33 461.67 235.17 455.33 235.00 446.00 C234.83 436.67 230.17 422.33 228.00 410.00 C225.83 397.67 223.00 385.33 222.00 372.00 C221.00 358.67 224.00 343.00 222.00 330.00 C220.00 317.00 211.33 307.00 210.00 294.00 C208.67 281.00 212.67 266.00 214.00 252.00 C215.33 238.00 216.83 222.67 218.00 210.00 C219.17 197.33 219.67 186.00 221.00 176.00 C222.33 166.00 226.67 159.67 226.00 150.00 C225.33 140.33 218.83 129.33 217.00 118.00 C215.17 106.67 213.33 93.00 215.00 82.00 C216.67 71.00 220.33 59.33 227.00 52.00 C233.67 44.67 245.67 37.00 255.00 38.00 Z";
+
+function pregGrowth(w){ return Math.pow(w/40, 1.15); }
+
+function pregBellyParams(w){
+  var g = pregGrowth(w);
+  return { rx: 4+g*68, ry: 6+g*88, cx: 286+g*46, cy: 268-g*46, g: g };
+}
+function pregUterusParams(w){
+  var b = pregBellyParams(w);
+  return { rx: b.rx*0.82, ry: b.ry*0.82, cx: b.cx-6, cy: b.cy+4 };
+}
+function pregFetusStage(w){
+  if(w<=5) return 'sac';
+  if(w<=9) return 'embryo';
+  if(w<=13) return 'earlyfetus';
+  return 'fetus';
+}
+function pregFetusScale(w){ return 0.15 + pregGrowth(w)*0.95; }
+
+function pregFetusSVG(w, cx, cy){
+  var stage = pregFetusStage(w), s = pregFetusScale(w);
+  if(stage==='sac'){
+    var s1=(s*1.6).toFixed(2);
+    return '<g transform="translate('+cx.toFixed(1)+','+cy.toFixed(1)+') scale('+s1+')">'+
+      '<circle r="14" fill="none" stroke="var(--fetus)" stroke-width="1.4" opacity=".8"/>'+
+      '<circle cx="-5" cy="3" r="4" fill="var(--fetus)" opacity=".7"/>'+
+      '<circle cx="4" cy="-2" r="2.2" fill="var(--primary)" opacity=".85"/></g>';
+  }
+  if(stage==='embryo'){
+    var s2=(s*1.3).toFixed(2);
+    return '<g transform="translate('+cx.toFixed(1)+','+cy.toFixed(1)+') scale('+s2+')">'+
+      '<path d="M0 -12 C8 -12 13 -5 12 3 C11 10 5 14 -2 13 C-9 12 -13 6 -12 -1 C-11 -8 -6 -12 0 -12 Z" fill="var(--fetus)" stroke="var(--primary)" stroke-width="1.1"/>'+
+      '<path d="M10 -2 C14 -3 17 0 15 4" fill="none" stroke="var(--primary)" stroke-width="1" opacity=".7"/>'+
+      '<path d="M-11 4 C-15 5 -16 9 -13 11" fill="none" stroke="var(--primary)" stroke-width="1" opacity=".7"/></g>';
+  }
+  if(stage==='earlyfetus'){
+    var s3=(s*1.15).toFixed(2);
+    return '<g transform="translate('+cx.toFixed(1)+','+cy.toFixed(1)+') scale('+s3+') rotate(8)">'+
+      '<path d="M2 -16 C14 -16 20 -6 18 4 C16 13 8 19 -3 18 C-13 17 -19 9 -17 0 C-17 -3 -16 -5 -14 -8 C-16 -12 -10 -17 2 -16 Z" fill="var(--fetus)" stroke="var(--primary)" stroke-width="1.2"/>'+
+      '<path d="M16 0 C21 -1 25 3 22 8 C20 11 16 10 15 7" fill="none" stroke="var(--primary)" stroke-width="1.1"/>'+
+      '<path d="M-16 6 C-21 8 -22 14 -17 16 C-14 17 -12 14 -13 11" fill="none" stroke="var(--primary)" stroke-width="1.1"/></g>';
+  }
+  var s4=(s*0.55).toFixed(3);
+  return '<g transform="translate('+cx.toFixed(1)+','+cy.toFixed(1)+') scale('+s4+') translate(-186,-180)">'+
+    '<path fill="var(--fetus)" fill-opacity=".9" stroke="var(--primary)" stroke-width="2.6" d="M160 40 C190 42 213 58 222 82 C230 102 228 118 220 132 C224 140 226 148 226 156 C210 168 190 172 172 168 C150 163 132 150 130 130 C128 112 134 96 142 86 C138 82 140 74 146 66 C148 58 152 50 160 44 C158 42 158 41 160 40 Z"/>'+
+    '<path fill="var(--fetus)" fill-opacity=".9" stroke="var(--primary)" stroke-width="2.6" d="M152 150 C190 148 224 148 226 156 C252 168 268 188 266 214 C264 240 248 260 224 270 C226 280 220 288 208 292 C214 300 208 308 196 310 C174 314 154 302 150 282 C156 278 158 270 154 262 C140 258 132 246 136 232 C124 226 120 212 128 200 C122 190 124 176 136 168 C134 160 140 152 152 150 Z"/>'+
+    '<path stroke="var(--primary)" stroke-width="2" fill="none" d="M216 108 C226 106 232 116 226 126 C222 132 214 130 213 122 C212 116 213 111 216 108 Z"/>'+
+    '<path stroke="var(--primary)" stroke-width="2" fill="none" d="M168 96 C174 101 182 101 188 96"/>'+
+    '<path stroke="var(--primary)" stroke-width="2" fill="none" d="M166 88 C173 85 182 85 189 88"/>'+
+    '<path stroke="var(--primary)" stroke-width="2" fill="none" d="M148 108 C142 112 141 118 146 122"/>'+
+    '<path stroke="var(--primary)" stroke-width="2" fill="none" d="M152 132 C157 136 164 136 168 132"/>'+
+    '<path stroke="var(--primary)" stroke-width="2.2" fill="none" d="M226 156 C206 168 188 180 176 190 C166 198 160 200 154 196"/>'+
+    '<path fill="var(--fetus)" stroke="var(--primary)" stroke-width="1.8" d="M154 196 C148 194 144 197 145 202 C146 206 152 207 156 204"/>'+
+    '<path stroke="var(--primary)" stroke-width="2.2" fill="none" d="M224 270 C214 282 202 292 196 298 C190 304 186 306 182 304"/>'+
+    '<path fill="var(--fetus)" stroke="var(--primary)" stroke-width="1.8" d="M182 304 C174 306 168 302 168 296 C168 291 174 288 180 290"/></g>';
+}
+
 function pregIllustrationSVG(cur){
-  var frac=cur/40, r=10+frac*44, op=(.45+frac*.5).toFixed(2);
-  var late = cur>=20;
-  var fetusShape = late
-    ? '<path d="M0 -'+(r*.5)+' C '+(r*.6)+' -'+(r*.6)+' '+(r*.75)+' -'+(r*.1)+' '+(r*.55)+' '+(r*.25)+' C '+(r*.4)+' '+(r*.55)+' 0 '+(r*.6)+' -'+(r*.3)+' '+(r*.4)+' C -'+(r*.6)+' '+(r*.15)+' -'+(r*.5)+' -'+(r*.3)+' 0 -'+(r*.5)+' Z" fill="var(--accent)" opacity="'+op+'"/>'
-    : '<circle r="'+r+'" fill="var(--accent)" opacity="'+op+'"/>';
-  return '<svg viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round">'+
-    '<defs><radialGradient id="pregCoverGlow" cx="50%" cy="60%" r="65%"><stop offset="0%" stop-color="var(--accent)" stop-opacity=".22"/><stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></radialGradient></defs>'+
-    '<circle cx="118" cy="150" r="98" fill="url(#pregCoverGlow)"/>'+
-    '<path d="M46 30 l3 9 l9 3 l-9 3 l-3 9 l-3 -9 l-9 -3 l9 -3 Z" fill="var(--champagne)" opacity=".85"/>'+
-    '<path d="M182 46 l2.4 7 l7 2.4 l-7 2.4 l-2.4 7 l-2.4 -7 l-7 -2.4 l7 -2.4 Z" fill="var(--accent)" opacity=".8"/>'+
-    '<path d="M110 14 C92 14 79 27 79 45 C79 56 84 65 92 71 L92 78 C78 84 69 98 67 114 C64 132 71 140 72 152 C73 165 65 173 63 189 C60 212 71 234 96 250 C120 264 148 268 168 262 C163 250 160 236 161 222 C186 206 198 178 191 150 C185 126 168 108 156 92 C149 82 146 72 147 62 C154 58 159 51 161 43 C168 44 173 43 178 41 C175 33 174 24 175 16"'+
-    ' fill="var(--accent)" fill-opacity=".08" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round" opacity=".7"/>'+
-    '<g transform="translate(122,168)">'+fetusShape+'</g>'+
-    '<circle cx="110" cy="168" r="58" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="'+(frac*364).toFixed(0)+' 364" stroke-linecap="round" transform="rotate(-90 110 168)" opacity=".85"/>'+
-    '<text x="110" y="174" text-anchor="middle" font-family="Fraunces,serif" font-size="26" fill="var(--accent)">'+cur+'</text>'+
-    '<text x="110" y="192" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="var(--muted)">de 40 semanas</text>'+
-    '</svg>';
+  var b = pregBellyParams(cur), u = pregUterusParams(cur), g = b.g;
+  var nDrops = 2 + Math.floor(g*4);
+  var drops = '';
+  for(var i=0;i<nDrops;i++){
+    var ang = (i/nDrops)*Math.PI*2 + (i*0.7);
+    var rad = 0.35 + ((i*37)%60)/100;
+    var dx = u.cx + Math.cos(ang)*u.rx*rad;
+    var dy = u.cy + Math.sin(ang)*u.ry*rad;
+    drops += '<circle cx="'+dx.toFixed(1)+'" cy="'+dy.toFixed(1)+'" r="'+(1.6+g*1.4).toFixed(1)+'" fill="var(--fetus)" opacity="'+(0.25+g*0.15).toFixed(2)+'"/>';
+  }
+  var placentaR = 10+g*16;
+  var placentaCx = u.cx - u.rx*0.35;
+  var placentaCy = u.cy - u.ry*0.55;
+  var fetusSvg = pregFetusSVG(cur, u.cx+u.rx*0.08, u.cy+u.ry*0.12);
+  var uid = 'pw'+cur;
+  return '<svg viewBox="0 0 512 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" class="preg-figure">'+
+    '<defs>'+
+      '<radialGradient id="pregGlow'+uid+'" cx="50%" cy="45%" r="60%"><stop offset="0%" stop-color="var(--glow)"/><stop offset="100%" stop-color="var(--glow)" stop-opacity="0"/></radialGradient>'+
+      '<linearGradient id="skinGrad'+uid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--secondary)" stop-opacity=".16"/><stop offset="100%" stop-color="var(--primary)" stop-opacity=".08"/></linearGradient>'+
+      '<clipPath id="bellyWindow'+uid+'"><ellipse cx="'+b.cx.toFixed(1)+'" cy="'+b.cy.toFixed(1)+'" rx="'+(b.rx+18).toFixed(1)+'" ry="'+(b.ry+18).toFixed(1)+'"/></clipPath>'+
+      '<filter id="softShadow'+uid+'" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="var(--primary)" flood-opacity=".18"/></filter>'+
+    '</defs>'+
+    '<circle cx="256" cy="240" r="220" fill="url(#pregGlow'+uid+')"/>'+
+    '<g filter="url(#softShadow'+uid+')">'+
+      '<path d="'+PREG_TORSO_PATH+'" fill="url(#skinGrad'+uid+')" stroke="var(--primary)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>'+
+      '<ellipse cx="'+b.cx.toFixed(1)+'" cy="'+b.cy.toFixed(1)+'" rx="'+b.rx.toFixed(1)+'" ry="'+b.ry.toFixed(1)+'" fill="url(#skinGrad'+uid+')" stroke="var(--primary)" stroke-width="2.2" opacity="'+(0.5+g*0.5).toFixed(2)+'" style="transition:all .8s cubic-bezier(.4,0,.2,1);transform-origin:center"/>'+
+    '</g>'+
+    '<g clip-path="url(#bellyWindow'+uid+')">'+
+      '<ellipse cx="'+u.cx.toFixed(1)+'" cy="'+u.cy.toFixed(1)+'" rx="'+u.rx.toFixed(1)+'" ry="'+u.ry.toFixed(1)+'" fill="none" stroke="var(--uterus)" stroke-width="1.6" stroke-dasharray="3 6" opacity=".8"/>'+
+      '<circle cx="'+placentaCx.toFixed(1)+'" cy="'+placentaCy.toFixed(1)+'" r="'+placentaR.toFixed(1)+'" fill="var(--uterus)" opacity=".28" stroke="var(--uterus)" stroke-width="1.2"/>'+
+      '<path d="M'+placentaCx.toFixed(0)+' '+(placentaCy+placentaR*0.6).toFixed(0)+' Q '+u.cx.toFixed(0)+' '+(u.cy-u.ry*0.2).toFixed(0)+' '+(u.cx+u.rx*0.05).toFixed(0)+' '+(u.cy+u.ry*0.05).toFixed(0)+'" fill="none" stroke="var(--uterus)" stroke-width="1.6" opacity=".7"/>'+
+      fetusSvg + drops +
+    '</g>'+
+  '</svg>';
 }
 window.pregIllustrationSVG = pregIllustrationSVG;
 
@@ -3058,7 +3159,7 @@ function pregVisitHTML(w, wk){
     return '<li class="'+(done?'done':'')+'">'+(done?'✓ ':'○ ')+e+'</li>';
   }).join('');
   return '<div class="preg-visit">'+
-    '<div class="preg-visit-hdr"><span class="badge">Consulta de pré-natal</span><b>'+v.motivo+'</b></div>'+
+    '<div class="preg-visit-hdr"><svg class="stetho-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3v6a3.5 3.5 0 0 0 7 0V3"/><path d="M18 3v6.5a5 5 0 0 1-10 0V13"/><circle cx="19" cy="4" r="1.6"/><path d="M8 13a4 4 0 1 0 8 0"/></svg><span class="badge">Consulta de pré-natal</span><b>'+v.motivo+'</b></div>'+
     '<div class="preg-exame-grid">'+
       '<div><b>Anamnese</b>'+v.anamnese+'</div>'+
       '<div><b>Exame físico</b>'+v.exame+'</div>'+
