@@ -223,6 +223,8 @@
   .jump-card{background:linear-gradient(135deg,rgba(183,110,121,.20),rgba(201,160,176,.07));border:1.5px solid var(--rose);border-radius:16px;padding:16px 18px}
   .jump-card .nav-btn{font-size:14px;padding:8px 15px}
   .nav-btn.qfinal{background:var(--rose);color:#fff;border-color:var(--rose);font-weight:700}
+  .nav-btn.cur-week{border:2px solid var(--ok);color:#8fe0b8;font-weight:800}
+  .nav-btn.cur-week:hover{color:var(--ivory)}
   .week-final-ribbon{display:inline-block;margin-left:10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:var(--rose);color:#fff;padding:3px 11px;border-radius:999px;font-family:var(--font-b);vertical-align:middle}
   .reg-q-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:7px 0}
   .reg-q-row label{color:var(--mauve);font-size:13px}
@@ -286,14 +288,14 @@
       <div class="brand"><span style="color:var(--rose-bright)">E</span>LI<span style="color:var(--rose-bright)">D</span></div>
       <div style="font-family:var(--font-d);font-size:25px;margin-top:12px">Acesso pelo ELID</div>
       <p style="color:var(--mauve);font-size:14px;margin-top:10px">Entre pela plataforma ELID para acessar seu cronograma. Suas tarefas, métricas e progresso ficam salvos na sua conta e sincronizam entre dispositivos.</p>
-      <a class="gate-btn" href="../../landing-page/">Ir para o ELID →</a>
+      <a class="gate-btn" href="../landing-page/">Ir para o ELID →</a>
     </div>
   </div>
 </div>
 
 <div id="app" style="display:none">
 <div class="topbar" id="topbar">
-  <button class="tb-power" id="tb-back" title="Voltar à Biblioteca ELID" onclick="window.location.href='../../biblioteca-web/'">⏻</button>
+  <button class="tb-power" id="tb-back" title="Voltar à Biblioteca ELID" onclick="window.location.href='../biblioteca-web/'">⏻</button>
 </div>
 <header>
   <div class="wrap">
@@ -592,6 +594,20 @@ var EXTRAS_ENARE={
  gineco:['Miomatose','Endometriose','Amenorreia','Climatério e menopausa','Vulvovaginites','Puberdade precoce e tardia'],
  obst:['Trabalho de parto e partograma','Indução do parto','RPMO','Restrição de crescimento fetal','Sofrimento fetal','Puerpério','Aleitamento materno','Isoimunização Rh','TORCHS'],
  prev:['Atenção primária e ESF','Redes de atenção à saúde','Vigilância epidemiológica','Vigilância sanitária','Medicina baseada em evidências','Ética médica','Segurança do paciente','Saúde da mulher e da criança']
+};
+/* subdivisão de Clínica Médica por especialidade — só para agrupar visualmente em Matérias ENARE */
+var CM_SUB_ORDER=['Cardiologia','Pneumologia','Gastroenterologia','Endocrinologia','Nefrologia','Hematologia','Infectologia','Neurologia','Reumatologia','Emergências','Outros'];
+var CM_SUB={
+ 'HAS':'Cardiologia','Síndrome coronariana aguda (SCA)':'Cardiologia','Insuficiência cardíaca':'Cardiologia','Arritmias':'Cardiologia','Emergência hipertensiva':'Cardiologia','Valvopatias e dislipidemia':'Cardiologia',
+ 'Pneumonia (PAC)':'Pneumologia','Asma':'Pneumologia','DPOC':'Pneumologia','TEP':'Pneumologia',
+ 'Hepatites e cirrose':'Gastroenterologia','Hemorragia digestiva (HDA/HDB)':'Gastroenterologia',
+ 'Diabetes mellitus':'Endocrinologia','Distúrbios da tireoide':'Endocrinologia',
+ 'Injúria renal aguda (IRA)':'Nefrologia','Doença renal crônica (DRC)':'Nefrologia','Distúrbios hidroeletrolíticos':'Nefrologia','Distúrbios ácido-base':'Nefrologia',
+ 'Anemias':'Hematologia',
+ 'Tuberculose':'Infectologia','Sepse':'Infectologia','HIV / AIDS':'Infectologia','Arboviroses (Dengue)':'Infectologia','Antimicrobianos':'Infectologia',
+ 'AVC isquêmico e hemorrágico':'Neurologia','Cefaleias':'Neurologia','Epilepsia e crises':'Neurologia','Meningites e encefalites':'Neurologia','Síndromes demenciais e confusão aguda':'Neurologia',
+ 'LES':'Reumatologia','Artrite reumatoide e gota':'Reumatologia',
+ 'Emergências clínicas':'Emergências'
 };
 /* mapa do cronograma: para cada assunto -> semana, data de resolução de questões e semana/data de revisão */
 var _crono=null;
@@ -895,7 +911,11 @@ function addPend(){
    ============================================================ */
 function renderCrono(){
   var jump=$('#week-jump');jump.innerHTML='';
-  WEEKS.forEach(function(w){var b=el('<button class="nav-btn'+(w.qonly?' qfinal':'')+'">'+(w.qonly?'Reta final':'S'+w.n)+'</button>');b.addEventListener('click',function(){var t=document.getElementById('week-'+w.n);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});jump.appendChild(b);});
+  var hojeJ=todayMid();
+  WEEKS.forEach(function(w){
+    var ws=weekStart(w.n),we=addDays(ws,6),isCur=(hojeJ>=ws&&hojeJ<=we);
+    var b=el('<button class="nav-btn'+(w.qonly?' qfinal':'')+(isCur?' cur-week':'')+'" title="'+(isCur?'Semana atual':'')+'">'+(w.qonly?'Reta final':'S'+w.n)+(isCur?' · hoje':'')+'</button>');
+    b.addEventListener('click',function(){var t=document.getElementById('week-'+w.n);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});jump.appendChild(b);});
   var box=$('#crono');box.innerHTML='';
   WEEKS.forEach(function(w){
     var ws=weekStart(w.n),we=addDays(ws,6);
@@ -1028,11 +1048,11 @@ function renderRanking(){
     var ckey='matc-'+gi,collapsed=(COLLAPSE[ckey]==null)?true:!!COLLAPSE[ckey];
     function marc(it){return it.crono?!isDone('matoff-'+it.id):isDone('mat-'+it.id);}
     function conta(){return itens.filter(marc).length;}
+    /* Clínica Médica ganha pequenas divisões por especialidade (Cardiologia, Pneumologia, Infectologia etc.) */
+    function subOf(it){ if(k!=='cm')return null; if(it.crono)return CM_SUB[it.c.nome]||'Outros'; if(it.custom)return 'Outros'; return CM_SUB[it.nome]||'Outros'; }
     var head=el('<div class="area-head'+(collapsed?' collapsed':'')+'"><span class="arw">▾</span><h3>'+esc(label)+'</h3><span class="cnt">'+conta()+'/'+itens.length+' marcados · '+cont.length+' no cronograma</span></div>');
-    var bodyEl=el('<div class="area-body'+(collapsed?' collapsed':'')+'"><div class="rk-list"></div></div>');
-    var list=bodyEl.querySelector('.rk-list');
-    function upd(){head.querySelector('.cnt').textContent=conta()+'/'+itens.length+' marcados · '+cont.length+' no cronograma';}
-    itens.forEach(function(it){
+    var bodyEl=el('<div class="area-body'+(collapsed?' collapsed':'')+'"></div>');
+    function buildCard(it){
       var on=marc(it),tag;
       if(it.crono){var c=it.c;tag='✦ Contemplada · Semana '+c.week+' · questões em '+fmtShort(c.date)+' · revisão na Semana '+c.revWeek+' ('+fmtShort(c.revDate)+')';}
       else if(it.custom) tag='Adicionada por você — marque ao estudar';
@@ -1042,7 +1062,7 @@ function renderRanking(){
       card.querySelector('.mat-name').textContent=it.nome;
       card.querySelector('.mat-tag').textContent=tag;
       var nEl=card.querySelector('.mat-note'); if(note){nEl.textContent='📝 '+note;} else {nEl.style.display='none';}
-      card.addEventListener('click',function(ev){if(ev.target.closest('.t-edit'))return;var novo=!marc(it);if(it.crono)setDone('matoff-'+it.id,novo?false:true);else setDone('mat-'+it.id,novo);card.classList.toggle('done',novo);upd();toast(novo?'Marcado':'Desmarcado');});
+      card.addEventListener('click',function(ev){if(ev.target.closest('.t-edit'))return;var novo=!marc(it);if(it.crono)setDone('matoff-'+it.id,novo?false:true);else setDone('mat-'+it.id,novo);toast(novo?'Marcado':'Desmarcado');renderRanking();});
       card.querySelector('.t-edit').addEventListener('click',function(ev){ev.stopPropagation();
         var fields=[]; if(it.custom)fields.push({key:'nome',label:'Nome da matéria (vazio = remover)',value:it.nome,type:'text'});
         fields.push({key:'nota',label:'Observação / ajuste para sua rotina',value:MATNOTE[it.id]||'',type:'textarea',placeholder:'Ex.: focar em flashcards; revisar com o resumo X...'});
@@ -1055,11 +1075,27 @@ function renderRanking(){
             var nv=(v.nota||'').trim(); if(nv==='')delete MATNOTE[it.id]; else MATNOTE[it.id]=nv; saveMatNote(); renderRanking(); toast('Salvo');
           }});
       });
-      list.appendChild(card);
-    });
+      return card;
+    }
+    /* marcadas primeiro (sobem na lista), depois pendentes — ordem interna preservada (sort estável) */
+    var sorted=itens.slice().sort(function(a,b){return (marc(b)?1:0)-(marc(a)?1:0);});
+    if(k==='cm'){
+      var groups={}; sorted.forEach(function(it){var s=subOf(it);(groups[s]=groups[s]||[]).push(it);});
+      CM_SUB_ORDER.concat(Object.keys(groups).filter(function(s){return CM_SUB_ORDER.indexOf(s)<0;})).forEach(function(s){
+        if(!groups[s]||!groups[s].length)return;
+        bodyEl.appendChild(el('<h4 style="font-family:var(--font-d);font-size:16px;font-weight:600;color:var(--mauve);margin:16px 0 8px;letter-spacing:.02em">'+esc(s)+'</h4>'));
+        var sublist=el('<div class="rk-list"></div>');
+        groups[s].forEach(function(it){sublist.appendChild(buildCard(it));});
+        bodyEl.appendChild(sublist);
+      });
+    } else {
+      var list=el('<div class="rk-list"></div>');
+      sorted.forEach(function(it){list.appendChild(buildCard(it));});
+      bodyEl.appendChild(list);
+    }
     var addBtn=el('<button class="mat-add-btn">＋ Adicionar matéria em '+esc(label)+'</button>');
     addBtn.addEventListener('click',function(ev){ev.stopPropagation();openModal({title:'Adicionar matéria',desc:'Em '+label,saveLabel:'Adicionar',fields:[{key:'nome',label:'Nome da matéria',value:'',type:'text',placeholder:'Ex.: Síndrome de Cushing'}],onSave:function(v){var nn=(v.nome||'').trim();if(!nn)return;var arr=MATADD[k]||[];arr.push({id:'m'+Date.now(),nome:nn});MATADD[k]=arr;saveMatAdd();renderRanking();toast('Matéria adicionada');}});});
-    list.appendChild(addBtn);
+    bodyEl.appendChild(addBtn);
     head.addEventListener('click',function(){head.classList.toggle('collapsed');bodyEl.classList.toggle('collapsed');COLLAPSE[ckey]=head.classList.contains('collapsed')?1:0;saveCollapse();});
     box.appendChild(head);box.appendChild(bodyEl);
   });
@@ -1136,7 +1172,7 @@ function showLogin(){ $g('gate').style.display='flex'; $g('gate-loading').style.
 function showApp(){ $g('gate').style.display='none'; $g('app').style.display='block'; $g('topbar').style.display='flex'; }
 
 // navegação da barra (⏻ volta à biblioteca, mantém sessão)
-if($g('tb-back')) $g('tb-back').addEventListener('click',function(){ window.location.href='../../biblioteca-web/'; });
+if($g('tb-back')) $g('tb-back').addEventListener('click',function(){ window.location.href='../biblioteca-web/'; });
 
 let saveTimer=null;
 onAuthStateChanged(auth, async (user)=>{
