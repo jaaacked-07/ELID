@@ -26012,5 +26012,1287 @@ try{ if(typeof route!=='undefined' && route &&
 })();
 </script>
 
+
+<script>
+/* ELID Ginecologia — Conteudo Rastreio e Nomenclatura Citologica (tratogenital|0). Aditivo. Explicacoes aprofundadas. */
+(function(){
+"use strict";
+var C=(window.CONTENT=window.CONTENT||{});
+C['tratogenital|0']={
+ name:'Rastreio e Nomenclatura Citologica',
+ intro:'A prova cobra menos a doutrina do HPV em si (isso ja caiu no modulo de infeccoes) e mais a capacidade de ler um laudo de Papanicolaou e decidir a periodicidade certa do rastreio em cada cenario clinico.',
+ sub:[
+  ['entendendo','Entendendo do Zero',`
+   <div class="ac-h">Por que existe rastreio para o cancer do colo do utero</div>
+   <p class="ac-p">O cancer do colo do utero tem uma caracteristica rara entre os canceres: ele quase sempre nasce de uma <b>lesao precursora</b> que demora <b>anos a decadas</b> para virar cancer invasor. Essa lesao precursora se chama <b>neoplasia intraepitelial cervical (NIC)</b> e e causada pela infeccao persistente por tipos oncogenicos do HPV. Como o processo e lento e passa por uma fase totalmente <b>assintomatica</b>, existe uma janela enorme de tempo em que dá para encontrar a lesao antes que ela vire cancer — e e exatamente isso que o rastreio tenta fazer: examinar mulheres <b>sem sintomas</b>, de forma periodica, para achar a NIC (ou o cancer bem inicial) e tratar antes que evolua.</p>
+   <p class="ac-p">A ferramenta classica de rastreio e o exame <b>citopatologico</b>, popularmente chamado de <b>Papanicolaou</b> (ou "preventivo"). Ele consiste em raspar delicadamente a superficie da ectocervice e do canal endocervical, colher as celulas soltas que descamam e analisa-las ao microscopio. Repare na palavra-chave: <b>celulas soltas</b>. A citologia nao mostra a arquitetura do tecido — ela so mostra como cada celula individual esta, se o nucleo esta aumentado, se a cromatina esta irregular, se a relacao nucleo/citoplasma esta alterada. Por isso a citologia e um exame de <b>triagem (rastreio)</b>, nao de <b>diagnostico definitivo</b>. Quem confirma o diagnostico e a <b>histologia</b> (biopsia dirigida por colposcopia), que analisa um fragmento de tecido inteiro e consegue ver a arquitetura das camadas do epitelio — isso e o que define o grau real da NIC.</p>
+   <p class="ac-p">Entender essa dupla — <b>citologia rastreia, histologia confirma</b> — e a chave para nao se perder no tema. Um resultado de citologia alterado nunca é, por si so, o diagnostico final; ele e um <b>sinal de alerta</b> que direciona a proxima etapa (repetir o exame, encaminhar para colposcopia, biopsiar). Este modulo se concentra em como <b>ler e classificar</b> o resultado da citologia (a nomenclatura de Bethesda) e em <b>quando e como</b> aplicar o rastreio em diferentes cenarios. Os modulos seguintes deste mesmo tema cuidam da colposcopia/biopsia, da conduta pratica por resultado (fluxo do INCA) e do seguimento pos-tratamento.</p>
+   <div class="ac-call"><b>A grande ideia do modulo:</b> a citologia classifica <b>celulas</b> (sistema de Bethesda) e serve para <b>rastrear</b> populacoes assintomaticas; a histologia (biopsia) classifica <b>tecido</b> (graus de NIC) e serve para <b>confirmar</b>. Toda conduta de rastreio muda conforme o cenario da paciente — idade, gestacao, imunossupressao.</div>
+   <div class="ac-h" style="margin-top:14px">O mapa do modulo</div>
+   <table class="ac-tbl">
+     <tr><th>Eixo</th><th>O que voce vai dominar</th></tr>
+     <tr><td>Sistema de Bethesda</td><td>estrutura do laudo, adequabilidade, categorias gerais</td></tr>
+     <tr><td>Atipias escamosas</td><td>ASC-US, ASC-H, LSIL, HSIL — o que cada uma significa e o risco por tras</td></tr>
+     <tr><td>Atipias glandulares</td><td>AGC, AIS — por que exigem investigacao mais ampla</td></tr>
+     <tr><td>Rastreio de rotina</td><td>idade de inicio/termino, periodicidade, quem nao precisa rastrear</td></tr>
+     <tr><td>Cenarios especiais</td><td>gestante e imunossuprimida — o que muda</td></tr>
+     <tr><td>Correlacao com a NIC</td><td>por que a citologia e a histologia as vezes discordam</td></tr>
+   </table>`],
+  ['bethesda_geral','O Sistema de Bethesda',`
+   <div class="ac-h">Como o laudo citopatologico e organizado</div>
+   <p class="ac-p">Antes da decada de 1990, os laudos de citologia usavam a antiga <b>classificacao de Papanicolaou</b> (classes numericas de I a V), que era vaga e nao se comunicava bem com a conduta clinica. O <b>Sistema de Bethesda</b> (criado nos EUA, revisado periodicamente e adotado no Brasil pelo INCA) resolveu isso criando uma nomenclatura <b>descritiva e padronizada</b>, que fala a mesma lingua da conduta: cada categoria do laudo ja aponta, quase automaticamente, para o proximo passo.</p>
+   <p class="ac-p">Todo laudo de Bethesda comeca avaliando a <b>adequabilidade da amostra</b>: o exame e <b>satisfatorio</b> ou <b>insatisfatorio</b> para avaliacao? Um detalhe que a prova adora: a presenca de <b>celulas endocervicais ou metaplasicas</b> na amostra e o marcador de que a coleta realmente alcancou a <b>juncao escamocolunar (JEC)</b> — a regiao onde quase todas as lesoes comecam. A ausencia dessas celulas nao torna o exame automaticamente insatisfatorio (ele pode ser satisfatorio, mas com essa ressalva), porem reforca a importancia de repetir a coleta corretamente no proximo rastreio.</p>
+   <p class="ac-p">Depois da adequabilidade, vem a <b>categorizacao geral</b>: o resultado e <b>negativo para lesao intraepitelial ou malignidade (NILM)</b> — que inclui achados benignos como inflamacao, atrofia, alteracoes reparativas — ou existe uma <b>anormalidade em celulas epiteliais</b>? E essa anormalidade se divide em duas grandes familias, que tem origem em tecidos diferentes do colo: as <b>atipias em celulas escamosas</b> (que vem da ectocervice, epitelio poliestratificado) e as <b>atipias em celulas glandulares</b> (que vem do canal endocervical ou, mais raramente, do endometrio). Essa divisao importa porque a conduta e bem diferente entre as duas — e e o assunto das proximas duas abas.</p>
+   <div class="ac-tip"><b>Macete de leitura de laudo:</b> primeiro olhe a adequabilidade (o exame presta?), depois a categoria geral (NILM ou anormalidade?), depois, se anormal, se e de origem <b>escamosa</b> ou <b>glandular</b> — cada familia tem sua propria escala de gravidade.</div>
+   <table class="ac-tbl">
+     <tr><th>Origem</th><th>Categorias (da menos a mais grave)</th></tr>
+     <tr><td>Escamosa</td><td>ASC-US -> LSIL -> ASC-H -> HSIL -> carcinoma escamoso</td></tr>
+     <tr><td>Glandular</td><td>AGC (NOS ou favorece neoplasia) -> adenocarcinoma in situ (AIS) -> adenocarcinoma</td></tr>
+   </table>`],
+  ['escamosas','Atipias Escamosas: ASC-US, ASC-H, LSIL, HSIL',`
+   <div class="ac-h">A familia mais comum — e a que mais confunde</div>
+   <p class="ac-p"><b>ASC-US</b> (celulas escamosas atipicas de significado indeterminado) e a categoria <b>mais frequente</b> e a mais "cinza" de todas: o citologista ve alteracoes nucleares discretas, mas nao consegue dizer com seguranca se sao apenas <b>reativas</b> (inflamacao, atrofia, processo reparativo) ou se representam o inicio de uma <b>lesao real</b>. Por isso o nome carrega a palavra "indeterminado" — é literalmente uma duvida documentada no laudo. O risco de haver uma lesao de alto grau por tras de um ASC-US existe, mas e relativamente baixo comparado as outras categorias, o que permite, na maioria das vezes, uma conduta menos invasiva do que ir direto para colposcopia (isso e detalhado no modulo de condutas).</p>
+   <p class="ac-p"><b>LSIL</b> (lesao intraepitelial escamosa de baixo grau) e o correlato citologico mais proximo da <b>NIC 1</b>: reflete o efeito citopatico direto do HPV sobre a celula, cujo achado classico e a <b>coilocitose</b> (um halo claro ao redor do nucleo, com o nucleo aumentado e irregular, "amassado" pelo virus). O LSIL tem uma caracteristica biologica importante — <b>alta taxa de regressao espontanea</b>, sobretudo em mulheres jovens, cujo sistema imune tende a eliminar o virus sozinho em meses a poucos anos. Isso explica por que a conduta em jovens tende a ser mais conservadora (observar) do que tratar de imediato.</p>
+   <p class="ac-p">Ja o <b>ASC-H</b> (celulas escamosas atipicas, nao se pode excluir lesao de alto grau) e um "primo" mais preocupante do ASC-US: apesar do nome comecar igual, o risco de haver uma NIC 2/3 escondida por tras e <b>muito maior</b> — por isso, diferente do ASC-US, o ASC-H <b>nao</b> entra na rota de "repetir o exame"; ele vai <b>direto para colposcopia</b>, como se ja fosse uma lesao de alto grau ate prova em contrario.</p>
+   <p class="ac-p">Por fim, <b>HSIL</b> (lesao intraepitelial escamosa de alto grau) e a categoria que mais se aproxima da <b>NIC 2/3</b>: as alteracoes nucleares sao intensas, a relacao nucleo/citoplasma esta muito aumentada (celulas "quase so nucleo"), a cromatina e grosseira e irregular. O HSIL tem a <b>maior probabilidade de ja existir uma lesao real e de risco de progressao para cancer invasor</b> se nao for investigado — por isso e a categoria que exige a conduta mais assertiva e rapida (colposcopia sempre, biopsia obrigatoria antes de qualquer tratamento definitivo, como voce vera no modulo de condutas).</p>
+   <div class="ac-warn"><b>Pegadinha classica:</b> ASC-US <b>nao</b> e sinonimo de LSIL — ASC-US e uma duvida (pode ou nao ser lesao), LSIL ja e uma lesao de baixo grau definida citologicamente. E ASC-H, apesar do nome parecido com ASC-US, tem conduta de <b>alto grau</b> (colposcopia direta), nao de baixo grau.</div>
+   <div class="ac-tip"><b>Ordem de gravidade (memorize assim):</b> ASC-US (duvida leve) &lt; LSIL (baixo grau, NIC1) &lt; ASC-H (duvida que sugere alto grau) &lt; HSIL (alto grau, NIC2/3).</div>`],
+  ['glandulares','Atipias Glandulares (AGC) e AIS',`
+   <div class="ac-h">Quando o problema pode nao estar so no colo</div>
+   <p class="ac-p">As <b>celulas glandulares</b> normais do colo revestem o <b>canal endocervical</b> (diferente das celulas escamosas, que revestem a ectocervice). Quando o citologista encontra atipia nessas celulas, o laudo usa a sigla <b>AGC</b> (atypical glandular cells / celulas glandulares atipicas), que pode vir qualificada como <b>AGC sem outras especificacoes (NOS)</b> ou <b>AGC favorece neoplasia</b> — essa segunda ja carrega um risco bem maior de doenca significativa por tras. O grau mais avancado, ja considerado uma lesao precursora glandular verdadeira, e o <b>adenocarcinoma in situ (AIS)</b> — o equivalente glandular da NIC de alto grau.</p>
+   <p class="ac-p">O motivo de a AGC merecer uma aba propria (e uma conduta mais ampla, que voce vera no modulo de condutas) e simples: por tras de uma AGC pode estar escondida <b>qualquer coisa</b>, do mais benigno ao mais grave — desde um polipo endocervical ou alteracao reativa, passando por NIC de alto grau escamosa (sim, AGC tambem pode revelar lesao <b>escamosa</b> por baixo), ate AIS, adenocarcinoma de colo, ou ate <b>cancer de endometrio</b>. Por isso a investigacao de uma AGC nao pode se limitar ao colo do utero: ela precisa avaliar tambem o <b>canal endocervical</b> e, em mulheres com fatores de risco endometrial, o <b>endometrio</b> tambem.</p>
+   <div class="ac-call"><b>Por que isso muda a conduta:</b> nenhuma das outras categorias (ASC-US, LSIL, ASC-H, HSIL) manda investigar o endometrio — so a AGC faz isso, porque a origem da celula atipica pode estar mais alta no trato genital do que o colo. Guardar "AGC = pensar tambem em endometrio" evita um erro grave de conduta.</div>
+   <table class="ac-tbl">
+     <tr><th>Categoria glandular</th><th>Significado</th></tr>
+     <tr><td>AGC-NOS</td><td>atipia glandular sem certeza de origem ou natureza</td></tr>
+     <tr><td>AGC favorece neoplasia</td><td>maior probabilidade de lesao significativa subjacente</td></tr>
+     <tr><td>AIS (adenocarcinoma in situ)</td><td>lesao precursora glandular de alto grau — ja e uma neoplasia confinada ao epitelio</td></tr>
+     <tr><td>Adenocarcinoma</td><td>neoplasia glandular invasiva</td></tr>
+   </table>`],
+  ['quando_rastrear','Quando e Como Rastrear (Rotina)',`
+   <div class="ac-h">A populacao-alvo e a periodicidade</div>
+   <p class="ac-p">O modelo de rastreio historicamente adotado pelo INCA no Brasil (e ainda a base operacional da maioria dos servicos) recomenda iniciar a coleta de citologia aos <b>25 anos</b> em mulheres que ja tiveram <b>atividade sexual</b> (independente da idade da primeira relacao) e seguir ate os <b>64 anos</b>. A periodicidade nao e anual para sempre: faz-se <b>um exame por ano</b> e, apos <b>dois resultados consecutivos negativos</b>, o intervalo passa a ser <b>trienal</b> (a cada 3 anos). A logica por tras disso e simples — se dois exames seguidos vieram normais, o risco de uma lesao relevante ter surgido e ainda nao ter sido pega em 3 anos e baixo, e rastrear com menos frequencia evita exames e procedimentos desnecessarios.</p>
+   <p class="ac-p">O rastreio pode ser <b>interrompido</b> em mulheres com mais de 64 anos que tenham pelo menos <b>dois exames consecutivos negativos nos ultimos 5 anos</b> e nenhum historico de lesao de alto grau. Ja quem tem mais de 64 anos e <b>nunca</b> se submeteu a rastreio deve fazer <b>dois exames com intervalo de 1 a 3 anos</b> antes de dispensar o seguimento. Mulheres <b>sem historia de atividade sexual</b> nao precisam rastrear (o HPV e sexualmente transmitido). E mulheres <b>histerectomizadas por causa benigna</b>, sem historico de NIC de alto grau, tambem nao necessitam manter o rastreio citologico do colo (porque o colo foi removido).</p>
+   <div class="ac-warn"><b>Atencao ao momento de prova:</b> o pais esta em transicao para um novo modelo de rastreio primario com <b>teste molecular de DNA-HPV oncogenico</b>, mais sensivel que a citologia isolada para detectar lesoes de alto grau. Nesse modelo organizado, quem tem o teste de HPV <b>negativo</b> repete em <b>5 anos</b>; quem tem teste <b>positivo</b> segue para genotipagem (tipos 16/18 tem prioridade) e/ou citologia reflexa, que decide o encaminhamento para colposcopia. Esse modelo esta em implantacao gradual pelo pais — a citologia continua sendo essencial (e a ferramenta usada na triagem reflexa e no manejo de resultados alterados), mas deixa de ser, nesse novo desenho, o exame de primeira linha isolado.</div>
+   <table class="ac-tbl">
+     <tr><th>Situacao</th><th>Conduta de rastreio (citologia)</th></tr>
+     <tr><td>Inicio</td><td>25 anos, se ja teve atividade sexual</td></tr>
+     <tr><td>Periodicidade padrao</td><td>anual ate 2 negativos seguidos -> depois trienal</td></tr>
+     <tr><td>Termino</td><td>64 anos, se 2 negativos consecutivos nos ultimos 5 anos</td></tr>
+     <tr><td>Sem vida sexual</td><td>nao rastrear</td></tr>
+     <tr><td>Histerectomia total por causa benigna, sem NIC previa</td><td>nao rastrear</td></tr>
+   </table>`],
+  ['cenarios_especiais','Cenarios Especiais: Gestante e Imunossuprimida',`
+   <div class="ac-h">O que muda quando a paciente esta gravida</div>
+   <p class="ac-p">Uma duvida muito comum: "posso colher citologia de uma gestante?" — pode, e deve, se ela estiver dentro da indicacao de rastreio (mesma idade e periodicidade da nao gestante). A gestacao <b>nao e contraindicacao</b> para a coleta, que pode ser feita em <b>qualquer trimestre</b>. O cuidado esta na tecnica: a coleta ectocervical deve ser feita com delicadeza (o colo gravido e mais friavel e sangra com mais facilidade), e evita-se a <b>coleta endocervical agressiva</b> (escovado profundo ou curetagem do canal), que pode desencadear sangramento ou desconforto sem necessidade — a avaliacao mais completa do canal, quando indicada, costuma ser adiada com seguranca para o puerperio, exceto quando ha suspeita de invasao.</p>
+   <p class="ac-p">Se a citologia da gestante vier alterada, a via de investigacao (colposcopia, biopsia se necessario) segue praticamente igual a da nao gestante — o que muda e o <b>tratamento</b> das lesoes precursoras: como a NIC tem baixo risco de progredir para cancer invasor no curto prazo da gestacao, o tratamento definitivo (excisao) e, na imensa maioria das vezes, <b>adiado para depois do parto</b>, reservando-se intervencao na gravidez apenas para a suspeita real de <b>invasao</b> (isso volta com mais detalhe no modulo de condutas).</p>
+   <div class="ac-h" style="margin-top:14px">O que muda na paciente imunossuprimida</div>
+   <p class="ac-p">Mulheres imunossuprimidas — vivendo com HIV, transplantadas em uso de imunossupressores, em corticoterapia cronica em dose imunossupressora, ou com outras condicoes que reduzem a resposta imune — tem uma biologia diferente diante do HPV: a chance de a infeccao <b>persistir</b> (em vez de ser eliminada pelo sistema imune) e muito maior, e a chance de uma lesao <b>progredir</b> mais rapido para graus avancados tambem aumenta. Por isso essas mulheres tem duas mudancas centrais no rastreio: (1) o <b>inicio</b> costuma ser mais precoce — a partir do <b>inicio da atividade sexual</b> (independente da idade) ou logo apos o <b>diagnostico da condicao imunossupressora</b> (por exemplo, diagnostico de HIV); e (2) a <b>periodicidade</b> passa a ser <b>anual</b>, e nao trienal, mesmo depois de dois exames negativos — porque o intervalo mais espacado que e seguro para a populacao geral nao e seguro para quem tem risco maior de progressao rapida.</p>
+   <div class="ac-call"><b>Resumo do cenario especial:</b> gestante — mesma indicacao/periodicidade, coleta delicada, tratamento definitivo (quando indicado) costuma esperar o parto. Imunossuprimida — inicio mais precoce e rastreio <b>sempre anual</b>, nunca trienal.</div>`],
+  ['correlacao_nic','Correlacao Citologia-Histologia (NIC)',`
+   <div class="ac-h">Por que a citologia e a histologia podem "discordar"</div>
+   <p class="ac-p">Para entender por que a citologia pode subestimar ou superestimar uma lesao, ajuda visualizar como o <b>epitelio escamoso</b> do colo e organizado: e um tecido em <b>camadas</b>, que vai da <b>camada basal</b> (mais profunda, onde as celulas se dividem) ate a <b>camada superficial</b> (mais proxima da superficie, onde as celulas ja estao maduras e vao descamar). A <b>NIC</b> e definida pela <b>proporcao da espessura do epitelio ocupada por celulas imaturas e desorganizadas</b> (displasicas): na <b>NIC 1</b>, a desorganizacao fica restrita ao <b>terco basal</b>; na <b>NIC 2</b>, avanca ate <b>dois tercos</b> da espessura; na <b>NIC 3</b> (que inclui o antigo "carcinoma in situ"), a desorganizacao ocupa <b>toda a espessura</b> do epitelio, embora ainda sem ultrapassar a membrana basal (por isso ainda nao e cancer invasor).</p>
+   <div class="ac-svg-wrap">
+    <svg viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Camadas do epitelio escamoso cervical e correlacao com os graus de NIC">
+     <defs>
+      <linearGradient id="tg0bgGrad" x1="0" y1="0" x2="0" y2="1">
+       <stop offset="0" stop-color="#0f1b2d"/>
+       <stop offset="1" stop-color="#182842"/>
+      </linearGradient>
+      <linearGradient id="tg0normal" x1="0" y1="0" x2="0" y2="1">
+       <stop offset="0" stop-color="#7dd3fc"/>
+       <stop offset="1" stop-color="#38bdf8"/>
+      </linearGradient>
+      <linearGradient id="tg0abn" x1="0" y1="0" x2="0" y2="1">
+       <stop offset="0" stop-color="#fca5f1"/>
+       <stop offset="1" stop-color="#c026d3"/>
+      </linearGradient>
+      <linearGradient id="tg0stroma" x1="0" y1="0" x2="0" y2="1">
+       <stop offset="0" stop-color="#7c5a3a"/>
+       <stop offset="1" stop-color="#5a3f28"/>
+      </linearGradient>
+      <filter id="tg0shadow" x="-30%" y="-30%" width="160%" height="160%">
+       <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.35"/>
+      </filter>
+     </defs>
+     <rect x="0" y="0" width="680" height="360" fill="url(#tg0bgGrad)"/>
+     <text x="340" y="34" text-anchor="middle" fill="#f5f7fb" font-size="18" font-weight="700" font-family="Arial, sans-serif">Quanto da espessura do epitelio esta desorganizado?</text>
+     <g filter="url(#tg0shadow)">
+      <!-- NIC1 column -->
+      <g>
+       <rect x="70" y="70" width="130" height="220" rx="10" fill="url(#tg0normal)" vector-effect="non-scaling-stroke"/>
+       <rect x="70" y="216" width="130" height="74" rx="0" fill="url(#tg0abn)"/>
+       <path d="M70,290 C90,300 180,300 200,290 L200,340 L70,340 Z" fill="url(#tg0stroma)"/>
+       <path d="M70,290 C110,282 160,282 200,290" fill="none" stroke="#f59f0a" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
+       <text x="135" y="60" text-anchor="middle" fill="#f5f7fb" font-size="16" font-weight="700" font-family="Arial, sans-serif">NIC 1</text>
+       <text x="135" y="330" text-anchor="middle" fill="#e6d9c8" font-size="11" font-family="Arial, sans-serif">estroma</text>
+       <text x="135" y="352" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="Arial, sans-serif">terco basal alterado</text>
+      </g>
+      <!-- NIC2 column -->
+      <g>
+       <rect x="275" y="70" width="130" height="220" rx="10" fill="url(#tg0normal)"/>
+       <rect x="275" y="143" width="130" height="147" fill="url(#tg0abn)"/>
+       <path d="M275,290 C295,300 385,300 405,290 L405,340 L275,340 Z" fill="url(#tg0stroma)"/>
+       <path d="M275,290 C315,282 365,282 405,290" fill="none" stroke="#f59f0a" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
+       <text x="340" y="60" text-anchor="middle" fill="#f5f7fb" font-size="16" font-weight="700" font-family="Arial, sans-serif">NIC 2</text>
+       <text x="340" y="330" text-anchor="middle" fill="#e6d9c8" font-size="11" font-family="Arial, sans-serif">estroma</text>
+       <text x="340" y="352" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="Arial, sans-serif">dois tercos alterados</text>
+      </g>
+      <!-- NIC3 column -->
+      <g>
+       <rect x="480" y="70" width="130" height="220" rx="10" fill="url(#tg0abn)"/>
+       <path d="M480,290 C500,300 590,300 610,290 L610,340 L480,340 Z" fill="url(#tg0stroma)"/>
+       <path d="M480,290 C520,282 570,282 610,290" fill="none" stroke="#f59f0a" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
+       <text x="545" y="60" text-anchor="middle" fill="#f5f7fb" font-size="16" font-weight="700" font-family="Arial, sans-serif">NIC 3</text>
+       <text x="545" y="330" text-anchor="middle" fill="#e6d9c8" font-size="11" font-family="Arial, sans-serif">estroma</text>
+       <text x="545" y="352" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="Arial, sans-serif">toda a espessura alterada</text>
+      </g>
+     </g>
+     <text x="340" y="112" text-anchor="middle" fill="#0b1220" font-size="10" font-family="Arial, sans-serif" opacity="0"> </text>
+    </svg>
+   </div>
+   <p class="ac-p">Isso explica a discordancia entre citologia e histologia: a citologia so ve <b>celulas isoladas</b> que se soltaram da superficie, sem informar de qual profundidade do epitelio elas vieram, enquanto a biopsia mostra a <b>arquitetura completa</b>. Por isso uma LSIL na citologia pode, ao ser biopsiada, revelar uma NIC 2 (a celula superficial mais alterada nem sempre reflete com precisao o grau real por baixo) — e e exatamente por essa margem de erro que resultados de citologia mais preocupantes (ASC-H, HSIL, AGC) sempre exigem <b>confirmacao histologica</b> antes de qualquer tratamento definitivo.</p>
+   <div class="ac-tip"><b>Correlacao aproximada (nunca automatica):</b> LSIL costuma corresponder a NIC 1; HSIL costuma corresponder a NIC 2 ou 3. Mas "costuma" nao e "sempre" — por isso a biopsia dirigida por colposcopia continua sendo o padrao-ouro para confirmar o grau.</div>`],
+  ['armadilhas','Erros Comuns e Pegadinhas de Prova',`
+   <div class="ac-h">O que a banca adora testar neste tema</div>
+   <p class="ac-p">Um erro frequente e tratar <b>ASC-US</b> como se fosse automaticamente uma lesao (LSIL) — na verdade ASC-US e uma <b>duvida documentada</b>, nao uma lesao confirmada, e isso muda toda a logica da conduta (repetir o exame em vez de já encaminhar tudo para colposcopia). Outro erro e nao perceber que <b>ASC-H</b>, apesar do nome parecido, tem comportamento de categoria de <b>alto risco</b> — vai direto para colposcopia, igual ao HSIL, e nao entra na rota de "repetir citologia" do ASC-US.</p>
+   <p class="ac-p">Na mulher em <b>climaterio/menopausa</b>, a <b>atrofia genital</b> (baixo estrogeno deixa o epitelio fino e as celulas parecem alteradas ao microscopio) pode <b>mimetizar</b> um ASC-US no laudo. Uma estrategia usada antes de repetir a citologia nessas pacientes e considerar um curso de <b>estrogenizacao local</b>, que "amadurece" o epitelio e reduz falsos positivos na repeticao. Outro ponto que pega muitos candidatos: diante de uma <b>AGC</b>, a conduta <b>nunca</b> e "repetir a citologia" como primeira opcao — AGC sempre exige colposcopia com avaliacao do canal endocervical (e, conforme o caso, avaliacao do endometrio), porque o risco de doenca significativa escondida e alto demais para se dar ao luxo de esperar.</p>
+   <div class="ac-warn"><b>Erros que reprovam:</b> confundir ASC-US com LSIL; mandar ASC-H para "repetir em 6 meses" (deveria ir direto para colposcopia); esquecer que imunossuprimida rastreia <b>anualmente</b> (nao trienalmente); esquecer que AGC pode exigir avaliacao do <b>endometrio</b>; achar que gestante nao pode colher citologia (pode, em qualquer trimestre).</div>
+   <div class="ac-tip"><b>Frase para gravar:</b> "citologia da o alerta; a conduta certa depende da categoria, da idade e do cenario da paciente — e a histologia e quem confirma."</div>`]
+ ],
+};
+
+Object.assign(C['tratogenital|0'], {
+ escores:`
+   <div class="ac-h">Risco aproximado de lesao de alto grau (NIC2+) por categoria</div>
+   <table class="ac-tbl">
+     <tr><th>Categoria citologica</th><th>Risco aproximado de NIC2+ subjacente</th></tr>
+     <tr><td>ASC-US</td><td>baixo (a minoria tem lesao de alto grau)</td></tr>
+     <tr><td>LSIL</td><td>baixo a intermediario (a maioria e NIC1 ou regride)</td></tr>
+     <tr><td>ASC-H</td><td>alto (bem maior que ASC-US, semelhante a HSIL)</td></tr>
+     <tr><td>HSIL</td><td>muito alto (maioria tem NIC2/3 confirmada)</td></tr>
+     <tr><td>AGC</td><td>variavel e amplo (pode ir de achado benigno a cancer)</td></tr>
+   </table>
+   <div class="ac-call">Guarde a <b>ordem de risco</b>, nao numeros decorados: ASC-US &lt; LSIL &lt; ASC-H aproximadamente = HSIL. AGC e a unica categoria em que o risco pode envolver <b>orgaos alem do colo</b>.</div>`,
+ dif:`
+   <div class="ac-h">Diferenciais dentro da nomenclatura</div>
+   <table class="ac-tbl">
+     <tr><th>Confusao comum</th><th>Diferenciar</th><th>Chave</th></tr>
+     <tr><td>ASC-US x LSIL</td><td>duvida x lesao definida</td><td>ASC-US = alteracao discreta, indeterminada; LSIL = coilocitose, efeito citopatico claro do HPV</td></tr>
+     <tr><td>ASC-US x ASC-H</td><td>risco baixo x risco alto</td><td>ASC-H vai direto para colposcopia; ASC-US pode repetir citologia primeiro</td></tr>
+     <tr><td>LSIL x HSIL</td><td>NIC1 x NIC2/3</td><td>HSIL tem alteracoes nucleares mais intensas e maior relacao nucleo/citoplasma</td></tr>
+     <tr><td>AGC x atipia escamosa</td><td>origem endocervical/endometrial x ectocervical</td><td>AGC exige avaliar canal endocervical (e endometrio em cenarios de risco)</td></tr>
+     <tr><td>Atrofia x ASC-US</td><td>alteracao benigna x atipia real</td><td>atrofia (menopausa) pode mimetizar ASC-US; considerar estrogenizacao antes de repetir</td></tr>
+   </table>`,
+ mapa:`
+   <div class="ac-h">Rastreio e nomenclatura em mapa (cards)</div>
+   <div class="mm">
+     <div class="mm-card"><h5>Bethesda</h5><ul><li>Adequabilidade da amostra</li><li>NILM x anormalidade epitelial</li><li>Escamosa x glandular</li></ul></div>
+     <div class="mm-card"><h5>Escamosas</h5><ul><li>ASC-US: duvida</li><li>LSIL: NIC1, alta regressao</li><li>ASC-H e HSIL: alto risco</li></ul></div>
+     <div class="mm-card"><h5>Glandulares</h5><ul><li>AGC-NOS x favorece neoplasia</li><li>AIS = precursor glandular</li><li>Pensar em endometrio</li></ul></div>
+     <div class="mm-card"><h5>Rastreio de rotina</h5><ul><li>25 a 64 anos</li><li>Anual -> trienal apos 2 negativos</li><li>Sem vida sexual: nao rastrear</li></ul></div>
+     <div class="mm-card"><h5>Gestante</h5><ul><li>Mesma indicacao/periodicidade</li><li>Coleta delicada, sem curetagem agressiva</li><li>Tratamento definitivo pode esperar o parto</li></ul></div>
+     <div class="mm-card"><h5>Imunossuprimida</h5><ul><li>Inicio mais precoce</li><li>Rastreio SEMPRE anual</li><li>Maior risco de persistencia/progressao</li></ul></div>
+   </div>`,
+ fluxo_dx:`
+   <div class="ac-h">Como interpretar o laudo, passo a passo</div>
+   <div class="fx">
+     <div class="fx-node start">Resultado da citologia em maos</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node">Amostra satisfatoria? (checar celulas endocervicais/metaplasicas)</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Categoria geral</div>
+     <div class="fx-row">
+       <div class="fx-node end">NILM -> segue rastreio de rotina</div>
+       <div class="fx-node">Anormalidade epitelial -> classificar origem</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-row">
+       <div class="fx-node">Escamosa: ASC-US / LSIL / ASC-H / HSIL</div>
+       <div class="fx-node">Glandular: AGC / AIS</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node end">Conduta especifica por categoria (ver modulo de condutas INCA)</div>
+   </div>`,
+ fluxo_cond:`
+   <div class="ac-h">Periodicidade do rastreio por cenario</div>
+   <div class="fx">
+     <div class="fx-node start">Paciente elegivel para rastreio</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-row">
+       <div class="fx-node">Populacao geral, 25-64 anos, ja teve atividade sexual</div>
+       <div class="fx-node">Imunossuprimida (HIV, transplante, corticoide cronico)</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-row">
+       <div class="fx-node">Anual -> apos 2 negativos seguidos -> trienal</div>
+       <div class="fx-node end">SEMPRE anual, inicio mais precoce</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node end">Gestante: mesma periodicidade da nao gestante, qualquer trimestre</div>
+   </div>`,
+ vespera:`
+   <div class="ac-h">Revisao de vespera</div>
+   <div class="ac-call"><b>Citologia x histologia:</b> citologia rastreia (celulas soltas), histologia confirma (arquitetura do tecido = grau de NIC).</div>
+   <div class="ac-call"><b>Ordem de gravidade escamosa:</b> ASC-US &lt; LSIL &lt; ASC-H &lt; HSIL. ASC-H tem conduta de alto grau.</div>
+   <div class="ac-call"><b>AGC:</b> sempre colposcopia + avaliar canal endocervical; avaliar endometrio se >=35 anos, sangramento anormal, celulas endometriais no laudo ou anovulacao cronica.</div>
+   <div class="ac-call"><b>Rastreio de rotina:</b> 25-64 anos, anual -> trienal apos 2 negativos. Sem vida sexual ou histerectomia total benigna sem NIC previa: nao rastrear.</div>
+   <div class="ac-call"><b>Gestante:</b> mesma indicacao, qualquer trimestre, coleta delicada, tratamento definitivo geralmente pos-parto.</div>
+   <div class="ac-call"><b>Imunossuprimida:</b> inicio mais precoce, rastreio sempre <b>anual</b>.</div>`,
+ dicas:`
+   <div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">NIC e definida pela <b>proporcao da espessura do epitelio</b> alterada: NIC1 = terco basal; NIC2 = dois tercos; NIC3 = toda a espessura.</div>
+   <div class="ac-tip">Atrofia (menopausa) pode simular ASC-US — considere estrogenizacao local antes de repetir.</div>
+   <div class="ac-tip">"AGC pensa alem do colo": canal endocervical sempre, endometrio se houver fator de risco.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Tratar ASC-US como se ja fosse uma lesao confirmada.</div>
+   <div class="ac-warn">Mandar ASC-H "repetir citologia" em vez de colposcopia direta.</div>
+   <div class="ac-warn">Aplicar periodicidade trienal em imunossuprimida (deve ser sempre anual).</div>
+   <div class="ac-warn">Achar que gestante nao pode fazer Papanicolaou.</div>
+   <div class="ac-warn">Conduzir AGC apenas repetindo a citologia, sem avaliar o canal.</div>`,
+ checklist:[
+   'Explico por que existe rastreio (lesao precursora de evolucao lenta)',
+   'Diferencio citologia (rastreio, celulas) de histologia (confirmacao, tecido/NIC)',
+   'Conheco a estrutura do laudo de Bethesda (adequabilidade, categoria geral, origem)',
+   'Diferencio ASC-US, ASC-H, LSIL e HSIL e sei a ordem de risco entre elas',
+   'Sei o que e AGC/AIS e por que exige avaliar canal e as vezes endometrio',
+   'Sei a periodicidade padrao do rastreio (25-64 anos, anual -> trienal)',
+   'Sei o que muda no rastreio da gestante e da imunossuprimida',
+   'Entendo a correlacao aproximada entre citologia e grau histologico de NIC'
+ ],
+});
+
+Object.assign(C['tratogenital|0'], {
+ questoes:[
+  {stem:'Qual das categorias abaixo do Sistema de Bethesda deve ser encaminhada DIRETAMENTE para colposcopia, sem a opcao de repetir a citologia primeiro?',
+   opts:['ASC-US','LSIL em mulher jovem','ASC-H','NILM com atrofia'],correct:2,
+   expl:'<b>ASC-H</b> (nao se pode excluir lesao de alto grau) tem risco elevado de NIC2/3 subjacente e vai direto para colposcopia, diferente do ASC-US, que pode repetir a citologia primeiro.'},
+  {stem:'O achado citologico classico de coilocitose (halo perinuclear, nucleo aumentado e irregular) e tipico de qual categoria?',
+   opts:['ASC-US','LSIL','HSIL','AGC'],correct:1,
+   expl:'A <b>coilocitose</b> e o efeito citopatico direto do HPV e caracteriza o <b>LSIL</b>, correlato citologico mais proximo da NIC1.'},
+  {stem:'Mulher de 40 anos, sem comorbidades, apresenta citologia com AGC favorece neoplasia. Qual a conduta inicial mais adequada?',
+   opts:['Repetir citologia em 6 meses','Colposcopia com avaliacao do canal endocervical (e considerar avaliacao endometrial)','Tranquilizar e manter rastreio trienal','Iniciar tratamento excisional empirico'],correct:1,
+   expl:'Toda <b>AGC</b> exige colposcopia com avaliacao do canal endocervical; nesta faixa etaria e com esse subtipo, tambem se considera avaliacao endometrial pelo risco de doenca em outros sitios.'},
+  {stem:'Segundo o modelo classico de rastreio do INCA (citologia), apos dois exames anuais consecutivos negativos, qual passa a ser a periodicidade?',
+   opts:['Semestral','Anual, sempre','Trienal','Quinquenal'],correct:2,
+   expl:'Apos <b>dois exames anuais negativos consecutivos</b>, a periodicidade do rastreio citologico passa a ser <b>trienal</b> na populacao geral.'},
+  {stem:'Mulher de 32 anos, vivendo com HIV, CD4 preservado. Qual a periodicidade correta do rastreio citologico do colo do utero?',
+   opts:['Trienal, igual a populacao geral','Anual, independente de exames previos negativos','Unico exame aos 25 anos e depois interromper','Nao ha indicacao de rastreio em PVHIV'],correct:1,
+   expl:'Em mulheres imunossuprimidas (incluindo PVHIV), o rastreio deve ser <b>sempre anual</b>, pelo maior risco de persistencia e progressao da infeccao por HPV.'},
+  {stem:'Gestante de 20 semanas apresenta indicacao de rastreio citologico de rotina. Qual a conduta correta?',
+   opts:['Contraindicar a coleta ate o puerperio','Colher a citologia normalmente, com tecnica delicada, evitando coleta endocervical agressiva','Colher apenas se houver sangramento','Realizar apenas colposcopia, sem citologia'],correct:1,
+   expl:'A gestacao <b>nao contraindica</b> a citologia, que pode ser feita em qualquer trimestre; deve-se evitar manobras endocervicais agressivas pelo maior risco de sangramento.'},
+  {stem:'A NIC 2 e definida histologicamente por qual extensao de acometimento do epitelio escamoso?',
+   opts:['Terco basal','Dois tercos da espessura','Toda a espessura, sem invasao','Invasao do estroma'],correct:1,
+   expl:'A <b>NIC 2</b> corresponde a desorganizacao celular que avanca ate <b>dois tercos</b> da espessura do epitelio (NIC1 = terco basal; NIC3 = toda a espessura, ainda sem invadir a membrana basal).'},
+  {stem:'Mulher de 58 anos, na menopausa, com citologia mostrando ASC-US e sinais de atrofia genital. Qual estrategia pode ser usada antes de repetir o exame?',
+   opts:['Iniciar quimioterapia local','Curso de estrogenizacao local para amadurecer o epitelio e reduzir falso-positivo','Conizacao imediata','Interromper o rastreio definitivamente'],correct:1,
+   expl:'A <b>atrofia</b> pode mimetizar ASC-US; um curso de <b>estrogenizacao local</b> antes de repetir a citologia reduz a chance de falso-positivo relacionado a atrofia.'},
+  {stem:'Sobre a citologia (exame citopatologico), e correto afirmar que:',
+   opts:['Avalia a arquitetura tecidual completa, como a biopsia','Avalia celulas isoladas, sendo um exame de rastreio, nao diagnostico definitivo','E dispensavel apos qualquer colposcopia normal','So pode ser realizada em mulheres na pos-menopausa'],correct:1,
+   expl:'A citologia analisa <b>celulas soltas</b> (nao a arquitetura tecidual), por isso e um exame de <b>rastreio/triagem</b>; o diagnostico definitivo do grau da lesao depende da <b>histologia</b>.'},
+  {stem:'Mulher de 70 anos relata nunca ter realizado exame citopatologico do colo. Qual a conduta correta em relacao ao rastreio?',
+   opts:['Nao rastrear, pois passou da idade limite','Realizar dois exames com intervalo de 1 a 3 anos antes de dispensar o seguimento','Encaminhar direto para histerectomia','Realizar apenas um exame e liberar definitivamente'],correct:1,
+   expl:'Mulheres acima de 64 anos <b>nunca rastreadas</b> devem realizar <b>dois exames com intervalo de 1 a 3 anos</b> antes de se considerar dispensa do rastreio.'},
+  {stem:'Em relacao a presenca de celulas endocervicais/metaplasicas no laudo citopatologico, e correto afirmar que:',
+   opts:['E irrelevante para a qualidade do exame','Indica que a coleta alcancou a juncao escamocolunar, area onde a maioria das lesoes se origina','Torna o exame automaticamente insatisfatorio se ausente','So importa em mulheres gestantes'],correct:1,
+   expl:'A presenca dessas celulas indica que a coleta atingiu a <b>juncao escamocolunar (JEC)</b>, regiao de origem da maioria das lesoes; a ausencia nao torna o exame insatisfatorio automaticamente, mas e um sinal de alerta sobre a qualidade da coleta.'},
+  {stem:'Qual das alternativas resume corretamente a ordem crescente de risco de lesao de alto grau subjacente entre as categorias escamosas?',
+   opts:['HSIL < ASC-H < LSIL < ASC-US','ASC-US < LSIL < ASC-H (proximo de HSIL)','LSIL < ASC-US < HSIL < ASC-H','ASC-H < HSIL < ASC-US < LSIL'],correct:1,
+   expl:'A ordem aproximada de risco crescente e <b>ASC-US &lt; LSIL &lt; ASC-H</b> (proximo de HSIL) <b>&lt; HSIL</b>, o que orienta a intensidade da investigacao em cada categoria.'}
+ ],
+ flashcards:[
+  {front:'Diferenca essencial entre citologia e histologia no rastreio do colo.',back:'Citologia analisa celulas soltas e serve para RASTREAR (triagem); histologia (biopsia) analisa arquitetura tecidual e serve para CONFIRMAR o grau da NIC.',type:'basic'},
+  {front:'O que significa ASC-US?',back:'Celulas escamosas atipicas de significado indeterminado: alteracao discreta, sem certeza se e reativa ou lesao real.',type:'basic'},
+  {front:'Por que ASC-H tem conduta diferente de ASC-US?',back:'ASC-H (nao pode excluir lesao de alto grau) tem risco muito maior de NIC2/3 e vai direto para colposcopia, ao contrario do ASC-US.',type:'basic'},
+  {front:'Achado citologico classico do LSIL.',back:'Coilocitose: halo perinuclear com nucleo aumentado e irregular, efeito citopatico direto do HPV.',type:'basic'},
+  {front:'Correlato citologico aproximado de NIC1 e de NIC2/3.',back:'LSIL aproxima-se de {{NIC1}}; HSIL aproxima-se de {{NIC2/3}}.',type:'cloze'},
+  {front:'O que torna a AGC diferente de todas as outras categorias?',back:'AGC exige investigar tambem o canal endocervical e, em cenarios de risco, o endometrio — pode esconder doenca alem do colo.',type:'basic'},
+  {front:'Quando avaliar o endometrio diante de uma AGC?',back:'Se idade >=35 anos, sangramento uterino anormal, celulas endometriais no laudo, ou anovulacao cronica.',type:'basic'},
+  {front:'Definicao histologica de NIC1, NIC2 e NIC3.',back:'NIC1 = terco basal alterado. NIC2 = dois tercos. NIC3 = toda a espessura, sem invasao da membrana basal.',type:'basic'},
+  {front:'Periodicidade padrao do rastreio citologico (populacao geral).',back:'Inicio aos 25 anos (com vida sexual), anual ate 2 exames negativos consecutivos, depois trienal, ate os 64 anos.',type:'basic'},
+  {front:'Rastreio em mulher imunossuprimida (ex.: HIV): o que muda?',back:'Inicio mais precoce (a partir da vida sexual ou do diagnostico) e periodicidade SEMPRE anual, nunca trienal.',type:'basic'},
+  {front:'Gestante pode colher citologia? Como?',back:'Sim, em qualquer trimestre, com tecnica delicada, evitando coleta endocervical agressiva.',type:'basic'},
+  {front:'Quando o tratamento definitivo de NIC na gestante costuma ser feito?',back:'Em geral apos o parto, exceto quando ha suspeita de invasao (que exige investigacao na gestacao).',type:'basic'},
+  {front:'Quem pode interromper o rastreio citologico de rotina?',back:'Mulheres >64 anos com 2 exames negativos nos ultimos 5 anos; mulheres sem vida sexual; histerectomizadas por causa benigna sem NIC previa.',type:'basic'},
+  {front:'O que a presenca de celulas endocervicais/metaplasicas no laudo indica?',back:'Que a coleta alcancou a juncao escamocolunar (JEC), area de origem da maioria das lesoes.',type:'basic'}
+ ],
+ casos:[
+  {t:'Caso 1 — Gestante com citologia alterada',
+   stem:'Gestante de 22 semanas, 27 anos, realiza citologia de rotina que retorna com LSIL. Colposcopia mostra achado menor e biopsia confirma NIC1.',
+   passos:[
+     {h:'1. A gestacao contraindicava o exame?',p:'Nao. A citologia pode ser colhida em <b>qualquer trimestre</b>; a gestacao nao e contraindicacao ao rastreio.'},
+     {h:'2. Interpretar o LSIL',p:'LSIL costuma corresponder a <b>NIC1</b>, com alta taxa de regressao espontanea, principalmente em mulheres jovens.'},
+     {h:'3. Conduta na gestacao',p:'Como a NIC1 tem baixissimo risco de progressao rapida, a conduta e <b>observacao</b>, sem tratamento excisional na gestacao.'},
+     {h:'4. E depois do parto?',p:'Reavaliar a lesao no puerperio; a maioria regride espontaneamente, e o seguimento decide a necessidade de tratamento (ver modulo de condutas).'},
+     {h:'Licao de prova',p:'Gestante pode e deve colher citologia; NIC1 na gestacao geralmente so se observa, sem tratamento excisional imediato.'}
+   ]},
+  {t:'Caso 2 — Mulher vivendo com HIV',
+   stem:'Mulher de 29 anos, diagnostico de HIV ha 2 anos, CD4 480, dois exames de citologia anteriores negativos com intervalo de 1 ano cada. Pergunta quando deve repetir o proximo exame.',
+   passos:[
+     {h:'1. Ela pode passar para o rastreio trienal?',p:'Nao. Mesmo com <b>dois exames negativos</b>, mulheres imunossuprimidas (incluindo PVHIV) <b>nao</b> entram no intervalo trienal da populacao geral.'},
+     {h:'2. Por que a regra e diferente?',p:'A imunossupressao aumenta o risco de <b>persistencia</b> do HPV e de <b>progressao mais rapida</b> da lesao, tornando o intervalo trienal inseguro.'},
+     {h:'3. Conduta correta',p:'Manter rastreio citologico <b>anual</b>, independentemente do numero de exames negativos previos.'},
+     {h:'4. E se o CD4 cair no futuro?',p:'A recomendacao de periodicidade anual se mantem; o CD4 baixo reforca ainda mais a necessidade de vigilancia proxima.'},
+     {h:'Licao de prova',p:'PVHIV e demais imunossuprimidas rastreiam <b>sempre anualmente</b>, nunca trienal, mesmo com exames previos negativos.'}
+   ]},
+  {t:'Caso 3 — Discordancia entre citologia e histologia',
+   stem:'Mulher de 45 anos, citologia com AGC favorece neoplasia. Colposcopia normal, escovado endocervical negativo. Ultrassom transvaginal mostra endometrio espessado.',
+   passos:[
+     {h:'1. AGC exige so avaliar o colo?',p:'Nao. Diante de <b>AGC</b>, sempre se avalia o canal endocervical, e em mulheres com fatores de risco (aqui, idade >=35 anos), tambem se avalia o <b>endometrio</b>.'},
+     {h:'2. Interpretar a colposcopia normal',p:'Colposcopia e escovado endocervical normais <b>nao encerram</b> a investigacao quando ha AGC — a origem pode estar fora do colo.'},
+     {h:'3. Seguir a pista do endometrio',p:'O achado de endometrio espessado ao ultrassom reforca a necessidade de <b>investigacao endometrial</b> (biopsia de endometrio).'},
+     {h:'4. Por que isso importa tanto',p:'A AGC e a unica categoria de Bethesda que pode ter origem <b>fora do colo do utero</b>, incluindo o endometrio.'},
+     {h:'Licao de prova',p:'AGC + fator de risco endometrial (idade, sangramento, celulas endometriais no laudo) = sempre investigar o endometrio, mesmo com colposcopia normal.'}
+   ]}
+ ],
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>
+/* ELID Ginecologia — Conteudo Colposcopia e Biopsia (tratogenital|1). Aditivo. Explicacoes aprofundadas. */
+(function(){
+"use strict";
+var C=(window.CONTENT=window.CONTENT||{});
+C['tratogenital|1']={
+ name:'Colposcopia e Biopsia',
+ intro:'A colposcopia e o "olho ampliado" que transforma um resultado citologico alterado em um alvo concreto para biopsiar. Dominar os achados (acetobranco, mosaico, pontilhado, vasos atipicos) e o que separa quem so decora nomes de quem realmente entende a lesao.',
+ sub:[
+  ['entendendo','Entendendo do Zero',`
+   <div class="ac-h">Para que serve a colposcopia</div>
+   <p class="ac-p">A citologia (Papanicolaou) e um exame de <b>rastreio</b>: ela avisa que algo pode estar errado, mas nao mostra <b>onde</b> no colo do utero esta o problema. A colposcopia resolve exatamente essa lacuna: e um exame que usa um aparelho com <b>lentes de aumento</b> (o colposcopio) e uma fonte de luz potente para observar o colo, a vagina e a vulva <b>ampliados varias vezes</b>, permitindo enxergar alteracoes de superficie e de vascularizacao que sao invisiveis a olho nu no exame especular comum. Em outras palavras: se a citologia diz "existe uma suspeita", a colposcopia responde "a suspeita esta aqui, exatamente neste ponto do colo" — e e esse ponto que sera biopsiado.</p>
+   <p class="ac-p">O principio por tras dos achados colposcopicos e simples de entender quando se pensa na <b>biologia da lesao</b>. Uma area do epitelio que esta proliferando de forma desordenada (uma NIC) tem <b>celulas mais imaturas, com nucleos maiores e mais densos, e uma vascularizacao anormal</b> por baixo (os vasos crescem de forma irregular para nutrir esse tecido que se multiplica rapido). Os reagentes usados na colposcopia (acido acetico e solucao de iodo) exploram exatamente essas duas caracteristicas — densidade nuclear e padrao vascular — para tornar a lesao <b>visivel</b> a olho.</p>
+   <p class="ac-p">Entender a colposcopia, portanto, nao e decorar uma lista de nomes bonitos (mosaico, pontilhado, vasos atipicos); e entender que cada achado e uma <b>janela</b> para o que esta acontecendo no tecido por baixo. Achados mais leves (acetobranco tenue, vasos finos e regulares) refletem alteracoes mais discretas; achados mais densos e irregulares (acetobranco denso, vasos grosseiros, vasos atipicos e bizarros) refletem tecido mais desorganizado e com maior chance de ser uma lesao de alto grau ou ate invasao.</p>
+   <div class="ac-call"><b>A grande ideia do modulo:</b> a colposcopia usa reagentes (acido acetico, iodo) para revelar duas coisas — <b>densidade celular/nuclear</b> (epitelio acetobranco) e <b>padrao vascular</b> (pontilhado, mosaico, vasos atipicos). Quanto mais denso e irregular o achado, maior a chance de lesao de alto grau, e e ali que se biopsia.</div>
+   <div class="ac-h" style="margin-top:14px">O mapa do modulo</div>
+   <table class="ac-tbl">
+     <tr><th>Eixo</th><th>O que voce vai dominar</th></tr>
+     <tr><td>Indicacoes</td><td>quando encaminhar para colposcopia</td></tr>
+     <tr><td>Tecnica</td><td>acido acetico, teste de Schiller/lugol, o porque de cada reagente</td></tr>
+     <tr><td>Zona de transformacao</td><td>tipos de ZT e por que isso decide a estrategia de tratamento</td></tr>
+     <tr><td>Achados menores e maiores</td><td>classificacao IFCPC — o que sugere baixo x alto grau</td></tr>
+     <tr><td>Suspeita de invasao</td><td>vasos atipicos, superficie irregular, necrose</td></tr>
+     <tr><td>Biopsia dirigida</td><td>tecnica, numero de fragmentos, ver-e-tratar</td></tr>
+   </table>`],
+  ['indicacoes','Indicacoes',`
+   <div class="ac-h">Quando encaminhar para colposcopia</div>
+   <p class="ac-p">A indicacao mais comum de colposcopia e o resultado <b>citologico alterado</b> que, pelo seu risco de lesao de alto grau, ja exige investigacao direta ou nao respondeu a conduta conservadora: <b>ASC-H</b> e <b>HSIL</b> vao sempre para colposcopia; <b>AGC</b> tambem vai sempre, com avaliacao adicional do canal; e <b>ASC-US</b> e <b>LSIL</b> entram na rota da colposcopia quando persistem em repeticoes do exame (o detalhamento fino de idade e numero de repeticoes fica no modulo de condutas).</p>
+   <p class="ac-p">Alem da citologia, existe uma indicacao que muitos esquecem: <b>suspeita clinica ao exame especular</b>, <b>independente</b> do resultado da citologia. Se o medico ve, a olho nu, uma lesao vegetante, ulcerada, friavel ou que sangra facilmente ao toque, a colposcopia (e a biopsia) devem ser feitas de imediato — <b>uma citologia normal nunca deve atrasar a investigacao de uma lesao clinicamente suspeita</b>, porque a citologia pode ter falsos negativos, sobretudo em lesoes ja invasivas com muita necrose e sangue no esfregaco.</p>
+   <p class="ac-p">Outra indicacao, cada vez mais relevante com a transicao do rastreio brasileiro para o modelo primario com <b>teste de DNA-HPV</b>, e o resultado <b>positivo para HPV oncogenico</b> em determinadas condicoes (por exemplo, positividade para os tipos <b>16 ou 18</b>, que tem risco especialmente alto, costuma encaminhar direto para colposcopia mesmo com citologia reflexa normal). Por fim, a colposcopia tambem e usada no <b>seguimento pos-tratamento</b> de NIC (modulo especifico) para verificar se a lesao foi completamente removida.</p>
+   <div class="ac-tbl-wrap"><table class="ac-tbl">
+     <tr><th>Indicacao</th><th>Observacao</th></tr>
+     <tr><td>ASC-H, HSIL</td><td>colposcopia direta, sem repetir citologia antes</td></tr>
+     <tr><td>AGC</td><td>colposcopia + avaliacao do canal (+ endometrio se indicado)</td></tr>
+     <tr><td>ASC-US / LSIL persistentes</td><td>apos repeticao(oes) alterada(s) — ver modulo de condutas</td></tr>
+     <tr><td>Lesao clinica suspeita ao especular</td><td>colposcopia/biopsia mesmo com citologia normal</td></tr>
+     <tr><td>HPV oncogenico de alto risco (16/18) no rastreio primario</td><td>encaminhamento direto em muitos protocolos</td></tr>
+     <tr><td>Seguimento pos-tratamento de NIC</td><td>verificar remissao/recidiva</td></tr>
+   </table></div>
+   <div class="ac-warn"><b>Pegadinha:</b> citologia negativa <b>nao</b> descarta cancer se ha lesao visivel ao exame especular. Sinal clinico manda mais do que exame de rastreio nesse cenario.</div>`],
+  ['tecnica','Tecnica do Exame',`
+   <div class="ac-h">O passo a passo e o porque de cada reagente</div>
+   <p class="ac-p">O exame comeca com a colocacao do especulo e a limpeza suave do colo com soro fisiologico, permitindo uma primeira observacao <b>sem reagentes</b>: nessa fase, ja se avalia a cor da mucosa, a presenca de lesoes visiveis a olho nu e o padrao vascular basal com o aumento do colposcopio (vasos finos e regulares sao esperados no epitelio normal).</p>
+   <p class="ac-p">O reagente mais importante e o <b>acido acetico a 3-5%</b>. Seu mecanismo explica por que ele "revela" a lesao: o acido acetico causa <b>coagulacao reversivel das proteinas nucleares e do citoesqueleto</b> das celulas. Em uma area normal, as celulas tem pouco nucleo em relacao ao citoplasma, entao o efeito e discreto. Mas em uma area de <b>NIC</b>, as celulas sao imaturas e tem uma <b>densidade nuclear muito maior</b> (relacao nucleo/citoplasma aumentada) — por isso, quando o acido acetico coagula essas proteinas em maior quantidade, a luz que incide sobre o epitelio nao consegue mais atravessa-lo e ser absorvida pelo estroma vascularizado por baixo; ela e <b>refletida de volta</b>, e a area aparece <b>branca</b> — e o chamado <b>epitelio acetobranco</b>. Quanto mais <b>densa, mais opaca e mais rapida</b> for essa reacao branca (e quanto mais <b>demorar para desaparecer</b>), maior a probabilidade de se tratar de uma lesao de <b>alto grau</b>.</p>
+   <p class="ac-p">O segundo reagente classico e a solucao de <b>iodo (teste de Schiller/lugol)</b>. O epitelio escamoso <b>normal e maduro</b> e rico em <b>glicogenio</b>, e o iodo se liga ao glicogenio, corando essa area de um tom <b>marrom-acastanhado (mogno)</b> — chama-se <b>Schiller negativo</b> (nao capta o corante de forma anormal, ou seja, e um teste "negativo para alteracao", que soa contraintuitivo mas e assim que se nomeia: iodo positivo/capta = normal). Ja o epitelio de uma <b>NIC</b> (imaturo, displasico) tem <b>pouco ou nenhum glicogenio</b>, entao <b>nao capta o iodo</b> e fica <b>amarelo-mostarda</b>, uma area dita <b>iodo-negativa</b> — esse achado se chama <b>Schiller positivo</b> (positivo para alteracao). O epitelio colunar (endocervical) e o epitelio atrofico tambem sao naturalmente iodo-negativos, o que exige cuidado para nao confundir achado normal com lesao.</p>
+   <div class="ac-tip"><b>Memorize assim:</b> acido acetico revela <b>densidade nuclear</b> (branco = mais nucleo, mais celula imatura). Lugol revela <b>glicogenio</b> (marrom = maduro/normal; amarelo/iodo-negativo = imaturo/lesao). Os dois reagentes olham para caracteristicas diferentes da mesma lesao.</div>
+   <div class="ac-warn"><b>Cuidado na leitura:</b> nem toda area iodo-negativa e lesao (epitelio colunar e atrofia tambem sao iodo-negativos); nem todo acetobranco e lesao (metaplasia escamosa imatura tambem pode ficar levemente acetobranca). Por isso os achados sempre se interpretam <b>em conjunto</b> (cor, margem, vasos, iodo), nunca isoladamente.</div>`],
+  ['zona_transformacao','Zona de Transformacao e Adequacao do Exame',`
+   <div class="ac-h">Por que quase tudo comeca na zona de transformacao</div>
+   <p class="ac-p">O colo do utero tem dois tipos de revestimento: a <b>ectocervice</b> (parte externa, voltada para a vagina) e coberta por <b>epitelio escamoso estratificado</b>, semelhante a pele por dentro; o <b>canal endocervical</b> e revestido por <b>epitelio colunar (glandular)</b>, mais fragil e avermelhado. O ponto onde os dois epitelios se encontram e a <b>juncao escamocolunar (JEC)</b>. Ao longo da vida (puberdade, gestacoes, exposicao hormonal), o epitelio colunar que fica exposto ao ambiente acido da vagina sofre um processo natural chamado <b>metaplasia escamosa</b> — ele se transforma em epitelio escamoso, "empurrando" a JEC para dentro do canal. A area onde esse processo de metaplasia acontece se chama <b>zona de transformacao (ZT)</b>, e e justamente ali, no meio dessa remodelacao celular ativa, que o HPV encontra as celulas mais vulneraveis para se instalar. <b>Por isso quase toda NIC nasce dentro da zona de transformacao.</b></p>
+   <div class="ac-svg-wrap">
+    <svg viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Anatomia da zona de transformacao e tipos de ZT conforme visibilidade da juncao escamocolunar">
+     <defs>
+      <linearGradient id="tg1bgGrad" x1="0" y1="0" x2="0" y2="1">
+       <stop offset="0" stop-color="#0f1b2d"/><stop offset="1" stop-color="#182842"/>
+      </linearGradient>
+      <linearGradient id="tg1ecto" x1="0" y1="0" x2="1" y2="1">
+       <stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#38bdf8"/>
+      </linearGradient>
+      <linearGradient id="tg1endo" x1="0" y1="0" x2="1" y2="1">
+       <stop offset="0" stop-color="#fda4af"/><stop offset="1" stop-color="#e11d5e"/>
+      </linearGradient>
+      <linearGradient id="tg1meta" x1="0" y1="0" x2="1" y2="1">
+       <stop offset="0" stop-color="#fcd34d"/><stop offset="1" stop-color="#f59f0a"/>
+      </linearGradient>
+      <filter id="tg1shadow" x="-30%" y="-30%" width="160%" height="160%">
+       <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.35"/>
+      </filter>
+     </defs>
+     <rect x="0" y="0" width="680" height="380" fill="url(#tg1bgGrad)"/>
+     <text x="180" y="30" text-anchor="middle" fill="#f5f7fb" font-size="15" font-weight="700" font-family="Arial, sans-serif">Colo do utero (corte)</text>
+     <g filter="url(#tg1shadow)">
+      <path d="M110,60 C60,80 60,240 110,280 C140,300 220,300 250,280 C300,240 300,80 250,60 C220,45 140,45 110,60 Z" fill="url(#tg1ecto)"/>
+      <path d="M175,60 C160,90 158,250 175,280 C185,290 205,290 215,280 C225,250 224,90 215,60 C205,50 185,50 175,60 Z" fill="url(#tg1endo)"/>
+      <path d="M155,95 C148,140 148,200 155,245 C165,255 225,255 235,245 C238,200 238,140 235,95 C225,85 165,85 155,95 Z" fill="url(#tg1meta)" opacity="0.85"/>
+     </g>
+     <path d="M155,95 C165,85 225,85 235,95" fill="none" stroke="#f5f7fb" stroke-width="2" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
+     <path d="M155,245 C165,255 225,255 235,245" fill="none" stroke="#f5f7fb" stroke-width="2" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>
+     <text x="180" y="330" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="Arial, sans-serif">azul: ectocervice (escamoso)</text>
+     <text x="180" y="346" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="Arial, sans-serif">vermelho: canal (colunar)</text>
+     <text x="180" y="362" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="Arial, sans-serif">laranja: zona de transformacao</text>
+     <line x1="330" y1="40" x2="330" y2="340" stroke="#334155" stroke-width="1.5"/>
+     <text x="500" y="30" text-anchor="middle" fill="#f5f7fb" font-size="15" font-weight="700" font-family="Arial, sans-serif">Tipos de ZT (visao colposcopica)</text>
+     <g filter="url(#tg1shadow)">
+      <circle cx="410" cy="100" r="42" fill="url(#tg1ecto)"/>
+      <circle cx="410" cy="100" r="16" fill="url(#tg1meta)"/>
+      <circle cx="530" cy="100" r="42" fill="url(#tg1ecto)"/>
+      <circle cx="530" cy="100" r="22" fill="url(#tg1meta)"/>
+      <circle cx="530" cy="100" r="9" fill="url(#tg1endo)"/>
+      <circle cx="620" cy="100" r="42" fill="url(#tg1ecto)"/>
+      <path d="M620,58 A42,42 0 0 1 620,142 A20,20 0 0 1 620,58 Z" fill="url(#tg1meta)"/>
+      <path d="M620,66 A14,14 0 0 1 620,134 A6,6 0 0 1 620,66 Z" fill="url(#tg1endo)"/>
+     </g>
+     <text x="410" y="160" text-anchor="middle" fill="#f5f7fb" font-size="12" font-weight="700" font-family="Arial, sans-serif">Tipo 1</text>
+     <text x="410" y="176" text-anchor="middle" fill="#cbd5e1" font-size="10" font-family="Arial, sans-serif">ectocervical, toda visivel</text>
+     <text x="530" y="160" text-anchor="middle" fill="#f5f7fb" font-size="12" font-weight="700" font-family="Arial, sans-serif">Tipo 2</text>
+     <text x="530" y="176" text-anchor="middle" fill="#cbd5e1" font-size="10" font-family="Arial, sans-serif">componente endocervical, visivel</text>
+     <text x="620" y="160" text-anchor="middle" fill="#f5f7fb" font-size="12" font-weight="700" font-family="Arial, sans-serif">Tipo 3</text>
+     <text x="620" y="176" text-anchor="middle" fill="#cbd5e1" font-size="10" font-family="Arial, sans-serif">JEC nao totalmente visivel</text>
+    </svg>
+   </div>
+   <p class="ac-p">A colposcopia so e considerada <b>adequada</b> (ou "satisfatoria") quando a <b>JEC e toda a zona de transformacao sao completamente visualizadas</b>. Por isso a classificacao das <b>ZT em tipo 1, 2 e 3</b> e tao usada: na <b>ZT tipo 1</b>, a transformacao e totalmente ectocervical e fica inteiramente visivel; na <b>ZT tipo 2</b>, ha um componente que entra um pouco no canal, mas ainda e possivel visualizar toda a JEC (por exemplo, com o uso de um especialzinho ou afastando delicadamente as bordas do canal); na <b>ZT tipo 3</b>, a JEC <b>nao pode ser totalmente vista</b>, porque se recolheu para dentro do canal — isso e mais comum em mulheres na perimenopausa e na pos-menopausa.</p>
+   <div class="ac-call"><b>Por que isso decide a conduta:</b> quando a ZT e tipo 3 (JEC nao visivel), a colposcopia nao consegue garantir que nao existe uma lesao mais alta no canal — isso influencia a escolha entre biopsia simples, curetagem/escovado do canal, e a decisao entre tratamento <b>destrutivo</b> (que exige ZT totalmente visivel) e <b>excisional</b> (que permite avaliar a peca inteira, inclusive o componente endocervical).</div>`],
+  ['achados_menores','Achados Normais e Menores (Grau 1)',`
+   <div class="ac-h">O vocabulario da colposcopia (classificacao IFCPC)</div>
+   <p class="ac-p">A terminologia internacional (IFCPC) organiza os achados colposcopicos em blocos, o que ajuda a nao se perder na quantidade de nomes. Os <b>achados normais</b> incluem o epitelio escamoso original, o epitelio colunar, a zona de transformacao normal (com metaplasia madura, orificios glandulares regulares, cistos de Naboth) e vasos <b>finos e regulares</b>. Nenhum desses achados indica lesao — sao apenas a anatomia normal do colo sob aumento.</p>
+   <p class="ac-p">Ja os <b>achados anormais de grau 1 (menores)</b> sao os que sugerem uma lesao de <b>baixo grau</b> (correlato aproximado de NIC1): <b>epitelio acetobranco tenue</b> (reacao discreta, de borda pouco definida e irregular, tipo "geografica", que aparece devagar e some rapido apos o acido acetico), <b>mosaico fino</b> e <b>pontilhado fino</b>. Vale entender a origem desses dois ultimos padroes: eles sao formados pelos capilares que nutrem o epitelio anormal. Quando esses vasos terminam em <b>pontos individuais</b> na superficie, formam o padrao chamado <b>pontilhado</b> (como pontinhos vermelhos espalhados na area acetobranca); quando os vasos correm <b>ao redor de blocos de epitelio</b>, desenhando linhas que se cruzam como um mosaico de piso, formam o padrao chamado <b>mosaico</b> (ou "ladrilhado"). No grau 1, esses padroes sao <b>finos</b> — vasos delicados, espacamento regular entre eles.</p>
+   <div class="ac-tip"><b>Macete:</b> pontilhado = vasos terminando em <b>pontos</b>. Mosaico = vasos contornando <b>blocos</b> (parecem ladrilhos). "Fino/tenue" = baixo grau; "grosseiro/denso" = alto grau (proxima aba).</div>
+   <table class="ac-tbl">
+     <tr><th>Achado</th><th>Categoria</th><th>Sugere</th></tr>
+     <tr><td>Epitelio escamoso original, epitelio colunar, ZT normal</td><td>Normal</td><td>anatomia normal</td></tr>
+     <tr><td>Acetobranco tenue, bordas irregulares/geograficas</td><td>Grau 1 (menor)</td><td>lesao de baixo grau (NIC1)</td></tr>
+     <tr><td>Mosaico fino</td><td>Grau 1 (menor)</td><td>lesao de baixo grau</td></tr>
+     <tr><td>Pontilhado fino</td><td>Grau 1 (menor)</td><td>lesao de baixo grau</td></tr>
+   </table>`],
+  ['achados_maiores','Achados Maiores e Suspeita de Invasao',`
+   <div class="ac-h">Quando o achado grita alto grau</div>
+   <p class="ac-p">Os <b>achados de grau 2 (maiores)</b> sao os que sugerem lesao de <b>alto grau</b> (correlato aproximado de NIC2/3): <b>epitelio acetobranco denso</b> (branco intenso, "branco-ostra", que aparece rapido e demora a desaparecer), <b>mosaico grosseiro</b> e <b>pontilhado grosseiro</b> (vasos mais largos, irregulares, com espacamento desigual entre eles — refletindo um tecido muito mais desorganizado do que no grau 1), <b>orificios glandulares espessados</b> (um halo esbranquicado ao redor da entrada das glandulas), o <b>sinal da borda interna</b> (uma linha mais branca e nitida dentro de uma area ja acetobranca, delimitando uma regiao ainda mais densa) e o <b>sinal da crista/sturge</b> (uma elevacao linear, tipo "crista de galo", dentro da lesao). Esses sinais tem <b>maior especificidade</b> para lesao de alto grau do que os achados de grau 1.</p>
+   <div class="ac-svg-wrap">
+    <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Padroes vasculares colposcopicos: pontilhado, mosaico e vasos atipicos">
+     <defs>
+      <linearGradient id="tg1bBg" x1="0" y1="0" x2="0" y2="1">
+       <stop offset="0" stop-color="#0f1b2d"/><stop offset="1" stop-color="#182842"/>
+      </linearGradient>
+      <radialGradient id="tg1bWhite" cx="0.5" cy="0.4" r="0.7">
+       <stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#cbd5e1"/>
+      </radialGradient>
+      <filter id="tg1bshadow" x="-30%" y="-30%" width="160%" height="160%">
+       <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.35"/>
+      </filter>
+     </defs>
+     <rect x="0" y="0" width="680" height="300" fill="url(#tg1bBg)"/>
+     <g filter="url(#tg1bshadow)">
+      <circle cx="130" cy="140" r="95" fill="url(#tg1bWhite)"/>
+      <circle cx="400" cy="140" r="95" fill="url(#tg1bWhite)"/>
+      <circle cx="560" cy="140" r="95" fill="url(#tg1bWhite)"/>
+     </g>
+     <g fill="#dc2626">
+      <circle cx="95" cy="105" r="4"/><circle cx="130" cy="95" r="4"/><circle cx="165" cy="108" r="4"/>
+      <circle cx="90" cy="140" r="4"/><circle cx="130" cy="135" r="4"/><circle cx="170" cy="142" r="4"/>
+      <circle cx="100" cy="175" r="4"/><circle cx="135" cy="180" r="4"/><circle cx="160" cy="172" r="4"/>
+     </g>
+     <g fill="none" stroke="#dc2626" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linecap="round">
+      <path d="M340,90 L400,120 L460,90"/>
+      <path d="M340,140 L400,120 L460,140"/>
+      <path d="M340,140 L400,170 L460,140"/>
+      <path d="M340,190 L400,170 L460,190"/>
+     </g>
+     <g fill="none" stroke="#b91c1c" stroke-width="3" vector-effect="non-scaling-stroke" stroke-linecap="round">
+      <path d="M520,100 C535,80 545,120 530,130 C550,135 560,110 575,125 C585,150 555,155 565,175 C575,195 545,180 535,195"/>
+      <path d="M545,95 C555,110 540,140 555,150 C570,158 565,180 550,190"/>
+     </g>
+     <text x="130" y="255" text-anchor="middle" fill="#f5f7fb" font-size="14" font-weight="700" font-family="Arial, sans-serif">Pontilhado</text>
+     <text x="130" y="272" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="Arial, sans-serif">vasos terminando em pontos</text>
+     <text x="400" y="255" text-anchor="middle" fill="#f5f7fb" font-size="14" font-weight="700" font-family="Arial, sans-serif">Mosaico</text>
+     <text x="400" y="272" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="Arial, sans-serif">vasos contornando blocos</text>
+     <text x="560" y="255" text-anchor="middle" fill="#f5f7fb" font-size="14" font-weight="700" font-family="Arial, sans-serif">Vasos atipicos</text>
+     <text x="560" y="272" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="Arial, sans-serif">tortuosos, calibre irregular</text>
+    </svg>
+   </div>
+   <p class="ac-p">Existe ainda um terceiro patamar, mais grave que os achados maiores: os <b>sinais suspeitos de invasao</b>. O principal deles sao os <b>vasos atipicos</b> — vasos que nao se organizam mais em pontilhado ou mosaico (padroes regulares e repetitivos), mas sim de forma <b>bizarra, tortuosa, com calibre irregular</b>, lembrando "saca-rolhas" ou "virgulas". Isso acontece porque, quando ha invasao, o tumor produz seus proprios vasos de forma caotica (neoangiogenese tumoral desorganizada), sem seguir o padrao arquitetural do epitelio. Junto aos vasos atipicos, tambem levantam suspeita de invasao a <b>superficie irregular, exofitica ou ulcerada</b>, a presenca de <b>necrose</b> e o <b>sangramento facil ao toque</b> (friabilidade).</p>
+   <div class="ac-warn"><b>Sinal de alerta maximo:</b> vasos atipicos + superficie irregular/ulcerada + sangramento facil = suspeita de <b>carcinoma invasor</b>. Nesse cenario, a biopsia deve ser feita sem demora, e a lesao nao deve ser tratada como uma NIC comum.</div>
+   <table class="ac-tbl">
+     <tr><th>Achado</th><th>Categoria</th><th>Sugere</th></tr>
+     <tr><td>Acetobranco denso, mosaico/pontilhado grosseiros, orificios espessados, sinal da borda interna/crista</td><td>Grau 2 (maior)</td><td>lesao de alto grau (NIC2/3)</td></tr>
+     <tr><td>Vasos atipicos, superficie irregular/ulcerada, necrose, sangramento facil</td><td>Suspeito de invasao</td><td>carcinoma invasor</td></tr>
+   </table>`],
+  ['biopsia','Biopsia Dirigida',`
+   <div class="ac-h">Como e onde biopsiar</div>
+   <p class="ac-p">A <b>biopsia dirigida por colposcopia</b> e feita com uma pinca de biopsia (tipo "saca-bocado"), retirando um pequeno fragmento exatamente do local que apresentou o <b>pior achado colposcopico</b> — geralmente a area mais densa, mais grosseira ou mais proxima da JEC. Quando existem <b>varias areas anormais</b> no colo, a evidencia mostra que colher <b>multiplas biopsias</b> (em vez de uma unica) aumenta significativamente a <b>sensibilidade</b> do metodo para detectar lesoes de alto grau, porque uma unica amostra pode "errar" o ponto mais grave de uma lesao heterogenea.</p>
+   <p class="ac-p">Uma duvida frequente e quando <b>tratar direto</b> (excisao) sem biopsiar antes — a estrategia chamada de <b>ver-e-tratar (see-and-treat)</b>. Ela e reservada a um cenario bem especifico: mulher <b>nao gestante</b>, com <b>ZT totalmente visivel (tipo 1 ou 2)</b>, achado colposcopico <b>maior</b> concordante com uma citologia de <b>alto grau (HSIL)</b>, sem qualquer sinal de suspeita de invasao ou de doenca glandular. Mesmo quando esses criterios sao preenchidos, a orientacao das diretrizes brasileiras tende a ser mais conservadora que algumas diretrizes internacionais: prefere-se, na maioria dos servicos, <b>confirmar por biopsia antes de indicar o tratamento excisional definitivo</b>, reservando-se o ver-e-tratar para situacoes muito bem selecionadas — o objetivo e reduzir a perda de seguimento sem submeter mulheres a tratamentos desnecessarios (overtreatment) quando a biopsia poderia ter mostrado uma lesao mais leve do que a citologia sugeria.</p>
+   <div class="ac-h" style="margin-top:14px">Um escore util: o Indice Colposcopico de Reid</div>
+   <p class="ac-p">Para sistematizar a impressao colposcopica, existe o <b>Indice Colposcopico de Reid (Reid Colposcopic Index)</b>, que pontua quatro parametros — <b>margem/contorno da lesao, cor, padrao vascular e captacao de iodo</b> — cada um de <b>0 a 2 pontos</b>. A soma total ajuda a estimar a probabilidade de a lesao ser de alto ou baixo grau antes mesmo do resultado da biopsia, e e util tanto na pratica quanto para organizar o raciocinio em prova.</p>
+   <div class="ac-tip"><b>Fixar:</b> multiplas biopsias aumentam sensibilidade. Ver-e-tratar exige ZT totalmente visivel + achado maior + citologia HSIL concordante + ausencia de suspeita de invasao — e mesmo assim, muitos servicos brasileiros preferem confirmar por biopsia antes de tratar.</div>`],
+  ['armadilhas','Erros Comuns e Pegadinhas de Prova',`
+   <div class="ac-h">O que a banca adora testar</div>
+   <p class="ac-p">Um erro classico e achar que <b>toda area iodo-negativa</b> ou <b>todo epitelio acetobranco</b> e sinonimo de lesao — nao e: epitelio colunar, atrofia e metaplasia imatura tambem podem se comportar assim, e por isso a interpretacao correta sempre combina <b>varios achados</b> (cor, margem, vasos, iodo), nunca um sinal isolado. Outro erro e nao lembrar que a colposcopia so e considerada <b>adequada</b> quando toda a JEC e visualizada — uma colposcopia com <b>ZT tipo 3</b> exige atencao redobrada, porque pode existir doenca escondida dentro do canal que o exame nao alcanca ver.</p>
+   <p class="ac-p">Tambem e comum confundir <b>pontilhado</b> com <b>mosaico</b>: pontilhado sao vasos terminando em <b>pontos individuais</b>; mosaico sao vasos contornando <b>blocos de tecido</b>, formando um padrao de "ladrilhos". E lembre-se: diante de <b>vasos atipicos</b> ou de uma lesao com superficie <b>ulcerada e sangrante</b>, a conduta nao e classificar como uma NIC comum — e biopsiar sem demora, pensando em <b>invasao</b>.</p>
+   <div class="ac-warn"><b>Erros que reprovam:</b> atrasar a biopsia de uma lesao clinicamente suspeita so porque a citologia veio normal; classificar epitelio colunar normal como "iodo-negativo = lesao"; confundir pontilhado com mosaico; oferecer ver-e-tratar em gestante ou em ZT tipo 3; colher biopsia unica quando ha multiplas areas anormais heterogeneas.</div>
+   <div class="ac-tip"><b>Frase para gravar:</b> "acido acetico mostra densidade nuclear, iodo mostra glicogenio, vasos mostram angiogenese — a biopsia sempre vai no pior achado."</div>`]
+ ],
+};
+
+Object.assign(C['tratogenital|1'], {
+ escores:`
+   <div class="ac-h">Indice Colposcopico de Reid (resumo)</div>
+   <table class="ac-tbl">
+     <tr><th>Parametro</th><th>0 pontos</th><th>1 ponto</th><th>2 pontos</th></tr>
+     <tr><td>Margem/contorno</td><td>bordas irregulares, geograficas</td><td>misto</td><td>bordas nitidas, retas</td></tr>
+     <tr><td>Cor</td><td>acetobranco tenue, brilhante</td><td>branco intermediario</td><td>acetobranco denso, ostra</td></tr>
+     <tr><td>Vasos</td><td>pontilhado/mosaico fino</td><td>ausentes</td><td>pontilhado/mosaico grosseiro</td></tr>
+     <tr><td>Iodo</td><td>capta bem (iodo positivo)</td><td>captacao parcial</td><td>iodo-negativo denso</td></tr>
+   </table>
+   <div class="ac-call"><b>Interpretacao:</b> soma <b>0-2</b> = provavel baixo grau. <b>3-4</b> = indeterminado. <b>5-8</b> = provavel alto grau. O escore orienta a impressao, mas a biopsia continua sendo o padrao-ouro.</div>`,
+ dif:`
+   <div class="ac-h">Diferenciais em colposcopia</div>
+   <table class="ac-tbl">
+     <tr><th>Confusao comum</th><th>Diferenciar</th><th>Chave</th></tr>
+     <tr><td>Pontilhado x mosaico</td><td>padrao vascular</td><td>pontilhado = vasos em pontos; mosaico = vasos contornando blocos ("ladrilhos")</td></tr>
+     <tr><td>Achado maior x suspeita de invasao</td><td>gravidade</td><td>maior = acetobranco denso/mosaico-pontilhado grosseiro; invasao = vasos atipicos + superficie irregular/ulcerada/necrose</td></tr>
+     <tr><td>Iodo-negativo por lesao x por epitelio colunar/atrofia</td><td>origem do achado</td><td>colunar e atrofia sao naturalmente iodo-negativos; nao sao lesao por si so</td></tr>
+     <tr><td>ZT tipo 2 x tipo 3</td><td>adequacao do exame</td><td>tipo 2: JEC visivel apesar do componente endocervical; tipo 3: JEC nao totalmente visivel</td></tr>
+     <tr><td>Biopsia dirigida x ver-e-tratar</td><td>estrategia diagnostica</td><td>ver-e-tratar exige ZT 1/2 + achado maior + HSIL concordante + sem suspeita de invasao</td></tr>
+   </table>`,
+ mapa:`
+   <div class="ac-h">Colposcopia e biopsia em mapa (cards)</div>
+   <div class="mm">
+     <div class="mm-card"><h5>Indicacoes</h5><ul><li>ASC-H, HSIL, AGC sempre</li><li>Lesao clinica suspeita, mesmo com citologia normal</li><li>HPV 16/18 positivo em varios protocolos</li></ul></div>
+     <div class="mm-card"><h5>Reagentes</h5><ul><li>Acido acetico: revela densidade nuclear</li><li>Lugol/Schiller: revela glicogenio</li><li>Interpretar sempre em conjunto</li></ul></div>
+     <div class="mm-card"><h5>Zona de transformacao</h5><ul><li>ZT1: toda ectocervical</li><li>ZT2: JEC visivel, componente endocervical</li><li>ZT3: JEC nao totalmente visivel</li></ul></div>
+     <div class="mm-card"><h5>Achados menores</h5><ul><li>Acetobranco tenue</li><li>Mosaico fino</li><li>Pontilhado fino</li></ul></div>
+     <div class="mm-card"><h5>Achados maiores</h5><ul><li>Acetobranco denso</li><li>Mosaico/pontilhado grosseiro</li><li>Sinal da borda interna/crista</li></ul></div>
+     <div class="mm-card"><h5>Suspeita de invasao</h5><ul><li>Vasos atipicos</li><li>Superficie irregular/ulcerada</li><li>Necrose, sangramento facil</li></ul></div>
+   </div>`,
+ fluxo_dx:`
+   <div class="ac-h">Do achado colposcopico a biopsia</div>
+   <div class="fx">
+     <div class="fx-node start">Indicacao de colposcopia confirmada</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node">Observar sem reagente -> acido acetico -> teste de Schiller/lugol</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Classificar o pior achado</div>
+     <div class="fx-row">
+       <div class="fx-node">Achado normal/grau 1 -> acompanhar</div>
+       <div class="fx-node">Achado grau 2 ou suspeita de invasao -> biopsiar</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node">Biopsia dirigida (multiplas se heterogeneo) no pior ponto</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node end">Resultado histologico define o grau real de NIC</div>
+   </div>`,
+ fluxo_cond:`
+   <div class="ac-h">Biopsiar antes ou ver-e-tratar?</div>
+   <div class="fx">
+     <div class="fx-node start">HSIL na citologia + achado colposcopico maior</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">ZT totalmente visivel (tipo 1 ou 2)? Nao gestante? Sem suspeita de invasao?</div>
+     <div class="fx-row">
+       <div class="fx-node end">Sim a tudo -> ver-e-tratar pode ser considerado (criterios estritos)</div>
+       <div class="fx-node end">Qualquer nao -> biopsia dirigida antes de decidir o tratamento</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node end">Na duvida ou na maioria dos servicos brasileiros: confirmar por biopsia antes de tratar</div>
+   </div>`,
+ vespera:`
+   <div class="ac-h">Revisao de vespera</div>
+   <div class="ac-call"><b>Acido acetico:</b> coagula proteinas nucleares -> epitelio acetobranco (quanto mais denso, maior o grau).</div>
+   <div class="ac-call"><b>Lugol/Schiller:</b> cora glicogenio (marrom = normal); lesao e iodo-negativa (Schiller positivo).</div>
+   <div class="ac-call"><b>Achados menores (grau 1):</b> acetobranco tenue, mosaico fino, pontilhado fino.</div>
+   <div class="ac-call"><b>Achados maiores (grau 2):</b> acetobranco denso, mosaico/pontilhado grosseiro, orificios espessados, sinal da borda interna/crista.</div>
+   <div class="ac-call"><b>Suspeita de invasao:</b> vasos atipicos, superficie irregular/ulcerada, necrose, sangramento facil.</div>
+   <div class="ac-call"><b>ZT:</b> tipo 1 (toda ectocervical), tipo 2 (JEC visivel), tipo 3 (JEC nao totalmente visivel) — decide biopsia/tratamento.</div>
+   <div class="ac-call"><b>Ver-e-tratar:</b> so com ZT1/2 + achado maior + HSIL concordante + sem suspeita de invasao, e mesmo assim muitos servicos preferem biopsia antes.</div>`,
+ dicas:`
+   <div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Pontilhado = pontos; mosaico = blocos/ladrilhos. Ambos finos (baixo grau) ou grosseiros (alto grau).</div>
+   <div class="ac-tip">Vasos atipicos (tortuosos, calibre irregular) = pensar em invasao, nao em NIC comum.</div>
+   <div class="ac-tip">Multiplas biopsias aumentam sensibilidade quando ha varias areas anormais.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Atrasar biopsia de lesao clinicamente suspeita por citologia normal.</div>
+   <div class="ac-warn">Considerar colposcopia adequada mesmo sem visualizar toda a JEC (ZT3 exige cautela).</div>
+   <div class="ac-warn">Confundir epitelio colunar/atrofico iodo-negativo com lesao.</div>
+   <div class="ac-warn">Indicar ver-e-tratar em gestante ou com suspeita de invasao.</div>
+   <div class="ac-warn">Colher biopsia unica em lesao extensa e heterogenea.</div>`,
+ checklist:[
+   'Explico para que serve a colposcopia e por que ela complementa a citologia',
+   'Sei as indicacoes de colposcopia, incluindo a suspeita clinica independente da citologia',
+   'Explico o mecanismo do acido acetico e do teste de Schiller/lugol',
+   'Diferencio os tipos de zona de transformacao (1, 2 e 3) e por que isso importa',
+   'Reconheco achados menores (grau 1): acetobranco tenue, mosaico e pontilhado finos',
+   'Reconheco achados maiores (grau 2) e sinais suspeitos de invasao',
+   'Sei quando e onde biopsiar, e os criterios estritos do ver-e-tratar',
+   'Conheco o Indice Colposcopico de Reid e sua interpretacao'
+ ],
+});
+
+Object.assign(C['tratogenital|1'], {
+ questoes:[
+  {stem:'Qual e o mecanismo pelo qual o acido acetico revela o epitelio acetobranco em uma lesao intraepitelial?',
+   opts:['Dissolve o glicogenio celular','Coagula proteinas nucleares e citoplasmaticas em areas de maior densidade nuclear','Cora vasos sanguineos irregulares','Provoca vasodilatacao local'],correct:1,
+   expl:'O acido acetico causa <b>coagulacao reversivel das proteinas nucleares</b>; como a NIC tem celulas mais imaturas e com maior densidade nuclear, a reflexao da luz aumenta e a area aparece branca.'},
+  {stem:'No teste de Schiller (lugol), uma area de NIC tipicamente aparece:',
+   opts:['Marrom-mogno, por captar bem o iodo','Amarelo-mostarda, iodo-negativa, por pouco ou nenhum glicogenio','Vermelho vivo, por vascularizacao aumentada','Inalterada, pois o lugol nao interage com epitelio anormal'],correct:1,
+   expl:'O epitelio de NIC tem pouco glicogenio, por isso <b>nao capta o iodo</b> e fica amarelo-mostarda (iodo-negativo), o chamado Schiller positivo.'},
+  {stem:'Mulher com citologia HSIL e exame especular evidenciando lesao ulcerada, friavel, que sangra ao toque. Qual a conduta mais apropriada?',
+   opts:['Aguardar repeticao da citologia em 6 meses','Colposcopia com biopsia dirigida sem demora, pela suspeita de invasao','Tranquilizar, pois a citologia ja definiu o diagnostico','Iniciar tratamento destrutivo (crioterapia) empirico'],correct:1,
+   expl:'Lesao <b>ulcerada, friavel e sangrante</b> ao exame especular e sinal de suspeita de <b>invasao</b>; a biopsia dirigida deve ser feita sem demora, independentemente do resultado citologico.'},
+  {stem:'O padrao vascular colposcopico chamado de "mosaico" e formado por vasos que:',
+   opts:['Terminam em pontos individuais na superficie','Contornam blocos de epitelio, formando um desenho de ladrilhos','Sao completamente ausentes na area lesada','Se dispoem de forma bizarra e tortuosa, tipo saca-rolhas'],correct:1,
+   expl:'O <b>mosaico</b> e formado por vasos que <b>contornam blocos</b> de epitelio anormal, criando um padrao semelhante a ladrilhos; o pontilhado forma pontos, e vasos atipicos sao tortuosos e irregulares.'},
+  {stem:'Qual achado colposcopico e o que MAIS levanta suspeita de carcinoma invasor?',
+   opts:['Mosaico fino','Acetobranco tenue','Vasos atipicos com superficie irregular e sangramento facil','Cisto de Naboth'],correct:2,
+   expl:'<b>Vasos atipicos</b> associados a superficie irregular/ulcerada e sangramento facil sao os achados de maior suspeita de <b>invasao</b>, decorrentes da neoangiogenese tumoral desorganizada.'},
+  {stem:'Sobre a zona de transformacao tipo 3, e correto afirmar que:',
+   opts:['A JEC e totalmente visivel','Corresponde a zona de transformacao inteiramente ectocervical','A JEC nao e totalmente visualizada, exigindo atencao especial na avaliacao do canal','Impede completamente a realizacao de qualquer biopsia'],correct:2,
+   expl:'Na <b>ZT tipo 3</b>, a JEC recolheu-se para dentro do canal e <b>nao e totalmente visualizada</b>, o que impede garantir a ausencia de doenca mais alta no canal endocervical.'},
+  {stem:'Em relacao a biopsia dirigida por colposcopia, e correto afirmar que:',
+   opts:['Deve ser sempre unica, independente do numero de areas anormais','Multiplas biopsias aumentam a sensibilidade quando ha lesoes heterogeneas','Nunca deve ser feita em ZT tipo 3','So pode ser realizada apos teste de Schiller negativo'],correct:1,
+   expl:'Quando existem <b>varias areas anormais</b>, colher <b>multiplas biopsias</b> aumenta a sensibilidade para detectar a area de maior gravidade, evitando que uma unica amostra "erre" o pior ponto.'},
+  {stem:'Qual dos criterios abaixo NAO faz parte dos requisitos classicos para a estrategia de "ver-e-tratar"?',
+   opts:['Zona de transformacao totalmente visivel (tipo 1 ou 2)','Achado colposcopico maior concordante com citologia de alto grau','Gestacao em curso','Ausencia de sinais suspeitos de invasao'],correct:2,
+   expl:'A <b>gestacao</b> e uma contraindicacao ao ver-e-tratar; os criterios classicos exigem mulher nao gestante, ZT totalmente visivel, achado maior concordante com HSIL e ausencia de suspeita de invasao.'},
+  {stem:'O Indice Colposcopico de Reid avalia qual conjunto de parametros?',
+   opts:['Idade, paridade, IMC e tabagismo','Margem/contorno, cor, padrao vascular e captacao de iodo','Tamanho da lesao, localizacao, dor e sangramento','CD4, carga viral, IgG e IgM'],correct:1,
+   expl:'O <b>Indice de Reid</b> pontua margem/contorno, cor, vasos e captacao de iodo (0 a 2 pontos cada), somando 0-8, para estimar a probabilidade de alto ou baixo grau.'},
+  {stem:'Uma citologia normal em paciente com lesao cervical visivel e suspeita ao exame especular deve:',
+   opts:['Ser considerada suficiente para descartar cancer','Nao impedir a investigacao com colposcopia e biopsia dirigida','Adiar a colposcopia por 1 ano','Substituir a necessidade de biopsia'],correct:1,
+   expl:'A citologia pode ter <b>falso-negativo</b>, especialmente em lesoes ja invasivas; uma lesao clinicamente suspeita sempre deve ser investigada com colposcopia/biopsia, mesmo com citologia normal.'},
+  {stem:'Epitelio colunar endocervical normal, ao teste de Schiller, tipicamente se comporta como:',
+   opts:['Fortemente iodo-positivo, corando em marrom-mogno intenso','Naturalmente iodo-negativo, o que nao deve ser confundido com lesao','Sempre acetobranco denso','Sempre associado a vasos atipicos'],correct:1,
+   expl:'O epitelio colunar (assim como o epitelio atrofico) e <b>naturalmente iodo-negativo</b>, por nao ter o glicogenio do epitelio escamoso maduro — isso nao deve ser confundido com lesao.'},
+  {stem:'Sobre a zona de transformacao, e correto afirmar que:',
+   opts:['E o local onde a maioria das lesoes de NIC se origina, pela metaplasia escamosa ativa','Corresponde exclusivamente ao canal endocervical','Nunca contem epitelio colunar','E irrelevante para a adequacao do exame colposcopico'],correct:0,
+   expl:'A <b>zona de transformacao</b> e onde ocorre a metaplasia escamosa ativa, tornando as celulas mais vulneraveis ao HPV — por isso a maioria das NIC nasce ali, e a visualizacao completa da JEC define a adequacao do exame.'}
+ ],
+ flashcards:[
+  {front:'Para que serve a colposcopia, diferente da citologia?',back:'A citologia rastreia (avisa que algo pode estar errado); a colposcopia localiza visualmente a lesao para guiar a biopsia.',type:'basic'},
+  {front:'Mecanismo do epitelio acetobranco.',back:'Acido acetico coagula proteinas nucleares; areas com maior densidade nuclear (NIC) refletem mais luz e ficam brancas.',type:'basic'},
+  {front:'O que o teste de Schiller/lugol revela?',back:'Capta o glicogenio do epitelio maduro (marrom = normal); epitelio de NIC tem pouco glicogenio e fica iodo-negativo (amarelo).',type:'basic'},
+  {front:'Diferenca entre pontilhado e mosaico.',back:'Pontilhado: vasos terminando em {{pontos}}. Mosaico: vasos contornando {{blocos}} de epitelio, tipo ladrilhos.',type:'cloze'},
+  {front:'Achados colposcopicos menores (grau 1).',back:'Acetobranco tenue, mosaico fino, pontilhado fino — sugerem lesao de baixo grau (NIC1).',type:'basic'},
+  {front:'Achados colposcopicos maiores (grau 2).',back:'Acetobranco denso, mosaico/pontilhado grosseiro, orificios glandulares espessados, sinal da borda interna e da crista — sugerem NIC2/3.',type:'basic'},
+  {front:'Sinais suspeitos de invasao na colposcopia.',back:'Vasos atipicos, superficie irregular/ulcerada/exofitica, necrose e sangramento facil ao toque.',type:'basic'},
+  {front:'Zonas de transformacao: tipo 1, 2 e 3.',back:'Tipo 1: toda ectocervical, visivel. Tipo 2: componente endocervical, ainda visivel. Tipo 3: JEC nao totalmente visivel.',type:'basic'},
+  {front:'Por que a ZT tipo 3 preocupa mais?',back:'A JEC nao e totalmente vista, podendo esconder doenca mais alta no canal endocervical.',type:'basic'},
+  {front:'Quando se pode considerar ver-e-tratar?',back:'Mulher nao gestante, ZT tipo 1 ou 2, achado maior concordante com HSIL, sem sinais de invasao.',type:'basic'},
+  {front:'Por que multiplas biopsias aumentam a sensibilidade?',back:'Lesoes podem ser heterogeneas; uma unica amostra pode nao captar a area mais grave.',type:'basic'},
+  {front:'Parametros do Indice Colposcopico de Reid.',back:'Margem/contorno, cor, padrao vascular e captacao de iodo (0-2 pontos cada, total 0-8).',type:'basic'},
+  {front:'Citologia normal descarta cancer se ha lesao visivel suspeita?',back:'Nao. Citologia pode ter falso-negativo; lesao clinicamente suspeita sempre exige biopsia.',type:'basic'},
+  {front:'Por que epitelio colunar e atrofico sao iodo-negativos sem serem lesao?',back:'Ambos tem pouco glicogenio, por natureza (nao por displasia), simulando um Schiller positivo benigno.',type:'basic'}
+ ],
+ casos:[
+  {t:'Caso 1 — Achado maior na colposcopia',
+   stem:'Mulher de 33 anos com HSIL na citologia. Colposcopia mostra ZT tipo 1, acetobranco denso com mosaico grosseiro, sem vasos atipicos ou ulceracao.',
+   passos:[
+     {h:'1. Classificar o achado',p:'Acetobranco denso + mosaico grosseiro sao achados de <b>grau 2 (maiores)</b>, compativeis com lesao de alto grau (NIC2/3).'},
+     {h:'2. Ha sinais de invasao?',p:'Nao — ausencia de vasos atipicos, ulceracao ou sangramento facil afasta suspeita de invasao neste momento.'},
+     {h:'3. Biopsiar ou tratar direto?',p:'Como ha achado maior concordante com HSIL e ZT totalmente visivel (tipo 1), o ver-e-tratar poderia ser considerado; muitos servicos, porem, preferem confirmar com <b>biopsia dirigida</b> antes do tratamento excisional.'},
+     {h:'4. Proximo passo',p:'A biopsia confirmando NIC2/3 direciona o tratamento excisional (ver modulo de condutas).'},
+     {h:'Licao de prova',p:'Achado maior + HSIL concordante = alta suspeita de alto grau; biopsia confirma antes de tratar na maioria dos protocolos brasileiros.'}
+   ]},
+  {t:'Caso 2 — Suspeita de invasao',
+   stem:'Mulher de 52 anos, sangramento pos-coital ha 2 meses. Exame especular mostra lesao exofitica, friavel, que sangra ao toque. Colposcopia evidencia vasos atipicos e superficie ulcerada.',
+   passos:[
+     {h:'1. O que esses achados sugerem?',p:'Vasos atipicos + superficie ulcerada + friabilidade sao sinais <b>suspeitos de invasao</b>, nao de uma NIC comum.'},
+     {h:'2. A citologia normal mudaria a conduta?',p:'Nao. Mesmo que a citologia fosse normal, a suspeita clinica e colposcopica <b>obriga</b> a biopsia sem demora.'},
+     {h:'3. Conduta',p:'Realizar biopsia dirigida imediatamente na area de pior achado para confirmar ou afastar carcinoma invasor.'},
+     {h:'4. Por que isso e diferente do ver-e-tratar',p:'A presenca de sinais suspeitos de invasao <b>contraindica</b> qualquer estrategia de ver-e-tratar; a prioridade e o diagnostico histologico preciso.'},
+     {h:'Licao de prova',p:'Vasos atipicos + ulceracao + sangramento facil = biopsiar sem demora, pensando em invasao.'}
+   ]},
+  {t:'Caso 3 — Zona de transformacao tipo 3',
+   stem:'Mulher de 61 anos, na pos-menopausa, com ASC-H na citologia. Colposcopia mostra JEC nao totalmente visivel, recolhida para dentro do canal.',
+   passos:[
+     {h:'1. Classificar a ZT',p:'JEC nao totalmente visivel = <b>ZT tipo 3</b>, comum na pos-menopausa pela retracao da JEC para o canal.'},
+     {h:'2. Isso limita o exame?',p:'Sim — o exame nao consegue garantir a ausencia de lesao mais alta no canal endocervical.'},
+     {h:'3. Conduta adicional',p:'Avaliar o canal endocervical (escovado/curetagem) e considerar biopsia mesmo sem achado totalmente caracterizado na ectocervice, dado o risco associado ao ASC-H.'},
+     {h:'4. Impacto na escolha do tratamento',p:'A ZT tipo 3 tambem influencia a escolha entre tratamento <b>destrutivo</b> (exige ZT totalmente visivel, portanto contraindicado aqui) e <b>excisional</b> (permite avaliar a peca inteira, inclusive o componente endocervical).'},
+     {h:'Licao de prova',p:'ZT tipo 3 = avaliar o canal e preferir tratamento excisional caso confirmada lesao, nunca destrutivo.'}
+   ]}
+ ],
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>
+/* ELID Ginecologia — Conteudo Condutas por Resultado (NIC) - INCA (tratogenital|2). Aditivo. Explicacoes aprofundadas. */
+(function(){
+"use strict";
+var C=(window.CONTENT=window.CONTENT||{});
+C['tratogenital|2']={
+ name:'Condutas por Resultado (NIC) - INCA',
+ intro:'Este e o modulo mais "decoreba" do tema, mas so na aparencia: cada prazo e cada idade de corte tem uma logica biologica por tras (regressao espontanea x risco de progressao). Entender o porque evita confundir os numeros.',
+ sub:[
+  ['entendendo','Entendendo do Zero',`
+   <div class="ac-h">O dilema por tras de toda conduta: subtratar x sobretratar</div>
+   <p class="ac-p">Toda diretriz de conduta para resultados alterados do rastreio tenta equilibrar <b>dois riscos opostos</b>. De um lado, o risco de <b>subtratar</b>: deixar uma lesao de alto grau (NIC2/3) sem vigilancia ou tratamento, permitindo que evolua, ao longo de anos, para um <b>cancer invasor</b>. Do outro lado, o risco de <b>sobretratar</b>: submeter mulheres — sobretudo jovens, no inicio da vida reprodutiva — a procedimentos excisionais (como o CAF) para lesoes que, se apenas observadas, <b>regrediriam sozinhas</b>. Isso importa porque os tratamentos excisionais do colo, embora seguros, removem tecido do colo e podem aumentar o risco de <b>parto prematuro</b> em gestacoes futuras (por perda de sustentacao mecanica do colo). Cada prazo, cada idade de corte e cada opcao entre "observar" e "tratar" que voce vai ver neste modulo nasce desse equilibrio.</p>
+   <p class="ac-p">A chave para entender esse equilibrio e a <b>historia natural</b> da NIC, que muda muito com a <b>idade</b> e com o <b>grau da lesao</b>. A <b>NIC1</b> tem taxa de <b>regressao espontanea muito alta</b> (a maioria some sozinha em 1-2 anos, principalmente em mulheres jovens, cujo sistema imune ainda elimina o HPV com eficiencia) — por isso NIC1 quase nunca e tratado de imediato. Ja a <b>NIC3</b> tem <b>baixa chance de regressao espontanea</b> e risco real de progredir para cancer se deixada sem tratamento — por isso NIC3 e tratado na quase totalidade dos casos. A <b>NIC2</b> fica no meio do caminho: em mulheres <b>jovens</b>, regride com frequencia relevante (o que abre espaco para observacao); em mulheres <b>mais velhas</b>, regride menos, e a balanca pende para tratar.</p>
+   <div class="ac-call"><b>A grande ideia do modulo:</b> quanto mais <b>jovem</b> a paciente e mais <b>baixo</b> o grau da lesao, mais a conduta tende para <b>observar</b> (a biologia trabalha a favor da regressao). Quanto mais <b>alto o grau</b> (NIC3) ou mais <b>persistente</b> a lesao, mais a conduta tende para <b>tratar</b>. As citologias ASC-H, HSIL e AGC sempre vao para colposcopia — a diferenca fica na conduta apos a biopsia.</div>
+   <div class="ac-h" style="margin-top:14px">O mapa do modulo</div>
+   <table class="ac-tbl">
+     <tr><th>Eixo</th><th>O que voce vai dominar</th></tr>
+     <tr><td>ASC-US/LSIL</td><td>fluxo por idade — quando repetir e quando encaminhar</td></tr>
+     <tr><td>ASC-H/HSIL</td><td>colposcopia direta e o papel da biopsia antes de tratar</td></tr>
+     <tr><td>AGC</td><td>avaliacao ampliada (canal + as vezes endometrio)</td></tr>
+     <tr><td>Conduta por NIC (biopsia)</td><td>NIC1 observa, NIC2 depende da idade, NIC3 trata</td></tr>
+     <tr><td>Metodos de tratamento</td><td>quando usar destrutivo x excisional</td></tr>
+     <tr><td>Idade e gestacao</td><td>particularidades que mudam tudo</td></tr>
+   </table>`],
+  ['ascus_lsil','Conduta em ASC-US e LSIL',`
+   <div class="ac-h">A rota de "esperar com vigilancia"</div>
+   <p class="ac-p">Como o ASC-US carrega um risco relativamente baixo de lesao de alto grau escondida, e o LSIL costuma corresponder a uma NIC1 com alta chance de regressao, a diretriz brasileira do INCA prioriza, para ambas as categorias, <b>repetir a citologia</b> apos um intervalo — em vez de encaminhar toda mulher direto para colposcopia. O intervalo, porem, <b>muda conforme a idade</b>, porque o risco de progressao e a chance de regressao mudam com a idade.</p>
+   <p class="ac-p">Em mulheres com <b>menos de 25 anos</b>, a chance de regressao espontanea e tao alta (e o risco populacional de cancer nessa faixa etaria e tao baixo) que a citologia so precisa ser <b>repetida em 3 anos</b> — tanto para ASC-US quanto para LSIL. Ja a partir dos <b>25 anos</b>, o intervalo encurta, porque o risco de uma lesao persistente representar algo mais serio aumenta: para <b>ASC-US</b>, repete-se em <b>12 meses</b> entre 25 e 29 anos, e em <b>6 meses</b> a partir dos <b>30 anos</b>; para <b>LSIL</b>, a partir dos <b>25 anos</b>, repete-se em <b>6 meses</b>. Se a citologia repetida vier <b>novamente alterada</b> (qualquer grau de atipia, nao precisa ser exatamente a mesma categoria), a paciente e encaminhada para <b>colposcopia</b>.</p>
+   <div class="ac-tbl-wrap"><table class="ac-tbl">
+     <tr><th>Resultado</th><th>Idade</th><th>Conduta inicial</th></tr>
+     <tr><td>ASC-US</td><td>&lt;25 anos</td><td>repetir citologia em 3 anos</td></tr>
+     <tr><td>ASC-US</td><td>25-29 anos</td><td>repetir citologia em 12 meses</td></tr>
+     <tr><td>ASC-US</td><td>&gt;=30 anos</td><td>repetir citologia em 6 meses</td></tr>
+     <tr><td>LSIL</td><td>&lt;25 anos</td><td>repetir citologia em 3 anos</td></tr>
+     <tr><td>LSIL</td><td>&gt;=25 anos</td><td>repetir citologia em 6 meses</td></tr>
+   </table></div>
+   <div class="ac-warn"><b>Se a repeticao mantiver qualquer atipia:</b> encaminhar para <b>colposcopia</b>. Essa regra vale tanto para ASC-US quanto para LSIL, em qualquer idade — a diferenca entre as idades esta apenas no intervalo da primeira repeticao.</div>
+   <div class="ac-tip"><b>Por que a idade muda o prazo?</b> Em mulheres jovens, o proprio corpo tem mais chance de eliminar o HPV e reverter a lesao — dar mais tempo (3 anos) evita procedimentos desnecessarios. Ja acima de 30 anos, uma infeccao persistente e mais preocupante (menor chance de ser uma infeccao transitoria recente), entao o intervalo de reavaliacao encurta.</div>`],
+  ['asch_hsil','Conduta em ASC-H e HSIL',`
+   <div class="ac-h">A rota direta: colposcopia sempre, biopsia antes de tratar</div>
+   <p class="ac-p">Diferente do ASC-US e do LSIL, tanto o <b>ASC-H</b> quanto o <b>HSIL</b> tem risco alto o bastante de esconder uma lesao de alto grau (ou ate cancer inicial) para que a conduta pule a etapa de "repetir citologia" e va <b>direto para colposcopia</b>, em qualquer idade. A colposcopia, entao, procura o pior achado (mosaico/pontilhado grosseiro, acetobranco denso, sinais de invasao) e a <b>biopsia dirigida</b> confirma o grau real da lesao.</p>
+   <p class="ac-p">Um ponto central e a exigencia, na diretriz brasileira, de <b>biopsia confirmando a lesao antes de qualquer tratamento definitivo</b> na grande maioria dos casos — mesmo diante de citologia HSIL e achado colposcopico maior concordante. Isso contrasta com a estrategia de <b>ver-e-tratar</b> (tratar direto, sem biopsia previa, ja discutida no modulo de colposcopia), que e aceita em algumas diretrizes internacionais sob criterios estritos, mas que a pratica brasileira tende a reservar para situacoes muito bem selecionadas — priorizando a confirmacao histologica para nao submeter mulheres a excisao desnecessaria caso a biopsia mostrasse, na verdade, uma lesao mais leve.</p>
+   <p class="ac-p">Quando a colposcopia <b>nao encontra lesao visivel</b>, ou quando a <b>JEC nao e totalmente visualizada</b> (zona de transformacao tipo 3) em uma paciente com HSIL ou ASC-H, a investigacao precisa continuar: avalia-se o <b>canal endocervical</b> (escovado ou curetagem endocervical) e, se ainda assim nao se encontra explicacao para a citologia alterada, considera-se uma <b>conizacao diagnostica</b> (excisao que remove uma peca maior, permitindo o estudo anatomopatologico completo) — porque uma citologia de alto grau <b>nao pode ficar sem explicacao</b>.</p>
+   <div class="ac-call"><b>Resumo pratico:</b> ASC-H e HSIL = colposcopia direta, sem repetir citologia antes. Biopsia confirma antes de tratar (na maioria dos servicos brasileiros). Sem achado visivel ou ZT3 = avaliar canal +/- conizacao diagnostica.</div>`],
+  ['agc','Conduta na AGC',`
+   <div class="ac-h">Por que a AGC exige um olhar mais amplo</div>
+   <p class="ac-p">Toda mulher com <b>AGC</b> na citologia deve ser encaminhada para <b>colposcopia com avaliacao do canal endocervical</b> (escovado endocervical ou curetagem do canal), independente da idade ou de qualquer outro fator — nunca se repete apenas a citologia como primeira conduta. Isso porque a AGC pode representar desde uma alteracao benigna ate uma lesao de alto grau escamosa, um adenocarcinoma in situ, ou ate um cancer de colo ou de <b>endometrio</b>.</p>
+   <p class="ac-p">A <b>avaliacao endometrial</b> (em geral com ultrassonografia transvaginal e, se indicado, biopsia de endometrio) e acrescentada quando a mulher tem <b>35 anos ou mais</b>, apresenta <b>sangramento uterino anormal</b>, tem <b>celulas endometriais</b> descritas no laudo citologico (fora do periodo menstrual esperado) ou tem historia de <b>anovulacao cronica</b> (por exemplo, sindrome dos ovarios policisticos, obesidade com anovulacao) — situacoes que aumentam o risco de doenca endometrial.</p>
+   <p class="ac-p">Um ponto que a prova adora explorar: mesmo quando a <b>colposcopia e a avaliacao do canal vem normais</b>, uma AGC — sobretudo se classificada como <b>"favorece neoplasia"</b> ou se ha suspeita de <b>AIS</b> — pode justificar uma <b>conizacao diagnostica</b>, porque o risco de doenca oculta (que pode estar mais alta no canal, fora do alcance do escovado) permanece relevante. Nao se "libera" uma AGC de alto risco so porque os exames iniciais vieram normais.</p>
+   <div class="ac-warn"><b>Erro grave de conduta:</b> tratar AGC como se fosse um ASC-US (repetir citologia e observar). AGC sempre exige investigacao ativa — colposcopia, canal, e as vezes endometrio.</div>`],
+  ['nic_biopsia','Conduta pelo Resultado da Biopsia (Histologia)',`
+   <div class="ac-h">Agora com o diagnostico histologico em maos</div>
+   <p class="ac-p">Uma vez confirmado o grau da lesao pela biopsia, a conduta muda de figura. A <b>NIC1</b> confirmada por histologia tem <b>conduta conservadora</b> na imensa maioria dos casos: como a chance de regressao espontanea e muito alta (a maior parte regride em ate 2 anos, especialmente em mulheres jovens), a estrategia e <b>seguir com citologia (e, se necessario, colposcopia) a cada 6 meses</b>, sem tratamento imediato. Se a NIC1 <b>persistir por mais de 2 anos</b>, ai sim considera-se tratamento (destrutivo ou excisional, conforme a zona de transformacao).</p>
+   <p class="ac-p">A <b>NIC2</b> e a categoria que mais depende da <b>idade</b>: em mulheres <b>jovens (tipicamente menores de 25 anos)</b>, dada a alta chance de regressao espontanea nessa faixa etaria e o desejo de preservar o potencial reprodutivo, aceita-se um <b>manejo conservador</b>, com seguimento citologico e colposcopico <b>semestral por ate 2 anos</b> — se a lesao persistir alem desse prazo, ou progredir, trata-se. Ja em mulheres com <b>25 anos ou mais</b>, a chance de regressao e menor e a conduta padrao passa a ser o <b>tratamento</b> (excisional, na maioria dos casos), reservando-se a observacao a situacoes muito especificas com concordancia da paciente e bom acesso ao seguimento.</p>
+   <p class="ac-p">A <b>NIC3</b> (que inclui o antigo "carcinoma in situ") tem <b>baixissima chance de regressao espontanea</b> e risco real de progressao — por isso o <b>tratamento e indicado em praticamente todos os casos</b>, independentemente da idade, exceto a excecao classica da <b>gestante</b> (em que o tratamento definitivo costuma ser adiado para o puerperio, salvo suspeita de invasao — assunto do modulo de seguimento).</p>
+   <div class="ac-tbl-wrap"><table class="ac-tbl">
+     <tr><th>Grau (biopsia)</th><th>Conduta padrao</th></tr>
+     <tr><td>NIC1</td><td>observar (citologia +/- colposcopia semestral); tratar se persistir &gt;2 anos</td></tr>
+     <tr><td>NIC2, &lt;25 anos</td><td>pode observar (semestral, ate 2 anos); tratar se persistir/progredir</td></tr>
+     <tr><td>NIC2, &gt;=25 anos</td><td>tratar (excisional, geralmente)</td></tr>
+     <tr><td>NIC3 (qualquer idade nao gestante)</td><td>tratar (excisional)</td></tr>
+   </table></div>
+   <div class="ac-tip"><b>Regra de bolso:</b> NIC1 quase nunca trata de cara; NIC2 depende da idade (jovem observa, mais velha trata); NIC3 quase sempre trata.</div>`],
+  ['metodos_tratamento','Escolhendo o Metodo de Tratamento',`
+   <div class="ac-h">Destrutivo x excisional: o que decide</div>
+   <p class="ac-p">Quando a decisao e <b>tratar</b>, existem duas grandes familias de metodo. Os <b>metodos destrutivos</b> (crioterapia, eletrocauterizacao, vaporizacao a laser) <b>destroem</b> o tecido anormal no lugar, sem produzir uma peca para analise anatomopatologica — por isso so podem ser usados quando ja existe <b>total certeza</b> do diagnostico e da extensao da lesao: exige-se <b>zona de transformacao totalmente visivel</b> (tipo 1 ou 2), biopsia previa <b>sem suspeita de invasao ou de doenca glandular</b>, lesao <b>pequena e bem delimitada</b>, e <b>boa concordancia</b> entre citologia, colposcopia e histologia.</p>
+   <p class="ac-p">Os <b>metodos excisionais</b> (CAF/cirurgia de alta frequencia por alca — tambem chamada LEEP, ou conizacao a frio com bisturi) <b>removem</b> um fragmento de tecido em forma de cone, que e enviado para analise anatomopatologica completa — permitindo avaliar as <b>margens</b> (se a lesao foi totalmente retirada) e confirmar o grau real. Sao preferidos quando a <b>zona de transformacao nao e totalmente visivel</b> (tipo 3), quando ha <b>suspeita de doenca glandular</b> (AGC, AIS), quando existe <b>discordancia</b> entre os exames, quando a lesao e <b>extensa</b>, ou sempre que se precisa de <b>certeza diagnostica adicional</b>. No Brasil, o <b>CAF</b> e o metodo mais utilizado, por ser ambulatorial, rapido, de baixo custo e alta eficacia.</p>
+   <div class="ac-call"><b>Por que essa escolha importa tanto para a prova:</b> pedir metodo destrutivo em uma situacao que exige excisao (ZT3, suspeita glandular, discordancia) e um erro classico — porque o destrutivo <b>nao gera peca</b> para confirmar margens nem para descartar invasao oculta.</div>
+   <table class="ac-tbl">
+     <tr><th>Situacao</th><th>Metodo preferido</th></tr>
+     <tr><td>ZT tipo 1 ou 2, lesao pequena, sem suspeita glandular/invasao</td><td>Destrutivo (crioterapia, laser) — possivel</td></tr>
+     <tr><td>ZT tipo 3 (JEC nao visivel)</td><td>Excisional (CAF/conizacao) — obrigatorio</td></tr>
+     <tr><td>Suspeita de doenca glandular (AGC/AIS)</td><td>Excisional</td></tr>
+     <tr><td>Discordancia citologia-colposcopia-histologia</td><td>Excisional</td></tr>
+     <tr><td>Lesao extensa ou suspeita de microinvasao</td><td>Excisional</td></tr>
+   </table>`],
+  ['idade_gestante','Particularidades por Idade e na Gestante',`
+   <div class="ac-h">Duas populacoes que exigem cuidado extra</div>
+   <p class="ac-p">Em mulheres <b>menores de 25 anos</b>, a diretriz reforca, em quase todas as situacoes, a preferencia pela <b>conduta mais conservadora possivel</b>, mesmo diante de NIC2 — porque a chance de regressao espontanea nessa faixa etaria e muito alta, e submeter uma mulher jovem a um tratamento excisional carrega o risco, mesmo que pequeno, de comprometer o colo para gestacoes futuras (insuficiencia istmocervical, parto prematuro). O raciocinio e sempre o mesmo: nao adiantar o tratamento de algo que a propria biologia tem alta chance de resolver sozinha.</p>
+   <p class="ac-p">Na <b>gestante</b>, mesmo diante de uma <b>NIC de alto grau</b>, a conduta muda de forma importante: a <b>biopsia</b> continua indicada quando ha suspeita real de invasao (para nao perder um cancer que precisaria de tratamento na gestacao), mas o <b>tratamento excisional definitivo e, na quase totalidade dos casos, adiado para o puerperio</b> — porque o risco de a NIC progredir para cancer invasor durante os meses da gestacao e muito baixo, enquanto o risco de complicacoes obstetricas (sangramento, trabalho de parto prematuro) associado a um procedimento excisional durante a gravidez e real. O acompanhamento nesse periodo costuma ser feito com <b>colposcopia seriada</b> (por exemplo, a cada trimestre), reavaliando se surgem sinais de progressao ou de invasao. A via de parto <b>nao</b> e determinada pela presenca de NIC isoladamente.</p>
+   <div class="ac-warn"><b>Pegadinha classica:</b> nao confundir "biopsia esta indicada na gestante" (verdadeiro, quando ha suspeita clinica ou de invasao) com "tratamento excisional deve ser feito na gestante" (falso, na imensa maioria dos casos — o tratamento espera o puerperio).</div>`],
+  ['armadilhas','Erros Comuns e Pegadinhas de Prova',`
+   <div class="ac-h">O que a banca adora testar neste tema</div>
+   <p class="ac-p">O erro mais comum e <b>trocar os prazos</b> entre ASC-US e LSIL, ou esquecer que o corte de idade muda o intervalo (menor de 25 anos sempre tem o prazo mais longo, 3 anos, para ambas as categorias). Outro erro e mandar ASC-H ou HSIL para "repetir citologia" — essas duas categorias vao <b>direto para colposcopia</b>, sem essa etapa intermediaria.</p>
+   <p class="ac-p">Tambem e comum esquecer que a idade muda a conduta da <b>NIC2</b> (jovem pode observar; mais velha trata), e achar que toda NIC (mesmo NIC1) precisa ser tratada de imediato — quando, na verdade, NIC1 quase nunca e tratado sem antes dar tempo para a regressao espontanea. Por fim, muitos erram ao indicar tratamento <b>destrutivo</b> em situacoes que exigem exame anatomopatologico completo (ZT3, suspeita glandular, discordancia) — nesses casos, o metodo tem que ser <b>excisional</b>.</p>
+   <div class="ac-warn"><b>Erros que reprovam:</b> mandar ASC-H para "repetir em 6 meses"; tratar NIC1 de imediato sem observar; tratar NIC2 em jovem sem considerar observacao; indicar crioterapia em ZT tipo 3; indicar CAF/conizacao definitiva em gestante sem suspeita de invasao (deve esperar o puerperio); repetir apenas citologia diante de uma AGC.</div>
+   <div class="ac-tip"><b>Frase para gravar:</b> "quanto mais jovem e mais baixo o grau, mais se observa; quanto mais alto o grau ou mais persistente, mais se trata — e biopsia sempre confirma antes de tratamento definitivo."</div>`]
+ ],
+};
+
+Object.assign(C['tratogenital|2'], {
+ escores:`
+   <div class="ac-h">Prazos de repeticao da citologia (ASC-US/LSIL) por idade</div>
+   <table class="ac-tbl">
+     <tr><th>Idade</th><th>ASC-US</th><th>LSIL</th></tr>
+     <tr><td>&lt;25 anos</td><td>repetir em 3 anos</td><td>repetir em 3 anos</td></tr>
+     <tr><td>25-29 anos</td><td>repetir em 12 meses</td><td>repetir em 6 meses</td></tr>
+     <tr><td>&gt;=30 anos</td><td>repetir em 6 meses</td><td>repetir em 6 meses</td></tr>
+   </table>
+   <div class="ac-h" style="margin-top:14px">Conduta por grau histologico de NIC</div>
+   <table class="ac-tbl">
+     <tr><th>NIC</th><th>Conduta</th></tr>
+     <tr><td>NIC1</td><td>observar; tratar se persistir &gt;2 anos</td></tr>
+     <tr><td>NIC2 (&lt;25 anos)</td><td>pode observar semestralmente ate 2 anos</td></tr>
+     <tr><td>NIC2 (&gt;=25 anos)</td><td>tratar</td></tr>
+     <tr><td>NIC3</td><td>tratar (exceto gestante — espera puerperio)</td></tr>
+   </table>
+   <div class="ac-call">ASC-H e HSIL <b>nao</b> entram nessa tabela de repeticao — vao <b>direto para colposcopia</b>, em qualquer idade.</div>`,
+ dif:`
+   <div class="ac-h">Diferenciais de conduta</div>
+   <table class="ac-tbl">
+     <tr><th>Confusao comum</th><th>Diferenciar</th><th>Chave</th></tr>
+     <tr><td>ASC-US x ASC-H (conduta)</td><td>repetir x colposcopia direta</td><td>ASC-US pode repetir citologia; ASC-H vai direto para colposcopia</td></tr>
+     <tr><td>NIC1 x NIC3 (conduta)</td><td>observar x tratar</td><td>NIC1 tem altissima regressao espontanea; NIC3 raramente regride</td></tr>
+     <tr><td>NIC2 jovem x NIC2 &gt;=25 anos</td><td>observar x tratar</td><td>idade muda a chance de regressao espontanea</td></tr>
+     <tr><td>Destrutivo x excisional</td><td>metodo de tratamento</td><td>destrutivo exige certeza total (ZT visivel, sem suspeita glandular/invasao); excisional da margem para analise</td></tr>
+     <tr><td>NIC na gestante: biopsia x tratamento</td><td>investigar x tratar</td><td>biopsia pode ser indicada (afastar invasao); tratamento excisional definitivo aguarda o puerperio</td></tr>
+   </table>`,
+ mapa:`
+   <div class="ac-h">Condutas INCA em mapa (cards)</div>
+   <div class="mm">
+     <div class="mm-card"><h5>ASC-US/LSIL</h5><ul><li>&lt;25a: repetir em 3 anos</li><li>&gt;=25-30a: 6-12 meses</li><li>Persistiu: colposcopia</li></ul></div>
+     <div class="mm-card"><h5>ASC-H/HSIL</h5><ul><li>Colposcopia direta, qualquer idade</li><li>Biopsia antes de tratar</li><li>Sem achado: avaliar canal +/- conizacao dx</li></ul></div>
+     <div class="mm-card"><h5>AGC</h5><ul><li>Colposcopia + canal sempre</li><li>Endometrio se risco (idade, sangramento)</li><li>Conizacao dx se favorece neoplasia/AIS</li></ul></div>
+     <div class="mm-card"><h5>NIC pela biopsia</h5><ul><li>NIC1: observa</li><li>NIC2: depende da idade</li><li>NIC3: trata</li></ul></div>
+     <div class="mm-card"><h5>Metodos</h5><ul><li>Destrutivo: ZT visivel, certeza total</li><li>Excisional (CAF): ZT3, glandular, discordancia</li></ul></div>
+     <div class="mm-card"><h5>Gestante</h5><ul><li>Biopsia se suspeita de invasao</li><li>Tratamento definitivo: puerperio</li><li>Colposcopia seriada por trimestre</li></ul></div>
+   </div>`,
+ fluxo_dx:`
+   <div class="ac-h">Roteamento inicial pela citologia</div>
+   <div class="fx">
+     <div class="fx-node start">Resultado da citologia</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-row">
+       <div class="fx-node">ASC-US / LSIL -> repetir citologia (prazo por idade)</div>
+       <div class="fx-node">ASC-H / HSIL -> colposcopia direta</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node">AGC -> colposcopia + avaliacao do canal (+ endometrio se risco)</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Repeticao de ASC-US/LSIL manteve atipia?</div>
+     <div class="fx-row">
+       <div class="fx-node end">Nao -> retorna ao rastreio de rotina</div>
+       <div class="fx-node end">Sim -> colposcopia</div>
+     </div>
+   </div>`,
+ fluxo_cond:`
+   <div class="ac-h">Conduta apos o resultado da biopsia</div>
+   <div class="fx">
+     <div class="fx-node start">Biopsia confirma o grau de NIC</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-row">
+       <div class="fx-node">NIC1 -> observar (citologia/colposcopia semestral)</div>
+       <div class="fx-node">NIC2 -> depende da idade</div>
+     </div>
+     <div class="fx-row">
+       <div class="fx-node">&lt;25 anos -> pode observar ate 2 anos</div>
+       <div class="fx-node">&gt;=25 anos -> tratar</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node">NIC3 -> tratar (exceto gestante: espera puerperio)</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Escolher o metodo</div>
+     <div class="fx-row">
+       <div class="fx-node end">ZT visivel, sem suspeita glandular/invasao -> destrutivo possivel</div>
+       <div class="fx-node end">ZT3, suspeita glandular, discordancia -> excisional (CAF)</div>
+     </div>
+   </div>`,
+ vespera:`
+   <div class="ac-h">Revisao de vespera</div>
+   <div class="ac-call"><b>ASC-US:</b> &lt;25a repete em 3 anos; 25-29a em 12 meses; &gt;=30a em 6 meses.</div>
+   <div class="ac-call"><b>LSIL:</b> &lt;25a repete em 3 anos; &gt;=25a repete em 6 meses.</div>
+   <div class="ac-call"><b>ASC-H e HSIL:</b> colposcopia direta, qualquer idade; biopsia confirma antes de tratar.</div>
+   <div class="ac-call"><b>AGC:</b> colposcopia + canal sempre; endometrio se >=35a, sangramento, celulas endometriais ou anovulacao cronica.</div>
+   <div class="ac-call"><b>NIC pela biopsia:</b> NIC1 observa; NIC2 depende da idade (jovem observa, &gt;=25a trata); NIC3 trata.</div>
+   <div class="ac-call"><b>Metodo:</b> destrutivo exige ZT visivel e certeza total; excisional (CAF) para ZT3, suspeita glandular, discordancia.</div>
+   <div class="ac-call"><b>Gestante:</b> biopsia se suspeita de invasao; tratamento definitivo aguarda o puerperio.</div>`,
+ dicas:`
+   <div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Menor de 25 anos = sempre o prazo mais longo (3 anos) para ASC-US/LSIL, refletindo a alta regressao espontanea.</div>
+   <div class="ac-tip">NIC2 e a unica categoria histologica em que a idade decide sozinha entre observar e tratar.</div>
+   <div class="ac-tip">Destrutivo so entra quando ha certeza total (ZT visivel + biopsia sem suspeita de invasao/glandular).</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Mandar ASC-H "repetir citologia" em vez de colposcopia direta.</div>
+   <div class="ac-warn">Tratar NIC1 de imediato, sem dar tempo para regressao.</div>
+   <div class="ac-warn">Ignorar a idade na decisao sobre NIC2.</div>
+   <div class="ac-warn">Indicar metodo destrutivo em ZT tipo 3 ou suspeita glandular.</div>
+   <div class="ac-warn">Indicar CAF/conizacao definitiva em gestante sem suspeita de invasao.</div>`,
+ checklist:[
+   'Explico o equilibrio entre subtratar e sobretratar que orienta as diretrizes',
+   'Sei os prazos de repeticao de ASC-US e LSIL por faixa etaria',
+   'Sei que ASC-H e HSIL vao direto para colposcopia, em qualquer idade',
+   'Sei a conduta ampliada da AGC (canal + as vezes endometrio)',
+   'Diferencio a conduta por grau histologico: NIC1 observa, NIC2 depende da idade, NIC3 trata',
+   'Sei escolher entre metodo destrutivo e excisional e por que',
+   'Sei o que muda na gestante (biopsia sim, tratamento definitivo espera o puerperio)',
+   'Reconheco as pegadinhas classicas de prova deste tema'
+ ],
+});
+
+Object.assign(C['tratogenital|2'], {
+ questoes:[
+  {stem:'Mulher de 23 anos com citologia mostrando LSIL. Qual a conduta inicial mais adequada segundo as diretrizes brasileiras?',
+   opts:['Colposcopia imediata','Repetir a citologia em 3 anos','Repetir a citologia em 6 meses','Iniciar tratamento excisional'],correct:1,
+   expl:'Em mulheres <b>menores de 25 anos</b>, tanto ASC-US quanto LSIL tem conduta inicial de <b>repetir a citologia em 3 anos</b>, dada a altissima chance de regressao espontanea nessa faixa etaria.'},
+  {stem:'Mulher de 34 anos com citologia ASC-US. Qual o prazo correto para repeticao do exame?',
+   opts:['3 anos','12 meses','6 meses','1 mes'],correct:2,
+   expl:'A partir dos <b>30 anos</b>, o ASC-US deve ser repetido em <b>6 meses</b>, prazo mais curto do que o usado entre 25 e 29 anos (12 meses).'},
+  {stem:'Mulher de 27 anos apresenta citologia com ASC-H. Qual a conduta correta?',
+   opts:['Repetir citologia em 12 meses','Encaminhar diretamente para colposcopia','Repetir citologia em 3 anos, como no ASC-US','Iniciar tratamento destrutivo empirico'],correct:1,
+   expl:'O <b>ASC-H</b> tem risco elevado de lesao de alto grau subjacente e deve ser encaminhado <b>diretamente para colposcopia</b>, sem a etapa de repeticao da citologia.'},
+  {stem:'Em relacao a conduta na AGC, e correto afirmar que:',
+   opts:['Deve-se apenas repetir a citologia em 6 meses','Deve-se sempre realizar colposcopia com avaliacao do canal endocervical','So se investiga se a paciente tiver menos de 25 anos','Nunca requer avaliacao do endometrio'],correct:1,
+   expl:'Toda <b>AGC</b> exige colposcopia com avaliacao do <b>canal endocervical</b>; a avaliacao endometrial se soma em cenarios de risco (idade &gt;=35 anos, sangramento anormal, celulas endometriais no laudo, anovulacao cronica).'},
+  {stem:'Biopsia confirma NIC1 em mulher de 26 anos. Qual a conduta mais apropriada?',
+   opts:['Tratamento excisional imediato (CAF)','Observacao com citologia (e colposcopia se necessario) a cada 6 meses','Histerectomia','Crioterapia imediata, independente do seguimento'],correct:1,
+   expl:'A <b>NIC1</b> tem alta taxa de regressao espontanea; a conduta padrao e a <b>observacao semestral</b>, reservando-se o tratamento para persistencia alem de 2 anos.'},
+  {stem:'Mulher de 22 anos com biopsia mostrando NIC2. Qual conduta pode ser considerada, dado o perfil de idade?',
+   opts:['Tratamento excisional obrigatorio, sem excecao','Manejo conservador com seguimento semestral por ate 2 anos, dada a alta chance de regressao nessa faixa etaria','Histerectomia total','Conduta identica a de uma mulher de 45 anos'],correct:1,
+   expl:'Em mulheres <b>jovens (tipicamente &lt;25 anos)</b> com NIC2, pode-se considerar <b>manejo conservador</b> com seguimento semestral por ate 2 anos, dada a maior chance de regressao espontanea nessa idade.'},
+  {stem:'Mulher de 40 anos com biopsia confirmando NIC3. Qual a conduta padrao?',
+   opts:['Observacao semestral por 2 anos, como no NIC1','Tratamento (geralmente excisional)','Repetir apenas citologia anualmente','Aguardar regressao espontanea, que e frequente nessa idade'],correct:1,
+   expl:'A <b>NIC3</b> tem baixa chance de regressao espontanea e risco real de progressao; o <b>tratamento</b> e indicado na quase totalidade dos casos, independente da idade (fora a excecao da gestante).'},
+  {stem:'Qual situacao abaixo torna obrigatoria a escolha de um metodo EXCISIONAL (e nao destrutivo) de tratamento?',
+   opts:['Zona de transformacao tipo 1, lesao pequena, sem suspeita de invasao','Zona de transformacao tipo 3, com JEC nao totalmente visivel','Biopsia previa concordante com a citologia e colposcopia','Lesao pequena e bem delimitada'],correct:1,
+   expl:'Na <b>ZT tipo 3</b>, a JEC nao e totalmente visualizada, impedindo garantir a ausencia de doenca mais alta no canal — por isso o metodo deve ser <b>excisional</b>, que permite avaliar toda a peca.'},
+  {stem:'Gestante de 24 semanas tem biopsia confirmando NIC3, sem sinais de invasao. Qual a conduta mais apropriada?',
+   opts:['Conizacao imediata, independente da gestacao','Acompanhamento com colposcopia seriada, adiando o tratamento excisional definitivo para o puerperio','Interrupcao da gestacao','Histerectomia com feto in utero'],correct:1,
+   expl:'Na gestante, mesmo com NIC3 confirmada e sem sinais de invasao, o <b>tratamento excisional definitivo</b> costuma ser <b>adiado para o puerperio</b>, com acompanhamento colposcopico seriado durante a gestacao.'},
+  {stem:'Mulher de 26 anos com citologia LSIL repetida em 6 meses, mantendo o mesmo resultado. Qual a proxima conduta?',
+   opts:['Repetir novamente em 6 meses, indefinidamente','Encaminhar para colposcopia','Iniciar tratamento excisional sem colposcopia','Considerar o caso resolvido e retornar ao rastreio trienal'],correct:1,
+   expl:'Quando a citologia repetida <b>mantem a atipia</b>, a conduta e encaminhar para <b>colposcopia</b>, independente de qual foi a categoria (ASC-US ou LSIL) originalmente.'},
+  {stem:'Colposcopia em paciente com HSIL nao evidencia lesao visivel e mostra zona de transformacao tipo 3. Qual a conduta mais apropriada?',
+   opts:['Considerar o exame normal e retornar ao rastreio de rotina','Avaliar o canal endocervical e considerar conizacao diagnostica','Tratamento destrutivo empirico','Repetir apenas a citologia em 3 anos'],correct:1,
+   expl:'Uma citologia de <b>HSIL sem explicacao</b> na colposcopia, especialmente com <b>ZT tipo 3</b>, exige avaliacao do canal endocervical e, se necessario, <b>conizacao diagnostica</b>, pois a JEC nao foi totalmente avaliada.'},
+  {stem:'Sobre o metodo destrutivo de tratamento de NIC (crioterapia, laser vaporizacao), e correto afirmar que:',
+   opts:['Pode ser usado mesmo com suspeita de doenca glandular','Exige zona de transformacao totalmente visivel e ausencia de suspeita de invasao ou doenca glandular na biopsia previa','Gera uma peca cirurgica para analise de margens','E o metodo preferido em qualquer situacao de NIC3'],correct:1,
+   expl:'O metodo destrutivo <b>nao gera peca</b> para analise; por isso so pode ser usado quando ha certeza diagnostica: ZT totalmente visivel, biopsia sem suspeita de invasao ou doenca glandular, e boa concordancia entre os exames.'}
+ ],
+ flashcards:[
+  {front:'Prazo de repeticao do ASC-US por idade.',back:'<25 anos: 3 anos. 25-29 anos: 12 meses. >=30 anos: 6 meses.',type:'basic'},
+  {front:'Prazo de repeticao do LSIL por idade.',back:'<25 anos: 3 anos. >=25 anos: 6 meses.',type:'basic'},
+  {front:'Conduta em ASC-H e HSIL, em qualquer idade.',back:'Colposcopia direta, sem repetir citologia antes.',type:'basic'},
+  {front:'Conduta inicial diante de uma AGC.',back:'Colposcopia com avaliacao do canal endocervical, sempre — nunca apenas repetir citologia.',type:'basic'},
+  {front:'Quando avaliar o endometrio na AGC?',back:'Idade >=35 anos, sangramento uterino anormal, celulas endometriais no laudo, ou anovulacao cronica.',type:'basic'},
+  {front:'Conduta padrao na NIC1 confirmada por biopsia.',back:'Observacao (citologia +/- colposcopia semestral); tratar se persistir mais de 2 anos.',type:'basic'},
+  {front:'O que decide a conduta na NIC2?',back:'A {{idade}}: jovens (<25 anos) podem observar semestralmente ate 2 anos; >=25 anos, tratar.',type:'cloze'},
+  {front:'Conduta padrao na NIC3 (nao gestante).',back:'Tratamento (geralmente excisional), na quase totalidade dos casos.',type:'basic'},
+  {front:'Quando um metodo destrutivo pode ser usado?',back:'ZT totalmente visivel (tipo 1 ou 2), biopsia sem suspeita de invasao/doenca glandular, lesao pequena, boa concordancia entre exames.',type:'basic'},
+  {front:'Quando o metodo deve ser excisional (CAF/conizacao)?',back:'ZT tipo 3, suspeita de doenca glandular, discordancia entre citologia/colposcopia/histologia, lesao extensa.',type:'basic'},
+  {front:'O que muda no tratamento da NIC de alto grau na gestante?',back:'Biopsia pode ser indicada (afastar invasao), mas o tratamento excisional definitivo costuma esperar o puerperio.',type:'basic'},
+  {front:'Vantagem do CAF como metodo de tratamento no Brasil.',back:'Ambulatorial, rapido, baixo custo, alta eficacia, e gera peca para analise de margens.',type:'basic'},
+  {front:'Por que menores de 25 anos recebem condutas mais conservadoras?',back:'Alta chance de regressao espontanea do HPV e da NIC, evitando risco futuro (parto prematuro) de tratamento excisional desnecessario.',type:'basic'},
+  {front:'O que fazer se colposcopia de HSIL nao mostra lesao e ZT e tipo 3?',back:'Avaliar o canal endocervical (escovado/curetagem) e considerar conizacao diagnostica.',type:'basic'}
+ ],
+ casos:[
+  {t:'Caso 1 — LSIL em mulher jovem',
+   stem:'Mulher de 21 anos, sexualmente ativa, citologia de rotina mostra LSIL. Exame especular sem lesoes visiveis.',
+   passos:[
+     {h:'1. Qual o proximo passo?',p:'Como e <b>menor de 25 anos</b>, a conduta inicial diante de LSIL e <b>repetir a citologia em 3 anos</b>, e nao colposcopia imediata.'},
+     {h:'2. Por que esperar tanto tempo?',p:'A chance de <b>regressao espontanea</b> do HPV e da lesao e muito alta nessa faixa etaria; encaminhar tudo para colposcopia geraria sobretratamento.'},
+     {h:'3. E se a citologia de repeticao vier alterada?',p:'Nesse caso, encaminha-se para <b>colposcopia</b>, independente de qual categoria de atipia aparecer.'},
+     {h:'4. E se vier normal?',p:'A paciente retorna ao <b>rastreio de rotina</b> padrao para a idade.'},
+     {h:'Licao de prova',p:'LSIL em menor de 25 anos = repetir em 3 anos, nao colposcopia imediata.'}
+   ]},
+  {t:'Caso 2 — NIC2 e a decisao pela idade',
+   stem:'Duas pacientes com biopsia confirmando NIC2: a paciente A tem 23 anos, a paciente B tem 31 anos. Ambas sem gestacao em curso.',
+   passos:[
+     {h:'1. Conduta para a paciente A (23 anos)',p:'Pode-se considerar <b>manejo conservador</b>, com seguimento citologico e colposcopico semestral por ate 2 anos, dada a alta chance de regressao nessa idade.'},
+     {h:'2. Conduta para a paciente B (31 anos)',p:'A chance de regressao espontanea e menor; a conduta padrao passa a ser o <b>tratamento</b> (geralmente excisional).'},
+     {h:'3. O que teriam em comum se fossem NIC3?',p:'Se ambas tivessem NIC3, o tratamento seria indicado para as duas, independente da idade — a NIC3 nao segue a mesma logica de espera da NIC2.'},
+     {h:'4. Por que essa diferenca de conduta por idade so existe na NIC2?',p:'Porque a NIC2 fica no meio do espectro biologico: a idade "desempata" entre alta e baixa chance de regressao. NIC1 quase sempre regride; NIC3 quase nunca.'},
+     {h:'Licao de prova',p:'NIC2 e a unica categoria histologica em que a idade decide sozinha entre observar e tratar.'}
+   ]},
+  {t:'Caso 3 — AGC com colposcopia normal',
+   stem:'Mulher de 38 anos, citologia com AGC favorece neoplasia. Colposcopia e escovado endocervical normais. Sem sangramento uterino anormal, sem celulas endometriais no laudo.',
+   passos:[
+     {h:'1. A colposcopia normal encerra a investigacao?',p:'Nao necessariamente. Uma AGC classificada como <b>favorece neoplasia</b> mantem risco relevante de doenca oculta mesmo com colposcopia e canal normais.'},
+     {h:'2. Precisa avaliar o endometrio?',p:'A idade (38 anos, >=35) ja e um criterio isolado que indica avaliacao endometrial, mesmo sem sangramento ou celulas endometriais no laudo.'},
+     {h:'3. E se tudo vier negativo?',p:'Diante da persistencia do risco ("favorece neoplasia"), pode-se considerar <b>conizacao diagnostica</b>, pois a origem da atipia pode estar em um ponto do canal nao alcancado pelo escovado.'},
+     {h:'4. Por que nao liberar a paciente?',p:'A AGC de alto risco nao deve ser "encerrada" apenas por exames iniciais normais — o risco de doenca oculta permanece ate excluir de forma mais completa.'},
+     {h:'Licao de prova',p:'AGC favorece neoplasia com investigacao inicial normal ainda pode justificar conizacao diagnostica, nao alta do seguimento.'}
+   ]}
+ ],
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
+<script>
+/* ELID Ginecologia — Conteudo Seguimento Pos-tratamento (tratogenital|3). Aditivo. Explicacoes aprofundadas. */
+(function(){
+"use strict";
+var C=(window.CONTENT=window.CONTENT||{});
+C['tratogenital|3']={
+ name:'Seguimento Pos-tratamento',
+ intro:'Tratar a NIC nao encerra o caso: a maior parte das recidivas aparece nos primeiros 2 anos, e e o padrao de seguimento (nao a cirurgia em si) que garante a protecao contra o cancer no longo prazo.',
+ sub:[
+  ['entendendo','Entendendo do Zero',`
+   <div class="ac-h">Por que o seguimento e tao importante quanto o tratamento</div>
+   <p class="ac-p">Depois de uma mulher passar por um tratamento excisional (o mais comum e o <b>CAF</b> — cirurgia de alta frequencia por alca, tambem chamado LEEP) ou por uma <b>conizacao a frio</b>, existe uma tentacao natural de pensar que o problema esta resolvido. Mas o tratamento remove a area <b>visivel e biopsiada</b> da lesao — ele nao garante, com 100% de certeza, que <b>todas</b> as celulas com HPV persistente foram removidas, nem que uma nova area de displasia nao vai se formar na zona de transformacao remanescente. Por isso o seguimento apos o tratamento e uma etapa tao importante quanto o procedimento em si: e ele que vai detectar precocemente uma <b>doenca residual</b> (que ficou para tras) ou uma <b>recidiva</b> (que reapareceu depois de um periodo livre).</p>
+   <p class="ac-p">Um dado que organiza toda a logica do seguimento: a grande maioria das recidivas (estima-se que cerca de <b>85%</b>) aparece dentro dos <b>primeiros 2 anos</b> apos o tratamento. Isso significa que o risco nao e constante ao longo do tempo — ele e <b>maior logo no inicio</b> e vai caindo conforme os exames de controle seguem vindo negativos. E exatamente essa curva de risco que explica por que o seguimento comeca <b>mais apertado</b> (exames a cada 6 meses) e vai se <b>espacando</b> gradualmente, ate a mulher poder, com seguranca, retornar ao rastreio de rotina da populacao geral.</p>
+   <p class="ac-p">Dois fatores tem peso especial na definicao do risco individual de recidiva: o <b>status das margens</b> da peca cirurgica (se a lesao foi totalmente removida ou se chegou ate a borda do fragmento) e, cada vez mais usado, o resultado do <b>teste de HPV pos-tratamento</b>. Esses dois pontos sao o coracao deste modulo.</p>
+   <div class="ac-call"><b>A grande ideia do modulo:</b> o risco de recidiva e maior nos <b>2 primeiros anos</b>, por isso o seguimento comeca mais frequente e vai se espacando. O status das <b>margens</b> da peca e o resultado do <b>teste de HPV</b> pos-tratamento sao os dois principais guias para decidir a intensidade desse seguimento.</div>
+   <div class="ac-h" style="margin-top:14px">O mapa do modulo</div>
+   <table class="ac-tbl">
+     <tr><th>Eixo</th><th>O que voce vai dominar</th></tr>
+     <tr><td>Margens da peca</td><td>o que sao, por que a endocervical e a mais critica</td></tr>
+     <tr><td>Margens livres</td><td>protocolo de seguimento padrao</td></tr>
+     <tr><td>Margens comprometidas</td><td>seguimento mais rigoroso x indicacao de retratamento</td></tr>
+     <tr><td>Teste de HPV pos-tratamento</td><td>o "teste de cura" e seu alto valor preditivo negativo</td></tr>
+     <tr><td>Retorno ao rastreio de rotina</td><td>quando e com que criterios</td></tr>
+     <tr><td>Complicacoes reprodutivas</td><td>insuficiencia istmocervical e parto pre-termo</td></tr>
+   </table>`],
+  ['margens','As Margens da Peca Cirurgica',`
+   <div class="ac-h">O que a peca de CAF/conizacao mostra</div>
+   <p class="ac-p">Quando se realiza um <b>CAF</b> ou uma <b>conizacao</b>, o tecido retirado tem o formato aproximado de um <b>cone</b> (ou de um disco, dependendo da tecnica), e esse fragmento e enviado para analise anatomopatologica completa. O patologista nao avalia so se a NIC estava presente — ele avalia tambem se a lesao <b>chegou ate a borda</b> do fragmento retirado, o que se chama de <b>status das margens</b>. Existem tres margens a se considerar: a <b>margem ectocervical</b> (borda externa, voltada para a vagina), a <b>margem endocervical</b> (borda interna, voltada para o canal) e a <b>margem profunda ou estromal</b> (a base do cone, mais para dentro do tecido).</p>
+   <div class="ac-svg-wrap">
+    <svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Peca de conizacao em cone mostrando as margens ectocervical, endocervical e profunda">
+     <defs>
+      <linearGradient id="tg3bg" x1="0" y1="0" x2="0" y2="1">
+       <stop offset="0" stop-color="#0f1b2d"/><stop offset="1" stop-color="#182842"/>
+      </linearGradient>
+      <linearGradient id="tg3tecido" x1="0" y1="0" x2="1" y2="1">
+       <stop offset="0" stop-color="#fda4af"/><stop offset="1" stop-color="#e11d5e"/>
+      </linearGradient>
+      <linearGradient id="tg3lesao" x1="0" y1="0" x2="1" y2="1">
+       <stop offset="0" stop-color="#fcd34d"/><stop offset="1" stop-color="#f59f0a"/>
+      </linearGradient>
+      <filter id="tg3shadow" x="-30%" y="-30%" width="160%" height="160%">
+       <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.35"/>
+      </filter>
+     </defs>
+     <rect x="0" y="0" width="680" height="340" fill="url(#tg3bg)"/>
+     <text x="340" y="32" text-anchor="middle" fill="#f5f7fb" font-size="16" font-weight="700" font-family="Arial, sans-serif">Peca de CAF/conizacao (corte lateral)</text>
+     <g filter="url(#tg3shadow)">
+      <path d="M230,70 C210,70 190,90 190,130 L190,220 C190,260 260,290 340,290 C420,290 490,260 490,220 L490,130 C490,90 470,70 450,70 Z" fill="url(#tg3tecido)"/>
+      <path d="M230,70 C220,110 220,180 250,220 C270,245 300,258 340,262 C380,258 410,245 430,220 C460,180 460,110 450,70" fill="none" stroke="#f8fafc" stroke-width="2" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
+      <path d="M255,95 C245,120 245,160 262,190 C278,212 300,222 322,225 L322,120 C300,105 275,98 255,95 Z" fill="url(#tg3lesao)" opacity="0.92"/>
+     </g>
+     <path d="M190,130 L490,130" stroke="#f5f7fb" stroke-width="2" stroke-dasharray="3 3" opacity="0.5"/>
+     <line x1="190" y1="72" x2="150" y2="55" stroke="#f59f0a" stroke-width="2" vector-effect="non-scaling-stroke"/>
+     <text x="60" y="52" fill="#f5f7fb" font-size="12" font-weight="700" font-family="Arial, sans-serif">Margem ectocervical</text>
+     <line x1="322" y1="120" x2="322" y2="60" stroke="#f59f0a" stroke-width="2" vector-effect="non-scaling-stroke"/>
+     <text x="322" y="50" text-anchor="middle" fill="#f5f7fb" font-size="12" font-weight="700" font-family="Arial, sans-serif">Margem endocervical</text>
+     <line x1="340" y1="290" x2="340" y2="320" stroke="#f59f0a" stroke-width="2" vector-effect="non-scaling-stroke"/>
+     <text x="340" y="335" text-anchor="middle" fill="#f5f7fb" font-size="12" font-weight="700" font-family="Arial, sans-serif">Margem profunda (estromal)</text>
+     <circle cx="290" cy="150" r="7" fill="#f59f0a"/>
+     <text x="530" y="150" fill="#cbd5e1" font-size="11" font-family="Arial, sans-serif">laranja = area da lesao (NIC)</text>
+     <text x="530" y="168" fill="#cbd5e1" font-size="11" font-family="Arial, sans-serif">rosa = tecido normal do cone</text>
+    </svg>
+   </div>
+   <p class="ac-p">A margem <b>mais critica</b> costuma ser a <b>endocervical</b>, porque, se a lesao chegar ate essa borda, existe a possibilidade real de ter sobrado tecido doente <b>dentro do canal</b>, uma regiao que fica fora do alcance da observacao direta na colposcopia subsequente. Diz-se que a margem esta <b>livre</b> quando ha uma distancia de tecido normal entre a borda da lesao e a borda do fragmento, e <b>comprometida</b> quando a lesao alcanca a propria borda cortada — nesse ultimo caso, nao se sabe com certeza se ainda restou tecido doente na paciente.</p>
+   <div class="ac-tip"><b>Por que isso muda tudo:</b> margens livres reduzem bastante a chance de doenca residual, permitindo um seguimento mais tranquilo. Margens comprometidas (principalmente a endocervical, e principalmente se a lesao era de alto grau) aumentam a chance de doenca residual e exigem um seguimento mais proximo — mas nao significam, por si so, que e preciso operar de novo (proxima aba).</div>`],
+  ['seguimento_margens_livres','Seguimento com Margens Livres',`
+   <div class="ac-h">O protocolo padrao quando tudo saiu bem</div>
+   <p class="ac-p">Quando a peca de CAF ou conizacao mostra <b>margens livres</b> (sem lesao residual na borda) e a paciente nao tem outros fatores de risco, o seguimento segue um protocolo relativamente previsivel: a <b>citologia</b> (podendo vir acompanhada de <b>colposcopia</b>, conforme a avaliacao clinica) e repetida aos <b>6 e 12 meses</b> apos o procedimento. Se esses dois primeiros exames vierem <b>negativos</b>, o seguimento passa a ser <b>anual</b>, mantido por um periodo de vigilancia mais proximo do que o rastreio de rotina da populacao geral (em geral, ate se completar cerca de <b>5 anos</b> de acompanhamento sem evidencia de doenca, dependendo do protocolo do servico), antes de a paciente poder retornar a periodicidade trienal padrao.</p>
+   <p class="ac-p">A logica desse esquema (6, 12 meses, depois anual) acompanha exatamente a curva de risco descrita na primeira aba: como a maioria das recidivas aparece nos <b>2 primeiros anos</b>, e ali que o seguimento precisa ser mais atento; depois desse periodo, o risco cai bastante, permitindo espacar os exames sem perder seguranca.</p>
+   <div class="ac-tbl-wrap"><table class="ac-tbl">
+     <tr><th>Momento</th><th>Conduta (margens livres)</th></tr>
+     <tr><td>6 meses</td><td>citologia (+/- colposcopia)</td></tr>
+     <tr><td>12 meses</td><td>citologia (+/- colposcopia)</td></tr>
+     <tr><td>Apos 2 exames negativos</td><td>seguimento anual</td></tr>
+     <tr><td>Apos periodo de vigilancia sem doenca (protocolo do servico)</td><td>retorno ao rastreio trienal de rotina</td></tr>
+   </table></div>
+   <div class="ac-warn"><b>Cuidado:</b> "margem livre" reduz o risco, mas <b>nao zera</b> a chance de recidiva — por isso mesmo com margens livres o seguimento continua sendo mais proximo que o rastreio de rotina nos primeiros anos, e nao se libera a paciente direto para o intervalo trienal logo apos o procedimento.</div>`],
+  ['seguimento_margens_comprometidas','Seguimento com Margens Comprometidas',`
+   <div class="ac-h">Margem comprometida nao e sinonimo automatico de reoperar</div>
+   <p class="ac-p">Um erro de raciocinio comum e achar que toda margem comprometida exige, automaticamente, uma <b>nova cirurgia</b> (reconizacao). Na pratica, a conduta e mais fina: quando a margem esta comprometida, sobretudo a <b>endocervical</b>, e especialmente se a lesao era de <b>alto grau</b>, a paciente entra em um esquema de <b>seguimento mais rigoroso</b> — tipicamente <b>citologia associada a colposcopia a cada 6 meses, por 2 anos</b> — em vez de ser levada direto para uma nova excisao.</p>
+   <p class="ac-p">A <b>reconizacao (ou novo tratamento excisional)</b> passa a ser considerada quando, durante esse seguimento mais proximo, surgem sinais de <b>doenca residual ou persistente</b> (nova citologia alterada, novo achado colposcopico compativel), ou em situacoes especiais em que o risco e considerado alto demais para arriscar a espera — por exemplo, margem endocervical comprometida por lesao de alto grau em mulher com <b>dificuldade de acesso ao seguimento regular</b>, ou que ja tenha <b>prole definida</b> e prefira resolver de forma mais definitiva. A decisao, portanto, pesa o <b>risco individual de doenca residual</b> contra o <b>risco cirurgico/obstetrico</b> de um segundo procedimento excisional (que reduz ainda mais o comprimento do colo).</p>
+   <div class="ac-call"><b>Resumo pratico:</b> margem comprometida = seguimento mais apertado (citologia + colposcopia semestral por 2 anos), <b>nao</b> reoperacao automatica. Reconizacao entra se houver evidencia de doenca residual/persistente no seguimento, ou em cenarios de risco especialmente alto.</div>
+   <div class="ac-tip"><b>Compare com a margem de baixo grau:</b> quando a margem comprometida corresponde a uma lesao de <b>baixo grau</b> (nao alto grau), o seguimento pode ser um pouco menos intenso — citologia semestral por 1 ano e, apos dois exames negativos com esse intervalo, retorno a periodicidade mais espacada — refletindo o menor risco intrinseco do baixo grau.</div>`],
+  ['teste_hpv_cura','O Teste de HPV Pos-tratamento ("Teste de Cura")',`
+   <div class="ac-h">Um exame com alto poder de tranquilizar</div>
+   <p class="ac-p">Alem da citologia e da colposcopia, o <b>teste de HPV</b> (deteccao molecular do DNA viral) realizado alguns meses apos o tratamento vem ganhando espaco como ferramenta de seguimento — as vezes chamado, na pratica clinica, de <b>"teste de cura"</b>. A razao para isso e o seu <b>altissimo valor preditivo negativo</b>: quando o teste de HPV volta <b>negativo</b> (em geral avaliado entre <b>6 e 12 meses</b> apos o procedimento), a chance de haver doenca residual ou de a paciente vir a ter uma recidiva no curto/medio prazo e muito baixa — mais baixa, inclusive, do que a citologia isolada consegue garantir.</p>
+   <p class="ac-p">Isso faz sentido biologicamente: a NIC e, na origem, uma doenca causada pela <b>persistencia do HPV oncogenico</b>. Se, apos o tratamento, o virus <b>nao e mais detectado</b>, a chance de a lesao ter sido completamente removida (e de nao haver reinfeccao imediata) e muito maior. Por outro lado, um teste de HPV <b>positivo persistente</b> no seguimento aumenta a vigilancia — ele sinaliza que o virus continua presente, seja por doenca residual, seja por uma nova infeccao, exigindo acompanhamento mais atento (mesmo que a citologia, isoladamente, ainda esteja normal).</p>
+   <div class="ac-tip"><b>Por que isso e util na prova:</b> o teste de HPV pos-tratamento e apontado, na literatura mais recente, como o <b>melhor preditor isolado</b> do sucesso do tratamento — mais sensivel do que confiar apenas na citologia de controle.</div>`],
+  ['quando_retorna_rotina','Quando Retornar ao Rastreio de Rotina',`
+   <div class="ac-h">A "alta" do seguimento intensificado</div>
+   <p class="ac-p">O retorno ao <b>rastreio de rotina</b> (a periodicidade trienal da populacao geral, apos dois exames negativos, como visto no primeiro modulo do tema) so acontece depois que a paciente <b>completa um periodo de vigilancia mais proxima sem qualquer evidencia de doenca</b>. Na pratica, isso significa uma sequencia de exames <b>consecutivamente negativos</b> (citologia, colposcopia quando indicada, e teste de HPV quando disponivel) ao longo do esquema de seguimento (6 e 12 meses, depois anual) — nao existe um "atalho" que libere a paciente antes desse tempo, mesmo que o primeiro exame de controle venha normal.</p>
+   <p class="ac-p">Vale reforcar por que essa cautela existe: como cerca de <b>85% das recidivas</b> se manifestam nos <b>2 primeiros anos</b>, e exatamente esse periodo que precisa ser "vencido" com exames negativos antes de a vigilancia poder relaxar. Depois de cumprido esse periodo de seguimento intensificado com resultados consistentemente negativos, a mulher retorna ao mesmo fluxo de rastreio da populacao geral (anual ate dois negativos, depois trienal), ja descrito no primeiro modulo deste tema.</p>
+   <div class="ac-warn"><b>Erro comum:</b> liberar a paciente para o rastreio trienal logo apos o primeiro exame de controle negativo (6 meses). E preciso completar toda a sequencia de vigilancia proxima antes desse retorno.</div>`],
+  ['complicacoes','Complicacoes e Implicacoes Reprodutivas',`
+   <div class="ac-h">O que o CAF/conizacao pode deixar de sequela</div>
+   <p class="ac-p">Os tratamentos excisionais sao seguros e eficazes, mas nao sao isentos de complicacoes. No curto prazo, as mais comuns sao <b>sangramento</b> (imediato ou tardio, quando a crosta se desprende) e, com menor frequencia, <b>infeccao</b> local. No medio prazo, pode ocorrer <b>estenose cervical</b> (estreitamento do canal, que pode dificultar exames futuros e, raramente, causar problemas menstruais).</p>
+   <p class="ac-p">A complicacao mais relevante para a pratica obstetrica futura, porem, e a possivel <b>insuficiencia istmocervical</b>: como parte do tecido do colo (incluindo fibras conjuntivas que ajudam a mante-lo fechado durante a gestacao) e removida no procedimento, mulheres que engravidam apos um CAF ou conizacao tem um risco um pouco <b>maior de parto prematuro</b>, especialmente quando o cone retirado foi mais extenso (mais profundo ou mais largo) ou quando ha necessidade de mais de um procedimento excisional ao longo da vida. Esse risco reforca por que, em mulheres jovens com NIC de baixo grau ou mesmo NIC2, a preferencia e sempre pela conduta <b>mais conservadora possivel</b> (modulo de condutas) antes de indicar uma excisao.</p>
+   <div class="ac-call"><b>Na pratica:</b> mulheres com historico de CAF/conizacao que engravidam devem informar esse antecedente no pre-natal, para que a equipe obstetrica fique atenta a sinais de <b>parto pre-termo</b> e considere a avaliacao do comprimento do colo (ultrassonografia transvaginal) quando pertinente.</div>
+   <div class="ac-tip"><b>Fixe:</b> quanto <b>maior</b> o volume de tecido retirado no tratamento, <b>maior</b> o risco obstetrico futuro — outro motivo para nunca tratar alem do necessario (evitar sobretratamento).</div>`],
+  ['armadilhas','Erros Comuns e Pegadinhas de Prova',`
+   <div class="ac-h">O que a banca adora testar neste tema</div>
+   <p class="ac-p">O erro mais frequente e achar que <b>margem comprometida = reoperar sempre</b> — na maioria das vezes, a conduta correta e <b>intensificar o seguimento</b> (citologia + colposcopia semestral por 2 anos), reservando a reconizacao para quando ha evidencia real de doenca residual ou persistente, ou em cenarios de risco elevado. Outro erro e liberar a paciente para o rastreio trienal <b>logo apos o primeiro exame negativo</b> — e preciso completar toda a sequencia de vigilancia intensificada (6, 12 meses, depois anual, ao longo de um periodo minimo sem evidencia de doenca).</p>
+   <p class="ac-p">Tambem e comum esquecer o <b>valor preditivo negativo altissimo</b> do teste de HPV pos-tratamento — muitos ainda acham que so a citologia importa no seguimento. E, por fim, nao lembrar da relacao entre o volume de tecido retirado no CAF/conizacao e o <b>risco obstetrico futuro</b> (parto pre-termo), o que reforca a importancia de tratar de forma conservadora sempre que a biologia permitir (modulo de condutas).</p>
+   <div class="ac-warn"><b>Erros que reprovam:</b> reoperar automaticamente toda margem comprometida; liberar para rastreio trienal antes de completar a vigilancia intensificada; ignorar o teste de HPV pos-tratamento; nao alertar a gestante com historico de conizacao sobre o risco de parto pre-termo; achar que margem livre dispensa qualquer seguimento diferenciado.</div>
+   <div class="ac-tip"><b>Frase para gravar:</b> "margem comprometida pede mais vigilancia, nao necessariamente mais cirurgia; e o risco de recidiva cai muito depois dos 2 primeiros anos."</div>`]
+ ],
+};
+
+Object.assign(C['tratogenital|3'], {
+ escores:`
+   <div class="ac-h">Seguimento por status de margem</div>
+   <table class="ac-tbl">
+     <tr><th>Status da margem</th><th>Seguimento</th></tr>
+     <tr><td>Livre</td><td>citologia (+/- colposcopia) aos 6 e 12 meses, depois anual</td></tr>
+     <tr><td>Comprometida por lesao de baixo grau</td><td>citologia semestral por 1 ano; apos 2 negativos, espaca o intervalo</td></tr>
+     <tr><td>Comprometida por lesao de alto grau (sobretudo endocervical)</td><td>citologia + colposcopia semestral por 2 anos; reconizacao se doenca residual/persistente</td></tr>
+   </table>
+   <div class="ac-h" style="margin-top:14px">Curva de risco de recidiva</div>
+   <div class="ac-call">Cerca de <b>85% das recidivas</b> ocorrem nos <b>2 primeiros anos</b> apos o tratamento — por isso o seguimento comeca apertado e vai se espacando.</div>`,
+ dif:`
+   <div class="ac-h">Diferenciais no seguimento</div>
+   <table class="ac-tbl">
+     <tr><th>Confusao comum</th><th>Diferenciar</th><th>Chave</th></tr>
+     <tr><td>Doenca residual x recidiva</td><td>tempo de aparecimento</td><td>residual = ficou desde o inicio; recidiva = reaparece apos periodo livre de doenca</td></tr>
+     <tr><td>Margem comprometida x indicacao de reoperar</td><td>vigilancia x cirurgia</td><td>margem comprometida pede seguimento mais proximo; reoperar so se houver doenca residual/persistente comprovada ou risco muito alto</td></tr>
+     <tr><td>Margem endocervical x ectocervical comprometida</td><td>risco de doenca residual</td><td>endocervical e a mais critica, pois o canal fica fora do alcance direto da colposcopia</td></tr>
+     <tr><td>Teste de HPV x citologia no seguimento</td><td>valor preditivo</td><td>HPV negativo tem valor preditivo negativo mais alto que citologia isolada</td></tr>
+     <tr><td>CAF x conizacao a frio</td><td>tecnica</td><td>CAF usa alca diatermica (ambulatorial); conizacao a frio usa bisturi, reservada a situacoes especiais (ex.: suspeita de invasao ou peca maior necessaria)</td></tr>
+   </table>`,
+ mapa:`
+   <div class="ac-h">Seguimento pos-tratamento em mapa (cards)</div>
+   <div class="mm">
+     <div class="mm-card"><h5>Margens</h5><ul><li>Ectocervical, endocervical, profunda</li><li>Endocervical e a mais critica</li><li>Livre reduz mas nao zera o risco</li></ul></div>
+     <div class="mm-card"><h5>Margens livres</h5><ul><li>Citologia 6 e 12 meses</li><li>Depois anual</li><li>So depois retorna ao trienal</li></ul></div>
+     <div class="mm-card"><h5>Margens comprometidas</h5><ul><li>Nao e reoperar automatico</li><li>Citologia+colposcopia semestral 2 anos</li><li>Reconizacao se doenca residual</li></ul></div>
+     <div class="mm-card"><h5>Teste de HPV</h5><ul><li>"Teste de cura"</li><li>Alto valor preditivo negativo</li><li>Positivo persistente = mais vigilancia</li></ul></div>
+     <div class="mm-card"><h5>Retorno a rotina</h5><ul><li>So apos vigilancia completa sem doenca</li><li>85% das recidivas em 2 anos</li><li>Sem atalhos</li></ul></div>
+     <div class="mm-card"><h5>Complicacoes</h5><ul><li>Sangramento, estenose</li><li>Insuficiencia istmocervical</li><li>Maior risco de parto pre-termo</li></ul></div>
+   </div>`,
+ fluxo_dx:`
+   <div class="ac-h">Interpretando o resultado da peca</div>
+   <div class="fx">
+     <div class="fx-node start">Resultado anatomopatologico da peca (CAF/conizacao)</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Status das margens</div>
+     <div class="fx-row">
+       <div class="fx-node end">Livres -> seguimento padrao (6, 12 meses, depois anual)</div>
+       <div class="fx-node">Comprometidas -> avaliar grau da lesao e qual margem</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-row">
+       <div class="fx-node">Baixo grau -> semestral por 1 ano</div>
+       <div class="fx-node end">Alto grau (sobretudo endocervical) -> citologia+colposcopia semestral por 2 anos</div>
+     </div>
+   </div>`,
+ fluxo_cond:`
+   <div class="ac-h">Quando considerar reconizacao</div>
+   <div class="fx">
+     <div class="fx-node start">Margem comprometida por lesao de alto grau</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node">Seguimento intensificado (citologia + colposcopia semestral)</div>
+     <div class="fx-arrow"></div>
+     <div class="fx-lbl">Surge evidencia de doenca residual/persistente no seguimento?</div>
+     <div class="fx-row">
+       <div class="fx-node end">Nao -> mantem seguimento ate completar vigilancia</div>
+       <div class="fx-node end">Sim, ou risco muito alto (dificil seguimento/prole definida) -> considerar reconizacao</div>
+     </div>
+     <div class="fx-arrow"></div>
+     <div class="fx-node end">Vigilancia completa sem doenca -> retorno ao rastreio de rotina trienal</div>
+   </div>`,
+ vespera:`
+   <div class="ac-h">Revisao de vespera</div>
+   <div class="ac-call"><b>Curva de risco:</b> cerca de 85% das recidivas ocorrem nos 2 primeiros anos apos o tratamento.</div>
+   <div class="ac-call"><b>Margens livres:</b> citologia (+/- colposcopia) aos 6 e 12 meses, depois anual, ate periodo de vigilancia completo.</div>
+   <div class="ac-call"><b>Margens comprometidas (alto grau/endocervical):</b> citologia + colposcopia semestral por 2 anos; reconizacao so se doenca residual/persistente ou risco muito alto.</div>
+   <div class="ac-call"><b>Teste de HPV pos-tratamento ("teste de cura"):</b> alto valor preditivo negativo; positivo persistente aumenta vigilancia.</div>
+   <div class="ac-call"><b>Retorno ao rastreio trienal:</b> so apos completar a vigilancia intensificada com exames consecutivos negativos.</div>
+   <div class="ac-call"><b>Complicacao reprodutiva:</b> insuficiencia istmocervical -> risco de parto pre-termo, proporcional ao volume de tecido retirado.</div>`,
+ dicas:`
+   <div class="ac-h">Dicas de ouro</div>
+   <div class="ac-tip">Margem endocervical comprometida e a mais critica, pois o canal fica fora do alcance direto da colposcopia subsequente.</div>
+   <div class="ac-tip">Teste de HPV negativo pos-tratamento tranquiliza mais que citologia isolada (altissimo valor preditivo negativo).</div>
+   <div class="ac-tip">Quanto maior o cone retirado, maior o risco futuro de parto pre-termo — mais um motivo para tratar so o necessario.</div>
+   <div class="ac-h" style="margin-top:14px">Erros que reprovam</div>
+   <div class="ac-warn">Reoperar automaticamente toda margem comprometida.</div>
+   <div class="ac-warn">Liberar para rastreio trienal logo apos o primeiro exame de controle negativo.</div>
+   <div class="ac-warn">Ignorar o teste de HPV pos-tratamento no seguimento.</div>
+   <div class="ac-warn">Nao alertar a gestante com historico de CAF/conizacao sobre risco de parto pre-termo.</div>
+   <div class="ac-warn">Achar que margem livre dispensa qualquer seguimento diferenciado do rastreio de rotina.</div>`,
+ checklist:[
+   'Explico por que o seguimento pos-tratamento e tao importante quanto o proprio tratamento',
+   'Sei as tres margens da peca (ectocervical, endocervical, profunda) e qual e mais critica',
+   'Sei o protocolo de seguimento com margens livres',
+   'Sei o protocolo de seguimento com margens comprometidas e quando considerar reconizacao',
+   'Entendo o papel e o valor preditivo do teste de HPV pos-tratamento',
+   'Sei quando a paciente pode retornar ao rastreio de rotina trienal',
+   'Conheco as complicacoes do CAF/conizacao, especialmente a implicacao obstetrica'
+ ],
+});
+
+Object.assign(C['tratogenital|3'], {
+ questoes:[
+  {stem:'Aproximadamente que proporcao das recidivas apos tratamento de NIC ocorre nos primeiros 2 anos?',
+   opts:['Cerca de 20%','Cerca de 50%','Cerca de 85%','Praticamente 100% ocorre apos 5 anos'],correct:2,
+   expl:'Estima-se que cerca de <b>85% das recidivas</b> se manifestem nos <b>2 primeiros anos</b> apos o tratamento, o que justifica um seguimento mais proximo nesse periodo.'},
+  {stem:'Qual das margens da peca de CAF/conizacao e considerada a mais critica quando comprometida?',
+   opts:['Margem ectocervical','Margem endocervical','Margem cutanea','Nenhuma margem tem relevancia clinica'],correct:1,
+   expl:'A margem <b>endocervical</b> e a mais critica: se comprometida, pode haver doenca residual dentro do canal, uma area que fica fora do alcance direto da colposcopia subsequente.'},
+  {stem:'Mulher submetida a CAF por NIC3, com margens livres na peca. Qual o esquema de seguimento inicial mais apropriado?',
+   opts:['Citologia unica aos 5 anos','Citologia (+/- colposcopia) aos 6 e 12 meses, depois anual','Retorno imediato ao rastreio trienal','Histerectomia profilatica'],correct:1,
+   expl:'Com margens livres, o seguimento padrao e <b>citologia (+/- colposcopia) aos 6 e 12 meses</b>, passando a <b>anual</b> apos dois exames negativos, antes do retorno ao rastreio trienal.'},
+  {stem:'Mulher com margem endocervical comprometida por NIC3 apos CAF. Qual a conduta inicial mais apropriada?',
+   opts:['Reconizacao imediata em todos os casos','Seguimento com citologia e colposcopia a cada 6 meses por 2 anos, reservando reconizacao para evidencia de doenca residual','Histerectomia total imediata','Alta para rastreio de rotina trienal'],correct:1,
+   expl:'Margem comprometida por lesao de alto grau exige <b>seguimento mais rigoroso</b> (citologia + colposcopia semestral por 2 anos); a reconizacao e reservada a evidencia real de doenca residual/persistente ou situacoes de risco muito alto.'},
+  {stem:'Sobre o teste de HPV realizado apos o tratamento de NIC (o chamado "teste de cura"), e correto afirmar que:',
+   opts:['Tem baixo valor preditivo, sendo dispensavel','Um resultado negativo tem alto valor preditivo negativo para ausencia de doenca residual/recidiva','So pode ser realizado em gestantes','Substitui a necessidade de qualquer citologia futura'],correct:1,
+   expl:'O teste de HPV pos-tratamento tem <b>altissimo valor preditivo negativo</b>: quando negativo, a chance de doenca residual ou recidiva no seguimento e muito baixa.'},
+  {stem:'Qual das opcoes abaixo melhor descreve a complicacao reprodutiva mais relevante do CAF/conizacao?',
+   opts:['Infertilidade definitiva em todas as pacientes','Insuficiencia istmocervical, associada a maior risco de parto pre-termo em gestacoes futuras','Anovulacao cronica','Aumento do risco de gravidez ectopica'],correct:1,
+   expl:'A remocao de tecido do colo pode comprometer sua funcao de sustentacao na gestacao, aumentando o risco de <b>insuficiencia istmocervical e parto pre-termo</b>, proporcionalmente ao volume de tecido retirado.'},
+  {stem:'Mulher com margem comprometida por lesao de baixo grau apos tratamento excisional. Qual o seguimento mais apropriado, comparado a margem comprometida por alto grau?',
+   opts:['Identico, pois toda margem comprometida exige o mesmo rigor','Pode ser um pouco menos intenso, como citologia semestral por 1 ano','Deve ser interrompido, pois baixo grau nao precisa de seguimento','Exige histerectomia imediata'],correct:1,
+   expl:'Margem comprometida por lesao de <b>baixo grau</b> tem menor risco intrinseco, permitindo um seguimento um pouco menos intenso (ex.: citologia semestral por 1 ano) comparado ao comprometimento por alto grau.'},
+  {stem:'Em que momento uma mulher tratada para NIC3, com margens livres, pode retornar ao rastreio trienal de rotina?',
+   opts:['Imediatamente apos o procedimento','Apos o primeiro exame de controle negativo, aos 6 meses','Somente apos completar o periodo de vigilancia intensificada com exames consecutivos negativos','Nunca mais pode fazer rastreio trienal'],correct:2,
+   expl:'O retorno ao rastreio trienal so ocorre apos <b>completar</b> a sequencia de vigilancia intensificada (6, 12 meses, depois anual) com exames consecutivamente negativos — nao ha atalho pelo primeiro exame negativo.'},
+  {stem:'Gestante com historico de CAF ha 2 anos por NIC3. Qual conduta obstetrica adicional e mais apropriada?',
+   opts:['Nenhuma, pois o CAF nao tem relevancia obstetrica','Informar o antecedente no pre-natal e considerar avaliacao do comprimento do colo, pelo risco de parto pre-termo','Indicar cesariana eletiva obrigatoria','Repetir o CAF durante a gestacao'],correct:1,
+   expl:'O antecedente de CAF/conizacao deve ser informado no pre-natal, com atencao a sinais de <b>parto pre-termo</b> e, quando pertinente, avaliacao do comprimento do colo por ultrassonografia transvaginal.'},
+  {stem:'Por que a curva de risco de recidiva justifica um seguimento mais apertado logo apos o tratamento?',
+   opts:['Porque o risco e constante ao longo de toda a vida','Porque a maior parte das recidivas se concentra nos primeiros anos apos o tratamento, caindo depois','Porque nao ha nenhuma relacao entre tempo e risco de recidiva','Porque o risco so aparece apos 10 anos'],correct:1,
+   expl:'Como a maioria das recidivas ocorre nos <b>primeiros 2 anos</b>, faz sentido concentrar a vigilancia mais proxima logo apos o tratamento, espacando os exames conforme o risco cai.'},
+  {stem:'Qual achado na peca de CAF/conizacao reduz, mas NAO elimina, a chance de recidiva?',
+   opts:['Margem comprometida','Margem livre','Ausencia de qualquer margem na peca','Teste de HPV positivo'],correct:1,
+   expl:'Mesmo com <b>margem livre</b>, ainda existe alguma chance de recidiva (por isso o seguimento continua sendo mais proximo que o rastreio de rotina nos primeiros anos), embora o risco seja bem menor do que com margem comprometida.'},
+  {stem:'Sobre a decisao entre seguir em vigilancia ou indicar reconizacao diante de margem comprometida, e correto afirmar que:',
+   opts:['A reconizacao e sempre a primeira opcao, independente do seguimento','A decisao pondera o risco de doenca residual contra o risco obstetrico de um novo procedimento excisional','So se considera reconizacao apos 10 anos de seguimento','Margem comprometida nunca leva a reconizacao, em nenhuma hipotese'],correct:1,
+   expl:'A escolha entre manter vigilancia ou reconizar pondera o <b>risco individual de doenca residual</b> (grau da lesao, qual margem, dificuldade de seguimento) contra o <b>risco obstetrico</b> de retirar mais tecido do colo.'}
+ ],
+ flashcards:[
+  {front:'Por que o seguimento pos-tratamento e essencial mesmo com o CAF/conizacao bem-sucedido?',back:'O tratamento remove a area biopsiada, mas nao garante 100% que todo HPV persistente foi eliminado — pode haver doenca residual ou recidiva.',type:'basic'},
+  {front:'Quando ocorre a maioria das recidivas apos o tratamento?',back:'Cerca de {{85%}} nos primeiros {{2 anos}} apos o tratamento.',type:'cloze'},
+  {front:'As tres margens avaliadas na peca de CAF/conizacao.',back:'Ectocervical, endocervical e profunda (estromal).',type:'basic'},
+  {front:'Qual margem e considerada a mais critica quando comprometida?',back:'A margem endocervical, porque o canal fica fora do alcance direto da colposcopia subsequente.',type:'basic'},
+  {front:'Seguimento padrao com margens livres.',back:'Citologia (+/- colposcopia) aos 6 e 12 meses; apos 2 negativos, passa a anual.',type:'basic'},
+  {front:'Seguimento com margem comprometida por lesao de alto grau.',back:'Citologia + colposcopia a cada 6 meses por 2 anos; reconizacao so se houver doenca residual/persistente ou risco muito alto.',type:'basic'},
+  {front:'Margem comprometida sempre exige reoperar?',back:'Nao. A conduta padrao e intensificar o seguimento, nao reoperar automaticamente.',type:'basic'},
+  {front:'O que e o "teste de cura" no seguimento pos-tratamento?',back:'O teste de HPV pos-tratamento, com altissimo valor preditivo negativo quando vem negativo.',type:'basic'},
+  {front:'O que significa teste de HPV positivo persistente no seguimento?',back:'Sinaliza possivel doenca residual ou nova infeccao, exigindo vigilancia mais atenta mesmo com citologia normal.',type:'basic'},
+  {front:'Quando a paciente pode retornar ao rastreio trienal de rotina?',back:'Somente apos completar toda a vigilancia intensificada com exames consecutivos negativos, nunca logo apos o primeiro controle.',type:'basic'},
+  {front:'Complicacao obstetrica mais relevante do CAF/conizacao.',back:'Insuficiencia istmocervical, com maior risco de parto pre-termo em gestacoes futuras.',type:'basic'},
+  {front:'O risco obstetrico futuro se relaciona com o que na cirurgia?',back:'Com o volume de tecido retirado (cones mais profundos/largos e multiplos procedimentos aumentam o risco).',type:'basic'},
+  {front:'Diferenca de seguimento entre margem comprometida por baixo grau e por alto grau.',back:'Baixo grau: citologia semestral por 1 ano. Alto grau (sobretudo endocervical): citologia + colposcopia semestral por 2 anos.',type:'basic'},
+  {front:'O que orientar a uma gestante com historico de CAF/conizacao no pre-natal?',back:'Informar o antecedente e considerar avaliacao do comprimento do colo, pelo risco de parto pre-termo.',type:'basic'}
+ ],
+ casos:[
+  {t:'Caso 1 — Margens livres apos CAF',
+   stem:'Mulher de 30 anos tratada com CAF para NIC3, peca com margens livres. Primeira citologia de controle, aos 6 meses, negativa.',
+   passos:[
+     {h:'1. Pode ja retornar ao rastreio trienal?',p:'Nao. Apesar de <b>margens livres</b> e do primeiro controle negativo, e preciso completar a sequencia de vigilancia (6, 12 meses, depois anual).'},
+     {h:'2. Proximo exame',p:'Repetir citologia (+/- colposcopia) aos <b>12 meses</b>.'},
+     {h:'3. Se os dois exames vierem negativos',p:'Passa para seguimento <b>anual</b>, mantido ate completar o periodo de vigilancia definido pelo servico.'},
+     {h:'4. So depois disso',p:'Retorna ao <b>rastreio trienal de rotina</b> da populacao geral.'},
+     {h:'Licao de prova',p:'Margem livre reduz o risco, mas nao dispensa a sequencia completa de vigilancia antes do retorno ao rastreio trienal.'}
+   ]},
+  {t:'Caso 2 — Margem endocervical comprometida',
+   stem:'Mulher de 36 anos tratada com CAF para NIC3, peca com margem endocervical comprometida pela lesao de alto grau.',
+   passos:[
+     {h:'1. Isso significa reoperar de imediato?',p:'Nao necessariamente. A conduta inicial e <b>intensificar o seguimento</b>, nao reconizar automaticamente.'},
+     {h:'2. Esquema de seguimento',p:'Citologia + colposcopia a cada <b>6 meses, por 2 anos</b>, pela margem comprometida de alto grau.'},
+     {h:'3. Quando considerar reconizacao?',p:'Se surgir evidencia de <b>doenca residual ou persistente</b> durante esse seguimento, ou se houver fatores de risco adicionais (dificuldade de seguimento regular, prole definida).'},
+     {h:'4. Reforco util',p:'O teste de HPV pos-tratamento, se disponivel, ajuda a estimar melhor o risco individual (negativo tranquiliza bastante).'},
+     {h:'Licao de prova',p:'Margem endocervical comprometida por alto grau = vigilancia mais proxima primeiro; reconizacao so com evidencia de doenca residual/persistente.'}
+   ]},
+  {t:'Caso 3 — Gestacao apos conizacao',
+   stem:'Mulher de 29 anos, gestante de 16 semanas, com historico de conizacao ha 3 anos por NIC3. Pergunta sobre riscos na gestacao atual.',
+   passos:[
+     {h:'1. Ha algum risco especifico?',p:'Sim — historico de conizacao esta associado a maior risco de <b>insuficiencia istmocervical e parto pre-termo</b>.'},
+     {h:'2. O que fazer no pre-natal?',p:'Registrar o antecedente e considerar <b>avaliacao do comprimento do colo</b> por ultrassonografia transvaginal ao longo da gestacao.'},
+     {h:'3. O tamanho do cone importa?',p:'Sim — quanto maior o volume de tecido retirado no procedimento, maior tende a ser o risco obstetrico.'},
+     {h:'4. Isso muda a via de parto?',p:'Nao automaticamente; a decisao sobre via de parto segue os criterios obstetricos habituais, mas a vigilancia para parto pre-termo deve ser reforcada.'},
+     {h:'Licao de prova',p:'Historico de conizacao = alertar a equipe obstetrica e vigiar parto pre-termo, proporcional ao volume de tecido retirado no passado.'}
+   ]}
+ ],
+});
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+
 </body>
 </html>
