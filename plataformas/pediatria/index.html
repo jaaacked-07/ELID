@@ -870,12 +870,8 @@ function bkStats(){
 // Cada item: {id:'slug', nm:'Nome do tema', ref:'categoria|indice'} — "ref" deve apontar para um
 // módulo que EXISTE de fato em MODULES (ver checklist de auditoria em references/plataforma.md).
 // NUNCA deixar temas/bancas de outra especialidade aqui (eles apontariam para módulos inexistentes).
-const TEMA_LIST=[
-  // {id:'exemplo', nm:'Nome do tema mais cobrado', ref:'categoria|0'},
-];
-const BANCA={
-  ENARE:{}, REVALIDA:{}, 'PSU-MG':{}, 'SES-RJ':{}, UFRJ:{}, UERJ:{},
-};
+const TEMA_LIST=[{"id": "aleitamento", "nm": "Aleitamento Materno", "ref": "puericultura|1"}, {"id": "calendario_vacinal", "nm": "Calendário Vacinal do PNI", "ref": "imunizacao|0"}, {"id": "diarreia_planos", "nm": "Diarreia Aguda: Avaliação & Planos A/B/C", "ref": "diarreia|0"}, {"id": "tro_calculos", "nm": "TRO & Cálculos de Reidratação", "ref": "diarreia|1"}, {"id": "pneumonia_bronquiolite", "nm": "Pneumonia & Bronquiolite", "ref": "respiratorias|2"}, {"id": "asma_infancia", "nm": "Asma na Infância", "ref": "asma|0"}, {"id": "reanimacao_neonatal", "nm": "Reanimação Neonatal", "ref": "neonatologia|0"}, {"id": "ictericia_neonatal", "nm": "Icterícia Neonatal", "ref": "neonatologia|1"}, {"id": "sepse_prematuridade", "nm": "Sepse & Prematuridade", "ref": "neonatologia|2"}, {"id": "triagem_neonatal", "nm": "Triagens Neonatais & Hipoglicemia", "ref": "neonatologia|3"}, {"id": "dnpm", "nm": "Desenvolvimento Neuropsicomotor", "ref": "crescimento|0"}, {"id": "curvas_crescimento", "nm": "Avaliação do Crescimento & Curvas OMS", "ref": "crescimento|1"}, {"id": "desnutricao", "nm": "Desnutrição", "ref": "nutricao|0"}, {"id": "sifilis_congenita", "nm": "Sífilis Congênita", "ref": "congenitas|0"}, {"id": "pcr_choque", "nm": "PCR & Choque", "ref": "emergencias|0"}, {"id": "convulsao", "nm": "Convulsão & Estado de Mal", "ref": "emergencias|2"}, {"id": "exantematicas", "nm": "Doenças Exantemáticas Clássicas", "ref": "exantematicas|0"}, {"id": "crupe_epiglotite", "nm": "Crupe & Epiglotite", "ref": "respiratorias|1"}, {"id": "sopros", "nm": "Sopros Cardíacos na Infância", "ref": "cardiologia|0"}, {"id": "cardiopatias_congenitas", "nm": "Cardiopatias Congênitas", "ref": "cardiologia|1"}, {"id": "anemias", "nm": "Anemias na Infância", "ref": "hematologia|0"}, {"id": "sindromes_geneticas", "nm": "Down · Turner · Klinefelter", "ref": "genetica|0"}, {"id": "consultas_triagens", "nm": "Consultas & Triagens de Puericultura", "ref": "puericultura|0"}, {"id": "introducao_alimentar", "nm": "Introdução Alimentar", "ref": "puericultura|2"}];
+const BANCA={"ENARE": {"aleitamento": 5, "calendario_vacinal": 5, "diarreia_planos": 5, "tro_calculos": 4, "pneumonia_bronquiolite": 4, "asma_infancia": 4, "reanimacao_neonatal": 4, "ictericia_neonatal": 3, "sepse_prematuridade": 3, "triagem_neonatal": 3, "dnpm": 4, "curvas_crescimento": 3, "desnutricao": 3, "sifilis_congenita": 3, "pcr_choque": 3, "convulsao": 3, "exantematicas": 3, "crupe_epiglotite": 3, "sopros": 2, "cardiopatias_congenitas": 3, "anemias": 2, "sindromes_geneticas": 2, "consultas_triagens": 4, "introducao_alimentar": 4}, "REVALIDA": {"aleitamento": 5, "calendario_vacinal": 5, "diarreia_planos": 5, "tro_calculos": 5, "pneumonia_bronquiolite": 4, "asma_infancia": 4, "reanimacao_neonatal": 3, "ictericia_neonatal": 3, "sepse_prematuridade": 2, "triagem_neonatal": 2, "dnpm": 3, "curvas_crescimento": 3, "desnutricao": 4, "sifilis_congenita": 4, "pcr_choque": 3, "convulsao": 2, "exantematicas": 3, "crupe_epiglotite": 3, "sopros": 2, "cardiopatias_congenitas": 2, "anemias": 2, "sindromes_geneticas": 1, "consultas_triagens": 4, "introducao_alimentar": 4}, "PSU-MG": {"aleitamento": 3, "calendario_vacinal": 4, "diarreia_planos": 4, "tro_calculos": 3, "pneumonia_bronquiolite": 4, "asma_infancia": 3, "reanimacao_neonatal": 5, "ictericia_neonatal": 4, "sepse_prematuridade": 5, "triagem_neonatal": 4, "dnpm": 3, "curvas_crescimento": 2, "desnutricao": 3, "sifilis_congenita": 3, "pcr_choque": 5, "convulsao": 4, "exantematicas": 2, "crupe_epiglotite": 4, "sopros": 3, "cardiopatias_congenitas": 3, "anemias": 2, "sindromes_geneticas": 2, "consultas_triagens": 3, "introducao_alimentar": 2}, "SES-RJ": {"aleitamento": 4, "calendario_vacinal": 4, "diarreia_planos": 4, "tro_calculos": 4, "pneumonia_bronquiolite": 3, "asma_infancia": 3, "reanimacao_neonatal": 4, "ictericia_neonatal": 3, "sepse_prematuridade": 4, "triagem_neonatal": 3, "dnpm": 2, "curvas_crescimento": 2, "desnutricao": 3, "sifilis_congenita": 5, "pcr_choque": 4, "convulsao": 3, "exantematicas": 4, "crupe_epiglotite": 3, "sopros": 2, "cardiopatias_congenitas": 2, "anemias": 3, "sindromes_geneticas": 1, "consultas_triagens": 3, "introducao_alimentar": 3}, "UFRJ": {"aleitamento": 3, "calendario_vacinal": 3, "diarreia_planos": 3, "tro_calculos": 2, "pneumonia_bronquiolite": 3, "asma_infancia": 3, "reanimacao_neonatal": 4, "ictericia_neonatal": 4, "sepse_prematuridade": 4, "triagem_neonatal": 3, "dnpm": 4, "curvas_crescimento": 4, "desnutricao": 2, "sifilis_congenita": 3, "pcr_choque": 3, "convulsao": 4, "exantematicas": 3, "crupe_epiglotite": 3, "sopros": 4, "cardiopatias_congenitas": 5, "anemias": 4, "sindromes_geneticas": 4, "consultas_triagens": 2, "introducao_alimentar": 2}, "UERJ": {"aleitamento": 3, "calendario_vacinal": 3, "diarreia_planos": 3, "tro_calculos": 2, "pneumonia_bronquiolite": 3, "asma_infancia": 3, "reanimacao_neonatal": 3, "ictericia_neonatal": 3, "sepse_prematuridade": 3, "triagem_neonatal": 3, "dnpm": 4, "curvas_crescimento": 3, "desnutricao": 2, "sifilis_congenita": 4, "pcr_choque": 3, "convulsao": 3, "exantematicas": 3, "crupe_epiglotite": 3, "sopros": 3, "cardiopatias_congenitas": 4, "anemias": 3, "sindromes_geneticas": 3, "consultas_triagens": 2, "introducao_alimentar": 2}};
 let temaBanca='ENARE';
 function viewTemas(){
   const bancas=Object.keys(BANCA);
@@ -2924,7 +2920,28 @@ function marcosAte(m){ var out=MARCOS_SORTED.filter(function(x){return x.m<=m;})
 function vacinasDaIdade(m){ var g=OLD_VACINAS.filter(function(x){return x.m===m;}); return g.length?g[0].items:[]; }
 
 /* ---------- estado (persistido junto do S() padrão da plataforma) ---------- */
-function cadState(){ var s=S(); if(!s.cad) s.cad={name:'',asked:false,tab:'cresc'}; return s.cad; }
+/* cadState(): estado da caderneta (nome/asked/tab) persistido DENTRO do mapa
+   done{} (com chaves prefixadas 'cad|') em vez de um campo solto s.cad{}.
+   Motivo: a funcao mergeState() do nucleo (script Firebase, escopo proprio,
+   inacessivel/nao-sobrescritivel daqui) so mescla campos de uma lista fixa
+   (done/srs/notes/dia/diaSeen/hl/cards/qSeen/qRight/xp) ao combinar o estado
+   local (localStorage) com o estado da nuvem a cada reload - qualquer campo
+   fora dessa lista (como um s.cad{} solto) e SILENCIOSAMENTE DESCARTADO a
+   cada merge, fazendo o nome"pedido so 1x" reaparecer a cada recarregamento.
+   O mapa done{} esta na lista mesclada corretamente, entao guardar tudo la
+   dentro (com prefixo 'cad|' pra nao colidir com as chaves 'ck|...' dos
+   checklists) resolve o problema sem tocar no nucleo do shell. */
+function cadState(){
+  var s=S(); var d=(s.done=s.done||{});
+  return {
+    get name(){ return d['cad|name']||''; },
+    set name(v){ d['cad|name']=v; },
+    get asked(){ return !!d['cad|asked']; },
+    set asked(v){ d['cad|asked']=!!v; },
+    get tab(){ return d['cad|tab']||'cresc'; },
+    set tab(v){ d['cad|tab']=v; }
+  };
+}
 function totalChecked(){
   var s=S(), done=s.done||{}, n=0;
   for(var k in done){ if(Object.prototype.hasOwnProperty.call(done,k) && k.indexOf('ck|')===0 && done[k]) n++; }
@@ -3059,6 +3076,8 @@ function injectCadStyles(){
   .cad-child-wrap{width:118px;height:118px;flex:none;color:var(--accent);position:relative}
   .cad-child-svg{width:100%;height:100%;transition:opacity .9s ease, transform .9s ease}
   .cad-stage-lbl{font-weight:700;font-size:1.05rem;margin-top:2px}
+  .cad-name-edit{font-weight:400;font-size:.72rem;color:var(--muted);cursor:pointer;margin-left:6px;white-space:nowrap}
+  .cad-name-edit:hover{color:var(--accent);text-decoration:underline}
   .cad-curve-wrap{flex:1;min-width:220px}
   .cad-curve-svg{width:100%;height:110px}
   .cad-curve-line{stroke-dasharray:600;stroke-dashoffset:600;animation:cadDraw 1.6s ease forwards}
@@ -3125,30 +3144,37 @@ function cadModal(html){
   setTimeout(function(){ov.classList.add('show');},10);
 }
 
-/* ---------- prompt do nome da criança (1ª visita, salvo por usuário via S()/save()) ---------- */
-function cadAskName(){
+/* ---------- prompt do nome da crianca (1a visita, salvo por usuario via S()/save())
+   e tambem reutilizado (force=true) pelo botao "Alterar nome" dentro da caderneta ---------- */
+function cadAskName(force){
   var cs=cadState();
-  if(cs.asked) return;
-  if(window.__cadNamePromptShown) return; // evita popup duplicado se bootUI rodar 2x na mesma sessao
-  window.__cadNamePromptShown = true;
+  if(!force){
+    if(cs.asked) return;
+    if(window.__cadNamePromptShown) return; // evita popup duplicado se bootUI rodar 2x na mesma sessao
+    window.__cadNamePromptShown = true;
+  }
   var ov=document.createElement('div'); ov.className='cad-name-ov';
   ov.innerHTML='<div class="cad-name-box">'+
     '<div style="width:60px;height:60px;margin:0 auto 6px;color:var(--accent)">'+(window.__CAD_LOGO_SVG__||'')+'</div>'+
-    '<h3 style="color:var(--accent)">Vamos começar a Caderneta?</h3>'+
-    '<p style="color:var(--muted);font-size:.86rem;margin-top:6px">Dê um nome para a criança da sua caderneta. Ela vai crescendo conforme você domina os módulos de Pediatria. Isso só será perguntado uma vez.</p>'+
-    '<input id="cadNameInput" placeholder="Ex.: Bento, Alice...">'+
-    '<div class="btn-primary" id="cadNameGo" style="cursor:pointer;display:inline-block">Começar 🧸</div>'+
+    '<h3 style="color:var(--accent)">'+(force?'Alterar nome da criança':'Vamos começar a Caderneta?')+'</h3>'+
+    '<p style="color:var(--muted);font-size:.86rem;margin-top:6px">'+(force?'Digite o novo nome para a criança da sua caderneta.':'Dê um nome para a criança da sua caderneta. Ela vai crescendo conforme você domina os módulos de Pediatria. Isso só será perguntado uma vez.')+'</p>'+
+    '<input id="cadNameInput" placeholder="Ex.: Bento, Alice..." value="'+esc(cs.name||'')+'">'+
+    '<div class="btn-primary" id="cadNameGo" style="cursor:pointer;display:inline-block">'+(force?'Salvar':'Começar 🧸')+'</div>'+
   '</div>';
   document.body.appendChild(ov);
   var go=function(){
     var v=(document.getElementById('cadNameInput').value||'').trim();
     cs.name=v||'Seu paciente'; cs.asked=true; save();
     ov.remove();
-    try{ if(typeof route!=='undefined' && route && route.view==='collection' && typeof renderRoute==='function') renderRoute(); }catch(e){}
+    try{
+      if(typeof route!=='undefined' && route && route.view==='collection' && typeof renderRoute==='function'){ renderRoute(); }
+      else if(window.viewCollection && document.getElementById('main')){ document.getElementById('main').innerHTML=window.viewCollection(); }
+    }catch(e){}
   };
   document.getElementById('cadNameGo').onclick=go;
   document.getElementById('cadNameInput').addEventListener('keydown',function(e){ if(e.key==='Enter') go(); });
 }
+window.__cadChangeName=function(){ cadAskName(true); };
 
 /* ---------- render: Página 1 — Crescimento ---------- */
 function viewCadCrescimento(){
@@ -3168,7 +3194,7 @@ function viewCadCrescimento(){
   var last=unlockedPts[unlockedPts.length-1];
   var h='<div class="cad-hero">'+
     '<div class="cad-child-wrap"><div id="cadChildSvg">'+childSVG(idx)+'</div></div>'+
-    '<div><div class="cad-stage-lbl">'+esc(cs.name||'Seu paciente')+' · '+CAD_STAGES[idx].label+'</div></div>'+
+    '<div><div class="cad-stage-lbl">'+esc(cs.name||'Seu paciente')+' · '+CAD_STAGES[idx].label+' <span class="cad-name-edit" onclick="window.__cadChangeName()" title="Alterar nome da criança">✎ Alterar nome</span></div></div>'+
     '<div class="cad-curve-wrap"><svg class="cad-curve-svg" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">'+
       '<polyline points="'+pts+'" fill="none" stroke="currentColor" class="cad-curve-line" style="color:var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'+
       '<circle cx="'+px(last[0]).toFixed(1)+'" cy="'+py(last[2]).toFixed(1)+'" r="4" class="cad-curve-dot"/>'+
@@ -3280,10 +3306,16 @@ window.acCk=function(el,arg,i){
   if(__cadPrevAcCk) __cadPrevAcCk(el,arg,i);
   var after=totalChecked();
   if(after>before){
-    var sIdxBefore=(function(n){var idx=0;for(var i=0;i<STAGE_CONQUISTAS;i++){var need=conquistaThreshold(CONQUISTA_SEQ.idxOf['stage:'+i]);if(n>=need)idx=i+1;}return idx;})(before);
-    var sIdxAfter=stageIdx();
-    injectCadStyles();
-    cadPopup(sIdxAfter>sIdxBefore ? ('Agora: '+CAD_STAGES[sIdxAfter].label) : 'Nova página da caderneta desbloqueada');
+    /* try/catch: o popup/som sao so um reforco visual -- se o navegador do
+       usuario bloquear AudioContext ou qualquer outra coisa aqui falhar,
+       isso NUNCA deve impedir o checklist de marcar (o toggle acima ja
+       aconteceu via __cadPrevAcCk antes desta linha). */
+    try{
+      var sIdxBefore=(function(n){var idx=0;for(var i=0;i<STAGE_CONQUISTAS;i++){var need=conquistaThreshold(CONQUISTA_SEQ.idxOf['stage:'+i]);if(n>=need)idx=i+1;}return idx;})(before);
+      var sIdxAfter=stageIdx();
+      injectCadStyles();
+      cadPopup(sIdxAfter>sIdxBefore ? ('Agora: '+CAD_STAGES[sIdxAfter].label) : 'Nova página da caderneta desbloqueada');
+    }catch(e){}
   }
 };
 
@@ -3340,7 +3372,10 @@ body.light{
     linear-gradient(160deg,#faf6f0,#efe5d6);
 }
 /* o ceu de bercario nao pode sumir no modo claro */
-body.light .bgart{ opacity:.34; color:var(--accent2); }
+/* ceu de berceario: opacidade um pouco maior (pedido do usuario) nos dois modos,
+   e mantendo visivel no modo claro (bug corrigido acima: sumia em body.light) */
+.bgart{ opacity:.20 !important; }
+body.light .bgart{ opacity:.42 !important; color:var(--accent2); }
 /* titulo das paginas usava gradiente de texto ink->accent; com o rosa pastel
    de Pediatria isso fica ilegivel no modo claro — no claro, cor solida */
 body.light .page-title h1{ background:none; -webkit-text-fill-color:unset; color:var(--ink); }
@@ -3433,11 +3468,17 @@ function moduleStatusLabel(st){ return st==='st-done' ? 'Concluído' : 'Em andam
 
 /* ---------- 1) Dashboard: card inicial + "Continue de onde parou" ---------- */
 function lastInProgressModule(){
-  var s=S(); var touch=(s.cad&&s.cad.touch)||{};
+  /* toques (ultimo modulo aberto) tambem guardados em done['cad|touch|<arg>']
+     pelo mesmo motivo do cadState() em caderneta.js: e o unico campo que
+     mergeState() do nucleo preserva corretamente entre reloads/merges. */
+  var s=S(); var done=s.done||{};
   var best=null, bestT=-1;
-  for(var arg in touch){
+  for(var k in done){
+    if(k.indexOf('cad|touch|')!==0) continue;
+    var arg=k.slice('cad|touch|'.length);
+    var t=done[k];
     var frac=moduleFractionLocal(arg);
-    if(frac<1 && touch[arg]>bestT){ best=arg; bestT=touch[arg]; }
+    if(frac<1 && t>bestT){ best=arg; bestT=t; }
   }
   return best;
 }
@@ -3517,42 +3558,20 @@ window.viewModules = function(){
 var __prevViewModule = window.viewModule;
 window.viewModule = function(arg){
   try{
-    var s=S(); s.cad=s.cad||{}; s.cad.touch=s.cad.touch||{}; s.cad.touch[arg]=Date.now(); save();
+    var s=S(); s.done=s.done||{}; s.done['cad|touch|'+arg]=Date.now(); save();
   }catch(e){}
   return __prevViewModule ? __prevViewModule(arg) : '';
 };
 
-/* ---------- 4) Central de Flashcards: sinalizar módulo estudado ----------
-   fccCardHTML/fccList/fccCatMap vivem numa IIFE do shell e não são
-   alcançáveis daqui (ver nota de escopo no topo do arquivo), então a
-   estratégia é reprocessar a STRING HTML já pronta que window.viewFcCenter
-   devolve (essa função É global — foi atribuída via 'window.viewFcCenter=').
-   Cada card de origem "plataforma" tem seu id codificado como
-   'fcc_m_<categoria><indiceDoModulo>_<indiceDoFlashcard>' (a barra "|" de
-   arg já foi removida pelo próprio engine ao montar o id, ex.: arg
-   'crescimento|0' vira 'crescimento0'); como os slugs de categoria desta
-   plataforma são só letras (sem dígitos), dá para decodificar de volta com
-   segurança via regex. */
-var __prevViewFcCenter = window.viewFcCenter;
-window.viewFcCenter = function(){
-  var html = __prevViewFcCenter ? __prevViewFcCenter() : '';
-  try{
-    html = html.replace(/id="(fcc_m_[a-zA-Z0-9_]+)"([\s\S]*?)<span class="fcc-origin-tag">Da plataforma<\/span>/g,
-      function(full, domId, mid){
-        var m = /^fcc_m_([a-z]+)(\d+)_\d+$/.exec(domId);
-        var badge = '';
-        if(m){
-          var arg = m[1]+'|'+m[2];
-          if((window.CONTENT||{})[arg]){
-            var st = moduleStatusClass(moduleFractionLocal(arg));
-            if(st) badge = '<span class="fcc-mod-tag '+st+'">'+moduleStatusLabel(st)+'</span>';
-          }
-        }
-        return 'id="'+domId+'"'+mid+'<span class="fcc-origin-tag">Da plataforma</span>'+badge;
-      });
-  }catch(e){}
-  return html;
-};
+/* ---------- 4) Central de Flashcards ----------
+   Reimplementada do zero em fixes_fcc.js (arquivo separado, carregado logo
+   depois deste): fccList/fccCardHTML/fccCatMap/window.viewFcCenter originais
+   do shell vivem numa IIFE propria e sao inacessiveis daqui (mesmo problema
+   de escopo de moduleFraction/modName, ver nota no topo). Expondo os
+   helpers de status de modulo para o arquivo de flashcards reutilizar. */
+window.__cadModuleFraction = moduleFractionLocal;
+window.__cadModuleStatusClass = moduleStatusClass;
+window.__cadModuleStatusLabel = moduleStatusLabel;
 
 /* ---------- 5) "Minhas Anotações" (dentro do módulo): bubble de formatação
    ao selecionar texto. O engine já mostra uma barra fixa de negrito/cor
@@ -3589,6 +3608,311 @@ document.addEventListener('mousedown', function(e){
     var b=document.getElementById('notes-fmt-bubble'); if(b) b.style.display='none';
   }
 });
+
+})();
+
+</script>
+<script>
+/* ===================================================================
+   Central de Flashcards — reimplementacao completa (Pediatria)
+   O shell entrega fccList/fccCardHTML/fccCatMap/window.viewFcCenter
+   originais dentro de uma IIFE propria (tag <script>(function(){...})();
+   por volta da linha 1740 do target_shell.html) que NAO expoe esses
+   nomes fora dali (nem em window, nem como identificador solto — testado
+   via jsdom: typeof window.fccList/fccCardHTML/fccCatMap === 'undefined').
+   Por isso, em vez de tentar "consertar" o original inacessivel, este
+   arquivo reconstroi a Central inteira aqui (mesmo padrao ja usado com
+   sucesso na plataforma de Ginecologia para adicionar a sessao de estudo),
+   somando:
+     - badge de modulo Concluido/Em andamento nos cards de origem "plataforma"
+     - botao "Estudar estes N cards" com sessao de estudo completa (SM-2)
+   O CSS (.fcc-card/.fcc-flip/.fcc-grid/etc.) e o item de nav "Central de
+   Flashcards" e o roteamento pra 'fccenter' JA existem no shell (nao
+   precisam ser re-adicionados aqui).
+   =================================================================== */
+(function(){
+"use strict";
+
+/* ---------- estado dos filtros + sessao de estudo (memoria da sessao) ---------- */
+var fccQ='', fccTop='__all', fccDiff='__all', fccOrigin='__all';
+var FCC_STUDYING=false, FCC_QUEUE=[], FCC_QIDX=0, fccsSide='front';
+
+function fccStrip(html){ return (html||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim(); }
+function fccNorm(s){ return (s||'').toString().toLowerCase().trim().replace(/\s+/g,' '); }
+
+/* dificuldade a partir do "ease" do SM-2 (S().srs[id].ease) -- e o esquema
+   que o motor desta plataforma realmente usa (window.__srsReview -> srsReview
+   no script do Firebase); sem entrada = Novo. */
+function fccDifficulty(id){
+  var srs=(window.S().srs)||{}; var e=srs[id];
+  if(!e) return 'novo';
+  if(e.ease<2.0) return 'dificil';
+  if(e.ease<=2.6) return 'medio';
+  return 'facil';
+}
+var FCC_DIFF_LABEL={novo:'Novo',dificil:'Difícil',medio:'Médio',facil:'Fácil'};
+var FCC_DIFF_CLASS={novo:'fcc-novo',dificil:'fcc-dificil',medio:'fcc-medio',facil:'fcc-facil'};
+
+function fccCatMap(){
+  var map={};
+  for(var ck in MODULES){
+    (MODULES[ck]||[]).forEach(function(nm){ map[fccNorm(nm)]=CH[ck]||ck; });
+  }
+  var CT=window.CONTENT||{};
+  for(var arg in CT){
+    var ck=arg.split('|')[0]; var nm=CT[arg]&&CT[arg].name;
+    if(nm) map[fccNorm(nm)]=CH[ck]||ck;
+  }
+  return map;
+}
+function fccTopics(cards){
+  var seen={}, list=[];
+  cards.forEach(function(c){ var t=c.top||'Geral'; var k=fccNorm(t); if(!seen[k]){seen[k]=1; list.push(t);} });
+  return list.sort(function(a,b){return a.localeCompare(b);});
+}
+function fccNextDue(id){
+  var srs=(window.S().srs)||{}; var e=srs[id];
+  if(!e || !e.due) return '—';
+  try{ return new Date(e.due).toLocaleDateString('pt-BR'); }catch(err){ return '—'; }
+}
+function fccArgFromId(id){
+  /* ids de flashcard da plataforma tem o formato 'm_<arg sem caracteres nao-palavra>_<indice>';
+     como a barra '|' de arg foi removida, e os slugs de categoria desta
+     plataforma sao so letras (sem digitos), da pra decodificar de volta. */
+  var m=/^m_([a-z]+)(\d+)_\d+$/.exec(id||'');
+  return m ? (m[1]+'|'+m[2]) : null;
+}
+
+function fccList(){
+  var ss=window.S(); var out=[], seen={};
+  (ss.cards||[]).forEach(function(c){
+    if(seen[c.id]) return; seen[c.id]=1;
+    c.origin = c.id.indexOf('m_')===0 ? 'platform' : 'mine';
+    out.push(c);
+  });
+  var CT=window.CONTENT||{};
+  for(var arg in CT){
+    var fcs=(CT[arg]&&CT[arg].flashcards)||[];
+    fcs.forEach(function(c,idx){
+      var id='m_'+arg.replace(/\W/g,'')+'_'+idx;
+      if(seen[id]) return; seen[id]=1;
+      var front=c.type==='cloze'?(window.clozeFront?window.clozeFront(c.front):c.front):c.front;
+      var back=c.type==='cloze'?(window.clozeBack?window.clozeBack(c.front):''):(c.back||'');
+      out.push({id:id, front:front, back:back, type:c.type||'basic', top:CT[arg].name, origin:'platform'});
+    });
+  }
+  return out;
+}
+
+function fccCardHTML(c){
+  var diff=fccDifficulty(c.id);
+  var domId='fcc_'+c.id.replace(/\W/g,'_');
+  var badge='';
+  if(c.origin==='platform'){
+    var arg=fccArgFromId(c.id);
+    if(arg && (window.CONTENT||{})[arg] && window.__cadModuleFraction){
+      var st=window.__cadModuleStatusClass(window.__cadModuleFraction(arg));
+      if(st) badge='<span class="fcc-mod-tag '+st+'">'+window.__cadModuleStatusLabel(st)+'</span>';
+    }
+  }
+  var actions = c.origin==='platform'
+    ? ('<span class="fcc-origin-tag">Da plataforma</span>'+badge)
+    : ('<div class="fcc-actions">'+
+        '<button class="fcc-btn" onclick="fccEdit(\''+c.id+'\')" title="Editar">✎</button>'+
+        '<button class="fcc-btn" onclick="fccDelete(\''+c.id+'\')" title="Excluir">🗑</button>'+
+      '</div>');
+  return '<div class="fcc-card">'+
+    '<div class="fcc-flip" id="'+domId+'" data-side="front" onclick="fccFlip(\''+c.id+'\',\''+domId+'\')">'+
+      '<span class="fcc-badge '+FCC_DIFF_CLASS[diff]+'">'+FCC_DIFF_LABEL[diff]+'</span>'+
+      '<div class="fcc-c" id="'+domId+'_c">'+c.front+'</div>'+
+      '<span class="fcc-hint">toque para virar</span>'+
+    '</div>'+
+    '<div class="fcc-meta">'+
+      '<span class="fcc-due">Próxima revisão: '+fccNextDue(c.id)+'</span>'+
+      actions+
+    '</div></div>';
+}
+
+function fccFilteredCards(){
+  return fccList().filter(function(c){
+    if(fccTop!=='__all' && fccNorm(c.top||'Geral')!==fccTop) return false;
+    if(fccDiff!=='__all' && fccDifficulty(c.id)!==fccDiff) return false;
+    if(fccOrigin!=='__all' && c.origin!==fccOrigin) return false;
+    if(fccQ){
+      var hay=(fccStrip(c.front)+' '+fccStrip(c.back)+' '+(c.top||'')).toLowerCase();
+      if(hay.indexOf(fccQ.toLowerCase())<0) return false;
+    }
+    return true;
+  });
+}
+
+window.viewFcCenter=function(){
+  if(FCC_STUDYING) return viewFccStudy();
+  var cards=fccList();
+  var counts={novo:0,dificil:0,medio:0,facil:0};
+  cards.forEach(function(c){ counts[fccDifficulty(c.id)]++; });
+
+  var topics=fccTopics(cards);
+  var topicOpts='<option value="__all">Todas as matérias</option>'+topics.map(function(t){
+    var v=fccNorm(t).replace(/"/g,'&quot;');
+    return '<option value="'+v+'" '+(fccTop===v?'selected':'')+'>'+t+'</option>';
+  }).join('');
+
+  var filtered=fccFilteredCards();
+
+  var catMap=fccCatMap();
+  var groups={}, order=[];
+  filtered.forEach(function(c){
+    var cat=catMap[fccNorm(c.top||'Geral')] || (c.top||'Geral');
+    if(!groups[cat]){ groups[cat]=[]; order.push(cat); }
+    groups[cat].push(c);
+  });
+  order.sort(function(a,b){return a.localeCompare(b);});
+
+  var body;
+  if(!filtered.length){
+    body = window.ph ? window.ph('Nenhum flashcard encontrado com esses filtros.') : '<div class="placeholder">Nenhum flashcard encontrado.</div>';
+  }else{
+    body='';
+    order.forEach(function(cat){
+      body+='<div class="mod-div">'+cat+'</div><div class="fcc-grid">';
+      groups[cat].forEach(function(c){ body+=fccCardHTML(c); });
+      body+='</div>';
+    });
+  }
+
+  var n=filtered.length;
+  var studyBtn='<button class="caso-btn" style="margin:2px 0 16px" onclick="fccStartStudy()">▶ Estudar estes '+n+' card'+(n===1?'':'s')+'</button>';
+
+  return '<div class="view"><div class="page-title">'+(ICONS.srs||'')+'<h1>Central de Flashcards</h1></div>'+
+    '<p class="page-sub">'+cards.length+' flashcard(s) no total · '+counts.novo+' novo(s) · '+counts.dificil+' difícil(eis) · '+counts.medio+' médio(s) · '+counts.facil+' fácil(eis)</p>'+
+    '<div class="fcc-toolbar">'+
+      '<input class="fcc-search" type="text" placeholder="Buscar por palavra-chave..." value="'+fccQ.replace(/"/g,'&quot;')+'" oninput="fccSetQ(this.value)">'+
+      '<select class="fcc-select" onchange="fccSetTop(this.value)">'+topicOpts+'</select>'+
+      '<select class="fcc-select" onchange="fccSetDiff(this.value)">'+
+        '<option value="__all"'+(fccDiff==='__all'?' selected':'')+'>Todas as dificuldades</option>'+
+        '<option value="novo"'+(fccDiff==='novo'?' selected':'')+'>Novo</option>'+
+        '<option value="dificil"'+(fccDiff==='dificil'?' selected':'')+'>Difícil</option>'+
+        '<option value="medio"'+(fccDiff==='medio'?' selected':'')+'>Médio</option>'+
+        '<option value="facil"'+(fccDiff==='facil'?' selected':'')+'>Fácil</option>'+
+      '</select>'+
+      '<select class="fcc-select" id="fcc-origin" onchange="fccSetOrigin(this.value)">'+
+        '<option value="__all"'+(fccOrigin==='__all'?' selected':'')+'>Todas as origens</option>'+
+        '<option value="mine"'+(fccOrigin==='mine'?' selected':'')+'>Criados por mim</option>'+
+        '<option value="platform"'+(fccOrigin==='platform'?' selected':'')+'>Criados pela plataforma</option>'+
+      '</select>'+
+    '</div>'+
+    studyBtn+
+    body+(window.gfoot?window.gfoot():'')+'</div>';
+};
+
+window.fccSetQ=function(v){ fccQ=v; fccRerender(); };
+window.fccSetTop=function(v){ fccTop=v; fccRerender(); };
+window.fccSetDiff=function(v){ fccDiff=v; fccRerender(); };
+window.fccSetOrigin=function(v){ fccOrigin=v; fccRerender(); };
+function fccRerender(){ if(typeof route!=='undefined' && route && route.view==='fccenter'){ document.getElementById('main').innerHTML=viewFcCenter(); } }
+
+window.fccFlip=function(id, domId){
+  var c=fccList().filter(function(x){return x.id===id;})[0]; if(!c) return;
+  var el=document.getElementById(domId); if(!el) return;
+  var showBack = el.dataset.side==='front';
+  el.classList.remove('fcc-anim'); void el.offsetWidth; el.classList.add('fcc-anim');
+  setTimeout(function(){
+    el.dataset.side = showBack?'back':'front';
+    var cEl=document.getElementById(domId+'_c');
+    if(cEl) cEl.innerHTML = showBack ? (c.back||'') : c.front;
+    var hint=el.querySelector('.fcc-hint'); if(hint) hint.textContent = showBack? 'toque para voltar':'toque para virar';
+  },160);
+};
+
+window.fccEdit=function(id){
+  if(id.indexOf('m_')===0){ window.toast('Flashcards da plataforma não podem ser editados/excluídos.'); return; }
+  var ss=window.S(); var c=(ss.cards||[]).filter(function(x){return x.id===id;})[0]; if(!c) return;
+  var ov=document.createElement('div'); ov.id='fcc-edit-ov';
+  ov.innerHTML='<div class="ac-fc-card"><h3>Editar flashcard</h3>'+
+    '<p class="ac-lbl">Matéria: '+(c.top||'Geral')+'</p>'+
+    '<div class="ac-lbl">Frente</div>'+(window.colorTool?window.colorTool('fcc-e-front'):'')+'<div class="ac-ce" id="fcc-e-front" contenteditable="true">'+c.front+'</div>'+
+    '<div class="ac-lbl">Verso</div>'+(window.colorTool?window.colorTool('fcc-e-back'):'')+'<div class="ac-ce" id="fcc-e-back" contenteditable="true">'+(c.back||'')+'</div>'+
+    '<div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px">'+
+      '<button style="border:none;background:transparent;color:var(--muted);cursor:pointer" onclick="document.getElementById(\'fcc-edit-ov\').remove()">Cancelar</button>'+
+      '<button class="btn-primary" onclick="fccSaveEdit(\''+id+'\')">Salvar</button>'+
+    '</div></div>';
+  ov.addEventListener('click',function(e){ if(e.target===ov) ov.remove(); });
+  document.body.appendChild(ov);
+};
+window.fccSaveEdit=function(id){
+  var ss=window.S(); var c=(ss.cards||[]).filter(function(x){return x.id===id;})[0]; if(!c) return;
+  var f=document.getElementById('fcc-e-front'), b=document.getElementById('fcc-e-back');
+  c.front=(f&&f.innerHTML)||c.front; c.back=(b&&b.innerHTML)||'';
+  window.save();
+  var ov=document.getElementById('fcc-edit-ov'); if(ov) ov.remove();
+  if(window.toast) window.toast('Flashcard atualizado ✓');
+  fccRerender();
+};
+window.fccDelete=function(id){
+  if(id.indexOf('m_')===0){ if(window.toast) window.toast('Flashcards da plataforma não podem ser editados/excluídos.'); return; }
+  if(!confirm('Excluir este flashcard? Essa ação não pode ser desfeita.')) return;
+  var ss=window.S();
+  ss.cards=(ss.cards||[]).filter(function(x){return x.id!==id;});
+  if(ss.srs) delete ss.srs[id];
+  window.save();
+  if(window.toast) window.toast('Flashcard excluído');
+  fccRerender();
+};
+
+/* ---------- sessao de estudo (mesmo padrao ja em producao na Ginecologia) ---------- */
+window.fccStartStudy=function(){
+  FCC_QUEUE=fccFilteredCards(); FCC_QIDX=0; fccsSide='front'; FCC_STUDYING=true;
+  document.getElementById('main').innerHTML=window.viewFcCenter();
+};
+window.fccStudyExit=function(){
+  FCC_STUDYING=false;
+  document.getElementById('main').innerHTML=window.viewFcCenter();
+};
+function fccStudyRenderCard(){
+  if(FCC_QIDX>=FCC_QUEUE.length){
+    return '<div class="fc-done"><div class="fc-done-i">✓</div><h3>Sessão concluída!</h3>'+
+      '<p class="page-sub">Você revisou '+FCC_QUEUE.length+' card(s) — todos avançaram na Revisão Espaçada.</p>'+
+      '<button class="caso-btn" onclick="fccStudyExit()">Voltar à Central ↩</button></div>';
+  }
+  var c=FCC_QUEUE[FCC_QIDX];
+  return '<p class="page-sub">Card '+(FCC_QIDX+1)+' de '+FCC_QUEUE.length+' · toque para ver a resposta e classifique.</p>'+
+    '<div class="fcwrap fc-enter"><div class="fcx" onclick="fccStudyToggle()"><div class="fcx-card" id="fccs-card">'+
+    '<span class="fcx-tag" id="fccs-tag">frente · toque para virar</span><div class="fcx-c" id="fccs-c">'+c.front+'</div></div></div>'+
+    '<div id="fccs-controls" class="fc-controls"><span class="fc-hint">Toque no card para ver a resposta</span></div></div>';
+}
+window.fccStudyToggle=function(){
+  var card=document.getElementById('fccs-card'); var c=FCC_QUEUE[FCC_QIDX]; if(!card||!c) return;
+  var showBack=(fccsSide==='front');
+  card.classList.remove('fcx-anim'); void card.offsetWidth; card.classList.add('fcx-anim');
+  setTimeout(function(){
+    fccsSide=showBack?'back':'front';
+    var el=document.getElementById('fccs-c'), t=document.getElementById('fccs-tag');
+    if(el) el.innerHTML=showBack?(c.back||''):c.front;
+    if(t) t.textContent=showBack?'verso · toque para voltar':'frente · toque para virar';
+    if(showBack){
+      var ctr=document.getElementById('fccs-controls');
+      if(ctr) ctr.innerHTML='<div class="grade">'+
+        '<button class="g-again" onclick="fccStudyGrade(0)"><b>Errei</b><span>rever já</span></button>'+
+        '<button class="g-hard" onclick="fccStudyGrade(3)"><b>Difícil</b><span>em breve</span></button>'+
+        '<button class="g-good" onclick="fccStudyGrade(4)"><b>Bom</b><span>no prazo</span></button>'+
+        '<button class="g-easy" onclick="fccStudyGrade(5)"><b>Fácil</b><span>+ tempo</span></button></div>';
+    }
+  },160);
+};
+window.fccStudyGrade=function(q){
+  var c=FCC_QUEUE[FCC_QIDX]; if(!c) return;
+  var ss=window.S(); ss.cards=ss.cards||[];
+  if(!ss.cards.some(function(x){return x.id===c.id;})) ss.cards.push({id:c.id,front:c.front,back:c.back,type:c.type||'basic',top:c.top});
+  if(window.__srsReview) window.__srsReview(c.id,q); else window.save();
+  fccsSide='front'; FCC_QIDX++;
+  document.getElementById('main').innerHTML=window.viewFcCenter();
+};
+function viewFccStudy(){
+  return '<div class="view"><div class="page-title">'+(ICONS.srs||'')+'<h1>Estudando · Central de Flashcards</h1></div>'+
+    '<button class="caso-btn" style="margin-bottom:14px" onclick="fccStudyExit()">← Sair da sessão</button>'+
+    fccStudyRenderCard()+(window.gfoot?window.gfoot():'')+'</div>';
+}
 
 })();
 
