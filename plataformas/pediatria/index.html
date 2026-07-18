@@ -3556,9 +3556,24 @@ window.viewModules = function(){
 
 /* ---------- 3) Rastreio de "último módulo em andamento" (touch{}) ---------- */
 var __prevViewModule = window.viewModule;
+/* BUG CRITICO CORRIGIDO: a versao anterior chamava save() em TODA renderizacao
+   de window.viewModule(arg) -- inclusive re-renderizacoes do MESMO modulo (troca
+   de aba dentro do modulo, ou um "eco" de rede quando o listener onSnapshot do
+   nucleo (bindCentral, no script do Firebase) chama renderRoute() apos QUALQUER
+   save() em QUALQUER lugar da plataforma). Isso criava um loop realimentado:
+   render -> save() -> pushCentral() grava no Firestore -> onSnapshot dispara
+   (mesmo para a propria escrita local) -> renderRoute() -> viewModule() renderiza
+   de novo -> save() de novo -> ... resultando na tela "piscando" sem parar e
+   ficando impossivel de clicar (relatado pelo usuario, mais rapido dentro dos
+   modulos). Correcao: so grava/salva quando o modulo ABERTO realmente MUDA
+   (nao a cada re-render do mesmo modulo). */
+var __lastTouchedModuleArg = null;
 window.viewModule = function(arg){
   try{
-    var s=S(); s.done=s.done||{}; s.done['cad|touch|'+arg]=Date.now(); save();
+    if(arg !== __lastTouchedModuleArg){
+      __lastTouchedModuleArg = arg;
+      var s=S(); s.done=s.done||{}; s.done['cad|touch|'+arg]=Date.now(); save();
+    }
   }catch(e){}
   return __prevViewModule ? __prevViewModule(arg) : '';
 };
