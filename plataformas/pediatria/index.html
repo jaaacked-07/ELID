@@ -2869,11 +2869,33 @@ MAP.forEach(function(pair){
    da plataforma de Pediatria (OLD_VACINAS, OLD_MARCOS, OLD_GROWTH,
    OLD_STAGES, OLD_ALERTA), preservados verbatim — nada foi reescrito
    ou resumido, apenas re-exibido em uma interface nova.
+
+   MODELO DE PROGRESSAO (pedido explicito do usuario):
+   A gamificacao so pode ser 100% concluida quando TODA a plataforma
+   de pediatria estiver completa (todos os 39 modulos com checklist
+   marcado). Para isso:
+     - Total de modulos da plataforma = 39 (18 categorias do TEMAS
+       original: ver ch_modules.json / MODULES).
+     - 3 modulos ja escritos (DNPM, Avaliacao do Crescimento,
+       Puberdade) NAO sao alterados: continuam com os 7 itens de
+       checklist que ja tinham = 21 itens fixos.
+     - Os 36 modulos restantes (ainda "em breve") sao contabilizados
+       com o numero PADRAO-OURO real usado pela skill de conteudo
+       (assets/exemplo/acontent_toxo.js, o modulo de referencia da
+       skill elid-study-platform, tem 9 itens de checklist) = 36*9
+       = 324 itens.
+     - Total de checklists da plataforma inteira = 21+324 = 345.
+     - "Conquistas" = cada elemento desbloqueavel das 4 paginas da
+       caderneta (estagios de crescimento a partir do 2o, marcos,
+       vacinas a partir da 3a, consultas). Dividimos o total de
+       checklists pelo total de conquistas para achar quantos
+       checklists sao necessarios por conquista, e so o desbloqueio
+       da ULTIMA conquista (a 345a) corresponde a plataforma 100%
+       completa.
    =================================================================== */
 (function(){
 "use strict";
 function esc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
 
 /* ---------- achatar dados originais ---------- */
 var VAC_FLAT=[];
@@ -2910,15 +2932,65 @@ function totalChecked(){
 }
 
 var CAD_STAGES=[
- {label:'Recém-nascido',min:0},
- {label:'Lactente',min:3},
- {label:'6 meses',min:6},
- {label:'1 ano',min:10},
- {label:'Pré-escolar',min:14},
- {label:'Escolar',min:18},
- {label:'Adolescente',min:21}
+ {label:'Recém-nascido'},
+ {label:'Lactente'},
+ {label:'6 meses'},
+ {label:'1 ano'},
+ {label:'Pré-escolar'},
+ {label:'Escolar'},
+ {label:'Adolescente'}
 ];
-function stageIdx(n){ var idx=0; for(var i=0;i<CAD_STAGES.length;i++){ if(n>=CAD_STAGES[i].min) idx=i; } return idx; }
+
+/* ============================================================
+   MODELO DE CONQUISTAS (total-checklists-da-plataforma / total-
+   de-conquistas). Ver comentario no topo do arquivo.
+   ============================================================ */
+var TOTAL_MODULES_PLATFORM = 39;                 // 18 categorias do TEMAS original (ver MODULES)
+var READY_CHECKLIST_TOTAL = 21;                  // 3 modulos prontos x 7 itens (NAO mexemos nisso)
+var STANDARD_CHECKLIST_PER_MODULE = 9;           // padrao-ouro real: acontent_toxo.js (skill elid-study-platform)
+var FUTURE_MODULES = TOTAL_MODULES_PLATFORM - 3; // 36
+var TOTAL_PLATFORM_CHECKLISTS = READY_CHECKLIST_TOTAL + FUTURE_MODULES*STANDARD_CHECKLIST_PER_MODULE; // 345
+
+/* baseline sempre visivel, fora da sequencia de conquistas:
+   - estagio 0 (Recem-nascido) e o ponto de partida da criança;
+   - as 2 primeiras vacinas (BCG + Hepatite B) sao aplicadas ao nascer. */
+var STAGE_CONQUISTAS = CAD_STAGES.length - 1;      // estagios 1..6 (transicoes reais)
+var VAC_BASELINE = 2;                              // BCG + Hepatite B
+var VAC_CONQUISTAS = VAC_FLAT.length - VAC_BASELINE;
+var MARCO_CONQUISTAS = MARCOS_SORTED.length;
+var CONSULTA_CONQUISTAS = CONSULTAS.length;
+
+/* sequencia global unica de conquistas, intercalada proporcionalmente
+   (posicao relativa dentro de cada pagina) para que as 4 paginas
+   avancem juntas — e mesmo assim so terminam 100% quando TODOS os
+   checklists da plataforma (345) estiverem marcados. */
+var CONQUISTA_SEQ = (function(){
+  var slots=[];
+  for(var i=0;i<STAGE_CONQUISTAS;i++) slots.push({cat:'stage', i:i, frac:(i+1)/(STAGE_CONQUISTAS+1)});
+  for(var j=0;j<MARCO_CONQUISTAS;j++) slots.push({cat:'marco', i:j, frac:(j+1)/(MARCO_CONQUISTAS+1)});
+  for(var k=0;k<VAC_CONQUISTAS;k++) slots.push({cat:'vac', i:k, frac:(k+1)/(VAC_CONQUISTAS+1)});
+  for(var c=0;c<CONSULTA_CONQUISTAS;c++) slots.push({cat:'consulta', i:c, frac:(c+1)/(CONSULTA_CONQUISTAS+1)});
+  slots.sort(function(a,b){ return a.frac-b.frac; });
+  var idxOf={};
+  slots.forEach(function(s,gi){ idxOf[s.cat+':'+s.i]=gi; });
+  return {slots:slots, idxOf:idxOf, total:slots.length};
+})();
+var TOTAL_CONQUISTAS = CONQUISTA_SEQ.total; // stage(6)+marco(16)+vac(28)+consulta(10) = 60
+
+function conquistaThreshold(globalIdx){
+  return Math.ceil((globalIdx+1) * TOTAL_PLATFORM_CHECKLISTS / TOTAL_CONQUISTAS);
+}
+function isUnlockedSlot(cat, localIdx){
+  var gi=CONQUISTA_SEQ.idxOf[cat+':'+localIdx];
+  if(gi===undefined) return false;
+  return totalChecked() >= conquistaThreshold(gi);
+}
+function stageIdx(){
+  var idx=0;
+  for(var i=0;i<STAGE_CONQUISTAS;i++){ if(isUnlockedSlot('stage', i)) idx=i+1; }
+  return idx; // 0 = Recem-nascido (sempre), ate 6 = Adolescente
+}
+function platformCompletePct(){ return Math.min(100, Math.round(totalChecked()/TOTAL_PLATFORM_CHECKLISTS*100)); }
 
 /* ---------- ilustração vetorial da criança (geométrica, evolui por estágio) ---------- */
 function childSVG(idx){
@@ -2947,7 +3019,7 @@ function playPencilSound(){
     for(var i=0;i<len;i++){
       var t=i/sr;
       var scratch=(Math.random()*2-1);
-      var strokeEnv=(Math.sin(t*6.2)*0.5+0.5); /* pulsos de "traço" */
+      var strokeEnv=(Math.sin(t*6.2)*0.5+0.5);
       var fade=Math.min(1,t*8)*Math.min(1,(dur-t)*3);
       data[i]=scratch*strokeEnv*0.16*fade;
     }
@@ -2961,7 +3033,7 @@ function playPencilSound(){
 }
 
 /* ---------- popup de evolução ---------- */
-function cadPopup(stageLabel){
+function cadPopup(msg){
   var ov=document.createElement('div'); ov.className='cad-pop-ov';
   ov.innerHTML='<div class="cad-pop-card">'+
     '<svg viewBox="0 0 220 140" class="cad-pop-svg" xmlns="http://www.w3.org/2000/svg">'+
@@ -2969,7 +3041,7 @@ function cadPopup(stageLabel){
       '<circle cx="195" cy="25" r="5" fill="currentColor" class="cad-pop-dot"/>'+
       '<line x1="10" y1="128" x2="205" y2="128" stroke="currentColor" stroke-width="1.4" opacity=".4"/>'+
     '</svg>'+
-    '<div class="cad-pop-txt"><b>Sua caderneta avançou!</b><span>'+esc(stageLabel)+'</span></div>'+
+    '<div class="cad-pop-txt"><b>Sua caderneta avançou!</b><span>'+esc(msg)+'</span></div>'+
   '</div>';
   document.body.appendChild(ov);
   playPencilSound();
@@ -2986,14 +3058,12 @@ function injectCadStyles(){
   .cad-hero{display:flex;gap:28px;align-items:center;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px 26px;margin-bottom:18px}
   .cad-child-wrap{width:118px;height:118px;flex:none;color:var(--accent);position:relative}
   .cad-child-svg{width:100%;height:100%;transition:opacity .9s ease, transform .9s ease}
-  .cad-child-fade{opacity:0;transform:scale(.94)}
   .cad-stage-lbl{font-weight:700;font-size:1.05rem;margin-top:2px}
-  .cad-stage-sub{color:var(--muted);font-size:.82rem;margin-top:2px}
   .cad-curve-wrap{flex:1;min-width:220px}
   .cad-curve-svg{width:100%;height:110px}
   .cad-curve-line{stroke-dasharray:600;stroke-dashoffset:600;animation:cadDraw 1.6s ease forwards}
   @keyframes cadDraw{to{stroke-dashoffset:0}}
-  .cad-curve-dot{fill:var(--accent2,var(--accent))}
+  .cad-curve-dot{fill:var(--accent2)}
   .cad-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
   .cad-tab{padding:8px 16px;border-radius:20px;border:1px solid var(--line);cursor:pointer;font-size:.84rem;color:var(--muted);transition:.2s}
   .cad-tab.active{background:var(--accent);color:#2d1b2e;border-color:transparent;font-weight:700}
@@ -3010,7 +3080,7 @@ function injectCadStyles(){
   .cad-vac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
   .cad-vac-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--panel);transition:.2s;position:relative}
   .cad-vac-card.on{cursor:pointer;border-color:var(--accent)}
-  .cad-vac-card.on:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+  .cad-vac-card.on:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--accent-soft)}
   .cad-vac-card.off{opacity:.4}
   .cad-vac-age{font-size:.7rem;color:var(--muted);text-transform:uppercase}
   .cad-vac-name{font-weight:700;margin-top:4px;font-size:.9rem}
@@ -3019,7 +3089,7 @@ function injectCadStyles(){
   .cad-modal-ov.show{opacity:1;pointer-events:auto}
   .cad-modal-box{background:var(--bg);border:1px solid var(--line);border-radius:20px;max-width:520px;width:100%;max-height:82vh;overflow:auto;padding:26px 28px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.5)}
   .cad-modal-x{position:absolute;top:14px;right:16px;cursor:pointer;color:var(--muted);font-size:1.2rem}
-  .cad-modal-box h3{margin-bottom:10px;color:var(--accent)}
+  .cad-modal-box h3{margin-bottom:10px;color:var(--accent2)}
   .cad-modal-box table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.86rem}
   .cad-modal-box td{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top}
   .cad-modal-box td:first-child{font-weight:700;color:var(--muted);width:34%}
@@ -3031,14 +3101,15 @@ function injectCadStyles(){
   .cad-pop-ov.show{opacity:1;pointer-events:auto}
   .cad-pop-card{background:var(--bg);border:1px solid var(--accent);border-radius:20px;padding:26px 32px;text-align:center;transform:scale(.9);transition:.4s;box-shadow:0 0 40px var(--accent-soft)}
   .cad-pop-ov.show .cad-pop-card{transform:scale(1)}
-  .cad-pop-svg{width:220px;height:130px;color:var(--accent)}
+  .cad-pop-svg{width:220px;height:130px;color:var(--accent2)}
   .cad-pop-line{stroke-dasharray:400;stroke-dashoffset:400;animation:cadDraw 1.8s ease forwards}
   .cad-pop-dot{opacity:0;animation:cadDotIn .5s ease 1.6s forwards, cadGlow 1.4s ease 1.6s infinite}
   @keyframes cadDotIn{to{opacity:1}}
-  @keyframes cadGlow{0%,100%{filter:drop-shadow(0 0 0 var(--accent))}50%{filter:drop-shadow(0 0 6px var(--accent))}}
+  @keyframes cadGlow{0%,100%{filter:drop-shadow(0 0 0 var(--accent2))}50%{filter:drop-shadow(0 0 6px var(--accent2))}}
   .cad-pop-txt{margin-top:14px;font-size:.92rem}
   .cad-pop-txt b{display:block;color:var(--accent);margin-bottom:4px}
   .cad-lock-note{color:var(--muted);font-size:.8rem;margin-top:10px}
+  .cad-platform-pct{font-size:.72rem;color:var(--muted);margin-top:8px}
   `;
   document.head.appendChild(st);
 }
@@ -3054,14 +3125,17 @@ function cadModal(html){
   setTimeout(function(){ov.classList.add('show');},10);
 }
 
-/* ---------- prompt do nome da criança (1ª visita) ---------- */
+/* ---------- prompt do nome da criança (1ª visita, salvo por usuário via S()/save()) ---------- */
 function cadAskName(){
-  var cs=cadState(); if(cs.asked) return;
+  var cs=cadState();
+  if(cs.asked) return;
+  if(window.__cadNamePromptShown) return; // evita popup duplicado se bootUI rodar 2x na mesma sessao
+  window.__cadNamePromptShown = true;
   var ov=document.createElement('div'); ov.className='cad-name-ov';
   ov.innerHTML='<div class="cad-name-box">'+
     '<div style="width:60px;height:60px;margin:0 auto 6px;color:var(--accent)">'+(window.__CAD_LOGO_SVG__||'')+'</div>'+
     '<h3 style="color:var(--accent)">Vamos começar a Caderneta?</h3>'+
-    '<p style="color:var(--muted);font-size:.86rem;margin-top:6px">Dê um nome para a criança da sua caderneta. Ela vai crescendo conforme você domina os módulos de Pediatria.</p>'+
+    '<p style="color:var(--muted);font-size:.86rem;margin-top:6px">Dê um nome para a criança da sua caderneta. Ela vai crescendo conforme você domina os módulos de Pediatria. Isso só será perguntado uma vez.</p>'+
     '<input id="cadNameInput" placeholder="Ex.: Bento, Alice...">'+
     '<div class="btn-primary" id="cadNameGo" style="cursor:pointer;display:inline-block">Começar 🧸</div>'+
   '</div>';
@@ -3078,34 +3152,38 @@ function cadAskName(){
 
 /* ---------- render: Página 1 — Crescimento ---------- */
 function viewCadCrescimento(){
-  var n=totalChecked(), idx=stageIdx(n), cs=cadState();
-  var revealed=OLD_GROWTH.filter(function(_,i){return n>i;});
-  if(!revealed.length) revealed=[OLD_GROWTH[0]];
+  var idx=stageIdx(), cs=cadState();
+  var n=totalChecked();
+  var unlockedPts=[];
+  for(var gi=0; gi<OLD_GROWTH.length; gi++){
+    // curva usa a mesma proporcao geral de conclusao da plataforma (nao um contador a parte)
+    var need=Math.ceil((gi+1)*TOTAL_PLATFORM_CHECKLISTS/OLD_GROWTH.length);
+    if(n>=need || gi===0) unlockedPts.push(OLD_GROWTH[gi]);
+  }
   var maxM=OLD_GROWTH[OLD_GROWTH.length-1][0], maxH=Math.max.apply(null,OLD_GROWTH.map(function(p){return p[2];}));
   var W=280,H=100,pad=8;
   function px(m){ return pad+(m/maxM)*(W-2*pad); }
   function py(h){ return H-pad-(h/maxH)*(H-2*pad); }
-  var pts=revealed.map(function(p){return px(p[0]).toFixed(1)+','+py(p[2]).toFixed(1);}).join(' ');
-  var last=revealed[revealed.length-1];
+  var pts=unlockedPts.map(function(p){return px(p[0]).toFixed(1)+','+py(p[2]).toFixed(1);}).join(' ');
+  var last=unlockedPts[unlockedPts.length-1];
   var h='<div class="cad-hero">'+
     '<div class="cad-child-wrap"><div id="cadChildSvg">'+childSVG(idx)+'</div></div>'+
-    '<div><div class="cad-stage-lbl">'+esc(cs.name||'Seu paciente')+' · '+CAD_STAGES[idx].label+'</div>'+
-    '<div class="cad-stage-sub">'+n+' domínio(s) marcados na plataforma até agora</div></div>'+
+    '<div><div class="cad-stage-lbl">'+esc(cs.name||'Seu paciente')+' · '+CAD_STAGES[idx].label+'</div></div>'+
     '<div class="cad-curve-wrap"><svg class="cad-curve-svg" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">'+
       '<polyline points="'+pts+'" fill="none" stroke="currentColor" class="cad-curve-line" style="color:var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'+
       '<circle cx="'+px(last[0]).toFixed(1)+'" cy="'+py(last[2]).toFixed(1)+'" r="4" class="cad-curve-dot"/>'+
     '</svg><div class="cad-lock-note">Curva inspirada na OMS · desenhada conforme você conclui os checklists de domínio</div></div>'+
   '</div>';
   h+='<div class="cad-tabs">'+CAD_STAGES.map(function(s,i){return '<span class="cad-tab'+(i===idx?' active':'')+'" style="'+(i>idx?'opacity:.4':'')+'">'+(i>idx?'🔒 ':'')+s.label+'</span>';}).join('')+'</div>';
+  h+='<div class="cad-platform-pct">Plataforma de Pediatria: '+platformCompletePct()+'% concluída — a caderneta se completa 100% junto com ela.</div>';
   return h;
 }
 
 /* ---------- render: Página 2 — Marcos ---------- */
 function viewCadMarcos(){
-  var n=totalChecked();
   var h='<div class="cad-timeline">';
   MARCOS_SORTED.forEach(function(mk,i){
-    var on=n>i;
+    var on=isUnlockedSlot('marco', i);
     h+='<div class="cad-t-item '+(on?'on':'cad-t-lock')+'" '+(on?'onclick="window.__cadOpenMarco('+i+')"':'')+'>'+
        '<span class="cad-t-dot">'+(on?'✓':'🔒')+'</span>'+
        '<div class="cad-t-age">'+esc(mk.exp)+'</div>'+
@@ -3127,10 +3205,9 @@ window.__cadOpenMarco=function(i){
 
 /* ---------- render: Página 3 — Vacinas ---------- */
 function viewCadVacinas(){
-  var n=totalChecked();
   var h='<div class="cad-vac-grid">';
   VAC_FLAT.forEach(function(v,i){
-    var on=(i<2)||(n>(i-2));
+    var on = (i<VAC_BASELINE) || isUnlockedSlot('vac', i-VAC_BASELINE);
     h+='<div class="cad-vac-card '+(on?'on':'off')+'" '+(on?'onclick="window.__cadOpenVac('+i+')"':'')+'>'+
        (on?'<span class="cad-vac-seal">✅</span>':'<span class="cad-vac-seal">🔒</span>')+
        '<div class="cad-vac-age">'+esc(v.age)+'</div>'+
@@ -3154,10 +3231,9 @@ window.__cadOpenVac=function(i){
 
 /* ---------- render: Página 4 — Puericultura ---------- */
 function viewCadConsultas(){
-  var n=totalChecked();
   var h='<div class="cad-timeline">';
   CONSULTAS.forEach(function(c,i){
-    var on=n>i;
+    var on=isUnlockedSlot('consulta', i);
     h+='<div class="cad-t-item '+(on?'on':'cad-t-lock')+'" '+(on?'onclick="window.__cadOpenConsulta('+i+')"':'')+'>'+
        '<span class="cad-t-dot">'+(on?'✓':'🔒')+'</span>'+
        '<div class="cad-t-name">'+esc(c.label)+'</div>'+
@@ -3204,12 +3280,12 @@ window.acCk=function(el,arg,i){
   if(__cadPrevAcCk) __cadPrevAcCk(el,arg,i);
   var after=totalChecked();
   if(after>before){
-    var sIdxBefore=stageIdx(before), sIdxAfter=stageIdx(after);
+    var sIdxBefore=(function(n){var idx=0;for(var i=0;i<STAGE_CONQUISTAS;i++){var need=conquistaThreshold(CONQUISTA_SEQ.idxOf['stage:'+i]);if(n>=need)idx=i+1;}return idx;})(before);
+    var sIdxAfter=stageIdx();
     injectCadStyles();
     cadPopup(sIdxAfter>sIdxBefore ? ('Agora: '+CAD_STAGES[sIdxAfter].label) : 'Nova página da caderneta desbloqueada');
   }
 };
-
 
 /* ---------- pedir o nome da crianca logo ao entrar na plataforma
    (nao so ao abrir a Caderneta), preservando o fluxo do arquivo original ---------- */
@@ -3219,6 +3295,300 @@ window.bootUI=function(){
   injectCadStyles();
   cadAskName();
 };
+
+/* expõe utilidades para os demais scripts aditivos (fixes.js) */
+window.__cadTotalChecked = totalChecked;
+window.__cadTotalPlatformChecklists = TOTAL_PLATFORM_CHECKLISTS;
+window.__cadPlatformPct = platformCompletePct;
+window.__cadStageInfo = function(){
+  var cs=cadState(); var idx=stageIdx();
+  return {name:cs.name||'Seu paciente', stageLabel:CAD_STAGES[idx].label, idx:idx};
+};
+window.__cadConquistasInfo = function(){
+  var n=totalChecked(), unlocked=0;
+  for(var gi=0; gi<TOTAL_CONQUISTAS; gi++){ if(n>=conquistaThreshold(gi)) unlocked++; }
+  return {unlocked:unlocked, total:TOTAL_CONQUISTAS};
+};
+
+})();
+
+</script>
+<style>
+/* ===================================================================
+   AJUSTES ADITIVOS — Pediatria (pos-migracao)
+   Corrige elementos que ainda usavam a cor da plataforma-base (laranja
+   #f59f0a / rgba(245,159,10,x)) em vez do acento de Pediatria, alem de
+   bugs de contraste no modo claro. Tudo aditivo (nao mexe no shell).
+   =================================================================== */
+:root{
+  --panel: var(--accent-soft);
+  --line: rgba(252,189,225,.24);
+}
+body.light{
+  --panel: rgba(252,189,225,.10);
+  --line: rgba(214,120,168,.28);
+}
+/* "luz" de fundo do body: era laranja fixo — agora no tom do acento azul */
+body{
+  background:
+    radial-gradient(900px 600px at 85% 8%, var(--accent2-soft), transparent 60%),
+    linear-gradient(160deg,#2d1b2e 0%, #34203a 60%, #2a1828 100%);
+}
+body.light{
+  background:
+    radial-gradient(900px 600px at 85% 8%, var(--accent2-soft), transparent 55%),
+    linear-gradient(160deg,#faf6f0,#efe5d6);
+}
+/* o ceu de bercario nao pode sumir no modo claro */
+body.light .bgart{ opacity:.34; color:var(--accent2); }
+/* titulo das paginas usava gradiente de texto ink->accent; com o rosa pastel
+   de Pediatria isso fica ilegivel no modo claro — no claro, cor solida */
+body.light .page-title h1{ background:none; -webkit-text-fill-color:unset; color:var(--ink); }
+
+/* card inicial do dashboard ("capa do livro") e elementos do livro/colecao
+   generica ainda usavam laranja hardcoded — realinhados ao acento rosa */
+.hero-cover{ box-shadow:0 20px 44px rgba(0,0,0,.5), inset 0 0 0 1px var(--accent-soft); border-left:9px solid var(--accent); }
+.hero-cover .hc-border{ border-color: rgba(252,189,225,.45); }
+.hero-cover .hc-border::after{ border-color: rgba(252,189,225,.22); }
+.book{ background-image: linear-gradient(135deg, var(--accent-soft), rgba(45,27,46,.25)); }
+.bookpages{ border-left-color: var(--accent); }
+.hardcover{ box-shadow: 0 30px 60px rgba(0,0,0,.5), inset 0 0 0 1px var(--accent-soft); }
+.hc-border{ border-color: rgba(252,189,225,.45); }
+.hc-border::after{ border-color: rgba(252,189,225,.22); }
+.bk-back:hover{ color:#a15080; background: var(--accent-soft); }
+.idx-item:hover{ background: var(--accent-soft); }
+.pcard:hover{ box-shadow: 0 8px 20px var(--accent-soft); }
+/* usados tambem nos cards de "Estudos do Dia" (barra de progresso/contorno) */
+.heat-track{ background: var(--accent-soft); }
+.prog{ background: var(--accent-soft); }
+.unlock-burst{ background: conic-gradient(from 0deg, transparent 0deg 18deg, var(--accent-soft) 18deg 20deg, transparent 20deg 38deg, var(--accent-soft) 38deg 40deg); }
+
+/* alguns toques discretos do azul de acento pela plataforma (sem exagero) */
+.fcc-badge.fcc-novo{ background:var(--accent2); color:#1a2740; }
+.cad-t-item.on .cad-t-dot{ box-shadow:0 0 0 3px var(--accent2-soft); }
+.mod-status{ display:inline-block; font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+  padding:3px 9px; border-radius:20px; margin-top:8px; }
+.mod-status.st-done{ background:rgba(61,220,132,.16); color:#3ddc84; }
+.mod-status.st-progress{ background:var(--accent-soft); color:var(--accent); }
+.fcc-mod-tag{ font-size:.64rem; border-radius:20px; padding:2px 8px; margin-left:6px; }
+.fcc-mod-tag.st-done{ background:rgba(61,220,132,.16); color:#3ddc84; }
+.fcc-mod-tag.st-progress{ background:var(--accent2-soft); color:var(--accent2); }
+
+.notes-fmt-bubble{position:fixed;transform:translateX(-50%);display:none;gap:4px;
+  background:var(--panel);border:1px solid var(--accent);border-radius:12px;
+  padding:5px 6px;box-shadow:0 8px 24px rgba(0,0,0,.35);z-index:250}
+.notes-fmt-bubble button{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);
+  background:transparent;color:var(--ink);cursor:pointer;font-weight:700}
+.notes-fmt-bubble button:hover{border-color:var(--accent)}
+
+.hero-continue-card{cursor:pointer}
+</style>
+
+<script>
+/* ===================================================================
+   AJUSTES ADITIVOS — Pediatria (pos-migracao, pos-feedback do usuario)
+   Todos os itens abaixo sao aditivos (wrapping de funcoes existentes),
+   seguindo o mesmo padrao ja usado no shell/engine e em caderneta.js.
+   Implementa as atualizacoes documentadas em
+   elid-study-platform/references/atualizacoes-consolidadas.md que
+   ainda faltavam nesta plataforma: badges "Concluido/Em andamento",
+   "Continue de onde parou" dinamico, e indicador de modulo estudado
+   na Central de Flashcards. Tambem substitui o card inicial do
+   dashboard (que ainda mostrava a gamificacao generica "Colecao de
+   Patogenos") pelo resumo da Caderneta da Crianca.
+
+   IMPORTANTE sobre escopo: varias funcoes do engine (moduleFraction,
+   modName, fccCardHTML, fccList, fccCatMap) sao declaradas DENTRO de
+   IIFEs proprias do shell (tag script contendo (function(){...})()) e
+   por isso NAO existem nem como 'window.X' nem como identificador
+   solto fora delas (testado via jsdom: typeof window.moduleFraction
+   === 'undefined'). Por isso este arquivo reimplementa versoes locais
+   equivalentes (moduleFractionLocal / modNameLocal) usando apenas o
+   que o shell de fato expoe globalmente: window.S / window.CONTENT /
+   CH, MODULES (estes dois ultimos sao 'const' de nivel superior em
+   outro <script> classico do MESMO documento — const/let de topo sao
+   compartilhados entre todas as tags <script> classicas do documento,
+   por isso 'CH'/'MODULES' soltos funcionam aqui mesmo sem 'window.').
+   =================================================================== */
+(function(){
+"use strict";
+function esc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ---------- helpers locais (reimplementacao segura, ver nota acima) ---------- */
+function moduleFractionLocal(arg){
+  var d=(window.CONTENT||{})[arg]; if(!d||!d.checklist||!d.checklist.length) return 0;
+  var done=(S().done)||{}; var m=0;
+  for(var i=0;i<d.checklist.length;i++){ if(done['ck|'+arg+'|'+i]===true) m++; }
+  return m/d.checklist.length;
+}
+function modNameLocal(ck,idx){
+  try{ return (MODULES[ck]||[])[+idx]||'Módulo'; }catch(e){ return 'Módulo'; }
+}
+function moduleStatusClass(frac){
+  if(frac>=1) return 'st-done';
+  if(frac>0) return 'st-progress';
+  return '';
+}
+function moduleStatusLabel(st){ return st==='st-done' ? 'Concluído' : 'Em andamento'; }
+
+/* ---------- 1) Dashboard: card inicial + "Continue de onde parou" ---------- */
+function lastInProgressModule(){
+  var s=S(); var touch=(s.cad&&s.cad.touch)||{};
+  var best=null, bestT=-1;
+  for(var arg in touch){
+    var frac=moduleFractionLocal(arg);
+    if(frac<1 && touch[arg]>bestT){ best=arg; bestT=touch[arg]; }
+  }
+  return best;
+}
+function continueCardHTML(){
+  var arg=lastInProgressModule();
+  if(!arg){
+    return '<div class="card"><p class="page-sub" style="margin:0">Nenhum módulo iniciado ainda — abra "Módulos" no menu.</p></div>';
+  }
+  var ck=arg.split('|')[0], idx=arg.split('|')[1];
+  var name=modNameLocal(ck,idx);
+  var catName=(typeof CH!=='undefined' && CH[ck]) ? CH[ck].replace(/^\d+\.\s/,'') : '';
+  return '<div class="card hero-continue-card" onclick="navigate(\'module\',\''+arg+'\')">'+
+    '<h3>'+esc(name)+'</h3><p>'+esc(catName)+'</p></div>';
+}
+
+window.viewDashboard=function(nm){
+  var stage = window.__cadStageInfo ? window.__cadStageInfo() : {name:'Seu paciente', stageLabel:'Recém-nascido'};
+  var pct = window.__cadPlatformPct ? window.__cadPlatformPct() : 0;
+  var conq = window.__cadConquistasInfo ? window.__cadConquistasInfo() : {unlocked:0,total:0};
+  var totalChecked = window.__cadTotalChecked ? window.__cadTotalChecked() : 0;
+  var totalPlat = window.__cadTotalPlatformChecklists || 0;
+  var s=S();
+  return '<div class="view">'+
+    '<div class="hero">'+
+      '<div class="hero-cover" onclick="navigate(\'collection\')" title="Abrir Caderneta da Criança">'+
+        '<div class="hc-border"></div>'+
+        '<div class="hcv-logo"><span class="sb-glow"></span>'+(window.__CAD_LOGO_SVG__||'')+'</div>'+
+        '<div class="hcv-ttl">Caderneta da<br>Criança</div>'+
+        '<div class="hcv-sub">Abrir a caderneta</div>'+
+      '</div>'+
+      '<div class="hero-info">'+
+        '<h2>Olá, '+esc(nm)+'!</h2>'+
+        '<div class="hero-rank">'+esc(stage.name)+' · '+esc(stage.stageLabel)+'</div>'+
+        '<p class="page-sub" style="margin:0 0 8px">Caderneta: '+totalChecked+'/'+totalPlat+' checklists da plataforma · '+pct+'%</p>'+
+        '<div class="prog"><i style="width:'+pct+'%"></i></div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="grid grid-4">'+
+      '<div class="card"><div class="stat-n">'+(s.qSeen||0)+'</div><div class="stat-l">Questões</div></div>'+
+      '<div class="card"><div class="stat-n">'+((s.cards||[]).length)+'</div><div class="stat-l">Flashcards</div></div>'+
+      '<div class="card"><div class="stat-n">'+((window.__cardsDue?window.__cardsDue():[]).length)+'</div><div class="stat-l">A revisar</div></div>'+
+      '<div class="card"><div class="stat-n" style="color:var(--accent2)">'+conq.unlocked+'/'+conq.total+'</div><div class="stat-l">Conquistas</div></div>'+
+    '</div>'+
+    '<div class="sec-title">Acesso rápido</div>'+
+    '<div class="grid grid-3">'+
+      '<div class="card qa" onclick="navigate(\'modules\')"><h3>Módulos</h3><p>Matérias divididas por etiologia.</p></div>'+
+      '<div class="card qa" onclick="navigate(\'daily\')"><h3>Estudos do Dia</h3><p>10 itens selecionados por dia.</p></div>'+
+      '<div class="card qa" onclick="navigate(\'srs\')"><h3>Revisão Espaçada</h3><p>Seus flashcards no prazo.</p></div>'+
+    '</div>'+
+    '<div class="sec-title">Continue de onde parou</div>'+
+    continueCardHTML()+
+    (typeof foot==='function'?foot():(window.gfoot?window.gfoot():''))+
+  '</div>';
+};
+
+/* ---------- 2) Módulos: badge Concluído / Em andamento ----------
+   Só se aplica aos módulos que já têm conteúdo construído (classe
+   'mod-card done' — 'done' aqui, no engine nativo, significa apenas
+   "conteúdo existe" / não é placeholder "em breve"; o badge abaixo é
+   o que de fato reflete o progresso do ALUNO no checklist daquele
+   módulo). Módulos ainda "em breve" (sem conteúdo) não recebem badge. */
+var __prevViewModules = window.viewModules;
+window.viewModules = function(){
+  var html = __prevViewModules ? __prevViewModules() : '';
+  try{
+    html = html.replace(/<div class="mod-card done" onclick="navigate\('module','([^']+)'\)"><h4>([^<]*)<\/h4><\/div>/g,
+      function(full, arg, title){
+        var st = moduleStatusClass(moduleFractionLocal(arg));
+        var badge = st ? ('<span class="mod-status '+st+'">'+moduleStatusLabel(st)+'</span>') : '';
+        return '<div class="mod-card done" onclick="navigate(\'module\',\''+arg+'\')"><h4>'+title+'</h4>'+badge+'</div>';
+      });
+  }catch(e){}
+  return html;
+};
+
+/* ---------- 3) Rastreio de "último módulo em andamento" (touch{}) ---------- */
+var __prevViewModule = window.viewModule;
+window.viewModule = function(arg){
+  try{
+    var s=S(); s.cad=s.cad||{}; s.cad.touch=s.cad.touch||{}; s.cad.touch[arg]=Date.now(); save();
+  }catch(e){}
+  return __prevViewModule ? __prevViewModule(arg) : '';
+};
+
+/* ---------- 4) Central de Flashcards: sinalizar módulo estudado ----------
+   fccCardHTML/fccList/fccCatMap vivem numa IIFE do shell e não são
+   alcançáveis daqui (ver nota de escopo no topo do arquivo), então a
+   estratégia é reprocessar a STRING HTML já pronta que window.viewFcCenter
+   devolve (essa função É global — foi atribuída via 'window.viewFcCenter=').
+   Cada card de origem "plataforma" tem seu id codificado como
+   'fcc_m_<categoria><indiceDoModulo>_<indiceDoFlashcard>' (a barra "|" de
+   arg já foi removida pelo próprio engine ao montar o id, ex.: arg
+   'crescimento|0' vira 'crescimento0'); como os slugs de categoria desta
+   plataforma são só letras (sem dígitos), dá para decodificar de volta com
+   segurança via regex. */
+var __prevViewFcCenter = window.viewFcCenter;
+window.viewFcCenter = function(){
+  var html = __prevViewFcCenter ? __prevViewFcCenter() : '';
+  try{
+    html = html.replace(/id="(fcc_m_[a-zA-Z0-9_]+)"([\s\S]*?)<span class="fcc-origin-tag">Da plataforma<\/span>/g,
+      function(full, domId, mid){
+        var m = /^fcc_m_([a-z]+)(\d+)_\d+$/.exec(domId);
+        var badge = '';
+        if(m){
+          var arg = m[1]+'|'+m[2];
+          if((window.CONTENT||{})[arg]){
+            var st = moduleStatusClass(moduleFractionLocal(arg));
+            if(st) badge = '<span class="fcc-mod-tag '+st+'">'+moduleStatusLabel(st)+'</span>';
+          }
+        }
+        return 'id="'+domId+'"'+mid+'<span class="fcc-origin-tag">Da plataforma</span>'+badge;
+      });
+  }catch(e){}
+  return html;
+};
+
+/* ---------- 5) "Minhas Anotações" (dentro do módulo): bubble de formatação
+   ao selecionar texto. O engine já mostra uma barra fixa de negrito/cor
+   acima do campo (renderNotas/.notes-tool, chamando window.acFmt — esse
+   já é global no shell). Este bubble é um reforço contextual: aparece só
+   quando o aluno seleciona um trecho, junto ao texto selecionado. */
+function ensureNotesBubble(){
+  var b=document.getElementById('notes-fmt-bubble');
+  if(b) return b;
+  b=document.createElement('div');
+  b.id='notes-fmt-bubble';
+  b.className='notes-fmt-bubble';
+  b.innerHTML =
+    '<button onmousedown="event.preventDefault()" onclick="acFmt(\'bold\')"><b>B</b></button>'+
+    '<button onmousedown="event.preventDefault()" onclick="acFmt(\'foreColor\',\'#6db3f2\')" style="color:#6db3f2">A</button>'+
+    '<button onmousedown="event.preventDefault()" onclick="acFmt(\'foreColor\',\'#e8675f\')" style="color:#e8675f">A</button>'+
+    '<button onmousedown="event.preventDefault()" onclick="acFmt(\'foreColor\',\'#fcbde1\')" style="color:#fcbde1">A</button>'+
+    '<button onmousedown="event.preventDefault()" onclick="acFmt(\'foreColor\',\'#cfc2b8\')">A</button>';
+  document.body.appendChild(b);
+  return b;
+}
+document.addEventListener('mouseup', function(e){
+  var ed = e.target.closest && e.target.closest('#notes-ed');
+  var sel = window.getSelection();
+  var b = ensureNotesBubble();
+  if(!ed || !sel || sel.isCollapsed || !sel.rangeCount){ b.style.display='none'; return; }
+  var r = sel.getRangeAt(0).getBoundingClientRect();
+  b.style.left = (r.left + r.width/2) + 'px';
+  b.style.top  = (r.top - 44 + window.scrollY) + 'px';
+  b.style.display = 'flex';
+});
+document.addEventListener('mousedown', function(e){
+  if(!e.target.closest || !e.target.closest('#notes-fmt-bubble, #notes-ed')){
+    var b=document.getElementById('notes-fmt-bubble'); if(b) b.style.display='none';
+  }
+});
 
 })();
 
