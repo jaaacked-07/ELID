@@ -345,6 +345,11 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 <!-- ===================== GATE ===================== -->
 <div id="gate">
   <div class="gate-card">
+    <div class="gate-logo"><span class="gate-glow"></span><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="21" cy="15" r="6.4" stroke="currentColor" stroke-width="2.3"/><circle cx="43" cy="15" r="6.4" stroke="currentColor" stroke-width="2.3"/><circle cx="32" cy="37" r="18.6" stroke="currentColor" stroke-width="2.3"/><ellipse cx="32" cy="41.5" rx="6.4" ry="5.6" stroke="currentColor" stroke-width="1.9"/><circle cx="32" cy="40.6" r="1.3" fill="currentColor"/></div>
+
+<!-- ===================== GATE ===================== -->
+<div id="gate">
+  <div class="gate-card">
     <div class="gate-logo"><span class="gate-glow"></span><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="21" cy="15" r="6.4" stroke="currentColor" stroke-width="2.3"/><circle cx="43" cy="15" r="6.4" stroke="currentColor" stroke-width="2.3"/><circle cx="32" cy="37" r="18.6" stroke="currentColor" stroke-width="2.3"/><ellipse cx="32" cy="41.5" rx="6.4" ry="5.6" stroke="currentColor" stroke-width="1.9"/><circle cx="32" cy="40.6" r="1.3" fill="currentColor"/></svg></div>
     <div class="gate-supra">Acesso pelo ELID</div>
     <div class="gate-name">PedAtlas</div>
@@ -2130,6 +2135,7 @@ if(!document.getElementById('hl-style')){
 
 
 <script>
+
 /* ===================================================================
    Dados ORIGINAIS da gamificacao de Pediatria (verbatim, extraidos do
    arquivo antigo) — VACINAS, MARCOS, GROWTH, STAGES, ALERTA. Nenhum
@@ -2232,8 +2238,10 @@ var OLD_ALERTA = [
    mental). Preservado como alias do mesmo array, sem duplicar dados. */
 var ALERTA = OLD_ALERTA;
 
+
 </script>
 <script>
+
 /* ===================================================================
    Conteudo ORIGINAL, verbatim, dos 3 modulos ja escritos (DNPM,
    Avaliacao do Crescimento, Puberdade). Unica alteracao mecanica:
@@ -2803,8 +2811,10 @@ regOld({ id:"puberdade", temaIc:"🌱", t:"Puberdade Normal & Patológica", sub:
  ]
 });
 
+
 </script>
 <script>
+
 /* ===================================================================
    Adaptador de conteúdo dos módulos já escritos (DNPM, Crescimento,
    Puberdade) para o schema atual C['categoria|indice']. Nenhum texto
@@ -2853,11 +2863,14 @@ MAP.forEach(function(pair){
 });
 })();
 
+
 </script>
 
 <!-- ===== MODULO DNPM reescrito (aditivo, sobrescreve CONTENT['crescimento|0']) ===== -->
 <script>
+
 Object.assign(window.ASVG=window.ASVG||{},{"dnpm_dominios": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>  <linearGradient id=\"dnpmPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#232a4a\"/>    <stop offset=\"1\" stop-color=\"#181d36\"/>  </linearGradient>  <linearGradient id=\"dnpmAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcbde1\"/>    <stop offset=\"1\" stop-color=\"#bdddfc\"/>  </linearGradient>  <linearGradient id=\"dnpmBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#9fd0f7\"/>    <stop offset=\"1\" stop-color=\"#6fa8e0\"/>  </linearGradient>  <linearGradient id=\"dnpmPink\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcc9e6\"/>    <stop offset=\"1\" stop-color=\"#ef8fc4\"/>  </linearGradient>  <linearGradient id=\"dnpmGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>    <stop offset=\"1\" stop-color=\"#4cbf93\"/>  </linearGradient>  <linearGradient id=\"dnpmAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ffd98f\"/>    <stop offset=\"1\" stop-color=\"#f0ab4c\"/>  </linearGradient>  <linearGradient id=\"dnpmRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>    <stop offset=\"1\" stop-color=\"#e8646f\"/>  </linearGradient>  <filter id=\"dnpmShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.22\"/>  </filter>  <filter id=\"dnpmShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.16\"/>  </filter></defs><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"url(#dnpmPanel)\"/><text x=\"340\" y=\"34\" fill=\"url(#dnpmAccent)\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">Os 4 dominios do desenvolvimento</text><g stroke-linecap=\"round\" stroke-linejoin=\"round\">  <path vector-effect=\"non-scaling-stroke\" d=\"M340,168 C300,140 250,120 175,96\" fill=\"none\" stroke=\"#4a5480\" stroke-width=\"2.5\"/>  <path vector-effect=\"non-scaling-stroke\" d=\"M340,168 C380,140 430,120 505,96\" fill=\"none\" stroke=\"#4a5480\" stroke-width=\"2.5\"/>  <path vector-effect=\"non-scaling-stroke\" d=\"M340,168 C300,196 250,216 175,240\" fill=\"none\" stroke=\"#4a5480\" stroke-width=\"2.5\"/>  <path vector-effect=\"non-scaling-stroke\" d=\"M340,168 C380,196 430,216 505,240\" fill=\"none\" stroke=\"#4a5480\" stroke-width=\"2.5\"/></g><g filter=\"url(#dnpmShadow)\">  <ellipse cx=\"340\" cy=\"168\" rx=\"72\" ry=\"46\" fill=\"url(#dnpmAccent)\"/></g><text x=\"340\" y=\"163\" fill=\"#211231\" font-size=\"15\" font-weight=\"700\" text-anchor=\"middle\">DNPM</text><text x=\"340\" y=\"181\" fill=\"#3a2540\" font-size=\"10\" text-anchor=\"middle\">sequencia fixa, ritmo variavel</text><g filter=\"url(#dnpmShadowSoft)\">  <path vector-effect=\"non-scaling-stroke\" d=\"M95,96 C95,78 112,64 148,64 C184,64 201,78 201,96 C201,114 184,128 148,128 C112,128 95,114 95,96 Z\" fill=\"url(#dnpmBlue)\"/>  <path vector-effect=\"non-scaling-stroke\" d=\"M479,96 C479,78 496,64 532,64 C568,64 585,78 585,96 C585,114 568,128 532,128 C496,128 479,114 479,96 Z\" fill=\"url(#dnpmPink)\"/>  <path vector-effect=\"non-scaling-stroke\" d=\"M95,240 C95,222 112,208 148,208 C184,208 201,222 201,240 C201,258 184,272 148,272 C112,272 95,258 95,240 Z\" fill=\"url(#dnpmGreen)\"/>  <path vector-effect=\"non-scaling-stroke\" d=\"M479,240 C479,222 496,208 532,208 C568,208 585,222 585,240 C585,258 568,272 532,272 C496,272 479,258 479,240 Z\" fill=\"url(#dnpmAmber)\"/></g><text x=\"148\" y=\"92\" fill=\"#1c2033\" font-size=\"12.5\" font-weight=\"700\" text-anchor=\"middle\">Motor grosso</text><text x=\"148\" y=\"107\" fill=\"#1c2033\" font-size=\"9.5\" text-anchor=\"middle\">postura, marcha</text><text x=\"532\" y=\"92\" fill=\"#1c2033\" font-size=\"12.5\" font-weight=\"700\" text-anchor=\"middle\">Motor fino</text><text x=\"532\" y=\"107\" fill=\"#1c2033\" font-size=\"9.5\" text-anchor=\"middle\">maos, preensao</text><text x=\"148\" y=\"236\" fill=\"#0f2a22\" font-size=\"12.5\" font-weight=\"700\" text-anchor=\"middle\">Linguagem</text><text x=\"148\" y=\"251\" fill=\"#0f2a22\" font-size=\"9.5\" text-anchor=\"middle\">receptiva/expressiva</text><text x=\"532\" y=\"236\" fill=\"#33230a\" font-size=\"12.5\" font-weight=\"700\" text-anchor=\"middle\">Pessoal-social</text><text x=\"532\" y=\"251\" fill=\"#33230a\" font-size=\"9.5\" text-anchor=\"middle\">vinculo, autocuidado</text><text x=\"340\" y=\"300\" fill=\"#c9cfe8\" font-size=\"10.5\" text-anchor=\"middle\">Os 4 dominios avancam juntos, mas cada crianca tem seu proprio ritmo</text></svg>", "dnpm_linha": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>  <linearGradient id=\"dnpmPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#232a4a\"/>    <stop offset=\"1\" stop-color=\"#181d36\"/>  </linearGradient>  <linearGradient id=\"dnpmAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcbde1\"/>    <stop offset=\"1\" stop-color=\"#bdddfc\"/>  </linearGradient>  <linearGradient id=\"dnpmBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#9fd0f7\"/>    <stop offset=\"1\" stop-color=\"#6fa8e0\"/>  </linearGradient>  <linearGradient id=\"dnpmPink\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcc9e6\"/>    <stop offset=\"1\" stop-color=\"#ef8fc4\"/>  </linearGradient>  <linearGradient id=\"dnpmGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>    <stop offset=\"1\" stop-color=\"#4cbf93\"/>  </linearGradient>  <linearGradient id=\"dnpmAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ffd98f\"/>    <stop offset=\"1\" stop-color=\"#f0ab4c\"/>  </linearGradient>  <linearGradient id=\"dnpmRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>    <stop offset=\"1\" stop-color=\"#e8646f\"/>  </linearGradient>  <filter id=\"dnpmShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.22\"/>  </filter>  <filter id=\"dnpmShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.16\"/>  </filter></defs><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#dnpmPanel)\"/><text x=\"340\" y=\"32\" fill=\"url(#dnpmAccent)\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">Linha do tempo dos marcos (2 a 18 meses)</text><path vector-effect=\"non-scaling-stroke\" d=\"M60,150 C220,138 460,162 620,150\" fill=\"none\" stroke=\"url(#dnpmAccent)\" stroke-width=\"5\" stroke-linecap=\"round\"/><circle cx=\"118\" cy=\"150\" r=\"8.5\" fill=\"url(#dnpmAccent)\" filter=\"url(#dnpmShadowSoft)\"/><path vector-effect=\"non-scaling-stroke\" d=\"M118,150 L118,104\" stroke=\"#57608c\" stroke-width=\"2\" stroke-linecap=\"round\"/><text x=\"118\" y=\"94\" fill=\"#ffd98f\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">2m</text><text x=\"118\" y=\"80\" fill=\"#dfe3f5\" font-size=\"10\" text-anchor=\"middle\">sorriso social</text><circle cx=\"210\" cy=\"150\" r=\"8.5\" fill=\"url(#dnpmAccent)\" filter=\"url(#dnpmShadowSoft)\"/><path vector-effect=\"non-scaling-stroke\" d=\"M210,150 L210,196\" stroke=\"#57608c\" stroke-width=\"2\" stroke-linecap=\"round\"/><text x=\"210\" y=\"214\" fill=\"#ffd98f\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">4m</text><text x=\"210\" y=\"228\" fill=\"#dfe3f5\" font-size=\"10\" text-anchor=\"middle\">rola / preensao</text><circle cx=\"302\" cy=\"150\" r=\"8.5\" fill=\"url(#dnpmAccent)\" filter=\"url(#dnpmShadowSoft)\"/><path vector-effect=\"non-scaling-stroke\" d=\"M302,150 L302,104\" stroke=\"#57608c\" stroke-width=\"2\" stroke-linecap=\"round\"/><text x=\"302\" y=\"94\" fill=\"#ffd98f\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">6m</text><text x=\"302\" y=\"80\" fill=\"#dfe3f5\" font-size=\"10\" text-anchor=\"middle\">senta c/ apoio</text><circle cx=\"394\" cy=\"150\" r=\"8.5\" fill=\"url(#dnpmAccent)\" filter=\"url(#dnpmShadowSoft)\"/><path vector-effect=\"non-scaling-stroke\" d=\"M394,150 L394,196\" stroke=\"#57608c\" stroke-width=\"2\" stroke-linecap=\"round\"/><text x=\"394\" y=\"214\" fill=\"#ffd98f\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">9m</text><text x=\"394\" y=\"228\" fill=\"#dfe3f5\" font-size=\"10\" text-anchor=\"middle\">senta so / pinca</text><circle cx=\"486\" cy=\"150\" r=\"8.5\" fill=\"url(#dnpmAccent)\" filter=\"url(#dnpmShadowSoft)\"/><path vector-effect=\"non-scaling-stroke\" d=\"M486,150 L486,104\" stroke=\"#57608c\" stroke-width=\"2\" stroke-linecap=\"round\"/><text x=\"486\" y=\"94\" fill=\"#ffd98f\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">12m</text><text x=\"486\" y=\"80\" fill=\"#dfe3f5\" font-size=\"10\" text-anchor=\"middle\">anda c/ apoio</text><circle cx=\"578\" cy=\"150\" r=\"8.5\" fill=\"url(#dnpmAccent)\" filter=\"url(#dnpmShadowSoft)\"/><path vector-effect=\"non-scaling-stroke\" d=\"M578,150 L578,196\" stroke=\"#57608c\" stroke-width=\"2\" stroke-linecap=\"round\"/><text x=\"578\" y=\"214\" fill=\"#ffd98f\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">18m</text><text x=\"578\" y=\"228\" fill=\"#dfe3f5\" font-size=\"10\" text-anchor=\"middle\">anda so / corre</text><text x=\"340\" y=\"272\" fill=\"#c9cfe8\" font-size=\"10.5\" text-anchor=\"middle\">O que importa em prova e a sequencia e o limite superior de cada marco -- nao o dia exato</text></svg>", "dnpm_motor": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>  <linearGradient id=\"dnpmPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#232a4a\"/>    <stop offset=\"1\" stop-color=\"#181d36\"/>  </linearGradient>  <linearGradient id=\"dnpmAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcbde1\"/>    <stop offset=\"1\" stop-color=\"#bdddfc\"/>  </linearGradient>  <linearGradient id=\"dnpmBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#9fd0f7\"/>    <stop offset=\"1\" stop-color=\"#6fa8e0\"/>  </linearGradient>  <linearGradient id=\"dnpmPink\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcc9e6\"/>    <stop offset=\"1\" stop-color=\"#ef8fc4\"/>  </linearGradient>  <linearGradient id=\"dnpmGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>    <stop offset=\"1\" stop-color=\"#4cbf93\"/>  </linearGradient>  <linearGradient id=\"dnpmAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ffd98f\"/>    <stop offset=\"1\" stop-color=\"#f0ab4c\"/>  </linearGradient>  <linearGradient id=\"dnpmRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>    <stop offset=\"1\" stop-color=\"#e8646f\"/>  </linearGradient>  <filter id=\"dnpmShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.22\"/>  </filter>  <filter id=\"dnpmShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.16\"/>  </filter></defs><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"url(#dnpmPanel)\"/><text x=\"340\" y=\"32\" fill=\"url(#dnpmAccent)\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">As duas leis: cefalo-caudal e proximo-distal</text><g filter=\"url(#dnpmShadow)\" stroke-linecap=\"round\" stroke-linejoin=\"round\">  <path vector-effect=\"non-scaling-stroke\" d=\"M300,60 C300,42 314,30 332,30 C350,30 364,42 364,60 C364,78 350,90 332,90 C314,90 300,78 300,60 Z\" fill=\"url(#dnpmBlue)\"/>  <path vector-effect=\"non-scaling-stroke\" d=\"M296,96 C296,84 310,78 332,78 C354,78 368,84 368,96 L372,192 C372,206 358,214 332,214 C306,214 292,206 292,192 Z\" fill=\"url(#dnpmAccent)\"/>  <path vector-effect=\"non-scaling-stroke\" d=\"M296,110 C270,116 250,132 236,158\" fill=\"none\" stroke=\"url(#dnpmPink)\" stroke-width=\"14\"/>  <path vector-effect=\"non-scaling-stroke\" d=\"M368,110 C394,116 414,132 428,158\" fill=\"none\" stroke=\"url(#dnpmPink)\" stroke-width=\"14\"/>  <path vector-effect=\"non-scaling-stroke\" d=\"M310,214 C304,240 300,262 300,278\" fill=\"none\" stroke=\"url(#dnpmGreen)\" stroke-width=\"16\"/>  <path vector-effect=\"non-scaling-stroke\" d=\"M354,214 C360,240 364,262 364,278\" fill=\"none\" stroke=\"url(#dnpmGreen)\" stroke-width=\"16\"/></g><path vector-effect=\"non-scaling-stroke\" d=\"M400,44 C440,90 460,180 460,270\" fill=\"none\" stroke=\"#ffd98f\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><text x=\"475\" y=\"70\" fill=\"#ffd98f\" font-size=\"12.5\" font-weight=\"700\">cefalo-caudal</text><text x=\"475\" y=\"86\" fill=\"#dfe3f5\" font-size=\"9.5\">cabeca -&gt; tronco -&gt; pernas</text><path vector-effect=\"non-scaling-stroke\" d=\"M230,150 C200,160 170,168 150,172\" fill=\"none\" stroke=\"#9fd0f7\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><text x=\"60\" y=\"196\" fill=\"#9fd0f7\" font-size=\"12.5\" font-weight=\"700\">proximo-distal</text><text x=\"60\" y=\"212\" fill=\"#dfe3f5\" font-size=\"9.5\">ombro -&gt; mao -&gt; dedos</text><text x=\"340\" y=\"300\" fill=\"#c9cfe8\" font-size=\"10.5\" text-anchor=\"middle\">Por isso sustenta a cabeca antes de sentar, e preensao grosseira vem antes da pinca fina</text></svg>", "dnpm_alerta": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>  <linearGradient id=\"dnpmPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#232a4a\"/>    <stop offset=\"1\" stop-color=\"#181d36\"/>  </linearGradient>  <linearGradient id=\"dnpmAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcbde1\"/>    <stop offset=\"1\" stop-color=\"#bdddfc\"/>  </linearGradient>  <linearGradient id=\"dnpmBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#9fd0f7\"/>    <stop offset=\"1\" stop-color=\"#6fa8e0\"/>  </linearGradient>  <linearGradient id=\"dnpmPink\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcc9e6\"/>    <stop offset=\"1\" stop-color=\"#ef8fc4\"/>  </linearGradient>  <linearGradient id=\"dnpmGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>    <stop offset=\"1\" stop-color=\"#4cbf93\"/>  </linearGradient>  <linearGradient id=\"dnpmAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ffd98f\"/>    <stop offset=\"1\" stop-color=\"#f0ab4c\"/>  </linearGradient>  <linearGradient id=\"dnpmRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>    <stop offset=\"1\" stop-color=\"#e8646f\"/>  </linearGradient>  <filter id=\"dnpmShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.22\"/>  </filter>  <filter id=\"dnpmShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.16\"/>  </filter></defs><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#dnpmPanel)\"/><text x=\"340\" y=\"32\" fill=\"url(#dnpmAccent)\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">Atraso x regressao: por que a diferenca importa</text><circle cx=\"120\" cy=\"150\" r=\"10\" fill=\"url(#dnpmAccent)\" filter=\"url(#dnpmShadowSoft)\"/><text x=\"120\" y=\"178\" fill=\"#dfe3f5\" font-size=\"10\" text-anchor=\"middle\">marco adquirido</text><path vector-effect=\"non-scaling-stroke\" d=\"M120,150 C220,110 320,90 430,70\" fill=\"none\" stroke=\"url(#dnpmGreen)\" stroke-width=\"5\" stroke-linecap=\"round\"/><text x=\"500\" y=\"66\" fill=\"#8fe3c0\" font-size=\"12.5\" font-weight=\"700\">desenvolvimento tipico</text><text x=\"500\" y=\"82\" fill=\"#dfe3f5\" font-size=\"9.5\">segue evoluindo</text><path vector-effect=\"non-scaling-stroke\" d=\"M120,150 C220,190 300,220 360,238\" fill=\"none\" stroke=\"url(#dnpmRed)\" stroke-width=\"5\" stroke-linecap=\"round\"/><circle cx=\"360\" cy=\"238\" r=\"9\" fill=\"url(#dnpmRed)\" filter=\"url(#dnpmShadowSoft)\"/><path vector-effect=\"non-scaling-stroke\" d=\"M360,238 C300,252 260,260 235,264\" fill=\"none\" stroke=\"url(#dnpmRed)\" stroke-width=\"4\" stroke-dasharray=\"1 7\" stroke-linecap=\"round\"/><g filter=\"url(#dnpmShadow)\">  <path vector-effect=\"non-scaling-stroke\" d=\"M470,190 C478,176 494,168 510,168 C526,168 542,176 550,190 L586,252 C594,266 586,284 568,284 L452,284 C434,284 426,266 434,252 Z\" fill=\"url(#dnpmAmber)\" stroke-linejoin=\"round\"/></g><text x=\"510\" y=\"238\" fill=\"#3a2708\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\">!</text><text x=\"510\" y=\"300\" fill=\"#dfe3f5\" font-size=\"10.5\" text-anchor=\"middle\">perda de marco ja adquirido</text><text x=\"200\" y=\"242\" fill=\"#ff9fa8\" font-size=\"12.5\" font-weight=\"700\">regressao</text><text x=\"200\" y=\"257\" fill=\"#dfe3f5\" font-size=\"9.5\">SEMPRE patologica -- investigar</text></svg>", "dnpm_fluxo": "<svg viewBox=\"0 0 680 340\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>  <linearGradient id=\"dnpmPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#232a4a\"/>    <stop offset=\"1\" stop-color=\"#181d36\"/>  </linearGradient>  <linearGradient id=\"dnpmAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcbde1\"/>    <stop offset=\"1\" stop-color=\"#bdddfc\"/>  </linearGradient>  <linearGradient id=\"dnpmBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#9fd0f7\"/>    <stop offset=\"1\" stop-color=\"#6fa8e0\"/>  </linearGradient>  <linearGradient id=\"dnpmPink\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcc9e6\"/>    <stop offset=\"1\" stop-color=\"#ef8fc4\"/>  </linearGradient>  <linearGradient id=\"dnpmGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>    <stop offset=\"1\" stop-color=\"#4cbf93\"/>  </linearGradient>  <linearGradient id=\"dnpmAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ffd98f\"/>    <stop offset=\"1\" stop-color=\"#f0ab4c\"/>  </linearGradient>  <linearGradient id=\"dnpmRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>    <stop offset=\"1\" stop-color=\"#e8646f\"/>  </linearGradient>  <filter id=\"dnpmShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.22\"/>  </filter>  <filter id=\"dnpmShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.16\"/>  </filter></defs><rect width=\"680\" height=\"340\" rx=\"16\" fill=\"url(#dnpmPanel)\"/><text x=\"340\" y=\"30\" fill=\"url(#dnpmAccent)\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">Vigilancia do desenvolvimento -- do consultorio a conduta</text><g filter=\"url(#dnpmShadowSoft)\">  <rect x=\"240\" y=\"46\" width=\"200\" height=\"42\" rx=\"16\" fill=\"url(#dnpmAccent)\"/></g><text x=\"340\" y=\"72\" fill=\"#211231\" font-size=\"12.5\" font-weight=\"700\" text-anchor=\"middle\">Consulta de puericultura</text><path vector-effect=\"non-scaling-stroke\" d=\"M340,88 C340,100 340,104 340,116\" stroke=\"#57608c\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><g filter=\"url(#dnpmShadowSoft)\">  <rect x=\"220\" y=\"118\" width=\"240\" height=\"42\" rx=\"16\" fill=\"url(#dnpmBlue)\"/></g><text x=\"340\" y=\"144\" fill=\"#11253c\" font-size=\"12\" font-weight=\"700\" text-anchor=\"middle\">Marcos da faixa presentes?</text><path vector-effect=\"non-scaling-stroke\" d=\"M340,160 C340,174 340,178 340,190\" stroke=\"#57608c\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><path vector-effect=\"non-scaling-stroke\" d=\"M300,196 C220,210 150,222 100,234\" fill=\"none\" stroke=\"#57608c\" stroke-width=\"2\" stroke-linecap=\"round\"/><path vector-effect=\"non-scaling-stroke\" d=\"M380,196 C460,210 530,222 580,234\" fill=\"none\" stroke=\"#57608c\" stroke-width=\"2\" stroke-linecap=\"round\"/><text x=\"230\" y=\"204\" fill=\"#ffd98f\" font-size=\"10.5\" font-weight=\"700\">nao (alerta)</text><text x=\"450\" y=\"204\" fill=\"#8fe3c0\" font-size=\"10.5\" font-weight=\"700\">sim</text><g filter=\"url(#dnpmShadowSoft)\">  <rect x=\"20\" y=\"236\" width=\"200\" height=\"56\" rx=\"14\" fill=\"url(#dnpmAmber)\"/></g><text x=\"120\" y=\"258\" fill=\"#3a2708\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Alerta</text><text x=\"120\" y=\"274\" fill=\"#3a2708\" font-size=\"9.5\" text-anchor=\"middle\">estimular + reavaliar em 30 dias</text><g filter=\"url(#dnpmShadowSoft)\">  <rect x=\"240\" y=\"236\" width=\"200\" height=\"56\" rx=\"14\" fill=\"url(#dnpmRed)\"/></g><text x=\"340\" y=\"258\" fill=\"#3a0d12\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Provavel atraso</text><text x=\"340\" y=\"274\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">atraso + regressao/PC alterado</text><g filter=\"url(#dnpmShadowSoft)\">  <rect x=\"460\" y=\"236\" width=\"200\" height=\"56\" rx=\"14\" fill=\"url(#dnpmGreen)\"/></g><text x=\"560\" y=\"258\" fill=\"#0c2b20\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Adequado</text><text x=\"560\" y=\"274\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">rotina + orientar familia</text><path vector-effect=\"non-scaling-stroke\" d=\"M340,292 C340,304 340,306 340,316\" stroke=\"#57608c\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><text x=\"340\" y=\"332\" fill=\"#c9cfe8\" font-size=\"10\" text-anchor=\"middle\">alerta persistente ou atraso -&gt; encaminhar para avaliacao especializada</text></svg>"});
+
 </script>
 <script>
 /* ===================================================================
@@ -3185,8 +3198,348 @@ try{
 })();
 
 </script>
+
+<!-- ===== MODULO Avaliacao do Crescimento reescrito (aditivo, sobrescreve CONTENT['crescimento|1']) ===== -->
+<script>
+Object.assign(window.ASVG=window.ASVG||{},{"crc_medidas": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>  <linearGradient id=\"crcPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#17303f\"/>    <stop offset=\"1\" stop-color=\"#0f2129\"/>  </linearGradient>  <linearGradient id=\"crcAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcbde1\"/>    <stop offset=\"1\" stop-color=\"#bdddfc\"/>  </linearGradient>  <linearGradient id=\"crcBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#9fd0f7\"/>    <stop offset=\"1\" stop-color=\"#5b9bd6\"/>  </linearGradient>  <linearGradient id=\"crcGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>    <stop offset=\"1\" stop-color=\"#43b489\"/>  </linearGradient>  <linearGradient id=\"crcAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ffd98f\"/>    <stop offset=\"1\" stop-color=\"#e79a3d\"/>  </linearGradient>  <linearGradient id=\"crcRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>    <stop offset=\"1\" stop-color=\"#df5d68\"/>  </linearGradient>  <filter id=\"crcShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.22\"/>  </filter>  <filter id=\"crcShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.16\"/>  </filter></defs><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"url(#crcPanel)\"/><text x=\"340\" y=\"34\" fill=\"url(#crcAccent)\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">O que medir, e o quanto se espera ganhar</text><path vector-effect=\"non-scaling-stroke\" d=\"M60,260 C220,230 460,140 620,60\" fill=\"none\" stroke=\"url(#crcAccent)\" stroke-width=\"5\" stroke-linecap=\"round\"/><g filter=\"url(#crcShadowSoft)\"><circle cx=\"100\" cy=\"250\" r=\"9\" fill=\"url(#crcBlue)\"/><circle cx=\"250\" cy=\"205\" r=\"9\" fill=\"url(#crcBlue)\"/><circle cx=\"400\" cy=\"140\" r=\"9\" fill=\"url(#crcBlue)\"/><circle cx=\"560\" cy=\"78\" r=\"9\" fill=\"url(#crcBlue)\"/></g><text x=\"100\" y=\"280\" fill=\"#dfe8ee\" font-size=\"10.5\" text-anchor=\"middle\">RN</text><text x=\"250\" y=\"230\" fill=\"#dfe8ee\" font-size=\"10.5\" text-anchor=\"middle\">4-5m</text><text x=\"400\" y=\"165\" fill=\"#dfe8ee\" font-size=\"10.5\" text-anchor=\"middle\">12m</text><text x=\"560\" y=\"103\" fill=\"#dfe8ee\" font-size=\"10.5\" text-anchor=\"middle\">24m</text><text x=\"100\" y=\"234\" fill=\"#ffd98f\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">peso 1x</text><text x=\"250\" y=\"189\" fill=\"#ffd98f\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">dobra</text><text x=\"400\" y=\"124\" fill=\"#ffd98f\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">triplica</text><text x=\"560\" y=\"62\" fill=\"#ffd98f\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">quadruplica</text><g filter=\"url(#crcShadow)\"><rect x=\"40\" y=\"50\" width=\"150\" height=\"66\" rx=\"14\" fill=\"url(#crcGreen)\"/></g><text x=\"115\" y=\"76\" fill=\"#0c2b20\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Peso</text><text x=\"115\" y=\"92\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">toda consulta</text><text x=\"115\" y=\"106\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">nutricao aguda</text><g filter=\"url(#crcShadow)\"><rect x=\"210\" y=\"50\" width=\"150\" height=\"66\" rx=\"14\" fill=\"url(#crcBlue)\"/></g><text x=\"285\" y=\"76\" fill=\"#0d2438\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Estatura</text><text x=\"285\" y=\"92\" fill=\"#0d2438\" font-size=\"9\" text-anchor=\"middle\">deitado &lt;2a</text><text x=\"285\" y=\"106\" fill=\"#0d2438\" font-size=\"9\" text-anchor=\"middle\">crescimento cronico</text><g filter=\"url(#crcShadow)\"><rect x=\"380\" y=\"50\" width=\"150\" height=\"66\" rx=\"14\" fill=\"url(#crcAmber)\"/></g><text x=\"455\" y=\"76\" fill=\"#3a2708\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Perim. cefalico</text><text x=\"455\" y=\"92\" fill=\"#3a2708\" font-size=\"9\" text-anchor=\"middle\">ate 2 anos</text><text x=\"455\" y=\"106\" fill=\"#3a2708\" font-size=\"9\" text-anchor=\"middle\">cerebro em formacao</text><g filter=\"url(#crcShadow)\"><rect x=\"550\" y=\"50\" width=\"110\" height=\"66\" rx=\"14\" fill=\"url(#crcAccent)\"/></g><text x=\"605\" y=\"76\" fill=\"#2a1830\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">IMC</text><text x=\"605\" y=\"92\" fill=\"#2a1830\" font-size=\"9\" text-anchor=\"middle\">sobrepeso</text><text x=\"605\" y=\"106\" fill=\"#2a1830\" font-size=\"9\" text-anchor=\"middle\">x magreza</text><text x=\"340\" y=\"300\" fill=\"#c9d8e0\" font-size=\"10.5\" text-anchor=\"middle\">O peso de nascimento dobra aos 4-5 meses, triplica aos 12, quadruplica aos 24</text></svg>", "crc_curvas": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>  <linearGradient id=\"crcPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#17303f\"/>    <stop offset=\"1\" stop-color=\"#0f2129\"/>  </linearGradient>  <linearGradient id=\"crcAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcbde1\"/>    <stop offset=\"1\" stop-color=\"#bdddfc\"/>  </linearGradient>  <linearGradient id=\"crcBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#9fd0f7\"/>    <stop offset=\"1\" stop-color=\"#5b9bd6\"/>  </linearGradient>  <linearGradient id=\"crcGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>    <stop offset=\"1\" stop-color=\"#43b489\"/>  </linearGradient>  <linearGradient id=\"crcAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ffd98f\"/>    <stop offset=\"1\" stop-color=\"#e79a3d\"/>  </linearGradient>  <linearGradient id=\"crcRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>    <stop offset=\"1\" stop-color=\"#df5d68\"/>  </linearGradient>  <filter id=\"crcShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.22\"/>  </filter>  <filter id=\"crcShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.16\"/>  </filter></defs><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"url(#crcPanel)\"/><text x=\"340\" y=\"30\" fill=\"url(#crcAccent)\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">Curvas da OMS: o canal que importa e a trajetoria</text><path vector-effect=\"non-scaling-stroke\" d=\"M60,270 C220,230 460,120 620,50\" fill=\"none\" stroke=\"url(#crcRed)\" stroke-width=\"2.5\" stroke-dasharray=\"2 6\" stroke-linecap=\"round\"/><path vector-effect=\"non-scaling-stroke\" d=\"M60,240 C220,205 460,140 620,90\" fill=\"none\" stroke=\"url(#crcBlue)\" stroke-width=\"3\" stroke-linecap=\"round\"/><path vector-effect=\"non-scaling-stroke\" d=\"M60,205 C220,185 460,155 620,125\" fill=\"none\" stroke=\"url(#crcGreen)\" stroke-width=\"4\" stroke-linecap=\"round\"/><path vector-effect=\"non-scaling-stroke\" d=\"M60,175 C220,165 460,168 620,158\" fill=\"none\" stroke=\"url(#crcBlue)\" stroke-width=\"3\" stroke-linecap=\"round\"/><path vector-effect=\"non-scaling-stroke\" d=\"M60,145 C220,150 460,175 620,190\" fill=\"none\" stroke=\"url(#crcRed)\" stroke-width=\"2.5\" stroke-dasharray=\"2 6\" stroke-linecap=\"round\"/><text x=\"628\" y=\"50\" fill=\"#ff9fa8\" font-size=\"10.5\">Z +3</text><text x=\"628\" y=\"90\" fill=\"#9fd0f7\" font-size=\"10.5\">Z +2 (P97)</text><text x=\"628\" y=\"128\" fill=\"#8fe3c0\" font-size=\"11\" font-weight=\"700\">Z 0 (P50)</text><text x=\"628\" y=\"160\" fill=\"#9fd0f7\" font-size=\"10.5\">Z -2 (P3)</text><text x=\"628\" y=\"192\" fill=\"#ff9fa8\" font-size=\"10.5\">Z -3</text><g filter=\"url(#crcShadow)\"><circle cx=\"330\" cy=\"163\" r=\"9\" fill=\"url(#crcAccent)\"/></g><text x=\"330\" y=\"145\" fill=\"#ffd98f\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">crianca no canal</text><text x=\"340\" y=\"300\" fill=\"#c9d8e0\" font-size=\"10.5\" text-anchor=\"middle\">Entre Z -2 e Z +2 (P3 a P97) e considerado normal -- o que importa e seguir paralelo a curva</text></svg>", "crc_alvo": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>  <linearGradient id=\"crcPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#17303f\"/>    <stop offset=\"1\" stop-color=\"#0f2129\"/>  </linearGradient>  <linearGradient id=\"crcAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcbde1\"/>    <stop offset=\"1\" stop-color=\"#bdddfc\"/>  </linearGradient>  <linearGradient id=\"crcBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#9fd0f7\"/>    <stop offset=\"1\" stop-color=\"#5b9bd6\"/>  </linearGradient>  <linearGradient id=\"crcGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>    <stop offset=\"1\" stop-color=\"#43b489\"/>  </linearGradient>  <linearGradient id=\"crcAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ffd98f\"/>    <stop offset=\"1\" stop-color=\"#e79a3d\"/>  </linearGradient>  <linearGradient id=\"crcRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>    <stop offset=\"1\" stop-color=\"#df5d68\"/>  </linearGradient>  <filter id=\"crcShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.22\"/>  </filter>  <filter id=\"crcShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.16\"/>  </filter></defs><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"url(#crcPanel)\"/><text x=\"340\" y=\"30\" fill=\"url(#crcAccent)\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">Velocidade de crescimento: o sinal mais sensivel</text><path vector-effect=\"non-scaling-stroke\" d=\"M60,250 C220,210 460,140 620,90\" fill=\"none\" stroke=\"url(#crcGreen)\" stroke-width=\"5\" stroke-linecap=\"round\"/><text x=\"500\" y=\"86\" fill=\"#8fe3c0\" font-size=\"12\" font-weight=\"700\">canal preservado</text><text x=\"500\" y=\"102\" fill=\"#dfe8ee\" font-size=\"9.5\">VC normal -- variante do normal</text><path vector-effect=\"non-scaling-stroke\" d=\"M60,250 C180,225 260,215 300,210\" fill=\"none\" stroke=\"url(#crcGreen)\" stroke-width=\"5\" stroke-linecap=\"round\"/><path vector-effect=\"non-scaling-stroke\" d=\"M300,210 C400,222 480,250 540,280\" fill=\"none\" stroke=\"url(#crcRed)\" stroke-width=\"5\" stroke-linecap=\"round\"/><circle cx=\"300\" cy=\"210\" r=\"9\" fill=\"url(#crcRed)\" filter=\"url(#crcShadowSoft)\"/><text x=\"420\" y=\"270\" fill=\"#ff9fa8\" font-size=\"12\" font-weight=\"700\">cruza canais para baixo</text><text x=\"420\" y=\"286\" fill=\"#dfe8ee\" font-size=\"9.5\">VC baixa -- investigar</text><g filter=\"url(#crcShadowSoft)\"><rect x=\"40\" y=\"40\" width=\"230\" height=\"40\" rx=\"14\" fill=\"url(#crcBlue)\"/></g><text x=\"155\" y=\"65\" fill=\"#0d2438\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Estatura-alvo (meninos): (Pai+Mae+13)/2</text><text x=\"340\" y=\"304\" fill=\"#c9d8e0\" font-size=\"10.5\" text-anchor=\"middle\">Um ponto isolado nao diagnostica nada -- e a trajetoria (velocidade) que revela o problema</text></svg>", "crc_diferencial": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>  <linearGradient id=\"crcPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#17303f\"/>    <stop offset=\"1\" stop-color=\"#0f2129\"/>  </linearGradient>  <linearGradient id=\"crcAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcbde1\"/>    <stop offset=\"1\" stop-color=\"#bdddfc\"/>  </linearGradient>  <linearGradient id=\"crcBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#9fd0f7\"/>    <stop offset=\"1\" stop-color=\"#5b9bd6\"/>  </linearGradient>  <linearGradient id=\"crcGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>    <stop offset=\"1\" stop-color=\"#43b489\"/>  </linearGradient>  <linearGradient id=\"crcAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ffd98f\"/>    <stop offset=\"1\" stop-color=\"#e79a3d\"/>  </linearGradient>  <linearGradient id=\"crcRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>    <stop offset=\"1\" stop-color=\"#df5d68\"/>  </linearGradient>  <filter id=\"crcShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.22\"/>  </filter>  <filter id=\"crcShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.16\"/>  </filter></defs><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"url(#crcPanel)\"/><text x=\"340\" y=\"30\" fill=\"url(#crcAccent)\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">Baixa estatura: variante do normal ou doenca?</text><g filter=\"url(#crcShadow)\"><path vector-effect=\"non-scaling-stroke\" d=\"M100,60 C120,60 140,72 140,90 C140,108 120,120 100,120 C80,120 60,108 60,90 C60,72 80,60 100,60 Z\" fill=\"url(#crcGreen)\"/></g><text x=\"100\" y=\"95\" fill=\"#0c2b20\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">F</text><text x=\"100\" y=\"145\" fill=\"#8fe3c0\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Familiar</text><text x=\"100\" y=\"161\" fill=\"#dfe8ee\" font-size=\"9.5\" text-anchor=\"middle\">idade ossea = cronologica</text><text x=\"100\" y=\"175\" fill=\"#dfe8ee\" font-size=\"9.5\" text-anchor=\"middle\">pais baixos, VC normal</text><g filter=\"url(#crcShadow)\"><path vector-effect=\"non-scaling-stroke\" d=\"M340,60 C360,60 380,72 380,90 C380,108 360,120 340,120 C320,120 300,108 300,90 C300,72 320,60 340,60 Z\" fill=\"url(#crcBlue)\"/></g><text x=\"340\" y=\"95\" fill=\"#0d2438\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">C</text><text x=\"340\" y=\"145\" fill=\"#9fd0f7\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Constitucional</text><text x=\"340\" y=\"161\" fill=\"#dfe8ee\" font-size=\"9.5\" text-anchor=\"middle\">idade ossea atrasada</text><text x=\"340\" y=\"175\" fill=\"#dfe8ee\" font-size=\"9.5\" text-anchor=\"middle\">puberdade tardia, recupera</text><g filter=\"url(#crcShadow)\"><path vector-effect=\"non-scaling-stroke\" d=\"M580,60 C600,60 620,72 620,90 C620,108 600,120 580,120 C560,120 540,108 540,90 C540,72 560,60 580,60 Z\" fill=\"url(#crcRed)\"/></g><text x=\"580\" y=\"95\" fill=\"#3a0d12\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">P</text><text x=\"580\" y=\"145\" fill=\"#ff9fa8\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Patologica</text><text x=\"580\" y=\"161\" fill=\"#dfe8ee\" font-size=\"9.5\" text-anchor=\"middle\">VC baixa, cruza canal</text><text x=\"580\" y=\"175\" fill=\"#dfe8ee\" font-size=\"9.5\" text-anchor=\"middle\">endocrino / cronica / genetica</text><path vector-effect=\"non-scaling-stroke\" d=\"M60,230 C220,215 460,215 620,230\" fill=\"none\" stroke=\"#57708c\" stroke-width=\"2\" stroke-linecap=\"round\"/><text x=\"340\" y=\"255\" fill=\"#dfe8ee\" font-size=\"10.5\" text-anchor=\"middle\">A velocidade de crescimento e a idade ossea decidem entre as tres</text><text x=\"340\" y=\"300\" fill=\"#c9d8e0\" font-size=\"10.5\" text-anchor=\"middle\">Menina baixa inexplicada: sempre pensar em cariotipo (Sindrome de Turner)</text></svg>", "crc_alarme": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>  <linearGradient id=\"crcPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#17303f\"/>    <stop offset=\"1\" stop-color=\"#0f2129\"/>  </linearGradient>  <linearGradient id=\"crcAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#fcbde1\"/>    <stop offset=\"1\" stop-color=\"#bdddfc\"/>  </linearGradient>  <linearGradient id=\"crcBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#9fd0f7\"/>    <stop offset=\"1\" stop-color=\"#5b9bd6\"/>  </linearGradient>  <linearGradient id=\"crcGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>    <stop offset=\"1\" stop-color=\"#43b489\"/>  </linearGradient>  <linearGradient id=\"crcAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ffd98f\"/>    <stop offset=\"1\" stop-color=\"#e79a3d\"/>  </linearGradient>  <linearGradient id=\"crcRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>    <stop offset=\"1\" stop-color=\"#df5d68\"/>  </linearGradient>  <filter id=\"crcShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.22\"/>  </filter>  <filter id=\"crcShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.16\"/>  </filter></defs><rect width=\"680\" height=\"320\" rx=\"16\" fill=\"url(#crcPanel)\"/><text x=\"340\" y=\"30\" fill=\"url(#crcAccent)\" font-size=\"18\" font-weight=\"700\" text-anchor=\"middle\">Quando investigar: os sinais que nao esperam</text><g filter=\"url(#crcShadow)\"><path vector-effect=\"non-scaling-stroke\" d=\"M140,60 C150,44 166,36 182,36 C198,36 214,44 222,60 L258,122 C266,136 258,154 240,154 L124,154 C106,154 98,136 106,122 Z\" fill=\"url(#crcAmber)\" stroke-linejoin=\"round\"/></g><text x=\"182\" y=\"108\" fill=\"#3a2708\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\">!</text><text x=\"182\" y=\"175\" fill=\"#dfe8ee\" font-size=\"10.5\" text-anchor=\"middle\">VC &lt; 5cm/ano</text><text x=\"182\" y=\"190\" fill=\"#dfe8ee\" font-size=\"10.5\" text-anchor=\"middle\">apos os 2 anos</text><g filter=\"url(#crcShadow)\"><path vector-effect=\"non-scaling-stroke\" d=\"M400,60 C410,44 426,36 442,36 C458,36 474,44 482,60 L518,122 C526,136 518,154 500,154 L384,154 C366,154 358,136 366,122 Z\" fill=\"url(#crcRed)\" stroke-linejoin=\"round\"/></g><text x=\"442\" y=\"108\" fill=\"#3a0d12\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\">!</text><text x=\"442\" y=\"175\" fill=\"#dfe8ee\" font-size=\"10.5\" text-anchor=\"middle\">cruza canais</text><text x=\"442\" y=\"190\" fill=\"#dfe8ee\" font-size=\"10.5\" text-anchor=\"middle\">de percentil p/ baixo</text><g filter=\"url(#crcShadowSoft)\"><rect x=\"40\" y=\"220\" width=\"600\" height=\"60\" rx=\"14\" fill=\"url(#crcBlue)\"/></g><text x=\"340\" y=\"244\" fill=\"#0d2438\" font-size=\"12\" font-weight=\"700\" text-anchor=\"middle\">Exames basicos sempre:</text><text x=\"340\" y=\"264\" fill=\"#0d2438\" font-size=\"10.5\" text-anchor=\"middle\">hemograma, TSH/T4 livre, idade ossea, rastreio celiaco (+ cariotipo em meninas)</text><text x=\"340\" y=\"304\" fill=\"#c9d8e0\" font-size=\"10.5\" text-anchor=\"middle\">Um ponto baixo isolado nao alarma -- a queda de velocidade ou o cruzamento de canal, sim</text></svg>"});
+</script>
+<script>
+/* ===================================================================
+   Avaliacao do Crescimento & Curvas OMS -- reescrita completa no
+   padrao Toxoplasmose (skill elid-study-platform), aditiva.
+   Reaproveita 100% do conteudo original migrado (OLD_MODULES.cresc,
+   ja presente no documento via module-adapter.js): tabelas de medidas
+   e ganhos esperados, curvas/escore-Z, classificacao nutricional,
+   diferencial de baixa estatura (familiar/constitucional/patologica),
+   estatura-alvo, o caso clinico e as 4 questoes e 6 flashcards
+   originais -- nenhuma informacao foi removida, tudo reformatado nas
+   classes atuais do engine (ac-*, mm, fx) e reorganizado em 8 sub-
+   abas de teoria (antes so 1, sem formatacao). Complementa com: 5
+   SVGs proprios (crc_*), diferencial automatico (dif), mapa mental e
+   2 fluxogramas em HTML/CSS nativo do engine, recorte sobre
+   crescimento do prematuro (curvas de Fenton / Intergrowth-21st,
+   transicao para curvas da OMS por idade corrigida) e mais
+   questoes/flashcards/1 caso novo.
+   Roda DEPOIS de module-adapter.js e SOBRESCREVE apenas
+   window.CONTENT['crescimento|1'] -- nao toca em mais nada.
+   =================================================================== */
+(function(){
+"use strict";
+var A = window.ASVG || {};
+window.CONTENT = window.CONTENT || {};
+
+var C = {};
+C.name = "Avaliação do Crescimento & Curvas OMS";
+C.intro = "Crescer é ganhar tamanho ao longo do tempo -- o que a banca cobra é a trajetória na curva, não o valor de um dia isolado.";
+
+C.sub = [
+
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">O pediatra como detetive de trajetórias</div>
+<p class="ac-p">Toda consulta de puericultura mede peso, estatura e perímetro cefálico -- mas o número isolado, sozinho, quase não diz nada. O que realmente importa é a <b>trajetória</b>: será que essa criança continua crescendo no mesmo "canal" da curva em que sempre esteve, ou ela está se afastando dele? Pense no pediatra como um detetive que não julga uma única fotografia, e sim o filme inteiro -- comparando a consulta de hoje com todas as anteriores, no mesmo gráfico.</p>
+<p class="ac-p">Essa ideia de "canal" existe porque cada criança nasce com um potencial genético de crescimento e, na ausência de doença, tende a crescer <b>paralelamente</b> a uma das curvas de referência -- pode ser a curva do percentil 25, do 50, ou do 75, e todas são igualmente normais. O que faz soar o alarme não é estar num percentil baixo, e sim <b>sair do seu canal habitual</b>: uma criança que sempre esteve no percentil 50 e cai para o percentil 10 está mandando um sinal, mesmo que o percentil 10 ainda seja, tecnicamente, uma faixa "normal" da população.</p>
+<p class="ac-p">Por isso a avaliação do crescimento depende de três peças que se completam: <b>o que medir</b> (peso, estatura, perímetro cefálico, IMC), <b>com que referência comparar</b> (as curvas da OMS, que representam como crianças saudáveis de várias partes do mundo crescem) e <b>como interpretar a tendência</b> (a velocidade de crescimento, que revela problemas antes mesmo que a criança "caia" visivelmente na curva). As próximas abas constroem essas três peças uma a uma.</p>
+<div class="ac-call"><b>A grande ideia:</b> um ponto isolado no gráfico quase nunca fecha diagnóstico -- é a trajetória ao longo do tempo, comparada ao canal habitual da própria criança, que revela se algo precisa de atenção.</div>
+`],
+
+['medidas_ganhos','O Que Medir e os Ganhos Esperados', `
+<div class="ac-h">Quatro medidas, quatro perguntas diferentes</div>
+<p class="ac-p">Cada medida antropométrica responde a uma pergunta clínica distinta, e é por isso que nenhuma substitui as outras. O <b>peso</b>, aferido em toda consulta, é o parâmetro mais sensível para o estado nutricional <b>agudo</b> -- reflete o que aconteceu nas últimas semanas (uma diarreia recente, uma infecção, uma dificuldade alimentar já derruba o peso rapidamente). A <b>estatura</b> (medida deitada até os 2 anos, em pé depois disso) reflete o crescimento <b>crônico</b> -- muda lentamente, e por isso um desvio na estatura sugere um problema que já dura meses. O <b>perímetro cefálico</b>, acompanhado sobretudo até os 2 anos, é a janela para o crescimento <b>cerebral</b> -- um PC crescendo rápido demais ou devagar demais é sinal de alerta neurológico, não só nutricional. E o <b>IMC</b> combina peso e estatura para separar sobrepeso/obesidade de magreza, sendo especialmente útil a partir dos 2 anos.</p>
+${A.crc_medidas}
+<p class="ac-p">Os ganhos esperados seguem um padrão de <b>desaceleração</b>: o recém-nascido ganha peso proporcionalmente muito mais rápido do que uma criança de 2 anos, porque a velocidade de crescimento é sempre maior quanto mais jovem o indivíduo. Isso explica por que o peso de nascimento <b>dobra por volta de 4 a 5 meses</b>, <b>triplica por volta de 12 meses</b> e <b>quadruplica por volta de 24 meses</b> -- os intervalos entre esses marcos vão ficando cada vez maiores, mesmo que o ganho absoluto de peso, em gramas, siga significativo.</p>
+<table class="ac-tbl"><tr><th>Parâmetro</th><th>Valor esperado</th></tr>
+<tr><td>Peso -- 1º trimestre</td><td>~<b>700 g/mês</b> (≈25-30 g/dia)</td></tr>
+<tr><td>Peso -- 2º trimestre</td><td>~600 g/mês</td></tr>
+<tr><td>Peso -- 3º trimestre</td><td>~500 g/mês</td></tr>
+<tr><td>Peso -- 4º trimestre</td><td>~300-400 g/mês</td></tr>
+<tr><td>Peso duplica</td><td>~<b>4-5 meses</b></td></tr>
+<tr><td>Peso triplica</td><td>~<b>12 meses</b></td></tr>
+<tr><td>Peso quadruplica</td><td>~24 meses</td></tr>
+<tr><td>Estatura -- 1º ano</td><td>~<b>25 cm</b> (≈50 → 75 cm)</td></tr>
+<tr><td>Estatura -- 2º ano</td><td>~12 cm</td></tr>
+<tr><td>Estatura -- pré-escolar/escolar</td><td>~5-7 cm/ano</td></tr>
+<tr><td>Perímetro cefálico ao nascer</td><td>~34-35 cm</td></tr>
+<tr><td>Perímetro cefálico -- 1º ano</td><td>cresce ~<b>12 cm</b> (≈47 cm aos 12m)</td></tr></table>
+<div class="ac-tip"><b>Mnemônico do perímetro cefálico mensal:</b> 1º trimestre +2 cm/mês · 2º trimestre +1 cm/mês · 2º semestre +0,5 cm/mês -- a velocidade cai pela metade a cada etapa.</div>
+`],
+
+['curvas_zscore','Curvas da OMS e Escore-Z', `
+<div class="ac-h">Um mapa comum para comparar qualquer criança</div>
+<p class="ac-p">Para saber se uma medida está "boa", é preciso compará-la com uma referência de crianças saudáveis da mesma idade e sexo -- é exatamente isso que as curvas fazem. O Brasil adota as curvas da <b>Organização Mundial da Saúde</b>: o <b>padrão de crescimento infantil (2006)</b>, construído a partir de crianças amamentadas e saudáveis de vários países, usado dos 0 aos 5 anos, e a <b>referência de crescimento (2007)</b>, usada dos 5 aos 19 anos. Ambas estão impressas na Caderneta de Saúde da Criança do Ministério da Saúde e devem ser preenchidas em toda consulta.</p>
+${A.crc_curvas}
+<p class="ac-p">A posição de uma criança nessas curvas pode ser lida de duas formas equivalentes: em <b>percentil</b> (que porcentagem da população de referência tem valor igual ou menor) ou em <b>escore-Z</b> (quantos desvios-padrão a medida está distante da média). O escore-Z é preferido tecnicamente porque, diferente do percentil, ele continua fazendo sentido matematicamente nos extremos da curva -- dois escores-Z muito baixos (por exemplo -4 e -6) mostram claramente qual criança está pior, enquanto "percentil menor que 1" não diferencia bem casos extremos.</p>
+<table class="ac-tbl"><tr><th>Escore-Z</th><th>Percentil aproximado</th></tr>
+<tr><td>0</td><td>P50</td></tr>
+<tr><td>+2 / -2</td><td>P97 / P3</td></tr>
+<tr><td>+3 / -3</td><td>~P99,9 / P0,1</td></tr></table>
+<div class="ac-call"><b>A grande ideia:</b> a regra geral da OMS considera normal a faixa entre escore-Z -2 e +2 (aproximadamente entre os percentis 3 e 97) -- mas "normal" aqui descreve a <b>posição</b>; a <b>trajetória</b> paralela à curva continua sendo o dado mais importante.</div>
+`],
+
+['classificacao_nutricional','Classificação do Estado Nutricional', `
+<div class="ac-h">Os cortes mudam com a idade -- e isso é pegadinha de prova</div>
+<p class="ac-p">Depois de posicionar a criança na curva certa, o próximo passo é classificar o estado nutricional -- e aqui mora uma armadilha clássica: os pontos de corte de IMC/idade são <b>diferentes</b> conforme a faixa etária, porque a composição corporal e os riscos associados ao excesso de peso mudam entre a primeira infância e a adolescência. Por isso, antes de classificar qualquer criança, o primeiro passo mental deve ser: "essa criança tem menos ou mais de 5 anos?".</p>
+<table class="ac-tbl"><tr><th>Faixa de escore-Z</th><th>Classificação (peso/estatura ou IMC/idade, &lt;5 anos)</th></tr>
+<tr><td>&gt; +3</td><td><b>Obesidade</b></td></tr>
+<tr><td>+2 a +3</td><td>Sobrepeso</td></tr>
+<tr><td>+1 a +2</td><td>Risco de sobrepeso</td></tr>
+<tr><td>-2 a +1</td><td><b>Eutrofia</b></td></tr>
+<tr><td>-3 a &lt;-2</td><td>Magreza</td></tr>
+<tr><td>&lt; -3</td><td>Magreza acentuada</td></tr></table>
+<table class="ac-tbl"><tr><th>Faixa de escore-Z</th><th>Classificação (IMC/idade, 5 a 19 anos)</th></tr>
+<tr><td>&gt; +2</td><td>Obesidade</td></tr>
+<tr><td>+1 a +2</td><td>Sobrepeso</td></tr>
+<tr><td>-2 a +1</td><td>Eutrofia</td></tr>
+<tr><td>&lt; -2</td><td>Magreza</td></tr></table>
+<table class="ac-tbl"><tr><th>Faixa de escore-Z</th><th>Classificação (estatura/idade, qualquer idade)</th></tr>
+<tr><td>≥ -2</td><td>Estatura adequada</td></tr>
+<tr><td>&lt; -2</td><td><b>Baixa estatura</b></td></tr>
+<tr><td>&lt; -3</td><td>Muito baixa estatura</td></tr></table>
+<div class="ac-warn"><b>Erro que reprova:</b> aplicar o corte de "risco de sobrepeso" (+1 a +2) da faixa &lt;5 anos para um adolescente de 12 anos -- nessa faixa (5-19 anos), +1 a +2 já é <b>sobrepeso</b>, não apenas risco. A mesma faixa de escore-Z tem nomes diferentes conforme a idade.</div>
+`],
+
+['estatura_alvo_vc','Estatura-Alvo e Velocidade de Crescimento', `
+<div class="ac-h">O parâmetro que denuncia o problema antes da curva</div>
+<p class="ac-p">Toda criança carrega um potencial de estatura determinado pela genética dos pais -- é o que se chama de <b>estatura-alvo</b> ou canal familiar, calculada a partir da altura dos pais. Para meninos, soma-se a altura do pai com a da mãe, adiciona-se 13 cm (a diferença média de estatura entre homens e mulheres adultos) e divide-se por 2; para meninas, o mesmo cálculo, mas subtraindo 13 cm. O resultado tem uma margem de aproximadamente ±8,5 cm -- ou seja, é uma estimativa, não um valor exato, mas serve como referência para saber se a estatura atual da criança é compatível com o potencial familiar dela.</p>
+${A.crc_alvo}
+<p class="ac-p">Mais importante que qualquer valor isolado é a <b>velocidade de crescimento</b> (VC), medida em centímetros por ano -- ela é considerada o parâmetro <b>mais sensível</b> para detectar precocemente um problema endócrino ou sistêmico, porque a velocidade cai <b>antes</b> que a estatura absoluta saia visivelmente da curva. Depois dos 2 anos de idade, uma velocidade de crescimento menor que aproximadamente 5 cm/ano já é motivo de suspeita, mesmo que a criança ainda pareça estar "dentro da curva" num único ponto medido.</p>
+<p class="ac-p">É por isso que <b>cruzar canais de percentil para baixo</b> -- uma criança que estava no percentil 50 e, ao longo de alguns meses, migra para o percentil 25, depois 10 -- é considerado um sinal de alarme mais forte do que simplesmente "estar num percentil baixo desde sempre". O primeiro padrão sugere um processo ativo, adquirido, que está desacelerando o crescimento; o segundo pode ser apenas o canal genético natural daquela criança.</p>
+<div class="ac-tip"><b>Como não confundir:</b> um ponto baixo na curva pode ser só o canal genético da criança. Uma <b>queda de velocidade</b> ou um <b>cruzamento de canais</b> é sempre o sinal que merece mais atenção.</div>
+`],
+
+['baixa_estatura','Baixa Estatura: Variante do Normal ou Doença?', `
+<div class="ac-h">Três caminhos para o mesmo achado</div>
+<p class="ac-p">Diante de uma criança com estatura abaixo de -2 escores-Z, a pergunta clínica mais importante não é "quão baixa ela está", e sim "por quê". Existem três cenários clássicos, e distingui-los é o cerne do raciocínio sobre baixa estatura. Na <b>baixa estatura familiar</b>, a criança simplesmente herdou uma estatura-alvo baixa dos pais: a velocidade de crescimento é normal, a idade óssea é igual à idade cronológica, e a criança cresce paralela à sua curva, só que numa faixa baixa da população -- não é doença, é genética.</p>
+${A.crc_diferencial}
+<p class="ac-p">No <b>retardo constitucional do crescimento e puberdade</b>, a criança também é baixa por um tempo, mas por um motivo diferente: seu "relógio" de maturação está simplesmente atrasado. A idade óssea vem atrasada (mais próxima da estatura atual do que da idade cronológica), a puberdade chega mais tarde que a média, e é comum haver um histórico familiar de "maturador tardio" (um dos pais que também cresceu e amadureceu mais tarde, alcançando estatura normal no fim). A boa notícia é que essas crianças recuperam o atraso mais tarde, atingindo uma estatura final adequada -- daí o nome "constitucional", ligado ao ritmo, não a uma doença permanente.</p>
+<p class="ac-p">Já na <b>baixa estatura patológica</b>, existe uma causa ativa prejudicando o crescimento -- e o sinal que a diferencia das duas anteriores é a <b>velocidade de crescimento baixa</b>, com a criança cruzando canais de percentil para baixo ao longo do tempo. As causas podem ser desproporcionadas (afetando mais o esqueleto, como displasias ósseas e raquitismo) ou proporcionadas (pré-natais, como restrição de crescimento intrauterino e síndromes genéticas; ou pós-natais, como desnutrição, doenças crônicas e causas endócrinas -- hipotireoidismo, deficiência de hormônio do crescimento, excesso de cortisol).</p>
+<div class="ac-warn"><b>Pegadinha clássica de prova:</b> menina com baixa estatura inexplicada, pescoço alado, tórax em escudo e atraso puberal com gonadotrofinas elevadas -- pensar sempre em <b>Síndrome de Turner (45,X)</b> e solicitar cariótipo. Toda menina com baixa estatura sem causa clara deveria ter esse diagnóstico ativamente descartado.</div>
+`],
+
+['especial_prematuro','Recorte Especial: Crescimento do Prematuro', `
+<div class="ac-h">Curvas diferentes para uma trajetória diferente</div>
+<p class="ac-p">Um recém-nascido prematuro não pode ser avaliado pelas mesmas curvas usadas para bebês a termo logo após o nascimento, porque ele ainda está, metabolicamente, completando um crescimento que deveria ter acontecido dentro do útero. Para essa fase inicial, usam-se curvas específicas de crescimento pós-natal do prematuro -- a mais tradicional é a <b>curva de Fenton</b>, que traça peso, comprimento e perímetro cefálico por idade gestacional (não por idade cronológica), permitindo comparar o crescimento do bebê prematuro com o que se esperaria se a gestação tivesse continuado. Uma alternativa mais recente, com base em dados multicêntricos de gestações de baixo risco, é o padrão <b>Intergrowth-21st</b>, que cobre desde o crescimento fetal até o crescimento pós-natal precoce do prematuro.</p>
+<p class="ac-p">Essas curvas específicas para prematuros são usadas, em geral, até a criança atingir por volta de 40 semanas de idade pós-menstrual (o equivalente a "nascer a termo", mesmo já estando fora do útero) -- a partir daí, a transição é feita para as curvas usuais da OMS, sempre usando a <b>idade corrigida</b> (idade cronológica menos o número de semanas que faltaram para completar 40 semanas de gestação), da mesma forma que se faz para avaliar marcos do desenvolvimento neuropsicomotor. Essa correção deve ser mantida até os 2 anos de idade cronológica, exatamente como no acompanhamento do DNPM.</p>
+<details><summary style="cursor:pointer;color:var(--accent);font-size:.86rem;margin:8px 0">Por que isso é tão cobrado nas provas de residência? (clique para expandir)</summary>
+<p class="ac-p" style="margin-top:8px">Prematuros, sobretudo os de muito baixo peso ao nascer, frequentemente apresentam um período inicial de <b>restrição de crescimento pós-natal</b> -- perdem peso nos primeiros dias (fisiológico, igual ao termo, mas proporcionalmente maior) e podem demorar para retomar a curva de crescimento esperada. Isso gera uma pergunta prática recorrente: até quando é aceitável esse "atraso", e quando ele já indica um problema nutricional ou de saúde subjacente que precisa de intervenção (ajuste calórico, investigação de complicações da prematuridade)? A resposta depende de acompanhar a <b>velocidade</b> de ganho de peso/comprimento nas curvas próprias do prematuro -- exatamente o mesmo princípio da velocidade de crescimento já visto para crianças a termo, só que aplicado com a régua certa para essa fase.</p>
+</details>
+<div class="ac-tip"><b>Resumindo:</b> prematuro recente → curva de Fenton/Intergrowth-21st por idade gestacional. Depois de ~40 semanas pós-menstruais → curva da OMS por idade <b>corrigida</b>, até os 2 anos.</div>
+`],
+
+['investigacao_conduta','Investigação e Conduta', `
+<div class="ac-h">Quando o achado deixa de ser observação e vira investigação</div>
+<p class="ac-p">Nem toda criança com estatura baixa ou peso abaixo do esperado precisa de exames -- a maioria dos casos são variantes do normal, que se resolvem apenas com acompanhamento e orientação. O que muda o rumo da consulta são sinais específicos: uma <b>velocidade de crescimento menor que ~5 cm/ano após os 2 anos de idade</b>, ou o <b>cruzamento de canais de percentil para baixo</b> ao longo de consultas sucessivas. Esses dois achados, isolados ou combinados, são os gatilhos clássicos para iniciar uma investigação.</p>
+${A.crc_alarme}
+<p class="ac-p">Diante de um desses sinais, o primeiro passo é classificar a baixa estatura como <b>proporcionada</b> ou <b>desproporcionada</b> (avaliando a relação entre o tamanho do tronco e dos membros) -- uma baixa estatura desproporcionada aponta para displasias ósseas ou raquitismo, enquanto uma proporcionada abre um leque mais amplo de causas pré-natais (restrição de crescimento intrauterino, síndromes genéticas) e pós-natais (desnutrição, doenças crônicas, causas endócrinas). Os exames básicos que praticamente todo protocolo recomenda incluem hemograma, função tireoidiana (TSH e T4 livre), radiografia para <b>idade óssea</b> e rastreio de doença celíaca -- e, em meninas com baixa estatura inexplicada, cariótipo para descartar Síndrome de Turner.</p>
+<div class="ac-call"><b>A grande ideia:</b> a maioria das provas quer que você diferencie três desfechos -- <b>variante do normal</b> (familiar ou constitucional, VC normal, apenas acompanhar), <b>investigação laboratorial básica</b> (VC baixa ou cruzamento de canal, sem outros achados graves) e <b>encaminhamento especializado</b> (achados desproporcionados, suspeita sindrômica, ou exames iniciais alterados).</div>
+`]
+
+];
+
+Object.assign(C, {
+
+escores: `
+<div class="ac-h">Conversão rápida: escore-Z, percentil e classificação</div>
+<table class="ac-tbl"><tr><th>Escore-Z</th><th>Percentil ≈</th><th>&lt;5 anos (peso/estatura ou IMC)</th><th>5-19 anos (IMC/idade)</th></tr>
+<tr><td>&gt; +3</td><td>&gt;P99,9</td><td>Obesidade</td><td>--</td></tr>
+<tr><td>+2 a +3</td><td>P97-P99,9</td><td>Sobrepeso</td><td>Obesidade (&gt;+2)</td></tr>
+<tr><td>+1 a +2</td><td>P84-P97</td><td>Risco de sobrepeso</td><td>Sobrepeso</td></tr>
+<tr><td>-2 a +1</td><td>P3-P84</td><td>Eutrofia</td><td>Eutrofia</td></tr>
+<tr><td>-3 a &lt;-2</td><td>P0,1-P3</td><td>Magreza</td><td>Magreza (&lt;-2)</td></tr>
+<tr><td>&lt; -3</td><td>&lt;P0,1</td><td>Magreza acentuada</td><td>--</td></tr></table>
+<div class="ac-tip"><b>Truque de prova:</b> memorize só a coluna de &lt;5 anos com detalhe (tem 6 faixas); a de 5-19 anos usa os MESMOS cortes de +2/-2 que já valem para estatura/idade em qualquer idade -- menos faixas para decorar.</div>
+`,
+
+dif: `
+<div class="ac-h">Familiar, constitucional ou patológica?</div>
+<table class="ac-tbl"><tr><th></th><th>Baixa estatura familiar</th><th>Retardo constitucional</th><th>Patológica</th></tr>
+<tr><td><b>Estatura-alvo</b></td><td>Baixa</td><td>Normal</td><td>Normal</td></tr>
+<tr><td><b>Idade óssea</b></td><td>= idade cronológica</td><td><b>Atrasada</b> (≈ estatura atual)</td><td>Variável</td></tr>
+<tr><td><b>Velocidade de crescimento</b></td><td>Normal</td><td>Normal (lenta nessa fase)</td><td><b>Baixa</b></td></tr>
+<tr><td><b>Puberdade</b></td><td>Normal</td><td>Atrasada</td><td>Variável</td></tr>
+<tr><td><b>História familiar</b></td><td>Pais baixos</td><td>"Maturador tardio" na família</td><td>Variável</td></tr>
+<tr><td><b>Prognóstico</b></td><td>Estatura final baixa (compatível com a família)</td><td>Estatura final normal (recupera)</td><td>Depende da causa/tratamento</td></tr></table>
+<div class="ac-call"><b>A grande ideia:</b> nas duas variantes do normal a velocidade de crescimento está preservada -- é ela, junto com a idade óssea, que separa "isso é genético/de ritmo" de "isso precisa de investigação".</div>
+`,
+
+mapa: `
+<div class="ac-h">Mapa mental -- Crescimento em 4 blocos</div>
+<div class="mm">
+<div class="mm-card"><h5>O que medir</h5><ul><li>Peso: nutrição aguda</li><li>Estatura: crescimento crônico</li><li>Perímetro cefálico: crescimento cerebral (até 2a)</li><li>IMC: sobrepeso x magreza</li></ul></div>
+<div class="mm-card"><h5>Ganhos esperados</h5><ul><li>Peso dobra 4-5m, triplica 12m, quadruplica 24m</li><li>Estatura +25cm 1º ano, +12cm 2º ano</li><li>PC +12cm no 1º ano</li></ul></div>
+<div class="mm-card"><h5>Curvas e escore-Z</h5><ul><li>OMS 2006 (0-5a) e OMS 2007 (5-19a)</li><li>Z 0 = P50; Z ±2 = P3/P97</li><li>Cortes de IMC mudam &lt;5a x 5-19a</li></ul></div>
+<div class="mm-card"><h5>Baixa estatura</h5><ul><li>Familiar: idade óssea normal, VC normal</li><li>Constitucional: idade óssea atrasada, recupera</li><li>Patológica: VC baixa, cruza canal</li><li>Menina baixa inexplicada → cariótipo (Turner)</li></ul></div>
+<div class="mm-card"><h5>Velocidade de crescimento</h5><ul><li>Parâmetro mais sensível</li><li>&lt;5cm/ano após 2 anos = suspeita</li><li>Cruzar canais para baixo = alarme</li></ul></div>
+<div class="mm-card"><h5>Prematuro</h5><ul><li>Curva de Fenton / Intergrowth-21st até ~40 sem</li><li>Depois: curva OMS por idade corrigida</li><li>Corrigir até 2 anos</li></ul></div>
+</div>
+`,
+
+fluxo_dx: `
+<div class="ac-h">Fluxograma -- investigação da baixa estatura</div>
+<div class="fx">
+<div class="fx-node start">Estatura/idade &lt; -2 escores-Z (baixa estatura)</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Velocidade de crescimento normal?</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node end">Sim, idade óssea = cronológica, pais baixos → <b>Baixa estatura familiar</b><div class="fx-lbl">acompanhar</div></div>
+<div class="fx-node end">Sim, idade óssea atrasada, atraso puberal → <b>Retardo constitucional</b><div class="fx-lbl">observar, bom prognóstico</div></div>
+<div class="fx-node">Não (VC baixa / cruza canal) → <b>Patológica</b><div class="fx-lbl">investigar</div></div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Proporcionada ou desproporcionada?</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">Desproporcionada<div class="fx-lbl">displasias ósseas, raquitismo</div></div>
+<div class="fx-node">Proporcionada<div class="fx-lbl">endócrino, crônica, genética</div></div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Exames básicos: hemograma, TSH/T4 livre, idade óssea, rastreio celíaco (+ cariótipo em meninas)</div>
+</div>
+`,
+
+fluxo_cond: `
+<div class="ac-h">Fluxograma -- conduta por cenário</div>
+<div class="fx">
+<div class="fx-node start">Classificação definida</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node end">Estatura adequada, VC normal<div class="fx-lbl">manter rotina de puericultura</div></div>
+<div class="fx-node end">Baixa estatura familiar<div class="fx-lbl">tranquilizar e seguir</div></div>
+<div class="fx-node end">Retardo constitucional<div class="fx-lbl">observar (recupera na puberdade)</div></div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">VC baixa / cruzamento de canal para baixo</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Investigar (TSH/T4L, IGF-1, cariótipo em meninas, rastreio celíaco) e encaminhar se alterado</div>
+</div>
+<div class="ac-tip" style="margin-top:14px"><b>Regra prática:</b> baixa estatura desproporcionada pula direto para avaliação de displasia óssea (radiografias, genética) -- não passa pela investigação endócrina padrão.</div>
+`,
+
+vespera: `
+<div class="ac-h">Revisão de véspera -- Crescimento</div>
+<div class="ac-call"><b>Pesos:</b> dobra 4-5m · triplica 12m · quadruplica 24m. <b>Estatura:</b> +25cm 1º ano · +12cm 2º ano. <b>PC:</b> +12cm no 1º ano.</div>
+<p class="ac-p">Z 0 = P50; Z ±2 = P97/P3. &lt;5a sobrepeso = Z +2 a +3, obesidade &gt;+3. 5-19a sobrepeso = Z +1 a +2, obesidade &gt;+2. Baixa estatura = estatura/idade &lt; -2 Z.</p>
+<p class="ac-p"><b>Velocidade de crescimento</b> é o parâmetro mais sensível; cruzar canal para baixo = alarme. Variante normal: VC normal. Patológico: VC baixa. Menina baixa inexplicada → cariótipo (Turner). Prematuro: Fenton/Intergrowth até ~40 semanas, depois OMS por idade corrigida até 2 anos.</p>
+`,
+
+dicas: `
+<div class="ac-h">Dicas &amp; Pegadinhas</div>
+<div class="ac-warn"><b>Pegadinha clássica:</b> os cortes de IMC mudam entre &lt;5 anos e 5-19 anos. Ler a idade antes de classificar!</div>
+<div class="ac-warn">Um ponto isolado baixo não diagnostica nada -- é a <b>trajetória</b>/velocidade de crescimento que importa.</div>
+<div class="ac-tip"><b>Familiar</b> = Família baixa, idade óssea Fiel (= cronológica). <b>Constitucional</b> = Cresce atrasado mas reCupera (idade óssea atrasada, puberdade tardia).</div>
+<div class="ac-tip">Peso preservado + estatura caindo = pensar <b>endócrino</b> (hipotireoidismo, deficiência de GH). Peso e estatura caindo juntos = pensar <b>nutricional/doença crônica</b>.</div>
+<div class="ac-tip">Prematuro: usar curva de Fenton/Intergrowth-21st até ~40 semanas pós-menstruais, depois OMS por idade corrigida até 2 anos -- mesma lógica do DNPM.</div>
+`,
+
+checklist: [
+ "Sei o que medir e com que frequência (peso, estatura, perímetro cefálico, IMC)",
+ "Decorei os ganhos de peso/estatura/perímetro cefálico esperados",
+ "Sei converter escore-Z em percentil e classificar corretamente por faixa etária",
+ "Diferencio os cortes de IMC de <5 anos e de 5-19 anos sem trocá-los",
+ "Calculo a estatura-alvo (canal familiar)",
+ "Diferencio variante do normal (familiar/constitucional) de baixa estatura patológica pela VC e idade óssea",
+ "Lembro de pedir cariótipo em menina com baixa estatura inexplicada",
+ "Sei quando uma velocidade de crescimento é motivo de investigação",
+ "Conheço as curvas específicas do prematuro (Fenton/Intergrowth) e quando fazer a transição para a OMS",
+ "Sei quais exames básicos pedir diante de baixa estatura patológica"
+],
+
+questoes: [
+ {stem:"Lactente que nasceu com 3,2 kg. Qual peso aproximado é esperado aos 4-5 meses?",
+  opts:["~4,5 kg","~6,4 kg (dobro)","~9,6 kg (triplo)","~12 kg"],
+  correct:1, expl:"O peso de nascimento <b>duplica por volta de 4-5 meses</b> (≈6,4 kg), triplica aos 12 meses (≈9,6 kg) e quadruplica aos 24 meses."},
+ {stem:"Criança de 3 anos com IMC/idade em escore-Z +2,5. Qual a classificação pela curva OMS (&lt;5 anos)?",
+  opts:["Eutrofia","Risco de sobrepeso","Sobrepeso","Obesidade"],
+  correct:2, expl:"Para &lt;5 anos: +1 a +2 = risco de sobrepeso; <b>+2 a +3 = sobrepeso</b>; &gt;+3 = obesidade. Z +2,5 → sobrepeso. Se essa mesma criança tivesse entre 5 e 19 anos, Z +2,5 já seria obesidade."},
+ {stem:"Menino de 8 anos, estatura no P10, velocidade de crescimento normal, idade óssea igual à cronológica, pais baixos. Qual o diagnóstico mais provável?",
+  opts:["Deficiência de GH","Hipotireoidismo","Baixa estatura familiar","Retardo constitucional do crescimento"],
+  correct:2, expl:"Estatura-alvo baixa + VC normal + idade óssea igual à cronológica + pais baixos = <b>baixa estatura familiar</b> (variante do normal). No retardo constitucional a idade óssea estaria atrasada e haveria atraso puberal."},
+ {stem:"Qual é o parâmetro mais sensível para a detecção precoce de causa endócrina de baixa estatura?",
+  opts:["Peso absoluto","Perímetro cefálico","Velocidade de crescimento","IMC"],
+  correct:2, expl:"A <b>velocidade de crescimento</b> (cm/ano) é o parâmetro mais sensível. Queda de VC com cruzamento de canais para baixo é o principal sinal de alarme, precedendo o desvio evidente na curva."},
+ {stem:"Qual das curvas abaixo é utilizada para o acompanhamento de crianças de 5 a 19 anos, segundo a Caderneta de Saúde da Criança do Ministério da Saúde?",
+  opts:["Padrão de crescimento infantil da OMS (2006)","Referência de crescimento da OMS (2007)","Curva de Fenton","Curva de Intergrowth-21st"],
+  correct:1, expl:"O padrão OMS de <b>2006</b> cobre 0 a 5 anos (crianças amamentadas e saudáveis, multicêntrico); a <b>referência de 2007</b> cobre 5 a 19 anos. Fenton e Intergrowth-21st são específicas para prematuros/crescimento fetal."},
+ {stem:"Recém-nascido prematuro de 30 semanas, agora com 36 semanas de idade pós-menstrual, em seguimento ambulatorial. Qual curva de crescimento é a mais apropriada neste momento?",
+  opts:["Curva da OMS (2006) por idade cronológica","Curva da OMS (2006) por idade corrigida","Curva de Fenton por idade gestacional/pós-menstrual","Referência da OMS (2007)"],
+  correct:2, expl:"Antes de completar cerca de 40 semanas de idade pós-menstrual, usa-se a <b>curva de Fenton</b> (ou Intergrowth-21st), que acompanha o crescimento pós-natal do prematuro por idade gestacional. A transição para as curvas da OMS por idade corrigida ocorre a partir de ~40 semanas."},
+ {stem:"Adolescente de 14 anos com IMC/idade em escore-Z +1,5. Qual a classificação correta pela referência OMS de 5 a 19 anos?",
+  opts:["Eutrofia","Sobrepeso","Obesidade","Risco de sobrepeso"],
+  correct:1, expl:"Para 5-19 anos, a faixa de +1 a +2 já é classificada como <b>sobrepeso</b> (diferente de &lt;5 anos, onde essa mesma faixa seria apenas 'risco de sobrepeso'). Obesidade nessa faixa etária exige Z &gt; +2."},
+ {stem:"Menina de 10 anos com baixa estatura, sem causa aparente na história e exame físico geral normal. Qual exame NÃO deve deixar de ser solicitado nessa investigação?",
+  opts:["Ressonância magnética de crânio de rotina","Cariótipo","Ecocardiograma de rotina","Endoscopia digestiva alta de rotina"],
+  correct:1, expl:"Toda menina com baixa estatura <b>inexplicada</b> deve ter a Síndrome de Turner (45,X) ativamente descartada por meio do <b>cariótipo</b>, mesmo na ausência de estigmas físicos evidentes -- o fenótipo pode ser sutil."},
+ {stem:"Criança de 5 anos que sempre cresceu próxima ao percentil 50 de estatura e, nos últimos 12 meses, migrou para o percentil 15, com velocidade de crescimento de 3,5 cm/ano. Esse padrão é mais bem descrito como:",
+  opts:["Variação normal do canal genético, sem necessidade de investigação","Cruzamento de canal com velocidade de crescimento baixa -- sinal de alarme","Erro de medida, deve-se apenas repetir a aferição em 6 meses","Achado esperado da puberdade normal"],
+  correct:1, expl:"Um cruzamento de canal de percentil <b>associado a velocidade de crescimento baixa</b> (esperado ~6-7 cm/ano nessa idade) é o padrão clássico de causa <b>adquirida/patológica</b>, e não de variante do normal -- exige investigação."},
+ {stem:"Lactente com perímetro cefálico crescendo muito acima do esperado para a idade, com peso e estatura normais. Esse achado, isoladamente, levanta principalmente a suspeita de:",
+  opts:["Desnutrição crônica","Alteração do crescimento cerebral (ex.: hidrocefalia, macrocefalia)","Baixa estatura familiar","Deficiência de hormônio do crescimento"],
+  correct:1, expl:"O perímetro cefálico reflete o <b>crescimento cerebral</b>. Um crescimento desproporcionalmente rápido do PC, com peso e estatura normais, direciona a investigação para causas neurológicas (como hidrocefalia), e não para causas nutricionais ou endócrinas gerais."},
+ {stem:"Segundo a fórmula clássica de estatura-alvo, qual é o cálculo correto para uma menina cujo pai mede 175 cm e cuja mãe mede 160 cm?",
+  opts:["(175+160+13)/2 = 174 cm","(175+160-13)/2 = 161 cm","(175+160)/2 = 167,5 cm","175-160+13 = 28 cm"],
+  correct:1, expl:"Para meninas: (altura do pai + altura da mãe − 13) / 2 = (175+160−13)/2 = 322/2 = <b>161 cm</b>. Para meninos, o cálculo usa +13 em vez de −13."},
+ {stem:"Pré-escolar de 4 anos com peso e estatura ambos caindo progressivamente de canal, sem sinais de doença endócrina evidente, mas com história de baixa oferta alimentar e infecções de repetição. A principal hipótese a considerar é:",
+  opts:["Hipotireoidismo congênito","Baixa estatura familiar","Causa nutricional/doença crônica associada","Retardo constitucional do crescimento e puberdade"],
+  correct:2, expl:"Quando peso <b>e</b> estatura caem juntos de canal, o raciocínio se volta mais para causas <b>nutricionais ou de doença crônica</b> do que para causas puramente endócrinas (nas quais classicamente o peso tende a ser mais preservado que a estatura)."}
+],
+
+flashcards: [
+ {front:"Quando o peso de nascimento triplica?", back:"Aos <b>12 meses</b> (duplica aos 4-5m, quadruplica aos 24m).", type:"basic"},
+ {front:"Quanto cresce o perímetro cefálico no 1º ano de vida?", back:"~<b>12 cm</b> (de ~35 para ~47 cm).", type:"basic"},
+ {front:"Escore-Z 0 aproximadamente corresponde ao percentil {{c1::50}}; escore-Z -2 corresponde ao percentil {{c2::3}}.", back:"Z 0 = P50; Z -2 = P3; Z +2 = P97.", type:"cloze"},
+ {front:"Qual é a fórmula da estatura-alvo para meninas?", back:"(altura do pai + altura da mãe − 13) / 2.", type:"basic"},
+ {front:"Estatura/idade com escore-Z -2,5 indica baixa estatura?", back:"<b>Sim.</b> Escore-Z &lt; -2 já define baixa estatura; &lt; -3 é muito baixa estatura.", type:"basic"},
+ {front:"Menina baixa + pescoço alado + atraso puberal: em qual síndrome pensar?", back:"<b>Síndrome de Turner (45,X)</b> -- solicitar cariótipo.", type:"basic"},
+ {front:"Para crianças de 5 a 19 anos, escore-Z de IMC entre {{c1::+1}} e {{c2::+2}} classifica como sobrepeso.", back:"Nessa faixa etária, +1 a +2 já é sobrepeso (diferente de <5 anos, onde é só 'risco de sobrepeso').", type:"cloze"},
+ {front:"Qual é o parâmetro mais sensível para detectar precocemente uma causa endócrina de baixa estatura?", back:"A <b>velocidade de crescimento</b> (cm/ano).", type:"basic"},
+ {front:"Qual curva da OMS é usada dos 0 aos 5 anos, e qual dos 5 aos 19 anos?", back:"Padrão de crescimento infantil (<b>2006</b>) dos 0-5 anos; referência de crescimento (<b>2007</b>) dos 5-19 anos.", type:"basic"},
+ {front:"Qual curva se usa para acompanhar o crescimento de um prematuro antes de ~40 semanas de idade pós-menstrual?", back:"A curva de <b>Fenton</b> (ou Intergrowth-21st), por idade gestacional/pós-menstrual.", type:"basic"},
+ {front:"Até quando se corrige a idade de um prematuro para fins de curva de crescimento e desenvolvimento?", back:"Até os <b>2 anos</b> de idade cronológica.", type:"basic"},
+ {front:"Na baixa estatura familiar, como estão a velocidade de crescimento e a idade óssea?", back:"Ambas <b>normais</b> (VC normal; idade óssea = idade cronológica).", type:"basic"},
+ {front:"No retardo constitucional do crescimento, como está a idade óssea em relação à estatura atual?", back:"A idade óssea está <b>atrasada</b>, aproximadamente compatível com a estatura atual (não com a idade cronológica).", type:"basic"},
+ {front:"Peso preservado com estatura caindo de canal sugere principalmente que tipo de causa?", back:"Causa <b>endócrina</b> (ex.: hipotireoidismo, deficiência de GH).", type:"basic"}
+],
+
+casos: [
+ {t:"Caso 1 -- Cruzou o canal",
+  stem:"Menina de 6 anos vinha no percentil 50 de estatura desde o nascimento. Nos últimos 18 meses, caiu para o percentil 10, com velocidade de crescimento de 3 cm/ano. Ganho de peso preservado (permanece no percentil 50). Ao exame: pele seca, constipação e sonolência.",
+  passos:[
+    {h:"1. Qual é o achado mais preocupante nesse quadro?", p:"O <b>cruzamento de canais de percentil para baixo</b> combinado com <b>velocidade de crescimento baixa</b> (3 cm/ano, esperado ~6 nessa idade) -- um sinal claro de causa adquirida, e não de variante familiar do crescimento."},
+    {h:"2. Qual a hipótese diagnóstica mais provável, e como investigá-la?", p:"A desaceleração linear <b>com peso preservado</b>, somada aos sinais de pele seca, constipação e sonolência, sugere fortemente <b>hipotireoidismo adquirido</b>. Deve-se solicitar TSH e T4 livre, além de avaliar a idade óssea (esperada atrasada nesse cenário)."},
+    {h:"3. Por que esse quadro não é compatível com baixa estatura familiar?", p:"Na baixa estatura familiar a criança cresce <b>paralela</b> à sua curva original, com velocidade de crescimento normal, e geralmente há pais baixos na história. Aqui houve uma <b>queda de canal</b> ao longo do tempo -- padrão que é sempre considerado patológico até prova em contrário."}
+  ]},
+ {t:"Caso 2 -- Prematuro em seguimento",
+  stem:"Recém-nascido de 29 semanas de idade gestacional, atualmente com 34 semanas de idade pós-menstrual, internado em unidade neonatal, em ganho de peso de aproximadamente 18 g/kg/dia, acompanhado com curva específica de prematuros.",
+  passos:[
+    {h:"1. Qual curva de crescimento é a mais apropriada neste momento, e por quê?", p:"A <b>curva de Fenton</b> (ou Intergrowth-21st), que traça o crescimento esperado por <b>idade gestacional/pós-menstrual</b> -- ainda não é o momento de usar as curvas da OMS por idade corrigida, reservadas para depois de aproximadamente 40 semanas pós-menstruais."},
+    {h:"2. O ganho de peso relatado está adequado?", p:"Sim -- o ganho esperado para recém-nascidos prematuros em fase de recuperação nutricional gira em torno de 15 a 20 g/kg/dia, então 18 g/kg/dia está dentro da faixa esperada para essa fase."},
+    {h:"3. Quando e como deve ocorrer a transição de curva para esse bebê?", p:"Por volta de 40 semanas de idade pós-menstrual, a equipe deve passar a acompanhar o crescimento pelas curvas da OMS, sempre calculando a <b>idade corrigida</b> (idade cronológica menos as semanas que faltaram para completar 40 semanas de gestação) -- correção que deve continuar sendo aplicada até os 2 anos de idade cronológica, tanto para crescimento quanto para desenvolvimento neuropsicomotor."}
+  ]},
+ {t:"Caso 3 -- Baixa estatura com puberdade atrasada",
+  stem:"Menino de 13 anos, estatura no percentil 5, sem sinais puberais ainda (Tanner 1), com velocidade de crescimento de 5 cm/ano nos últimos 2 anos. Idade óssea de 11 anos. O pai relata que também era 'um dos mais baixos da turma' até os 16 anos, quando teve um estirão tardio e alcançou 1,78 m na vida adulta.",
+  passos:[
+    {h:"1. Qual é a hipótese diagnóstica mais provável?", p:"<b>Retardo constitucional do crescimento e puberdade</b>: idade óssea atrasada (compatível com a estatura atual, não com a idade cronológica), atraso puberal, velocidade de crescimento ainda dentro de uma faixa aceitável para a fase pré-puberal tardia, e histórico familiar clássico de 'maturador tardio' com estatura final normal."},
+    {h:"2. Como diferenciar esse quadro de uma baixa estatura familiar?", p:"Na baixa estatura familiar a idade óssea seria igual à cronológica e não haveria atraso puberal associado. Aqui, a idade óssea claramente atrasada (11 anos em um menino de 13) e a ausência de caracteres puberais aos 13 anos apontam para o padrão constitucional, não familiar."},
+    {h:"3. Qual a conduta e o prognóstico?", p:"Conduta expectante, com acompanhamento da velocidade de crescimento e reavaliação puberal periódica -- o prognóstico de estatura final é <b>bom</b>, já que o histórico paterno de estirão tardio com estatura adulta normal reforça a natureza constitucional (e não patológica) do atraso."}
+  ]}
+]
+
+});
+
+window.CONTENT['crescimento|1'] = C;
+
+try{
+  if(typeof mArg !== 'undefined' && mArg === 'crescimento|1' && typeof renderRoute === 'function'){
+    renderRoute();
+  }
+}catch(e){}
+
+})();
+
+</script>
 <script>window.__CAD_LOGO_SVG__="<svg viewBox=\"0 0 64 64\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"21\" cy=\"15\" r=\"6.4\" stroke=\"currentColor\" stroke-width=\"2.3\"/><circle cx=\"43\" cy=\"15\" r=\"6.4\" stroke=\"currentColor\" stroke-width=\"2.3\"/><circle cx=\"32\" cy=\"37\" r=\"18.6\" stroke=\"currentColor\" stroke-width=\"2.3\"/><ellipse cx=\"32\" cy=\"41.5\" rx=\"6.4\" ry=\"5.6\" stroke=\"currentColor\" stroke-width=\"1.9\"/><circle cx=\"32\" cy=\"40.6\" r=\"1.3\" fill=\"currentColor\"/></svg>";</script>
 <script>
+
 /* ===================================================================
    CADERNETA DA CRIANÇA — Gamificação de Pediatria (aditivo)
    Regra de ouro: NENHUM sistema de progresso novo. Toda a evolução
@@ -3203,9 +3556,11 @@ try{
    marcado). Para isso:
      - Total de modulos da plataforma = 39 (18 categorias do TEMAS
        original: ver ch_modules.json / MODULES).
-     - 3 modulos ja escritos (DNPM, Avaliacao do Crescimento,
-       Puberdade) NAO sao alterados: continuam com os 7 itens de
-       checklist que ja tinham = 21 itens fixos.
+     - Dos 3 modulos ja escritos, DNPM (10 itens) e Avaliacao do
+       Crescimento (10 itens) foram reescritos no padrao atual da skill
+       (mais sub-abas/conteudo = checklist um pouco maior); Puberdade
+       ainda nao foi tocado e continua com os 7 itens originais.
+       Total fixo desses 3 modulos = 10+10+7 = 27 itens.
      - Os 36 modulos restantes (ainda "em breve") sao contabilizados
        com o numero PADRAO-OURO real usado pela skill de conteudo
        (assets/exemplo/acontent_toxo.js, o modulo de referencia da
@@ -3262,13 +3617,35 @@ function vacinasDaIdade(m){ var g=OLD_VACINAS.filter(function(x){return x.m===m;
    O mapa done{} esta na lista mesclada corretamente, entao guardar tudo la
    dentro (com prefixo 'cad|' pra nao colidir com as chaves 'ck|...' dos
    checklists) resolve o problema sem tocar no nucleo do shell. */
+/* Salvaguarda redundante para a flag "ja perguntou o nome": alem de
+   done['cad|asked'] (que sobrevive ao mergeState local pq 'done' esta na
+   whitelist do nucleo), tambem gravamos uma chave PLANA e independente no
+   localStorage, fora de qualquer chave 'atlas_<PLATFORM_ID>' -- ou seja,
+   fora do sistema loadLocal()/mergeState()/sync com a nuvem por completo.
+   Motivo: loadLocal() reconstroi o estado local varrendo TODAS as chaves
+   'atlas_<PLATFORM_ID>*' do localStorage e fazendo merge com o que a nuvem
+   (Firestore) manda em cada onAuthStateChanged; se por qualquer motivo (rede
+   instavel no primeiro save, doc antigo na nuvem sem essa chave, etc.) o
+   'cad|asked' demorar a chegar la ou a chave 'done' vinda da nuvem nao tiver
+   sido escrita a tempo, o usuario pode ver o card de nome de novo. A chave
+   plana abaixo nunca passa por loadLocal/mergeState/nuvem -- e so
+   localStorage.getItem/setItem direto no MESMO navegador -- entao, uma vez
+   setada, o card NUNCA mais reaparece nesse navegador, independente do que
+   acontecer com o sync da nuvem. */
+var CAD_ASKED_LS_KEY = '__pedatlas_cad_name_asked_v1';
+function cadAskedLSGet(){
+  try{ return localStorage.getItem(CAD_ASKED_LS_KEY) === '1'; }catch(e){ return false; }
+}
+function cadAskedLSSet(){
+  try{ localStorage.setItem(CAD_ASKED_LS_KEY, '1'); }catch(e){}
+}
 function cadState(){
   var s=S(); var d=(s.done=s.done||{});
   return {
     get name(){ return d['cad|name']||''; },
     set name(v){ d['cad|name']=v; },
-    get asked(){ return !!d['cad|asked']; },
-    set asked(v){ d['cad|asked']=!!v; },
+    get asked(){ return !!d['cad|asked'] || cadAskedLSGet(); },
+    set asked(v){ d['cad|asked']=!!v; if(v) cadAskedLSSet(); },
     get tab(){ return d['cad|tab']||'cresc'; },
     set tab(v){ d['cad|tab']=v; }
   };
@@ -3294,7 +3671,7 @@ var CAD_STAGES=[
    de-conquistas). Ver comentario no topo do arquivo.
    ============================================================ */
 var TOTAL_MODULES_PLATFORM = 39;                 // 18 categorias do TEMAS original (ver MODULES)
-var READY_CHECKLIST_TOTAL = 21;                  // 3 modulos prontos x 7 itens (NAO mexemos nisso)
+var READY_CHECKLIST_TOTAL = 27;                  // DNPM(10) + Crescimento(10) + Puberdade(7, original)
 var STANDARD_CHECKLIST_PER_MODULE = 9;           // padrao-ouro real: acontent_toxo.js (skill elid-study-platform)
 var FUTURE_MODULES = TOTAL_MODULES_PLATFORM - 3; // 36
 var TOTAL_PLATFORM_CHECKLISTS = READY_CHECKLIST_TOTAL + FUTURE_MODULES*STANDARD_CHECKLIST_PER_MODULE; // 345
@@ -3675,6 +4052,7 @@ window.__cadConquistasInfo = function(){
 
 })();
 
+
 </script>
 <style>
 /* ===================================================================
@@ -3690,6 +4068,15 @@ window.__cadConquistasInfo = function(){
 body.light{
   --panel: rgba(252,189,225,.10);
   --line: rgba(214,120,168,.28);
+  /* rosa pastel (#fcbde1) tem contraste ruim como cor de TEXTO sobre fundo
+     claro -- no modo claro trocamos so o --accent (usado como COR de titulos/
+     textos) por um rosa mais escuro e legivel. --accent-soft continua pastel
+     (usado so como fundo/realce), entao os destaques suaves nao mudam, so o
+     texto/titulos ficam legiveis. Isso corrige de uma vez TODOS os titulos da
+     plataforma que usam color:var(--accent) (ac-h, mod-div, nav-sec, tb-brand,
+     sb-name, hero titles, stat numbers, caso-h etc.) sem precisar listar cada
+     selecionador. */
+  --accent: #9c2c62;
 }
 /* "luz" de fundo do body: era laranja fixo — agora no tom do acento azul */
 body{
@@ -3710,11 +4097,6 @@ body.light .bgart{ opacity:.42 !important; color:var(--accent2); }
 /* titulo das paginas usava gradiente de texto ink->accent; com o rosa pastel
    de Pediatria isso fica ilegivel no modo claro — no claro, cor solida */
 body.light .page-title h1{ background:none; -webkit-text-fill-color:unset; color:var(--ink); }
-/* titulos de categoria (ex.: 'Crescimento e Desenvolvimento' na grade de Modulos,
-   e os mesmos titulos reaproveitados na Central de Flashcards) usam --accent (rosa)
-   por padrao -- no modo claro o rosa claro tem contraste ruim contra o fundo claro.
-   Troca so esses titulos para o acento azul no modo claro (pedido do usuario). */
-body.light .mod-div{ color:var(--accent2); }
 
 /* card inicial do dashboard ("capa do livro") e elementos do livro/colecao
    generica ainda usavam laranja hardcoded — realinhados ao acento rosa */
@@ -3754,8 +4136,8 @@ body.light .mod-div{ color:var(--accent2); }
 
 .hero-continue-card{cursor:pointer}
 </style>
-
 <script>
+
 /* ===================================================================
    AJUSTES ADITIVOS — Pediatria (pos-migracao, pos-feedback do usuario)
    Todos os itens abaixo sao aditivos (wrapping de funcoes existentes),
@@ -3962,8 +4344,10 @@ document.addEventListener('mousedown', function(e){
 
 })();
 
+
 </script>
 <script>
+
 /* ===================================================================
    Central de Flashcards — reimplementacao completa (Pediatria)
    O shell entrega fccList/fccCardHTML/fccCatMap/window.viewFcCenter
@@ -4266,6 +4650,7 @@ function viewFccStudy(){
 }
 
 })();
+
 
 </script>
 </body>
