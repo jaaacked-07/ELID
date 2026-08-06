@@ -4490,7 +4490,7 @@ var CAD_STAGES=[
    de-conquistas). Ver comentario no topo do arquivo.
    ============================================================ */
 var TOTAL_MODULES_PLATFORM = 39;                 // 18 categorias do TEMAS original (ver MODULES)
-var READY_CHECKLIST_TOTAL = 150;                  // DNPM(10) + Crescimento(10) + Puberdade(10) + Aleitamento(10) + Sarampo(10) + Diarreia Etiologia(10) + Avaliacao Desidratacao(10) + Planos ABC(10) + Diarreia Cronica(10) + Consulta Puericultura(10) + Triagens Neonatais(10) + Alimentacao Complementar(10) + Prevencao de Acidentes(10) + Calendario Vacinal PNI(10) + Vacinas Especiais(10)
+var READY_CHECKLIST_TOTAL = 170;                  // DNPM(10) + Crescimento(10) + Puberdade(10) + Aleitamento(10) + Sarampo(10) + Diarreia Etiologia(10) + Avaliacao Desidratacao(10) + Planos ABC(10) + Diarreia Cronica(10) + Consulta Puericultura(10) + Triagens Neonatais(10) + Alimentacao Complementar(10) + Prevencao de Acidentes(10) + Calendario Vacinal PNI(10) + Vacinas Especiais(10) + EAPV e Contraindicacoes(10) + Atualizacao de Esquema em Atraso(10)
 var STANDARD_CHECKLIST_PER_MODULE = 9;           // padrao-ouro real: acontent_toxo.js (skill elid-study-platform)
 var FUTURE_MODULES = TOTAL_MODULES_PLATFORM - 3; // 36
 var TOTAL_PLATFORM_CHECKLISTS = READY_CHECKLIST_TOTAL + FUTURE_MODULES*STANDARD_CHECKLIST_PER_MODULE; // 345
@@ -9108,6 +9108,615 @@ casos:[
 });
 
 window.CONTENT['imunizacao|1'] = C;
+})();
+
+</script>
+
+<!-- ===== MODULO EAPV e Contraindicacoes (imunizacao|2) (novo) ===== -->
+<script>
+Object.assign(window.ASVG=window.ASVG||{}, {"eap_verdadeiras_falsas": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"eapPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#4a1f0a\"/>\n    <stop offset=\"1\" stop-color=\"#261007\"/>\n  </linearGradient>\n  <linearGradient id=\"eapAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffc199\"/>\n    <stop offset=\"1\" stop-color=\"#e0793d\"/>\n  </linearGradient>\n  <linearGradient id=\"eapGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"eapRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <linearGradient id=\"eapBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"eapShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"eapShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"320\" rx=\"16\" fill=\"url(#eapPanel)\"/>\n<text x=\"340\" y=\"26\" fill=\"url(#eapAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Contraindicações verdadeiras x falsas (\"mitos\")</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"160\" rx=\"14\" fill=\"url(#eapRed)\"/></g>\n<text x=\"170\" y=\"72\" fill=\"#3a0d12\" font-size=\"12\" font-weight=\"700\" text-anchor=\"middle\">Verdadeiras</text>\n<text x=\"170\" y=\"94\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">anafilaxia a dose anterior</text>\n<text x=\"170\" y=\"110\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">ou a componente da vacina</text>\n<text x=\"170\" y=\"130\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">imunodeficiência grave</text>\n<text x=\"170\" y=\"146\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">(vivas atenuadas)</text>\n<text x=\"170\" y=\"166\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">gestação (vivas atenuadas)</text>\n<text x=\"170\" y=\"186\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">doença moderada/grave aguda</text>\n<text x=\"170\" y=\"200\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">(adiar até melhora)</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"340\" y=\"48\" width=\"320\" height=\"160\" rx=\"14\" fill=\"url(#eapGreen)\"/></g>\n<text x=\"500\" y=\"72\" fill=\"#0c2b20\" font-size=\"12\" font-weight=\"700\" text-anchor=\"middle\">Falsas (\"não impedem vacinar\")</text>\n<text x=\"500\" y=\"94\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">doença aguda leve (resfriado,</text>\n<text x=\"500\" y=\"108\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">febre baixa) sem toxemia</text>\n<text x=\"500\" y=\"126\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">uso de antibiótico</text>\n<text x=\"500\" y=\"142\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">alergia não anafilática a ovo</text>\n<text x=\"500\" y=\"158\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">aleitamento materno</text>\n<text x=\"500\" y=\"174\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">história familiar de convulsão</text>\n<text x=\"500\" y=\"190\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">prematuridade (idade cronológica)</text>\n\n<g filter=\"url(#eapShadowSoft)\"><rect x=\"20\" y=\"224\" width=\"640\" height=\"70\" rx=\"12\" fill=\"rgba(255,193,153,.13)\" stroke=\"url(#eapAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"248\" fill=\"#ffddc2\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Oportunidade perdida de vacinação é indicador de má qualidade de serviço</text>\n<text x=\"340\" y=\"266\" fill=\"#ffddc2\" font-size=\"9.5\" text-anchor=\"middle\">Adiar por motivo que não é contraindicação real prejudica a proteção da criança</text>\n<text x=\"340\" y=\"282\" fill=\"#ffddc2\" font-size=\"9.5\" text-anchor=\"middle\">Na dúvida, verificar a lista oficial -- não \"inventar\" cautela extra sem fundamento</text>\n</svg>", "eap_tipos_eapv": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"eapPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#4a1f0a\"/>\n    <stop offset=\"1\" stop-color=\"#261007\"/>\n  </linearGradient>\n  <linearGradient id=\"eapAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffc199\"/>\n    <stop offset=\"1\" stop-color=\"#e0793d\"/>\n  </linearGradient>\n  <linearGradient id=\"eapGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"eapRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <linearGradient id=\"eapBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"eapShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"eapShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#eapPanel)\"/>\n<text x=\"340\" y=\"28\" fill=\"url(#eapAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Classificação dos eventos adversos pós-vacinação</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"20\" y=\"52\" width=\"200\" height=\"120\" rx=\"14\" fill=\"url(#eapGreen)\"/></g>\n<text x=\"120\" y=\"76\" fill=\"#0c2b20\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Locais</text>\n<text x=\"120\" y=\"98\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">dor, eritema, edema</text>\n<text x=\"120\" y=\"112\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">no local da aplicação</text>\n<text x=\"120\" y=\"132\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">os mais frequentes</text>\n<text x=\"120\" y=\"146\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">e geralmente leves</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"240\" y=\"52\" width=\"200\" height=\"120\" rx=\"14\" fill=\"url(#eapBlue)\"/></g>\n<text x=\"340\" y=\"76\" fill=\"#06263d\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Sistêmicos</text>\n<text x=\"340\" y=\"98\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">febre, irritabilidade,</text>\n<text x=\"340\" y=\"112\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">exantema leve</text>\n<text x=\"340\" y=\"132\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">vivas atenuadas: podem</text>\n<text x=\"340\" y=\"146\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">surgir dias depois</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"460\" y=\"52\" width=\"200\" height=\"120\" rx=\"14\" fill=\"url(#eapRed)\"/></g>\n<text x=\"560\" y=\"76\" fill=\"#3a0d12\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Graves</text>\n<text x=\"560\" y=\"98\" fill=\"#3a0d12\" font-size=\"9\" text-anchor=\"middle\">anafilaxia, convulsão,</text>\n<text x=\"560\" y=\"112\" fill=\"#3a0d12\" font-size=\"9\" text-anchor=\"middle\">encefalopatia</text>\n<text x=\"560\" y=\"132\" fill=\"#3a0d12\" font-size=\"9\" text-anchor=\"middle\">raros, mas exigem</text>\n<text x=\"560\" y=\"146\" fill=\"#3a0d12\" font-size=\"9\" text-anchor=\"middle\">notificação obrigatória</text>\n\n<g filter=\"url(#eapShadowSoft)\"><rect x=\"20\" y=\"192\" width=\"640\" height=\"80\" rx=\"12\" fill=\"rgba(255,193,153,.13)\" stroke=\"url(#eapAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"216\" fill=\"#ffddc2\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">A grande maioria dos EAPV é local ou sistêmica leve -- graves são raros</text>\n<text x=\"340\" y=\"234\" fill=\"#ffddc2\" font-size=\"9.5\" text-anchor=\"middle\">Serviços de vacinação devem estar preparados para manejo de anafilaxia</text>\n<text x=\"340\" y=\"250\" fill=\"#ffddc2\" font-size=\"9.5\" text-anchor=\"middle\">Todo EAPV grave (ESAVI) deve ser notificado ao sistema de vigilância</text>\n</svg>", "eap_padrao_temporal": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"eapPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#4a1f0a\"/>\n    <stop offset=\"1\" stop-color=\"#261007\"/>\n  </linearGradient>\n  <linearGradient id=\"eapAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffc199\"/>\n    <stop offset=\"1\" stop-color=\"#e0793d\"/>\n  </linearGradient>\n  <linearGradient id=\"eapGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"eapRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <linearGradient id=\"eapBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"eapShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"eapShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#eapPanel)\"/>\n<text x=\"340\" y=\"26\" fill=\"url(#eapAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Quando esperar cada tipo de reação</text>\n\n<path vector-effect=\"non-scaling-stroke\" d=\"M40,80 L640,80\" stroke=\"#7a4020\" stroke-width=\"3\"/>\n<circle cx=\"70\" cy=\"80\" r=\"7\" fill=\"url(#eapRed)\" filter=\"url(#eapShadowSoft)\"/>\n<circle cx=\"220\" cy=\"80\" r=\"7\" fill=\"url(#eapGreen)\" filter=\"url(#eapShadowSoft)\"/>\n<circle cx=\"420\" cy=\"80\" r=\"7\" fill=\"url(#eapBlue)\" filter=\"url(#eapShadowSoft)\"/>\n<circle cx=\"600\" cy=\"80\" r=\"7\" fill=\"url(#eapAccent)\" filter=\"url(#eapShadowSoft)\"/>\n<circle r=\"4\" fill=\"#fff3ea\">\n  <animateMotion dur=\"4.5s\" repeatCount=\"indefinite\" path=\"M70,80 L220,80 L420,80 L600,80\"/>\n</circle>\n<text x=\"70\" y=\"66\" fill=\"#ffddc2\" font-size=\"8.5\" text-anchor=\"middle\">&lt;30 min</text>\n<text x=\"220\" y=\"66\" fill=\"#ffddc2\" font-size=\"8.5\" text-anchor=\"middle\">&lt;48h</text>\n<text x=\"420\" y=\"66\" fill=\"#ffddc2\" font-size=\"8.5\" text-anchor=\"middle\">5-20 dias</text>\n<text x=\"600\" y=\"66\" fill=\"#ffddc2\" font-size=\"8.5\" text-anchor=\"middle\">semanas</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"20\" y=\"100\" width=\"150\" height=\"130\" rx=\"14\" fill=\"url(#eapRed)\"/></g>\n<text x=\"95\" y=\"124\" fill=\"#3a0d12\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Anafilaxia</text>\n<text x=\"95\" y=\"146\" fill=\"#3a0d12\" font-size=\"8.5\" text-anchor=\"middle\">imediata, minutos</text>\n<text x=\"95\" y=\"160\" fill=\"#3a0d12\" font-size=\"8.5\" text-anchor=\"middle\">após aplicação --</text>\n<text x=\"95\" y=\"174\" fill=\"#3a0d12\" font-size=\"8.5\" text-anchor=\"middle\">observação de 15-30</text>\n<text x=\"95\" y=\"188\" fill=\"#3a0d12\" font-size=\"8.5\" text-anchor=\"middle\">min no serviço</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"185\" y=\"100\" width=\"150\" height=\"130\" rx=\"14\" fill=\"url(#eapGreen)\"/></g>\n<text x=\"260\" y=\"124\" fill=\"#0c2b20\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Local/febre</text>\n<text x=\"260\" y=\"146\" fill=\"#0c2b20\" font-size=\"8.5\" text-anchor=\"middle\">dor, eritema,</text>\n<text x=\"260\" y=\"160\" fill=\"#0c2b20\" font-size=\"8.5\" text-anchor=\"middle\">febre baixa --</text>\n<text x=\"260\" y=\"174\" fill=\"#0c2b20\" font-size=\"8.5\" text-anchor=\"middle\">primeiras 48h,</text>\n<text x=\"260\" y=\"188\" fill=\"#0c2b20\" font-size=\"8.5\" text-anchor=\"middle\">qualquer vacina</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"345\" y=\"100\" width=\"150\" height=\"130\" rx=\"14\" fill=\"url(#eapBlue)\"/></g>\n<text x=\"420\" y=\"124\" fill=\"#06263d\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Vivas atenuadas</text>\n<text x=\"420\" y=\"146\" fill=\"#06263d\" font-size=\"8.5\" text-anchor=\"middle\">exantema/febre</text>\n<text x=\"420\" y=\"160\" fill=\"#06263d\" font-size=\"8.5\" text-anchor=\"middle\">tardios, simulam</text>\n<text x=\"420\" y=\"174\" fill=\"#06263d\" font-size=\"8.5\" text-anchor=\"middle\">doença leve --</text>\n<text x=\"420\" y=\"188\" fill=\"#06263d\" font-size=\"8.5\" text-anchor=\"middle\">5 a 20 dias depois</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"510\" y=\"100\" width=\"150\" height=\"130\" rx=\"14\" fill=\"url(#eapAccent)\"/></g>\n<text x=\"585\" y=\"124\" fill=\"#3a2410\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">BCG</text>\n<text x=\"585\" y=\"146\" fill=\"#3a2410\" font-size=\"8.5\" text-anchor=\"middle\">úlcera/adenite</text>\n<text x=\"585\" y=\"160\" fill=\"#3a2410\" font-size=\"8.5\" text-anchor=\"middle\">no local --</text>\n<text x=\"585\" y=\"174\" fill=\"#3a2410\" font-size=\"8.5\" text-anchor=\"middle\">semanas a meses</text>\n<text x=\"585\" y=\"188\" fill=\"#3a2410\" font-size=\"8.5\" text-anchor=\"middle\">após a aplicação</text>\n\n<text x=\"340\" y=\"260\" fill=\"#ffddc2\" font-size=\"9.5\" text-anchor=\"middle\">Reconhecer o padrão temporal ajuda a diferenciar evento vacinal de coincidência</text>\n</svg>", "eap_notificacao_esavi": "<svg viewBox=\"0 0 680 280\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"eapPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#4a1f0a\"/>\n    <stop offset=\"1\" stop-color=\"#261007\"/>\n  </linearGradient>\n  <linearGradient id=\"eapAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffc199\"/>\n    <stop offset=\"1\" stop-color=\"#e0793d\"/>\n  </linearGradient>\n  <linearGradient id=\"eapGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"eapRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <linearGradient id=\"eapBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"eapShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"eapShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"280\" rx=\"16\" fill=\"url(#eapPanel)\"/>\n<text x=\"340\" y=\"28\" fill=\"url(#eapAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Notificação de ESAVI -- fluxo obrigatório</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"20\" y=\"52\" width=\"195\" height=\"110\" rx=\"14\" fill=\"url(#eapAccent)\"/></g>\n<text x=\"117\" y=\"76\" fill=\"#3a2410\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">1. Identificar</text>\n<text x=\"117\" y=\"96\" fill=\"#3a2410\" font-size=\"9\" text-anchor=\"middle\">evento supostamente</text>\n<text x=\"117\" y=\"110\" fill=\"#3a2410\" font-size=\"9\" text-anchor=\"middle\">atribuível à vacina</text>\n<text x=\"117\" y=\"126\" fill=\"#3a2410\" font-size=\"9\" text-anchor=\"middle\">(ESAVI)</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"242\" y=\"52\" width=\"195\" height=\"110\" rx=\"14\" fill=\"url(#eapGreen)\"/></g>\n<text x=\"339\" y=\"76\" fill=\"#0c2b20\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">2. Notificar</text>\n<text x=\"339\" y=\"96\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">sistema de vigilância</text>\n<text x=\"339\" y=\"110\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">(e-SUS Notifica ou</text>\n<text x=\"339\" y=\"126\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">VigiMed)</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"464\" y=\"52\" width=\"195\" height=\"110\" rx=\"14\" fill=\"url(#eapBlue)\"/></g>\n<text x=\"561\" y=\"76\" fill=\"#06263d\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">3. Comunicar</text>\n<text x=\"561\" y=\"96\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">também ao laboratório</text>\n<text x=\"561\" y=\"110\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">fabricante do</text>\n<text x=\"561\" y=\"126\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">imunobiológico</text>\n\n<g filter=\"url(#eapShadowSoft)\"><rect x=\"20\" y=\"182\" width=\"640\" height=\"80\" rx=\"12\" fill=\"rgba(255,193,153,.13)\" stroke=\"url(#eapAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"206\" fill=\"#ffddc2\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Notificação é obrigatória mesmo diante de dúvida sobre causalidade</text>\n<text x=\"340\" y=\"224\" fill=\"#ffddc2\" font-size=\"9.5\" text-anchor=\"middle\">Sistema de vigilância detecta sinais de segurança em nível populacional</text>\n<text x=\"340\" y=\"240\" fill=\"#ffddc2\" font-size=\"9.5\" text-anchor=\"middle\">Notificar NÃO significa afirmar causalidade -- é vigilância ativa, não acusação</text>\n</svg>", "eap_precaucoes_especiais": "<svg viewBox=\"0 0 680 280\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"eapPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#4a1f0a\"/>\n    <stop offset=\"1\" stop-color=\"#261007\"/>\n  </linearGradient>\n  <linearGradient id=\"eapAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffc199\"/>\n    <stop offset=\"1\" stop-color=\"#e0793d\"/>\n  </linearGradient>\n  <linearGradient id=\"eapGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"eapRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <linearGradient id=\"eapBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"eapShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"eapShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"280\" rx=\"16\" fill=\"url(#eapPanel)\"/>\n<text x=\"340\" y=\"28\" fill=\"url(#eapAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Precauções -- adiar/individualizar, não necessariamente contraindicar</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"20\" y=\"52\" width=\"300\" height=\"110\" rx=\"14\" fill=\"url(#eapAccent)\"/></g>\n<text x=\"170\" y=\"76\" fill=\"#3a2410\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Febre alta pós-dose anterior</text>\n<text x=\"170\" y=\"98\" fill=\"#3a2410\" font-size=\"9.5\" text-anchor=\"middle\">avaliar individualmente antes</text>\n<text x=\"170\" y=\"114\" fill=\"#3a2410\" font-size=\"9.5\" text-anchor=\"middle\">de repetir -- não é</text>\n<text x=\"170\" y=\"130\" fill=\"#3a2410\" font-size=\"9.5\" text-anchor=\"middle\">contraindicação automática</text>\n\n<g filter=\"url(#eapShadow)\"><rect x=\"340\" y=\"52\" width=\"320\" height=\"110\" rx=\"14\" fill=\"url(#eapBlue)\"/></g>\n<text x=\"500\" y=\"76\" fill=\"#06263d\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Convulsão febril prévia</text>\n<text x=\"500\" y=\"98\" fill=\"#06263d\" font-size=\"9.5\" text-anchor=\"middle\">não é contraindicação --</text>\n<text x=\"500\" y=\"114\" fill=\"#06263d\" font-size=\"9.5\" text-anchor=\"middle\">orientar antitérmico</text>\n<text x=\"500\" y=\"130\" fill=\"#06263d\" font-size=\"9.5\" text-anchor=\"middle\">se febre após a dose</text>\n\n<g filter=\"url(#eapShadowSoft)\"><rect x=\"20\" y=\"176\" width=\"640\" height=\"86\" rx=\"12\" fill=\"rgba(255,193,153,.13)\" stroke=\"url(#eapAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"200\" fill=\"#ffddc2\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Síndrome de Guillain-Barré nas 6 semanas após dose anterior: avaliação individualizada</text>\n<text x=\"340\" y=\"218\" fill=\"#ffddc2\" font-size=\"9.5\" text-anchor=\"middle\">Trombocitopenia pós-vacinal prévia: considerar antes de repetir a mesma vacina</text>\n<text x=\"340\" y=\"236\" fill=\"#ffddc2\" font-size=\"9.5\" text-anchor=\"middle\">\"Precaução\" pesa risco x benefício -- pode ainda assim vacinar, com mais cautela</text>\n<text x=\"340\" y=\"252\" fill=\"#ffddc2\" font-size=\"9.5\" text-anchor=\"middle\">Diferente de contraindicação verdadeira, que impede a vacinação</text>\n</svg>"});
+</script>
+<script>
+/* ===================================================================
+   Eventos Adversos Pos-Vacinacao (EAPV) e Contraindicacoes -- 3a aula
+   da categoria Imunizacao, modulo no padrao Toxoplasmose (skill
+   elid-study-platform), aditivo. Fontes: Ministerio da Saude (Manual
+   de Vigilancia Epidemiologica de Eventos Adversos Pos-Vacinacao,
+   4a edicao), SBIm (Calendarios de vacinacao 2025/26, Guia de
+   Contraindicacoes e Precaucoes). 8 sub-abas de teoria, 5 SVGs
+   proprios (eap_*), diferencial, mapa mental, 2 fluxogramas em
+   HTML/CSS nativo do engine, questoes/flashcards/casos.
+   Roda DEPOIS de module-adapter.js e cria window.CONTENT['imunizacao|2']
+   -- nao toca em mais nada.
+   =================================================================== */
+(function(){
+"use strict";
+var A = window.ASVG || {};
+window.CONTENT = window.CONTENT || {};
+
+var C = {};
+C.name = "Eventos Adversos Pós-Vacinação (EAPV) e Contraindicações";
+C.intro = "Saber distinguir o que realmente contraindica uma vacina do que é apenas mito evita duas falhas graves: vacinar quem não deveria, e deixar de vacinar quem poderia.";
+
+C.sub = [
+
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">Por que esse tema separa quem sabe de quem "acha que sabe"</div>
+<p class="ac-p">Toda vacina pode, eventualmente, causar uma reação -- isso não é falha da vacina, é a natureza de qualquer intervenção que estimula o sistema imunológico. Um <b>Evento Adverso Pós-Vacinação (EAPV)</b> é qualquer ocorrência médica indesejada que acontece após a vacinação, e que não necessariamente tem relação causal comprovada com a vacina em si.</p>
+<p class="ac-p">O grande erro de raciocínio, tanto de profissionais quanto de famílias, é confundir dois conceitos completamente diferentes: uma <b>contraindicação real</b> (que de fato impede aplicar aquela vacina) e uma <b>falsa contraindicação</b> ou "mito" (uma crença popular ou cautela exagerada, sem base técnica, que leva a adiar ou negar vacinação sem necessidade).</p>
+<div class="ac-call ac-tip">💡 Toda oportunidade perdida de vacinação por um motivo que não é contraindicação real é uma falha de qualidade do serviço de saúde -- e deixa a criança desprotegida sem necessidade.</div>
+<div class="ac-call ac-mne">🧠 A pergunta certa nunca é "posso vacinar apesar disso?" -- é "isso realmente contraindica, ou é só um motivo popular para adiar?"</div>
+`],
+
+['verdadeiras_x_falsas','Contraindicações Verdadeiras x Falsas', `
+<div class="ac-h">A lista que resolve a maioria das dúvidas na consulta</div>
+${A.eap_verdadeiras_falsas === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.eap_verdadeiras_falsas)+'" alt="Contraindicacoes verdadeiras x falsas"/>'}
+<p class="ac-p">As <b>contraindicações verdadeiras</b> são poucas e bem definidas: anafilaxia a uma dose anterior da mesma vacina ou a algum componente da fórmula; imunodeficiência grave para vacinas de agentes vivos atenuados; gestação para vacinas vivas atenuadas; e doença aguda moderada ou grave (a vacinação deve ser adiada até a melhora, não necessariamente cancelada).</p>
+<p class="ac-p">As <b>falsas contraindicações</b> ("mitos") são muito mais numerosas na prática, e é justamente aí que ocorrem as oportunidades perdidas: doença aguda leve, como resfriado comum ou febre baixa sem toxemia; uso concomitante de antibióticos; alergia não anafilática a ovo; aleitamento materno; história familiar de convulsão; e prematuridade -- que muda apenas o raciocínio de dose, nunca a indicação em si (ver aula de Vacinas Especiais).</p>
+<div class="ac-call ac-peg">⚠️ Nenhuma dessas "falsas contraindicações" deve levar a adiar a vacina. Adiar por motivo que não é contraindicação real prejudica a proteção da criança sem qualquer benefício.</div>
+`],
+
+['classificacao_eapv','Classificação dos EAPV', `
+<div class="ac-h">Locais, sistêmicos e graves -- por que a distinção importa</div>
+${A.eap_tipos_eapv === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.eap_tipos_eapv)+'" alt="Classificacao dos eventos adversos pos-vacinacao"/>'}
+<p class="ac-p">Os EAPV se classificam, de forma prática, em três grupos, e essa classificação orienta a conduta e a necessidade (ou não) de notificação formal:</p>
+<ul class="ac-ul">
+<li><b>Locais:</b> dor, eritema e edema no local da aplicação -- os mais frequentes de todos, geralmente leves e autolimitados, não exigem conduta além de orientação e analgesia se necessário.</li>
+<li><b>Sistêmicos:</b> febre, irritabilidade, exantema leve -- especialmente comuns após vacinas de agentes vivos atenuados, podendo surgir dias depois da aplicação (não imediatamente).</li>
+<li><b>Graves:</b> anafilaxia, convulsão, encefalopatia -- raros, mas exigem notificação obrigatória ao sistema de vigilância, independente de haver certeza sobre a causalidade.</li>
+</ul>
+<div class="ac-call ac-high">⚡ A grande maioria dos EAPV é local ou sistêmico leve. Os serviços de vacinação devem estar preparados para manejo de anafilaxia, mesmo sendo um evento raro -- por isso a observação de 15-30 minutos pós-vacina em casos de maior risco.</div>
+`],
+
+['padrao_temporal','Quando Esperar Cada Tipo de Reação', `
+<div class="ac-h">O tempo entre a dose e o sintoma é uma pista diagnóstica</div>
+${A.eap_padrao_temporal === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.eap_padrao_temporal)+'" alt="Padrao temporal dos eventos adversos"/>'}
+<p class="ac-p">Reconhecer o padrão temporal esperado de cada tipo de reação ajuda a diferenciar um evento realmente vacinal de uma simples coincidência temporal (uma criança pode ter febre por qualquer outra causa nos dias seguintes à vacina, sem relação alguma com ela):</p>
+<ul class="ac-ul">
+<li><b>Anafilaxia:</b> imediata, em geral nos primeiros 30 minutos -- por isso a orientação de observação no serviço após a aplicação.</li>
+<li><b>Reações locais e febre baixa:</b> nas primeiras 48 horas, podem ocorrer com qualquer tipo de vacina.</li>
+<li><b>Reações sistêmicas de vacinas vivas atenuadas</b> (como exantema/febre da Tríplice Viral): tardias, simulando a própria doença que a vacina previne, tipicamente entre 5 e 20 dias após a aplicação.</li>
+<li><b>BCG:</b> úlcera e adenite fazem parte da evolução esperada, podendo surgir semanas a meses após a aplicação.</li>
+</ul>
+<div class="ac-call ac-tip">💡 Diante de febre 10 dias após a Tríplice Viral, o raciocínio correto é pensar primeiro em reação esperada da vacina viva, antes de assumir automaticamente uma infecção não relacionada -- mas sem deixar de investigar se houver sinais de alarme.</div>
+`],
+
+['notificacao_esavi','Notificação de ESAVI', `
+<div class="ac-h">Notificar não é acusar a vacina -- é vigilância ativa</div>
+${A.eap_notificacao_esavi === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.eap_notificacao_esavi)+'" alt="Fluxo de notificacao de ESAVI"/>'}
+<p class="ac-p">Todo evento adverso grave (ou qualquer evento que gere dúvida relevante sobre segurança) deve ser notificado como <b>ESAVI (Evento Supostamente Atribuível à Vacinação ou Imunização)</b>, através dos sistemas oficiais de vigilância -- e-SUS Notifica ou VigiMed, a depender do fluxo local.</p>
+<p class="ac-p">A notificação é <b>obrigatória mesmo diante de dúvida sobre a causalidade</b> -- o sistema de vigilância existe justamente para detectar, em nível populacional, sinais de segurança que só se tornam visíveis quando muitos casos são agregados e analisados em conjunto. Notificar um caso isolado não significa afirmar que a vacina causou o evento.</p>
+<div class="ac-call ac-mne">🧠 "Notificar não é acusar" -- é alimentar um sistema de vigilância que protege toda a população, não uma admissão de culpa da vacina.</div>
+`],
+
+['precaucoes_nao_contraindicacoes','Precauções que Não São Contraindicações', `
+<div class="ac-h">Adiar ou individualizar não é o mesmo que proibir</div>
+${A.eap_precaucoes_especiais === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.eap_precaucoes_especiais)+'" alt="Precaucoes especiais nao sao contraindicacoes"/>'}
+<p class="ac-p">Existe uma categoria intermediária entre "pode vacinar sem ressalva" e "está formalmente contraindicado": as <b>precauções</b>, situações em que se pesa risco e benefício e, muitas vezes, ainda se vacina -- com mais cautela, ou em ambiente monitorado.</p>
+<ul class="ac-ul">
+<li><b>Febre alta após dose anterior:</b> não é contraindicação automática para repetir a mesma vacina -- deve-se avaliar individualmente.</li>
+<li><b>Convulsão febril prévia:</b> não é contraindicação -- orienta-se controle antitérmico caso ocorra febre após a dose seguinte.</li>
+<li><b>Síndrome de Guillain-Barré</b> nas 6 semanas após dose anterior de determinada vacina: exige avaliação individualizada antes de repetir a mesma vacina.</li>
+<li><b>Trombocitopenia pós-vacinal prévia:</b> considerar antes de repetir a mesma vacina, pesando risco e benefício.</li>
+</ul>
+<div class="ac-call ac-peg">⚠️ Diferente de contraindicação verdadeira (que impede vacinar), a precaução pesa risco x benefício -- na maioria das vezes ainda é possível vacinar, com mais cautela.</div>
+`],
+
+['eventos_especificos_vacina','Eventos Esperados por Vacina Específica', `
+<div class="ac-h">Cada vacina tem seu "perfil" de evento esperado</div>
+<p class="ac-p">Além do raciocínio geral, algumas vacinas têm eventos característicos que vale conhecer especificamente, para não confundir "esperado e benigno" com "sinal de alarme":</p>
+<ul class="ac-ul">
+<li><b>BCG:</b> úlcera no local com secreção discreta e adenite satélite (linfonodo aumentado, geralmente axilar) fazem parte da evolução natural na maioria dos casos -- só exigem investigação adicional se houver sinais de disseminação (BCGite disseminada), mais comum em imunodeficiências graves não diagnosticadas.</li>
+<li><b>Pentavalente (componente pertussis):</b> episódio hipotônico-hiporresponsivo é raro, mas reconhecido -- criança fica subitamente hipotônica, pálida e com resposta diminuída a estímulos, geralmente nas primeiras horas após a dose, com recuperação espontânea.</li>
+<li><b>Tríplice Viral e Varicela (vivas atenuadas):</b> febre e exantema tardios (5-20 dias), simulando formas leves da própria doença.</li>
+<li><b>Febre Amarela:</b> doença viscerotrópica aguda pós-vacinal é um evento grave raríssimo, mais associado à primovacinação em adultos do que em crianças, mas que reforça por que a indicação deve sempre respeitar contraindicações formais (imunodeficiência grave, gestação).</li>
+</ul>
+<div class="ac-call ac-tip">💡 Conhecer o perfil esperado de cada vacina evita alarmismo desnecessário e, ao mesmo tempo, ajuda a identificar rapidamente quando algo foge do padrão e merece notificação.</div>
+`],
+
+['papel_pediatra_orientacao','O Papel do Pediatra na Orientação das Famílias', `
+<div class="ac-h">Comunicação de risco é parte do cuidado, não um detalhe</div>
+<p class="ac-p">Grande parte da hesitação vacinal nasce de eventos adversos leves e esperados que a família não foi preparada para reconhecer -- uma febre baixa após a Tríplice Viral, interpretada sem contexto, pode se tornar motivo para recusar doses futuras, inclusive de outras vacinas sem relação alguma com aquele evento.</p>
+<p class="ac-p">Cabe à consulta orientar <b>antecipadamente</b> quais reações são esperadas e benignas, como manejá-las em casa (antitérmico se necessário, compressa local, observação), e quais sinais realmente justificam buscar atendimento -- reforçando que a maioria dos EAPV é leve e não deve, por si só, mudar a decisão de completar o calendário vacinal.</p>
+<div class="ac-call ac-mne">🧠 Orientação antecipada sobre EAPV esperados é uma das ferramentas mais eficazes contra a hesitação vacinal -- previne o medo, sem minimizar a necessidade real de notificar eventos graves.</div>
+`],
+
+];
+
+Object.assign(C, {
+
+escores: `
+<div class="ac-h">Números que fecham questão</div>
+<table class="ac-tbl"><tr><th>Parâmetro</th><th>Valor</th></tr>
+<tr><td>Janela de observação pós-vacina (risco de anafilaxia)</td><td><b>15-30 minutos</b> no serviço</td></tr>
+<tr><td>Início esperado da anafilaxia</td><td><b>&lt;30 minutos</b> após a aplicação</td></tr>
+<tr><td>Início de reações locais/febre baixa</td><td>primeiras <b>48 horas</b></td></tr>
+<tr><td>Início de reações sistêmicas de vivas atenuadas</td><td><b>5 a 20 dias</b> após a dose</td></tr>
+<tr><td>Janela de Guillain-Barré como precaução</td><td><b>6 semanas</b> após dose anterior</td></tr>
+<tr><td>Categorias de classificação de EAPV</td><td><b>3</b>: locais, sistêmicos, graves</td></tr></table>
+`,
+
+dif: `
+<div class="ac-h">Diferencial automático -- contraindicação, precaução ou mito</div>
+<table class="ac-tbl"><tr><th>Situação</th><th>Classificação</th></tr>
+<tr><td>Anafilaxia a dose anterior da mesma vacina</td><td>Contraindicação <b>verdadeira</b></td></tr>
+<tr><td>Doença aguda leve (resfriado, febre baixa sem toxemia)</td><td><b>Falsa</b> contraindicação (mito)</td></tr>
+<tr><td>Imunodeficiência grave e vacina vida atenuada</td><td>Contraindicação <b>verdadeira</b></td></tr>
+<tr><td>Uso de antibiótico no momento da vacina</td><td><b>Falsa</b> contraindicação (mito)</td></tr>
+<tr><td>Convulsão febril prévia (não relacionada a vacina)</td><td><b>Precaução</b> -- não contraindica</td></tr>
+<tr><td>Alergia não anafilática a ovo</td><td><b>Falsa</b> contraindicação (mito)</td></tr>
+<tr><td>Guillain-Barré nas últimas 6 semanas</td><td><b>Precaução</b> -- avaliação individualizada</td></tr></table>
+`,
+
+mapa: `
+<div class="ac-h">Mapa mental -- EAPV e Contraindicações</div>
+<div class="mm">
+<div class="mm-card"><h5>VERDADEIRAS</h5><ul><li>Anafilaxia prévia ao componente</li><li>Imunodeficiência grave (vivas)</li><li>Gestação (vivas)</li></ul></div>
+<div class="mm-card"><h5>FALSAS (MITOS)</h5><ul><li>Doença leve, febre baixa</li><li>Antibiótico, alergia não anafilática a ovo</li><li>Aleitamento, história familiar de convulsão</li></ul></div>
+<div class="mm-card"><h5>CLASSIFICAÇÃO</h5><ul><li>Locais (mais comuns)</li><li>Sistêmicos</li><li>Graves (notificação obrigatória)</li></ul></div>
+<div class="mm-card"><h5>PADRÃO TEMPORAL</h5><ul><li>Anafilaxia &lt;30min</li><li>Vivas atenuadas: 5-20 dias</li></ul></div>
+<div class="mm-card"><h5>NOTIFICAÇÃO</h5><ul><li>ESAVI: e-SUS Notifica/VigiMed</li><li>Obrigatória mesmo com dúvida</li></ul></div>
+<div class="mm-card"><h5>PRECAUÇÕES</h5><ul><li>Febre alta prévia, convulsão febril</li><li>Guillain-Barré 6 semanas</li></ul></div>
+</div>
+`,
+
+fluxo_dx: `
+<div class="ac-h">Fluxograma -- essa condição é contraindicação verdadeira?</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Criança apresenta condição/história que gera dúvida vacinal</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node">É anafilaxia prévia, imunodeficiência grave (viva) ou gestação (viva)?</div>
+</div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node end">SIM -- contraindicação verdadeira, não vacinar (essa dose/tipo)</div>
+<div class="fx-node end">NÃO -- provável mito/falsa contraindicação, vacinar normalmente</div>
+</div>
+</div>
+`,
+
+fluxo_cond: `
+<div class="ac-h">Fluxograma de conduta -- evento adverso após dose anterior</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Evento adverso relatado após dose anterior de vacina</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Classificar: local/sistêmico leve x grave (anafilaxia, convulsão, encefalopatia)</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node">Leve/esperado</div>
+<div class="fx-node">Grave ou dúvida relevante</div>
+</div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node end">Orientar família, manter calendário normalmente</div>
+<div class="fx-node end">Notificar ESAVI + avaliar CRIE para próximas doses</div>
+</div>
+</div>
+`,
+
+vespera: `
+<div class="ac-h">Revisão de véspera -- EAPV e Contraindicações</div>
+<div class="ac-call ac-high">⚡ Contraindicações verdadeiras são poucas: anafilaxia prévia, imunodeficiência grave (vivas), gestação (vivas), doença aguda moderada/grave (adiar).</div>
+<ul class="ac-ul">
+<li>Doença leve, antibiótico, alergia não anafilática a ovo, aleitamento, história familiar de convulsão: são MITOS, não contraindicam.</li>
+<li>3 classificações de EAPV: locais (mais comuns), sistêmicos, graves (notificação obrigatória).</li>
+<li>Anafilaxia: &lt;30min. Locais/febre: &lt;48h. Vivas atenuadas: 5-20 dias depois.</li>
+<li>Notificação de ESAVI é obrigatória mesmo com dúvida sobre causalidade -- não é acusação, é vigilância.</li>
+<li>Febre alta prévia e convulsão febril prévia são PRECAUÇÕES, não contraindicações.</li>
+<li>Guillain-Barré nas últimas 6 semanas: avaliação individualizada antes de repetir a vacina.</li>
+<li>Orientação antecipada sobre eventos esperados previne hesitação vacinal.</li>
+</ul>
+`,
+
+dicas: `
+<div class="ac-h">Dicas e Pegadinhas</div>
+<div class="ac-call ac-peg">⚠️ "Febre baixa contraindica vacina" é o mito mais cobrado -- doença aguda LEVE nunca contraindica.</div>
+<div class="ac-call ac-peg">⚠️ Alergia a ovo NÃO anafilática não contraindica vacinas com traços de proteína do ovo -- só a reação anafilática grave exige cuidado especial.</div>
+<div class="ac-call ac-mne">🧠 "Notificar ≠ acusar": toda ESAVI grave se notifica, mesmo sem certeza de causalidade.</div>
+<div class="ac-call ac-tip">✅ Febre/exantema 5-20 dias após Tríplice Viral costuma ser reação esperada da vacina viva, não infecção nova.</div>
+<div class="ac-call ac-peg">⚠️ Convulsão febril prévia e história familiar de convulsão são PRECAUÇÃO/MITO, não contraindicação verdadeira -- questão clássica de confusão.</div>
+`,
+
+checklist: [
+ "Sei as contraindicações verdadeiras (poucas e específicas)",
+ "Sei diferenciar contraindicação verdadeira de falsa contraindicação (mito)",
+ "Conheço as 3 classificações de EAPV: locais, sistêmicos, graves",
+ "Sei o padrão temporal esperado de cada tipo de reação",
+ "Sei quando e como notificar um ESAVI",
+ "Entendo que notificar não significa afirmar causalidade",
+ "Sei diferenciar precaução de contraindicação verdadeira",
+ "Conheço eventos esperados específicos (BCG, pentavalente, vivas atenuadas)",
+ "Sei orientar a família sobre reações esperadas antecipadamente",
+ "Entendo o impacto da comunicação de risco na hesitação vacinal"
+],
+
+});
+
+Object.assign(C, {
+
+questoes: [
+  {id:"eap-q1",banca:"ENARE (estilo)",stem:"Lactente de 4 meses vai receber a segunda dose da vacina Pentavalente. A mãe relata que a criança está com resfriado comum, sem febre, ativa e mamando bem. Qual a conduta correta?",
+   opts:["Adiar a vacinação até resolução completa do resfriado","Vacinar normalmente -- doença aguda leve não é contraindicação","Encaminhar ao CRIE antes de vacinar","Trocar por vacina inativada alternativa"],
+   correct:1, expl:"Doença aguda leve (resfriado comum sem toxemia) é uma <b>falsa contraindicação</b> -- a criança deve ser vacinada normalmente."},
+  {id:"eap-q2",banca:"Revalida (estilo)",stem:"Criança apresentou anafilaxia após dose anterior de determinada vacina, confirmadamente relacionada a um componente da fórmula. Qual a conduta correta em relação a essa mesma vacina?",
+   opts:["Repetir a mesma vacina em ambiente hospitalar","Essa é uma contraindicação verdadeira -- não repetir essa formulação, avaliar alternativa via CRIE","Repetir em dose reduzida","Aguardar 6 meses e repetir normalmente"],
+   correct:1, expl:"Anafilaxia a componente de dose anterior é <b>contraindicação verdadeira</b> -- não se repete a mesma formulação; buscar alternativa, geralmente via CRIE."},
+  {id:"eap-q3",banca:"UFRJ (estilo)",stem:"Sobre a classificação dos eventos adversos pós-vacinação (EAPV), é correto afirmar:",
+   opts:["Só existem eventos locais e sistêmicos","Classificam-se em locais, sistêmicos e graves, sendo os locais os mais frequentes","Todo EAPV é considerado grave por definição","Eventos sistêmicos são sempre mais frequentes que os locais"],
+   correct:1, expl:"A classificação usual é em <b>locais, sistêmicos e graves</b> -- sendo os locais (dor, eritema, edema) os mais frequentes de todos."},
+  {id:"eap-q4",banca:"SES-RJ (estilo)",stem:"Criança apresenta febre e exantema leve 10 dias após receber a vacina Tríplice Viral (vacina viva atenuada). Qual a interpretação mais provável?",
+   opts:["Infecção bacteriana grave não relacionada à vacina","Reação sistêmica esperada de vacina viva atenuada, com padrão temporal compatível","Sinal obrigatório de contraindicação para próximas doses","Erro de conservação da vacina"],
+   correct:1, expl:"Vacinas vivas atenuadas podem causar reação sistêmica tardia (5-20 dias), simulando forma leve da doença prevenida -- padrão temporal compatível com <b>reação esperada</b>."},
+  {id:"eap-q5",banca:"UERJ (estilo)",stem:"Diante de um evento adverso grave (ex.: convulsão) após vacinação, mesmo com dúvida sobre a relação causal com a vacina, a conduta correta é:",
+   opts:["Não notificar até haver certeza de causalidade","Notificar como ESAVI, pois a notificação não exige certeza de causalidade","Aguardar reação do paciente em nova dose para confirmar","Descartar a possibilidade, já que é raro"],
+   correct:1, expl:"A notificação de <b>ESAVI é obrigatória mesmo diante de dúvida</b> sobre causalidade -- o sistema de vigilância detecta sinais em nível populacional."},
+  {id:"eap-q6",banca:"PSU-MG (estilo)",stem:"Lactente com história de convulsão febril prévia (não relacionada a vacina) precisa receber vacina de rotina. Qual a conduta correta?",
+   opts:["Contraindicar formalmente todas as vacinas futuras","Vacinar normalmente, orientando controle antitérmico se houver febre após a dose","Adiar a vacinação por 1 ano","Substituir por esquema de vacinas inativadas exclusivamente"],
+   correct:1, expl:"Convulsão febril prévia é uma <b>precaução</b>, não contraindicação -- vacina-se normalmente, com orientação de controle antitérmico."},
+  {id:"eap-q7",banca:"ENARE (estilo)",stem:"Sobre a janela de observação recomendada após a aplicação de vacinas em serviços de saúde, é correto afirmar que ela existe principalmente para:",
+   opts:["Confirmar a eficácia da vacina","Detectar precocemente uma possível reação anafilática, que costuma ocorrer em até 30 minutos","Avaliar reações sistêmicas tardias de vacinas vivas","Verificar erros de conservação da vacina"],
+   correct:1, expl:"A observação de 15-30 minutos pós-vacina visa detectar <b>anafilaxia</b>, que tipicamente se manifesta nos primeiros 30 minutos após a aplicação."},
+  {id:"eap-q8",banca:"Revalida (estilo)",stem:"Recém-nascido apresentou úlcera no local de aplicação da BCG e linfonodo axilar aumentado (adenite satélite) algumas semanas após a vacinação. Qual a interpretação mais adequada?",
+   opts:["Sinal de infecção grave que exige investigação imediata de imunodeficiência em toda criança","Parte da evolução esperada na maioria dos casos, sem necessidade de investigação adicional na ausência de sinais de disseminação","Contraindicação para completar o calendário vacinal","Erro técnico de aplicação da vacina"],
+   correct:1, expl:"Úlcera e adenite satélite fazem parte da <b>evolução esperada</b> da BCG na maioria dos casos -- só investigar sinais de disseminação (BCGite disseminada), sugestivos de imunodeficiência grave não diagnosticada."},
+  {id:"eap-q9",banca:"UFRJ (estilo)",stem:"Sobre alergia a ovo e vacinação, é correto afirmar:",
+   opts:["Toda alergia a ovo, mesmo leve, contraindica formalmente qualquer vacina com traço de proteína do ovo","Apenas a reação anafilática grave prévia exige cuidado especial -- alergia não anafilática não contraindica","Alergia a ovo contraindica todas as vacinas do calendário, independente do tipo","Alergia a ovo é sempre uma contraindicação absoluta e permanente"],
+   correct:1, expl:"Alergia <b>não anafilática</b> a ovo é uma falsa contraindicação -- apenas reação anafilática grave prévia exige avaliação especial."},
+  {id:"eap-q10",banca:"SES-RJ (estilo)",stem:"Qual das situações abaixo representa uma PRECAUÇÃO (não contraindicação verdadeira), exigindo apenas avaliação individualizada antes de repetir a mesma vacina?",
+   opts:["Anafilaxia confirmada a componente vacinal","Síndrome de Guillain-Barré nas 6 semanas após dose anterior da mesma vacina","Imunodeficiência grave para vacina viva atenuada","Gestação para vacina viva atenuada"],
+   correct:1, expl:"Guillain-Barré nas 6 semanas após dose anterior é classificado como <b>precaução</b> -- exige avaliação individualizada, mas não é contraindicação automática e definitiva."},
+  {id:"eap-q11",banca:"UERJ (estilo)",stem:"Qual a melhor estratégia para reduzir a hesitação vacinal relacionada a eventos adversos leves e esperados, como febre baixa após a Pentavalente?",
+   opts:["Evitar comentar sobre possíveis reações antes da aplicação","Orientar antecipadamente a família sobre reações esperadas e como manejá-las em casa","Aguardar a reação ocorrer para só então explicar o que aconteceu","Recomendar suspensão de doses futuras preventivamente"],
+   correct:1, expl:"A <b>orientação antecipada</b> sobre reações esperadas é uma das ferramentas mais eficazes para prevenir hesitação vacinal, evitando surpresa e medo desnecessário da família."},
+  {id:"eap-q12",banca:"ENARE (estilo)",stem:"Sobre o uso concomitante de antibióticos e vacinação, é correto afirmar:",
+   opts:["Antibiótico em uso contraindica formalmente qualquer vacina até o término do tratamento","Uso de antibiótico não é contraindicação para vacinação de rotina","Apenas vacinas vivas atenuadas são contraindicadas durante uso de antibiótico","Antibiótico exige dobrar o intervalo entre doses da mesma vacina"],
+   correct:1, expl:"Uso de antibiótico é uma <b>falsa contraindicação</b> (mito) -- não impede a vacinação de rotina."}
+],
+
+flashcards:[
+  {id:"eap-f1",tipo:"qa",tag:"Contraindicação",front:"Cite as principais contraindicações verdadeiras a vacinas.",back:"Anafilaxia a dose/componente anterior, imunodeficiência grave (vivas), gestação (vivas), doença aguda moderada/grave (adiar)."},
+  {id:"eap-f2",tipo:"vf",tag:"Mito",front:"Doença aguda leve, como resfriado sem febre, contraindica vacinação.",back:"<b>FALSO.</b> É uma falsa contraindicação (mito) -- vacinar normalmente."},
+  {id:"eap-f3",tipo:"qa",tag:"Classificação",front:"Quais as 3 classificações de EAPV?",back:"Locais (mais comuns), sistêmicos, graves (notificação obrigatória)."},
+  {id:"eap-f4",tipo:"qa",tag:"Padrão temporal",front:"Quando tipicamente ocorre a anafilaxia pós-vacinal?",back:"Nos primeiros <b>30 minutos</b> após a aplicação."},
+  {id:"eap-f5",tipo:"qa",tag:"Padrão temporal",front:"Quando tipicamente surgem reações sistêmicas de vacinas vivas atenuadas?",back:"Entre <b>5 e 20 dias</b> após a dose (tardias, simulando a doença)."},
+  {id:"eap-f6",tipo:"qa",tag:"ESAVI",front:"O que significa ESAVI e quando deve ser notificado?",back:"Evento Supostamente Atribuível à Vacinação/Imunização -- notificar sempre que grave, <b>mesmo com dúvida</b> sobre causalidade."},
+  {id:"eap-f7",tipo:"vf",tag:"Precaução",front:"Convulsão febril prévia é contraindicação formal para vacinar.",back:"<b>FALSO.</b> É precaução -- vacinar normalmente, orientando controle antitérmico."},
+  {id:"eap-f8",tipo:"cloze",tag:"BCG",front:"Úlcera e {{c1::adenite satélite}} fazem parte da {{c2::evolução esperada}} da BCG na maioria dos casos.",back:"São achados esperados; investigar só se houver sinais de disseminação."},
+  {id:"eap-f9",tipo:"qa",tag:"Alergia a ovo",front:"Alergia não anafilática a ovo contraindica vacinas com traço de proteína do ovo?",back:"<b>Não</b> -- só a reação anafilática grave prévia exige cuidado especial."},
+  {id:"eap-f10",tipo:"qa",tag:"Guillain-Barré",front:"O que fazer diante de Guillain-Barré nas 6 semanas após dose anterior da mesma vacina?",back:"Avaliação <b>individualizada</b> antes de repetir -- é precaução, não contraindicação automática."},
+  {id:"eap-f11",tipo:"qa",tag:"Antibiótico",front:"Uso de antibiótico contraindica vacinação de rotina?",back:"<b>Não</b> -- é uma falsa contraindicação (mito) clássica."},
+  {id:"eap-f12",tipo:"qa",tag:"Comunicação",front:"Qual estratégia reduz hesitação vacinal relacionada a EAPV leves?",back:"<b>Orientação antecipada</b> à família sobre reações esperadas e manejo em casa."},
+  {id:"eap-f13",tipo:"qa",tag:"Pentavalente",front:"O que é o episódio hipotônico-hiporresponsivo?",back:"Evento raro pós-Pentavalente (componente pertussis): hipotonia, palidez, resposta diminuída, com recuperação espontânea."},
+  {id:"eap-f14",tipo:"qa",tag:"Princípio",front:"Qual a diferença central entre contraindicação verdadeira e precaução?",back:"Verdadeira <b>impede</b> vacinar; precaução exige <b>avaliar risco x benefício</b>, muitas vezes ainda se vacina."}
+],
+
+casos:[
+  {t:"Caso 1 -- Dúvida clássica na sala de vacina",
+   stem:"Lactente de 6 meses comparece para dose de Pentavalente. A mãe relata resfriado leve sem febre, e menciona que um tio teve convulsão quando criança, motivo pelo qual está insegura sobre vacinar hoje.",
+   passos:[
+     {h:"1. O resfriado leve sem febre contraindica a vacina hoje?", p:"Não -- doença aguda <b>leve</b> é uma falsa contraindicação (mito); vacinar normalmente."},
+     {h:"2. A história familiar de convulsão contraindica a vacina?", p:"Não -- história familiar de convulsão também é falsa contraindicação; não há motivo para adiar."},
+     {h:"3. Qual a conduta final?", p:"Vacinar normalmente hoje, orientando a mãe sobre reações esperadas e desfazendo os dois mitos levantados."}
+   ]},
+  {t:"Caso 2 -- Evento adverso grave após dose anterior",
+   stem:"Criança de 3 anos apresentou quadro de anafilaxia minutos após receber determinada vacina, confirmado clinicamente no próprio serviço de saúde.",
+   passos:[
+     {h:"1. Esse é um evento que precisa ser notificado?", p:"Sim -- anafilaxia é EAPV <b>grave</b>, notificação obrigatória como ESAVI (e-SUS Notifica/VigiMed)."},
+     {h:"2. A mesma formulação vacinal pode ser repetida no futuro?", p:"Não -- anafilaxia a componente é <b>contraindicação verdadeira</b> para aquela formulação específica."},
+     {h:"3. A criança fica sem proteção contra aquela doença?", p:"Não necessariamente -- deve-se buscar formulação alternativa sem o componente responsável, geralmente disponível via CRIE."}
+   ]},
+  {t:"Caso 3 -- Febre tardia após Tríplice Viral",
+   stem:"Criança de 1 ano recebeu a 1ª dose de Tríplice Viral há 9 dias e hoje apresenta febre baixa e exantema leve, sem outros sintomas de alarme.",
+   passos:[
+     {h:"1. Qual a hipótese mais provável diante do padrão temporal?", p:"Reação sistêmica <b>esperada</b> de vacina viva atenuada -- o intervalo de 9 dias é compatível com a janela de 5-20 dias descrita para esse tipo de reação."},
+     {h:"2. Esse evento contraindica a 2ª dose futura da Tríplice Viral?", p:"Não -- reação sistêmica leve esperada não é contraindicação para doses futuras."},
+     {h:"3. Existe necessidade de notificação obrigatória nesse caso?", p:"Não obrigatoriamente -- é um evento leve e esperado; a notificação formal é reservada a eventos graves ou de dúvida relevante sobre segurança."}
+   ]}
+]
+
+});
+
+window.CONTENT['imunizacao|2'] = C;
+})();
+
+</script>
+
+<!-- ===== MODULO Atualizacao de Esquema Vacinal em Atraso (imunizacao|3) (novo) ===== -->
+<script>
+Object.assign(window.ASVG=window.ASVG||{}, {"atr_principios_gerais": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"atrPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#3a0f2a\"/>\n    <stop offset=\"1\" stop-color=\"#1c0715\"/>\n  </linearGradient>\n  <linearGradient id=\"atrAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffb3d9\"/>\n    <stop offset=\"1\" stop-color=\"#e0568f\"/>\n  </linearGradient>\n  <linearGradient id=\"atrGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"atrRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <linearGradient id=\"atrBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"atrShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/>\n  </filter>\n  <filter id=\"atrShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.2\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#atrPanel)\"/>\n<text x=\"340\" y=\"26\" fill=\"url(#atrAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Os 3 princípios do resgate vacinal</text>\n\n<g filter=\"url(#atrShadow)\"><rect x=\"20\" y=\"48\" width=\"200\" height=\"140\" rx=\"14\" fill=\"url(#atrGreen)\"/></g>\n<text x=\"120\" y=\"72\" fill=\"#0c2b20\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Nunca reiniciar</text>\n<text x=\"120\" y=\"94\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">o esquema não</text>\n<text x=\"120\" y=\"108\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">recomeça do zero</text>\n<text x=\"120\" y=\"128\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">doses aplicadas</text>\n<text x=\"120\" y=\"142\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">permanecem válidas</text>\n<text x=\"120\" y=\"162\" fill=\"#0c2b20\" font-size=\"9\" text-anchor=\"middle\">para sempre</text>\n\n<g filter=\"url(#atrShadow)\"><rect x=\"240\" y=\"48\" width=\"200\" height=\"140\" rx=\"14\" fill=\"url(#atrBlue)\"/></g>\n<text x=\"340\" y=\"72\" fill=\"#06263d\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Só intervalo mínimo</text>\n<text x=\"340\" y=\"94\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">não existe intervalo</text>\n<text x=\"340\" y=\"108\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">máximo entre doses</text>\n<text x=\"340\" y=\"128\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">só o mínimo precisa</text>\n<text x=\"340\" y=\"142\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">ser respeitado</text>\n\n<g filter=\"url(#atrShadow)\"><rect x=\"460\" y=\"48\" width=\"200\" height=\"140\" rx=\"14\" fill=\"url(#atrAccent)\"/></g>\n<text x=\"560\" y=\"72\" fill=\"#3a1428\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Simultaneidade segura</text>\n<text x=\"560\" y=\"94\" fill=\"#3a1428\" font-size=\"9\" text-anchor=\"middle\">várias vacinas no</text>\n<text x=\"560\" y=\"108\" fill=\"#3a1428\" font-size=\"9\" text-anchor=\"middle\">mesmo dia, em locais</text>\n<text x=\"560\" y=\"128\" fill=\"#3a1428\" font-size=\"9\" text-anchor=\"middle\">diferentes, é seguro</text>\n<text x=\"560\" y=\"142\" fill=\"#3a1428\" font-size=\"9\" text-anchor=\"middle\">e acelera o resgate</text>\n\n<g filter=\"url(#atrShadowSoft)\"><rect x=\"20\" y=\"204\" width=\"640\" height=\"76\" rx=\"12\" fill=\"rgba(255,179,217,.13)\" stroke=\"url(#atrAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"228\" fill=\"#ffd9ec\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">O corpo guarda memória imunológica das doses anteriores</text>\n<text x=\"340\" y=\"246\" fill=\"#ffd9ec\" font-size=\"9.5\" text-anchor=\"middle\">Só se considera o esquema completo -- e a proteção plena -- ao final de todas as doses</text>\n<text x=\"340\" y=\"262\" fill=\"#ffd9ec\" font-size=\"9.5\" text-anchor=\"middle\">Toda caderneta em atraso é recuperável, sem exceção pelo tempo decorrido</text>\n</svg>", "atr_janelas_idade": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"atrPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#3a0f2a\"/>\n    <stop offset=\"1\" stop-color=\"#1c0715\"/>\n  </linearGradient>\n  <linearGradient id=\"atrAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffb3d9\"/>\n    <stop offset=\"1\" stop-color=\"#e0568f\"/>\n  </linearGradient>\n  <linearGradient id=\"atrGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"atrRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <linearGradient id=\"atrBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"atrShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/>\n  </filter>\n  <filter id=\"atrShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.2\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#atrPanel)\"/>\n<text x=\"340\" y=\"26\" fill=\"url(#atrAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Vacinas com janela de idade -- a exceção que mais cai em prova</text>\n\n<g filter=\"url(#atrShadow)\"><rect x=\"20\" y=\"50\" width=\"310\" height=\"150\" rx=\"14\" fill=\"url(#atrRed)\"/></g>\n<text x=\"175\" y=\"74\" fill=\"#3a0d12\" font-size=\"12\" font-weight=\"700\" text-anchor=\"middle\">Rotavírus (a mais rígida)</text>\n<text x=\"175\" y=\"96\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">1ª dose: até 3 meses e 15 dias</text>\n<text x=\"175\" y=\"112\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">última dose: até 7 meses e 29 dias</text>\n<text x=\"175\" y=\"132\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">após essas idades, NÃO se aplica</text>\n<text x=\"175\" y=\"148\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">mais -- risco de invaginação</text>\n<text x=\"175\" y=\"164\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">intestinal em crianças maiores</text>\n\n<g filter=\"url(#atrShadow)\"><rect x=\"350\" y=\"50\" width=\"310\" height=\"150\" rx=\"14\" fill=\"url(#atrAccent)\"/></g>\n<text x=\"505\" y=\"74\" fill=\"#3a1428\" font-size=\"12\" font-weight=\"700\" text-anchor=\"middle\">BCG e demais vacinas</text>\n<text x=\"505\" y=\"96\" fill=\"#3a1428\" font-size=\"9.5\" text-anchor=\"middle\">BCG: resgate até 4 anos,</text>\n<text x=\"505\" y=\"112\" fill=\"#3a1428\" font-size=\"9.5\" text-anchor=\"middle\">11 meses e 29 dias</text>\n<text x=\"505\" y=\"132\" fill=\"#3a1428\" font-size=\"9.5\" text-anchor=\"middle\">maioria das demais vacinas:</text>\n<text x=\"505\" y=\"148\" fill=\"#3a1428\" font-size=\"9.5\" text-anchor=\"middle\">sem limite superior de idade --</text>\n<text x=\"505\" y=\"164\" fill=\"#3a1428\" font-size=\"9.5\" text-anchor=\"middle\">podem ser resgatadas a qualquer momento</text>\n\n<g filter=\"url(#atrShadowSoft)\"><rect x=\"20\" y=\"214\" width=\"640\" height=\"66\" rx=\"12\" fill=\"rgba(255,179,217,.13)\" stroke=\"url(#atrAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"238\" fill=\"#ffd9ec\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Regra prática: sempre checar se a vacina tem idade MÁXIMA antes de tentar resgatar</text>\n<text x=\"340\" y=\"256\" fill=\"#ffd9ec\" font-size=\"9.5\" text-anchor=\"middle\">Rotavírus perdido na janela não se recupera -- é a principal pegadinha do tema</text>\n</svg>", "atr_intervalos_minimos": "<svg viewBox=\"0 0 680 310\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"atrPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#3a0f2a\"/>\n    <stop offset=\"1\" stop-color=\"#1c0715\"/>\n  </linearGradient>\n  <linearGradient id=\"atrAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffb3d9\"/>\n    <stop offset=\"1\" stop-color=\"#e0568f\"/>\n  </linearGradient>\n  <linearGradient id=\"atrGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"atrRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <linearGradient id=\"atrBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"atrShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/>\n  </filter>\n  <filter id=\"atrShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.2\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"310\" rx=\"16\" fill=\"url(#atrPanel)\"/>\n<text x=\"340\" y=\"26\" fill=\"url(#atrAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Intervalos mínimos usuais entre doses (esquema básico infantil)</text>\n\n<g filter=\"url(#atrShadow)\"><rect x=\"20\" y=\"48\" width=\"640\" height=\"34\" rx=\"10\" fill=\"url(#atrAccent)\"/></g>\n<text x=\"120\" y=\"70\" fill=\"#3a1428\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">Vacina</text>\n<text x=\"360\" y=\"70\" fill=\"#3a1428\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">1ª → 2ª dose</text>\n<text x=\"580\" y=\"70\" fill=\"#3a1428\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">2ª → 3ª dose</text>\n\n<rect x=\"20\" y=\"86\" width=\"640\" height=\"32\" rx=\"8\" fill=\"rgba(255,255,255,.06)\"/>\n<text x=\"120\" y=\"107\" fill=\"#ffe9f5\" font-size=\"9.5\" text-anchor=\"middle\">Penta / DTP / VIP</text>\n<text x=\"360\" y=\"107\" fill=\"#ffe9f5\" font-size=\"9.5\" text-anchor=\"middle\">4 semanas</text>\n<text x=\"580\" y=\"107\" fill=\"#ffe9f5\" font-size=\"9.5\" text-anchor=\"middle\">4 semanas</text>\n\n<rect x=\"20\" y=\"122\" width=\"640\" height=\"32\" rx=\"8\" fill=\"rgba(255,255,255,.03)\"/>\n<text x=\"120\" y=\"143\" fill=\"#ffe9f5\" font-size=\"9.5\" text-anchor=\"middle\">Pneumocócica 10</text>\n<text x=\"360\" y=\"143\" fill=\"#ffe9f5\" font-size=\"9.5\" text-anchor=\"middle\">4 semanas</text>\n<text x=\"580\" y=\"143\" fill=\"#ffe9f5\" font-size=\"9.5\" text-anchor=\"middle\">-- (reforço aos 12m)</text>\n\n<rect x=\"20\" y=\"158\" width=\"640\" height=\"32\" rx=\"8\" fill=\"rgba(255,255,255,.06)\"/>\n<text x=\"120\" y=\"179\" fill=\"#ffe9f5\" font-size=\"9.5\" text-anchor=\"middle\">Hepatite B</text>\n<text x=\"360\" y=\"179\" fill=\"#ffe9f5\" font-size=\"9.5\" text-anchor=\"middle\">4 semanas</text>\n<text x=\"580\" y=\"179\" fill=\"#ffe9f5\" font-size=\"9.5\" text-anchor=\"middle\">8 semanas (min. 16 sem. da 1ª)</text>\n\n<rect x=\"20\" y=\"194\" width=\"640\" height=\"32\" rx=\"8\" fill=\"rgba(255,255,255,.03)\"/>\n<text x=\"120\" y=\"215\" fill=\"#ffe9f5\" font-size=\"9.5\" text-anchor=\"middle\">Rotavírus</text>\n<text x=\"360\" y=\"215\" fill=\"#ffe9f5\" font-size=\"9.5\" text-anchor=\"middle\">4 semanas</text>\n<text x=\"580\" y=\"215\" fill=\"#ffe9f5\" font-size=\"9.5\" text-anchor=\"middle\">respeitar idade máxima!</text>\n\n<g filter=\"url(#atrShadowSoft)\"><rect x=\"20\" y=\"238\" width=\"640\" height=\"58\" rx=\"12\" fill=\"rgba(255,179,217,.13)\" stroke=\"url(#atrAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"260\" fill=\"#ffd9ec\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">Intervalos mínimos são regra de exceção -- usados só quando há risco de exposição</text>\n<text x=\"340\" y=\"278\" fill=\"#ffd9ec\" font-size=\"9\" text-anchor=\"middle\">iminente; fora do resgate, o intervalo padrão de rotina é o preferido</text>\n</svg>", "atr_vivas_regra_resgate": "<svg viewBox=\"0 0 680 270\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"atrPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#3a0f2a\"/>\n    <stop offset=\"1\" stop-color=\"#1c0715\"/>\n  </linearGradient>\n  <linearGradient id=\"atrAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffb3d9\"/>\n    <stop offset=\"1\" stop-color=\"#e0568f\"/>\n  </linearGradient>\n  <linearGradient id=\"atrGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"atrRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <linearGradient id=\"atrBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"atrShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/>\n  </filter>\n  <filter id=\"atrShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.2\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"270\" rx=\"16\" fill=\"url(#atrPanel)\"/>\n<text x=\"340\" y=\"26\" fill=\"url(#atrAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Vivas atenuadas não aplicadas juntas -- a regra das 4 semanas</text>\n\n<g filter=\"url(#atrShadow)\"><rect x=\"20\" y=\"50\" width=\"300\" height=\"120\" rx=\"14\" fill=\"url(#atrGreen)\"/></g>\n<text x=\"170\" y=\"74\" fill=\"#0c2b20\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Mesmo dia = sempre pode</text>\n<text x=\"170\" y=\"98\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">duas ou mais vacinas vivas</text>\n<text x=\"170\" y=\"114\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">atenuadas aplicadas no</text>\n<text x=\"170\" y=\"130\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">mesmo dia: sem restrição</text>\n<text x=\"170\" y=\"150\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">(ex.: Tríplice Viral + Febre Amarela)</text>\n\n<g filter=\"url(#atrShadow)\"><rect x=\"340\" y=\"50\" width=\"320\" height=\"120\" rx=\"14\" fill=\"url(#atrRed)\"/></g>\n<text x=\"500\" y=\"74\" fill=\"#3a0d12\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Dias diferentes = esperar</text>\n<text x=\"500\" y=\"98\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">se não forem no mesmo dia,</text>\n<text x=\"500\" y=\"114\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">respeitar intervalo mínimo</text>\n<text x=\"500\" y=\"130\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">de 4 semanas entre elas</text>\n<text x=\"500\" y=\"150\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">(regra específica de vivas atenuadas)</text>\n\n<g filter=\"url(#atrShadowSoft)\"><rect x=\"20\" y=\"188\" width=\"640\" height=\"66\" rx=\"12\" fill=\"rgba(255,179,217,.13)\" stroke=\"url(#atrAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"210\" fill=\"#ffd9ec\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Vacinas inativadas não têm essa restrição entre si nem com as vivas</text>\n<text x=\"340\" y=\"228\" fill=\"#ffd9ec\" font-size=\"9.5\" text-anchor=\"middle\">A regra das 4 semanas vale apenas entre duas vivas atenuadas diferentes,</text>\n<text x=\"340\" y=\"244\" fill=\"#ffd9ec\" font-size=\"9.5\" text-anchor=\"middle\">quando não administradas no mesmo dia -- erro clássico de prova</text>\n</svg>", "atr_estrategia_oportunidade": "<svg viewBox=\"0 0 680 280\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"atrPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#3a0f2a\"/>\n    <stop offset=\"1\" stop-color=\"#1c0715\"/>\n  </linearGradient>\n  <linearGradient id=\"atrAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffb3d9\"/>\n    <stop offset=\"1\" stop-color=\"#e0568f\"/>\n  </linearGradient>\n  <linearGradient id=\"atrGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"atrRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <linearGradient id=\"atrBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"atrShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/>\n  </filter>\n  <filter id=\"atrShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.2\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"280\" rx=\"16\" fill=\"url(#atrPanel)\"/>\n<text x=\"340\" y=\"26\" fill=\"url(#atrAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Toda consulta é uma oportunidade de vacinar</text>\n\n<circle cx=\"120\" cy=\"130\" r=\"58\" fill=\"url(#atrAccent)\" filter=\"url(#atrShadow)\"/>\n<text x=\"120\" y=\"122\" fill=\"#3a1428\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">1. Checar</text>\n<text x=\"120\" y=\"138\" fill=\"#3a1428\" font-size=\"8.5\" text-anchor=\"middle\">a caderneta em</text>\n<text x=\"120\" y=\"150\" fill=\"#3a1428\" font-size=\"8.5\" text-anchor=\"middle\">TODA consulta</text>\n\n<path vector-effect=\"non-scaling-stroke\" d=\"M182,130 L268,130\" stroke=\"#7a2050\" stroke-width=\"3\"/>\n<circle cx=\"340\" cy=\"130\" r=\"58\" fill=\"url(#atrGreen)\" filter=\"url(#atrShadow)\"/>\n<text x=\"340\" y=\"122\" fill=\"#0c2b20\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">2. Identificar</text>\n<text x=\"340\" y=\"138\" fill=\"#0c2b20\" font-size=\"8.5\" text-anchor=\"middle\">doses em atraso,</text>\n<text x=\"340\" y=\"150\" fill=\"#0c2b20\" font-size=\"8.5\" text-anchor=\"middle\">mesmo se não é</text>\n<text x=\"340\" y=\"162\" fill=\"#0c2b20\" font-size=\"8.5\" text-anchor=\"middle\">o motivo da consulta</text>\n\n<path vector-effect=\"non-scaling-stroke\" d=\"M402,130 L488,130\" stroke=\"#7a2050\" stroke-width=\"3\"/>\n<circle cx=\"560\" cy=\"130\" r=\"58\" fill=\"url(#atrBlue)\" filter=\"url(#atrShadow)\"/>\n<text x=\"560\" y=\"122\" fill=\"#06263d\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">3. Vacinar</text>\n<text x=\"560\" y=\"138\" fill=\"#06263d\" font-size=\"8.5\" text-anchor=\"middle\">na mesma visita,</text>\n<text x=\"560\" y=\"150\" fill=\"#06263d\" font-size=\"8.5\" text-anchor=\"middle\">nunca só</text>\n<text x=\"560\" y=\"162\" fill=\"#06263d\" font-size=\"8.5\" text-anchor=\"middle\">encaminhar/adiar</text>\n\n<circle r=\"4\" fill=\"#fff3ea\">\n  <animateMotion dur=\"3.2s\" repeatCount=\"indefinite\" path=\"M120,190 L120,225 L560,225 L560,190\"/>\n</circle>\n\n<g filter=\"url(#atrShadowSoft)\"><rect x=\"20\" y=\"220\" width=\"640\" height=\"46\" rx=\"12\" fill=\"rgba(255,179,217,.13)\" stroke=\"url(#atrAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"242\" fill=\"#ffd9ec\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">Deixar de vacinar numa consulta por não ser \"o motivo de hoje\" é oportunidade perdida</text>\n<text x=\"340\" y=\"258\" fill=\"#ffd9ec\" font-size=\"9\" text-anchor=\"middle\">Busca ativa de faltosos reduz bolsões de suscetíveis na comunidade</text>\n</svg>"});
+</script>
+<script>
+/* ===================================================================
+   Atualizacao de Esquema Vacinal em Atraso -- 4a e ultima aula da
+   categoria Imunizacao, modulo no padrao Toxoplasmose (skill
+   elid-study-platform), aditivo. Fontes: SBIm (Nota Tecnica
+   "Recuperacao de esquemas de vacinacao em atraso", 11 mar 2026;
+   Guia Rapido de Idades e Intervalos Minimos, 09 mar 2026), Ministerio
+   da Saude (Calendario Nacional de Vacinacao 2026, Instrucao
+   Normativa). 8 sub-abas de teoria, 5 SVGs proprios (atr_*),
+   diferencial, mapa mental, 2 fluxogramas em HTML/CSS nativo do
+   engine, questoes/flashcards/casos.
+   Roda DEPOIS de module-adapter.js e cria window.CONTENT['imunizacao|3']
+   -- nao toca em mais nada.
+   =================================================================== */
+(function(){
+"use strict";
+var A = window.ASVG || {};
+window.CONTENT = window.CONTENT || {};
+
+var C = {};
+C.name = "Atualização de Esquema Vacinal em Atraso";
+C.intro = "Caderneta atrasada não é motivo para reiniciar nada -- é motivo para aplicar a regra certa, na consulta certa, sem perder mais tempo.";
+
+C.sub = [
+
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">O medo mais comum -- e o mais infundado -- da consulta de resgate</div>
+<p class="ac-p">É frequente encontrar crianças com a caderneta de vacinação atrasada -- por internação, mudança de cidade, falta de acesso, ou simplesmente porque a família perdeu o fio da meada. O erro mais comum diante disso, tanto de profissionais quanto de famílias, é achar que "atrasou demais, agora tem que começar tudo de novo". Isso é <b>falso</b> na quase totalidade dos casos.</p>
+<p class="ac-p">O sistema imunológico guarda memória das doses já recebidas, mesmo que o intervalo entre elas tenha sido muito maior do que o recomendado. Reiniciar um esquema por atraso, além de desnecessário, significa aplicar doses a mais do que o preciso, sem benefício adicional.</p>
+<div class="ac-call ac-tip">💡 A pergunta certa diante de uma caderneta atrasada nunca é "por onde recomeçar?" -- é "quais doses faltam, e qual o intervalo mínimo até a próxima?"</div>
+<div class="ac-call ac-mne">🧠 Resgate vacinal = continuar de onde parou, respeitando só o intervalo MÍNIMO até a próxima dose.</div>
+`],
+
+['principios_resgate','Os 3 Princípios do Resgate Vacinal', `
+<div class="ac-h">A lógica que resolve 90% das dúvidas de consulta</div>
+${A.atr_principios_gerais === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.atr_principios_gerais)+'" alt="Principios gerais do resgate vacinal"/>'}
+<p class="ac-p">Três princípios resolvem a maior parte das situações de resgate:</p>
+<ul class="ac-ul">
+<li><b>Nunca reiniciar:</b> doses aplicadas, mesmo com intervalo maior do que o preconizado, permanecem <b>válidas para sempre</b> -- o esquema continua de onde parou.</li>
+<li><b>Só existe intervalo mínimo, não máximo:</b> não há um "prazo de validade" entre uma dose e outra. O único limite técnico relevante é o <b>intervalo mínimo</b> necessário para a próxima dose gerar resposta imune adequada.</li>
+<li><b>Simultaneidade é segura:</b> aplicar várias vacinas diferentes no mesmo dia, em locais anatômicos diferentes, é seguro e recomendado para acelerar a atualização -- não sobrecarrega o sistema imunológico da criança.</li>
+</ul>
+<div class="ac-call ac-high">⚡ A criança só é considerada imunizada (com proteção plena) ao término do esquema completo -- por isso, quanto antes o resgate for concluído, melhor.</div>
+`],
+
+['janelas_idade','Vacinas com Janela de Idade Crítica', `
+<div class="ac-h">A exceção que separa quem sabe de quem "acha que sabe"</div>
+${A.atr_janelas_idade === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.atr_janelas_idade)+'" alt="Vacinas com janela de idade critica"/>'}
+<p class="ac-p">Apesar da regra geral de "sem prazo máximo", existem exceções importantes -- vacinas com <b>idade máxima</b> definida para aplicação, além da qual não se aplica mais, independente do esquema estar incompleto:</p>
+<ul class="ac-ul">
+<li><b>Rotavírus</b> é o exemplo mais rígido e mais cobrado: 1ª dose até <b>3 meses e 15 dias</b>; última dose até <b>7 meses e 29 dias</b>. Depois dessas idades, a vacina simplesmente não é mais aplicada, pelo risco aumentado de invaginação intestinal em crianças mais velhas.</li>
+<li><b>BCG</b> tem resgate recomendado até <b>4 anos, 11 meses e 29 dias</b>.</li>
+<li>A grande maioria das demais vacinas do calendário <b>não tem limite superior de idade</b> para resgate -- podem ser aplicadas a qualquer momento em que a criança/adolescente/adulto seja identificado com esquema incompleto.</li>
+</ul>
+<div class="ac-call ac-peg">⚠️ Rotavírus perdido na janela de idade NÃO se recupera depois -- é a pegadinha clássica de prova sobre esse tema, então sempre checar a idade antes de tentar "resgatar".</div>
+`],
+
+['intervalos_minimos','Intervalos Mínimos entre Doses', `
+<div class="ac-h">O único número que realmente importa no resgate</div>
+${A.atr_intervalos_minimos === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.atr_intervalos_minimos)+'" alt="Intervalos minimos entre doses"/>'}
+<p class="ac-p">Para a maioria das vacinas de múltiplas doses do calendário básico infantil (Pentavalente, DTP, VIP, Pneumocócica 10, Rotavírus), o intervalo mínimo entre doses consecutivas é de <b>4 semanas</b>. A Hepatite B tem uma particularidade: intervalo mínimo de 4 semanas entre 1ª e 2ª dose, mas de <b>8 semanas</b> entre a 2ª e a 3ª -- com a recomendação adicional de que a 3ª dose fique a pelo menos 16 semanas da 1ª.</p>
+<p class="ac-p">Esses intervalos mínimos são, na prática, <b>ferramentas de exceção</b> -- usadas quando há necessidade real de acelerar a proteção (risco de exposição iminente, viagem a área de risco, certas comorbidades). Fora dessas situações, o intervalo padrão de rotina, mais espaçado, continua sendo preferido por gerar resposta imunológica um pouco mais robusta.</p>
+<div class="ac-call ac-tip">💡 Na dúvida sobre um esquema específico, o raciocínio de fundo é sempre o mesmo: qual o intervalo mínimo até a próxima dose, e a criança já está dentro dele?</div>
+`],
+
+['vivas_regra_resgate','Vivas Atenuadas: A Regra das 4 Semanas', `
+<div class="ac-h">A única restrição real de simultaneidade no calendário</div>
+${A.atr_vivas_regra_resgate === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.atr_vivas_regra_resgate)+'" alt="Regra das vivas atenuadas no resgate"/>'}
+<p class="ac-p">Vacinas de agentes <b>vivos atenuados</b> diferentes (como Tríplice Viral, Varicela e Febre Amarela) podem ser aplicadas no <b>mesmo dia</b> sem qualquer restrição. O problema surge quando elas não são aplicadas no mesmo dia: nesse caso, é preciso respeitar um intervalo mínimo de <b>4 semanas</b> entre uma vacina viva e outra.</p>
+<p class="ac-p">Essa regra é específica de vivas atenuadas entre si -- <b>não se aplica</b> entre vacinas inativadas, nem entre uma viva e uma inativada, que podem ser combinadas livremente em qualquer intervalo.</p>
+<div class="ac-call ac-mne">🧠 "Vivas: junto pode, separado espera 4 semanas" -- a regra rápida para não confundir esse ponto na hora do resgate.</div>
+`],
+
+['estrategia_oportunidade','Toda Consulta é uma Oportunidade', `
+<div class="ac-h">A estratégia que evita a maior fonte de atraso vacinal</div>
+${A.atr_estrategia_oportunidade === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.atr_estrategia_oportunidade)+'" alt="Estrategia de oportunidade -- checar, identificar, vacinar"/>'}
+<p class="ac-p">A estratégia mais eficaz contra o atraso vacinal não depende de campanhas especiais -- depende de um hábito simples: <b>checar a caderneta em toda consulta</b>, independente do motivo que trouxe a família ao serviço de saúde (consulta de puericultura, intercorrência aguda, retorno de outra especialidade).</p>
+<p class="ac-p">Identificada uma dose em atraso, a conduta correta é <b>vacinar na mesma visita</b>, sempre que não houver contraindicação -- nunca apenas anotar e "encaminhar para depois", o que frequentemente significa a criança nunca completar o esquema.</p>
+<div class="ac-call ac-high">⚡ Deixar de vacinar numa consulta por não ser "o motivo de hoje" é uma oportunidade perdida -- e oportunidades perdidas se acumulam, formando bolsões de crianças suscetíveis na comunidade.</div>
+`],
+
+['papel_busca_ativa','Busca Ativa de Faltosos', `
+<div class="ac-h">Ir atrás de quem não veio, não só esperar quem aparece</div>
+<p class="ac-p">Além de aproveitar toda consulta espontânea, os serviços de saúde devem realizar <b>busca ativa</b> de crianças com esquema vacinal incompleto -- usando os registros da própria unidade (caderneta digital, sistema de informação do PNI) para identificar faltosos e convocá-los ativamente, por telefone, mensagem, ou visita domiciliar da equipe de saúde da família.</p>
+<p class="ac-p">Essa busca ativa é especialmente importante após períodos de queda de cobertura vacinal em nível populacional (por exemplo, decorrentes de crises sanitárias, desabastecimento temporário de algum imunobiológico, ou barreiras de acesso), quando bolsões de suscetíveis se formam e aumentam o risco de reintrodução de doenças já bem controladas, como sarampo e coqueluche.</p>
+<div class="ac-call ac-tip">💡 A meta de cobertura vacinal de uma população só se sustenta com dois pilares simultâneos: oportunidade em toda consulta e busca ativa dos que não comparecem espontaneamente.</div>
+`],
+
+['transicoes_esquema','Transições de Esquema por Idade', `
+<div class="ac-h">Quando o resgate muda de "qual vacina" para "qual formulação"</div>
+<p class="ac-p">Algumas transições etárias mudam não apenas o intervalo, mas a <b>formulação</b> correta a ser usada no resgate:</p>
+<ul class="ac-ul">
+<li><b>Pentavalente/DTP → dT/dTpa:</b> a partir dos <b>7 anos</b>, doses de difteria-tétano-coqueluche passam a ser feitas com as formulações de adulto (dT ou dTpa), com menor quantidade de antígeno pertussis/diftérico, e não mais com a formulação pediátrica.</li>
+<li><b>HPV:</b> a recomendação do PNI é de <b>dose única</b>, na faixa de 9 a 14 anos -- fora dessa janela específica, a indicação pode mudar (esquemas diferentes em grupos especiais, avaliados separadamente pelo CRIE).</li>
+<li><b>dT (reforço):</b> deve ser repetida a cada <b>10 anos</b>, ao longo de toda a vida, independentemente da idade em que o resgate é iniciado.</li>
+</ul>
+<div class="ac-call ac-peg">⚠️ Usar formulação pediátrica de DTP em criança com 8 anos, ou vice-versa, é um erro técnico -- sempre checar a idade antes de escolher a apresentação.</div>
+`],
+
+];
+
+Object.assign(C, {
+
+escores: `
+<div class="ac-h">Números que fecham questão</div>
+<table class="ac-tbl"><tr><th>Parâmetro</th><th>Valor</th></tr>
+<tr><td>Intervalo mínimo usual entre doses (Penta/DTP/VIP/Pneumo/Rotavírus)</td><td><b>4 semanas</b></td></tr>
+<tr><td>Hepatite B: intervalo mínimo 2ª→3ª dose</td><td><b>8 semanas</b> (mín. 16 sem. da 1ª)</td></tr>
+<tr><td>Rotavírus -- idade máxima 1ª dose</td><td><b>3 meses e 15 dias</b></td></tr>
+<tr><td>Rotavírus -- idade máxima última dose</td><td><b>7 meses e 29 dias</b></td></tr>
+<tr><td>BCG -- idade máxima de resgate</td><td><b>4 anos, 11 meses e 29 dias</b></td></tr>
+<tr><td>Vivas atenuadas em dias diferentes -- intervalo mínimo</td><td><b>4 semanas</b></td></tr>
+<tr><td>Transição Penta/DTP → dT/dTpa</td><td>a partir dos <b>7 anos</b></td></tr>
+<tr><td>Reforço de dT</td><td>a cada <b>10 anos</b>, por toda a vida</td></tr></table>
+`,
+
+dif: `
+<div class="ac-h">Diferencial automático -- situação de resgate e conduta</div>
+<table class="ac-tbl"><tr><th>Situação</th><th>Conduta</th></tr>
+<tr><td>Criança com Penta atrasada 3 meses (2ª dose)</td><td>Aplicar agora -- não reiniciar; só respeitar 4 semanas mínimas desde a 1ª</td></tr>
+<tr><td>Lactente de 8 meses sem nenhuma dose de Rotavírus</td><td>NÃO aplicar -- passou da idade máxima (7m29d)</td></tr>
+<tr><td>Criança de 4 anos e 10 meses sem BCG</td><td>Ainda dentro da janela -- aplicar (limite é 4a11m29d)</td></tr>
+<tr><td>Tríplice Viral e Febre Amarela em atraso, mesma consulta</td><td>Aplicar as duas no mesmo dia, sem restrição</td></tr>
+<tr><td>Tríplice Viral hoje, Febre Amarela só daqui 2 semanas</td><td>Não aplicar a 2ª viva ainda -- esperar completar 4 semanas</td></tr>
+<tr><td>Criança de 8 anos com esquema de DTP incompleto</td><td>Completar com dT/dTpa (formulação de adulto), não mais DTP pediátrica</td></tr></table>
+`,
+
+mapa: `
+<div class="ac-h">Mapa mental -- Resgate Vacinal</div>
+<div class="mm">
+<div class="mm-card"><h5>PRINCÍPIOS</h5><ul><li>Nunca reiniciar</li><li>Só intervalo mínimo, não máximo</li><li>Simultaneidade segura</li></ul></div>
+<div class="mm-card"><h5>JANELAS DE IDADE</h5><ul><li>Rotavírus: 3m15d / 7m29d</li><li>BCG: até 4a11m29d</li></ul></div>
+<div class="mm-card"><h5>INTERVALOS</h5><ul><li>Maioria: 4 semanas</li><li>HepB 2ª→3ª: 8 semanas</li></ul></div>
+<div class="mm-card"><h5>VIVAS ATENUADAS</h5><ul><li>Mesmo dia: sempre pode</li><li>Dias diferentes: 4 semanas</li></ul></div>
+<div class="mm-card"><h5>OPORTUNIDADE</h5><ul><li>Checar em toda consulta</li><li>Vacinar na mesma visita</li></ul></div>
+<div class="mm-card"><h5>TRANSIÇÕES</h5><ul><li>DTP→dT/dTpa aos 7 anos</li><li>HPV dose única 9-14 anos</li></ul></div>
+</div>
+`,
+
+fluxo_dx: `
+<div class="ac-h">Fluxograma -- essa vacina ainda pode ser resgatada?</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Criança com dose de determinada vacina em atraso</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Essa vacina tem idade MÁXIMA definida (ex.: Rotavírus, BCG)?</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node">SIM -- checar se a criança ainda está dentro da janela</div>
+<div class="fx-node">NÃO -- sem limite superior de idade</div>
+</div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node end">Se dentro da janela (ou sem limite): aplicar respeitando intervalo mínimo da última dose</div></div>
+</div>
+`,
+
+fluxo_cond: `
+<div class="ac-h">Fluxograma de conduta -- resgatando múltiplas vacinas em atraso</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Criança comparece com múltiplas vacinas atrasadas</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Checar idade máxima de cada vacina pendente (priorizar as com janela)</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Aplicar todas as vacinas elegíveis hoje, em locais anatômicos diferentes</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node end">Agendar retorno já calculando o intervalo mínimo da próxima dose de cada série</div></div>
+</div>
+`,
+
+vespera: `
+<div class="ac-h">Revisão de véspera -- Atualização de Esquema em Atraso</div>
+<div class="ac-call ac-high">⚡ Nunca reiniciar esquema por atraso -- doses aplicadas continuam válidas para sempre. Só existe intervalo MÍNIMO, não máximo.</div>
+<ul class="ac-ul">
+<li>Simultaneidade de várias vacinas no mesmo dia é segura e acelera o resgate.</li>
+<li>Rotavírus: 1ª dose até 3m15d, última até 7m29d -- perdida a janela, não se recupera.</li>
+<li>BCG: resgate até 4a11m29d.</li>
+<li>Intervalo mínimo usual entre doses: 4 semanas (HepB 2ª→3ª: 8 semanas).</li>
+<li>Vivas atenuadas: mesmo dia sempre pode; dias diferentes, esperar 4 semanas.</li>
+<li>Toda consulta é oportunidade -- checar caderneta e vacinar na mesma visita, sempre.</li>
+<li>DTP/Penta vira dT/dTpa a partir dos 7 anos. HPV: dose única, 9-14 anos. dT: reforço a cada 10 anos.</li>
+</ul>
+`,
+
+dicas: `
+<div class="ac-h">Dicas e Pegadinhas</div>
+<div class="ac-call ac-peg">⚠️ "Atrasou muito, precisa reiniciar o esquema" é o mito mais cobrado -- FALSO, sempre se continua de onde parou.</div>
+<div class="ac-call ac-peg">⚠️ Rotavírus fora da janela de idade (após 7m29d) é a pegadinha clássica -- não existe "resgate" possível depois desse limite.</div>
+<div class="ac-call ac-mne">🧠 "Vivas: junto pode, separado espera 4 semanas" -- regra rápida para não errar simultaneidade.</div>
+<div class="ac-call ac-tip">✅ Múltiplas vacinas no mesmo dia, em locais diferentes, é sempre seguro -- não hesitar em aplicar tudo que está atrasado na mesma consulta.</div>
+<div class="ac-call ac-peg">⚠️ Confundir intervalo mínimo (existe) com intervalo máximo (não existe) é erro frequente em questões de prova.</div>
+`,
+
+checklist: [
+ "Sei que atraso vacinal nunca exige reiniciar o esquema",
+ "Sei que só existe intervalo mínimo entre doses, nunca máximo",
+ "Sei que aplicar várias vacinas no mesmo dia é seguro",
+ "Conheço as janelas de idade máxima do Rotavírus e da BCG",
+ "Sei os intervalos mínimos usuais entre doses (4 semanas / HepB 8 semanas)",
+ "Sei a regra das vivas atenuadas: mesmo dia sempre pode, separado espera 4 semanas",
+ "Entendo por que toda consulta deve ser oportunidade de checar e vacinar",
+ "Sei o que é busca ativa de faltosos e por que importa",
+ "Sei quando a formulação passa de DTP/Penta para dT/dTpa",
+ "Sei a recomendação de dose única de HPV e o reforço de dT a cada 10 anos"
+],
+
+});
+
+Object.assign(C, {
+
+questoes: [
+  {id:"atr-q1",banca:"ENARE (estilo)",stem:"Criança de 1 ano de idade está com a 2ª dose da vacina Pentavalente atrasada em 5 meses. Qual a conduta correta?",
+   opts:["Reiniciar o esquema completo de Pentavalente desde a 1ª dose","Aplicar a 2ª dose agora, continuando o esquema de onde parou","Aguardar completar 2 anos para reiniciar o esquema","Substituir por vacina inativada alternativa"],
+   correct:1, expl:"O esquema <b>nunca é reiniciado</b> por atraso -- deve-se aplicar a dose pendente e continuar de onde parou, respeitando apenas o intervalo mínimo já cumprido."},
+  {id:"atr-q2",banca:"Revalida (estilo)",stem:"Lactente de 8 meses de idade nunca recebeu nenhuma dose da vacina de Rotavírus. Qual a conduta correta?",
+   opts:["Aplicar a 1ª dose imediatamente, iniciando o esquema com atraso","Não aplicar -- a criança já ultrapassou a idade máxima permitida para essa vacina","Aplicar em esquema acelerado de 2 doses com intervalo de 2 semanas","Aplicar apenas após avaliação do CRIE"],
+   correct:1, expl:"A vacina de Rotavírus tem <b>idade máxima</b> rígida (última dose até 7 meses e 29 dias) -- após essa idade, não se aplica mais, pelo risco de invaginação intestinal."},
+  {id:"atr-q3",banca:"UFRJ (estilo)",stem:"Sobre a aplicação simultânea de múltiplas vacinas em uma única consulta de resgate, é correto afirmar:",
+   opts:["Deve-se aplicar no máximo 2 vacinas por consulta","É segura e recomendada para acelerar a atualização vacinal","Está contraindicada por sobrecarregar o sistema imunológico","Exige intervalo mínimo de 24 horas entre cada vacina do mesmo dia"],
+   correct:1, expl:"Aplicar múltiplas vacinas diferentes no mesmo dia, em locais anatômicos diferentes, é <b>seguro e recomendado</b>, acelerando a atualização do esquema vacinal."},
+  {id:"atr-q4",banca:"SES-RJ (estilo)",stem:"Sobre os intervalos entre doses de uma mesma vacina no contexto de resgate vacinal, é correto afirmar:",
+   opts:["Existe intervalo mínimo e também um intervalo máximo, que não pode ser ultrapassado","Existe apenas intervalo mínimo -- não há prazo máximo entre doses","O intervalo entre doses é sempre fixo e não pode ser antecipado nem atrasado","O intervalo entre doses deve ser recalculado a cada nova consulta"],
+   correct:1, expl:"O único limite técnico relevante é o <b>intervalo mínimo</b> -- não existe intervalo máximo entre as doses de uma mesma vacina."},
+  {id:"atr-q5",banca:"UERJ (estilo)",stem:"Criança de 4 anos e 10 meses ainda não recebeu a vacina BCG. Qual a conduta correta?",
+   opts:["Não aplicar -- já ultrapassou a idade permitida","Aplicar -- ainda está dentro da janela de resgate (até 4 anos, 11 meses e 29 dias)","Aplicar apenas com autorização do CRIE","Substituir por outra vacina equivalente"],
+   correct:1, expl:"A BCG pode ser resgatada até <b>4 anos, 11 meses e 29 dias</b> -- essa criança ainda está dentro da janela permitida."},
+  {id:"atr-q6",banca:"PSU-MG (estilo)",stem:"Criança recebeu a vacina Tríplice Viral hoje e precisa também da vacina de Febre Amarela, ambas em atraso, mas o serviço só tem estoque de Febre Amarela disponível daqui a 15 dias. Qual a conduta correta?",
+   opts:["Aplicar a Febre Amarela em 15 dias, pois esse intervalo é suficiente entre vivas atenuadas","Aguardar completar pelo menos 4 semanas desde a Tríplice Viral antes de aplicar a Febre Amarela","Aplicar a Febre Amarela a qualquer momento, sem necessidade de intervalo","Reiniciar o esquema de Tríplice Viral se a Febre Amarela não puder ser aplicada no mesmo dia"],
+   correct:1, expl:"Vacinas vivas atenuadas aplicadas em dias diferentes exigem intervalo mínimo de <b>4 semanas</b> entre elas -- 15 dias não é suficiente."},
+  {id:"atr-q7",banca:"ENARE (estilo)",stem:"Qual a estratégia mais eficaz para reduzir o atraso vacinal em nível populacional, segundo a lógica de oportunidade em saúde?",
+   opts:["Aguardar campanhas de vacinação específicas para resgatar faltosos","Checar a caderneta vacinal em toda consulta, independente do motivo, e vacinar na mesma visita","Encaminhar sempre a um serviço especializado em vacinação","Vacinar apenas quando a família solicitar espontaneamente"],
+   correct:1, expl:"Checar a caderneta em <b>toda consulta</b> e vacinar na mesma visita, sem depender do motivo da consulta, é a estratégia mais eficaz para reduzir o atraso vacinal."},
+  {id:"atr-q8",banca:"Revalida (estilo)",stem:"Adolescente de 8 anos está com esquema de DTP incompleto. Qual a formulação correta para completar o esquema nessa idade?",
+   opts:["Continuar com a formulação pediátrica de DTP, igual usada em lactentes","Completar com formulação de adulto (dT ou dTpa)","Substituir por vacina Pentavalente","Aguardar completar 10 anos para iniciar qualquer reforço"],
+   correct:1, expl:"A partir dos <b>7 anos</b>, as doses de difteria-tétano-coqueluche passam a ser feitas com formulações de adulto (dT ou dTpa), não mais com a formulação pediátrica de DTP."},
+  {id:"atr-q9",banca:"UFRJ (estilo)",stem:"Sobre a recomendação atual do PNI para a vacina HPV, é correto afirmar:",
+   opts:["Esquema de 3 doses, obrigatório em toda a adolescência","Dose única, na faixa de 9 a 14 anos","Duas doses, com intervalo de 5 anos","Contraindicada para meninos"],
+   correct:1, expl:"A recomendação do PNI para HPV é de <b>dose única</b>, na faixa etária de <b>9 a 14 anos</b>."},
+  {id:"atr-q10",banca:"SES-RJ (estilo)",stem:"Sobre o reforço de dT (dupla adulto) ao longo da vida, é correto afirmar:",
+   opts:["É feito uma única vez, aos 15 anos","Deve ser repetido a cada 10 anos, por toda a vida","Só é necessário em caso de ferimento com risco de tétano","É substituído definitivamente pela dTpa a partir dos 20 anos"],
+   correct:1, expl:"O reforço de dT deve ser repetido a cada <b>10 anos</b>, ao longo de toda a vida, independentemente da idade em que o esquema foi iniciado."},
+  {id:"atr-q11",banca:"UERJ (estilo)",stem:"Sobre o intervalo mínimo entre a 2ª e a 3ª dose da vacina de Hepatite B no esquema básico infantil, é correto afirmar:",
+   opts:["4 semanas, igual às demais vacinas do calendário","8 semanas, com recomendação adicional de a 3ª dose ficar a pelo menos 16 semanas da 1ª","12 semanas fixas, sem exceção","Não há intervalo mínimo definido para essa vacina"],
+   correct:1, expl:"O intervalo mínimo entre a 2ª e a 3ª dose de Hepatite B é de <b>8 semanas</b>, com a 3ª dose devendo ficar a pelo menos 16 semanas da 1ª dose."},
+  {id:"atr-q12",banca:"ENARE (estilo)",stem:"Após um período de queda importante na cobertura vacinal de uma região, qual estratégia é mais indicada para reduzir bolsões de suscetíveis na comunidade?",
+   opts:["Aguardar passivamente a procura espontânea pelos serviços de vacinação","Busca ativa de faltosos, usando registros do serviço para identificar e convocar ativamente as crianças com esquema incompleto","Suspender temporariamente a vacinação até normalização do estoque","Vacinar apenas crianças que apresentarem sintomas de doenças evitáveis por vacina"],
+   correct:1, expl:"A <b>busca ativa de faltosos</b>, usando os registros do próprio serviço para identificar e convocar crianças com esquema incompleto, é essencial para reduzir bolsões de suscetíveis após quedas de cobertura vacinal."}
+],
+
+flashcards:[
+  {id:"atr-f1",tipo:"vf",tag:"Princípio",front:"Atraso vacinal exige reiniciar o esquema desde a 1ª dose.",back:"<b>FALSO.</b> Nunca se reinicia -- continua-se de onde parou."},
+  {id:"atr-f2",tipo:"qa",tag:"Princípio",front:"Existe intervalo máximo entre doses de uma mesma vacina?",back:"<b>Não</b> -- só existe intervalo mínimo a ser respeitado."},
+  {id:"atr-f3",tipo:"vf",tag:"Simultaneidade",front:"Aplicar várias vacinas no mesmo dia é contraindicado.",back:"<b>FALSO.</b> É seguro e recomendado para acelerar o resgate."},
+  {id:"atr-f4",tipo:"qa",tag:"Rotavírus",front:"Até quando pode ser aplicada a última dose de Rotavírus?",back:"Até <b>7 meses e 29 dias</b> de idade."},
+  {id:"atr-f5",tipo:"qa",tag:"BCG",front:"Até quando a BCG pode ser resgatada?",back:"Até <b>4 anos, 11 meses e 29 dias</b>."},
+  {id:"atr-f6",tipo:"qa",tag:"Intervalos",front:"Qual o intervalo mínimo usual entre doses de Penta/DTP/VIP/Pneumo?",back:"<b>4 semanas.</b>"},
+  {id:"atr-f7",tipo:"qa",tag:"Hepatite B",front:"Qual o intervalo mínimo entre a 2ª e a 3ª dose de Hepatite B?",back:"<b>8 semanas</b> (com a 3ª a pelo menos 16 sem. da 1ª)."},
+  {id:"atr-f8",tipo:"cloze",tag:"Vivas atenuadas",front:"Vivas atenuadas: no {{c1::mesmo dia}} sempre pode; em dias diferentes, esperar {{c2::4 semanas}}.",back:"Regra específica de simultaneidade entre vacinas vivas atenuadas."},
+  {id:"atr-f9",tipo:"qa",tag:"Oportunidade",front:"Qual a conduta ao identificar dose atrasada numa consulta por outro motivo?",back:"Vacinar <b>na mesma visita</b>, nunca só encaminhar/adiar."},
+  {id:"atr-f10",tipo:"qa",tag:"Busca ativa",front:"O que é busca ativa de faltosos?",back:"Identificar e convocar ativamente (telefone/mensagem/visita) crianças com esquema incompleto."},
+  {id:"atr-f11",tipo:"qa",tag:"Transição",front:"A partir de qual idade se troca DTP/Penta por dT/dTpa?",back:"A partir dos <b>7 anos</b>."},
+  {id:"atr-f12",tipo:"qa",tag:"HPV",front:"Qual o esquema atual de HPV pelo PNI?",back:"<b>Dose única</b>, na faixa de 9 a 14 anos."},
+  {id:"atr-f13",tipo:"qa",tag:"dT",front:"Com que frequência o reforço de dT deve ser repetido?",back:"A cada <b>10 anos</b>, por toda a vida."},
+  {id:"atr-f14",tipo:"qa",tag:"Princípio",front:"Quando a criança é considerada plenamente imunizada?",back:"Somente ao <b>término do esquema completo</b>, não em cada dose isolada."}
+],
+
+casos:[
+  {t:"Caso 1 -- Caderneta perdida na mudança de cidade",
+   stem:"Criança de 2 anos chega a um novo serviço de saúde após mudança de cidade. A caderneta mostra que recebeu 1ª e 2ª doses de Pentavalente aos 2 e 4 meses, mas nenhuma dose depois disso.",
+   passos:[
+     {h:"1. É preciso reiniciar o esquema de Pentavalente?", p:"Não -- as duas doses já aplicadas continuam <b>válidas</b>; deve-se aplicar a 3ª dose agora, completando o esquema."},
+     {h:"2. Existe algum problema em o intervalo desde a 2ª dose ter sido de quase 2 anos?", p:"Não -- não existe intervalo <b>máximo</b> entre doses, apenas mínimo (já amplamente ultrapassado nesse caso)."},
+     {h:"3. Outras vacinas do calendário também podem ser resgatadas na mesma consulta?", p:"Sim -- todas as vacinas elegíveis e sem contraindicação devem ser aplicadas na mesma visita, para acelerar a atualização."}
+   ]},
+  {t:"Caso 2 -- Lactente com Rotavírus perdido",
+   stem:"Lactente de 9 meses nunca recebeu nenhuma dose de Rotavírus, por ter ficado internado nos primeiros meses de vida. A família pergunta se ainda é possível aplicar.",
+   passos:[
+     {h:"1. A vacina de Rotavírus ainda pode ser aplicada nessa idade?", p:"Não -- a idade máxima para a última dose é <b>7 meses e 29 dias</b>; essa criança já ultrapassou o limite."},
+     {h:"2. Por que existe esse limite rígido de idade, diferente da maioria das vacinas?", p:"Pelo risco aumentado de <b>invaginação intestinal</b> associado à aplicação em crianças mais velhas."},
+     {h:"3. As demais vacinas em atraso dessa criança também estão perdidas?", p:"Não -- a maioria das demais vacinas do calendário não tem limite superior de idade e pode ser normalmente resgatada."}
+   ]},
+  {t:"Caso 3 -- Múltiplas vacinas atrasadas numa única consulta",
+   stem:"Criança de 5 anos comparece a consulta de rotina com Tríplice Viral (2ª dose), Varicela (2ª dose) e DTP (reforço dos 4 anos) todas em atraso.",
+   passos:[
+     {h:"1. Tríplice Viral e Varicela (ambas vivas atenuadas) podem ser aplicadas na mesma consulta?", p:"Sim -- vacinas vivas atenuadas aplicadas no <b>mesmo dia</b> não têm restrição entre si."},
+     {h:"2. A DTP (vacina inativada) pode ser aplicada na mesma consulta que as duas vivas?", p:"Sim -- vacinas inativadas podem ser combinadas livremente com vivas atenuadas, sem necessidade de intervalo."},
+     {h:"3. Se a família não puder aplicar todas hoje e só voltar daqui 2 semanas para a última dose viva pendente, há problema?", p:"Sim, se for uma 2ª vacina viva diferente das já aplicadas hoje -- precisaria completar pelo menos <b>4 semanas</b> desde a aplicação de hoje."}
+   ]}
+]
+
+});
+
+window.CONTENT['imunizacao|3'] = C;
 })();
 
 </script>
