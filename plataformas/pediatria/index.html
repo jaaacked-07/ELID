@@ -4490,7 +4490,7 @@ var CAD_STAGES=[
    de-conquistas). Ver comentario no topo do arquivo.
    ============================================================ */
 var TOTAL_MODULES_PLATFORM = 39;                 // 18 categorias do TEMAS original (ver MODULES)
-var READY_CHECKLIST_TOTAL = 130;                  // DNPM(10) + Crescimento(10) + Puberdade(10) + Aleitamento(10) + Sarampo(10) + Diarreia Etiologia(10) + Avaliacao Desidratacao(10) + Planos ABC(10) + Diarreia Cronica(10) + Consulta Puericultura(10) + Triagens Neonatais(10) + Alimentacao Complementar(10) + Prevencao de Acidentes(10)
+var READY_CHECKLIST_TOTAL = 150;                  // DNPM(10) + Crescimento(10) + Puberdade(10) + Aleitamento(10) + Sarampo(10) + Diarreia Etiologia(10) + Avaliacao Desidratacao(10) + Planos ABC(10) + Diarreia Cronica(10) + Consulta Puericultura(10) + Triagens Neonatais(10) + Alimentacao Complementar(10) + Prevencao de Acidentes(10) + Calendario Vacinal PNI(10) + Vacinas Especiais(10)
 var STANDARD_CHECKLIST_PER_MODULE = 9;           // padrao-ouro real: acontent_toxo.js (skill elid-study-platform)
 var FUTURE_MODULES = TOTAL_MODULES_PLATFORM - 3; // 36
 var TOTAL_PLATFORM_CHECKLISTS = READY_CHECKLIST_TOTAL + FUTURE_MODULES*STANDARD_CHECKLIST_PER_MODULE; // 345
@@ -8502,6 +8502,612 @@ casos:[
 });
 
 window.CONTENT['puericultura|4'] = C;
+})();
+
+</script>
+
+<!-- ===== MODULO Calendario Vacinal do PNI (imunizacao|0) (novo) ===== -->
+<script>
+Object.assign(window.ASVG=window.ASVG||{}, {"pni_linha_tempo_1ano": "<svg viewBox=\"0 0 680 320\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"pniPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#241a4a\"/>\n    <stop offset=\"1\" stop-color=\"#120d26\"/>\n  </linearGradient>\n  <linearGradient id=\"pniAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#c9b6ff\"/>\n    <stop offset=\"1\" stop-color=\"#7d5fd6\"/>\n  </linearGradient>\n  <linearGradient id=\"pniGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"pniAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffd98f\"/>\n    <stop offset=\"1\" stop-color=\"#e79a3d\"/>\n  </linearGradient>\n  <linearGradient id=\"pniBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"pniShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"pniShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"320\" rx=\"16\" fill=\"url(#pniPanel)\"/>\n<text x=\"340\" y=\"24\" fill=\"url(#pniAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Calendário PNI -- do nascimento aos 15 meses</text>\n\n<path vector-effect=\"non-scaling-stroke\" d=\"M30,70 L650,70\" stroke=\"#4a3a7a\" stroke-width=\"3\"/>\n<circle cx=\"55\" cy=\"70\" r=\"6\" fill=\"url(#pniAccent)\" filter=\"url(#pniShadowSoft)\"/>\n<circle cx=\"160\" cy=\"70\" r=\"6\" fill=\"url(#pniAccent)\" filter=\"url(#pniShadowSoft)\"/>\n<circle cx=\"230\" cy=\"70\" r=\"6\" fill=\"url(#pniAccent)\" filter=\"url(#pniShadowSoft)\"/>\n<circle cx=\"300\" cy=\"70\" r=\"6\" fill=\"url(#pniAccent)\" filter=\"url(#pniShadowSoft)\"/>\n<circle cx=\"370\" cy=\"70\" r=\"6\" fill=\"url(#pniAccent)\" filter=\"url(#pniShadowSoft)\"/>\n<circle cx=\"480\" cy=\"70\" r=\"6\" fill=\"url(#pniAccent)\" filter=\"url(#pniShadowSoft)\"/>\n<circle cx=\"600\" cy=\"70\" r=\"6\" fill=\"url(#pniAccent)\" filter=\"url(#pniShadowSoft)\"/>\n<circle r=\"4\" fill=\"#f3edff\">\n  <animateMotion dur=\"5s\" repeatCount=\"indefinite\" path=\"M55,70 L160,70 L230,70 L300,70 L370,70 L480,70 L600,70\"/>\n</circle>\n<text x=\"55\" y=\"56\" fill=\"#e4dbff\" font-size=\"8.5\" text-anchor=\"middle\">nasc.</text>\n<text x=\"160\" y=\"56\" fill=\"#e4dbff\" font-size=\"8.5\" text-anchor=\"middle\">2m</text>\n<text x=\"230\" y=\"56\" fill=\"#e4dbff\" font-size=\"8.5\" text-anchor=\"middle\">3m</text>\n<text x=\"300\" y=\"56\" fill=\"#e4dbff\" font-size=\"8.5\" text-anchor=\"middle\">4m</text>\n<text x=\"370\" y=\"56\" fill=\"#e4dbff\" font-size=\"8.5\" text-anchor=\"middle\">5-6m</text>\n<text x=\"480\" y=\"56\" fill=\"#e4dbff\" font-size=\"8.5\" text-anchor=\"middle\">9m</text>\n<text x=\"600\" y=\"56\" fill=\"#e4dbff\" font-size=\"8.5\" text-anchor=\"middle\">12-15m</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"20\" y=\"90\" width=\"130\" height=\"90\" rx=\"12\" fill=\"url(#pniGreen)\"/></g>\n<text x=\"85\" y=\"112\" fill=\"#0c2b20\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">Ao nascer</text>\n<text x=\"85\" y=\"130\" fill=\"#0c2b20\" font-size=\"8.5\" text-anchor=\"middle\">BCG dose</text>\n<text x=\"85\" y=\"142\" fill=\"#0c2b20\" font-size=\"8.5\" text-anchor=\"middle\">única</text>\n<text x=\"85\" y=\"158\" fill=\"#0c2b20\" font-size=\"8.5\" text-anchor=\"middle\">Hepatite B</text>\n<text x=\"85\" y=\"170\" fill=\"#0c2b20\" font-size=\"8.5\" text-anchor=\"middle\">1ª dose</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"170\" y=\"90\" width=\"270\" height=\"90\" rx=\"12\" fill=\"url(#pniAccent)\"/></g>\n<text x=\"305\" y=\"112\" fill=\"#251a4a\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">2, 4, 6 meses</text>\n<text x=\"305\" y=\"130\" fill=\"#251a4a\" font-size=\"8.5\" text-anchor=\"middle\">Penta (DTP+Hib+HB), VIP,</text>\n<text x=\"305\" y=\"144\" fill=\"#251a4a\" font-size=\"8.5\" text-anchor=\"middle\">Pneumo10 (2 e 4m) e Rotavírus</text>\n<text x=\"305\" y=\"158\" fill=\"#251a4a\" font-size=\"8.5\" text-anchor=\"middle\">(2 e 4m) -- doses simultâneas</text>\n<text x=\"305\" y=\"170\" fill=\"#251a4a\" font-size=\"8.5\" text-anchor=\"middle\">MenC: 3 e 5 meses</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"460\" y=\"90\" width=\"200\" height=\"90\" rx=\"12\" fill=\"url(#pniAmber)\"/></g>\n<text x=\"560\" y=\"112\" fill=\"#3a2708\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">6, 7, 9 meses</text>\n<text x=\"560\" y=\"130\" fill=\"#3a2708\" font-size=\"8.5\" text-anchor=\"middle\">Influenza (6m) anual,</text>\n<text x=\"560\" y=\"144\" fill=\"#3a2708\" font-size=\"8.5\" text-anchor=\"middle\">Covid-19 (3 doses: 6/7/9m),</text>\n<text x=\"560\" y=\"158\" fill=\"#3a2708\" font-size=\"8.5\" text-anchor=\"middle\">Febre Amarela 1ª dose (9m)</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"20\" y=\"196\" width=\"640\" height=\"90\" rx=\"12\" fill=\"url(#pniBlue)\"/></g>\n<text x=\"340\" y=\"218\" fill=\"#06263d\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">12 e 15 meses -- fecha o 1º grande bloco de reforços</text>\n<text x=\"340\" y=\"238\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">12m: Pneumo10 reforço, MenACWY, Tríplice Viral (SCR) 1ª dose</text>\n<text x=\"340\" y=\"254\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">15m: DTP 1º reforço, VIP 1º reforço, SCR 2ª dose, Varicela, Hepatite A</text>\n<text x=\"340\" y=\"272\" fill=\"#06263d\" font-size=\"8.5\" text-anchor=\"middle\">(Tetraviral pode substituir SCR+Varicela em dose única, se disponível)</text>\n</svg>", "pni_reforcos_infancia": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"pniPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#241a4a\"/>\n    <stop offset=\"1\" stop-color=\"#120d26\"/>\n  </linearGradient>\n  <linearGradient id=\"pniAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#c9b6ff\"/>\n    <stop offset=\"1\" stop-color=\"#7d5fd6\"/>\n  </linearGradient>\n  <linearGradient id=\"pniGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"pniAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffd98f\"/>\n    <stop offset=\"1\" stop-color=\"#e79a3d\"/>\n  </linearGradient>\n  <linearGradient id=\"pniBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"pniShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"pniShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#pniPanel)\"/>\n<text x=\"340\" y=\"26\" fill=\"url(#pniAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Reforços da pré-escola à adolescência</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"20\" y=\"50\" width=\"300\" height=\"120\" rx=\"14\" fill=\"url(#pniAccent)\"/></g>\n<text x=\"170\" y=\"74\" fill=\"#251a4a\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">4 anos</text>\n<text x=\"170\" y=\"96\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">DTP 2º reforço (última</text>\n<text x=\"170\" y=\"112\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">dose de DTP -- depois</text>\n<text x=\"170\" y=\"128\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">disso, usa-se dT)</text>\n<text x=\"170\" y=\"146\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">VIP 2º reforço, Febre Amarela</text>\n<text x=\"170\" y=\"160\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">reforço, Varicela</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"340\" y=\"50\" width=\"320\" height=\"120\" rx=\"14\" fill=\"url(#pniGreen)\"/></g>\n<text x=\"500\" y=\"74\" fill=\"#0c2b20\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">A partir de 7 anos</text>\n<text x=\"500\" y=\"96\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">dT (dupla adulto) substitui</text>\n<text x=\"500\" y=\"112\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">a DTP para completar</text>\n<text x=\"500\" y=\"128\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">esquema e reforços a</text>\n<text x=\"500\" y=\"144\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">cada 10 anos, por toda a vida</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"20\" y=\"186\" width=\"640\" height=\"70\" rx=\"12\" fill=\"url(#pniAmber)\"/></g>\n<text x=\"340\" y=\"210\" fill=\"#3a2708\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">9 a 14 anos -- HPV4, dose única</text>\n<text x=\"340\" y=\"230\" fill=\"#3a2708\" font-size=\"9.5\" text-anchor=\"middle\">meninos e meninas; resgate com dose única até 19 anos, 11 meses e 29 dias</text>\n<text x=\"340\" y=\"246\" fill=\"#3a2708\" font-size=\"9\" text-anchor=\"middle\">Dengue (Qdenga): PNI oferece para adolescentes de 10 a 14 anos</text>\n\n<text x=\"340\" y=\"284\" fill=\"#c9b6ff\" font-size=\"9.5\" text-anchor=\"middle\">DTP só pode ser usada até 6 anos, 11 meses e 29 dias -- depois disso, sempre dT</text>\n</svg>", "pni_combinacoes_siglas": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"pniPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#241a4a\"/>\n    <stop offset=\"1\" stop-color=\"#120d26\"/>\n  </linearGradient>\n  <linearGradient id=\"pniAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#c9b6ff\"/>\n    <stop offset=\"1\" stop-color=\"#7d5fd6\"/>\n  </linearGradient>\n  <linearGradient id=\"pniGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"pniAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffd98f\"/>\n    <stop offset=\"1\" stop-color=\"#e79a3d\"/>\n  </linearGradient>\n  <linearGradient id=\"pniBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"pniShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"pniShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#pniPanel)\"/>\n<text x=\"340\" y=\"28\" fill=\"url(#pniAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Decifrando as combinações mais cobradas</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"20\" y=\"52\" width=\"300\" height=\"100\" rx=\"14\" fill=\"url(#pniAccent)\"/></g>\n<text x=\"170\" y=\"76\" fill=\"#251a4a\" font-size=\"12\" font-weight=\"700\" text-anchor=\"middle\">Penta (rede pública)</text>\n<text x=\"170\" y=\"98\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">DTP + Hib + Hepatite B</text>\n<text x=\"170\" y=\"114\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">difteria, tétano, coqueluche,</text>\n<text x=\"170\" y=\"130\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">Haemophilus influenzae b</text>\n<text x=\"170\" y=\"146\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">e hepatite B, em 1 aplicação</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"340\" y=\"52\" width=\"320\" height=\"100\" rx=\"14\" fill=\"url(#pniGreen)\"/></g>\n<text x=\"500\" y=\"76\" fill=\"#0c2b20\" font-size=\"12\" font-weight=\"700\" text-anchor=\"middle\">Hexa (grupos especiais)</text>\n<text x=\"500\" y=\"98\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">Penta + poliomielite (VIP)</text>\n<text x=\"500\" y=\"114\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">6 antígenos em 1 aplicação --</text>\n<text x=\"500\" y=\"130\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">reduz o número de picadas,</text>\n<text x=\"500\" y=\"146\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">disponível para grupos especiais</text>\n\n<g filter=\"url(#pniShadowSoft)\"><rect x=\"20\" y=\"172\" width=\"640\" height=\"90\" rx=\"12\" fill=\"rgba(201,182,255,.13)\" stroke=\"url(#pniAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"194\" fill=\"#e4dbff\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">DTP x dT x dTpa: mesma \"família\", públicos diferentes</text>\n<text x=\"340\" y=\"212\" fill=\"#e4dbff\" font-size=\"9\" text-anchor=\"middle\">DTP: dose infantil (pertussis de células inteiras), até 6a11m29d</text>\n<text x=\"340\" y=\"228\" fill=\"#e4dbff\" font-size=\"9\" text-anchor=\"middle\">dT: dupla adulto (sem componente pertussis), a partir de 7 anos</text>\n<text x=\"340\" y=\"244\" fill=\"#e4dbff\" font-size=\"9\" text-anchor=\"middle\">dTpa: tríplice acelular do adulto, indicada rotineiramente para gestantes</text>\n</svg>", "pni_vivas_x_inativadas": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"pniPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#241a4a\"/>\n    <stop offset=\"1\" stop-color=\"#120d26\"/>\n  </linearGradient>\n  <linearGradient id=\"pniAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#c9b6ff\"/>\n    <stop offset=\"1\" stop-color=\"#7d5fd6\"/>\n  </linearGradient>\n  <linearGradient id=\"pniGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"pniAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffd98f\"/>\n    <stop offset=\"1\" stop-color=\"#e79a3d\"/>\n  </linearGradient>\n  <linearGradient id=\"pniBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"pniShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"pniShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#pniPanel)\"/>\n<text x=\"340\" y=\"28\" fill=\"url(#pniAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Vacinas vivas atenuadas x inativadas -- por que a regra muda</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"20\" y=\"52\" width=\"300\" height=\"130\" rx=\"14\" fill=\"url(#pniAccent)\"/></g>\n<text x=\"170\" y=\"76\" fill=\"#251a4a\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Vivas atenuadas</text>\n<text x=\"170\" y=\"98\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">BCG, Tríplice Viral (SCR),</text>\n<text x=\"170\" y=\"114\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">Varicela, Tetraviral,</text>\n<text x=\"170\" y=\"130\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">Febre Amarela, Rotavírus</text>\n<text x=\"170\" y=\"150\" fill=\"#251a4a\" font-size=\"9.5\" font-weight=\"700\" text-anchor=\"middle\">2 injetáveis não simultâneas:</text>\n<text x=\"170\" y=\"166\" fill=\"#251a4a\" font-size=\"9.5\" font-weight=\"700\" text-anchor=\"middle\">intervalo mínimo de 4 semanas</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"340\" y=\"52\" width=\"320\" height=\"130\" rx=\"14\" fill=\"url(#pniGreen)\"/></g>\n<text x=\"500\" y=\"76\" fill=\"#0c2b20\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Inativadas</text>\n<text x=\"500\" y=\"98\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">Penta/Hexa, VIP, Pneumo10,</text>\n<text x=\"500\" y=\"114\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">MenC/ACWY, HPV, Influenza,</text>\n<text x=\"500\" y=\"130\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">Hepatite A/B, Covid-19</text>\n<text x=\"500\" y=\"150\" fill=\"#0c2b20\" font-size=\"9.5\" font-weight=\"700\" text-anchor=\"middle\">Podem ser combinadas entre si</text>\n<text x=\"500\" y=\"166\" fill=\"#0c2b20\" font-size=\"9.5\" font-weight=\"700\" text-anchor=\"middle\">e com vivas, sem restrição</text>\n\n<g filter=\"url(#pniShadowSoft)\"><rect x=\"20\" y=\"198\" width=\"640\" height=\"70\" rx=\"12\" fill=\"rgba(201,182,255,.13)\" stroke=\"url(#pniAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"220\" fill=\"#e4dbff\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Vacinas atenuadas orais (rotavírus) não entram nessa regra do intervalo</text>\n<text x=\"340\" y=\"238\" fill=\"#e4dbff\" font-size=\"9.5\" text-anchor=\"middle\">Aplicar mais de uma vacina no mesmo dia NÃO aumenta risco de evento adverso</text>\n<text x=\"340\" y=\"254\" fill=\"#e4dbff\" font-size=\"9.5\" text-anchor=\"middle\">A regra de 4 semanas vale só entre 2 vivas atenuadas parenterais em dias diferentes</text>\n</svg>", "pni_estrategia_cobertura": "<svg viewBox=\"0 0 680 280\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"pniPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#241a4a\"/>\n    <stop offset=\"1\" stop-color=\"#120d26\"/>\n  </linearGradient>\n  <linearGradient id=\"pniAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#c9b6ff\"/>\n    <stop offset=\"1\" stop-color=\"#7d5fd6\"/>\n  </linearGradient>\n  <linearGradient id=\"pniGreen\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#8fe3c0\"/>\n    <stop offset=\"1\" stop-color=\"#43b489\"/>\n  </linearGradient>\n  <linearGradient id=\"pniAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffd98f\"/>\n    <stop offset=\"1\" stop-color=\"#e79a3d\"/>\n  </linearGradient>\n  <linearGradient id=\"pniBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <filter id=\"pniShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"pniShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"280\" rx=\"16\" fill=\"url(#pniPanel)\"/>\n<text x=\"340\" y=\"28\" fill=\"url(#pniAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Por que cobertura vacinal alta importa</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"20\" y=\"52\" width=\"300\" height=\"100\" rx=\"14\" fill=\"url(#pniAccent)\"/></g>\n<text x=\"170\" y=\"76\" fill=\"#251a4a\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Proteção individual</text>\n<text x=\"170\" y=\"98\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">cada criança vacinada</text>\n<text x=\"170\" y=\"114\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">reduz seu próprio risco</text>\n<text x=\"170\" y=\"130\" fill=\"#251a4a\" font-size=\"9.5\" text-anchor=\"middle\">de formas graves da doença</text>\n\n<g filter=\"url(#pniShadow)\"><rect x=\"340\" y=\"52\" width=\"320\" height=\"100\" rx=\"14\" fill=\"url(#pniGreen)\"/></g>\n<text x=\"500\" y=\"76\" fill=\"#0c2b20\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Imunidade de rebanho</text>\n<text x=\"500\" y=\"98\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">cobertura alta protege</text>\n<text x=\"500\" y=\"114\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">quem não pode ser vacinado</text>\n<text x=\"500\" y=\"130\" fill=\"#0c2b20\" font-size=\"9.5\" text-anchor=\"middle\">(imunossuprimidos, alérgicos)</text>\n\n<g filter=\"url(#pniShadowSoft)\"><rect x=\"20\" y=\"172\" width=\"640\" height=\"80\" rx=\"12\" fill=\"rgba(201,182,255,.13)\" stroke=\"url(#pniAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"196\" fill=\"#e4dbff\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Queda de cobertura vacinal já trouxe de volta surtos de sarampo no Brasil</text>\n<text x=\"340\" y=\"214\" fill=\"#e4dbff\" font-size=\"9.5\" text-anchor=\"middle\">Conferir ativamente a Caderneta em toda consulta de puericultura é dever do pediatra</text>\n<text x=\"340\" y=\"232\" fill=\"#e4dbff\" font-size=\"9.5\" text-anchor=\"middle\">Busca ativa de faltosos e orientação sobre hesitação vacinal fazem parte do cuidado</text>\n</svg>"});
+</script>
+<script>
+/* ===================================================================
+   Calendario Vacinal do PNI -- 1a aula da categoria Imunizacao, modulo
+   no padrao Toxoplasmose (skill elid-study-platform), aditivo. Fontes:
+   Ministerio da Saude / PNI (Calendario Nacional de Vacinacao, Instrucao
+   Normativa 2025-2026, Manual de Normas e Procedimentos para Vacinacao
+   2ed. 2024), Sociedade Brasileira de Imunizacoes (SBIm, Calendario de
+   Vacinacao da Crianca 2025). 8 sub-abas de teoria, 5 SVGs proprios
+   (pni_*), diferencial, mapa mental, 2 fluxogramas em HTML/CSS nativo
+   do engine, questoes/flashcards/casos.
+   Roda DEPOIS de module-adapter.js e cria window.CONTENT['imunizacao|0']
+   -- nao toca em mais nada.
+   =================================================================== */
+(function(){
+"use strict";
+var A = window.ASVG || {};
+window.CONTENT = window.CONTENT || {};
+
+var C = {};
+C.name = "Calendário Vacinal do PNI";
+C.intro = "O calendário vacinal é, provavelmente, o tema mais decorado e mais cobrado de toda a pediatria de prova -- e também um dos mais aplicáveis no dia a dia do consultório.";
+
+C.sub = [
+
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">O que é o PNI, e por que o calendário existe</div>
+<p class="ac-p">O Programa Nacional de Imunizações (PNI), criado em 1973, é um dos maiores e mais bem-sucedidos programas de vacinação do mundo, responsável por reduzir drasticamente ou eliminar doenças como varíola, poliomielite e, por período, o sarampo endêmico no Brasil.</p>
+<p class="ac-p">O calendário vacinal não é uma lista arbitrária: cada vacina entra na idade em que oferece a <b>melhor proteção com a menor chance de efeito indesejado</b>, considerando a maturação do sistema imunológico do lactente e o momento de maior risco de exposição à doença.</p>
+<div class="ac-call ac-tip">💡 Decorar o calendário fica mais fácil quando você entende a lógica por trás: vacinas contra doenças graves e de exposição precoce (coqueluche, Hib) vêm logo aos 2 meses; vacinas vivas atenuadas (tríplice viral) esperam a queda dos anticorpos maternos, por volta de 12 meses.</div>
+<div class="ac-call ac-mne">🧠 "2, 4, 6": a espinha dorsal do primeiro ano de vida -- Penta, VIP, Pneumo10 (até 4m) e Rotavírus (até 4m) se repetem nesse ritmo.</div>
+`],
+
+['linha_tempo_0_15m','Linha do Tempo: 0 a 15 Meses', `
+<div class="ac-h">O bloco mais denso do calendário</div>
+${A.pni_linha_tempo_1ano === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.pni_linha_tempo_1ano)+'" alt="Calendario PNI do nascimento aos 15 meses"/>'}
+<p class="ac-p">Ao nascer, a criança recebe <b>BCG</b> (dose única) e a <b>1ª dose de Hepatite B</b>, idealmente nas primeiras 12 horas de vida. A partir dos 2 meses, inicia-se o bloco mais denso do calendário:</p>
+<table class="ac-tbl"><tr><th>Idade</th><th>Vacinas</th></tr>
+<tr><td>2, 4 e 6 meses</td><td>Penta (DTP+Hib+Hepatite B) -- 3 doses</td></tr>
+<tr><td>2, 4 e 6 meses</td><td>VIP (poliomielite inativada) -- 3 doses</td></tr>
+<tr><td>2 e 4 meses</td><td>Pneumocócica 10-valente -- 2 doses (esquema primário)</td></tr>
+<tr><td>2 e 4 meses</td><td>Rotavírus -- 2 doses</td></tr>
+<tr><td>3 e 5 meses</td><td>Meningocócica C -- 2 doses</td></tr>
+<tr><td>6 meses</td><td>Influenza (anual, a partir dessa idade) e Covid-19 (1ª de 3 doses: 6, 7 e 9m)</td></tr>
+<tr><td>9 meses</td><td>Febre Amarela -- 1ª dose</td></tr>
+<tr><td>12 meses</td><td>Pneumo10 reforço, MenACWY, Tríplice Viral (SCR) 1ª dose</td></tr>
+<tr><td>15 meses</td><td>DTP 1º reforço, VIP 1º reforço, SCR 2ª dose, Varicela, Hepatite A</td></tr></table>
+<div class="ac-call ac-peg">⚠️ Rotavírus tem janela rígida: 1ª dose entre 1 mês e 15 dias e 3 meses e 15 dias; 2ª dose até 7 meses e 29 dias. Perdeu a janela, perdeu a oportunidade -- não há "recuperação" fora dela.</div>
+`],
+
+['reforcos_infancia','Reforços da Infância à Adolescência', `
+<div class="ac-h">O calendário não termina no 1º ano</div>
+${A.pni_reforcos_infancia === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.pni_reforcos_infancia)+'" alt="Reforcos da pre-escola a adolescencia"/>'}
+<p class="ac-p">Aos <b>4 anos</b>, fecha-se o esquema básico infantil de coqueluche/tétano/difteria com o <b>2º reforço de DTP</b> (última dose de DTP -- depois disso, usa-se sempre dT), além do 2º reforço de VIP, reforço de Febre Amarela e dose de Varicela.</p>
+<p class="ac-p">A partir dos <b>7 anos</b>, a <b>dT (dupla adulto)</b> substitui a DTP para completar esquemas e para reforços a cada <b>10 anos</b>, por toda a vida. Entre <b>9 e 14 anos</b>, é oferecida a <b>HPV4</b> em dose única (meninos e meninas), com estratégia de resgate até 19 anos, 11 meses e 29 dias. Adolescentes de 10 a 14 anos também recebem a vacina de Dengue (Qdenga) pelo PNI.</p>
+<div class="ac-call ac-mne">🧠 "DTP até 7, dT depois": a idade-limite de 6 anos, 11 meses e 29 dias para a última DTP é uma pegadinha clássica de prova.</div>
+`],
+
+['combinacoes_siglas','Decifrando Combinações e Siglas', `
+<div class="ac-h">Penta, Hexa, DTP, dT, dTpa -- não é decoreba, é lógica</div>
+${A.pni_combinacoes_siglas === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.pni_combinacoes_siglas)+'" alt="Decifrando as combinacoes mais cobradas"/>'}
+<p class="ac-p">A <b>Penta</b> (disponível na rede pública) combina DTP + Hib + Hepatite B em uma única aplicação -- 4 doenças, 1 picada. A <b>Hexa</b>, disponível para grupos especiais, acrescenta a poliomielite (VIP) à Penta, somando 6 componentes.</p>
+<p class="ac-p">DTP, dT e dTpa são a mesma "família" de vacina (difteria-tétano-coqueluche), mas para públicos diferentes: <b>DTP</b> é a formulação infantil (pertussis de células inteiras), usada até 6 anos, 11 meses e 29 dias; <b>dT</b> (dupla adulto, sem componente pertussis) é usada a partir de 7 anos para completar esquemas e reforços; <b>dTpa</b> (tríplice acelular do adulto) é indicada rotineiramente para gestantes, a cada gestação.</p>
+<div class="ac-call ac-tip">💡 Quando a prova descreve uma gestante recebendo reforço de coqueluche/tétano/difteria, a resposta quase sempre é dTpa -- não DTP nem dT isoladamente.</div>
+`],
+
+['vivas_x_inativadas','Vacinas Vivas x Inativadas', `
+<div class="ac-h">A regra que muda o raciocínio sobre intervalos</div>
+${A.pni_vivas_x_inativadas === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.pni_vivas_x_inativadas)+'" alt="Vacinas vivas atenuadas x inativadas"/>'}
+<p class="ac-p">Vacinas <b>vivas atenuadas</b> (BCG, Tríplice Viral, Varicela, Tetraviral, Febre Amarela, Rotavírus) usam o próprio agente enfraquecido -- por isso, entre duas vacinas vivas atenuadas <b>injetáveis</b> aplicadas em dias diferentes, é preciso respeitar um intervalo mínimo de <b>4 semanas</b>. Vacinas <b>inativadas</b> (Penta/Hexa, VIP, Pneumo10, Meningocócicas, HPV, Influenza, Hepatites, Covid-19) não têm essa restrição entre si, nem em relação às vivas.</p>
+<div class="ac-call ac-high">⚡ Aplicar mais de uma vacina no mesmo dia é seguro e recomendado -- NÃO aumenta o risco de eventos adversos, e otimiza a atualização do calendário.</div>
+<div class="ac-call ac-peg">⚠️ A regra de 4 semanas vale apenas entre 2 vacinas vivas atenuadas de aplicação parenteral, em dias diferentes -- vacinas orais (rotavírus) não entram nessa regra.</div>
+`],
+
+['gestante_puerperio','Vacinação da Gestante e da Nutriz', `
+<div class="ac-h">O calendário que protege mãe e bebê ao mesmo tempo</div>
+<p class="ac-p">Gestantes recebem rotineiramente <b>dTpa</b> (a cada gestação, idealmente entre 20 e 36 semanas, para transferência de anticorpos anti-pertussis ao feto) e <b>Influenza</b>. A vacina de <b>VSR (Abrysvo)</b> também é oferecida pelo PNI para gestantes, uma dose a cada gestação.</p>
+<p class="ac-p">Vacinas vivas atenuadas são, em geral, <b>contraindicadas na gestação</b>. A nutriz (lactante) pode e deve receber as vacinas recomendadas para sua idade, com <b>duas exceções</b>: Febre Amarela e Dengue -- se indicadas, recomenda-se suspender temporariamente o aleitamento (10 dias para febre amarela, 15 dias para dengue) quando a criança amamentada tem menos de 6 meses.</p>
+<div class="ac-call ac-peg">⚠️ Essa exceção do aleitamento é restrita a Febre Amarela e Dengue -- todas as outras vacinas são compatíveis com a amamentação, sem necessidade de suspensão.</div>
+`],
+
+['cobertura_importancia','Por que Cobertura Vacinal Alta Importa', `
+<div class="ac-h">Proteção individual e coletiva</div>
+${A.pni_estrategia_cobertura === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.pni_estrategia_cobertura)+'" alt="Por que cobertura vacinal alta importa"/>'}
+<p class="ac-p">Além da proteção individual direta, uma cobertura vacinal alta gera <b>imunidade de rebanho</b>: quando a maioria da população está protegida, a circulação do agente infeccioso cai a ponto de proteger indiretamente quem não pode ser vacinado (imunossuprimidos, alérgicos graves a componentes vacinais, recém-nascidos ainda não elegíveis).</p>
+<p class="ac-p">A queda de cobertura vacinal observada no Brasil entre 2016 e 2022 (agravada durante a pandemia de Covid-19) já trouxe de volta surtos de doenças antes controladas, como o sarampo -- reforçando que cobertura alta não é conquista permanente, exige manutenção ativa.</p>
+<div class="ac-call ac-mne">🧠 Conferir ativamente a Caderneta de Vacinação em toda consulta de puericultura, e fazer busca ativa de faltosos, são deveres do pediatra -- não apenas do serviço de saúde.</div>
+`],
+
+['papel_pediatra_orientacao','O Papel do Pediatra na Orientação Vacinal', `
+<div class="ac-h">Combatendo a hesitação vacinal com informação</div>
+<p class="ac-p">A hesitação vacinal (recusa ou adiamento voluntário da vacinação apesar da disponibilidade) é hoje reconhecida como uma das principais ameaças à saúde pública global. O papel do pediatra vai além de "aplicar a vacina certa na hora certa" -- inclui <b>identificar ativamente</b> famílias hesitantes, entender as razões específicas da hesitação (desinformação, medo de eventos adversos, dificuldade de acesso) e oferecer informação baseada em evidência, sem julgamento.</p>
+<p class="ac-p">Estratégias eficazes incluem recomendação forte e direta da vacina (mais eficaz que apenas "oferecer" a opção), esclarecimento de mitos específicos levantados pela família, e uso de todos os contatos com o sistema de saúde (não só consultas de puericultura) como oportunidade de atualizar o calendário.</p>
+<div class="ac-call ac-tip">💡 Toda consulta -- mesmo por outro motivo -- é uma oportunidade de conferir e atualizar a caderneta vacinal ("oportunidade perdida de vacinação" é um indicador de qualidade de serviço monitorado pelo PNI).</div>
+`],
+
+];
+
+Object.assign(C, {
+
+escores: `
+<div class="ac-h">Números que fecham questão</div>
+<table class="ac-tbl"><tr><th>Parâmetro</th><th>Valor</th></tr>
+<tr><td>BCG e Hepatite B (1ª dose)</td><td><b>ao nascer</b></td></tr>
+<tr><td>Penta, VIP, Pneumo10, Rotavírus</td><td><b>2, 4 (e 6 meses para Penta/VIP)</b></td></tr>
+<tr><td>Meningocócica C</td><td><b>3 e 5 meses</b></td></tr>
+<tr><td>Janela da 1ª dose de Rotavírus</td><td>até <b>3 meses e 15 dias</b></td></tr>
+<tr><td>Febre Amarela -- 1ª dose</td><td><b>9 meses</b></td></tr>
+<tr><td>Tríplice Viral (SCR) -- 1ª e 2ª dose</td><td><b>12 e 15 meses</b></td></tr>
+<tr><td>DTP -- última dose possível</td><td><b>6 anos, 11 meses e 29 dias</b></td></tr>
+<tr><td>dT -- reforço a partir de 7 anos</td><td>a cada <b>10 anos</b></td></tr>
+<tr><td>HPV4 -- dose no PNI</td><td><b>dose única</b>, 9-14 anos</td></tr>
+<tr><td>Intervalo mínimo entre 2 vivas atenuadas injetáveis</td><td><b>4 semanas</b></td></tr></table>
+`,
+
+dif: `
+<div class="ac-h">Diferencial automático -- situação e vacina/conduta</div>
+<table class="ac-tbl"><tr><th>Situação</th><th>Conduta</th></tr>
+<tr><td>Criança de 6 anos e 10 meses, atualizando esquema</td><td>Ainda pode receber DTP (dentro do limite de 6a11m29d)</td></tr>
+<tr><td>Criança de 7 anos e 1 mês, mesma situação</td><td>Usar dT, não mais DTP</td></tr>
+<tr><td>Gestante precisando de reforço tétano/coqueluche</td><td>dTpa, idealmente entre 20-36 semanas</td></tr>
+<tr><td>Aplicar SCR e Varicela em dias diferentes</td><td>Respeitar intervalo mínimo de 4 semanas entre elas</td></tr>
+<tr><td>Aplicar Penta e VIP no mesmo dia</td><td>Sem restrição -- inativadas podem ser simultâneas</td></tr>
+<tr><td>Nutriz de bebê de 3 meses precisando de Febre Amarela</td><td>Suspender aleitamento por 10 dias após a vacina</td></tr></table>
+`,
+
+mapa: `
+<div class="ac-h">Mapa mental -- Calendário Vacinal do PNI</div>
+<div class="mm">
+<div class="mm-card"><h5>NASCIMENTO</h5><ul><li>BCG dose única</li><li>Hepatite B 1ª dose</li></ul></div>
+<div class="mm-card"><h5>2-6 MESES</h5><ul><li>Penta/VIP: 2,4,6m</li><li>Pneumo10/Rotavírus: 2,4m · MenC: 3,5m</li></ul></div>
+<div class="mm-card"><h5>6-9 MESES</h5><ul><li>Influenza (6m, anual)</li><li>Covid-19 (6,7,9m) · Febre Amarela (9m)</li></ul></div>
+<div class="mm-card"><h5>12-15 MESES</h5><ul><li>Pneumo10 reforço, MenACWY, SCR 1ª</li><li>DTP/VIP reforço, SCR 2ª, Varicela, HepA</li></ul></div>
+<div class="mm-card"><h5>4 ANOS+</h5><ul><li>DTP 2º reforço (última DTP)</li><li>dT a partir de 7a · HPV4 9-14a</li></ul></div>
+<div class="mm-card"><h5>REGRAS</h5><ul><li>Vivas injetáveis: 4 sem entre si</li><li>Simultâneas não aumentam eventos adversos</li></ul></div>
+</div>
+`,
+
+fluxo_dx: `
+<div class="ac-h">Fluxograma -- checagem da caderneta em qualquer consulta</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Qualquer consulta com a criança presente</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Conferir Caderneta de Vacinação ativamente</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node">Esquema em dia</div>
+<div class="fx-node">Doses pendentes</div>
+</div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node end">Registrar e seguir</div>
+<div class="fx-node end">Vacinar na própria consulta, sempre que possível</div>
+</div>
+</div>
+`,
+
+fluxo_cond: `
+<div class="ac-h">Fluxograma de conduta -- escolhendo entre DTP, dT e dTpa</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Necessidade de vacina difteria/tétano/coqueluche</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node">Menor de 7 anos</div>
+<div class="fx-node">7 anos ou mais, reforço de rotina</div>
+<div class="fx-node">Gestante</div>
+</div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node end">DTP</div>
+<div class="fx-node end">dT (a cada 10 anos)</div>
+<div class="fx-node end">dTpa (a cada gestação)</div>
+</div>
+</div>
+`,
+
+vespera: `
+<div class="ac-h">Revisão de véspera -- Calendário Vacinal do PNI</div>
+<div class="ac-call ac-high">⚡ Ao nascer: BCG + HepB. 2-4-6m: Penta+VIP (+Pneumo10 e Rotavírus até 4m). 3-5m: MenC. 9m: Febre Amarela. 12-15m: reforços + SCR/Varicela/HepA.</div>
+<ul class="ac-ul">
+<li>Rotavírus tem janela rígida: 1ª dose até 3m15d, 2ª dose até 7m29d -- sem recuperação fora da janela.</li>
+<li>DTP só até 6 anos, 11 meses e 29 dias; depois, sempre dT (reforço a cada 10 anos).</li>
+<li>dTpa é a vacina de escolha na gestação (tétano/difteria/coqueluche), a cada gestação.</li>
+<li>Penta = DTP+Hib+HepB (rede pública). Hexa = Penta+VIP (grupos especiais).</li>
+<li>Vivas atenuadas injetáveis (SCR, Varicela, Febre Amarela, BCG): 4 semanas de intervalo mínimo entre si, se não aplicadas no mesmo dia.</li>
+<li>Inativadas podem ser combinadas livremente entre si e com vivas, sem intervalo.</li>
+<li>HPV4: dose única no PNI, 9-14 anos, resgate até 19a11m29d.</li>
+<li>Nutriz: só Febre Amarela e Dengue exigem suspensão temporária do aleitamento (10 e 15 dias).</li>
+</ul>
+`,
+
+dicas: `
+<div class="ac-h">Dicas e Pegadinhas</div>
+<div class="ac-call ac-peg">⚠️ "Aplicar 2 vacinas no mesmo dia aumenta risco de evento adverso" é FALSO -- pegadinha clássica de prova.</div>
+<div class="ac-call ac-peg">⚠️ Idade-limite de DTP (6a11m29d) x idade de início de dT (7 anos) é a pegadinha mais recorrente do tema.</div>
+<div class="ac-call ac-mne">🧠 "2, 4, 6 é Penta e VIP; 2, 4 só (sem 6) é Pneumo10 e Rotavírus": memorize a diferença de esquema.</div>
+<div class="ac-call ac-tip">✅ Toda vez que a questão mencionar gestante + vacina tríplice bacteriana, a resposta é dTpa, não DTP nem dT.</div>
+<div class="ac-call ac-peg">⚠️ Rotavírus é a única vacina do calendário básico com janela de idade que, se perdida, NÃO permite recuperação da dose depois.</div>
+`,
+
+checklist: [
+ "Sei as vacinas administradas ao nascimento",
+ "Sei o esquema de Penta, VIP, Pneumo10 e Rotavírus no 1º ano",
+ "Conheço a janela rígida de aplicação do Rotavírus",
+ "Sei os reforços de 12, 15 meses e 4 anos",
+ "Sei diferenciar DTP, dT e dTpa e quando usar cada uma",
+ "Entendo a diferença entre Penta e Hexa",
+ "Sei a regra de intervalo entre vacinas vivas atenuadas injetáveis",
+ "Sei que vacinas simultâneas não aumentam risco de evento adverso",
+ "Conheço as exceções de vacina na amamentação (Febre Amarela e Dengue)",
+ "Entendo a importância da cobertura vacinal e o papel do pediatra na hesitação vacinal"
+],
+
+});
+
+Object.assign(C, {
+
+questoes: [
+  {id:"pni-q1",banca:"ENARE (estilo)",stem:"Quais vacinas são administradas ao nascimento, segundo o calendário do PNI?",
+   opts:["BCG e Hepatite B","Penta e VIP","Pneumocócica 10-valente e Rotavírus","Tríplice Viral e Varicela"],
+   correct:0, expl:"Ao nascer, administram-se <b>BCG</b> (dose única) e a <b>1ª dose de Hepatite B</b>, idealmente nas primeiras 12 horas de vida."},
+  {id:"pni-q2",banca:"Revalida (estilo)",stem:"Lactente de 5 meses, esquema vacinal em dia, comparece para vacinação de rotina. Qual vacina NÃO deve mais ser aplicada nessa consulta, por já ter esgotado seu esquema primário?",
+   opts:["Penta (3ª dose aos 6 meses ainda pendente)","Pneumocócica 10-valente (esquema de 2 e 4 meses já completo)","VIP (3ª dose aos 6 meses ainda pendente)","Meningocócica C (2ª dose aos 5 meses)"],
+   correct:1, expl:"A Pneumo10 tem esquema primário de <b>2 e 4 meses</b> apenas (sem dose aos 6m) -- já estaria completa aos 5 meses, restando só o reforço aos 12 meses."},
+  {id:"pni-q3",banca:"UFRJ (estilo)",stem:"Criança de 7 anos e 2 meses necessita de dose de reforço contra difteria, tétano e coqueluche. Qual vacina deve ser utilizada?",
+   opts:["DTP","dT","dTpa (obrigatoriamente)","Nenhuma vacina está indicada nessa idade"],
+   correct:1, expl:"Após os <b>6 anos, 11 meses e 29 dias</b>, não se usa mais DTP -- a partir de 7 anos, utiliza-se <b>dT</b> para reforços, a cada 10 anos."},
+  {id:"pni-q4",banca:"SES-RJ (estilo)",stem:"Gestante de 28 semanas necessita de atualização vacinal contra tétano, difteria e coqueluche. Qual a vacina de escolha?",
+   opts:["DTP","dT","dTpa","Nenhuma vacina é recomendada na gestação"],
+   correct:2, expl:"A <b>dTpa</b> é a vacina de escolha na gestação, recomendada a cada gestação, idealmente entre 20 e 36 semanas, para transferência de anticorpos anti-pertussis ao feto."},
+  {id:"pni-q5",banca:"UERJ (estilo)",stem:"Sobre a administração simultânea de múltiplas vacinas no mesmo dia, é correto afirmar:",
+   opts:["Aumenta significativamente o risco de eventos adversos","Não aumenta o risco de eventos adversos e é recomendada para otimizar a atualização vacinal","É contraindicada pelo Ministério da Saúde","Só pode ser feita entre vacinas inativadas, nunca envolvendo vacinas vivas"],
+   correct:1, expl:"A administração simultânea de múltiplas vacinas <b>não aumenta</b> o risco de eventos adversos e é recomendada, inclusive entre vacinas vivas e inativadas."},
+  {id:"pni-q6",banca:"PSU-MG (estilo)",stem:"Se a Tríplice Viral (SCR) e a vacina Varicela monovalente não forem aplicadas no mesmo dia, qual o intervalo mínimo recomendado entre elas?",
+   opts:["Nenhum intervalo é necessário","2 semanas","4 semanas","3 meses"],
+   correct:2, expl:"Entre duas vacinas vivas atenuadas <b>injetáveis</b> aplicadas em dias diferentes, o intervalo mínimo recomendado é de <b>4 semanas</b>."},
+  {id:"pni-q7",banca:"ENARE (estilo)",stem:"Lactente de 4 meses ainda não recebeu nenhuma dose de Rotavírus. Qual a conduta correta?",
+   opts:["Iniciar o esquema normalmente, pois ainda está dentro da janela para a 1ª dose","Não é mais possível iniciar o esquema, pois a janela da 1ª dose já se encerrou","Aplicar 3 doses para compensar o atraso","Aguardar completar 6 meses para iniciar"],
+   correct:1, expl:"A janela para a <b>1ª dose de Rotavírus</b> vai até 3 meses e 15 dias -- após esse prazo, a oportunidade de iniciar o esquema está perdida, sem possibilidade de recuperação."},
+  {id:"pni-q8",banca:"Revalida (estilo)",stem:"A vacina Penta, disponível na rede pública, protege contra quais doenças?",
+   opts:["Difteria, tétano, coqueluche, Haemophilus influenzae b e hepatite B","Difteria, tétano, coqueluche, poliomielite e hepatite B","Sarampo, caxumba, rubéola, varicela e hepatite A","Pneumococo, meningococo, Haemophilus influenzae b, difteria e tétano"],
+   correct:0, expl:"A Penta combina proteção contra <b>difteria, tétano, coqueluche, Haemophilus influenzae b e hepatite B</b> em uma única aplicação."},
+  {id:"pni-q9",banca:"UFRJ (estilo)",stem:"Nutriz de lactente de 4 meses necessita receber a vacina de Febre Amarela por risco epidemiológico. Qual a orientação correta?",
+   opts:["Suspender definitivamente o aleitamento materno","Suspender o aleitamento materno temporariamente por 10 dias após a vacina","Não há necessidade de qualquer cuidado especial com a amamentação","A vacina é absolutamente contraindicada em nutrizes, independente da idade do bebê"],
+   correct:1, expl:"Para nutrizes de crianças menores de 6 meses, recomenda-se suspender <b>temporariamente</b> o aleitamento por <b>10 dias</b> após a vacina de Febre Amarela."},
+  {id:"pni-q10",banca:"SES-RJ (estilo)",stem:"Em relação à vacina HPV4 oferecida pelo PNI, é correto afirmar:",
+   opts:["É indicada apenas para meninas, entre 9 e 14 anos","É indicada para meninos e meninas, dose única, entre 9 e 14 anos, com resgate até 19 anos, 11 meses e 29 dias","Exige esquema de 3 doses obrigatoriamente","É contraindicada para meninos"],
+   correct:1, expl:"A HPV4 do PNI é indicada para <b>meninos e meninas</b>, em <b>dose única</b>, rotineiramente entre 9 e 14 anos, com estratégia de resgate até 19 anos, 11 meses e 29 dias."},
+  {id:"pni-q11",banca:"UERJ (estilo)",stem:"Qual o principal benefício populacional de uma cobertura vacinal alta, além da proteção individual de cada vacinado?",
+   opts:["Redução de custos do sistema de saúde exclusivamente","Imunidade de rebanho, protegendo indiretamente quem não pode ser vacinado","Eliminação da necessidade de vigilância epidemiológica","Nenhum benefício além da proteção individual"],
+   correct:1, expl:"Cobertura vacinal alta gera <b>imunidade de rebanho</b>, reduzindo a circulação do agente infeccioso e protegendo indiretamente pessoas que não podem ser vacinadas."},
+  {id:"pni-q12",banca:"ENARE (estilo)",stem:"Qual estratégia é considerada mais eficaz para reduzir a hesitação vacinal entre pais e cuidadores, segundo a literatura em imunizações?",
+   opts:["Apenas disponibilizar a vacina, sem recomendação ativa do profissional","Recomendação forte e direta do profissional de saúde, combinada a esclarecimento de dúvidas específicas","Evitar o tema para não gerar desconforto na consulta","Delegar exclusivamente à mídia a responsabilidade de informar sobre vacinas"],
+   correct:1, expl:"A <b>recomendação forte e direta</b> do profissional de saúde, associada ao esclarecimento de dúvidas específicas da família, é reconhecida como estratégia mais eficaz contra a hesitação vacinal."}
+],
+
+flashcards:[
+  {id:"pni-f1",tipo:"qa",tag:"Nascimento",front:"Quais vacinas são dadas ao nascimento?",back:"<b>BCG</b> (dose única) e <b>Hepatite B</b> (1ª dose)."},
+  {id:"pni-f2",tipo:"qa",tag:"1º ano",front:"Em quais meses se aplicam Penta e VIP?",back:"<b>2, 4 e 6 meses</b> (3 doses cada)."},
+  {id:"pni-f3",tipo:"qa",tag:"1º ano",front:"Em quais meses se aplicam Pneumo10 e Rotavírus (esquema primário)?",back:"<b>2 e 4 meses</b> (sem dose aos 6m)."},
+  {id:"pni-f4",tipo:"vf",tag:"Rotavírus",front:"Se perdida a janela da 1ª dose de rotavírus, é possível recuperar depois.",back:"<b>FALSO.</b> Perdida a janela (até 3m15d), a oportunidade de iniciar o esquema é perdida."},
+  {id:"pni-f5",tipo:"cloze",tag:"Reforços",front:"12 meses: Pneumo10 reforço, {{c1::MenACWY}}, SCR 1ª dose. 15 meses: {{c2::DTP e VIP 1º reforço}}, SCR 2ª dose, Varicela, Hepatite A.",back:"12m: Pneumo10, MenACWY, SCR1. 15m: DTP/VIP reforço, SCR2, Varicela, HepA."},
+  {id:"pni-f6",tipo:"qa",tag:"DTP x dT",front:"Até qual idade se pode usar DTP? E depois?",back:"Até <b>6 anos, 11 meses e 29 dias</b>; depois, usa-se <b>dT</b> (reforço a cada 10 anos)."},
+  {id:"pni-f7",tipo:"qa",tag:"Gestante",front:"Qual vacina tríplice bacteriana é indicada na gestação?",back:"<b>dTpa</b>, a cada gestação (idealmente 20-36 semanas)."},
+  {id:"pni-f8",tipo:"qa",tag:"Combinações",front:"O que a vacina Hexa acrescenta à Penta?",back:"<b>VIP</b> (poliomielite inativada) -- Penta + VIP = Hexa."},
+  {id:"pni-f9",tipo:"vf",tag:"Simultaneidade",front:"Aplicar múltiplas vacinas no mesmo dia aumenta o risco de eventos adversos.",back:"<b>FALSO.</b> Não aumenta o risco e é recomendado para otimizar a atualização vacinal."},
+  {id:"pni-f10",tipo:"qa",tag:"Vivas atenuadas",front:"Qual o intervalo mínimo entre 2 vacinas vivas atenuadas injetáveis, se não aplicadas no mesmo dia?",back:"<b>4 semanas</b>."},
+  {id:"pni-f11",tipo:"qa",tag:"Amamentação",front:"Quais as 2 únicas vacinas que exigem suspensão temporária do aleitamento?",back:"<b>Febre Amarela</b> (10 dias) e <b>Dengue</b> (15 dias), se o bebê tem menos de 6 meses."},
+  {id:"pni-f12",tipo:"qa",tag:"HPV",front:"Como é o esquema de HPV4 no PNI?",back:"<b>Dose única</b>, 9-14 anos, meninos e meninas; resgate até 19a11m29d."},
+  {id:"pni-f13",tipo:"qa",tag:"Febre Amarela",front:"Em qual idade se dá a 1ª dose de Febre Amarela no calendário de rotina?",back:"<b>9 meses</b>, com reforço aos 4 anos."},
+  {id:"pni-f14",tipo:"qa",tag:"Cobertura",front:"O que é imunidade de rebanho?",back:"Proteção indireta de quem não pode ser vacinado, quando a cobertura vacinal da população é alta o suficiente para reduzir a circulação do agente."}
+],
+
+casos:[
+  {t:"Caso 1 -- Consulta de rotina aos 4 meses",
+   stem:"Lactente de 4 meses comparece para vacinação de rotina, sem nenhuma dose atrasada até o momento.",
+   passos:[
+     {h:"1. Quais vacinas devem ser aplicadas nessa consulta?", p:"2ª dose de <b>Penta</b>, <b>VIP</b> e <b>Rotavírus</b>, além da 2ª dose de <b>Pneumo10</b> (completando o esquema primário desta vacina)."},
+     {h:"2. A vacina Meningocócica C também deve ser aplicada hoje?", p:"Não nessa consulta -- o esquema de MenC é aos <b>3 e 5 meses</b>; a criança já deveria ter recebido a 1ª dose no mês anterior."},
+     {h:"3. Aplicar todas as vacinas do dia junto aumenta o risco de eventos adversos?", p:"Não -- a aplicação simultânea de múltiplas vacinas <b>não aumenta</b> o risco de eventos adversos."}
+   ]},
+  {t:"Caso 2 -- Adolescente atualizando o calendário",
+   stem:"Adolescente de 13 anos, sem registro de reforço de tétano/difteria/coqueluche desde os 4 anos de idade, comparece para atualização vacinal.",
+   passos:[
+     {h:"1. Qual vacina deve ser utilizada para esse reforço?", p:"<b>dT</b> (dupla adulto) -- já que tem mais de 7 anos, não se usa mais DTP."},
+     {h:"2. Com que periodicidade esse reforço deve ser repetido ao longo da vida?", p:"A cada <b>10 anos</b>, continuamente."},
+     {h:"3. Essa adolescente também deve ser avaliada para outra vacina, considerando a faixa etária?", p:"Sim -- verificar histórico de <b>HPV4</b> (rotina 9-14 anos, resgate até 19a11m29d) e considerar dose de reforço meningocócica, conforme calendário SBIm."}
+   ]},
+  {t:"Caso 3 -- Nutriz precisando de vacina de febre amarela",
+   stem:"Mãe em amamentação exclusiva de lactente de 2 meses precisa se vacinar contra febre amarela antes de viajar para área de risco.",
+   passos:[
+     {h:"1. A vacinação da nutriz está contraindicada nesse contexto?", p:"Não está contraindicada, mas exige orientação especial: como o bebê tem menos de 6 meses, recomenda-se <b>suspender o aleitamento por 10 dias</b> após a aplicação."},
+     {h:"2. Se fosse necessária vacina de Hepatite B para a mesma nutriz, a orientação seria a mesma?", p:"Não -- a Hepatite B (assim como praticamente todas as outras vacinas) é <b>compatível com a amamentação</b>, sem necessidade de suspensão. A exceção é restrita a Febre Amarela e Dengue."},
+     {h:"3. Como planejar a alimentação do bebê durante os 10 dias de suspensão?", p:"Orientar ordenha e armazenamento prévio de leite materno, ou uso de fórmula temporária, com apoio de consultoria em amamentação para retomada do aleitamento após o período."}
+   ]}
+]
+
+});
+
+window.CONTENT['imunizacao|0'] = C;
+})();
+
+</script>
+
+<!-- ===== MODULO Vacinas Especiais e Situacoes Especiais (imunizacao|1) (novo) ===== -->
+<script>
+Object.assign(window.ASVG=window.ASVG||{}, {"esp_o_que_e_crie": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"espPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#0f3322\"/>\n    <stop offset=\"1\" stop-color=\"#081a11\"/>\n  </linearGradient>\n  <linearGradient id=\"espAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#a8f0c8\"/>\n    <stop offset=\"1\" stop-color=\"#4fbf8a\"/>\n  </linearGradient>\n  <linearGradient id=\"espBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <linearGradient id=\"espAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffd98f\"/>\n    <stop offset=\"1\" stop-color=\"#e79a3d\"/>\n  </linearGradient>\n  <linearGradient id=\"espRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <filter id=\"espShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"espShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#espPanel)\"/>\n<text x=\"340\" y=\"26\" fill=\"url(#espAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">CRIE/RIE -- imunobiológicos especiais, gratuitos, fora da rotina</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"20\" y=\"48\" width=\"200\" height=\"120\" rx=\"14\" fill=\"url(#espAccent)\"/></g>\n<text x=\"120\" y=\"72\" fill=\"#0a2b1c\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">1. Profilaxia</text>\n<text x=\"120\" y=\"88\" fill=\"#0a2b1c\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">pré-exposição</text>\n<text x=\"120\" y=\"108\" fill=\"#0a2b1c\" font-size=\"9\" text-anchor=\"middle\">grupos de risco</text>\n<text x=\"120\" y=\"122\" fill=\"#0a2b1c\" font-size=\"9\" text-anchor=\"middle\">específicos (ex.:</text>\n<text x=\"120\" y=\"136\" fill=\"#0a2b1c\" font-size=\"9\" text-anchor=\"middle\">prematuros, viajantes,</text>\n<text x=\"120\" y=\"150\" fill=\"#0a2b1c\" font-size=\"9\" text-anchor=\"middle\">profissionais de saúde)</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"240\" y=\"48\" width=\"200\" height=\"120\" rx=\"14\" fill=\"url(#espBlue)\"/></g>\n<text x=\"340\" y=\"72\" fill=\"#06263d\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">2. Substituição</text>\n<text x=\"340\" y=\"92\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">quando a vacina de</text>\n<text x=\"340\" y=\"106\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">rotina não pode ser</text>\n<text x=\"340\" y=\"120\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">usada por hipersensi-</text>\n<text x=\"340\" y=\"134\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">bilidade ou evento</text>\n<text x=\"340\" y=\"148\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">adverso grave prévio</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"460\" y=\"48\" width=\"200\" height=\"120\" rx=\"14\" fill=\"url(#espAmber)\"/></g>\n<text x=\"560\" y=\"72\" fill=\"#3a2708\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">3. Imunodeficiências</text>\n<text x=\"560\" y=\"92\" fill=\"#3a2708\" font-size=\"9\" text-anchor=\"middle\">esquemas e vacinas</text>\n<text x=\"560\" y=\"106\" fill=\"#3a2708\" font-size=\"9\" text-anchor=\"middle\">específicas para quem</text>\n<text x=\"560\" y=\"120\" fill=\"#3a2708\" font-size=\"9\" text-anchor=\"middle\">tem imunodeficiência</text>\n<text x=\"560\" y=\"134\" fill=\"#3a2708\" font-size=\"9\" text-anchor=\"middle\">primária ou adquirida</text>\n\n<g filter=\"url(#espShadowSoft)\"><rect x=\"20\" y=\"188\" width=\"640\" height=\"90\" rx=\"12\" fill=\"rgba(168,240,200,.13)\" stroke=\"url(#espAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"212\" fill=\"#d6f7e5\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">CRIE = Centro de Referência para Imunobiológicos Especiais</text>\n<text x=\"340\" y=\"230\" fill=\"#d6f7e5\" font-size=\"9.5\" text-anchor=\"middle\">Manual atualizado (6ª edição, MS) ampliou indicações clínicas de acesso</text>\n<text x=\"340\" y=\"248\" fill=\"#d6f7e5\" font-size=\"9.5\" text-anchor=\"middle\">Encaminhamento com relatório médico detalhando a condição clínica de base</text>\n<text x=\"340\" y=\"264\" fill=\"#d6f7e5\" font-size=\"9.5\" text-anchor=\"middle\">Oferece vacinas E imunoglobulinas não disponíveis na rotina do calendário</text>\n</svg>", "esp_prematuros": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"espPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#0f3322\"/>\n    <stop offset=\"1\" stop-color=\"#081a11\"/>\n  </linearGradient>\n  <linearGradient id=\"espAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#a8f0c8\"/>\n    <stop offset=\"1\" stop-color=\"#4fbf8a\"/>\n  </linearGradient>\n  <linearGradient id=\"espBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <linearGradient id=\"espAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffd98f\"/>\n    <stop offset=\"1\" stop-color=\"#e79a3d\"/>\n  </linearGradient>\n  <linearGradient id=\"espRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <filter id=\"espShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"espShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#espPanel)\"/>\n<text x=\"340\" y=\"26\" fill=\"url(#espAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Vacinação do prematuro -- idade cronológica, não corrigida</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"110\" rx=\"14\" fill=\"url(#espAccent)\"/></g>\n<text x=\"170\" y=\"72\" fill=\"#0a2b1c\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Princípio geral</text>\n<text x=\"170\" y=\"94\" fill=\"#0a2b1c\" font-size=\"9.5\" text-anchor=\"middle\">vacinar pela idade cronológica</text>\n<text x=\"170\" y=\"110\" fill=\"#0a2b1c\" font-size=\"9.5\" text-anchor=\"middle\">(dias de vida), NUNCA pela</text>\n<text x=\"170\" y=\"126\" fill=\"#0a2b1c\" font-size=\"9.5\" text-anchor=\"middle\">idade corrigida -- mesmas</text>\n<text x=\"170\" y=\"142\" fill=\"#0a2b1c\" font-size=\"9.5\" text-anchor=\"middle\">doses e mesmo volume que RN a termo</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"340\" y=\"48\" width=\"320\" height=\"110\" rx=\"14\" fill=\"url(#espAmber)\"/></g>\n<text x=\"500\" y=\"72\" fill=\"#3a2708\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Hepatite B -- exceção</text>\n<text x=\"500\" y=\"94\" fill=\"#3a2708\" font-size=\"9.5\" text-anchor=\"middle\">se &lt;34 semanas ou &lt;2000g e</text>\n<text x=\"500\" y=\"110\" fill=\"#3a2708\" font-size=\"9.5\" text-anchor=\"middle\">recebeu 1ª dose ao nascer:</text>\n<text x=\"500\" y=\"126\" fill=\"#3a2708\" font-size=\"9.5\" font-weight=\"700\" text-anchor=\"middle\">esquema de 4 doses no 1º ano</text>\n<text x=\"500\" y=\"142\" fill=\"#3a2708\" font-size=\"9.5\" text-anchor=\"middle\">(dose extra \"peso ao nascer baixo\")</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"20\" y=\"172\" width=\"300\" height=\"90\" rx=\"14\" fill=\"url(#espBlue)\"/></g>\n<text x=\"170\" y=\"196\" fill=\"#06263d\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Rotavírus</text>\n<text x=\"170\" y=\"218\" fill=\"#06263d\" font-size=\"9.5\" text-anchor=\"middle\">contraindicado durante</text>\n<text x=\"170\" y=\"234\" fill=\"#06263d\" font-size=\"9.5\" text-anchor=\"middle\">internação hospitalar --</text>\n<text x=\"170\" y=\"250\" fill=\"#06263d\" font-size=\"9.5\" text-anchor=\"middle\">aplicar após a alta, se dentro da janela</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"340\" y=\"172\" width=\"320\" height=\"90\" rx=\"14\" fill=\"url(#espRed)\"/></g>\n<text x=\"500\" y=\"196\" fill=\"#3a0d12\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Palivizumabe (não é vacina)</text>\n<text x=\"500\" y=\"218\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">anticorpo monoclonal anti-VSR,</text>\n<text x=\"500\" y=\"234\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">profilaxia mensal em sazonalidade,</text>\n<text x=\"500\" y=\"250\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">para prematuros de alto risco (CRIE)</text>\n</svg>", "esp_imunocomprometidos": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"espPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#0f3322\"/>\n    <stop offset=\"1\" stop-color=\"#081a11\"/>\n  </linearGradient>\n  <linearGradient id=\"espAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#a8f0c8\"/>\n    <stop offset=\"1\" stop-color=\"#4fbf8a\"/>\n  </linearGradient>\n  <linearGradient id=\"espBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <linearGradient id=\"espAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffd98f\"/>\n    <stop offset=\"1\" stop-color=\"#e79a3d\"/>\n  </linearGradient>\n  <linearGradient id=\"espRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <filter id=\"espShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"espShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#espPanel)\"/>\n<text x=\"340\" y=\"28\" fill=\"url(#espAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Imunocomprometidos -- vivas x inativadas, lógica oposta à eficácia</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"20\" y=\"52\" width=\"300\" height=\"120\" rx=\"14\" fill=\"url(#espAccent)\"/></g>\n<text x=\"170\" y=\"76\" fill=\"#0a2b1c\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Vacinas inativadas</text>\n<text x=\"170\" y=\"98\" fill=\"#0a2b1c\" font-size=\"9.5\" text-anchor=\"middle\">podem ter eficácia reduzida,</text>\n<text x=\"170\" y=\"114\" fill=\"#0a2b1c\" font-size=\"9.5\" text-anchor=\"middle\">mas NÃO são contraindicadas</text>\n<text x=\"170\" y=\"130\" fill=\"#0a2b1c\" font-size=\"9.5\" text-anchor=\"middle\">-- aplicar normalmente,</text>\n<text x=\"170\" y=\"146\" fill=\"#0a2b1c\" font-size=\"9.5\" text-anchor=\"middle\">mesmo com resposta menor</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"340\" y=\"52\" width=\"320\" height=\"120\" rx=\"14\" fill=\"url(#espRed)\"/></g>\n<text x=\"500\" y=\"76\" fill=\"#3a0d12\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Vacinas vivas atenuadas</text>\n<text x=\"500\" y=\"98\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">exigem maior cautela --</text>\n<text x=\"500\" y=\"114\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">o grau/tipo de imunossupressão</text>\n<text x=\"500\" y=\"130\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">pode contraindicar de forma</text>\n<text x=\"500\" y=\"146\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">temporária ou definitiva</text>\n\n<g filter=\"url(#espShadowSoft)\"><rect x=\"20\" y=\"192\" width=\"640\" height=\"70\" rx=\"12\" fill=\"rgba(168,240,200,.13)\" stroke=\"url(#espAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"216\" fill=\"#d6f7e5\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">A decisão depende do tipo de medicação/dose e do grau de imunossupressão --</text>\n<text x=\"340\" y=\"234\" fill=\"#d6f7e5\" font-size=\"9.5\" text-anchor=\"middle\">avaliação individualizada, muitas vezes junto ao CRIE</text>\n<text x=\"340\" y=\"250\" fill=\"#d6f7e5\" font-size=\"9.5\" text-anchor=\"middle\">Idealmente, atualizar vivas atenuadas ANTES de iniciar imunossupressão eletiva</text>\n</svg>", "esp_contactantes": "<svg viewBox=\"0 0 680 280\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"espPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#0f3322\"/>\n    <stop offset=\"1\" stop-color=\"#081a11\"/>\n  </linearGradient>\n  <linearGradient id=\"espAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#a8f0c8\"/>\n    <stop offset=\"1\" stop-color=\"#4fbf8a\"/>\n  </linearGradient>\n  <linearGradient id=\"espBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <linearGradient id=\"espAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffd98f\"/>\n    <stop offset=\"1\" stop-color=\"#e79a3d\"/>\n  </linearGradient>\n  <linearGradient id=\"espRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <filter id=\"espShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"espShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"280\" rx=\"16\" fill=\"url(#espPanel)\"/>\n<text x=\"340\" y=\"28\" fill=\"url(#espAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Contactantes de imunossuprimidos -- proteger em volta</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"20\" y=\"52\" width=\"300\" height=\"100\" rx=\"14\" fill=\"url(#espAccent)\"/></g>\n<text x=\"170\" y=\"76\" fill=\"#0a2b1c\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Manter calendário em dia</text>\n<text x=\"170\" y=\"98\" fill=\"#0a2b1c\" font-size=\"9.5\" text-anchor=\"middle\">familiares e profissionais</text>\n<text x=\"170\" y=\"114\" fill=\"#0a2b1c\" font-size=\"9.5\" text-anchor=\"middle\">de saúde que convivem com</text>\n<text x=\"170\" y=\"130\" fill=\"#0a2b1c\" font-size=\"9.5\" text-anchor=\"middle\">o paciente devem estar</text>\n<text x=\"170\" y=\"144\" fill=\"#0a2b1c\" font-size=\"9.5\" text-anchor=\"middle\">com a vacinação atualizada</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"340\" y=\"52\" width=\"320\" height=\"100\" rx=\"14\" fill=\"url(#espAmber)\"/></g>\n<text x=\"500\" y=\"76\" fill=\"#3a2708\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Cuidado com Varicela</text>\n<text x=\"500\" y=\"98\" fill=\"#3a2708\" font-size=\"9.5\" text-anchor=\"middle\">se surgirem lesões cutâneas</text>\n<text x=\"500\" y=\"114\" fill=\"#3a2708\" font-size=\"9.5\" text-anchor=\"middle\">pós-vacinais no contactante,</text>\n<text x=\"500\" y=\"130\" fill=\"#3a2708\" font-size=\"9.5\" text-anchor=\"middle\">evitar contato próximo até resolução</text>\n\n<g filter=\"url(#espShadowSoft)\"><rect x=\"20\" y=\"172\" width=\"640\" height=\"80\" rx=\"12\" fill=\"rgba(168,240,200,.13)\" stroke=\"url(#espAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"196\" fill=\"#d6f7e5\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Estratégia de \"capulho\" (cocoon): vacinar quem está ao redor do paciente vulnerável</text>\n<text x=\"340\" y=\"214\" fill=\"#d6f7e5\" font-size=\"9.5\" text-anchor=\"middle\">Vacina Influenza anual para toda a família reduz risco de exposição do imunossuprimido</text>\n<text x=\"340\" y=\"230\" fill=\"#d6f7e5\" font-size=\"9.5\" text-anchor=\"middle\">No Brasil, VOP (pólio oral) não é mais usada -- reduz preocupação com transmissão do vírus vacinal</text>\n</svg>", "esp_situacoes_especificas": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"espPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#0f3322\"/>\n    <stop offset=\"1\" stop-color=\"#081a11\"/>\n  </linearGradient>\n  <linearGradient id=\"espAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#a8f0c8\"/>\n    <stop offset=\"1\" stop-color=\"#4fbf8a\"/>\n  </linearGradient>\n  <linearGradient id=\"espBlue\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#9fd3f7\"/>\n    <stop offset=\"1\" stop-color=\"#4a8ed6\"/>\n  </linearGradient>\n  <linearGradient id=\"espAmber\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ffd98f\"/>\n    <stop offset=\"1\" stop-color=\"#e79a3d\"/>\n  </linearGradient>\n  <linearGradient id=\"espRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#ff9fa8\"/>\n    <stop offset=\"1\" stop-color=\"#df5d68\"/>\n  </linearGradient>\n  <filter id=\"espShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.26\"/>\n  </filter>\n  <filter id=\"espShadowSoft\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\">\n    <feDropShadow dx=\"0\" dy=\"1.4\" stdDeviation=\"2\" flood-opacity=\"0.18\"/>\n  </filter>\n</defs>\n<rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#espPanel)\"/>\n<text x=\"340\" y=\"26\" fill=\"url(#espAccent)\" font-size=\"17\" font-weight=\"700\" text-anchor=\"middle\">Outras situações que ampliam o calendário</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"20\" y=\"48\" width=\"200\" height=\"100\" rx=\"14\" fill=\"url(#espAccent)\"/></g>\n<text x=\"120\" y=\"72\" fill=\"#0a2b1c\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Asplenia</text>\n<text x=\"120\" y=\"92\" fill=\"#0a2b1c\" font-size=\"9\" text-anchor=\"middle\">anatômica ou funcional</text>\n<text x=\"120\" y=\"106\" fill=\"#0a2b1c\" font-size=\"9\" text-anchor=\"middle\">(doença falciforme):</text>\n<text x=\"120\" y=\"122\" fill=\"#0a2b1c\" font-size=\"9\" text-anchor=\"middle\">risco de sepse por germes</text>\n<text x=\"120\" y=\"136\" fill=\"#0a2b1c\" font-size=\"9\" text-anchor=\"middle\">encapsulados aumentado</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"240\" y=\"48\" width=\"200\" height=\"100\" rx=\"14\" fill=\"url(#espBlue)\"/></g>\n<text x=\"340\" y=\"72\" fill=\"#06263d\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Doença renal crônica</text>\n<text x=\"340\" y=\"92\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">e hemodiálise</text>\n<text x=\"340\" y=\"108\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">Hepatite B em dose</text>\n<text x=\"340\" y=\"122\" fill=\"#06263d\" font-size=\"9\" text-anchor=\"middle\">dobrada/esquema reforçado</text>\n\n<g filter=\"url(#espShadow)\"><rect x=\"460\" y=\"48\" width=\"200\" height=\"100\" rx=\"14\" fill=\"url(#espAmber)\"/></g>\n<text x=\"560\" y=\"72\" fill=\"#3a2708\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Vivendo com HIV</text>\n<text x=\"560\" y=\"92\" fill=\"#3a2708\" font-size=\"9\" text-anchor=\"middle\">esquema ampliado de</text>\n<text x=\"560\" y=\"106\" fill=\"#3a2708\" font-size=\"9\" text-anchor=\"middle\">pneumocócica, vivas</text>\n<text x=\"560\" y=\"120\" fill=\"#3a2708\" font-size=\"9\" text-anchor=\"middle\">conforme contagem de CD4</text>\n\n<g filter=\"url(#espShadowSoft)\"><rect x=\"20\" y=\"164\" width=\"640\" height=\"90\" rx=\"12\" fill=\"rgba(168,240,200,.13)\" stroke=\"url(#espAccent)\" stroke-width=\"1.5\"/></g>\n<text x=\"340\" y=\"188\" fill=\"#d6f7e5\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">Corticoterapia sistêmica prolongada, transplantados, oncológicos em tratamento</text>\n<text x=\"340\" y=\"206\" fill=\"#d6f7e5\" font-size=\"9.5\" text-anchor=\"middle\">todos têm protocolo específico de vivas atenuadas (avaliar tempo desde suspensão)</text>\n<text x=\"340\" y=\"224\" fill=\"#d6f7e5\" font-size=\"9.5\" text-anchor=\"middle\">Esquema individualizado, avaliado junto à equipe especialista e ao CRIE</text>\n<text x=\"340\" y=\"240\" fill=\"#d6f7e5\" font-size=\"9.5\" text-anchor=\"middle\">Nunca assumir automaticamente contraindicação -- sempre avaliar caso a caso</text>\n</svg>"});
+</script>
+<script>
+/* ===================================================================
+   Vacinas Especiais e Situacoes Especiais -- 2a aula da categoria
+   Imunizacao, modulo no padrao Toxoplasmose (skill elid-study-platform),
+   aditivo. Fontes: Ministerio da Saude (Manual dos Centros de Referencia
+   para Imunobiologicos Especiais, 6a edicao), SBIm (Calendarios de
+   vacinacao de pacientes especiais 2025, Guia SBIm/ASBAI de Imunizacao
+   em Asma/Alergia/Imunodeficiencias 2025/26). 8 sub-abas de teoria,
+   5 SVGs proprios (esp_*), diferencial, mapa mental, 2 fluxogramas em
+   HTML/CSS nativo do engine, questoes/flashcards/casos.
+   Roda DEPOIS de module-adapter.js e cria window.CONTENT['imunizacao|1']
+   -- nao toca em mais nada.
+   =================================================================== */
+(function(){
+"use strict";
+var A = window.ASVG || {};
+window.CONTENT = window.CONTENT || {};
+
+var C = {};
+C.name = "Vacinas Especiais e Situações Especiais";
+C.intro = "Nem toda criança se encaixa no calendário padrão -- prematuros, imunossuprimidos e outras condições exigem um raciocínio à parte, com fontes próprias.";
+
+C.sub = [
+
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">Por que existe um calendário "além" do PNI básico</div>
+<p class="ac-p">O calendário nacional de vacinação cobre a criança saudável típica -- mas uma parcela de crianças tem condições clínicas que mudam o risco de doença, a resposta imune esperada, ou a segurança de determinadas vacinas. Para essas situações, existe uma rede específica: os <b>Centros de Referência para Imunobiológicos Especiais (CRIE)</b>, parte da Rede de Imunobiológicos para Pessoas com Situações Especiais (RIE).</p>
+<p class="ac-p">O CRIE oferece, gratuitamente, vacinas e imunoglobulinas que <b>não estão disponíveis no calendário básico</b>, para grupos específicos: prematuros, imunodeprimidos, pessoas com determinadas doenças crônicas, contactantes de imunossuprimidos, e pacientes com hipersensibilidade ou eventos adversos graves prévios a alguma vacina.</p>
+<div class="ac-call ac-tip">💡 O raciocínio central deste tema não é decorar uma lista de exceções -- é entender a LÓGICA de cada situação especial: por que aquela condição muda a recomendação vacinal.</div>
+<div class="ac-call ac-mne">🧠 CRIE = "vacina que a criança comum não precisa, mas a criança especial precisa" -- profilaxia extra, substituição por evento adverso, ou imunodeficiência.</div>
+`],
+
+['crie_categorias','O que é o CRIE e suas 3 Categorias', `
+<div class="ac-h">Três motivos para precisar do CRIE</div>
+${A.esp_o_que_e_crie === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.esp_o_que_e_crie)+'" alt="CRIE/RIE -- imunobiologicos especiais"/>'}
+<p class="ac-p">As indicações do CRIE se organizam em 3 categorias principais:</p>
+<ul class="ac-ul">
+<li><b>Profilaxia pré-exposição</b> em grupos de risco específico -- por exemplo, palivizumabe para prematuros de alto risco na sazonalidade do VSR, ou vacinas para viajantes a áreas endêmicas.</li>
+<li><b>Substituição</b> de produtos da rotina quando não podem ser usados por hipersensibilidade ou evento adverso grave em uso anterior -- por exemplo, uma formulação alternativa de vacina para quem teve reação alérgica grave a um componente específico.</li>
+<li><b>Imunização de imunodeficientes</b> -- esquemas e vacinas específicas para pessoas com imunodeficiência primária ou adquirida.</li>
+</ul>
+<div class="ac-call ac-high">⚡ O encaminhamento ao CRIE geralmente exige relatório médico detalhando a condição clínica de base -- não é "livre demanda", é indicação técnica documentada.</div>
+`],
+
+['prematuros_vacinacao','Vacinação do Prematuro', `
+<div class="ac-h">Idade cronológica, nunca corrigida</div>
+${A.esp_prematuros === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.esp_prematuros)+'" alt="Vacinacao do prematuro"/>'}
+<p class="ac-p">O princípio geral, e um dos pontos mais cobrados em prova: prematuros são vacinados pela <b>idade cronológica</b> (dias/meses de vida), <b>nunca</b> pela idade corrigida -- recebem as mesmas doses e o mesmo volume que um recém-nascido a termo, na mesma idade cronológica.</p>
+<p class="ac-p">A principal exceção é a <b>Hepatite B</b>: se o prematuro nasceu com menos de 34 semanas ou menos de 2000g e recebeu a 1ª dose ao nascer, o esquema passa a ser de <b>4 doses</b> no primeiro ano de vida (dose extra por baixo peso ao nascer), em vez do esquema padrão.</p>
+<p class="ac-p">A vacina de <b>Rotavírus</b> é contraindicada durante a internação hospitalar (risco de disseminação nosocomial do vírus vacinal), devendo ser aplicada após a alta, se ainda dentro da janela de idade permitida.</p>
+<div class="ac-call ac-peg">⚠️ Palivizumabe NÃO é vacina -- é um anticorpo monoclonal anti-VSR, usado como profilaxia mensal durante a sazonalidade, disponível no CRIE para prematuros de alto risco.</div>
+`],
+
+['imunocomprometidos_regra','Imunocomprometidos: a Lógica Vivas x Inativadas', `
+<div class="ac-h">Eficácia reduzida não é o mesmo que contraindicação</div>
+${A.esp_imunocomprometidos === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.esp_imunocomprometidos)+'" alt="Imunocomprometidos -- vivas x inativadas"/>'}
+<p class="ac-p">Em pacientes imunocomprometidos, vacinas <b>inativadas</b> podem ter eficácia reduzida (resposta imune menor), mas <b>não são contraindicadas</b> -- devem ser aplicadas normalmente, mesmo sabendo que a proteção conferida pode ser parcial.</p>
+<p class="ac-p">Vacinas <b>vivas atenuadas</b>, por outro lado, exigem maior cautela: o tipo e a dose da medicação imunossupressora, e o grau de imunossupressão, podem contraindicar a aplicação de forma <b>temporária ou definitiva</b>. A avaliação é sempre individualizada, muitas vezes em conjunto com o CRIE e a equipe especialista que acompanha a condição de base.</p>
+<div class="ac-call ac-tip">💡 Estratégia ideal: sempre que possível, atualizar as vacinas vivas atenuadas ANTES de iniciar um tratamento imunossupressor eletivo (ex.: antes de iniciar quimioterapia ou terapia biológica programada).</div>
+`],
+
+['contactantes_estrategia','Vacinação de Contactantes', `
+<div class="ac-h">Protegendo quem está ao redor do paciente vulnerável</div>
+${A.esp_contactantes === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.esp_contactantes)+'" alt="Vacinacao de contactantes de imunossuprimidos"/>'}
+<p class="ac-p">Familiares e profissionais de saúde que convivem com um paciente imunossuprimido devem manter sua própria vacinação <b>atualizada</b> -- essa estratégia, conhecida como "efeito capulho" (cocoon), reduz a exposição do paciente vulnerável a doenças evitáveis por vacina.</p>
+<p class="ac-p">Um cuidado específico envolve a vacina de <b>Varicela</b>: se o contactante desenvolver lesões cutâneas pós-vacinais (raro, mas possível com vacinas vivas atenuadas), deve evitar contato próximo com o paciente imunossuprimido até a resolução das lesões, pelo risco teórico de transmissão do vírus vacinal.</p>
+<div class="ac-call ac-high">⚡ Vacinar toda a família contra Influenza anualmente é uma das medidas mais simples e eficazes para reduzir a exposição de um paciente imunossuprimido no domicílio.</div>
+`],
+
+['outras_condicoes','Outras Condições que Ampliam o Calendário', `
+<div class="ac-h">Cada condição, sua lógica própria</div>
+${A.esp_situacoes_especificas === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.esp_situacoes_especificas)+'" alt="Outras situacoes que ampliam o calendario"/>'}
+<p class="ac-p">Diversas outras condições justificam esquemas ampliados:</p>
+<ul class="ac-ul">
+<li><b>Asplenia</b> anatômica ou funcional (incluindo doença falciforme): risco aumentado de sepse por germes encapsulados (pneumococo, meningococo, Hib), justificando esquema reforçado de vacinas conjugadas contra esses agentes.</li>
+<li><b>Doença renal crônica e hemodiálise:</b> resposta imune reduzida à Hepatite B, geralmente exigindo dose dobrada ou esquema reforçado.</li>
+<li><b>Pessoas vivendo com HIV:</b> esquema ampliado de pneumocócica, com decisões sobre vacinas vivas dependentes da contagem de CD4.</li>
+<li><b>Corticoterapia sistêmica prolongada, transplantados e pacientes oncológicos em tratamento:</b> cada situação tem protocolo próprio, considerando inclusive o tempo desde a suspensão da imunossupressão.</li>
+</ul>
+<div class="ac-call ac-peg">⚠️ Nunca assumir automaticamente que uma condição contraindica vacinação -- a regra geral é sempre avaliar caso a caso, muitas vezes junto ao CRIE.</div>
+`],
+
+['sopros_hipersensibilidade','Hipersensibilidade e Substituição de Vacinas', `
+<div class="ac-h">Quando a vacina da rotina não pode ser usada</div>
+<p class="ac-p">Pacientes com histórico de hipersensibilidade grave (anafilaxia) a um componente específico de uma vacina de rotina não devem, necessariamente, deixar de ser protegidos contra aquela doença -- muitas vezes existe uma <b>formulação alternativa</b> sem o componente responsável pela reação, disponível através do CRIE.</p>
+<p class="ac-p">Da mesma forma, um evento adverso grave documentado após uma dose prévia (não apenas reação alérgica, mas também eventos neurológicos ou outros graves relacionados à vacina) pode justificar troca de formulação, ajuste de esquema, ou administração em ambiente hospitalar com monitorização, dependendo da gravidade.</p>
+<div class="ac-call ac-mne">🧠 "Reação a componente ≠ contraindicação à doença que a vacina previne" -- quase sempre existe uma alternativa a ser buscada antes de simplesmente não vacinar.</div>
+`],
+
+['integracao_puericultura','Integrando com a Consulta de Puericultura', `
+<div class="ac-h">Identificar precocemente quem precisa do CRIE</div>
+<p class="ac-p">Cabe à consulta de puericultura de rotina <b>identificar precocemente</b> as crianças que se enquadram em alguma situação especial -- prematuridade, doença crônica de base, imunossupressão, histórico de evento adverso grave -- e encaminhá-las ativamente ao CRIE, em vez de simplesmente seguir o calendário básico ou, pior, deixar de vacinar por insegurança quanto à conduta correta.</p>
+<p class="ac-p">O encaminhamento deve incluir relatório médico claro sobre a condição de base, histórico vacinal completo e, quando aplicável, exames que fundamentem a indicação (ex.: contagem de CD4, função renal, tempo desde transplante).</p>
+<div class="ac-call ac-tip">💡 Na dúvida sobre se uma condição justifica encaminhamento ao CRIE, o caminho mais seguro é buscar orientação especializada -- nunca "decidir sozinho" por não vacinar uma criança com condição especial.</div>
+`],
+
+];
+
+Object.assign(C, {
+
+escores: `
+<div class="ac-h">Números que fecham questão</div>
+<table class="ac-tbl"><tr><th>Parâmetro</th><th>Valor</th></tr>
+<tr><td>Peso/IG que muda esquema de Hepatite B no prematuro</td><td><b>&lt;34 semanas</b> ou <b>&lt;2000g</b></td></tr>
+<tr><td>Esquema de Hepatite B nesse grupo</td><td><b>4 doses</b> no 1º ano de vida</td></tr>
+<tr><td>Rotavírus em prematuro internado</td><td><b>contraindicado</b> durante a internação</td></tr>
+<tr><td>Palivizumabe</td><td>anticorpo monoclonal, profilaxia <b>mensal</b> na sazonalidade de VSR</td></tr>
+<tr><td>Categorias de indicação do CRIE</td><td><b>3</b>: profilaxia, substituição, imunodeficiência</td></tr>
+<tr><td>Idade do prematuro para vacinar</td><td>sempre <b>cronológica</b>, nunca corrigida</td></tr></table>
+`,
+
+dif: `
+<div class="ac-h">Diferencial automático -- situação especial e conduta</div>
+<table class="ac-tbl"><tr><th>Situação</th><th>Conduta</th></tr>
+<tr><td>Prematuro de 28 semanas, 2 meses de vida cronológica</td><td>Vacinar como qualquer criança de 2 meses -- idade cronológica, não corrigida</td></tr>
+<tr><td>Prematuro &lt;34sem/&lt;2000g com 1ª dose de HepB ao nascer</td><td>Esquema de 4 doses no 1º ano (não o esquema padrão de 3)</td></tr>
+<tr><td>Criança em quimioterapia, precisa de vacina inativada</td><td>Aplicar normalmente, mesmo com eficácia potencialmente reduzida</td></tr>
+<tr><td>Criança em quimioterapia, precisa de vacina viva atenuada</td><td>Avaliar individualmente -- pode estar contraindicada temporária/definitivamente</td></tr>
+<tr><td>Irmão de paciente transplantado com lesões pós-vacina de varicela</td><td>Evitar contato próximo com o paciente até resolução das lesões</td></tr>
+<tr><td>Criança com anafilaxia a componente de vacina de rotina</td><td>Buscar formulação alternativa via CRIE, antes de simplesmente não vacinar</td></tr></table>
+`,
+
+mapa: `
+<div class="ac-h">Mapa mental -- Vacinas Especiais</div>
+<div class="mm">
+<div class="mm-card"><h5>CRIE</h5><ul><li>3 categorias: profilaxia, substituição, imunodeficiência</li><li>Gratuito, mediante relatório médico</li></ul></div>
+<div class="mm-card"><h5>PREMATUROS</h5><ul><li>Idade cronológica sempre</li><li>HepB 4 doses se &lt;34sem/&lt;2000g</li></ul></div>
+<div class="mm-card"><h5>IMUNOCOMPROMETIDOS</h5><ul><li>Inativadas: aplicar, eficácia pode cair</li><li>Vivas: avaliar caso a caso</li></ul></div>
+<div class="mm-card"><h5>CONTACTANTES</h5><ul><li>Manter calendário em dia (cocoon)</li><li>Cuidado com lesões de varicela vacinal</li></ul></div>
+<div class="mm-card"><h5>OUTRAS CONDIÇÕES</h5><ul><li>Asplenia, DRC, HIV, transplante</li><li>Cada uma com protocolo próprio</li></ul></div>
+<div class="mm-card"><h5>PRINCÍPIO</h5><ul><li>Nunca presumir contraindicação</li><li>Avaliar sempre caso a caso</li></ul></div>
+</div>
+`,
+
+fluxo_dx: `
+<div class="ac-h">Fluxograma -- quando pensar em encaminhar ao CRIE</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Criança com condição clínica especial identificada</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node">Prematuridade/imunossupressão/doença crônica</div>
+<div class="fx-node">Evento adverso grave prévio</div>
+<div class="fx-node">Contactante de imunossuprimido</div>
+</div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node end">Encaminhar ao CRIE com relatório médico da condição</div></div>
+</div>
+`,
+
+fluxo_cond: `
+<div class="ac-h">Fluxograma de conduta -- vacina viva em imunocomprometido</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Vacina viva atenuada indicada em paciente imunocomprometido</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Avaliar tipo/dose de imunossupressão e grau de comprometimento</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node">Imunossupressão leve/controlada</div>
+<div class="fx-node">Imunossupressão significativa</div>
+</div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node end">Pode ser possível vacinar, com avaliação especializada</div>
+<div class="fx-node end">Contraindicação temporária ou definitiva</div>
+</div>
+</div>
+`,
+
+vespera: `
+<div class="ac-h">Revisão de véspera -- Vacinas Especiais</div>
+<div class="ac-call ac-high">⚡ CRIE: 3 categorias (profilaxia pré-exposição, substituição por evento adverso, imunodeficiência). Prematuro: sempre idade cronológica.</div>
+<ul class="ac-ul">
+<li>Hepatite B em prematuro &lt;34sem/&lt;2000g com dose ao nascer: esquema de 4 doses.</li>
+<li>Rotavírus contraindicado durante internação hospitalar do prematuro.</li>
+<li>Palivizumabe = anticorpo monoclonal anti-VSR (NÃO é vacina), profilaxia mensal em prematuros de alto risco.</li>
+<li>Imunocomprometidos: inativadas sempre aplicáveis (eficácia pode cair); vivas exigem avaliação individualizada.</li>
+<li>Contactantes de imunossuprimidos: manter calendário em dia (estratégia cocoon); cuidado com lesões de varicela vacinal.</li>
+<li>Asplenia/doença falciforme: risco aumentado de germes encapsulados, esquema reforçado.</li>
+<li>Nunca presumir contraindicação automática -- sempre avaliar caso a caso, muitas vezes com apoio do CRIE.</li>
+</ul>
+`,
+
+dicas: `
+<div class="ac-h">Dicas e Pegadinhas</div>
+<div class="ac-call ac-peg">⚠️ "Prematuro deve ser vacinado pela idade corrigida" é FALSO -- sempre idade cronológica, é a pegadinha mais clássica do tema.</div>
+<div class="ac-call ac-peg">⚠️ Palivizumabe NÃO é vacina -- é anticorpo monoclonal, questões que chamam de "vacina contra VSR" estão erradas.</div>
+<div class="ac-call ac-mne">🧠 "Inativada aplica sempre, viva avalia sempre": a regra rápida para imunocomprometidos.</div>
+<div class="ac-call ac-tip">✅ Reação alérgica a componente vacinal não é motivo para simplesmente não vacinar -- buscar formulação alternativa via CRIE.</div>
+<div class="ac-call ac-peg">⚠️ Eficácia reduzida em imunocomprometido não é sinônimo de contraindicação -- são conceitos diferentes, cobrados separadamente em prova.</div>
+`,
+
+checklist: [
+ "Sei as 3 categorias de indicação do CRIE",
+ "Sei que prematuro é vacinado pela idade cronológica, não corrigida",
+ "Sei a exceção da Hepatite B no prematuro de baixo peso/idade gestacional",
+ "Sei por que Rotavírus é contraindicado durante internação hospitalar",
+ "Sei o que é palivizumabe e para quem é indicado",
+ "Entendo a diferença entre eficácia reduzida e contraindicação em imunocomprometidos",
+ "Sei a lógica de vacinação de contactantes (estratégia cocoon)",
+ "Conheço situações que ampliam o calendário (asplenia, DRC, HIV)",
+ "Sei como proceder diante de hipersensibilidade a componente vacinal",
+ "Entendo o papel da puericultura em identificar e encaminhar ao CRIE"
+],
+
+});
+
+Object.assign(C, {
+
+questoes: [
+  {id:"esp-q1",banca:"ENARE (estilo)",stem:"Recém-nascido pré-termo de 30 semanas, atualmente com 2 meses de idade cronológica (idade corrigida de aproximadamente 1 mês e 2 semanas). Segundo a idade a ser considerada para vacinação, a conduta correta é:",
+   opts:["Vacinar conforme a idade corrigida (1 mês e 2 semanas)","Vacinar conforme a idade cronológica (2 meses), como qualquer criança dessa idade","Aguardar completar a idade corrigida de 2 meses para iniciar vacinação","Adiar toda vacinação até alcançar o termo (40 semanas corrigidas)"],
+   correct:1, expl:"Prematuros são vacinados pela <b>idade cronológica</b>, nunca pela idade corrigida -- recebem as mesmas vacinas e doses de qualquer criança da mesma idade cronológica."},
+  {id:"esp-q2",banca:"Revalida (estilo)",stem:"Recém-nascido pré-termo de 32 semanas e 1800g recebeu a 1ª dose de Hepatite B ao nascer. Qual o esquema vacinal correto para Hepatite B nesse caso?",
+   opts:["Esquema padrão de 3 doses, igual ao de um RN a termo","Esquema de 4 doses no primeiro ano de vida","Esquema de 2 doses apenas","Dispensa de doses adicionais, pois já recebeu ao nascer"],
+   correct:1, expl:"Prematuros com menos de 34 semanas ou menos de 2000g que recebem a 1ª dose de Hepatite B ao nascer devem completar um esquema de <b>4 doses</b> no primeiro ano de vida."},
+  {id:"esp-q3",banca:"UFRJ (estilo)",stem:"Sobre a vacina de Rotavírus em prematuro ainda internado em UTI neonatal, é correto afirmar:",
+   opts:["Deve ser aplicada normalmente, seguindo apenas o critério de idade","É contraindicada durante a internação hospitalar, devendo ser aplicada após a alta, se dentro da janela","É formalmente contraindicada em qualquer prematuro, mesmo após a alta","Deve ser substituída por dose dobrada de vacina inativada"],
+   correct:1, expl:"A vacina de Rotavírus (viva atenuada, oral) é <b>contraindicada durante a internação hospitalar</b>, pelo risco de disseminação nosocomial do vírus vacinal -- aplicar após a alta, dentro da janela de idade."},
+  {id:"esp-q4",banca:"SES-RJ (estilo)",stem:"Sobre o palivizumabe, é correto afirmar:",
+   opts:["É uma vacina viva atenuada contra o vírus sincicial respiratório","É um anticorpo monoclonal para profilaxia mensal contra o vírus sincicial respiratório em prematuros de alto risco","É uma vacina inativada de dose única aplicada ao nascimento","Substitui a necessidade de vacinação de rotina do prematuro"],
+   correct:1, expl:"Palivizumabe é um <b>anticorpo monoclonal</b> (não é vacina), usado como profilaxia mensal durante a sazonalidade do VSR, em prematuros de alto risco."},
+  {id:"esp-q5",banca:"UERJ (estilo)",stem:"Criança em uso de corticoterapia sistêmica em altas doses necessita de vacina inativada de rotina. Qual a conduta correta?",
+   opts:["Contraindicar totalmente a vacinação enquanto durar a corticoterapia","Aplicar normalmente, sabendo que a eficácia pode estar reduzida","Dobrar a dose da vacina para compensar a imunossupressão","Substituir obrigatoriamente por vacina viva atenuada"],
+   correct:1, expl:"Vacinas <b>inativadas</b> devem ser aplicadas normalmente em imunocomprometidos, mesmo sabendo que a resposta imune (eficácia) pode estar reduzida -- não há contraindicação."},
+  {id:"esp-q6",banca:"PSU-MG (estilo)",stem:"Sobre vacinas vivas atenuadas em pacientes imunocomprometidos, é correto afirmar:",
+   opts:["Nunca podem ser aplicadas, independente do grau de imunossupressão","Podem ser contraindicadas temporária ou definitivamente, a depender do tipo/dose de imunossupressão","Têm sempre eficácia aumentada nesses pacientes","Devem ser aplicadas em dose dobrada nesses pacientes"],
+   correct:1, expl:"Vacinas vivas atenuadas exigem avaliação individualizada -- podem estar <b>contraindicadas temporária ou definitivamente</b>, dependendo do tipo e dose da imunossupressão."},
+  {id:"esp-q7",banca:"ENARE (estilo)",stem:"Qual estratégia de vacinação visa proteger indiretamente um paciente imunossuprimido, vacinando as pessoas que convivem com ele?",
+   opts:["Estratégia de rebanho exclusivo","Estratégia cocoon (capulho)","Estratégia de substituição do CRIE","Estratégia de resgate vacinal"],
+   correct:1, expl:"A estratégia <b>cocoon (capulho)</b> consiste em manter a vacinação atualizada de familiares e contactantes próximos, protegendo indiretamente o paciente vulnerável."},
+  {id:"esp-q8",banca:"Revalida (estilo)",stem:"Criança com doença falciforme (asplenia funcional) apresenta risco aumentado para infecções por quais tipos de patógenos, justificando esquema vacinal reforçado?",
+   opts:["Vírus respiratórios exclusivamente","Germes encapsulados (pneumococo, meningococo, Haemophilus influenzae b)","Fungos oportunistas exclusivamente","Parasitas intestinais"],
+   correct:1, expl:"Asplenia anatômica ou funcional aumenta o risco de sepse por <b>germes encapsulados</b> (pneumococo, meningococo, Hib), justificando esquema vacinal reforçado contra esses agentes."},
+  {id:"esp-q9",banca:"UFRJ (estilo)",stem:"Criança apresentou reação anafilática após dose de uma vacina de rotina, atribuída a um componente específico da formulação. Qual a conduta mais apropriada?",
+   opts:["Não vacinar mais contra aquela doença, definitivamente","Buscar formulação alternativa sem o componente responsável, via CRIE, sempre que disponível","Repetir a mesma vacina em dose reduzida","Substituir automaticamente por uma vacina viva atenuada"],
+   correct:1, expl:"Diante de hipersensibilidade a um componente específico, deve-se buscar uma <b>formulação alternativa</b> sem esse componente, frequentemente disponível através do CRIE, antes de simplesmente deixar de vacinar."},
+  {id:"esp-q10",banca:"SES-RJ (estilo)",stem:"Qual das opções abaixo NÃO é uma das 3 categorias principais de indicação do CRIE?",
+   opts:["Profilaxia pré-exposição em grupos de risco","Substituição por hipersensibilidade ou evento adverso grave prévio","Imunização de imunodeficientes","Vacinação de rotina de crianças saudáveis"],
+   correct:3, expl:"A vacinação de rotina de crianças saudáveis é feita pelo calendário básico do PNI -- o CRIE cobre profilaxia de grupos de risco, substituição por evento adverso/hipersensibilidade, e imunização de imunodeficientes."},
+  {id:"esp-q11",banca:"UERJ (estilo)",stem:"Contactante domiciliar de paciente transplantado renal recebeu recentemente a vacina de Varicela e desenvolveu lesões cutâneas pós-vacinais. Qual a orientação correta?",
+   opts:["Não há nenhum cuidado adicional necessário","Evitar contato próximo com o paciente transplantado até a resolução das lesões","O paciente transplantado deve receber imediatamente a mesma vacina","Suspender toda a vacinação da família por 6 meses"],
+   correct:1, expl:"Havendo lesões cutâneas pós-vacinais de varicela no contactante, recomenda-se <b>evitar contato próximo</b> com o paciente imunossuprimido até a resolução completa das lesões."},
+  {id:"esp-q12",banca:"ENARE (estilo)",stem:"Qual a melhor estratégia em relação à vacinação com vivas atenuadas antes do início de um tratamento imunossupressor eletivo programado?",
+   opts:["Aguardar o início do tratamento para depois avaliar a vacinação","Atualizar as vacinas vivas atenuadas ANTES de iniciar a imunossupressão, sempre que possível","Não há nenhuma vantagem em antecipar a vacinação","Substituir automaticamente todas as vivas por inativadas equivalentes"],
+   correct:1, expl:"Sempre que possível, a estratégia ideal é <b>atualizar as vacinas vivas atenuadas antes</b> de iniciar um tratamento imunossupressor eletivo, aproveitando a janela em que o sistema imune ainda responde adequadamente."}
+],
+
+flashcards:[
+  {id:"esp-f1",tipo:"qa",tag:"CRIE",front:"Quais as 3 categorias de indicação do CRIE?",back:"Profilaxia pré-exposição, substituição por hipersensibilidade/evento adverso, imunização de imunodeficientes."},
+  {id:"esp-f2",tipo:"vf",tag:"Prematuro",front:"O prematuro deve ser vacinado pela idade corrigida.",back:"<b>FALSO.</b> Sempre pela idade cronológica."},
+  {id:"esp-f3",tipo:"qa",tag:"Prematuro",front:"Quando o esquema de Hepatite B do prematuro passa a ser de 4 doses?",back:"Quando &lt;34 semanas ou &lt;2000g e recebeu a 1ª dose ao nascer."},
+  {id:"esp-f4",tipo:"qa",tag:"Rotavírus",front:"Por que Rotavírus é contraindicado em prematuro internado?",back:"Risco de <b>disseminação nosocomial</b> do vírus vacinal."},
+  {id:"esp-f5",tipo:"vf",tag:"Palivizumabe",front:"Palivizumabe é uma vacina contra o vírus sincicial respiratório.",back:"<b>FALSO.</b> É um anticorpo monoclonal, não uma vacina."},
+  {id:"esp-f6",tipo:"qa",tag:"Imunocomprometidos",front:"Vacinas inativadas são contraindicadas em imunocomprometidos?",back:"<b>Não</b> -- podem ter eficácia reduzida, mas devem ser aplicadas normalmente."},
+  {id:"esp-f7",tipo:"qa",tag:"Imunocomprometidos",front:"E as vacinas vivas atenuadas nesses pacientes?",back:"Exigem avaliação individualizada -- podem estar contraindicadas temporária ou definitivamente."},
+  {id:"esp-f8",tipo:"cloze",tag:"Contactantes",front:"Estratégia {{c1::cocoon}} (capulho): vacinar quem convive com o {{c2::paciente imunossuprimido}}.",back:"Estratégia cocoon: vacinar contactantes para proteger indiretamente o imunossuprimido."},
+  {id:"esp-f9",tipo:"qa",tag:"Asplenia",front:"Por que asplenia (ex.: doença falciforme) aumenta risco vacinal-relevante?",back:"Risco aumentado de sepse por <b>germes encapsulados</b> (pneumococo, meningococo, Hib)."},
+  {id:"esp-f10",tipo:"qa",tag:"Hipersensibilidade",front:"O que fazer diante de anafilaxia a componente de vacina de rotina?",back:"Buscar <b>formulação alternativa</b> sem o componente, via CRIE."},
+  {id:"esp-f11",tipo:"qa",tag:"Estratégia",front:"Qual o momento ideal para atualizar vivas atenuadas em paciente que iniciará imunossupressão eletiva?",back:"<b>Antes</b> de iniciar o tratamento imunossupressor, sempre que possível."},
+  {id:"esp-f12",tipo:"qa",tag:"DRC",front:"O que muda na vacinação de Hepatite B em paciente renal crônico/hemodiálise?",back:"Geralmente dose <b>dobrada</b> ou esquema reforçado, pela resposta imune reduzida."},
+  {id:"esp-f13",tipo:"qa",tag:"CRIE acesso",front:"O que geralmente é exigido para encaminhamento ao CRIE?",back:"<b>Relatório médico</b> detalhando a condição clínica de base."},
+  {id:"esp-f14",tipo:"qa",tag:"Princípio",front:"Qual o princípio central diante de qualquer condição especial e dúvida vacinal?",back:"Nunca presumir contraindicação automática -- <b>avaliar caso a caso</b>, com apoio do CRIE se necessário."}
+],
+
+casos:[
+  {t:"Caso 1 -- Prematuro extremo em vacinação de rotina",
+   stem:"Recém-nascido pré-termo de 27 semanas, peso ao nascer de 900g, recebeu a 1ª dose de Hepatite B ao nascer. Atualmente com 2 meses de idade cronológica, comparece para vacinação de rotina.",
+   passos:[
+     {h:"1. Qual idade deve ser usada para decidir as vacinas de hoje?", p:"A idade <b>cronológica</b> (2 meses) -- prematuros nunca são vacinados pela idade corrigida."},
+     {h:"2. O esquema de Hepatite B dessa criança segue o padrão de 3 doses?", p:"Não -- por ter nascido com &lt;34 semanas e &lt;2000g e ter recebido a 1ª dose ao nascer, o esquema correto é de <b>4 doses</b> no primeiro ano."},
+     {h:"3. Se a criança ainda estivesse internada, a vacina de Rotavírus poderia ser aplicada hoje?", p:"Não -- Rotavírus é <b>contraindicado durante internação hospitalar</b>; deve ser aplicado após a alta, se ainda dentro da janela de idade."}
+   ]},
+  {t:"Caso 2 -- Criança em tratamento oncológico",
+   stem:"Criança de 5 anos em quimioterapia para leucemia linfoblástica aguda necessita de atualização vacinal. A família pergunta se pode receber a vacina de Tríplice Viral, que está em atraso.",
+   passos:[
+     {h:"1. A Tríplice Viral pode ser aplicada rotineiramente nesse momento?", p:"Não necessariamente -- é uma vacina <b>viva atenuada</b>, e a decisão depende do grau de imunossupressão atual, exigindo avaliação individualizada, idealmente com a equipe de oncologia e o CRIE."},
+     {h:"2. E uma vacina inativada de rotina, como a Pneumocócica?", p:"Pode e deve ser aplicada normalmente -- vacinas inativadas não são contraindicadas em imunocomprometidos, mesmo com eficácia potencialmente reduzida."},
+     {h:"3. Qual teria sido a estratégia ideal antes de iniciar a quimioterapia?", p:"Atualizar as vacinas vivas atenuadas <b>antes</b> do início do tratamento imunossupressor, sempre que a urgência do tratamento permitir esse planejamento."}
+   ]},
+  {t:"Caso 3 -- Contactante de paciente transplantado",
+   stem:"Irmã de 6 anos de paciente transplantado renal de 8 anos precisa atualizar a vacina de Varicela, que está em atraso.",
+   passos:[
+     {h:"1. A irmã deve ser vacinada normalmente?", p:"Sim -- manter o calendário de contactantes em dia é parte da estratégia <b>cocoon</b>, que protege indiretamente o paciente imunossuprimido."},
+     {h:"2. Existe algum cuidado especial após essa vacinação?", p:"Sim -- se a irmã desenvolver lesões cutâneas pós-vacinais, deve <b>evitar contato próximo</b> com o irmão transplantado até a resolução completa das lesões."},
+     {h:"3. O paciente transplantado também poderia receber a mesma vacina de Varicela?", p:"Depende do grau de imunossupressão -- vacinas vivas em transplantados exigem avaliação individualizada específica, geralmente junto à equipe de transplante e ao CRIE."}
+   ]}
+]
+
+});
+
+window.CONTENT['imunizacao|1'] = C;
 })();
 
 </script>
