@@ -16139,6 +16139,16 @@ body.annot-edit-on .hl-zone,
 body.annot-edit-on .hl-zone *{
   user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
 }
+/* excecao: com a ferramenta Marca-texto ativa, a selecao nativa de
+   texto precisa estar LIGADA -- e ela mesma (window.getSelection())
+   que o marca-texto le pra saber o que foi selecionado. Sem isso,
+   arrastar sobre o texto nao seleciona nada e o marca-texto fica sem
+   ter o que ler. */
+body.annot-tool-hl .hl-zone,
+body.annot-tool-hl .hl-zone *{
+  user-select:text!important;-webkit-user-select:text!important;
+  -webkit-touch-callout:default!important;
+}
 
 /* ---------- botao flutuante principal (sempre visivel durante a leitura) --- */
 .annot-fab{
@@ -16411,7 +16421,7 @@ function uid(pre){ return pre+'_'+Date.now().toString(36)+'_'+Math.random().toSt
    interpretado como o inicio de outra coisa (rolagem, selecao). Chama
    handler() uma unica vez por toque valido. */
 function onTap(el, handler){
-  var down=null;
+  var down=null, lastAt=0;
   el.addEventListener('pointerdown', function(ev){
     down={x:ev.clientX,y:ev.clientY,t:Date.now(),id:ev.pointerId};
   });
@@ -16419,15 +16429,18 @@ function onTap(el, handler){
     if(!down || ev.pointerId!==down.id) return;
     var dx=ev.clientX-down.x, dy=ev.clientY-down.y, dt=Date.now()-down.t;
     down=null;
-    if((dx*dx+dy*dy)<144 && dt<800){ ev.preventDefault(); ev.stopPropagation(); handler(ev); }
+    if((dx*dx+dy*dy)<144 && dt<800){ ev.preventDefault(); ev.stopPropagation(); lastAt=Date.now(); handler(ev); }
   });
   el.addEventListener('pointercancel', function(){ down=null; });
   /* fallback: se por algum motivo o navegador nao entregar pointerup
      (raro, mas acontece em alguns webviews), o 'click' sintetico ainda
-     serve de rede de seguranca -- protegido de duplo-disparo porque o
-     pointerup acima ja consome preventDefault+stopPropagation antes do
-     click ser sintetizado na mesma interacao. */
-  el.addEventListener('click', function(ev){ ev.preventDefault(); ev.stopPropagation(); handler(ev); });
+     serve de rede de seguranca -- so dispara se o pointerup NAO acabou
+     de tratar o mesmo toque (senao dispararia o handler DUAS vezes
+     para uma unica interacao, ex.: criando dois blocos em vez de um). */
+  el.addEventListener('click', function(ev){
+    if(Date.now()-lastAt<600) return;
+    ev.preventDefault(); ev.stopPropagation(); handler(ev);
+  });
 }
 function zoneRect(zone){ return zone.getBoundingClientRect(); }
 function toPct(zone, clientX, clientY){
@@ -16460,6 +16473,7 @@ function syncBodyClasses(){
   b.classList.toggle('annot-writing', edit && (TOOL==='pen'||TOOL==='hl'||TOOL==='tape'));
   b.classList.toggle('annot-erasing', edit && TOOL==='eraser');
   b.classList.toggle('annot-eraser-armed', edit && TOOL==='eraser');
+  b.classList.toggle('annot-tool-hl', edit && TOOL==='hl');
   updateEditableSurfaces();
   updateEraserCursorVisibility();
   refreshAllBlockInsertPoints();
@@ -16569,39 +16583,50 @@ function caretFromPoint(x,y){
   if(t) return {node:t, offset:0};
   return null;
 }
-function hlDragStart(zone,x,y){
-  var c=caretFromPoint(x,y); if(!c) return null;
-  var a=hlOffsetAt(zone,c.node,c.offset);
-  return {zone:zone, anchor:a, s:a, e:a};
+/* ===================================================================
+   MARCA-TEXTO -- 2a reescrita. As duas tentativas anteriores tentavam
+   "adivinhar" a posicao do caret via caretRangeFromPoint/
+   caretPositionFromPoint a cada pointermove -- essas APIs sao
+   inconsistentes entre motores (principalmente em pontos proximos a
+   bordas de palavras/elementos) e, mais importante, NAO sao o
+   mecanismo que o proprio sistema operacional usa para selecionar
+   texto por toque (que envolve lupa de selecao, alcas ajustaveis
+   etc.). Em vez de reimplementar isso na mao, agora o marca-texto
+   DEIXA o navegador cuidar da selecao nativa de texto (a mesma que
+   qualquer usuario ja sabe fazer arrastando o dedo/caneta sobre um
+   texto) e so LE o resultado em window.getSelection() quando o gesto
+   termina, convertendo em um destaque salvo. Isso e ordens de
+   magnitude mais confiavel entre navegadores/dispositivos. */
+var HL_SELECTING=null; // {zone, pid}
+function hlBeginSelection(zone, pid){ HL_SELECTING={zone:zone, pid:pid}; }
+function hlFinishSelection(){
+  if(!HL_SELECTING) return;
+  var zone=HL_SELECTING.zone; HL_SELECTING=null;
+  var sel=window.getSelection && window.getSelection();
+  if(!sel || sel.rangeCount===0 || sel.isCollapsed) return;
+  var range=sel.getRangeAt(0);
+  if(!zone.contains(range.commonAncestorContainer) &&
+     range.commonAncestorContainer!==zone) return; // selecao nao pertence a esta zona
+  var s=hlOffsetAt(zone, range.startContainer, range.startOffset);
+  var e=hlOffsetAt(zone, range.endContainer, range.endOffset);
+  if(e<s){ var t=s; s=e; e=t; }
+  sel.removeAllRanges(); // some com a selecao nativa (azul) -- vira destaque permanente
+  if(e<=s) return;
+  var id=uid('hl'), item={id:id,s:s,e:e,c:HL_C}, key=zone.dataset.hlkey;
+  var st=AState(); st.hl[key]=st.hl[key]||[]; st.hl[key].push(item); save();
+  hlApplyOne(zone, item);
+  pushUndo({op:'add',kind:'hl',key:key,zone:zone,item:item});
+  if(window.toast) window.toast('Texto marcado ✓');
 }
-/* IMPORTANTE: s/e sao recalculados de forma SINCRONA a cada movimento
-   -- so o REPINTE visual (preview) e que e jogado pro proximo frame via
-   requestAnimationFrame, por performance. Antes, o calculo de s/e
-   inteiro estava dentro do RAF, e um gesto rapido (arrastar e soltar
-   entre dois frames) fazia pointerup disparar ANTES do RAF calcular
-   nada, entao s/e ficavam iguais ao ancora e o marca-texto nao
-   registrava nada -- esse era o bug real por tras de "passar a caneta
-   e nada acontece". */
-var hlRAF=null;
-function hlDragUpdate(st,x,y){
-  var c=caretFromPoint(x,y); if(!c) return;
-  var off=hlOffsetAt(st.zone,c.node,c.offset);
-  st.s=Math.min(st.anchor,off); st.e=Math.max(st.anchor,off);
-  if(hlRAF) return;
-  hlRAF=requestAnimationFrame(function(){
-    hlRAF=null;
-    hlClearMark(st.zone,'tmp');
-    if(st.e>st.s) hlApplyOne(st.zone, {id:'tmp', s:st.s, e:st.e, c:HL_C});
-  });
-}
-function hlDragEnd(st){
-  hlClearMark(st.zone,'tmp');
-  if(!st || st.e<=st.s) return;
-  var id=uid('hl'), item={id:id,s:st.s,e:st.e,c:HL_C}, key=st.zone.dataset.hlkey;
-  var s=AState(); s.hl[key]=s.hl[key]||[]; s.hl[key].push(item); save();
-  hlApplyOne(st.zone, item);
-  pushUndo({op:'add',kind:'hl',key:key,zone:st.zone,item:item});
-}
+document.addEventListener('pointerup', function(){
+  /* pequeno atraso: em touch/stylus o navegador pode ainda estar
+     ajustando as alcas de selecao (lupa) no exato instante do
+     pointerup -- ler a selecao cedo demais pode pegar um estado
+     intermediario. */
+  if(!HL_SELECTING) return;
+  setTimeout(hlFinishSelection, 80);
+});
+document.addEventListener('pointercancel', function(){ HL_SELECTING=null; });
 
 /* ===================================================================
    CANETA (tinta livre) -- overlay SVG por zona, com traco SUAVE.
@@ -16699,13 +16724,42 @@ function penEnd(st){
    soltar (nunca removida e recriada) -- assim nao existe nenhuma
    janela de tempo em que a fita possa "sumir" da tela.
    =================================================================== */
+function tapeTogglePeek(d){
+  d.classList.toggle('revealed');
+}
 function tapeWire(d, zone, t){
   d.className='annot-tape'; d.dataset.tapeid=t.id; d.dataset.c=t.c||'n';
   d.innerHTML='<span class="annot-tape-lbl">toque p/ revelar</span><button class="annot-tape-del" title="Excluir">×</button>';
+  /* deteccao de toque propria (nao so 'click') pra abrir/fechar o peek
+     -- mais confiavel em touch/stylus. Cuidado: NAO pode interceptar
+     o toque no botao de excluir (checado ANTES de qualquer
+     preventDefault/stopPropagation, senao o click nativo do botao de
+     excluir seria suprimido junto). */
+  var down=null, lastToggleAt=0;
+  d.addEventListener('pointerdown', function(ev){
+    if(ev.target.closest('.annot-tape-del')) { down=null; return; }
+    down={x:ev.clientX,y:ev.clientY,t:Date.now(),id:ev.pointerId};
+  });
+  d.addEventListener('pointerup', function(ev){
+    if(!down || ev.pointerId!==down.id) return;
+    var dx=ev.clientX-down.x, dy=ev.clientY-down.y, dt=Date.now()-down.t;
+    down=null;
+    if((dx*dx+dy*dy)>=144 || dt>=800) return; // nao foi um toque, foi um arrasto/gesto longo
+    if(TOOL==='eraser') return; // apagar com a Borracha e tratado no gesto de pointerdown/drag (eraseAt)
+    ev.preventDefault(); ev.stopPropagation();
+    lastToggleAt=Date.now();
+    tapeTogglePeek(d);
+  });
+  d.addEventListener('pointercancel', function(){ down=null; });
+  /* rede de seguranca: alguns webviews raros nao entregam pointerup de
+     forma confiavel -- 'click' funciona como fallback, mas so se o
+     pointerup NAO acabou de tratar o mesmo toque (evita alternar o
+     peek duas vezes -- ida e volta -- quando ambos disparam). */
   d.addEventListener('click', function(ev){
     if(ev.target.closest('.annot-tape-del')) return;
-    if(TOOL==='eraser') return; // apagar com a Borracha e tratado no gesto de pointerdown/drag (eraseAt)
-    d.classList.toggle('revealed');
+    if(TOOL==='eraser') return;
+    if(Date.now()-lastToggleAt<600) return;
+    tapeTogglePeek(d);
   });
   d.querySelector('.annot-tape-del').addEventListener('click', function(ev){
     ev.stopPropagation();
@@ -16894,12 +16948,21 @@ function stickyCreate(zone,x,y){
   var key=zone.dataset.hlkey;
   var s=AState(); s.stickies[key]=s.stickies[key]||[]; s.stickies[key].push(item); save();
   var el=stickyEl(zone, item);
+  if(!el || !el.isConnected){
+    /* defesa extra: se por algum motivo o elemento nao ficou
+       realmente conectado ao documento, avisa em vez de deixar o
+       usuario achar que nada aconteceu. */
+    console.error('[annot] post-it criado mas nao esta no DOM', el);
+    if(window.toast) window.toast('Post-it não apareceu -- tente de novo');
+    return el;
+  }
   pushUndo({op:'add',kind:'sticky',key:key,zone:zone,item:item});
+  if(window.toast) window.toast('Post-it criado ✓');
   /* foco SINCRONO, dentro da mesma pilha de chamada do gesto do usuario
      -- um setTimeout aqui quebra a "ativacao de usuario" no Safari/
      iPadOS e o teclado nunca aparece, fazendo o post-it parecer que
      "nao abre" mesmo tendo sido criado normalmente */
-  var b=el.querySelector('.annot-sticky-body'); if(b) b.focus();
+  try{ var b=el.querySelector('.annot-sticky-body'); if(b) b.focus(); }catch(err){}
   return el;
 }
 
@@ -17070,10 +17133,22 @@ function blockCreate(zone, slot){
   var id=uid('blk'), item={id:id, slot:slot, html:'', open:true, created:Date.now()};
   var key=zone.dataset.hlkey;
   var s=AState(); s.blocks[key]=s.blocks[key]||[]; s.blocks[key].push(item); save();
-  var el=blockEl(zone, item);
+  var el;
+  try{ el=blockEl(zone, item); }
+  catch(err){
+    console.error('[annot] falha ao criar área de anotação:', err);
+    if(window.toast) window.toast('Erro ao criar área de anotação: '+(err&&err.message||err));
+    return null;
+  }
+  if(!el || !el.isConnected){
+    console.error('[annot] bloco criado mas nao esta no DOM', el);
+    if(window.toast) window.toast('Área de anotação não apareceu -- tente de novo');
+    return el;
+  }
   pushUndo({op:'add',kind:'block',key:key,zone:zone,item:item});
   renderBlockInsertPoints(zone);
-  var t=el.querySelector('.annot-block-text'); if(t) t.focus();
+  if(window.toast) window.toast('Área de anotação criada ✓');
+  try{ var t=el.querySelector('.annot-block-text'); if(t) t.focus(); }catch(err){}
   return el;
 }
 function clearBlockInsertPoints(zone){
@@ -17212,7 +17287,11 @@ function wireZonePointer(zone){
     if(TOOL==='sticky'){
       if(ev.pointerType==='mouse' && ev.button!==0) return;
       ev.preventDefault(); ev.stopPropagation();
-      try{ stickyCreate(zone, ev.clientX, ev.clientY); }catch(err){}
+      /* nunca falha em silencio -- se algo der errado aqui, o usuario
+         precisa VER que algo aconteceu (mesmo que seja um erro), em
+         vez de "nada acontece" sem nenhuma pista do que investigar. */
+      try{ stickyCreate(zone, ev.clientX, ev.clientY); }
+      catch(err){ console.error('[annot] falha ao criar post-it:', err); if(window.toast) window.toast('Erro ao criar post-it: '+(err&&err.message||err)); }
       return;
     }
 
@@ -17230,24 +17309,34 @@ function wireZonePointer(zone){
       return;
     }
 
-    if(ev.pointerType==='touch'){ ev.preventDefault(); return; } // dedo nunca escreve/marca/tampa -- so rola (ver ROLAGEM MANUAL)
+    if(TOOL==='hl'){
+      /* NAO preventDefault/stopPropagation aqui -- o objetivo e deixar
+         o navegador cuidar da selecao nativa de texto (lupa, alcas),
+         que e infinitamente mais confiavel do que tentar adivinhar a
+         posicao do caret na mao. So marca que uma selecao pode estar
+         comecando nesta zona; o resultado e lido em hlFinishSelection
+         quando o gesto termina (ver pointerup no escopo do modulo). */
+      hlBeginSelection(zone, ev.pointerId);
+      return;
+    }
 
-    /* pointerType 'pen' ou 'mouse' daqui pra baixo -- caneta, marca-
-       texto e fita. Pressiona a rejeicao de palma ANTES de comecar,
-       para que qualquer dedo que toque durante o gesto seja ignorado
-       (ver o listener de pointerdown da ROLAGEM MANUAL, acima, que
-       tambem checa esse mesmo PEN_POINTER_ACTIVE). */
+    if(ev.pointerType==='touch'){ ev.preventDefault(); return; } // dedo nunca escreve/tampa -- so rola (ver ROLAGEM MANUAL)
+
+    /* pointerType 'pen' ou 'mouse' daqui pra baixo -- caneta e fita.
+       Pressiona a rejeicao de palma ANTES de comecar, para que
+       qualquer dedo que toque durante o gesto seja ignorado (ver o
+       listener de pointerdown da ROLAGEM MANUAL, acima, que tambem
+       checa esse mesmo PEN_POINTER_ACTIVE). */
     ev.preventDefault(); ev.stopPropagation();
     try{ zone.setPointerCapture(ev.pointerId); }catch(err){}
     PEN_POINTER_ACTIVE=true;
     var started=null;
     try{
       if(TOOL==='pen') started={kind:'pen', st:penStart(zone, ev.clientX, ev.clientY, ev.pressure), pid:ev.pointerId};
-      else if(TOOL==='hl'){ var st=hlDragStart(zone, ev.clientX, ev.clientY); if(st) started={kind:'hl', st:st, pid:ev.pointerId}; }
       else if(TOOL==='tape') started={kind:'tape', st:tapeStart(zone, ev.clientX, ev.clientY), pid:ev.pointerId};
     }catch(err){ started=null; }
     DRAW=started;
-    /* nada foi realmente iniciado (ex.: caretFromPoint falhou de vez)
+    /* nada foi realmente iniciado (penStart/tapeStart lançou excecao)
        -- libera a rejeicao de palma NA HORA, sem esperar um pointerup
        que nunca vai casar com DRAW.pid; sem isso a zona ficava "presa"
        rejeitando todo toque seguinte para sempre. */
@@ -17262,7 +17351,6 @@ function wireZonePointer(zone){
     if(!events.length) events=[ev]; // alguns navegadores/dispositivos retornam lista vazia -- nunca perder o ponto
     events.forEach(function(e2){
       if(DRAW.kind==='pen') penMove(DRAW.st, e2.clientX, e2.clientY);
-      else if(DRAW.kind==='hl') hlDragUpdate(DRAW.st, e2.clientX, e2.clientY);
       else if(DRAW.kind==='tape') tapeUpdate(DRAW.st, e2.clientX, e2.clientY);
     });
   }, {passive:false});
@@ -17274,7 +17362,6 @@ function wireZonePointer(zone){
     if(!DRAW || ev.pointerId!==DRAW.pid) return;
     try{
       if(DRAW.kind==='pen') penEnd(DRAW.st);
-      else if(DRAW.kind==='hl') hlDragEnd(DRAW.st);
       else if(DRAW.kind==='tape') tapeEnd(DRAW.st);
     }catch(err){}
     DRAW=null;
