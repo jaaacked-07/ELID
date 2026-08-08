@@ -16259,33 +16259,51 @@ body.annot-edit-on .annot-tape:hover .annot-tape-del{display:flex}
 .annot-sticky[data-c="p"]{background:#f6d3e6}
 .annot-sticky[data-c="b"]{background:#cfe6fc}
 .annot-sticky[data-c="g"]{background:#c7ecd2}
+/* previa "fantasma" enquanto o usuario desenha o tamanho do post-it com
+   a caneta (arrastar) -- opacidade reduzida, sem sombra pesada, nunca
+   intercepta toque (o proprio gesto de arrasto e tratado no nivel da
+   zona, nao no elemento) -- ao soltar, vira um post-it real com
+   opacidade normal. */
+.annot-sticky-ghost{position:absolute;z-index:5;border-radius:4px 4px 10px 10px;
+  background:rgba(246,230,172,.38);border:2px dashed rgba(45,27,46,.45);
+  pointer-events:none;min-width:24px;min-height:20px}
 .annot-sticky-head{display:flex;align-items:center;justify-content:space-between;padding:4px 6px;
   cursor:grab;background:rgba(0,0,0,.06);flex:none;touch-action:none;gap:4px}
 .annot-sticky-head:active{cursor:grabbing}
 .annot-sticky-handle{font-size:.7rem;color:rgba(45,27,46,.5);letter-spacing:.1em;flex:1}
-.annot-sticky-headbtns{display:flex;gap:2px}
-.annot-sticky-color,.annot-sticky-del{width:18px;height:18px;border-radius:50%;border:none;background:rgba(45,27,46,.16);
+.annot-sticky-headbtns{display:flex;gap:2px;align-items:center}
+.annot-sticky-color,.annot-sticky-del,.annot-sticky-kbd,.annot-sticky-photo{
+  width:18px;height:18px;border-radius:50%;border:none;background:rgba(45,27,46,.16);
   color:#2d1b2e;font-size:.6rem;cursor:pointer;display:none;align-items:center;justify-content:center}
-.annot-sticky-head:hover .annot-sticky-color,.annot-sticky-head:hover .annot-sticky-del{display:flex}
+.annot-sticky-kbd.on{background:rgba(45,27,46,.42);color:#fff}
+.annot-sticky-head:hover .annot-sticky-color,
+.annot-sticky-head:hover .annot-sticky-del,
+.annot-sticky-head:hover .annot-sticky-kbd,
+.annot-sticky-head:hover .annot-sticky-photo{display:flex}
 .annot-sticky-colors{display:none;gap:4px;padding:4px 6px;background:rgba(0,0,0,.05);flex:none}
 .annot-sticky-colors.open{display:flex}
-.annot-sticky-body{flex:1;padding:6px 8px;font-size:.76rem;line-height:1.4;color:#2d1b2e;
-  outline:none;overflow:auto;word-break:break-word}
-.annot-sticky-body:empty:before{content:'Toque para escrever...';color:rgba(45,27,46,.4)}
+/* o "corpo" agora e uma zona aninhada completa (mesma infraestrutura
+   das demais .hl-zone): a caneta/marca-texto/fita/borracha escolhidas
+   no painel principal funcionam aqui dentro automaticamente, sem
+   nenhum codigo extra -- o post-it e "papel" de verdade, escrita a
+   mao e o modo natural. O texto digitado (opcional, via botao ⌨️) fica
+   em .annot-sticky-text, dentro dessa mesma zona. */
+.annot-sticky-body{position:relative;flex:1;overflow:auto}
+.annot-sticky-text{padding:6px 8px;font-size:.76rem;line-height:1.4;color:#2d1b2e;
+  outline:none;word-break:break-word;position:relative;z-index:1}
+.annot-sticky-text:empty:before{content:'Toque em ⌨️ para digitar, ou escreva com a caneta';color:rgba(45,27,46,.4)}
 .annot-sticky img{max-width:100%;border-radius:6px;display:block;margin-top:4px}
-.annot-sticky-foot{display:flex;justify-content:flex-end;padding:3px 6px;flex:none}
-.annot-sticky-foot label{font-size:.78rem;cursor:pointer;opacity:.7}
-.annot-sticky-foot label:hover{opacity:1}
 .annot-sticky-resize{position:absolute;right:2px;bottom:2px;width:14px;height:14px;cursor:nwse-resize;
   background:linear-gradient(135deg,transparent 50%,rgba(45,27,46,.35) 50%);border-radius:0 0 8px 0;
-  display:none;touch-action:none}
+  display:none;touch-action:none;z-index:3}
 .annot-sticky:hover .annot-sticky-resize{display:block}
 .annot-sticky.readonly .annot-sticky-head{cursor:default}
 .annot-sticky.readonly .annot-sticky-del,
 .annot-sticky.readonly .annot-sticky-color,
-.annot-sticky.readonly .annot-sticky-foot,
+.annot-sticky.readonly .annot-sticky-kbd,
+.annot-sticky.readonly .annot-sticky-photo,
 .annot-sticky.readonly .annot-sticky-resize{display:none!important}
-.annot-sticky.readonly .annot-sticky-body{cursor:default}
+.annot-sticky.readonly .annot-sticky-text{cursor:default}
 
 /* ---------- area de anotacao (bloco expansivel no fluxo do conteudo) --- */
 .annot-block{
@@ -16303,14 +16321,20 @@ body.light .annot-block-head{background:rgba(0,0,0,.03)}
 .annot-block-toggle:hover,.annot-block-del:hover{border-color:var(--accent);color:var(--accent)}
 .annot-block.closed .annot-block-body{display:none}
 .annot-block-body{position:relative;padding:10px 12px 12px}
-.annot-block-tools{display:flex;gap:6px;margin-bottom:8px}
+.annot-block-tools{display:flex;gap:6px;margin-bottom:8px;align-items:center;flex-wrap:wrap}
 .annot-block-tool{
   width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--bg);
   display:flex;align-items:center;justify-content:center;font-size:.86rem;cursor:pointer;
 }
 .annot-block-tool:hover{border-color:var(--accent)}
-.annot-block-text{min-height:48px;font-size:.86rem;line-height:1.55;color:var(--ink);outline:none}
-.annot-block-text:empty:before{content:'Toque para escrever sua anotação...';color:var(--muted)}
+.annot-block-tool.on{border-color:var(--accent);background:var(--accent);color:#fff}
+.annot-block-sep{width:1px;align-self:stretch;background:var(--line);flex:none}
+/* o corpo do bloco (.annot-block-body) e sua propria .hl-zone -- a
+   caneta/marca-texto/fita/borracha do painel principal (ou destes
+   botoes de atalho) escrevem direto sobre ele, sem nenhum codigo
+   extra. O texto digitado (opcional, via ⌨️) fica em .annot-block-text. */
+.annot-block-text{min-height:48px;font-size:.86rem;line-height:1.55;color:var(--ink);outline:none;position:relative;z-index:1}
+.annot-block-text:empty:before{content:'Toque em ⌨️ para digitar, ou escreva com a caneta';color:var(--muted)}
 .annot-block-text img{max-width:100%;border-radius:8px;display:block;margin-top:6px}
 body.annot-readmode .annot-block-del,
 body.annot-readmode .annot-block-tools{display:none}
@@ -16351,6 +16375,8 @@ body.annot-readmode .annot-tape-del,
 body.annot-readmode .annot-sticky-resize,
 body.annot-readmode .annot-sticky-head{cursor:default}
 body.annot-readmode .annot-sticky-del,
+body.annot-readmode .annot-sticky-kbd,
+body.annot-readmode .annot-sticky-photo,
 body.annot-readmode .annot-sticky-resize{display:none!important}
 
 </style>
@@ -16469,13 +16495,18 @@ function toPct(zone, clientX, clientY){
 }
 function updateEditableSurfaces(){
   var edit=isEditMode();
+  /* post-it e Area de anotacao agora sao "papel" (zona de caneta) por
+     padrao -- o texto digitado so vira editavel quando o usuario liga
+     o botao ⌨️ daquele item especifico (dataset.kbd==='1'), pra nao
+     abrir teclado sozinho nem competir com o desenho a mao. */
   document.querySelectorAll('.annot-sticky').forEach(function(d){
     d.classList.toggle('readonly', !edit);
-    var body=d.querySelector('.annot-sticky-body');
-    if(body) body.setAttribute('contenteditable', edit?'true':'false');
+    var text=d.querySelector('.annot-sticky-text');
+    if(text) text.setAttribute('contenteditable', (edit && d.dataset.kbd==='1') ? 'true' : 'false');
   });
-  document.querySelectorAll('.annot-block-text').forEach(function(t){
-    t.setAttribute('contenteditable', edit?'true':'false');
+  document.querySelectorAll('.annot-block').forEach(function(d){
+    var text=d.querySelector('.annot-block-text');
+    if(text) text.setAttribute('contenteditable', (edit && d.dataset.kbd==='1') ? 'true' : 'false');
   });
 }
 function updateEraserCursorVisibility(){
@@ -16484,6 +16515,15 @@ function updateEraserCursorVisibility(){
 }
 function refreshAllBlockInsertPoints(){
   document.querySelectorAll('.hl-zone[data-annot-wired]:not(.annot-nested-zone)').forEach(renderBlockInsertPoints);
+}
+/* reflete a ferramenta global (TOOL) nos botoes de atalho (Caneta/
+   Marca-texto/Fita/Borracha) dentro de cada Area de anotacao aberta --
+   e o MESMO TOOL usado pelo painel principal, so um atalho visual, por
+   isso nao ha nenhum estado duplicado pra manter sincronizado. */
+function syncBlockToolButtons(){
+  document.querySelectorAll('.annot-block-tool[data-tool]').forEach(function(btn){
+    btn.classList.toggle('on', isEditMode() && btn.dataset.tool===TOOL);
+  });
 }
 function syncBodyClasses(){
   var b=document.body, edit=isEditMode();
@@ -16496,6 +16536,7 @@ function syncBodyClasses(){
   updateEditableSurfaces();
   updateEraserCursorVisibility();
   refreshAllBlockInsertPoints();
+  syncBlockToolButtons();
 }
 
 /* ===================================================================
@@ -16603,24 +16644,28 @@ function caretFromPoint(x,y){
   return null;
 }
 /* ===================================================================
-   MARCA-TEXTO -- 2a reescrita. As duas tentativas anteriores tentavam
-   "adivinhar" a posicao do caret via caretRangeFromPoint/
-   caretPositionFromPoint a cada pointermove -- essas APIs sao
-   inconsistentes entre motores (principalmente em pontos proximos a
-   bordas de palavras/elementos) e, mais importante, NAO sao o
-   mecanismo que o proprio sistema operacional usa para selecionar
-   texto por toque (que envolve lupa de selecao, alcas ajustaveis
-   etc.). Em vez de reimplementar isso na mao, agora o marca-texto
-   DEIXA o navegador cuidar da selecao nativa de texto (a mesma que
-   qualquer usuario ja sabe fazer arrastando o dedo/caneta sobre um
-   texto) e so LE o resultado em window.getSelection() quando o gesto
-   termina, convertendo em um destaque salvo. Isso e ordens de
-   magnitude mais confiavel entre navegadores/dispositivos. */
-var HL_SELECTING=null; // {zone, pid}
-function hlBeginSelection(zone, pid){ HL_SELECTING={zone:zone, pid:pid}; }
-function hlFinishSelection(){
-  if(!HL_SELECTING) return;
-  var zone=HL_SELECTING.zone; HL_SELECTING=null;
+   MARCA-TEXTO -- 3a reescrita. A 2a tentativa deixava o navegador
+   cuidar da selecao nativa de texto (esperando o gesto padrao de
+   arrastar o dedo sobre o texto), mas isso NUNCA funcionou em
+   touch/caneta: selecao nativa por toque em praticamente todo
+   navegador mobile so comeca com um toque longo ou duplo-toque
+   PRIMEIRO (que ativa os "handles"/lupa) -- um simples
+   pointerdown+arrasto+pointerup, do jeito que o usuario realmente
+   usa a ferramenta, NUNCA produz uma Selection nativa. Por isso
+   sel.isCollapsed ficava sempre true e a funcao retornava em
+   silencio, sem nenhum erro visivel -- exatamente o "nao marca nada"
+   relatado em 3 rounds seguidos.
+   Solucao: paramos de TORCER pra selecao nativa acontecer sozinha e
+   passamos a CONSTRUIR a selecao nos mesmos, chamando
+   Selection.setBaseAndExtent() a cada pointermove com base em
+   caretFromPoint(). Isso funciona identicamente com mouse, touch e
+   caneta (é so JS puro, nao depende de nenhum gesto reconhecido pelo
+   SO), e ainda ganha de graca o destaque azul nativo do navegador
+   como feedback visual durante o arrasto, porque estamos mutando a
+   Selection real do documento. Ao soltar, lemos essa mesma Selection
+   (que fomos nos que preenchemos) e convertemos em destaque salvo,
+   exatamente como antes. */
+function hlCommit(zone){
   var sel=window.getSelection && window.getSelection();
   if(!sel || sel.rangeCount===0 || sel.isCollapsed) return;
   var range=sel.getRangeAt(0);
@@ -16637,15 +16682,6 @@ function hlFinishSelection(){
   pushUndo({op:'add',kind:'hl',key:key,zone:zone,item:item});
   if(window.toast) window.toast('Texto marcado ✓');
 }
-document.addEventListener('pointerup', function(){
-  /* pequeno atraso: em touch/stylus o navegador pode ainda estar
-     ajustando as alcas de selecao (lupa) no exato instante do
-     pointerup -- ler a selecao cedo demais pode pegar um estado
-     intermediario. */
-  if(!HL_SELECTING) return;
-  setTimeout(hlFinishSelection, 80);
-});
-document.addEventListener('pointercancel', function(){ HL_SELECTING=null; });
 
 /* ===================================================================
    CANETA (tinta livre) -- overlay SVG por zona, com traco SUAVE.
@@ -16865,14 +16901,22 @@ function stickyFlush(zone, id, patch){
 }
 function stickyEl(zone, note){
   var edit=isEditMode();
+  /* post-it "papel": por padrao pronto pra escrever com a caneta. So
+     entra em modo teclado de saida se ja tinha texto digitado antes
+     (compatibilidade com post-its criados nas versoes anteriores). */
+  var kbdOn = !!(note.html && note.html.replace(/<[^>]*>/g,'').trim());
   var d=document.createElement('div');
   d.className='annot-sticky'+(edit?'':' readonly'); d.dataset.stickyid=note.id; d.dataset.c=note.c||'y';
+  d.dataset.kbd = kbdOn ? '1' : '';
   d.style.left=note.x+'%'; d.style.top=note.y+'%';
   var w0=note.w||STICKY_SIZE, h0=note.h||Math.round(w0*0.733);
   d.style.width=w0+'px'; d.style.height=h0+'px';
+  var innerKey=zone.dataset.hlkey+'#sticky#'+note.id;
   d.innerHTML=
     '<div class="annot-sticky-head"><span class="annot-sticky-handle">⠿⠿</span>'+
       '<div class="annot-sticky-headbtns">'+
+        '<button class="annot-sticky-kbd'+(kbdOn?' on':'')+'" title="Digitar com teclado">⌨️</button>'+
+        '<label class="annot-sticky-photo" title="Adicionar foto">📷<input type="file" accept="image/*" style="display:none"></label>'+
         '<button class="annot-sticky-color" title="Cor">🎨</button>'+
         '<button class="annot-sticky-del" title="Excluir">×</button>'+
       '</div>'+
@@ -16880,21 +16924,23 @@ function stickyEl(zone, note){
     '<div class="annot-sticky-colors">'+Object.keys(STICKY_COLORS).map(function(k){
       return '<div class="annot-swatch sm" data-color="'+k+'" style="background:'+STICKY_COLORS[k]+'"></div>';
     }).join('')+'</div>'+
-    '<div class="annot-sticky-body" contenteditable="'+(edit?'true':'false')+'">'+(note.html||'')+'</div>'+
-    '<div class="annot-sticky-foot"><label>📷<input type="file" accept="image/*" style="display:none"></label></div>'+
+    '<div class="annot-sticky-body annot-nested-zone hl-zone" data-hlkey="'+innerKey+'">'+
+      '<div class="annot-sticky-text" contenteditable="'+((edit&&kbdOn)?'true':'false')+'">'+(note.html||'')+'</div>'+
+    '</div>'+
     '<div class="annot-sticky-resize" title="Arraste para redimensionar"></div>';
   zone.appendChild(d);
 
-  var body=d.querySelector('.annot-sticky-body');
-  var flush=function(){ stickyFlush(zone, note.id, {html:body.innerHTML}); };
-  body.addEventListener('input', flush);
-  body.addEventListener('blur', flush);
+  var bodyZone=d.querySelector('.annot-sticky-body');
+  var text=d.querySelector('.annot-sticky-text');
+  var flush=function(){ stickyFlush(zone, note.id, {html:text.innerHTML}); };
+  text.addEventListener('input', flush);
+  text.addEventListener('blur', flush);
 
   var fileInp=d.querySelector('input[type=file]');
   if(fileInp) fileInp.addEventListener('change', function(ev){
     if(!isEditMode()) return;
     var f=ev.target.files && ev.target.files[0]; if(!f) return;
-    imgToDataUrl(f, function(url){ var img=document.createElement('img'); img.src=url; body.appendChild(img); flush(); });
+    imgToDataUrl(f, function(url){ var img=document.createElement('img'); img.src=url; text.appendChild(img); flush(); });
   });
 
   d.querySelector('.annot-sticky-del').addEventListener('click', function(ev){
@@ -16902,6 +16948,19 @@ function stickyEl(zone, note){
     if(!isEditMode()) return;
     var removed=stickyRemove(zone, note.id);
     if(removed){ pushUndo({op:'remove',kind:'sticky',key:zone.dataset.hlkey,zone:zone,item:removed}); asave('remover post-it'); }
+  });
+
+  var kbdBtn=d.querySelector('.annot-sticky-kbd');
+  kbdBtn.addEventListener('click', function(ev){
+    ev.stopPropagation();
+    if(!isEditMode()) return;
+    var enabling = d.dataset.kbd!=='1';
+    d.dataset.kbd = enabling ? '1' : '';
+    text.setAttribute('contenteditable', enabling ? 'true' : 'false');
+    kbdBtn.classList.toggle('on', enabling);
+    /* foco SINCRONO dentro do proprio gesto do usuario -- em setTimeout
+       o teclado nao abre em Safari/iPadOS (mesma licao do post-it). */
+    if(enabling){ try{ text.focus(); }catch(e){} }
   });
 
   var colorsRow=d.querySelector('.annot-sticky-colors');
@@ -16924,7 +16983,7 @@ function stickyEl(zone, note){
   var handle=d.querySelector('.annot-sticky-head');
   handle.addEventListener('pointerdown', function(ev){
     if(!isEditMode()) return;
-    if(ev.target.closest('.annot-sticky-del,.annot-sticky-color')) return;
+    if(ev.target.closest('.annot-sticky-del,.annot-sticky-color,.annot-sticky-kbd,.annot-sticky-photo')) return;
     ev.preventDefault(); ev.stopPropagation();
     try{ handle.setPointerCapture(ev.pointerId); }catch(e){}
     function move(mv){
@@ -16960,6 +17019,7 @@ function stickyEl(zone, note){
     resizeHandle.addEventListener('pointerup', up);
   });
 
+  wireZone(bodyZone); // o corpo do post-it vira sua propria hl-zone -- caneta/marca-texto/fita/borracha funcionam nele automaticamente
   return d;
 }
 function stickyApplyZone(zone){
@@ -16973,10 +17033,8 @@ function stickyRemove(zone,id){
   var el=zone.querySelector('.annot-sticky[data-stickyid="'+id+'"]'); if(el) el.remove();
   return removed;
 }
-function stickyCreate(zone,x,y){
-  var p=toPct(zone,x,y);
-  var w=STICKY_SIZE, h=Math.round(STICKY_SIZE*0.733);
-  var id=uid('note'), item={id:id, x:Math.min(85,p[0]), y:Math.min(85,p[1]), c:STICKY_C, html:'', w:w, h:h};
+function stickyCreateAt(zone, xPct, yPct, w, h){
+  var id=uid('note'), item={id:id, x:Math.max(0,Math.min(85,xPct)), y:Math.max(0,Math.min(85,yPct)), c:STICKY_C, html:'', w:w, h:h};
   var key=zone.dataset.hlkey;
   var s=AState(); s.stickies[key]=s.stickies[key]||[]; s.stickies[key].push(item); asave('post-it');
   var el=stickyEl(zone, item);
@@ -16989,13 +17047,55 @@ function stickyCreate(zone,x,y){
     return el;
   }
   pushUndo({op:'add',kind:'sticky',key:key,zone:zone,item:item});
-  if(window.toast) window.toast('Post-it criado ✓');
-  /* foco SINCRONO, dentro da mesma pilha de chamada do gesto do usuario
-     -- um setTimeout aqui quebra a "ativacao de usuario" no Safari/
-     iPadOS e o teclado nunca aparece, fazendo o post-it parecer que
-     "nao abre" mesmo tendo sido criado normalmente */
-  try{ var b=el.querySelector('.annot-sticky-body'); if(b) b.focus(); }catch(err){}
+  if(window.toast) window.toast('Post-it criado ✓ -- escreva com a caneta, ou toque em ⌨️ para digitar');
+  /* desarma a ferramenta apos UM post-it -- e um "carimbo", nao uma
+     ferramenta de uso continuo como caneta/marca-texto/fita. Sem isso,
+     qualquer toque seguinte na mesma zona (inclusive so pra tirar o
+     foco/continuar lendo) criava OUTRO post-it, dando a impressao de
+     "duplicacao". */
+  TOOL=null; syncBodyClasses(); if(typeof PANEL_OPEN!=='undefined' && PANEL_OPEN) renderPanel();
   return el;
+}
+/* ---- criacao por arrasto ("desenhar" o tamanho com a caneta) ----
+   previa fantasma (opacidade reduzida) segue o dedo/caneta; ao soltar,
+   vira o post-it definitivo com opacidade normal. Um toque simples
+   (arrasto minusculo) cria no tamanho padrao configurado no painel --
+   assim tanto "toque rapido" quanto "desenhar o tamanho" continuam
+   funcionando, sem exigir arrasto de todo mundo. */
+function stickyDragStart(zone,x,y){
+  var p=toPct(zone,x,y);
+  return {zone:zone, x0:p[0], y0:p[1], x1:p[0], y1:p[1], el:null};
+}
+function stickyDragUpdate(st,x,y){
+  var p=toPct(st.zone,x,y); st.x1=p[0]; st.y1=p[1];
+  var x=Math.min(st.x0,st.x1), y=Math.min(st.y0,st.y1),
+      w=Math.abs(st.x1-st.x0), h=Math.abs(st.y1-st.y0);
+  if(!st.el){
+    st.el=document.createElement('div');
+    st.el.className='annot-sticky-ghost';
+    st.el.dataset.c=STICKY_C;
+    st.zone.appendChild(st.el);
+  }
+  st.el.style.left=x+'%'; st.el.style.top=y+'%'; st.el.style.width=w+'%'; st.el.style.height=h+'%';
+}
+function stickyDragEnd(st){
+  if(!st) return;
+  if(st.el){ st.el.remove(); }
+  var zone=st.zone;
+  var r=zoneRect(zone);
+  var dragWpx=Math.abs(st.x1-st.x0)/100*r.width, dragHpx=Math.abs(st.y1-st.y0)/100*r.height;
+  var xPct, yPct, w, h;
+  if(dragWpx<40 || dragHpx<40){
+    /* toque simples (ou arrasto minusculo demais pra ter sido
+       intencional) -- usa o tamanho padrao do painel, ancorado no
+       ponto onde o gesto comecou. */
+    xPct=st.x0; yPct=st.y0; w=STICKY_SIZE; h=Math.round(STICKY_SIZE*0.733);
+  } else {
+    xPct=Math.min(st.x0,st.x1); yPct=Math.min(st.y0,st.y1);
+    w=Math.max(110, Math.min(420, dragWpx)); h=Math.max(80, Math.min(420, dragHpx));
+  }
+  try{ stickyCreateAt(zone, xPct, yPct, w, h); }
+  catch(err){ console.error('[annot] falha ao criar post-it:', err); if(window.toast) window.toast('Erro ao criar post-it: '+(err&&err.message||err)); }
 }
 
 /* ===================================================================
@@ -17102,6 +17202,11 @@ function blockEl(zone, b){
   var d=document.createElement('div');
   d.className='annot-block'+(b.open?'':' closed');
   d.dataset.blockid=b.id;
+  /* igual ao post-it: por padrao e "papel" pronto pra caneta. So entra
+     em modo teclado de saida se ja tinha texto digitado (compat. com
+     areas criadas antes desta mudanca). */
+  var kbdOn = !!(b.html && b.html.replace(/<[^>]*>/g,'').trim());
+  d.dataset.kbd = kbdOn ? '1' : '';
   var innerKey=zone.dataset.hlkey+'#block#'+b.id;
   d.innerHTML=
     '<div class="annot-block-head">'+
@@ -17113,9 +17218,14 @@ function blockEl(zone, b){
     '<div class="annot-block-body annot-nested-zone hl-zone" data-hlkey="'+innerKey+'">'+
       '<div class="annot-block-tools">'+
         '<label class="annot-block-tool" title="Adicionar foto">📷<input type="file" accept="image/*" style="display:none"></label>'+
-        '<button type="button" class="annot-block-tool" data-act="sticky" title="Adicionar post-it">📝</button>'+
+        '<button type="button" class="annot-block-tool'+(kbdOn?' on':'')+'" data-act="kbd" title="Digitar com teclado">⌨️</button>'+
+        '<div class="annot-block-sep"></div>'+
+        '<button type="button" class="annot-block-tool" data-tool="pen" title="Caneta">✏️</button>'+
+        '<button type="button" class="annot-block-tool" data-tool="hl" title="Marca-texto">🖍️</button>'+
+        '<button type="button" class="annot-block-tool" data-tool="tape" title="Fita">🎞️</button>'+
+        '<button type="button" class="annot-block-tool" data-tool="eraser" title="Borracha">🗑️</button>'+
       '</div>'+
-      '<div class="annot-block-text" contenteditable="'+(isEditMode()?'true':'false')+'">'+(b.html||'')+'</div>'+
+      '<div class="annot-block-text" contenteditable="'+((isEditMode()&&kbdOn)?'true':'false')+'">'+(b.html||'')+'</div>'+
     '</div>';
   var ref=blockInsertRef(zone, b.slot);
   zone.insertBefore(d, ref);
@@ -17146,14 +17256,34 @@ function blockEl(zone, b){
     var f=ev.target.files && ev.target.files[0]; if(!f) return;
     imgToDataUrl(f, function(url){ var img=document.createElement('img'); img.src=url; textEl.appendChild(img); flush(); });
   });
-  d.querySelector('[data-act=sticky]').addEventListener('click', function(ev){
+
+  var kbdBtn=d.querySelector('[data-act=kbd]');
+  kbdBtn.addEventListener('click', function(ev){
     ev.stopPropagation();
     if(!isEditMode()) return;
-    var r=bodyZone.getBoundingClientRect();
-    stickyCreate(bodyZone, r.left+24, r.top+50);
+    var enabling = d.dataset.kbd!=='1';
+    d.dataset.kbd = enabling ? '1' : '';
+    textEl.setAttribute('contenteditable', enabling ? 'true' : 'false');
+    kbdBtn.classList.toggle('on', enabling);
+    if(enabling){ try{ textEl.focus(); }catch(e){} }
   });
 
-  wireZone(bodyZone); // a area do bloco vira sua propria hl-zone (caneta/marca-texto/post-it/fita/borracha tambem funcionam dentro dela)
+  /* atalhos de Caneta/Marca-texto/Fita/Borracha -- so trocam a MESMA
+     ferramenta global (TOOL) usada pelo painel principal (mesmas cores
+     e configuracoes, porque e literalmente o mesmo painel) e garantem
+     que ele fique visivel, pra nao obrigar o usuario a sair da area de
+     anotacao pra trocar de ferramenta/cor. */
+  d.querySelectorAll('.annot-block-tool[data-tool]').forEach(function(btn){
+    btn.addEventListener('click', function(ev){
+      ev.stopPropagation();
+      if(!isEditMode()) return;
+      TOOL = (TOOL===btn.dataset.tool) ? null : btn.dataset.tool;
+      PANEL_OPEN=true; PANEL_MIN=false;
+      syncBodyClasses(); renderPanel();
+    });
+  });
+
+  wireZone(bodyZone); // a area do bloco vira sua propria hl-zone (caneta/marca-texto/fita/borracha tambem funcionam dentro dela)
   return d;
 }
 function blocksApplyZone(zone){
@@ -17179,8 +17309,10 @@ function blockCreate(zone, slot){
   }
   pushUndo({op:'add',kind:'block',key:key,zone:zone,item:item});
   renderBlockInsertPoints(zone);
-  if(window.toast) window.toast('Área de anotação criada ✓');
-  try{ var t=el.querySelector('.annot-block-text'); if(t) t.focus(); }catch(err){}
+  if(window.toast) window.toast('Área de anotação criada ✓ -- escreva com a caneta, ou toque em ⌨️ para digitar');
+  /* NAO foca o texto automaticamente -- a area nasce em modo "papel"
+     (pronta pra caneta), forcar foco abriria o teclado sem o usuario
+     pedir. O usuario ativa a digitacao tocando em ⌨️. */
   return el;
 }
 function clearBlockInsertPoints(zone){
@@ -17330,12 +17462,18 @@ function wireZonePointer(zone){
 
     if(TOOL==='sticky'){
       if(ev.pointerType==='mouse' && ev.button!==0) return;
+      /* toque em um post-it JA EXISTENTE (cabecalho, corpo, botao de
+         cor/excluir, alça de redimensionar) -- nunca cria um post-it
+         novo por cima; deixa o proprio elemento tratar o gesto
+         normalmente. Sem esse guarda, tocar no "x" de um post-it
+         disparava pointerdown na ZONA (fase de captura, antes do
+         'click' do proprio botao), criando um post-it novo ANTES de
+         o antigo ser removido -- e por isso parecia "duplicar" e
+         nunca sumir. */
+      if(ev.target.closest('.annot-sticky')) return;
       ev.preventDefault(); ev.stopPropagation();
-      /* nunca falha em silencio -- se algo der errado aqui, o usuario
-         precisa VER que algo aconteceu (mesmo que seja um erro), em
-         vez de "nada acontece" sem nenhuma pista do que investigar. */
-      try{ stickyCreate(zone, ev.clientX, ev.clientY); }
-      catch(err){ console.error('[annot] falha ao criar post-it:', err); if(window.toast) window.toast('Erro ao criar post-it: '+(err&&err.message||err)); }
+      try{ zone.setPointerCapture(ev.pointerId); }catch(err){}
+      DRAW={kind:'sticky', st:stickyDragStart(zone, ev.clientX, ev.clientY), pid:ev.pointerId};
       return;
     }
 
@@ -17354,13 +17492,21 @@ function wireZonePointer(zone){
     }
 
     if(TOOL==='hl'){
-      /* NAO preventDefault/stopPropagation aqui -- o objetivo e deixar
-         o navegador cuidar da selecao nativa de texto (lupa, alcas),
-         que e infinitamente mais confiavel do que tentar adivinhar a
-         posicao do caret na mao. So marca que uma selecao pode estar
-         comecando nesta zona; o resultado e lido em hlFinishSelection
-         quando o gesto termina (ver pointerup no escopo do modulo). */
-      hlBeginSelection(zone, ev.pointerId);
+      /* comeca a construir a selecao nos mesmos (ver comentario grande
+         acima de hlCommit) -- se nao houver nenhum texto sob o dedo/
+         caneta neste ponto, nao ha o que selecionar, deixa passar. */
+      var c0=caretFromPoint(ev.clientX, ev.clientY);
+      if(!c0) return;
+      ev.preventDefault(); ev.stopPropagation();
+      try{ zone.setPointerCapture(ev.pointerId); }catch(err){}
+      try{
+        var sel0=window.getSelection();
+        sel0.removeAllRanges();
+        var r0=document.createRange(); r0.setStart(c0.node,c0.offset); r0.collapse(true);
+        sel0.addRange(r0);
+      }catch(err){}
+      PEN_POINTER_ACTIVE=true; // mesma rejeicao de palma usada por caneta/fita durante o gesto
+      DRAW={kind:'hl', zone:zone, anchorNode:c0.node, anchorOffset:c0.offset, pid:ev.pointerId};
       return;
     }
 
@@ -17391,6 +17537,14 @@ function wireZonePointer(zone){
     if(!DRAW || ev.pointerId!==DRAW.pid) return;
     ev.preventDefault();
     if(DRAW.kind==='eraser'){ eraseAt(zone, ev.clientX, ev.clientY, ERASER_W/2, DRAW.erased); moveEraserCursor(ev.clientX, ev.clientY); return; }
+    if(DRAW.kind==='hl'){
+      var cN=caretFromPoint(ev.clientX, ev.clientY);
+      if(cN){
+        try{ window.getSelection().setBaseAndExtent(DRAW.anchorNode, DRAW.anchorOffset, cN.node, cN.offset); }catch(err){}
+      }
+      return;
+    }
+    if(DRAW.kind==='sticky'){ stickyDragUpdate(DRAW.st, ev.clientX, ev.clientY); return; }
     var events=(ev.getCoalescedEvents && ev.getCoalescedEvents()) || [];
     if(!events.length) events=[ev]; // alguns navegadores/dispositivos retornam lista vazia -- nunca perder o ponto
     events.forEach(function(e2){
@@ -17407,6 +17561,8 @@ function wireZonePointer(zone){
     try{
       if(DRAW.kind==='pen') penEnd(DRAW.st);
       else if(DRAW.kind==='tape') tapeEnd(DRAW.st);
+      else if(DRAW.kind==='hl') hlCommit(DRAW.zone);
+      else if(DRAW.kind==='sticky') stickyDragEnd(DRAW.st);
     }catch(err){}
     DRAW=null;
   }
