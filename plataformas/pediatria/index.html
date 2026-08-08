@@ -16120,32 +16120,47 @@ window.CONTENT['asma|4'] = C;
 /* ---------- zona anotavel: precisa de position:relative para hospedar
    os overlays absolutos de tinta/post-it/fita ---------- */
 .hl-zone{position:relative}
-/* ---------- touch-action ESTATICO (nao mais trocado por gesto) --------
-   touch-action precisa ser decidido pelo CSS ANTES do primeiro contato --
-   muitos motores de navegador (WebKit/iPadOS em especial) capturam o
-   valor computado de touch-action no exato instante do toque inicial;
-   trocar zone.style.touchAction dentro do proprio handler de pointerdown
-   do MESMO gesto chega tarde demais e e ignorado, o que fazia a ponta da
-   caneta continuar rolando a pagina ("tremendo") mesmo com a logica de
-   JS correta. A solucao real: manter touch-action:pinch-zoom o tempo
-   TODO em que o modo de edicao esta ativo (bloqueia PAN nativo -- de
-   caneta OU de dedo -- mas preserva o pinca-para-zoom nativo) e
-   reimplementar a rolagem por ARRASTO DE UM DEDO manualmente via JS,
-   restrita a pointerType 'touch' (ver ROLAGEM MANUAL POR TOQUE, abaixo)
-   -- assim a caneta NUNCA mais aciona rolagem, e o dedo continua
-   rolando normalmente, agora por codigo em vez de gesto nativo. */
-body.annot-edit-on .hl-zone{touch-action:pinch-zoom}
-body.annot-edit-on .hl-zone,
-body.annot-edit-on .hl-zone *{
-  user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
-}
-/* excecao: com a ferramenta Marca-texto ativa, a selecao nativa de
-   texto precisa estar LIGADA -- e ela mesma (window.getSelection())
-   que o marca-texto le pra saber o que foi selecionado. Sem isso,
-   arrastar sobre o texto nao seleciona nada e o marca-texto fica sem
-   ter o que ler. */
+/* ===================================================================
+   ROLAGEM E REJEICAO DE PALMA -- arquitetura v2 (round 7), pensada por
+   inteiro ANTES de programar, para substituir a rolagem manual via JS
+   (scrollBy) dos rounds anteriores, que era a causa raiz de "nao rola"/
+   "pisca" -- fragil por depender de timing de touch-action, que varia
+   entre motores de navegador.
+
+   1) ROLAGEM: a pagina rola por scroll NATIVO o tempo todo, inclusive
+      em modo de edicao -- NUNCA MAIS reimplementada a mao via JS.
+      touch-action:pan-y (+pinch-zoom) libera a rolagem vertical nativa
+      por TOQUE (dedo) livremente, sempre, em qualquer ferramenta.
+   2) So a CANETA (pointerType 'pen') pode cancelar esse pan nativo, e
+      SOMENTE durante o proprio gesto de escrever/marcar/tampar/apagar:
+      o handler de pointerdown/pointermove daquela ferramenta chama
+      preventDefault() nesses eventos (ver JS mais abaixo), cancelando
+      a rolagem nativa so PARA AQUELE gesto especifico -- sem nenhum
+      JS de rolagem paralelo brigando com o navegador. O DEDO nunca
+      chama preventDefault nesse fluxo -- portanto o dedo SEMPRE rola,
+      mesmo com Caneta/Fita/Marca-texto/Borracha selecionada.
+   3) PALM REJECTION (selecao de texto por toque acidental): o gap real
+      dos rounds anteriores era que user-select:none so era aplicado
+      DENTRO de .hl-zone -- texto FORA dela (titulos, abas, menu, resto
+      da pagina) podia ser selecionado por um toque acidental (relatado
+      como "a mao da mae tocando fora da aba de teoria"). Agora o modo
+      de edicao desliga user-select na PAGINA INTEIRA (aplicado no body
+      e herdado por tudo dentro dele -- user-select e uma propriedade
+      herdada em CSS, entao um unico ponto de controle cobre a pagina
+      toda), com 2 excecoes pontuais: a ferramenta Marca-texto (precisa
+      de selecao nativa dentro da zona, e a propria window.getSelection()
+      e o que ela le) e qualquer campo contenteditable ativo (post-it/
+      Area de anotacao com o teclado ligado, que precisa de cursor de
+      texto normal pra digitar).
+   =================================================================== */
+body.annot-edit-on{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
+body.annot-edit-on .hl-zone{touch-action:pan-y pinch-zoom}
 body.annot-tool-hl .hl-zone,
 body.annot-tool-hl .hl-zone *{
+  user-select:text!important;-webkit-user-select:text!important;
+  -webkit-touch-callout:default!important;
+}
+body.annot-edit-on [contenteditable="true"]{
   user-select:text!important;-webkit-user-select:text!important;
   -webkit-touch-callout:default!important;
 }
@@ -16176,7 +16191,14 @@ body.light .annot-fab{background:rgba(255,255,255,.7)}
 }
 body.light .annot-panel{background:rgba(255,255,255,.85)}
 .annot-panel.open{transform:translateY(0) scale(1); opacity:1; pointer-events:auto}
-.annot-panel.min{padding:6px; width:auto}
+/* minimizado: vira uma barra/pilula inteira clicavel (sem nenhum botao
+   separado dentro) -- tocar em QUALQUER ponto da barra expande de novo. */
+.annot-panel.min{padding:0; width:auto; border-radius:999px; cursor:pointer}
+.annot-panel-minbar{
+  display:flex; align-items:center; gap:7px; padding:12px 20px;
+  font-family:'Fraunces',serif; font-size:.8rem; color:var(--accent);
+  white-space:nowrap; user-select:none;
+}
 .annot-panel-head{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 0}
 .annot-panel-title{font-family:'Fraunces',serif;font-size:.86rem;color:var(--accent)}
 .annot-min-btn{width:24px;height:24px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-size:.75rem}
@@ -16291,7 +16313,13 @@ body.annot-edit-on .annot-tape:hover .annot-tape-del{display:flex}
 .annot-sticky-body{position:relative;flex:1;overflow:auto}
 .annot-sticky-text{padding:6px 8px;font-size:.76rem;line-height:1.4;color:#2d1b2e;
   outline:none;word-break:break-word;position:relative;z-index:1}
-.annot-sticky-text:empty:before{content:'Toque em ⌨️ para digitar, ou escreva com a caneta';color:rgba(45,27,46,.4)}
+/* a dica so aparece se NAO houver nada -- nem texto digitado, nem
+   tinta/marca-texto/fita desenhados na zona (classe .has-content,
+   alternada em JS por refreshZoneEmptyHint sempre que ink/hl/tape
+   mudam). Sem o :not(.has-content), a dica ficava presa sobreposta ao
+   desenho pra sempre, porque so considerava o texto digitado vazio, e
+   desenhar com a caneta nunca preenche o texto digitado. */
+.annot-sticky-body:not(.has-content) .annot-sticky-text:empty:before{content:'Toque em ⌨️ para digitar, ou escreva com a caneta';color:rgba(45,27,46,.4)}
 .annot-sticky img{max-width:100%;border-radius:6px;display:block;margin-top:4px}
 .annot-sticky-resize{position:absolute;right:2px;bottom:2px;width:14px;height:14px;cursor:nwse-resize;
   background:linear-gradient(135deg,transparent 50%,rgba(45,27,46,.35) 50%);border-radius:0 0 8px 0;
@@ -16307,7 +16335,7 @@ body.annot-edit-on .annot-tape:hover .annot-tape-del{display:flex}
 
 /* ---------- area de anotacao (bloco expansivel no fluxo do conteudo) --- */
 .annot-block{
-  margin:14px 0; border-radius:14px; border:1px solid var(--line);
+  position:relative; margin:14px 0; border-radius:14px; border:1px solid var(--line);
   background:var(--panel); overflow:hidden;
 }
 .annot-block-head{display:flex;align-items:center;gap:6px;padding:6px 10px;background:rgba(0,0,0,.05)}
@@ -16320,6 +16348,7 @@ body.light .annot-block-head{background:rgba(0,0,0,.03)}
 }
 .annot-block-toggle:hover,.annot-block-del:hover{border-color:var(--accent);color:var(--accent)}
 .annot-block.closed .annot-block-body{display:none}
+.annot-block.closed .annot-block-resize{display:none!important}
 .annot-block-body{position:relative;padding:10px 12px 12px}
 .annot-block-tools{display:flex;gap:6px;margin-bottom:8px;align-items:center;flex-wrap:wrap}
 .annot-block-tool{
@@ -16334,10 +16363,21 @@ body.light .annot-block-head{background:rgba(0,0,0,.03)}
    botoes de atalho) escrevem direto sobre ele, sem nenhum codigo
    extra. O texto digitado (opcional, via ⌨️) fica em .annot-block-text. */
 .annot-block-text{min-height:48px;font-size:.86rem;line-height:1.55;color:var(--ink);outline:none;position:relative;z-index:1}
-.annot-block-text:empty:before{content:'Toque em ⌨️ para digitar, ou escreva com a caneta';color:var(--muted)}
+.annot-block-body:not(.has-content) .annot-block-text:empty:before{content:'Toque em ⌨️ para digitar, ou escreva com a caneta';color:var(--muted)}
 .annot-block-text img{max-width:100%;border-radius:8px;display:block;margin-top:6px}
+/* alça de redimensionar na borda inferior -- arraste pra baixo pra
+   aumentar a altura utilizavel da area (mais espaço pra escrever com
+   a caneta sem precisar rolar). Barra inteira e a alça (mais facil de
+   acertar com o dedo/caneta do que um cantinho pequeno). */
+.annot-block-resize{
+  position:absolute;left:0;right:0;bottom:0;height:16px;cursor:ns-resize;
+  display:none;align-items:center;justify-content:center;touch-action:none;z-index:3;
+}
+.annot-block-resize:before{content:'';width:36px;height:4px;border-radius:3px;background:var(--line)}
+body.annot-edit-on .annot-block-resize{display:flex}
 body.annot-readmode .annot-block-del,
-body.annot-readmode .annot-block-tools{display:none}
+body.annot-readmode .annot-block-tools,
+body.annot-readmode .annot-block-resize{display:none}
 
 /* indicadores de insercao ("+ anotação"), so aparecem com a ferramenta ativa */
 .annot-slot-indicator{
@@ -16428,7 +16468,6 @@ var ERASER_W = 26;
 var STICKY_SIZE = 150;
 var UNDO=[], REDO=[];
 var DRAW=null;
-var PEN_POINTER_ACTIVE=false;
 var ZONE_ORIG_CHILDREN = (typeof WeakMap!=='undefined') ? new WeakMap() : null;
 
 function isEditMode(){ return PANEL_OPEN; }
@@ -16437,6 +16476,22 @@ function AState(){
   var s=S();
   s.hl=s.hl||{}; s.ink=s.ink||{}; s.stickies=s.stickies||{}; s.tape=s.tape||{}; s.blocks=s.blocks||{};
   return s;
+}
+/* liga/desliga a classe .has-content numa zona ANINHADA (post-it/Area
+   de anotacao) conforme ela tenha ou nao tinta/marca-texto/fita
+   desenhados -- usada pelo CSS pra esconder a dica "toque para
+   digitar..." assim que o usuario escreve com a caneta (antes, a dica
+   so considerava o texto DIGITADO vazio, entao nunca sumia ao
+   desenhar, ficando sobreposta na tinta). Chamada depois de qualquer
+   acao que crie/apague ink/hl/tape numa zona, e uma vez ao religar a
+   zona (wireZone), pra refletir o estado salvo corretamente desde o
+   inicio. Sem efeito em zonas que nao sejam post-it/Area (o CSS que
+   consome essa classe so existe pra elas). */
+function refreshZoneEmptyHint(zone){
+  if(!zone || !zone.classList || !zone.classList.contains('annot-nested-zone')) return;
+  var key=zone.dataset.hlkey, s=AState();
+  var hasContent = !!((s.ink[key]&&s.ink[key].length) || (s.hl[key]&&s.hl[key].length) || (s.tape[key]&&s.tape[key].length));
+  zone.classList.toggle('has-content', hasContent);
 }
 /* save() do motor de anotacoes -- NUNCA falha em silencio. O
    backend (Firestore, via setDoc) valida a estrutura dos dados; se
@@ -16680,6 +16735,7 @@ function hlCommit(zone){
   var st=AState(); st.hl[key]=st.hl[key]||[]; st.hl[key].push(item); asave('marca-texto');
   hlApplyOne(zone, item);
   pushUndo({op:'add',kind:'hl',key:key,zone:zone,item:item});
+  refreshZoneEmptyHint(zone);
   if(window.toast) window.toast('Texto marcado ✓');
 }
 
@@ -16719,17 +16775,32 @@ function inkSvg(zone){
    com qualquer dado que possa ter ficado em cache local). */
 function ptX(p){ return Array.isArray(p) ? p[0] : p.x; }
 function ptY(p){ return Array.isArray(p) ? p[1] : p.y; }
+/* round 7: traço "estilo lettering" -- a tecnica anterior (curva
+   quadratica passando pelo PONTO MEDIO de cada par de pontos) nunca
+   passa pelos pontos realmente capturados, so pelos meios-termos entre
+   eles -- em trechos curvos/cursivos isso "corta caminho" de um jeito
+   que pode ficar com aparencia quebrada/irregular, lembrando lapis em
+   vez de um traço solido e continuo. Trocado por Catmull-Rom
+   convertido em curvas de Bezier cubicas: passa exatamente por CADA
+   ponto capturado, com tangentes continuas entre os segmentos -- e a
+   tecnica padrao pra traço de caneta suave em apps de escrita a mao
+   (GoodNotes/Notability etc). Cor solida e fill:none/stroke-linecap/
+   linejoin:round ja vem da classe .annot-stroke (CSS); repetidos aqui
+   como atributo tambem, por seguranca (nunca depender so de CSS pra
+   algo visualmente critico). */
 function inkPathD(pts){
   var n=pts.length;
   if(n===0) return '';
   if(n===1) return 'M '+ptX(pts[0]).toFixed(2)+' '+ptY(pts[0]).toFixed(2);
   if(n===2) return 'M '+ptX(pts[0]).toFixed(2)+' '+ptY(pts[0]).toFixed(2)+' L '+ptX(pts[1]).toFixed(2)+' '+ptY(pts[1]).toFixed(2);
   var d='M '+ptX(pts[0]).toFixed(2)+' '+ptY(pts[0]).toFixed(2);
-  for(var i=1;i<n-1;i++){
-    var mx=(ptX(pts[i])+ptX(pts[i+1]))/2, my=(ptY(pts[i])+ptY(pts[i+1]))/2;
-    d+=' Q '+ptX(pts[i]).toFixed(2)+' '+ptY(pts[i]).toFixed(2)+' '+mx.toFixed(2)+' '+my.toFixed(2);
+  for(var i=0;i<n-1;i++){
+    var p0=pts[i-1]||pts[i], p1=pts[i], p2=pts[i+1], p3=pts[i+2]||p2;
+    var x0=ptX(p0), y0=ptY(p0), x1=ptX(p1), y1=ptY(p1), x2=ptX(p2), y2=ptY(p2), x3=ptX(p3), y3=ptY(p3);
+    var c1x=x1+(x2-x0)/6, c1y=y1+(y2-y0)/6;
+    var c2x=x2-(x3-x1)/6, c2y=y2-(y3-y1)/6;
+    d+=' C '+c1x.toFixed(2)+' '+c1y.toFixed(2)+' '+c2x.toFixed(2)+' '+c2y.toFixed(2)+' '+x2.toFixed(2)+' '+y2.toFixed(2);
   }
-  d+=' L '+ptX(pts[n-1]).toFixed(2)+' '+ptY(pts[n-1]).toFixed(2);
   return d;
 }
 function inkRenderStroke(svg, stroke){
@@ -16739,6 +16810,9 @@ function inkRenderStroke(svg, stroke){
   p.setAttribute('d', inkPathD(stroke.pts));
   p.setAttribute('stroke', PEN_COLORS[stroke.c]||PEN_COLORS.k);
   p.setAttribute('stroke-width', stroke.w||3);
+  p.setAttribute('fill','none');
+  p.setAttribute('stroke-linecap','round');
+  p.setAttribute('stroke-linejoin','round');
   p.setAttribute('vector-effect','non-scaling-stroke');
   svg.appendChild(p);
   return p;
@@ -16784,6 +16858,7 @@ function penEnd(st){
   var key=st.zone.dataset.hlkey;
   var s=AState(); s.ink[key]=s.ink[key]||[]; s.ink[key].push(st.stroke); asave('traço de caneta');
   pushUndo({op:'add',kind:'ink',key:key,zone:st.zone,item:st.stroke});
+  refreshZoneEmptyHint(st.zone);
 }
 
 /* ===================================================================
@@ -16873,6 +16948,7 @@ function tapeEnd(st){
   var s=AState(); s.tape[key]=s.tape[key]||[]; s.tape[key].push(item); asave('fita');
   tapeWire(st.el, st.zone, item); // promove a PROPRIA previa a elemento definitivo
   pushUndo({op:'add',kind:'tape',key:key,zone:st.zone,item:item});
+  refreshZoneEmptyHint(st.zone);
 }
 
 /* ===================================================================
@@ -17048,12 +17124,16 @@ function stickyCreateAt(zone, xPct, yPct, w, h){
   }
   pushUndo({op:'add',kind:'sticky',key:key,zone:zone,item:item});
   if(window.toast) window.toast('Post-it criado ✓ -- escreva com a caneta, ou toque em ⌨️ para digitar');
-  /* desarma a ferramenta apos UM post-it -- e um "carimbo", nao uma
-     ferramenta de uso continuo como caneta/marca-texto/fita. Sem isso,
-     qualquer toque seguinte na mesma zona (inclusive so pra tirar o
-     foco/continuar lendo) criava OUTRO post-it, dando a impressao de
-     "duplicacao". */
-  TOOL=null; syncBodyClasses(); if(typeof PANEL_OPEN!=='undefined' && PANEL_OPEN) renderPanel();
+  /* troca a ferramenta de 'sticky' para 'pen' assim que o post-it e
+     criado -- nunca fica em 'sticky' (que e um "carimbo", nao uma
+     ferramenta continua: sem isso, qualquer toque seguinte na mesma
+     zona, so pra tirar o foco/continuar lendo, criava OUTRO post-it,
+     dando impressao de "duplicacao"), e vira 'pen' automaticamente
+     para o usuario poder escrever com a caneta NA HORA, sem precisar
+     tocar em mais nada antes (o corpo do post-it e sua propria zona
+     de anotacao -- ver wireZone(bodyZone) em stickyEl -- entao a
+     caneta ja funciona dentro dele imediatamente). */
+  TOOL='pen'; syncBodyClasses(); if(typeof PANEL_OPEN!=='undefined' && PANEL_OPEN) renderPanel();
   return el;
 }
 /* ---- criacao por arrasto ("desenhar" o tamanho com a caneta) ----
@@ -17143,7 +17223,7 @@ function eraseAt(zone,x,y,radius,erasedSet){
       var r=stickyRemove(zone,id); if(r){ pushUndo({op:'remove',kind:'sticky',key:zone.dataset.hlkey,zone:zone,item:r}); hit=true; }
     }
   });
-  if(hit) asave('borracha');
+  if(hit){ asave('borracha'); refreshZoneEmptyHint(zone); }
   return hit;
 }
 function ensureEraserCursor(){
@@ -17226,12 +17306,14 @@ function blockEl(zone, b){
         '<button type="button" class="annot-block-tool" data-tool="eraser" title="Borracha">🗑️</button>'+
       '</div>'+
       '<div class="annot-block-text" contenteditable="'+((isEditMode()&&kbdOn)?'true':'false')+'">'+(b.html||'')+'</div>'+
-    '</div>';
+    '</div>'+
+    '<div class="annot-block-resize" title="Arraste para aumentar a área"></div>';
   var ref=blockInsertRef(zone, b.slot);
   zone.insertBefore(d, ref);
 
   var bodyZone=d.querySelector('.annot-block-body');
   var textEl=d.querySelector('.annot-block-text');
+  if(b.h) textEl.style.minHeight=Math.max(48,b.h)+'px';
   var flush=function(){ blockFlush(zone, b.id, {html:textEl.innerHTML}); };
   textEl.addEventListener('input', flush);
   textEl.addEventListener('blur', flush);
@@ -17242,6 +17324,9 @@ function blockEl(zone, b){
     var open=!d.classList.contains('closed');
     ev.currentTarget.textContent = open ? '▾' : '▸';
     blockFlush(zone, b.id, {open:open});
+    /* reabrindo uma area fechada, em modo de edicao -- arma a caneta
+       na hora, mesmo fluxo rapido da criacao. */
+    if(open && isEditMode()){ TOOL='pen'; syncBodyClasses(); if(PANEL_OPEN) renderPanel(); }
   });
   d.querySelector('.annot-block-del').addEventListener('click', function(ev){
     ev.stopPropagation();
@@ -17283,6 +17368,31 @@ function blockEl(zone, b){
     });
   });
 
+  /* alça de redimensionar (borda inferior): arrastar pra baixo aumenta
+     o min-height do texto -- e por tabela, a altura de toda a zona
+     (o overlay de tinta e absolute/inset:0 dentro dela, entao acompanha
+     automaticamente). preventDefault/stopPropagation logo no
+     pointerdown pra esse gesto nunca ser interpretado como um traço de
+     caneta pela zona por baixo. */
+  var resizeHandle=d.querySelector('.annot-block-resize');
+  resizeHandle.addEventListener('pointerdown', function(ev){
+    if(!isEditMode()) return;
+    ev.preventDefault(); ev.stopPropagation();
+    try{ resizeHandle.setPointerCapture(ev.pointerId); }catch(e){}
+    var startY=ev.clientY, startH=textEl.offsetHeight;
+    function move(mv){
+      var h=Math.max(48, Math.min(900, startH+(mv.clientY-startY)));
+      textEl.style.minHeight=h+'px';
+    }
+    function up(){
+      resizeHandle.removeEventListener('pointermove', move);
+      resizeHandle.removeEventListener('pointerup', up);
+      blockFlush(zone, b.id, {h:parseFloat(textEl.style.minHeight)});
+    }
+    resizeHandle.addEventListener('pointermove', move);
+    resizeHandle.addEventListener('pointerup', up);
+  });
+
   wireZone(bodyZone); // a area do bloco vira sua propria hl-zone (caneta/marca-texto/fita/borracha tambem funcionam dentro dela)
   return d;
 }
@@ -17308,11 +17418,14 @@ function blockCreate(zone, slot){
     return el;
   }
   pushUndo({op:'add',kind:'block',key:key,zone:zone,item:item});
-  renderBlockInsertPoints(zone);
   if(window.toast) window.toast('Área de anotação criada ✓ -- escreva com a caneta, ou toque em ⌨️ para digitar');
   /* NAO foca o texto automaticamente -- a area nasce em modo "papel"
      (pronta pra caneta), forcar foco abriria o teclado sem o usuario
-     pedir. O usuario ativa a digitacao tocando em ⌨️. */
+     pedir. Em vez disso, troca a ferramenta global para 'pen' -- assim
+     o usuario ja pode escrever a mao NA HORA, sem tocar em mais nada
+     antes (fluxo rapido, como pedido). */
+  TOOL='pen'; syncBodyClasses(); if(typeof PANEL_OPEN!=='undefined' && PANEL_OPEN) renderPanel();
+  renderBlockInsertPoints(zone);
   return el;
 }
 function clearBlockInsertPoints(zone){
@@ -17397,44 +17510,17 @@ document.addEventListener('touchend', function(e){
 }, {passive:true});
 
 /* ===================================================================
-   ROLAGEM MANUAL POR TOQUE -- ja que touch-action:pinch-zoom desliga a
-   rolagem NATIVA por arrasto dentro de qualquer .hl-zone em modo de
-   edicao (para que a caneta pare de "roubar" rolagem da pagina), um
-   dedo arrastando precisa continuar rolando a pagina -- so que agora
-   por codigo. So entra em acao para pointerType 'touch' que NAO esteja
-   sendo usado por nenhuma ferramenta no momento (ex.: a Borracha
-   aceita toque de proposito, e nesse caso NAO deve rolar).
+   ROLAGEM POR TOQUE -- round 7: NAO existe mais nenhum JS de rolagem
+   manual aqui de proposito (ver o comentario grande na CSS, acima,
+   "ROLAGEM E REJEICAO DE PALMA -- arquitetura v2"). O dedo rola a
+   pagina de forma 100% NATIVA (touch-action:pan-y na .hl-zone permite
+   isso), em qualquer ferramenta, sem excecao. So a caneta intercepta
+   seu proprio gesto (preventDefault dentro do handler de cada
+   ferramenta, mais abaixo). Um scrollBy manual reimplementado a mao
+   foi a causa raiz dos bugs de "nao rola"/"pisca" nos rounds
+   anteriores -- a solucao definitiva e simplesmente NAO competir com
+   o navegador.
    =================================================================== */
-var TOUCH_SCROLL=null; // {pid,x,y}
-document.addEventListener('pointerdown', function(ev){
-  if(ev.pointerType!=='touch') return;
-  if(!isEditMode()) return;
-  if(!ev.target || !ev.target.closest || !ev.target.closest('.hl-zone')) return;
-  if(DRAW && DRAW.pid===ev.pointerId) return; // ja e dono de outro gesto (ex.: Borracha por toque)
-  if(PEN_POINTER_ACTIVE) return; // rejeicao de palma: a caneta esta escrevendo, ignora QUALQUER outro toque por completo
-  TOUCH_SCROLL={pid:ev.pointerId, x:ev.clientX, y:ev.clientY};
-}, {passive:true});
-/* IMPORTANTE: este listener precisa ser passive:false + preventDefault.
-   touch-action:pinch-zoom por si so NEM SEMPRE e suficiente pra
-   suprimir 100% da rolagem nativa em todo motor/dispositivo -- e sem
-   preventDefault aqui, a rolagem NATIVA continuava acontecendo AO
-   MESMO TEMPO que este scrollBy manual, entao os dois ficavam
-   competindo pela mesma posicao de rolagem (dobrando o deslocamento e
-   cada um reagindo ao "erro" causado pelo outro) -- isso e exatamente
-   o que produzia a tela "piscando"/oscilando rapido pra cima e pra
-   baixo ao rolar em modo de edicao. Com preventDefault, so o nosso
-   scrollBy manual controla a posicao; a rolagem nativa nunca chega a
-   competir. */
-document.addEventListener('pointermove', function(ev){
-  if(!TOUCH_SCROLL || ev.pointerId!==TOUCH_SCROLL.pid) return;
-  ev.preventDefault();
-  var dy=ev.clientY-TOUCH_SCROLL.y;
-  TOUCH_SCROLL.y=ev.clientY; TOUCH_SCROLL.x=ev.clientX;
-  if(dy) window.scrollBy(0, -dy);
-}, {passive:false});
-function endTouchScroll(ev){ if(TOUCH_SCROLL && ev.pointerId===TOUCH_SCROLL.pid) TOUCH_SCROLL=null; }
-document.addEventListener('pointerup', endTouchScroll, {passive:true});
-document.addEventListener('pointercancel', endTouchScroll, {passive:true});
 
 /* ===================================================================
    ROTEAMENTO DE PONTEIRO POR ZONA
@@ -17505,32 +17591,29 @@ function wireZonePointer(zone){
         var r0=document.createRange(); r0.setStart(c0.node,c0.offset); r0.collapse(true);
         sel0.addRange(r0);
       }catch(err){}
-      PEN_POINTER_ACTIVE=true; // mesma rejeicao de palma usada por caneta/fita durante o gesto
       DRAW={kind:'hl', zone:zone, anchorNode:c0.node, anchorOffset:c0.offset, pid:ev.pointerId};
       return;
     }
 
-    if(ev.pointerType==='touch'){ ev.preventDefault(); return; } // dedo nunca escreve/tampa -- so rola (ver ROLAGEM MANUAL)
+    /* dedo (touch) daqui pra baixo NUNCA desenha/tampa -- e tambem
+       NUNCA sofre preventDefault: deixamos a rolagem NATIVA (pan-y)
+       cuidar do toque sozinha, sem nenhum JS no meio. So a caneta
+       (pointerType 'pen'/'mouse') continua abaixo. */
+    if(ev.pointerType==='touch') return;
 
     /* pointerType 'pen' ou 'mouse' daqui pra baixo -- caneta e fita.
-       Pressiona a rejeicao de palma ANTES de comecar, para que
-       qualquer dedo que toque durante o gesto seja ignorado (ver o
-       listener de pointerdown da ROLAGEM MANUAL, acima, que tambem
-       checa esse mesmo PEN_POINTER_ACTIVE). */
+       preventDefault AQUI (e no pointermove, abaixo) e o UNICO
+       mecanismo que impede a propria caneta de acionar rolagem nativa
+       -- nao ha mais nenhum JS de rolagem paralelo pra manter em
+       sincronia com isso. */
     ev.preventDefault(); ev.stopPropagation();
     try{ zone.setPointerCapture(ev.pointerId); }catch(err){}
-    PEN_POINTER_ACTIVE=true;
     var started=null;
     try{
       if(TOOL==='pen') started={kind:'pen', st:penStart(zone, ev.clientX, ev.clientY, ev.pressure), pid:ev.pointerId};
       else if(TOOL==='tape') started={kind:'tape', st:tapeStart(zone, ev.clientX, ev.clientY), pid:ev.pointerId};
     }catch(err){ started=null; }
     DRAW=started;
-    /* nada foi realmente iniciado (penStart/tapeStart lançou excecao)
-       -- libera a rejeicao de palma NA HORA, sem esperar um pointerup
-       que nunca vai casar com DRAW.pid; sem isso a zona ficava "presa"
-       rejeitando todo toque seguinte para sempre. */
-    if(!DRAW) PEN_POINTER_ACTIVE=false;
   }, {capture:true, passive:false});
 
   zone.addEventListener('pointermove', function(ev){
@@ -17554,9 +17637,6 @@ function wireZonePointer(zone){
   }, {passive:false});
 
   function finish(ev){
-    /* limpeza SEMPRE roda, mesmo se este pointerId nao for o dono do
-       DRAW atual -- evita qualquer flag/estado que fique preso. */
-    PEN_POINTER_ACTIVE=false;
     if(!DRAW || ev.pointerId!==DRAW.pid) return;
     try{
       if(DRAW.kind==='pen') penEnd(DRAW.st);
@@ -17588,10 +17668,15 @@ function renderPanel(){
   panel.classList.toggle('min', PANEL_MIN);
 
   if(PANEL_MIN){
-    panel.innerHTML='<button class="annot-min-btn" id="annot-expand" title="Expandir">▢</button>';
-    document.getElementById('annot-expand').onclick=function(){ PANEL_MIN=false; renderPanel(); };
+    /* minimizado: NAO existe mais um botao pequeno dentro da barra --
+       a barra inteira e a area de toque (o usuario pode tocar em
+       qualquer lugar dela pra expandir, sem precisar acertar um alvo
+       pequeno). O click fica no PROPRIO elemento .annot-panel. */
+    panel.innerHTML='<div class="annot-panel-minbar">✏️ Toque para expandir</div>';
+    panel.onclick=function(){ PANEL_MIN=false; renderPanel(); };
     return;
   }
+  panel.onclick=null; // painel aberto: nao herda o click do estado minimizado anterior
 
   var html='<div class="annot-panel-head"><span class="annot-panel-title">Anotações</span><button class="annot-min-btn" id="annot-min" title="Minimizar">–</button></div>';
   html+='<div class="annot-tools">'+
@@ -17686,6 +17771,7 @@ function wireZone(zone){
   stickyApplyZone(zone);
   blocksApplyZone(zone);
   wireZonePointer(zone);
+  refreshZoneEmptyHint(zone);
   if(!zone.classList.contains('annot-nested-zone')) renderBlockInsertPoints(zone);
 }
 function scanMain(){
