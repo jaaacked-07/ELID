@@ -16114,8 +16114,7 @@ window.CONTENT['asma|4'] = C;
    MODO DE ANOTACOES E REVISAO -- estilos (aditivo)
    Reaproveita as variaveis de tema ja existentes (--accent, --accent2,
    --bg, --ink, --muted, --panel, --line) e os padroes visuais ja usados
-   na plataforma (botao circular estilo .tb-btn, cartao com blur estilo
-   .ac-fc-card, toast). Nao introduz paleta nova.
+   na plataforma. Nao introduz paleta nova.
    =================================================================== */
 
 /* ---------- zona anotavel: precisa de position:relative para hospedar
@@ -16170,6 +16169,7 @@ body.light .annot-panel{background:rgba(255,255,255,.85)}
 .annot-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:0 2px}
 .annot-swatch{width:26px;height:26px;border-radius:50%;border:2px solid transparent;cursor:pointer;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
 .annot-swatch.on{border-color:var(--ink);transform:scale(1.1)}
+.annot-swatch.sm{width:18px;height:18px}
 .annot-thickness{flex:1;display:flex;align-items:center;gap:8px}
 .annot-thickness input{flex:1;accent-color:var(--accent)}
 .annot-sep{height:1px;background:var(--line);margin:2px 0}
@@ -16178,8 +16178,6 @@ body.light .annot-panel{background:rgba(255,255,255,.85)}
   color:var(--ink);cursor:pointer;font-size:.78rem;display:flex;align-items:center;justify-content:center;gap:5px}
 .annot-foot button:hover{border-color:var(--accent);color:var(--accent)}
 .annot-foot button:disabled{opacity:.35;cursor:default;pointer-events:none}
-.annot-foot button.warn{color:#e8675f}
-.annot-foot button.warn:hover{border-color:#e8675f}
 .annot-readmsg{font-size:.76rem;color:var(--muted);line-height:1.5;padding:4px 4px 2px}
 
 /* ---------- destaque de texto (mark) ---------- */
@@ -16192,13 +16190,12 @@ mark.uhl[data-c="g"]{background:#b7e8c4}
 mark.uhl[data-c="o"]{background:#f6cfa0}
 body.annot-eraser-armed mark.uhl:hover{outline:2px dashed #e8675f;outline-offset:1px}
 
-/* ---------- caneta (overlay svg) ---------- */
+/* ---------- caneta (overlay svg) -- traco suave por curvas ---------- */
 .annot-ink-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
 .annot-stroke{fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:stroke;cursor:pointer}
 body.annot-eraser-armed .annot-stroke:hover{filter:drop-shadow(0 0 0 2px #e8675f)}
 
-/* ---------- cursor da borracha: circulo que acompanha a caneta/mouse
-   mostrando exatamente a area que sera apagada ao passar por cima --- */
+/* ---------- cursor da borracha ---------- */
 .annot-eraser-cursor{
   position:fixed; z-index:200; border-radius:50%;
   border:2px solid #e8675f; background:rgba(232,103,95,.16);
@@ -16231,12 +16228,15 @@ body.annot-edit-on .annot-tape:hover .annot-tape-del{display:flex}
 .annot-sticky[data-c="b"]{background:#cfe6fc}
 .annot-sticky[data-c="g"]{background:#c7ecd2}
 .annot-sticky-head{display:flex;align-items:center;justify-content:space-between;padding:4px 6px;
-  cursor:grab;background:rgba(0,0,0,.06);flex:none;touch-action:none}
+  cursor:grab;background:rgba(0,0,0,.06);flex:none;touch-action:none;gap:4px}
 .annot-sticky-head:active{cursor:grabbing}
-.annot-sticky-handle{font-size:.7rem;color:rgba(45,27,46,.5);letter-spacing:.1em}
-.annot-sticky-del{width:18px;height:18px;border-radius:50%;border:none;background:rgba(45,27,46,.16);
-  color:#2d1b2e;font-size:.62rem;cursor:pointer;display:none;align-items:center;justify-content:center}
-.annot-sticky-head:hover .annot-sticky-del{display:flex}
+.annot-sticky-handle{font-size:.7rem;color:rgba(45,27,46,.5);letter-spacing:.1em;flex:1}
+.annot-sticky-headbtns{display:flex;gap:2px}
+.annot-sticky-color,.annot-sticky-del{width:18px;height:18px;border-radius:50%;border:none;background:rgba(45,27,46,.16);
+  color:#2d1b2e;font-size:.6rem;cursor:pointer;display:none;align-items:center;justify-content:center}
+.annot-sticky-head:hover .annot-sticky-color,.annot-sticky-head:hover .annot-sticky-del{display:flex}
+.annot-sticky-colors{display:none;gap:4px;padding:4px 6px;background:rgba(0,0,0,.05);flex:none}
+.annot-sticky-colors.open{display:flex}
 .annot-sticky-body{flex:1;padding:6px 8px;font-size:.76rem;line-height:1.4;color:#2d1b2e;
   outline:none;overflow:auto;word-break:break-word}
 .annot-sticky-body:empty:before{content:'Toque para escrever...';color:rgba(45,27,46,.4)}
@@ -16250,9 +16250,52 @@ body.annot-edit-on .annot-tape:hover .annot-tape-del{display:flex}
 .annot-sticky:hover .annot-sticky-resize{display:block}
 .annot-sticky.readonly .annot-sticky-head{cursor:default}
 .annot-sticky.readonly .annot-sticky-del,
+.annot-sticky.readonly .annot-sticky-color,
 .annot-sticky.readonly .annot-sticky-foot,
 .annot-sticky.readonly .annot-sticky-resize{display:none!important}
 .annot-sticky.readonly .annot-sticky-body{cursor:default}
+
+/* ---------- area de anotacao (bloco expansivel no fluxo do conteudo) --- */
+.annot-block{
+  margin:14px 0; border-radius:14px; border:1px solid var(--line);
+  background:var(--panel); overflow:hidden;
+}
+.annot-block-head{display:flex;align-items:center;gap:6px;padding:6px 10px;background:rgba(0,0,0,.05)}
+body.light .annot-block-head{background:rgba(0,0,0,.03)}
+.annot-block-tag{font-size:.74rem;color:var(--accent);letter-spacing:.02em}
+.annot-block-spacer{flex:1}
+.annot-block-toggle,.annot-block-del{
+  width:24px;height:24px;border-radius:7px;border:1px solid transparent;background:transparent;
+  color:var(--muted);cursor:pointer;font-size:.76rem;display:flex;align-items:center;justify-content:center;
+}
+.annot-block-toggle:hover,.annot-block-del:hover{border-color:var(--accent);color:var(--accent)}
+.annot-block.closed .annot-block-body{display:none}
+.annot-block-body{position:relative;padding:10px 12px 12px}
+.annot-block-tools{display:flex;gap:6px;margin-bottom:8px}
+.annot-block-tool{
+  width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--bg);
+  display:flex;align-items:center;justify-content:center;font-size:.86rem;cursor:pointer;
+}
+.annot-block-tool:hover{border-color:var(--accent)}
+.annot-block-text{min-height:48px;font-size:.86rem;line-height:1.55;color:var(--ink);outline:none}
+.annot-block-text:empty:before{content:'Toque para escrever sua anotação...';color:var(--muted)}
+.annot-block-text img{max-width:100%;border-radius:8px;display:block;margin-top:6px}
+body.annot-readmode .annot-block-del,
+body.annot-readmode .annot-block-tools{display:none}
+
+/* indicadores de insercao ("+ anotação"), so aparecem com a ferramenta ativa */
+.annot-slot-indicator{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  width:100%;margin:8px 0;padding:4px 0;border:none;background:none;cursor:pointer;
+}
+.annot-slot-indicator::before,.annot-slot-indicator::after{
+  content:'';flex:1;height:1px;background:var(--accent);opacity:.35;
+}
+.annot-slot-indicator span{
+  font-size:.68rem;color:var(--accent);border:1px dashed var(--accent);
+  border-radius:20px;padding:3px 12px;white-space:nowrap;opacity:.85;background:var(--bg);
+}
+.annot-slot-indicator:hover span{opacity:1}
 
 /* ---------- responsivo: tablet/celular ---------- */
 @media(pointer:coarse), (max-width:880px){
@@ -16270,8 +16313,7 @@ body.annot-edit-on .annot-tape:hover .annot-tape-del{display:flex}
   .annot-sticky{width:130px;min-height:96px}
 }
 
-/* ---------- modo apenas-leitura (painel fechado): nada editavel, so
-   a visualizacao do que ja foi anotado --- */
+/* ---------- modo apenas-leitura (painel fechado) --- */
 body.annot-readmode .annot-sticky-del,
 body.annot-readmode .annot-tape-del,
 body.annot-readmode .annot-sticky-resize,
@@ -16283,53 +16325,35 @@ body.annot-readmode .annot-sticky-resize{display:none!important}
 <script>
 /* ===================================================================
    MODO DE ANOTACOES E REVISAO (aditivo)
-   Barra de ferramentas completa: Caneta, Marca-texto (multi-cor),
-   Post-it (com foto e tamanho ajustavel), Fita de oclusao e Borracha
-   (com raio ajustavel), com Desfazer/Refazer.
+   Caneta (traco suave), Marca-texto, Post-it, Fita de oclusao, Borracha
+   (raio ajustavel) e Area de anotacao (bloco expansivel no fluxo do
+   conteudo), com Desfazer/Refazer e gesto de 2 dedos/2 toques.
 
    Reaproveita 100% a infraestrutura ja existente:
-   - toda .hl-zone[data-hlkey] (teoria por sub-aba, escores, dif, mapa,
-     fluxo_dx, fluxo_cond, vespera, dicas, casos) vira automaticamente
-     uma "pagina" anotavel -- a mesma data-hlkey e usada como chave de
-     posicao pra TODAS as ferramentas (destaque, tinta, post-it, fita).
-   - S()/save() (nucleo Firebase+localStorage) -- os dados
-     (S().ink, S().stickies, S().tape, S().hl) entram no mesmo pipeline
-     de merge local+nuvem que ja existe pra done/srs/notes, portanto
-     ficam salvos no login do usuario e sincronizados entre aparelhos.
-   - MutationObserver em #main, igual ao script antigo de highlight:
-     como toda navegacao faz #main.innerHTML=..., qualquer zona nova
-     e pega automaticamente sem precisar tocar nas funcoes de render.
+   - toda .hl-zone[data-hlkey] vira uma "pagina" anotavel -- a mesma
+     data-hlkey e usada como chave de posicao pra todas as ferramentas.
+   - S()/save() -- os dados (hl/ink/stickies/tape/blocks) entram no
+     mesmo pipeline de merge local+nuvem que ja existe, ficando salvos
+     no login do usuario.
+   - MutationObserver em #main: qualquer .hl-zone nova (inclusive as
+     que nascem DENTRO de uma Area de anotacao) e pega automaticamente.
 
-   MODO LEITURA x EDICAO (regra nova, mais simples): o modo edicao so
-   fica ativo enquanto o painel de ferramentas esta ABERTO (usuario
-   clicou no lapis flutuante). Fechou o painel -> volta a leitura
-   automaticamente. Nao existe mais um botao manual de "Leitura"
-   dentro do painel -- ele e redundante com o proprio icone do lapis.
-   Minimizar o painel (manual ou automatico ao tocar fora dele)
-   MANTEM o modo edicao ativo, so tira a caixa de ferramentas da
-   frente pra continuar desenhando/escrevendo sem ela atrapalhar.
+   MODO LEITURA x EDICAO: edicao = painel de ferramentas aberto. Fechou
+   o painel (icone do lapis) -> volta a leitura. Minimizar o painel
+   (manual ou automatico ao tocar fora dele) MANTEM a edicao ativa.
 
-   CANETA / STYLUS x DEDO (critico): Caneta, Marca-texto e Fita (as 3
-   ferramentas de gesto livre/arrasto) só respondem a pointerType
-   'pen' ou 'mouse' -- pointerType 'touch' é ignorado nesses gestos de
-   CRIACAO, deixando o dedo livre pra rolar a pagina normalmente. Alem
-   do filtro por pointerType, a zona troca dinamicamente seu
-   touch-action para 'none' SOMENTE durante o gesto de caneta/mouse em
-   andamento (setado no pointerdown, revertido no pointerup/cancel) --
-   isso impede que o navegador interprete o traço da caneta como
-   rolagem, sem precisar desabilitar rolagem por toque permanentemente
-   (a regra CSS base, pan-y, continua valendo pro dedo o tempo todo).
-   Rejeicao de palma (nao deixar a mao apoiada virar traço) e reforçada
-   em 2 camadas: pelo pointerType (touch nunca desenha) e por um flag
-   PEN_POINTER_ACTIVE que descarta qualquer toque de dedo concorrente
-   enquanto a caneta esta desenhando; a rejeicao de palma nativa do
-   hardware/SO, quando suportada, atua por cima disso.
-   Mover um post-it existente, redimensiona-lo ou apagar (Borracha)
-   continuam funcionando com qualquer ponteiro, inclusive o dedo, por
-   serem interacoes discretas sobre algo que ja existe, nao criacao de
-   traço livre -- e por isso a Borracha usa touch-action:none proprio
-   enquanto ativa (ela QUER capturar o dedo pra apagar, ao contrario
-   das outras ferramentas de gesto).
+   CANETA / STYLUS x DEDO: Caneta, Marca-texto, Fita e Borracha por
+   arrasto so respondem a pointerType 'pen'/'mouse' nos gestos de
+   CRIACAO (Borracha tambem aceita 'touch', de propósito). touch-action
+   e trocado dinamicamente por gesto (none durante o traço, revertendo
+   pro pan-y do CSS ao soltar) e ha rejeicao de palma via flag enquanto
+   a caneta desenha.
+
+   ZONAS ANINHADAS: a Area de anotacao cria sua propria .hl-zone
+   independente dentro do conteudo. Todo pointerdown verifica se o
+   .hl-zone mais proximo do alvo real do evento é a propria zona atual
+   -- se nao for (o evento pertence a uma zona aninhada), a zona de
+   fora ignora e deixa a zona aninhada cuidar sozinha.
    =================================================================== */
 (function(){
 "use strict";
@@ -16339,22 +16363,21 @@ var PEN_COLORS    = {k:'#3a2a3d', r:'#e8675f', b:'#6db3f2', o:'#f59f0a', p:'#fcb
 var TAPE_COLORS   = {n:'#e6d3ad', g:'#cdc6d6', k:'#6a5570', p:'#f3c6de'};
 var STICKY_COLORS = {y:'#f6e6ac', p:'#f6d3e6', b:'#cfe6fc', g:'#c7ecd2'};
 
-var TOOL = null;              // null | 'pen' | 'hl' | 'sticky' | 'tape' | 'eraser'
+var TOOL = null;              // null | 'pen' | 'hl' | 'sticky' | 'tape' | 'eraser' | 'block'
 var PANEL_OPEN = false, PANEL_MIN = false;
 var PEN_C='k', PEN_W=3, HL_C='y', TAPE_C='n', STICKY_C='y';
-var ERASER_W = 26;            // diametro do pincel da borracha, em px de tela
-var STICKY_SIZE = 150;        // largura padrao (px) de um post-it novo
+var ERASER_W = 26;
+var STICKY_SIZE = 150;
 var UNDO=[], REDO=[];
-var DRAW=null;                // gesto de criacao/apagamento em andamento
-var PEN_POINTER_ACTIVE=false; // true enquanto caneta/mouse esta desenhando (p/ rejeicao de palma)
+var DRAW=null;
+var PEN_POINTER_ACTIVE=false;
+var ZONE_ORIG_CHILDREN = (typeof WeakMap!=='undefined') ? new WeakMap() : null;
 
-/* modo edicao = painel de ferramentas aberto (nao depende mais de um
-   estado salvo -- e sempre "leitura" ate o usuario tocar no lapis) */
 function isEditMode(){ return PANEL_OPEN; }
 
 function AState(){
   var s=S();
-  s.hl=s.hl||{}; s.ink=s.ink||{}; s.stickies=s.stickies||{}; s.tape=s.tape||{};
+  s.hl=s.hl||{}; s.ink=s.ink||{}; s.stickies=s.stickies||{}; s.tape=s.tape||{}; s.blocks=s.blocks||{};
   return s;
 }
 function uid(pre){ return pre+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7); }
@@ -16364,17 +16387,23 @@ function toPct(zone, clientX, clientY){
   var x=(clientX-r.left)/Math.max(1,r.width)*100, y=(clientY-r.top)/Math.max(1,r.height)*100;
   return [Math.max(0,Math.min(100,x)), Math.max(0,Math.min(100,y))];
 }
-function updateStickiesInteractivity(){
+function updateEditableSurfaces(){
   var edit=isEditMode();
   document.querySelectorAll('.annot-sticky').forEach(function(d){
     d.classList.toggle('readonly', !edit);
     var body=d.querySelector('.annot-sticky-body');
     if(body) body.setAttribute('contenteditable', edit?'true':'false');
   });
+  document.querySelectorAll('.annot-block-text').forEach(function(t){
+    t.setAttribute('contenteditable', edit?'true':'false');
+  });
 }
 function updateEraserCursorVisibility(){
   var el=document.getElementById('annot-eraser-cursor');
   if(el && !(isEditMode() && TOOL==='eraser')) el.style.display='none';
+}
+function refreshAllBlockInsertPoints(){
+  document.querySelectorAll('.hl-zone[data-annot-wired]:not(.annot-nested-zone)').forEach(renderBlockInsertPoints);
 }
 function syncBodyClasses(){
   var b=document.body, edit=isEditMode();
@@ -16383,35 +16412,42 @@ function syncBodyClasses(){
   b.classList.toggle('annot-writing', edit && (TOOL==='pen'||TOOL==='hl'||TOOL==='tape'));
   b.classList.toggle('annot-erasing', edit && TOOL==='eraser');
   b.classList.toggle('annot-eraser-armed', edit && TOOL==='eraser');
-  updateStickiesInteractivity();
+  updateEditableSurfaces();
   updateEraserCursorVisibility();
+  refreshAllBlockInsertPoints();
 }
 
 /* ===================================================================
    DESTAQUE DE TEXTO (marca-texto) -- multi-cor, seguro com SVG embutido
+   e com zonas aninhadas (Area de anotacao)
    =================================================================== */
 function inSvg(node){
   var el = node.nodeType===1 ? node : node.parentElement;
   while(el){ if(el.tagName && el.tagName.toLowerCase()==='svg') return true; el=el.parentElement; }
   return false;
 }
-/* TreeWalker que IGNORA qualquer texto dentro de <svg> -- os 5 SVGs
-   premium de cada aula de teoria ficam dentro da mesma .hl-zone, e sem
-   esse filtro um <mark> (elemento HTML) podia acabar inserido dentro
-   do namespace SVG, invalidando e escondendo o desenho. */
+function inNestedZone(node, zone){
+  var el = node.nodeType===1 ? node : node.parentElement;
+  while(el && el!==zone){
+    if(el.classList && el.classList.contains('hl-zone')) return true;
+    el=el.parentElement;
+  }
+  return false;
+}
+/* TreeWalker que IGNORA texto dentro de <svg> e dentro de qualquer
+   .hl-zone aninhada (ex.: o corpo de uma Area de anotacao) -- cada
+   zona so enxerga o proprio texto. */
 function hlWalker(zone){
   return document.createTreeWalker(zone, NodeFilter.SHOW_TEXT, {
-    acceptNode:function(n){ return inSvg(n) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }
+    acceptNode:function(n){ return (inSvg(n)||inNestedZone(n,zone)) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }
   });
 }
 function hlOffsetAt(zone, node, offset){
-  if(node && node.nodeType===3 && !inSvg(node)){
+  if(node && node.nodeType===3 && !inSvg(node) && !inNestedZone(node,zone)){
     var w=hlWalker(zone), n, pos=0;
     while((n=w.nextNode())){ if(n===node) return pos+offset; pos+=n.nodeValue.length; }
     return pos;
   }
-  // ponto caiu num elemento (ou dentro do svg): usa o 1o no de texto
-  // valido que vem depois dele na ordem do documento como referencia
   var anchor = (node && node.nodeType===1) ? (node.childNodes[offset]||node) : node;
   var w2=hlWalker(zone), n2, pos2=0;
   while((n2=w2.nextNode())){
@@ -16457,8 +16493,8 @@ function hlRemove(zone, id){
   return removed;
 }
 function caretFromPoint(x,y){
-  if(document.caretRangeFromPoint){ var r=document.caretRangeFromPoint(x,y); return r?{node:r.startContainer,offset:r.startOffset}:null; }
-  if(document.caretPositionFromPoint){ var p=document.caretPositionFromPoint(x,y); return p?{node:p.offsetNode,offset:p.offset}:null; }
+  if(document.caretRangeFromPoint){ var r=document.caretRangeFromPoint(x,y); if(r) return {node:r.startContainer,offset:r.startOffset}; }
+  if(document.caretPositionFromPoint){ var p=document.caretPositionFromPoint(x,y); if(p) return {node:p.offsetNode,offset:p.offset}; }
   return null;
 }
 function hlDragStart(zone,x,y){
@@ -16466,15 +16502,22 @@ function hlDragStart(zone,x,y){
   var a=hlOffsetAt(zone,c.node,c.offset);
   return {zone:zone, anchor:a, s:a, e:a};
 }
+/* IMPORTANTE: s/e sao recalculados de forma SINCRONA a cada movimento
+   -- so o REPINTE visual (preview) e que e jogado pro proximo frame via
+   requestAnimationFrame, por performance. Antes, o calculo de s/e
+   inteiro estava dentro do RAF, e um gesto rapido (arrastar e soltar
+   entre dois frames) fazia pointerup disparar ANTES do RAF calcular
+   nada, entao s/e ficavam iguais ao ancora e o marca-texto nao
+   registrava nada -- esse era o bug real por tras de "passar a caneta
+   e nada acontece". */
 var hlRAF=null;
 function hlDragUpdate(st,x,y){
-  st._x=x; st._y=y;
+  var c=caretFromPoint(x,y); if(!c) return;
+  var off=hlOffsetAt(st.zone,c.node,c.offset);
+  st.s=Math.min(st.anchor,off); st.e=Math.max(st.anchor,off);
   if(hlRAF) return;
   hlRAF=requestAnimationFrame(function(){
     hlRAF=null;
-    var c=caretFromPoint(st._x, st._y); if(!c) return;
-    var off=hlOffsetAt(st.zone,c.node,c.offset);
-    st.s=Math.min(st.anchor,off); st.e=Math.max(st.anchor,off);
     hlClearMark(st.zone,'tmp');
     if(st.e>st.s) hlApplyOne(st.zone, {id:'tmp', s:st.s, e:st.e, c:HL_C});
   });
@@ -16489,14 +16532,17 @@ function hlDragEnd(st){
 }
 
 /* ===================================================================
-   CANETA (tinta livre) -- overlay SVG por zona
+   CANETA (tinta livre) -- overlay SVG por zona, com traco SUAVE.
    Pontos guardados em % (0-100) da largura/altura da zona no momento
-   do traço (viewBox "0 0 100 100", preserveAspectRatio="none"). Isso
-   mantém o traço colado ao conteúdo em qualquer tela sem precisar
-   recalcular nada; a única contrapartida (simplificação deliberada) é
-   que, se a proporção da zona mudar bastante entre o dispositivo onde
-   se desenhou e onde se revê, o traço pode esticar levemente -- a
-   espessura em si fica constante via vector-effect="non-scaling-stroke".
+   do traço. A suavizacao usa curvas quadraticas passando pelo PONTO
+   MEDIO de cada par de pontos consecutivos (tecnica classica de
+   "smooth freehand drawing"): cada ponto capturado vira um ponto de
+   controle, e a curva real passa pelos pontos medios entre eles --
+   isso elimina a aparencia de polígono/serrilhado de um path com só
+   segmentos "L" (reta a reta) e aproxima o resultado de escrever a
+   mao (estilo GoodNotes). Pontos capturados muito proximos entre si
+   sao descartados (reduz ruido de amostragem em alta frequencia sem
+   perder fidelidade perceptível do traço).
    =================================================================== */
 function inkSvg(zone){
   var svg=zone.querySelector(':scope > svg.annot-ink-svg');
@@ -16510,9 +16556,16 @@ function inkSvg(zone){
   return svg;
 }
 function inkPathD(pts){
-  if(!pts.length) return '';
+  var n=pts.length;
+  if(n===0) return '';
+  if(n===1) return 'M '+pts[0][0].toFixed(2)+' '+pts[0][1].toFixed(2);
+  if(n===2) return 'M '+pts[0][0].toFixed(2)+' '+pts[0][1].toFixed(2)+' L '+pts[1][0].toFixed(2)+' '+pts[1][1].toFixed(2);
   var d='M '+pts[0][0].toFixed(2)+' '+pts[0][1].toFixed(2);
-  for(var i=1;i<pts.length;i++) d+=' L '+pts[i][0].toFixed(2)+' '+pts[i][1].toFixed(2);
+  for(var i=1;i<n-1;i++){
+    var mx=(pts[i][0]+pts[i+1][0])/2, my=(pts[i][1]+pts[i+1][1])/2;
+    d+=' Q '+pts[i][0].toFixed(2)+' '+pts[i][1].toFixed(2)+' '+mx.toFixed(2)+' '+my.toFixed(2);
+  }
+  d+=' L '+pts[n-1][0].toFixed(2)+' '+pts[n-1][1].toFixed(2);
   return d;
 }
 function inkRenderStroke(svg, stroke){
@@ -16547,30 +16600,34 @@ function penStart(zone,x,y,pressure){
 }
 var penRAF=null;
 function penMove(st,x,y){
-  st.stroke.pts.push(toPct(st.zone,x,y));
+  var p=toPct(st.zone,x,y);
+  var last=st.stroke.pts[st.stroke.pts.length-1];
+  if(last){
+    var dx=p[0]-last[0], dy=p[1]-last[1];
+    if((dx*dx+dy*dy) < 0.02) return; // ponto novo praticamente identico ao anterior -- ignora
+  }
+  st.stroke.pts.push(p);
   if(penRAF) return;
   penRAF=requestAnimationFrame(function(){ penRAF=null; if(st.el) st.el.setAttribute('d', inkPathD(st.stroke.pts)); });
 }
 function penEnd(st){
   if(!st) return;
   if(st.stroke.pts.length<2){ st.el.remove(); return; }
+  st.el.setAttribute('d', inkPathD(st.stroke.pts)); // garante o path final completo, mesmo se o ultimo RAF nao tiver rodado
   var key=st.zone.dataset.hlkey;
   var s=AState(); s.ink[key]=s.ink[key]||[]; s.ink[key].push(st.stroke); save();
   pushUndo({op:'add',kind:'ink',key:key,zone:st.zone,item:st.stroke});
 }
 
 /* ===================================================================
-   FITA DE OCLUSAO -- cobre um trecho; toque revela. O estado "revelado"
-   é sempre efêmero (não é salvo): toda vez que a página é reaberta a
-   fita volta a cobrir, exatamente pra funcionar como exercício de
-   revisão ativa (perguntar de novo, não só lembrar que já revelou).
+   FITA DE OCLUSAO -- cobre um trecho; toque revela. A previa exibida
+   durante o arrasto e PROMOVIDA diretamente a elemento definitivo ao
+   soltar (nunca removida e recriada) -- assim nao existe nenhuma
+   janela de tempo em que a fita possa "sumir" da tela.
    =================================================================== */
-function tapeEl(zone, t){
-  var d=document.createElement('div');
+function tapeWire(d, zone, t){
   d.className='annot-tape'; d.dataset.tapeid=t.id; d.dataset.c=t.c||'n';
-  d.style.left=t.x+'%'; d.style.top=t.y+'%'; d.style.width=t.w+'%'; d.style.height=t.h+'%';
   d.innerHTML='<span class="annot-tape-lbl">toque p/ revelar</span><button class="annot-tape-del" title="Excluir">×</button>';
-  zone.appendChild(d);
   d.addEventListener('click', function(ev){
     if(ev.target.closest('.annot-tape-del')) return;
     if(TOOL==='eraser') return; // apagar com a Borracha e tratado no gesto de pointerdown/drag (eraseAt)
@@ -16582,6 +16639,12 @@ function tapeEl(zone, t){
     var removed=tapeRemove(zone, t.id);
     if(removed){ pushUndo({op:'remove',kind:'tape',key:zone.dataset.hlkey,zone:zone,item:removed}); save(); }
   });
+}
+function tapeEl(zone, t){
+  var d=document.createElement('div');
+  d.style.left=t.x+'%'; d.style.top=t.y+'%'; d.style.width=t.w+'%'; d.style.height=t.h+'%';
+  zone.appendChild(d);
+  tapeWire(d, zone, t);
   return d;
 }
 function tapeApplyZone(zone){
@@ -16609,19 +16672,16 @@ function tapeUpdate(st,x,y){
 function tapeEnd(st){
   if(!st || !st.el) return;
   var x=Math.min(st.x0,st.x1), y=Math.min(st.y0,st.y1), w=Math.abs(st.x1-st.x0), h=Math.abs(st.y1-st.y0);
-  st.el.remove();
-  if(w<2 || h<1.5) return;
+  if(w<2 || h<1.5){ st.el.remove(); return; }
   var id=uid('tape'), item={id:id,x:x,y:y,w:w,h:h,c:TAPE_C}, key=st.zone.dataset.hlkey;
   var s=AState(); s.tape[key]=s.tape[key]||[]; s.tape[key].push(item); save();
-  tapeEl(st.zone, item);
+  tapeWire(st.el, st.zone, item); // promove a PROPRIA previa a elemento definitivo
   pushUndo({op:'add',kind:'tape',key:key,zone:st.zone,item:item});
 }
 
 /* ===================================================================
    POST-IT -- ancorado em % da zona; arrastavel pelo cabecalho,
-   redimensionavel pela alça no canto inferior direito; texto e foto
-   (a foto e reduzida no cliente antes de virar dataURL, pra nao pesar
-   o localStorage).
+   redimensionavel pela alça, com cor trocavel depois de criado.
    =================================================================== */
 function imgToDataUrl(file, cb){
   var reader=new FileReader();
@@ -16651,7 +16711,15 @@ function stickyEl(zone, note){
   var w0=note.w||STICKY_SIZE, h0=note.h||Math.round(w0*0.733);
   d.style.width=w0+'px'; d.style.height=h0+'px';
   d.innerHTML=
-    '<div class="annot-sticky-head"><span class="annot-sticky-handle">⠿⠿</span><button class="annot-sticky-del" title="Excluir">×</button></div>'+
+    '<div class="annot-sticky-head"><span class="annot-sticky-handle">⠿⠿</span>'+
+      '<div class="annot-sticky-headbtns">'+
+        '<button class="annot-sticky-color" title="Cor">🎨</button>'+
+        '<button class="annot-sticky-del" title="Excluir">×</button>'+
+      '</div>'+
+    '</div>'+
+    '<div class="annot-sticky-colors">'+Object.keys(STICKY_COLORS).map(function(k){
+      return '<div class="annot-swatch sm" data-color="'+k+'" style="background:'+STICKY_COLORS[k]+'"></div>';
+    }).join('')+'</div>'+
     '<div class="annot-sticky-body" contenteditable="'+(edit?'true':'false')+'">'+(note.html||'')+'</div>'+
     '<div class="annot-sticky-foot"><label>📷<input type="file" accept="image/*" style="display:none"></label></div>'+
     '<div class="annot-sticky-resize" title="Arraste para redimensionar"></div>';
@@ -16676,10 +16744,27 @@ function stickyEl(zone, note){
     if(removed){ pushUndo({op:'remove',kind:'sticky',key:zone.dataset.hlkey,zone:zone,item:removed}); save(); }
   });
 
+  var colorsRow=d.querySelector('.annot-sticky-colors');
+  d.querySelector('.annot-sticky-color').addEventListener('click', function(ev){
+    ev.stopPropagation();
+    if(!isEditMode()) return;
+    colorsRow.classList.toggle('open');
+  });
+  colorsRow.querySelectorAll('.annot-swatch').forEach(function(sw){
+    sw.addEventListener('click', function(ev){
+      ev.stopPropagation();
+      if(!isEditMode()) return;
+      var c=sw.dataset.color;
+      d.dataset.c=c;
+      stickyFlush(zone, note.id, {c:c});
+      colorsRow.classList.remove('open');
+    });
+  });
+
   var handle=d.querySelector('.annot-sticky-head');
   handle.addEventListener('pointerdown', function(ev){
     if(!isEditMode()) return;
-    if(ev.target.closest('.annot-sticky-del')) return;
+    if(ev.target.closest('.annot-sticky-del,.annot-sticky-color')) return;
     ev.preventDefault(); ev.stopPropagation();
     try{ handle.setPointerCapture(ev.pointerId); }catch(e){}
     function move(mv){
@@ -16736,15 +16821,20 @@ function stickyCreate(zone,x,y){
   var s=AState(); s.stickies[key]=s.stickies[key]||[]; s.stickies[key].push(item); save();
   var el=stickyEl(zone, item);
   pushUndo({op:'add',kind:'sticky',key:key,zone:zone,item:item});
-  setTimeout(function(){ var b=el.querySelector('.annot-sticky-body'); if(b) b.focus(); }, 60);
+  /* foco SINCRONO, dentro da mesma pilha de chamada do gesto do usuario
+     -- um setTimeout aqui quebra a "ativacao de usuario" no Safari/
+     iPadOS e o teclado nunca aparece, fazendo o post-it parecer que
+     "nao abre" mesmo tendo sido criado normalmente */
+  var b=el.querySelector('.annot-sticky-body'); if(b) b.focus();
+  return el;
 }
 
 /* ===================================================================
    BORRACHA -- pincel circular de raio ajustavel (ERASER_W, em px de
-   tela). Ao arrastar sobre a zona, qualquer destaque/traço/fita/post-it
-   cuja caixa delimitadora esteja a uma distancia <= raio do ponteiro e
-   apagado. Funciona com qualquer pointerType (inclusive dedo).
+   tela). So apaga elementos que pertencem a PROPRIA zona (nao alcanca
+   dentro de uma zona aninhada, como o corpo de uma Area de anotacao).
    =================================================================== */
+function belongsToZone(el, zone){ return el.closest('.hl-zone')===zone; }
 function distToRect(rect,x,y){
   var dx=Math.max(rect.left-x, 0, x-rect.right);
   var dy=Math.max(rect.top-y, 0, y-rect.bottom);
@@ -16753,6 +16843,7 @@ function distToRect(rect,x,y){
 function eraseAt(zone,x,y,radius,erasedSet){
   var hit=false;
   zone.querySelectorAll('mark.uhl').forEach(function(m){
+    if(!belongsToZone(m,zone)) return;
     var id=m.dataset.hlid, k='hl:'+id; if(erasedSet.has(k)) return;
     if(distToRect(m.getBoundingClientRect(),x,y)<=radius){
       erasedSet.add(k);
@@ -16760,6 +16851,7 @@ function eraseAt(zone,x,y,radius,erasedSet){
     }
   });
   zone.querySelectorAll('.annot-stroke').forEach(function(s){
+    if(!belongsToZone(s,zone)) return;
     var id=s.dataset.inkid, k='ink:'+id; if(erasedSet.has(k)) return;
     if(distToRect(s.getBoundingClientRect(),x,y)<=radius){
       erasedSet.add(k);
@@ -16767,6 +16859,7 @@ function eraseAt(zone,x,y,radius,erasedSet){
     }
   });
   zone.querySelectorAll('.annot-tape').forEach(function(t){
+    if(!belongsToZone(t,zone)) return;
     var id=t.dataset.tapeid, k='tape:'+id; if(erasedSet.has(k)) return;
     if(distToRect(t.getBoundingClientRect(),x,y)<=radius){
       erasedSet.add(k);
@@ -16774,6 +16867,7 @@ function eraseAt(zone,x,y,radius,erasedSet){
     }
   });
   zone.querySelectorAll('.annot-sticky').forEach(function(n){
+    if(!belongsToZone(n,zone)) return;
     var id=n.dataset.stickyid, k='sticky:'+id; if(erasedSet.has(k)) return;
     if(distToRect(n.getBoundingClientRect(),x,y)<=radius){
       erasedSet.add(k);
@@ -16790,12 +16884,149 @@ function ensureEraserCursor(){
 }
 document.addEventListener('pointermove', function(ev){
   if(!(isEditMode() && TOOL==='eraser')) return;
-  if(ev.pointerType==='touch') return; // dedo nao precisa do indicador visual (ele mesmo cobre a area)
+  if(ev.pointerType==='touch') return;
   var el=ensureEraserCursor();
   el.style.display='block';
   el.style.width=el.style.height=ERASER_W+'px';
   el.style.left=ev.clientX+'px'; el.style.top=ev.clientY+'px';
 });
+
+/* ===================================================================
+   AREA DE ANOTACAO -- bloco expansivel inserido no fluxo do conteudo.
+   Cada zona lembra, na hora em que e "religada" apos uma navegacao, a
+   lista dos seus filhos ORIGINAIS (antes de qualquer overlay/bloco ser
+   inserido) -- essa lista e a referencia estavel usada pra saber onde
+   cada "slot" (posicao entre paragrafos) fica, mesmo depois de blocos
+   serem adicionados/removidos.
+   =================================================================== */
+function origChildrenOf(zone){
+  if(!ZONE_ORIG_CHILDREN) return [];
+  if(!ZONE_ORIG_CHILDREN.has(zone)) ZONE_ORIG_CHILDREN.set(zone, Array.prototype.slice.call(zone.children));
+  return ZONE_ORIG_CHILDREN.get(zone);
+}
+function blockInsertRef(zone, slot){
+  var orig=origChildrenOf(zone);
+  return orig[slot] || null; // null = appendChild (fim da zona)
+}
+function blockFlush(zone, id, patch){
+  var key=zone.dataset.hlkey, arr=AState().blocks[key]||[];
+  var it=arr.find(function(b){return b.id===id;});
+  if(it){ Object.assign(it, patch); save(); }
+}
+function blockRemove(zone, id){
+  var key=zone.dataset.hlkey, arr=AState().blocks[key]||[];
+  var idx=arr.findIndex(function(b){return b.id===id;});
+  var removed=idx>=0?arr[idx]:null; if(idx>=0) arr.splice(idx,1);
+  var el=zone.querySelector(':scope > .annot-block[data-blockid="'+id+'"]'); if(el) el.remove();
+  return removed;
+}
+function blockEl(zone, b){
+  var d=document.createElement('div');
+  d.className='annot-block'+(b.open?'':' closed');
+  d.dataset.blockid=b.id;
+  var innerKey=zone.dataset.hlkey+'#block#'+b.id;
+  d.innerHTML=
+    '<div class="annot-block-head">'+
+      '<span class="annot-block-tag">✎ Minha anotação</span>'+
+      '<span class="annot-block-spacer"></span>'+
+      '<button class="annot-block-toggle" title="Abrir/Fechar">'+(b.open?'▾':'▸')+'</button>'+
+      '<button class="annot-block-del" title="Excluir">×</button>'+
+    '</div>'+
+    '<div class="annot-block-body annot-nested-zone hl-zone" data-hlkey="'+innerKey+'">'+
+      '<div class="annot-block-tools">'+
+        '<label class="annot-block-tool" title="Adicionar foto">📷<input type="file" accept="image/*" style="display:none"></label>'+
+        '<button type="button" class="annot-block-tool" data-act="sticky" title="Adicionar post-it">📝</button>'+
+      '</div>'+
+      '<div class="annot-block-text" contenteditable="'+(isEditMode()?'true':'false')+'">'+(b.html||'')+'</div>'+
+    '</div>';
+  var ref=blockInsertRef(zone, b.slot);
+  zone.insertBefore(d, ref);
+
+  var bodyZone=d.querySelector('.annot-block-body');
+  var textEl=d.querySelector('.annot-block-text');
+  var flush=function(){ blockFlush(zone, b.id, {html:textEl.innerHTML}); };
+  textEl.addEventListener('input', flush);
+  textEl.addEventListener('blur', flush);
+
+  d.querySelector('.annot-block-toggle').addEventListener('click', function(ev){
+    ev.stopPropagation();
+    d.classList.toggle('closed');
+    var open=!d.classList.contains('closed');
+    ev.currentTarget.textContent = open ? '▾' : '▸';
+    blockFlush(zone, b.id, {open:open});
+  });
+  d.querySelector('.annot-block-del').addEventListener('click', function(ev){
+    ev.stopPropagation();
+    if(!isEditMode()) return;
+    var removed=blockRemove(zone, b.id);
+    if(removed){ pushUndo({op:'remove',kind:'block',key:zone.dataset.hlkey,zone:zone,item:removed}); save(); }
+  });
+
+  var fileInp=d.querySelector('.annot-block-tools input[type=file]');
+  fileInp.addEventListener('change', function(ev){
+    if(!isEditMode()) return;
+    var f=ev.target.files && ev.target.files[0]; if(!f) return;
+    imgToDataUrl(f, function(url){ var img=document.createElement('img'); img.src=url; textEl.appendChild(img); flush(); });
+  });
+  d.querySelector('[data-act=sticky]').addEventListener('click', function(ev){
+    ev.stopPropagation();
+    if(!isEditMode()) return;
+    var r=bodyZone.getBoundingClientRect();
+    stickyCreate(bodyZone, r.left+24, r.top+50);
+  });
+
+  wireZone(bodyZone); // a area do bloco vira sua propria hl-zone (caneta/marca-texto/post-it/fita/borracha tambem funcionam dentro dela)
+  return d;
+}
+function blocksApplyZone(zone){
+  var key=zone.dataset.hlkey, list=(AState().blocks[key]||[]).slice();
+  list.sort(function(a,b){ return (a.slot-b.slot) || ((a.created||0)-(b.created||0)); });
+  list.forEach(function(b){ blockEl(zone, b); });
+}
+function blockCreate(zone, slot){
+  var id=uid('blk'), item={id:id, slot:slot, html:'', open:true, created:Date.now()};
+  var key=zone.dataset.hlkey;
+  var s=AState(); s.blocks[key]=s.blocks[key]||[]; s.blocks[key].push(item); save();
+  var el=blockEl(zone, item);
+  pushUndo({op:'add',kind:'block',key:key,zone:zone,item:item});
+  renderBlockInsertPoints(zone);
+  var t=el.querySelector('.annot-block-text'); if(t) t.focus();
+  return el;
+}
+function clearBlockInsertPoints(zone){
+  zone.querySelectorAll(':scope > .annot-slot-indicator').forEach(function(el){ el.remove(); });
+}
+function renderBlockInsertPoints(zone){
+  var want = isEditMode() && TOOL==='block';
+  var existing = zone.querySelectorAll(':scope > .annot-slot-indicator');
+  var orig=origChildrenOf(zone), n=orig.length;
+  if(!want){
+    if(existing.length) clearBlockInsertPoints(zone);
+    return;
+  }
+  /* idempotencia: se os indicadores ja estao la (mesma contagem
+     esperada), NAO mexe no DOM de novo. Sem isso, cada chamada
+     removeria/recriaria os botoes, o que dispara o MutationObserver
+     (que observa #main em subtree), que chama scanMain -> syncBodyClasses
+     -> refreshAllBlockInsertPoints -> esta funcao de novo -- um laco
+     infinito de mutacao entre esta funcao e o proprio observer. */
+  if(existing.length===n+1) return;
+  clearBlockInsertPoints(zone);
+  for(var slot=0; slot<=n; slot++){
+    (function(slot){
+      var ind=document.createElement('button');
+      ind.type='button';
+      ind.className='annot-slot-indicator';
+      ind.title='Adicionar área de anotação aqui';
+      ind.innerHTML='<span>+ anotação</span>';
+      ind.addEventListener('click', function(ev){
+        ev.preventDefault(); ev.stopPropagation();
+        blockCreate(zone, slot);
+      });
+      zone.insertBefore(ind, blockInsertRef(zone, slot));
+    })(slot);
+  }
+}
 
 /* ===================================================================
    DESFAZER / REFAZER (pilha em memoria por sessao)
@@ -16808,12 +17039,14 @@ function invert(entry){
     if(entry.kind==='ink') inkRemove(entry.zone, entry.item.id);
     if(entry.kind==='tape') tapeRemove(entry.zone, entry.item.id);
     if(entry.kind==='sticky') stickyRemove(entry.zone, entry.item.id);
+    if(entry.kind==='block') blockRemove(entry.zone, entry.item.id);
     return {op:'remove', kind:entry.kind, key:key, zone:entry.zone, item:entry.item};
   }
   if(entry.kind==='hl'){ s.hl[key]=s.hl[key]||[]; s.hl[key].push(entry.item); hlApplyOne(entry.zone, entry.item); }
   if(entry.kind==='ink'){ s.ink[key]=s.ink[key]||[]; s.ink[key].push(entry.item); inkRenderStroke(inkSvg(entry.zone), entry.item); }
   if(entry.kind==='tape'){ s.tape[key]=s.tape[key]||[]; s.tape[key].push(entry.item); tapeEl(entry.zone, entry.item); }
   if(entry.kind==='sticky'){ s.stickies[key]=s.stickies[key]||[]; s.stickies[key].push(entry.item); stickyEl(entry.zone, entry.item); }
+  if(entry.kind==='block'){ s.blocks[key]=s.blocks[key]||[]; s.blocks[key].push(entry.item); blockEl(entry.zone, entry.item); renderBlockInsertPoints(entry.zone); }
   return {op:'add', kind:entry.kind, key:key, zone:entry.zone, item:entry.item};
 }
 function doUndo(){ var e=UNDO.pop(); if(!e) return; var inv=invert(e); save(); REDO.push(inv); refreshFoot(); if(window.toast) toast('Desfeito'); }
@@ -16826,9 +17059,15 @@ document.addEventListener('keydown', function(e){
   if((e.ctrlKey||e.metaKey) && !e.shiftKey && k==='z'){ e.preventDefault(); doUndo(); }
   else if((e.ctrlKey||e.metaKey) && (k==='y' || (e.shiftKey && k==='z'))){ e.preventDefault(); doRedo(); }
 });
-/* gesto de tablet: toque duplo com DOIS dedos = desfazer (dois toques
-   de 2 dedos em sequencia rapida, no espirito do "duplo toque" de
-   edicao dos tablets) */
+/* gesto de tablet, estilo GoodNotes: DOIS toques rapidos usando DOIS
+   dedos SIMULTANEAMENTE = desfazer. So dispara quando o MESMO evento
+   touchend solta exatamente 2 dedos ao mesmo tempo (changedTouches
+   com 2 itens e nenhum dedo restante) -- um duplo toque comum de UM
+   dedo nunca bate nessa condicao, e o gesto so conta quando isso se
+   repete 2x dentro da janela de tempo. Nao mexe em pointerdown/move/up
+   (que so respondem a pointerType touch quando NENHUMA ferramenta de
+   arrasto esta ativa), entao nao compete com o traço da caneta nem
+   com zoom/rolagem normais de um dedo so. */
 var lastTwoFingerTap=0;
 document.addEventListener('touchend', function(e){
   if(!isEditMode()) return;
@@ -16846,6 +17085,13 @@ function wireZonePointer(zone){
     if(!isEditMode()) return;
     if(!TOOL) return; // nenhuma ferramenta ativa -> comportamento nativo (selecionar, copiar, rolar)
 
+    /* zonas aninhadas (ex.: dentro de uma Area de anotacao): so a zona
+       mais proxima do alvo real do evento deve tratar o gesto */
+    var owner = ev.target.closest ? ev.target.closest('.hl-zone') : zone;
+    if(owner!==zone) return;
+
+    if(TOOL==='block') return; // a Area de anotacao e criada pelos indicadores "+ ", nao por arrasto na zona
+
     if(TOOL==='sticky'){
       if(ev.pointerType==='mouse' && ev.button!==0) return;
       ev.preventDefault();
@@ -16854,8 +17100,6 @@ function wireZonePointer(zone){
     }
 
     if(TOOL==='eraser'){
-      // a Borracha aceita qualquer ponteiro (inclusive dedo) e apaga por
-      // arrasto -- captura o ponteiro e vai varrendo a area em pointermove
       ev.preventDefault();
       try{ zone.setPointerCapture(ev.pointerId); }catch(e){}
       var erasedSet=new Set();
@@ -16864,18 +17108,11 @@ function wireZonePointer(zone){
       return;
     }
 
-    /* rejeicao de palma: se ha um gesto de caneta/mouse em andamento,
-       qualquer toque de DEDO concorrente e descartado -- evita que a
-       mao apoiada na tela vire traço ou atrapalhe o desenho */
-    if(ev.pointerType==='touch' && PEN_POINTER_ACTIVE){ ev.preventDefault(); return; }
-    if(ev.pointerType==='touch') return; // dedo nunca desenha (caneta/marca-texto/fita) -- rola normalmente
+    if(ev.pointerType==='touch' && PEN_POINTER_ACTIVE){ ev.preventDefault(); return; } // rejeicao de palma
+    if(ev.pointerType==='touch') return; // dedo nunca desenha -- rola normalmente
 
     ev.preventDefault();
     try{ zone.setPointerCapture(ev.pointerId); }catch(e){}
-    /* troca dinamica de touch-action: durante ESTE gesto de caneta/mouse
-       a zona fica 'none' (impede que o navegador interprete o
-       movimento da caneta como rolagem); ao soltar, volta pro 'pan-y'
-       padrao definido em CSS, que e o que deixa o dedo rolar depois */
     zone.style.touchAction='none';
     PEN_POINTER_ACTIVE=true;
     if(TOOL==='pen') DRAW={kind:'pen', st:penStart(zone, ev.clientX, ev.clientY, ev.pressure), pid:ev.pointerId};
@@ -16901,7 +17138,7 @@ function wireZonePointer(zone){
     if(DRAW.kind==='pen') penEnd(DRAW.st);
     else if(DRAW.kind==='hl') hlDragEnd(DRAW.st);
     else if(DRAW.kind==='tape') tapeEnd(DRAW.st);
-    zone.style.touchAction=''; // restaura o pan-y padrao do CSS p/ o dedo
+    zone.style.touchAction='';
     PEN_POINTER_ACTIVE=false;
     DRAW=null;
   }
@@ -16936,7 +17173,7 @@ function renderPanel(){
   html+='<div class="annot-tools">'+
     toolBtn('pen','Caneta','✏️')+toolBtn('hl','Marca-texto','🖍️')+
     toolBtn('sticky','Post-it','📝')+toolBtn('tape','Fita','🎞️')+
-    toolBtn('eraser','Borracha','🗑️')+'</div>';
+    toolBtn('eraser','Borracha','🗑️')+toolBtn('block','Área','🗒️')+'</div>';
 
   if(TOOL==='pen'){
     html+='<div class="annot-sep"></div>'+colorRow('pen',PEN_COLORS,PEN_C)+
@@ -16951,6 +17188,8 @@ function renderPanel(){
   } else if(TOOL==='eraser'){
     html+='<div class="annot-sep"></div>'+
       '<div class="annot-row"><div class="annot-thickness">🗑️<input type="range" id="annot-eraser-w" min="12" max="70" step="2" value="'+ERASER_W+'"><span id="annot-eraser-w-lbl">'+ERASER_W+'</span></div></div>';
+  } else if(TOOL==='block'){
+    html+='<div class="annot-sep"></div><p class="annot-readmsg">Toque em "+ anotação", entre os parágrafos do conteúdo, para inserir uma área de anotação nesse ponto.</p>';
   }
 
   html+='<div class="annot-sep"></div><div class="annot-foot">'+
@@ -17001,10 +17240,6 @@ function ensureUI(){
     if(PANEL_OPEN) renderPanel();
   });
 
-  /* clicou fora do painel (mas com o painel aberto e ainda expandido)
-     -> minimiza sozinho, como se tivesse clicado no "–", pra nao
-     atrapalhar quem quer continuar usando a ferramenta selecionada
-     (ex.: comecar a desenhar direto no conteudo) */
   document.addEventListener('pointerdown', function(ev){
     if(!PANEL_OPEN || PANEL_MIN) return;
     if(panel.contains(ev.target) || fab.contains(ev.target)) return;
@@ -17014,16 +17249,20 @@ function ensureUI(){
 
 /* ===================================================================
    MONTAGEM: qualquer .hl-zone nova (renderizada via #main.innerHTML=...
-   em toda troca de aba/sub-aba/modulo) e pega automaticamente.
+   em toda troca de aba/sub-aba/modulo, ou criada dinamicamente dentro
+   de uma Area de anotacao) e pega automaticamente.
    =================================================================== */
 function wireZone(zone){
   if(zone.dataset.annotWired) return;
   zone.dataset.annotWired='1';
+  if(ZONE_ORIG_CHILDREN) ZONE_ORIG_CHILDREN.set(zone, Array.prototype.slice.call(zone.children));
   hlApplyZone(zone);
   inkApplyZone(zone);
   tapeApplyZone(zone);
   stickyApplyZone(zone);
+  blocksApplyZone(zone);
   wireZonePointer(zone);
+  if(!zone.classList.contains('annot-nested-zone')) renderBlockInsertPoints(zone);
 }
 function scanMain(){
   syncBodyClasses(); // reflete o modo atual (painel aberto/fechado) em qualquer zona nova
