@@ -16120,12 +16120,25 @@ window.CONTENT['asma|4'] = C;
 /* ---------- zona anotavel: precisa de position:relative para hospedar
    os overlays absolutos de tinta/post-it/fita ---------- */
 .hl-zone{position:relative}
-body.annot-writing .hl-zone{touch-action:pan-y}
-body.annot-erasing .hl-zone{touch-action:none}
-body.annot-writing .hl-zone,
-body.annot-writing .hl-zone *{user-select:none;-webkit-user-select:none}
-body.annot-erasing .hl-zone,
-body.annot-erasing .hl-zone *{user-select:none;-webkit-user-select:none}
+/* ---------- touch-action ESTATICO (nao mais trocado por gesto) --------
+   touch-action precisa ser decidido pelo CSS ANTES do primeiro contato --
+   muitos motores de navegador (WebKit/iPadOS em especial) capturam o
+   valor computado de touch-action no exato instante do toque inicial;
+   trocar zone.style.touchAction dentro do proprio handler de pointerdown
+   do MESMO gesto chega tarde demais e e ignorado, o que fazia a ponta da
+   caneta continuar rolando a pagina ("tremendo") mesmo com a logica de
+   JS correta. A solucao real: manter touch-action:pinch-zoom o tempo
+   TODO em que o modo de edicao esta ativo (bloqueia PAN nativo -- de
+   caneta OU de dedo -- mas preserva o pinca-para-zoom nativo) e
+   reimplementar a rolagem por ARRASTO DE UM DEDO manualmente via JS,
+   restrita a pointerType 'touch' (ver ROLAGEM MANUAL POR TOQUE, abaixo)
+   -- assim a caneta NUNCA mais aciona rolagem, e o dedo continua
+   rolando normalmente, agora por codigo em vez de gesto nativo. */
+body.annot-edit-on .hl-zone{touch-action:pinch-zoom}
+body.annot-edit-on .hl-zone,
+body.annot-edit-on .hl-zone *{
+  user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+}
 
 /* ---------- botao flutuante principal (sempre visivel durante a leitura) --- */
 .annot-fab{
@@ -16191,15 +16204,19 @@ mark.uhl[data-c="o"]{background:#f6cfa0}
 body.annot-eraser-armed mark.uhl:hover{outline:2px dashed #e8675f;outline-offset:1px}
 
 /* ---------- caneta (overlay svg) -- traco suave por curvas ---------- */
-.annot-ink-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
-.annot-stroke{fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:stroke;cursor:pointer}
+.annot-ink-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;shape-rendering:geometricPrecision}
+/* traco tipo fineliner digital: espessura uniforme, borda arredondada e
+   sem qualquer textura/granulacao (sem filtro, sem opacidade variavel,
+   sem pattern) -- limpo e preciso. */
+.annot-stroke{fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:stroke;cursor:pointer;shape-rendering:geometricPrecision}
 body.annot-eraser-armed .annot-stroke:hover{filter:drop-shadow(0 0 0 2px #e8675f)}
 
 /* ---------- cursor da borracha ---------- */
 .annot-eraser-cursor{
-  position:fixed; z-index:200; border-radius:50%;
+  position:fixed; z-index:200; border-radius:50%; box-sizing:border-box;
   border:2px solid #e8675f; background:rgba(232,103,95,.16);
   pointer-events:none; transform:translate(-50%,-50%); display:none;
+  will-change:left,top;
 }
 
 /* ---------- fita de oclusao ---------- */
@@ -16209,7 +16226,12 @@ body.annot-eraser-armed .annot-stroke:hover{filter:drop-shadow(0 0 0 2px #e8675f
 .annot-tape::before{content:'';position:absolute;inset:0;border-radius:6px;
   background:repeating-linear-gradient(135deg,rgba(255,255,255,.10) 0 8px,rgba(255,255,255,0) 8px 16px)}
 .annot-tape-lbl{position:relative;font-size:.68rem;color:rgba(45,27,46,.55);letter-spacing:.08em;text-transform:uppercase;pointer-events:none}
-.annot-tape.revealed{opacity:0;pointer-events:none}
+/* "revelada" (peek): opacidade baixa, mas continua visivel e continua
+   clicavel -- assim o usuario ve o que estava coberto (para puxar da
+   memoria) e consegue tocar de NOVO na mesma fita para tampar de volta.
+   Nunca some de vez nem vira intocavel. */
+.annot-tape.revealed{opacity:.16}
+.annot-tape.revealed .annot-tape-lbl{opacity:0}
 .annot-tape[data-c="n"]{background:#e6d3ad}
 .annot-tape[data-c="g"]{background:#cdc6d6}
 .annot-tape[data-c="k"]{background:#6a5570}
@@ -16381,6 +16403,32 @@ function AState(){
   return s;
 }
 function uid(pre){ return pre+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7); }
+/* deteccao de "toque" propria (pointerdown perto de pointerup, pouco
+   movimento, pouco tempo) para botoes criados dinamicamente dentro de
+   uma .hl-zone -- mais confiavel do que depender so do evento 'click'
+   sintetico do navegador, que em alguns motores touch pode nao disparar
+   se algo no caminho chamar preventDefault ou se o gesto for
+   interpretado como o inicio de outra coisa (rolagem, selecao). Chama
+   handler() uma unica vez por toque valido. */
+function onTap(el, handler){
+  var down=null;
+  el.addEventListener('pointerdown', function(ev){
+    down={x:ev.clientX,y:ev.clientY,t:Date.now(),id:ev.pointerId};
+  });
+  el.addEventListener('pointerup', function(ev){
+    if(!down || ev.pointerId!==down.id) return;
+    var dx=ev.clientX-down.x, dy=ev.clientY-down.y, dt=Date.now()-down.t;
+    down=null;
+    if((dx*dx+dy*dy)<144 && dt<800){ ev.preventDefault(); ev.stopPropagation(); handler(ev); }
+  });
+  el.addEventListener('pointercancel', function(){ down=null; });
+  /* fallback: se por algum motivo o navegador nao entregar pointerup
+     (raro, mas acontece em alguns webviews), o 'click' sintetico ainda
+     serve de rede de seguranca -- protegido de duplo-disparo porque o
+     pointerup acima ja consome preventDefault+stopPropagation antes do
+     click ser sintetizado na mesma interacao. */
+  el.addEventListener('click', function(ev){ ev.preventDefault(); ev.stopPropagation(); handler(ev); });
+}
 function zoneRect(zone){ return zone.getBoundingClientRect(); }
 function toPct(zone, clientX, clientY){
   var r=zoneRect(zone);
@@ -16492,9 +16540,33 @@ function hlRemove(zone, id){
   hlClearMark(zone, id);
   return removed;
 }
+function nearestTextNode(el){
+  if(!el) return null;
+  var w=document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+    acceptNode:function(n){ return (n.nodeValue&&n.nodeValue.trim()) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP; }
+  });
+  return w.nextNode();
+}
+/* Tenta 3 estrategias, da mais precisa pra mais tolerante -- em telas
+   reais (principalmente com caneta/stylus) caretRangeFromPoint pode
+   retornar null perto de bordas de elementos inline (fim de uma
+   palavra, um <b>, um espaço) mesmo com o navegador dando suporte a
+   API; sem fallback, ESSE caso isolado fazia o gesto inteiro de
+   marca-texto morrer silenciosamente ("passar a caneta e nada
+   acontece"). Com fallback, sempre ancora no texto mais proximo do
+   ponto tocado. */
 function caretFromPoint(x,y){
-  if(document.caretRangeFromPoint){ var r=document.caretRangeFromPoint(x,y); if(r) return {node:r.startContainer,offset:r.startOffset}; }
-  if(document.caretPositionFromPoint){ var p=document.caretPositionFromPoint(x,y); if(p) return {node:p.offsetNode,offset:p.offset}; }
+  if(document.caretRangeFromPoint){
+    var r=document.caretRangeFromPoint(x,y);
+    if(r && r.startContainer) return {node:r.startContainer, offset:r.startOffset};
+  }
+  if(document.caretPositionFromPoint){
+    var p=document.caretPositionFromPoint(x,y);
+    if(p && p.offsetNode) return {node:p.offsetNode, offset:p.offset};
+  }
+  var el=document.elementFromPoint(x,y);
+  var t=nearestTextNode(el);
+  if(t) return {node:t, offset:0};
   return null;
 }
 function hlDragStart(zone,x,y){
@@ -16593,8 +16665,10 @@ function inkRemove(zone,id){
 }
 function penStart(zone,x,y,pressure){
   var svg=inkSvg(zone);
-  var w = PEN_W * (0.55 + (typeof pressure==='number' && pressure>0 ? pressure : 0.5));
-  var stroke={id:uid('ink'), c:PEN_C, w:Math.max(1, w), pts:[toPct(zone,x,y)]};
+  /* fineliner digital: espessura SEMPRE uniforme (PEN_W), sem variar
+     com a pressao do stylus -- variar a largura por pressao e o que da
+     a aparencia de "lapis"/caligrafia que o usuario pediu para tirar. */
+  var stroke={id:uid('ink'), c:PEN_C, w:PEN_W, pts:[toPct(zone,x,y)]};
   var el=inkRenderStroke(svg, stroke);
   return {zone:zone, stroke:stroke, el:el};
 }
@@ -16882,13 +16956,22 @@ function ensureEraserCursor(){
   if(!el){ el=document.createElement('div'); el.id='annot-eraser-cursor'; el.className='annot-eraser-cursor'; document.body.appendChild(el); }
   return el;
 }
-document.addEventListener('pointermove', function(ev){
-  if(!(isEditMode() && TOOL==='eraser')) return;
-  if(ev.pointerType==='touch') return;
+/* posiciona o guia circular da borracha EXATAMENTE no ponto de contato
+   (mesmo x,y usado por eraseAt para o hit-test) -- chamada tanto por um
+   listener de hover (antes de tocar, pra pre-visualizar o tamanho/
+   posicao) quanto de DENTRO do proprio pointermove que apaga (durante o
+   gesto ativo), garantindo que os dois nunca fiquem dessincronizados. */
+function moveEraserCursor(x,y){
   var el=ensureEraserCursor();
   el.style.display='block';
   el.style.width=el.style.height=ERASER_W+'px';
-  el.style.left=ev.clientX+'px'; el.style.top=ev.clientY+'px';
+  el.style.left=x+'px'; el.style.top=y+'px';
+}
+document.addEventListener('pointermove', function(ev){
+  if(!(isEditMode() && TOOL==='eraser')) return;
+  if(DRAW && DRAW.kind==='eraser') return; // durante o gesto ativo, quem posiciona e o pointermove da propria zona
+  if(ev.pointerType==='touch') return;
+  moveEraserCursor(ev.clientX, ev.clientY);
 });
 
 /* ===================================================================
@@ -17019,10 +17102,7 @@ function renderBlockInsertPoints(zone){
       ind.className='annot-slot-indicator';
       ind.title='Adicionar área de anotação aqui';
       ind.innerHTML='<span>+ anotação</span>';
-      ind.addEventListener('click', function(ev){
-        ev.preventDefault(); ev.stopPropagation();
-        blockCreate(zone, slot);
-      });
+      onTap(ind, function(){ blockCreate(zone, slot); });
       zone.insertBefore(ind, blockInsertRef(zone, slot));
     })(slot);
   }
@@ -17078,7 +17158,44 @@ document.addEventListener('touchend', function(e){
 }, {passive:true});
 
 /* ===================================================================
+   ROLAGEM MANUAL POR TOQUE -- ja que touch-action:pinch-zoom desliga a
+   rolagem NATIVA por arrasto dentro de qualquer .hl-zone em modo de
+   edicao (para que a caneta pare de "roubar" rolagem da pagina), um
+   dedo arrastando precisa continuar rolando a pagina -- so que agora
+   por codigo. So entra em acao para pointerType 'touch' que NAO esteja
+   sendo usado por nenhuma ferramenta no momento (ex.: a Borracha
+   aceita toque de proposito, e nesse caso NAO deve rolar).
+   =================================================================== */
+var TOUCH_SCROLL=null; // {pid,x,y}
+document.addEventListener('pointerdown', function(ev){
+  if(ev.pointerType!=='touch') return;
+  if(!isEditMode()) return;
+  if(!ev.target || !ev.target.closest || !ev.target.closest('.hl-zone')) return;
+  if(DRAW && DRAW.pid===ev.pointerId) return; // ja e dono de outro gesto (ex.: Borracha por toque)
+  if(PEN_POINTER_ACTIVE) return; // rejeicao de palma: a caneta esta escrevendo, ignora QUALQUER outro toque por completo
+  TOUCH_SCROLL={pid:ev.pointerId, x:ev.clientX, y:ev.clientY};
+}, {passive:true});
+document.addEventListener('pointermove', function(ev){
+  if(!TOUCH_SCROLL || ev.pointerId!==TOUCH_SCROLL.pid) return;
+  var dy=ev.clientY-TOUCH_SCROLL.y;
+  TOUCH_SCROLL.y=ev.clientY; TOUCH_SCROLL.x=ev.clientX;
+  window.scrollBy(0, -dy);
+}, {passive:true});
+function endTouchScroll(ev){ if(TOUCH_SCROLL && ev.pointerId===TOUCH_SCROLL.pid) TOUCH_SCROLL=null; }
+document.addEventListener('pointerup', endTouchScroll, {passive:true});
+document.addEventListener('pointercancel', endTouchScroll, {passive:true});
+
+/* ===================================================================
    ROTEAMENTO DE PONTEIRO POR ZONA
+   Ouve em fase de CAPTURA (nao em bubble): assim nenhum elemento
+   interno do conteudo (flashcard, aba, <details>, checkbox) consegue,
+   via stopPropagation no seu proprio handler, impedir que a ferramenta
+   de anotacao ativa veja o toque primeiro. Cada ramo que "consome" o
+   gesto chama stopPropagation explicitamente para nao competir com o
+   elemento por baixo; quando nenhuma ferramenta vai tratar o evento
+   (TOOL vazio, ou dedo com caneta/marca-texto/fita selecionados), a
+   funcao simplesmente retorna sem tocar no evento -- a pagina continua
+   funcionando normalmente.
    =================================================================== */
 function wireZonePointer(zone){
   zone.addEventListener('pointerdown', function(ev){
@@ -17094,36 +17211,53 @@ function wireZonePointer(zone){
 
     if(TOOL==='sticky'){
       if(ev.pointerType==='mouse' && ev.button!==0) return;
-      ev.preventDefault();
-      stickyCreate(zone, ev.clientX, ev.clientY);
+      ev.preventDefault(); ev.stopPropagation();
+      try{ stickyCreate(zone, ev.clientX, ev.clientY); }catch(err){}
       return;
     }
 
     if(TOOL==='eraser'){
-      ev.preventDefault();
-      try{ zone.setPointerCapture(ev.pointerId); }catch(e){}
+      ev.preventDefault(); ev.stopPropagation();
+      /* setPointerCapture isolado no seu proprio try -- se falhar (nem
+         todo motor/dispositivo garante suporte), NAO pode derrubar a
+         propria acao de apagar nem o posicionamento do cursor-guia
+         junto com ele; sao preocupacoes independentes. */
+      try{ zone.setPointerCapture(ev.pointerId); }catch(err){}
       var erasedSet=new Set();
-      eraseAt(zone, ev.clientX, ev.clientY, ERASER_W/2, erasedSet);
+      try{ eraseAt(zone, ev.clientX, ev.clientY, ERASER_W/2, erasedSet); }catch(err){}
       DRAW={kind:'eraser', pid:ev.pointerId, zone:zone, erased:erasedSet};
+      moveEraserCursor(ev.clientX, ev.clientY);
       return;
     }
 
-    if(ev.pointerType==='touch' && PEN_POINTER_ACTIVE){ ev.preventDefault(); return; } // rejeicao de palma
-    if(ev.pointerType==='touch') return; // dedo nunca desenha -- rola normalmente
+    if(ev.pointerType==='touch'){ ev.preventDefault(); return; } // dedo nunca escreve/marca/tampa -- so rola (ver ROLAGEM MANUAL)
 
-    ev.preventDefault();
-    try{ zone.setPointerCapture(ev.pointerId); }catch(e){}
-    zone.style.touchAction='none';
+    /* pointerType 'pen' ou 'mouse' daqui pra baixo -- caneta, marca-
+       texto e fita. Pressiona a rejeicao de palma ANTES de comecar,
+       para que qualquer dedo que toque durante o gesto seja ignorado
+       (ver o listener de pointerdown da ROLAGEM MANUAL, acima, que
+       tambem checa esse mesmo PEN_POINTER_ACTIVE). */
+    ev.preventDefault(); ev.stopPropagation();
+    try{ zone.setPointerCapture(ev.pointerId); }catch(err){}
     PEN_POINTER_ACTIVE=true;
-    if(TOOL==='pen') DRAW={kind:'pen', st:penStart(zone, ev.clientX, ev.clientY, ev.pressure), pid:ev.pointerId};
-    else if(TOOL==='hl'){ var st=hlDragStart(zone, ev.clientX, ev.clientY); if(st) DRAW={kind:'hl', st:st, pid:ev.pointerId}; }
-    else if(TOOL==='tape') DRAW={kind:'tape', st:tapeStart(zone, ev.clientX, ev.clientY), pid:ev.pointerId};
-  }, {passive:false});
+    var started=null;
+    try{
+      if(TOOL==='pen') started={kind:'pen', st:penStart(zone, ev.clientX, ev.clientY, ev.pressure), pid:ev.pointerId};
+      else if(TOOL==='hl'){ var st=hlDragStart(zone, ev.clientX, ev.clientY); if(st) started={kind:'hl', st:st, pid:ev.pointerId}; }
+      else if(TOOL==='tape') started={kind:'tape', st:tapeStart(zone, ev.clientX, ev.clientY), pid:ev.pointerId};
+    }catch(err){ started=null; }
+    DRAW=started;
+    /* nada foi realmente iniciado (ex.: caretFromPoint falhou de vez)
+       -- libera a rejeicao de palma NA HORA, sem esperar um pointerup
+       que nunca vai casar com DRAW.pid; sem isso a zona ficava "presa"
+       rejeitando todo toque seguinte para sempre. */
+    if(!DRAW) PEN_POINTER_ACTIVE=false;
+  }, {capture:true, passive:false});
 
   zone.addEventListener('pointermove', function(ev){
     if(!DRAW || ev.pointerId!==DRAW.pid) return;
     ev.preventDefault();
-    if(DRAW.kind==='eraser'){ eraseAt(zone, ev.clientX, ev.clientY, ERASER_W/2, DRAW.erased); return; }
+    if(DRAW.kind==='eraser'){ eraseAt(zone, ev.clientX, ev.clientY, ERASER_W/2, DRAW.erased); moveEraserCursor(ev.clientX, ev.clientY); return; }
     var events=(ev.getCoalescedEvents && ev.getCoalescedEvents()) || [];
     if(!events.length) events=[ev]; // alguns navegadores/dispositivos retornam lista vazia -- nunca perder o ponto
     events.forEach(function(e2){
@@ -17134,12 +17268,15 @@ function wireZonePointer(zone){
   }, {passive:false});
 
   function finish(ev){
-    if(!DRAW || ev.pointerId!==DRAW.pid) return;
-    if(DRAW.kind==='pen') penEnd(DRAW.st);
-    else if(DRAW.kind==='hl') hlDragEnd(DRAW.st);
-    else if(DRAW.kind==='tape') tapeEnd(DRAW.st);
-    zone.style.touchAction='';
+    /* limpeza SEMPRE roda, mesmo se este pointerId nao for o dono do
+       DRAW atual -- evita qualquer flag/estado que fique preso. */
     PEN_POINTER_ACTIVE=false;
+    if(!DRAW || ev.pointerId!==DRAW.pid) return;
+    try{
+      if(DRAW.kind==='pen') penEnd(DRAW.st);
+      else if(DRAW.kind==='hl') hlDragEnd(DRAW.st);
+      else if(DRAW.kind==='tape') tapeEnd(DRAW.st);
+    }catch(err){}
     DRAW=null;
   }
   zone.addEventListener('pointerup', finish);
