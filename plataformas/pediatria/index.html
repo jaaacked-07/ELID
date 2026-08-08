@@ -16122,8 +16122,11 @@ window.CONTENT['asma|4'] = C;
    os overlays absolutos de tinta/post-it/fita ---------- */
 .hl-zone{position:relative}
 body.annot-writing .hl-zone{touch-action:pan-y}
+body.annot-erasing .hl-zone{touch-action:none}
 body.annot-writing .hl-zone,
 body.annot-writing .hl-zone *{user-select:none;-webkit-user-select:none}
+body.annot-erasing .hl-zone,
+body.annot-erasing .hl-zone *{user-select:none;-webkit-user-select:none}
 
 /* ---------- botao flutuante principal (sempre visivel durante a leitura) --- */
 .annot-fab{
@@ -16194,6 +16197,14 @@ body.annot-eraser-armed mark.uhl:hover{outline:2px dashed #e8675f;outline-offset
 .annot-stroke{fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:stroke;cursor:pointer}
 body.annot-eraser-armed .annot-stroke:hover{filter:drop-shadow(0 0 0 2px #e8675f)}
 
+/* ---------- cursor da borracha: circulo que acompanha a caneta/mouse
+   mostrando exatamente a area que sera apagada ao passar por cima --- */
+.annot-eraser-cursor{
+  position:fixed; z-index:200; border-radius:50%;
+  border:2px solid #e8675f; background:rgba(232,103,95,.16);
+  pointer-events:none; transform:translate(-50%,-50%); display:none;
+}
+
 /* ---------- fita de oclusao ---------- */
 .annot-tape{position:absolute;z-index:3;border-radius:6px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;transition:opacity .25s, filter .25s;
@@ -16220,7 +16231,7 @@ body.annot-edit-on .annot-tape:hover .annot-tape-del{display:flex}
 .annot-sticky[data-c="b"]{background:#cfe6fc}
 .annot-sticky[data-c="g"]{background:#c7ecd2}
 .annot-sticky-head{display:flex;align-items:center;justify-content:space-between;padding:4px 6px;
-  cursor:grab;background:rgba(0,0,0,.06);flex:none}
+  cursor:grab;background:rgba(0,0,0,.06);flex:none;touch-action:none}
 .annot-sticky-head:active{cursor:grabbing}
 .annot-sticky-handle{font-size:.7rem;color:rgba(45,27,46,.5);letter-spacing:.1em}
 .annot-sticky-del{width:18px;height:18px;border-radius:50%;border:none;background:rgba(45,27,46,.16);
@@ -16233,8 +16244,15 @@ body.annot-edit-on .annot-tape:hover .annot-tape-del{display:flex}
 .annot-sticky-foot{display:flex;justify-content:flex-end;padding:3px 6px;flex:none}
 .annot-sticky-foot label{font-size:.78rem;cursor:pointer;opacity:.7}
 .annot-sticky-foot label:hover{opacity:1}
+.annot-sticky-resize{position:absolute;right:2px;bottom:2px;width:14px;height:14px;cursor:nwse-resize;
+  background:linear-gradient(135deg,transparent 50%,rgba(45,27,46,.35) 50%);border-radius:0 0 8px 0;
+  display:none;touch-action:none}
+.annot-sticky:hover .annot-sticky-resize{display:block}
 .annot-sticky.readonly .annot-sticky-head{cursor:default}
-.annot-sticky.readonly .annot-sticky-del,.annot-sticky.readonly .annot-sticky-foot{display:none}
+.annot-sticky.readonly .annot-sticky-del,
+.annot-sticky.readonly .annot-sticky-foot,
+.annot-sticky.readonly .annot-sticky-resize{display:none!important}
+.annot-sticky.readonly .annot-sticky-body{cursor:default}
 
 /* ---------- responsivo: tablet/celular ---------- */
 @media(pointer:coarse), (max-width:880px){
@@ -16252,50 +16270,66 @@ body.annot-edit-on .annot-tape:hover .annot-tape-del{display:flex}
   .annot-sticky{width:130px;min-height:96px}
 }
 
-/* ---------- modo apenas-leitura: nada flutuante alem do FAB minimo --- */
+/* ---------- modo apenas-leitura (painel fechado): nada editavel, so
+   a visualizacao do que ja foi anotado --- */
 body.annot-readmode .annot-sticky-del,
 body.annot-readmode .annot-tape-del,
+body.annot-readmode .annot-sticky-resize,
 body.annot-readmode .annot-sticky-head{cursor:default}
-body.annot-readmode .annot-sticky-del{display:none!important}
+body.annot-readmode .annot-sticky-del,
+body.annot-readmode .annot-sticky-resize{display:none!important}
 
 </style>
 <script>
 /* ===================================================================
    MODO DE ANOTACOES E REVISAO (aditivo)
-   Substitui o antigo marcador de texto de cor unica por uma barra de
-   ferramentas completa: Caneta, Marca-texto (multi-cor), Post-it (com
-   foto), Fita de oclusao e Borracha, com Desfazer/Refazer e um modo
-   "Apenas leitura" lembrado por usuario.
+   Barra de ferramentas completa: Caneta, Marca-texto (multi-cor),
+   Post-it (com foto e tamanho ajustavel), Fita de oclusao e Borracha
+   (com raio ajustavel), com Desfazer/Refazer.
 
    Reaproveita 100% a infraestrutura ja existente:
    - toda .hl-zone[data-hlkey] (teoria por sub-aba, escores, dif, mapa,
      fluxo_dx, fluxo_cond, vespera, dicas, casos) vira automaticamente
      uma "pagina" anotavel -- a mesma data-hlkey e usada como chave de
-     posicao pra TODAS as ferramentas (destaque, tinta, post-it, fita),
-     nao so pro destaque como antes.
-   - S()/save() (nucleo Firebase+localStorage) -- os dados novos
-     (S().ink, S().stickies, S().tape, S().annotMode) entram no mesmo
-     pipeline de merge local+nuvem que ja existe pra done/srs/notes/hl
-     (blankState/mergeState no nucleo foram ajustados p/ incluir as
-     chaves novas -- ver build_annotations.py).
+     posicao pra TODAS as ferramentas (destaque, tinta, post-it, fita).
+   - S()/save() (nucleo Firebase+localStorage) -- os dados
+     (S().ink, S().stickies, S().tape, S().hl) entram no mesmo pipeline
+     de merge local+nuvem que ja existe pra done/srs/notes, portanto
+     ficam salvos no login do usuario e sincronizados entre aparelhos.
    - MutationObserver em #main, igual ao script antigo de highlight:
      como toda navegacao faz #main.innerHTML=..., qualquer zona nova
      e pega automaticamente sem precisar tocar nas funcoes de render.
 
-   Regra "dedo nao escreve": Caneta, Marca-texto e Fita (as 3
+   MODO LEITURA x EDICAO (regra nova, mais simples): o modo edicao so
+   fica ativo enquanto o painel de ferramentas esta ABERTO (usuario
+   clicou no lapis flutuante). Fechou o painel -> volta a leitura
+   automaticamente. Nao existe mais um botao manual de "Leitura"
+   dentro do painel -- ele e redundante com o proprio icone do lapis.
+   Minimizar o painel (manual ou automatico ao tocar fora dele)
+   MANTEM o modo edicao ativo, so tira a caixa de ferramentas da
+   frente pra continuar desenhando/escrevendo sem ela atrapalhar.
+
+   CANETA / STYLUS x DEDO (critico): Caneta, Marca-texto e Fita (as 3
    ferramentas de gesto livre/arrasto) só respondem a pointerType
    'pen' ou 'mouse' -- pointerType 'touch' é ignorado nesses gestos de
-   CRIACAO, deixando o dedo livre pra rolar a pagina normalmente
-   (touch-action:pan-y enquanto uma dessas ferramentas está ativa).
-   Mover um post-it existente ou apagar (Borracha) continuam
-   funcionando com qualquer ponteiro, inclusive o dedo, por serem
-   interacoes discretas sobre um elemento já existente, nao criacao de
-   traço livre. Rejeição de palma real (ignorar o toque da mao
-   encostada enquanto a Apple Pencil escreve) é responsabilidade do
-   sistema operacional/navegador quando o hardware suporta -- este
-   codigo é o reforço de software: mesmo que um toque da palma dispare
-   um evento, ele nunca cria marca porque pointerType 'touch' é
-   descartado nos 3 gestos acima.
+   CRIACAO, deixando o dedo livre pra rolar a pagina normalmente. Alem
+   do filtro por pointerType, a zona troca dinamicamente seu
+   touch-action para 'none' SOMENTE durante o gesto de caneta/mouse em
+   andamento (setado no pointerdown, revertido no pointerup/cancel) --
+   isso impede que o navegador interprete o traço da caneta como
+   rolagem, sem precisar desabilitar rolagem por toque permanentemente
+   (a regra CSS base, pan-y, continua valendo pro dedo o tempo todo).
+   Rejeicao de palma (nao deixar a mao apoiada virar traço) e reforçada
+   em 2 camadas: pelo pointerType (touch nunca desenha) e por um flag
+   PEN_POINTER_ACTIVE que descarta qualquer toque de dedo concorrente
+   enquanto a caneta esta desenhando; a rejeicao de palma nativa do
+   hardware/SO, quando suportada, atua por cima disso.
+   Mover um post-it existente, redimensiona-lo ou apagar (Borracha)
+   continuam funcionando com qualquer ponteiro, inclusive o dedo, por
+   serem interacoes discretas sobre algo que ja existe, nao criacao de
+   traço livre -- e por isso a Borracha usa touch-action:none proprio
+   enquanto ativa (ela QUER capturar o dedo pra apagar, ao contrario
+   das outras ferramentas de gesto).
    =================================================================== */
 (function(){
 "use strict";
@@ -16308,8 +16342,15 @@ var STICKY_COLORS = {y:'#f6e6ac', p:'#f6d3e6', b:'#cfe6fc', g:'#c7ecd2'};
 var TOOL = null;              // null | 'pen' | 'hl' | 'sticky' | 'tape' | 'eraser'
 var PANEL_OPEN = false, PANEL_MIN = false;
 var PEN_C='k', PEN_W=3, HL_C='y', TAPE_C='n', STICKY_C='y';
+var ERASER_W = 26;            // diametro do pincel da borracha, em px de tela
+var STICKY_SIZE = 150;        // largura padrao (px) de um post-it novo
 var UNDO=[], REDO=[];
-var DRAW=null;                // gesto de criacao em andamento
+var DRAW=null;                // gesto de criacao/apagamento em andamento
+var PEN_POINTER_ACTIVE=false; // true enquanto caneta/mouse esta desenhando (p/ rejeicao de palma)
+
+/* modo edicao = painel de ferramentas aberto (nao depende mais de um
+   estado salvo -- e sempre "leitura" ate o usuario tocar no lapis) */
+function isEditMode(){ return PANEL_OPEN; }
 
 function AState(){
   var s=S();
@@ -16323,12 +16364,27 @@ function toPct(zone, clientX, clientY){
   var x=(clientX-r.left)/Math.max(1,r.width)*100, y=(clientY-r.top)/Math.max(1,r.height)*100;
   return [Math.max(0,Math.min(100,x)), Math.max(0,Math.min(100,y))];
 }
+function updateStickiesInteractivity(){
+  var edit=isEditMode();
+  document.querySelectorAll('.annot-sticky').forEach(function(d){
+    d.classList.toggle('readonly', !edit);
+    var body=d.querySelector('.annot-sticky-body');
+    if(body) body.setAttribute('contenteditable', edit?'true':'false');
+  });
+}
+function updateEraserCursorVisibility(){
+  var el=document.getElementById('annot-eraser-cursor');
+  if(el && !(isEditMode() && TOOL==='eraser')) el.style.display='none';
+}
 function syncBodyClasses(){
-  var b=document.body, mode=AState().annotMode||'edit';
-  b.classList.toggle('annot-readmode', mode==='read');
-  b.classList.toggle('annot-edit-on', mode!=='read');
-  b.classList.toggle('annot-writing', mode!=='read' && (TOOL==='pen'||TOOL==='hl'||TOOL==='tape'));
-  b.classList.toggle('annot-eraser-armed', mode!=='read' && TOOL==='eraser');
+  var b=document.body, edit=isEditMode();
+  b.classList.toggle('annot-readmode', !edit);
+  b.classList.toggle('annot-edit-on', edit);
+  b.classList.toggle('annot-writing', edit && (TOOL==='pen'||TOOL==='hl'||TOOL==='tape'));
+  b.classList.toggle('annot-erasing', edit && TOOL==='eraser');
+  b.classList.toggle('annot-eraser-armed', edit && TOOL==='eraser');
+  updateStickiesInteractivity();
+  updateEraserCursorVisibility();
 }
 
 /* ===================================================================
@@ -16439,8 +16495,8 @@ function hlDragEnd(st){
    mantém o traço colado ao conteúdo em qualquer tela sem precisar
    recalcular nada; a única contrapartida (simplificação deliberada) é
    que, se a proporção da zona mudar bastante entre o dispositivo onde
-   se desenhou e onde se revê, o traço pode esticar levemente -- span
-   the espessura em si fica constante via vector-effect="non-scaling-stroke".
+   se desenhou e onde se revê, o traço pode esticar levemente -- a
+   espessura em si fica constante via vector-effect="non-scaling-stroke".
    =================================================================== */
 function inkSvg(zone){
   var svg=zone.querySelector(':scope > svg.annot-ink-svg');
@@ -16517,15 +16573,12 @@ function tapeEl(zone, t){
   zone.appendChild(d);
   d.addEventListener('click', function(ev){
     if(ev.target.closest('.annot-tape-del')) return;
-    if(TOOL==='eraser' && AState().annotMode!=='read'){
-      var removed=tapeRemove(zone, t.id);
-      if(removed){ pushUndo({op:'remove',kind:'tape',key:zone.dataset.hlkey,zone:zone,item:removed}); save(); }
-      return;
-    }
+    if(TOOL==='eraser') return; // apagar com a Borracha e tratado no gesto de pointerdown/drag (eraseAt)
     d.classList.toggle('revealed');
   });
   d.querySelector('.annot-tape-del').addEventListener('click', function(ev){
     ev.stopPropagation();
+    if(!isEditMode()) return;
     var removed=tapeRemove(zone, t.id);
     if(removed){ pushUndo({op:'remove',kind:'tape',key:zone.dataset.hlkey,zone:zone,item:removed}); save(); }
   });
@@ -16565,9 +16618,10 @@ function tapeEnd(st){
 }
 
 /* ===================================================================
-   POST-IT -- ancorado em % da zona; arrastavel pelo cabecalho; texto
-   e foto (a foto e reduzida no cliente antes de virar dataURL, pra nao
-   pesar o localStorage).
+   POST-IT -- ancorado em % da zona; arrastavel pelo cabecalho,
+   redimensionavel pela alça no canto inferior direito; texto e foto
+   (a foto e reduzida no cliente antes de virar dataURL, pra nao pesar
+   o localStorage).
    =================================================================== */
 function imgToDataUrl(file, cb){
   var reader=new FileReader();
@@ -16590,14 +16644,17 @@ function stickyFlush(zone, id, patch){
   if(it){ Object.assign(it, patch); save(); }
 }
 function stickyEl(zone, note){
-  var ro = AState().annotMode==='read';
+  var edit=isEditMode();
   var d=document.createElement('div');
-  d.className='annot-sticky'+(ro?' readonly':''); d.dataset.stickyid=note.id; d.dataset.c=note.c||'y';
+  d.className='annot-sticky'+(edit?'':' readonly'); d.dataset.stickyid=note.id; d.dataset.c=note.c||'y';
   d.style.left=note.x+'%'; d.style.top=note.y+'%';
+  var w0=note.w||STICKY_SIZE, h0=note.h||Math.round(w0*0.733);
+  d.style.width=w0+'px'; d.style.height=h0+'px';
   d.innerHTML=
     '<div class="annot-sticky-head"><span class="annot-sticky-handle">⠿⠿</span><button class="annot-sticky-del" title="Excluir">×</button></div>'+
-    '<div class="annot-sticky-body" contenteditable="'+(ro?'false':'true')+'">'+(note.html||'')+'</div>'+
-    (ro?'':'<div class="annot-sticky-foot"><label>📷<input type="file" accept="image/*" style="display:none"></label></div>');
+    '<div class="annot-sticky-body" contenteditable="'+(edit?'true':'false')+'">'+(note.html||'')+'</div>'+
+    '<div class="annot-sticky-foot"><label>📷<input type="file" accept="image/*" style="display:none"></label></div>'+
+    '<div class="annot-sticky-resize" title="Arraste para redimensionar"></div>';
   zone.appendChild(d);
 
   var body=d.querySelector('.annot-sticky-body');
@@ -16607,20 +16664,23 @@ function stickyEl(zone, note){
 
   var fileInp=d.querySelector('input[type=file]');
   if(fileInp) fileInp.addEventListener('change', function(ev){
+    if(!isEditMode()) return;
     var f=ev.target.files && ev.target.files[0]; if(!f) return;
     imgToDataUrl(f, function(url){ var img=document.createElement('img'); img.src=url; body.appendChild(img); flush(); });
   });
 
   d.querySelector('.annot-sticky-del').addEventListener('click', function(ev){
     ev.stopPropagation();
+    if(!isEditMode()) return;
     var removed=stickyRemove(zone, note.id);
     if(removed){ pushUndo({op:'remove',kind:'sticky',key:zone.dataset.hlkey,zone:zone,item:removed}); save(); }
   });
 
   var handle=d.querySelector('.annot-sticky-head');
   handle.addEventListener('pointerdown', function(ev){
-    if(AState().annotMode==='read') return;
-    ev.preventDefault();
+    if(!isEditMode()) return;
+    if(ev.target.closest('.annot-sticky-del')) return;
+    ev.preventDefault(); ev.stopPropagation();
     try{ handle.setPointerCapture(ev.pointerId); }catch(e){}
     function move(mv){
       var p=toPct(zone, mv.clientX, mv.clientY);
@@ -16634,6 +16694,27 @@ function stickyEl(zone, note){
     handle.addEventListener('pointermove', move);
     handle.addEventListener('pointerup', up);
   });
+
+  var resizeHandle=d.querySelector('.annot-sticky-resize');
+  resizeHandle.addEventListener('pointerdown', function(ev){
+    if(!isEditMode()) return;
+    ev.preventDefault(); ev.stopPropagation();
+    try{ resizeHandle.setPointerCapture(ev.pointerId); }catch(e){}
+    var startX=ev.clientX, startY=ev.clientY, startW=d.offsetWidth, startH=d.offsetHeight;
+    function move(mv){
+      var w=Math.max(110, Math.min(420, startW+(mv.clientX-startX)));
+      var h=Math.max(80, Math.min(420, startH+(mv.clientY-startY)));
+      d.style.width=w+'px'; d.style.height=h+'px';
+    }
+    function up(){
+      resizeHandle.removeEventListener('pointermove', move);
+      resizeHandle.removeEventListener('pointerup', up);
+      stickyFlush(zone, note.id, {w:parseFloat(d.style.width), h:parseFloat(d.style.height)});
+    }
+    resizeHandle.addEventListener('pointermove', move);
+    resizeHandle.addEventListener('pointerup', up);
+  });
+
   return d;
 }
 function stickyApplyZone(zone){
@@ -16649,13 +16730,72 @@ function stickyRemove(zone,id){
 }
 function stickyCreate(zone,x,y){
   var p=toPct(zone,x,y);
-  var id=uid('note'), item={id:id, x:Math.min(85,p[0]), y:Math.min(85,p[1]), c:STICKY_C, html:''};
+  var w=STICKY_SIZE, h=Math.round(STICKY_SIZE*0.733);
+  var id=uid('note'), item={id:id, x:Math.min(85,p[0]), y:Math.min(85,p[1]), c:STICKY_C, html:'', w:w, h:h};
   var key=zone.dataset.hlkey;
   var s=AState(); s.stickies[key]=s.stickies[key]||[]; s.stickies[key].push(item); save();
   var el=stickyEl(zone, item);
   pushUndo({op:'add',kind:'sticky',key:key,zone:zone,item:item});
   setTimeout(function(){ var b=el.querySelector('.annot-sticky-body'); if(b) b.focus(); }, 60);
 }
+
+/* ===================================================================
+   BORRACHA -- pincel circular de raio ajustavel (ERASER_W, em px de
+   tela). Ao arrastar sobre a zona, qualquer destaque/traço/fita/post-it
+   cuja caixa delimitadora esteja a uma distancia <= raio do ponteiro e
+   apagado. Funciona com qualquer pointerType (inclusive dedo).
+   =================================================================== */
+function distToRect(rect,x,y){
+  var dx=Math.max(rect.left-x, 0, x-rect.right);
+  var dy=Math.max(rect.top-y, 0, y-rect.bottom);
+  return Math.sqrt(dx*dx+dy*dy);
+}
+function eraseAt(zone,x,y,radius,erasedSet){
+  var hit=false;
+  zone.querySelectorAll('mark.uhl').forEach(function(m){
+    var id=m.dataset.hlid, k='hl:'+id; if(erasedSet.has(k)) return;
+    if(distToRect(m.getBoundingClientRect(),x,y)<=radius){
+      erasedSet.add(k);
+      var r=hlRemove(zone,id); if(r){ pushUndo({op:'remove',kind:'hl',key:zone.dataset.hlkey,zone:zone,item:r}); hit=true; }
+    }
+  });
+  zone.querySelectorAll('.annot-stroke').forEach(function(s){
+    var id=s.dataset.inkid, k='ink:'+id; if(erasedSet.has(k)) return;
+    if(distToRect(s.getBoundingClientRect(),x,y)<=radius){
+      erasedSet.add(k);
+      var r=inkRemove(zone,id); if(r){ pushUndo({op:'remove',kind:'ink',key:zone.dataset.hlkey,zone:zone,item:r}); hit=true; }
+    }
+  });
+  zone.querySelectorAll('.annot-tape').forEach(function(t){
+    var id=t.dataset.tapeid, k='tape:'+id; if(erasedSet.has(k)) return;
+    if(distToRect(t.getBoundingClientRect(),x,y)<=radius){
+      erasedSet.add(k);
+      var r=tapeRemove(zone,id); if(r){ pushUndo({op:'remove',kind:'tape',key:zone.dataset.hlkey,zone:zone,item:r}); hit=true; }
+    }
+  });
+  zone.querySelectorAll('.annot-sticky').forEach(function(n){
+    var id=n.dataset.stickyid, k='sticky:'+id; if(erasedSet.has(k)) return;
+    if(distToRect(n.getBoundingClientRect(),x,y)<=radius){
+      erasedSet.add(k);
+      var r=stickyRemove(zone,id); if(r){ pushUndo({op:'remove',kind:'sticky',key:zone.dataset.hlkey,zone:zone,item:r}); hit=true; }
+    }
+  });
+  if(hit) save();
+  return hit;
+}
+function ensureEraserCursor(){
+  var el=document.getElementById('annot-eraser-cursor');
+  if(!el){ el=document.createElement('div'); el.id='annot-eraser-cursor'; el.className='annot-eraser-cursor'; document.body.appendChild(el); }
+  return el;
+}
+document.addEventListener('pointermove', function(ev){
+  if(!(isEditMode() && TOOL==='eraser')) return;
+  if(ev.pointerType==='touch') return; // dedo nao precisa do indicador visual (ele mesmo cobre a area)
+  var el=ensureEraserCursor();
+  el.style.display='block';
+  el.style.width=el.style.height=ERASER_W+'px';
+  el.style.left=ev.clientX+'px'; el.style.top=ev.clientY+'px';
+});
 
 /* ===================================================================
    DESFAZER / REFAZER (pilha em memoria por sessao)
@@ -16681,7 +16821,7 @@ function doRedo(){ var e=REDO.pop(); if(!e) return; var inv=invert(e); save(); U
 
 /* atalhos de teclado (desktop) */
 document.addEventListener('keydown', function(e){
-  if(AState().annotMode==='read') return;
+  if(!isEditMode()) return;
   var k=(e.key||'').toLowerCase();
   if((e.ctrlKey||e.metaKey) && !e.shiftKey && k==='z'){ e.preventDefault(); doUndo(); }
   else if((e.ctrlKey||e.metaKey) && (k==='y' || (e.shiftKey && k==='z'))){ e.preventDefault(); doRedo(); }
@@ -16691,7 +16831,7 @@ document.addEventListener('keydown', function(e){
    edicao dos tablets) */
 var lastTwoFingerTap=0;
 document.addEventListener('touchend', function(e){
-  if(AState().annotMode==='read') return;
+  if(!isEditMode()) return;
   if(e.touches.length===0 && e.changedTouches && e.changedTouches.length===2){
     var now=Date.now();
     if(now-lastTwoFingerTap<420){ doUndo(); lastTwoFingerTap=0; } else lastTwoFingerTap=now;
@@ -16703,7 +16843,7 @@ document.addEventListener('touchend', function(e){
    =================================================================== */
 function wireZonePointer(zone){
   zone.addEventListener('pointerdown', function(ev){
-    if(AState().annotMode==='read') return;
+    if(!isEditMode()) return;
     if(!TOOL) return; // nenhuma ferramenta ativa -> comportamento nativo (selecionar, copiar, rolar)
 
     if(TOOL==='sticky'){
@@ -16712,12 +16852,32 @@ function wireZonePointer(zone){
       stickyCreate(zone, ev.clientX, ev.clientY);
       return;
     }
-    if(TOOL==='eraser') return; // apagar e tratado no listener de click abaixo
 
-    if(ev.pointerType==='touch') return; // dedo NUNCA desenha (caneta/marca-texto/fita)
+    if(TOOL==='eraser'){
+      // a Borracha aceita qualquer ponteiro (inclusive dedo) e apaga por
+      // arrasto -- captura o ponteiro e vai varrendo a area em pointermove
+      ev.preventDefault();
+      try{ zone.setPointerCapture(ev.pointerId); }catch(e){}
+      var erasedSet=new Set();
+      eraseAt(zone, ev.clientX, ev.clientY, ERASER_W/2, erasedSet);
+      DRAW={kind:'eraser', pid:ev.pointerId, zone:zone, erased:erasedSet};
+      return;
+    }
+
+    /* rejeicao de palma: se ha um gesto de caneta/mouse em andamento,
+       qualquer toque de DEDO concorrente e descartado -- evita que a
+       mao apoiada na tela vire traço ou atrapalhe o desenho */
+    if(ev.pointerType==='touch' && PEN_POINTER_ACTIVE){ ev.preventDefault(); return; }
+    if(ev.pointerType==='touch') return; // dedo nunca desenha (caneta/marca-texto/fita) -- rola normalmente
 
     ev.preventDefault();
     try{ zone.setPointerCapture(ev.pointerId); }catch(e){}
+    /* troca dinamica de touch-action: durante ESTE gesto de caneta/mouse
+       a zona fica 'none' (impede que o navegador interprete o
+       movimento da caneta como rolagem); ao soltar, volta pro 'pan-y'
+       padrao definido em CSS, que e o que deixa o dedo rolar depois */
+    zone.style.touchAction='none';
+    PEN_POINTER_ACTIVE=true;
     if(TOOL==='pen') DRAW={kind:'pen', st:penStart(zone, ev.clientX, ev.clientY, ev.pressure), pid:ev.pointerId};
     else if(TOOL==='hl'){ var st=hlDragStart(zone, ev.clientX, ev.clientY); if(st) DRAW={kind:'hl', st:st, pid:ev.pointerId}; }
     else if(TOOL==='tape') DRAW={kind:'tape', st:tapeStart(zone, ev.clientX, ev.clientY), pid:ev.pointerId};
@@ -16726,7 +16886,9 @@ function wireZonePointer(zone){
   zone.addEventListener('pointermove', function(ev){
     if(!DRAW || ev.pointerId!==DRAW.pid) return;
     ev.preventDefault();
-    var events=(ev.getCoalescedEvents && ev.getCoalescedEvents()) || [ev];
+    if(DRAW.kind==='eraser'){ eraseAt(zone, ev.clientX, ev.clientY, ERASER_W/2, DRAW.erased); return; }
+    var events=(ev.getCoalescedEvents && ev.getCoalescedEvents()) || [];
+    if(!events.length) events=[ev]; // alguns navegadores/dispositivos retornam lista vazia -- nunca perder o ponto
     events.forEach(function(e2){
       if(DRAW.kind==='pen') penMove(DRAW.st, e2.clientX, e2.clientY);
       else if(DRAW.kind==='hl') hlDragUpdate(DRAW.st, e2.clientX, e2.clientY);
@@ -16739,22 +16901,12 @@ function wireZonePointer(zone){
     if(DRAW.kind==='pen') penEnd(DRAW.st);
     else if(DRAW.kind==='hl') hlDragEnd(DRAW.st);
     else if(DRAW.kind==='tape') tapeEnd(DRAW.st);
+    zone.style.touchAction=''; // restaura o pan-y padrao do CSS p/ o dedo
+    PEN_POINTER_ACTIVE=false;
     DRAW=null;
   }
   zone.addEventListener('pointerup', finish);
   zone.addEventListener('pointercancel', finish);
-
-  zone.addEventListener('click', function(ev){
-    if(AState().annotMode==='read' || TOOL!=='eraser') return;
-    var mark=ev.target.closest('mark.uhl');
-    if(mark){ var r1=hlRemove(zone, mark.dataset.hlid); if(r1){ pushUndo({op:'remove',kind:'hl',key:zone.dataset.hlkey,zone:zone,item:r1}); save(); } return; }
-    var stroke=ev.target.closest('.annot-stroke');
-    if(stroke){ var r2=inkRemove(zone, stroke.dataset.inkid); if(r2){ pushUndo({op:'remove',kind:'ink',key:zone.dataset.hlkey,zone:zone,item:r2}); save(); } return; }
-    var tape=ev.target.closest('.annot-tape');
-    if(tape && !ev.target.closest('.annot-tape-del')){ var r3=tapeRemove(zone, tape.dataset.tapeid); if(r3){ pushUndo({op:'remove',kind:'tape',key:zone.dataset.hlkey,zone:zone,item:r3}); save(); } return; }
-    var sticky=ev.target.closest('.annot-sticky');
-    if(sticky && !ev.target.closest('.annot-sticky-del')){ var r4=stickyRemove(zone, sticky.dataset.stickyid); if(r4){ pushUndo({op:'remove',kind:'sticky',key:zone.dataset.hlkey,zone:zone,item:r4}); save(); } }
-  });
 }
 
 /* ===================================================================
@@ -16770,24 +16922,10 @@ function colorRow(name,colors,current){
     return '<div class="annot-swatch'+(k===current?' on':'')+'" data-color="'+k+'" style="background:'+colors[k]+'"></div>';
   }).join('')+'</div>';
 }
-function setMode(m){
-  var s=AState(); s.annotMode=m; save();
-  if(m==='read') TOOL=null;
-  syncBodyClasses(); renderPanel();
-}
 function renderPanel(){
   var panel=document.getElementById('annot-panel'); if(!panel) return;
-  var mode=AState().annotMode||'edit';
-  panel.classList.toggle('min', PANEL_MIN && mode!=='read');
+  panel.classList.toggle('min', PANEL_MIN);
 
-  if(mode==='read'){
-    panel.innerHTML =
-      '<div class="annot-panel-head"><span class="annot-panel-title">Modo leitura</span></div>'+
-      '<p class="annot-readmsg">Suas marcações, post-its e fitas continuam aqui. Toque para voltar a editar.</p>'+
-      '<div class="annot-foot"><button id="annot-toggle-mode">✏️ Ativar anotações</button></div>';
-    document.getElementById('annot-toggle-mode').onclick=function(){ setMode('edit'); };
-    return;
-  }
   if(PANEL_MIN){
     panel.innerHTML='<button class="annot-min-btn" id="annot-expand" title="Expandir">▢</button>';
     document.getElementById('annot-expand').onclick=function(){ PANEL_MIN=false; renderPanel(); };
@@ -16808,13 +16946,16 @@ function renderPanel(){
   } else if(TOOL==='tape'){
     html+='<div class="annot-sep"></div>'+colorRow('tape',TAPE_COLORS,TAPE_C);
   } else if(TOOL==='sticky'){
-    html+='<div class="annot-sep"></div>'+colorRow('sticky',STICKY_COLORS,STICKY_C);
+    html+='<div class="annot-sep"></div>'+colorRow('sticky',STICKY_COLORS,STICKY_C)+
+      '<div class="annot-row"><div class="annot-thickness">📐<input type="range" id="annot-sticky-size" min="100" max="320" step="10" value="'+STICKY_SIZE+'"><span id="annot-sticky-size-lbl">'+STICKY_SIZE+'</span></div></div>';
+  } else if(TOOL==='eraser'){
+    html+='<div class="annot-sep"></div>'+
+      '<div class="annot-row"><div class="annot-thickness">🗑️<input type="range" id="annot-eraser-w" min="12" max="70" step="2" value="'+ERASER_W+'"><span id="annot-eraser-w-lbl">'+ERASER_W+'</span></div></div>';
   }
 
   html+='<div class="annot-sep"></div><div class="annot-foot">'+
     '<button id="annot-undo" title="Desfazer" '+(UNDO.length?'':'disabled')+'>↩︎</button>'+
-    '<button id="annot-redo" title="Refazer" '+(REDO.length?'':'disabled')+'>↪︎</button>'+
-    '<button id="annot-readbtn" title="Apenas leitura">👁️ Leitura</button></div>';
+    '<button id="annot-redo" title="Refazer" '+(REDO.length?'':'disabled')+'>↪︎</button></div>';
   panel.innerHTML=html;
 
   panel.querySelectorAll('.annot-tbtn').forEach(function(btn){
@@ -16831,10 +16972,13 @@ function renderPanel(){
   });
   var wInput=document.getElementById('annot-w');
   if(wInput) wInput.oninput=function(){ PEN_W=parseFloat(wInput.value); var l=document.getElementById('annot-w-lbl'); if(l) l.textContent=PEN_W; };
+  var eInput=document.getElementById('annot-eraser-w');
+  if(eInput) eInput.oninput=function(){ ERASER_W=parseFloat(eInput.value); var l=document.getElementById('annot-eraser-w-lbl'); if(l) l.textContent=ERASER_W; };
+  var sInput=document.getElementById('annot-sticky-size');
+  if(sInput) sInput.oninput=function(){ STICKY_SIZE=parseFloat(sInput.value); var l=document.getElementById('annot-sticky-size-lbl'); if(l) l.textContent=STICKY_SIZE; };
   var minBtn=document.getElementById('annot-min'); if(minBtn) minBtn.onclick=function(){ PANEL_MIN=true; renderPanel(); };
   var uBtn=document.getElementById('annot-undo'); if(uBtn) uBtn.onclick=doUndo;
   var rBtn=document.getElementById('annot-redo'); if(rBtn) rBtn.onclick=doRedo;
-  var roBtn=document.getElementById('annot-readbtn'); if(roBtn) roBtn.onclick=function(){ setMode('read'); };
 }
 function refreshFoot(){ if(PANEL_OPEN) renderPanel(); }
 function ensureUI(){
@@ -16849,11 +16993,23 @@ function ensureUI(){
   document.body.appendChild(panel);
 
   fab.addEventListener('click', function(){
-    PANEL_OPEN=!PANEL_OPEN; if(PANEL_OPEN) PANEL_MIN=false;
+    PANEL_OPEN=!PANEL_OPEN;
+    if(PANEL_OPEN){ PANEL_MIN=false; } else { TOOL=null; PANEL_MIN=false; }
     panel.classList.toggle('open', PANEL_OPEN);
     fab.classList.toggle('on', PANEL_OPEN);
+    syncBodyClasses();
     if(PANEL_OPEN) renderPanel();
   });
+
+  /* clicou fora do painel (mas com o painel aberto e ainda expandido)
+     -> minimiza sozinho, como se tivesse clicado no "–", pra nao
+     atrapalhar quem quer continuar usando a ferramenta selecionada
+     (ex.: comecar a desenhar direto no conteudo) */
+  document.addEventListener('pointerdown', function(ev){
+    if(!PANEL_OPEN || PANEL_MIN) return;
+    if(panel.contains(ev.target) || fab.contains(ev.target)) return;
+    PANEL_MIN=true; renderPanel();
+  }, true);
 }
 
 /* ===================================================================
@@ -16870,7 +17026,7 @@ function wireZone(zone){
   wireZonePointer(zone);
 }
 function scanMain(){
-  syncBodyClasses(); // reflete annotMode atual mesmo se mudou por sincronizacao remota (outro dispositivo)
+  syncBodyClasses(); // reflete o modo atual (painel aberto/fechado) em qualquer zona nova
   document.querySelectorAll('.hl-zone:not([data-annot-wired])').forEach(wireZone);
 }
 function boot(){
