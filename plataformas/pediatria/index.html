@@ -412,7 +412,7 @@ let uid=null, unsubCentral=null;
 
 // ---------- estado ----------
 let S=loadLocal();
-function blankState(){return {_updated:0, done:{}, srs:{}, cards:[], notes:{}, dia:{}, diaSeen:{}, hl:{}, qSeen:0, qRight:0, xp:0};}
+function blankState(){return {_updated:0, done:{}, srs:{}, cards:[], notes:{}, dia:{}, diaSeen:{}, hl:{}, ink:{}, stickies:{}, tape:{}, annotMode:'edit', qSeen:0, qRight:0, xp:0};}
 function loadLocal(){
   let base=blankState();
   try{
@@ -429,9 +429,10 @@ function mergeState(a,b){
   if(!b) return a;
   const out={...a};
   out._updated=Math.max(a._updated||0,b._updated||0);
-  for(const m of ['done','srs','notes','dia','diaSeen','hl']){
+  for(const m of ['done','srs','notes','dia','diaSeen','hl','ink','stickies','tape']){
     out[m]={...(a[m]||{}),...(b[m]||{})};        // união de mapas (local vence empate via ordem)
   }
+  out.annotMode = (b._updated||0) >= (a._updated||0) ? (b.annotMode||a.annotMode||'edit') : (a.annotMode||b.annotMode||'edit');
   out.cards=[...(a.cards||[]),...(b.cards||[])].filter((c,i,arr)=>arr.findIndex(x=>x.id===c.id)===i);
   out.qSeen=Math.max(a.qSeen||0,b.qSeen||0);
   out.qRight=Math.max(a.qRight||0,b.qRight||0);
@@ -2005,128 +2006,9 @@ if(!document.getElementById('fcc-style')){
 }
 })();</script>
 
-<!-- ===================================================================
-     MARCADOR DE TEXTO / HIGHLIGHT (aditivo)
-     Seleciona texto dentro de qualquer .hl-zone (teoria, escores, dif, mapa,
-     fluxo_dx, fluxo_cond, vespera, dicas, casos) -> vira <mark class="uhl">
-     amarelo pastel, salvo por usuario em S().hl[key]=[{id,s,e},...] (mesmo
-     pipeline local+nuvem de notes/done). Botao direito sobre um trecho
-     marcado remove o destaque. Reaplica sozinho a cada render via
-     MutationObserver — nao precisa tocar nas funcoes de render existentes.
-     =================================================================== -->
-<script>(function(){
-"use strict";
-
-/* posicao do destaque = intervalo de caracteres [s,e) do texto puro da zona
-   (ignorando tags), pois o conteudo e reconstruido do zero (innerHTML) a cada
-   navegacao — nao da pra guardar referencia de no do DOM. Range.toString()
-   resolve a concatenacao do texto pra qualquer node/offset, seja no de texto
-   ou elemento. */
-function hlBoundaryOffset(zone, node, offset){
-  var r=document.createRange();
-  r.selectNodeContents(zone);
-  r.setEnd(node, offset);
-  return r.toString().length;
-}
-
-/* caminha os nos de texto da zona com TreeWalker, acha os que se sobrepoe a
-   [s,e) e usa splitText pra isolar so o trecho marcado, envolvendo num <mark>.
-   splitText so altera o no sendo processado — aplicar varios destaques em
-   sequencia (mesmo atravessando tags como <b>) continua funcionando, porque
-   o texto concatenado da zona nunca muda de tamanho ao envolver algo em
-   <mark> (so adiciona um wrapper). */
-function hlApplyOne(zone, hl){
-  var walker=document.createTreeWalker(zone, NodeFilter.SHOW_TEXT, null);
-  var pos=0, node;
-  while((node=walker.nextNode())){
-    var len=node.nodeValue.length;
-    var nStart=pos, nEnd=pos+len;
-    if(nEnd>hl.s && nStart<hl.e){
-      var cutStart=Math.max(hl.s,nStart)-nStart;
-      var cutEnd=Math.min(hl.e,nEnd)-nStart;
-      var mid=node;
-      if(cutStart>0) mid=mid.splitText(cutStart);
-      if(cutEnd-cutStart<mid.nodeValue.length) mid.splitText(cutEnd-cutStart);
-      var mark=document.createElement('mark');
-      mark.className='uhl'; mark.dataset.hlid=hl.id;
-      mid.parentNode.insertBefore(mark, mid);
-      mark.appendChild(mid);
-      // walker ja tem referencia ao no antigo; segue do mark pra frente
-      walker.currentNode=mark;
-    }
-    pos=nEnd;
-  }
-}
-
-function hlApplyZone(zone){
-  var key=zone.dataset.hlkey; if(!key) return;
-  var list=((window.S && window.S().hl)||{})[key]||[];
-  list.forEach(function(hl){ try{ hlApplyOne(zone, hl); }catch(e){} });
-}
-
-/* reaplica sozinho: qualquer #main.innerHTML=... que produza uma nova
-   .hl-zone e pega aqui, sem precisar alterar as funcoes de render. */
-var mainEl = document.getElementById('main');
-if(mainEl && window.MutationObserver){
-  new MutationObserver(function(){
-    document.querySelectorAll('.hl-zone:not([data-hlwired])').forEach(function(zone){
-      zone.setAttribute('data-hlwired','1');
-      hlApplyZone(zone);
-    });
-  }).observe(mainEl, {childList:true, subtree:true});
-}
-
-/* criar destaque: mouseup + setTimeout(0) pra esperar a selecao do navegador
-   se estabilizar. Só aceita selecao inteira dentro da MESMA .hl-zone. */
-document.addEventListener('mouseup', function(){
-  setTimeout(function(){
-    var sel=window.getSelection(); if(!sel || sel.isCollapsed || !sel.rangeCount) return;
-    var range=sel.getRangeAt(0);
-    var zone=range.startContainer && (range.startContainer.nodeType===1 ? range.startContainer : range.startContainer.parentElement);
-    zone = zone && zone.closest ? zone.closest('.hl-zone') : null;
-    var zoneEnd = range.endContainer && (range.endContainer.nodeType===1 ? range.endContainer : range.endContainer.parentElement);
-    zoneEnd = zoneEnd && zoneEnd.closest ? zoneEnd.closest('.hl-zone') : null;
-    if(!zone || zone!==zoneEnd) return;
-    var key=zone.dataset.hlkey; if(!key) return;
-
-    var s=hlBoundaryOffset(zone, range.startContainer, range.startOffset);
-    var e=hlBoundaryOffset(zone, range.endContainer, range.endOffset);
-    if(e<=s) return;
-
-    var ss=window.S(); ss.hl=ss.hl||{}; ss.hl[key]=ss.hl[key]||[];
-    var id='hl_'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
-    ss.hl[key].push({id:id, s:s, e:e});
-    window.save();
-
-    sel.removeAllRanges();
-    hlApplyOne(zone, {id:id, s:s, e:e});
-  }, 0);
-});
-
-/* remover destaque: botao direito sobre um <mark class="uhl"> */
-document.addEventListener('contextmenu', function(e){
-  var mark = e.target && e.target.closest ? e.target.closest('mark.uhl') : null;
-  if(!mark) return;
-  e.preventDefault();
-  var zone = mark.closest('.hl-zone'); if(!zone) return;
-  var key=zone.dataset.hlkey, id=mark.dataset.hlid;
-  var ss=window.S();
-  if(ss.hl && ss.hl[key]) ss.hl[key]=ss.hl[key].filter(function(h){return h.id!==id;});
-  window.save();
-  document.querySelectorAll('mark.uhl[data-hlid="'+id+'"]').forEach(function(m){
-    var parent=m.parentNode;
-    while(m.firstChild) parent.insertBefore(m.firstChild, m);
-    parent.removeChild(m);
-    parent.normalize();
-  });
-});
-
-if(!document.getElementById('hl-style')){
-  var st=document.createElement('style'); st.id='hl-style';
-  st.textContent = 'mark.uhl{background:#f2e0a2;color:#241a33;border-radius:3px;padding:.02em .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone;cursor:context-menu}';
-  document.head.appendChild(st);
-}
-})();</script>
+<!-- ===== MARCADOR DE TEXTO ANTIGO (cor unica) removido -- substituido pelo
+     Modo de Anotacoes e Revisao completo (annot_style.css + annot_engine.js),
+     anexado no fechamento do documento. hlWrap() continua a mesma, intocada. ===== -->
 
 
 <script>
@@ -16226,6 +16108,782 @@ window.CONTENT['asma|4'] = C;
 
 </script>
 
+<!-- ===== MODO DE ANOTACOES E REVISAO (aditivo) ===== -->
+<style>
+/* ===================================================================
+   MODO DE ANOTACOES E REVISAO -- estilos (aditivo)
+   Reaproveita as variaveis de tema ja existentes (--accent, --accent2,
+   --bg, --ink, --muted, --panel, --line) e os padroes visuais ja usados
+   na plataforma (botao circular estilo .tb-btn, cartao com blur estilo
+   .ac-fc-card, toast). Nao introduz paleta nova.
+   =================================================================== */
+
+/* ---------- zona anotavel: precisa de position:relative para hospedar
+   os overlays absolutos de tinta/post-it/fita ---------- */
+.hl-zone{position:relative}
+body.annot-writing .hl-zone{touch-action:pan-y}
+body.annot-writing .hl-zone,
+body.annot-writing .hl-zone *{user-select:none;-webkit-user-select:none}
+
+/* ---------- botao flutuante principal (sempre visivel durante a leitura) --- */
+.annot-fab{
+  position:fixed; z-index:170; width:46px; height:46px; border-radius:50%;
+  border:1px solid var(--line); background:rgba(45,27,46,.55); backdrop-filter:blur(14px);
+  color:var(--accent); cursor:pointer; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 6px 20px rgba(0,0,0,.28); transition:.2s;
+  right:20px; bottom:26px;
+}
+body.light .annot-fab{background:rgba(255,255,255,.7)}
+.annot-fab svg{width:22px;height:22px}
+.annot-fab:hover{border-color:var(--accent);box-shadow:0 6px 22px var(--accent-soft);transform:translateY(-1px)}
+.annot-fab.on{color:#2d1b2e;background:var(--accent);border-color:var(--accent)}
+.annot-fab .annot-dot{position:absolute;top:2px;right:2px;width:9px;height:9px;border-radius:50%;background:#3ddc84;border:2px solid var(--bg);display:none}
+.annot-fab.dirty .annot-dot{display:block}
+
+/* ---------- painel de ferramentas ---------- */
+.annot-panel{
+  position:fixed; z-index:169; right:20px; bottom:82px;
+  background:rgba(45,27,46,.62); backdrop-filter:blur(20px); border:1px solid var(--line);
+  border-radius:20px; padding:10px; box-shadow:0 14px 40px rgba(0,0,0,.34);
+  display:flex; flex-direction:column; gap:8px; width:230px;
+  max-height:calc(100vh - 130px); overflow:auto;
+  transform:translateY(8px) scale(.98); opacity:0; pointer-events:none; transition:.18s;
+}
+body.light .annot-panel{background:rgba(255,255,255,.85)}
+.annot-panel.open{transform:translateY(0) scale(1); opacity:1; pointer-events:auto}
+.annot-panel.min{padding:6px; width:auto}
+.annot-panel-head{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 0}
+.annot-panel-title{font-family:'Fraunces',serif;font-size:.86rem;color:var(--accent)}
+.annot-min-btn{width:24px;height:24px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-size:.75rem}
+.annot-min-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+.annot-tools{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.annot-tbtn{position:relative;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--panel);
+  color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.05rem;transition:.15s}
+.annot-tbtn:hover{border-color:var(--accent)}
+.annot-tbtn.on{background:var(--accent);border-color:var(--accent);color:#2d1b2e}
+.annot-tbtn small{position:absolute;bottom:2px;left:0;right:0;font-size:.5rem;letter-spacing:.02em;color:inherit;opacity:.75;text-align:center}
+
+.annot-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:0 2px}
+.annot-swatch{width:26px;height:26px;border-radius:50%;border:2px solid transparent;cursor:pointer;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+.annot-swatch.on{border-color:var(--ink);transform:scale(1.1)}
+.annot-thickness{flex:1;display:flex;align-items:center;gap:8px}
+.annot-thickness input{flex:1;accent-color:var(--accent)}
+.annot-sep{height:1px;background:var(--line);margin:2px 0}
+.annot-foot{display:flex;align-items:center;gap:6px}
+.annot-foot button{flex:1;height:36px;border-radius:10px;border:1px solid var(--line);background:transparent;
+  color:var(--ink);cursor:pointer;font-size:.78rem;display:flex;align-items:center;justify-content:center;gap:5px}
+.annot-foot button:hover{border-color:var(--accent);color:var(--accent)}
+.annot-foot button:disabled{opacity:.35;cursor:default;pointer-events:none}
+.annot-foot button.warn{color:#e8675f}
+.annot-foot button.warn:hover{border-color:#e8675f}
+.annot-readmsg{font-size:.76rem;color:var(--muted);line-height:1.5;padding:4px 4px 2px}
+
+/* ---------- destaque de texto (mark) ---------- */
+mark.uhl{border-radius:3px;padding:.02em .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone;
+  cursor:pointer; color:#241a33}
+mark.uhl[data-c="y"]{background:#f2e0a2}
+mark.uhl[data-c="p"]{background:#f3c6de}
+mark.uhl[data-c="b"]{background:#bdddfc}
+mark.uhl[data-c="g"]{background:#b7e8c4}
+mark.uhl[data-c="o"]{background:#f6cfa0}
+body.annot-eraser-armed mark.uhl:hover{outline:2px dashed #e8675f;outline-offset:1px}
+
+/* ---------- caneta (overlay svg) ---------- */
+.annot-ink-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.annot-stroke{fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:stroke;cursor:pointer}
+body.annot-eraser-armed .annot-stroke:hover{filter:drop-shadow(0 0 0 2px #e8675f)}
+
+/* ---------- fita de oclusao ---------- */
+.annot-tape{position:absolute;z-index:3;border-radius:6px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:opacity .25s, filter .25s;
+  box-shadow:0 3px 10px rgba(0,0,0,.22);}
+.annot-tape::before{content:'';position:absolute;inset:0;border-radius:6px;
+  background:repeating-linear-gradient(135deg,rgba(255,255,255,.10) 0 8px,rgba(255,255,255,0) 8px 16px)}
+.annot-tape-lbl{position:relative;font-size:.68rem;color:rgba(45,27,46,.55);letter-spacing:.08em;text-transform:uppercase;pointer-events:none}
+.annot-tape.revealed{opacity:0;pointer-events:none}
+.annot-tape[data-c="n"]{background:#e6d3ad}
+.annot-tape[data-c="g"]{background:#cdc6d6}
+.annot-tape[data-c="k"]{background:#6a5570}
+.annot-tape[data-c="p"]{background:#f3c6de}
+.annot-tape-del{position:absolute;top:-8px;right:-8px;width:20px;height:20px;border-radius:50%;
+  background:#e8675f;color:#fff;border:2px solid var(--bg);font-size:.7rem;line-height:1;display:none;
+  align-items:center;justify-content:center;cursor:pointer;z-index:4}
+body.annot-edit-on .annot-tape:hover .annot-tape-del{display:flex}
+
+/* ---------- post-it ---------- */
+.annot-sticky{position:absolute;z-index:5;width:150px;min-height:110px;border-radius:4px 4px 10px 10px;
+  box-shadow:0 8px 22px rgba(0,0,0,.30);display:flex;flex-direction:column;overflow:hidden;
+  font-family:'Inter',sans-serif;}
+.annot-sticky[data-c="y"]{background:#f6e6ac}
+.annot-sticky[data-c="p"]{background:#f6d3e6}
+.annot-sticky[data-c="b"]{background:#cfe6fc}
+.annot-sticky[data-c="g"]{background:#c7ecd2}
+.annot-sticky-head{display:flex;align-items:center;justify-content:space-between;padding:4px 6px;
+  cursor:grab;background:rgba(0,0,0,.06);flex:none}
+.annot-sticky-head:active{cursor:grabbing}
+.annot-sticky-handle{font-size:.7rem;color:rgba(45,27,46,.5);letter-spacing:.1em}
+.annot-sticky-del{width:18px;height:18px;border-radius:50%;border:none;background:rgba(45,27,46,.16);
+  color:#2d1b2e;font-size:.62rem;cursor:pointer;display:none;align-items:center;justify-content:center}
+.annot-sticky-head:hover .annot-sticky-del{display:flex}
+.annot-sticky-body{flex:1;padding:6px 8px;font-size:.76rem;line-height:1.4;color:#2d1b2e;
+  outline:none;overflow:auto;word-break:break-word}
+.annot-sticky-body:empty:before{content:'Toque para escrever...';color:rgba(45,27,46,.4)}
+.annot-sticky img{max-width:100%;border-radius:6px;display:block;margin-top:4px}
+.annot-sticky-foot{display:flex;justify-content:flex-end;padding:3px 6px;flex:none}
+.annot-sticky-foot label{font-size:.78rem;cursor:pointer;opacity:.7}
+.annot-sticky-foot label:hover{opacity:1}
+.annot-sticky.readonly .annot-sticky-head{cursor:default}
+.annot-sticky.readonly .annot-sticky-del,.annot-sticky.readonly .annot-sticky-foot{display:none}
+
+/* ---------- responsivo: tablet/celular ---------- */
+@media(pointer:coarse), (max-width:880px){
+  .annot-fab{right:16px;bottom:22px;width:50px;height:50px}
+  .annot-panel{
+    right:8px;left:8px;bottom:78px;width:auto;max-width:520px;margin:0 auto;
+    border-radius:22px;
+  }
+  .annot-tools{grid-template-columns:repeat(4,1fr)}
+}
+@media(max-width:520px){
+  .annot-fab{right:12px;bottom:16px}
+  .annot-panel{right:6px;left:6px;bottom:70px;padding:9px}
+  .annot-tbtn{height:48px;font-size:1.15rem}
+  .annot-sticky{width:130px;min-height:96px}
+}
+
+/* ---------- modo apenas-leitura: nada flutuante alem do FAB minimo --- */
+body.annot-readmode .annot-sticky-del,
+body.annot-readmode .annot-tape-del,
+body.annot-readmode .annot-sticky-head{cursor:default}
+body.annot-readmode .annot-sticky-del{display:none!important}
+
+</style>
+<script>
+/* ===================================================================
+   MODO DE ANOTACOES E REVISAO (aditivo)
+   Substitui o antigo marcador de texto de cor unica por uma barra de
+   ferramentas completa: Caneta, Marca-texto (multi-cor), Post-it (com
+   foto), Fita de oclusao e Borracha, com Desfazer/Refazer e um modo
+   "Apenas leitura" lembrado por usuario.
+
+   Reaproveita 100% a infraestrutura ja existente:
+   - toda .hl-zone[data-hlkey] (teoria por sub-aba, escores, dif, mapa,
+     fluxo_dx, fluxo_cond, vespera, dicas, casos) vira automaticamente
+     uma "pagina" anotavel -- a mesma data-hlkey e usada como chave de
+     posicao pra TODAS as ferramentas (destaque, tinta, post-it, fita),
+     nao so pro destaque como antes.
+   - S()/save() (nucleo Firebase+localStorage) -- os dados novos
+     (S().ink, S().stickies, S().tape, S().annotMode) entram no mesmo
+     pipeline de merge local+nuvem que ja existe pra done/srs/notes/hl
+     (blankState/mergeState no nucleo foram ajustados p/ incluir as
+     chaves novas -- ver build_annotations.py).
+   - MutationObserver em #main, igual ao script antigo de highlight:
+     como toda navegacao faz #main.innerHTML=..., qualquer zona nova
+     e pega automaticamente sem precisar tocar nas funcoes de render.
+
+   Regra "dedo nao escreve": Caneta, Marca-texto e Fita (as 3
+   ferramentas de gesto livre/arrasto) só respondem a pointerType
+   'pen' ou 'mouse' -- pointerType 'touch' é ignorado nesses gestos de
+   CRIACAO, deixando o dedo livre pra rolar a pagina normalmente
+   (touch-action:pan-y enquanto uma dessas ferramentas está ativa).
+   Mover um post-it existente ou apagar (Borracha) continuam
+   funcionando com qualquer ponteiro, inclusive o dedo, por serem
+   interacoes discretas sobre um elemento já existente, nao criacao de
+   traço livre. Rejeição de palma real (ignorar o toque da mao
+   encostada enquanto a Apple Pencil escreve) é responsabilidade do
+   sistema operacional/navegador quando o hardware suporta -- este
+   codigo é o reforço de software: mesmo que um toque da palma dispare
+   um evento, ele nunca cria marca porque pointerType 'touch' é
+   descartado nos 3 gestos acima.
+   =================================================================== */
+(function(){
+"use strict";
+
+var HL_COLORS     = {y:'#f2e0a2', p:'#f3c6de', b:'#bdddfc', g:'#b7e8c4', o:'#f6cfa0'};
+var PEN_COLORS    = {k:'#3a2a3d', r:'#e8675f', b:'#6db3f2', o:'#f59f0a', p:'#fcbde1'};
+var TAPE_COLORS   = {n:'#e6d3ad', g:'#cdc6d6', k:'#6a5570', p:'#f3c6de'};
+var STICKY_COLORS = {y:'#f6e6ac', p:'#f6d3e6', b:'#cfe6fc', g:'#c7ecd2'};
+
+var TOOL = null;              // null | 'pen' | 'hl' | 'sticky' | 'tape' | 'eraser'
+var PANEL_OPEN = false, PANEL_MIN = false;
+var PEN_C='k', PEN_W=3, HL_C='y', TAPE_C='n', STICKY_C='y';
+var UNDO=[], REDO=[];
+var DRAW=null;                // gesto de criacao em andamento
+
+function AState(){
+  var s=S();
+  s.hl=s.hl||{}; s.ink=s.ink||{}; s.stickies=s.stickies||{}; s.tape=s.tape||{};
+  return s;
+}
+function uid(pre){ return pre+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7); }
+function zoneRect(zone){ return zone.getBoundingClientRect(); }
+function toPct(zone, clientX, clientY){
+  var r=zoneRect(zone);
+  var x=(clientX-r.left)/Math.max(1,r.width)*100, y=(clientY-r.top)/Math.max(1,r.height)*100;
+  return [Math.max(0,Math.min(100,x)), Math.max(0,Math.min(100,y))];
+}
+function syncBodyClasses(){
+  var b=document.body, mode=AState().annotMode||'edit';
+  b.classList.toggle('annot-readmode', mode==='read');
+  b.classList.toggle('annot-edit-on', mode!=='read');
+  b.classList.toggle('annot-writing', mode!=='read' && (TOOL==='pen'||TOOL==='hl'||TOOL==='tape'));
+  b.classList.toggle('annot-eraser-armed', mode!=='read' && TOOL==='eraser');
+}
+
+/* ===================================================================
+   DESTAQUE DE TEXTO (marca-texto) -- multi-cor, seguro com SVG embutido
+   =================================================================== */
+function inSvg(node){
+  var el = node.nodeType===1 ? node : node.parentElement;
+  while(el){ if(el.tagName && el.tagName.toLowerCase()==='svg') return true; el=el.parentElement; }
+  return false;
+}
+/* TreeWalker que IGNORA qualquer texto dentro de <svg> -- os 5 SVGs
+   premium de cada aula de teoria ficam dentro da mesma .hl-zone, e sem
+   esse filtro um <mark> (elemento HTML) podia acabar inserido dentro
+   do namespace SVG, invalidando e escondendo o desenho. */
+function hlWalker(zone){
+  return document.createTreeWalker(zone, NodeFilter.SHOW_TEXT, {
+    acceptNode:function(n){ return inSvg(n) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }
+  });
+}
+function hlOffsetAt(zone, node, offset){
+  if(node && node.nodeType===3 && !inSvg(node)){
+    var w=hlWalker(zone), n, pos=0;
+    while((n=w.nextNode())){ if(n===node) return pos+offset; pos+=n.nodeValue.length; }
+    return pos;
+  }
+  // ponto caiu num elemento (ou dentro do svg): usa o 1o no de texto
+  // valido que vem depois dele na ordem do documento como referencia
+  var anchor = (node && node.nodeType===1) ? (node.childNodes[offset]||node) : node;
+  var w2=hlWalker(zone), n2, pos2=0;
+  while((n2=w2.nextNode())){
+    if(anchor && anchor.compareDocumentPosition && n2.compareDocumentPosition(anchor) & Node.DOCUMENT_POSITION_FOLLOWING){
+      pos2 += n2.nodeValue.length; continue;
+    }
+    return pos2;
+  }
+  return pos2;
+}
+function hlApplyOne(zone, hl){
+  var w=hlWalker(zone), pos=0, node;
+  while((node=w.nextNode())){
+    var len=node.nodeValue.length, nStart=pos, nEnd=pos+len;
+    if(nEnd>hl.s && nStart<hl.e){
+      var cutStart=Math.max(hl.s,nStart)-nStart, cutEnd=Math.min(hl.e,nEnd)-nStart;
+      var mid=node;
+      if(cutStart>0) mid=mid.splitText(cutStart);
+      if(cutEnd-cutStart<mid.nodeValue.length) mid.splitText(cutEnd-cutStart);
+      var mark=document.createElement('mark');
+      mark.className='uhl'; mark.dataset.hlid=hl.id; mark.dataset.c=hl.c||'y';
+      mid.parentNode.insertBefore(mark, mid); mark.appendChild(mid);
+      w.currentNode=mark;
+    }
+    pos=nEnd;
+  }
+}
+function hlApplyZone(zone){
+  var key=zone.dataset.hlkey; if(!key) return;
+  (AState().hl[key]||[]).forEach(function(hl){ try{ hlApplyOne(zone, hl); }catch(e){} });
+}
+function hlClearMark(zone, id){
+  zone.querySelectorAll('mark.uhl[data-hlid="'+id+'"]').forEach(function(m){
+    var p=m.parentNode; while(m.firstChild) p.insertBefore(m.firstChild,m); p.removeChild(m); p.normalize();
+  });
+}
+function hlRemove(zone, id){
+  var key=zone.dataset.hlkey, arr=AState().hl[key]||[];
+  var idx=arr.findIndex(function(h){return h.id===id;});
+  var removed = idx>=0 ? arr[idx] : null;
+  if(idx>=0) arr.splice(idx,1);
+  hlClearMark(zone, id);
+  return removed;
+}
+function caretFromPoint(x,y){
+  if(document.caretRangeFromPoint){ var r=document.caretRangeFromPoint(x,y); return r?{node:r.startContainer,offset:r.startOffset}:null; }
+  if(document.caretPositionFromPoint){ var p=document.caretPositionFromPoint(x,y); return p?{node:p.offsetNode,offset:p.offset}:null; }
+  return null;
+}
+function hlDragStart(zone,x,y){
+  var c=caretFromPoint(x,y); if(!c) return null;
+  var a=hlOffsetAt(zone,c.node,c.offset);
+  return {zone:zone, anchor:a, s:a, e:a};
+}
+var hlRAF=null;
+function hlDragUpdate(st,x,y){
+  st._x=x; st._y=y;
+  if(hlRAF) return;
+  hlRAF=requestAnimationFrame(function(){
+    hlRAF=null;
+    var c=caretFromPoint(st._x, st._y); if(!c) return;
+    var off=hlOffsetAt(st.zone,c.node,c.offset);
+    st.s=Math.min(st.anchor,off); st.e=Math.max(st.anchor,off);
+    hlClearMark(st.zone,'tmp');
+    if(st.e>st.s) hlApplyOne(st.zone, {id:'tmp', s:st.s, e:st.e, c:HL_C});
+  });
+}
+function hlDragEnd(st){
+  hlClearMark(st.zone,'tmp');
+  if(!st || st.e<=st.s) return;
+  var id=uid('hl'), item={id:id,s:st.s,e:st.e,c:HL_C}, key=st.zone.dataset.hlkey;
+  var s=AState(); s.hl[key]=s.hl[key]||[]; s.hl[key].push(item); save();
+  hlApplyOne(st.zone, item);
+  pushUndo({op:'add',kind:'hl',key:key,zone:st.zone,item:item});
+}
+
+/* ===================================================================
+   CANETA (tinta livre) -- overlay SVG por zona
+   Pontos guardados em % (0-100) da largura/altura da zona no momento
+   do traço (viewBox "0 0 100 100", preserveAspectRatio="none"). Isso
+   mantém o traço colado ao conteúdo em qualquer tela sem precisar
+   recalcular nada; a única contrapartida (simplificação deliberada) é
+   que, se a proporção da zona mudar bastante entre o dispositivo onde
+   se desenhou e onde se revê, o traço pode esticar levemente -- span
+   the espessura em si fica constante via vector-effect="non-scaling-stroke".
+   =================================================================== */
+function inkSvg(zone){
+  var svg=zone.querySelector(':scope > svg.annot-ink-svg');
+  if(!svg){
+    svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('class','annot-ink-svg');
+    svg.setAttribute('viewBox','0 0 100 100');
+    svg.setAttribute('preserveAspectRatio','none');
+    zone.insertBefore(svg, zone.firstChild);
+  }
+  return svg;
+}
+function inkPathD(pts){
+  if(!pts.length) return '';
+  var d='M '+pts[0][0].toFixed(2)+' '+pts[0][1].toFixed(2);
+  for(var i=1;i<pts.length;i++) d+=' L '+pts[i][0].toFixed(2)+' '+pts[i][1].toFixed(2);
+  return d;
+}
+function inkRenderStroke(svg, stroke){
+  var p=document.createElementNS('http://www.w3.org/2000/svg','path');
+  p.setAttribute('class','annot-stroke');
+  p.setAttribute('data-inkid', stroke.id);
+  p.setAttribute('d', inkPathD(stroke.pts));
+  p.setAttribute('stroke', PEN_COLORS[stroke.c]||PEN_COLORS.k);
+  p.setAttribute('stroke-width', stroke.w||3);
+  p.setAttribute('vector-effect','non-scaling-stroke');
+  svg.appendChild(p);
+  return p;
+}
+function inkApplyZone(zone){
+  var key=zone.dataset.hlkey, list=AState().ink[key]||[]; if(!list.length) return;
+  var svg=inkSvg(zone);
+  list.forEach(function(s){ inkRenderStroke(svg, s); });
+}
+function inkRemove(zone,id){
+  var key=zone.dataset.hlkey, arr=AState().ink[key]||[];
+  var idx=arr.findIndex(function(s){return s.id===id;});
+  var removed=idx>=0?arr[idx]:null; if(idx>=0) arr.splice(idx,1);
+  var el=zone.querySelector('.annot-stroke[data-inkid="'+id+'"]'); if(el) el.remove();
+  return removed;
+}
+function penStart(zone,x,y,pressure){
+  var svg=inkSvg(zone);
+  var w = PEN_W * (0.55 + (typeof pressure==='number' && pressure>0 ? pressure : 0.5));
+  var stroke={id:uid('ink'), c:PEN_C, w:Math.max(1, w), pts:[toPct(zone,x,y)]};
+  var el=inkRenderStroke(svg, stroke);
+  return {zone:zone, stroke:stroke, el:el};
+}
+var penRAF=null;
+function penMove(st,x,y){
+  st.stroke.pts.push(toPct(st.zone,x,y));
+  if(penRAF) return;
+  penRAF=requestAnimationFrame(function(){ penRAF=null; if(st.el) st.el.setAttribute('d', inkPathD(st.stroke.pts)); });
+}
+function penEnd(st){
+  if(!st) return;
+  if(st.stroke.pts.length<2){ st.el.remove(); return; }
+  var key=st.zone.dataset.hlkey;
+  var s=AState(); s.ink[key]=s.ink[key]||[]; s.ink[key].push(st.stroke); save();
+  pushUndo({op:'add',kind:'ink',key:key,zone:st.zone,item:st.stroke});
+}
+
+/* ===================================================================
+   FITA DE OCLUSAO -- cobre um trecho; toque revela. O estado "revelado"
+   é sempre efêmero (não é salvo): toda vez que a página é reaberta a
+   fita volta a cobrir, exatamente pra funcionar como exercício de
+   revisão ativa (perguntar de novo, não só lembrar que já revelou).
+   =================================================================== */
+function tapeEl(zone, t){
+  var d=document.createElement('div');
+  d.className='annot-tape'; d.dataset.tapeid=t.id; d.dataset.c=t.c||'n';
+  d.style.left=t.x+'%'; d.style.top=t.y+'%'; d.style.width=t.w+'%'; d.style.height=t.h+'%';
+  d.innerHTML='<span class="annot-tape-lbl">toque p/ revelar</span><button class="annot-tape-del" title="Excluir">×</button>';
+  zone.appendChild(d);
+  d.addEventListener('click', function(ev){
+    if(ev.target.closest('.annot-tape-del')) return;
+    if(TOOL==='eraser' && AState().annotMode!=='read'){
+      var removed=tapeRemove(zone, t.id);
+      if(removed){ pushUndo({op:'remove',kind:'tape',key:zone.dataset.hlkey,zone:zone,item:removed}); save(); }
+      return;
+    }
+    d.classList.toggle('revealed');
+  });
+  d.querySelector('.annot-tape-del').addEventListener('click', function(ev){
+    ev.stopPropagation();
+    var removed=tapeRemove(zone, t.id);
+    if(removed){ pushUndo({op:'remove',kind:'tape',key:zone.dataset.hlkey,zone:zone,item:removed}); save(); }
+  });
+  return d;
+}
+function tapeApplyZone(zone){
+  var key=zone.dataset.hlkey, list=AState().tape[key]||[];
+  list.forEach(function(t){ tapeEl(zone, t); });
+}
+function tapeRemove(zone,id){
+  var key=zone.dataset.hlkey, arr=AState().tape[key]||[];
+  var idx=arr.findIndex(function(t){return t.id===id;});
+  var removed=idx>=0?arr[idx]:null; if(idx>=0) arr.splice(idx,1);
+  var el=zone.querySelector('.annot-tape[data-tapeid="'+id+'"]'); if(el) el.remove();
+  return removed;
+}
+function tapeStart(zone,x,y){ var p=toPct(zone,x,y); return {zone:zone,x0:p[0],y0:p[1],x1:p[0],y1:p[1],el:null}; }
+function tapeUpdate(st,x,y){
+  var p=toPct(st.zone,x,y); st.x1=p[0]; st.y1=p[1];
+  var x=Math.min(st.x0,st.x1), y=Math.min(st.y0,st.y1), w=Math.abs(st.x1-st.x0), h=Math.abs(st.y1-st.y0);
+  if(!st.el){
+    st.el=document.createElement('div'); st.el.className='annot-tape'; st.el.dataset.c=TAPE_C;
+    st.el.innerHTML='<span class="annot-tape-lbl">fita</span>';
+    st.zone.appendChild(st.el);
+  }
+  st.el.style.left=x+'%'; st.el.style.top=y+'%'; st.el.style.width=w+'%'; st.el.style.height=h+'%';
+}
+function tapeEnd(st){
+  if(!st || !st.el) return;
+  var x=Math.min(st.x0,st.x1), y=Math.min(st.y0,st.y1), w=Math.abs(st.x1-st.x0), h=Math.abs(st.y1-st.y0);
+  st.el.remove();
+  if(w<2 || h<1.5) return;
+  var id=uid('tape'), item={id:id,x:x,y:y,w:w,h:h,c:TAPE_C}, key=st.zone.dataset.hlkey;
+  var s=AState(); s.tape[key]=s.tape[key]||[]; s.tape[key].push(item); save();
+  tapeEl(st.zone, item);
+  pushUndo({op:'add',kind:'tape',key:key,zone:st.zone,item:item});
+}
+
+/* ===================================================================
+   POST-IT -- ancorado em % da zona; arrastavel pelo cabecalho; texto
+   e foto (a foto e reduzida no cliente antes de virar dataURL, pra nao
+   pesar o localStorage).
+   =================================================================== */
+function imgToDataUrl(file, cb){
+  var reader=new FileReader();
+  reader.onload=function(){
+    var img=new Image();
+    img.onload=function(){
+      var maxD=480, w=img.width, h=img.height, scale=Math.min(1, maxD/Math.max(w,h));
+      var cw=Math.max(1,Math.round(w*scale)), ch=Math.max(1,Math.round(h*scale));
+      var cv=document.createElement('canvas'); cv.width=cw; cv.height=ch;
+      cv.getContext('2d').drawImage(img,0,0,cw,ch);
+      cb(cv.toDataURL('image/jpeg',0.72));
+    };
+    img.src=reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+function stickyFlush(zone, id, patch){
+  var key=zone.dataset.hlkey, arr=AState().stickies[key]||[];
+  var it=arr.find(function(n){return n.id===id;});
+  if(it){ Object.assign(it, patch); save(); }
+}
+function stickyEl(zone, note){
+  var ro = AState().annotMode==='read';
+  var d=document.createElement('div');
+  d.className='annot-sticky'+(ro?' readonly':''); d.dataset.stickyid=note.id; d.dataset.c=note.c||'y';
+  d.style.left=note.x+'%'; d.style.top=note.y+'%';
+  d.innerHTML=
+    '<div class="annot-sticky-head"><span class="annot-sticky-handle">⠿⠿</span><button class="annot-sticky-del" title="Excluir">×</button></div>'+
+    '<div class="annot-sticky-body" contenteditable="'+(ro?'false':'true')+'">'+(note.html||'')+'</div>'+
+    (ro?'':'<div class="annot-sticky-foot"><label>📷<input type="file" accept="image/*" style="display:none"></label></div>');
+  zone.appendChild(d);
+
+  var body=d.querySelector('.annot-sticky-body');
+  var flush=function(){ stickyFlush(zone, note.id, {html:body.innerHTML}); };
+  body.addEventListener('input', flush);
+  body.addEventListener('blur', flush);
+
+  var fileInp=d.querySelector('input[type=file]');
+  if(fileInp) fileInp.addEventListener('change', function(ev){
+    var f=ev.target.files && ev.target.files[0]; if(!f) return;
+    imgToDataUrl(f, function(url){ var img=document.createElement('img'); img.src=url; body.appendChild(img); flush(); });
+  });
+
+  d.querySelector('.annot-sticky-del').addEventListener('click', function(ev){
+    ev.stopPropagation();
+    var removed=stickyRemove(zone, note.id);
+    if(removed){ pushUndo({op:'remove',kind:'sticky',key:zone.dataset.hlkey,zone:zone,item:removed}); save(); }
+  });
+
+  var handle=d.querySelector('.annot-sticky-head');
+  handle.addEventListener('pointerdown', function(ev){
+    if(AState().annotMode==='read') return;
+    ev.preventDefault();
+    try{ handle.setPointerCapture(ev.pointerId); }catch(e){}
+    function move(mv){
+      var p=toPct(zone, mv.clientX, mv.clientY);
+      d.style.left=Math.max(0,Math.min(92,p[0]))+'%'; d.style.top=Math.max(0,Math.min(92,p[1]))+'%';
+    }
+    function up(){
+      handle.removeEventListener('pointermove', move);
+      handle.removeEventListener('pointerup', up);
+      stickyFlush(zone, note.id, {x:parseFloat(d.style.left), y:parseFloat(d.style.top)});
+    }
+    handle.addEventListener('pointermove', move);
+    handle.addEventListener('pointerup', up);
+  });
+  return d;
+}
+function stickyApplyZone(zone){
+  var key=zone.dataset.hlkey, list=AState().stickies[key]||[];
+  list.forEach(function(n){ stickyEl(zone, n); });
+}
+function stickyRemove(zone,id){
+  var key=zone.dataset.hlkey, arr=AState().stickies[key]||[];
+  var idx=arr.findIndex(function(n){return n.id===id;});
+  var removed=idx>=0?arr[idx]:null; if(idx>=0) arr.splice(idx,1);
+  var el=zone.querySelector('.annot-sticky[data-stickyid="'+id+'"]'); if(el) el.remove();
+  return removed;
+}
+function stickyCreate(zone,x,y){
+  var p=toPct(zone,x,y);
+  var id=uid('note'), item={id:id, x:Math.min(85,p[0]), y:Math.min(85,p[1]), c:STICKY_C, html:''};
+  var key=zone.dataset.hlkey;
+  var s=AState(); s.stickies[key]=s.stickies[key]||[]; s.stickies[key].push(item); save();
+  var el=stickyEl(zone, item);
+  pushUndo({op:'add',kind:'sticky',key:key,zone:zone,item:item});
+  setTimeout(function(){ var b=el.querySelector('.annot-sticky-body'); if(b) b.focus(); }, 60);
+}
+
+/* ===================================================================
+   DESFAZER / REFAZER (pilha em memoria por sessao)
+   =================================================================== */
+function pushUndo(entry){ UNDO.push(entry); if(UNDO.length>40) UNDO.shift(); REDO.length=0; refreshFoot(); }
+function invert(entry){
+  var s=AState(), key=entry.key;
+  if(entry.op==='add'){
+    if(entry.kind==='hl') hlRemove(entry.zone, entry.item.id);
+    if(entry.kind==='ink') inkRemove(entry.zone, entry.item.id);
+    if(entry.kind==='tape') tapeRemove(entry.zone, entry.item.id);
+    if(entry.kind==='sticky') stickyRemove(entry.zone, entry.item.id);
+    return {op:'remove', kind:entry.kind, key:key, zone:entry.zone, item:entry.item};
+  }
+  if(entry.kind==='hl'){ s.hl[key]=s.hl[key]||[]; s.hl[key].push(entry.item); hlApplyOne(entry.zone, entry.item); }
+  if(entry.kind==='ink'){ s.ink[key]=s.ink[key]||[]; s.ink[key].push(entry.item); inkRenderStroke(inkSvg(entry.zone), entry.item); }
+  if(entry.kind==='tape'){ s.tape[key]=s.tape[key]||[]; s.tape[key].push(entry.item); tapeEl(entry.zone, entry.item); }
+  if(entry.kind==='sticky'){ s.stickies[key]=s.stickies[key]||[]; s.stickies[key].push(entry.item); stickyEl(entry.zone, entry.item); }
+  return {op:'add', kind:entry.kind, key:key, zone:entry.zone, item:entry.item};
+}
+function doUndo(){ var e=UNDO.pop(); if(!e) return; var inv=invert(e); save(); REDO.push(inv); refreshFoot(); if(window.toast) toast('Desfeito'); }
+function doRedo(){ var e=REDO.pop(); if(!e) return; var inv=invert(e); save(); UNDO.push(inv); refreshFoot(); if(window.toast) toast('Refeito'); }
+
+/* atalhos de teclado (desktop) */
+document.addEventListener('keydown', function(e){
+  if(AState().annotMode==='read') return;
+  var k=(e.key||'').toLowerCase();
+  if((e.ctrlKey||e.metaKey) && !e.shiftKey && k==='z'){ e.preventDefault(); doUndo(); }
+  else if((e.ctrlKey||e.metaKey) && (k==='y' || (e.shiftKey && k==='z'))){ e.preventDefault(); doRedo(); }
+});
+/* gesto de tablet: toque duplo com DOIS dedos = desfazer (dois toques
+   de 2 dedos em sequencia rapida, no espirito do "duplo toque" de
+   edicao dos tablets) */
+var lastTwoFingerTap=0;
+document.addEventListener('touchend', function(e){
+  if(AState().annotMode==='read') return;
+  if(e.touches.length===0 && e.changedTouches && e.changedTouches.length===2){
+    var now=Date.now();
+    if(now-lastTwoFingerTap<420){ doUndo(); lastTwoFingerTap=0; } else lastTwoFingerTap=now;
+  }
+}, {passive:true});
+
+/* ===================================================================
+   ROTEAMENTO DE PONTEIRO POR ZONA
+   =================================================================== */
+function wireZonePointer(zone){
+  zone.addEventListener('pointerdown', function(ev){
+    if(AState().annotMode==='read') return;
+    if(!TOOL) return; // nenhuma ferramenta ativa -> comportamento nativo (selecionar, copiar, rolar)
+
+    if(TOOL==='sticky'){
+      if(ev.pointerType==='mouse' && ev.button!==0) return;
+      ev.preventDefault();
+      stickyCreate(zone, ev.clientX, ev.clientY);
+      return;
+    }
+    if(TOOL==='eraser') return; // apagar e tratado no listener de click abaixo
+
+    if(ev.pointerType==='touch') return; // dedo NUNCA desenha (caneta/marca-texto/fita)
+
+    ev.preventDefault();
+    try{ zone.setPointerCapture(ev.pointerId); }catch(e){}
+    if(TOOL==='pen') DRAW={kind:'pen', st:penStart(zone, ev.clientX, ev.clientY, ev.pressure), pid:ev.pointerId};
+    else if(TOOL==='hl'){ var st=hlDragStart(zone, ev.clientX, ev.clientY); if(st) DRAW={kind:'hl', st:st, pid:ev.pointerId}; }
+    else if(TOOL==='tape') DRAW={kind:'tape', st:tapeStart(zone, ev.clientX, ev.clientY), pid:ev.pointerId};
+  }, {passive:false});
+
+  zone.addEventListener('pointermove', function(ev){
+    if(!DRAW || ev.pointerId!==DRAW.pid) return;
+    ev.preventDefault();
+    var events=(ev.getCoalescedEvents && ev.getCoalescedEvents()) || [ev];
+    events.forEach(function(e2){
+      if(DRAW.kind==='pen') penMove(DRAW.st, e2.clientX, e2.clientY);
+      else if(DRAW.kind==='hl') hlDragUpdate(DRAW.st, e2.clientX, e2.clientY);
+      else if(DRAW.kind==='tape') tapeUpdate(DRAW.st, e2.clientX, e2.clientY);
+    });
+  }, {passive:false});
+
+  function finish(ev){
+    if(!DRAW || ev.pointerId!==DRAW.pid) return;
+    if(DRAW.kind==='pen') penEnd(DRAW.st);
+    else if(DRAW.kind==='hl') hlDragEnd(DRAW.st);
+    else if(DRAW.kind==='tape') tapeEnd(DRAW.st);
+    DRAW=null;
+  }
+  zone.addEventListener('pointerup', finish);
+  zone.addEventListener('pointercancel', finish);
+
+  zone.addEventListener('click', function(ev){
+    if(AState().annotMode==='read' || TOOL!=='eraser') return;
+    var mark=ev.target.closest('mark.uhl');
+    if(mark){ var r1=hlRemove(zone, mark.dataset.hlid); if(r1){ pushUndo({op:'remove',kind:'hl',key:zone.dataset.hlkey,zone:zone,item:r1}); save(); } return; }
+    var stroke=ev.target.closest('.annot-stroke');
+    if(stroke){ var r2=inkRemove(zone, stroke.dataset.inkid); if(r2){ pushUndo({op:'remove',kind:'ink',key:zone.dataset.hlkey,zone:zone,item:r2}); save(); } return; }
+    var tape=ev.target.closest('.annot-tape');
+    if(tape && !ev.target.closest('.annot-tape-del')){ var r3=tapeRemove(zone, tape.dataset.tapeid); if(r3){ pushUndo({op:'remove',kind:'tape',key:zone.dataset.hlkey,zone:zone,item:r3}); save(); } return; }
+    var sticky=ev.target.closest('.annot-sticky');
+    if(sticky && !ev.target.closest('.annot-sticky-del')){ var r4=stickyRemove(zone, sticky.dataset.stickyid); if(r4){ pushUndo({op:'remove',kind:'sticky',key:zone.dataset.hlkey,zone:zone,item:r4}); save(); } }
+  });
+}
+
+/* ===================================================================
+   BOTAO FLUTUANTE + PAINEL DE FERRAMENTAS
+   =================================================================== */
+function svgFabIcon(){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+
+    '<path d="M4 20 L4 16 L15 5 a2 2 0 0 1 3 3 L7 19 Z"/><path d="M13 6 L18 11"/></svg>';
+}
+function toolBtn(key,label,glyph){ return '<button class="annot-tbtn" data-tool="'+key+'" title="'+label+'">'+glyph+'<small>'+label+'</small></button>'; }
+function colorRow(name,colors,current){
+  return '<div class="annot-row" data-colorfor="'+name+'">'+Object.keys(colors).map(function(k){
+    return '<div class="annot-swatch'+(k===current?' on':'')+'" data-color="'+k+'" style="background:'+colors[k]+'"></div>';
+  }).join('')+'</div>';
+}
+function setMode(m){
+  var s=AState(); s.annotMode=m; save();
+  if(m==='read') TOOL=null;
+  syncBodyClasses(); renderPanel();
+}
+function renderPanel(){
+  var panel=document.getElementById('annot-panel'); if(!panel) return;
+  var mode=AState().annotMode||'edit';
+  panel.classList.toggle('min', PANEL_MIN && mode!=='read');
+
+  if(mode==='read'){
+    panel.innerHTML =
+      '<div class="annot-panel-head"><span class="annot-panel-title">Modo leitura</span></div>'+
+      '<p class="annot-readmsg">Suas marcações, post-its e fitas continuam aqui. Toque para voltar a editar.</p>'+
+      '<div class="annot-foot"><button id="annot-toggle-mode">✏️ Ativar anotações</button></div>';
+    document.getElementById('annot-toggle-mode').onclick=function(){ setMode('edit'); };
+    return;
+  }
+  if(PANEL_MIN){
+    panel.innerHTML='<button class="annot-min-btn" id="annot-expand" title="Expandir">▢</button>';
+    document.getElementById('annot-expand').onclick=function(){ PANEL_MIN=false; renderPanel(); };
+    return;
+  }
+
+  var html='<div class="annot-panel-head"><span class="annot-panel-title">Anotações</span><button class="annot-min-btn" id="annot-min" title="Minimizar">–</button></div>';
+  html+='<div class="annot-tools">'+
+    toolBtn('pen','Caneta','✏️')+toolBtn('hl','Marca-texto','🖍️')+
+    toolBtn('sticky','Post-it','📝')+toolBtn('tape','Fita','🎞️')+
+    toolBtn('eraser','Borracha','🗑️')+'</div>';
+
+  if(TOOL==='pen'){
+    html+='<div class="annot-sep"></div>'+colorRow('pen',PEN_COLORS,PEN_C)+
+      '<div class="annot-row"><div class="annot-thickness">✏️<input type="range" id="annot-w" min="1.5" max="9" step="0.5" value="'+PEN_W+'"><span id="annot-w-lbl">'+PEN_W+'</span></div></div>';
+  } else if(TOOL==='hl'){
+    html+='<div class="annot-sep"></div>'+colorRow('hl',HL_COLORS,HL_C);
+  } else if(TOOL==='tape'){
+    html+='<div class="annot-sep"></div>'+colorRow('tape',TAPE_COLORS,TAPE_C);
+  } else if(TOOL==='sticky'){
+    html+='<div class="annot-sep"></div>'+colorRow('sticky',STICKY_COLORS,STICKY_C);
+  }
+
+  html+='<div class="annot-sep"></div><div class="annot-foot">'+
+    '<button id="annot-undo" title="Desfazer" '+(UNDO.length?'':'disabled')+'>↩︎</button>'+
+    '<button id="annot-redo" title="Refazer" '+(REDO.length?'':'disabled')+'>↪︎</button>'+
+    '<button id="annot-readbtn" title="Apenas leitura">👁️ Leitura</button></div>';
+  panel.innerHTML=html;
+
+  panel.querySelectorAll('.annot-tbtn').forEach(function(btn){
+    btn.classList.toggle('on', btn.dataset.tool===TOOL);
+    btn.onclick=function(){ TOOL=(TOOL===btn.dataset.tool)?null:btn.dataset.tool; syncBodyClasses(); renderPanel(); };
+  });
+  panel.querySelectorAll('[data-colorfor] .annot-swatch').forEach(function(sw){
+    sw.onclick=function(){
+      var g=sw.parentElement.dataset.colorfor;
+      if(g==='pen') PEN_C=sw.dataset.color; else if(g==='hl') HL_C=sw.dataset.color;
+      else if(g==='tape') TAPE_C=sw.dataset.color; else if(g==='sticky') STICKY_C=sw.dataset.color;
+      renderPanel();
+    };
+  });
+  var wInput=document.getElementById('annot-w');
+  if(wInput) wInput.oninput=function(){ PEN_W=parseFloat(wInput.value); var l=document.getElementById('annot-w-lbl'); if(l) l.textContent=PEN_W; };
+  var minBtn=document.getElementById('annot-min'); if(minBtn) minBtn.onclick=function(){ PANEL_MIN=true; renderPanel(); };
+  var uBtn=document.getElementById('annot-undo'); if(uBtn) uBtn.onclick=doUndo;
+  var rBtn=document.getElementById('annot-redo'); if(rBtn) rBtn.onclick=doRedo;
+  var roBtn=document.getElementById('annot-readbtn'); if(roBtn) roBtn.onclick=function(){ setMode('read'); };
+}
+function refreshFoot(){ if(PANEL_OPEN) renderPanel(); }
+function ensureUI(){
+  if(document.getElementById('annot-fab')) return;
+  var fab=document.createElement('button');
+  fab.id='annot-fab'; fab.className='annot-fab'; fab.title='Modo de anotações e revisão';
+  fab.innerHTML=svgFabIcon();
+  document.body.appendChild(fab);
+
+  var panel=document.createElement('div');
+  panel.id='annot-panel'; panel.className='annot-panel';
+  document.body.appendChild(panel);
+
+  fab.addEventListener('click', function(){
+    PANEL_OPEN=!PANEL_OPEN; if(PANEL_OPEN) PANEL_MIN=false;
+    panel.classList.toggle('open', PANEL_OPEN);
+    fab.classList.toggle('on', PANEL_OPEN);
+    if(PANEL_OPEN) renderPanel();
+  });
+}
+
+/* ===================================================================
+   MONTAGEM: qualquer .hl-zone nova (renderizada via #main.innerHTML=...
+   em toda troca de aba/sub-aba/modulo) e pega automaticamente.
+   =================================================================== */
+function wireZone(zone){
+  if(zone.dataset.annotWired) return;
+  zone.dataset.annotWired='1';
+  hlApplyZone(zone);
+  inkApplyZone(zone);
+  tapeApplyZone(zone);
+  stickyApplyZone(zone);
+  wireZonePointer(zone);
+}
+function scanMain(){
+  syncBodyClasses(); // reflete annotMode atual mesmo se mudou por sincronizacao remota (outro dispositivo)
+  document.querySelectorAll('.hl-zone:not([data-annot-wired])').forEach(wireZone);
+}
+function boot(){
+  ensureUI(); scanMain(); syncBodyClasses();
+  var mainEl=document.getElementById('main');
+  if(mainEl && window.MutationObserver) new MutationObserver(scanMain).observe(mainEl,{childList:true,subtree:true});
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
+else boot();
+
+})();
+
+</script>
 </body>
 </html>
 
