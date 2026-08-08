@@ -1079,6 +1079,7 @@ window.viewModule=function(arg){
   return '<div class="view"><div class="page-title">'+gICON()+'<h1>'+name+'</h1></div>'+
     '<p class="page-sub">'+chName(ck)+(d?' · conteúdo atualizado 2025/2026':' · estrutura pronta')+'</p>'+
     '<div class="fc-create" onclick="acFC(\''+name.replace(/'/g,'')+'\')">＋ Criar flashcard</div>'+
+    (d && window.pdfExportModule ? '<div class="fc-create pdf-export-btn" onclick="pdfExportModule(\''+arg+'\')">📄 Exportar PDF</div>' : '')+
     '<div class="tabs">'+tabsH+'</div>'+inner+gfoot()+'</div>';
 };
 window.acTab=function(arg,k){ mTab=k; if(k==='teoria'&&!mSub){var d=C[arg]; mSub=d&&d.sub?d.sub[0][0]:'entendendo';} document.getElementById('main').innerHTML=window.viewModule(arg); };
@@ -1476,7 +1477,9 @@ window.viewModules=function(){
   var h='<div class="view"><div class="page-title">'+gICON()+'<h1>Módulos</h1></div>'+
     '<p class="page-sub">Matérias divididas por etiologia. Disciplinas concluídas aparecem contornadas no tom do acento.</p>';
   for(var ck in CH){
-    h+='<div class="mod-div">'+CH[ck].replace(/^\d+\.\s/,'')+'</div><div class="mod-cards">';
+    h+='<div class="mod-div mod-div-row"><span>'+CH[ck].replace(/^\d+\.\s/,'')+'</span>'+
+      (window.pdfExportCategory ? '<button type="button" class="pdf-cat-btn" onclick="pdfExportCategory(\''+ck+'\')">📄 Baixar PDF da categoria</button>' : '')+
+      '</div><div class="mod-cards">';
     (MODULES[ck]||[]).forEach(function(m,i){
       var arg=ck+'|'+i, done=!!C[arg];
       if(done) h+='<div class="mod-card done" onclick="navigate(\'module\',\''+arg+'\')"><h4>'+m+'</h4></div>';
@@ -20263,6 +20266,192 @@ try{ if(typeof route!=='undefined' && route &&
    renderRoute(); }catch(e){}
 })();
 
+</script>
+
+<!-- ===================================================================
+     EXPORTAR PDF -- botao por modulo (ao lado de "Criar flashcard") e
+     por categoria/etiologia (na listagem de Modulos). ADITIVO: nao
+     mexe em nenhum dado/conteudo, so LÊ window.CONTENT/MODULES/CH (que
+     ja existem) e monta uma versao "achatada" (todas as sub-abas de
+     teoria e todas as demais abas, uma embaixo da outra, sem nada
+     escondido atras de clique) num container proprio, sempre em modo
+     claro, e aciona a impressao nativa do navegador -- no tablet isso
+     abre a folha de compartilhamento/impressao do sistema, de onde da
+     pra "Salvar em PDF" ou mandar direto pro GoodNotes.
+     =================================================================== -->
+<style>
+#pdf-print-area{display:none}
+.mod-div-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pdf-cat-btn,.pdf-export-btn{
+  display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:.78rem;color:var(--accent);
+  border:1px solid var(--line);border-radius:20px;padding:6px 12px;background:transparent;
+  font-family:'Inter',sans-serif;letter-spacing:normal;text-transform:none;
+}
+.pdf-cat-btn:hover,.pdf-export-btn:hover{background:var(--accent-soft)}
+.pdf-export-btn{margin-left:10px}
+@media print{
+  /* esconde TUDO que nao seja a area de impressao -- inclusive decoracoes
+     de fundo, #gate, #app -- sem precisar enumerar cada uma por nome. */
+  body>*:not(#pdf-print-area){display:none!important}
+  body{background:#fff!important}
+  #pdf-print-area{
+    display:block!important;background:#fff;color:#2d1b2e;
+    padding:24px;max-width:820px;margin:0 auto;
+  }
+  #pdf-print-area .pdf-mod{margin:0 0 10px}
+  #pdf-print-area .pdf-mod.pdf-break{page-break-before:always}
+  #pdf-print-area .pdf-mod-cat{font-family:'Fraunces',serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#a0527a;margin-bottom:4px}
+  #pdf-print-area .pdf-mod-title{font-family:'Fraunces',serif;font-size:1.6rem;color:#2d1b2e;margin:0 0 16px}
+  #pdf-print-area .pdf-sec{margin:20px 0}
+  #pdf-print-area .pdf-sec-h{font-family:'Fraunces',serif;font-size:1.05rem;color:#a0527a;border-bottom:1px solid #e4d9cd;padding-bottom:6px;margin-bottom:10px}
+  #pdf-print-area .pdf-sub{margin:14px 0}
+  #pdf-print-area .pdf-sub-h{font-size:.92rem;color:#2d1b2e;margin-bottom:6px;font-weight:700}
+  #pdf-print-area .pdf-q{border:1px solid #e4d9cd;border-radius:10px;padding:12px 14px;margin-bottom:10px;break-inside:avoid}
+  #pdf-print-area .pdf-q-stem{margin-bottom:6px}
+  #pdf-print-area .pdf-q-opt{padding:3px 0}
+  #pdf-print-area .pdf-q-correct{color:#1b7a3d;font-weight:700}
+  #pdf-print-area .pdf-q-expl{margin-top:8px;font-size:.86rem;color:#6b5b6e}
+  #pdf-print-area .pdf-caso{border-left:3px solid #a0527a;background:#f6ece9;border-radius:8px;padding:10px 14px;margin-bottom:12px;break-inside:avoid}
+  #pdf-print-area .pdf-caso-h{font-weight:700;color:#a0527a;margin-bottom:4px}
+  #pdf-print-area .pdf-fc{border:1px solid #e4d9cd;border-radius:10px;padding:10px 14px;margin-bottom:8px;break-inside:avoid}
+  #pdf-print-area .pdf-fc-front{margin-bottom:4px}
+  #pdf-print-area .pdf-fc-back{color:#6b5b6e}
+  #pdf-print-area .pdf-ck-row{padding:4px 0}
+  #pdf-print-area img,#pdf-print-area svg{max-width:100%}
+}
+</style>
+<script>
+(function(){
+"use strict";
+
+function pdfEsc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function pdfSection(title, html){ if(!html) return ''; return '<div class="pdf-sec"><h2 class="pdf-sec-h">'+title+'</h2>'+html+'</div>'; }
+
+function pdfTeoria(d){
+  if(!d.sub || !d.sub.length) return '';
+  return d.sub.map(function(s){ return '<div class="pdf-sub"><div class="pdf-sub-h">'+s[1]+'</div><div>'+s[2]+'</div></div>'; }).join('');
+}
+function pdfQuestoes(d){
+  if(!d.questoes || !d.questoes.length) return '';
+  var h='';
+  d.questoes.forEach(function(q,qi){
+    h+='<div class="pdf-q"><div class="pdf-q-stem"><b>'+(qi+1)+'.</b> '+q.stem+'</div>';
+    (q.opts||[]).forEach(function(o,oi){
+      h+='<div class="pdf-q-opt'+(oi===q.correct?' pdf-q-correct':'')+'">'+String.fromCharCode(65+oi)+') '+o+(oi===q.correct?' ✓':'')+'</div>';
+    });
+    h+='<div class="pdf-q-expl"><b>Comentário:</b> '+(q.expl||'')+'</div></div>';
+  });
+  return h;
+}
+function pdfCasos(d){
+  if(!d.casos || !d.casos.length) return '';
+  var h='';
+  d.casos.forEach(function(c){
+    h+='<div class="pdf-caso"><div class="pdf-caso-h">'+(c.t||'')+'</div><div class="ac-p">'+(c.stem||'')+'</div>';
+    (c.passos||[]).forEach(function(s){
+      h+='<div class="caso-step"><div class="caso-step-h">'+s.h+'</div><div class="ac-p" style="margin:3px 0 0">'+s.p+'</div></div>';
+    });
+    h+='</div>';
+  });
+  return h;
+}
+function pdfFlashcards(d){
+  if(!d.flashcards || !d.flashcards.length) return '';
+  var h='', cf=window.clozeFront, cb=window.clozeBack;
+  d.flashcards.forEach(function(c,i){
+    var front=(c.type==='cloze' && cf) ? cf(c.front) : c.front;
+    var back=(c.type==='cloze' && cb) ? cb(c.front) : (c.back||'');
+    h+='<div class="pdf-fc"><div class="pdf-fc-front"><b>P'+(i+1)+':</b> '+front+'</div><div class="pdf-fc-back"><b>R:</b> '+back+'</div></div>';
+  });
+  return h;
+}
+function pdfChecklist(d){
+  if(!d.checklist || !d.checklist.length) return '';
+  return '<div class="pdf-ck">'+d.checklist.map(function(t){ return '<div class="pdf-ck-row">☐ '+t+'</div>'; }).join('')+'</div>';
+}
+
+/* monta o HTML "achatado" de UM modulo -- todas as abas, sem nenhuma
+   escondida atras de clique/estado. breakBefore=true forca nova pagina
+   antes dele (usado na exportacao de categoria inteira, exceto no 1o). */
+function pdfModuleHTML(arg, breakBefore){
+  var CT=window.CONTENT||{}, d=CT[arg]; if(!d) return '';
+  var p=arg.split('|'), ck=p[0];
+  var MD=(typeof MODULES!=='undefined')?MODULES:(window.MODULES||{});
+  var CHT=(typeof CH!=='undefined')?CH:(window.CH||{});
+  var name=(MD && MD[ck] && MD[ck][+p[1]]) || d.name || 'Módulo';
+  var catName=((CHT && CHT[ck]) || '').replace(/^\d+\.\s/,'');
+  var h='<div class="pdf-mod'+(breakBefore?' pdf-break':'')+'">';
+  h+='<div class="pdf-mod-cat">'+pdfEsc(catName)+'</div>';
+  h+='<h1 class="pdf-mod-title">'+pdfEsc(name)+'</h1>';
+  h+=pdfSection('Teoria', pdfTeoria(d));
+  h+=pdfSection('Escores/Critérios', d.escores);
+  h+=pdfSection('Diferenciais', d.dif);
+  h+=pdfSection('Mapa Mental', d.mapa);
+  h+=pdfSection('Fluxograma Diagnóstico', d.fluxo_dx);
+  h+=pdfSection('Fluxograma de Conduta', d.fluxo_cond);
+  h+=pdfSection('Revisão de Véspera', d.vespera);
+  h+=pdfSection('Dicas e Erros', d.dicas);
+  h+=pdfSection('Checklist de Domínio', pdfChecklist(d));
+  h+=pdfSection('Casos Clínicos', pdfCasos(d));
+  h+=pdfSection('Questões', pdfQuestoes(d));
+  h+=pdfSection('Flashcards', pdfFlashcards(d));
+  h+='</div>';
+  return h;
+}
+
+function ensurePdfArea(){
+  var el=document.getElementById('pdf-print-area');
+  if(!el){ el=document.createElement('div'); el.id='pdf-print-area'; document.body.appendChild(el); }
+  return el;
+}
+
+/* SEMPRE modo claro na impressao, seja qual for o tema atual da tela --
+   restaura o tema original depois. 'afterprint' cobre o caso normal
+   (fechou/confirmou a folha de impressao); o setTimeout de seguranca
+   cobre webviews que nao disparam esse evento de forma confiavel. */
+function pdfDoPrint(innerHTML, docTitleHint){
+  var area=ensurePdfArea();
+  area.innerHTML=innerHTML;
+  var wasLight=document.body.classList.contains('light');
+  if(!wasLight) document.body.classList.add('light');
+  var prevTitle=document.title;
+  if(docTitleHint) document.title=docTitleHint;
+  var done=false;
+  function cleanup(){
+    if(done) return; done=true;
+    if(!wasLight) document.body.classList.remove('light');
+    document.title=prevTitle;
+    area.innerHTML='';
+    window.removeEventListener('afterprint', cleanup);
+  }
+  window.addEventListener('afterprint', cleanup);
+  setTimeout(function(){ try{ window.print(); }catch(e){ cleanup(); } }, 50);
+  setTimeout(cleanup, 20000); // rede de seguranca
+}
+
+window.pdfExportModule=function(arg){
+  var html=pdfModuleHTML(arg, false);
+  if(!html){ if(window.toast) window.toast('Conteúdo deste módulo ainda não está pronto.'); return; }
+  var CT=window.CONTENT||{}, d=CT[arg];
+  pdfDoPrint(html, (d.name||'Módulo')+' - PedAtlas');
+};
+
+window.pdfExportCategory=function(ck){
+  var MD=(typeof MODULES!=='undefined')?MODULES:(window.MODULES||{});
+  var mods=(MD && MD[ck])||[];
+  var html='', first=true, any=false;
+  mods.forEach(function(_,i){
+    var mh=pdfModuleHTML(ck+'|'+i, !first);
+    if(mh){ html+=mh; first=false; any=true; }
+  });
+  if(!any){ if(window.toast) window.toast('Nenhum módulo pronto nesta categoria ainda.'); return; }
+  var CHT=(typeof CH!=='undefined')?CH:(window.CH||{});
+  var catName=((CHT && CHT[ck])||'').replace(/^\d+\.\s/,'');
+  pdfDoPrint(html, catName+' - PedAtlas');
+};
+
+window.__pdfModuleHTML=pdfModuleHTML; // exposto so p/ testes
+})();
 </script>
 
 </body>
