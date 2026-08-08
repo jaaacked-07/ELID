@@ -16412,6 +16412,25 @@ function AState(){
   s.hl=s.hl||{}; s.ink=s.ink||{}; s.stickies=s.stickies||{}; s.tape=s.tape||{}; s.blocks=s.blocks||{};
   return s;
 }
+/* save() do motor de anotacoes -- NUNCA falha em silencio. O
+   backend (Firestore, via setDoc) valida a estrutura dos dados; se
+   algo no estado nao for serializavel (ex.: o bug real que ja
+   encontramos aqui -- um array cujos elementos sao outros arrays,
+   coisa que o Firestore rejeita), save() pode lançar uma excecao
+   SINCRONA. Sem essa captura, essa excecao invisivelmente cancelava a
+   gravacao de QUALQUER acao seguinte (marca-texto, post-it, fita,
+   Area de anotacao), mesmo sem nenhuma relacao direta com a causa
+   real do erro -- porque save() grava o documento inteiro de uma vez,
+   entao um unico campo invalido derruba TODAS as gravacoes ate ser
+   corrigido. Agora qualquer falha aqui aparece como toast na tela em
+   vez de "nada acontecer". */
+function asave(context){
+  try{ save(); }
+  catch(err){
+    console.error('[annot] falha ao salvar ('+context+'):', err);
+    if(window.toast) window.toast('Erro ao salvar '+context+': '+(err&&err.message||err));
+  }
+}
 function uid(pre){ return pre+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7); }
 /* deteccao de "toque" propria (pointerdown perto de pointerup, pouco
    movimento, pouco tempo) para botoes criados dinamicamente dentro de
@@ -16613,7 +16632,7 @@ function hlFinishSelection(){
   sel.removeAllRanges(); // some com a selecao nativa (azul) -- vira destaque permanente
   if(e<=s) return;
   var id=uid('hl'), item={id:id,s:s,e:e,c:HL_C}, key=zone.dataset.hlkey;
-  var st=AState(); st.hl[key]=st.hl[key]||[]; st.hl[key].push(item); save();
+  var st=AState(); st.hl[key]=st.hl[key]||[]; st.hl[key].push(item); asave('marca-texto');
   hlApplyOne(zone, item);
   pushUndo({op:'add',kind:'hl',key:key,zone:zone,item:item});
   if(window.toast) window.toast('Texto marcado ✓');
@@ -16652,17 +16671,29 @@ function inkSvg(zone){
   }
   return svg;
 }
+/* pontos guardados como {x,y} (objeto), NUNCA como [x,y] (array) --
+   Firestore (setDoc) rejeita "arrays aninhados" (um array cujos
+   elementos sao outros arrays), e pts era exatamente isso: um array
+   de pares [x,y]. Isso fazia TODA chamada de save() estourar
+   silenciosamente sempre que houvesse pelo menos um traço de caneta
+   no estado -- e como save() grava o documento inteiro, isso quebrava
+   TAMBEM marca-texto, post-it e Area de anotacao (nao so a caneta),
+   mesmo sem nenhuma relacao direta com eles. ptX/ptY aceitam tanto o
+   formato novo ({x,y}) quanto o antigo ([x,y], por compatibilidade
+   com qualquer dado que possa ter ficado em cache local). */
+function ptX(p){ return Array.isArray(p) ? p[0] : p.x; }
+function ptY(p){ return Array.isArray(p) ? p[1] : p.y; }
 function inkPathD(pts){
   var n=pts.length;
   if(n===0) return '';
-  if(n===1) return 'M '+pts[0][0].toFixed(2)+' '+pts[0][1].toFixed(2);
-  if(n===2) return 'M '+pts[0][0].toFixed(2)+' '+pts[0][1].toFixed(2)+' L '+pts[1][0].toFixed(2)+' '+pts[1][1].toFixed(2);
-  var d='M '+pts[0][0].toFixed(2)+' '+pts[0][1].toFixed(2);
+  if(n===1) return 'M '+ptX(pts[0]).toFixed(2)+' '+ptY(pts[0]).toFixed(2);
+  if(n===2) return 'M '+ptX(pts[0]).toFixed(2)+' '+ptY(pts[0]).toFixed(2)+' L '+ptX(pts[1]).toFixed(2)+' '+ptY(pts[1]).toFixed(2);
+  var d='M '+ptX(pts[0]).toFixed(2)+' '+ptY(pts[0]).toFixed(2);
   for(var i=1;i<n-1;i++){
-    var mx=(pts[i][0]+pts[i+1][0])/2, my=(pts[i][1]+pts[i+1][1])/2;
-    d+=' Q '+pts[i][0].toFixed(2)+' '+pts[i][1].toFixed(2)+' '+mx.toFixed(2)+' '+my.toFixed(2);
+    var mx=(ptX(pts[i])+ptX(pts[i+1]))/2, my=(ptY(pts[i])+ptY(pts[i+1]))/2;
+    d+=' Q '+ptX(pts[i]).toFixed(2)+' '+ptY(pts[i]).toFixed(2)+' '+mx.toFixed(2)+' '+my.toFixed(2);
   }
-  d+=' L '+pts[n-1][0].toFixed(2)+' '+pts[n-1][1].toFixed(2);
+  d+=' L '+ptX(pts[n-1]).toFixed(2)+' '+ptY(pts[n-1]).toFixed(2);
   return d;
 }
 function inkRenderStroke(svg, stroke){
@@ -16693,7 +16724,8 @@ function penStart(zone,x,y,pressure){
   /* fineliner digital: espessura SEMPRE uniforme (PEN_W), sem variar
      com a pressao do stylus -- variar a largura por pressao e o que da
      a aparencia de "lapis"/caligrafia que o usuario pediu para tirar. */
-  var stroke={id:uid('ink'), c:PEN_C, w:PEN_W, pts:[toPct(zone,x,y)]};
+  var p0=toPct(zone,x,y);
+  var stroke={id:uid('ink'), c:PEN_C, w:PEN_W, pts:[{x:p0[0], y:p0[1]}]};
   var el=inkRenderStroke(svg, stroke);
   return {zone:zone, stroke:stroke, el:el};
 }
@@ -16702,10 +16734,10 @@ function penMove(st,x,y){
   var p=toPct(st.zone,x,y);
   var last=st.stroke.pts[st.stroke.pts.length-1];
   if(last){
-    var dx=p[0]-last[0], dy=p[1]-last[1];
+    var dx=p[0]-last.x, dy=p[1]-last.y;
     if((dx*dx+dy*dy) < 0.02) return; // ponto novo praticamente identico ao anterior -- ignora
   }
-  st.stroke.pts.push(p);
+  st.stroke.pts.push({x:p[0], y:p[1]});
   if(penRAF) return;
   penRAF=requestAnimationFrame(function(){ penRAF=null; if(st.el) st.el.setAttribute('d', inkPathD(st.stroke.pts)); });
 }
@@ -16714,7 +16746,7 @@ function penEnd(st){
   if(st.stroke.pts.length<2){ st.el.remove(); return; }
   st.el.setAttribute('d', inkPathD(st.stroke.pts)); // garante o path final completo, mesmo se o ultimo RAF nao tiver rodado
   var key=st.zone.dataset.hlkey;
-  var s=AState(); s.ink[key]=s.ink[key]||[]; s.ink[key].push(st.stroke); save();
+  var s=AState(); s.ink[key]=s.ink[key]||[]; s.ink[key].push(st.stroke); asave('traço de caneta');
   pushUndo({op:'add',kind:'ink',key:key,zone:st.zone,item:st.stroke});
 }
 
@@ -16765,7 +16797,7 @@ function tapeWire(d, zone, t){
     ev.stopPropagation();
     if(!isEditMode()) return;
     var removed=tapeRemove(zone, t.id);
-    if(removed){ pushUndo({op:'remove',kind:'tape',key:zone.dataset.hlkey,zone:zone,item:removed}); save(); }
+    if(removed){ pushUndo({op:'remove',kind:'tape',key:zone.dataset.hlkey,zone:zone,item:removed}); asave('remover fita'); }
   });
 }
 function tapeEl(zone, t){
@@ -16802,7 +16834,7 @@ function tapeEnd(st){
   var x=Math.min(st.x0,st.x1), y=Math.min(st.y0,st.y1), w=Math.abs(st.x1-st.x0), h=Math.abs(st.y1-st.y0);
   if(w<2 || h<1.5){ st.el.remove(); return; }
   var id=uid('tape'), item={id:id,x:x,y:y,w:w,h:h,c:TAPE_C}, key=st.zone.dataset.hlkey;
-  var s=AState(); s.tape[key]=s.tape[key]||[]; s.tape[key].push(item); save();
+  var s=AState(); s.tape[key]=s.tape[key]||[]; s.tape[key].push(item); asave('fita');
   tapeWire(st.el, st.zone, item); // promove a PROPRIA previa a elemento definitivo
   pushUndo({op:'add',kind:'tape',key:key,zone:st.zone,item:item});
 }
@@ -16829,7 +16861,7 @@ function imgToDataUrl(file, cb){
 function stickyFlush(zone, id, patch){
   var key=zone.dataset.hlkey, arr=AState().stickies[key]||[];
   var it=arr.find(function(n){return n.id===id;});
-  if(it){ Object.assign(it, patch); save(); }
+  if(it){ Object.assign(it, patch); asave('editar post-it'); }
 }
 function stickyEl(zone, note){
   var edit=isEditMode();
@@ -16869,7 +16901,7 @@ function stickyEl(zone, note){
     ev.stopPropagation();
     if(!isEditMode()) return;
     var removed=stickyRemove(zone, note.id);
-    if(removed){ pushUndo({op:'remove',kind:'sticky',key:zone.dataset.hlkey,zone:zone,item:removed}); save(); }
+    if(removed){ pushUndo({op:'remove',kind:'sticky',key:zone.dataset.hlkey,zone:zone,item:removed}); asave('remover post-it'); }
   });
 
   var colorsRow=d.querySelector('.annot-sticky-colors');
@@ -16946,7 +16978,7 @@ function stickyCreate(zone,x,y){
   var w=STICKY_SIZE, h=Math.round(STICKY_SIZE*0.733);
   var id=uid('note'), item={id:id, x:Math.min(85,p[0]), y:Math.min(85,p[1]), c:STICKY_C, html:'', w:w, h:h};
   var key=zone.dataset.hlkey;
-  var s=AState(); s.stickies[key]=s.stickies[key]||[]; s.stickies[key].push(item); save();
+  var s=AState(); s.stickies[key]=s.stickies[key]||[]; s.stickies[key].push(item); asave('post-it');
   var el=stickyEl(zone, item);
   if(!el || !el.isConnected){
     /* defesa extra: se por algum motivo o elemento nao ficou
@@ -17011,7 +17043,7 @@ function eraseAt(zone,x,y,radius,erasedSet){
       var r=stickyRemove(zone,id); if(r){ pushUndo({op:'remove',kind:'sticky',key:zone.dataset.hlkey,zone:zone,item:r}); hit=true; }
     }
   });
-  if(hit) save();
+  if(hit) asave('borracha');
   return hit;
 }
 function ensureEraserCursor(){
@@ -17057,7 +17089,7 @@ function blockInsertRef(zone, slot){
 function blockFlush(zone, id, patch){
   var key=zone.dataset.hlkey, arr=AState().blocks[key]||[];
   var it=arr.find(function(b){return b.id===id;});
-  if(it){ Object.assign(it, patch); save(); }
+  if(it){ Object.assign(it, patch); asave('editar área de anotação'); }
 }
 function blockRemove(zone, id){
   var key=zone.dataset.hlkey, arr=AState().blocks[key]||[];
@@ -17105,7 +17137,7 @@ function blockEl(zone, b){
     ev.stopPropagation();
     if(!isEditMode()) return;
     var removed=blockRemove(zone, b.id);
-    if(removed){ pushUndo({op:'remove',kind:'block',key:zone.dataset.hlkey,zone:zone,item:removed}); save(); }
+    if(removed){ pushUndo({op:'remove',kind:'block',key:zone.dataset.hlkey,zone:zone,item:removed}); asave('remover área de anotação'); }
   });
 
   var fileInp=d.querySelector('.annot-block-tools input[type=file]');
@@ -17132,7 +17164,7 @@ function blocksApplyZone(zone){
 function blockCreate(zone, slot){
   var id=uid('blk'), item={id:id, slot:slot, html:'', open:true, created:Date.now()};
   var key=zone.dataset.hlkey;
-  var s=AState(); s.blocks[key]=s.blocks[key]||[]; s.blocks[key].push(item); save();
+  var s=AState(); s.blocks[key]=s.blocks[key]||[]; s.blocks[key].push(item); asave('área de anotação');
   var el;
   try{ el=blockEl(zone, item); }
   catch(err){
@@ -17204,8 +17236,8 @@ function invert(entry){
   if(entry.kind==='block'){ s.blocks[key]=s.blocks[key]||[]; s.blocks[key].push(entry.item); blockEl(entry.zone, entry.item); renderBlockInsertPoints(entry.zone); }
   return {op:'add', kind:entry.kind, key:key, zone:entry.zone, item:entry.item};
 }
-function doUndo(){ var e=UNDO.pop(); if(!e) return; var inv=invert(e); save(); REDO.push(inv); refreshFoot(); if(window.toast) toast('Desfeito'); }
-function doRedo(){ var e=REDO.pop(); if(!e) return; var inv=invert(e); save(); UNDO.push(inv); refreshFoot(); if(window.toast) toast('Refeito'); }
+function doUndo(){ var e=UNDO.pop(); if(!e) return; var inv=invert(e); asave('desfazer'); REDO.push(inv); refreshFoot(); }
+function doRedo(){ var e=REDO.pop(); if(!e) return; var inv=invert(e); asave('refazer'); UNDO.push(inv); refreshFoot(); }
 
 /* atalhos de teclado (desktop) */
 document.addEventListener('keydown', function(e){
@@ -17250,12 +17282,24 @@ document.addEventListener('pointerdown', function(ev){
   if(PEN_POINTER_ACTIVE) return; // rejeicao de palma: a caneta esta escrevendo, ignora QUALQUER outro toque por completo
   TOUCH_SCROLL={pid:ev.pointerId, x:ev.clientX, y:ev.clientY};
 }, {passive:true});
+/* IMPORTANTE: este listener precisa ser passive:false + preventDefault.
+   touch-action:pinch-zoom por si so NEM SEMPRE e suficiente pra
+   suprimir 100% da rolagem nativa em todo motor/dispositivo -- e sem
+   preventDefault aqui, a rolagem NATIVA continuava acontecendo AO
+   MESMO TEMPO que este scrollBy manual, entao os dois ficavam
+   competindo pela mesma posicao de rolagem (dobrando o deslocamento e
+   cada um reagindo ao "erro" causado pelo outro) -- isso e exatamente
+   o que produzia a tela "piscando"/oscilando rapido pra cima e pra
+   baixo ao rolar em modo de edicao. Com preventDefault, so o nosso
+   scrollBy manual controla a posicao; a rolagem nativa nunca chega a
+   competir. */
 document.addEventListener('pointermove', function(ev){
   if(!TOUCH_SCROLL || ev.pointerId!==TOUCH_SCROLL.pid) return;
+  ev.preventDefault();
   var dy=ev.clientY-TOUCH_SCROLL.y;
   TOUCH_SCROLL.y=ev.clientY; TOUCH_SCROLL.x=ev.clientX;
-  window.scrollBy(0, -dy);
-}, {passive:true});
+  if(dy) window.scrollBy(0, -dy);
+}, {passive:false});
 function endTouchScroll(ev){ if(TOUCH_SCROLL && ev.pointerId===TOUCH_SCROLL.pid) TOUCH_SCROLL=null; }
 document.addEventListener('pointerup', endTouchScroll, {passive:true});
 document.addEventListener('pointercancel', endTouchScroll, {passive:true});
