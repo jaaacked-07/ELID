@@ -1078,7 +1078,7 @@ window.viewModule=function(arg){
   return '<div class="view"><div class="page-title">'+gICON()+'<h1>'+name+'</h1></div>'+
     '<p class="page-sub">'+chName(ck)+(d?' · conteúdo atualizado 2025/2026':' · estrutura pronta')+'</p>'+
     '<div class="fc-create" onclick="acFC(\''+name.replace(/'/g,'')+'\')">＋ Criar flashcard</div>'+
-    (d && window.pdfExportModule ? '<div class="fc-create pdf-export-btn" onclick="pdfExportModule(\''+arg+'\')">📄 Exportar PDF</div>' : '')+
+    (d && window.pdfExportModule ? '<div class="fc-create pdf-export-btn" onclick="pdfExportModule(\''+arg+'\', this)">📄 Exportar PDF</div>' : '')+
     '<div class="tabs">'+tabsH+'</div>'+inner+gfoot()+'</div>';
 };
 window.acTab=function(arg,k){ mTab=k; if(k==='teoria'&&!mSub){var d=C[arg]; mSub=d&&d.sub?d.sub[0][0]:'entendendo';} document.getElementById('main').innerHTML=window.viewModule(arg); };
@@ -1477,7 +1477,7 @@ window.viewModules=function(){
     '<p class="page-sub">Matérias divididas por etiologia. Disciplinas concluídas aparecem contornadas no tom do acento.</p>';
   for(var ck in CH){
     h+='<div class="mod-div mod-div-row"><span>'+CH[ck].replace(/^\d+\.\s/,'')+'</span>'+
-      (window.pdfExportCategory ? '<button type="button" class="pdf-cat-btn" onclick="pdfExportCategory(\''+ck+'\')">📄 Baixar PDF da categoria</button>' : '')+
+      (window.pdfExportCategory ? '<button type="button" class="pdf-cat-btn" onclick="pdfExportCategory(\''+ck+'\', this)">📄 Baixar PDF da categoria</button>' : '')+
       '</div><div class="mod-cards">';
     (MODULES[ck]||[]).forEach(function(m,i){
       var arg=ck+'|'+i, done=!!C[arg];
@@ -18587,17 +18587,25 @@ try{ if(typeof route!=='undefined' && route &&
 
 <!-- ===================================================================
      EXPORTAR PDF -- botao por modulo (ao lado de "Criar flashcard") e
-     por categoria/etiologia (na listagem de Modulos). ADITIVO: nao
-     mexe em nenhum dado/conteudo, so LÊ window.CONTENT/MODULES/CH (que
-     ja existem) e monta uma versao "achatada" (todas as sub-abas de
-     teoria e todas as demais abas, uma embaixo da outra, sem nada
-     escondido atras de clique) num container proprio, sempre em modo
-     claro, e aciona a impressao nativa do navegador -- no tablet isso
-     abre a folha de compartilhamento/impressao do sistema, de onde da
-     pra "Salvar em PDF" ou mandar direto pro GoodNotes.
+     por categoria/etiologia (na listagem de Modulos). ADITIVO: nao mexe
+     em nenhum dado/conteudo, so LÊ window.CONTENT/MODULES/CH (que ja
+     existem) e monta uma versao "achatada" (todas as sub-abas de teoria
+     e as demais abas, na ordem pedagogica: teoria -> escores -> diferenciais
+     -> mapa mental -> fluxogramas -> casos clinicos -> dicas -> vespera ->
+     checklist -> questoes SEM gabarito -> flashcards SEM resposta (grade),
+     terminando numa secao final com o gabarito das questoes e as respostas
+     dos flashcards em fonte menor) num container fora da tela, sempre no
+     estilo/cores do modo claro do site, e gera um PDF DE VERDADE no
+     navegador (html2pdf.js = html2canvas+jsPDF, via CDN, carregado so na
+     hora do 1o uso) que é baixado direto -- sem depender do dialogo
+     nativo de impressao do navegador (que em tablet/Chrome pode ficar em
+     branco ou ser bloqueado apos chamadas repetidas de window.print()).
+     O rodape ELID/Elisabete Delfini e desenhado em TODA pagina do PDF via
+     hook do proprio jsPDF (html2canvas so gera uma imagem raster; um
+     "position:fixed" no HTML nao se repetiria por pagina). O arquivo
+     baixado pode ser aberto/importado direto no GoodNotes.
      =================================================================== -->
 <style>
-#pdf-print-area{display:none}
 .mod-div-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .pdf-cat-btn,.pdf-export-btn{
   display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:.78rem;color:var(--accent);
@@ -18606,36 +18614,38 @@ try{ if(typeof route!=='undefined' && route &&
 }
 .pdf-cat-btn:hover,.pdf-export-btn:hover{background:var(--accent-soft)}
 .pdf-export-btn{margin-left:10px}
-@media print{
-  /* esconde TUDO que nao seja a area de impressao -- inclusive decoracoes
-     de fundo, #gate, #app -- sem precisar enumerar cada uma por nome. */
-  body>*:not(#pdf-print-area){display:none!important}
-  body{background:#fff!important}
-  #pdf-print-area{
-    display:block!important;background:#fff;color:#2d1b2e;
-    padding:24px;max-width:820px;margin:0 auto;
-  }
-  #pdf-print-area .pdf-mod{margin:0 0 10px}
-  #pdf-print-area .pdf-mod.pdf-break{page-break-before:always}
-  #pdf-print-area .pdf-mod-cat{font-family:'Fraunces',serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#a0527a;margin-bottom:4px}
-  #pdf-print-area .pdf-mod-title{font-family:'Fraunces',serif;font-size:1.6rem;color:#2d1b2e;margin:0 0 16px}
-  #pdf-print-area .pdf-sec{margin:20px 0}
-  #pdf-print-area .pdf-sec-h{font-family:'Fraunces',serif;font-size:1.05rem;color:#a0527a;border-bottom:1px solid #e4d9cd;padding-bottom:6px;margin-bottom:10px}
-  #pdf-print-area .pdf-sub{margin:14px 0}
-  #pdf-print-area .pdf-sub-h{font-size:.92rem;color:#2d1b2e;margin-bottom:6px;font-weight:700}
-  #pdf-print-area .pdf-q{border:1px solid #e4d9cd;border-radius:10px;padding:12px 14px;margin-bottom:10px;break-inside:avoid}
-  #pdf-print-area .pdf-q-stem{margin-bottom:6px}
-  #pdf-print-area .pdf-q-opt{padding:3px 0}
-  #pdf-print-area .pdf-q-correct{color:#1b7a3d;font-weight:700}
-  #pdf-print-area .pdf-q-expl{margin-top:8px;font-size:.86rem;color:#6b5b6e}
-  #pdf-print-area .pdf-caso{border-left:3px solid #a0527a;background:#f6ece9;border-radius:8px;padding:10px 14px;margin-bottom:12px;break-inside:avoid}
-  #pdf-print-area .pdf-caso-h{font-weight:700;color:#a0527a;margin-bottom:4px}
-  #pdf-print-area .pdf-fc{border:1px solid #e4d9cd;border-radius:10px;padding:10px 14px;margin-bottom:8px;break-inside:avoid}
-  #pdf-print-area .pdf-fc-front{margin-bottom:4px}
-  #pdf-print-area .pdf-fc-back{color:#6b5b6e}
-  #pdf-print-area .pdf-ck-row{padding:4px 0}
-  #pdf-print-area img,#pdf-print-area svg{max-width:100%}
+.pdf-cat-btn.pdf-busy,.pdf-export-btn.pdf-busy{opacity:.6;cursor:wait}
+
+/* fica fora da tela (NAO display:none -- precisa estar layoutado p/ o
+   html2canvas conseguir capturar) com largura fixa, p/ o PDF sair sempre
+   com a mesma proporcao/paginacao independente da tela do usuario. */
+#pdf-print-area{
+  position:fixed; top:0; left:-99999px; z-index:-1;
+  width:794px; background:#faf6f0; color:#2d1b2e; font-family:'Inter',sans-serif;
 }
+#pdf-print-area .pdf-page-pad{padding:30px 34px}
+#pdf-print-area .pdf-mod.pdf-break{page-break-before:always}
+#pdf-print-area .pdf-mod-cat{font-family:'Fraunces',serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#a0527a;margin-bottom:4px}
+#pdf-print-area .pdf-mod-title{font-family:'Fraunces',serif;font-size:1.7rem;color:#2d1b2e;margin:0 0 18px;border-bottom:2px solid #f0c8da;padding-bottom:12px}
+#pdf-print-area .pdf-sec{margin:22px 0}
+#pdf-print-area .pdf-sec-h{font-family:'Fraunces',serif;font-size:1.08rem;color:#a0527a;border-bottom:1px solid #e4d9cd;padding-bottom:6px;margin-bottom:12px}
+#pdf-print-area .pdf-sub{margin:14px 0}
+#pdf-print-area .pdf-sub-h{font-size:.94rem;color:#2d1b2e;margin-bottom:6px;font-weight:700}
+#pdf-print-area .pdf-sub-h2{font-size:.86rem;color:#a0527a;margin:10px 0 4px;font-weight:700}
+#pdf-print-area .pdf-q{border:1px solid #e4d9cd;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+#pdf-print-area .pdf-q-stem{margin-bottom:8px}
+#pdf-print-area .pdf-q-opt{padding:3px 0}
+#pdf-print-area .pdf-caso{border-left:3px solid #a0527a;background:#f6ece9;border-radius:8px;padding:10px 14px;margin-bottom:12px}
+#pdf-print-area .pdf-caso-h{font-weight:700;color:#a0527a;margin-bottom:4px}
+#pdf-print-area .pdf-fc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+#pdf-print-area .pdf-fc{border:1px solid #e4d9cd;border-radius:8px;padding:8px 9px;font-size:.72rem;line-height:1.35}
+#pdf-print-area .pdf-fc-n{color:#a0527a;font-weight:700;margin-bottom:3px;font-size:.68rem}
+#pdf-print-area .pdf-ck-row{padding:4px 0}
+#pdf-print-area img,#pdf-print-area svg{max-width:100%}
+#pdf-print-area .pdf-final{margin-top:26px;padding-top:18px;border-top:2px dashed #d8c4b0;font-size:.74rem;color:#4a3a4c}
+#pdf-print-area .pdf-final .pdf-sec-h{font-size:.92rem}
+#pdf-print-area .pdf-gab-row{padding:2px 0}
+#pdf-print-area .pdf-gab-correct{color:#1b7a3d;font-weight:700}
 </style>
 <script>
 (function(){
@@ -18648,16 +18658,10 @@ function pdfTeoria(d){
   if(!d.sub || !d.sub.length) return '';
   return d.sub.map(function(s){ return '<div class="pdf-sub"><div class="pdf-sub-h">'+s[1]+'</div><div>'+s[2]+'</div></div>'; }).join('');
 }
-function pdfQuestoes(d){
-  if(!d.questoes || !d.questoes.length) return '';
+function pdfFluxogramas(d){
   var h='';
-  d.questoes.forEach(function(q,qi){
-    h+='<div class="pdf-q"><div class="pdf-q-stem"><b>'+(qi+1)+'.</b> '+q.stem+'</div>';
-    (q.opts||[]).forEach(function(o,oi){
-      h+='<div class="pdf-q-opt'+(oi===q.correct?' pdf-q-correct':'')+'">'+String.fromCharCode(65+oi)+') '+o+(oi===q.correct?' ✓':'')+'</div>';
-    });
-    h+='<div class="pdf-q-expl"><b>Comentário:</b> '+(q.expl||'')+'</div></div>';
-  });
+  if(d.fluxo_dx) h+='<div class="pdf-sub"><div class="pdf-sub-h">Fluxograma Diagnóstico</div><div>'+d.fluxo_dx+'</div></div>';
+  if(d.fluxo_cond) h+='<div class="pdf-sub"><div class="pdf-sub-h">Fluxograma de Conduta</div><div>'+d.fluxo_cond+'</div></div>';
   return h;
 }
 function pdfCasos(d){
@@ -18672,24 +18676,64 @@ function pdfCasos(d){
   });
   return h;
 }
-function pdfFlashcards(d){
-  if(!d.flashcards || !d.flashcards.length) return '';
-  var h='', cf=window.clozeFront, cb=window.clozeBack;
-  d.flashcards.forEach(function(c,i){
-    var front=(c.type==='cloze' && cf) ? cf(c.front) : c.front;
-    var back=(c.type==='cloze' && cb) ? cb(c.front) : (c.back||'');
-    h+='<div class="pdf-fc"><div class="pdf-fc-front"><b>P'+(i+1)+':</b> '+front+'</div><div class="pdf-fc-back"><b>R:</b> '+back+'</div></div>';
-  });
-  return h;
-}
 function pdfChecklist(d){
   if(!d.checklist || !d.checklist.length) return '';
   return '<div class="pdf-ck">'+d.checklist.map(function(t){ return '<div class="pdf-ck-row">☐ '+t+'</div>'; }).join('')+'</div>';
 }
+/* Questoes SEM gabarito (nem opcao correta marcada, nem comentario) --
+   o aluno responde no papel/GoodNotes e confere depois na secao final. */
+function pdfQuestoesSemResposta(d){
+  if(!d.questoes || !d.questoes.length) return '';
+  var h='';
+  d.questoes.forEach(function(q,qi){
+    h+='<div class="pdf-q"><div class="pdf-q-stem"><b>'+(qi+1)+'.</b> '+q.stem+'</div>';
+    (q.opts||[]).forEach(function(o,oi){
+      h+='<div class="pdf-q-opt">'+String.fromCharCode(65+oi)+') '+o+'</div>';
+    });
+    h+='</div>';
+  });
+  return h;
+}
+/* Flashcards SEM resposta, em grade (3 por fileira) e fonte menor --
+   so a frente; a resposta fica na secao final. */
+function pdfFlashcardsSemResposta(d){
+  if(!d.flashcards || !d.flashcards.length) return '';
+  var cf=window.clozeFront;
+  var h='<div class="pdf-fc-grid">';
+  d.flashcards.forEach(function(c,i){
+    var front=(c.type==='cloze' && cf) ? cf(c.front) : c.front;
+    h+='<div class="pdf-fc"><div class="pdf-fc-n">P'+(i+1)+'</div>'+front+'</div>';
+  });
+  h+='</div>';
+  return h;
+}
+function pdfGabaritoQuestoes(d){
+  if(!d.questoes || !d.questoes.length) return '';
+  var h='<div class="pdf-sub-h2">Gabarito das Questões</div>';
+  d.questoes.forEach(function(q,qi){
+    var letra=String.fromCharCode(65+(q.correct||0));
+    h+='<div class="pdf-gab-row"><b>'+(qi+1)+'.</b> <span class="pdf-gab-correct">'+letra+'</span>'+(q.expl?' — '+q.expl:'')+'</div>';
+  });
+  return h;
+}
+function pdfGabaritoFlashcards(d){
+  if(!d.flashcards || !d.flashcards.length) return '';
+  var cb=window.clozeBack;
+  var h='<div class="pdf-sub-h2">Respostas dos Flashcards</div>';
+  d.flashcards.forEach(function(c,i){
+    var back=(c.type==='cloze' && cb) ? cb(c.front) : (c.back||'');
+    h+='<div class="pdf-gab-row"><b>P'+(i+1)+':</b> '+back+'</div>';
+  });
+  return h;
+}
 
-/* monta o HTML "achatado" de UM modulo -- todas as abas, sem nenhuma
-   escondida atras de clique/estado. breakBefore=true forca nova pagina
-   antes dele (usado na exportacao de categoria inteira, exceto no 1o). */
+/* monta o HTML "achatado" de UM modulo, na ordem pedida pelo usuario:
+   teoria -> escores -> diferenciais -> mapa mental -> fluxogramas ->
+   casos clinicos -> dicas -> vespera -> checklist -> questoes (sem
+   gabarito) -> flashcards (sem resposta, em grade) -> secao final com
+   gabarito das questoes + respostas dos flashcards, em fonte menor.
+   breakBefore=true forca nova pagina antes dele (exportacao de categoria
+   inteira, exceto no 1o modulo). */
 function pdfModuleHTML(arg, breakBefore){
   var CT=window.CONTENT||{}, d=CT[arg]; if(!d) return '';
   var p=arg.split('|'), ck=p[0];
@@ -18697,21 +18741,22 @@ function pdfModuleHTML(arg, breakBefore){
   var CHT=(typeof CH!=='undefined')?CH:(window.CH||{});
   var name=(MD && MD[ck] && MD[ck][+p[1]]) || d.name || 'Módulo';
   var catName=((CHT && CHT[ck]) || '').replace(/^\d+\.\s/,'');
-  var h='<div class="pdf-mod'+(breakBefore?' pdf-break':'')+'">';
+  var h='<div class="pdf-mod pdf-page-pad'+(breakBefore?' pdf-break':'')+'">';
   h+='<div class="pdf-mod-cat">'+pdfEsc(catName)+'</div>';
   h+='<h1 class="pdf-mod-title">'+pdfEsc(name)+'</h1>';
   h+=pdfSection('Teoria', pdfTeoria(d));
   h+=pdfSection('Escores/Critérios', d.escores);
-  h+=pdfSection('Diferenciais', d.dif);
+  h+=pdfSection('Diagnóstico Diferencial', d.dif);
   h+=pdfSection('Mapa Mental', d.mapa);
-  h+=pdfSection('Fluxograma Diagnóstico', d.fluxo_dx);
-  h+=pdfSection('Fluxograma de Conduta', d.fluxo_cond);
-  h+=pdfSection('Revisão de Véspera', d.vespera);
-  h+=pdfSection('Dicas e Erros', d.dicas);
-  h+=pdfSection('Checklist de Domínio', pdfChecklist(d));
+  h+=pdfSection('Fluxogramas', pdfFluxogramas(d));
   h+=pdfSection('Casos Clínicos', pdfCasos(d));
-  h+=pdfSection('Questões', pdfQuestoes(d));
-  h+=pdfSection('Flashcards', pdfFlashcards(d));
+  h+=pdfSection('Dicas e Erros', d.dicas);
+  h+=pdfSection('Revisão de Véspera', d.vespera);
+  h+=pdfSection('Checklist de Domínio', pdfChecklist(d));
+  h+=pdfSection('Questões', pdfQuestoesSemResposta(d));
+  h+=pdfSection('Flashcards', pdfFlashcardsSemResposta(d));
+  var gabQ=pdfGabaritoQuestoes(d), gabF=pdfGabaritoFlashcards(d);
+  if(gabQ || gabF){ h+='<div class="pdf-final"><h2 class="pdf-sec-h">Gabarito</h2>'+gabQ+gabF+'</div>'; }
   h+='</div>';
   return h;
 }
@@ -18722,38 +18767,100 @@ function ensurePdfArea(){
   return el;
 }
 
-/* SEMPRE modo claro na impressao, seja qual for o tema atual da tela --
-   restaura o tema original depois. 'afterprint' cobre o caso normal
-   (fechou/confirmou a folha de impressao); o setTimeout de seguranca
-   cobre webviews que nao disparam esse evento de forma confiavel. */
-function pdfDoPrint(innerHTML, docTitleHint){
+function pdfSetBusy(btnEl, busy, label){
+  if(!btnEl) return;
+  if(busy){
+    if(btnEl.getAttribute('data-pdf-orig')==null) btnEl.setAttribute('data-pdf-orig', btnEl.innerHTML);
+    btnEl.innerHTML=label||'⏳ Gerando PDF...';
+    btnEl.classList.add('pdf-busy');
+    btnEl.style.pointerEvents='none';
+  } else {
+    var orig=btnEl.getAttribute('data-pdf-orig');
+    if(orig!=null) btnEl.innerHTML=orig;
+    btnEl.classList.remove('pdf-busy');
+    btnEl.style.pointerEvents='';
+  }
+}
+
+var PDF_LIB_URL='https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.14.0/html2pdf.bundle.min.js';
+var pdfLibPromise=null;
+function pdfLoadLib(){
+  if(window.html2pdf) return Promise.resolve();
+  if(pdfLibPromise) return pdfLibPromise;
+  pdfLibPromise=new Promise(function(resolve,reject){
+    var s=document.createElement('script');
+    s.src=PDF_LIB_URL;
+    s.onload=function(){ resolve(); };
+    s.onerror=function(){ pdfLibPromise=null; reject(new Error('pdf-lib-load-failed')); };
+    document.head.appendChild(s);
+  });
+  return pdfLibPromise;
+}
+
+/* desenha o "recado" ELID em TODA pagina do PDF ja montado -- precisa ser
+   feito com a API nativa do jsPDF (nao CSS), pois o html2canvas gera uma
+   unica imagem longa que o jsPDF so fatia em paginas -- nada de HTML se
+   repete automaticamente por pagina. */
+function pdfFooterEveryPage(pdf){
+  var n=pdf.internal.getNumberOfPages();
+  var w=pdf.internal.pageSize.getWidth(), hgt=pdf.internal.pageSize.getHeight();
+  for(var i=1;i<=n;i++){
+    pdf.setPage(i);
+    pdf.setDrawColor(228,217,205);
+    pdf.setLineWidth(0.2);
+    pdf.line(14, hgt-16, w-14, hgt-16);
+    pdf.setTextColor(176,106,117);
+    pdf.setFont('helvetica','bold');
+    pdf.setFontSize(7.5);
+    pdf.text('ELID · Ensino Legitimado para Internos em Desenvolvimento', w/2, hgt-11, {align:'center'});
+    pdf.setFont('helvetica','italic');
+    pdf.setFontSize(8);
+    pdf.text('Inspirado em Elisabete Delfini', w/2, hgt-7, {align:'center'});
+  }
+}
+
+/* SEMPRE modo claro no PDF, seja qual for o tema atual da tela -- restaura
+   o tema original depois. Gera um arquivo .pdf de verdade (download),
+   sem passar pelo dialogo nativo de impressao do navegador. */
+function pdfGenerate(innerHTML, filenameHint, btnEl){
   var area=ensurePdfArea();
   area.innerHTML=innerHTML;
   var wasLight=document.body.classList.contains('light');
   if(!wasLight) document.body.classList.add('light');
-  var prevTitle=document.title;
-  if(docTitleHint) document.title=docTitleHint;
-  var done=false;
+  pdfSetBusy(btnEl, true);
   function cleanup(){
-    if(done) return; done=true;
-    if(!wasLight) document.body.classList.remove('light');
-    document.title=prevTitle;
     area.innerHTML='';
-    window.removeEventListener('afterprint', cleanup);
+    if(!wasLight) document.body.classList.remove('light');
+    pdfSetBusy(btnEl, false);
   }
-  window.addEventListener('afterprint', cleanup);
-  setTimeout(function(){ try{ window.print(); }catch(e){ cleanup(); } }, 50);
-  setTimeout(cleanup, 20000); // rede de seguranca
+  var fontsReady=(document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+  pdfLoadLib().then(function(){ return fontsReady; }).then(function(){
+    var opt={
+      margin:[10,10,20,10],
+      filename:(filenameHint||'ELID')+'.pdf',
+      image:{type:'jpeg',quality:0.95},
+      html2canvas:{scale:2,useCORS:true,backgroundColor:'#faf6f0'},
+      jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+      pagebreak:{mode:['css','avoid-all'],avoid:['.pdf-q','.pdf-caso','.pdf-fc','.pdf-gab-row']}
+    };
+    return window.html2pdf().set(opt).from(area).toPdf().get('pdf').then(function(pdf){
+      pdfFooterEveryPage(pdf);
+      return pdf.save(opt.filename);
+    });
+  }).then(cleanup).catch(function(err){
+    cleanup();
+    if(window.toast) window.toast('Não foi possível gerar o PDF agora. Verifique sua conexão e tente novamente.');
+  });
 }
 
-window.pdfExportModule=function(arg){
+window.pdfExportModule=function(arg, btnEl){
   var html=pdfModuleHTML(arg, false);
   if(!html){ if(window.toast) window.toast('Conteúdo deste módulo ainda não está pronto.'); return; }
   var CT=window.CONTENT||{}, d=CT[arg];
-  pdfDoPrint(html, (d.name||'Módulo')+' - PedAtlas');
+  pdfGenerate(html, (d.name||'Módulo')+' - PedAtlas', btnEl);
 };
 
-window.pdfExportCategory=function(ck){
+window.pdfExportCategory=function(ck, btnEl){
   var MD=(typeof MODULES!=='undefined')?MODULES:(window.MODULES||{});
   var mods=(MD && MD[ck])||[];
   var html='', first=true, any=false;
@@ -18764,10 +18871,11 @@ window.pdfExportCategory=function(ck){
   if(!any){ if(window.toast) window.toast('Nenhum módulo pronto nesta categoria ainda.'); return; }
   var CHT=(typeof CH!=='undefined')?CH:(window.CH||{});
   var catName=((CHT && CHT[ck])||'').replace(/^\d+\.\s/,'');
-  pdfDoPrint(html, catName+' - PedAtlas');
+  pdfGenerate(html, catName+' - PedAtlas', btnEl);
 };
 
 window.__pdfModuleHTML=pdfModuleHTML; // exposto so p/ testes
+window.__pdfGenerate=pdfGenerate; // exposto so p/ testes
 })();
 </script>
 
