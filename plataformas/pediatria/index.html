@@ -18656,7 +18656,7 @@ try{ if(typeof route!=='undefined' && route &&
 .pdf-mod-title{font-family:'Fraunces',serif;font-size:1.7rem;color:#2d1b2e;margin:0 0 18px;border-bottom:2px solid #f0c8da;padding-bottom:12px}
 .pdf-sec-h{font-family:'Fraunces',serif;font-size:1.08rem;color:#a0527a;border-bottom:1px solid #e4d9cd;padding-bottom:6px;margin:6px 0 4px}
 .pdf-sub{margin:0}
-.pdf-sub-h{font-size:.94rem;color:#2d1b2e;margin-bottom:6px;font-weight:700}
+.pdf-sub-h{font-family:'Fraunces',serif;font-size:1.28rem;font-weight:700;color:#a0527a;margin:2px 0 10px;padding-bottom:4px;border-bottom:1.5px solid #f0c8da}
 .pdf-sub-h2{font-size:.86rem;color:#a0527a;margin:0 0 4px;font-weight:700}
 .pdf-q{border:1px solid #e4d9cd;border-radius:10px;padding:12px 14px}
 .pdf-q-stem{margin-bottom:8px}
@@ -18684,7 +18684,7 @@ var CONTENT_W_MM=PAGE_W_MM-MARGIN_L_MM-MARGIN_R_MM;
 var CONTENT_H_MM=PAGE_H_MM-MARGIN_T_MM-MARGIN_B_MM;
 var CONTENT_W_PX=Math.round(CONTENT_W_MM*PX_PER_MM);
 var CONTENT_H_PX=Math.round(CONTENT_H_MM*PX_PER_MM);
-var RENDER_SCALE=1.6; // resolucao de captura (nao a "escala" de zoom da pagina)
+var RENDER_SCALE=2.5; // resolucao de captura (nao a "escala" de zoom da pagina) -- alto p/ texto nitido
 
 function pdfEsc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
@@ -18705,19 +18705,29 @@ function pdfModuleBlocks(arg, isFirstOfDoc){
 
   blocks.push({html:'<div class="pdf-mod-cat">'+pdfEsc(catName)+'</div><h1 class="pdf-mod-title">'+pdfEsc(name)+'</h1>', forceNewPage:!isFirstOfDoc});
 
-  function head(title){ blocks.push({html:'<h2 class="pdf-sec-h">'+title+'</h2>'}); }
+  /* titulo de secao NUNCA fica sozinho no fim de uma pagina, separado do
+     seu proprio conteudo -- em vez de virar um bloco atomico independente
+     (que o empacotador podia deixar "orfao"), o titulo e colado (prepend)
+     no HTML do PRIMEIRO bloco de conteudo que vem depois dele, formando
+     uma unica unidade inseparavel pro empacotador. */
+  var pendingHead=null;
+  function head(title){ pendingHead='<h2 class="pdf-sec-h">'+title+'</h2>'; }
+  function push(b){
+    if(pendingHead){ b.html=pendingHead+b.html; pendingHead=null; }
+    blocks.push(b);
+  }
 
   if(d.sub && d.sub.length){
     head('Teoria');
-    d.sub.forEach(function(s){ blocks.push({html:'<div class="pdf-sub"><div class="pdf-sub-h">'+s[1]+'</div><div>'+s[2]+'</div></div>'}); });
+    d.sub.forEach(function(s){ push({html:'<div class="pdf-sub"><div class="pdf-sub-h">'+s[1]+'</div><div>'+s[2]+'</div></div>'}); });
   }
-  if(d.escores){ head('Escores/Critérios'); blocks.push({html:d.escores}); }
-  if(d.dif){ head('Diagnóstico Diferencial'); blocks.push({html:d.dif}); }
-  if(d.mapa){ head('Mapa Mental'); blocks.push({html:d.mapa}); }
+  if(d.escores){ head('Escores/Critérios'); push({html:d.escores}); }
+  if(d.dif){ head('Diagnóstico Diferencial'); push({html:d.dif}); }
+  if(d.mapa){ head('Mapa Mental'); push({html:d.mapa}); }
   if(d.fluxo_dx || d.fluxo_cond){
     head('Fluxogramas');
-    if(d.fluxo_dx) blocks.push({html:'<div class="pdf-sub"><div class="pdf-sub-h">Fluxograma Diagnóstico</div><div>'+d.fluxo_dx+'</div></div>'});
-    if(d.fluxo_cond) blocks.push({html:'<div class="pdf-sub"><div class="pdf-sub-h">Fluxograma de Conduta</div><div>'+d.fluxo_cond+'</div></div>'});
+    if(d.fluxo_dx) push({html:'<div class="pdf-sub"><div class="pdf-sub-h">Fluxograma Diagnóstico</div><div>'+d.fluxo_dx+'</div></div>'});
+    if(d.fluxo_cond) push({html:'<div class="pdf-sub"><div class="pdf-sub-h">Fluxograma de Conduta</div><div>'+d.fluxo_cond+'</div></div>'});
   }
   if(d.casos && d.casos.length){
     head('Casos Clínicos');
@@ -18727,14 +18737,14 @@ function pdfModuleBlocks(arg, isFirstOfDoc){
         h+='<div class="caso-step"><div class="caso-step-h">'+s.h+'</div><div class="ac-p" style="margin:3px 0 0">'+s.p+'</div></div>';
       });
       h+='</div>';
-      blocks.push({html:h});
+      push({html:h});
     });
   }
-  if(d.dicas){ head('Dicas e Erros'); blocks.push({html:d.dicas}); }
-  if(d.vespera){ head('Revisão de Véspera'); blocks.push({html:d.vespera}); }
+  if(d.dicas){ head('Dicas e Erros'); push({html:d.dicas}); }
+  if(d.vespera){ head('Revisão de Véspera'); push({html:d.vespera}); }
   if(d.checklist && d.checklist.length){
     head('Checklist de Domínio');
-    blocks.push({html:'<div class="pdf-ck">'+d.checklist.map(function(t){ return '<div class="pdf-ck-row">☐ '+t+'</div>'; }).join('')+'</div>'});
+    push({html:'<div class="pdf-ck">'+d.checklist.map(function(t){ return '<div class="pdf-ck-row">☐ '+t+'</div>'; }).join('')+'</div>'});
   }
   if(d.questoes && d.questoes.length){
     head('Questões');
@@ -18742,7 +18752,7 @@ function pdfModuleBlocks(arg, isFirstOfDoc){
       var h='<div class="pdf-q"><div class="pdf-q-stem"><b>'+(qi+1)+'.</b> '+q.stem+'</div>';
       (q.opts||[]).forEach(function(o,oi){ h+='<div class="pdf-q-opt">'+String.fromCharCode(65+oi)+') '+o+'</div>'; });
       h+='</div>';
-      blocks.push({html:h});
+      push({html:h});
     });
   }
   if(d.flashcards && d.flashcards.length){
@@ -18755,38 +18765,35 @@ function pdfModuleBlocks(arg, isFirstOfDoc){
         h+='<div class="pdf-fc"><div class="pdf-fc-n">P'+(idx+1)+'</div>'+front+'</div>';
       });
       h+='</div>';
-      blocks.push({html:h});
+      push({html:h});
     }
   }
   // gabarito final -- fonte menor, empacotado em grupos p/ nao virar
-  // dezenas de blocos atomicos minusculos.
-  var gab=[];
+  // dezenas de blocos atomicos minusculos. Usa o mesmo mecanismo de
+  // "titulo colado no 1o bloco" pra nunca ficar orfao.
+  head('Gabarito');
   if(d.questoes && d.questoes.length){
-    gab.push({html:'<div class="pdf-sub-h2">Gabarito das Questões</div>', cls:'pdf-gab-block'});
+    push({html:'<div class="pdf-sub-h2">Gabarito das Questões</div>', cls:'pdf-gab-block'});
     for(var qi=0; qi<d.questoes.length; qi+=8){
       var grp=d.questoes.slice(qi,qi+8), h='';
       grp.forEach(function(q,gi){
         var idx=qi+gi, letra=String.fromCharCode(65+(q.correct||0));
         h+='<div class="pdf-gab-row"><b>'+(idx+1)+'.</b> <span class="pdf-gab-correct">'+letra+'</span>'+(q.expl?' — '+q.expl:'')+'</div>';
       });
-      gab.push({html:h, cls:'pdf-gab-block'});
+      blocks.push({html:h, cls:'pdf-gab-block'});
     }
   }
   if(d.flashcards && d.flashcards.length){
     var cb=window.clozeBack;
-    gab.push({html:'<div class="pdf-sub-h2">Respostas dos Flashcards</div>', cls:'pdf-gab-block'});
+    push({html:'<div class="pdf-sub-h2">Respostas dos Flashcards</div>', cls:'pdf-gab-block'});
     for(var fi=0; fi<d.flashcards.length; fi+=8){
       var grp=d.flashcards.slice(fi,fi+8), h='';
       grp.forEach(function(c,gi){
         var idx=fi+gi, back=(c.type==='cloze'&&cb)?cb(c.front):(c.back||'');
         h+='<div class="pdf-gab-row"><b>P'+(idx+1)+':</b> '+back+'</div>';
       });
-      gab.push({html:h, cls:'pdf-gab-block'});
+      blocks.push({html:h, cls:'pdf-gab-block'});
     }
-  }
-  if(gab.length){
-    blocks.push({html:'<h2 class="pdf-sec-h">Gabarito</h2>', cls:'pdf-gab-block'});
-    gab.forEach(function(b){ blocks.push(b); });
   }
   return blocks;
 }
@@ -18846,25 +18853,63 @@ function pdfLoadLibs(){
   return pdfLibPromise;
 }
 
-/* desenha o "recado" ELID em TODA pagina do PDF ja montado -- via API
-   nativa do jsPDF (cada pagina e uma imagem independente; nada de HTML
-   se repete automaticamente por pagina). */
-function pdfFooterEveryPage(pdf){
+/* o rodape precisa usar a FONTE EXATA do site (Cormorant Garamond /
+   Great Vibes) -- o jsPDF so tem fontes nativas tipo helvetica/times,
+   entao em vez de desenhar texto vetorial com pdf.text() (que sairia
+   com uma fonte generica, fora do padrao visual do site), a gente
+   RENDERIZA o proprio HTML/CSS do rodape do site (a mesma função foot()
+   usada no rodape de toda pagina da plataforma) e tira uma UNICA foto
+   dele via html2canvas -- pequena, sem nenhum risco de limite de canvas
+   -- e carimba essa mesma imagem em toda pagina do PDF (cores do tema
+   atual da plataforma, ja que o modo claro esta forçado durante a
+   geracao). */
+function pdfBuildFooterImage(area){
+  var wrap=document.createElement('div');
+  wrap.style.cssText='width:'+CONTENT_W_PX+'px;background:#faf6f0;padding:10px 0 4px;text-align:center;border-top:1px solid #e4d9cd';
+  var footHTML=(typeof window.foot==='function') ? window.foot() : '';
+  // usa o markup real do site (elid-credit/elid-tribute); se por algum
+  // motivo foot() nao existir, cai num texto simples equivalente.
+  wrap.innerHTML=footHTML || '<div class="elid-credit"><b>E</b>LID · <b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div><div class="elid-tribute" style="margin-top:6px">Inspirado em <b>E</b>lisabete <b>D</b>elfini ✦</div>';
+  area.innerHTML=''; area.style.width=CONTENT_W_PX+'px'; area.appendChild(wrap);
+  void area.offsetHeight;
+  return window.html2canvas(wrap, {scale:RENDER_SCALE, useCORS:true, backgroundColor:'#faf6f0', logging:false}).then(function(canvas){
+    return {dataUrl:canvas.toDataURL('image/png'), w:canvas.width, h:canvas.height};
+  });
+}
+
+/* carimba a imagem do rodape (gerada 1x) em TODA pagina do PDF ja
+   montado -- cada pagina e uma imagem de conteudo independente, entao
+   nada de HTML/CSS se repete automaticamente por pagina; precisa ser
+   desenhado explicitamente em cada uma. */
+function pdfStampFooterEveryPage(pdf, footerImg){
   var n=pdf.internal.getNumberOfPages();
-  var w=pdf.internal.pageSize.getWidth(), hgt=pdf.internal.pageSize.getHeight();
+  var pageW=pdf.internal.pageSize.getWidth(), pageH=pdf.internal.pageSize.getHeight();
+  var footerWmm=CONTENT_W_MM*0.62;
+  var footerHmm=footerImg.h*(footerWmm/footerImg.w);
+  var x=(pageW-footerWmm)/2;
+  var y=pageH-MARGIN_B_MM+ (MARGIN_B_MM-footerHmm)/2;
   for(var i=1;i<=n;i++){
     pdf.setPage(i);
-    pdf.setDrawColor(228,217,205);
-    pdf.setLineWidth(0.2);
-    pdf.line(14, hgt-16, w-14, hgt-16);
-    pdf.setTextColor(176,106,117);
-    pdf.setFont('helvetica','bold');
-    pdf.setFontSize(7.5);
-    pdf.text('ELID · Ensino Legitimado para Internos em Desenvolvimento', w/2, hgt-11, {align:'center'});
-    pdf.setFont('helvetica','italic');
-    pdf.setFontSize(8);
-    pdf.text('Inspirado em Elisabete Delfini', w/2, hgt-7, {align:'center'});
+    pdf.addImage(footerImg.dataUrl, 'PNG', x, y, footerWmm, footerHmm, undefined, 'FAST');
   }
+}
+
+/* altura "de verdade" de um bloco -- nao usa so o getBoundingClientRect()
+   do proprio wrapper, pois algum conteudo (fluxograma/mapa mental/tabela
+   com elemento posicionado, flutuante etc.) pode visualmente extrapolar
+   a caixa que o wrapper reporta como sua propria altura. Anda por TODOS
+   os descendentes e usa a borda inferior mais distante -- isso evita
+   subestimar a altura de um bloco (o que empacotava o proximo bloco
+   comecando cedo demais e causava texto sobreposto). */
+function pdfDeepHeight(wrapperEl){
+  var rect=wrapperEl.getBoundingClientRect();
+  var maxBottom=rect.bottom;
+  var all=wrapperEl.querySelectorAll('*');
+  for(var i=0;i<all.length;i++){
+    var b=all[i].getBoundingClientRect().bottom;
+    if(b>maxBottom) maxBottom=b;
+  }
+  return Math.max(1, maxBottom-rect.top);
 }
 
 /* mede a altura real de cada bloco atomico (colocando todos juntos, de
@@ -18882,7 +18927,7 @@ function pdfMeasureAndPack(blocks, area){
     return w;
   });
   void area.offsetHeight; // forca layout
-  var heights=wrappers.map(function(w){ return w.getBoundingClientRect().height || 1; });
+  var heights=wrappers.map(pdfDeepHeight);
   area.innerHTML='';
 
   var pages=[], cur=[], curH=0;
@@ -18916,10 +18961,10 @@ function pdfRenderPages(blocks, pages, area, pdf, onProgress){
     void area.offsetHeight;
     if(onProgress) onProgress(idx+1, pages.length);
     return window.html2canvas(area, {scale:RENDER_SCALE, useCORS:true, backgroundColor:'#faf6f0', logging:false}).then(function(canvas){
-      var imgData=canvas.toDataURL('image/jpeg', 0.94);
+      var imgData=canvas.toDataURL('image/png'); // png (sem perdas) -- texto sai nitido, sem borrao de compressao jpeg
       var imgHmm=canvas.height*(CONTENT_W_MM/canvas.width);
       if(idx>0) pdf.addPage();
-      pdf.addImage(imgData, 'JPEG', MARGIN_L_MM, MARGIN_T_MM, CONTENT_W_MM, imgHmm);
+      pdf.addImage(imgData, 'PNG', MARGIN_L_MM, MARGIN_T_MM, CONTENT_W_MM, imgHmm, undefined, 'FAST');
       idx++;
       return next();
     });
@@ -18953,7 +18998,9 @@ function pdfGenerate(blocks, filenameHint, btnEl){
     return pdfRenderPages(blocks, pages, area, pdf, function(done,total){
       if(subEl) subEl.textContent=done+' / '+total+' páginas';
     }).then(function(){
-      pdfFooterEveryPage(pdf);
+      return pdfBuildFooterImage(area);
+    }).then(function(footerImg){
+      pdfStampFooterEveryPage(pdf, footerImg);
       pdf.save((filenameHint||'ELID')+'.pdf');
     });
   }).then(cleanup).catch(function(err){
@@ -18985,6 +19032,8 @@ window.pdfExportCategory=function(ck, btnEl){
 
 window.__pdfModuleBlocks=pdfModuleBlocks; // exposto so p/ testes
 window.__pdfMeasureAndPack=pdfMeasureAndPack; // exposto so p/ testes
+window.__pdfDeepHeight=pdfDeepHeight; // exposto so p/ testes
+window.__pdfBuildFooterImage=pdfBuildFooterImage; // exposto so p/ testes
 window.__pdfGenerate=pdfGenerate; // exposto so p/ testes
 })();
 </script>
