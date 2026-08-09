@@ -18609,7 +18609,13 @@ try{ if(typeof route!=='undefined' && route &&
      limite de canvas) e adicionada como uma pagina de imagem no jsPDF
      (html2canvas + jsPDF carregados direto via CDN, sem o wrapper
      automatico do html2pdf.js). O rodape ELID/Elisabete Delfini e
-     desenhado por cima, em TODA pagina, via API nativa do jsPDF.
+     desenhado por cima, em TODA pagina, como TEXTO VETORIAL nativo do
+     jsPDF (pdf.text/setFont) -- nao como foto/captura, que saia com cara
+     de "print" escaneado; ver comentario proprio na funcao
+     pdfFooterEveryPage. Qualquer pergunta expansivel (<details>) que
+     exista dentro de algum campo de conteudo e "achatada" (sempre
+     visivel, pergunta + resposta) antes de virar bloco do PDF -- ver
+     pdfFlattenDetails.
 
      O conteudo fica visivel na tela (nao off-screen com coordenada
      extrema, que e um fator de risco a mais pro html2canvas) mas
@@ -18671,6 +18677,8 @@ try{ if(typeof route!=='undefined' && route &&
 .pdf-gab-block{font-size:.74rem;color:#4a3a4c}
 .pdf-gab-row{padding:2px 0}
 .pdf-gab-correct{color:#1b7a3d;font-weight:700}
+.pdf-qa{border-left:3px solid #a0527a;background:#f6ece9;border-radius:8px;padding:10px 14px;margin:10px 0}
+.pdf-qa-q{font-weight:700;color:#a0527a;margin-bottom:6px}
 </style>
 <script>
 (function(){
@@ -18684,9 +18692,25 @@ var CONTENT_W_MM=PAGE_W_MM-MARGIN_L_MM-MARGIN_R_MM;
 var CONTENT_H_MM=PAGE_H_MM-MARGIN_T_MM-MARGIN_B_MM;
 var CONTENT_W_PX=Math.round(CONTENT_W_MM*PX_PER_MM);
 var CONTENT_H_PX=Math.round(CONTENT_H_MM*PX_PER_MM);
-var RENDER_SCALE=2.5; // resolucao de captura (nao a "escala" de zoom da pagina) -- alto p/ texto nitido
+var RENDER_SCALE=3.5; // resolucao de captura (nao a "escala" de zoom da pagina) -- ~336dpi, bem acima de impressao padrao (300dpi), mas ainda longe do limite de canvas de qualquer dispositivo (cada pagina capturada isoladamente fica em ~2500x3500px)
 
 function pdfEsc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* num PDF/impresso estatico o leitor NUNCA consegue clicar pra abrir um
+   <details> fechado -- a resposta ficaria escondida pra sempre. Por isso,
+   toda pergunta expansivel (usada em alguns trechos de teoria pra
+   aprofundar um ponto) vira aqui um bloco SEMPRE visivel (pergunta em
+   destaque + resposta logo abaixo, no fluxo normal do texto, sem colapsar
+   nada) -- isso tambem elimina de raiz qualquer chance de sobreposicao de
+   texto que o <details> pudesse causar ao ser fotografado pelo
+   html2canvas (aberto ou fechado). */
+function pdfFlattenDetails(html){
+  if(!html || html.indexOf('<details')===-1) return html;
+  return html.replace(/<details[^>]*>\s*<summary[^>]*>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/gi, function(_, q, a){
+    q=q.replace(/\s*\(clique para expandir\)\s*/i,'').trim();
+    return '<div class="pdf-qa"><div class="pdf-qa-q">'+q+'</div><div>'+a+'</div></div>';
+  });
+}
 
 /* ---------- monta a lista de BLOCOS ATOMICOS de um modulo (nao um
    HTML unico) -- cada bloco vira uma unidade empacotavel numa pagina.
@@ -18795,6 +18819,7 @@ function pdfModuleBlocks(arg, isFirstOfDoc){
       blocks.push({html:h, cls:'pdf-gab-block'});
     }
   }
+  blocks.forEach(function(b){ b.html=pdfFlattenDetails(b.html); });
   return blocks;
 }
 
@@ -18853,44 +18878,69 @@ function pdfLoadLibs(){
   return pdfLibPromise;
 }
 
-/* o rodape precisa usar a FONTE EXATA do site (Cormorant Garamond /
-   Great Vibes) -- o jsPDF so tem fontes nativas tipo helvetica/times,
-   entao em vez de desenhar texto vetorial com pdf.text() (que sairia
-   com uma fonte generica, fora do padrao visual do site), a gente
-   RENDERIZA o proprio HTML/CSS do rodape do site (a mesma função foot()
-   usada no rodape de toda pagina da plataforma) e tira uma UNICA foto
-   dele via html2canvas -- pequena, sem nenhum risco de limite de canvas
-   -- e carimba essa mesma imagem em toda pagina do PDF (cores do tema
-   atual da plataforma, ja que o modo claro esta forçado durante a
-   geracao). */
-function pdfBuildFooterImage(area){
-  var wrap=document.createElement('div');
-  wrap.style.cssText='width:'+CONTENT_W_PX+'px;background:#faf6f0;padding:10px 0 4px;text-align:center;border-top:1px solid #e4d9cd';
-  var footHTML=(typeof window.foot==='function') ? window.foot() : '';
-  // usa o markup real do site (elid-credit/elid-tribute); se por algum
-  // motivo foot() nao existir, cai num texto simples equivalente.
-  wrap.innerHTML=footHTML || '<div class="elid-credit"><b>E</b>LID · <b>E</b>nsino <b>L</b>egitimado para <b>I</b>nternos em <b>D</b>esenvolvimento</div><div class="elid-tribute" style="margin-top:6px">Inspirado em <b>E</b>lisabete <b>D</b>elfini ✦</div>';
-  area.innerHTML=''; area.style.width=CONTENT_W_PX+'px'; area.appendChild(wrap);
-  void area.offsetHeight;
-  return window.html2canvas(wrap, {scale:RENDER_SCALE, useCORS:true, backgroundColor:'#faf6f0', logging:false}).then(function(canvas){
-    return {dataUrl:canvas.toDataURL('image/png'), w:canvas.width, h:canvas.height};
+/* rodape ELID/Elisabete Delfini desenhado como TEXTO VETORIAL nativo do
+   jsPDF (pdf.text/setFont), nao mais como foto do HTML via html2canvas --
+   a foto ficava com fundo/bordas de "print" (imagem raster ampliada
+   dentro do PDF, serrilhada em telas de alta densidade e destoando do
+   resto do documento, que e todo desenhado nitidamente). O jsPDF nao tem
+   as fontes exatas do site (Cormorant Garamond/Great Vibes), entao a
+   aproximacao usa helvetica p/ a linha de credito e times italico p/ a
+   linha de homenagem (a mais "elegante" das 3 fontes nativas do jsPDF) --
+   mas o resultado sai sempre nitido em qualquer resolucao, sem nenhum
+   artefato de captura, e reproduz o mesmo padrao visual do site de
+   destacar a 1a letra de cada palavra-chave (E-L-I-D / Elisabete Delfini)
+   numa cor de destaque. */
+function pdfHexRgb(hex){
+  var n=parseInt(hex.replace('#',''),16);
+  return [(n>>16)&255,(n>>8)&255,n&255];
+}
+var PDF_FOOT_INK=pdfHexRgb('#2d1b2e');   // --ink no modo claro
+var PDF_FOOT_ROSE=pdfHexRgb('#b06a75');  // --credit-rose
+var PDF_FOOT_LINE=pdfHexRgb('#e4d9cd');
+var PDF_FOOT_CREDIT_SEGS=[
+  {t:'E',b:true},{t:'LI',b:false},{t:'D',b:true},{t:' · ',b:false},
+  {t:'E',b:true},{t:'nsino ',b:false},
+  {t:'L',b:true},{t:'egitimado para ',b:false},
+  {t:'I',b:true},{t:'nternos em ',b:false},
+  {t:'D',b:true},{t:'esenvolvimento',b:false}
+];
+var PDF_FOOT_TRIBUTE_SEGS=[
+  {t:'Inspirado em ',b:false},
+  {t:'E',b:true},{t:'lisabete ',b:false},
+  {t:'D',b:true},{t:'elfini ✦',b:false}
+];
+function pdfFontStyle(bold, italic){ return bold ? (italic?'bolditalic':'bold') : (italic?'italic':'normal'); }
+function pdfSegsWidth(pdf, segs, family, size, italic){
+  var w=0;
+  segs.forEach(function(s){ pdf.setFont(family, pdfFontStyle(s.b,italic)); pdf.setFontSize(size); w+=pdf.getTextWidth(s.t); });
+  return w;
+}
+function pdfDrawSegsCentered(pdf, segs, cx, y, family, size, italic){
+  var totalW=pdfSegsWidth(pdf, segs, family, size, italic);
+  var x=cx-totalW/2;
+  segs.forEach(function(s){
+    pdf.setFont(family, pdfFontStyle(s.b,italic));
+    pdf.setFontSize(size);
+    pdf.setTextColor.apply(pdf, s.b?PDF_FOOT_ROSE:PDF_FOOT_INK);
+    pdf.text(s.t, x, y);
+    x+=pdf.getTextWidth(s.t);
   });
 }
-
-/* carimba a imagem do rodape (gerada 1x) em TODA pagina do PDF ja
-   montado -- cada pagina e uma imagem de conteudo independente, entao
-   nada de HTML/CSS se repete automaticamente por pagina; precisa ser
-   desenhado explicitamente em cada uma. */
-function pdfStampFooterEveryPage(pdf, footerImg){
+/* desenha o rodape em TODA pagina do PDF ja montado -- cada pagina e uma
+   imagem de conteudo independente, entao nada se repete automaticamente
+   por pagina; precisa ser desenhado explicitamente em cada uma. */
+function pdfFooterEveryPage(pdf){
   var n=pdf.internal.getNumberOfPages();
   var pageW=pdf.internal.pageSize.getWidth(), pageH=pdf.internal.pageSize.getHeight();
-  var footerWmm=CONTENT_W_MM*0.62;
-  var footerHmm=footerImg.h*(footerWmm/footerImg.w);
-  var x=(pageW-footerWmm)/2;
-  var y=pageH-MARGIN_B_MM+ (MARGIN_B_MM-footerHmm)/2;
+  var cx=pageW/2;
+  var lineY=pageH-MARGIN_B_MM+2, y1=lineY+5, y2=y1+5.5;
   for(var i=1;i<=n;i++){
     pdf.setPage(i);
-    pdf.addImage(footerImg.dataUrl, 'PNG', x, y, footerWmm, footerHmm, undefined, 'FAST');
+    pdf.setDrawColor(PDF_FOOT_LINE[0],PDF_FOOT_LINE[1],PDF_FOOT_LINE[2]);
+    pdf.setLineWidth(0.2);
+    pdf.line(MARGIN_L_MM, lineY, pageW-MARGIN_R_MM, lineY);
+    pdfDrawSegsCentered(pdf, PDF_FOOT_CREDIT_SEGS, cx, y1, 'helvetica', 8, false);
+    pdfDrawSegsCentered(pdf, PDF_FOOT_TRIBUTE_SEGS, cx, y2, 'times', 9, true);
   }
 }
 
@@ -18998,9 +19048,7 @@ function pdfGenerate(blocks, filenameHint, btnEl){
     return pdfRenderPages(blocks, pages, area, pdf, function(done,total){
       if(subEl) subEl.textContent=done+' / '+total+' páginas';
     }).then(function(){
-      return pdfBuildFooterImage(area);
-    }).then(function(footerImg){
-      pdfStampFooterEveryPage(pdf, footerImg);
+      pdfFooterEveryPage(pdf);
       pdf.save((filenameHint||'ELID')+'.pdf');
     });
   }).then(cleanup).catch(function(err){
@@ -19033,7 +19081,8 @@ window.pdfExportCategory=function(ck, btnEl){
 window.__pdfModuleBlocks=pdfModuleBlocks; // exposto so p/ testes
 window.__pdfMeasureAndPack=pdfMeasureAndPack; // exposto so p/ testes
 window.__pdfDeepHeight=pdfDeepHeight; // exposto so p/ testes
-window.__pdfBuildFooterImage=pdfBuildFooterImage; // exposto so p/ testes
+window.__pdfFlattenDetails=pdfFlattenDetails; // exposto so p/ testes
+window.__pdfFooterEveryPage=pdfFooterEveryPage; // exposto so p/ testes
 window.__pdfGenerate=pdfGenerate; // exposto so p/ testes
 })();
 </script>
