@@ -18878,54 +18878,20 @@ function pdfLoadLibs(){
   return pdfLibPromise;
 }
 
-/* rodape ELID/Elisabete Delfini desenhado como TEXTO VETORIAL nativo do
-   jsPDF (pdf.text/setFont), nao mais como foto do HTML via html2canvas --
-   a foto ficava com fundo/bordas de "print" (imagem raster ampliada
-   dentro do PDF, serrilhada em telas de alta densidade e destoando do
-   resto do documento, que e todo desenhado nitidamente). O jsPDF nao tem
-   as fontes exatas do site (Cormorant Garamond/Great Vibes), entao a
-   aproximacao usa helvetica p/ a linha de credito e times italico p/ a
-   linha de homenagem (a mais "elegante" das 3 fontes nativas do jsPDF) --
-   mas o resultado sai sempre nitido em qualquer resolucao, sem nenhum
-   artefato de captura, e reproduz o mesmo padrao visual do site de
-   destacar a 1a letra de cada palavra-chave (E-L-I-D / Elisabete Delfini)
-   numa cor de destaque. */
+/* rodape ELID/Elisabete Delfini -- padrao ORIGINAL (1a versao): texto
+   vetorial nativo do jsPDF (pdf.text/setFont), letras comuns (sem negrito
+   nem destaque de letra por letra), tudo numa unica cor -- a cor de
+   destaque da propria plataforma (o mesmo tom usado nos titulos de secao
+   do PDF). Sai sempre nitido em qualquer resolucao/zoom, sem nenhum
+   artefato de captura. */
 function pdfHexRgb(hex){
   var n=parseInt(hex.replace('#',''),16);
   return [(n>>16)&255,(n>>8)&255,n&255];
 }
-var PDF_FOOT_INK=pdfHexRgb('#2d1b2e');   // --ink no modo claro
-var PDF_FOOT_ROSE=pdfHexRgb('#b06a75');  // --credit-rose
+var PDF_FOOT_ACCENT=pdfHexRgb('#a0527a'); // cor de destaque da plataforma (mesmo tom dos titulos de secao do PDF)
 var PDF_FOOT_LINE=pdfHexRgb('#e4d9cd');
-var PDF_FOOT_CREDIT_SEGS=[
-  {t:'E',b:true},{t:'LI',b:false},{t:'D',b:true},{t:' · ',b:false},
-  {t:'E',b:true},{t:'nsino ',b:false},
-  {t:'L',b:true},{t:'egitimado para ',b:false},
-  {t:'I',b:true},{t:'nternos em ',b:false},
-  {t:'D',b:true},{t:'esenvolvimento',b:false}
-];
-var PDF_FOOT_TRIBUTE_SEGS=[
-  {t:'Inspirado em ',b:false},
-  {t:'E',b:true},{t:'lisabete ',b:false},
-  {t:'D',b:true},{t:'elfini ✦',b:false}
-];
-function pdfFontStyle(bold, italic){ return bold ? (italic?'bolditalic':'bold') : (italic?'italic':'normal'); }
-function pdfSegsWidth(pdf, segs, family, size, italic){
-  var w=0;
-  segs.forEach(function(s){ pdf.setFont(family, pdfFontStyle(s.b,italic)); pdf.setFontSize(size); w+=pdf.getTextWidth(s.t); });
-  return w;
-}
-function pdfDrawSegsCentered(pdf, segs, cx, y, family, size, italic){
-  var totalW=pdfSegsWidth(pdf, segs, family, size, italic);
-  var x=cx-totalW/2;
-  segs.forEach(function(s){
-    pdf.setFont(family, pdfFontStyle(s.b,italic));
-    pdf.setFontSize(size);
-    pdf.setTextColor.apply(pdf, s.b?PDF_FOOT_ROSE:PDF_FOOT_INK);
-    pdf.text(s.t, x, y);
-    x+=pdf.getTextWidth(s.t);
-  });
-}
+var PDF_FOOT_CREDIT_TXT='ELID · Ensino Legitimado para Internos em Desenvolvimento';
+var PDF_FOOT_TRIBUTE_TXT='Inspirado em Elisabete Delfini ✦';
 /* desenha o rodape em TODA pagina do PDF ja montado -- cada pagina e uma
    imagem de conteudo independente, entao nada se repete automaticamente
    por pagina; precisa ser desenhado explicitamente em cada uma. */
@@ -18939,8 +18905,12 @@ function pdfFooterEveryPage(pdf){
     pdf.setDrawColor(PDF_FOOT_LINE[0],PDF_FOOT_LINE[1],PDF_FOOT_LINE[2]);
     pdf.setLineWidth(0.2);
     pdf.line(MARGIN_L_MM, lineY, pageW-MARGIN_R_MM, lineY);
-    pdfDrawSegsCentered(pdf, PDF_FOOT_CREDIT_SEGS, cx, y1, 'helvetica', 8, false);
-    pdfDrawSegsCentered(pdf, PDF_FOOT_TRIBUTE_SEGS, cx, y2, 'times', 9, true);
+    pdf.setFont('helvetica','normal');
+    pdf.setTextColor(PDF_FOOT_ACCENT[0],PDF_FOOT_ACCENT[1],PDF_FOOT_ACCENT[2]);
+    pdf.setFontSize(8);
+    pdf.text(PDF_FOOT_CREDIT_TXT, cx, y1, {align:'center'});
+    pdf.setFontSize(9);
+    pdf.text(PDF_FOOT_TRIBUTE_TXT, cx, y2, {align:'center'});
   }
 }
 
