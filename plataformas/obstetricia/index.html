@@ -1182,6 +1182,7 @@ window.viewModule=function(arg){
   return '<div class="view"><div class="page-title">'+gICON()+'<h1>'+name+'</h1></div>'+
     '<p class="page-sub">'+chName(ck)+(d?' · conteúdo atualizado 2025/2026':' · estrutura pronta')+'</p>'+
     '<div class="fc-create" onclick="acFC(\''+fcTop.replace(/'/g,'')+'\')">＋ Criar flashcard</div>'+
+    (d && window.pdfExportModule ? '<div class="fc-create pdf-export-btn" onclick="pdfExportModule(\''+arg+'\', this)">📄 Exportar PDF</div>' : '')+
     '<div class="tabs">'+tabsH+'</div>'+inner+gfoot()+'</div>';
 };
 window.acTab=function(arg,k){ mTab=k; if(k==='teoria'&&!mSub){var d=C[arg]; mSub=d&&d.sub?d.sub[0][0]:'entendendo';} document.getElementById('main').innerHTML=window.viewModule(arg); };
@@ -1571,7 +1572,7 @@ window.viewModules=function(){
   var h='<div class="view"><div class="page-title">'+gICON()+'<h1>Módulos</h1></div>'+
     '<p class="page-sub">Matérias divididas por etiologia. Disciplinas concluídas aparecem contornadas no tom do acento.</p>';
   for(var ck in CH){
-    h+='<div class="mod-div">'+CH[ck].replace(/^\d+\.\s/,'')+'</div><div class="mod-cards">';
+    h+='<div class="mod-div mod-div-row"><span>'+CH[ck].replace(/^\d+\.\s/,'')+'</span>'+(window.pdfExportCategory ? '<button type="button" class="pdf-cat-btn" onclick="pdfExportCategory(\''+ck+'\', this)">📄 Baixar PDF da categoria</button>' : '')+'</div><div class="mod-cards">';
     (MODULES[ck]||[]).forEach(function(m,i){
       var arg=ck+'|'+i, done=!!C[arg];
       if(done){
@@ -3436,5 +3437,383 @@ C['puerperio|1'] = {"name": "Infeccoes Puerperais", "intro": "A febre no puerper
 <script>(function(){"use strict";var C=(window.CONTENT=window.CONTENT||{});
 C['puerperio|2'] = {"name": "Hemorragia Pos-Parto", "intro": "A principal causa de morte materna evitavel exige reconhecimento sistematico pelo mnemonico dos 4 Ts (Tonus, Trauma, Tecido, Trombina), manejo escalonado da atonia uterina (massagem e ocitocina em paralelo, depois uterotonicos de segunda linha, medidas mecanicas e, por fim, cirurgia), e reposicao volemica agressiva conduzida simultaneamente ao controle da causa.", "sub": [["definicao", "Definindo hemorragia pos-parto", "\n<div class=\"ac-h\">Um volume, mas tambem uma questao de repercussao clinica</div>\n<p class=\"ac-p\">A <b>hemorragia pos-parto (HPP)</b> e classicamente definida por criterios de <b>volume de perda sanguinea</b> apos o parto, variando conforme a via de parto: perda <b>igual ou maior que 500 mL</b> apos <b>parto vaginal</b>, ou <b>igual ou maior que 1000 mL</b> apos <b>cesariana</b>.</p>\n<svg viewBox=\"0 0 680 220\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" style=\"width:100%;height:auto;font-family:inherit\">\n<defs>\n  <linearGradient id=\"bgh5a\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"var(--panel)\"/><stop offset=\"1\" stop-color=\"var(--panel)\" stop-opacity=\"0.85\"/>\n  </linearGradient>\n  <linearGradient id=\"acch5a\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"var(--accent)\"/><stop offset=\"1\" stop-color=\"var(--accent-soft)\"/>\n  </linearGradient>\n  <filter id=\"shh5a\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"2\" flood-opacity=\"0.25\"/>\n  </filter>\n</defs>\n<rect x=\"30\" y=\"40\" width=\"290\" height=\"150\" rx=\"14\" fill=\"var(--panel)\" stroke=\"var(--line)\" filter=\"url(#shh5a)\"/>\n<text x=\"175\" y=\"70\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"var(--ink)\">Parto vaginal</text>\n<circle cx=\"175\" cy=\"120\" r=\"40\" fill=\"url(#acch5a)\" opacity=\"0.5\"/>\n<text x=\"175\" y=\"115\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"700\" fill=\"var(--ink)\">≥500</text>\n<text x=\"175\" y=\"132\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--ink)\">mL</text>\n<text x=\"175\" y=\"170\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">Perda sanguinea significativa</text>\n<rect x=\"360\" y=\"40\" width=\"290\" height=\"150\" rx=\"14\" fill=\"var(--panel)\" stroke=\"var(--line)\" filter=\"url(#shh5a)\"/>\n<text x=\"505\" y=\"70\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"var(--ink)\">Cesariana</text>\n<circle cx=\"505\" cy=\"120\" r=\"40\" fill=\"url(#acch5a)\" opacity=\"0.5\"/>\n<text x=\"505\" y=\"115\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"700\" fill=\"var(--ink)\">≥1000</text>\n<text x=\"505\" y=\"132\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--ink)\">mL</text>\n<text x=\"505\" y=\"170\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">Perda sanguinea significativa</text>\n</svg>\n<p class=\"ac-p\">Na pratica clinica, no entanto, a estimativa visual de perda sanguinea e notoriamente <b>imprecisa</b> (tendendo a subestimar o volume real), de modo que definicoes mais modernas tambem incorporam a <b>repercussao clinica</b> — ou seja, qualquer sangramento que cause <b>instabilidade hemodinamica</b> (independente do volume exato estimado) deve ser tratado como HPP e manejado com a mesma urgencia. A HPP e classificada em <b>precoce (primaria)</b>, quando ocorre nas primeiras <b>24 horas</b> pos-parto (a grande maioria dos casos), e <b>tardia (secundaria)</b>, quando ocorre entre <b>24 horas e 6 a 12 semanas</b> pos-parto.</p>\n<div class=\"ac-warn\"><b>Pegadinha:</b> nao esperar atingir exatamente o volume \"oficial\" de definicao para agir — instabilidade hemodinamica em qualquer volume de sangramento deve ser tratada como emergencia obstetrica.</div>\n"], ["causas_4ts", "Os 4 Ts: mnemonico das causas", "\n<div class=\"ac-h\">Um mnemonico que organiza toda a investigacao etiologica</div>\n<p class=\"ac-p\">As causas de hemorragia pos-parto sao classicamente organizadas no mnemonico dos <b>\"4 Ts\"</b>, que cobre praticamente todo o espectro etiologico relevante e serve como guia sistematico de investigacao a beira do leito.</p>\n<svg viewBox=\"0 0 720 300\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" style=\"width:100%;height:auto;font-family:inherit\">\n<defs>\n  <linearGradient id=\"bgh1a\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"var(--panel)\"/><stop offset=\"1\" stop-color=\"var(--panel)\" stop-opacity=\"0.85\"/>\n  </linearGradient>\n  <linearGradient id=\"acch1a\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"var(--accent)\"/><stop offset=\"1\" stop-color=\"var(--accent-soft)\"/>\n  </linearGradient>\n  <filter id=\"shh1a\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"2\" flood-opacity=\"0.25\"/>\n  </filter>\n</defs>\n<text x=\"360\" y=\"30\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"var(--ink)\">Os 4 Ts: causas de hemorragia pos-parto</text>\n<rect x=\"20\" y=\"55\" width=\"160\" height=\"220\" rx=\"14\" fill=\"var(--panel)\" stroke=\"var(--accent)\" stroke-width=\"2.5\" filter=\"url(#shh1a)\"/>\n<circle cx=\"100\" cy=\"100\" r=\"30\" fill=\"url(#acch1a)\"/>\n<text x=\"100\" y=\"107\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"700\" fill=\"#fff\">T</text>\n<text x=\"100\" y=\"150\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" fill=\"var(--ink)\">TONUS</text>\n<text x=\"100\" y=\"175\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">Atonia uterina</text>\n<text x=\"100\" y=\"192\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">(~70% dos casos)</text>\n<text x=\"100\" y=\"230\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--ink)\" font-weight=\"600\">CAUSA MAIS</text>\n<text x=\"100\" y=\"245\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--ink)\" font-weight=\"600\">COMUM</text>\n<rect x=\"195\" y=\"55\" width=\"160\" height=\"220\" rx=\"14\" fill=\"var(--panel)\" stroke=\"var(--line)\" filter=\"url(#shh1a)\"/>\n<circle cx=\"275\" cy=\"100\" r=\"30\" fill=\"url(#acch1a)\" opacity=\"0.8\"/>\n<text x=\"275\" y=\"107\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"700\" fill=\"#fff\">T</text>\n<text x=\"275\" y=\"150\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" fill=\"var(--ink)\">TRAUMA</text>\n<text x=\"275\" y=\"175\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">Laceracoes de</text>\n<text x=\"275\" y=\"192\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">trajeto, rotura</text>\n<text x=\"275\" y=\"209\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">uterina, inversao</text>\n<rect x=\"370\" y=\"55\" width=\"160\" height=\"220\" rx=\"14\" fill=\"var(--panel)\" stroke=\"var(--line)\" filter=\"url(#shh1a)\"/>\n<circle cx=\"450\" cy=\"100\" r=\"30\" fill=\"url(#acch1a)\" opacity=\"0.8\"/>\n<text x=\"450\" y=\"107\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"700\" fill=\"#fff\">T</text>\n<text x=\"450\" y=\"150\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" fill=\"var(--ink)\">TECIDO</text>\n<text x=\"450\" y=\"175\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">Retencao de</text>\n<text x=\"450\" y=\"192\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">restos placentarios</text>\n<text x=\"450\" y=\"209\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">ou coagulos</text>\n<rect x=\"545\" y=\"55\" width=\"160\" height=\"220\" rx=\"14\" fill=\"var(--panel)\" stroke=\"var(--line)\" filter=\"url(#shh1a)\"/>\n<circle cx=\"625\" cy=\"100\" r=\"30\" fill=\"url(#acch1a)\" opacity=\"0.8\"/>\n<text x=\"625\" y=\"107\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"700\" fill=\"#fff\">T</text>\n<text x=\"625\" y=\"150\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" fill=\"var(--ink)\">TROMBINA</text>\n<text x=\"625\" y=\"175\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">Coagulopatias</text>\n<text x=\"625\" y=\"192\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">(previas ou</text>\n<text x=\"625\" y=\"209\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--muted)\">adquiridas na gestacao)</text>\n</svg>\n<p class=\"ac-p\"><b>Tonus</b> (atonia uterina) e disparadamente a <b>causa mais comum</b>, respondendo por cerca de <b>70% dos casos</b> de HPP — o utero nao se contrai adequadamente apos a dequitacao, falhando em comprimir os vasos do leito placentario. <b>Trauma</b> engloba laceracoes do trajeto (vagina, colo, períneo), rotura uterina e inversao uterina. <b>Tecido</b> se refere a retencao de restos placentarios ou coagulos que impedem a contracao uterina efetiva. <b>Trombina</b> engloba as coagulopatias, sejam previas a gestacao (ex.: doenca de von Willebrand) ou adquiridas durante a gestacao/parto (ex.: coagulopatia de consumo em descolamento prematuro de placenta ou em pre-eclampsia grave).</p>\n<div class=\"ac-tip\"><b>Macete:</b> \"Tonus, Trauma, Tecido, Trombina\" — quando avaliar uma HPP, percorra os 4 Ts sistematicamente, comecando sempre pelo mais provavel (tonus).</div>\n"], ["atonia_fatores", "Atonia uterina: fatores de risco", "\n<div class=\"ac-h\">Qualquer coisa que superdistenda ou exauste o miometrio</div>\n<p class=\"ac-p\">Por ser a causa mais comum e mais evitavel de HPP, reconhecer os fatores de risco para <b>atonia uterina</b> e essencial para antecipar o problema. De forma geral, os fatores de risco compartilham um mecanismo comum: qualquer condicao que <b>superdistenda</b> a fibra miometrial (reduzindo sua capacidade de contracao eficiente apos o parto) ou que <b>exauste</b> a musculatura uterina (por trabalho de parto excessivamente prolongado).</p>\n<p class=\"ac-p\">Entre os fatores de superdistensao, destacam-se: <b>polidramnio</b>, <b>gestacao gemelar/multipla</b> (relembrando o modulo anterior), e <b>macrossomia fetal</b>. Entre os fatores de exaustao miometrial, destacam-se: <b>trabalho de parto prolongado</b> e <b>uso prolongado de ocitocina</b> durante a inducao/conducao do trabalho de parto (paradoxalmente, o uso excessivo do proprio uterotonico durante o trabalho de parto pode \"exaurir\" a resposta miometrial no pos-parto). Outros fatores relevantes incluem <b>multiparidade</b> (miometrio progressivamente menos eficiente a cada gestacao), <b>corioamnionite</b>, e historia previa de atonia/HPP.</p>\n<div class=\"ac-call\"><b>A grande ideia:</b> antecipar o risco de atonia (identificando os fatores predisponentes antes do parto) permite preparar previamente uterotonicos e recursos, reduzindo o tempo de resposta caso a atonia ocorra.</div>\n"], ["manejo_inicial", "Manejo inicial: massagem e uterotonicos de primeira linha", "\n<div class=\"ac-h\">A primeira linha de resposta, executada em paralelo</div>\n<p class=\"ac-p\">Diante de atonia uterina confirmada (utero amolecido, sem globo de seguranca de Pinard bem formado), o manejo inicial combina, <b>simultaneamente</b> (nao sequencialmente): <b>massagem uterina bimanual</b> e <b>uterotonico de primeira linha</b>.</p>\n<svg viewBox=\"0 0 640 300\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" style=\"width:100%;height:auto;font-family:inherit\">\n<defs>\n  <linearGradient id=\"bgh2a\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"var(--panel)\"/><stop offset=\"1\" stop-color=\"var(--panel)\" stop-opacity=\"0.85\"/>\n  </linearGradient>\n  <linearGradient id=\"acch2a\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"var(--accent)\"/><stop offset=\"1\" stop-color=\"var(--accent-soft)\"/>\n  </linearGradient>\n  <filter id=\"shh2a\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"2\" flood-opacity=\"0.25\"/>\n  </filter>\n</defs>\n<ellipse cx=\"320\" cy=\"170\" rx=\"110\" ry=\"90\" fill=\"url(#bgh2a-h2a)\" stroke=\"var(--accent)\" stroke-width=\"2.5\" filter=\"url(#shh2a)\"/>\n<text x=\"320\" y=\"50\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"700\" fill=\"var(--ink)\">Massagem uterina bimanual</text>\n<path d=\"M230 120 Q 260 90 320 90\" stroke=\"var(--accent)\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<circle cx=\"230\" cy=\"120\" r=\"18\" fill=\"url(#acch2a)\" opacity=\"0.8\"/>\n<text x=\"200\" y=\"105\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--ink)\" font-weight=\"600\">Mao abdominal</text>\n<text x=\"200\" y=\"90\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--muted)\">(comprime fundo)</text>\n<path d=\"M410 220 Q 380 250 320 250\" stroke=\"var(--accent)\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<circle cx=\"410\" cy=\"220\" r=\"18\" fill=\"url(#acch2a)\" opacity=\"0.8\"/>\n<text x=\"440\" y=\"255\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--ink)\" font-weight=\"600\">Mao vaginal</text>\n<text x=\"440\" y=\"270\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--muted)\">(eleva o utero)</text>\n<text x=\"320\" y=\"175\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--ink)\" font-weight=\"600\">Compressao entre</text>\n<text x=\"320\" y=\"192\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--ink)\" font-weight=\"600\">as duas maos</text>\n</svg>\n<p class=\"ac-p\">A <b>massagem uterina bimanual</b> e realizada com uma mao comprimindo o fundo uterino pela parede abdominal, enquanto a outra mao (introduzida na vagina) eleva e comprime o corpo uterino contra a mao abdominal, gerando compressao mecanica direta sobre o miometrio e estimulando sua contracao reflexa. Paralelamente, administra-se <b>ocitocina endovenosa</b> como uterotonico de primeira linha (geralmente em infusao continua), o farmaco mais amplamente utilizado tanto na profilaxia quanto no tratamento inicial da atonia, por seu perfil de seguranca favoravel e rapido inicio de acao.</p>\n<div class=\"ac-warn\"><b>Pegadinha:</b> massagem uterina e ocitocina devem ser feitas EM PARALELO, nao uma apos a outra — o tempo de resposta na HPP e critico.</div>\n"], ["manejo_escalonado", "Manejo escalonado: uterotonicos de segunda linha e medidas mecanicas", "\n<div class=\"ac-h\">Uma sequencia logica de intensificacao terapeutica</div>\n<p class=\"ac-p\">Quando a resposta a massagem e ocitocina e insuficiente, o manejo da HPP por atonia segue uma sequencia escalonada de intervencoes, cada uma mais invasiva que a anterior.</p>\n<svg viewBox=\"0 0 740 260\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" style=\"width:100%;height:auto;font-family:inherit\">\n<defs>\n  <linearGradient id=\"bgh3a\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"var(--panel)\"/><stop offset=\"1\" stop-color=\"var(--panel)\" stop-opacity=\"0.85\"/>\n  </linearGradient>\n  <linearGradient id=\"acch3a\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"var(--accent)\"/><stop offset=\"1\" stop-color=\"var(--accent-soft)\"/>\n  </linearGradient>\n  <filter id=\"shh3a\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"2\" flood-opacity=\"0.25\"/>\n  </filter>\n</defs>\n<line x1=\"60\" y1=\"130\" x2=\"700\" y2=\"130\" stroke=\"url(#acch3a)\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n<circle cx=\"100\" cy=\"130\" r=\"8\" fill=\"url(#acch3a)\"/>\n<circle cx=\"280\" cy=\"130\" r=\"8\" fill=\"url(#acch3a)\"/>\n<circle cx=\"460\" cy=\"130\" r=\"8\" fill=\"url(#acch3a)\"/>\n<circle cx=\"640\" cy=\"130\" r=\"8\" fill=\"#c0392b\"/>\n<rect x=\"30\" y=\"150\" width=\"140\" height=\"90\" rx=\"10\" fill=\"var(--panel)\" stroke=\"var(--line)\" filter=\"url(#shh3a)\"/>\n<text x=\"100\" y=\"110\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" fill=\"var(--ink)\">1. Massagem +</text>\n<text x=\"100\" y=\"175\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--ink)\">Ocitocina</text>\n<text x=\"100\" y=\"192\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--muted)\">(1a linha)</text>\n<rect x=\"210\" y=\"150\" width=\"140\" height=\"90\" rx=\"10\" fill=\"var(--panel)\" stroke=\"var(--line)\" filter=\"url(#shh3a)\"/>\n<text x=\"280\" y=\"110\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" fill=\"var(--ink)\">2. Uterotonicos</text>\n<text x=\"280\" y=\"175\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--ink)\">Metilergonovina /</text>\n<text x=\"280\" y=\"192\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--ink)\">Misoprostol</text>\n<rect x=\"390\" y=\"150\" width=\"140\" height=\"90\" rx=\"10\" fill=\"var(--panel)\" stroke=\"var(--line)\" filter=\"url(#shh3a)\"/>\n<text x=\"460\" y=\"110\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" fill=\"var(--ink)\">3. Medidas</text>\n<text x=\"460\" y=\"175\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--ink)\">Balao intrauterino /</text>\n<text x=\"460\" y=\"192\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--ink)\">Sutura B-Lynch</text>\n<rect x=\"570\" y=\"150\" width=\"150\" height=\"90\" rx=\"10\" fill=\"var(--panel)\" stroke=\"#c0392b\" stroke-width=\"2\" filter=\"url(#shh3a)\"/>\n<text x=\"645\" y=\"110\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" fill=\"#c0392b\">4. Refrataria</text>\n<text x=\"645\" y=\"175\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--ink)\">Ligadura vascular /</text>\n<text x=\"645\" y=\"192\" text-anchor=\"middle\" font-size=\"10\" fill=\"var(--ink)\">Histerectomia</text>\n</svg>\n<p class=\"ac-p\">Como <b>uterotonicos de segunda linha</b>, destacam-se a <b>metilergonovina</b> (contraindicada em hipertensao/pre-eclampsia, pelo risco de crise hipertensiva) e o <b>misoprostol</b> (analogo de prostaglandina, util especialmente quando ha contraindicacao aos demais uterotonicos). Persistindo o sangramento, avanca-se para <b>medidas mecanicas/cirurgicas conservadoras</b>: o <b>balao intrauterino</b> (tamponamento mecanico do utero, exercendo pressao direta sobre a superficie sangrante) e a <b>sutura compressiva de B-Lynch</b> (sutura cirurgica que comprime o utero externamente, \"abracando-o\", preservando o orgao). Em casos refratarios a todas as medidas anteriores, recorre-se a <b>ligadura de vasos pelvicos</b> (arterias uterinas, ou mesmo hipogastricas) e, como ultimo recurso, a <b>histerectomia</b> (puerperal, de emergencia) — medida que salva a vida da paciente as custas da perda do utero.</p>\n<div class=\"ac-call\"><b>A grande ideia:</b> a sequencia escalonada busca sempre a medida menos invasiva capaz de controlar o sangramento, preservando o utero (e a fertilidade futura) sempre que possivel — mas a histerectomia nunca deve ser postergada quando a vida da paciente esta em risco.</div>\n"], ["choque_hemorragico", "Reconhecendo e classificando o choque hemorragico", "\n<div class=\"ac-h\">Sinais vitais que evoluem previsivelmente com a perda volemica</div>\n<p class=\"ac-p\">Paralelamente ao controle da causa do sangramento, e essencial reconhecer precocemente os sinais de <b>choque hemorragico</b>, que evoluem de forma relativamente previsivel conforme o percentual de volemia perdida.</p>\n<svg viewBox=\"0 0 700 260\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" style=\"width:100%;height:auto;font-family:inherit\">\n<defs>\n  <linearGradient id=\"bgh4a\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"var(--panel)\"/><stop offset=\"1\" stop-color=\"var(--panel)\" stop-opacity=\"0.85\"/>\n  </linearGradient>\n  <linearGradient id=\"acch4a\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"var(--accent)\"/><stop offset=\"1\" stop-color=\"var(--accent-soft)\"/>\n  </linearGradient>\n  <filter id=\"shh4a\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feDropShadow dx=\"0\" dy=\"1.5\" stdDeviation=\"2\" flood-opacity=\"0.25\"/>\n  </filter>\n</defs>\n<text x=\"350\" y=\"30\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"700\" fill=\"var(--ink)\">Classificacao do choque hemorragico (% de volemia perdida)</text>\n<rect x=\"30\" y=\"55\" width=\"150\" height=\"170\" rx=\"10\" fill=\"var(--panel)\" stroke=\"var(--line)\" filter=\"url(#shh4a)\"/>\n<rect x=\"30\" y=\"55\" width=\"150\" height=\"30\" rx=\"10\" fill=\"#2ecc71\" opacity=\"0.8\"/>\n<text x=\"105\" y=\"76\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" fill=\"#fff\">Classe I</text>\n<text x=\"105\" y=\"105\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--ink)\" font-weight=\"600\">&lt;15%</text>\n<text x=\"105\" y=\"130\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--muted)\">Compensado,</text>\n<text x=\"105\" y=\"145\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--muted)\">sinais vitais normais</text>\n<rect x=\"195\" y=\"55\" width=\"150\" height=\"170\" rx=\"10\" fill=\"var(--panel)\" stroke=\"var(--line)\" filter=\"url(#shh4a)\"/>\n<rect x=\"195\" y=\"55\" width=\"150\" height=\"30\" rx=\"10\" fill=\"#f1c40f\" opacity=\"0.85\"/>\n<text x=\"270\" y=\"76\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" fill=\"#333\">Classe II</text>\n<text x=\"270\" y=\"105\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--ink)\" font-weight=\"600\">15-30%</text>\n<text x=\"270\" y=\"130\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--muted)\">Taquicardia,</text>\n<text x=\"270\" y=\"145\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--muted)\">PA ainda normal</text>\n<rect x=\"360\" y=\"55\" width=\"150\" height=\"170\" rx=\"10\" fill=\"var(--panel)\" stroke=\"var(--line)\" filter=\"url(#shh4a)\"/>\n<rect x=\"360\" y=\"55\" width=\"150\" height=\"30\" rx=\"10\" fill=\"#e67e22\" opacity=\"0.85\"/>\n<text x=\"435\" y=\"76\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" fill=\"#fff\">Classe III</text>\n<text x=\"435\" y=\"105\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--ink)\" font-weight=\"600\">30-40%</text>\n<text x=\"435\" y=\"130\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--muted)\">Hipotensao,</text>\n<text x=\"435\" y=\"145\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--muted)\">confusao mental</text>\n<rect x=\"525\" y=\"55\" width=\"150\" height=\"170\" rx=\"10\" fill=\"var(--panel)\" stroke=\"#c0392b\" stroke-width=\"2\" filter=\"url(#shh4a)\"/>\n<rect x=\"525\" y=\"55\" width=\"150\" height=\"30\" rx=\"10\" fill=\"#c0392b\"/>\n<text x=\"600\" y=\"76\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" fill=\"#fff\">Classe IV</text>\n<text x=\"600\" y=\"105\" text-anchor=\"middle\" font-size=\"11\" fill=\"var(--ink)\" font-weight=\"600\">&gt;40%</text>\n<text x=\"600\" y=\"130\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--muted)\">Risco iminente</text>\n<text x=\"600\" y=\"145\" text-anchor=\"middle\" font-size=\"9.5\" fill=\"var(--muted)\">de morte</text>\n</svg>\n<p class=\"ac-p\">No <b>choque classe I</b> (perda &lt;15% da volemia), os sinais vitais permanecem essencialmente normais — o organismo compensa integralmente a perda, o que torna esse estagio o mais facilmente subestimado clinicamente. No <b>classe II</b> (15-30%), surge <b>taquicardia</b>, ainda com pressao arterial preservada. No <b>classe III</b> (30-40%), surgem <b>hipotensao</b> e alteracao do estado mental (confusao, ansiedade), sinalizando que os mecanismos compensatorios estao se esgotando. No <b>classe IV</b> (&gt;40%), ha <b>risco iminente de morte</b>, com hipotensao franca, taquicardia extrema e rebaixamento importante do nivel de consciencia.</p>\n<div class=\"ac-warn\"><b>Pegadinha:</b> sinais vitais normais NAO excluem perda volemica significativa — no choque classe I (ate 15%), a compensacao fisiologica pode manter os sinais vitais essencialmente normais, mascarando a gravidade real da perda.</div>\n"], ["reposicao_volemica", "Reposicao volemica e transfusao", "\n<div class=\"ac-h\">Agir em paralelo ao controle da causa, nunca depois</div>\n<p class=\"ac-p\">O manejo da HPP grave exige <b>reposicao volemica agressiva</b> em paralelo as medidas de controle da causa do sangramento (nunca esperar o controle definitivo da causa para iniciar a reposicao). Isso envolve <b>acesso venoso calibroso</b> (idealmente dois acessos), infusao de <b>cristaloides aquecidos</b> em bolus, e, quando indicado pela gravidade do quadro, <b>transfusao de hemocomponentes</b> — concentrado de hemacias, plasma fresco congelado e plaquetas, em proporcoes que buscam mimetizar sangue total (protocolos de transfusao maciça), evitando a diluicao excessiva de fatores de coagulacao que ocorreria com reposicao isolada de cristaloide em grandes volumes.</p>\n<p class=\"ac-p\">O <b>acido tranexamico</b> (antifibrinolitico) tem papel bem estabelecido no tratamento da HPP, reduzindo a mortalidade relacionada ao sangramento quando administrado precocemente (idealmente dentro das primeiras horas do diagnostico). A monitorizacao continua de sinais vitais, diurese e nivel de consciencia, associada a reavaliacao seriada do hematocrito/hemoglobina e da coagulacao, orienta a intensidade e a duracao da reposicao.</p>\n<div class=\"ac-tip\"><b>Macete:</b> \"trate a causa E reponha volume ao mesmo tempo\" — a HPP grave e uma corrida contra o tempo em duas frentes simultaneas, nunca sequenciais.</div>\n"]], "escores": "<div class=\"ac-h\">Os 4 Ts (causas de HPP)</div><table class=\"ac-tbl\"><tr><th>T</th><th>Causa</th><th>Frequencia</th></tr><tr><td>Tonus</td><td>Atonia uterina</td><td>~70% (mais comum)</td></tr><tr><td>Trauma</td><td>Laceracoes, rotura/inversao uterina</td><td>Variavel</td></tr><tr><td>Tecido</td><td>Retencao de restos/coagulos</td><td>Variavel</td></tr><tr><td>Trombina</td><td>Coagulopatias</td><td>Menos comum</td></tr></table><div class=\"ac-h\">Classificacao do choque hemorragico</div><table class=\"ac-tbl\"><tr><th>Classe</th><th>% volemia</th><th>Sinais</th></tr><tr><td>I</td><td>&lt;15%</td><td>Sinais vitais normais (compensado)</td></tr><tr><td>II</td><td>15-30%</td><td>Taquicardia, PA normal</td></tr><tr><td>III</td><td>30-40%</td><td>Hipotensao, confusao mental</td></tr><tr><td>IV</td><td>&gt;40%</td><td>Risco iminente de morte</td></tr></table>", "mapa": "<div class=\"mm\"><div class=\"mm-card\"><h5>Definicao HPP</h5><p class=\"ac-p\">&ge;500mL (vaginal) ou &ge;1000mL (cesariana), ou qualquer sangramento com repercussao.</p></div><div class=\"mm-card\"><h5>4 Ts</h5><p class=\"ac-p\">Tonus (mais comum), Trauma, Tecido, Trombina.</p></div><div class=\"mm-card\"><h5>Manejo inicial</h5><p class=\"ac-p\">Massagem bimanual + ocitocina, em paralelo.</p></div><div class=\"mm-card\"><h5>Escalonamento</h5><p class=\"ac-p\">Uterotonicos 2a linha -&gt; balao/B-Lynch -&gt; ligadura vascular -&gt; histerectomia.</p></div><div class=\"mm-card\"><h5>Choque hemorragico</h5><p class=\"ac-p\">Classes I-IV por % de volemia perdida — sinais vitais normais nao excluem perda significativa.</p></div><div class=\"mm-card\"><h5>Reposicao</h5><p class=\"ac-p\">Volume e controle da causa em paralelo; acido tranexamico precoce.</p></div></div>", "fluxo_dx": "<div class=\"fx\"><div class=\"fx-node fx-start\">Sangramento pos-parto excessivo ou com repercussao clinica</div><div class=\"fx-arrow\"></div><div class=\"fx-node\">Avaliar utero (tonus), trajeto (trauma), placenta/coagulos (tecido), coagulacao (trombina)</div><div class=\"fx-lbl\">utero amolecido, sem globo de seguranca?</div><div class=\"fx-row\"><div class=\"fx-node\">Sim -&gt; atonia uterina (causa mais provavel)</div><div class=\"fx-node\">Nao -&gt; investigar trauma, retencao de tecido ou coagulopatia</div></div></div>", "fluxo_cond": "<div class=\"fx\"><div class=\"fx-node fx-start\">Atonia uterina confirmada</div><div class=\"fx-arrow\"></div><div class=\"fx-node\">Massagem bimanual + ocitocina EV (em paralelo)</div><div class=\"fx-lbl\">sangramento persiste?</div><div class=\"fx-row\"><div class=\"fx-node\">Sim -&gt; uterotonicos 2a linha -&gt; balao/B-Lynch -&gt; ligadura vascular -&gt; histerectomia</div><div class=\"fx-node\">Nao -&gt; manter vigilancia, reavaliar sinais vitais</div></div></div>", "vespera": "<div class=\"ob-legacy\"><div class=\"ac-h\">Revisao de vespera</div><div class=\"ac-call\"><b>Ponto 1:</b> HPP: &ge;500mL (vaginal) ou &ge;1000mL (cesariana); ou qualquer sangramento com repercussao hemodinamica.</div><div class=\"ac-call\"><b>Ponto 2:</b> 4 Ts: Tonus (~70%, mais comum), Trauma, Tecido, Trombina.</div><div class=\"ac-call\"><b>Ponto 3:</b> Fatores de risco para atonia: superdistensao (polidramnio, gemelar, macrossomia) ou exaustao miometrial (TP prolongado, ocitocina prolongada).</div><div class=\"ac-call\"><b>Ponto 4:</b> Manejo inicial: massagem bimanual + ocitocina EM PARALELO.</div><div class=\"ac-call\"><b>Ponto 5:</b> Escalonamento: uterotonicos 2a linha -&gt; balao/B-Lynch -&gt; ligadura vascular -&gt; histerectomia.</div><div class=\"ac-call\"><b>Ponto 6:</b> Choque: classe I (&lt;15%, compensado) -&gt; II (15-30%, taquicardia) -&gt; III (30-40%, hipotensao/confusao) -&gt; IV (&gt;40%, risco de morte).</div><div class=\"ac-call\"><b>Ponto 7:</b> Reposicao volemica e controle da causa devem ocorrer em paralelo; acido tranexamico precoce reduz mortalidade.</div></div>", "dicas": "<div class=\"ac-tip\"><b>Macete:</b> \"Tonus, Trauma, Tecido, Trombina\" — os 4 Ts, sempre investigados nessa ordem de probabilidade.</div><div class=\"ac-warn\"><b>Pegadinha:</b> sinais vitais normais nao excluem perda volemica significativa (classe I pode chegar a 15% de perda com sinais vitais normais).</div><div class=\"ac-tip\"><b>Macete:</b> massagem uterina + ocitocina sao feitas AO MESMO TEMPO, nunca em sequencia.</div><div class=\"ac-warn\"><b>Pegadinha:</b> metilergonovina e contraindicada em hipertensao/pre-eclampsia — risco de crise hipertensiva.</div><div class=\"ac-warn\"><b>Pegadinha:</b> nao aguardar o controle definitivo da causa para iniciar reposicao volemica — as duas frentes ocorrem simultaneamente.</div>", "checklist": ["Definir HPP por volume e por repercussao clinica", "Aplicar o mnemonico dos 4 Ts na investigacao etiologica", "Reconhecer os fatores de risco para atonia uterina", "Descrever a sequencia de manejo escalonado da atonia (massagem/ocitocina -&gt; uterotonicos 2a linha -&gt; medidas mecanicas -&gt; cirurgia)", "Classificar o choque hemorragico pelas 4 classes de perda volemica", "Saber que reposicao volemica e controle da causa ocorrem em paralelo"], "casos": [{"t": "Atonia uterina pos-parto vaginal", "stem": "Puerpera com gestacao gemelar, trabalho de parto prolongado, apresenta sangramento vaginal abundante 20 minutos apos o parto vaginal, com utero amolecido e sem globo de seguranca de Pinard bem formado a palpacao.", "passos": [{"h": "1. Reconhecer os fatores de risco", "p": "Gestacao gemelar (superdistensao) e trabalho de parto prolongado (exaustao miometrial) sao fatores de risco classicos para atonia."}, {"h": "2. Confirmar a causa mais provavel", "p": "Utero amolecido, sem globo de seguranca, aponta para atonia uterina (Tonus, o T mais comum)."}, {"h": "3. Conduta inicial", "p": "Iniciar massagem uterina bimanual e ocitocina endovenosa simultaneamente."}, {"h": "4. Se persistir", "p": "Escalonar para uterotonicos de segunda linha (misoprostol, ou metilergonovina se sem contraindicacao) e, se necessario, medidas mecanicas (balao intrauterino)."}, {"h": "5. Encerramento", "p": "O reconhecimento precoce dos fatores de risco permite antecipar a resposta terapeutica assim que a atonia se manifesta."}]}, {"t": "Reconhecendo choque hemorragico subestimado", "stem": "Puerpera com sangramento pos-parto estimado clinicamente em 600 mL apresenta frequencia cardiaca de 110bpm e pressao arterial ainda dentro da normalidade.", "passos": [{"h": "1. Nao subestimar a perda", "p": "A estimativa visual de sangramento costuma subestimar o volume real perdido."}, {"h": "2. Classificar o choque pelos sinais vitais", "p": "Taquicardia com PA ainda normal e compativel com choque hemorragico classe II (15-30% de perda volemica)."}, {"h": "3. Conduta", "p": "Iniciar reposicao volemica (cristaloides, acesso calibroso) em paralelo a investigacao e tratamento da causa do sangramento."}, {"h": "4. Encerramento", "p": "A classificacao do choque pelos sinais vitais, e nao apenas pelo volume estimado, orienta a real gravidade e a urgencia da resposta."}]}, {"t": "Metilergonovina contraindicada", "stem": "Puerpera com pre-eclampsia grave apresenta atonia uterina refrataria a massagem e ocitocina, sendo cogitado o uso de metilergonovina como uterotonico de segunda linha.", "passos": [{"h": "1. Reconhecer a contraindicacao", "p": "Metilergonovina e contraindicada em pacientes com hipertensao/pre-eclampsia, pelo risco de crise hipertensiva grave."}, {"h": "2. Escolher alternativa adequada", "p": "O misoprostol e uma alternativa de segunda linha sem essa contraindicacao especifica."}, {"h": "3. Conduta", "p": "Utilizar misoprostol como uterotonico de segunda linha, e, se persistir o sangramento, escalonar para medidas mecanicas (balao/B-Lynch)."}, {"h": "4. Encerramento", "p": "Conhecer as contraindicacoes especificas de cada uterotonico e essencial para escolher a droga certa em cada contexto clinico."}]}], "questoes": [{"stem": "A hemorragia pos-parto e classicamente definida, apos parto vaginal, por perda sanguinea:", "opts": ["≥250 mL", "≥500 mL", "≥1000 mL", "≥1500 mL"], "correct": 1, "expl": "Apos parto vaginal, o criterio classico e perda <b>≥500 mL</b>."}, {"stem": "Apos cesariana, o criterio de volume para hemorragia pos-parto e:", "opts": ["≥500 mL", "≥750 mL", "≥1000 mL", "≥2000 mL"], "correct": 2, "expl": "Apos cesariana, o criterio classico e perda <b>≥1000 mL</b>."}, {"stem": "No mnemonico dos 4 Ts, qual e a causa mais comum de HPP?", "opts": ["Trauma", "Tecido", "Tonus (atonia uterina)", "Trombina"], "correct": 2, "expl": "<b>Tonus</b> (atonia uterina) responde por cerca de 70% dos casos, sendo a causa mais comum."}, {"stem": "Sao fatores de risco classicos para atonia uterina por superdistensao miometrial, EXCETO:", "opts": ["Polidramnio", "Gestacao gemelar", "Macrossomia fetal", "Trabalho de parto rapido (menos de 2 horas)"], "correct": 3, "expl": "Trabalho de parto <b>prolongado</b> (nao rapido) e fator de risco, por exaustao miometrial."}, {"stem": "O manejo inicial da atonia uterina confirmada deve ser feito:", "opts": ["Primeiro massagem, so depois ocitocina se falhar", "Primeiro ocitocina, so depois massagem se falhar", "Massagem uterina bimanual e ocitocina simultaneamente", "Apenas observacao nas primeiras 2 horas"], "correct": 2, "expl": "Massagem uterina bimanual e ocitocina devem ser realizadas <b>simultaneamente</b>, nao em sequencia."}, {"stem": "A metilergonovina e classicamente contraindicada em pacientes com:", "opts": ["Diabetes gestacional", "Hipertensao/pre-eclampsia", "Anemia ferropriva", "Gestacao gemelar previa"], "correct": 1, "expl": "A metilergonovina e contraindicada em <b>hipertensao/pre-eclampsia</b>, pelo risco de crise hipertensiva."}, {"stem": "A sutura compressiva de B-Lynch tem como objetivo:", "opts": ["Remover restos placentarios retidos", "Comprimir o utero externamente, controlando a hemorragia preservando o orgao", "Ligar diretamente a arteria aorta", "Substituir a necessidade de reposicao volemica"], "correct": 1, "expl": "A sutura de B-Lynch <b>comprime o utero externamente</b>, controlando o sangramento e preservando o utero."}, {"stem": "No choque hemorragico classe I (perda &lt;15% da volemia), espera-se que os sinais vitais estejam:", "opts": ["Gravemente alterados", "Essencialmente normais (compensados)", "Com hipotensao franca", "Com taquicardia extrema"], "correct": 1, "expl": "No classe I, os mecanismos compensatorios mantem os sinais vitais <b>essencialmente normais</b>, apesar da perda ja significativa."}, {"stem": "O choque hemorragico classe III (30-40% de perda volemica) e caracterizado por:", "opts": ["Sinais vitais normais", "Apenas taquicardia leve, sem outras alteracoes", "Hipotensao e alteracao do estado mental", "Ausencia completa de taquicardia"], "correct": 2, "expl": "No classe III, surgem <b>hipotensao</b> e <b>alteracao do estado mental</b>, sinalizando esgotamento da compensacao."}, {"stem": "Em relacao a reposicao volemica na HPP grave, e correto afirmar que:", "opts": ["Deve ser iniciada somente apos controle definitivo da causa do sangramento", "Deve ocorrer em paralelo as medidas de controle da causa do sangramento", "Cristaloides sao contraindicados na HPP", "Transfusao nunca e indicada em obstetricia"], "correct": 1, "expl": "A reposicao volemica deve ocorrer <b>em paralelo</b> ao controle da causa, nunca aguardando sua resolucao completa."}, {"stem": "O acido tranexamico, quando administrado precocemente na HPP, tem como principal beneficio demonstrado:", "opts": ["Aumentar a producao de leite materno", "Reduzir a mortalidade relacionada ao sangramento", "Substituir completamente a necessidade de uterotonicos", "Prevenir exclusivamente infeccao puerperal"], "correct": 1, "expl": "O acido tranexamico, administrado precocemente, <b>reduz a mortalidade</b> relacionada ao sangramento na HPP."}], "flashcards": [{"front": "Criterio de volume de HPP apos parto vaginal x cesariana.", "back": "≥500 mL (vaginal) x ≥1000 mL (cesariana).", "type": "basic"}, {"front": "Os 4 Ts das causas de HPP.", "back": "Tonus, Trauma, Tecido, Trombina.", "type": "basic"}, {"front": "Causa mais comum de HPP (dos 4 Ts).", "back": "Tonus (atonia uterina), ~70% dos casos.", "type": "basic"}, {"front": "Dois mecanismos gerais de risco para atonia uterina.", "back": "Superdistensao miometrial (polidramnio, gemelar, macrossomia) e exaustao miometrial (TP prolongado).", "type": "basic"}, {"front": "Manejo inicial da atonia uterina confirmada.", "back": "Massagem uterina bimanual + ocitocina EV, simultaneamente.", "type": "basic"}, {"front": "Uterotonico de segunda linha contraindicado em hipertensao/pre-eclampsia.", "back": "Metilergonovina.", "type": "basic"}, {"front": "Uterotonico de segunda linha alternativo, sem essa contraindicacao.", "back": "Misoprostol.", "type": "basic"}, {"front": "Duas medidas mecanicas conservadoras (preservam o utero) no manejo escalonado.", "back": "Balao intrauterino e sutura compressiva de B-Lynch.", "type": "basic"}, {"front": "Ultimo recurso no manejo escalonado da HPP refrataria.", "back": "Histerectomia (apos ligadura vascular sem sucesso).", "type": "basic"}, {"front": "Choque hemorragico classe {{I}}: perda &lt;15%, sinais vitais normais (compensado).", "back": "I", "type": "cloze"}, {"front": "Choque hemorragico classe II: perda e achado principal.", "back": "15-30%; taquicardia com PA ainda normal.", "type": "basic"}, {"front": "Choque hemorragico classe III: perda e achado principal.", "back": "30-40%; hipotensao e alteracao do estado mental.", "type": "basic"}, {"front": "Reposicao volemica e controle da causa: sequencial ou paralelo?", "back": "Paralelo — nunca aguardar o controle da causa para repor volume.", "type": "basic"}, {"front": "Beneficio do acido tranexamico administrado precocemente na HPP.", "back": "Reduz a mortalidade relacionada ao sangramento.", "type": "basic"}], "dif": "<div class=\"ac-h\">Os 4 Ts</div><table class=\"ac-tbl\"><tr><th>T</th><th>Exemplos</th></tr><tr><td>Tonus</td><td>Atonia uterina (mais comum)</td></tr><tr><td>Trauma</td><td>Laceracoes, rotura/inversao uterina</td></tr><tr><td>Tecido</td><td>Restos placentarios, coagulos</td></tr><tr><td>Trombina</td><td>Coagulopatias previas ou adquiridas</td></tr></table><div class=\"ac-h\">Classes de choque hemorragico</div><table class=\"ac-tbl\"><tr><th>Classe</th><th>% perda</th><th>Achado chave</th></tr><tr><td>I</td><td>&lt;15%</td><td>Compensado, sinais normais</td></tr><tr><td>II</td><td>15-30%</td><td>Taquicardia</td></tr><tr><td>III</td><td>30-40%</td><td>Hipotensao + confusao</td></tr><tr><td>IV</td><td>&gt;40%</td><td>Risco de morte</td></tr></table>"};
 })();</script>
+<style>
+.mod-div-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pdf-cat-btn,.pdf-export-btn{
+  display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:.78rem;color:var(--accent);
+  border:1px solid var(--line);border-radius:20px;padding:6px 12px;background:transparent;
+  font-family:'Inter',sans-serif;letter-spacing:normal;text-transform:none;
+}
+.pdf-cat-btn:hover,.pdf-export-btn:hover{background:var(--accent-soft)}
+.pdf-export-btn{margin-left:10px}
+.pdf-cat-btn.pdf-busy,.pdf-export-btn.pdf-busy{opacity:.6;cursor:wait}
+
+#pdf-print-area{
+  position:fixed; top:0; left:0; z-index:9990;
+  background:#faf6f0; color:#2d1b2e; font-family:'Inter',sans-serif;
+  overflow:hidden;
+}
+#pdf-print-area:empty{display:none}
+.pdf-gen-overlay{
+  position:fixed; inset:0; z-index:9995; background:#2d1b2e; color:#faf6f0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+  font-family:'Inter',sans-serif; text-align:center; padding:24px;
+}
+.pdf-gen-overlay .pdf-gen-spin{
+  width:38px; height:38px; border-radius:50%;
+  border:3px solid rgba(250,246,240,.25); border-top-color:#fcbde1;
+  animation:pdfspin .9s linear infinite;
+}
+@keyframes pdfspin{to{transform:rotate(360deg)}}
+.pdf-gen-overlay .pdf-gen-msg{font-family:'Fraunces',serif;font-size:1.05rem}
+.pdf-gen-overlay .pdf-gen-sub{font-size:.8rem;opacity:.75}
+
+.pdf-block{margin:0 0 10px}
+.pdf-mod-cat{font-family:'Fraunces',serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.pdf-mod-title{font-family:'Fraunces',serif;font-size:1.7rem;color:#2d1b2e;margin:0 0 18px;border-bottom:2px solid var(--accent-soft);padding-bottom:12px}
+.pdf-sec-h{font-family:'Fraunces',serif;font-size:1.08rem;color:var(--accent);border-bottom:1px solid #e4d9cd;padding-bottom:6px;margin:6px 0 4px}
+.pdf-sub{margin:0}
+.pdf-sub-h{font-family:'Fraunces',serif;font-size:1.28rem;font-weight:700;color:var(--accent);margin:2px 0 10px;padding-bottom:4px;border-bottom:1.5px solid var(--accent-soft)}
+.pdf-sub-h2{font-size:.86rem;color:var(--accent);margin:0 0 4px;font-weight:700}
+.pdf-q{border:1px solid #e4d9cd;border-radius:10px;padding:12px 14px}
+.pdf-q-stem{margin-bottom:8px}
+.pdf-q-opt{padding:3px 0}
+.pdf-caso{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:8px;padding:10px 14px}
+.pdf-caso-h{font-weight:700;color:var(--accent);margin-bottom:4px}
+.pdf-fc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pdf-fc{border:1px solid #e4d9cd;border-radius:8px;padding:8px 9px;font-size:.72rem;line-height:1.35}
+.pdf-fc-n{color:var(--accent);font-weight:700;margin-bottom:3px;font-size:.68rem}
+.pdf-ck-row{padding:4px 0}
+.pdf-block img,.pdf-block svg{max-width:100%}
+.pdf-gab-block{font-size:.74rem;color:#4a3a4c}
+.pdf-gab-row{padding:2px 0}
+.pdf-gab-correct{color:#1b7a3d;font-weight:700}
+.pdf-qa{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:8px;padding:10px 14px;margin:10px 0}
+.pdf-qa-q{font-weight:700;color:var(--accent);margin-bottom:6px}
+</style>
+<script>
+(function(){
+"use strict";
+
+/* ---------- geometria da pagina (A4, em mm e px @96dpi) ---------- */
+var PX_PER_MM=96/25.4;
+var PAGE_W_MM=210, PAGE_H_MM=297;
+var MARGIN_L_MM=12, MARGIN_R_MM=12, MARGIN_T_MM=14, MARGIN_B_MM=20;
+var CONTENT_W_MM=PAGE_W_MM-MARGIN_L_MM-MARGIN_R_MM;
+var CONTENT_H_MM=PAGE_H_MM-MARGIN_T_MM-MARGIN_B_MM;
+var CONTENT_W_PX=Math.round(CONTENT_W_MM*PX_PER_MM);
+var CONTENT_H_PX=Math.round(CONTENT_H_MM*PX_PER_MM);
+var RENDER_SCALE=3.5;
+
+function pdfEsc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function pdfFlattenDetails(html){
+  if(!html || html.indexOf('<details')===-1) return html;
+  return html.replace(/<details[^>]*>\s*<summary[^>]*>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/gi, function(_, q, a){
+    q=q.replace(/\s*\(clique para expandir\)\s*/i,'').trim();
+    return '<div class="pdf-qa"><div class="pdf-qa-q">'+q+'</div><div>'+a+'</div></div>';
+  });
+}
+
+function pdfModuleBlocks(arg, isFirstOfDoc){
+  var CT=window.CONTENT||{}, d=CT[arg]; if(!d) return null;
+  var p=arg.split('|'), ck=p[0];
+  var MD=(typeof MODULES!=='undefined')?MODULES:(window.MODULES||{});
+  var CHT=(typeof CH!=='undefined')?CH:(window.CH||{});
+  var name=(MD && MD[ck] && MD[ck][+p[1]]) || d.name || 'Módulo';
+  var catName=((CHT && CHT[ck]) || '').replace(/^\d+\.\s/,'');
+  var blocks=[];
+
+  blocks.push({html:'<div class="pdf-mod-cat">'+pdfEsc(catName)+'</div><h1 class="pdf-mod-title">'+pdfEsc(name)+'</h1>', forceNewPage:!isFirstOfDoc});
+
+  var pendingHead=null;
+  function head(title){ pendingHead='<h2 class="pdf-sec-h">'+title+'</h2>'; }
+  function push(b){
+    if(pendingHead){ b.html=pendingHead+b.html; pendingHead=null; }
+    blocks.push(b);
+  }
+
+  if(d.sub && d.sub.length){
+    head('Teoria');
+    d.sub.forEach(function(s){ push({html:'<div class="pdf-sub"><div class="pdf-sub-h">'+s[1]+'</div><div>'+s[2]+'</div></div>'}); });
+  }
+  if(d.escores){ head('Escores/Critérios'); push({html:d.escores}); }
+  if(d.dif){ head('Diagnóstico Diferencial'); push({html:d.dif}); }
+  if(d.mapa){ head('Mapa Mental'); push({html:d.mapa}); }
+  if(d.fluxo_dx || d.fluxo_cond){
+    head('Fluxogramas');
+    if(d.fluxo_dx) push({html:'<div class="pdf-sub"><div class="pdf-sub-h">Fluxograma Diagnóstico</div><div>'+d.fluxo_dx+'</div></div>'});
+    if(d.fluxo_cond) push({html:'<div class="pdf-sub"><div class="pdf-sub-h">Fluxograma de Conduta</div><div>'+d.fluxo_cond+'</div></div>'});
+  }
+  if(d.casos && d.casos.length){
+    head('Casos Clínicos');
+    d.casos.forEach(function(c){
+      var h='<div class="pdf-caso"><div class="pdf-caso-h">'+(c.t||'')+'</div><div class="ac-p">'+(c.stem||'')+'</div>';
+      (c.passos||[]).forEach(function(s){
+        h+='<div class="caso-step"><div class="caso-step-h">'+s.h+'</div><div class="ac-p" style="margin:3px 0 0">'+s.p+'</div></div>';
+      });
+      h+='</div>';
+      push({html:h});
+    });
+  }
+  if(d.dicas){ head('Dicas e Erros'); push({html:d.dicas}); }
+  if(d.vespera){ head('Revisão de Véspera'); push({html:d.vespera}); }
+  if(d.checklist && d.checklist.length){
+    head('Checklist de Domínio');
+    push({html:'<div class="pdf-ck">'+d.checklist.map(function(t){ return '<div class="pdf-ck-row">☐ '+t+'</div>'; }).join('')+'</div>'});
+  }
+  if(d.questoes && d.questoes.length){
+    head('Questões');
+    d.questoes.forEach(function(q,qi){
+      var h='<div class="pdf-q"><div class="pdf-q-stem"><b>'+(qi+1)+'.</b> '+q.stem+'</div>';
+      (q.opts||[]).forEach(function(o,oi){ h+='<div class="pdf-q-opt">'+String.fromCharCode(65+oi)+') '+o+'</div>'; });
+      h+='</div>';
+      push({html:h});
+    });
+  }
+  if(d.flashcards && d.flashcards.length){
+    head('Flashcards');
+    var cf=window.clozeFront;
+    for(var i=0;i<d.flashcards.length;i+=6){
+      var grp=d.flashcards.slice(i,i+6), h='<div class="pdf-fc-grid">';
+      grp.forEach(function(c,gi){
+        var idx=i+gi, front=(c.type==='cloze'&&cf)?cf(c.front):c.front;
+        h+='<div class="pdf-fc"><div class="pdf-fc-n">P'+(idx+1)+'</div>'+front+'</div>';
+      });
+      h+='</div>';
+      push({html:h});
+    }
+  }
+  head('Gabarito');
+  if(d.questoes && d.questoes.length){
+    push({html:'<div class="pdf-sub-h2">Gabarito das Questões</div>', cls:'pdf-gab-block'});
+    for(var qi=0; qi<d.questoes.length; qi+=8){
+      var grp=d.questoes.slice(qi,qi+8), h='';
+      grp.forEach(function(q,gi){
+        var idx=qi+gi, letra=String.fromCharCode(65+(q.correct||0));
+        h+='<div class="pdf-gab-row"><b>'+(idx+1)+'.</b> <span class="pdf-gab-correct">'+letra+'</span>'+(q.expl?' — '+q.expl:'')+'</div>';
+      });
+      blocks.push({html:h, cls:'pdf-gab-block'});
+    }
+  }
+  if(d.flashcards && d.flashcards.length){
+    var cb=window.clozeBack;
+    push({html:'<div class="pdf-sub-h2">Respostas dos Flashcards</div>', cls:'pdf-gab-block'});
+    for(var fi=0; fi<d.flashcards.length; fi+=8){
+      var grp=d.flashcards.slice(fi,fi+8), h='';
+      grp.forEach(function(c,gi){
+        var idx=fi+gi, back=(c.type==='cloze'&&cb)?cb(c.front):(c.back||'');
+        h+='<div class="pdf-gab-row"><b>P'+(idx+1)+':</b> '+back+'</div>';
+      });
+      blocks.push({html:h, cls:'pdf-gab-block'});
+    }
+  }
+  blocks.forEach(function(b){ b.html=pdfFlattenDetails(b.html); });
+  return blocks;
+}
+
+function ensurePdfArea(){
+  var el=document.getElementById('pdf-print-area');
+  if(!el){ el=document.createElement('div'); el.id='pdf-print-area'; document.body.appendChild(el); }
+  return el;
+}
+function ensurePdfOverlay(){
+  var el=document.getElementById('pdf-gen-overlay');
+  if(!el){
+    el=document.createElement('div'); el.id='pdf-gen-overlay'; el.className='pdf-gen-overlay';
+    el.innerHTML='<div class="pdf-gen-spin"></div><div class="pdf-gen-msg">Gerando PDF...</div><div class="pdf-gen-sub" id="pdf-gen-sub"></div>';
+    document.body.appendChild(el);
+  }
+  return el;
+}
+
+function pdfSetBusy(btnEl, busy, label){
+  if(!btnEl) return;
+  if(busy){
+    if(btnEl.getAttribute('data-pdf-orig')==null) btnEl.setAttribute('data-pdf-orig', btnEl.innerHTML);
+    btnEl.innerHTML=label||'⏳ Gerando PDF...';
+    btnEl.classList.add('pdf-busy');
+    btnEl.style.pointerEvents='none';
+  } else {
+    var orig=btnEl.getAttribute('data-pdf-orig');
+    if(orig!=null) btnEl.innerHTML=orig;
+    btnEl.classList.remove('pdf-busy');
+    btnEl.style.pointerEvents='';
+  }
+}
+
+var PDF_LIB_URLS=[
+  'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/jspdf/4.2.1/jspdf.umd.min.js'
+];
+var pdfLibPromise=null;
+function pdfLoadScript(url){
+  return new Promise(function(resolve,reject){
+    var s=document.createElement('script');
+    s.src=url;
+    s.onload=function(){ resolve(); };
+    s.onerror=function(){ reject(new Error('script-load-failed:'+url)); };
+    document.head.appendChild(s);
+  });
+}
+function pdfLoadLibs(){
+  if(window.html2canvas && window.jspdf && window.jspdf.jsPDF) return Promise.resolve();
+  if(pdfLibPromise) return pdfLibPromise;
+  pdfLibPromise=Promise.all(PDF_LIB_URLS.map(pdfLoadScript)).catch(function(err){ pdfLibPromise=null; throw err; });
+  return pdfLibPromise;
+}
+
+function pdfHexRgb(hex){
+  var n=parseInt(hex.replace('#',''),16);
+  return [(n>>16)&255,(n>>8)&255,n&255];
+}
+var PDF_FOOT_ACCENT=pdfHexRgb('#e002b4');
+var PDF_FOOT_LINE=pdfHexRgb('#e4d9cd');
+var PDF_FOOT_CREDIT_TXT='ELID · Ensino Legitimado para Internos em Desenvolvimento';
+var PDF_FOOT_TRIBUTE_TXT='Inspirado em Elisabete Delfini ✦';
+function pdfFooterEveryPage(pdf){
+  var n=pdf.internal.getNumberOfPages();
+  var pageW=pdf.internal.pageSize.getWidth(), pageH=pdf.internal.pageSize.getHeight();
+  var cx=pageW/2;
+  var lineY=pageH-MARGIN_B_MM+2, y1=lineY+5, y2=y1+5.5;
+  for(var i=1;i<=n;i++){
+    pdf.setPage(i);
+    pdf.setDrawColor(PDF_FOOT_LINE[0],PDF_FOOT_LINE[1],PDF_FOOT_LINE[2]);
+    pdf.setLineWidth(0.2);
+    pdf.line(MARGIN_L_MM, lineY, pageW-MARGIN_R_MM, lineY);
+    pdf.setFont('helvetica','normal');
+    pdf.setTextColor(PDF_FOOT_ACCENT[0],PDF_FOOT_ACCENT[1],PDF_FOOT_ACCENT[2]);
+    pdf.setFontSize(8);
+    pdf.text(PDF_FOOT_CREDIT_TXT, cx, y1, {align:'center'});
+    pdf.setFontSize(9);
+    pdf.text(PDF_FOOT_TRIBUTE_TXT, cx, y2, {align:'center'});
+  }
+}
+
+function pdfDeepHeight(wrapperEl){
+  var rect=wrapperEl.getBoundingClientRect();
+  var maxBottom=rect.bottom;
+  var all=wrapperEl.querySelectorAll('*');
+  for(var i=0;i<all.length;i++){
+    var b=all[i].getBoundingClientRect().bottom;
+    if(b>maxBottom) maxBottom=b;
+  }
+  return Math.max(1, maxBottom-rect.top);
+}
+
+function pdfMeasureAndPack(blocks, area){
+  area.style.width=CONTENT_W_PX+'px';
+  area.innerHTML='';
+  var wrappers=blocks.map(function(b){
+    var w=document.createElement('div');
+    w.className='pdf-block'+(b.cls?' '+b.cls:'');
+    w.innerHTML=b.html;
+    area.appendChild(w);
+    return w;
+  });
+  void area.offsetHeight;
+  var heights=wrappers.map(pdfDeepHeight);
+  area.innerHTML='';
+
+  var pages=[], cur=[], curH=0;
+  for(var i=0;i<blocks.length;i++){
+    var h=heights[i];
+    var forceNew=blocks[i].forceNewPage && cur.length>0;
+    if(forceNew || (cur.length>0 && curH+h>CONTENT_H_PX)){ pages.push(cur); cur=[]; curH=0; }
+    cur.push(i); curH+=h;
+  }
+  if(cur.length) pages.push(cur);
+  return pages;
+}
+
+function pdfRenderPages(blocks, pages, area, pdf, onProgress){
+  var idx=0;
+  function next(){
+    if(idx>=pages.length) return Promise.resolve();
+    var pageBlockIdxs=pages[idx];
+    area.innerHTML='';
+    area.style.width=CONTENT_W_PX+'px';
+    pageBlockIdxs.forEach(function(bi){
+      var w=document.createElement('div');
+      w.className='pdf-block'+(blocks[bi].cls?' '+blocks[bi].cls:'');
+      w.innerHTML=blocks[bi].html;
+      area.appendChild(w);
+    });
+    void area.offsetHeight;
+    if(onProgress) onProgress(idx+1, pages.length);
+    return window.html2canvas(area, {scale:RENDER_SCALE, useCORS:true, backgroundColor:'#faf6f0', logging:false}).then(function(canvas){
+      var imgData=canvas.toDataURL('image/png');
+      var imgHmm=canvas.height*(CONTENT_W_MM/canvas.width);
+      if(idx>0) pdf.addPage();
+      pdf.addImage(imgData, 'PNG', MARGIN_L_MM, MARGIN_T_MM, CONTENT_W_MM, imgHmm, undefined, 'FAST');
+      idx++;
+      return next();
+    });
+  }
+  return next();
+}
+
+function pdfGenerate(blocks, filenameHint, btnEl){
+  if(!blocks || !blocks.length){ if(window.toast) window.toast('Conteúdo ainda não está pronto.'); return; }
+  var area=ensurePdfArea();
+  var overlay=ensurePdfOverlay();
+  overlay.style.display='flex';
+  var wasLight=document.body.classList.contains('light');
+  if(!wasLight) document.body.classList.add('light');
+  pdfSetBusy(btnEl, true);
+  function cleanup(){
+    area.innerHTML=''; area.style.width='';
+    overlay.style.display='none';
+    if(!wasLight) document.body.classList.remove('light');
+    pdfSetBusy(btnEl, false);
+  }
+  var fontsReady=(document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+  pdfLoadLibs().then(function(){ return fontsReady; }).then(function(){
+    var jsPDFCtor=window.jspdf.jsPDF;
+    var pdf=new jsPDFCtor({unit:'mm', format:'a4', orientation:'portrait'});
+    var pages=pdfMeasureAndPack(blocks, area);
+    var subEl=document.getElementById('pdf-gen-sub');
+    return pdfRenderPages(blocks, pages, area, pdf, function(done,total){
+      if(subEl) subEl.textContent=done+' / '+total+' páginas';
+    }).then(function(){
+      pdfFooterEveryPage(pdf);
+      pdf.save((filenameHint||'ELID')+'.pdf');
+    });
+  }).then(cleanup).catch(function(err){
+    cleanup();
+    if(window.toast) window.toast('Não foi possível gerar o PDF agora. Verifique sua conexão e tente novamente.');
+  });
+}
+
+window.pdfExportModule=function(arg, btnEl){
+  var blocks=pdfModuleBlocks(arg, true);
+  if(!blocks){ if(window.toast) window.toast('Conteúdo deste módulo ainda não está pronto.'); return; }
+  var CT=window.CONTENT||{}, d=CT[arg];
+  pdfGenerate(blocks, (d.name||'Módulo')+' - '+(window.PLATFORM_TITLE||document.title), btnEl);
+};
+
+window.pdfExportCategory=function(ck, btnEl){
+  var MD=(typeof MODULES!=='undefined')?MODULES:(window.MODULES||{});
+  var mods=(MD && MD[ck])||[];
+  var allBlocks=[], first=true, any=false;
+  mods.forEach(function(_,i){
+    var bs=pdfModuleBlocks(ck+'|'+i, first);
+    if(bs){ allBlocks=allBlocks.concat(bs); first=false; any=true; }
+  });
+  if(!any){ if(window.toast) window.toast('Nenhum módulo pronto nesta categoria ainda.'); return; }
+  var CHT=(typeof CH!=='undefined')?CH:(window.CH||{});
+  var catName=((CHT && CHT[ck])||'').replace(/^\d+\.\s/,'');
+  pdfGenerate(allBlocks, catName+' - '+(window.PLATFORM_TITLE||document.title), btnEl);
+};
+
+window.__pdfModuleBlocks=pdfModuleBlocks;
+window.__pdfMeasureAndPack=pdfMeasureAndPack;
+window.__pdfDeepHeight=pdfDeepHeight;
+window.__pdfFlattenDetails=pdfFlattenDetails;
+window.__pdfFooterEveryPage=pdfFooterEveryPage;
+window.__pdfGenerate=pdfGenerate;
+})();
+</script>
+
 </body>
 </html>
