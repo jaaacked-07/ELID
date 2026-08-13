@@ -21945,6 +21945,1066 @@ try{ if(typeof route!=='undefined' && route &&
 })();
 </script>
 
+
+<!-- ===== MODULO Desnutricao Energetico-Proteica (novo, nutricao|0) ===== -->
+<script>
+Object.assign(window.ASVG=window.ASVG||{}, {"dep_classificacao_oms": "<svg viewBox=\"0 0 680 280\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"depPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#3a2410\"/><stop offset=\"1\" stop-color=\"#1c1006\"/></linearGradient>\n  <linearGradient id=\"depAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffcf8a\"/><stop offset=\"1\" stop-color=\"#e8983a\"/></linearGradient>\n  <linearGradient id=\"depGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"depRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"depShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"280\" rx=\"16\" fill=\"url(#depPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#depAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Classificação da desnutrição (OMS/MS) por escore-Z</text><g filter=\"url(#depShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"190\" rx=\"14\" fill=\"url(#depAccent)\"/></g><text x=\"170\" y=\"74\" fill=\"#3a2408\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Moderada</text><text x=\"170\" y=\"100\" fill=\"#3a2408\" font-size=\"9.5\" text-anchor=\"middle\">Peso/Estatura: -3 a &lt;-2 DP</text><text x=\"170\" y=\"118\" fill=\"#3a2408\" font-size=\"9.5\" text-anchor=\"middle\">(70-79% da mediana)</text><text x=\"170\" y=\"144\" fill=\"#3a2408\" font-size=\"9.5\" text-anchor=\"middle\">Estatura/Idade: -3 a &lt;-2 DP</text><text x=\"170\" y=\"162\" fill=\"#3a2408\" font-size=\"9.5\" text-anchor=\"middle\">(85-89% da mediana)</text><text x=\"170\" y=\"196\" fill=\"#3a2408\" font-size=\"9\" text-anchor=\"middle\">Sem edema</text><g filter=\"url(#depShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"190\" rx=\"14\" fill=\"url(#depRed)\"/></g><text x=\"505\" y=\"74\" fill=\"#3a0d12\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Grave</text><text x=\"505\" y=\"100\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">Peso/Estatura: &lt;-3 DP (&lt;70%)</text><text x=\"505\" y=\"118\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">OU Estatura/Idade &lt;-3 DP (&lt;85%)</text><text x=\"505\" y=\"144\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">OU qualquer edema simétrico</text><text x=\"505\" y=\"162\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">bilateral (desnutrição edematosa)</text><text x=\"505\" y=\"196\" fill=\"#3a0d12\" font-size=\"9\" text-anchor=\"middle\">Critérios não são mutuamente exclusivos</text><text x=\"340\" y=\"258\" fill=\"#f5e2c8\" font-size=\"9.5\" text-anchor=\"middle\">DP (escore-Z) = (valor observado - mediana de referência) / desvio-padrão da população de referência</text></svg>", "dep_marasmo_kwashiorkor": "<svg viewBox=\"0 0 680 280\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"depPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#3a2410\"/><stop offset=\"1\" stop-color=\"#1c1006\"/></linearGradient>\n  <linearGradient id=\"depAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffcf8a\"/><stop offset=\"1\" stop-color=\"#e8983a\"/></linearGradient>\n  <linearGradient id=\"depGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"depRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"depShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"280\" rx=\"16\" fill=\"url(#depPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#depAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Marasmo x Kwashiorkor -- dois fenótipos, um espectro</text><g filter=\"url(#depShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"190\" rx=\"14\" fill=\"url(#depGold)\"/></g><text x=\"170\" y=\"74\" fill=\"#3a2a08\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Marasmo</text><text x=\"170\" y=\"98\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Deficit calórico global</text><text x=\"170\" y=\"116\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">\"Velhinho\" -- perda de gordura</text><text x=\"170\" y=\"134\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">e massa muscular acentuada</text><text x=\"170\" y=\"152\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">SEM edema</text><text x=\"170\" y=\"170\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Apetite geralmente preservado</text><text x=\"170\" y=\"196\" fill=\"#3a2a08\" font-size=\"9\" text-anchor=\"middle\">Adaptação metabólica ao jejum</text><g filter=\"url(#depShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"190\" rx=\"14\" fill=\"url(#depRed)\"/></g><text x=\"505\" y=\"74\" fill=\"#3a0d12\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"middle\">Kwashiorkor</text><text x=\"505\" y=\"98\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">Deficit proteico predominante</text><text x=\"505\" y=\"116\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">Edema simétrico (SEMPRE presente)</text><text x=\"505\" y=\"134\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">Cabelo fino/quebradiço/despigmentado</text><text x=\"505\" y=\"152\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">Lesões de pele \"tinta descascada\"</text><text x=\"505\" y=\"170\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">Hepatomegalia (esteatose), apatia</text><text x=\"505\" y=\"196\" fill=\"#3a0d12\" font-size=\"9\" text-anchor=\"middle\">Falha em adaptação metabólica</text></svg>", "dep_10_passos": "<svg viewBox=\"0 0 680 300\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"depPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#3a2410\"/><stop offset=\"1\" stop-color=\"#1c1006\"/></linearGradient>\n  <linearGradient id=\"depAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffcf8a\"/><stop offset=\"1\" stop-color=\"#e8983a\"/></linearGradient>\n  <linearGradient id=\"depGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"depRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"depShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"300\" rx=\"16\" fill=\"url(#depPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#depAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Os 10 passos do tratamento (fase de estabilização)</text><g filter=\"url(#depShadow)\"><rect x=\"20\" y=\"48\" width=\"150\" height=\"150\" rx=\"12\" fill=\"url(#depAccent)\"/></g><text x=\"95\" y=\"70\" fill=\"#3a2408\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">1-2</text><text x=\"95\" y=\"94\" fill=\"#3a2408\" font-size=\"8.5\" text-anchor=\"middle\">Hipoglicemia</text><text x=\"95\" y=\"108\" fill=\"#3a2408\" font-size=\"8.5\" text-anchor=\"middle\">e hipotermia</text><g filter=\"url(#depShadow)\"><rect x=\"185\" y=\"48\" width=\"150\" height=\"150\" rx=\"12\" fill=\"url(#depAccent)\"/></g><text x=\"260\" y=\"70\" fill=\"#3a2408\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">3-4</text><text x=\"260\" y=\"94\" fill=\"#3a2408\" font-size=\"8.5\" text-anchor=\"middle\">Desidratação e</text><text x=\"260\" y=\"108\" fill=\"#3a2408\" font-size=\"8.5\" text-anchor=\"middle\">eletrólitos (K/Mg)</text><g filter=\"url(#depShadow)\"><rect x=\"350\" y=\"48\" width=\"150\" height=\"150\" rx=\"12\" fill=\"url(#depGold)\"/></g><text x=\"425\" y=\"70\" fill=\"#3a2a08\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">5-7</text><text x=\"425\" y=\"94\" fill=\"#3a2a08\" font-size=\"8.5\" text-anchor=\"middle\">Infecção, micro-</text><text x=\"425\" y=\"108\" fill=\"#3a2a08\" font-size=\"8.5\" text-anchor=\"middle\">nutrientes SEM ferro</text><g filter=\"url(#depShadow)\"><rect x=\"515\" y=\"48\" width=\"145\" height=\"150\" rx=\"12\" fill=\"url(#depGold)\"/></g><text x=\"587\" y=\"70\" fill=\"#3a2a08\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">7</text><text x=\"587\" y=\"94\" fill=\"#3a2a08\" font-size=\"8.5\" text-anchor=\"middle\">Alimentação</text><text x=\"587\" y=\"108\" fill=\"#3a2a08\" font-size=\"8.5\" text-anchor=\"middle\">inicial cautelosa</text><text x=\"340\" y=\"228\" fill=\"#f5e2c8\" font-size=\"9.5\" text-anchor=\"middle\">Passos 8-9 (reabilitação, com ferro) e 10 (acompanhamento) vêm depois da estabilização</text><text x=\"340\" y=\"248\" fill=\"#f5e2c8\" font-size=\"9.5\" text-anchor=\"middle\">Assumir hipoglicemia em TODA criança gravemente desnutrida, mesmo sem confirmação laboratorial</text></svg>", "dep_sindrome_realimentacao": "<svg viewBox=\"0 0 680 260\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"depPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#3a2410\"/><stop offset=\"1\" stop-color=\"#1c1006\"/></linearGradient>\n  <linearGradient id=\"depAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffcf8a\"/><stop offset=\"1\" stop-color=\"#e8983a\"/></linearGradient>\n  <linearGradient id=\"depGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"depRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"depShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"260\" rx=\"16\" fill=\"url(#depPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#depAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Síndrome de realimentação -- por que começar devagar salva vidas</text><g filter=\"url(#depShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"150\" rx=\"14\" fill=\"url(#depRed)\"/></g><text x=\"170\" y=\"74\" fill=\"#3a0d12\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">O mecanismo</text><text x=\"170\" y=\"98\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">Oferta calórica agressiva</text><text x=\"170\" y=\"114\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">→ pico de insulina →</text><text x=\"170\" y=\"130\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">fósforo/potássio/magnésio</text><text x=\"170\" y=\"146\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">despejados para dentro da célula</text><text x=\"170\" y=\"170\" fill=\"#3a0d12\" font-size=\"9\" text-anchor=\"middle\">Hipofosfatemia grave: risco cardíaco</text><g filter=\"url(#depShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"150\" rx=\"14\" fill=\"url(#depAccent)\"/></g><text x=\"505\" y=\"74\" fill=\"#3a2408\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">A prevenção</text><text x=\"505\" y=\"98\" fill=\"#3a2408\" font-size=\"9.5\" text-anchor=\"middle\">Fase de estabilização:</text><text x=\"505\" y=\"114\" fill=\"#3a2408\" font-size=\"9.5\" text-anchor=\"middle\">~100 kcal/kg/dia, cautelosa</text><text x=\"505\" y=\"138\" fill=\"#3a2408\" font-size=\"9.5\" text-anchor=\"middle\">Só depois, na reabilitação,</text><text x=\"505\" y=\"154\" fill=\"#3a2408\" font-size=\"9.5\" text-anchor=\"middle\">avança para 150-220 kcal/kg/dia</text><text x=\"340\" y=\"222\" fill=\"#f5e2c8\" font-size=\"9.5\" text-anchor=\"middle\">\"Alimentar rápido para recuperar rápido\" é o erro mais perigoso do manejo inicial</text></svg>", "dep_quando_internar": "<svg viewBox=\"0 0 680 250\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"depPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#3a2410\"/><stop offset=\"1\" stop-color=\"#1c1006\"/></linearGradient>\n  <linearGradient id=\"depAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffcf8a\"/><stop offset=\"1\" stop-color=\"#e8983a\"/></linearGradient>\n  <linearGradient id=\"depGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"depRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"depShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"250\" rx=\"16\" fill=\"url(#depPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#depAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Quando internar uma criança desnutrida</text><g filter=\"url(#depShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"140\" rx=\"14\" fill=\"url(#depRed)\"/></g><text x=\"170\" y=\"72\" fill=\"#3a0d12\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Critérios de internação</text><text x=\"170\" y=\"96\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">Desnutrição grave (com ou</text><text x=\"170\" y=\"112\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">sem edema) + complicação</text><text x=\"170\" y=\"128\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">(infecção, desidratação, choque)</text><g filter=\"url(#depShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"140\" rx=\"14\" fill=\"url(#depAccent)\"/></g><text x=\"505\" y=\"72\" fill=\"#3a2408\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Pode ser ambulatorial</text><text x=\"505\" y=\"96\" fill=\"#3a2408\" font-size=\"9.5\" text-anchor=\"middle\">Desnutrição grave SEM</text><text x=\"505\" y=\"112\" fill=\"#3a2408\" font-size=\"9.5\" text-anchor=\"middle\">complicações E bom apetite</text><text x=\"505\" y=\"128\" fill=\"#3a2408\" font-size=\"9.5\" text-anchor=\"middle\">(programas de RUTF/PlumpyNut)</text><text x=\"340\" y=\"216\" fill=\"#f5e2c8\" font-size=\"9.5\" text-anchor=\"middle\">Desnutrição moderada: acompanhamento ambulatorial de rotina na puericultura</text></svg>"});
+</script>
+<script>
+(function(){
+"use strict";
+var A = window.ASVG || {};
+window.CONTENT = window.CONTENT || {};
+
+var C = {};
+C.name = "Desnutrição Energético-Proteica";
+C.intro = "Antes de tratar a fome, é preciso entender que o corpo gravemente desnutrido já se reorganizou para sobreviver com pouco -- e 'alimentar rápido para recuperar rápido' é exatamente o erro que pode matar essa criança nos primeiros dias.";
+
+C.sub = [
+
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">Um corpo que se reorganizou inteiro para sobreviver com menos</div>
+<p class="ac-p">A desnutrição energético-proteica (DEP) grave não é apenas "comer pouco" -- é um estado em que o organismo, diante de privação prolongada de calorias e/ou proteínas, reduz seu metabolismo basal, redistribui reservas e reorganiza a função de praticamente todos os órgãos para poupar energia. O coração diminui de tamanho e reduz o débito cardíaco, os rins perdem capacidade de concentrar e diluir urina, o sistema imune fica comprometido, e a termorregulação e a homeostase da glicose ficam frágeis.</p>
+<p class="ac-p">Essa reorganização metabólica é a razão pela qual o tratamento da desnutrição grave <b>não é simplesmente "dar comida"</b> -- um corpo adaptado à escassez reage de forma perigosa a uma oferta calórica agressiva e repentina, podendo desenvolver complicações graves (síndrome de realimentação, insuficiência cardíaca) nos primeiros dias de tratamento, exatamente quando a intenção é ajudar.</p>
+<div class="ac-call ac-tip">💡 O racional central: primeiro estabilizar as funções vitais fragilizadas, só depois alimentar para recuperar peso -- nessa ordem, sempre.</div>
+<div class="ac-call ac-mne">🧠 Corpo desnutrido grave = corpo adaptado à escassez. Tratar como se fosse só "fome" é o erro mais perigoso do manejo inicial.</div>
+`],
+
+['classificacao','Classificando a Desnutrição', `
+<div class="ac-h">Peso/estatura, estatura/idade e a presença de edema</div>
+${A.dep_classificacao_oms === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.dep_classificacao_oms)+'" alt="Classificacao da desnutricao por escore-Z"/>'}
+<p class="ac-p">A classificação atual (OMS/MS) usa o <b>escore-Z</b> (desvio-padrão em relação à mediana da população de referência) em dois eixos: <b>peso/estatura</b> (reflete emagrecimento, processo mais agudo) e <b>estatura/idade</b> (reflete nanismo nutricional, processo mais crônico). Desnutrição <b>moderada</b>: escore-Z entre -3 e -2 em qualquer um dos dois eixos (aproximadamente 70-79% ou 85-89% da mediana, respectivamente). Desnutrição <b>grave</b>: escore-Z abaixo de -3 em qualquer um dos dois eixos, <b>ou</b> a presença de qualquer grau de <b>edema simétrico bilateral</b> -- que por si só já define gravidade, independentemente do peso.</p>
+<p class="ac-p">Esses critérios não são mutuamente exclusivos: uma criança pode ter emagrecimento grave e nanismo grave simultaneamente, refletindo desnutrição aguda sobreposta a um processo crônico. O eixo peso/estatura corresponde ao antigo conceito de "marasmo" (Welcome) quando sem edema, e ao Grau II da classificação de Gomez.</p>
+<div class="ac-call ac-mne">🧠 Qualquer edema simétrico bilateral = desnutrição GRAVE, mesmo que o peso não pareça tão baixo.</div>
+`],
+
+['marasmo_kwashiorkor','Marasmo x Kwashiorkor', `
+<div class="ac-h">Dois fenótipos clínicos do mesmo espectro de gravidade</div>
+${A.dep_marasmo_kwashiorkor === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.dep_marasmo_kwashiorkor)+'" alt="Marasmo x Kwashiorkor"/>'}
+<p class="ac-p">O <b>marasmo</b> resulta de déficit calórico global e prolongado: a criança tem aparência de "velhinho encolhido", com perda acentuada de gordura subcutânea e massa muscular, mas <b>sem edema</b> -- o corpo consumiu suas próprias reservas de forma adaptativa, e o apetite costuma estar relativamente preservado. Já o <b>kwashiorkor</b> resulta de déficit proteico desproporcionalmente maior que o calórico, e se manifesta com <b>edema simétrico</b> (sempre presente, por definição), cabelo fino, quebradiço e despigmentado, lesões de pele descritas como "tinta descascada" (dermatose pelagroide), hepatomegalia por esteatose hepática, e apatia -- um quadro que reflete falha da adaptação metabólica ao invés de adaptação bem-sucedida.</p>
+<p class="ac-p">Formas mistas (kwashiorkor-marasmático) também ocorrem. Na prática clínica moderna, a nomenclatura preferida é simplesmente "desnutrição grave, com ou sem edema" -- os termos marasmo/kwashiorkor continuam úteis para entender e reconhecer o espectro clínico, mas a conduta terapêutica inicial (os 10 passos) é essencialmente a mesma para ambos.</p>
+<div class="ac-call ac-peg">⚠️ Uma criança com kwashiorkor pode até parecer "menos magra" à primeira vista por causa do edema -- não subestimar a gravidade pelo aspecto visual do peso.</div>
+`],
+
+['passos_1_4','Os Primeiros Passos: Hipoglicemia, Hipotermia, Desidratação', `
+<div class="ac-h">Estabilizando o que ameaça a vida nas primeiras horas</div>
+${A.dep_10_passos === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.dep_10_passos)+'" alt="Os 10 passos do tratamento"/>'}
+<p class="ac-p"><b>Passo 1 -- Hipoglicemia</b> (glicemia &lt;54 mg/dl): deve ser <b>assumida em toda criança gravemente desnutrida</b>, mesmo sem confirmação laboratorial imediata, e tratada de forma proativa com alimentação a cada 2 horas (dia e noite) por pelo menos 24 a 48 horas, ou glicose IV se houver rebaixamento de consciência ou convulsão. <b>Passo 2 -- Hipotermia</b> (temperatura axilar &lt;35°C): manejada com técnica canguru, aquecimento ambiental e alimentação frequente -- nunca com fontes de calor diretas na pele (risco de queimadura).</p>
+<p class="ac-p"><b>Passo 3 -- Desidratação e choque séptico</b>: a reidratação preferencialmente <b>oral</b>, usando o <b>ReSoMal</b> (solução específica para desnutrição grave, com menos sódio e mais potássio que o soro de reidratação oral padrão, além de magnésio, zinco e cobre adicionados) -- a via IV fica reservada para choque verdadeiro, pelo risco real de sobrecarga hídrica e insuficiência cardíaca num coração já enfraquecido pela desnutrição. <b>Passo 4 -- Distúrbios eletrolíticos</b>: potássio e magnésio estão sistematicamente depletados (podendo levar semanas para se corrigir), e essa depleção contribui diretamente para a formação do edema.</p>
+<div class="ac-call ac-peg">⚠️ Reidratação IV agressiva em criança gravemente desnutrida é uma armadilha clássica -- o coração enfraquecido não tolera sobrecarga de volume como um coração saudável toleraria.</div>
+`],
+
+['sindrome_realimentacao','A Síndrome de Realimentação', `
+<div class="ac-h">Por que alimentar rápido demais pode matar</div>
+${A.dep_sindrome_realimentacao === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.dep_sindrome_realimentacao)+'" alt="Sindrome de realimentacao"/>'}
+<p class="ac-p">Quando uma criança gravemente desnutrida recebe uma <b>oferta calórica agressiva</b> logo no início do tratamento, a súbita disponibilidade de glicose dispara um pico de insulina que empurra fósforo, potássio e magnésio para dentro das células -- depletando ainda mais esses eletrólitos no sangue. A <b>hipofosfatemia grave</b> resultante é a mais perigosa: o fósforo é essencial para a produção de ATP, e sua queda abrupta pode causar disfunção cardíaca, respiratória e neurológica potencialmente fatal -- a chamada <b>síndrome de realimentação</b>.</p>
+<p class="ac-p">Por isso, a fase inicial de estabilização usa uma <b>fórmula alimentar cautelosa</b>, ofertando cerca de <b>100 kcal/kg/dia</b> -- deliberadamente abaixo do que seria necessário para ganho de peso rápido. Somente depois de estabilizado (geralmente após a primeira semana, com resolução do edema e retorno do apetite), a criança avança para a <b>fase de reabilitação</b>, com fórmulas mais calóricas e proteicas, permitindo o verdadeiro "catch-up" de crescimento.</p>
+<div class="ac-call ac-mne">🧠 Estabilização primeiro (cautelosa, ~100 kcal/kg/dia), reabilitação depois (catch-up, maior aporte calórico) -- nunca o contrário.</div>
+`],
+
+['fase_reabilitacao','Fase de Reabilitação: Agora Sim, Recuperar Peso', `
+<div class="ac-h">Depois de estabilizada, a criança está pronta para crescer rápido</div>
+<p class="ac-p">Uma vez resolvidos os problemas agudos que ameaçavam a vida (hipoglicemia, hipotermia, desidratação, infecção tratada, edema em resolução, apetite retornando), a criança entra na <b>fase de reabilitação</b>, com fórmulas alimentares de maior densidade calórica e proteica, visando o <b>catch-up growth</b> -- ganho de peso acelerado que recupera o déficit acumulado. É também nessa fase, e não antes, que se inicia a <b>suplementação de ferro</b>: administrar ferro durante a fase de estabilização é evitado porque o ferro livre, num organismo ainda combatendo infecções subclínicas, pode favorecer a proliferação bacteriana (o ferro é um nutriente cobiçado também por patógenos).</p>
+<p class="ac-p">Essa fase também inclui <b>estimulação sensorial e emocional</b> ativa (brincar, conversar, estimular movimento), já que crianças gravemente desnutridas frequentemente apresentam apatia e atraso transitório do desenvolvimento, que respondem bem a estímulo ativo associado à recuperação nutricional.</p>
+<div class="ac-call ac-tip">💡 "Sem ferro" na estabilização, "com ferro" na reabilitação -- um dos detalhes mais cobrados sobre a sequência correta do tratamento.</div>
+`],
+
+['quando_internar','Internação x Manejo Ambulatorial', `
+<div class="ac-h">Nem toda desnutrição grave precisa de hospital</div>
+${A.dep_quando_internar === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.dep_quando_internar)+'" alt="Quando internar uma crianca desnutrida"/>'}
+<p class="ac-p">A <b>internação</b> é indicada para desnutrição grave (com ou sem edema) associada a alguma <b>complicação</b> -- infecção, desidratação, choque, apetite ausente, ou idade muito baixa. Já a desnutrição grave <b>sem complicações</b>, com bom apetite e sem edema extenso, pode ser manejada em regime <b>ambulatorial</b>, com o uso de alimentos terapêuticos prontos para uso (RUTF, do inglês ready-to-use therapeutic food, como pastas à base de amendoim fortificadas), modelo que expandiu enormemente o acesso ao tratamento em contextos de recursos limitados.</p>
+<p class="ac-p">A desnutrição <b>moderada</b>, por sua vez, é manejada rotineiramente no acompanhamento ambulatorial de puericultura, com orientação nutricional, investigação de causas de base (alimentar, socioeconômica, doença crônica) e monitoramento seriado da curva de crescimento.</p>
+<div class="ac-call ac-peg">⚠️ "Grave" não é sinônimo automático de "precisa internar" -- a decisão depende da presença de complicações, não só do grau de desnutrição isolado.</div>
+`],
+
+['papel_puericultura','O Papel da Puericultura na Prevenção', `
+<div class="ac-h">A curva de crescimento como ferramenta de detecção precoce</div>
+<p class="ac-p">A consulta de puericultura de rotina, com pesagem e medição sistemáticas plotadas nas curvas de crescimento da OMS, é a principal ferramenta de <b>detecção precoce</b> da desnutrição -- muito antes que ela evolua para as formas graves discutidas neste módulo. Uma criança que cruza percentis para baixo, ou que estaciona/perde peso, deve disparar investigação ativa de causas alimentares, socioeconômicas e de doenças de base antes que o quadro se agrave.</p>
+<p class="ac-p">A orientação sobre aleitamento materno, introdução alimentar adequada e reconhecimento de sinais de alerta familiar (insegurança alimentar, doença crônica materna, contexto de vulnerabilidade social) fazem parte do papel preventivo da equipe de saúde, e devem estar integrados a toda consulta de rotina, não apenas quando já há sinais evidentes de desnutrição.</p>
+<div class="ac-call ac-tip">💡 A desnutrição grave que chega ao hospital quase sempre poderia ter sido identificada, e potencialmente evitada, semanas ou meses antes, numa consulta de puericultura de rotina.</div>
+`],
+
+];
+
+Object.assign(C, {
+
+escores: `
+<div class="ac-h">Números que fecham questão</div>
+<table class="ac-tbl"><tr><th>Parâmetro</th><th>Valor</th></tr>
+<tr><td>Desnutrição moderada (peso/estatura ou estatura/idade)</td><td>Escore-Z entre -3 e -2</td></tr>
+<tr><td>Desnutrição grave (peso/estatura ou estatura/idade)</td><td>Escore-Z &lt;-3</td></tr>
+<tr><td>Presença de edema simétrico</td><td>Já define desnutrição GRAVE, isoladamente</td></tr>
+<tr><td>Hipoglicemia (definição operacional)</td><td>Glicemia &lt;54 mg/dl (&lt;3 mmol/l)</td></tr>
+<tr><td>Hipotermia (definição operacional)</td><td>Temperatura axilar &lt;35°C</td></tr>
+<tr><td>Oferta calórica -- fase de estabilização</td><td>~100 kcal/kg/dia (cautelosa)</td></tr>
+<tr><td>ReSoMal -- volume de reidratação</td><td>70-100 ml/kg em 12h</td></tr>
+<tr><td>Início da suplementação de ferro</td><td>Só na fase de REABILITAÇÃO, nunca na estabilização</td></tr></table>
+`,
+
+dif: `
+<div class="ac-h">Diferencial automático -- Marasmo x Kwashiorkor</div>
+<table class="ac-tbl"><tr><th>Achado</th><th>Marasmo</th><th>Kwashiorkor</th></tr>
+<tr><td>Déficit predominante</td><td>Calórico global</td><td>Proteico desproporcional</td></tr>
+<tr><td>Edema</td><td>Ausente</td><td>Sempre presente (define)</td></tr>
+<tr><td>Aparência</td><td>"Velhinho", perda de gordura/massa</td><td>Edemaciado, pode mascarar magreza</td></tr>
+<tr><td>Cabelo/pele</td><td>Geralmente preservados</td><td>Cabelo fino/despigmentado, pele "tinta descascada"</td></tr>
+<tr><td>Fígado</td><td>Geralmente normal</td><td>Hepatomegalia por esteatose</td></tr>
+<tr><td>Apetite</td><td>Preservado</td><td>Reduzido, apatia</td></tr></table>
+`,
+
+mapa: `
+<div class="ac-h">Mapa mental -- Desnutrição Energético-Proteica</div>
+<div class="mm">
+<div class="mm-card"><h5>CLASSIFICAÇÃO</h5><ul><li>Escore-Z peso/estatura e estatura/idade</li><li>Edema = grave, sempre</li></ul></div>
+<div class="mm-card"><h5>FENÓTIPOS</h5><ul><li>Marasmo: sem edema</li><li>Kwashiorkor: com edema</li></ul></div>
+<div class="mm-card"><h5>ESTABILIZAÇÃO</h5><ul><li>Hipoglicemia, hipotermia</li><li>Desidratação (ReSoMal), eletrólitos</li></ul></div>
+<div class="mm-card"><h5>REALIMENTAÇÃO</h5><ul><li>~100 kcal/kg/dia inicial</li><li>Hipofosfatemia = risco cardíaco</li></ul></div>
+<div class="mm-card"><h5>REABILITAÇÃO</h5><ul><li>Catch-up growth</li><li>Ferro só AQUI, não antes</li></ul></div>
+<div class="mm-card"><h5>INTERNAÇÃO</h5><ul><li>Grave + complicação = internar</li><li>Grave sem complicação = RUTF ambulatorial</li></ul></div>
+</div>
+`,
+
+fluxo_dx: `
+<div class="ac-h">Fluxograma -- classificando a desnutrição</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Criança com déficit de peso/estatura ou edema simétrico</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Calcular escore-Z peso/estatura E estatura/idade + verificar edema</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node end">Escore-Z -3 a -2, sem edema: desnutrição MODERADA</div>
+<div class="fx-node end">Escore-Z &lt;-3 OU qualquer edema: desnutrição GRAVE</div>
+</div>
+</div>
+`,
+
+fluxo_cond: `
+<div class="ac-h">Fluxograma de conduta -- desnutrição grave</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Desnutrição grave identificada</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Há complicação (infecção, desidratação, choque, sem apetite)?</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node">Sim: internar, iniciar os 10 passos (estabilização primeiro)</div>
+<div class="fx-node">Não, bom apetite: RUTF ambulatorial</div>
+</div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node end">Após estabilização: fase de reabilitação (catch-up + ferro)</div></div>
+</div>
+`,
+
+vespera: `
+<div class="ac-h">Revisão de véspera -- Desnutrição Energético-Proteica</div>
+<div class="ac-call ac-high">⚡ Estabilizar primeiro (cautelosa), alimentar para recuperar peso depois -- nunca ao contrário.</div>
+<ul class="ac-ul">
+<li>Desnutrição moderada: escore-Z -3 a -2. Grave: &lt;-3 OU qualquer edema simétrico (isoladamente já define gravidade).</li>
+<li>Marasmo: déficit calórico global, sem edema, "velhinho". Kwashiorkor: déficit proteico, SEMPRE com edema, cabelo/pele alterados, hepatomegalia.</li>
+<li>Hipoglicemia (&lt;54mg/dl) deve ser assumida e tratada mesmo sem confirmação laboratorial.</li>
+<li>Reidratação preferencialmente ORAL (ReSoMal) -- IV só em choque verdadeiro (risco de sobrecarga/ICC).</li>
+<li>Potássio e magnésio sempre depletados, contribuem para o edema.</li>
+<li>Fase de estabilização: ~100 kcal/kg/dia, SEM ferro -- risco de síndrome de realimentação e de favorecer infecção.</li>
+<li>Fase de reabilitação: catch-up growth, COM ferro, estimulação sensorial.</li>
+<li>Internar se grave + complicação; grave sem complicação e bom apetite pode ser RUTF ambulatorial.</li>
+</ul>
+`,
+
+dicas: `
+<div class="ac-h">Dicas e Pegadinhas</div>
+<div class="ac-call ac-peg">⚠️ Nunca iniciar ferro na fase de estabilização -- só na reabilitação, depois que a criança estiver estável.</div>
+<div class="ac-call ac-mne">🧠 "Sem ferro na estabilização, com ferro na reabilitação" -- pegadinha clássica de prova.</div>
+<div class="ac-call ac-peg">⚠️ Reidratação IV agressiva em desnutrição grave pode causar insuficiência cardíaca -- preferir via oral (ReSoMal) sempre que possível.</div>
+<div class="ac-call ac-tip">✅ Qualquer edema simétrico, mesmo que o peso não pareça tão baixo, já classifica a desnutrição como grave.</div>
+<div class="ac-call ac-peg">⚠️ Alimentar rápido demais no início do tratamento pode desencadear síndrome de realimentação (hipofosfatemia grave) -- começar cauteloso.</div>
+`,
+
+checklist: [
+ "Sei classificar desnutrição moderada x grave pelo escore-Z e pela presença de edema",
+ "Sei diferenciar marasmo de kwashiorkor clinicamente",
+ "Sei os primeiros passos do tratamento (hipoglicemia, hipotermia, desidratação)",
+ "Sei por que a reidratação IV é evitada, exceto em choque verdadeiro",
+ "Sei o que é a síndrome de realimentação e por que a oferta calórica inicial é cautelosa",
+ "Sei por que o ferro é adiado para a fase de reabilitação",
+ "Sei diferenciar quando internar de quando manejar ambulatorialmente",
+ "Sei o papel do RUTF no manejo ambulatorial da desnutrição grave sem complicações",
+ "Entendo a importância da puericultura na detecção precoce",
+ "Sei o papel da estimulação sensorial na fase de reabilitação"
+],
+
+});
+
+Object.assign(C, {
+
+questoes: [
+  {id:"dep-q1",banca:"ENARE (estilo)",stem:"Qual achado, isoladamente, já classifica uma criança como tendo desnutrição GRAVE, independentemente do peso corporal?",
+   opts:["Escore-Z de peso/estatura entre -2 e -1","Presença de edema simétrico bilateral","Apetite reduzido isolado, sem outros achados","Estatura no percentil 25 para a idade"],
+   correct:1, expl:"A presença de qualquer grau de edema simétrico bilateral já classifica a desnutrição como grave, independentemente do peso."},
+  {id:"dep-q2",banca:"Revalida (estilo)",stem:"Qual característica diferencia o kwashiorkor do marasmo?",
+   opts:["Apenas o marasmo apresenta edema","O kwashiorkor sempre apresenta edema simétrico, enquanto o marasmo não","Ambos sempre apresentam edema de igual intensidade","Nenhum dos dois apresenta alterações de pele ou cabelo"],
+   correct:1, expl:"O kwashiorkor é definido pela presença de edema simétrico, ausente no marasmo (déficit calórico global sem edema)."},
+  {id:"dep-q3",banca:"UFRJ (estilo)",stem:"Qual a conduta inicial mais apropriada diante de hipoglicemia em criança gravemente desnutrida, mesmo antes de confirmação laboratorial?",
+   opts:["Aguardar resultado laboratorial antes de qualquer intervenção","Assumir hipoglicemia e tratar imediatamente, dado o alto risco nessa população","Iniciar corticoide sistêmico imediatamente","Restringir totalmente a oferta de glicose até estabilização completa"],
+   correct:1, expl:"Hipoglicemia deve ser assumida e tratada proativamente em toda criança gravemente desnutrida, dado o altíssimo risco nessa população."},
+  {id:"dep-q4",banca:"SES-RJ (estilo)",stem:"Por que a reidratação intravenosa é evitada, sempre que possível, em crianças com desnutrição grave?",
+   opts:["Porque a via oral é sempre proibida nesses pacientes","Porque o coração enfraquecido pela desnutrição tem maior risco de sobrecarga de volume e insuficiência cardíaca","Porque a via IV é mais barata e por isso menos utilizada","Porque não existe nenhuma solução apropriada para reidratação oral nesses casos"],
+   correct:1, expl:"O coração fragilizado pela desnutrição grave tolera mal sobrecarga de volume; por isso a via oral (ReSoMal) é preferida sempre que possível."},
+  {id:"dep-q5",banca:"UERJ (estilo)",stem:"O que caracteriza a síndrome de realimentação no contexto do tratamento da desnutrição grave?",
+   opts:["Excesso de proteína levando a insuficiência renal aguda isolada","Hipofosfatemia grave e outros distúrbios eletrolíticos desencadeados por oferta calórica agressiva precoce","Ausência completa de qualquer risco relacionado à velocidade de realimentação","Hiperglicemia persistente sem qualquer relação com desfechos cardíacos"],
+   correct:1, expl:"A síndrome de realimentação decorre de oferta calórica agressiva precoce, causando hipofosfatemia grave e outros distúrbios eletrolíticos com risco cardíaco."},
+  {id:"dep-q6",banca:"PSU-MG (estilo)",stem:"Em qual fase do tratamento da desnutrição grave a suplementação de ferro deve ser iniciada?",
+   opts:["Imediatamente na fase de estabilização, no primeiro dia","Somente na fase de reabilitação, após estabilização inicial","Nunca deve ser suplementado em crianças com desnutrição grave","Apenas se houver anemia confirmada por hemograma antes de qualquer outra conduta"],
+   correct:1, expl:"O ferro é iniciado apenas na fase de reabilitação, evitando favorecer proliferação bacteriana durante a fase de estabilização."},
+  {id:"dep-q7",banca:"ENARE (estilo)",stem:"Qual oferta calórica aproximada é recomendada na fase inicial de estabilização do tratamento da desnutrição grave?",
+   opts:["Cerca de 100 kcal/kg/dia, de forma cautelosa","Pelo menos 300 kcal/kg/dia, para recuperação rápida imediata","Nenhuma oferta calórica até resolução completa do edema","Apenas hidratação, sem qualquer oferta calórica nos primeiros 10 dias"],
+   correct:0, expl:"A fase de estabilização usa oferta calórica cautelosa, em torno de 100 kcal/kg/dia, evitando síndrome de realimentação."},
+  {id:"dep-q8",banca:"Revalida (estilo)",stem:"Qual critério permite o manejo AMBULATORIAL de uma criança com desnutrição grave, ao invés de internação?",
+   opts:["Presença de qualquer complicação associada, independente do apetite","Ausência de complicações e bom apetite, permitindo uso de alimento terapêutico pronto para uso (RUTF)","Apenas crianças com desnutrição moderada podem ser manejadas ambulatorialmente","Nunca é possível manejo ambulatorial em desnutrição classificada como grave"],
+   correct:1, expl:"Desnutrição grave sem complicações e com bom apetite pode ser manejada ambulatorialmente com RUTF."},
+  {id:"dep-q9",banca:"UFRJ (estilo)",stem:"Quais eletrólitos estão tipicamente depletados na desnutrição grave, contribuindo para a formação de edema?",
+   opts:["Apenas cálcio, isoladamente","Potássio e magnésio","Exclusivamente sódio, em excesso","Apenas fósforo, sem relação com outros eletrólitos"],
+   correct:1, expl:"Potássio e magnésio estão sistematicamente depletados na desnutrição grave, contribuindo para a fisiopatologia do edema."},
+  {id:"dep-q10",banca:"SES-RJ (estilo)",stem:"Qual a definição de hipotermia utilizada no manejo da criança gravemente desnutrida?",
+   opts:["Temperatura axilar abaixo de 35°C","Temperatura axilar abaixo de 37°C, considerada já hipotermia","Apenas temperatura retal abaixo de 38°C","Hipotermia não é uma preocupação relevante nesses pacientes"],
+   correct:0, expl:"Hipotermia é definida como temperatura axilar abaixo de 35°C (ou retal abaixo de 35,5°C), achado frequente e de manejo prioritário."},
+  {id:"dep-q11",banca:"UERJ (estilo)",stem:"Qual a principal ferramenta para detecção precoce da desnutrição, antes que evolua para formas graves?",
+   opts:["Exames laboratoriais de rotina em toda consulta pediátrica","Acompanhamento sistemático da curva de crescimento na puericultura","Apenas triagem hospitalar em pronto-socorro","Avaliação exclusivamente reservada a especialistas em nutrologia"],
+   correct:1, expl:"O acompanhamento sistemático da curva de crescimento na consulta de puericultura é a principal ferramenta de detecção precoce."},
+  {id:"dep-q12",banca:"ENARE (estilo)",stem:"Por que a estimulação sensorial e emocional é incluída no tratamento da fase de reabilitação da desnutrição grave?",
+   opts:["Porque não tem qualquer relação com o quadro nutricional","Porque a apatia e o atraso transitório do desenvolvimento, comuns na desnutrição grave, respondem bem ao estímulo ativo associado à recuperação nutricional","Porque substitui completamente a necessidade de recuperação calórica","Porque é usada apenas em crianças acima de 5 anos de idade"],
+   correct:1, expl:"A apatia e o atraso transitório do desenvolvimento respondem bem à estimulação ativa, complementando a recuperação nutricional na fase de reabilitação."}
+],
+
+flashcards:[
+  {id:"dep-f1",tipo:"qa",tag:"Classificação",front:"Qual achado isolado já define desnutrição grave?",back:"<b>Edema simétrico bilateral</b>, independente do peso."},
+  {id:"dep-f2",tipo:"vf",tag:"Fenótipos",front:"O marasmo sempre apresenta edema.",back:"<b>FALSO.</b> Marasmo = déficit calórico SEM edema; kwashiorkor = COM edema."},
+  {id:"dep-f3",tipo:"qa",tag:"Fenótipos",front:"Cite 3 achados típicos do kwashiorkor além do edema.",back:"<b>Cabelo despigmentado, pele 'tinta descascada', hepatomegalia</b> (entre outros)."},
+  {id:"dep-f4",tipo:"qa",tag:"Estabilização",front:"Qual glicemia define hipoglicemia nesse contexto?",back:"<b>&lt;54 mg/dl</b> -- deve ser assumida e tratada mesmo sem confirmação."},
+  {id:"dep-f5",tipo:"qa",tag:"Estabilização",front:"Qual solução é preferida para reidratação oral na desnutrição grave?",back:"<b>ReSoMal</b> (menos sódio, mais potássio/magnésio/zinco que o SRO padrão)."},
+  {id:"dep-f6",tipo:"vf",tag:"Estabilização",front:"A via IV é a preferida para reidratação na desnutrição grave.",back:"<b>FALSO.</b> Via oral é preferida -- IV só em choque verdadeiro, risco de ICC."},
+  {id:"dep-f7",tipo:"qa",tag:"Realimentação",front:"O que é a síndrome de realimentação?",back:"Hipofosfatemia grave e distúrbios eletrolíticos por <b>oferta calórica agressiva precoce.</b>"},
+  {id:"dep-f8",tipo:"qa",tag:"Realimentação",front:"Qual a oferta calórica cautelosa da fase de estabilização?",back:"Cerca de <b>100 kcal/kg/dia.</b>"},
+  {id:"dep-f9",tipo:"cloze",tag:"Reabilitação",front:"O ferro só é iniciado na fase de {{c1::reabilitação}}, nunca na de {{c2::estabilização}}.",back:"Sequência correta de suplementação de ferro no tratamento."},
+  {id:"dep-f10",tipo:"qa",tag:"Internação",front:"Quando desnutrição grave pode ser manejada ambulatorialmente?",back:"Sem <b>complicações</b> e com <b>bom apetite</b> (uso de RUTF)."},
+  {id:"dep-f11",tipo:"qa",tag:"Eletrólitos",front:"Quais 2 eletrólitos estão sempre depletados na desnutrição grave?",back:"<b>Potássio e magnésio.</b>"},
+  {id:"dep-f12",tipo:"qa",tag:"Prevenção",front:"Qual a principal ferramenta de detecção precoce da desnutrição?",back:"<b>Curva de crescimento</b> na puericultura de rotina."},
+  {id:"dep-f13",tipo:"vf",tag:"Conceito",front:"Alimentar rapidamente logo no início do tratamento acelera a recuperação com segurança.",back:"<b>FALSO.</b> Pode causar síndrome de realimentação -- começar cauteloso."},
+  {id:"dep-f14",tipo:"qa",tag:"Classificação",front:"Qual escore-Z define desnutrição grave (peso/estatura ou estatura/idade)?",back:"<b>Abaixo de -3</b> desvios-padrão."}
+],
+
+casos:[
+  {t:"Caso 1 -- Reconhecendo gravidade apesar do peso 'não tão baixo'",
+   stem:"Criança de 2 anos com peso aparentemente pouco reduzido para a idade, mas apresentando edema simétrico em membros inferiores, cabelo fino e despigmentado, e hepatomegalia.",
+   passos:[
+     {h:"1. Essa criança tem desnutrição grave, apesar do peso 'não tão baixo'?", p:"Sim -- a presença de edema simétrico já classifica como GRAVE, independentemente do peso isolado."},
+     {h:"2. Qual fenótipo esse quadro sugere?", p:"<b>Kwashiorkor</b> -- edema, alteração capilar e hepatomegalia por esteatose."},
+     {h:"3. Qual o primeiro passo do manejo?", p:"Avaliar e tratar <b>hipoglicemia e hipotermia</b> proativamente, antes de qualquer outra conduta."}
+   ]},
+  {t:"Caso 2 -- Evitando a síndrome de realimentação",
+   stem:"Criança com desnutrição grave internada, família pergunta por que a equipe não está oferecendo uma dieta hipercalórica desde o primeiro dia, já que a criança 'precisa ganhar peso rápido'.",
+   passos:[
+     {h:"1. Por que não iniciar dieta hipercalórica imediatamente?", p:"Risco de <b>síndrome de realimentação</b> -- hipofosfatemia grave e distúrbios eletrolíticos com risco cardíaco."},
+     {h:"2. Qual a oferta calórica apropriada nesse momento inicial?", p:"Cerca de <b>100 kcal/kg/dia</b>, de forma cautelosa (fase de estabilização)."},
+     {h:"3. Quando a dieta hipercalórica de recuperação será apropriada?", p:"Somente na <b>fase de reabilitação</b>, após estabilização dos problemas agudos."}
+   ]},
+  {t:"Caso 3 -- Decidindo entre internação e manejo ambulatorial",
+   stem:"Duas crianças com desnutrição grave: a primeira tem infecção respiratória associada e recusa alimentar; a segunda não tem complicações e mantém bom apetite.",
+   passos:[
+     {h:"1. Qual criança deve ser internada?", p:"A <b>primeira</b> -- desnutrição grave associada a complicação (infecção, recusa alimentar)."},
+     {h:"2. Qual o manejo apropriado para a segunda criança?", p:"Manejo <b>ambulatorial</b>, com alimento terapêutico pronto para uso (RUTF)."},
+     {h:"3. O que justifica essa diferença de conduta?", p:"A decisão depende da presença de <b>complicações</b>, não apenas do grau de desnutrição isolado."}
+   ]}
+]
+
+});
+
+window.CONTENT['nutricao|0'] = C;
+})();
+</script>
+
+<!-- ===== MODULO Obesidade Infantil (novo, nutricao|1) ===== -->
+<script>
+Object.assign(window.ASVG=window.ASVG||{}, {"obi_classificacao_imc": "<svg viewBox=\"0 0 680 280\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"obiPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#123030\"/><stop offset=\"1\" stop-color=\"#061818\"/></linearGradient>\n  <linearGradient id=\"obiAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#a3e0d4\"/><stop offset=\"1\" stop-color=\"#4fb8a3\"/></linearGradient>\n  <linearGradient id=\"obiGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"obiRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"obiShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"280\" rx=\"16\" fill=\"url(#obiPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#obiAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Classificação por IMC/idade (curva OMS, escore-Z)</text><g filter=\"url(#obiShadow)\"><rect x=\"20\" y=\"48\" width=\"150\" height=\"180\" rx=\"12\" fill=\"url(#obiAccent)\"/></g><text x=\"95\" y=\"72\" fill=\"#0a2a24\" font-size=\"9.5\" font-weight=\"700\" text-anchor=\"middle\">Risco de</text><text x=\"95\" y=\"86\" fill=\"#0a2a24\" font-size=\"9.5\" font-weight=\"700\" text-anchor=\"middle\">sobrepeso</text><text x=\"95\" y=\"110\" fill=\"#0a2a24\" font-size=\"8.5\" text-anchor=\"middle\">P85-P97</text><text x=\"95\" y=\"124\" fill=\"#0a2a24\" font-size=\"8.5\" text-anchor=\"middle\">(escore-Z +1 a +2)</text><g filter=\"url(#obiShadow)\"><rect x=\"185\" y=\"48\" width=\"150\" height=\"180\" rx=\"12\" fill=\"url(#obiGold)\"/></g><text x=\"260\" y=\"72\" fill=\"#3a2a08\" font-size=\"9.5\" font-weight=\"700\" text-anchor=\"middle\">Sobrepeso</text><text x=\"260\" y=\"110\" fill=\"#3a2a08\" font-size=\"8.5\" text-anchor=\"middle\">P97-P99,9</text><text x=\"260\" y=\"124\" fill=\"#3a2a08\" font-size=\"8.5\" text-anchor=\"middle\">(escore-Z +2 a +3)</text><g filter=\"url(#obiShadow)\"><rect x=\"350\" y=\"48\" width=\"150\" height=\"180\" rx=\"12\" fill=\"url(#obiRed)\"/></g><text x=\"425\" y=\"72\" fill=\"#3a0d12\" font-size=\"9.5\" font-weight=\"700\" text-anchor=\"middle\">Obesidade</text><text x=\"425\" y=\"110\" fill=\"#3a0d12\" font-size=\"8.5\" text-anchor=\"middle\">&gt;P99,9</text><text x=\"425\" y=\"124\" fill=\"#3a0d12\" font-size=\"8.5\" text-anchor=\"middle\">(escore-Z &gt;+3)</text><g filter=\"url(#obiShadow)\"><rect x=\"515\" y=\"48\" width=\"145\" height=\"180\" rx=\"12\" fill=\"url(#obiRed)\"/></g><text x=\"587\" y=\"72\" fill=\"#3a0d12\" font-size=\"9\" font-weight=\"700\" text-anchor=\"middle\">Obesidade</text><text x=\"587\" y=\"86\" fill=\"#3a0d12\" font-size=\"9\" font-weight=\"700\" text-anchor=\"middle\">grave</text><text x=\"587\" y=\"110\" fill=\"#3a0d12\" font-size=\"8\" text-anchor=\"middle\">Escore-Z muito</text><text x=\"587\" y=\"124\" fill=\"#3a0d12\" font-size=\"8\" text-anchor=\"middle\">acima de +3</text><text x=\"340\" y=\"250\" fill=\"#d8f2ec\" font-size=\"9.5\" text-anchor=\"middle\">Em menores de 5 anos usa-se peso/estatura; a partir de 5 anos, IMC/idade</text></svg>", "obi_comorbidades": "<svg viewBox=\"0 0 680 270\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"obiPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#123030\"/><stop offset=\"1\" stop-color=\"#061818\"/></linearGradient>\n  <linearGradient id=\"obiAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#a3e0d4\"/><stop offset=\"1\" stop-color=\"#4fb8a3\"/></linearGradient>\n  <linearGradient id=\"obiGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"obiRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"obiShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"270\" rx=\"16\" fill=\"url(#obiPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#obiAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Comorbidades a investigar ativamente</text><g filter=\"url(#obiShadow)\"><rect x=\"20\" y=\"48\" width=\"150\" height=\"150\" rx=\"12\" fill=\"url(#obiAccent)\"/></g><text x=\"95\" y=\"76\" fill=\"#0a2a24\" font-size=\"9\" font-weight=\"700\" text-anchor=\"middle\">Metabólicas</text><text x=\"95\" y=\"100\" fill=\"#0a2a24\" font-size=\"8\" text-anchor=\"middle\">Dislipidemia,</text><text x=\"95\" y=\"114\" fill=\"#0a2a24\" font-size=\"8\" text-anchor=\"middle\">pré-diabetes/DM2</text><g filter=\"url(#obiShadow)\"><rect x=\"185\" y=\"48\" width=\"150\" height=\"150\" rx=\"12\" fill=\"url(#obiAccent)\"/></g><text x=\"260\" y=\"76\" fill=\"#0a2a24\" font-size=\"9\" font-weight=\"700\" text-anchor=\"middle\">Hepática</text><text x=\"260\" y=\"100\" fill=\"#0a2a24\" font-size=\"8\" text-anchor=\"middle\">Esteatose hepática</text><text x=\"260\" y=\"114\" fill=\"#0a2a24\" font-size=\"8\" text-anchor=\"middle\">não alcoólica (DHGNA)</text><g filter=\"url(#obiShadow)\"><rect x=\"350\" y=\"48\" width=\"150\" height=\"150\" rx=\"12\" fill=\"url(#obiGold)\"/></g><text x=\"425\" y=\"76\" fill=\"#3a2a08\" font-size=\"9\" font-weight=\"700\" text-anchor=\"middle\">Respiratória</text><text x=\"425\" y=\"100\" fill=\"#3a2a08\" font-size=\"8\" text-anchor=\"middle\">Apneia obstrutiva</text><text x=\"425\" y=\"114\" fill=\"#3a2a08\" font-size=\"8\" text-anchor=\"middle\">do sono (SAOS)</text><g filter=\"url(#obiShadow)\"><rect x=\"515\" y=\"48\" width=\"145\" height=\"150\" rx=\"12\" fill=\"url(#obiGold)\"/></g><text x=\"587\" y=\"76\" fill=\"#3a2a08\" font-size=\"9\" font-weight=\"700\" text-anchor=\"middle\">Cardiovascular</text><text x=\"587\" y=\"100\" fill=\"#3a2a08\" font-size=\"8\" text-anchor=\"middle\">Hipertensão</text><text x=\"587\" y=\"114\" fill=\"#3a2a08\" font-size=\"8\" text-anchor=\"middle\">arterial</text><text x=\"340\" y=\"228\" fill=\"#d8f2ec\" font-size=\"9.5\" text-anchor=\"middle\">Também investigar: repercussão ortopédica (epifisiólise), psicossocial e SOP em adolescentes</text></svg>", "obi_tratamento_escalonado": "<svg viewBox=\"0 0 680 260\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"obiPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#123030\"/><stop offset=\"1\" stop-color=\"#061818\"/></linearGradient>\n  <linearGradient id=\"obiAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#a3e0d4\"/><stop offset=\"1\" stop-color=\"#4fb8a3\"/></linearGradient>\n  <linearGradient id=\"obiGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"obiRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"obiShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"260\" rx=\"16\" fill=\"url(#obiPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#obiAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Tratamento em estágios (SBP/ABESO)</text><g filter=\"url(#obiShadow)\"><rect x=\"20\" y=\"48\" width=\"150\" height=\"150\" rx=\"12\" fill=\"url(#obiAccent)\"/></g><text x=\"95\" y=\"70\" fill=\"#0a2a24\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">1</text><text x=\"95\" y=\"96\" fill=\"#0a2a24\" font-size=\"8.5\" text-anchor=\"middle\">Prevenção/</text><text x=\"95\" y=\"110\" fill=\"#0a2a24\" font-size=\"8.5\" text-anchor=\"middle\">dieta+atividade</text><g filter=\"url(#obiShadow)\"><rect x=\"185\" y=\"48\" width=\"150\" height=\"150\" rx=\"12\" fill=\"url(#obiAccent)\"/></g><text x=\"260\" y=\"70\" fill=\"#0a2a24\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">2</text><text x=\"260\" y=\"96\" fill=\"#0a2a24\" font-size=\"8.5\" text-anchor=\"middle\">Manejo estruturado</text><text x=\"260\" y=\"110\" fill=\"#0a2a24\" font-size=\"8.5\" text-anchor=\"middle\">c/ equipe</text><g filter=\"url(#obiShadow)\"><rect x=\"350\" y=\"48\" width=\"150\" height=\"150\" rx=\"12\" fill=\"url(#obiGold)\"/></g><text x=\"425\" y=\"70\" fill=\"#3a2a08\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">3</text><text x=\"425\" y=\"96\" fill=\"#3a2a08\" font-size=\"8.5\" text-anchor=\"middle\">Multidisciplinar</text><text x=\"425\" y=\"110\" fill=\"#3a2a08\" font-size=\"8.5\" text-anchor=\"middle\">intensivo</text><g filter=\"url(#obiShadow)\"><rect x=\"515\" y=\"48\" width=\"145\" height=\"150\" rx=\"12\" fill=\"url(#obiRed)\"/></g><text x=\"587\" y=\"70\" fill=\"#3a0d12\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">4</text><text x=\"587\" y=\"96\" fill=\"#3a0d12\" font-size=\"8\" text-anchor=\"middle\">Farmaco/cirurgia</text><text x=\"587\" y=\"110\" fill=\"#3a0d12\" font-size=\"8\" text-anchor=\"middle\">(seletivo)</text><text x=\"340\" y=\"222\" fill=\"#d8f2ec\" font-size=\"9.5\" text-anchor=\"middle\">A base de tudo, em qualquer estágio, é frutas/vegetais + reduzir sedentarismo + sono adequado</text></svg>", "obi_sinais_alarme": "<svg viewBox=\"0 0 680 240\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"obiPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#123030\"/><stop offset=\"1\" stop-color=\"#061818\"/></linearGradient>\n  <linearGradient id=\"obiAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#a3e0d4\"/><stop offset=\"1\" stop-color=\"#4fb8a3\"/></linearGradient>\n  <linearGradient id=\"obiGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"obiRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"obiShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"240\" rx=\"16\" fill=\"url(#obiPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#obiAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Sinais de alarme que pedem investigação adicional</text><g filter=\"url(#obiShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"130\" rx=\"14\" fill=\"url(#obiRed)\"/></g><text x=\"170\" y=\"72\" fill=\"#3a0d12\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Sugerem causa secundária</text><text x=\"170\" y=\"96\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">Baixa estatura associada,</text><text x=\"170\" y=\"112\" fill=\"#3a0d12\" font-size=\"9.5\" text-anchor=\"middle\">dismorfismos, atraso do DNPM</text><g filter=\"url(#obiShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"130\" rx=\"14\" fill=\"url(#obiAccent)\"/></g><text x=\"505\" y=\"72\" fill=\"#0a2a24\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Sugerem obesidade comum</text><text x=\"505\" y=\"96\" fill=\"#0a2a24\" font-size=\"9.5\" text-anchor=\"middle\">Estatura normal/aumentada,</text><text x=\"505\" y=\"112\" fill=\"#0a2a24\" font-size=\"9.5\" text-anchor=\"middle\">história familiar, contexto ambiental</text><text x=\"340\" y=\"206\" fill=\"#d8f2ec\" font-size=\"9.5\" text-anchor=\"middle\">Baixa estatura + obesidade juntas quase sempre apontam para causa endócrina/genética</text></svg>"});
+</script>
+<script>
+(function(){
+"use strict";
+var A = window.ASVG || {};
+window.CONTENT = window.CONTENT || {};
+
+var C = {};
+C.name = "Obesidade Infantil";
+C.intro = "Obesidade na infância não é sobre estética -- é uma doença crônica que já começa a gerar dano metabólico, hepático, respiratório e cardiovascular antes mesmo da adolescência, e que responde melhor quanto mais cedo é reconhecida.";
+
+C.sub = [
+
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">Uma doença crônica, não um "excesso de peso passageiro"</div>
+<p class="ac-p">A obesidade infantil é hoje reconhecida como uma <b>doença crônica</b> em si mesma -- não apenas um fator de risco isolado para outras doenças. O excesso de tecido adiposo, especialmente o visceral, é metabolicamente ativo: libera citocinas inflamatórias, altera a sensibilidade à insulina, e cria um estado de inflamação sistêmica de baixo grau que afeta praticamente todos os sistemas do corpo, mesmo em crianças e adolescentes aparentemente assintomáticos.</p>
+<p class="ac-p">O racional para agir cedo é direto: quanto mais tempo o excesso de peso persiste, maior o número de comorbidades acumuladas e menor a taxa de sucesso do tratamento. Além disso, a obesidade que começa na infância tem alta probabilidade de persistir na vida adulta, especialmente quando não abordada precocemente -- o que reforça o papel central da puericultura na identificação e intervenção o mais cedo possível.</p>
+<div class="ac-call ac-tip">💡 O racional central: obesidade infantil é doença, não fase -- e o tratamento funciona melhor quanto mais cedo começa.</div>
+<div class="ac-call ac-mne">🧠 Gordura visceral não é só "sobra" -- é tecido ativo, gerando inflamação sistêmica mensurável.</div>
+`],
+
+['diagnostico_imc','Diagnóstico: Curvas de IMC/Idade', `
+<div class="ac-h">Classificando pelo escore-Z e pelo percentil</div>
+${A.obi_classificacao_imc === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.obi_classificacao_imc)+'" alt="Classificacao por IMC"/>'}
+<p class="ac-p">Em crianças a partir de 5 anos, o diagnóstico utiliza as curvas de <b>IMC por idade e sexo</b> da OMS: <b>risco de sobrepeso</b> entre os percentis 85 e 97 (escore-Z entre +1 e +2), <b>sobrepeso</b> entre os percentis 97 e 99,9 (escore-Z entre +2 e +3), e <b>obesidade</b> acima do percentil 99,9 (escore-Z acima de +3) -- com <b>obesidade grave</b> reservada para escores-Z muito acima de +3. Em menores de 5 anos, usa-se a relação <b>peso/estatura</b> em vez do IMC isolado.</p>
+<p class="ac-p">É importante lembrar que o IMC é uma medida indireta de adiposidade -- ele não distingue diretamente massa gorda de massa magra -- mas continua sendo a ferramenta de rastreio mais prática e amplamente validada na rotina pediátrica. A avaliação nutricional completa também deve incluir a curva de <b>peso/estatura</b> ao longo do tempo (velocidade de ganho de peso) e, quando disponível, medidas complementares como circunferência abdominal.</p>
+<div class="ac-call ac-mne">🧠 &lt;5 anos: peso/estatura. ≥5 anos: IMC/idade -- não confundir os dois parâmetros conforme a faixa etária.</div>
+`],
+
+['comorbidades','Comorbidades a Buscar Ativamente', `
+<div class="ac-h">O que investigar em toda criança com obesidade</div>
+${A.obi_comorbidades === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.obi_comorbidades)+'" alt="Comorbidades da obesidade infantil"/>'}
+<p class="ac-p">A obesidade infantil se associa a um espectro amplo de comorbidades que devem ser <b>ativamente buscadas</b>, não apenas aguardadas: alterações do metabolismo glicídico (resistência insulínica, pré-diabetes, diabetes tipo 2), <b>dislipidemia</b>, <b>doença hepática gordurosa não alcoólica</b> (DHGNA, hoje uma das causas mais comuns de doença hepática crônica em pediatria), <b>hipertensão arterial</b>, e <b>síndrome da apneia obstrutiva do sono</b> (SAOS) -- essa última frequentemente subdiagnosticada, mas com impacto direto em atenção, comportamento e desempenho escolar.</p>
+<p class="ac-p">Em adolescentes do sexo feminino, deve-se considerar também a <b>síndrome dos ovários policísticos</b> (SOP). Repercussões ortopédicas (como a epifisiólise da cabeça femoral, mais comum em adolescentes com obesidade) e o impacto <b>psicossocial</b> (baixa autoestima, bullying, ansiedade, depressão) completam a lista de aspectos a avaliar sistematicamente em toda consulta.</p>
+<div class="ac-call ac-peg">⚠️ Comorbidades da obesidade infantil frequentemente são assintomáticas no início -- rastreio ativo, não espera passiva por sintomas.</div>
+`],
+
+['investigacao_complementar','Investigação Laboratorial Complementar', `
+<div class="ac-h">O que pedir, e por quê</div>
+<p class="ac-p">A SBP recomenda investigação laboratorial complementar em crianças com obesidade para rastrear as repercussões metabólicas mais comuns: <b>perfil lipídico</b> (colesterol total e frações, triglicerídeos), <b>glicemia de jejum</b> (e, em casos selecionados, teste oral de tolerância à glicose ou HbA1c), <b>transaminases</b> (rastreio de DHGNA), e aferição sistemática da <b>pressão arterial</b> com manguito adequado ao tamanho do braço em toda consulta.</p>
+<p class="ac-p">Exames adicionais (função tireoidiana, cortisol, estudos genéticos) são reservados a situações que sugerem <b>causa secundária</b> de obesidade -- por exemplo, baixa estatura associada, dismorfismos ou atraso do desenvolvimento neuropsicomotor, que fogem do padrão esperado da obesidade comum (multifatorial, com componente ambiental e genético poligênico).</p>
+<div class="ac-call ac-tip">💡 A investigação de rotina é direcionada às comorbidades mais prevalentes -- não um "pacote genérico" de exames sem indicação clínica.</div>
+`],
+
+['tratamento_escalonado','Tratamento em Estágios', `
+<div class="ac-h">Uma escada terapêutica, não um único caminho para todos</div>
+${A.obi_tratamento_escalonado === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.obi_tratamento_escalonado)+'" alt="Tratamento escalonado da obesidade infantil"/>'}
+<p class="ac-p">O tratamento segue uma abordagem em <b>estágios</b>: o <b>Estágio 1</b>, aplicável a toda criança com sobrepeso/obesidade, foca em mudanças de estilo de vida -- aumento do consumo de frutas e vegetais, redução de bebidas açucaradas, limitação do tempo de tela/sedentarismo, e aumento da atividade física, geralmente conduzido na atenção primária. O <b>Estágio 2</b> intensifica esse manejo com apoio de equipe estruturada (nutricionista, psicólogo). O <b>Estágio 3</b> envolve manejo multidisciplinar intensivo, geralmente em serviço de referência.</p>
+<p class="ac-p">O <b>Estágio 4</b>, reservado a casos selecionados (obesidade grave com comorbidades significativas, falha dos estágios anteriores), pode incluir <b>farmacoterapia</b> específica ou, em adolescentes com critérios rigorosos, <b>cirurgia bariátrica</b> -- decisões sempre tomadas em centro especializado, com avaliação multidisciplinar completa.</p>
+<div class="ac-call ac-mne">🧠 A base de qualquer estágio é sempre a mesma: frutas/vegetais, menos sedentarismo, mais atividade física, sono adequado.</div>
+`],
+
+['sinais_alarme','Quando Suspeitar de Causa Secundária', `
+<div class="ac-h">Nem toda obesidade infantil é "comum"</div>
+${A.obi_sinais_alarme === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.obi_sinais_alarme)+'" alt="Sinais de alarme na obesidade infantil"/>'}
+<p class="ac-p">A grande maioria dos casos de obesidade infantil é <b>multifatorial</b> (componente genético poligênico somado a fatores ambientais/comportamentais), e cursa com <b>estatura normal ou aumentada</b> para a idade. A combinação de <b>obesidade com baixa estatura</b>, dismorfismos característicos, atraso do desenvolvimento neuropsicomotor, ou início muito precoce e de progressão rápida, deve levantar suspeita de causa <b>secundária</b> -- endócrina (hipotireoidismo, síndrome de Cushing) ou genética/sindrômica (por exemplo, síndrome de Prader-Willi).</p>
+<p class="ac-p">Nesses casos, a investigação direcionada e, quando indicado, o encaminhamento à endocrinologia pediátrica ou à genética médica, são apropriados -- mas representam uma minoria dos casos vistos na prática clínica geral.</p>
+<div class="ac-call ac-peg">⚠️ Obesidade + baixa estatura associada quase sempre aponta para causa secundária -- investigar, não apenas reforçar dieta.</div>
+`],
+
+['papel_familia','O Papel da Família e do Ambiente', `
+<div class="ac-h">Mudança de estilo de vida é um projeto familiar, não individual</div>
+<p class="ac-p">Intervenções que envolvem <b>toda a família</b>, e não apenas a criança isoladamente, têm maior taxa de sucesso -- modelar hábitos alimentares e de atividade física em casa, ajustar o ambiente doméstico (disponibilidade de alimentos ultraprocessados, tempo de tela compartilhado) e criar rotinas de sono adequadas são intervenções que dependem da adesão de toda a unidade familiar, não apenas de orientações dirigidas exclusivamente à criança.</p>
+<p class="ac-p">A abordagem também deve ser cuidadosamente <b>não estigmatizante</b> -- evitar linguagem culpabilizadora ou focada exclusivamente em peso/aparência, e priorizar mensagens sobre saúde, energia e bem-estar, reduz o risco de desenvolvimento de transtornos alimentares e preserva a relação de confiança entre a família e a equipe de saúde.</p>
+<div class="ac-call ac-tip">💡 Mudança de hábito que só a criança tenta sozinha, num ambiente familiar inalterado, tende a fracassar -- o alvo da intervenção é o ambiente, não só o indivíduo.</div>
+`],
+
+['papel_puericultura','O Papel da Puericultura na Prevenção e Detecção', `
+<div class="ac-h">A curva de IMC como ferramenta de rastreio contínuo</div>
+<p class="ac-p">A plotagem sistemática do IMC (ou peso/estatura, em menores de 5 anos) em toda consulta de puericultura permite identificar precocemente a <b>trajetória ascendente</b> de ganho de peso -- muitas vezes visível na curva bem antes que a criança atinja critérios de obesidade estabelecida, permitindo intervenção preventiva no estágio de "risco de sobrepeso".</p>
+<p class="ac-p">A puericultura também é o momento de reforçar orientações preventivas desde os primeiros anos de vida: introdução alimentar adequada (evitando açúcar e ultraprocessados precocemente), incentivo a brincadeiras ativas, e limite de tempo de tela conforme recomendações por idade -- medidas que, aplicadas cedo, reduzem a probabilidade de desenvolvimento de obesidade nos anos seguintes.</p>
+<div class="ac-call ac-tip">💡 Identificar a curva de IMC subindo antes de cruzar o percentil 97 é uma oportunidade preventiva -- não esperar o diagnóstico estabelecido para agir.</div>
+`],
+
+];
+
+Object.assign(C, {
+
+escores: `
+<div class="ac-h">Números que fecham questão</div>
+<table class="ac-tbl"><tr><th>Classificação</th><th>Percentil IMC/idade</th><th>Escore-Z</th></tr>
+<tr><td>Risco de sobrepeso</td><td>P85 - P97</td><td>+1 a +2</td></tr>
+<tr><td>Sobrepeso</td><td>P97 - P99,9</td><td>+2 a +3</td></tr>
+<tr><td>Obesidade</td><td>&gt;P99,9</td><td>&gt;+3</td></tr>
+<tr><td>Obesidade grave</td><td>Muito acima de P99,9</td><td>Muito acima de +3</td></tr>
+<tr><td>Parâmetro em &lt;5 anos</td><td colspan="2">Peso/Estatura, não IMC isolado</td></tr></table>
+`,
+
+dif: `
+<div class="ac-h">Diferencial automático -- obesidade comum x causa secundária</div>
+<table class="ac-tbl"><tr><th>Achado</th><th>Obesidade comum (multifatorial)</th><th>Causa secundária</th></tr>
+<tr><td>Estatura</td><td>Normal ou aumentada</td><td>Frequentemente baixa/desacelerada</td></tr>
+<tr><td>Desenvolvimento</td><td>Normal</td><td>Pode haver atraso</td></tr>
+<tr><td>Dismorfismos</td><td>Ausentes</td><td>Podem estar presentes</td></tr>
+<tr><td>Início/progressão</td><td>Gradual, contexto ambiental claro</td><td>Precoce e/ou rápida, atípica</td></tr></table>
+`,
+
+mapa: `
+<div class="ac-h">Mapa mental -- Obesidade Infantil</div>
+<div class="mm">
+<div class="mm-card"><h5>DIAGNÓSTICO</h5><ul><li>&lt;5a: peso/estatura</li><li>≥5a: IMC/idade (percentil/escore-Z)</li></ul></div>
+<div class="mm-card"><h5>COMORBIDADES</h5><ul><li>Dislipidemia, pré-DM2, DHGNA</li><li>HAS, SAOS, SOP</li></ul></div>
+<div class="mm-card"><h5>INVESTIGAÇÃO</h5><ul><li>Lipidograma, glicemia, transaminases</li><li>PA em toda consulta</li></ul></div>
+<div class="mm-card"><h5>TRATAMENTO</h5><ul><li>Estágios 1→4</li><li>Base: dieta+atividade+sono, sempre</li></ul></div>
+<div class="mm-card"><h5>CAUSA SECUNDÁRIA</h5><ul><li>Suspeitar se baixa estatura associada</li><li>Endócrina/genética/sindrômica</li></ul></div>
+<div class="mm-card"><h5>ABORDAGEM</h5><ul><li>Familiar, não individual</li><li>Não estigmatizante</li></ul></div>
+</div>
+`,
+
+fluxo_dx: `
+<div class="ac-h">Fluxograma -- diagnóstico e triagem inicial</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Criança em consulta de puericultura/rotina</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Plotar IMC/idade (≥5a) ou peso/estatura (&lt;5a) na curva OMS</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node end">Percentil ≥97: sobrepeso/obesidade -- investigar comorbidades</div>
+<div class="fx-node end">Baixa estatura associada ou dismorfismos: suspeitar causa secundária</div>
+</div>
+</div>
+`,
+
+fluxo_cond: `
+<div class="ac-h">Fluxograma de conduta -- tratamento escalonado</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Diagnóstico de sobrepeso/obesidade confirmado</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Estágio 1: dieta + atividade física + sono, atenção primária</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Sem resposta ou comorbidade significativa: Estágio 2-3, equipe multidisciplinar</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node end">Casos selecionados/graves: Estágio 4 (farmacoterapia/cirurgia, centro especializado)</div></div>
+</div>
+`,
+
+vespera: `
+<div class="ac-h">Revisão de véspera -- Obesidade Infantil</div>
+<div class="ac-call ac-high">⚡ Obesidade infantil é doença crônica -- quanto mais cedo reconhecida e tratada, melhor a resposta.</div>
+<ul class="ac-ul">
+<li>&lt;5 anos: peso/estatura. ≥5 anos: IMC/idade -- sobrepeso P85-97, obesidade &gt;P99,9 (escore-Z &gt;+3).</li>
+<li>Comorbidades a buscar ativamente: dislipidemia, pré-diabetes/DM2, DHGNA, HAS, SAOS, SOP (adolescentes).</li>
+<li>Investigação de rotina: lipidograma, glicemia, transaminases, PA em toda consulta.</li>
+<li>Tratamento em estágios (1 a 4): base sempre dieta+atividade+sono; farmaco/cirurgia reservados a casos selecionados.</li>
+<li>Obesidade + baixa estatura associada = suspeitar causa secundária (endócrina/genética).</li>
+<li>Abordagem familiar, não individual; linguagem não estigmatizante reduz risco de transtorno alimentar.</li>
+<li>Puericultura: identificar trajetória ascendente do IMC antes de cruzar percentil 97 é oportunidade preventiva.</li>
+</ul>
+`,
+
+dicas: `
+<div class="ac-h">Dicas e Pegadinhas</div>
+<div class="ac-call ac-peg">⚠️ Obesidade com baixa estatura associada NÃO é o padrão esperado -- investigar causa secundária.</div>
+<div class="ac-call ac-mne">🧠 "&lt;5 anos peso/estatura, ≥5 anos IMC/idade" -- não confundir o parâmetro pela faixa etária.</div>
+<div class="ac-call ac-peg">⚠️ Comorbidades da obesidade costumam ser assintomáticas no início -- rastrear ativamente, não esperar sintomas.</div>
+<div class="ac-call ac-tip">✅ A base do tratamento (dieta+atividade+sono) é a mesma em todos os estágios -- farmaco/cirurgia são reservados a casos selecionados.</div>
+<div class="ac-call ac-peg">⚠️ Linguagem estigmatizante/focada só em peso aumenta risco de transtorno alimentar -- priorizar mensagens de saúde.</div>
+`,
+
+checklist: [
+ "Sei classificar sobrepeso/obesidade pelo percentil/escore-Z de IMC, e diferenciar de &lt;5 anos",
+ "Sei as principais comorbidades a buscar ativamente na obesidade infantil",
+ "Sei quais exames complementares são recomendados de rotina",
+ "Sei os 4 estágios do tratamento escalonado",
+ "Sei quando suspeitar de causa secundária de obesidade",
+ "Sei por que a abordagem familiar é mais eficaz que a individual",
+ "Entendo a importância de linguagem não estigmatizante",
+ "Sei o papel da puericultura na detecção precoce da trajetória de ganho de peso",
+ "Sei diferenciar obesidade comum de causa secundária pelo diferencial clínico",
+ "Entendo por que a obesidade infantil é considerada doença crônica, não fase transitória"
+],
+
+});
+
+Object.assign(C, {
+
+questoes: [
+  {id:"obi-q1",banca:"ENARE (estilo)",stem:"Qual parâmetro é utilizado para avaliação nutricional em crianças MENORES de 5 anos, ao invés do IMC isolado?",
+   opts:["Circunferência do braço, exclusivamente","Relação peso/estatura","Apenas o peso absoluto, sem relação com outra medida","Perímetro cefálico"],
+   correct:1, expl:"Em menores de 5 anos, utiliza-se a relação peso/estatura; o IMC/idade é usado a partir dos 5 anos."},
+  {id:"obi-q2",banca:"Revalida (estilo)",stem:"Qual faixa de percentil de IMC/idade define obesidade em criança maior de 5 anos?",
+   opts:["Entre os percentis 50 e 75","Entre os percentis 85 e 97 (risco de sobrepeso)","Acima do percentil 99,9","Abaixo do percentil 85, em qualquer caso"],
+   correct:2, expl:"Obesidade é definida por IMC/idade acima do percentil 99,9 (escore-Z acima de +3)."},
+  {id:"obi-q3",banca:"UFRJ (estilo)",stem:"Qual comorbidade hepática está entre as mais comuns associadas à obesidade infantil atualmente?",
+   opts:["Hepatite autoimune","Doença hepática gordurosa não alcoólica (DHGNA)","Cirrose biliar primária","Doença de Wilson"],
+   correct:1, expl:"A DHGNA é hoje uma das causas mais comuns de doença hepática crônica em crianças com obesidade."},
+  {id:"obi-q4",banca:"SES-RJ (estilo)",stem:"Qual achado associado à obesidade infantil deve levantar suspeita de causa SECUNDÁRIA (endócrina/genética)?",
+   opts:["Estatura normal para a idade","Obesidade associada a baixa estatura e dismorfismos","Início gradual, associado a contexto ambiental claro","Ausência de qualquer comorbidade metabólica"],
+   correct:1, expl:"Obesidade associada a baixa estatura, dismorfismos ou atraso do desenvolvimento sugere causa secundária, não obesidade comum."},
+  {id:"obi-q5",banca:"UERJ (estilo)",stem:"Qual a base terapêutica comum a TODOS os estágios de tratamento da obesidade infantil?",
+   opts:["Farmacoterapia isolada, independente do estágio","Mudança de estilo de vida: dieta, atividade física e sono adequado","Cirurgia bariátrica, mesmo em estágios iniciais","Restrição calórica extrema sem outra orientação"],
+   correct:1, expl:"Mudanças de estilo de vida (dieta, atividade física, sono) constituem a base de todos os estágios do tratamento."},
+  {id:"obi-q6",banca:"PSU-MG (estilo)",stem:"Por que a abordagem familiar é considerada mais eficaz do que a intervenção dirigida isoladamente à criança?",
+   opts:["Porque a criança não tem qualquer papel no processo","Porque hábitos alimentares e de atividade física dependem do ambiente e da adesão de toda a família","Porque a família deve assumir toda a responsabilidade, sem envolvimento da criança","Porque não há evidência de qualquer diferença entre as abordagens"],
+   correct:1, expl:"Mudanças de hábito dependem do ambiente doméstico e da adesão de toda a família, não apenas da criança isoladamente."},
+  {id:"obi-q7",banca:"ENARE (estilo)",stem:"Qual comorbidade respiratória, frequentemente subdiagnosticada, deve ser considerada em crianças com obesidade?",
+   opts:["Fibrose cística","Síndrome da apneia obstrutiva do sono (SAOS)","Bronquiectasias congênitas","Discinesia ciliar primária"],
+   correct:1, expl:"A SAOS é frequentemente subdiagnosticada em crianças com obesidade, com impacto em atenção e desempenho escolar."},
+  {id:"obi-q8",banca:"Revalida (estilo)",stem:"Qual exame deve ser aferido em TODA consulta de criança com sobrepeso/obesidade?",
+   opts:["Ressonância magnética abdominal","Pressão arterial, com manguito adequado ao tamanho do braço","Endoscopia digestiva alta","Densitometria óssea"],
+   correct:1, expl:"A pressão arterial deve ser aferida com manguito adequado em toda consulta de criança com obesidade, dado o risco de hipertensão associada."},
+  {id:"obi-q9",banca:"UFRJ (estilo)",stem:"Em qual situação a farmacoterapia ou cirurgia bariátrica (Estágio 4) é considerada apropriada?",
+   opts:["Como primeira linha em qualquer criança com sobrepeso","Em casos selecionados de obesidade grave com comorbidades significativas, após falha dos estágios anteriores","Rotineiramente a partir dos 6 anos de idade, independente de outros fatores","Nunca é indicada em pacientes pediátricos, em nenhuma circunstância"],
+   correct:1, expl:"Farmacoterapia/cirurgia são reservadas a casos selecionados e graves, após falha do manejo em estágios anteriores, em centro especializado."},
+  {id:"obi-q10",banca:"SES-RJ (estilo)",stem:"Qual risco está associado a uma abordagem estigmatizante e focada exclusivamente em peso/aparência no manejo da obesidade infantil?",
+   opts:["Nenhum risco relevante identificado na literatura","Maior risco de desenvolvimento de transtornos alimentares","Melhora automática e mais rápida da adesão ao tratamento","Redução do risco cardiovascular, independente de outros fatores"],
+   correct:1, expl:"Linguagem estigmatizante aumenta o risco de transtornos alimentares e prejudica a relação de confiança com a equipe de saúde."},
+  {id:"obi-q11",banca:"UERJ (estilo)",stem:"Qual síndrome ginecológica deve ser considerada em adolescentes do sexo feminino com obesidade?",
+   opts:["Síndrome de Turner","Síndrome dos ovários policísticos (SOP)","Síndrome de Kallmann","Síndrome de Rokitansky"],
+   correct:1, expl:"A síndrome dos ovários policísticos deve ser considerada em adolescentes do sexo feminino com obesidade e irregularidade menstrual."},
+  {id:"obi-q12",banca:"ENARE (estilo)",stem:"Qual é o valor da monitorização contínua do IMC na puericultura, mesmo antes do diagnóstico de obesidade estabelecida?",
+   opts:["Nenhum valor prático, só é útil após diagnóstico confirmado","Permite identificar trajetória ascendente de ganho de peso precocemente, possibilitando intervenção preventiva","Serve apenas para fins estatísticos, sem impacto clínico","Substitui completamente a necessidade de exame físico"],
+   correct:1, expl:"O acompanhamento contínuo do IMC permite identificar a trajetória ascendente antes mesmo do diagnóstico estabelecido, permitindo intervenção preventiva precoce."}
+],
+
+flashcards:[
+  {id:"obi-f1",tipo:"qa",tag:"Diagnóstico",front:"Qual parâmetro usar em criança &lt;5 anos?",back:"<b>Peso/Estatura</b> (não IMC isolado)."},
+  {id:"obi-f2",tipo:"qa",tag:"Diagnóstico",front:"Qual percentil de IMC/idade define obesidade (≥5a)?",back:"<b>Acima do P99,9</b> (escore-Z &gt;+3)."},
+  {id:"obi-f3",tipo:"qa",tag:"Comorbidade",front:"Qual doença hepática se associa à obesidade infantil?",back:"<b>Doença hepática gordurosa não alcoólica (DHGNA).</b>"},
+  {id:"obi-f4",tipo:"qa",tag:"Comorbidade",front:"Qual comorbidade respiratória é subdiagnosticada?",back:"<b>Síndrome da apneia obstrutiva do sono (SAOS).</b>"},
+  {id:"obi-f5",tipo:"vf",tag:"Diferencial",front:"Obesidade + baixa estatura associada é o padrão esperado da obesidade comum.",back:"<b>FALSO.</b> Sugere causa secundária -- investigar."},
+  {id:"obi-f6",tipo:"qa",tag:"Investigação",front:"Cite 3 exames de rotina na investigação da obesidade infantil.",back:"<b>Lipidograma, glicemia de jejum, transaminases</b> (+ PA em toda consulta)."},
+  {id:"obi-f7",tipo:"qa",tag:"Tratamento",front:"Qual a base terapêutica comum a todos os estágios?",back:"<b>Dieta + atividade física + sono adequado.</b>"},
+  {id:"obi-f8",tipo:"qa",tag:"Tratamento",front:"Quando considerar farmacoterapia/cirurgia (Estágio 4)?",back:"Casos <b>selecionados/graves</b>, após falha dos estágios anteriores."},
+  {id:"obi-f9",tipo:"qa",tag:"Ginecológica",front:"Qual condição considerar em adolescentes com obesidade?",back:"<b>Síndrome dos ovários policísticos (SOP).</b>"},
+  {id:"obi-f10",tipo:"vf",tag:"Abordagem",front:"Linguagem focada em peso/aparência é a mais eficaz para engajar a família.",back:"<b>FALSO.</b> Aumenta risco de transtorno alimentar -- priorizar mensagens de saúde."},
+  {id:"obi-f11",tipo:"cloze",tag:"Ortopedia",front:"Repercussão ortopédica associada à obesidade em adolescentes: {{c1::epifisiólise da cabeça femoral}}.",back:"Complicação ortopédica a considerar em adolescente obeso com dor no quadril/joelho."},
+  {id:"obi-f12",tipo:"qa",tag:"Prevenção",front:"Qual o valor de acompanhar o IMC antes do diagnóstico de obesidade?",back:"Identifica <b>trajetória ascendente</b> precocemente -- oportunidade preventiva."},
+  {id:"obi-f13",tipo:"qa",tag:"Conceito",front:"Obesidade infantil é considerada fase transitória ou doença crônica?",back:"<b>Doença crônica</b>, com inflamação sistêmica mensurável."},
+  {id:"obi-f14",tipo:"qa",tag:"Abordagem",front:"Por que a abordagem familiar é mais eficaz que a individual?",back:"Hábitos dependem do <b>ambiente</b> e da <b>adesão de toda a família.</b>"}
+],
+
+casos:[
+  {t:"Caso 1 -- Classificando corretamente por idade",
+   stem:"Duas crianças avaliadas: uma de 3 anos com peso elevado para a estatura, outra de 8 anos com IMC no percentil 98 para idade e sexo.",
+   passos:[
+     {h:"1. Qual parâmetro usar para a criança de 3 anos?", p:"<b>Peso/Estatura</b>, não IMC isolado."},
+     {h:"2. Como classificar a criança de 8 anos com percentil 98?", p:"<b>Sobrepeso</b> (percentil entre 97 e 99,9)."},
+     {h:"3. Qual a conduta inicial em ambos os casos?", p:"Reforçar <b>dieta, atividade física e sono adequado</b> (Estágio 1), com toda a família envolvida."}
+   ]},
+  {t:"Caso 2 -- Reconhecendo sinal de alarme para causa secundária",
+   stem:"Criança de 6 anos com obesidade, mas também com estatura no percentil 3 e leve atraso do desenvolvimento neuropsicomotor.",
+   passos:[
+     {h:"1. Esse padrão é típico da obesidade comum?", p:"Não -- obesidade comum cursa com estatura normal/aumentada."},
+     {h:"2. O que essa combinação sugere?", p:"Possível <b>causa secundária</b> (endócrina ou síndrômica/genética)."},
+     {h:"3. Qual a conduta apropriada?", p:"Investigação direcionada e <b>encaminhamento</b> à endocrinologia pediátrica/genética médica."}
+   ]},
+  {t:"Caso 3 -- Investigando comorbidades",
+   stem:"Adolescente com obesidade grave, assintomático, nunca havia feito exames complementares relacionados ao peso.",
+   passos:[
+     {h:"1. A ausência de sintomas descarta comorbidades?", p:"Não -- comorbidades da obesidade costumam ser assintomáticas inicialmente."},
+     {h:"2. Quais exames solicitar de rotina?", p:"<b>Lipidograma, glicemia de jejum, transaminases</b>, além de aferição de PA."},
+     {h:"3. Que outras comorbidades investigar ativamente na anamnese/exame?", p:"Sinais de <b>SAOS</b> (ronco, sonolência diurna), e em adolescente do sexo feminino, irregularidade menstrual sugestiva de <b>SOP</b>."}
+   ]}
+]
+
+});
+
+window.CONTENT['nutricao|1'] = C;
+})();
+</script>
+
+<!-- ===== MODULO Micronutrientes: Deficiencias Especificas (novo, nutricao|2) ===== -->
+<script>
+Object.assign(window.ASVG=window.ASVG||{}, {"mcr_vitamina_a": "<svg viewBox=\"0 0 680 260\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"mcrPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#2a1e08\"/><stop offset=\"1\" stop-color=\"#160f02\"/></linearGradient>\n  <linearGradient id=\"mcrAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#c99a2e\"/></linearGradient>\n  <linearGradient id=\"mcrGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"mcrRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"mcrShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"260\" rx=\"16\" fill=\"url(#mcrPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#mcrAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Deficiência de vitamina A -- xeroftalmia</text><g filter=\"url(#mcrShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"150\" rx=\"14\" fill=\"url(#mcrAccent)\"/></g><text x=\"170\" y=\"72\" fill=\"#3a2a08\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Sequência de gravidade</text><text x=\"170\" y=\"96\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">1. Cegueira noturna (1º sinal)</text><text x=\"170\" y=\"114\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">2. Xerose conjuntival</text><text x=\"170\" y=\"132\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">3. Manchas de Bitot</text><text x=\"170\" y=\"150\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">4. Xerose/ulceração de córnea</text><g filter=\"url(#mcrShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"150\" rx=\"14\" fill=\"url(#mcrGold)\"/></g><text x=\"505\" y=\"72\" fill=\"#3a2a08\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Por que importa tanto</text><text x=\"505\" y=\"96\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Reduz mortalidade infantil</text><text x=\"505\" y=\"112\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">em ~23-30% em áreas de</text><text x=\"505\" y=\"128\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">deficiência endêmica</text><text x=\"505\" y=\"148\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Atenua gravidade da diarreia</text><text x=\"340\" y=\"228\" fill=\"#f0e2c0\" font-size=\"9.5\" text-anchor=\"middle\">Xeroftalmia não tratada evolui até cegueira irreversível -- diagnóstico precoce é essencial</text></svg>", "mcr_zinco": "<svg viewBox=\"0 0 680 250\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"mcrPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#2a1e08\"/><stop offset=\"1\" stop-color=\"#160f02\"/></linearGradient>\n  <linearGradient id=\"mcrAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#c99a2e\"/></linearGradient>\n  <linearGradient id=\"mcrGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"mcrRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"mcrShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"250\" rx=\"16\" fill=\"url(#mcrPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#mcrAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Deficiência de zinco</text><g filter=\"url(#mcrShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"140\" rx=\"14\" fill=\"url(#mcrAccent)\"/></g><text x=\"170\" y=\"72\" fill=\"#3a2a08\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Manifestações</text><text x=\"170\" y=\"96\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Retardo de crescimento,</text><text x=\"170\" y=\"112\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">lesões cutâneas periorificiais,</text><text x=\"170\" y=\"128\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">diarreia crônica, alopecia</text><g filter=\"url(#mcrShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"140\" rx=\"14\" fill=\"url(#mcrGold)\"/></g><text x=\"505\" y=\"72\" fill=\"#3a2a08\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Papel clínico</text><text x=\"505\" y=\"96\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Imunidade celular prejudicada</text><text x=\"505\" y=\"112\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">→ infecções de repetição,</text><text x=\"505\" y=\"128\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">diarreia mais grave e prolongada</text><text x=\"340\" y=\"216\" fill=\"#f0e2c0\" font-size=\"9.5\" text-anchor=\"middle\">Zinco terapêutico reduz duração e gravidade dos episódios de diarreia aguda</text></svg>", "mcr_iodo": "<svg viewBox=\"0 0 680 240\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"mcrPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#2a1e08\"/><stop offset=\"1\" stop-color=\"#160f02\"/></linearGradient>\n  <linearGradient id=\"mcrAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#c99a2e\"/></linearGradient>\n  <linearGradient id=\"mcrGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"mcrRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"mcrShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"240\" rx=\"16\" fill=\"url(#mcrPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#mcrAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Deficiência de iodo</text><g filter=\"url(#mcrShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"130\" rx=\"14\" fill=\"url(#mcrAccent)\"/></g><text x=\"170\" y=\"72\" fill=\"#3a2a08\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Bócio e hipotireoidismo</text><text x=\"170\" y=\"96\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Deficiência materna grave =</text><text x=\"170\" y=\"112\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">cretinismo (dano neurológico)</text><g filter=\"url(#mcrShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"130\" rx=\"14\" fill=\"url(#mcrGold)\"/></g><text x=\"505\" y=\"72\" fill=\"#3a2a08\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Prevenção populacional</text><text x=\"505\" y=\"96\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Iodação universal do sal</text><text x=\"505\" y=\"112\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">(medida de saúde pública)</text><text x=\"340\" y=\"206\" fill=\"#f0e2c0\" font-size=\"9.5\" text-anchor=\"middle\">Causa evitável mais comum de retardo mental no mundo</text></svg>", "mcr_vitd_raquitismo": "<svg viewBox=\"0 0 680 260\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"mcrPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#2a1e08\"/><stop offset=\"1\" stop-color=\"#160f02\"/></linearGradient>\n  <linearGradient id=\"mcrAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#c99a2e\"/></linearGradient>\n  <linearGradient id=\"mcrGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"mcrRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"mcrShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"260\" rx=\"16\" fill=\"url(#mcrPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#mcrAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Deficiência de vitamina D -- raquitismo</text><g filter=\"url(#mcrShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"150\" rx=\"14\" fill=\"url(#mcrAccent)\"/></g><text x=\"170\" y=\"72\" fill=\"#3a2a08\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Achados clássicos</text><text x=\"170\" y=\"96\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Craniotabes, rosário raquítico,</text><text x=\"170\" y=\"112\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">alargamento de punhos/tornozelos,</text><text x=\"170\" y=\"128\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">arqueamento de pernas (genu varo)</text><text x=\"170\" y=\"146\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Atraso da dentição, fraturas</text><g filter=\"url(#mcrShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"150\" rx=\"14\" fill=\"url(#mcrGold)\"/></g><text x=\"505\" y=\"72\" fill=\"#3a2a08\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Mecanismo</text><text x=\"505\" y=\"96\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Falta de vit D → menor</text><text x=\"505\" y=\"112\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">absorção de cálcio/fósforo →</text><text x=\"505\" y=\"128\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">mineralização óssea deficiente</text><text x=\"340\" y=\"228\" fill=\"#f0e2c0\" font-size=\"9.5\" text-anchor=\"middle\">Escorbuto (vit C) é raro mas causa dor óssea, sangramento gengival e petéquias</text></svg>", "mcr_diagnostico_geral": "<svg viewBox=\"0 0 680 240\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"mcrPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#2a1e08\"/><stop offset=\"1\" stop-color=\"#160f02\"/></linearGradient>\n  <linearGradient id=\"mcrAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#c99a2e\"/></linearGradient>\n  <linearGradient id=\"mcrGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"mcrRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"mcrShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"240\" rx=\"16\" fill=\"url(#mcrPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#mcrAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Abordagem diagnóstica das deficiências</text><g filter=\"url(#mcrShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"130\" rx=\"14\" fill=\"url(#mcrAccent)\"/></g><text x=\"170\" y=\"72\" fill=\"#3a2a08\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Predominantemente clínico</text><text x=\"170\" y=\"96\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Anamnese alimentar detalhada</text><text x=\"170\" y=\"112\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">+ exame físico dirigido</text><g filter=\"url(#mcrShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"130\" rx=\"14\" fill=\"url(#mcrGold)\"/></g><text x=\"505\" y=\"72\" fill=\"#3a2a08\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Exames confirmatórios</text><text x=\"505\" y=\"96\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Reservados a dúvida diagnóstica</text><text x=\"505\" y=\"112\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">ou refratariedade ao tratamento</text><text x=\"340\" y=\"206\" fill=\"#f0e2c0\" font-size=\"9.5\" text-anchor=\"middle\">Grupos de risco (vegetarianismo estrito, seletividade alimentar) merecem rastreio ativo</text></svg>"});
+</script>
+<script>
+(function(){
+"use strict";
+var A = window.ASVG || {};
+window.CONTENT = window.CONTENT || {};
+
+var C = {};
+C.name = "Micronutrientes: Deficiências Específicas";
+C.intro = "Um mesmo prato \"insuficiente\" pode faltar em calorias, em proteína, ou só em um micronutriente específico -- e cada deficiência isolada de vitamina ou mineral tem sua própria assinatura clínica, muitas vezes reconhecível antes de qualquer exame laboratorial.";
+
+C.sub = [
+
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">Deficiências "escondidas" mesmo sem desnutrição energético-proteica evidente</div>
+<p class="ac-p">É possível uma criança ter peso e estatura adequados para a idade e, ainda assim, apresentar deficiência clinicamente relevante de um micronutriente específico -- a chamada "fome oculta". Isso ocorre porque a dieta pode fornecer calorias suficientes (às vezes até em excesso, como em dietas ricas em ultraprocessados) sem fornecer quantidades adequadas de vitaminas e minerais essenciais.</p>
+<p class="ac-p">Este módulo cobre as deficiências de <b>vitamina A</b>, <b>zinco</b>, <b>iodo</b> e <b>vitamina D</b> (com menção à vitamina C) de forma isolada -- a deficiência de ferro (anemia ferropriva), por sua relevância e volume próprio, tem módulo dedicado na categoria de Hematologia. Cada uma dessas deficiências tem um quadro clínico característico, reconhecível pela equipe de saúde atenta, mesmo antes de qualquer confirmação laboratorial.</p>
+<div class="ac-call ac-tip">💡 O racional central: nem toda deficiência nutricional "aparece" no peso -- pensar em micronutrientes específicos diante de sinais clínicos direcionados.</div>
+<div class="ac-call ac-mne">🧠 "Fome oculta" = calorias suficientes, micronutrientes insuficientes -- peso normal não exclui deficiência.</div>
+`],
+
+['vitamina_a','Deficiência de Vitamina A', `
+<div class="ac-h">Da cegueira noturna à xeroftalmia</div>
+${A.mcr_vitamina_a === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.mcr_vitamina_a)+'" alt="Deficiencia de vitamina A"/>'}
+<p class="ac-p">A deficiência de vitamina A afeta primariamente a <b>retina, a conjuntiva e a córnea</b>. O primeiro sinal funcional é a <b>cegueira noturna</b> (nictalopia) -- dificuldade de enxergar em ambientes com pouca luz. Com a progressão, surge a <b>xeroftalmia</b>: xerose (ressecamento) conjuntival, <b>manchas de Bitot</b> (placas espumosas esbranquiçadas na conjuntiva, compostas por secreção ceratinizada), e, nos casos mais graves, xerose e ulceração de córnea -- que pode evoluir para <b>cegueira irreversível</b> se não tratada.</p>
+<p class="ac-p">Além do impacto ocular, a vitamina A tem papel importante na <b>imunidade</b>: sua suplementação em áreas de deficiência endêmica reduz a mortalidade infantil geral em cerca de 23 a 30%, e atenua a gravidade de episódios de diarreia. Isso torna a suplementação populacional (não apenas o tratamento de casos clínicos evidentes) uma medida de saúde pública de alto impacto.</p>
+<div class="ac-call ac-mne">🧠 Sequência de gravidade: cegueira noturna → xerose conjuntival → manchas de Bitot → xerose/ulceração de córnea.</div>
+`],
+
+['zinco','Deficiência de Zinco', `
+<div class="ac-h">Crescimento, pele e imunidade comprometidos juntos</div>
+${A.mcr_zinco === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.mcr_zinco)+'" alt="Deficiencia de zinco"/>'}
+<p class="ac-p">A deficiência de zinco se manifesta com <b>retardo de crescimento</b>, <b>lesões cutâneas periorificiais e em extremidades</b> (ao redor da boca, olhos, região perianal, mãos e pés -- um padrão característico), <b>diarreia crônica</b>, e <b>alopecia</b>. O zinco é essencial para a função de centenas de enzimas e para a <b>imunidade celular</b>, de modo que sua deficiência predispõe a infecções de repetição, particularmente respiratórias e gastrointestinais.</p>
+<p class="ac-p">Existe uma relação bidirecional importante com a diarreia: a diarreia aguda pode causar perda de zinco, e a deficiência de zinco, por sua vez, prolonga e agrava os episódios diarreicos -- por isso a suplementação terapêutica de zinco é recomendada rotineiramente no manejo da diarreia aguda (assunto já visto na categoria de Diarreia), reduzindo tanto a duração quanto a gravidade do episódio atual, além de reduzir o risco de episódios futuros nos meses seguintes.</p>
+<div class="ac-call ac-tip">💡 Zinco e diarreia se retroalimentam -- deficiência prolonga a diarreia, e a diarreia repetida aprofunda a deficiência.</div>
+`],
+
+['iodo','Deficiência de Iodo', `
+<div class="ac-h">A causa evitável mais comum de retardo mental no mundo</div>
+${A.mcr_iodo === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.mcr_iodo)+'" alt="Deficiencia de iodo"/>'}
+<p class="ac-p">O iodo é essencial para a síntese dos hormônios tireoidianos. Sua deficiência causa <b>bócio</b> (aumento compensatório da tireoide tentando captar mais iodo disponível) e pode evoluir para <b>hipotireoidismo</b>. O cenário mais grave é a deficiência <b>materna severa durante a gestação</b>, que pode causar <b>cretinismo</b> no feto/recém-nascido -- uma forma de dano neurológico permanente e profundo, incluindo deficiência intelectual grave, surdo-mudez e alterações motoras.</p>
+<p class="ac-p">Por esse impacto devastador e evitável, a <b>iodação universal do sal de cozinha</b> é uma das intervenções de saúde pública mais custo-efetivas já implementadas globalmente, e é considerada responsável por prevenir a causa evitável mais comum de retardo mental no mundo. No Brasil, a iodação do sal é obrigatória por lei, o que tornou a deficiência clínica de iodo relativamente rara na população geral atual.</p>
+<div class="ac-call ac-mne">🧠 Deficiência de iodo materna grave = cretinismo no feto. Prevenção = iodação universal do sal.</div>
+`],
+
+['vitd_raquitismo','Deficiência de Vitamina D e Outras Deficiências', `
+<div class="ac-h">Raquitismo, e uma nota sobre vitamina C</div>
+${A.mcr_vitd_raquitismo === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.mcr_vitd_raquitismo)+'" alt="Deficiencia de vitamina D - raquitismo"/>'}
+<p class="ac-p">A deficiência de vitamina D prejudica a <b>absorção intestinal de cálcio e fósforo</b>, comprometendo a mineralização óssea -- o <b>raquitismo</b>. Os achados clássicos incluem <b>craniotabes</b> (amolecimento do osso craniano, palpável em lactentes), <b>rosário raquítico</b> (alargamento das junções costocondrais, palpável como nódulos ao longo do tórax), <b>alargamento de punhos e tornozelos</b>, <b>arqueamento das pernas</b> (genu varo, mais evidente quando a criança começa a andar), atraso na erupção dentária, e maior propensão a fraturas.</p>
+<p class="ac-p">Menos comum na prática atual, mas ainda relevante para o raciocínio diagnóstico, o <b>escorbuto</b> (deficiência de vitamina C) causa dor óssea, sangramento gengival, petéquias e má cicatrização de feridas -- por comprometimento da síntese de colágeno. Deve ser lembrado especialmente em crianças com dietas extremamente restritivas ou seletividade alimentar severa.</p>
+<div class="ac-call ac-peg">⚠️ Craniotabes e rosário raquítico são achados palpáveis no exame físico de rotina -- não exigem exame de imagem para serem suspeitados.</div>
+`],
+
+['diagnostico_geral','Abordagem Diagnóstica', `
+<div class="ac-h">Clínico primeiro, laboratorial quando necessário</div>
+${A.mcr_diagnostico_geral === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.mcr_diagnostico_geral)+'" alt="Abordagem diagnostica das deficiencias de micronutrientes"/>'}
+<p class="ac-p">O diagnóstico das deficiências específicas de micronutrientes é predominantemente <b>clínico</b>, baseado numa <b>anamnese alimentar detalhada</b> (padrão dietético, seletividade alimentar, dietas restritivas, contexto socioeconômico) associada a um <b>exame físico dirigido</b> aos sinais característicos de cada deficiência discutidos neste módulo.</p>
+<p class="ac-p">Exames laboratoriais confirmatórios (dosagem sérica de retinol, zinco plasmático, 25-hidroxivitamina D, entre outros) são <b>reservados</b> a situações de dúvida diagnóstica, quadros atípicos, ou refratariedade ao tratamento empírico -- não são necessários rotineiramente para iniciar suplementação terapêutica diante de um quadro clínico característico.</p>
+<div class="ac-call ac-tip">💡 Grupos de maior risco -- vegetarianismo/veganismo estrito sem suplementação, seletividade alimentar severa, doenças de má absorção -- merecem rastreio clínico ativo na consulta.</div>
+`],
+
+['papel_puericultura','O Papel da Puericultura', `
+<div class="ac-h">Anamnese alimentar como rotina, não exceção</div>
+<p class="ac-p">A puericultura é o momento ideal para uma <b>anamnese alimentar sistemática</b> em cada consulta -- não apenas perguntar "está comendo bem", mas explorar variedade da dieta, presença de seletividade alimentar importante, uso de dietas restritivas (vegetarianismo/veganismo sem orientação adequada), e contexto de insegurança alimentar familiar. Essa investigação ativa permite identificar riscos de deficiência de micronutrientes antes que se tornem clinicamente evidentes.</p>
+<p class="ac-p">A equipe de saúde também deve estar atenta a sinais físicos sutis nas consultas de rotina (alterações de pele, cabelo, gengiva, marcha, desenvolvimento) que podem ser a primeira pista de uma deficiência específica, e orientar preventivamente sobre alimentação variada e, quando indicado, suplementação profilática (tema do próximo módulo desta categoria).</p>
+<div class="ac-call ac-tip">💡 Perguntar especificamente sobre seletividade alimentar e dietas restritivas revela riscos que a pergunta genérica "come bem?" frequentemente não capta.</div>
+`],
+
+];
+
+Object.assign(C, {
+
+escores: `
+<div class="ac-h">Números que fecham questão</div>
+<table class="ac-tbl"><tr><th>Deficiência</th><th>Achado-chave</th></tr>
+<tr><td>Vitamina A</td><td>1º sinal: cegueira noturna. Grave: manchas de Bitot, xerose/ulceração de córnea</td></tr>
+<tr><td>Vitamina A (impacto populacional)</td><td>Reduz mortalidade infantil em ~23-30% em áreas endêmicas</td></tr>
+<tr><td>Zinco</td><td>Lesões periorificiais, retardo de crescimento, diarreia crônica, alopecia</td></tr>
+<tr><td>Iodo</td><td>Bócio; deficiência materna grave = cretinismo fetal</td></tr>
+<tr><td>Vitamina D</td><td>Raquitismo: craniotabes, rosário raquítico, genu varo</td></tr>
+<tr><td>Vitamina C</td><td>Escorbuto: dor óssea, sangramento gengival, petéquias</td></tr></table>
+`,
+
+dif: `
+<div class="ac-h">Diferencial automático -- deficiências específicas</div>
+<table class="ac-tbl"><tr><th>Achado predominante</th><th>Deficiência a suspeitar</th></tr>
+<tr><td>Cegueira noturna, manchas de Bitot</td><td>Vitamina A</td></tr>
+<tr><td>Lesões periorificiais + diarreia crônica</td><td>Zinco</td></tr>
+<tr><td>Bócio, atraso neurológico congênito grave</td><td>Iodo</td></tr>
+<tr><td>Craniotabes, genu varo, rosário costal</td><td>Vitamina D (raquitismo)</td></tr>
+<tr><td>Sangramento gengival, petéquias, dor óssea</td><td>Vitamina C (escorbuto)</td></tr></table>
+`,
+
+mapa: `
+<div class="ac-h">Mapa mental -- Micronutrientes: Deficiências Específicas</div>
+<div class="mm">
+<div class="mm-card"><h5>VITAMINA A</h5><ul><li>Cegueira noturna → manchas de Bitot</li><li>Reduz mortalidade infantil</li></ul></div>
+<div class="mm-card"><h5>ZINCO</h5><ul><li>Lesões periorificiais, alopecia</li><li>Piora e é piorado pela diarreia</li></ul></div>
+<div class="mm-card"><h5>IODO</h5><ul><li>Bócio, hipotireoidismo</li><li>Materna grave = cretinismo</li></ul></div>
+<div class="mm-card"><h5>VITAMINA D</h5><ul><li>Raquitismo: craniotabes, genu varo</li></ul></div>
+<div class="mm-card"><h5>VITAMINA C</h5><ul><li>Escorbuto: gengiva, petéquias</li></ul></div>
+<div class="mm-card"><h5>DIAGNÓSTICO</h5><ul><li>Clínico primeiro</li><li>Laboratorial só se dúvida/refratário</li></ul></div>
+</div>
+`,
+
+fluxo_dx: `
+<div class="ac-h">Fluxograma -- investigando deficiência de micronutriente</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Sinal clínico sugestivo (ocular, cutâneo, ósseo, tireoidiano)</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Anamnese alimentar detalhada + exame físico dirigido</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node end">Quadro clínico característico: tratar empiricamente</div>
+<div class="fx-node end">Dúvida/atípico/refratário: exame laboratorial confirmatório</div>
+</div>
+</div>
+`,
+
+fluxo_cond: `
+<div class="ac-h">Fluxograma de conduta -- rastreio na puericultura</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Consulta de puericultura de rotina</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Anamnese alimentar ativa: variedade, seletividade, dietas restritivas</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Exame físico dirigido a sinais sutis (pele, cabelo, gengiva, ossos)</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node end">Grupo de risco identificado: orientar/considerar suplementação preventiva</div></div>
+</div>
+`,
+
+vespera: `
+<div class="ac-h">Revisão de véspera -- Micronutrientes: Deficiências Específicas</div>
+<div class="ac-call ac-high">⚡ "Fome oculta": peso normal não exclui deficiência de micronutriente específico.</div>
+<ul class="ac-ul">
+<li>Vitamina A: cegueira noturna (1º sinal) → xerose conjuntival → manchas de Bitot → xerose/ulceração de córnea.</li>
+<li>Vitamina A reduz mortalidade infantil em ~23-30% em áreas de deficiência endêmica.</li>
+<li>Zinco: lesões periorificiais, retardo de crescimento, diarreia crônica, alopecia -- relação bidirecional com diarreia.</li>
+<li>Iodo: bócio/hipotireoidismo; deficiência materna grave = cretinismo fetal. Prevenção: iodação universal do sal.</li>
+<li>Vitamina D (raquitismo): craniotabes, rosário raquítico, genu varo, atraso dentário.</li>
+<li>Vitamina C (escorbuto): dor óssea, sangramento gengival, petéquias -- raro, dietas muito restritivas.</li>
+<li>Diagnóstico predominantemente clínico; laboratorial reservado a dúvida/refratariedade.</li>
+</ul>
+`,
+
+dicas: `
+<div class="ac-h">Dicas e Pegadinhas</div>
+<div class="ac-call ac-peg">⚠️ Peso e estatura normais NÃO excluem deficiência de micronutriente específico -- "fome oculta" é real.</div>
+<div class="ac-call ac-mne">🧠 "Cegueira noturna primeiro, córnea por último" -- sequência de gravidade da deficiência de vitamina A.</div>
+<div class="ac-call ac-peg">⚠️ Deficiência de zinco e diarreia se retroalimentam -- lembrar da suplementação terapêutica na diarreia aguda.</div>
+<div class="ac-call ac-tip">✅ Craniotabes e rosário raquítico são achados de exame físico, não exigem exame de imagem para suspeita inicial.</div>
+<div class="ac-call ac-peg">⚠️ Deficiência de iodo materna GRAVE (não leve) é a que causa cretinismo -- não confundir gravidade com qualquer grau de deficiência.</div>
+`,
+
+checklist: [
+ "Sei a sequência de gravidade da deficiência de vitamina A (xeroftalmia)",
+ "Sei os achados clínicos característicos da deficiência de zinco",
+ "Sei a relação bidirecional entre zinco e diarreia",
+ "Sei as consequências da deficiência de iodo, incluindo o cretinismo",
+ "Sei os achados clássicos do raquitismo (deficiência de vitamina D)",
+ "Sei reconhecer o escorbuto (deficiência de vitamina C)",
+ "Sei que o diagnóstico é predominantemente clínico, com exames reservados a dúvida",
+ "Entendo o conceito de 'fome oculta' e por que peso normal não exclui deficiência",
+ "Sei identificar grupos de maior risco para deficiências específicas",
+ "Sei o papel da anamnese alimentar ativa na puericultura"
+],
+
+});
+
+Object.assign(C, {
+
+questoes: [
+  {id:"mcr-q1",banca:"ENARE (estilo)",stem:"Qual o primeiro sinal funcional da deficiência de vitamina A?",
+   opts:["Xerose de córnea","Cegueira noturna (nictalopia)","Manchas de Bitot","Ulceração corneana"],
+   correct:1, expl:"A cegueira noturna é o primeiro sinal funcional, precedendo os demais achados de xeroftalmia."},
+  {id:"mcr-q2",banca:"Revalida (estilo)",stem:"Qual achado cutâneo é característico da deficiência de zinco?",
+   opts:["Lesões periorificiais e em extremidades","Petéquias generalizadas isoladas","Icterícia difusa","Eritema malar em asa de borboleta"],
+   correct:0, expl:"Lesões cutâneas periorificiais e em extremidades são características da deficiência de zinco."},
+  {id:"mcr-q3",banca:"UFRJ (estilo)",stem:"Qual a relação entre deficiência de zinco e diarreia na infância?",
+   opts:["Não existe relação entre os dois","Relação bidirecional: a diarreia causa perda de zinco, e a deficiência de zinco prolonga/agrava a diarreia","Zinco só é relevante em quadros respiratórios, não digestivos","O zinco piora exclusivamente quadros virais, sem relação com diarreia"],
+   correct:1, expl:"Existe relação bidirecional: diarreia causa perda de zinco, e a deficiência de zinco prolonga e agrava episódios diarreicos."},
+  {id:"mcr-q4",banca:"SES-RJ (estilo)",stem:"Qual a consequência mais grave da deficiência materna SEVERA de iodo durante a gestação?",
+   opts:["Nenhuma repercussão relevante para o feto","Cretinismo, com deficiência intelectual grave e alterações motoras no feto/RN","Apenas alterações estéticas transitórias no recém-nascido","Exclusivamente sobrepeso neonatal, sem outras repercussões"],
+   correct:1, expl:"Deficiência materna severa de iodo pode causar cretinismo no feto/RN, com dano neurológico permanente e profundo."},
+  {id:"mcr-q5",banca:"UERJ (estilo)",stem:"Quais achados de exame físico são característicos do raquitismo (deficiência de vitamina D)?",
+   opts:["Icterícia e hepatomegalia isoladas","Craniotabes, rosário raquítico e arqueamento das pernas (genu varo)","Exclusivamente perda de peso acentuada","Apenas alterações oculares, sem repercussão óssea"],
+   correct:1, expl:"Craniotabes, rosário raquítico (alargamento costocondral) e genu varo são achados clássicos do raquitismo."},
+  {id:"mcr-q6",banca:"PSU-MG (estilo)",stem:"Qual medida de saúde pública é responsável por reduzir drasticamente a deficiência clínica de iodo na população geral?",
+   opts:["Suplementação individual obrigatória de iodo em todas as crianças","Iodação universal do sal de cozinha","Vacinação específica contra deficiência de iodo","Restrição do consumo de sal na dieta infantil"],
+   correct:1, expl:"A iodação universal do sal é uma das intervenções de saúde pública mais custo-efetivas para prevenir deficiência de iodo."},
+  {id:"mcr-q7",banca:"ENARE (estilo)",stem:"Qual achado clínico sugere escorbuto (deficiência de vitamina C)?",
+   opts:["Cegueira noturna isolada","Sangramento gengival, petéquias e dor óssea","Bócio visível ao exame cervical","Lesões periorificiais características de zinco"],
+   correct:1, expl:"Sangramento gengival, petéquias e dor óssea são achados clássicos do escorbuto, por comprometimento da síntese de colágeno."},
+  {id:"mcr-q8",banca:"Revalida (estilo)",stem:"É possível uma criança com peso e estatura adequados para a idade apresentar deficiência clinicamente relevante de um micronutriente específico?",
+   opts:["Não, peso e estatura normais sempre excluem qualquer deficiência nutricional","Sim -- o conceito de 'fome oculta' descreve exatamente essa situação","Apenas em prematuros extremos, nunca em crianças a termo","Apenas se houver desnutrição energético-proteica associada"],
+   correct:1, expl:"O conceito de 'fome oculta' descreve deficiência de micronutrientes específicos mesmo com peso/estatura adequados."},
+  {id:"mcr-q9",banca:"UFRJ (estilo)",stem:"Qual a abordagem diagnóstica inicial mais apropriada diante de suspeita de deficiência de micronutriente específico?",
+   opts:["Exame laboratorial extenso e obrigatório antes de qualquer conduta","Anamnese alimentar detalhada associada a exame físico dirigido aos sinais característicos","Apenas biópsia de pele em todos os casos suspeitos","Ressonância magnética como primeira linha de investigação"],
+   correct:1, expl:"O diagnóstico é predominantemente clínico, baseado em anamnese alimentar e exame físico dirigido; exames são reservados a dúvida/refratariedade."},
+  {id:"mcr-q10",banca:"SES-RJ (estilo)",stem:"Qual o impacto da suplementação de vitamina A em áreas de deficiência endêmica, sobre a mortalidade infantil?",
+   opts:["Nenhum impacto mensurável identificado em estudos populacionais","Redução de aproximadamente 23 a 30% na mortalidade infantil","Aumento da mortalidade por efeitos adversos da suplementação","Impacto restrito exclusivamente à acuidade visual, sem relação com mortalidade"],
+   correct:1, expl:"A suplementação de vitamina A em áreas endêmicas reduz a mortalidade infantil em aproximadamente 23 a 30%."},
+  {id:"mcr-q11",banca:"UERJ (estilo)",stem:"Quais grupos devem ser considerados de maior risco para deficiências de micronutrientes e merecem rastreio ativo?",
+   opts:["Apenas crianças com obesidade estabelecida","Vegetarianismo/veganismo estrito sem orientação, seletividade alimentar severa, doenças de má absorção","Exclusivamente crianças hospitalizadas por outras causas","Nenhum grupo específico apresenta maior risco relevante"],
+   correct:1, expl:"Dietas restritivas sem orientação adequada, seletividade alimentar severa e doenças de má absorção são grupos de maior risco."},
+  {id:"mcr-q12",banca:"ENARE (estilo)",stem:"Qual pergunta na anamnese de puericultura é mais eficaz para identificar riscos de deficiência nutricional do que perguntar genericamente 'está comendo bem'?",
+   opts:["Nenhuma pergunta adicional é necessária além da genérica","Explorar especificamente variedade da dieta, seletividade alimentar e uso de dietas restritivas","Perguntar apenas sobre o peso ao nascer","Perguntar exclusivamente sobre frequência de consultas médicas anteriores"],
+   correct:1, expl:"Perguntas específicas sobre variedade alimentar, seletividade e dietas restritivas revelam riscos que a pergunta genérica frequentemente não capta."}
+],
+
+flashcards:[
+  {id:"mcr-f1",tipo:"qa",tag:"Vitamina A",front:"Qual o primeiro sinal funcional da deficiência de vitamina A?",back:"<b>Cegueira noturna</b> (nictalopia)."},
+  {id:"mcr-f2",tipo:"qa",tag:"Vitamina A",front:"O que são manchas de Bitot?",back:"Placas espumosas esbranquiçadas na <b>conjuntiva</b>, por ceratinização."},
+  {id:"mcr-f3",tipo:"qa",tag:"Zinco",front:"Cite achados clínicos da deficiência de zinco.",back:"<b>Lesões periorificiais, retardo de crescimento, diarreia crônica, alopecia.</b>"},
+  {id:"mcr-f4",tipo:"vf",tag:"Zinco",front:"Zinco e diarreia não têm relação clínica relevante.",back:"<b>FALSO.</b> Relação bidirecional -- cada um agrava o outro."},
+  {id:"mcr-f5",tipo:"qa",tag:"Iodo",front:"Qual a consequência mais grave da deficiência materna severa de iodo?",back:"<b>Cretinismo</b> no feto/RN."},
+  {id:"mcr-f6",tipo:"qa",tag:"Iodo",front:"Qual medida de saúde pública previne deficiência de iodo?",back:"<b>Iodação universal do sal.</b>"},
+  {id:"mcr-f7",tipo:"qa",tag:"Vitamina D",front:"Cite 3 achados do raquitismo.",back:"<b>Craniotabes, rosário raquítico, genu varo</b> (entre outros)."},
+  {id:"mcr-f8",tipo:"qa",tag:"Vitamina C",front:"Quais achados sugerem escorbuto?",back:"<b>Sangramento gengival, petéquias, dor óssea.</b>"},
+  {id:"mcr-f9",tipo:"cloze",tag:"Conceito",front:"'{{c1::Fome oculta}}' = calorias suficientes, mas {{c2::micronutrientes}} insuficientes.",back:"Conceito-chave: peso normal não exclui deficiência de micronutriente."},
+  {id:"mcr-f10",tipo:"qa",tag:"Diagnóstico",front:"Quando solicitar exame laboratorial confirmatório?",back:"Apenas em <b>dúvida diagnóstica ou refratariedade</b> ao tratamento empírico."},
+  {id:"mcr-f11",tipo:"qa",tag:"Vitamina A",front:"Qual o impacto da vitamina A na mortalidade infantil em áreas endêmicas?",back:"Redução de <b>~23-30%</b>."},
+  {id:"mcr-f12",tipo:"qa",tag:"Grupos de risco",front:"Cite 2 grupos de maior risco para deficiência de micronutrientes.",back:"<b>Dietas restritivas sem orientação</b> e <b>seletividade alimentar severa</b> (entre outros)."},
+  {id:"mcr-f13",tipo:"vf",tag:"Diagnóstico",front:"O diagnóstico das deficiências específicas é predominantemente laboratorial.",back:"<b>FALSO.</b> É predominantemente clínico."},
+  {id:"mcr-f14",tipo:"qa",tag:"Zinco",front:"Qual o papel do zinco terapêutico na diarreia aguda?",back:"Reduz <b>duração e gravidade</b> do episódio, e risco de recorrência."}
+],
+
+casos:[
+  {t:"Caso 1 -- Reconhecendo xeroftalmia precoce",
+   stem:"Criança de 3 anos, dieta pobre em variedade, mãe relata que a criança tropeça mais à noite e evita ambientes escuros.",
+   passos:[
+     {h:"1. Qual deficiência esse relato sugere?", p:"<b>Deficiência de vitamina A</b> -- cegueira noturna é o primeiro sinal funcional."},
+     {h:"2. Qual a conduta diante desse quadro?", p:"Tratamento com <b>vitamina A</b>, e avaliação oftalmológica se sinais mais avançados estiverem presentes."},
+     {h:"3. Por que agir rapidamente é importante aqui?", p:"A progressão pode levar a <b>xerose/ulceração de córnea e cegueira irreversível</b> se não tratada."}
+   ]},
+  {t:"Caso 2 -- Diarreia crônica e lesões de pele",
+   stem:"Criança com diarreia crônica recorrente, lesões cutâneas ao redor da boca e ânus, e queda de cabelo perceptível.",
+   passos:[
+     {h:"1. Qual deficiência esse quadro sugere?", p:"<b>Deficiência de zinco</b> -- lesões periorificiais, diarreia crônica, alopecia."},
+     {h:"2. Existe relação entre a diarreia e essa deficiência?", p:"Sim -- relação <b>bidirecional</b>: a diarreia perpetua a perda de zinco, e a deficiência prolonga a diarreia."},
+     {h:"3. O que a suplementação de zinco pode ajudar nesse caso?", p:"Reduzir a <b>duração e gravidade</b> do quadro atual e diminuir risco de recorrência."}
+   ]},
+  {t:"Caso 3 -- Lactente com achados ósseos",
+   stem:"Lactente de 8 meses com amolecimento perceptível do osso craniano à palpação e nódulos ao longo das junções costocondrais.",
+   passos:[
+     {h:"1. Como se chamam esses dois achados?", p:"<b>Craniotabes</b> e <b>rosário raquítico</b>, respectivamente."},
+     {h:"2. Qual deficiência esses achados sugerem?", p:"<b>Deficiência de vitamina D</b> (raquitismo)."},
+     {h:"3. É necessário exame de imagem para suspeitar desse diagnóstico?", p:"Não -- ambos são achados <b>palpáveis ao exame físico</b> de rotina."}
+   ]}
+]
+
+});
+
+window.CONTENT['nutricao|2'] = C;
+})();
+</script>
+
+<!-- ===== MODULO Suplementacao Profilatica na Infancia (novo, nutricao|3) ===== -->
+<script>
+Object.assign(window.ASVG=window.ASVG||{}, {"sup_ferro_esquema": "<svg viewBox=\"0 0 680 250\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"supPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#123a2e\"/><stop offset=\"1\" stop-color=\"#061e16\"/></linearGradient>\n  <linearGradient id=\"supAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#9be8b8\"/><stop offset=\"1\" stop-color=\"#4fb87f\"/></linearGradient>\n  <linearGradient id=\"supGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"supRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"supShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"250\" rx=\"16\" fill=\"url(#supPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#supAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Suplementação profilática de ferro (SBP)</text><g filter=\"url(#supShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"140\" rx=\"14\" fill=\"url(#supAccent)\"/></g><text x=\"170\" y=\"72\" fill=\"#0a2a1c\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">RN a termo, peso adequado</text><text x=\"170\" y=\"96\" fill=\"#0a2a1c\" font-size=\"9.5\" text-anchor=\"middle\">1 mg/kg/dia de ferro elementar</text><text x=\"170\" y=\"112\" fill=\"#0a2a1c\" font-size=\"9.5\" text-anchor=\"middle\">a partir do 3º mês até os 24</text><text x=\"170\" y=\"128\" fill=\"#0a2a1c\" font-size=\"9.5\" text-anchor=\"middle\">meses, independente da dieta</text><g filter=\"url(#supShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"140\" rx=\"14\" fill=\"url(#supGold)\"/></g><text x=\"505\" y=\"72\" fill=\"#3a2a08\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Prematuros/baixo peso</text><text x=\"505\" y=\"96\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Doses maiores e início mais</text><text x=\"505\" y=\"112\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">precoce (protocolo específico</text><text x=\"505\" y=\"128\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">por peso/idade gestacional)</text><text x=\"340\" y=\"216\" fill=\"#d8f2e6\" font-size=\"9.5\" text-anchor=\"middle\">Independe do tipo de alimentação -- inclusive em aleitamento materno exclusivo</text></svg>", "sup_vitamina_d_esquema": "<svg viewBox=\"0 0 680 260\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"supPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#123a2e\"/><stop offset=\"1\" stop-color=\"#061e16\"/></linearGradient>\n  <linearGradient id=\"supAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#9be8b8\"/><stop offset=\"1\" stop-color=\"#4fb87f\"/></linearGradient>\n  <linearGradient id=\"supGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"supRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"supShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"260\" rx=\"16\" fill=\"url(#supPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#supAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Suplementação profilática de vitamina D (SBP, atualização)</text><g filter=\"url(#supShadow)\"><rect x=\"20\" y=\"48\" width=\"200\" height=\"150\" rx=\"12\" fill=\"url(#supAccent)\"/></g><text x=\"120\" y=\"72\" fill=\"#0a2a1c\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">&lt;1 ano</text><text x=\"120\" y=\"110\" fill=\"#0a2a1c\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">400 UI/dia</text><g filter=\"url(#supShadow)\"><rect x=\"240\" y=\"48\" width=\"200\" height=\"150\" rx=\"12\" fill=\"url(#supAccent)\"/></g><text x=\"340\" y=\"72\" fill=\"#0a2a1c\" font-size=\"10\" font-weight=\"700\" text-anchor=\"middle\">1-18 anos</text><text x=\"340\" y=\"110\" fill=\"#0a2a1c\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">600 UI/dia</text><g filter=\"url(#supShadow)\"><rect x=\"460\" y=\"48\" width=\"200\" height=\"150\" rx=\"12\" fill=\"url(#supGold)\"/></g><text x=\"560\" y=\"72\" fill=\"#3a2a08\" font-size=\"9.5\" font-weight=\"700\" text-anchor=\"middle\">Com fator de risco</text><text x=\"560\" y=\"110\" fill=\"#3a2a08\" font-size=\"12.5\" font-weight=\"700\" text-anchor=\"middle\">1200-1800 UI/dia</text><text x=\"560\" y=\"130\" fill=\"#3a2a08\" font-size=\"8\" text-anchor=\"middle\">(obesidade, hepatopatia,</text><text x=\"560\" y=\"142\" fill=\"#3a2a08\" font-size=\"8\" text-anchor=\"middle\">nefropatia, má absorção)</text><text x=\"340\" y=\"228\" fill=\"#d8f2e6\" font-size=\"9.5\" text-anchor=\"middle\">Recomendação atualizada da SBP: profilaxia universal dos 0 aos 18 anos</text></svg>", "sup_vitamina_a_programa": "<svg viewBox=\"0 0 680 250\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"supPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#123a2e\"/><stop offset=\"1\" stop-color=\"#061e16\"/></linearGradient>\n  <linearGradient id=\"supAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#9be8b8\"/><stop offset=\"1\" stop-color=\"#4fb87f\"/></linearGradient>\n  <linearGradient id=\"supGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"supRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"supShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"250\" rx=\"16\" fill=\"url(#supPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#supAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Programa Nacional de Suplementação de Vitamina A</text><g filter=\"url(#supShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"140\" rx=\"14\" fill=\"url(#supAccent)\"/></g><text x=\"170\" y=\"72\" fill=\"#0a2a1c\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">6 a 11 meses</text><text x=\"170\" y=\"106\" fill=\"#0a2a1c\" font-size=\"15\" font-weight=\"700\" text-anchor=\"middle\">Megadose 100.000 UI</text><text x=\"170\" y=\"128\" fill=\"#0a2a1c\" font-size=\"8.5\" text-anchor=\"middle\">dose única nessa faixa</text><g filter=\"url(#supShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"140\" rx=\"14\" fill=\"url(#supGold)\"/></g><text x=\"505\" y=\"72\" fill=\"#3a2a08\" font-size=\"10.5\" font-weight=\"700\" text-anchor=\"middle\">12 a 59 meses (e puérperas)</text><text x=\"505\" y=\"106\" fill=\"#3a2a08\" font-size=\"15\" font-weight=\"700\" text-anchor=\"middle\">Megadose 200.000 UI</text><text x=\"505\" y=\"128\" fill=\"#3a2a08\" font-size=\"8.5\" text-anchor=\"middle\">repetida a cada 6 meses</text><text x=\"340\" y=\"216\" fill=\"#d8f2e6\" font-size=\"9.5\" text-anchor=\"middle\">Áreas de risco definidas pelo Ministério da Saúde (regiões endêmicas para hipovitaminose A)</text></svg>", "sup_grupos_risco": "<svg viewBox=\"0 0 680 240\" xmlns=\"http://www.w3.org/2000/svg\" shape-rendering=\"geometricPrecision\" text-rendering=\"geometricPrecision\" preserveAspectRatio=\"xMidYMid meet\" font-family=\"Inter,Arial,sans-serif\"><defs>\n  <linearGradient id=\"supPanel\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#123a2e\"/><stop offset=\"1\" stop-color=\"#061e16\"/></linearGradient>\n  <linearGradient id=\"supAccent\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#9be8b8\"/><stop offset=\"1\" stop-color=\"#4fb87f\"/></linearGradient>\n  <linearGradient id=\"supGold\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffe08a\"/><stop offset=\"1\" stop-color=\"#d9a23a\"/></linearGradient>\n  <linearGradient id=\"supRed\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff9f9f\"/><stop offset=\"1\" stop-color=\"#d94a4a\"/></linearGradient>\n  <filter id=\"supShadow\" x=\"-30%\" y=\"-30%\" width=\"160%\" height=\"160%\"><feDropShadow dx=\"0\" dy=\"2\" stdDeviation=\"3.2\" flood-opacity=\"0.28\"/></filter>\n</defs><rect width=\"680\" height=\"240\" rx=\"16\" fill=\"url(#supPanel)\"/><text x=\"340\" y=\"26\" fill=\"url(#supAccent)\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Quando ir além do esquema padrão</text><g filter=\"url(#supShadow)\"><rect x=\"20\" y=\"48\" width=\"300\" height=\"130\" rx=\"14\" fill=\"url(#supGold)\"/></g><text x=\"170\" y=\"72\" fill=\"#3a2a08\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Grupos de maior risco</text><text x=\"170\" y=\"96\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">Prematuridade, vegetarianismo</text><text x=\"170\" y=\"112\" fill=\"#3a2a08\" font-size=\"9.5\" text-anchor=\"middle\">estrito, má absorção, obesidade</text><g filter=\"url(#supShadow)\"><rect x=\"350\" y=\"48\" width=\"310\" height=\"130\" rx=\"14\" fill=\"url(#supAccent)\"/></g><text x=\"505\" y=\"72\" fill=\"#0a2a1c\" font-size=\"11\" font-weight=\"700\" text-anchor=\"middle\">Conduta</text><text x=\"505\" y=\"96\" fill=\"#0a2a1c\" font-size=\"9.5\" text-anchor=\"middle\">Individualizar dose e</text><text x=\"505\" y=\"112\" fill=\"#0a2a1c\" font-size=\"9.5\" text-anchor=\"middle\">considerar rastreio laboratorial</text><text x=\"340\" y=\"206\" fill=\"#d8f2e6\" font-size=\"9.5\" text-anchor=\"middle\">A puericultura de rotina é o momento-chave para identificar esses grupos</text></svg>"});
+</script>
+<script>
+(function(){
+"use strict";
+var A = window.ASVG || {};
+window.CONTENT = window.CONTENT || {};
+
+var C = {};
+C.name = "Suplementação Profilática na Infância";
+C.intro = "Prevenir é mais barato, mais simples e infinitamente menos traumático do que tratar a deficiência já estabelecida -- e os esquemas de suplementação profilática da SBP/MS são exatamente isso: proteção sistemática, aplicada antes que o problema apareça.";
+
+C.sub = [
+
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">Por que suplementar quem ainda não tem deficiência</div>
+<p class="ac-p">A suplementação <b>profilática</b> é diferente do tratamento de uma deficiência já estabelecida (temas do módulo anterior): ela é oferecida <b>sistematicamente</b>, a toda uma população-alvo (por faixa etária, não por sintoma), justamente para <b>evitar</b> que a deficiência se instale. Essa estratégia é adotada quando um nutriente específico tem alta prevalência de deficiência populacional, baixo custo de suplementação, alto impacto quando deficiente, e segurança bem estabelecida na dose profilática recomendada.</p>
+<p class="ac-p">No Brasil, os dois pilares mais consolidados da suplementação profilática pediátrica são o <b>ferro</b> e a <b>vitamina D</b>, ambos com esquemas de dose fixa por faixa etária, recomendados pela Sociedade Brasileira de Pediatria independentemente de sintomas ou fatores de risco individuais -- e a <b>vitamina A</b>, com esquema de megadose específico para áreas de risco definidas pelo Ministério da Saúde.</p>
+<div class="ac-call ac-tip">💡 O racional central: suplementação profilática protege ANTES do sintoma aparecer -- é medida populacional, não resposta a um caso individual.</div>
+<div class="ac-call ac-mne">🧠 Profilática = todo mundo do grupo-alvo recebe, por idade. Terapêutica = só quem já tem a deficiência estabelecida.</div>
+`],
+
+['ferro_profilatico','Suplementação Profilática de Ferro', `
+<div class="ac-h">O esquema mais universal da puericultura</div>
+${A.sup_ferro_esquema === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.sup_ferro_esquema)+'" alt="Esquema de suplementacao profilatica de ferro"/>'}
+<p class="ac-p">A SBP recomenda suplementação profilática de ferro para <b>todo recém-nascido a termo, de peso adequado para a idade gestacional</b>: <b>1 mg/kg/dia de ferro elementar</b>, iniciando no <b>3º mês de vida</b> e mantida <b>até os 24 meses</b> -- <b>independentemente do tipo de alimentação</b>, inclusive em lactentes em aleitamento materno exclusivo (o ferro do leite materno, embora bem absorvido, não é suficiente isoladamente para as reservas necessárias após os primeiros meses).</p>
+<p class="ac-p">Recém-nascidos <b>prematuros ou de baixo peso</b> seguem esquemas de dose maior e início mais precoce, ajustados conforme peso ao nascer e idade gestacional -- refletindo reservas de ferro menores ao nascimento (a maior transferência de ferro materno-fetal ocorre no terceiro trimestre) e maior velocidade de crescimento relativa nesse grupo.</p>
+<div class="ac-call ac-mne">🧠 "1mg/kg/dia, do 3º mês aos 24 meses, sempre" -- independe do tipo de aleitamento.</div>
+`],
+
+['vitamina_d_esquema','Suplementação Profilática de Vitamina D', `
+<div class="ac-h">Atualização recente: profilaxia dos 0 aos 18 anos</div>
+${A.sup_vitamina_d_esquema === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.sup_vitamina_d_esquema)+'" alt="Esquema de suplementacao profilatica de vitamina D"/>'}
+<p class="ac-p">A SBP atualizou sua recomendação de suplementação de vitamina D para cobrir toda a faixa pediátrica: <b>400 UI/dia</b> em menores de 1 ano, e <b>600 UI/dia</b> dos <b>1 aos 18 anos</b> -- uma mudança em relação a recomendações anteriores mais restritas, refletindo o reconhecimento de que a deficiência de vitamina D é prevalente mesmo além da primeira infância, inclusive em adolescentes.</p>
+<p class="ac-p">Crianças e adolescentes com <b>fatores de risco</b> para deficiência mais acentuada -- dieta vegetariana estrita, obesidade, hepatopatia, nefropatia crônica, síndromes de má absorção intestinal, ou uso de medicações que interferem no metabolismo da vitamina D -- recebem doses maiores, na faixa de <b>1200 a 1800 UI/dia</b>, refletindo maior necessidade ou menor eficiência de absorção/ativação nesses grupos.</p>
+<div class="ac-call ac-peg">⚠️ A recomendação atual é de profilaxia UNIVERSAL dos 0 aos 18 anos -- não apenas nos primeiros meses de vida, como em diretrizes mais antigas.</div>
+`],
+
+['vitamina_a_programa','O Programa Nacional de Suplementação de Vitamina A', `
+<div class="ac-h">Megadoses, por faixa etária, em áreas de risco</div>
+${A.sup_vitamina_a_programa === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.sup_vitamina_a_programa)+'" alt="Programa Nacional de Suplementacao de Vitamina A"/>'}
+<p class="ac-p">O Programa Nacional de Suplementação de Vitamina A, do Ministério da Saúde, oferece <b>megadoses</b> por via oral, repetidas a cada <b>6 meses</b>, em áreas consideradas de risco para hipovitaminose A: <b>100.000 UI</b> para crianças de <b>6 a 11 meses</b> (dose única nessa faixa etária, antes de completar 1 ano) e <b>200.000 UI</b> para crianças de <b>12 a 59 meses</b> -- e também para puérperas, no pós-parto imediato, como estratégia de reforço adicional às reservas maternas e ao leite materno.</p>
+<p class="ac-p">Diferentemente da suplementação de ferro e vitamina D (contínuas, diárias, universais), a suplementação de vitamina A é feita em <b>megadoses intermitentes</b>, e direcionada a <b>áreas geográficas de risco</b> definidas pelo Ministério da Saúde -- refletindo a distribuição desigual da deficiência de vitamina A no território brasileiro, historicamente mais prevalente nas regiões Norte e Nordeste.</p>
+<div class="ac-call ac-mne">🧠 "100 mil para 6-11 meses, 200 mil para 12-59 meses" -- dose dobra exatamente ao completar 1 ano.</div>
+`],
+
+['outros_nutrientes','Outras Suplementações a Considerar', `
+<div class="ac-h">Ácido fólico, e quando pensar além do trio principal</div>
+<p class="ac-p">O <b>ácido fólico</b> tem papel de suplementação profilática bem estabelecido, mas principalmente no período <b>periconcepcional/gestacional</b> (prevenção de defeitos de tubo neural), não como rotina universal pediátrica pós-natal -- é mencionado aqui para não confundir com os esquemas de ferro e vitamina D, que são de fato universais na infância.</p>
+<p class="ac-p">O <b>zinco</b> é usado profilaticamente em contextos específicos de alto risco populacional (não é rotina universal como ferro/vitamina D no Brasil), enquanto seu uso <b>terapêutico</b> na diarreia aguda (visto no módulo anterior desta categoria e na categoria de Diarreia) é uma recomendação bem mais consolidada na prática brasileira atual.</p>
+<div class="ac-call ac-tip">💡 Nem todo nutriente "importante" tem esquema de suplementação profilática universal -- ferro e vitamina D são os únicos verdadeiramente universais na rotina pediátrica brasileira atual.</div>
+`],
+
+['grupos_risco','Grupos que Precisam de Atenção Individualizada', `
+<div class="ac-h">Quando o esquema padrão não é suficiente</div>
+${A.sup_grupos_risco === undefined ? '' : '<img class="ac-svg" src="data:image/svg+xml;utf8,'+encodeURIComponent(A.sup_grupos_risco)+'" alt="Grupos de risco para suplementacao individualizada"/>'}
+<p class="ac-p">Além dos esquemas padronizados por idade, alguns grupos merecem avaliação <b>individualizada</b>, com possível ajuste de dose ou investigação laboratorial complementar: prematuros e recém-nascidos de baixo peso (ferro), crianças com dietas vegetarianas/veganas estritas sem orientação nutricional adequada (vitamina D, ferro, B12, zinco), crianças com doenças de <b>má absorção intestinal</b> (doença celíaca, fibrose cística, doença inflamatória intestinal), e crianças com <b>obesidade</b> (menor biodisponibilidade de vitamina D lipossolúvel no tecido adiposo).</p>
+<p class="ac-p">Nesses grupos, a puericultura de rotina deve ir além do esquema padrão, considerando doses ajustadas conforme protocolos específicos e, quando indicado, rastreio laboratorial direcionado -- reconhecendo que "seguir o esquema padrão" pode ser insuficiente para grupos com necessidades diferenciadas.</p>
+<div class="ac-call ac-peg">⚠️ Aplicar cegamente o esquema padrão em um grupo de alto risco pode ser insuficiente -- individualizar quando o contexto clínico pedir.</div>
+`],
+
+['papel_puericultura','O Papel da Puericultura: Onde Tudo se Aplica', `
+<div class="ac-h">A consulta de rotina como ponto de entrega da profilaxia</div>
+<p class="ac-p">A consulta de puericultura é o momento em que a prescrição e o reforço da suplementação profilática de ferro e vitamina D devem ser <b>rotina sistemática</b>, não uma lembrança ocasional -- checar se a suplementação foi iniciada na idade correta, se está sendo mantida, e se a dose ainda é apropriada para o peso/idade atual da criança faz parte de toda consulta dos primeiros dois anos de vida.</p>
+<p class="ac-p">Identificar precocemente crianças em grupos de maior risco (prematuridade, dietas restritivas, doenças crônicas de base) permite individualizar a suplementação antes que uma deficiência clínica se instale -- fechando o ciclo com o módulo anterior desta categoria: a suplementação profilática bem-feita é exatamente o que evita que as deficiências específicas discutidas ali cheguem a se manifestar clinicamente.</p>
+<div class="ac-call ac-tip">💡 Perguntar "está tomando o ferro/vitamina D?" deveria ser tão rotineiro quanto perguntar sobre o calendário vacinal em toda consulta dos 2 primeiros anos.</div>
+`],
+
+];
+
+Object.assign(C, {
+
+escores: `
+<div class="ac-h">Números que fecham questão</div>
+<table class="ac-tbl"><tr><th>Suplemento</th><th>Esquema</th></tr>
+<tr><td>Ferro (RN a termo, peso adequado)</td><td>1 mg/kg/dia, do 3º mês aos 24 meses, independente da dieta</td></tr>
+<tr><td>Vitamina D (&lt;1 ano)</td><td>400 UI/dia</td></tr>
+<tr><td>Vitamina D (1-18 anos)</td><td>600 UI/dia</td></tr>
+<tr><td>Vitamina D (grupos de risco)</td><td>1200-1800 UI/dia</td></tr>
+<tr><td>Vitamina A (6-11 meses)</td><td>Megadose única de 100.000 UI</td></tr>
+<tr><td>Vitamina A (12-59 meses)</td><td>Megadose de 200.000 UI, a cada 6 meses</td></tr></table>
+`,
+
+dif: `
+<div class="ac-h">Diferencial automático -- profilático x terapêutico</div>
+<table class="ac-tbl"><tr><th>Aspecto</th><th>Suplementação profilática</th><th>Tratamento terapêutico</th></tr>
+<tr><td>Quando</td><td>Antes de qualquer sintoma, por idade</td><td>Diante de deficiência já estabelecida</td></tr>
+<tr><td>Público</td><td>Todo o grupo etário-alvo</td><td>Apenas quem tem o quadro clínico</td></tr>
+<tr><td>Exemplo</td><td>Ferro 1mg/kg/dia universal</td><td>Ferro em dose terapêutica para anemia confirmada</td></tr></table>
+`,
+
+mapa: `
+<div class="ac-h">Mapa mental -- Suplementação Profilática na Infância</div>
+<div class="mm">
+<div class="mm-card"><h5>FERRO</h5><ul><li>1mg/kg/dia, 3º-24º mês</li><li>Universal, qualquer dieta</li></ul></div>
+<div class="mm-card"><h5>VITAMINA D</h5><ul><li>400 UI (&lt;1a) / 600 UI (1-18a)</li><li>1200-1800 UI se risco</li></ul></div>
+<div class="mm-card"><h5>VITAMINA A</h5><ul><li>100mil (6-11m) / 200mil (12-59m)</li><li>Megadose, áreas de risco, 6/6 meses</li></ul></div>
+<div class="mm-card"><h5>OUTROS</h5><ul><li>Ácido fólico: gestacional, não pediátrico universal</li><li>Zinco: terapêutico na diarreia</li></ul></div>
+<div class="mm-card"><h5>GRUPOS DE RISCO</h5><ul><li>Prematuros, dietas restritivas</li><li>Má absorção, obesidade</li></ul></div>
+<div class="mm-card"><h5>PUERICULTURA</h5><ul><li>Checar em toda consulta</li><li>Como o calendário vacinal</li></ul></div>
+</div>
+`,
+
+fluxo_dx: `
+<div class="ac-h">Fluxograma -- decidindo o esquema profilático</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Lactente/criança em consulta de puericultura</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">RN a termo, peso adequado, sem fator de risco adicional?</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row">
+<div class="fx-node end">Sim: esquema padrão (ferro 1mg/kg/dia do 3º mês; vit D 400/600 UI/dia)</div>
+<div class="fx-node end">Prematuro/baixo peso/má absorção/obesidade: individualizar dose</div>
+</div>
+</div>
+`,
+
+fluxo_cond: `
+<div class="ac-h">Fluxograma de conduta -- rotina na puericultura</div>
+<div class="fx">
+<div class="fx-row"><div class="fx-node start">Toda consulta de puericultura até os 2 anos</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Checar: ferro iniciado no 3º mês? Vitamina D em uso contínuo?</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node">Área de risco para vit A? Verificar megadose conforme calendário (6/6 meses)</div></div>
+<div class="fx-arrow">↓</div>
+<div class="fx-row"><div class="fx-node end">Identificar grupos de risco: individualizar dose/investigação quando indicado</div></div>
+</div>
+`,
+
+vespera: `
+<div class="ac-h">Revisão de véspera -- Suplementação Profilática na Infância</div>
+<div class="ac-call ac-high">⚡ Profilático = todo o grupo etário recebe, por idade -- não é resposta a sintoma.</div>
+<ul class="ac-ul">
+<li>Ferro: 1 mg/kg/dia, do 3º ao 24º mês, INDEPENDENTE do tipo de alimentação (inclusive aleitamento exclusivo).</li>
+<li>Vitamina D: 400 UI/dia (&lt;1 ano), 600 UI/dia (1-18 anos), 1200-1800 UI/dia se fator de risco.</li>
+<li>Vitamina A (áreas de risco, MS): 100.000 UI (6-11 meses, dose única), 200.000 UI (12-59 meses, a cada 6 meses).</li>
+<li>Ácido fólico: profilaxia é periconcepcional/gestacional, não rotina pediátrica pós-natal universal.</li>
+<li>Zinco: uso profilático não é universal no Brasil; uso terapêutico é consolidado na diarreia aguda.</li>
+<li>Grupos de risco (prematuros, dietas restritivas, má absorção, obesidade) precisam de individualização.</li>
+<li>Checar a suplementação em TODA consulta de puericultura dos 2 primeiros anos, como rotina.</li>
+</ul>
+`,
+
+dicas: `
+<div class="ac-h">Dicas e Pegadinhas</div>
+<div class="ac-call ac-peg">⚠️ Ferro profilático é INDEPENDENTE do tipo de aleitamento -- inclusive em amamentação exclusiva.</div>
+<div class="ac-call ac-mne">🧠 "3º mês, 1mg/kg/dia, até 24 meses" -- esquema padrão de ferro que mais cai em prova.</div>
+<div class="ac-call ac-peg">⚠️ A dose de vitamina A DOBRA de 100.000 para 200.000 UI exatamente ao completar 1 ano de idade.</div>
+<div class="ac-call ac-tip">✅ Vitamina D universal hoje vai até os 18 anos, não só até 1-2 anos como em recomendações mais antigas.</div>
+<div class="ac-call ac-peg">⚠️ Ácido fólico profilático de rotina é tema de pré-natal/gestação -- não confundir com suplementação pediátrica universal.</div>
+`,
+
+checklist: [
+ "Sei o esquema profilático de ferro (dose, início, término) para RN a termo",
+ "Sei que o ferro profilático independe do tipo de alimentação",
+ "Sei o esquema de vitamina D por faixa etária e para grupos de risco",
+ "Sei o esquema de megadoses do Programa Nacional de Vitamina A",
+ "Sei diferenciar suplementação profilática de tratamento terapêutico",
+ "Sei que ácido fólico profilático de rotina não é pediátrico pós-natal universal",
+ "Sei identificar grupos que precisam de individualização da dose",
+ "Entendo por que prematuros seguem esquema de ferro diferenciado",
+ "Sei o papel da puericultura na entrega sistemática da profilaxia",
+ "Entendo a lógica de saúde pública por trás da suplementação profilática"
+],
+
+});
+
+Object.assign(C, {
+
+questoes: [
+  {id:"sup-q1",banca:"ENARE (estilo)",stem:"Qual o esquema de suplementação profilática de ferro para recém-nascido a termo, com peso adequado para a idade gestacional?",
+   opts:["1 mg/kg/dia, a partir do 3º mês até os 24 meses, independente da dieta","Apenas se em uso de fórmula infantil, nunca em aleitamento materno exclusivo","5 mg/kg/dia, a partir do nascimento até 6 meses","Suplementação não é recomendada rotineiramente nesse grupo"],
+   correct:0, expl:"O esquema padrão é 1 mg/kg/dia de ferro elementar, do 3º ao 24º mês, independentemente do tipo de alimentação."},
+  {id:"sup-q2",banca:"Revalida (estilo)",stem:"Qual a dose diária de vitamina D recomendada para crianças de 1 a 18 anos, sem fatores de risco adicionais?",
+   opts:["200 UI/dia","400 UI/dia","600 UI/dia","1800 UI/dia"],
+   correct:2, expl:"A recomendação atual da SBP é de 600 UI/dia de vitamina D para crianças e adolescentes de 1 a 18 anos."},
+  {id:"sup-q3",banca:"UFRJ (estilo)",stem:"Qual a dose de megadose de vitamina A recomendada para crianças de 12 a 59 meses, em áreas de risco?",
+   opts:["50.000 UI","100.000 UI","200.000 UI","500.000 UI"],
+   correct:2, expl:"Crianças de 12 a 59 meses recebem megadose de 200.000 UI, repetida a cada 6 meses, em áreas de risco."},
+  {id:"sup-q4",banca:"SES-RJ (estilo)",stem:"Qual grupo de crianças/adolescentes deve receber dose maior de vitamina D (1200-1800 UI/dia)?",
+   opts:["Todas as crianças, independente de fatores de risco","Crianças com obesidade, hepatopatia, nefropatia crônica, má absorção ou dieta vegetariana estrita","Apenas recém-nascidos a termo saudáveis","Exclusivamente adolescentes do sexo feminino"],
+   correct:1, expl:"Grupos com fatores de risco para deficiência mais acentuada recebem doses maiores de vitamina D (1200-1800 UI/dia)."},
+  {id:"sup-q5",banca:"UERJ (estilo)",stem:"O que diferencia a suplementação PROFILÁTICA da suplementação TERAPÊUTICA de um nutriente?",
+   opts:["Não há diferença conceitual entre os dois termos","A profilática é oferecida sistematicamente a todo o grupo etário-alvo, antes de qualquer sintoma; a terapêutica trata deficiência já estabelecida","A terapêutica sempre usa doses menores que a profilática","A profilática é usada apenas em crianças hospitalizadas"],
+   correct:1, expl:"A suplementação profilática é sistemática e por faixa etária, enquanto a terapêutica trata uma deficiência já estabelecida."},
+  {id:"sup-q6",banca:"PSU-MG (estilo)",stem:"Por que recém-nascidos prematuros ou de baixo peso seguem esquema de ferro diferenciado do esquema padrão?",
+   opts:["Porque não precisam de suplementação de ferro, ao contrário dos RN a termo","Porque têm reservas de ferro menores ao nascimento (menor transferência no 3º trimestre) e maior velocidade de crescimento relativa","Porque o ferro é contraindicado nesse grupo específico","Porque prematuros absorvem ferro de forma mais eficiente que RN a termo"],
+   correct:1, expl:"Prematuros têm menor transferência de ferro materno-fetal (ocorre principalmente no 3º trimestre) e maior velocidade de crescimento relativa, exigindo esquema ajustado."},
+  {id:"sup-q7",banca:"ENARE (estilo)",stem:"A suplementação profilática de ácido fólico de rotina, na forma mais consolidada, está associada a qual período?",
+   opts:["Rotina pediátrica universal pós-natal, dos 0 aos 2 anos","Período periconcepcional/gestacional, para prevenção de defeitos de tubo neural","Exclusivamente na adolescência, sem relação com gestação","Não existe recomendação estabelecida de suplementação de ácido fólico em nenhum contexto"],
+   correct:1, expl:"A suplementação profilática de ácido fólico mais consolidada é periconcepcional/gestacional, não uma rotina pediátrica pós-natal universal."},
+  {id:"sup-q8",banca:"Revalida (estilo)",stem:"Em qual contexto o uso de zinco é uma recomendação bem consolidada na prática brasileira atual?",
+   opts:["Como suplementação profilática universal em todas as crianças, desde o nascimento","Como tratamento terapêutico no manejo da diarreia aguda","Exclusivamente na prevenção de anemia ferropriva","Apenas em crianças com obesidade estabelecida"],
+   correct:1, expl:"O uso terapêutico de zinco na diarreia aguda é uma recomendação bem consolidada; o uso profilático universal não é rotina no Brasil."},
+  {id:"sup-q9",banca:"UFRJ (estilo)",stem:"Qual a frequência de repetição da megadose de vitamina A no Programa Nacional de Suplementação, em áreas de risco?",
+   opts:["A cada 30 dias","A cada 6 meses","Uma única vez na vida, sem repetição","A cada 5 anos"],
+   correct:1, expl:"A megadose de vitamina A é repetida a cada 6 meses, conforme a faixa etária da criança."},
+  {id:"sup-q10",banca:"SES-RJ (estilo)",stem:"Até que idade se estende a recomendação atual (SBP) de suplementação universal de vitamina D?",
+   opts:["Até 1 ano de idade, apenas","Até 6 anos de idade","Até 18 anos de idade","Não há recomendação além do período neonatal"],
+   correct:2, expl:"A recomendação atualizada da SBP estende a profilaxia universal de vitamina D até os 18 anos de idade."},
+  {id:"sup-q11",banca:"UERJ (estilo)",stem:"Qual conduta é apropriada na consulta de puericultura em relação à suplementação profilática de ferro e vitamina D?",
+   opts:["Prescrever apenas uma vez, sem necessidade de reforço em consultas subsequentes","Checar sistematicamente em toda consulta dos primeiros dois anos se a suplementação foi iniciada e está sendo mantida","Delegar completamente essa responsabilidade à família, sem verificação médica","Suplementação só deve ser verificada se houver sintomas sugestivos de deficiência"],
+   correct:1, expl:"A verificação sistemática da suplementação profilática deve ser rotina em toda consulta de puericultura dos primeiros dois anos."},
+  {id:"sup-q12",banca:"ENARE (estilo)",stem:"Qual característica torna um nutriente elegível para um programa de suplementação profilática populacional (como ferro e vitamina D)?",
+   opts:["Alta prevalência de deficiência, baixo custo de suplementação, alto impacto quando deficiente e segurança bem estabelecida na dose profilática","Apenas nutrientes de custo elevado são elegíveis para programas populacionais","Somente nutrientes sem qualquer risco populacional de deficiência são elegíveis","A elegibilidade não depende de nenhum critério objetivo, apenas de preferência clínica"],
+   correct:0, expl:"Nutrientes com alta prevalência de deficiência, baixo custo, alto impacto e segurança bem estabelecida são os candidatos típicos a programas de suplementação profilática populacional."}
+],
+
+flashcards:[
+  {id:"sup-f1",tipo:"qa",tag:"Ferro",front:"Qual o esquema profilático padrão de ferro?",back:"<b>1 mg/kg/dia</b>, do 3º ao 24º mês, independente da dieta."},
+  {id:"sup-f2",tipo:"vf",tag:"Ferro",front:"O ferro profilático não é necessário em aleitamento materno exclusivo.",back:"<b>FALSO.</b> É indicado independente do tipo de alimentação."},
+  {id:"sup-f3",tipo:"qa",tag:"Vitamina D",front:"Qual a dose de vitamina D em menores de 1 ano?",back:"<b>400 UI/dia.</b>"},
+  {id:"sup-f4",tipo:"qa",tag:"Vitamina D",front:"Qual a dose de vitamina D de 1 a 18 anos?",back:"<b>600 UI/dia.</b>"},
+  {id:"sup-f5",tipo:"qa",tag:"Vitamina D",front:"Qual dose para grupos de risco (obesidade, hepatopatia, etc.)?",back:"<b>1200-1800 UI/dia.</b>"},
+  {id:"sup-f6",tipo:"qa",tag:"Vitamina A",front:"Qual megadose para 6-11 meses?",back:"<b>100.000 UI</b> (dose única nessa faixa)."},
+  {id:"sup-f7",tipo:"qa",tag:"Vitamina A",front:"Qual megadose para 12-59 meses, e com que frequência?",back:"<b>200.000 UI</b>, a cada <b>6 meses.</b>"},
+  {id:"sup-f8",tipo:"cloze",tag:"Conceito",front:"Profilática = todo o {{c1::grupo etário-alvo}} recebe; terapêutica = só quem tem {{c2::deficiência estabelecida}}.",back:"Distinção conceitual central do módulo."},
+  {id:"sup-f9",tipo:"vf",tag:"Ácido fólico",front:"O ácido fólico profilático é rotina pediátrica pós-natal universal no Brasil.",back:"<b>FALSO.</b> É periconcepcional/gestacional, não pediátrico universal."},
+  {id:"sup-f10",tipo:"qa",tag:"Zinco",front:"Qual o uso mais consolidado do zinco na prática brasileira atual?",back:"<b>Terapêutico, na diarreia aguda</b> (não profilático universal)."},
+  {id:"sup-f11",tipo:"qa",tag:"Prematuros",front:"Por que prematuros seguem esquema de ferro diferenciado?",back:"Menor <b>transferência de ferro no 3º trimestre</b> + maior velocidade de crescimento."},
+  {id:"sup-f12",tipo:"qa",tag:"Puericultura",front:"Com que frequência checar a suplementação profilática na puericultura?",back:"Em <b>toda consulta</b> dos primeiros 2 anos."},
+  {id:"sup-f13",tipo:"qa",tag:"Vitamina A",front:"Qual órgão/programa coordena a suplementação de vitamina A no Brasil?",back:"<b>Ministério da Saúde</b> (Programa Nacional de Suplementação de Vitamina A)."},
+  {id:"sup-f14",tipo:"qa",tag:"Grupos de risco",front:"Cite 2 grupos que precisam de individualização da suplementação.",back:"<b>Prematuros</b> e <b>dietas vegetarianas/veganas estritas</b> (entre outros)."}
+],
+
+casos:[
+  {t:"Caso 1 -- Verificando o esquema de ferro na consulta de rotina",
+   stem:"Lactente de 4 meses, a termo, peso adequado ao nascer, em aleitamento materno exclusivo, mãe pergunta se ainda é necessário suplementar ferro já que 'o leite materno é completo'.",
+   passos:[
+     {h:"1. O aleitamento materno exclusivo dispensa a suplementação de ferro?", p:"Não -- a suplementação é <b>independente do tipo de alimentação.</b>"},
+     {h:"2. Qual o esquema correto nesse caso?", p:"<b>1 mg/kg/dia</b> de ferro elementar, já deveria ter iniciado no <b>3º mês</b>, mantido até os 24 meses."},
+     {h:"3. Como orientar a mãe?", p:"Explicar que o ferro do leite materno, apesar de bem absorvido, não é suficiente isoladamente após os primeiros meses."}
+   ]},
+  {t:"Caso 2 -- Ajustando vitamina D por fator de risco",
+   stem:"Adolescente de 14 anos com obesidade, sem outras comorbidades conhecidas, em consulta de rotina.",
+   passos:[
+     {h:"1. Qual a dose padrão de vitamina D para a idade, sem considerar a obesidade?", p:"<b>600 UI/dia</b> (1-18 anos)."},
+     {h:"2. A obesidade muda essa recomendação?", p:"Sim -- obesidade é fator de risco, indicando dose maior: <b>1200-1800 UI/dia.</b>"},
+     {h:"3. Por que a obesidade aumenta o risco de deficiência de vitamina D?", p:"Menor <b>biodisponibilidade</b> da vitamina D lipossolúvel, sequestrada no tecido adiposo em maior quantidade."}
+   ]},
+  {t:"Caso 3 -- Aplicando o Programa Nacional de Vitamina A",
+   stem:"Duas crianças em área de risco definida pelo MS: uma com 8 meses, outra com 2 anos, ambas na fila de vacinação de rotina.",
+   passos:[
+     {h:"1. Qual megadose para a criança de 8 meses?", p:"<b>100.000 UI</b> (faixa de 6-11 meses)."},
+     {h:"2. Qual megadose para a criança de 2 anos?", p:"<b>200.000 UI</b> (faixa de 12-59 meses)."},
+     {h:"3. Com que frequência essas doses devem ser repetidas?", p:"A cada <b>6 meses</b>, enquanto permanecerem na faixa etária elegível e na área de risco."}
+   ]}
+]
+
+});
+
+window.CONTENT['nutricao|3'] = C;
+})();
+</script>
+
 </body>
 </html>
 
