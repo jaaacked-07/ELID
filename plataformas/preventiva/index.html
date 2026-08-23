@@ -315,6 +315,8 @@ h1.ph{font-family:var(--font-s);font-size:34px;font-weight:900;letter-spacing:-.
 .mod-card .badge.flag{background:linear-gradient(120deg,var(--accent),#b347b3);color:#fff;border:none}
 .mod-card h3{font-family:var(--font-s);font-size:18px;margin-bottom:6px;padding-right:60px}
 .mod-card .meta{color:var(--muted);font-size:13px;margin-bottom:14px}
+.area-sep{font-family:var(--font-s);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);padding-bottom:9px;margin:30px 0 16px;border-bottom:1px solid var(--border)}
+.area-sep:first-of-type{margin-top:0}
 
 .chip{display:inline-block;padding:5px 12px;border-radius:20px;background:var(--glass);border:1px solid var(--border);font-size:12px;font-weight:600;margin:3px}
 .chip.on{background:var(--primary);color:#fff;border:none}
@@ -1194,7 +1196,107 @@ window.MODULES = [
   }
   ]},
   {id:"epi-c4",t:"Epidemiologia — Testes Diagnósticos",ic:"🧪",desc:"Sensibilidade, especificidade, valores preditivos, razões de verossimilhança e curva ROC.",topics:[
-    stubTopic("epi-sens-esp","Sensibilidade e Especificidade","Capacidade do teste de identificar corretamente doentes e sadios — com a tabela 2×2 e cálculo passo a passo."),
+  {
+    id:"epi-sens-esp", t:"Sensibilidade e Especificidade",
+    CONTENT:{
+      subtopics:[{id:"a",t:"Conceito e tabela 2×2"},{id:"b",t:"Como calcular Sensibilidade"},{id:"c",t:"Como calcular Especificidade"},{id:"d",t:"Pegadinhas e mnemônicos"}],
+      teach:`<h3>Entendendo do zero</h3>
+<p>Imagine que você é o "juiz" de um teste diagnóstico: você já SABE quem realmente tem a doença (porque tem o padrão-ouro — biópsia, cultura, exame confirmatório) e quer avaliar se o teste novo "acerta" ou "erra" ao dizer quem é doente e quem é sadio. Sensibilidade e Especificidade são as duas notas que você dá para esse teste.</p>
+<div class="box tip"><b>Pergunta que cada uma responde:</b> <b>Sensibilidade</b> = "de todo mundo que REALMENTE tem a doença, quantos o teste conseguiu pegar (deu positivo)?" <b>Especificidade</b> = "de todo mundo que REALMENTE não tem a doença, quantos o teste conseguiu liberar corretamente (deu negativo)?"</p></div>
+<h3>A tabela 2×2 dos testes diagnósticos</h3>
+<div class="box tip"><b>A tabela 2×2 dos testes diagnósticos — a base de tudo:</b></div>
+<table class="dt"><tr><th></th><th>Doença PRESENTE (padrão-ouro +)</th><th>Doença AUSENTE (padrão-ouro −)</th></tr>
+<tr><td><b>Teste POSITIVO</b></td><td>a = Verdadeiro Positivo (VP)</td><td>b = Falso Positivo (FP)</td></tr>
+<tr><td><b>Teste NEGATIVO</b></td><td>c = Falso Negativo (FN)</td><td>d = Verdadeiro Negativo (VN)</td></tr></table>
+<p>Como montar: as <b>linhas</b> são o resultado do TESTE que você está avaliando (positivo/negativo); as <b>colunas</b> são a verdade real, dada pelo <b>padrão-ouro</b> (biópsia, cultura, exame confirmatório) — nunca pelo próprio teste em avaliação. <b>a (VP)</b> = teste positivo em quem realmente tem a doença; <b>b (FP)</b> = teste positivo em quem NÃO tem a doença (o teste "errou para cima"); <b>c (FN)</b> = teste negativo em quem tem a doença (o teste "errou para baixo", deixou passar); <b>d (VN)</b> = teste negativo em quem não tem a doença.</p>
+<div class="box warn"><b>Como identificar cada número no enunciado:</b> procure primeiro quem foi confirmado pelo padrão-ouro ("biópsia confirmou", "cultura positiva", "diagnóstico definitivo") — isso te dá as COLUNAS (total de doentes = a+c; total de sadios = b+d). Depois procure o resultado do teste em avaliação dentro de cada grupo — isso preenche as LINHAS dentro de cada coluna.</p></div>
+<h3>Como calcular — Sensibilidade (passo a passo)</h3>
+<p>Vamos usar um exemplo completo. Um novo exame de imagem é testado para detectar uma doença, comparado ao padrão-ouro (biópsia). Foram estudadas 1.000 pessoas: a biópsia confirmou a doença em 100 delas, e descartou nas outras 900. Entre as 100 com biópsia positiva, o exame novo deu positivo em 90 (e negativo, "errando", nas outras 10). Entre as 900 com biópsia negativa, o exame deu positivo (errando) em 50, e negativo (corretamente) em 850.</p>
+<ul>
+<li><b>PASSO 1 — Ache o padrão-ouro no enunciado:</b> "a biópsia confirmou a doença em 100" → essas 100 pessoas formam a COLUNA "Doença Presente" (a+c = 100). As outras 900 formam a coluna "Doença Ausente" (b+d = 900).</li>
+<li><b>PASSO 2 — Ache o resultado do teste DENTRO do grupo doente:</b> "entre as 100 com biópsia positiva, o exame deu positivo em 90" → isso é <b>a = VP = 90</b>. As demais dessa coluna são falso negativo: <b>c = FN = 100 − 90 = 10</b>.</li>
+<li><b>PASSO 3 — Monte a fórmula:</b> Sensibilidade = VP / (VP + FN) = a / (a+c). Repare que o denominador é o TOTAL DE DOENTES (padrão-ouro) — é sempre a soma da coluna "Doença Presente".</li>
+<li><b>PASSO 4 — Substitua os números:</b> Sensibilidade = 90 / (90 + 10) = 90 / 100.</li>
+<li><b>PASSO 5 — Calcule:</b> 90 / 100 = 0,90.</li>
+<li><b>PASSO 6 — Interprete e transforme em %:</b> Sensibilidade = 0,90 × 100 = <b>90%</b>. Ou seja: de cada 100 pessoas que realmente têm a doença, o teste consegue identificar corretamente 90 delas (e "perde" 10, que dão falso negativo).</li>
+</ul>
+<div class="box tip"><b>Fórmula direta:</b> Sensibilidade = VP / (VP+FN) = a / (a+c). Só usa a coluna dos DOENTES.</div>
+<h3>Como calcular — Especificidade (passo a passo)</h3>
+<p>Continuando o mesmo exemplo: das 900 pessoas com biópsia negativa (sadias), o exame deu positivo (errando) em 50 e negativo (corretamente) em 850.</p>
+<ul>
+<li><b>PASSO 1 — Já temos a coluna "Doença Ausente":</b> b+d = 900 (as 900 pessoas com biópsia negativa).</li>
+<li><b>PASSO 2 — Ache o resultado do teste DENTRO do grupo sadio:</b> "deu positivo (errando) em 50" → isso é <b>b = FP = 50</b>. O restante é verdadeiro negativo: <b>d = VN = 900 − 50 = 850</b>.</li>
+<li><b>PASSO 3 — Monte a fórmula:</b> Especificidade = VN / (VN + FP) = d / (b+d). O denominador aqui é o TOTAL DE SADIOS (padrão-ouro) — sempre a soma da coluna "Doença Ausente".</li>
+<li><b>PASSO 4 — Substitua os números:</b> Especificidade = 850 / (50 + 850) = 850 / 900.</li>
+<li><b>PASSO 5 — Calcule:</b> 850 / 900 ≈ 0,944.</li>
+<li><b>PASSO 6 — Interprete e transforme em %:</b> Especificidade ≈ 0,944 × 100 ≈ <b>94,4%</b>. De cada 900 pessoas realmente sadias, o teste libera corretamente cerca de 944 em cada 1.000 (ou seja, 94,4%), e "assusta à toa" (falso positivo) cerca de 5,6%.</li>
+</ul>
+<div class="box tip"><b>Fórmula direta:</b> Especificidade = VN / (VN+FP) = d / (b+d). Só usa a coluna dos SADIOS.</div>
+<h3>Como as bancas tentam confundir você</h3>
+<ul>
+<li><b>Trocar o denominador:</b> a pegadinha mais comum é fazer você calcular VP/(VP+FP) (isso seria VPP, não sensibilidade!). Lembre-se: sensibilidade e especificidade sempre têm como denominador o total de doentes OU o total de sadios pelo padrão-ouro — nunca o total de testes positivos ou negativos.</li>
+<li><b>Confundir com VPP/VPN:</b> Sensibilidade/Especificidade partem de quem TEM ou NÃO TEM a doença (colunas) e perguntam como o teste se saiu. Valor Preditivo Positivo/Negativo partem de quem teve resultado POSITIVO ou NEGATIVO no teste (linhas) e perguntam a chance real de ter a doença — isso é conteúdo de outro módulo (Valores Preditivos), mas a diferença cai muito em prova.</li>
+<li><b>Achar que sensibilidade/especificidade mudam com a prevalência:</b> ERRADO. Sensibilidade e especificidade são propriedades INTRÍNSECAS do teste (dependem só da qualidade técnica dele), e não variam se a doença for rara ou comum na população estudada. Quem muda com a prevalência é o VPP e o VPN.</li>
+<li><b>Esquecer o trade-off:</b> ao mudar o ponto de corte de um teste para aumentar a sensibilidade, tipicamente a especificidade cai (e vice-versa) — são grandezas em tensão.</li>
+</ul>
+<div class="box warn"><b>Mnemônicos clássicos de prova:</b> <b>SnNout</b> (Sensitivity, Negative, rules OUT): um teste muito SENSÍVEL, quando dá NEGATIVO, praticamente EXCLUI a doença — útil para RASTREAMENTO (não pode deixar passar doente). <b>SpPin</b> (Specificity, Positive, rules IN): um teste muito ESPECÍFICO, quando dá POSITIVO, praticamente CONFIRMA a doença — útil para CONFIRMAÇÃO diagnóstica (não pode dar alarme falso).</div>
+<h3>Pratique você mesmo</h3>
+<p><b>Exemplo para você tentar:</b> um teste rápido molecular para tuberculose foi comparado à cultura (padrão-ouro) em 1.000 pacientes com suspeita da doença. A cultura confirmou TB em 200 pacientes e descartou nos outros 800. Entre os 200 com cultura positiva, o teste rápido deu positivo em 180. Entre os 800 com cultura negativa, o teste rápido deu positivo (errando) em 40. Calcule a Sensibilidade e a Especificidade desse teste rápido.</p>
+<div class="box tip"><b>Resposta comentada:</b> PASSO 1: coluna doentes (cultura+) = 200; coluna sadios (cultura−) = 800. PASSO 2: dentro dos 200 doentes, teste positivo (VP) = 180, logo FN = 200−180 = 20. Dentro dos 800 sadios, teste positivo errando (FP) = 40, logo VN = 800−40 = 760. PASSO 3 — Sensibilidade = VP/(VP+FN) = 180/(180+20) = 180/200 = 0,90 = <b>90%</b>. PASSO 4 — Especificidade = VN/(VN+FP) = 760/(760+40) = 760/800 = 0,95 = <b>95%</b>. Interpretação: o teste rápido detecta corretamente 90% dos verdadeiros doentes (perde 10%) e libera corretamente 95% dos verdadeiros sadios (assusta à toa 5%) — um teste bom tanto para rastrear quanto para apoiar confirmação.</div>`,
+      scores:`<table class="dt"><tr><th>Medida</th><th>Fórmula</th><th>Responde a</th><th>Usa a coluna de</th></tr>
+<tr><td>Sensibilidade</td><td>VP/(VP+FN) = a/(a+c)</td><td>Dos doentes, quantos o teste pegou?</td><td>Doentes (padrão-ouro +)</td></tr>
+<tr><td>Especificidade</td><td>VN/(VN+FP) = d/(b+d)</td><td>Dos sadios, quantos o teste liberou?</td><td>Sadios (padrão-ouro −)</td></tr></table>
+<table class="dt"><tr><th>Célula</th><th>Significado</th></tr>
+<tr><td>a = VP</td><td>Teste positivo em quem tem a doença (acertou)</td></tr>
+<tr><td>b = FP</td><td>Teste positivo em quem não tem a doença (errou p/ cima)</td></tr>
+<tr><td>c = FN</td><td>Teste negativo em quem tem a doença (errou p/ baixo, "perdeu" o caso)</td></tr>
+<tr><td>d = VN</td><td>Teste negativo em quem não tem a doença (acertou)</td></tr></table>`,
+      compare:`<table class="dt"><tr><th>Sensibilidade / Especificidade</th><th>VPP / VPN</th></tr>
+<tr><td>Partem de quem TEM/NÃO TEM a doença (colunas)</td><td>Partem de quem teve teste POSITIVO/NEGATIVO (linhas)</td></tr>
+<tr><td>Propriedade intrínseca do teste — NÃO muda com a prevalência</td><td>Muda com a prevalência da doença na população testada</td></tr>
+<tr><td>Usada para escolher/validar o teste</td><td>Usada para interpretar o resultado de UM paciente na prática</td></tr></table>
+<table class="dt"><tr><th>Alta Sensibilidade (SnNout)</th><th>Alta Especificidade (SpPin)</th></tr>
+<tr><td>Negativo EXCLUI a doença</td><td>Positivo CONFIRMA a doença</td></tr>
+<tr><td>Ideal para RASTREAMENTO (screening)</td><td>Ideal para CONFIRMAÇÃO diagnóstica</td></tr></table>`,
+      erros:`<ul><li><b>Trocar o denominador</b> — usar VP+FP (isso é VPP) no lugar de VP+FN para a sensibilidade.</li><li><b>Confundir sensibilidade/especificidade com VPP/VPN</b> — a diferença colunas × linhas cai muito em prova.</li><li><b>Achar que sensibilidade/especificidade variam com a prevalência</b> — são fixas, propriedades do teste.</li><li><b>Trocar SnNout com SpPin</b> na hora da prova.</li><li><b>Esquecer que o padrão-ouro define as colunas</b>, nunca o teste em avaliação.</li></ul>`,
+      summary:`<p><b>Flash:</b> Sensibilidade=VP/(VP+FN) — coluna dos doentes, SnNout (negativo exclui, bom p/ rastreio). Especificidade=VN/(VN+FP) — coluna dos sadios, SpPin (positivo confirma, bom p/ confirmação). Não mudam com prevalência (diferente de VPP/VPN).</p>`,
+      questions:[
+        {stem:"A Sensibilidade de um teste diagnóstico é calculada por:",opts:["VP/(VP+FP)","VP/(VP+FN)","VN/(VN+FP)","VN/(VN+FN)"],correct:1,expl:"Sensibilidade = VP/(VP+FN) = a/(a+c), usando a coluna dos doentes (padrão-ouro positivo)."},
+        {stem:"A Especificidade de um teste diagnóstico é calculada por:",opts:["VN/(VN+FP)","VP/(VP+FN)","VN/(VN+FN)","VP/(VP+FP)"],correct:0,expl:"Especificidade = VN/(VN+FP) = d/(b+d), usando a coluna dos sadios (padrão-ouro negativo)."},
+        {stem:"Em um estudo com 150 doentes (padrão-ouro+) e 350 sadios (padrão-ouro−), o teste avaliado deu positivo em 120 doentes e em 35 sadios. A Sensibilidade é:",opts:["70%","80%","90%","120/155"],correct:1,expl:"VP=120, FN=150-120=30. Sensibilidade=120/(120+30)=120/150=0,80=80%."},
+        {stem:"Usando os mesmos dados da questão anterior (150 doentes, 350 sadios, teste positivo em 35 dos sadios), a Especificidade é:",opts:["80%","90%","35/350","315/350 = 90%"],correct:3,expl:"FP=35, VN=350-35=315. Especificidade=315/(315+35)=315/350=0,90=90%."},
+        {stem:"Um teste com sensibilidade muito alta, quando o resultado é NEGATIVO, tem a propriedade de:",opts:["Confirmar a doença","Praticamente excluir a doença (SnNout)","Não ter nenhum valor clínico","Só funcionar em população rara"],correct:1,expl:"SnNout: teste muito sensível, negativo exclui (rules OUT) a doença — útil no rastreamento."},
+        {stem:"Um teste com especificidade muito alta, quando o resultado é POSITIVO, tem a propriedade de:",opts:["Excluir a doença","Não ter valor diagnóstico","Praticamente confirmar a doença (SpPin)","Aumentar o número de falsos positivos"],correct:2,expl:"SpPin: teste muito específico, positivo confirma (rules IN) a doença — útil na confirmação diagnóstica."},
+        {stem:"Sobre sensibilidade e especificidade, é CORRETO afirmar que:",opts:["Aumentam conforme a prevalência da doença aumenta","São propriedades intrínsecas do teste, independentes da prevalência","Diminuem conforme a prevalência da doença aumenta","São sempre iguais entre si"],correct:1,expl:"Sensibilidade e especificidade não variam com a prevalência — são características do próprio teste. Quem varia com a prevalência são VPP e VPN."},
+        {stem:"Para um programa de RASTREAMENTO populacional, a prioridade na escolha do teste deve ser:",opts:["Alta especificidade, mesmo com baixa sensibilidade","Alta sensibilidade, para minimizar falsos negativos","Baixa sensibilidade e baixa especificidade","Nenhuma das características importa no rastreamento"],correct:1,expl:"No rastreamento não se pode 'perder' casos verdadeiros — prioriza-se alta sensibilidade (poucos falsos negativos)."},
+        {stem:"Em um teste diagnóstico, o Falso Negativo (célula c da tabela 2×2) representa:",opts:["Teste positivo em quem tem a doença","Teste negativo em quem tem a doença","Teste negativo em quem não tem a doença","Teste positivo em quem não tem a doença"],correct:1,expl:"Falso Negativo = teste negativo em paciente que realmente tem a doença (padrão-ouro positivo) — o teste 'deixou passar' o caso."},
+        {stem:"As colunas da tabela 2×2 de um teste diagnóstico são definidas por:",opts:["O resultado do próprio teste em avaliação","O padrão-ouro (diagnóstico de referência)","A opinião do médico assistente","A gravidade clínica do paciente"],correct:1,expl:"As colunas (doença presente/ausente) são sempre definidas pelo padrão-ouro, nunca pelo teste que está sendo avaliado — essa é a base de toda a tabela."}
+      ],
+      flashcards:[
+        {type:"basic",front:"Fórmula da Sensibilidade?",back:"VP/(VP+FN) = a/(a+c) — usa a coluna dos doentes (padrão-ouro positivo)."},
+        {type:"basic",front:"Fórmula da Especificidade?",back:"VN/(VN+FP) = d/(b+d) — usa a coluna dos sadios (padrão-ouro negativo)."},
+        {type:"basic",front:"O que é SnNout?",back:"Teste muito Sensível, quando Negativo, exclui (rules OUT) a doença. Bom para rastreamento."},
+        {type:"basic",front:"O que é SpPin?",back:"Teste muito Específico, quando Positivo, confirma (rules IN) a doença. Bom para confirmação diagnóstica."},
+        {type:"truefalse",front:"Sensibilidade e especificidade mudam conforme a prevalência da doença. (V/F)",back:"FALSO. São propriedades intrínsecas do teste; quem muda com a prevalência é o VPP/VPN."},
+        {type:"cloze",front:"Falso Negativo (FN) = teste {{negativo}} em quem {{tem}} a doença.",back:"negativo / tem"},
+        {type:"cloze",front:"Falso Positivo (FP) = teste {{positivo}} em quem {{não tem}} a doença.",back:"positivo / não tem"},
+        {type:"basic",front:"Quem define as colunas da tabela 2×2 de teste diagnóstico?",back:"O padrão-ouro (diagnóstico de referência), nunca o teste em avaliação."},
+        {type:"basic",front:"Para rastreamento populacional, prioriza-se qual característica do teste?",back:"Alta sensibilidade (minimizar falsos negativos — não pode deixar passar doente)."},
+        {type:"basic",front:"Para confirmação diagnóstica, prioriza-se qual característica do teste?",back:"Alta especificidade (minimizar falsos positivos — não pode dar alarme falso)."},
+        {type:"truefalse",front:"O denominador da sensibilidade é o total de testes positivos (VP+FP). (V/F)",back:"FALSO. O denominador é o total de doentes pelo padrão-ouro (VP+FN)."},
+        {type:"basic",front:"O que acontece tipicamente com a especificidade quando se aumenta a sensibilidade mudando o ponto de corte?",back:"Tende a diminuir — sensibilidade e especificidade estão em trade-off."}
+      ],
+      cases:[
+        {title:"Validando um novo teste de imagem",hist:"Pesquisadores testam um novo exame de imagem para uma doença, usando biópsia como padrão-ouro em 1.000 pacientes: 100 tiveram biópsia positiva e 900 negativa. O exame novo foi positivo em 90 dos 100 biópsia-positivos e em 50 dos 900 biópsia-negativos.",exam:"Coorte de validação diagnóstica, sem desfecho clínico direto no paciente individual.",exams:"Biópsia (padrão-ouro) em todos os participantes.",reason:"Construindo a tabela 2×2: a=VP=90, c=FN=10, b=FP=50, d=VN=850. Sensibilidade=90/100=90%; Especificidade=850/900≈94,4%. O teste tem desempenho bom tanto para detectar doentes quanto para liberar sadios.",dx:"Teste com sensibilidade e especificidade elevadas — adequado tanto para rastreio quanto para apoio à confirmação.",tto:"Pode ser incorporado à prática clínica; a escolha entre priorizar sensibilidade ou especificidade dependerá do contexto de uso (rastreio populacional x confirmação em paciente sintomático)."},
+        {title:"Escolhendo o teste certo para rastreamento",hist:"Uma secretaria de saúde precisa escolher entre dois testes para rastrear uma doença na população: o Teste A tem sensibilidade 95%/especificidade 60%; o Teste B tem sensibilidade 60%/especificidade 95%.",exam:"Decisão de saúde pública, não de um paciente individual.",exams:"Comparação de desempenho dos dois testes frente ao padrão-ouro.",reason:"Para RASTREAMENTO POPULACIONAL, não se pode deixar passar casos verdadeiros — prioriza-se alta sensibilidade (SnNout), mesmo assumindo mais falsos positivos que depois serão descartados por um teste confirmatório mais específico.",dx:"Teste A é mais adequado para a etapa de rastreamento.",tto:"Adotar o Teste A (alta sensibilidade) na triagem inicial; todo positivo é encaminhado para um teste confirmatório de alta especificidade (ex.: o próprio padrão-ouro) antes do diagnóstico definitivo."}
+      ],
+      flowDx:{start:"d1",nodes:{d1:{t:"Você quer avaliar o desempenho do teste a partir de quem TEM/NÃO TEM a doença (padrão-ouro)?",type:"q",opts:[{l:"Sim",to:"d2"},{l:"Não, quero a partir do resultado do teste (VP/VN)",to:"d3"}]},d2:{t:"Use Sensibilidade (coluna doentes) e Especificidade (coluna sadios)",type:"end"},d3:{t:"Isso é VPP/VPN — outro módulo (Valores Preditivos)",type:"end"}}},
+      flowCond:{start:"c1",nodes:{c1:{t:"Qual o objetivo clínico do teste?",type:"q",opts:[{l:"Rastrear/triar população (não pode perder caso)",to:"c2"},{l:"Confirmar diagnóstico em suspeita clínica",to:"c3"}]},c2:{t:"Priorize teste de ALTA SENSIBILIDADE (SnNout)",type:"end"},c3:{t:"Priorize teste de ALTA ESPECIFICIDADE (SpPin)",type:"end"}}},
+      mind:{center:"Sensibilidade e Especificidade",branches:[{h:"Sensibilidade",ic:"🎯",leaves:["VP/(VP+FN)","Coluna dos doentes","SnNout → rastreamento"]},{h:"Especificidade",ic:"🛡️",leaves:["VN/(VN+FP)","Coluna dos sadios","SpPin → confirmação"]},{h:"Propriedade",ic:"⚖️",leaves:["Intrínseca do teste","NÃO muda com prevalência"]},{h:"Tabela 2×2",ic:"🧮",leaves:["Linhas = teste","Colunas = padrão-ouro"]}]},
+      vespera:`<p><b>Flash véspera:</b> Sensibilidade=VP/(VP+FN), coluna dos doentes, SnNout (negativo exclui → rastreio). Especificidade=VN/(VN+FP), coluna dos sadios, SpPin (positivo confirma → confirmação). Não mudam com prevalência (diferente de VPP/VPN). Colunas da tabela = padrão-ouro, nunca o teste avaliado.</p>`,
+      checklist:[{id:"se1",t:"Sei montar a tabela 2×2 de um teste diagnóstico"},{id:"se2",t:"Calculo Sensibilidade passo a passo (VP/(VP+FN))"},{id:"se3",t:"Calculo Especificidade passo a passo (VN/(VN+FP))"},{id:"se4",t:"Sei os mnemônicos SnNout e SpPin"},{id:"se5",t:"Não confundo Sensibilidade/Especificidade com VPP/VPN"},{id:"se6",t:"Sei que não mudam com a prevalência da doença"}]
+    }
+  },
     stubTopic("epi-vpp-vpn","Valor Preditivo Positivo e Negativo","Probabilidade de doença dado um resultado do teste, e como a prevalência influencia esses valores."),
     stubTopic("epi-lr","Razões de Verossimilhança (LR+ e LR-)","Como combinar sensibilidade/especificidade numa única razão que atualiza a probabilidade pré-teste."),
     stubTopic("epi-roc","Acurácia, Ponto de Corte e Curva ROC","Acurácia global do teste, escolha do ponto de corte e interpretação da área sob a curva ROC.")
@@ -3304,19 +3406,35 @@ function modStatus(m){const r=m.topics.filter(isTopicReady).length,tot=m.topics.
   if(r===0)return{lbl:"🚧 Em andamento",cls:"st-wip",r,tot};
   if(r===tot)return{lbl:"✅ Completo",cls:"st-done",r,tot};
   return{lbl:`🟡 Parcial (${r}/${tot})`,cls:"st-part",r,tot};}
+function splitAreaAssunto(t){
+  const i=t.indexOf(" — ");
+  return i<0 ? {area:t,assunto:t} : {area:t.slice(0,i),assunto:t.slice(i+3)};
+}
+function groupModsByArea(mods){
+  const groups=[];
+  mods.forEach(m=>{
+    const {area,assunto}=splitAreaAssunto(m.t);
+    if(!groups.length||groups[groups.length-1].area!==area) groups.push({area,items:[]});
+    groups[groups.length-1].items.push({m,assunto});
+  });
+  return groups;
+}
 function renderModulos(){
   const completos=MODULES.filter(m=>modStatus(m).r===m.topics.length).length;
-  return `<h1 class="ph">${phIco('modulos')}Módulos</h1><p class="ph-sub">${MODULES.length} módulos · <b style="color:var(--primary)">${completos} completo(s)</b>, ${MODULES.length-completos} em desenvolvimento. As etiquetas mostram o status do conteúdo.</p>
-  <div class="grid g2">`+MODULES.map(m=>{
-    const tot=m.topics.length,done=m.topics.filter(t=>S.done["topic:"+t.id]).length;const p=Math.round(done/tot*100);
-    const st=modStatus(m);
-    return `<div class="card mod-card hov" onclick="openModule('${m.id}')">
-      <span class="badge ${m.flag?'flag':''}">${m.flag?'FLAGSHIP':m.topics.length+' tópicos'}</span>
-      <span class="status-pill ${st.cls}">${st.lbl}</span>
-      <h3>${m.ic} ${m.t}</h3><div class="meta">${m.desc}</div>
-      <div class="progress"><i style="width:${p}%"></i></div>
-      <div style="font-size:12px;color:var(--muted);margin-top:6px">Conteúdo: ${st.r}/${tot} pronto(s) · Seu estudo: ${done}/${tot} (${p}%)</div>
-    </div>`;}).join("")+`</div>`;
+  const body=groupModsByArea(MODULES).map(g=>{
+    const cards=g.items.map(({m,assunto})=>{
+      const tot=m.topics.length,done=m.topics.filter(t=>S.done["topic:"+t.id]).length;const p=Math.round(done/tot*100);
+      const st=modStatus(m);
+      return `<div class="card mod-card hov" onclick="openModule('${m.id}')">
+        <span class="badge ${m.flag?'flag':''}">${m.flag?'FLAGSHIP':m.topics.length+' tópicos'}</span>
+        <span class="status-pill ${st.cls}">${st.lbl}</span>
+        <h3>${m.ic} ${assunto}</h3><div class="meta">${m.desc}</div>
+        <div class="progress"><i style="width:${p}%"></i></div>
+        <div style="font-size:12px;color:var(--muted);margin-top:6px">Conteúdo: ${st.r}/${tot} pronto(s) · Seu estudo: ${done}/${tot} (${p}%)</div>
+      </div>`;}).join("");
+    return `<div class="area-sep">${g.area}</div><div class="grid g2">${cards}</div>`;
+  }).join("");
+  return `<h1 class="ph">${phIco('modulos')}Módulos</h1><p class="ph-sub">${MODULES.length} módulos · <b style="color:var(--primary)">${completos} completo(s)</b>, ${MODULES.length-completos} em desenvolvimento. As etiquetas mostram o status do conteúdo.</p>`+body;
 }
 function openModule(mid){
   curMod=MODULES.find(m=>m.id===mid);
