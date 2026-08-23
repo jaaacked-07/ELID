@@ -79,7 +79,7 @@ main{max-width:1080px;margin:0 auto;padding:34px 18px 60px}
 .sys-panel.show{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-.sys-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:8px}
+.sys-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:8px;flex-wrap:wrap}
 .sys-head .ic{flex:0 0 auto;width:54px;height:54px;border-radius:15px;display:grid;place-items:center;
   background:linear-gradient(160deg,var(--surface2),var(--surface));border:1px solid var(--line)}
 .sys-head .ic svg{width:30px;height:30px}
@@ -262,6 +262,7 @@ footer .mono{font-family:var(--mono);letter-spacing:.1em;color:var(--muted)}
   <h1>Atlas Interativo de<br><span class="thin">Semiologia & Exame Físico</span></h1>
   <p class="sub">Exame físico dos principais sistemas, passo a passo, com os achados normais e patológicos — diagramas em SVG e <b style="color:var(--vital)">sons reais sintetizados</b> de ausculta. Toque para ouvir.</p>
   <div class="brand-tag">ELID · Ensino Legitimado para Internos em Desenvolvimento</div>
+  <button type="button" class="pdf-cat-btn" style="margin:16px auto 0;display:inline-flex" onclick="pdfExportAtlas(this)">📄 Baixar Atlas completo em PDF</button>
 </header>
 
 <nav class="sys"><div class="sys-scroll" id="navScroll"></div></nav>
@@ -281,6 +282,432 @@ footer .mono{font-family:var(--mono);letter-spacing:.1em;color:var(--muted)}
     <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
   </div>
 </div>
+
+<!-- ===================================================================
+     EXPORTAR PDF -- por sistema, por manobras, por auto-teste e atlas
+     completo. ADITIVO: nao mexe em nenhum bloco acima. Mesma arquitetura
+     (html2canvas+jsPDF) usada nas demais plataformas ELID -- ver
+     transformar.em.pdf.MD / exportar-pdf-config.md. Adaptada aqui aos
+     dados nativos desta plataforma (SISTEMAS/MANOBRAS/QUIZ), ja que o
+     Atlas de Semiologia nao usa o engine window.CONTENT/MODULES/CH
+     compartilhado pelas demais especialidades.
+     =================================================================== -->
+<style>
+.pdf-cat-btn{
+  display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:.78rem;color:var(--vital);
+  border:1px solid var(--line);border-radius:20px;padding:6px 12px;background:transparent;
+  font-family:var(--font);letter-spacing:normal;text-transform:none;white-space:nowrap;
+}
+.pdf-cat-btn:hover{background:color-mix(in srgb,var(--vital) 14%,transparent)}
+.pdf-cat-btn.pdf-busy{opacity:.6;cursor:wait}
+
+/* fica no fluxo normal, visivel (NAO display:none, NAO off-screen com
+   coordenada extrema -- o html2canvas precisa de um elemento realmente
+   layoutado/pintado) mas coberto pelo overlay abaixo. */
+#pdf-print-area{
+  position:fixed; top:0; left:0; z-index:9990;
+  background:#faf6f0; color:#2d1b2e; font-family:'Inter',sans-serif;
+  overflow:hidden;
+}
+#pdf-print-area:empty{display:none}
+.pdf-gen-overlay{
+  position:fixed; inset:0; z-index:9995; background:#2d1b2e; color:#faf6f0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+  font-family:'Inter',sans-serif; text-align:center; padding:24px;
+}
+.pdf-gen-overlay .pdf-gen-spin{
+  width:38px; height:38px; border-radius:50%;
+  border:3px solid rgba(250,246,240,.25); border-top-color:#0f9d6e;
+  animation:pdfspin .9s linear infinite;
+}
+@keyframes pdfspin{to{transform:rotate(360deg)}}
+.pdf-gen-overlay .pdf-gen-msg{font-family:'Fraunces',serif;font-size:1.05rem}
+.pdf-gen-overlay .pdf-gen-sub{font-size:.8rem;opacity:.75}
+
+.pdf-block{margin:0 0 10px}
+.pdf-mod-cat{font-family:'Fraunces',serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#0f9d6e;margin-bottom:4px}
+.pdf-mod-title{font-family:'Fraunces',serif;font-size:1.7rem;color:#2d1b2e;margin:0 0 10px;border-bottom:2px solid #c9e9dc;padding-bottom:12px}
+.pdf-lead{font-size:.92rem;color:#5c5048;margin:0 0 18px;line-height:1.5}
+.pdf-sec-h{font-family:'Fraunces',serif;font-size:1.08rem;color:#0f9d6e;border-bottom:1px solid #e4d9cd;padding-bottom:6px;margin:6px 0 4px}
+.pdf-sub-h2{font-family:'Fraunces',serif;font-size:1.02rem;color:#0f9d6e;margin:2px 0 8px;font-weight:700}
+.pdf-step{border:1px solid #e4d9cd;border-radius:10px;padding:12px 14px}
+.pdf-step-h{font-weight:700;color:#2d1b2e;margin-bottom:4px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.pdf-step-tag{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:#8a7c6f;font-weight:400}
+.pdf-tecnica{font-size:.86rem;color:#4a3a4c;margin:6px 0 10px;line-height:1.5}
+.pdf-ach{padding:6px 0;border-bottom:1px solid #f0ece4;font-size:.84rem}
+.pdf-ach:last-child{border-bottom:none}
+.pdf-ach b{color:#2d1b2e}
+.pdf-ach small{display:block;color:#6b5f56;margin-top:2px}
+.pdf-badge{font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-right:6px}
+.pdf-ach.normal .pdf-badge{color:#0f9d6e}
+.pdf-ach.alt .pdf-badge{color:#c0392b}
+.pdf-hy{border-left:3px solid #d7a53a;background:#faf1de;border-radius:8px;padding:10px 14px;margin:8px 0 0;font-size:.84rem;color:#4a3a4c}
+.pdf-hy b{color:#a87c1a}
+.pdf-tbl-wrap{overflow:hidden;border:1px solid #e4d9cd;border-radius:10px}
+.pdf-tbl-wrap table{border-collapse:collapse;width:100%;font-size:.76rem}
+.pdf-tbl-wrap caption{text-align:left;padding:10px 12px 6px;font-weight:700;color:#2d1b2e;font-family:'Fraunces',serif}
+.pdf-tbl-wrap th,.pdf-tbl-wrap td{padding:7px 10px;text-align:left;border-bottom:1px solid #eee2d6;vertical-align:top}
+.pdf-tbl-wrap thead th{background:#f6ece9;font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:#8a7c6f}
+.pdf-mech{border-left:3px solid #7c5cdb;background:#f2eefb;border-radius:8px;padding:10px 14px;margin:0 0 8px}
+.pdf-mech b{color:#5b3fb0}
+.pdf-mech h4{font-size:.9rem;color:#2d1b2e;margin-bottom:3px}
+.pdf-man{border:1px solid #e4d9cd;border-radius:10px;padding:12px 14px}
+.pdf-man h4{font-size:.98rem;color:#2d1b2e;margin-bottom:3px}
+.pdf-man-tag{font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:#1f6fd6}
+.pdf-man-ind{font-size:.8rem;color:#6b5f56;margin:2px 0 8px}
+.pdf-man ol{margin:0 0 8px 18px;font-size:.82rem;color:#4a3a4c;line-height:1.5}
+.pdf-man-res{font-size:.8rem;background:#eaf7f1;border-radius:8px;padding:8px 11px;margin-bottom:6px}
+.pdf-man-res b{color:#0f9d6e}
+.pdf-man-why{font-size:.8rem;background:#f2eefb;border-radius:8px;padding:8px 11px}
+.pdf-man-why b{color:#5b3fb0}
+.pdf-q{border:1px solid #e4d9cd;border-radius:10px;padding:12px 14px}
+.pdf-q-stem{margin-bottom:8px;font-size:.88rem}
+.pdf-q-opt{padding:3px 0;font-size:.84rem}
+.pdf-gab-block{font-size:.74rem;color:#4a3a4c}
+.pdf-gab-row{padding:3px 0}
+.pdf-gab-correct{color:#0f9d6e;font-weight:700}
+.pdf-block img,.pdf-block svg{max-width:100%}
+
+.pdf-toast{
+  position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:9997;
+  background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:10px 16px;
+  border-radius:12px;font-size:.85rem;box-shadow:var(--shadow);max-width:80vw;text-align:center;
+}
+</style>
+<script>
+(function(){
+"use strict";
+
+/* ---------- toast leve (esta plataforma nao tem window.toast) ---------- */
+function pdfToast(msg){
+  var t=document.createElement('div');
+  t.className='pdf-toast'; t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(function(){ t.remove(); }, 3200);
+}
+
+/* ---------- geometria da pagina (A4, em mm e px @96dpi) -- identica a
+   todas as plataformas ELID ---------- */
+var PX_PER_MM=96/25.4;
+var PAGE_W_MM=210, PAGE_H_MM=297;
+var MARGIN_L_MM=12, MARGIN_R_MM=12, MARGIN_T_MM=14, MARGIN_B_MM=20;
+var CONTENT_W_MM=PAGE_W_MM-MARGIN_L_MM-MARGIN_R_MM;
+var CONTENT_H_MM=PAGE_H_MM-MARGIN_T_MM-MARGIN_B_MM;
+var CONTENT_W_PX=Math.round(CONTENT_W_MM*PX_PER_MM);
+var CONTENT_H_PX=Math.round(CONTENT_H_MM*PX_PER_MM);
+var RENDER_SCALE=3.5;
+
+function pdfEsc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ---------- blocos atomicos por SISTEMA (equivalente a "por modulo") ---------- */
+function pdfSystemBlocks(sysId, isFirstOfDoc){
+  var sys=null;
+  for(var i=0;i<SISTEMAS.length;i++){ if(SISTEMAS[i].id===sysId){ sys=SISTEMAS[i]; break; } }
+  if(!sys) return null;
+  var blocks=[];
+  var pendingHead=null;
+  function head(title){ pendingHead='<h2 class="pdf-sec-h">'+title+'</h2>'; }
+  function push(b){ if(pendingHead){ b.html=pendingHead+b.html; pendingHead=null; } blocks.push(b); }
+
+  blocks.push({html:'<div class="pdf-mod-cat">Semiologia · Exame Físico</div><h1 class="pdf-mod-title">'+pdfEsc(sys.titulo)+'</h1><div class="pdf-lead">'+pdfEsc(sys.lead)+'</div>', forceNewPage:!isFirstOfDoc});
+
+  head('Técnica de Exame');
+  sys.etapas.forEach(function(e){
+    var h='<div class="pdf-step"><div class="pdf-step-h">'+pdfEsc(e.n)+'. '+pdfEsc(e.titulo)+' <span class="pdf-step-tag">'+pdfEsc(e.tag)+'</span></div>';
+    h+='<div class="pdf-tecnica">'+e.tecnica+'</div>';
+    h+='<div>'+e.achados.map(function(a){
+      return '<div class="pdf-ach '+(a.tipo==='normal'?'normal':'alt')+'"><span class="pdf-badge">'+pdfEsc(a.badge)+'</span><b>'+a.lab+'</b><small>'+a.desc+'</small></div>';
+    }).join('')+'</div>';
+    if(e.hy) h+='<div class="pdf-hy"><b>Alto rendimento:</b> '+e.hy+'</div>';
+    h+='</div>';
+    push({html:h});
+  });
+
+  if(sys.tabelas && sys.tabelas.length){
+    head('Tabelas de Referência');
+    sys.tabelas.forEach(function(t){
+      var h='<div class="pdf-tbl-wrap"><table><caption>'+pdfEsc(t.caption)+'</caption><thead><tr>'+t.head.map(function(x){ return '<th>'+pdfEsc(x)+'</th>'; }).join('')+'</tr></thead><tbody>';
+      t.rows.forEach(function(r){ h+='<tr>'+r.map(function(c,i){ return i===0?'<th>'+c+'</th>':'<td>'+c+'</td>'; }).join('')+'</tr>'; });
+      h+='</tbody></table></div>';
+      push({html:h});
+    });
+  }
+
+  if(sys.fisiopatologia && sys.fisiopatologia.length){
+    head('Por que Acontece — Fisiopatologia');
+    sys.fisiopatologia.forEach(function(m){
+      push({html:'<div class="pdf-mech"><h4>'+pdfEsc(m.t)+'</h4><div>'+m.p+'</div></div>'});
+    });
+  }
+
+  return blocks;
+}
+
+/* ---------- blocos atomicos das MANOBRAS ---------- */
+function pdfManobrasBlocks(isFirstOfDoc){
+  var blocks=[];
+  var pendingHead=null;
+  function head(title){ pendingHead='<h2 class="pdf-sec-h">'+title+'</h2>'; }
+  function push(b){ if(pendingHead){ b.html=pendingHead+b.html; pendingHead=null; } blocks.push(b); }
+
+  blocks.push({html:'<div class="pdf-mod-cat">Semiologia · Exame Físico</div><h1 class="pdf-mod-title">Manobras — Passo a Passo</h1>', forceNewPage:!isFirstOfDoc});
+
+  MANOBRAS.forEach(function(g){
+    head(g.sis);
+    g.itens.forEach(function(m){
+      var h='<div class="pdf-man">';
+      if(m.fig && FIG[m.fig]) h+='<div style="max-width:220px;margin:0 auto 8px">'+FIG[m.fig]+'</div>';
+      h+='<div class="pdf-man-tag">'+pdfEsc(g.sis)+'</div><h4>'+pdfEsc(m.nome)+'</h4><div class="pdf-man-ind">'+m.ind+'</div>';
+      h+='<ol>'+m.passos.map(function(p){ return '<li>'+p+'</li>'; }).join('')+'</ol>';
+      h+='<div class="pdf-man-res"><b>Resultado:</b> '+m.res+'</div>';
+      if(m.porque) h+='<div class="pdf-man-why"><b>Por quê:</b> '+m.porque+'</div>';
+      h+='</div>';
+      push({html:h});
+    });
+  });
+  return blocks;
+}
+
+/* ---------- blocos atomicos do AUTO-TESTE (questoes + gabarito) ---------- */
+function pdfQuizBlocks(isFirstOfDoc){
+  var blocks=[];
+  var pendingHead=null;
+  function head(title){ pendingHead='<h2 class="pdf-sec-h">'+title+'</h2>'; }
+  function push(b){ if(pendingHead){ b.html=pendingHead+b.html; pendingHead=null; } blocks.push(b); }
+
+  blocks.push({html:'<div class="pdf-mod-cat">Semiologia · Exame Físico</div><h1 class="pdf-mod-title">Auto-teste</h1>', forceNewPage:!isFirstOfDoc});
+
+  head('Questões');
+  QUIZ.forEach(function(q,qi){
+    var h='<div class="pdf-q"><div class="pdf-q-stem"><b>'+(qi+1)+'.</b> '+q.q+'</div>';
+    q.o.forEach(function(o,oi){ h+='<div class="pdf-q-opt">'+String.fromCharCode(65+oi)+') '+o+'</div>'; });
+    h+='</div>';
+    push({html:h});
+  });
+
+  push({html:'<div class="pdf-sub-h2">Gabarito</div>', cls:'pdf-gab-block'});
+  var gh='';
+  QUIZ.forEach(function(q,qi){
+    var letra=String.fromCharCode(65+q.c);
+    gh+='<div class="pdf-gab-row"><b>'+(qi+1)+'.</b> <span class="pdf-gab-correct">'+letra+'</span> — '+q.e+'</div>';
+  });
+  blocks.push({html:gh, cls:'pdf-gab-block'});
+  return blocks;
+}
+
+function ensurePdfArea(){
+  var el=document.getElementById('pdf-print-area');
+  if(!el){ el=document.createElement('div'); el.id='pdf-print-area'; document.body.appendChild(el); }
+  return el;
+}
+function ensurePdfOverlay(){
+  var el=document.getElementById('pdf-gen-overlay');
+  if(!el){
+    el=document.createElement('div'); el.id='pdf-gen-overlay'; el.className='pdf-gen-overlay';
+    el.innerHTML='<div class="pdf-gen-spin"></div><div class="pdf-gen-msg">Gerando PDF...</div><div class="pdf-gen-sub" id="pdf-gen-sub"></div>';
+    document.body.appendChild(el);
+  }
+  return el;
+}
+
+function pdfSetBusy(btnEl, busy, label){
+  if(!btnEl) return;
+  if(busy){
+    if(btnEl.getAttribute('data-pdf-orig')==null) btnEl.setAttribute('data-pdf-orig', btnEl.innerHTML);
+    btnEl.innerHTML=label||'⏳ Gerando PDF...';
+    btnEl.classList.add('pdf-busy');
+    btnEl.style.pointerEvents='none';
+  } else {
+    var orig=btnEl.getAttribute('data-pdf-orig');
+    if(orig!=null) btnEl.innerHTML=orig;
+    btnEl.classList.remove('pdf-busy');
+    btnEl.style.pointerEvents='';
+  }
+}
+
+var PDF_LIB_URLS=[
+  'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/jspdf/4.2.1/jspdf.umd.min.js'
+];
+var pdfLibPromise=null;
+function pdfLoadScript(url){
+  return new Promise(function(resolve,reject){
+    var s=document.createElement('script');
+    s.src=url;
+    s.onload=function(){ resolve(); };
+    s.onerror=function(){ reject(new Error('script-load-failed:'+url)); };
+    document.head.appendChild(s);
+  });
+}
+function pdfLoadLibs(){
+  if(window.html2canvas && window.jspdf && window.jspdf.jsPDF) return Promise.resolve();
+  if(pdfLibPromise) return pdfLibPromise;
+  pdfLibPromise=Promise.all(PDF_LIB_URLS.map(pdfLoadScript)).catch(function(err){ pdfLibPromise=null; throw err; });
+  return pdfLibPromise;
+}
+
+function pdfHexRgb(hex){
+  var n=parseInt(hex.replace('#',''),16);
+  return [(n>>16)&255,(n>>8)&255,n&255];
+}
+var PDF_FOOT_ACCENT=pdfHexRgb('#0f9d6e'); // verde --vital (tom claro) -- accent do Atlas de Semiologia
+var PDF_FOOT_LINE=pdfHexRgb('#e4d9cd');
+var PDF_FOOT_CREDIT_TXT='ELID · Ensino Legitimado para Internos em Desenvolvimento';
+var PDF_FOOT_TRIBUTE_TXT='Inspirado em Elisabete Delfini ✦';
+function pdfFooterEveryPage(pdf){
+  var n=pdf.internal.getNumberOfPages();
+  var pageW=pdf.internal.pageSize.getWidth(), pageH=pdf.internal.pageSize.getHeight();
+  var cx=pageW/2;
+  var lineY=pageH-MARGIN_B_MM+2, y1=lineY+5, y2=y1+5.5;
+  for(var i=1;i<=n;i++){
+    pdf.setPage(i);
+    pdf.setDrawColor(PDF_FOOT_LINE[0],PDF_FOOT_LINE[1],PDF_FOOT_LINE[2]);
+    pdf.setLineWidth(0.2);
+    pdf.line(MARGIN_L_MM, lineY, pageW-MARGIN_R_MM, lineY);
+    pdf.setFont('helvetica','normal');
+    pdf.setTextColor(PDF_FOOT_ACCENT[0],PDF_FOOT_ACCENT[1],PDF_FOOT_ACCENT[2]);
+    pdf.setFontSize(8);
+    pdf.text(PDF_FOOT_CREDIT_TXT, cx, y1, {align:'center'});
+    pdf.setFontSize(9);
+    pdf.text(PDF_FOOT_TRIBUTE_TXT, cx, y2, {align:'center'});
+  }
+}
+
+function pdfDeepHeight(wrapperEl){
+  var rect=wrapperEl.getBoundingClientRect();
+  var maxBottom=rect.bottom;
+  var all=wrapperEl.querySelectorAll('*');
+  for(var i=0;i<all.length;i++){
+    var b=all[i].getBoundingClientRect().bottom;
+    if(b>maxBottom) maxBottom=b;
+  }
+  return Math.max(1, maxBottom-rect.top);
+}
+
+function pdfMeasureAndPack(blocks, area){
+  area.style.width=CONTENT_W_PX+'px';
+  area.innerHTML='';
+  var wrappers=blocks.map(function(b){
+    var w=document.createElement('div');
+    w.className='pdf-block'+(b.cls?' '+b.cls:'');
+    w.innerHTML=b.html;
+    area.appendChild(w);
+    return w;
+  });
+  void area.offsetHeight;
+  var heights=wrappers.map(pdfDeepHeight);
+  area.innerHTML='';
+
+  var pages=[], cur=[], curH=0;
+  for(var i=0;i<blocks.length;i++){
+    var h=heights[i];
+    var forceNew=blocks[i].forceNewPage && cur.length>0;
+    if(forceNew || (cur.length>0 && curH+h>CONTENT_H_PX)){ pages.push(cur); cur=[]; curH=0; }
+    cur.push(i); curH+=h;
+  }
+  if(cur.length) pages.push(cur);
+  return pages;
+}
+
+function pdfRenderPages(blocks, pages, area, pdf, onProgress){
+  var idx=0;
+  function next(){
+    if(idx>=pages.length) return Promise.resolve();
+    var pageBlockIdxs=pages[idx];
+    area.innerHTML='';
+    area.style.width=CONTENT_W_PX+'px';
+    pageBlockIdxs.forEach(function(bi){
+      var w=document.createElement('div');
+      w.className='pdf-block'+(blocks[bi].cls?' '+blocks[bi].cls:'');
+      w.innerHTML=blocks[bi].html;
+      area.appendChild(w);
+    });
+    void area.offsetHeight;
+    if(onProgress) onProgress(idx+1, pages.length);
+    return window.html2canvas(area, {scale:RENDER_SCALE, useCORS:true, backgroundColor:'#faf6f0', logging:false}).then(function(canvas){
+      var imgData=canvas.toDataURL('image/png');
+      var imgHmm=canvas.height*(CONTENT_W_MM/canvas.width);
+      if(idx>0) pdf.addPage();
+      pdf.addImage(imgData, 'PNG', MARGIN_L_MM, MARGIN_T_MM, CONTENT_W_MM, imgHmm, undefined, 'FAST');
+      idx++;
+      return next();
+    });
+  }
+  return next();
+}
+
+function pdfGenerate(blocks, filenameHint, btnEl){
+  if(!blocks || !blocks.length){ pdfToast('Conteúdo ainda não está pronto.'); return; }
+  var area=ensurePdfArea();
+  var overlay=ensurePdfOverlay();
+  overlay.style.display='flex';
+  /* PDF sempre no modo claro, independente do tema ativo na tela --
+     esta plataforma alterna tema via atributo data-theme (nao via
+     classe .light no body como as demais). */
+  var prevTheme=document.documentElement.getAttribute('data-theme');
+  if(prevTheme!=='light') document.documentElement.setAttribute('data-theme','light');
+  pdfSetBusy(btnEl, true);
+  function cleanup(){
+    area.innerHTML=''; area.style.width='';
+    overlay.style.display='none';
+    if(prevTheme!=='light') document.documentElement.setAttribute('data-theme', prevTheme||'dark');
+    pdfSetBusy(btnEl, false);
+  }
+  var fontsReady=(document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+  pdfLoadLibs().then(function(){ return fontsReady; }).then(function(){
+    var jsPDFCtor=window.jspdf.jsPDF;
+    var pdf=new jsPDFCtor({unit:'mm', format:'a4', orientation:'portrait'});
+    var pages=pdfMeasureAndPack(blocks, area);
+    var subEl=document.getElementById('pdf-gen-sub');
+    return pdfRenderPages(blocks, pages, area, pdf, function(done,total){
+      if(subEl) subEl.textContent=done+' / '+total+' páginas';
+    }).then(function(){
+      pdfFooterEveryPage(pdf);
+      pdf.save((filenameHint||'ELID')+'.pdf');
+    });
+  }).then(cleanup).catch(function(err){
+    cleanup();
+    pdfToast('Não foi possível gerar o PDF agora. Verifique sua conexão e tente novamente.');
+  });
+}
+
+window.pdfExportSystem=function(sysId, btnEl){
+  var blocks=pdfSystemBlocks(sysId, true);
+  if(!blocks){ pdfToast('Conteúdo deste sistema ainda não está pronto.'); return; }
+  var sys=null; for(var i=0;i<SISTEMAS.length;i++){ if(SISTEMAS[i].id===sysId){ sys=SISTEMAS[i]; break; } }
+  pdfGenerate(blocks, (sys?sys.titulo:'Sistema')+' - Semiologia ELID', btnEl);
+};
+
+window.pdfExportManobras=function(btnEl){
+  var blocks=pdfManobrasBlocks(true);
+  pdfGenerate(blocks, 'Manobras - Semiologia ELID', btnEl);
+};
+
+window.pdfExportQuiz=function(btnEl){
+  var blocks=pdfQuizBlocks(true);
+  pdfGenerate(blocks, 'Auto-teste - Semiologia ELID', btnEl);
+};
+
+window.pdfExportAtlas=function(btnEl){
+  var allBlocks=[], first=true;
+  SISTEMAS.forEach(function(s){
+    var bs=pdfSystemBlocks(s.id, first);
+    if(bs){ allBlocks=allBlocks.concat(bs); first=false; }
+  });
+  allBlocks=allBlocks.concat(pdfManobrasBlocks(false));
+  allBlocks=allBlocks.concat(pdfQuizBlocks(false));
+  pdfGenerate(allBlocks, 'Atlas Completo - Semiologia ELID', btnEl);
+};
+
+window.__pdfSystemBlocks=pdfSystemBlocks; // exposto so p/ testes
+window.__pdfManobrasBlocks=pdfManobrasBlocks; // exposto so p/ testes
+window.__pdfQuizBlocks=pdfQuizBlocks; // exposto so p/ testes
+window.__pdfMeasureAndPack=pdfMeasureAndPack; // exposto so p/ testes
+window.__pdfDeepHeight=pdfDeepHeight; // exposto so p/ testes
+window.__pdfFooterEveryPage=pdfFooterEveryPage; // exposto so p/ testes
+window.__pdfGenerate=pdfGenerate; // exposto so p/ testes
+})();
+</script>
 
 <script>
 /* =========================================================
@@ -820,7 +1247,8 @@ const QUIZ=[
 function renderQuiz(){
  let h=`<section class="sys-panel" id="panel-quiz" role="tabpanel">
    <div class="sys-head"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICO.quiz}</svg></div>
-   <div><h2>Auto-teste</h2><div class="lead">Seis questões no estilo das bancas para fixar os achados. Toque na alternativa para ver o gabarito comentado.</div></div></div>
+   <div><h2>Auto-teste</h2><div class="lead">Seis questões no estilo das bancas para fixar os achados. Toque na alternativa para ver o gabarito comentado.</div></div>
+   ${window.pdfExportQuiz?`<button type="button" class="pdf-cat-btn" style="margin-left:auto" onclick="pdfExportQuiz(this)">📄 Baixar PDF</button>`:''}</div>
    <div class="q-foot" style="margin:0 0 18px"><span class="q-score" id="qScore">Acertos: 0 / ${QUIZ.length}</span></div>`;
  QUIZ.forEach((q,i)=>{
    h+=`<div class="quiz-card" style="margin-bottom:16px" data-qi="${i}"><div class="q-num">Questão ${i+1}</div><div class="q-txt">${q.q}</div>`;
@@ -837,7 +1265,8 @@ let qAnswered={}, qScore=0;
 function renderPanel(sys){
  let h=`<section class="sys-panel" id="panel-${sys.id}" role="tabpanel">
    <div class="sys-head"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${sys.ico}</svg></div>
-   <div><h2>${sys.titulo}</h2><div class="lead">${sys.lead}</div></div></div>
+   <div><h2>${sys.titulo}</h2><div class="lead">${sys.lead}</div></div>
+   ${window.pdfExportSystem?`<button type="button" class="pdf-cat-btn" style="margin-left:auto" onclick="pdfExportSystem('${sys.id}', this)">📄 Baixar PDF</button>`:''}</div>
    <div class="seq-rail">`+sys.seq.map((s,i)=>`<span class="seq-pill"><b>${i+1}</b> ${s}</span>`).join('')+`</div>`;
  sys.etapas.forEach(e=>{
    h+=`<div class="step"><div class="step-head"><div class="step-num">${e.n}</div><h3>${e.titulo}</h3><span class="tag">${e.tag}</span></div>
@@ -1021,7 +1450,8 @@ const MANOBRAS=[
 function renderManobras(){
  let h=`<section class="sys-panel" id="panel-manobras" role="tabpanel">
    <div class="sys-head"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICO.manobras}</svg></div>
-   <div><h2>Manobras — passo a passo</h2><div class="lead">Cada manobra com a técnica numerada, a ilustração da execução e a interpretação. Nas de coração e neuro, o bloco roxo explica <b>por que</b> o resultado acontece.</div></div></div>`;
+   <div><h2>Manobras — passo a passo</h2><div class="lead">Cada manobra com a técnica numerada, a ilustração da execução e a interpretação. Nas de coração e neuro, o bloco roxo explica <b>por que</b> o resultado acontece.</div></div>
+   ${window.pdfExportManobras?`<button type="button" class="pdf-cat-btn" style="margin-left:auto" onclick="pdfExportManobras(this)">📄 Baixar PDF</button>`:''}</div>`;
  MANOBRAS.forEach(g=>{
    h+=`<div class="section-label">${g.sis}</div><div class="man-grid">`;
    g.itens.forEach(m=>{
@@ -1127,7 +1557,7 @@ function unlockAudio(){
 
 
 
-
 </script>
+
 </body>
 </html>
