@@ -234,7 +234,7 @@ a{color:var(--accent);text-decoration:none}
 .tab:hover{color:var(--text)}
 .tab.active{background:linear-gradient(100deg,rgba(45,212,191,.18),rgba(56,189,248,.08));color:var(--text);border-color:rgba(45,212,191,.3)}
 /* sub-navegação de subtópicos */
-.subnav{display:flex;gap:8px;overflow-x:auto;padding:10px;border-radius:14px;margin-bottom:16px;border:1px solid var(--border);background:var(--surface);backdrop-filter:blur(14px);position:sticky;top:64px;z-index:20}
+.subnav{display:flex;flex-wrap:wrap;gap:8px;padding:10px;border-radius:14px;margin-bottom:16px;border:1px solid var(--border);background:var(--surface);backdrop-filter:blur(14px);position:sticky;top:64px;z-index:20}
 .subnav::-webkit-scrollbar{height:6px}
 .subchip{white-space:nowrap;padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:700;font-size:.82rem;color:var(--text-soft);border:1px solid var(--border);background:var(--surface-2);transition:.18s var(--ease);font-family:var(--font-body)}
 .subchip:hover{color:var(--text);border-color:var(--accent)}
@@ -291,6 +291,8 @@ a{color:var(--accent);text-decoration:none}
 .callout.mne b{color:var(--violet)}
 .callout.fast{border-color:rgba(245,196,81,.35);background:rgba(245,196,81,.08)}
 .callout.fast b{color:var(--gold)}
+.callout.update{border-color:rgba(63,227,212,.35);background:rgba(63,227,212,.08)}
+.callout.update b{color:var(--cyan)}
 
 table.med{width:100%;border-collapse:collapse;margin:14px 0;font-size:.86rem;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
 table.med th{background:var(--surface-2);text-align:left;padding:10px 12px;font-weight:700;color:var(--text);font-size:.78rem;letter-spacing:.02em;border-bottom:1px solid var(--border)}
@@ -1683,47 +1685,340 @@ MODULES.push({
   title:'Crises e Classificação', sub:'O que é crise e epilepsia, tipos e diagnóstico',
   prio:'alta', topics:['Crise epiléptica','Epilepsia','Classificação ILAE','EEG'],
   subtopics:[
-   {label:'1. Crise x Epilepsia',html:`<h3>⚡ Entendendo do zero</h3>
+   {label:'1. Entendendo do Zero',html:`<h3>⚡ Entendendo do zero</h3>
 <p>Pense no cérebro como uma rede elétrica. Uma <b>crise epiléptica</b> é um "curto-circuito": uma descarga elétrica anormal, excessiva e sincronizada de um grupo de neurônios. O que aparece (convulsão, ausência, sensação estranha) depende de <b>onde</b> e <b>quanto</b> essa descarga se espalha.</p>
-<p>Atenção à diferença que mais cai em prova:</p>
+<p>Para entender por que isso acontece, vale abrir essa ideia com mais calma. Os neurônios "conversam" entre si o tempo todo por meio de sinais elétricos e químicos. Para essa conversa funcionar direito, o cérebro mantém um equilíbrio fino entre sinais que <b>excitam</b> (fazem o neurônio disparar, principalmente via glutamato) e sinais que <b>inibem</b> (freiam o disparo, principalmente via GABA). Esse equilíbrio é o que permite que cada área do cérebro dispare "na hora certa e do jeito certo".</p>
+<p>A crise acontece quando esse equilíbrio se rompe numa região (ou no cérebro todo de uma vez): um grupo de neurônios passa a disparar de forma <b>excessiva</b> e, principalmente, <b>sincronizada</b> — todos ao mesmo tempo, como um coro desafinado que de repente canta em uníssono e alto demais. Por isso a analogia do "curto-circuito" faz sentido: não é falta de energia, é energia elétrica descontrolada e sincronizada.</p>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="epNormBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#132a28"/><stop offset="1" stop-color="#0d1f1d"/></linearGradient>
+<linearGradient id="epCriseBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1f10"/><stop offset="1" stop-color="#1f160c"/></linearGradient>
+<linearGradient id="epNeurNorm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<linearGradient id="epNeurCrise" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5c451"/><stop offset="1" stop-color="#e08a1f"/></linearGradient>
+<filter id="epShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity=".25"/></filter>
+<radialGradient id="epGlow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#f5c451" stop-opacity=".55"/><stop offset="1" stop-color="#f5c451" stop-opacity="0"/></radialGradient>
+</defs>
+<rect x="8" y="8" width="320" height="224" rx="18" fill="url(#epNormBg)"/>
+<rect x="352" y="8" width="320" height="224" rx="18" fill="url(#epCriseBg)"/>
+<text x="168" y="34" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="800" fill="#8fe8dd">CÉREBRO EM EQUILÍBRIO</text>
+<text x="512" y="34" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="800" fill="#f7cf87">CRISE EPILÉPTICA</text>
+<g stroke-linecap="round" stroke-linejoin="round" filter="url(#epShadow)">
+<path vector-effect="non-scaling-stroke" d="M70 130 C100 90,140 90,168 120" stroke="#3fe3d4" stroke-width="2" fill="none" opacity=".55"/>
+<path vector-effect="non-scaling-stroke" d="M168 120 C196 150,236 150,266 118" stroke="#3fe3d4" stroke-width="2" fill="none" opacity=".55"/>
+<path vector-effect="non-scaling-stroke" d="M100 180 C130 160,150 160,168 120" stroke="#3fe3d4" stroke-width="2" fill="none" opacity=".4"/>
+<path vector-effect="non-scaling-stroke" d="M236 180 C210 160,190 160,168 120" stroke="#3fe3d4" stroke-width="2" fill="none" opacity=".4"/>
+<circle cx="70" cy="130" r="15" fill="url(#epNeurNorm)"/>
+<circle cx="168" cy="120" r="17" fill="url(#epNeurNorm)"/>
+<circle cx="266" cy="118" r="15" fill="url(#epNeurNorm)"/>
+<circle cx="100" cy="180" r="13" fill="url(#epNeurNorm)" opacity=".8"/>
+<circle cx="236" cy="180" r="13" fill="url(#epNeurNorm)" opacity=".8"/>
+</g>
+<text x="168" y="215" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" fill="#a9d9d2">Excitação e inibição equilibradas</text>
+<circle cx="512" cy="130" r="70" fill="url(#epGlow)"/>
+<g stroke-linecap="round" stroke-linejoin="round" filter="url(#epShadow)">
+<path vector-effect="non-scaling-stroke" d="M430 118 C462 100,490 100,512 118" stroke="#f5c451" stroke-width="2.4" fill="none"/>
+<path vector-effect="non-scaling-stroke" d="M512 118 C534 100,564 100,594 118" stroke="#f5c451" stroke-width="2.4" fill="none"/>
+<path vector-effect="non-scaling-stroke" d="M446 168 C470 148,494 140,512 118" stroke="#f5c451" stroke-width="2.4" fill="none"/>
+<path vector-effect="non-scaling-stroke" d="M578 168 C554 148,530 140,512 118" stroke="#f5c451" stroke-width="2.4" fill="none"/>
+<circle cx="430" cy="118" r="14" fill="url(#epNeurCrise)"/>
+<circle cx="594" cy="118" r="14" fill="url(#epNeurCrise)"/>
+<circle cx="446" cy="168" r="12" fill="url(#epNeurCrise)"/>
+<circle cx="578" cy="168" r="12" fill="url(#epNeurCrise)"/>
+<circle cx="512" cy="118" r="19" fill="url(#epNeurCrise)"/>
+</g>
+<text x="512" y="215" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" fill="#f0d6a0">Descarga excessiva e sincronizada</text>
+</svg>
+</div>
+<p>O que aparece clinicamente — uma convulsão generalizada, uma "ausência" de segundos, um cheiro estranho, um formigamento — depende de <b>onde</b> essa descarga começa e <b>o quanto</b> ela se espalha. Se ela nasce e fica restrita a uma área que controla, por exemplo, o movimento da mão, o sintoma é um abalo só na mão. Se ela nasce nos dois hemisférios ao mesmo tempo, o sintoma já é generalizado desde o início. Essa lógica de "geografia" é literalmente a base de toda a classificação que você vai estudar nas próximas sub-abas.</p>
+<p>Atenção à diferença que mais cai em prova — muita gente usa "crise" e "epilepsia" como sinônimos, mas são conceitos diferentes:</p>
 <table class="med"><tr><th>Termo</th><th>Significado</th></tr>
-<tr><td><b>Crise</b></td><td>O evento elétrico em si (pode ser único e ter causa pontual)</td></tr>
+<tr><td><b>Crise</b></td><td>O evento elétrico em si — um episódio (pode ser único e ter causa pontual)</td></tr>
 <tr><td><b>Epilepsia</b></td><td>A <b>doença</b> = tendência <b>persistente</b> a ter crises</td></tr>
 <tr><td><b>Crise provocada</b></td><td>Tem um gatilho agudo reversível (febre, hipoglicemia, distúrbio de sódio, abstinência alcoólica, drogas). <b>Tratar a causa</b>, não é epilepsia</td></tr>
 <tr><td><b>Crise não provocada</b></td><td>Sem gatilho agudo — é a que conta para o diagnóstico de epilepsia</td></tr></table>
+<p>Pense assim: uma crise provocada por hipoglicemia é como um alarme de incêndio disparando porque alguém queimou a torrada — o alarme (cérebro) funciona normalmente, o problema foi um evento externo pontual. Já a epilepsia é o alarme que dispara sozinho, repetidamente, sem nenhum incêndio real — o defeito está no próprio sistema.</p>
+<div class="callout mne"><b>CONCEITO-CHAVE</b>"Convulsão" não é sinônimo de "crise epiléptica": convulsão é apenas o tipo de crise com abalos motores. Uma ausência (criança que "desliga" por segundos) é uma crise epiléptica, mas não é uma convulsão. Em prova, prefira sempre o termo "crise epiléptica" — é mais amplo e mais correto.</div>
 <h3>Definição operacional de epilepsia (decore)</h3>
-<div class="callout fast"><b>É epilepsia quando há:</b> ① <b>≥ 2 crises não provocadas</b> separadas por mais de 24h; <b>OU</b> ② <b>1 crise não provocada</b> + alto risco de recorrência (ex.: lesão na RM, EEG alterado); <b>OU</b> ③ uma síndrome epiléptica definida.</div>`},
-   {label:'2. Classificação (ILAE)',html:`<h3>🗂️ Como classificar uma crise</h3>
-<p>A classificação atual (ILAE 2017) começa por uma pergunta simples: <b>onde a crise começa?</b></p>
+<div class="callout fast"><b>É epilepsia quando há:</b> ① <b>≥ 2 crises não provocadas</b> separadas por mais de 24h; <b>OU</b> ② <b>1 crise não provocada</b> + alto risco de recorrência (ex.: lesão na RM, EEG alterado); <b>OU</b> ③ uma síndrome epiléptica definida.</div>
+<p>Essa é a definição oficial da ILAE (2014) e vale entender o porquê de cada parte. O critério ①, "duas crises separadas por mais de 24h", existe porque duas crises muito próximas no tempo (por exemplo, em uma mesma madrugada) provavelmente compartilham o mesmo gatilho agudo e contam como um único evento, não como "tendência persistente". Já o critério ②, "uma crise + alto risco", existe porque estudos mostram que, depois de duas crises não provocadas, o risco de uma terceira é muito alto (em torno de 60% a mais nos próximos 10 anos) — e esse MESMO patamar de risco pode já estar presente depois de uma única crise, se houver uma lesão estrutural na ressonância ou um EEG com atividade epileptiforme. Nesses casos, esperar a "segunda crise" para fechar o diagnóstico não faz sentido clínico: o risco já é equivalente. O critério ③ cobre as síndromes epilépticas reconhecíveis (ex.: epilepsia mioclônica juvenil), nas quais o próprio padrão eletroclínico já basta para o diagnóstico, mesmo com poucas crises.</p>
+<div class="callout tip"><b>MACETE</b>Pense assim: "duas crises OU uma crise que já se comporta como se fossem duas" (porque o risco de repetir é alto) OU "uma síndrome que a gente já reconhece de cara".</div>
+<p>Existe ainda o conceito de <b>epilepsia resolvida</b>, pouco lembrado mas cobrado em provas mais atualizadas: considera-se resolvida em pacientes com uma síndrome idade-dependente que já passaram da idade aplicável, ou em quem ficou <b>10 anos sem crises</b> estando <b>sem medicação antiepiléptica há pelo menos 5 anos</b>. "Resolvida" é diferente de "curada" — significa que a probabilidade de nova crise voltou a ser semelhante à da população geral, mas o termo "cura" é evitado porque não há garantia absoluta.</p>`},
+   {label:'2. Classificação da Crise',html:`<h3>🗂️ Como classificar uma crise — a lógica ILAE</h3>
+<p>A classificação de uma crise começa por uma pergunta simples e muito prática: <b>onde a crise começa?</b> Essa única pergunta já organiza quase tudo o que você precisa saber para acertar questões de prova sobre o tema.</p>
 <table class="med"><tr><th>Início</th><th>Subtipos</th></tr>
 <tr><td><b>Focal</b> (começa numa área de um hemisfério)</td><td><b>Perceptiva</b> (consciência preservada) · <b>Disperceptiva</b> (consciência alterada) · pode evoluir para <b>tônico-clônica bilateral</b></td></tr>
-<tr><td><b>Generalizado</b> (começa nos dois hemisférios de uma vez)</td><td>Tônico-clônica (TCG) · Ausência · Mioclônica · Atônica · Tônica · Clônica</td></tr>
-<tr><td><b>Início desconhecido</b></td><td>Quando não há testemunha do começo</td></tr></table>
-<div class="callout tip"><b>Por que isso importa</b>A classificação <b>guia o tratamento</b>: algumas drogas boas para crise focal <b>pioram</b> crises generalizadas (ausência/mioclonia). Classificar certo = tratar certo.</div>`},
-   {label:'3. Os tipos na prática',html:`<h3>👀 Reconhecendo os principais tipos</h3>
+<tr><td><b>Generalizado</b> (começa nos dois hemisférios de uma vez)</td><td>Tônico-clônica (TCG) · Ausência · Mioclônica · Atônica · Tônica · Clônica · Espasmo epiléptico</td></tr>
+<tr><td><b>Início desconhecido</b></td><td>Quando não há testemunha do começo (pode ser reclassificada depois, com mais dados)</td></tr></table>
+<p>Os termos <b>perceptiva</b> e <b>disperceptiva</b> são a tradução consagrada em português do que a ILAE chamava, em 2017, de "aware" e "impaired awareness" — e é a nomenclatura que a maioria das provas de residência ainda usa. Na próxima sub-aba você vai ver a versão mais recente (2025) dessa mesma ideia.</p>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="clRoot" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#7c5cf0"/></linearGradient>
+<linearGradient id="clFocal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<linearGradient id="clGen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5c451"/><stop offset="1" stop-color="#e08a1f"/></linearGradient>
+<linearGradient id="clUnk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ca3af"/><stop offset="1" stop-color="#6b7280"/></linearGradient>
+<filter id="clShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity=".28"/></filter>
+</defs>
+<rect x="0" y="0" width="680" height="300" rx="18" fill="#0a0f1c"/>
+<g filter="url(#clShadow)"><rect x="255" y="14" width="170" height="42" rx="12" fill="url(#clRoot)"/></g>
+<text x="340" y="40" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="800" fill="#fff">CRISE EPILÉPTICA</text>
+<g stroke="#5b5570" stroke-width="2" fill="none" stroke-linecap="round">
+<path vector-effect="non-scaling-stroke" d="M300 56 C260 90,150 90,110 118"/>
+<path vector-effect="non-scaling-stroke" d="M340 56 L340 118"/>
+<path vector-effect="non-scaling-stroke" d="M380 56 C420 90,530 90,570 118"/>
+</g>
+<g filter="url(#clShadow)">
+<rect x="30" y="118" width="160" height="38" rx="11" fill="url(#clFocal)"/>
+<rect x="260" y="118" width="160" height="38" rx="11" fill="url(#clGen)"/>
+<rect x="490" y="118" width="160" height="38" rx="11" fill="url(#clUnk)"/>
+</g>
+<text x="110" y="142" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="800" fill="#04241f">FOCAL</text>
+<text x="340" y="142" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="800" fill="#2b1a03">GENERALIZADA</text>
+<text x="570" y="142" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="800" fill="#fff">DESCONHECIDA</text>
+<g font-family="Inter,Arial,sans-serif" font-size="10.6" fill="#cbd5c9">
+<text x="110" y="176">Consciência preservada</text>
+<text x="110" y="192">Consciência prejudicada</text>
+<text x="110" y="208">-&gt; Bilateral tônico-clônica</text>
+<text x="340" y="176">Motora: TCG, tônica, clônica,</text>
+<text x="340" y="192">mioclônica, atônica, espasmo</text>
+<text x="340" y="208">Não motora: ausências</text>
+<text x="560" y="176" font-size="9.6">Sem testemunha do início</text>
+<text x="560" y="192" font-size="9.6">Reclassificar se possível</text>
+<text x="560" y="208" font-size="9.6">com EEG/vídeo depois</text>
+</g>
+<rect x="20" y="234" width="640" height="52" rx="12" fill="rgba(63,227,212,.08)" stroke="rgba(63,227,212,.35)"/>
+<text x="340" y="256" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="700" fill="#8fe8dd">Classificar corretamente muda a escolha do antiepiléptico</text>
+<text x="340" y="274" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#a9d9d2">drogas boas para crise focal podem piorar crises generalizadas</text>
+</svg>
+</div>
+<div class="callout tip"><b>Por que isso importa</b>A classificação <b>guia o tratamento</b>: algumas drogas boas para crise focal <b>pioram</b> crises generalizadas (ausência/mioclonia). Classificar certo = tratar certo. (O detalhamento de qual droga usar em cada tipo está no módulo de Antiepilépticos.)</div>
+<div class="callout update"><b>ATUALIZAÇÃO</b>Em abril de 2025 a ILAE publicou uma revisão oficial da classificação de crises (Beniczky et al., <i>Epilepsia</i> 2025), a primeira grande atualização desde 2017. O que mudou, em resumo: (1) o termo "onset" saiu do nome das 4 classes principais (agora é só "focal", "generalizada", "desconhecida" e "não classificada"); (2) ficou explícita a diferença entre <b>classificadores</b> (mudam a conduta) e <b>descritores</b> (detalham a semiologia); (3) "awareness" virou <b>"consciência"</b>, definida como percepção <b>+</b> responsividade juntas; (4) a antiga dicotomia motor/não motor virou <b>manifestação observável/não observável</b>; (5) passou-se a descrever a crise pela <b>sequência cronológica</b> completa de sinais, não só pelo primeiro sinal; (6) a <b>mioclonia negativa epiléptica</b> foi reconhecida como tipo próprio de crise. No total, os 63 tipos de crise de 2017 foram simplificados para 21. <b>Por que importa:</b> bancas de residência ainda usam majoritariamente os termos de 2017 ("crise focal com/sem consciência preservada" aparecendo como "aware"/"impaired awareness"), mas questões mais novas já podem cobrar a terminologia 2025 — vale reconhecer as duas.</div>
+<table class="med"><tr><th>Termo 2017</th><th>Termo 2025</th></tr>
+<tr><td>Crise de início focal ("focal-onset")</td><td>Crise focal</td></tr>
+<tr><td>Crise focal "aware" (perceptiva)</td><td>Crise focal com consciência preservada</td></tr>
+<tr><td>Crise focal "impaired awareness" (disperceptiva)</td><td>Crise focal com consciência prejudicada</td></tr>
+<tr><td>Crise generalizada de início ("generalized-onset")</td><td>Crise generalizada</td></tr>
+<tr><td>Motor x não motor</td><td>Manifestação observável x não observável</td></tr></table>`},
+   {label:'3. Consciência, Aura e Automatismos',html:`<h3>🧠 Percepção, responsividade e os "avisos" da crise focal</h3>
+<p>Dentro das crises focais, a informação mais cobrada em prova (depois de "onde começa") é: <b>a pessoa fica consciente durante a crise?</b> Para responder isso direito, é preciso entender dois componentes separados que juntos formam o que hoje se chama de "consciência":</p>
+<ul><li><b>Percepção (awareness):</b> a pessoa tem noção do que está acontecendo e, principalmente, <b>guarda memória</b> do episódio depois.</li>
+<li><b>Responsividade (responsiveness):</b> a pessoa consegue responder a comandos verbais ou motores durante a crise (ex.: "aperte minha mão").</li></ul>
+<p>Só se considera <b>consciência preservada</b> quando os dois componentes estão intactos. Se qualquer um deles falha — mesmo que a pessoa pareça "acordada" mas não responda direito, ou responda mas não lembre depois — já se classifica como <b>consciência prejudicada</b>.</p>
+<div class="callout tip"><b>MACETE</b>Pergunte duas coisas: "ela lembra o que aconteceu?" (percepção) e "ela respondia quando você chamava?" (responsividade). Se as duas respostas forem "sim", é consciência preservada. Qualquer "não" já derruba para prejudicada.</div>
+<h3>A aura é parte da crise, não um aviso antes dela</h3>
+<p>Um erro conceitual muito comum — inclusive entre pacientes e familiares — é achar que a "aura" é um sintoma <b>que vem antes</b> da crise, como um pré-aviso. Na verdade, a aura <b>já é a própria crise</b>: é uma crise focal com consciência preservada (o paciente lembra dela perfeitamente, porque viveu esse trecho com percepção e responsividade intactas), que pode ficar restrita a esse sintoma ou evoluir para algo maior. Auras clássicas incluem sensação epigástrica ascendente, déjà-vu, medo súbito sem motivo, alterações visuais ou olfativas.</p>
+<p>Quando a crise evolui e a consciência se prejudica, é comum aparecerem os <b>automatismos</b>: comportamentos motores repetitivos e sem propósito real, que o paciente faz sem perceber — mastigar, estalar os lábios (automatismo oroalimentar), mexer as mãos como quem procura algo ou manipula um objeto (automatismo manual/gestual). A presença de automatismos é um forte indicador de que a consciência já está prejudicada naquele momento.</p>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="sq1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<linearGradient id="sq2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fd8c9"/><stop offset="1" stop-color="#3fa89a"/></linearGradient>
+<linearGradient id="sq3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#7c5cf0"/></linearGradient>
+<linearGradient id="sq4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fb7185"/><stop offset="1" stop-color="#e0455f"/></linearGradient>
+<filter id="sqShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity=".28"/></filter>
+<marker id="sqArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6b6478"/></marker>
+</defs>
+<rect x="0" y="0" width="680" height="200" rx="18" fill="#0a0f1c"/>
+<g stroke="#6b6478" stroke-width="2" fill="none" marker-end="url(#sqArrow)">
+<path vector-effect="non-scaling-stroke" d="M158 70 L192 70"/>
+<path vector-effect="non-scaling-stroke" d="M328 70 L362 70"/>
+<path vector-effect="non-scaling-stroke" d="M498 70 L532 70"/>
+</g>
+<g filter="url(#sqShadow)">
+<rect x="14" y="36" width="144" height="68" rx="14" fill="url(#sq1)"/>
+<rect x="192" y="36" width="136" height="68" rx="14" fill="url(#sq2)"/>
+<rect x="362" y="36" width="136" height="68" rx="14" fill="url(#sq3)"/>
+<rect x="532" y="36" width="134" height="68" rx="14" fill="url(#sq4)"/>
+</g>
+<g font-family="Inter,Arial,sans-serif" text-anchor="middle">
+<text x="86" y="64" font-size="11.5" font-weight="800" fill="#0c1c1a">AURA</text>
+<text x="86" y="80" font-size="9.5" fill="#0c1c1a">consciência preservada</text>
+<text x="260" y="64" font-size="11.5" font-weight="800" fill="#0d211d">AUTOMATISMO</text>
+<text x="260" y="80" font-size="9.5" fill="#0d211d">mastigar, mexer as mãos</text>
+<text x="430" y="64" font-size="11.5" font-weight="800" fill="#fff">CONSCIÊNCIA</text>
+<text x="430" y="80" font-size="9.5" fill="#f1eaff">prejudicada</text>
+<text x="599" y="64" font-size="11.5" font-weight="800" fill="#fff">BILATERAL</text>
+<text x="599" y="80" font-size="9.5" fill="#ffe1e6">tônico-clônica (se evoluir)</text>
+</g>
+<text x="340" y="140" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" fill="#c9c2d6">Exemplo de descrição por sequência cronológica (padrão ILAE 2025)</text>
+<text x="340" y="164" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#9992a8">Nem toda crise focal percorre todas as etapas — a evolução pode parar em qualquer ponto</text>
+</svg>
+</div>
+<p>Quando uma crise focal se espalha para os dois hemisférios e passa a ter abalos generalizados, ela é chamada de <b>focal para bilateral tônico-clônica</b> (o termo antigo "secundariamente generalizada" caiu em desuso). Reconhecer esse padrão é importante porque, clinicamente, o começo focal (a aura, o automatismo) é a principal pista de que existe uma <b>lesão ou foco cerebral específico</b> por trás da crise — informação essencial para investigação e tratamento.</p>
+<div class="callout trap"><b>PEGADINHA DE PROVA</b>Não confunda "aura" com "pródromo". Pródromo (irritabilidade, mudança de humor horas antes) pode ocorrer em alguns pacientes com epilepsia, mas é um fenômeno diferente e menos específico. A <b>aura já é crise</b>; o pródromo não é.</div>`},
+   {label:'4. Tipos de Crise na Prática',html:`<h3>👀 Reconhecendo os principais tipos</h3>
 <table class="med"><tr><th>Tipo</th><th>Como se apresenta</th></tr>
 <tr><td><b>Tônico-clônica (TCG)</b></td><td>Perda de consciência, fase tônica (enrijece) + clônica (abalos), pode ter mordedura lateral de língua, liberação esfincteriana e <b>confusão pós-ictal</b></td></tr>
 <tr><td><b>Ausência</b> (criança)</td><td>"Desliga" por segundos, olhar parado, sem queda nem pós-ictal; volta como se nada tivesse acontecido</td></tr>
 <tr><td><b>Mioclônica</b></td><td>Abalos rápidos (ex.: epilepsia mioclônica juvenil — abalos matinais, derruba objetos)</td></tr>
-<tr><td><b>Focal disperceptiva</b> (temporal)</td><td>Aura (déjà-vu, sensação epigástrica), automatismos (mastigar, mexer as mãos), consciência alterada</td></tr>
-<tr><td><b>Atônica</b></td><td>Perda súbita do tônus → queda ("drop attack")</td></tr></table>
-<div class="callout mne"><b>Pós-ictal: a pista de ouro</b>A <b>confusão/sonolência depois</b> da crise (estado pós-ictal) ajuda a diferenciar de uma síncope (recupera rápido) e de crise não epiléptica.</div>`},
-   {label:'4. Diagnóstico',html:`<h3>🔬 Como investigar</h3>
-<p>O diagnóstico é, antes de tudo, <b>clínico</b> — e a <b>história de quem viu</b> a crise vale ouro (o paciente costuma não lembrar).</p>
+<tr><td><b>Focal disperceptiva</b> (temporal; hoje também chamada de consciência prejudicada)</td><td>Aura (déjà-vu, sensação epigástrica), automatismos (mastigar, mexer as mãos), consciência alterada</td></tr>
+<tr><td><b>Atônica</b></td><td>Perda súbita do tônus → queda ("drop attack")</td></tr>
+<tr><td><b>Tônica</b></td><td>Enrijecimento súbito e sustentado, sem a fase de abalos</td></tr>
+<tr><td><b>Clônica</b></td><td>Abalos rítmicos repetidos, sem a fase tônica inicial (rara isolada)</td></tr>
+<tr><td><b>Espasmo epiléptico</b></td><td>Flexão/extensão súbita e breve do tronco e membros, em salvas; no lactente é a marca da síndrome de West</td></tr>
+<tr><td><b>Mioclonia negativa epiléptica</b></td><td>Interrupção súbita e breve do tônus muscular por "pausa" elétrica (diferente da mioclonia, que é um abalo positivo) — tipo reconhecido na atualização ILAE 2025</td></tr></table>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="tp1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#d97706"/></linearGradient>
+<linearGradient id="tp2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f87171"/><stop offset="1" stop-color="#c53030"/></linearGradient>
+<linearGradient id="tp3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c93c9"/><stop offset="1" stop-color="#495a86"/></linearGradient>
+<filter id="tpShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity=".28"/></filter>
+</defs>
+<rect x="0" y="0" width="680" height="220" rx="18" fill="#0a0f1c"/>
+<g filter="url(#tpShadow)">
+<rect x="20" y="30" width="200" height="54" rx="13" fill="url(#tp1)"/>
+<rect x="240" y="30" width="200" height="54" rx="13" fill="url(#tp2)"/>
+<rect x="460" y="30" width="200" height="54" rx="13" fill="url(#tp3)"/>
+</g>
+<g font-family="Inter,Arial,sans-serif" text-anchor="middle" font-weight="800" font-size="13">
+<text x="120" y="63" fill="#2b1a03">FASE TÔNICA</text>
+<text x="340" y="63" fill="#3a0d0d">FASE CLÔNICA</text>
+<text x="560" y="63" fill="#eef1fb">PÓS-ICTAL</text>
+</g>
+<g font-family="Inter,Arial,sans-serif" text-anchor="middle" font-size="10.4" fill="#c7c2d1">
+<text x="120" y="106">Enrijecimento generalizado,</text>
+<text x="120" y="120">queda, grito ictal</text>
+<text x="340" y="106">Abalos rítmicos,</text>
+<text x="340" y="120">mordedura lateral de língua</text>
+<text x="560" y="106">Confusão, sonolência,</text>
+<text x="560" y="120">pode durar minutos a horas</text>
+</g>
+<path vector-effect="non-scaling-stroke" d="M20 150 C 120 130, 220 170, 340 150 C 460 130, 560 170, 660 150" stroke="#4b465a" stroke-width="2" fill="none" stroke-linecap="round"/>
+<text x="340" y="188" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.6" fill="#a79fc2">Liberação esfincteriana e cianose podem ocorrer na fase tônica</text>
+<text x="340" y="206" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.6" fill="#a79fc2">Sequência completa dura tipicamente 1 a 3 minutos</text>
+</svg>
+</div>
+<p>Um detalhe semiológico que cai bastante: a <b>mordedura de língua na crise tônico-clônica é tipicamente lateral</b> (a língua é mordida na lateral pela contração forte do masseter durante a fase tônica), enquanto síncope e crise não epiléptica psicogênica raramente produzem esse achado — quando produzem, tendem a morder a ponta da língua. Esse é um dos poucos achados de exame físico com valor real para diferenciar os quadros.</p>
+<div class="callout mne"><b>Pós-ictal: a pista de ouro (CAI NA PROVA)</b>A <b>confusão/sonolência depois</b> da crise (estado pós-ictal) ajuda a diferenciar de uma síncope (recupera rápido, em segundos) e de uma crise não epiléptica psicogênica (o retorno costuma ser mais rápido e sem a confusão característica). Quando a questão descrever "demorou minutos para 'voltar ao normal' e ficou confuso", pense em crise epiléptica.</div>
+<div class="callout tip"><b>MACETE</b>Ausência x focal com consciência prejudicada: a <b>ausência</b> começa e termina abruptamente, dura segundos, sem aura e sem pós-ictal. A <b>focal com consciência prejudicada</b> costuma ter aura antes, automatismos durante e confusão pós-ictal depois, e dura tipicamente mais (1-2 minutos).</div>`},
+   {label:'5. Classificação da Epilepsia',html:`<h3>🧩 Além da crise: classificando a doença</h3>
+<p>Até aqui você classificou o <b>evento</b> (a crise). Mas a ILAE também organiza a classificação em um segundo nível, mais amplo: o da <b>doença</b> (a epilepsia em si). Entender essa diferença evita um erro comum de quem está começando a estudar o tema, que é achar que "tipo de crise" e "tipo de epilepsia" são a mesma coisa.</p>
+<p>A lógica funciona em <b>3 níveis</b>, cada um mais específico que o anterior, e você pode parar em qualquer nível dependendo de quanta informação está disponível (nem todo paciente vai ter uma síndrome reconhecível, por exemplo):</p>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="pyr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<linearGradient id="pyr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#7c5cf0"/></linearGradient>
+<linearGradient id="pyr3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5c451"/><stop offset="1" stop-color="#e08a1f"/></linearGradient>
+<filter id="pyShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity=".26"/></filter>
+</defs>
+<rect x="0" y="0" width="680" height="320" rx="18" fill="#0a0f1c"/>
+<g filter="url(#pyShadow)" stroke-linejoin="round">
+<path vector-effect="non-scaling-stroke" d="M40 240 L280 240 L250 190 L70 190 Z" fill="url(#pyr1)"/>
+<path vector-effect="non-scaling-stroke" d="M70 186 L250 186 L226 136 L94 136 Z" fill="url(#pyr2)"/>
+<path vector-effect="non-scaling-stroke" d="M94 132 L226 132 L196 84 L124 84 Z" fill="url(#pyr3)"/>
+</g>
+<g font-family="Inter,Arial,sans-serif" text-anchor="middle" font-weight="800">
+<text x="160" y="219" font-size="11.5" fill="#04241f">NÍVEL 1 · TIPO DE CRISE</text>
+<text x="160" y="164" font-size="11.5" fill="#fff">NÍVEL 2 · TIPO DE EPILEPSIA</text>
+<text x="160" y="112" font-size="10.5" fill="#2b1a03">NÍVEL 3 · SÍNDROME</text>
+</g>
+<text x="160" y="270" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.6" fill="#a79fc2">Focal, generalizada, combinada ou desconhecida</text>
+<text x="160" y="288" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.6" fill="#a79fc2">quando o quadro eletroclínico é reconhecível</text>
+<circle cx="500" cy="170" r="88" fill="none" stroke="#3a3548" stroke-width="1"/>
+<circle cx="500" cy="170" r="46" fill="#241a30"/>
+<text x="500" y="166" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="800" fill="#e7defc">ETIOLOGIA</text>
+<text x="500" y="182" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="8.6" fill="#b9adcf">(investigar sempre)</text>
+<g font-family="Inter,Arial,sans-serif" font-size="10" font-weight="700">
+<text x="500" y="66" text-anchor="middle" fill="#8fe8dd">Estrutural</text>
+<text x="596" y="106" text-anchor="middle" fill="#f0c98a">Genética</text>
+<text x="626" y="176" text-anchor="middle" fill="#f5a3ac">Infecciosa</text>
+<text x="596" y="246" text-anchor="middle" fill="#9fd6f0">Metabólica</text>
+<text x="500" y="286" text-anchor="middle" fill="#c9b3f2">Imune</text>
+<text x="404" y="246" text-anchor="middle" fill="#c7c2d1">Desconhecida</text>
+</g>
+</svg>
+</div>
+<p><b>Nível 1 — Tipo de crise:</b> é o que você já aprendeu (focal, generalizada, desconhecida). <b>Nível 2 — Tipo de epilepsia:</b> olha para o conjunto de crises e exames do paciente e classifica a doença em <b>focal</b>, <b>generalizada</b>, <b>combinada</b> (generalizada e focal no mesmo paciente) ou <b>desconhecida</b>. <b>Nível 3 — Síndrome epiléptica:</b> quando o conjunto de idade de início, tipo(s) de crise, padrão de EEG e, às vezes, achados de imagem forma um quadro reconhecível com nome próprio — por exemplo, a <b>epilepsia mioclônica juvenil</b> (adolescente, mioclonias matinais, TCG ao acordar, poliponta-onda no EEG) ou a <b>epilepsia ausência da infância</b> (criança, múltiplas ausências/dia, ponta-onda a 3Hz). A síndrome de West (espasmos epilépticos + hipsarritmia no EEG + regressão do desenvolvimento, no lactente) é outro exemplo clássico de prova. Cada síndrome tem prognóstico e tratamento próprios — por isso reconhecer uma síndrome muda a conduta.</p>
+<h3>As 6 categorias de etiologia (investigar sempre, em todo paciente)</h3>
+<table class="med"><tr><th>Etiologia</th><th>Exemplo típico</th></tr>
+<tr><td><b>Estrutural</b></td><td>Esclerose mesial temporal, displasia cortical, tumor, sequela de AVC/TCE</td></tr>
+<tr><td><b>Genética</b></td><td>Canalopatias, epilepsias generalizadas geneticamente determinadas (ex.: epilepsia mioclônica juvenil)</td></tr>
+<tr><td><b>Infecciosa</b></td><td>Neurocisticercose (principal causa de epilepsia adquirida no Brasil), sequela de meningoencefalite</td></tr>
+<tr><td><b>Metabólica</b></td><td>Erros inatos do metabolismo, deficiência de piridoxina no neonato</td></tr>
+<tr><td><b>Imune</b></td><td>Encefalites autoimunes (ex.: anti-NMDA), categoria incluída formalmente a partir de 2017</td></tr>
+<tr><td><b>Desconhecida</b></td><td>Investigação completa sem causa identificada</td></tr></table>
+<div class="callout mne"><b>CONCEITO-CHAVE</b>As 6 etiologias <b>não são mutuamente excludentes</b> — um mesmo paciente pode ter, por exemplo, causa estrutural E genética associadas — e devem ser reavaliadas <b>em cada nível</b> da classificação (crise, epilepsia e síndrome), não investigadas só uma vez. Isso porque encontrar a etiologia muda a conduta: causa imune pede imunoterapia, causa infecciosa pede tratar o agente, causa genética muda o aconselhamento familiar.</div>
+<div class="callout trap"><b>PEGADINHA DE PROVA</b>"Tipo de epilepsia" (focal/generalizada/combinada/desconhecida) não é a mesma coisa que "síndrome epiléptica" (um quadro nomeado e reconhecível). Toda síndrome tem um tipo de epilepsia por trás, mas nem toda epilepsia classificável por tipo chega a fechar uma síndrome nomeada.</div>`},
+   {label:'6. Diagnóstico e Diferenciais',html:`<h3>🔬 Como investigar</h3>
+<p>O diagnóstico é, antes de tudo, <b>clínico</b> — e a <b>história de quem viu</b> a crise vale ouro (o paciente costuma não lembrar). Isso é ainda mais verdadeiro quando a consciência foi prejudicada durante o evento.</p>
 <table class="med"><tr><th>Passo</th><th>O que fazer / procurar</th></tr>
 <tr><td>1</td><td><b>Anamnese detalhada</b> + relato da testemunha (como começou, duração, pós-ictal)</td></tr>
-<tr><td>2</td><td>Excluir <b>crise provocada</b>: glicemia, sódio, cálcio, função renal/hepática, drogas, abstinência</td></tr>
+<tr><td>2</td><td>Excluir <b>crise provocada</b>: glicemia, sódio, cálcio, magnésio, função renal/hepática, drogas, abstinência (álcool, benzodiazepínicos, barbitúricos)</td></tr>
 <tr><td>3</td><td><b>EEG</b>: procura atividade epileptiforme (ajuda a classificar e estimar recorrência). EEG normal <b>não</b> exclui epilepsia</td></tr>
-<tr><td>4</td><td><b>Ressonância de crânio</b>: procura lesão estrutural (esclerose mesial temporal, displasia, tumor, AVC antigo)</td></tr></table>
+<tr><td>4</td><td><b>Ressonância de crânio</b> com <b>protocolo para epilepsia</b> (cortes finos pelo hipocampo): procura lesão estrutural (esclerose mesial temporal, displasia, tumor, AVC antigo)</td></tr></table>
+<p>Sobre o EEG, um ponto que costuma confundir: um único EEG de rotina (20-30 min, acordado) tem sensibilidade de cerca de <b>50%</b> para achar atividade epileptiforme em quem tem epilepsia — ou seja, metade dos exames vem "normal" mesmo havendo a doença. Repetir o exame, fazer com <b>privação de sono</b> ou em <b>vídeo-EEG prolongado</b> aumenta bastante essa sensibilidade (até 80-90% em séries repetidas). Por isso um único EEG normal nunca fecha a exclusão do diagnóstico.</p>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="dg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#7c5cf0"/></linearGradient>
+<linearGradient id="dg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<linearGradient id="dg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5c451"/><stop offset="1" stop-color="#e08a1f"/></linearGradient>
+<linearGradient id="dg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ca3af"/><stop offset="1" stop-color="#6b7280"/></linearGradient>
+<filter id="dgShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity=".26"/></filter>
+<marker id="dgArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6b6478"/></marker>
+<marker id="dgArrowSm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7d778f"/></marker>
+</defs>
+<rect x="0" y="0" width="680" height="400" rx="18" fill="#0a0f1c"/>
+<g stroke="#6b6478" stroke-width="2" fill="none" marker-end="url(#dgArrow)">
+<path vector-effect="non-scaling-stroke" d="M190 60 L190 76"/>
+<path vector-effect="non-scaling-stroke" d="M190 186 L190 202"/>
+<path vector-effect="non-scaling-stroke" d="M190 130 L190 145"/>
+<path vector-effect="non-scaling-stroke" d="M190 256 L190 271"/>
+</g>
+<path vector-effect="non-scaling-stroke" d="M350 103 C 400 103, 420 103, 448 103" stroke="#7d778f" stroke-width="1.6" fill="none" stroke-dasharray="3 4" marker-end="url(#dgArrowSm)"/>
+<path vector-effect="non-scaling-stroke" d="M350 229 C 400 229, 420 229, 448 229" stroke="#7d778f" stroke-width="1.6" fill="none" stroke-dasharray="3 4" marker-end="url(#dgArrowSm)"/>
+<g filter="url(#dgShadow)">
+<rect x="30" y="20" width="320" height="40" rx="12" fill="url(#dg1)"/>
+<rect x="30" y="76" width="320" height="54" rx="13" fill="url(#dg4)"/>
+<rect x="30" y="145" width="320" height="41" rx="12" fill="url(#dg2)"/>
+<rect x="30" y="202" width="320" height="54" rx="13" fill="url(#dg4)"/>
+<rect x="30" y="271" width="320" height="46" rx="12" fill="url(#dg3)"/>
+</g>
+<text x="190" y="44" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="800" fill="#fff">1ª CRISE NÃO PROVOCADA</text>
+<text x="190" y="98" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.6" font-weight="700" fill="#fff">Causa aguda reversível?</text>
+<text x="190" y="114" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#e5e2ea">glicemia, Na+, abstinência, drogas</text>
+<text x="190" y="169" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="800" fill="#04241f">EEG + RM (protocolo epilepsia)</text>
+<text x="190" y="224" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.6" font-weight="700" fill="#fff">Risco alto de recorrência?</text>
+<text x="190" y="240" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#e5e2ea">lesão estrutural ou EEG epileptiforme</text>
+<text x="190" y="298" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11.5" font-weight="800" fill="#2b1a03">EPILEPSIA (alto risco)</text>
+<text x="190" y="313" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#3a2406">considerar iniciar antiepiléptico</text>
+<g font-family="Inter,Arial,sans-serif" font-size="10">
+<text x="452" y="98" fill="#c9c2d6" font-weight="700">SIM →</text>
+<text x="452" y="113" fill="#a79fc2">crise provocada: tratar a</text>
+<text x="452" y="127" fill="#a79fc2">causa de base</text>
+<text x="452" y="224" fill="#c9c2d6" font-weight="700">NÃO →</text>
+<text x="452" y="239" fill="#a79fc2">crise única não provocada:</text>
+<text x="452" y="253" fill="#a79fc2">investigar e individualizar</text>
+</g>
+<text x="190" y="345" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#807a90">Fluxo completo e interativo disponível na aba "Fluxo Dx"</text>
+</svg>
+</div>
+<p>Vale entender também o <b>porquê</b> desses critérios de "alto risco" pesarem tanto na decisão de tratar já na primeira crise: estudos de seguimento mostram que, após uma primeira crise não provocada <b>sem</b> nenhum fator de risco, o risco de uma segunda crise em 2 anos fica em torno de 40-50%. Quando existe EEG com atividade epileptiforme, lesão estrutural na RM, crise noturna ou uma lesão cerebral prévia conhecida (AVC antigo, TCE, malformação), esse risco sobe consideravelmente — motivo pelo qual, nesses casos, já se considera tratar mesmo depois de uma única crise, em vez de esperar a recorrência.</p>
 <h3>Diferenciais</h3>
 <ul><li><b>Síncope</b>: gatilho postural/dor, recuperação rápida, sem pós-ictal prolongado (pode ter alguns abalos).</li>
 <li><b>Crise não epiléptica psicogênica</b>: movimentos atípicos, olhos fechados resistindo à abertura, EEG normal durante o evento.</li></ul>
+<p>Esses dois diferenciais são os mais cobrados — para aprofundar, a tabela abaixo compara os três quadros lado a lado:</p>
+<table class="med"><tr><th></th><th>Crise epiléptica</th><th>Síncope</th><th>Crise não epiléptica psicogênica (PNES)</th></tr>
+<tr><td><b>Gatilho</b></td><td>Geralmente nenhum (ou privação de sono, luzes)</td><td>Postural, dor, calor, jejum, estresse emocional</td></tr>
+<tr><td><b>Início</b></td><td>Súbito, pode ter aura</td><td>Pródromo comum: escurecer da visão, sudorese, tontura</td></tr>
+<tr><td><b>Duração</b></td><td>Segundos a poucos minutos</td><td>Segundos (recuperação rápida)</td></tr>
+<tr><td><b>Movimentos</b></td><td>Tônicos/clônicos organizados, mordedura lateral de língua</td><td>Pode ter alguns abalos breves e assíncronos</td></tr>
+<tr><td><b>Durante o evento</b></td><td>-</td><td>-</td></tr>
+<tr><td><b>Olhos</b></td><td>Abertos, muitas vezes desviados</td><td>Fechados, resistindo à abertura passiva (achado clássico de PNES)</td></tr>
+<tr><td><b>Pós-evento</b></td><td>Confusão/sonolência prolongada (pós-ictal)</td><td>Recuperação rápida, sem pós-ictal verdadeiro</td></tr>
+<tr><td><b>EEG ictal</b></td><td>Alterado (descarga epileptiforme)</td><td>Normal durante o evento</td></tr></table>
+<div class="callout update"><b>ATUALIZAÇÃO</b>Antigamente ensinava-se dosar a <b>prolactina sérica</b> 10-20 minutos após o evento para ajudar a diferenciar crise epiléptica de PNES (prolactina sobe após crise tônico-clônica ou focal com consciência prejudicada, mas não após PNES). Hoje esse exame <b>não é mais recomendado rotineiramente</b>: tem baixa sensibilidade (pode não subir mesmo em crise verdadeira) e não distingue crise de síncope. O padrão-ouro atual para casos duvidosos é o <b>vídeo-EEG prolongado</b>, que registra o evento clínico e o traçado eletroencefalográfico simultaneamente.</div>
 <div class="callout warn"><b>Regra prática</b>Primeira crise → sempre afaste causa <b>provocada</b> (corrigível!) antes de rotular como epilepsia. E lembre: EEG normal não descarta.</div>`},
    {label:'Mapa Mental',html:`<h3>🧠 Mapa mental — Crises e Classificação</h3>
 <div class="mindmap"><div class="mm-center">CRISES</div><div class="mm-trunk"></div><div class="mm-branches">
-<div class="mm-branch"><b>Conceitos</b><ul><li>Crise = evento</li><li>Epilepsia = tendência</li><li>Provocada x não provocada</li></ul></div>
-<div class="mm-branch"><b>Classificação</b><ul><li>Focal (perceptiva/disperceptiva)</li><li>Generalizada (TCG, ausência, mioclônica...)</li></ul></div>
-<div class="mm-branch"><b>Diagnóstico</b><ul><li>Testemunha</li><li>Excluir provocada</li><li>EEG + RM</li></ul></div>
+<div class="mm-branch"><b>Conceitos</b><ul><li>Crise = evento</li><li>Epilepsia = tendência (≥2 ou 1+alto risco ou síndrome)</li><li>Provocada x não provocada</li><li>"Resolvida" ≠ "curada"</li></ul></div>
+<div class="mm-branch"><b>Classificação</b><ul><li>Focal (perceptiva/disperceptiva)</li><li>Generalizada (TCG, ausência, mioclônica...)</li><li>Desconhecida</li><li>Atualização ILAE 2025: 21 tipos</li></ul></div>
+<div class="mm-branch"><b>Consciência</b><ul><li>Percepção + responsividade</li><li>Aura = já é crise</li><li>Automatismos = consciência prejudicada</li></ul></div>
+<div class="mm-branch"><b>Classificação da epilepsia</b><ul><li>Nível 1: crise</li><li>Nível 2: tipo de epilepsia</li><li>Nível 3: síndrome</li><li>6 etiologias (investigar sempre)</li></ul></div>
+<div class="mm-branch"><b>Diagnóstico</b><ul><li>Testemunha é essencial</li><li>Excluir provocada</li><li>EEG + RM protocolo epilepsia</li><li>Diferenciais: síncope, PNES</li></ul></div>
 </div></div>`},
    {label:'Revisão de véspera',html:`<h3>📌 Revisão de véspera</h3>
 <table class="med"><tr><th>Situação</th><th>Resposta</th></tr>
@@ -1731,10 +2026,16 @@ MODULES.push({
 <tr><td>1 crise + lesão/EEG alterado</td><td>Epilepsia (alto risco)</td></tr>
 <tr><td>Crise + hipoglicemia/abstinência</td><td>Provocada → tratar a causa</td></tr>
 <tr><td>Criança "desliga" segundos, sem pós-ictal</td><td>Ausência</td></tr>
-<tr><td>Confusão pós-ictal</td><td>Favorece crise epiléptica (vs síncope)</td></tr></table>`},
+<tr><td>Confusão pós-ictal</td><td>Favorece crise epiléptica (vs síncope)</td></tr>
+<tr><td>Aura (déjà-vu, epigástrica)</td><td>Já é crise focal, não "pré-aviso"</td></tr>
+<tr><td>Olhos fechados resistindo à abertura</td><td>Favorece PNES</td></tr>
+<tr><td>Lactente com espasmos em salva + regressão</td><td>Pensar em síndrome de West</td></tr>
+<tr><td>EEG único normal</td><td>Não exclui epilepsia (sensibilidade ~50%)</td></tr>
+<tr><td>10 anos sem crise e 5 anos sem medicação</td><td>Epilepsia "resolvida"</td></tr></table>`},
    {label:'Dicas & Pegadinhas',html:`<h3>💡 Dicas</h3>
-<div class="callout fast"><b>Lembre</b>① História da testemunha é essencial. ② Excluir causas provocadas (corrigíveis). ③ EEG normal não exclui. ④ Classificar bem guia o tratamento.</div>
-<div class="callout trap"><b>Pegadinhas</b>① Chamar de "epilepsia" uma crise provocada (ex.: por hiponatremia). ② Achar que EEG normal afasta o diagnóstico. ③ Esquecer o pós-ictal como pista contra síncope.</div>`}
+<div class="callout fast"><b>Lembre</b>① História da testemunha é essencial. ② Excluir causas provocadas (corrigíveis). ③ EEG normal não exclui. ④ Classificar bem guia o tratamento. ⑤ As 6 etiologias devem ser investigadas em todo paciente, não só quando "óbvio".</div>
+<div class="callout trap"><b>Pegadinhas</b>① Chamar de "epilepsia" uma crise provocada (ex.: por hiponatremia). ② Achar que EEG normal afasta o diagnóstico. ③ Esquecer o pós-ictal como pista contra síncope. ④ Confundir "tipo de epilepsia" com "síndrome epiléptica". ⑤ Achar que a aura vem antes da crise — ela já é a crise. ⑥ Usar "convulsão" como sinônimo de "crise epiléptica" (ausência não é convulsão).</div>
+<div class="callout tip"><b>MACETE</b>Para não confundir consciência preservada x prejudicada: "lembra + responde" = preservada; qualquer falha em um dos dois = prejudicada.</div>`}
   ],
   flowDx:{ title:'Abordagem da primeira crise', start:'c1', nodes:{
     c1:{q:'Há causa aguda reversível? (glicemia, Na+, abstinência, drogas)',opts:[{t:'Sim',go:'rProv'},{t:'Não',go:'c2'}]},
