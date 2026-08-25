@@ -2250,50 +2250,164 @@ MODULES.push({
   title:'Fármacos Antiepilépticos', sub:'Como escolher a droga certa e seus cuidados',
   prio:'alta', topics:['Antiepilépticos','Escolha por tipo de crise','Efeitos adversos'],
   subtopics:[
-   {label:'1. Princípios gerais',html:`<h3>💊 Como pensar o tratamento</h3>
+   {label:'1. Entendendo os Antiepilépticos',html:`<h3>💊 O que essas drogas realmente fazem</h3>
+<p>Para entender por que cada antiepiléptico é usado numa situação e não em outra, primeiro é preciso entender o que causa a crise no nível celular: uma crise epiléptica é um <b>desequilíbrio entre excitação e inibição</b> nos neurônios — excesso de sinalização excitatória (glutamato) e/ou falta de sinalização inibitória (GABA), somado a um comportamento anormal dos <b>canais iônicos</b> (sobretudo sódio e cálcio) que permite que a despolarização se espalhe e se perpetue em vez de se apagar sozinha.</p>
+<p>Todo antiepiléptico age interrompendo esse ciclo em algum ponto. Os grandes mecanismos são: <b>bloquear canais de sódio</b> (impede a despolarização repetitiva descontrolada), <b>potencializar o GABA</b> (aumenta o "freio" inibitório do cérebro), <b>bloquear canais de cálcio tipo T</b> (relevante sobretudo no circuito tálamo-cortical da ausência) e mecanismos mais novos como a <b>modulação da proteína SV2A</b> (que regula a liberação de neurotransmissores na vesícula sináptica). Entender em qual desses grupos cada droga se encaixa explica, por exemplo, por que certos fármacos funcionam bem numa crise e pioram outra — voltaremos a isso na próxima sub-aba.</p>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="faeM1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<linearGradient id="faeM2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#7c5cf0"/></linearGradient>
+<linearGradient id="faeM3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5c451"/><stop offset="1" stop-color="#e08a1f"/></linearGradient>
+<linearGradient id="faeM4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fb7185"/><stop offset="1" stop-color="#c2255c"/></linearGradient>
+<filter id="faeShadow1" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity=".26"/></filter>
+</defs>
+<rect x="0" y="0" width="680" height="300" rx="18" fill="#0a0f1c"/>
+<circle cx="340" cy="40" r="26" fill="none" stroke="#4b465a" stroke-width="2"/>
+<text x="340" y="45" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#c7c2d1">CRISE</text>
+<g stroke="#4b465a" stroke-width="2" fill="none">
+<path vector-effect="non-scaling-stroke" d="M340 66 L120 110"/>
+<path vector-effect="non-scaling-stroke" d="M340 66 L280 110"/>
+<path vector-effect="non-scaling-stroke" d="M340 66 L400 110"/>
+<path vector-effect="non-scaling-stroke" d="M340 66 L560 110"/>
+</g>
+<g filter="url(#faeShadow1)">
+<rect x="30" y="110" width="180" height="72" rx="13" fill="url(#faeM1)"/>
+<rect x="250" y="110" width="180" height="72" rx="13" fill="url(#faeM2)"/>
+<rect x="470" y="110" width="180" height="72" rx="13" fill="url(#faeM3)"/>
+</g>
+<text x="120" y="134" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="800" fill="#04241f">Bloqueio canal Na+</text>
+<text x="120" y="150" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#04241f">carbamazepina, fenitoína,</text>
+<text x="120" y="163" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#04241f">lamotrigina, oxcarbazepina</text>
+<text x="340" y="134" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="800" fill="#fff">Potencializa GABA</text>
+<text x="340" y="150" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#f1eaff">benzodiazepínicos,</text>
+<text x="340" y="163" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#f1eaff">fenobarbital, valproato</text>
+<text x="560" y="134" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="800" fill="#2b1a03">Bloqueio Ca2+ tipo T</text>
+<text x="560" y="150" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#2b1a03">etossuximida,</text>
+<text x="560" y="163" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#2b1a03">valproato</text>
+<g filter="url(#faeShadow1)"><rect x="250" y="210" width="180" height="60" rx="13" fill="url(#faeM4)"/></g>
+<text x="340" y="234" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="800" fill="#fff">Modulação SV2A</text>
+<text x="340" y="250" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#ffe3ea">levetiracetam</text>
+<text x="340" y="264" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#ffe3ea">(sem interações maiores)</text>
+<text x="340" y="290" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#807a90">Muitas drogas atuam em mais de um mecanismo ao mesmo tempo</text>
+</svg>
+</div>
+<h3>💊 Como pensar o tratamento</h3>
 <p>Regras de ouro que valem para quase toda questão:</p>
 <ul><li><b>Monoterapia</b> primeiro: começar com 1 droga, na menor dose eficaz, e <b>titular devagar</b>.</li>
 <li>Escolher a droga pelo <b>tipo de crise</b> + <b>perfil do paciente</b> (idade, sexo, comorbidades, interações).</li>
 <li>Se falhar, trocar por outra em monoterapia antes de combinar.</li>
 <li>Objetivo: <b>controle de crises com mínimos efeitos adversos</b>.</li></ul>
 <div class="callout tip"><b>Quando começar</b>Geralmente após o diagnóstico de epilepsia (≥2 crises ou 1 + alto risco). Crise única provocada → trata-se a causa, não se inicia antiepiléptico de longo prazo.</div>`},
-   {label:'2. Escolha por tipo de crise',html:`<h3>🎯 A droga certa para cada crise</h3>
+   {label:'2. Escolha pelo Tipo de Crise',html:`<h3>🎯 A droga certa para cada crise</h3>
 <table class="med"><tr><th>Tipo de crise</th><th>Boas opções</th></tr>
 <tr><td><b>Focal</b></td><td>Carbamazepina, oxcarbazepina, <b>lamotrigina</b>, <b>levetiracetam</b></td></tr>
 <tr><td><b>Generalizada (TCG, mioclônica)</b></td><td><b>Valproato</b> (muito eficaz), lamotrigina, levetiracetam</td></tr>
 <tr><td><b>Ausência</b></td><td><b>Etossuximida</b> (clássica) ou valproato</td></tr></table>
-<div class="callout trap"><b>O erro que mais cai: drogas que AGRAVAM</b>Carbamazepina, oxcarbazepina e fenitoína podem <b>piorar</b> ausências e mioclonias. Por isso, na dúvida sobre crise generalizada, prefira <b>valproato/levetiracetam/lamotrigina</b> (amplo espectro).</div>`},
-   {label:'3. Principais drogas e cuidados',html:`<h3>⚠️ O que vigiar em cada uma</h3>
+<div class="callout trap"><b>O erro que mais cai: drogas que AGRAVAM</b>Carbamazepina, oxcarbazepina e fenitoína podem <b>piorar</b> ausências e mioclonias. Por isso, na dúvida sobre crise generalizada, prefira <b>valproato/levetiracetam/lamotrigina</b> (amplo espectro).</div>
+<p>Por que isso acontece? Voltando ao mecanismo da sub-aba anterior: carbamazepina, oxcarbazepina e fenitoína são <b>bloqueadoras de canal de sódio</b> praticamente puras — ótimas para conter a descarga focal repetitiva, mas sem ação sobre o circuito tálamo-cortical de canais de cálcio tipo T que gera a ausência, e há evidência de que podem até <b>facilitar</b> as descargas generalizadas tipo espícula-onda características da ausência e da epilepsia mioclônica. Já valproato, lamotrigina e levetiracetam atuam por mecanismos múltiplos ou diferentes — por isso são chamados de <b>"amplo espectro"</b>: funcionam bem tanto na crise focal quanto na generalizada, o que os torna a escolha mais segura quando ainda não se tem certeza do tipo de epilepsia.</p>`},
+   {label:'3. Principais Drogas e Cuidados',html:`<h3>⚠️ O que vigiar em cada uma</h3>
 <table class="med"><tr><th>Droga</th><th>Pontos-chave</th></tr>
 <tr><td><b>Valproato</b></td><td>Amplo espectro e potente; <b>teratogênico</b> (evitar em mulher fértil), ganho de peso, tremor, <b>hepatotoxicidade</b>, hiperamonemia, plaquetopenia</td></tr>
 <tr><td><b>Carbamazepina</b></td><td>Boa para focal; <b>indutor enzimático</b> (muitas interações), hiponatremia, risco de <b>Stevens-Johnson</b> (rastrear <b>HLA-B*1502</b> em asiáticos)</td></tr>
 <tr><td><b>Lamotrigina</b></td><td>Bem tolerada; <b>titular bem devagar</b> (risco de rash grave se subir rápido)</td></tr>
 <tr><td><b>Levetiracetam</b></td><td>Prática (sem interações maiores); efeito adverso típico: <b>irritabilidade/alterações de humor</b></td></tr>
-<tr><td><b>Fenitoína</b></td><td>Útil na emergência; <b>cinética não linear</b> (pequenas mudanças de dose → grandes mudanças no nível), hiperplasia gengival, hirsutismo</td></tr></table>`},
-   {label:'4. Situações especiais',html:`<h3>👩 Mulher fértil, gestação e mais</h3>
+<tr><td><b>Fenitoína</b></td><td>Útil na emergência; <b>cinética não linear</b> (pequenas mudanças de dose → grandes mudanças no nível), hiperplasia gengival, hirsutismo</td></tr></table>
+<h3>Por que a lamotrigina exige tanta paciência na titulação</h3>
+<p>O risco de rash grave com a lamotrigina não é aleatório: ele está diretamente ligado à <b>velocidade</b> com que a dose sobe, não à dose final em si. Por isso o esquema de introdução é sempre de escalonamento lento e gradual ao longo de semanas — e fica <b>ainda mais lento</b> quando associada ao valproato (que inibe a metabolização da lamotrigina e praticamente dobra seus níveis séricos).</p>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="faeLtg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<linearGradient id="faeLtg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5c451"/><stop offset="1" stop-color="#e08a1f"/></linearGradient>
+<filter id="faeShadow2" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity=".26"/></filter>
+</defs>
+<rect x="0" y="0" width="680" height="240" rx="18" fill="#0a0f1c"/>
+<path vector-effect="non-scaling-stroke" d="M50 190 L50 40 L640 40" stroke="#4b465a" stroke-width="2" fill="none"/>
+<text x="30" y="45" text-anchor="end" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#a79fc2">dose</text>
+<g filter="url(#faeShadow2)">
+<path vector-effect="non-scaling-stroke" d="M50 190 L200 165 L350 130 L500 95 L640 60" stroke="url(#faeLtg1)" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g filter="url(#faeShadow2)">
+<path vector-effect="non-scaling-stroke" d="M50 190 L250 178 L450 150 L640 110" stroke="url(#faeLtg2)" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 10"/>
+</g>
+<circle cx="50" cy="190" r="5" fill="#8fe8dd"/>
+<circle cx="640" cy="60" r="6" fill="url(#faeLtg1)"/>
+<circle cx="640" cy="110" r="6" fill="url(#faeLtg2)"/>
+<text x="500" y="50" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#8fe8dd">Monoterapia: sobe a cada ~2 sem</text>
+<text x="470" y="128" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#f5c451">Com valproato: sobe ainda mais devagar</text>
+<text x="340" y="220" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#807a90">Semanas — o risco de rash é ligado à VELOCIDADE da subida, não à dose final</text>
+</svg>
+</div>
+<p>Além disso, valproato pede <b>função hepática e hemograma</b> em acompanhamento (hepatotoxicidade, plaquetopenia); carbamazepina pede <b>sódio</b> (hiponatremia) e, em pacientes de ascendência asiática, o teste de <b>HLA-B*1502</b> antes de iniciar, pelo risco aumentado de síndrome de Stevens-Johnson; fenitoína, pela cinética não linear, se beneficia de <b>dosagem sérica</b> quando disponível para ajuste fino.</p>`},
+   {label:'4. Interações e Efeitos Idiossincráticos',html:`<h3>🔗 Por que os antiepilépticos interagem tanto</h3>
+<p>Boa parte dos antiepilépticos clássicos (carbamazepina, fenitoína, fenobarbital) é metabolizada pelo <b>citocromo P450 hepático</b> — e, ao mesmo tempo, <b>induz</b> essas mesmas enzimas, acelerando o metabolismo de tudo que passa pela mesma via. Isso reduz o efeito de diversos outros medicamentos, incluindo <b>anticoncepcionais hormonais</b> (risco de gravidez não planejada), <b>varfarina</b> e até de <b>outros antiepilépticos</b> usados em associação.</p>
+<div class="callout mne"><b>CONCEITO-CHAVE</b>Carbamazepina, fenitoína e fenobarbital = indutores enzimáticos potentes. Valproato = o oposto: <b>inibidor</b> enzimático, que eleva o nível de drogas metabolizadas na mesma via (como a lamotrigina).</div>
+<p>Um fenômeno particular da carbamazepina é a <b>autoindução</b>: nas primeiras semanas de uso, ela induz sua própria metabolização, fazendo com que seu nível sérico caia progressivamente mesmo com a mesma dose — por isso muitas vezes é preciso reajustar a dose para cima após as primeiras semanas de tratamento, e isso não é sinal de "resistência" à droga, é farmacocinética esperada.</p>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="faeInd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fb7185"/><stop offset="1" stop-color="#c2255c"/></linearGradient>
+<linearGradient id="faeInh" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<filter id="faeShadow3" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity=".26"/></filter>
+</defs>
+<rect x="0" y="0" width="680" height="220" rx="18" fill="#0a0f1c"/>
+<g filter="url(#faeShadow3)"><rect x="30" y="24" width="290" height="52" rx="13" fill="url(#faeInd)"/></g>
+<text x="175" y="46" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="800" fill="#fff">INDUTORES (↑ metabolismo)</text>
+<text x="175" y="64" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#ffe3ea">carbamazepina · fenitoína · fenobarbital</text>
+<g stroke="#6b6478" stroke-width="1.6" fill="none">
+<path vector-effect="non-scaling-stroke" d="M175 76 L175 100"/>
+</g>
+<g font-family="Inter,Arial,sans-serif" font-size="10" fill="#c9c2d6" text-anchor="middle">
+<text x="175" y="118">↓ nível de anticoncepcional,</text>
+<text x="175" y="134">varfarina e outros AEDs</text>
+</g>
+<g filter="url(#faeShadow3)"><rect x="360" y="24" width="290" height="52" rx="13" fill="url(#faeInh)"/></g>
+<text x="505" y="46" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="800" fill="#04241f">INIBIDOR (↓ metabolismo)</text>
+<text x="505" y="64" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#04241f">valproato</text>
+<g stroke="#6b6478" stroke-width="1.6" fill="none">
+<path vector-effect="non-scaling-stroke" d="M505 76 L505 100"/>
+</g>
+<g font-family="Inter,Arial,sans-serif" font-size="10" fill="#c9c2d6" text-anchor="middle">
+<text x="505" y="118">↑ nível de lamotrigina</text>
+<text x="505" y="134">(exige titulação ainda + lenta)</text>
+</g>
+<rect x="140" y="160" width="400" height="40" rx="10" fill="rgba(245,196,81,.1)" stroke="rgba(245,196,81,.35)"/>
+<text x="340" y="177" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="700" fill="#f5c451">Carbamazepina se AUTOINDUZ nas 1as semanas</text>
+<text x="340" y="192" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#e0d9ec">nível cai com o tempo → pode precisar reajustar a dose</text>
+</svg>
+</div>
+<p>Outro ponto de prova clássico é a triagem de <b>HLA-B*1502</b> antes de iniciar carbamazepina em pacientes de ascendência asiática (chinesa Han, tailandesa e outras) — esse alelo está associado a risco muito maior de <b>Stevens-Johnson/necrólise epidérmica tóxica</b> com essa droga, e a triagem pré-tratamento é recomendada nessas populações.</p>
+<div class="callout trap"><b>PEGADINHA DE PROVA</b>Paciente em uso de valproato que inicia lamotrigina e desenvolve rash mesmo com titulação "normal" — a associação valproato + lamotrigina exige um esquema de titulação ainda MAIS lento que o padrão, exatamente por essa interação de inibição enzimática.</div>`},
+   {label:'5. Situações Especiais',html:`<h3>👩 Mulher fértil, gestação e mais</h3>
 <ul><li><b>Mulher que pode engravidar</b>: <b>evitar valproato</b> (teratogênico e afeta neurodesenvolvimento). Preferir lamotrigina/levetiracetam. Suplementar <b>ácido fólico</b>.</li>
 <li><b>Idoso</b>: começar baixo, ir devagar; cuidado com interações e quedas.</li>
 <li><b>Interações</b>: indutores (carbamazepina, fenitoína) reduzem o efeito de outros fármacos, inclusive <b>anticoncepcionais</b> — orientar.</li></ul>
 <h3>Quando suspender?</h3>
 <p>Após período prolongado <b>livre de crises</b> (em geral ≥2 anos), com EEG favorável, considera-se a retirada <b>gradual</b> e <b>compartilhada</b> com o paciente (há risco de recorrência).</p>
+<div class="callout update"><b>ATUALIZAÇÃO</b>Em maio de 2023 a <b>OMS</b> reforçou as restrições ao uso do valproato em mulheres e meninas em idade fértil: a orientação atual é que o valproato <b>não deve ser prescrito</b> nessa população, devendo <b>lamotrigina ou levetiracetam</b> serem oferecidos como primeira escolha em monoterapia. <b>Antes</b>, a recomendação era mais branda — "evitar quando possível" e usar com cautela. <b>Agora</b>, o padrão passou a ser uma contraindicação relativa forte, só se justificando o uso quando não há alternativa eficaz, e nesse caso exigindo: contracepção eficaz contínua, aconselhamento detalhado sobre os riscos fetais, decisão compartilhada e revisão periódica por especialista. Para quem já engravidou ou planeja engravidar, o ideal é tentar trocar para uma alternativa mais segura <b>antes</b> da concepção, com acompanhamento especializado. <b>Por que importa para a prova:</b> a resposta "evitar valproato em mulher fértil" continua correta, mas o enunciado pode cobrar o detalhe mais atual — que hoje se trata de uma restrição forte com necessidade de contracepção eficaz documentada, e não apenas uma preferência entre opções equivalentes.</div>
 <div class="callout mne"><b>Atalhos de prova</b>Mulher fértil → evitar valproato. Crise generalizada → amplo espectro. Carbamazepina/fenitoína → pioram ausência/mioclonia e induzem enzimas. Lamotrigina → subir devagar (rash).</div>`},
    {label:'Mapa Mental',html:`<h3>🧠 Mapa mental — Antiepilépticos</h3>
 <div class="mindmap"><div class="mm-center">ANTIEPILÉPTICOS</div><div class="mm-trunk"></div><div class="mm-branches">
+<div class="mm-branch"><b>Mecanismos</b><ul><li>Bloqueio Na+</li><li>Potencializa GABA</li><li>Bloqueio Ca2+ tipo T</li><li>Modulação SV2A</li></ul></div>
 <div class="mm-branch"><b>Princípios</b><ul><li>Monoterapia</li><li>Titular devagar</li><li>Pelo tipo de crise</li></ul></div>
 <div class="mm-branch"><b>Escolha</b><ul><li>Focal: carbamazepina/lamotrigina/levetiracetam</li><li>Generalizada: valproato (amplo espectro)</li><li>Ausência: etossuximida/valproato</li></ul></div>
-<div class="mm-branch"><b>Cuidados</b><ul><li>Valproato: teratogênico</li><li>Carbamazepina: SJS, indutor</li><li>Lamotrigina: rash</li></ul></div>
+<div class="mm-branch"><b>Cuidados</b><ul><li>Valproato: teratogênico</li><li>Carbamazepina: SJS, indutor, rastrear HLA-B*1502</li><li>Lamotrigina: rash</li></ul></div>
+<div class="mm-branch"><b>Interações</b><ul><li>Indutores: carbamazepina/fenitoína/fenobarbital</li><li>Inibidor: valproato ↑ lamotrigina</li></ul></div>
 </div></div>`},
    {label:'Revisão de véspera',html:`<h3>📌 Revisão de véspera</h3>
 <table class="med"><tr><th>Situação</th><th>Resposta</th></tr>
 <tr><td>Crise focal</td><td>Carbamazepina/lamotrigina/levetiracetam</td></tr>
 <tr><td>Crise generalizada/mioclônica</td><td>Valproato (ou amplo espectro)</td></tr>
 <tr><td>Ausência</td><td>Etossuximida ou valproato</td></tr>
-<tr><td>Mulher que pode engravidar</td><td>Evitar valproato (folato!)</td></tr>
+<tr><td>Mulher que pode engravidar</td><td>Evitar valproato (folato!) — OMS 2023: contraindicação forte, preferir lamotrigina/levetiracetam</td></tr>
 <tr><td>Carbamazepina/fenitoína na mioclonia/ausência</td><td>EVITAR (agravam)</td></tr>
-<tr><td>Iniciar lamotrigina</td><td>Titular bem devagar (rash)</td></tr></table>`},
+<tr><td>Iniciar lamotrigina</td><td>Titular bem devagar (rash); mais devagar ainda se associada a valproato</td></tr>
+<tr><td>Carbamazepina em ascendência asiática</td><td>Rastrear HLA-B*1502 antes (risco de Stevens-Johnson)</td></tr>
+<tr><td>Nível de carbamazepina cai nas primeiras semanas</td><td>Autoindução (esperado, pode exigir reajuste)</td></tr></table>`},
    {label:'Dicas & Pegadinhas',html:`<h3>💡 Dicas</h3>
-<div class="callout fast"><b>Lembre</b>① Monoterapia, dose mínima eficaz, titular devagar. ② Escolher pelo tipo de crise + perfil. ③ Amplo espectro na dúvida.</div>
-<div class="callout trap"><b>Pegadinhas</b>① Dar valproato a mulher fértil sem necessidade. ② Carbamazepina/fenitoína agravando ausência/mioclonia. ③ Subir lamotrigina rápido (rash grave). ④ Esquecer que indutores reduzem o anticoncepcional.</div>`}
+<div class="callout fast"><b>Lembre</b>① Monoterapia, dose mínima eficaz, titular devagar. ② Escolher pelo tipo de crise + perfil. ③ Amplo espectro na dúvida. ④ Indutores enzimáticos: carbamazepina, fenitoína, fenobarbital.</div>
+<div class="callout trap"><b>Pegadinhas</b>① Dar valproato a mulher fértil sem necessidade. ② Carbamazepina/fenitoína agravando ausência/mioclonia. ③ Subir lamotrigina rápido (rash grave). ④ Esquecer que indutores reduzem o anticoncepcional. ⑤ Associar lamotrigina + valproato sem titular ainda mais devagar (a interação aumenta o risco de rash). ⑥ Não rastrear HLA-B*1502 antes de carbamazepina em paciente de ascendência asiática. ⑦ Achar que a queda do nível sérico de carbamazepina nas primeiras semanas é falha terapêutica (é autoindução).</div>`}
   ],
   questions:[
     {stem:'Mulher de 22a com epilepsia generalizada que deseja engravidar no futuro. Qual droga EVITAR?',opts:['Lamotrigina','Levetiracetam','Valproato','Etossuximida'],correct:2,expl:'<b>C.</b> Valproato é teratogênico e afeta o neurodesenvolvimento — evitar em mulher fértil; preferir lamotrigina/levetiracetam + ácido fólico.'},
