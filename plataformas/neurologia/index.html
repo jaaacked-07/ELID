@@ -2067,45 +2067,158 @@ MODULES.push({
   title:'Estado de Mal Epiléptico', sub:'A emergência: crise prolongada e seu manejo passo a passo',
   prio:'altíssima', topics:['Status epilepticus','Benzodiazepínico','Manejo escalonado'],
   subtopics:[
-   {label:'1. O que é (e por que é grave)',html:`<h3>🚑 Estado de mal epiléptico (EME)</h3>
+   {label:'1. Entendendo o EME',html:`<h3>🚑 Estado de mal epiléptico (EME)</h3>
 <p>Normalmente uma crise se autolimita em 1–2 minutos. No EME, o "freio" do cérebro falha e a crise <b>não para</b> — ou as crises se repetem <b>sem o paciente recuperar a consciência</b> entre elas.</p>
+<p>Esse "freio" é bioquímico: o próprio cérebro tem mecanismos inibitórios (principalmente GABAérgicos) que normalmente "desligam" a descarga elétrica sozinhos, encerrando a crise em 1-2 minutos. No EME, é justamente esse mecanismo de desligamento que falha — por isso a crise persiste em vez de se autolimitar.</p>
 <div class="callout fast"><b>Definição operacional (a que importa na prática)</b>Tratar como EME quando a crise dura <b>≥ 5 minutos</b> (tempo convulsivo), ou há crises repetidas sem recuperação da consciência. Não espere 30 minutos — <b>5 minutos já é gatilho para agir</b>.</div>
+<h3>Por que 5 minutos, e não 10 ou 30? (o racional por trás do número)</h3>
+<p>A ILAE formalizou essa lógica em 2015 com o conceito de <b>dois pontos no tempo, t1 e t2</b>. <b>t1</b> é o momento a partir do qual a crise provavelmente não vai parar sozinha e o tratamento deve começar; <b>t2</b> é o momento a partir do qual começam a surgir consequências de longo prazo (lesão neuronal, sequelas). Para a crise tônico-clônica, t1 é <b>5 minutos</b> e t2 é <b>30 minutos</b> — por isso a regra prática de "5 minutos já é EME, aja". É importante saber que esses tempos <b>não são os mesmos para todo tipo de crise</b>: uma crise focal com consciência prejudicada só é tratada como EME a partir de 10 minutos, e uma crise de ausência prolongada a partir de 10-15 minutos — mas na prática de emergência, a regra dos 5 minutos para a crise convulsiva é a mais cobrada e a mais relevante clinicamente.</p>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="emeT1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<linearGradient id="emeT2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f87171"/><stop offset="1" stop-color="#c53030"/></linearGradient>
+<filter id="emeShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity=".26"/></filter>
+</defs>
+<rect x="0" y="0" width="680" height="260" rx="18" fill="#0a0f1c"/>
+<path vector-effect="non-scaling-stroke" d="M40 140 L640 140" stroke="#4b465a" stroke-width="3" stroke-linecap="round"/>
+<circle cx="40" cy="140" r="7" fill="#8fe8dd"/>
+<circle cx="260" cy="140" r="9" fill="url(#emeT1)"/>
+<circle cx="600" cy="140" r="9" fill="url(#emeT2)"/>
+<text x="40" y="120" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" fill="#c7c2d1">0 min</text>
+<text x="40" y="180" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#a79fc2">crise começa</text>
+<g filter="url(#emeShadow)"><rect x="180" y="60" width="160" height="46" rx="12" fill="url(#emeT1)"/></g>
+<text x="260" y="80" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11.5" font-weight="800" fill="#04241f">t1 = 5 min</text>
+<text x="260" y="96" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#04241f">provavelmente não para sozinha</text>
+<text x="260" y="180" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#a79fc2">TRATAR AGORA</text>
+<g filter="url(#emeShadow)"><rect x="520" y="60" width="160" height="46" rx="12" fill="url(#emeT2)" transform="translate(-40,0)"/></g>
+<text x="600" y="80" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11.5" font-weight="800" fill="#fff">t2 = 30 min</text>
+<text x="600" y="96" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#ffe1e1">risco de lesão neuronal</text>
+<text x="600" y="180" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#a79fc2">consequências de longo prazo</text>
+<text x="340" y="230" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.6" fill="#c9c2d6">Valores de t1/t2 para crise tônico-clônica (ILAE 2015)</text>
+<text x="340" y="248" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.6" fill="#9992a8">Focal com consciência prejudicada: t1=10min · Ausência: t1=10-15min</text>
+</svg>
+</div>
 <h3>Por que é emergência</h3>
-<p>Crise prolongada causa <b>lesão neuronal</b> (excitotoxicidade), além de complicações sistêmicas (hipóxia, hipertermia, acidose, rabdomiólise, aspiração). Quanto mais tempo convulsionando, <b>mais difícil de parar</b> e pior o prognóstico. <b>Tempo é cérebro</b> aqui também.</p>`},
+<p>Crise prolongada causa <b>lesão neuronal</b> (excitotoxicidade), além de complicações sistêmicas (hipóxia, hipertermia, acidose, rabdomiólise, aspiração). Quanto mais tempo convulsionando, <b>mais difícil de parar</b> e pior o prognóstico. <b>Tempo é cérebro</b> aqui também.</p>
+<p>Entendendo o mecanismo: a descarga contínua libera glutamato em excesso, que superestimula os neurônios vizinhos e leva à entrada maciça de cálcio nas células — um processo que literalmente mata neurônios quanto mais tempo dura. Além disso, quanto mais tempo a crise se prolonga, mais difícil ela fica de controlar farmacologicamente: os próprios receptores GABA que os benzodiazepínicos ativam vão sendo internalizados/perdidos da superfície do neurônio com o passar do tempo, num fenômeno conhecido como "farmacorresistência tempo-dependente". É a mesma lógica do AVC aplicada aqui.</p>
+<div class="callout mne"><b>CONCEITO-CHAVE</b>Quanto mais a crise demora para ser tratada, menos os benzodiazepínicos funcionam (os receptores GABA-A somem da superfície do neurônio). Por isso agir rápido e com dose adequada na 1ª linha não é só "protocolo" — é literalmente a janela em que a droga mais eficaz ainda funciona bem.</div>`},
    {label:'2. Causas',html:`<h3>🔍 Por que entrou em EME?</h3>
 <p>Buscar a causa em paralelo ao tratamento (uma coisa não atrasa a outra):</p>
 <table class="med"><tr><th>Grupo</th><th>Exemplos</th></tr>
 <tr><td>Epilepsia conhecida</td><td><b>Má adesão</b> / suspensão do antiepiléptico (causa muito comum)</td></tr>
 <tr><td>Agudas sintomáticas</td><td>AVC, infecção do SNC, TCE, distúrbios metabólicos (glicose, sódio, cálcio), intoxicações/abstinência</td></tr>
 <tr><td>Outras</td><td>Tumor, anóxia (pós-PCR)</td></tr></table>
-<div class="callout tip"><b>Dica</b>Em epiléptico conhecido que entra em EME, pergunte sempre por <b>parou o remédio?</b> — e dose sérica quando disponível.</div>`},
-   {label:'3. Manejo passo a passo',html:`<h3>⏱️ O tratamento é por tempo (decore a escada)</h3>
+<div class="callout tip"><b>Dica</b>Em epiléptico conhecido que entra em EME, pergunte sempre por <b>parou o remédio?</b> — e dose sérica quando disponível. É a causa mais frequentemente cobrada em prova.</div>
+<p>Vale entender por que a causa muda tanto a conduta: se a causa é uma <b>infecção do SNC</b>, tratar só a crise sem cobrir o quadro infeccioso (antibiótico/aciclovir empírico) deixa o paciente convulsionando de novo assim que o efeito da droga passar. Se a causa é uma <b>hiponatremia grave</b>, corrigir o sódio pode ser mais importante para parar a crise do que qualquer antiepiléptico. Por isso a busca pela causa nunca é "depois" — ela caminha junto com a escada de tratamento.</p>`},
+   {label:'3. Manejo Passo a Passo',html:`<h3>⏱️ O tratamento é por tempo (decore a escada)</h3>
 <table class="med"><tr><th>Tempo</th><th>Conduta</th></tr>
 <tr><td><b>0–5 min</b></td><td><b>ABC</b>: via aérea, O₂, monitor, acesso venoso. <b>Glicemia capilar</b> (+ tiamina antes de glicose no etilista/desnutrido). Hora de início da crise</td></tr>
 <tr><td><b>5–20 min<br>(1ª linha)</b></td><td><b>BENZODIAZEPÍNICO</b>: lorazepam EV, ou <b>diazepam</b> EV, ou <b>midazolam IM</b> (ótimo sem acesso). Pode repetir 1x</td></tr>
 <tr><td><b>20–40 min<br>(2ª linha)</b></td><td>Antiepiléptico EV: <b>fenitoína/fosfenitoína</b>, ou <b>valproato</b>, ou <b>levetiracetam</b></td></tr>
 <tr><td><b>&gt;40 min<br>(refratário)</b></td><td><b>UTI + intubação</b> + anestésicos em infusão contínua (midazolam, propofol; tiopental) com monitorização (EEG)</td></tr></table>
-<div class="callout warn"><b>Os erros que mais derrubam</b>① <b>Subdosar</b> o benzodiazepínico (dose insuficiente = crise não cede). ② Pular a 1ª linha e ir direto para a fenitoína. ③ Esquecer glicemia/tiamina. A sequência é: <b>benzo → 2ª linha → anestésico</b>.</div>`},
-   {label:'4. Refratário e super-refratário',html:`<h3>🧪 Quando não para</h3>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="emeL1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ca3af"/><stop offset="1" stop-color="#6b7280"/></linearGradient>
+<linearGradient id="emeL2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<linearGradient id="emeL3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5c451"/><stop offset="1" stop-color="#e08a1f"/></linearGradient>
+<linearGradient id="emeL4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f87171"/><stop offset="1" stop-color="#c53030"/></linearGradient>
+<filter id="emeShadow2" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity=".26"/></filter>
+<marker id="emeArrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6b6478"/></marker>
+</defs>
+<rect x="0" y="0" width="680" height="300" rx="18" fill="#0a0f1c"/>
+<g stroke="#6b6478" stroke-width="2" fill="none" marker-end="url(#emeArrow2)">
+<path vector-effect="non-scaling-stroke" d="M190 58 L190 74"/>
+<path vector-effect="non-scaling-stroke" d="M190 130 L190 146"/>
+<path vector-effect="non-scaling-stroke" d="M190 202 L190 218"/>
+</g>
+<g filter="url(#emeShadow2)">
+<rect x="30" y="18" width="320" height="40" rx="12" fill="url(#emeL1)"/>
+<rect x="30" y="74" width="320" height="56" rx="13" fill="url(#emeL2)"/>
+<rect x="30" y="146" width="320" height="56" rx="13" fill="url(#emeL3)"/>
+<rect x="30" y="218" width="320" height="56" rx="13" fill="url(#emeL4)"/>
+</g>
+<text x="190" y="42" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11.5" font-weight="800" fill="#fff">0-5 MIN: ABC + GLICEMIA</text>
+<text x="190" y="98" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11.5" font-weight="800" fill="#04241f">5-20 MIN: BENZODIAZEPÍNICO</text>
+<text x="190" y="114" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.2" fill="#04241f">lorazepam/diazepam EV ou midazolam IM</text>
+<text x="190" y="170" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11.5" font-weight="800" fill="#2b1a03">20-40 MIN: 2ª LINHA EV</text>
+<text x="190" y="186" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.2" fill="#2b1a03">fenitoína, valproato ou levetiracetam</text>
+<text x="190" y="242" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11.5" font-weight="800" fill="#fff">&gt;40 MIN: REFRATÁRIO</text>
+<text x="190" y="258" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.2" fill="#ffe1e1">UTI + IOT + anestésico contínuo + EEG</text>
+<g font-family="Inter,Arial,sans-serif" font-size="10" fill="#c9c2d6">
+<text x="452" y="102">≈45% param</text>
+<text x="452" y="117">com o benzo</text>
+<text x="452" y="174">≈45-47% param</text>
+<text x="452" y="189">com qualquer uma</text>
+<text x="452" y="204">das 3 (ESETT)</text>
+</g>
+<text x="340" y="290" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#807a90">Correr contra o tempo: a chance de resposta cai a cada degrau</text>
+</svg>
+</div>
+<div class="callout warn"><b>Os erros que mais derrubam</b>① <b>Subdosar</b> o benzodiazepínico (dose insuficiente = crise não cede). ② Pular a 1ª linha e ir direto para a fenitoína. ③ Esquecer glicemia/tiamina. A sequência é: <b>benzo → 2ª linha → anestésico</b>.</div>
+<div class="callout update"><b>ATUALIZAÇÃO</b>Por muito tempo se ensinou a <b>fenitoína</b> como "a" segunda linha padrão do EME. Isso mudou com o <b>ESETT</b> (Established Status Epilepticus Treatment Trial, NEJM 2019) — um grande ensaio clínico randomizado que comparou fenitoína/fosfenitoína, valproato e levetiracetam EV como 2ª linha em crianças e adultos. Resultado: as <b>três drogas tiveram eficácia semelhante</b> (cerca de 45-47% de resposta cada, sem diferença estatística) e perfis de segurança comparáveis. <b>Por que importa:</b> hoje as diretrizes (incluindo a da American Epilepsy Society) tratam as três como <b>opções equivalentes</b> de 2ª linha — a escolha entre elas passou a depender mais do perfil do paciente (ex.: evitar valproato em mulher fértil, evitar fenitoína em arritmia/hipotensão) do que de uma hierarquia fixa. Isso pode aparecer em prova como "qual a MELHOR segunda linha?" — a resposta atual é que não há uma só melhor, e sim três opções válidas.</div>`},
+   {label:'4. Refratário e Super-refratário',html:`<h3>🧪 Quando não para</h3>
 <ul><li><b>EME refratário</b>: não cede ao benzodiazepínico + 1 droga de 2ª linha → anestésicos em UTI com EEG contínuo.</li>
 <li><b>EME super-refratário</b>: persiste ou recorre &gt;24h após anestésico → investigar causas raras (encefalites autoimunes), imunoterapia, outras estratégias.</li></ul>
-<div class="callout mne"><b>Não esqueça</b>Ao mesmo tempo em que escala o tratamento, <b>trate a causa</b> (corrigir sódio/glicose, antibiótico/aciclovir se infecção do SNC, etc.). Parar a crise sem tratar a causa não resolve.</div>`},
+<div class="callout mne"><b>Não esqueça</b>Ao mesmo tempo em que escala o tratamento, <b>trate a causa</b> (corrigir sódio/glicose, antibiótico/aciclovir se infecção do SNC, etc.). Parar a crise sem tratar a causa não resolve. A crise volta assim que o efeito da droga passar se a causa de base não for corrigida.</div>
+<p>No EME super-refratário, uma causa que passou a ser lembrada com mais frequência nos últimos anos é a <b>encefalite autoimune</b> (ex.: anti-receptor NMDA), especialmente em pacientes jovens sem epilepsia prévia, com pródromo psiquiátrico/comportamental antes das crises — casos assim podem se beneficiar de imunoterapia (corticoide em pulso, imunoglobulina, plasmaférese) além do tratamento antiepiléptico convencional.</p>`},
+   {label:'5. EME Não Convulsivo',html:`<h3>👁️ A forma que passa despercebida</h3>
+<p>Até aqui você viu o EME <b>convulsivo</b> — abalos motores evidentes, fácil de reconhecer. Mas existe uma forma igualmente perigosa e muito mais fácil de <b>não perceber</b>: o <b>EME não convulsivo (ENC)</b>.</p>
+<p>No ENC, o paciente está em atividade elétrica epiléptica contínua no cérebro, mas <b>sem os abalos motores característicos</b> — o quadro clínico é apenas um <b>rebaixamento do nível de consciência</b> (confusão, sonolência, torpor) que não melhora como esperado, às vezes com sinais motores discretos (piscar rítmico, desvio ocular, mioclonias sutis nos dedos). É por isso que ele "passa despercebido": parece só uma encefalopatia, um paciente "que não desperta direito" — e não uma crise em andamento.</p>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="ncA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f87171"/><stop offset="1" stop-color="#c53030"/></linearGradient>
+<linearGradient id="ncB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#7c5cf0"/></linearGradient>
+<filter id="ncShadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity=".26"/></filter>
+</defs>
+<rect x="0" y="0" width="680" height="220" rx="18" fill="#0a0f1c"/>
+<g filter="url(#ncShadow)">
+<rect x="20" y="24" width="300" height="150" rx="16" fill="url(#ncA)" opacity="0.92"/>
+<rect x="360" y="24" width="300" height="150" rx="16" fill="url(#ncB)" opacity="0.92"/>
+</g>
+<text x="170" y="52" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="800" fill="#fff">EME CONVULSIVO</text>
+<text x="510" y="52" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="800" fill="#fff">EME NÃO CONVULSIVO</text>
+<g font-family="Inter,Arial,sans-serif" font-size="10.4" fill="#fdeaea" text-anchor="middle">
+<text x="170" y="82">Abalos motores evidentes</text>
+<text x="170" y="100">Fácil de reconhecer</text>
+<text x="170" y="118">Diagnóstico clínico</text>
+<text x="170" y="146">Suspeitar sempre que:</text>
+<text x="170" y="162">crise que não para</text>
+</g>
+<g font-family="Inter,Arial,sans-serif" font-size="10.4" fill="#f1eaff" text-anchor="middle">
+<text x="510" y="82">Só rebaixamento de consciência</text>
+<text x="510" y="100">Fácil de confundir com</text>
+<text x="510" y="116">encefalopatia/sedação</text>
+<text x="510" y="146">Suspeitar sempre que:</text>
+<text x="510" y="162">não desperta como esperado</text>
+</g>
+<rect x="220" y="188" width="240" height="26" rx="8" fill="rgba(63,227,212,.1)" stroke="rgba(63,227,212,.35)"/>
+<text x="340" y="205" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#8fe8dd">O diagnóstico do ENC exige EEG</text>
+</svg>
+</div>
+<p>Os cenários clássicos em que o ENC deve ser lembrado: paciente que teve uma crise tônico-clônica, foi tratado, mas <b>não recupera a consciência como esperado</b> depois de um tempo razoável (o pós-ictal normal não deveria durar tanto); paciente internado em UTI, sedado ou com encefalopatia de causa pouco clara, que não melhora com as medidas habituais; idoso confuso sem outra explicação. O diagnóstico exige <b>EEG</b> (idealmente contínuo) — sem ele, o ENC simplesmente não é diagnosticado, porque não há achado de exame físico que feche o caso sozinho.</p>
+<div class="callout trap"><b>PEGADINHA DE PROVA</b>"Paciente convulsionou, foi medicado, mas continua sonolento e não melhora" não é sempre só "efeito residual da medicação" — é um dos cenários clássicos para suspeitar de EME não convulsivo e pedir EEG.</div>`},
    {label:'Mapa Mental',html:`<h3>🧠 Mapa mental — EME</h3>
 <div class="mindmap"><div class="mm-center">ESTADO DE MAL</div><div class="mm-trunk"></div><div class="mm-branches">
-<div class="mm-branch"><b>Definição</b><ul><li>Crise ≥5 min</li><li>Ou sem recuperar consciência</li></ul></div>
-<div class="mm-branch"><b>Escada</b><ul><li>1ª: benzodiazepínico</li><li>2ª: fenitoína/valproato/levetiracetam</li><li>Refratário: UTI + anestésico</li></ul></div>
+<div class="mm-branch"><b>Definição</b><ul><li>Crise ≥5 min (t1)</li><li>Ou sem recuperar consciência</li><li>t2 = 30min (risco de lesão)</li></ul></div>
+<div class="mm-branch"><b>Escada</b><ul><li>1ª: benzodiazepínico</li><li>2ª: fenitoína/valproato/levetiracetam (ESETT: equivalentes)</li><li>Refratário: UTI + anestésico</li></ul></div>
 <div class="mm-branch"><b>Sempre</b><ul><li>ABC + glicemia + tiamina</li><li>Tratar a causa</li></ul></div>
+<div class="mm-branch"><b>Não convulsivo</b><ul><li>Só rebaixamento de consciência</li><li>Diagnóstico exige EEG</li></ul></div>
 </div></div>`},
    {label:'Revisão de véspera',html:`<h3>📌 Revisão de véspera</h3>
 <table class="med"><tr><th>Situação</th><th>Resposta</th></tr>
-<tr><td>Crise ≥5 min</td><td>Tratar como EME</td></tr>
+<tr><td>Crise ≥5 min</td><td>Tratar como EME (t1)</td></tr>
 <tr><td>1ª droga</td><td>Benzodiazepínico (lorazepam/diazepam EV ou midazolam IM)</td></tr>
-<tr><td>Não cedeu ao benzo</td><td>2ª linha: fenitoína/valproato/levetiracetam</td></tr>
+<tr><td>Não cedeu ao benzo</td><td>2ª linha: fenitoína/valproato/levetiracetam (ESETT: equivalentes)</td></tr>
 <tr><td>Refratário</td><td>UTI + IOT + anestésico (midazolam/propofol)</td></tr>
-<tr><td>Sempre no início</td><td>ABC + glicemia + tiamina; achar e tratar a causa</td></tr></table>`},
+<tr><td>Sempre no início</td><td>ABC + glicemia + tiamina; achar e tratar a causa</td></tr>
+<tr><td>Confuso, não desperta, sem abalos evidentes</td><td>Pensar em EME não convulsivo → EEG</td></tr>
+<tr><td>t2 (crise tônico-clônica)</td><td>30 min: risco de lesão neuronal</td></tr></table>`},
    {label:'Dicas & Pegadinhas',html:`<h3>💡 Dicas</h3>
-<div class="callout fast"><b>Lembre</b>① 5 min já é EME — aja. ② Benzo é a 1ª linha (dose adequada!). ③ Sem acesso? Midazolam IM. ④ Refratário = UTI + anestésico + EEG.</div>
-<div class="callout trap"><b>Pegadinhas</b>① Subdosar o benzodiazepínico. ② Pular a 1ª linha. ③ Esquecer glicemia/tiamina. ④ Não procurar a causa (ex.: parou o remédio, infecção, hiponatremia).</div>`}
+<div class="callout fast"><b>Lembre</b>① 5 min já é EME — aja. ② Benzo é a 1ª linha (dose adequada!). ③ Sem acesso? Midazolam IM. ④ Refratário = UTI + anestésico + EEG. ⑤ Confuso sem abalos = pensar em EME não convulsivo.</div>
+<div class="callout trap"><b>Pegadinhas</b>① Subdosar o benzodiazepínico. ② Pular a 1ª linha. ③ Esquecer glicemia/tiamina. ④ Não procurar a causa (ex.: parou o remédio, infecção, hiponatremia). ⑤ Achar que só existe "a" segunda linha certa (fenitoína) — ESETT mostrou equivalência entre as três. ⑥ Não pensar em EME não convulsivo num paciente que "não desperta direito".</div>`}
   ],
   flowMx:{ title:'Manejo escalonado do EME', steps:[
     'ABC: via aérea, O₂, monitor, acesso; anotar hora de início.',
