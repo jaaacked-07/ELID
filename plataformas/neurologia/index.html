@@ -836,17 +836,25 @@ MODULES.push({
   subtopics:[
    {label:'1. O que é (e por que acontece)',html:`<h3>🩸 Entendendo o AVE isquêmico do zero</h3>
 <div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:10px 0;text-align:center">
-<svg viewBox="0 0 300 210" width="100%" style="max-width:320px">
-<ellipse cx="150" cy="100" rx="128" ry="86" fill="#46566a" stroke="#cfd8e3" stroke-width="2"/>
-<ellipse cx="150" cy="58" rx="42" ry="32" fill="#b48ad6" opacity="0.65"/>
-<ellipse cx="66" cy="106" rx="42" ry="58" fill="#8fd4c8" opacity="0.5"/>
-<ellipse cx="234" cy="106" rx="42" ry="58" fill="#8fd4c8" opacity="0.5"/>
-<ellipse cx="150" cy="158" rx="58" ry="30" fill="#f2a33a" opacity="0.6"/>
-<text x="150" y="62" text-anchor="middle" font-size="12" font-weight="800" fill="#1a0f24">ACA</text>
-<text x="60" y="110" text-anchor="middle" font-size="12" font-weight="800" fill="#06302a">ACM</text>
-<text x="240" y="110" text-anchor="middle" font-size="12" font-weight="800" fill="#06302a">ACM</text>
-<text x="150" y="162" text-anchor="middle" font-size="12" font-weight="800" fill="#3a2406">ACP</text>
-<text x="150" y="14" text-anchor="middle" font-size="9" fill="#cfd8e3">(frente)</text>
+<svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:340px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<radialGradient id="aveACA" cx="0.5" cy="0.35" r="0.7"><stop offset="0" stop-color="#c9a3e8"/><stop offset="1" stop-color="#9d6dc9"/></radialGradient>
+<radialGradient id="aveACM" cx="0.5" cy="0.4" r="0.7"><stop offset="0" stop-color="#8fe8dd"/><stop offset="1" stop-color="#2fa998"/></radialGradient>
+<radialGradient id="aveACP" cx="0.5" cy="0.35" r="0.7"><stop offset="0" stop-color="#f7c274"/><stop offset="1" stop-color="#e08a1f"/></radialGradient>
+<filter id="aveShadow0" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity=".28"/></filter>
+</defs>
+<ellipse cx="160" cy="120" rx="138" ry="96" fill="#232035" stroke="#4b465a" stroke-width="2"/>
+<g filter="url(#aveShadow0)">
+<ellipse cx="160" cy="68" rx="46" ry="34" fill="url(#aveACA)" opacity="0.92"/>
+<ellipse cx="70" cy="126" rx="46" ry="64" fill="url(#aveACM)" opacity="0.92"/>
+<ellipse cx="250" cy="126" rx="46" ry="64" fill="url(#aveACM)" opacity="0.92"/>
+<ellipse cx="160" cy="184" rx="62" ry="32" fill="url(#aveACP)" opacity="0.92"/>
+</g>
+<text x="160" y="72" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="800" fill="#2b1a3d">ACA</text>
+<text x="70" y="130" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="800" fill="#04241f">ACM</text>
+<text x="250" y="130" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="800" fill="#04241f">ACM</text>
+<text x="160" y="188" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="12.5" font-weight="800" fill="#3a2406">ACP</text>
+<text x="160" y="22" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#c9c2d6">(frente)</text>
 </svg>
 <div style="font-size:.76rem;color:var(--text-dim);margin-top:6px;text-align:left">
 <b>Territórios:</b> <b style="color:#c79ae0">ACA</b> (cerebral anterior) → perna/medial · <b style="color:#8fd4c8">ACM</b> (cerebral média) → face e braço, afasia (lado dominante), negligência · <b style="color:#f2a33a">ACP</b> (cerebral posterior) → visão (hemianopsia). O <b>território</b> acometido prevê o déficit.</div>
@@ -863,6 +871,32 @@ MODULES.push({
 <li><b>Núcleo (core):</b> o centro, que ficou totalmente sem sangue. Esse tecido <b>já morreu</b> e não tem volta.</li>
 <li><b>Penumbra:</b> a borda ao redor, que recebe um pouquinho de sangue de canos vizinhos. Está "em coma", sofrendo, mas <b>ainda viva e salvável</b> — se reabrirmos o cano a tempo.</li>
 </ul>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:600px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<radialGradient id="aveCore" cx="0.5" cy="0.5" r="0.6"><stop offset="0" stop-color="#c53030"/><stop offset="1" stop-color="#7a1f1f"/></radialGradient>
+<radialGradient id="avePen" cx="0.5" cy="0.5" r="0.75"><stop offset="0" stop-color="#f5c451" stop-opacity="0"/><stop offset="0.55" stop-color="#f5c451" stop-opacity=".55"/><stop offset="1" stop-color="#e08a1f" stop-opacity=".85"/></radialGradient>
+<filter id="aveShadow1" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity=".26"/></filter>
+</defs>
+<rect x="0" y="0" width="640" height="220" rx="18" fill="#0a0f1c"/>
+<g filter="url(#aveShadow1)">
+<circle cx="160" cy="110" r="86" fill="url(#avePen)"/>
+<circle cx="160" cy="110" r="46" fill="url(#aveCore)"/>
+</g>
+<text x="160" y="115" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="800" fill="#fff">NÚCLEO</text>
+<text x="160" y="130" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="8.6" fill="#ffe1e1">já morto</text>
+<text x="160" y="192" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="700" fill="#f5c451">PENUMBRA — ainda salvável</text>
+<g font-family="Inter,Arial,sans-serif" font-size="10" fill="#c9c2d6">
+<text x="420" y="60">Núcleo (core)</text>
+<text x="420" y="76" font-size="9" fill="#9992a8">morreu, sem volta</text>
+<text x="420" y="104">Penumbra</text>
+<text x="420" y="120" font-size="9" fill="#9992a8">sofrendo, mas viva —</text>
+<text x="420" y="134" font-size="9" fill="#9992a8">salvável se reabrir a tempo</text>
+<text x="420" y="162" font-weight="700" fill="#8fe8dd">Quanto mais tempo,</text>
+<text x="420" y="178" font-weight="700" fill="#8fe8dd">mais penumbra vira núcleo</text>
+</g>
+</svg>
+</div>
 <div class="callout fast"><b>"Tempo é cérebro" (time is brain)</b>A cada minuto de AVC sem tratamento, perdem-se cerca de <b>1,9 milhão de neurônios</b>. Por isso AVE é <b>emergência absoluta</b>: quanto antes reabrirmos o cano, mais penumbra (cérebro) salvamos. Todo o tratamento gira em torno de <b>ganhar tempo</b>.</div>
 <div class="callout mne"><b>Guarde esta lógica</b>① Reconhecer rápido → ② Excluir hemorragia (TC) → ③ Reabrir o vaso dentro da janela. É isso que você vai detalhar nas próximas seções.</div>`},
    {label:'2. Como se manifesta (por território)',html:`<h3>🧭 O quadro clínico depende de QUAL cano entupiu</h3>
@@ -913,6 +947,31 @@ MODULES.push({
 <tr><td>Ataxia, sensibilidade</td></tr>
 <tr><td>Linguagem (afasia), fala (disartria) e negligência</td></tr></table>
 <table class="med"><tr><th>Pontuação</th><th>Gravidade</th></tr><tr><td>0</td><td>Sem déficit</td></tr><tr><td>1–4</td><td>Leve</td></tr><tr><td>5–15</td><td>Moderado</td></tr><tr><td>16–20</td><td>Moderado a grave</td></tr><tr><td>21–42</td><td>Grave</td></tr></table>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:600px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="aveNihss" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3fe3d4"/><stop offset="0.3" stop-color="#f5c451"/><stop offset="0.6" stop-color="#e08a1f"/><stop offset="1" stop-color="#c53030"/></linearGradient>
+<filter id="aveShadow2" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity=".26"/></filter>
+</defs>
+<rect x="0" y="0" width="640" height="160" rx="18" fill="#0a0f1c"/>
+<g filter="url(#aveShadow2)"><rect x="30" y="40" width="580" height="34" rx="17" fill="url(#aveNihss)"/></g>
+<g font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#0a0f1c" font-weight="700" text-anchor="middle">
+<text x="65" y="61">0</text>
+<text x="150" y="61">1-4</text>
+<text x="280" y="61">5-15</text>
+<text x="420" y="61">16-20</text>
+<text x="560" y="61">21-42</text>
+</g>
+<g font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#c9c2d6" text-anchor="middle">
+<text x="65" y="92">Sem déficit</text>
+<text x="150" y="92">Leve</text>
+<text x="280" y="92">Moderado</text>
+<text x="420" y="92">Mod-grave</text>
+<text x="560" y="92">Grave</text>
+</g>
+<text x="320" y="125" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#807a90">Escala pontua pouco a circulação posterior — cuidado com falso baixo risco</text>
+</svg>
+</div>
 <div class="callout trap"><b>A pegadinha que mais cai</b>A NIHSS <b>valoriza pouco a circulação posterior</b> (tronco e cerebelo). Um AVC de tronco pode ser gravíssimo e pontuar baixo. Nunca use "NIHSS baixa" para descartar AVC nem para negar tratamento se houver oclusão de grande vaso.</div>
 <div class="callout tip"><b>Uso prático</b>NIHSS muito alta sugere oclusão de grande vaso (candidato a trombectomia). Mas mesmo déficits "leves", porém incapacitantes (ex.: afasia isolada), podem indicar trombólise.</div>`},
    {label:'5. Etiologia (classificação TOAST)',html:`<h3>🧬 De onde veio o coágulo? (e por que isso importa)</h3>
@@ -923,6 +982,39 @@ MODULES.push({
 <tr><td><b>Pequenos vasos (lacunar)</b></td><td>HAS/DM; síndromes puras (só motora ou só sensitiva)</td><td>Controle rigoroso de PA e diabetes + antiagregante</td></tr>
 <tr><td><b>Outra causa definida</b></td><td><b>Dissecção arterial</b> (jovem, após trauma cervical), trombofilias, vasculites</td><td>Tratar a causa específica</td></tr>
 <tr><td><b>Indeterminada</b></td><td>Investigação negativa ou múltiplas causas</td><td>Investigar mais (Holter prolongado pode achar FA oculta)</td></tr></table>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:600px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="aveT1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<linearGradient id="aveT2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fb7185"/><stop offset="1" stop-color="#c2255c"/></linearGradient>
+<linearGradient id="aveT3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5c451"/><stop offset="1" stop-color="#e08a1f"/></linearGradient>
+<filter id="aveShadow3" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity=".26"/></filter>
+</defs>
+<rect x="0" y="0" width="640" height="220" rx="18" fill="#0a0f1c"/>
+<text x="320" y="30" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="800" fill="#e4dcf5">TOAST</text>
+<g filter="url(#aveShadow3)">
+<rect x="20" y="50" width="185" height="70" rx="13" fill="url(#aveT1)"/>
+<rect x="228" y="50" width="185" height="70" rx="13" fill="url(#aveT2)"/>
+<rect x="436" y="50" width="185" height="70" rx="13" fill="url(#aveT3)"/>
+</g>
+<text x="112" y="76" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="800" fill="#04241f">Grande artéria</text>
+<text x="112" y="92" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#04241f">placa/estenose</text>
+<text x="112" y="107" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" font-weight="700" fill="#04241f">→ antiagregar</text>
+<text x="320" y="76" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="800" fill="#fff">Cardioembólico</text>
+<text x="320" y="92" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#ffe3ea">fibrilação atrial</text>
+<text x="320" y="107" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" font-weight="700" fill="#fff">→ ANTICOAGULAR</text>
+<text x="528" y="76" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="800" fill="#2b1a03">Pequenos vasos</text>
+<text x="528" y="92" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#2b1a03">HAS/DM, lacunar</text>
+<text x="528" y="107" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" font-weight="700" fill="#2b1a03">→ controle PA/DM</text>
+<g font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#c9c2d6" text-anchor="middle">
+<text x="180" y="155">+ Outra causa definida</text>
+<text x="180" y="170" font-size="8.6" fill="#9992a8">(dissecção, jovem)</text>
+<text x="460" y="155">+ Indeterminada</text>
+<text x="460" y="170" font-size="8.6" fill="#9992a8">(investigar mais: Holter)</text>
+</g>
+<text x="320" y="200" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#807a90">A causa muda a prevenção secundária</text>
+</svg>
+</div>
 <div class="callout mne"><b>Macete que vale ouro</b>Achou <b>fibrilação atrial</b>? → pense <b>ANTICOAGULAR</b>. Achou <b>placa na carótida</b>? → pense <b>ANTIAGREGAR + avaliar cirurgia</b>. Esses dois cenários caem muito.</div>
 <div class="callout tip"><b>AVC no jovem</b>Sem fatores de risco clássicos, pense em <b>dissecção</b>, forame oval patente, trombofilias e uso de drogas.</div>`},
    {label:'6. Conduta — Trombólise',html:`<h3>💉 Reperfusão (1): trombólise endovenosa</h3>
@@ -939,11 +1031,41 @@ MODULES.push({
 <li><b>PA &gt; 185 × 110</b> que não cede; glicemia &lt; 50 (corrigir e reavaliar).</li>
 <li>Cirurgia de grande porte recente, sangramento gastrointestinal recente.</li></ul>
 <div class="callout trap"><b>O erro de PA que derruba na prova — leia 3 vezes</b>① Se VAI trombolisar: PA precisa ficar <b>&lt; 185 × 110</b>. ② Se NÃO vai trombolisar: deixe a PA alta em paz (hipertensão <b>permissiva</b>) e só trate se passar de <b>220 × 120</b>. Inverter isso é o erro mais comum.</div>
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="aveW1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<linearGradient id="aveW2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5c451"/><stop offset="1" stop-color="#e08a1f"/></linearGradient>
+<filter id="aveShadow4" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity=".26"/></filter>
+</defs>
+<rect x="0" y="0" width="680" height="210" rx="18" fill="#0a0f1c"/>
+<path vector-effect="non-scaling-stroke" d="M40 100 L640 100" stroke="#4b465a" stroke-width="3" stroke-linecap="round"/>
+<circle cx="40" cy="100" r="6" fill="#8fe8dd"/>
+<g filter="url(#aveShadow4)"><rect x="20" y="40" width="180" height="42" rx="12" fill="url(#aveW1)"/></g>
+<text x="110" y="63" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="800" fill="#04241f">0-4,5h: janela padrão</text>
+<text x="110" y="78" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="8.6" fill="#04241f">alteplase OU tenecteplase</text>
+<circle cx="270" cy="100" r="6" fill="#f5c451"/>
+<g filter="url(#aveShadow4)"><rect x="230" y="40" width="200" height="42" rx="12" fill="url(#aveW2)"/></g>
+<text x="330" y="63" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="800" fill="#2b1a03">4,5-9h ou wake-up</text>
+<text x="330" y="78" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="8.6" fill="#2b1a03">SE imagem mostrar tecido salvável</text>
+<circle cx="480" cy="100" r="6" fill="#f5c451"/>
+<g filter="url(#aveShadow4)"><rect x="440" y="40" width="200" height="42" rx="12" fill="url(#aveW2)"/></g>
+<text x="540" y="63" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10.5" font-weight="800" fill="#2b1a03">até 24h</text>
+<text x="540" y="78" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="8.6" fill="#2b1a03">grande vaso, SEM acesso a trombectomia</text>
+<circle cx="640" cy="100" r="6" fill="#6b6478"/>
+<text x="40" y="130" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#a79fc2">0h</text>
+<text x="640" y="130" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#a79fc2">24h</text>
+<text x="340" y="170" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#807a90">Diretriz AHA/ASA 2026 — janelas estendidas exigem imagem avançada mostrando tecido salvável</text>
+<text x="340" y="188" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#807a90">(não basta o relógio: é a imagem que decide fora da janela padrão)</text>
+</svg>
+</div>
+<div class="callout update"><b>ATUALIZAÇÃO</b>A diretriz <b>AHA/ASA 2026</b> para manejo do AVC isquêmico agudo trouxe mudanças relevantes na trombólise. <b>Antes:</b> a alteplase era o trombolítico padrão, com a tenecteplase citada como alternativa; a janela clássica era de 4,5h, com pouca menção a alternativas para quem "perdeu a janela". <b>Agora:</b> (1) <b>tenecteplase e alteplase são tratadas como equivalentes</b> dentro de 4,5h, com a tenecteplase ganhando preferência prática por ser um <b>bolus único</b> (mais simples e rápido de administrar que a infusão de 60 minutos da alteplase) — dose de tenecteplase confirmada em <b>0,25 mg/kg (máx. 25 mg)</b>; (2) a janela se <b>expandiu</b>: pacientes que <b>acordam com o déficit</b> (wake-up stroke) dentro de até 9h do início do sono, ou que estão entre <b>4,5–9h</b> do último momento bem, podem ser trombolisados <b>se a imagem avançada (perfusão) mostrar tecido ainda salvável</b>; (3) pacientes com <b>oclusão de grande vaso sem acesso à trombectomia</b> podem se beneficiar de trombólise EV mesmo até <b>24h</b>. <b>Por que importa para a prova:</b> a resposta clássica "só até 4,5h" continua sendo a mais cobrada no cenário padrão, mas uma questão mais atualizada pode testar exatamente esse conceito — de que a <b>janela deixou de ser só o relógio</b> e passou a depender também da <b>imagem</b>, o mesmo princípio já usado na trombectomia (próxima seção).</div>
 <h3>Depois de trombolisar</h3>
 <ul><li>Manter PA <b>&lt; 180 × 105</b> por 24h (reduz transformação hemorrágica).</li>
 <li><b>Não</b> dar antiagregante/anticoagulante nas primeiras 24h.</li>
 <li>Vigiar a complicação temida: <b>hemorragia intracraniana</b> (piora súbita, cefaleia, queda de consciência → TC imediata).</li>
-<li>Sempre avaliar se há oclusão de grande vaso para encaminhar à trombectomia.</li></ul>`},
+<li>Sempre avaliar se há oclusão de grande vaso para encaminhar à trombectomia.</li></ul>
+<div class="callout warn"><b>Detalhe fino (2026)</b>Mesmo após reperfusão bem-sucedida, a diretriz mais recente <b>desaconselha baixar a PA de forma intensiva para &lt;140×90</b> — estudos mostraram que essa redução agressiva não melhora o desfecho funcional e pode até ser prejudicial. O alvo prático continua sendo o controle geral (&lt;180×105), não uma meta baixa e rígida.</div>`},
    {label:'7. Conduta — Trombectomia',html:`<h3>🧲 Reperfusão (2): trombectomia mecânica</h3>
 <p>Quando o entupimento é num <b>vaso grande</b> (carótida intracraniana, segmento M1 da cerebral média, basilar), o remédio sozinho muitas vezes não basta. Aí entra a trombectomia: por um cateter (geralmente pela artéria da virilha), o neurorradiologista chega até o coágulo e o <b>retira fisicamente</b> com um dispositivo (stent retriever/aspiração).</p>
 <h3>Quem é candidato</h3>
@@ -952,7 +1074,34 @@ MODULES.push({
 <li><b>6 a 24 horas</b>: ainda pode, se exames de imagem (perfusão) mostrarem <b>muito tecido salvável</b> em relação ao já perdido — o conceito de <b>mismatch</b> (estudos DAWN e DEFUSE-3).</li></ul>
 <div class="callout tip"><b>Entenda o "mismatch" sem decoreba</b>É a comparação entre o que já morreu (núcleo) e o que ainda dá para salvar (penumbra). Se sobra muita penumbra, vale a pena ir buscar o coágulo mesmo tardiamente. <b>O que abre a janela estendida é a imagem, não a idade do paciente.</b></div>
 <p>A trombólise e a trombectomia <b>não competem</b>: se o paciente preenche critérios para as duas, faz-se a trombólise e encaminha-se para a trombectomia (não se atrasa uma pela outra).</p>
-<div class="callout fast"><b>Resumo de bolso</b>Vaso pequeno/dentro de 4,5h → trombólise. Vaso GRANDE → trombectomia (até 6h; até 24h se houver mismatch).</div>`},
+<div style="background:#0a0f1c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;text-align:center">
+<svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:640px;display:block;margin:0 auto" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" preserveAspectRatio="xMidYMid meet">
+<defs>
+<linearGradient id="aveTv1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3fe3d4"/><stop offset="1" stop-color="#06a89a"/></linearGradient>
+<linearGradient id="aveTv2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#7c5cf0"/></linearGradient>
+<filter id="aveShadow5" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity=".26"/></filter>
+</defs>
+<rect x="0" y="0" width="680" height="220" rx="18" fill="#0a0f1c"/>
+<g filter="url(#aveShadow5)">
+<rect x="20" y="20" width="300" height="170" rx="15" fill="url(#aveTv1)" opacity="0.94"/>
+<rect x="360" y="20" width="300" height="170" rx="15" fill="url(#aveTv2)" opacity="0.94"/>
+</g>
+<text x="170" y="46" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11.5" font-weight="800" fill="#04241f">NÚCLEO PEQUENO</text>
+<text x="170" y="70" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#04241f">critério clássico (DAWN/</text>
+<text x="170" y="84" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#04241f">DEFUSE-3) — já bem estabelecido</text>
+<text x="170" y="120" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" font-weight="700" fill="#04241f">0-6h de rotina</text>
+<text x="170" y="136" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" font-weight="700" fill="#04241f">6-24h se mismatch favorável</text>
+<text x="510" y="46" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11.5" font-weight="800" fill="#fff">EXPANSÕES 2026</text>
+<text x="510" y="70" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#f1eaff">Núcleo GRANDE: agora também</text>
+<text x="510" y="84" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#f1eaff">pode se beneficiar (TESLA/</text>
+<text x="510" y="98" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#f1eaff">SELECT2/ANGEL-ASPECT)</text>
+<text x="510" y="128" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" font-weight="700" fill="#fff">Oclusão de BASILAR</text>
+<text x="510" y="144" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#f1eaff">até 24h, se NIHSS ≥10</text>
+<text x="510" y="160" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9.5" fill="#f1eaff">(ATTENTION/BAOCHE)</text>
+</svg>
+</div>
+<div class="callout update"><b>ATUALIZAÇÃO</b>A diretriz <b>AHA/ASA 2026</b> também ampliou significativamente quem pode ser candidato à trombectomia. <b>Antes:</b> a indicação clássica exigia núcleo isquêmico pequeno/moderado (critérios de imagem restritivos), e havia pouca recomendação formal para oclusão de basilar. <b>Agora:</b> (1) evidências recentes (ensaios como TESLA, SELECT2 e ANGEL-ASPECT) sustentam trombectomia também em pacientes com <b>núcleo isquêmico maior</b>, antes considerados inelegíveis; (2) há recomendação <b>forte</b> para trombectomia na <b>oclusão de artéria basilar</b> dentro de <b>24 horas</b> em pacientes com <b>NIHSS ≥10</b> (estudos ATTENTION e BAOCHE) — antes essa era uma indicação menos consolidada, com mais variação de conduta entre serviços. <b>Por que importa para a prova:</b> o critério clássico "núcleo pequeno = trombectomia, núcleo grande = não" está deixando de ser absoluto; e "vertigem + rebaixamento + déficit de tronco" (sugerindo basilar) passou a ter uma indicação de reperfusão mais claramente estabelecida mesmo em janelas mais longas.</div>
+<div class="callout fast"><b>Resumo de bolso</b>Vaso pequeno/dentro de 4,5h → trombólise. Vaso GRANDE → trombectomia (até 6h; até 24h se houver mismatch). Desde 2026, isso também vale para núcleo grande e para basilar com NIHSS≥10.</div>`},
    {label:'8. Prevenção e unidade de AVC',html:`<h3>🛡️ Depois da fase aguda: evitar o próximo</h3>
 <p>Reabrir o vaso é só o começo. O paciente deve ir para uma <b>Unidade de AVC</b> (reduz mortalidade e sequelas) e iniciar a <b>prevenção secundária</b>, guiada pela causa (TOAST):</p>
 <table class="med"><tr><th>Pilar</th><th>Conduta</th></tr>
@@ -965,20 +1114,23 @@ MODULES.push({
 <ul><li><b>Disfagia</b>: testar a deglutição <b>antes</b> de oferecer água/comida (risco de broncoaspiração e pneumonia).</li>
 <li>Profilaxia de TVP, mobilização precoce, reabilitação (fono, fisio, TO).</li>
 <li>Rastrear e tratar depressão pós-AVC.</li></ul>
+<p>Vale uma nota sobre o controle glicêmico na fase aguda: a diretriz 2026 passou a <b>desencorajar metas glicêmicas muito rígidas</b> (na faixa de 80–130 mg/dL) no paciente internado por AVC agudo, pelo risco real de <b>hipoglicemia</b> — que por si só pode piorar o desfecho neurológico. O controle deve ser cuidadoso, mas sem perseguir uma meta excessivamente apertada nas primeiras horas.</p>
 <div class="callout mne"><b>Fechando o raciocínio</b>Agudo: reconhecer → TC → reabrir o vaso na janela. Depois: unidade de AVC + prevenção pela causa. Esse é o caminho completo que uma prova de residência cobra.</div>`},
    {label:'Mapa Mental',html:`<h3>🧠 Mapa mental — AVE Isquêmico</h3>
 <div class="mindmap"><div class="mm-center">AVE ISQUÊMICO</div><div class="mm-trunk"></div><div class="mm-branches">
 <div class="mm-branch"><b>Conceito</b><ul><li>Cano entupiu</li><li>Núcleo morto + penumbra salvável</li><li>Tempo é cérebro</li></ul></div>
 <div class="mm-branch"><b>Diagnóstico</b><ul><li>Glicemia</li><li>Último visto bem</li><li>TC sem contraste (sangue?)</li><li>NIHSS</li></ul></div>
-<div class="mm-branch"><b>Reperfusão</b><ul><li>≤4,5h: trombólise</li><li>Grande vaso: trombectomia (≤6h; ≤24h se mismatch)</li></ul></div>
-<div class="mm-branch"><b>PA</b><ul><li>Com trombólise &lt;185×110</li><li>Sem trombólise permissiva &gt;220×120</li></ul></div>
+<div class="mm-branch"><b>Reperfusão</b><ul><li>≤4,5h: trombólise (alteplase ou tenecteplase)</li><li>4,5-9h/wake-up ou LVO até 24h: trombólise se imagem favorável (2026)</li><li>Grande vaso: trombectomia (≤6h; ≤24h se mismatch)</li><li>2026: também núcleo grande e basilar com NIHSS≥10</li></ul></div>
+<div class="mm-branch"><b>PA</b><ul><li>Com trombólise &lt;185×110</li><li>Sem trombólise permissiva &gt;220×120</li><li>Após reperfusão: não baixar agressivo a &lt;140×90</li></ul></div>
 <div class="mm-branch"><b>Causa → prevenção</b><ul><li>FA → anticoagular</li><li>Carótida → antiagregar + cirurgia</li></ul></div>
 </div></div>`},
    {label:'Revisão de véspera',html:`<h3>📌 Revisão de véspera — só o que cai</h3>
 <table class="med"><tr><th>Situação</th><th>Resposta automática</th></tr>
 <tr><td>Déficit focal súbito</td><td>Glicemia + TC sem contraste</td></tr>
-<tr><td>TC sem sangue, ≤4,5h</td><td>Trombólise (PA &lt;185×110)</td></tr>
+<tr><td>TC sem sangue, ≤4,5h</td><td>Trombólise (PA &lt;185×110); alteplase ou tenecteplase (2026: equivalentes)</td></tr>
+<tr><td>4,5-9h/wake-up ou LVO sem trombectomia até 24h</td><td>Trombólise SE imagem mostrar tecido salvável (2026)</td></tr>
 <tr><td>Oclusão de grande vaso ≤6h (ou ≤24h com mismatch)</td><td>Trombectomia</td></tr>
+<tr><td>Oclusão de basilar, NIHSS≥10, até 24h</td><td>Trombectomia (recomendação forte, 2026)</td></tr>
 <tr><td>NÃO vai trombolisar</td><td>PA permissiva (tratar só &gt;220×120)</td></tr>
 <tr><td>Fibrilação atrial</td><td>Anticoagular (prevenção)</td></tr>
 <tr><td>Estenose carotídea sintomática</td><td>Endarterectomia/stent</td></tr>
@@ -986,7 +1138,7 @@ MODULES.push({
    {label:'Dicas & Pegadinhas',html:`<h3>💡 Dicas de ouro</h3>
 <div class="callout fast"><b>Faça sempre</b>① Glicemia antes de tudo (hipoglicemia imita AVC). ② Horário = último visto bem. ③ TC sem contraste antes de qualquer reperfusão. ④ Trombólise e trombectomia se somam, não competem.</div>
 <h3>🚫 Pegadinhas que derrubam</h3>
-<div class="callout trap"><b>Cuidado</b>① Inverter os alvos de PA (com vs sem trombólise). ② Descartar AVC de fossa posterior por NIHSS baixa. ③ Esquecer de anticoagular o cardioembólico (dar só AAS). ④ Dar comida antes de testar a deglutição. ⑤ Achar que a janela estendida depende da idade — depende da <b>imagem (mismatch)</b>.</div>`}
+<div class="callout trap"><b>Cuidado</b>① Inverter os alvos de PA (com vs sem trombólise). ② Descartar AVC de fossa posterior por NIHSS baixa. ③ Esquecer de anticoagular o cardioembólico (dar só AAS). ④ Dar comida antes de testar a deglutição. ⑤ Achar que a janela estendida depende da idade — depende da <b>imagem (mismatch)</b>. ⑥ Achar que tenecteplase é "inferior" à alteplase — 2026: são equivalentes. ⑦ Baixar a PA agressivamente a &lt;140×90 achando que "quanto menor, melhor" após reperfusão bem-sucedida.</div>`}
   ],
   flowDx:{ title:'AVE isquêmico — diagnóstico', start:'s1', nodes:{
     s1:{q:'Déficit focal súbito + TC SEM sangue?',opts:[{t:'Sim',go:'s2'},{t:'TC com sangue',go:'rHem'}]},
