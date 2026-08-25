@@ -166,7 +166,7 @@ a{color:var(--accent);text-decoration:none}
 .side-foot{padding:12px;border-top:1px solid var(--border)}
 .np-chip{display:flex;align-items:center;gap:10px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:9px 11px}
 .np-chip .np-ico{font-size:1.1rem}
-.np-text b{display:block;font-family:var(--font-mono);font-size:.95rem;color:var(--gold)}
+.np-text>b:first-child{display:block;font-family:var(--font-mono);font-size:.95rem;color:var(--gold)}
 .np-text small{font-size:.64rem;color:var(--text-dim)}
 
 .main{flex:1;min-width:0;display:flex;flex-direction:column}
@@ -247,12 +247,12 @@ a{color:var(--accent);text-decoration:none}
 .mm-trunk{width:2px;height:24px;background:var(--border-strong)}
 .mm-branches{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;width:100%}
 .mm-branch{border:1px solid var(--border);border-radius:14px;padding:14px;background:var(--surface-2);border-top:3px solid var(--accent)}
-.mm-branch b{display:block;color:var(--accent-2);font-size:.92rem;margin-bottom:6px;font-family:var(--font-display)}
+.mm-branch>b:first-child{display:block;color:var(--accent-2);font-size:.92rem;margin-bottom:6px;font-family:var(--font-display)}
 .mm-branch ul{margin:0;padding-left:15px;font-size:.83rem;color:var(--text-soft)}
 .mm-branch li{margin:3px 0}
 .diagram{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:16px 0}
 .dg-step{flex:1;min-width:130px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;font-size:.84rem;position:relative}
-.dg-step b{display:block;color:var(--accent-2);font-size:.8rem;margin-bottom:4px}
+.dg-step>b:first-child{display:block;color:var(--accent-2);font-size:.8rem;margin-bottom:4px}
 .dg-arrow{display:flex;align-items:center;color:var(--accent);font-size:1.3rem;padding:0 6px}
 @media(max-width:640px){.dg-arrow{transform:rotate(90deg);width:100%;justify-content:center}.dg-step{min-width:100%}}
 /* fluxograma visual — árvore de decisão (sempre na tela) */
@@ -280,19 +280,19 @@ a{color:var(--accent);text-decoration:none}
 .teach li{margin:5px 0;line-height:1.65}
 .teach li::marker{color:var(--accent)}
 .callout{border-radius:14px;padding:14px 16px;margin:16px 0;border:1px solid var(--border);background:var(--surface-2);position:relative;font-size:.92rem}
-.callout b{display:block;margin-bottom:4px}
+.callout>b:first-child{display:block;margin-bottom:4px}
 .callout.tip{border-color:rgba(45,212,191,.35);background:rgba(45,212,191,.08)}
-.callout.tip b{color:var(--teal)}
+.callout.tip>b:first-child{color:var(--teal)}
 .callout.warn{border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.08)}
-.callout.warn b{color:var(--amber)}
+.callout.warn>b:first-child{color:var(--amber)}
 .callout.trap{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.08)}
-.callout.trap b{color:var(--red)}
+.callout.trap>b:first-child{color:var(--red)}
 .callout.mne{border-color:rgba(167,139,250,.35);background:rgba(167,139,250,.08)}
-.callout.mne b{color:var(--violet)}
+.callout.mne>b:first-child{color:var(--violet)}
 .callout.fast{border-color:rgba(245,196,81,.35);background:rgba(245,196,81,.08)}
-.callout.fast b{color:var(--gold)}
+.callout.fast>b:first-child{color:var(--gold)}
 .callout.update{border-color:rgba(63,227,212,.35);background:rgba(63,227,212,.08)}
-.callout.update b{color:var(--cyan)}
+.callout.update>b:first-child{color:var(--cyan)}
 
 table.med{width:100%;border-collapse:collapse;margin:14px 0;font-size:.86rem;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
 table.med th{background:var(--surface-2);text-align:left;padding:10px 12px;font-weight:700;color:var(--text);font-size:.78rem;letter-spacing:.02em;border-bottom:1px solid var(--border)}
@@ -5815,13 +5815,22 @@ function esc(s){ return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>
 .pdf-gen-overlay .pdf-gen-msg{font-size:1.05rem}
 .pdf-gen-overlay .pdf-gen-sub{font-size:.8rem;opacity:.75}
 
-.pdf-block{margin:0 0 10px}
+.pdf-block{margin:0 0 16px}
 .pdf-mod-cat{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#0EA89A;margin-bottom:4px;font-weight:700}
 .pdf-mod-title{font-size:1.7rem;color:#2d1b2e;margin:0 0 18px;border-bottom:2px solid #bdf0ea;padding-bottom:12px;font-weight:800}
-.pdf-sec-h{font-size:1.08rem;color:#0EA89A;border-bottom:1px solid #e4d9cd;padding-bottom:6px;margin:6px 0 4px;font-weight:700}
-.pdf-sub{margin:0}
-.pdf-sub-h{font-size:1.28rem;font-weight:700;color:#0EA89A;margin:2px 0 10px;padding-bottom:4px;border-bottom:1.5px solid #bdf0ea}
+.pdf-sec-h{font-size:1.22rem;color:#0EA89A;border-bottom:1px solid #e4d9cd;padding-bottom:7px;margin:8px 0 10px;font-weight:700}
+.pdf-sub{margin:0 0 4px}
+.pdf-sub-h{font-size:1rem;font-weight:700;color:#0EA89A;margin:2px 0 9px;padding-bottom:4px;border-bottom:1.5px solid #bdf0ea}
 .pdf-sub-h2{font-size:.86rem;color:#0EA89A;margin:0 0 4px;font-weight:700}
+.pdf-block h3{font-size:.9rem;color:#3d2b3f;margin:14px 0 6px;font-weight:700;line-height:1.32}
+.pdf-block h3:first-child{margin-top:0}
+.pdf-block h4{font-size:.82rem;color:#3d2b3f;margin:10px 0 5px;font-weight:700;line-height:1.32}
+.pdf-block p{margin:0 0 8px;line-height:1.5}
+.pdf-block ul,.pdf-block ol{margin:0 0 8px;padding-left:18px}
+.pdf-block li{margin:2px 0}
+.pdf-block table.med{margin:8px 0 12px}
+.pdf-block .callout{margin:10px 0}
+.pdf-block .mindmap{margin:8px 0}
 .pdf-q{border:1px solid #e4d9cd;border-radius:10px;padding:12px 14px}
 .pdf-q-stem{margin-bottom:8px}
 .pdf-q-opt{padding:3px 0}
@@ -5854,6 +5863,8 @@ var CONTENT_W_MM=PAGE_W_MM-MARGIN_L_MM-MARGIN_R_MM;
 var CONTENT_H_MM=PAGE_H_MM-MARGIN_T_MM-MARGIN_B_MM;
 var CONTENT_W_PX=Math.round(CONTENT_W_MM*PX_PER_MM);
 var CONTENT_H_PX=Math.round(CONTENT_H_MM*PX_PER_MM);
+var PACK_SAFETY_MM=6; // colchao extra p/ pack: evita que o ultimo bloco de uma pagina encoste no rodape
+var PACK_H_PX=Math.round((CONTENT_H_MM-PACK_SAFETY_MM)*PX_PER_MM);
 var RENDER_SCALE=3.5;
 
 function pdfEsc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -6074,7 +6085,7 @@ function pdfMeasureAndPack(blocks, area){
   for(var i=0;i<blocks.length;i++){
     var h=heights[i];
     var forceNew=blocks[i].forceNewPage && cur.length>0;
-    if(forceNew || (cur.length>0 && curH+h>CONTENT_H_PX)){ pages.push(cur); cur=[]; curH=0; }
+    if(forceNew || (cur.length>0 && curH+h>PACK_H_PX)){ pages.push(cur); cur=[]; curH=0; }
     cur.push(i); curH+=h;
   }
   if(cur.length) pages.push(cur);
