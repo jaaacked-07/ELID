@@ -3799,6 +3799,1095 @@ try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.vie
 })();
 
 </script>
+<script>/* ============================================================
+   InfectoAtlas — Conteúdo Leptospirose (bacterias|3). Aditivo.
+   Não altera nenhum outro C[...] existente.
+   ============================================================ */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+C['bacterias|3'] = {
+name:'Leptospirose',
+intro:'Zoonose bacteriana de distribuição mundial, hiperendêmica no Brasil, com pico após enchentes urbanas. Espectro que vai de quadro febril autolimitado até a forma grave (síndrome de Weil), com mortalidade que pode ultrapassar 10-15% quando há hemorragia pulmonar maciça. É uma das perguntas mais clássicas de prova sobre "febre + mialgia + icterícia + IRA após contato com água de enchente".',
+sub:[
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">O que é a leptospirose, do zero</div>
+<div class="ac-p">A leptospirose é causada por espiroquetas do gênero <b>Leptospira</b> (a espécie patogênica clássica é a <i>Leptospira interrogans</i>, com dezenas de sorovares — no Brasil o sorovar <b>Copenhageni</b> é o mais associado a doença grave). É uma <b>zoonose</b>: o reservatório principal é o <b>rato de esgoto (<i>Rattus norvegicus</i>)</b>, que elimina a bactéria na urina de forma assintomática e crônica, contaminando água parada, lama e solo úmido.</div>
+<div class="ac-p">O ser humano é um hospedeiro acidental. A porta de entrada é a <b>pele com microabrasões</b> (mesmo imperceptíveis) ou <b>mucosas</b> (conjuntiva, boca) em contato com água ou lama contaminada — por isso a doença explode em <b>enchentes urbanas</b> (pessoas andando em água suja) e tem forte componente <b>ocupacional</b> (garis, catadores de lixo, trabalhadores de esgoto, agricultores de arroz irrigado, veterinários, tratadores de animais).</div>
+<div class="ac-call"><b>CONCEITO-CHAVE — a doença "de duas fases"</b><br>Pensar a leptospirose como uma doença bifásica ajuda a entender toda a prova: (1) uma <b>fase septicêmica/leptospirêmica</b> curta e inespecífica, seguida de uma breve melhora, e depois (2) uma <b>fase imune</b> na qual — em uma minoria dos pacientes — a doença "volta" de forma grave, com icterícia, insuficiência renal e sangramento. A maioria dos casos (~90%) é uma forma <b>anictérica leve</b> e autolimitada; só ~5-10% evolui para a forma grave (síndrome de Weil).</div>
+<div class="ac-p">A gravidade da doença não vem de uma toxina única, mas de uma <b>vasculite generalizada</b>: a leptospira lesa diretamente o endotélio capilar, causando extravasamento, microtrombose e disfunção de múltiplos órgãos — fígado, rim, pulmão, músculo e meninges são os mais afetados, o que explica o padrão de manifestações que você vai ver na prova.</div>
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif" width="100%" style="max-width:640px;display:block;margin:10px auto">
+<rect width="640" height="300" rx="16" fill="#241420"/>
+<text x="320" y="28" fill="#f59f0a" font-size="16" font-weight="700" text-anchor="middle">Ciclo de transmissão</text>
+<circle cx="110" cy="150" r="50" fill="#2d1b2e" stroke="#f59f0a" stroke-width="2.5"/>
+<text x="110" y="145" fill="#faf6f0" font-size="12" text-anchor="middle" font-weight="700">Rato</text>
+<text x="110" y="162" fill="#faf6f0" font-size="10.5" text-anchor="middle">reservatório</text>
+<path d="M162 150 h70" stroke="#6db3f2" stroke-width="3" fill="none" marker-end="url(#arrl)"/>
+<text x="197" y="140" fill="#6db3f2" font-size="10.5" text-anchor="middle">urina</text>
+<circle cx="320" cy="150" r="50" fill="#2d1b2e" stroke="#6db3f2" stroke-width="2.5"/>
+<text x="320" y="145" fill="#faf6f0" font-size="12" text-anchor="middle" font-weight="700">Água/lama</text>
+<text x="320" y="162" fill="#faf6f0" font-size="10.5" text-anchor="middle">enchente</text>
+<path d="M372 150 h70" stroke="#3ddc84" stroke-width="3" fill="none" marker-end="url(#arrl)"/>
+<circle cx="530" cy="150" r="50" fill="#2d1b2e" stroke="#3ddc84" stroke-width="2.5"/>
+<text x="530" y="140" fill="#faf6f0" font-size="12" text-anchor="middle" font-weight="700">Humano</text>
+<text x="530" y="157" fill="#faf6f0" font-size="10" text-anchor="middle">pele c/ lesão</text>
+<text x="530" y="171" fill="#faf6f0" font-size="10" text-anchor="middle">ou mucosa</text>
+<defs><marker id="arrl" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#faf6f0"/></marker></defs>
+<text x="320" y="250" fill="#b76e79" font-size="12" text-anchor="middle">Hospedeiro acidental — sem transmissão pessoa-a-pessoa relevante</text>
+<text x="320" y="272" fill="#faf6f0" font-size="11" text-anchor="middle">Risco: enchente urbana, ocupação (gari, esgoto, agricultura irrigada), lazer em água doce</text>
+</svg>
+`],
+['fisiopatologia','Fisiopatologia', `
+<div class="ac-h">Por que a leptospira causa exatamente esse padrão de dano</div>
+<div class="ac-p">Após romper a barreira cutâneo-mucosa, a leptospira ganha a corrente sanguínea (<b>fase de leptospiremia</b>, primeiros 4-7 dias) e se dissemina para praticamente todos os tecidos. O mecanismo central de lesão é a <b>vasculite com dano endotelial direto</b> mediada por toxinas e proteínas de superfície da bactéria (como a proteína Lig e a hemolisina esfingomielinase), levando a aumento da permeabilidade capilar, extravasamento e, nos casos graves, hemorragia.</div>
+<div class="ac-call"><b>CONCEITO-CHAVE — por que cada órgão falha do jeito que falha</b>
+<ul style="margin:6px 0 0 18px;padding:0">
+<li><b>Fígado:</b> a leptospira lesa o espaço entre hepatócitos (disjunção das junções intercelulares), causando <b>colestase</b> intensa com <b>bilirrubina muito alta (predomínio direto)</b> — mas SEM necrose hepatocitária maciça, por isso as <b>transaminases sobem pouco</b> (geralmente &lt;200 U/L). Esse padrão "bilirrubina alta + transaminase pouco alterada" é a marca registrada da leptospirose e a diferencia da hepatite viral.</li>
+<li><b>Rim:</b> nefrite intersticial + necrose tubular aguda por ação direta da bactéria e de toxinas nos túbulos proximais e distais. A lesão tubular proximal aumenta a natriurese e a <b>caliurese</b>, de forma que a IRA da leptospirose é classicamente <b>não oligúrica e hipocalêmica</b> — ao contrário da maioria das IRAs, que cursam com hiperK.</li>
+<li><b>Pulmão:</b> vasculite da microcirculação alveolar causa a <b>Síndrome de Hemorragia Pulmonar Grave (SHPG)</b> — hemorragia alveolar difusa, a principal causa de morte na doença, podendo ocorrer mesmo em pacientes anictéricos.</li>
+<li><b>Músculo esquelético:</b> invasão direta do sarcolema causa miosite, elevando a <b>CPK</b> — outro achado que ajuda a diferenciar de dengue/hepatite viral.</li>
+<li><b>Meninges:</b> pode causar meningite asséptica (LCR com discreta pleocitose linfomonocitária), geralmente benigna.</li>
+</ul></div>
+<div class="ac-p">Depois de alguns dias, uma resposta imune humoral (IgM, depois IgG) começa a controlar a bacteriemia, e o paciente entra em uma breve <b>defervescência</b> de 1-3 dias. Em seguida pode surgir a <b>fase imune</b>, na qual a leptospira já está eliminada do sangue mas presente na urina (leptospirúria) e no LCR, e as manifestações mais graves aparecem — mediadas mais por resposta imunológica do hospedeiro do que pela bactéria em si.</div>
+`],
+['clinica','Quadro Clínico — as duas fases', `
+<div class="ac-h">Fase leptospirêmica (precoce, dias 1-7)</div>
+<div class="ac-p">Início <b>abrupto</b> com febre alta, calafrios, <b>mialgia intensa</b> (característica em <b>panturrilhas e região lombar</b> — pense sempre nessa localização na prova), cefaleia holocraniana ou retro-orbitária, e <b>sufusão conjuntival</b> — hiperemia conjuntival <b>bilateral, sem secreção e sem dor</b>, muito diferente de uma conjuntivite infecciosa comum. Pode haver ainda náuseas, vômitos, diarreia e, mais raramente, exantema.</div>
+<div class="ac-call"><b>PEGADINHA DE PROVA</b><br>Sufusão conjuntival ≠ conjuntivite. Na leptospirose ela é <b>indolor, sem secreção purulenta e bilateral</b> — se a questão descrever "olho vermelho com secreção e dor", pense em outro diagnóstico. A sufusão conjuntival isolada, em paciente com febre e mialgia após exposição a água de enchente, é um dos achados mais valorizados nas provas de residência para sugerir leptospirose.</div>
+<div class="ac-h" style="margin-top:18px">Fase imune (tardia, após 1-3 dias de melhora)</div>
+<div class="ac-p">Na maioria dos pacientes essa fase é leve ou assintomática (forma <b>anictérica</b>). Em uma minoria, evolui para a forma grave — a <b>síndrome de Weil</b> — clássica tríade:</div>
+<div class="ac-pills"><span class="ac-pill">Icterícia rubínica (tom alaranjado/avermelhado)</span><span class="ac-pill">Insuficiência renal aguda</span><span class="ac-pill">Hemorragias (a mais letal: pulmonar)</span></div>
+<div class="ac-p">A icterícia da leptospirose tem coloração característica <b>"rubínica"</b> (avermelhado-alaranjada), por combinar bilirrubina alta com congestão capilar e possível hemorragia subconjuntival, diferente do amarelo-esverdeado clássico de outras hepatopatias. Fenômenos hemorrágicos vão de petéquias e epistaxe a hemoptise franca e hemorragia digestiva; a <b>hemorragia pulmonar maciça</b> é a principal causa de óbito e pode ocorrer de forma fulminante, inclusive em pacientes sem icterícia importante — por isso todo paciente grave precisa de vigilância respiratória rigorosa independentemente do grau de icterícia.</div>
+<div class="ac-p">Outras manifestações da fase imune: <b>meningite asséptica</b> (cefaleia, rigidez de nuca, LCR claro), miocardite/arritmias, uveíte (manifestação tardia, semanas a meses depois).</div>
+`],
+['diagnostico','Diagnóstico', `
+<div class="ac-h">Como confirmar — e por que raramente dá tempo de esperar</div>
+<div class="ac-p">O diagnóstico é essencialmente <b>clínico-epidemiológico</b> na fase aguda: febre + mialgia + sufusão conjuntival/icterícia + história de exposição a água de enchente, lama ou atividade de risco já é suficiente para <b>iniciar tratamento empiricamente</b>, sem esperar confirmação laboratorial.</div>
+<table class="ac-tbl"><tr><th>Método</th><th>Quando fica positivo</th><th>Utilidade prática</th></tr>
+<tr><td>PCR (sangue)</td><td>Primeiros 5-7 dias (leptospiremia)</td><td>Bom para diagnóstico precoce, pouco disponível na rotina</td></tr>
+<tr><td>ELISA IgM</td><td>A partir do 5º-7º dia</td><td>Teste mais usado na prática; sensibilidade limitada nos primeiros dias</td></tr>
+<tr><td>Teste rápido (imunocromatografia IgM)</td><td>A partir do 5º-7º dia</td><td>Point-of-care, útil para triagem, confirmar com ELISA/MAT se possível</td></tr>
+<tr><td>MAT (soroaglutinação microscópica)</td><td>Precisa de 2 amostras (aguda + convalescente) com soroconversão ou aumento 4x do título</td><td><b>Padrão-ouro</b>, mas de resultado tardio — serve para confirmação retrospectiva/epidemiológica, não para decisão terapêutica aguda</td></tr>
+<tr><td>Cultura (sangue/urina/LCR)</td><td>Sangue/LCR: 1ª semana. Urina: a partir da 2ª semana (leptospirúria)</td><td>Demorada (semanas), baixo rendimento na prática, mais usada em pesquisa</td></tr>
+</table>
+<div class="ac-p">Exames inespecíficos que ajudam a levantar a suspeita e diferenciar de outras causas de síndrome febril ictérica: <b>leucocitose com desvio à esquerda</b>, <b>plaquetopenia leve a moderada</b> (menos intensa que na dengue), <b>CPK elevada</b> (miosite — acha muito valorizado para diferenciar de hepatite viral e dengue), <b>bilirrubina direta muito elevada com transaminases pouco alteradas</b>, e ureia/creatinina elevadas com <b>hipocalemia</b> (quando há IRA).</div>
+<div class="ac-call"><b>CONCEITO-CHAVE — critérios de Faine modificados (vigilância epidemiológica)</b><br>O Ministério da Saúde utiliza um sistema de pontuação (critérios de Faine modificados) que soma pontos de três blocos — <b>(A) achados clínicos</b> (ex.: mialgia, sufusão conjuntival, icterícia, oligúria), <b>(B) achados epidemiológicos</b> (exposição a água de enchente, contato com roedores/animais, atividade de risco) e <b>(C) achados laboratoriais</b> (sorologia IgM positiva, elevação de ureia/CPK/bilirrubina) — para classificar o caso como suspeito, provável ou confirmado quando a confirmação sorológica definitiva (MAT pareado) não está disponível a tempo. Na prática de prova, o ponto-chave não é decorar a pontuação exata, e sim entender que o diagnóstico de leptospirose é construído combinando <b>clínica + epidemiologia + laboratório</b>, e que isso já basta para iniciar tratamento.</div>
+`],
+['gravidade','Reconhecendo a Forma Grave', `
+<div class="ac-h">Sinais de alarme — quando internar e monitorizar de perto</div>
+<div class="ac-p">Todo paciente com suspeita de leptospirose deve ser reavaliado ativamente em busca de sinais de gravidade, porque a evolução para a forma grave pode ser rápida.</div>
+<div class="ac-warn"><b>CAI NA PROVA — sinais de alarme na leptospirose</b>
+<ul style="margin:6px 0 0 18px;padding:0">
+<li>Dispneia, tosse com escarro hemoptoico, taquipneia (pensar em <b>hemorragia pulmonar</b> — internar e monitorizar SpO2/gasometria de perto)</li>
+<li>Alteração do nível de consciência, oligúria/anúria (IRA grave)</li>
+<li>Arritmia cardíaca, hipotensão (miocardite/choque)</li>
+<li>Icterícia importante + plaquetopenia + fenômenos hemorrágicos</li>
+<li>Comorbidades (idade &gt;65 anos, cardiopatia, DPOC, doença renal prévia, uso de diurético) — fatores de pior prognóstico</li>
+</ul></div>
+<div class="ac-p">A <b>Síndrome de Hemorragia Pulmonar Grave (SHPG)</b> é a apresentação mais temida: infiltrado alveolar difuso bilateral à radiografia, hemoptise franca ou oculta, insuficiência respiratória aguda progressiva — pode ser fulminante em horas e é a principal causa de óbito, respondendo por boa parte da letalidade mesmo em séries brasileiras recentes. O reconhecimento precoce (queda de SpO2, taquipneia) e o suporte ventilatório imediato mudam desfecho.</div>
+<div class="ac-tip"><b>MACETE</b><br>"Weil = <b>W</b>ave of three": <b>I</b>ctérica (rubínica) + <b>R</b>enal (IRA não oligúrica, hipoK) + <b>H</b>emorragia (pulmonar = a que mata). Se a prova descrever essas três coisas juntas após exposição a enchente, a resposta é leptospirose grave (síndrome de Weil) até prova em contrário.</div>
+`],
+['tratamento','Tratamento', `
+<div class="ac-h">Antibiótico — não espere a sorologia</div>
+<div class="ac-p">O tratamento deve começar <b>assim que há suspeita clínica</b>, idealmente nos primeiros 4-5 dias de doença, quando o benefício antimicrobiano é maior — mas mesmo iniciado mais tarde, o antibiótico ainda reduz gravidade e mortalidade nos casos graves, então nunca deve ser adiado à espera de confirmação laboratorial.</div>
+<table class="ac-tbl"><tr><th>Forma</th><th>1ª escolha</th><th>Observações de farmacologia</th></tr>
+<tr><td>Leve (ambulatorial)</td><td><b>Doxiciclina</b> 100 mg VO 12/12h por 5-7 dias</td><td>Contraindicada em gestantes e crianças &lt;8 anos (deposição em dentes/ossos) — nesses casos usar <b>amoxicilina</b> ou <b>ampicilina</b> VO</td></tr>
+<tr><td>Grave (internado)</td><td><b>Penicilina G cristalina</b> 1,5 milhão UI IV 6/6h, <b>OU ceftriaxona</b> 1 g IV 1x/dia, <b>OU cefotaxima</b> 1 g IV 6/6h — por 7 dias</td><td>Ceftriaxona vem sendo cada vez mais usada por não inferioridade à penicilina, praticidade posológica (dose única diária) e dispensar teste de sensibilidade prévio</td></tr>
+</table>
+<div class="ac-warn"><b>PEGADINHA DE PROVA — reação de Jarisch-Herxheimer</b><br>Assim como em outras espiroquetoses (sífilis, por exemplo), o início do antibiótico pode desencadear uma reação de Jarisch-Herxheimer (piora transitória da febre, calafrios, mialgia, hipotensão) por lise bacteriana maciça liberando produtos inflamatórios — não é alergia ao antibiótico e não deve levar à sua suspensão; o manejo é sintomático.</div>
+<div class="ac-h" style="margin-top:16px">Suporte é o que salva vida na forma grave</div>
+<div class="ac-p">Na síndrome de Weil, o suporte intensivo é tão importante quanto o antibiótico: <b>diálise precoce</b> na IRA (a indicação é liberal — iniciar cedo reduz mortalidade, mesmo sem os critérios clássicos de diálise de urgência), <b>suporte ventilatório</b> agressivo na hemorragia pulmonar (ventilação protetora, considerar estratégias para minimizar barotrauma), reposição volêmica cuidadosa, correção de distúrbios eletrolíticos (atenção à <b>hipocalemia</b>, que pode ser grave) e evitar drogas nefrotóxicas (AINEs, aminoglicosídeos).</div>
+<div class="ac-call"><b>ATUALIZAÇÃO</b><br>Notas técnicas recentes do Ministério da Saúde (reforçadas após os surtos de enchentes no Rio Grande do Sul em 2024) reforçam justamente esse ponto central: <b>iniciar antibioticoterapia diante da suspeita clínica, sem aguardar confirmação laboratorial</b>, e capacitar as unidades de urgência para reconhecer precocemente os sinais de alarme (dispneia, oligúria, hemoptise) diante do aumento de casos após grandes desastres climáticos.</div>
+`],
+['prevencao','Prevenção e Quimioprofilaxia', `
+<div class="ac-h">Controle e profilaxia</div>
+<div class="ac-p">Medidas de saúde pública: controle de roedores (desratização, armazenamento adequado de lixo e alimentos), saneamento básico, uso de equipamento de proteção individual (botas, luvas) para trabalhadores expostos (limpeza de córregos/esgoto, coleta de lixo), e orientação à população para evitar contato com água de enchente, especialmente com lesões de pele expostas.</div>
+<div class="ac-p">A <b>quimioprofilaxia com doxiciclina 200 mg VO em dose única semanal</b> pode ser considerada para grupos de <b>exposição de curta duração e alto risco</b> (militares em operações em área alagada, atletas em provas em água doce, voluntários em resgate após desastres) durante o período de exposição — a evidência de benefício é limitada, mas é frequentemente cobrada em prova como opção nesse cenário específico. Não existe vacina humana de uso rotineiro amplamente disponível no Brasil; vacinas veterinárias (cães, animais de produção) ajudam a reduzir a carga do reservatório mas não eliminam a transmissão por roedores selvagens.</div>
+<div class="ac-tip"><b>MACETE</b><br>Leptospirose é doença de <b>notificação compulsória</b> — todo caso suspeito deve ser notificado, e os dados de exposição (enchente, ocupação, contato com roedores) são cruciais tanto para o diagnóstico individual quanto para a vigilância epidemiológica de surtos.</div>
+`]
+],
+};
+
+Object.assign(C['bacterias|3'], {
+escores:`
+<div class="ac-h">Critérios de Faine modificados — entendendo a lógica (não decore só o número)</div>
+<div class="ac-p">Esse sistema soma pontos de três grupos de evidência para classificar a probabilidade diagnóstica quando ainda não há confirmação sorológica definitiva:</div>
+<table class="ac-tbl"><tr><th>Bloco</th><th>O que entra</th><th>Exemplo de itens pontuados</th></tr>
+<tr><td><b>A — Clínico</b></td><td>Achados clássicos da doença</td><td>Cefaleia, febre, mialgia (panturrilha), sufusão conjuntival, meningismo, icterícia, oligúria/anúria, manifestações hemorrágicas, alterações de ECG sugestivas</td></tr>
+<tr><td><b>B — Epidemiológico</b></td><td>Contexto de exposição</td><td>Contato com água de enchente/lama, roedores, animais domésticos/de produção, viagem a área endêmica, atividade ocupacional de risco</td></tr>
+<tr><td><b>C — Laboratorial</b></td><td>Exames de suporte (não confirmatórios isoladamente)</td><td>Sorologia IgM reagente (mesmo isolada), cultura em andamento, elevação de ureia/CPK/bilirrubina compatível</td></tr>
+</table>
+<div class="ac-p"><b>Como usar na prova:</b> o somatório de pontos de A+B (e C, quando disponível) classifica o caso em faixas de probabilidade (ex.: caso suspeito de baixa probabilidade / caso suspeito de alta probabilidade / caso confirmado). O que a banca quer que você entenda é o <b>racional</b>: quanto mais elementos clínicos clássicos + exposição epidemiológica compatível, maior a probabilidade — e isso já justifica <b>iniciar o tratamento</b>, mesmo sem sorologia positiva, porque o MAT confirmatório só fica pronto tardiamente (retrospectivo).</div>
+<div class="ac-warn"><b>PEGADINHA DE PROVA</b><br>Uma sorologia IgM <b>negativa</b> na primeira semana <b>não exclui</b> leptospirose — a janela imunológica faz o teste ficar reagente só a partir do 5º-7º dia. Se a suspeita clínico-epidemiológica é forte, repita a sorologia mais tarde e trate empiricamente enquanto isso.</div>
+`,
+dif:`
+<div class="ac-h">Diagnóstico Diferencial</div>
+<table class="ac-tbl"><tr><th>Doença</th><th>O que diferencia da leptospirose</th></tr>
+<tr><td>Dengue</td><td>Plaquetopenia costuma ser mais intensa; sem sufusão conjuntival típica; sem o padrão "bilirrubina alta + transaminase baixa"; prova do laço/sinais de alarme de extravasamento plasmático são próprios da dengue</td></tr>
+<tr><td>Hepatite viral aguda</td><td>Transaminases muito elevadas (&gt;1000 em muitos casos), enquanto na leptospirose ficam discretamente altas apesar da bilirrubina elevada; CPK normal na hepatite viral</td></tr>
+<tr><td>Febre tifoide</td><td>Febre em platô, dissociação pulso-temperatura, roséolas, sem sufusão conjuntival; história de água/alimento contaminado por via fecal-oral</td></tr>
+<tr><td>Malária grave</td><td>Área endêmica amazônica, hemólise com anemia mais proeminente, esfregaço/teste rápido positivo para Plasmodium</td></tr>
+<tr><td>Hantavirose (síndrome cardiopulmonar)</td><td>Contato com roedores silvestres em área rural, evolução para choque cardiogênico com edema pulmonar não cardiogênico, geralmente sem icterícia</td></tr>
+<tr><td>Febre amarela</td><td>Também causa icterícia + IRA + hemorragia, mas sem sufusão conjuntival típica e com transaminases muito elevadas (padrão de necrose hepática); história vacinal e área de mata</td></tr>
+<tr><td>Sepse de outra origem / colangite</td><td>Foco infeccioso identificável, sem o contexto epidemiológico de exposição a água contaminada</td></tr>
+</table>
+`,
+mapa:`
+<div class="mm">
+<div class="mm-card"><h5>Etiologia</h5><ul><li>Leptospira interrogans</li><li>Sorovar Copenhageni (Brasil)</li><li>Reservatório: rato</li></ul></div>
+<div class="mm-card"><h5>Transmissão</h5><ul><li>Água/lama com urina de rato</li><li>Entra por pele lesada ou mucosa</li><li>Sem transmissão pessoa-a-pessoa relevante</li></ul></div>
+<div class="mm-card"><h5>Fase 1 — leptospirêmica</h5><ul><li>Febre, mialgia (panturrilha)</li><li>Sufusão conjuntival</li><li>Cefaleia</li></ul></div>
+<div class="mm-card"><h5>Fase 2 — imune (Weil, 5-10%)</h5><ul><li>Icterícia rubínica</li><li>IRA não oligúrica hipoK</li><li>Hemorragia (pulmonar = letal)</li></ul></div>
+<div class="mm-card"><h5>Laboratório-chave</h5><ul><li>Bili alta / transaminase baixa</li><li>CPK alta</li><li>Plaquetopenia leve · leucocitose</li></ul></div>
+<div class="mm-card"><h5>Diagnóstico</h5><ul><li>Clínico-epidemiológico primeiro</li><li>IgM a partir do 5º-7º dia</li><li>MAT = padrão-ouro tardio</li></ul></div>
+<div class="mm-card"><h5>Tratamento leve</h5><ul><li>Doxiciclina VO 7 dias</li><li>Contraindicada em gestante/criança &lt;8a</li></ul></div>
+<div class="mm-card"><h5>Tratamento grave</h5><ul><li>Penicilina G cristalina IV ou ceftriaxona IV</li><li>+ diálise precoce, ventilação</li></ul></div>
+<div class="mm-card"><h5>Prevenção</h5><ul><li>Controle de roedores, EPI</li><li>Doxiciclina profilática em exposição breve de alto risco</li></ul></div>
+</div>
+`,
+fluxo_dx:`
+<div class="fx">
+<div class="fx-node start">Febre + mialgia (panturrilha/lombar) + exposição a água de enchente/lama ou risco ocupacional</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Sufusão conjuntival? Icterícia rubínica? Oligúria? Hemorragia?</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">Sim a algum → suspeita ALTA<br>Iniciar ATB empírico já</div>
+<div class="fx-node">Não, quadro leve inespecífico → suspeita ainda assim é válida no contexto epidemiológico</div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Colher: hemograma, função renal, bilirrubinas, transaminases, CPK, sorologia IgM (se ≥5-7 dias) — sem esperar resultado para tratar</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Tratar empiricamente + notificar (doença de notificação compulsória) + reavaliar sinais de gravidade diariamente</div>
+</div>
+`,
+fluxo_cond:`
+<div class="fx">
+<div class="fx-node start">Diagnóstico/suspeita de leptospirose confirmada</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Classificar gravidade: icterícia importante? IRA/oligúria? Hemorragia? Dispneia/hemoptise? Instabilidade?</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">LEVE → ambulatorial<br>Doxiciclina VO 5-7 dias<br>(amoxi/ampicilina se gestante/criança)</div>
+<div class="fx-node">GRAVE → internar<br>Penicilina G cristalina IV ou ceftriaxona IV<br>+ suporte intensivo</div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Grave: monitorar função renal (diálise precoce se IRA), SpO2/gasometria (ventilação se hemorragia pulmonar), eletrólitos (hipoK)</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Reavaliação diária — atenção: piora pode ser rápida mesmo após início do antibiótico (Jarisch-Herxheimer ≠ falha terapêutica)</div>
+</div>
+`,
+vespera:`
+<div class="ac-h">Revisão de véspera — Leptospirose</div>
+<div class="ac-p"><b>Agente:</b> Leptospira interrogans (sorovar Copenhageni no Brasil) · reservatório: rato · transmissão via água/lama contaminada por urina, entrando por pele lesada/mucosa.</div>
+<div class="ac-p"><b>Fase 1 (leptospirêmica):</b> febre, mialgia de panturrilha/lombar, sufusão conjuntival indolor sem secreção.</div>
+<div class="ac-p"><b>Fase 2 (imune, Weil ~5-10%):</b> icterícia rubínica + IRA NÃO oligúrica com HIPOcalemia + hemorragia (pulmonar = principal causa de morte).</div>
+<div class="ac-p"><b>Labs-chave:</b> bilirrubina direta muito alta com transaminases pouco alteradas; CPK elevada (miosite); leucocitose; plaquetopenia leve.</div>
+<div class="ac-p"><b>Diagnóstico:</b> clínico-epidemiológico → tratar já. IgM só positiva a partir do 5º-7º dia. MAT pareado = padrão-ouro, mas tardio.</div>
+<div class="ac-p"><b>Tratamento:</b> leve = doxiciclina VO; grave = penicilina G cristalina IV ou ceftriaxona IV + suporte (diálise precoce, ventilação).</div>
+<div class="ac-p"><b>Não esquecer:</b> Jarisch-Herxheimer pode ocorrer após 1ª dose de ATB; notificação compulsória; doxiciclina profilática em exposição breve de alto risco.</div>
+`,
+dicas:`
+<div class="ac-warn"><b>Erro comum 1</b><br>Esperar a sorologia IgM ficar positiva para começar o antibiótico. Errado: a sorologia só positiva a partir do 5º-7º dia, e o benefício do antibiótico é maior quanto mais precoce. Trate pela suspeita clínico-epidemiológica.</div>
+<div class="ac-warn"><b>Erro comum 2</b><br>Achar que IRA = hipercalemia sempre. Na leptospirose a IRA costuma ser não oligúrica e HIPOcalêmica — uma pegadinha clássica.</div>
+<div class="ac-warn"><b>Erro comum 3</b><br>Confundir sufusão conjuntival com conjuntivite infecciosa e tratar com colírio antibiótico. Sufusão conjuntival é hiperemia sem secreção/dor — sinal sistêmico, não ocular local.</div>
+<div class="ac-tip"><b>Dica de prova</b><br>Se a questão trouxer "transaminases pouco alteradas mas bilirrubina muito alta + CPK elevada + história de enchente" — é leptospirose, não hepatite viral.</div>
+`,
+checklist:[
+'Explico o ciclo de transmissão (rato → água/lama → pele/mucosa) e por que é uma zoonose sem transmissão pessoa-a-pessoa relevante',
+'Descrevo as duas fases da doença (leptospirêmica e imune) e sei por que a maioria dos casos não evolui para a forma grave',
+'Reconheço a sufusão conjuntival e diferencio de conjuntivite',
+'Explico a tríade da síndrome de Weil (icterícia rubínica + IRA não oligúrica hipoK + hemorragia)',
+'Justifico fisiopatologicamente o padrão "bilirrubina alta/transaminase baixa" e a hipocalemia na IRA',
+'Sei por que CPK elevada ajuda no diagnóstico diferencial',
+'Conheço as opções diagnósticas (PCR, IgM, MAT, cultura) e sei quando cada uma fica positiva',
+'Entendo a lógica dos critérios de Faine modificados (clínico + epidemiológico + laboratorial)',
+'Sei o esquema antibiótico por gravidade, incluindo contraindicações da doxiciclina',
+'Reconheço a reação de Jarisch-Herxheimer e sei que não é motivo para suspender o antibiótico',
+'Sei identificar sinais de alarme para hemorragia pulmonar grave e a importância da diálise/ventilação precoces',
+'Conheço as medidas de prevenção, incluindo a quimioprofilaxia com doxiciclina em exposição breve de alto risco',
+],
+});
+
+Object.assign(C['bacterias|3'], {
+questoes:[
+{stem:'Homem, 34 anos, gari, procura pronto-socorro com febre alta há 4 dias, mialgia intensa em panturrilhas, cefaleia e hiperemia conjuntival bilateral sem secreção. Relata ter trabalhado na limpeza de bueiros após enchente na semana anterior. Qual a conduta mais apropriada neste momento?',
+opts:['Aguardar resultado de sorologia IgM antes de iniciar qualquer tratamento','Iniciar doxiciclina empiricamente e notificar o caso, sem aguardar confirmação laboratorial','Solicitar apenas hemocultura e liberar o paciente com sintomáticos','Iniciar corticoide em dose alta para reduzir a resposta inflamatória'],
+correct:1,
+expl:'O quadro (febre + mialgia de panturrilha + sufusão conjuntival + exposição ocupacional a água de enchente/esgoto) é altamente sugestivo de leptospirose na fase leptospirêmica. Como a sorologia IgM só se torna reagente a partir do 5º-7º dia, o tratamento deve ser iniciado empiricamente diante da suspeita clínico-epidemiológica, junto com a notificação compulsória do caso.'},
+{stem:'Paciente com leptospirose confirmada evolui em 9 dias de doença com icterícia de tonalidade alaranjada, diurese preservada (não oligúrico) e potássio sérico de 2,9 mEq/L. Esse padrão de disfunção renal é explicado por qual mecanismo?',
+opts:['Necrose cortical renal bilateral com anúria obrigatória','Disfunção tubular proximal e distal com natriurese e caliurese aumentadas, cursando com IRA não oligúrica e hipocalemia','Glomerulonefrite proliferativa difusa com síndrome nefrítica clássica','Rabdomiólise maciça causando hipercalemia por lise celular'],
+correct:1,
+expl:'A leptospira lesa diretamente os túbulos renais (proximal e distal), aumentando a excreção de sódio e potássio (natriurese e caliurese), o que caracteristicamente produz uma IRA não oligúrica com hipocalemia — um padrão diferente da maioria das outras causas de lesão renal aguda, que cursam com hipercalemia.'},
+{stem:'Qual achado laboratorial mais ajuda a diferenciar leptospirose de hepatite viral aguda em um paciente ictérico?',
+opts:['Transaminases (AST/ALT) muito elevadas, acima de 2000 U/L, em ambas as doenças','Bilirrubina direta muito elevada associada a transaminases apenas discretamente alteradas na leptospirose, ao contrário da elevação acentuada de transaminases na hepatite viral','Ausência completa de alteração de bilirrubina na leptospirose','Plaquetose acentuada específica da leptospirose'],
+correct:1,
+expl:'Na leptospirose, a lesão hepática é predominantemente colestática (disjunção das junções intercelulares dos hepatócitos), com bilirrubina direta muito elevada mas transaminases pouco alteradas (em geral <200 U/L). Já na hepatite viral aguda há necrose hepatocitária, com transaminases muito elevadas (frequentemente >1000 U/L).'},
+{stem:'Gestante de 20 semanas com diagnóstico clínico-epidemiológico de leptospirose leve, sem sinais de gravidade. Qual o antibiótico mais apropriado?',
+opts:['Doxiciclina 100 mg VO 12/12h por 7 dias','Amoxicilina VO, pois a doxiciclina é contraindicada na gestação','Ciprofloxacino VO por 7 dias','Nenhum antibiótico deve ser iniciado até o parto'],
+correct:1,
+expl:'A doxiciclina é contraindicada na gestação e em crianças menores de 8 anos pelo risco de deposição em dentes e ossos em formação. Nesses grupos, a amoxicilina (ou ampicilina) é a alternativa recomendada para a forma leve.'},
+{stem:'Paciente internado por leptospirose grave (síndrome de Weil) evolui no 2º dia de antibioticoterapia com piora transitória da febre, calafrios e hipotensão logo após a dose de penicilina cristalina. A conduta mais adequada é:',
+opts:['Suspender imediatamente a penicilina por suspeita de alergia grave e trocar de classe','Manter a penicilina, pois o quadro é compatível com reação de Jarisch-Herxheimer, e tratar de forma sintomática','Aumentar a dose de penicilina para compensar possível subdosagem','Associar corticoide sistêmico em altas doses de forma rotineira para todos os pacientes com este achado'],
+correct:1,
+expl:'A reação de Jarisch-Herxheimer (piora transitória de febre, calafrios e hipotensão pouco após o início do antibiótico) ocorre por lise bacteriana maciça e liberação de produtos pró-inflamatórios, sendo descrita em espiroquetoses como leptospirose e sífilis. Não representa alergia e não deve levar à suspensão do antibiótico; o manejo é sintomático e de suporte.'},
+{stem:'Qual manifestação é considerada a principal causa de óbito na leptospirose grave, podendo ocorrer mesmo em pacientes sem icterícia importante?',
+opts:['Meningite asséptica','Uveíte tardia','Síndrome de hemorragia pulmonar grave','Exantema maculopapular difuso'],
+correct:2,
+expl:'A síndrome de hemorragia pulmonar grave (hemorragia alveolar difusa por vasculite da microcirculação pulmonar) é a principal causa de morte na leptospirose grave e pode ocorrer de forma fulminante, inclusive em pacientes com icterícia discreta — por isso a vigilância respiratória deve ser rigorosa em todo caso grave, independentemente do grau de icterícia.'},
+{stem:'Militares participarão de um treinamento de curta duração em área alagada de alto risco para leptospirose. Qual medida de quimioprofilaxia pode ser considerada?',
+opts:['Ceftriaxona intramuscular dose única antes da exposição','Doxiciclina 200 mg VO em dose única semanal durante o período de exposição','Vacina antileptospirose humana de rotina, disponível na rede pública','Azitromicina 500 mg VO diária durante toda a missão'],
+correct:1,
+expl:'A quimioprofilaxia com doxiciclina 200 mg VO em dose única semanal pode ser considerada para grupos com exposição de curta duração e alto risco (militares, atletas, equipes de resgate) durante o período de exposição a água contaminada, embora a evidência de benefício seja limitada. Não há vacina humana de uso rotineiro amplamente disponível no Brasil.'},
+],
+flashcards:[
+{front:'Agente etiológico e reservatório da leptospirose.',back:'Leptospira interrogans (sorovar Copenhageni no Brasil) · reservatório: rato de esgoto (Rattus norvegicus), que elimina a bactéria na urina.',type:'basic'},
+{front:'Porta de entrada da leptospira no ser humano.',back:'Pele com microabrasões ou mucosas (conjuntiva, boca) em contato com água/lama contaminada por urina de rato.',type:'basic'},
+{front:'{{Sufusão conjuntival}} é hiperemia conjuntival bilateral, indolor e sem secreção — achado clássico da fase leptospirêmica.',back:'Sufusão conjuntival',type:'cloze'},
+{front:'Tríade da síndrome de Weil.',back:'Icterícia rubínica (alaranjada) + insuficiência renal aguda não oligúrica hipocalêmica + hemorragia (a pulmonar é a mais letal).',type:'basic'},
+{front:'Por que a IRA da leptospirose costuma ser hipocalêmica, ao contrário da maioria das IRAs?',back:'Disfunção tubular proximal/distal aumenta a caliurese (perda urinária de potássio), gerando IRA não oligúrica com hipocalemia.',type:'basic'},
+{front:'Padrão hepático típico da leptospirose.',back:'Bilirrubina direta muito elevada com transaminases apenas discretamente alteradas (colestase por disjunção intercelular, sem necrose maciça).',type:'basic'},
+{front:'Por que a CPK ajuda no diagnóstico?',back:'A leptospira invade diretamente o sarcolema, causando miosite e elevação de CPK — ajuda a diferenciar de dengue e hepatite viral.',type:'basic'},
+{front:'Quando a sorologia IgM se torna positiva?',back:'A partir do 5º-7º dia de doença — por isso não deve ser esperada para iniciar o tratamento.',type:'basic'},
+{front:'Padrão-ouro diagnóstico e sua limitação prática.',back:'MAT (soroaglutinação microscópica) pareada, com soroconversão ou aumento de 4x no título — porém resultado tardio, serve mais para confirmação retrospectiva/epidemiológica.',type:'basic'},
+{front:'Antibiótico de escolha na forma leve (ambulatorial).',back:'Doxiciclina 100 mg VO 12/12h por 5-7 dias (contraindicada em gestantes e crianças <8 anos — usar amoxicilina/ampicilina nesses casos).',type:'basic'},
+{front:'Antibiótico de escolha na forma grave (internado).',back:'Penicilina G cristalina IV 1,5 milhão UI 6/6h, ou ceftriaxona IV 1 g 1x/dia, ou cefotaxima IV — por 7 dias.',type:'basic'},
+{front:'O que é a reação de Jarisch-Herxheimer e a conduta diante dela.',back:'Piora transitória de febre/calafrios/hipotensão após início do antibiótico, por lise bacteriana maciça. Não é alergia — manter o antibiótico e tratar sintomaticamente.',type:'basic'},
+{front:'Principal causa de óbito na leptospirose grave.',back:'Síndrome de hemorragia pulmonar grave (hemorragia alveolar difusa) — pode ocorrer mesmo sem icterícia importante.',type:'basic'},
+{front:'Quimioprofilaxia para exposição breve de alto risco.',back:'Doxiciclina 200 mg VO em dose única semanal durante o período de exposição (evidência limitada, mas cobrada em prova).',type:'basic'},
+],
+casos:[
+{t:'Caso 1 — Após a enchente',
+stem:'Homem, 42 anos, trabalhou na limpeza de sua casa após enchente há 6 dias. Há 3 dias com febre de 39°C, mialgia intensa em panturrilhas, cefaleia e hiperemia conjuntival bilateral indolor, sem secreção.',
+passos:[
+{h:'1. Reconhecer o padrão',p:'Febre + mialgia de panturrilha + sufusão conjuntival + exposição a água de enchente = quadro clássico de <b>fase leptospirêmica</b>.'},
+{h:'2. Não esperar exame',p:'A sorologia IgM ainda não estaria positiva neste momento (só a partir do 5º-7º dia) — a conduta é <b>tratar empiricamente</b> e notificar o caso.'},
+{h:'3. Escolher o antibiótico',p:'Sem sinais de gravidade → <b>doxiciclina VO</b> ambulatorial, com orientação de retorno se surgirem sinais de alarme (icterícia, oligúria, dispneia, hemoptise).'},
+{h:'Lição de prova',p:'Diagnóstico e tratamento da leptospirose são clínico-epidemiológicos — não se espera confirmação laboratorial para tratar.'}]},
+{t:'Caso 2 — A pegadinha do potássio',
+stem:'Paciente internado por leptospirose grave, ictérico, com creatinina 4,2 mg/dL e diurese preservada (2,5 L/dia). Exame mostra potássio de 2,8 mEq/L.',
+passos:[
+{h:'1. Estranhar a combinação',p:'IRA + potássio BAIXO é incomum na maioria das nefropatias — mas é o <b>padrão típico</b> da leptospirose por disfunção tubular com caliurese aumentada.'},
+{h:'2. Não tratar como IRA "comum"',p:'Não restringir potássio da dieta/reposição por medo de hiperK — na leptospirose, ao contrário, é preciso <b>repor potássio</b> e monitorar de perto.'},
+{h:'3. Vigiar a via respiratória',p:'Mesmo sem hemoptise agora, o paciente precisa de vigilância de SpO2/gasometria pelo risco de hemorragia pulmonar súbita.'},
+{h:'Lição de prova',p:'IRA não oligúrica + hipocalemia em paciente com icterícia após exposição a água contaminada = leptospirose até prova em contrário.'}]},
+],
+});
+
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+<script>/* ============================================================
+   InfectoAtlas — Conteúdo Endocardite Infecciosa (bacterias|5). Aditivo.
+   Não altera nenhum outro C[...] existente.
+   ============================================================ */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+C['bacterias|5'] = {
+name:'Endocardite Infecciosa',
+intro:'Infecção do endocárdio, tipicamente das valvas cardíacas, que combina destruição estrutural, fenômenos embólicos e resposta imunológica sistêmica. Tema denso e muito cobrado: exige raciocínio integrado entre microbiologia, ecocardiografia, critérios diagnósticos (Duke) e indicação cirúrgica.',
+sub:[
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">O que é a endocardite infecciosa, do zero</div>
+<div class="ac-p">A endocardite infecciosa (EI) é a infecção do endocárdio — mais comumente das <b>valvas cardíacas</b> (nativas ou protéticas), mas também de dispositivos intracardíacos (marcapasso, desfibrilador) ou de defeitos septais. O evento central é a formação de uma <b>vegetação</b>: uma massa composta por fibrina, plaquetas, células inflamatórias e microrganismos aderida à superfície valvar.</div>
+<div class="ac-call"><b>CONCEITO-CHAVE — a sequência que origina a vegetação</b><br>(1) Uma superfície endotelial previamente lesada (por turbulência de fluxo — válvula bicúspide, prolapso mitral, doença reumática, cardiopatia congênita, valva protética) forma um trombo estéril de plaquetas e fibrina, chamado <b>endocardite trombótica não bacteriana (ETNB)</b>. (2) Durante um episódio de bacteriemia (mesmo transitória — escovar dentes, procedimento odontológico, cateter, uso de drogas injetáveis), os microrganismos aderem a esse trombo. (3) Bactérias proliferam protegidas dentro da vegetação, formando um biofilme que dificulta a ação de antibióticos e do sistema imune — por isso o tratamento exige antibioticoterapia prolongada (semanas) em altas doses.</div>
+<div class="ac-p">A partir da vegetação, três grandes grupos de manifestações se desenrolam, e entender essa lógica resolve praticamente qualquer questão de prova sobre o tema:</div>
+<div class="ac-pills"><span class="ac-pill">Destruição local (sopro novo, insuficiência valvar, abscesso, bloqueio de condução)</span><span class="ac-pill">Fenômenos embólicos (AVC, infarto esplênico/renal, embolia pulmonar séptica)</span><span class="ac-pill">Fenômenos imunológicos (glomerulonefrite, nódulos de Osler, manchas de Roth)</span></div>
+<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif" width="100%" style="max-width:640px;display:block;margin:10px auto">
+<rect width="640" height="260" rx="16" fill="#241420"/>
+<text x="320" y="26" fill="#f59f0a" font-size="15" font-weight="700" text-anchor="middle">Da vegetação às três famílias de manifestação</text>
+<rect x="255" y="45" width="130" height="42" rx="8" fill="#2d1b2e" stroke="#f59f0a" stroke-width="2"/>
+<text x="320" y="70" fill="#faf6f0" font-size="12" text-anchor="middle" font-weight="700">VEGETAÇÃO</text>
+<path d="M290 87 L150 130" stroke="#6db3f2" stroke-width="2" fill="none"/>
+<path d="M320 87 L320 130" stroke="#3ddc84" stroke-width="2" fill="none"/>
+<path d="M350 87 L500 130" stroke="#b76e79" stroke-width="2" fill="none"/>
+<rect x="60" y="130" width="180" height="70" rx="8" fill="#2d1b2e" stroke="#6db3f2"/>
+<text x="150" y="150" fill="#6db3f2" font-size="11.5" font-weight="700" text-anchor="middle">DESTRUIÇÃO LOCAL</text>
+<text x="150" y="167" fill="#faf6f0" font-size="10" text-anchor="middle">Sopro novo, ruptura de</text>
+<text x="150" y="181" fill="#faf6f0" font-size="10" text-anchor="middle">cordoalha, abscesso,</text>
+<text x="150" y="195" fill="#faf6f0" font-size="10" text-anchor="middle">BAV (abscesso do septo)</text>
+<rect x="230" y="130" width="180" height="70" rx="8" fill="#2d1b2e" stroke="#3ddc84"/>
+<text x="320" y="150" fill="#3ddc84" font-size="11.5" font-weight="700" text-anchor="middle">EMBOLIA SÉPTICA</text>
+<text x="320" y="167" fill="#faf6f0" font-size="10" text-anchor="middle">AVC, infarto esplênico/</text>
+<text x="320" y="181" fill="#faf6f0" font-size="10" text-anchor="middle">renal, aneurisma micótico,</text>
+<text x="320" y="195" fill="#faf6f0" font-size="10" text-anchor="middle">êmbolos pulmonares (VD)</text>
+<rect x="400" y="130" width="180" height="70" rx="8" fill="#2d1b2e" stroke="#b76e79"/>
+<text x="490" y="150" fill="#b76e79" font-size="11.5" font-weight="700" text-anchor="middle">IMUNOLÓGICO</text>
+<text x="490" y="167" fill="#faf6f0" font-size="10" text-anchor="middle">Glomerulonefrite, nódulos</text>
+<text x="490" y="181" fill="#faf6f0" font-size="10" text-anchor="middle">de Osler, manchas de Roth,</text>
+<text x="490" y="195" fill="#faf6f0" font-size="10" text-anchor="middle">fator reumatoide +</text>
+<text x="320" y="225" fill="#faf6f0" font-size="11" text-anchor="middle">Toda a clínica e os critérios de Duke derivam dessas três famílias</text>
+</svg>
+`],
+['classificacao','Formas Clínicas e Etiologia', `
+<div class="ac-h">Aguda vs subaguda — e por que isso já sugere o agente</div>
+<table class="ac-tbl"><tr><th>Forma</th><th>Evolução</th><th>Agente típico</th><th>Contexto</th></tr>
+<tr><td>Aguda</td><td>Dias, febre alta, toxemia, destruição valvar rápida</td><td><b>Staphylococcus aureus</b></td><td>Válvula previamente normal, usuários de drogas injetáveis, bacteriemia por acesso vascular</td></tr>
+<tr><td>Subaguda</td><td>Semanas a meses, febre baixa, emagrecimento, fadiga</td><td><b>Streptococcus viridans</b> (S. mitis, S. sanguinis)</td><td>Valva com lesão prévia (reumática, degenerativa, prolapso mitral), após procedimento dentário</td></tr>
+<tr><td>Endocardite de valva protética precoce (&lt;1 ano da cirurgia)</td><td>Geralmente nosocomial</td><td><b>Staphylococcus coagulase-negativo (S. epidermidis)</b></td><td>Contaminação perioperatória/biofilme no material</td></tr>
+<tr><td>Endocardite de valva protética tardia (&gt;1 ano)</td><td>Comportamento semelhante à de valva nativa</td><td>Streptococcus, S. aureus, Enterococcus</td><td>Bacteriemia adquirida na comunidade colonizando a prótese</td></tr>
+<tr><td>Endocardite em usuário de drogas injetáveis (lado direito)</td><td>Febre + êmbolos pulmonares sépticos</td><td><b>S. aureus</b> (valva tricúspide)</td><td>Injeção de substâncias não estéreis; sopro pode ser discreto por ser lado direito</td></tr>
+</table>
+<div class="ac-call"><b>CONCEITO-CHAVE — grupo HACEK e outros agentes de cultura difícil</b><br>O grupo <b>HACEK</b> (<i>Haemophilus, Aggregatibacter, Cardiobacterium, Eikenella, Kingella</i>) causa endocardite subaguda com hemoculturas de crescimento lento — historicamente exigiam incubação prolongada, hoje detectados mais rápido com sistemas automatizados modernos. Outros agentes de "endocardite com cultura negativa" incluem <i>Coxiella burnetii</i> (febre Q), <i>Bartonella</i> spp. (contato com gatos/pulgas, sem-teto), <i>Tropheryma whipplei</i> e fungos (<i>Candida</i> — usuários de drogas injetáveis, cateteres de longa permanência, imunossuprimidos) — nesses casos, sorologia específica ou PCR do material valvar é necessária para o diagnóstico etiológico.</div>
+`],
+['clinica','Quadro Clínico', `
+<div class="ac-h">Sinais e sintomas — a clínica reflete a fisiopatologia</div>
+<div class="ac-p">Febre é o achado mais constante (presente na grande maioria dos casos), frequentemente acompanhada de <b>sopro cardíaco novo ou que mudou de característica</b> — pesquisar ativamente com ausculta seriada. Sintomas constitucionais (fadiga, emagrecimento, sudorese noturna, artralgia/mialgia) são mais proeminentes na forma subaguda.</div>
+<div class="ac-h" style="margin-top:14px">Estigmas periféricos (fenômenos imunológicos e embólicos)</div>
+<table class="ac-tbl"><tr><th>Achado</th><th>Característica</th><th>Mecanismo</th></tr>
+<tr><td>Nódulos de Osler</td><td>Nódulos <b>dolorosos</b>, avermelhados, em polpas digitais (mãos/pés)</td><td>Imunológico (depósito de imunocomplexos)</td></tr>
+<tr><td>Lesões de Janeway</td><td>Máculas <b>indolores</b>, hemorrágicas, em palmas/plantas</td><td>Embólico séptico</td></tr>
+<tr><td>Manchas de Roth</td><td>Hemorragias retinianas com centro pálido</td><td>Imunológico</td></tr>
+<tr><td>Hemorragias em estilhaço (splinter)</td><td>Estrias hemorrágicas lineares sob unhas</td><td>Embólico (microêmbolos)</td></tr>
+<tr><td>Petéquias</td><td>Conjuntiva, palato, extremidades</td><td>Embólico/vasculítico</td></tr>
+<tr><td>Esplenomegalia</td><td>Mais comum na forma subaguda/crônica</td><td>Resposta imune sistêmica + embolia esplênica</td></tr>
+</table>
+<div class="ac-warn"><b>PEGADINHA DE PROVA</b><br>Osler <b>d</b>ói (nódulos <b>d</b>olorosos, imunológicos) e Janeway <b>n</b>ão dói (lesões indolores, embólicas). Um bom truque mnemônico: "<b>O</b>sler = <b>O</b>uch (dói)".</div>
+<div class="ac-h" style="margin-top:14px">Complicações que mudam a conduta</div>
+<div class="ac-p">Insuficiência cardíaca por destruição valvar é a <b>principal causa de morte e a principal indicação cirúrgica</b>. Um <b>bloqueio atrioventricular novo</b> no ECG sugere fortemente extensão perivalvular com <b>abscesso do anel/septo</b> (a raiz aórtica, próxima ao sistema de condução, é especialmente vulnerável em endocardite da valva aórtica) — achado muito valorizado em prova. Fenômenos embólicos podem acometer qualquer território: AVC isquêmico/hemorrágico (inclusive por aneurisma micótico), infarto esplênico ou renal (dor em flanco), embolia pulmonar séptica (endocardite de lado direito).</div>
+`],
+['diagnostico','Diagnóstico — Hemoculturas e Ecocardiograma', `
+<div class="ac-h">A dupla que sustenta o diagnóstico</div>
+<div class="ac-p">Antes de iniciar qualquer antibiótico (exceto em choque séptico com necessidade de terapia imediata), deve-se coletar <b>ao menos 3 conjuntos de hemoculturas</b> de sítios de punção diferentes, espaçados no tempo, para maximizar a chance de identificar o agente e demonstrar bacteriemia persistente (importante para os critérios diagnósticos).</div>
+<div class="ac-p">O ecocardiograma é o exame de imagem central: o <b>ecocardiograma transtorácico (ETT)</b> é o exame inicial, mas tem sensibilidade limitada (especialmente em valva protética, obesidade, DPOC). O <b>ecocardiograma transesofágico (ETE)</b> é mais sensível para vegetações pequenas, abscessos perivalvulares e valvas protéticas, sendo indicado sempre que o ETT for inconclusivo, houver alta suspeita clínica apesar de ETT normal, ou em endocardite de valva protética/dispositivo.</div>
+<div class="ac-call"><b>ATUALIZAÇÃO</b><br>As diretrizes mais recentes (ESC 2023 e a atualização dos critérios de Duke pelo grupo Duke-ISCVID em 2023) passaram a valorizar também a <b>tomografia computadorizada cardíaca</b> (maior sensibilidade que o ecocardiograma para lesões para-valvares) e o <b>PET-CT com [18F]-FDG</b>, este último especialmente útil em prótese valvar com alta suspeita clínica e ecocardiograma inconclusivo, permitindo reclassificar um caso de "possível" para "definitivo".</div>
+`],
+['duke','Critérios de Duke Modificados', `
+<div class="ac-h">Como o diagnóstico é formalmente classificado</div>
+<div class="ac-p">Os critérios de Duke modificados (Li 2000, com a atualização Duke-ISCVID 2023) combinam achados <b>maiores</b> e <b>menores</b> para classificar o caso como definitivo, possível ou rejeitado. Veja a explicação completa na aba "Escores/Critérios".</div>
+<div class="ac-tip"><b>MACETE</b><br>Pense nos critérios maiores como as duas colunas centrais da doença: "<b>tem bactéria</b>" (hemocultura positiva para agente típico ou persistente) e "<b>tem lesão endocárdica</b>" (eco positivo ou nova regurgitação valvar). Os critérios menores são tudo aquilo que aponta na mesma direção sem fechar sozinho o diagnóstico: predisposição, febre, fenômenos vasculares, fenômenos imunológicos e evidência microbiológica/ecocardiográfica que não atinge o critério maior.</div>
+`],
+['tratamento','Tratamento', `
+<div class="ac-h">Princípios gerais</div>
+<div class="ac-p">O tratamento exige antibióticos <b>bactericidas</b>, em <b>altas doses</b> e por <b>via intravenosa</b>, durante <b>semanas</b> — porque as bactérias dentro do biofilme da vegetação estão relativamente protegidas e em baixa atividade metabólica, exigindo exposição prolongada a concentrações bactericidas para erradicação completa.</div>
+<table class="ac-tbl"><tr><th>Agente</th><th>Esquema</th><th>Duração</th></tr>
+<tr><td>Streptococcus viridans sensível à penicilina</td><td>Penicilina G cristalina ou ceftriaxona (± gentamicina para encurtar para 2 semanas em casos selecionados de baixo risco)</td><td>4 semanas (2 se associado a gentamicina, valva nativa, sem complicações)</td></tr>
+<tr><td>S. aureus sensível à meticilina (MSSA), valva nativa</td><td>Oxacilina ou cefazolina</td><td>6 semanas</td></tr>
+<tr><td>S. aureus resistente à meticilina (MRSA)</td><td>Vancomicina ou daptomicina</td><td>6 semanas</td></tr>
+<tr><td>S. aureus, valva protética</td><td>Betalactâmico/vancomicina + <b>rifampicina</b> + <b>gentamicina</b></td><td>≥6 semanas (rifampicina por sua ação em biofilme)</td></tr>
+<tr><td>Enterococcus</td><td>Ampicilina + ceftriaxona (dupla betalactâmica, menos nefrotóxica) OU ampicilina + gentamicina</td><td>4-6 semanas</td></tr>
+<tr><td>HACEK</td><td>Ceftriaxona</td><td>4 semanas</td></tr>
+<tr><td>Fungos (Candida)</td><td>Anfotericina B lipossomal ± flucitosina</td><td>Prolongado + geralmente cirurgia associada</td></tr>
+</table>
+<div class="ac-p">Antes da identificação do agente, em endocardite adquirida na comunidade com valva nativa, um esquema empírico comum associa <b>vancomicina</b> (cobre S. aureus incluindo MRSA e estreptococos) a um agente com boa cobertura para bacilos Gram-negativos e HACEK, como <b>ceftriaxona</b>.</div>
+<div class="ac-h" style="margin-top:14px">Quando operar</div>
+<div class="ac-warn"><b>CAI NA PROVA — indicações de cirurgia (mesmo com infecção ativa)</b>
+<ul style="margin:6px 0 0 18px;padding:0">
+<li><b>Insuficiência cardíaca</b> refratária por disfunção valvar aguda (indicação mais comum e mais urgente)</li>
+<li><b>Infecção não controlada</b>: abscesso perivalvular/anular, fístula, bacteriemia ou febre persistente após 5-7 dias de antibiótico adequado, endocardite fúngica ou por organismo altamente resistente</li>
+<li><b>Prevenção de embolia</b>: vegetação &gt;10 mm com evento embólico prévio, ou vegetação muito grande e móvel mesmo sem embolia prévia, especialmente na valva mitral anterior</li>
+</ul></div>
+<div class="ac-p">Em relação ao <b>AVC</b>: se foi isquêmico sem transformação hemorrágica e sem lesão neurológica extensa, a cirurgia pode ser realizada precocemente se ainda houver indicação; se houve <b>AVC hemorrágico</b> ou lesão extensa, geralmente se adia a cirurgia por pelo menos <b>4 semanas</b> pelo risco de agravar o sangramento durante a circulação extracorpórea.</div>
+`],
+['profilaxia','Profilaxia', `
+<div class="ac-h">Quem realmente precisa de profilaxia antibiótica</div>
+<div class="ac-p">As diretrizes atuais (AHA/ESC) restringiram bastante a indicação de profilaxia, reservando-a apenas para pacientes de <b>altíssimo risco</b> submetidos a <b>procedimentos odontológicos de alto risco</b> (manipulação gengival, região periapical do dente, ou perfuração da mucosa oral).</div>
+<div class="ac-pills"><span class="ac-pill">Valva protética ou material protético usado em reparo valvar</span><span class="ac-pill">Endocardite infecciosa prévia</span><span class="ac-pill">Cardiopatia congênita cianótica não corrigida, ou corrigida com defeito residual/shunt/material protético</span><span class="ac-pill">Transplante cardíaco com valvulopatia</span></div>
+<div class="ac-p">Esquema: <b>amoxicilina 2 g VO</b>, dose única, 30-60 minutos antes do procedimento (ou ampicilina IV se via oral não for possível). Em alérgicos a penicilina, as opções preferidas atualmente são <b>cefalexina</b> ou <b>azitromicina/claritromicina</b> — a clindamicina vem sendo evitada como primeira alternativa pelo maior risco de infecção por <i>Clostridioides difficile</i>.</div>
+<div class="ac-warn"><b>PEGADINHA DE PROVA</b><br>Profilaxia <b>NÃO</b> é indicada rotineiramente para todos os pacientes com sopro cardíaco, prolapso mitral sem regurgitação significativa, ou procedimentos de baixo risco (endoscopia digestiva ou geniturinária de rotina sem infecção ativa). O critério é a combinação de <b>condição cardíaca de altíssimo risco</b> + <b>procedimento de alto risco</b>.</div>
+`]
+],
+};
+
+Object.assign(C['bacterias|5'], {
+escores:`
+<div class="ac-h">Critérios de Duke Modificados (Li 2000 / atualização Duke-ISCVID 2023) — explicados por completo</div>
+<div class="ac-h" style="margin-top:10px">Critérios MAIORES</div>
+<table class="ac-tbl"><tr><th>Critério</th><th>Detalhamento</th></tr>
+<tr><td>1. Hemocultura positiva para organismo típico</td><td>≥2 hemoculturas separadas positivas para Streptococcus viridans, S. gallolyticus (bovis), grupo HACEK, S. aureus ou Enterococcus adquirido na comunidade sem foco primário — OU hemoculturas persistentemente positivas (≥2 amostras com intervalo &gt;12h, ou 3/3 ou maioria de ≥4 amostras com intervalo entre a 1ª e a última ≥1h) — OU sorologia/título único positivo para Coxiella burnetii (Fase I IgG &gt;1:800)</td></tr>
+<tr><td>2. Evidência de envolvimento endocárdico</td><td>Ecocardiograma com vegetação, abscesso, pseudoaneurisma, fístula, ou deiscência parcial nova de prótese valvar — OU nova regurgitação valvar (piora/mudança de sopro pré-existente não conta)</td></tr>
+<tr><td>3. (Atualização 2023) Visualização direta em cirurgia</td><td>Confirmação de sinais de endocardite observados diretamente durante procedimento cirúrgico</td></tr>
+</table>
+<div class="ac-h" style="margin-top:14px">Critérios MENORES</div>
+<table class="ac-tbl"><tr><th>Critério</th><th>Detalhamento</th></tr>
+<tr><td>Predisposição</td><td>Cardiopatia predisponente conhecida ou uso de drogas injetáveis</td></tr>
+<tr><td>Febre</td><td>Temperatura ≥38°C</td></tr>
+<tr><td>Fenômenos vasculares</td><td>Êmbolos arteriais maiores, infarto pulmonar séptico, aneurisma micótico, hemorragia intracraniana, hemorragias conjuntivais, lesões de Janeway</td></tr>
+<tr><td>Fenômenos imunológicos</td><td>Glomerulonefrite, nódulos de Osler, manchas de Roth, fator reumatoide positivo</td></tr>
+<tr><td>Evidência microbiológica</td><td>Hemocultura positiva que não preenche critério maior (excluindo contaminantes de pele isolados uma única vez), ou evidência sorológica de infecção ativa por organismo compatível</td></tr>
+<tr><td>Achado ecocardiográfico</td><td>Compatível com endocardite, mas não preenchendo o critério maior</td></tr>
+</table>
+<div class="ac-h" style="margin-top:14px">Classificação final</div>
+<table class="ac-tbl"><tr><th>Classificação</th><th>Como se atinge</th></tr>
+<tr><td><b>Definitiva</b></td><td>2 critérios maiores <b>OU</b> 1 maior + 3 menores <b>OU</b> 5 menores <b>OU</b> confirmação patológica (cultura/histologia da vegetação ou êmbolo/abscesso)</td></tr>
+<tr><td><b>Possível</b></td><td>1 maior + 1 menor <b>OU</b> 3 menores</td></tr>
+<tr><td><b>Rejeitada</b></td><td>Diagnóstico alternativo firme explicando o quadro, <b>OU</b> resolução com ≤4 dias de antibiótico, <b>OU</b> ausência de evidência patológica na cirurgia/necropsia após ≤4 dias de antibiótico, <b>OU</b> não preenche critérios de "possível"</td></tr>
+</table>
+<div class="ac-p"><b>Exemplo resolvido:</b> paciente com 2 hemoculturas positivas para <i>Streptococcus mitis</i> (critério maior 1) + ecocardiograma mostrando vegetação em valva mitral (critério maior 2) = <b>2 critérios maiores → endocardite definitiva</b>, sem necessidade de nenhum critério menor.</div>
+<div class="ac-p"><b>Outro exemplo:</b> paciente usuário de drogas injetáveis (menor: predisposição) + febre 38,5°C (menor) + fenômeno embólico pulmonar séptico (menor) + uma hemocultura isolada positiva para agente que não preenche critério maior (menor) = <b>4 critérios menores</b> → ainda não fecha "definitiva" (precisaria de 5 menores ou 1 maior+3 menores), mas já preenche <b>"possível"</b> (bastam 3 menores) — reforçando a necessidade de buscar ativamente o critério maior (repetir hemoculturas, ecocardiograma).</div>
+`,
+dif:`
+<div class="ac-h">Diagnóstico Diferencial</div>
+<table class="ac-tbl"><tr><th>Condição</th><th>O que diferencia</th></tr>
+<tr><td>Febre reumática aguda / cardite reumática</td><td>Critérios de Jones, história de faringite estreptocócica recente, poliartrite migratória; hemoculturas negativas</td></tr>
+<tr><td>Lúpus eritematoso sistêmico (endocardite de Libman-Sacks)</td><td>Vegetações estéreis associadas a anticorpo antifosfolípide; sorologia lúpica positiva, hemoculturas negativas</td></tr>
+<tr><td>Mixoma atrial</td><td>Massa intracardíaca ao eco, mas sem febre/bacteriemia; sintomas constitucionais e embólicos podem mimetizar EI</td></tr>
+<tr><td>Sepse de outro foco com bacteriemia transitória</td><td>Sem evidência ecocardiográfica de vegetação, hemoculturas não persistentemente positivas</td></tr>
+<tr><td>Neoplasia oculta (febre de origem indeterminada)</td><td>Ausência de sopro novo e de achados ecocardiográficos; investigação de imagem oncológica direciona</td></tr>
+<tr><td>Vasculites sistêmicas (poliangeíte, Behçet)</td><td>Padrão de acometimento multissistêmico sem vegetação valvar; sorologias específicas</td></tr>
+</table>
+`,
+mapa:`
+<div class="mm">
+<div class="mm-card"><h5>Fisiopatologia</h5><ul><li>Endotélio lesado → ETNB</li><li>Bacteriemia adere ao trombo</li><li>Vegetação com biofilme</li></ul></div>
+<div class="mm-card"><h5>Formas</h5><ul><li>Aguda: S. aureus</li><li>Subaguda: viridans</li><li>Protética precoce: S. epidermidis</li></ul></div>
+<div class="mm-card"><h5>Clínica</h5><ul><li>Febre + sopro novo</li><li>Osler (dói) x Janeway (não dói)</li><li>Roth, splinter, esplenomegalia</li></ul></div>
+<div class="mm-card"><h5>Complicações</h5><ul><li>IC = principal causa de morte</li><li>BAV novo = abscesso do anel</li><li>Embolia séptica sistêmica</li></ul></div>
+<div class="mm-card"><h5>Diagnóstico</h5><ul><li>≥3 hemoculturas antes do ATB</li><li>ETT → ETE se dúvida</li><li>Duke: maior/menor</li></ul></div>
+<div class="mm-card"><h5>Tratamento</h5><ul><li>Bactericida, IV, semanas</li><li>MRSA: vanco/daptomicina</li><li>Enterococo: ampi+ceftriaxona</li></ul></div>
+<div class="mm-card"><h5>Cirurgia</h5><ul><li>IC refratária</li><li>Infecção não controlada</li><li>Vegetação &gt;10mm + embolia</li></ul></div>
+<div class="mm-card"><h5>Profilaxia</h5><ul><li>Só altíssimo risco</li><li>+ procedimento odonto de alto risco</li><li>Amoxicilina 2g VO única</li></ul></div>
+</div>
+`,
+fluxo_dx:`
+<div class="fx">
+<div class="fx-node start">Febre + sopro novo ou fatores de risco (valva protética, EI prévia, drogas injetáveis, cardiopatia)</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Colher 3 conjuntos de hemocultura de sítios diferentes ANTES do antibiótico (exceto choque séptico)</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Ecocardiograma transtorácico (ETT)</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">ETT inconclusivo ou alta suspeita mantida ou prótese valvar → ETE</div>
+<div class="fx-node end">ETT com vegetação/abscesso/nova regurgitação → critério maior presente</div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Aplicar critérios de Duke modificados (maior + menor) → classificar definitiva / possível / rejeitada</div>
+</div>
+`,
+fluxo_cond:`
+<div class="fx">
+<div class="fx-node start">Endocardite infecciosa diagnosticada (definitiva ou possível com alta suspeita)</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Antibiótico bactericida IV guiado pelo agente (empírico: vancomicina + ceftriaxona, se comunidade/valva nativa)</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Reavaliar diariamente: febre persiste? IC piora? Novo BAV no ECG? Novo evento embólico?</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">IC refratária, infecção não controlada (abscesso/fístula/bacteriemia persistente), fungo ou organismo resistente, vegetação grande + embolia → CIRURGIA</div>
+<div class="fx-node end">Resposta adequada, sem complicações → completar 4-6 semanas de antibiótico IV conforme agente</div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Seguimento: ecocardiograma de controle, atenção a recidiva e a necessidade tardia de profilaxia em novos procedimentos</div>
+</div>
+`,
+vespera:`
+<div class="ac-h">Revisão de véspera — Endocardite Infecciosa</div>
+<div class="ac-p"><b>Fisiopatologia:</b> endotélio lesado → trombo estéril (ETNB) → bacteriemia adere → vegetação com biofilme → destruição local + embolia + imunológico.</div>
+<div class="ac-p"><b>Agentes:</b> aguda = S. aureus; subaguda = viridans; protética precoce = S. epidermidis; drogas injetáveis (lado direito) = S. aureus; HACEK/Coxiella/Bartonella = cultura negativa.</div>
+<div class="ac-p"><b>Clínica:</b> febre + sopro novo. Osler dói (imunológico), Janeway não dói (embólico). BAV novo = suspeitar de abscesso perivalvular.</div>
+<div class="ac-p"><b>Diagnóstico:</b> 3 hemoculturas ANTES do ATB + ETT (→ ETE se dúvida ou prótese) + critérios de Duke (2 maiores, ou 1 maior+3 menores, ou 5 menores = definitiva).</div>
+<div class="ac-p"><b>Tratamento:</b> bactericida IV por semanas (4-6). MSSA: oxacilina. MRSA: vancomicina/daptomicina. Enterococo: ampicilina+ceftriaxona. Protética por S. aureus: + rifampicina + gentamicina.</div>
+<div class="ac-p"><b>Cirurgia:</b> IC refratária (indicação mais comum), infecção não controlada, vegetação &gt;10mm com embolia.</div>
+<div class="ac-p"><b>Profilaxia:</b> só altíssimo risco cardíaco + procedimento odontológico de alto risco → amoxicilina 2g VO.</div>
+`,
+dicas:`
+<div class="ac-warn"><b>Erro comum 1</b><br>Iniciar antibiótico empírico antes de colher hemoculturas em paciente estável. Sempre colher ao menos 3 conjuntos antes do ATB (exceto instabilidade/choque séptico).</div>
+<div class="ac-warn"><b>Erro comum 2</b><br>Achar que ETT normal exclui endocardite. ETT tem sensibilidade limitada — se a suspeita clínica é alta, complementar com ETE.</div>
+<div class="ac-warn"><b>Erro comum 3</b><br>Indicar profilaxia antibiótica para qualquer procedimento odontológico em qualquer cardiopata. A indicação é restrita a condições de altíssimo risco + procedimento de alto risco.</div>
+<div class="ac-tip"><b>Dica de prova</b><br>BAV novo em paciente com endocardite = pensar em abscesso perivalvular (raiz aórtica) até prova em contrário — é achado clássico de banca.</div>
+`,
+checklist:[
+'Explico a sequência fisiopatológica: endotélio lesado → ETNB → adesão bacteriana → vegetação com biofilme',
+'Diferencio endocardite aguda (S. aureus) de subaguda (viridans) e associo cada uma ao contexto clínico',
+'Reconheço os estigmas periféricos e sei diferenciar Osler (dói, imunológico) de Janeway (não dói, embólico)',
+'Sei por que um BAV novo sugere abscesso perivalvular',
+'Descrevo os critérios de Duke maiores e menores completos, incluindo a atualização 2023',
+'Sei classificar um caso em definitivo, possível ou rejeitado a partir dos critérios',
+'Sei quando pedir ETE em vez de/além do ETT',
+'Conheço o esquema antibiótico por agente e a duração típica de tratamento',
+'Reconheço as três indicações principais de cirurgia (IC refratária, infecção não controlada, prevenção de embolia)',
+'Sei o momento correto de operar em relação a um AVC recente (isquêmico x hemorrágico)',
+'Identifico corretamente quem precisa de profilaxia antibiótica e com qual esquema',
+'Reconheço as causas de endocardite com hemocultura negativa (HACEK, Coxiella, Bartonella, uso prévio de antibiótico)',
+],
+});
+
+Object.assign(C['bacterias|5'], {
+questoes:[
+{stem:'Usuário de drogas injetáveis, 28 anos, apresenta febre há 5 dias e dispneia. Radiografia de tórax mostra múltiplos infiltrados nodulares periféricos bilaterais. Ecocardiograma transtorácico evidencia vegetação em valva tricúspide. Qual o agente etiológico mais provável?',
+opts:['Streptococcus viridans','Staphylococcus aureus','Enterococcus faecalis','Grupo HACEK'],
+correct:1,
+expl:'Endocardite de valva tricúspide (lado direito) em usuário de drogas injetáveis, com êmbolos sépticos pulmonares (infiltrados nodulares periféricos), é classicamente causada por Staphylococcus aureus.'},
+{stem:'Paciente com endocardite infecciosa em tratamento antibiótico adequado há 10 dias evolui com hemoculturas ainda positivas e surgimento de bloqueio atrioventricular de 1º grau novo ao ECG. A explicação mais provável e a conduta mais apropriada são:',
+opts:['Reação adversa ao antibiótico; trocar o esquema empiricamente','Provável abscesso perivalvular/perianular; avaliar cirurgia e reforçar investigação de imagem','Achado incidental sem relevância; manter conduta inalterada','Sinal de cura, indicando resolução da vegetação'],
+correct:1,
+expl:'Um novo distúrbio de condução em paciente com endocardite sugere extensão da infecção para o tecido perivalvular/anular com formação de abscesso, frequentemente próximo ao sistema de condução (especialmente na endocardite da valva aórtica). Isso configura infecção não controlada, uma das indicações de avaliação cirúrgica.'},
+{stem:'Mulher, 45 anos, com prolapso de valva mitral, apresenta 2 hemoculturas positivas para Streptococcus mitis e ecocardiograma com vegetação de 8 mm em folheto mitral anterior, sem outras alterações. De acordo com os critérios de Duke modificados, este caso deve ser classificado como:',
+opts:['Endocardite rejeitada, pois faltam critérios menores','Endocardite possível, pois apenas 1 critério maior está presente','Endocardite definitiva, pois há 2 critérios maiores (hemocultura + evidência ecocardiográfica)','Não é possível classificar sem biópsia da vegetação'],
+correct:2,
+expl:'Hemoculturas positivas para organismo típico (Streptococcus viridans) em 2 amostras separadas constitui um critério maior, e a vegetação ao ecocardiograma constitui o segundo critério maior (evidência de envolvimento endocárdico). Dois critérios maiores classificam o caso como endocardite definitiva, independentemente de critérios menores.'},
+{stem:'Paciente com endocardite por Enterococcus faecalis sensível à penicilina e à gentamicina. Qual esquema antibiótico é preferido atualmente para reduzir o risco de nefrotoxicidade, mantendo eficácia?',
+opts:['Vancomicina em monoterapia por 6 semanas','Ampicilina associada a ceftriaxona (dupla betalactâmica)','Gentamicina em monoterapia por 4 semanas','Azitromicina associada a rifampicina'],
+correct:1,
+expl:'A combinação de ampicilina com ceftriaxona (sinergismo entre dois betalactâmicos que saturam diferentes proteínas ligadoras de penicilina do enterococo) é hoje preferida a ampicilina+gentamicina em muitos cenários, por eficácia semelhante com menor nefrotoxicidade, especialmente relevante em pacientes idosos ou com função renal limítrofe.',},
+{stem:'Qual das situações abaixo representa indicação clara de tratamento cirúrgico em endocardite infecciosa ainda com infecção ativa?',
+opts:['Vegetação de 3 mm sem repercussão hemodinâmica','Febre isolada nas primeiras 24 horas de antibiótico adequado','Insuficiência cardíaca refratária por destruição valvar aguda','Presença isolada de nódulos de Osler sem outras alterações'],
+correct:2,
+expl:'Insuficiência cardíaca refratária secundária à disfunção valvar aguda é a indicação cirúrgica mais comum e mais urgente em endocardite infecciosa, sendo realizada mesmo com a infecção ainda ativa, pois adiar a cirurgia nesse contexto aumenta significativamente a mortalidade.'},
+{stem:'Homem, 60 anos, com prótese valvar aórtica biológica implantada há 3 anos, será submetido a extração dentária com manipulação gengival significativa. Ele não tem outras comorbidades cardíacas relevantes. Qual a conduta de profilaxia antibiótica mais adequada?',
+opts:['Não é necessária profilaxia, pois próteses biológicas não conferem risco','Profilaxia obrigatória com amoxicilina 2g VO 30-60 minutos antes do procedimento, pela presença de material protético valvar','Profilaxia apenas se o paciente tiver febre no dia do procedimento','Profilaxia com vancomicina IV de rotina antes de qualquer procedimento odontológico'],
+correct:1,
+expl:'Pacientes com valva protética (biológica ou mecânica) fazem parte do grupo de altíssimo risco para endocardite, e a combinação com um procedimento odontológico de alto risco (manipulação gengival) indica profilaxia com amoxicilina 2g VO em dose única, 30-60 minutos antes do procedimento.'},
+{stem:'Qual achado clínico é classicamente descrito como DOLOROSO, distinguindo-o de outro fenômeno periférico indolor da endocardite infecciosa?',
+opts:['Lesões de Janeway','Manchas de Roth','Nódulos de Osler','Hemorragias em estilhaço'],
+correct:2,
+expl:'Os nódulos de Osler são nódulos dolorosos nas polpas digitais, de origem imunológica (depósito de imunocomplexos), diferentemente das lesões de Janeway, que são máculas indolores nas palmas/plantas, de origem embólica séptica.'},
+],
+flashcards:[
+{front:'Sequência fisiopatológica da formação da vegetação.',back:'Endotélio lesado por turbulência → trombo estéril de plaquetas/fibrina (ETNB) → bacteriemia adere ao trombo → vegetação com biofilme protetor.',type:'basic'},
+{front:'Agente mais associado à endocardite AGUDA em valva previamente normal.',back:'Staphylococcus aureus.',type:'basic'},
+{front:'Agente mais associado à endocardite SUBAGUDA em valva com lesão prévia.',back:'Streptococcus viridans (S. mitis, S. sanguinis).',type:'basic'},
+{front:'Agente típico da endocardite de valva protética PRECOCE (<1 ano).',back:'Staphylococcus coagulase-negativo (S. epidermidis) — geralmente contaminação perioperatória.',type:'basic'},
+{front:'{{Nódulos de Osler}} são dolorosos e de origem imunológica; {{lesões de Janeway}} são indolores e de origem embólica.',back:'Nódulos de Osler / lesões de Janeway',type:'cloze'},
+{front:'O que sugere um novo bloqueio atrioventricular em paciente com endocardite?',back:'Abscesso perivalvular/perianular, geralmente próximo à raiz aórtica — infecção não controlada, possível indicação cirúrgica.',type:'basic'},
+{front:'Grupo de bactérias fastidiosas, causa clássica de endocardite subaguda com cultura de crescimento lento.',back:'HACEK: Haemophilus, Aggregatibacter, Cardiobacterium, Eikenella, Kingella.',type:'basic'},
+{front:'Quantas hemoculturas coletar, e quando, antes de iniciar antibiótico?',back:'Ao menos 3 conjuntos de sítios diferentes, ANTES do antibiótico (exceto choque séptico com necessidade de terapia imediata).',type:'basic'},
+{front:'Critérios de Duke — quantos maiores/menores definem endocardite DEFINITIVA?',back:'2 maiores, OU 1 maior + 3 menores, OU 5 menores, OU confirmação patológica.',type:'basic'},
+{front:'Principal causa de óbito e principal indicação cirúrgica em endocardite.',back:'Insuficiência cardíaca refratária por destruição valvar aguda.',type:'basic'},
+{front:'Esquema antibiótico para S. aureus em valva PROTÉTICA.',back:'Betalactâmico/vancomicina (conforme sensibilidade) + rifampicina + gentamicina — a rifampicina atua no biofilme.',type:'basic'},
+{front:'Quem precisa de profilaxia antibiótica antes de procedimento odontológico de alto risco?',back:'Apenas altíssimo risco: valva protética, EI prévia, cardiopatia congênita cianótica não corrigida ou corrigida com defeito residual, transplante cardíaco com valvulopatia.',type:'basic'},
+{front:'Esquema de profilaxia antibiótica padrão.',back:'Amoxicilina 2 g VO, dose única, 30-60 min antes do procedimento (alérgicos: cefalexina ou azitromicina, preferidas à clindamicina).',type:'basic'},
+{front:'Quando indicar ETE em vez de/além do ETT?',back:'ETT inconclusivo, alta suspeita clínica mantida apesar de ETT normal, ou suspeita em valva protética/dispositivo intracardíaco.',type:'basic'},
+],
+casos:[
+{t:'Caso 1 — Febre baixa e sopro há semanas',
+stem:'Mulher, 55 anos, com histórico de febre reumática, procura atendimento com febre baixa intermitente há 6 semanas, emagrecimento e fadiga. Ausculta revela sopro sistólico mitral não documentado anteriormente.',
+passos:[
+{h:'1. Reconhecer o padrão subagudo',p:'Evolução arrastada + cardiopatia predisponente (reumática) + sopro novo = pensar em endocardite <b>subaguda</b>, provavelmente por <b>Streptococcus viridans</b>.'},
+{h:'2. Investigar corretamente',p:'Colher <b>3 hemoculturas</b> de sítios diferentes antes de iniciar antibiótico, e solicitar <b>ecocardiograma transtorácico</b>.'},
+{h:'3. Aplicar Duke',p:'Se hemoculturas positivas para viridans (maior) + eco com vegetação (maior) → <b>2 critérios maiores = definitiva</b>.'},
+{h:'Lição de prova',p:'Cardiopatia predisponente + evolução arrastada + sopro novo = pensar em endocardite subaguda por estreptococo viridans.'}]},
+{t:'Caso 2 — Quando chamar o cirurgião',
+stem:'Paciente em tratamento para endocardite por S. aureus há 6 dias, com antibiótico adequado conforme antibiograma, mas mantém febre diária e hemoculturas de controle ainda positivas.',
+passos:[
+{h:'1. Reconhecer infecção não controlada',p:'Febre e bacteriemia persistentes após 5-7 dias de antibiótico apropriado sugerem <b>infecção não controlada</b> (abscesso, foco metastático, resistência).'},
+{h:'2. Investigar complicação estrutural',p:'Repetir ecocardiograma (considerar ETE) em busca de abscesso perivalvular, e revisar ECG em busca de novo distúrbio de condução.'},
+{h:'3. Considerar cirurgia',p:'Infecção não controlada é indicação cirúrgica, independentemente da resposta radiológica isolada.'},
+{h:'Lição de prova',p:'Febre/bacteriemia persistente apesar de antibiótico correto = pensar em complicação estrutural e avaliar cirurgia, não apenas trocar antibiótico.'}]},
+],
+});
+
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+<script>/* ============================================================
+   InfectoAtlas — Conteúdo Pneumonias Bacterianas (bacterias|6). Aditivo.
+   Não altera nenhum outro C[...] existente.
+   ============================================================ */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+C['bacterias|6'] = {
+name:'Pneumonias Bacterianas',
+intro:'A pneumonia adquirida na comunidade (PAC) é uma das doenças infecciosas mais prevalentes e mais cobradas em prova — o raciocínio de banca gira em torno de três perguntas: qual o agente mais provável nesse contexto, qual a gravidade (e por isso onde tratar), e qual o esquema empírico correto para esse cenário.',
+sub:[
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">O que é pneumonia bacteriana, do zero</div>
+<div class="ac-p">Pneumonia é a infecção do parênquima pulmonar, com preenchimento dos alvéolos por exsudato inflamatório — o que aparece na radiografia como <b>infiltrado/consolidação</b>. Quando essa infecção é adquirida fora do ambiente hospitalar (ou nas primeiras 48h de internação), chamamos de <b>pneumonia adquirida na comunidade (PAC)</b>, em contraposição à pneumonia hospitalar (adquirida após 48h de internação) e à associada à ventilação mecânica.</div>
+<div class="ac-call"><b>CONCEITO-CHAVE — o agente mais comum é sempre o pneumococo, mas o contexto muda tudo</b><br><i>Streptococcus pneumoniae</i> é o agente mais frequente da PAC em praticamente todos os cenários e faixas etárias. Mas a banca adora testar se você reconhece pistas que apontam para outros agentes: tabagismo/DPOC (Haemophilus influenzae, Moraxella catarrhalis), alcoolismo/aspiração (Klebsiella pneumoniae, anaeróbios), pós-influenza (Staphylococcus aureus), adultos jovens com quadro arrastado e "poucos achados ao exame para tanta queixa" (Mycoplasma pneumoniae), surtos ligados a sistemas de água/ar-condicionado com hiponatremia e sintomas gastrointestinais (Legionella).</div>
+<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif" width="100%" style="max-width:640px;display:block;margin:10px auto">
+<rect width="640" height="260" rx="16" fill="#241420"/>
+<text x="320" y="26" fill="#f59f0a" font-size="15" font-weight="700" text-anchor="middle">Pistas do contexto → agente provável</text>
+<g font-size="10.5">
+<rect x="20" y="45" width="185" height="52" rx="8" fill="#2d1b2e" stroke="#f59f0a"/>
+<text x="112" y="64" fill="#f59f0a" font-weight="700" text-anchor="middle">Geral / sem pistas</text>
+<text x="112" y="80" fill="#faf6f0" text-anchor="middle">S. pneumoniae</text>
+<text x="112" y="93" fill="#faf6f0" text-anchor="middle">(agente mais comum sempre)</text>
+<rect x="220" y="45" width="195" height="52" rx="8" fill="#2d1b2e" stroke="#6db3f2"/>
+<text x="317" y="64" fill="#6db3f2" font-weight="700" text-anchor="middle">DPOC/tabagista</text>
+<text x="317" y="80" fill="#faf6f0" text-anchor="middle">H. influenzae, M. catarrhalis</text>
+<rect x="430" y="45" width="190" height="52" rx="8" fill="#2d1b2e" stroke="#3ddc84"/>
+<text x="525" y="64" fill="#3ddc84" font-weight="700" text-anchor="middle">Alcoolismo/aspiração</text>
+<text x="525" y="80" fill="#faf6f0" text-anchor="middle">Klebsiella, anaeróbios</text>
+<text x="525" y="93" fill="#faf6f0" text-anchor="middle">(escarro "geleia de framboesa")</text>
+<rect x="20" y="112" width="185" height="52" rx="8" fill="#2d1b2e" stroke="#b76e79"/>
+<text x="112" y="131" fill="#b76e79" font-weight="700" text-anchor="middle">Pós-influenza</text>
+<text x="112" y="147" fill="#faf6f0" text-anchor="middle">S. aureus</text>
+<text x="112" y="160" fill="#faf6f0" text-anchor="middle">(pode necrosar/cavitar)</text>
+<rect x="220" y="112" width="195" height="52" rx="8" fill="#2d1b2e" stroke="#f59f0a"/>
+<text x="317" y="131" fill="#f59f0a" font-weight="700" text-anchor="middle">Jovem, quadro arrastado</text>
+<text x="317" y="147" fill="#faf6f0" text-anchor="middle">Mycoplasma pneumoniae</text>
+<text x="317" y="160" fill="#faf6f0" text-anchor="middle">("pneumonia atípica/andante")</text>
+<rect x="430" y="112" width="190" height="52" rx="8" fill="#2d1b2e" stroke="#6db3f2"/>
+<text x="525" y="131" fill="#6db3f2" font-weight="700" text-anchor="middle">Surto, água/ar-cond.</text>
+<text x="525" y="147" fill="#faf6f0" text-anchor="middle">Legionella pneumophila</text>
+<text x="525" y="160" fill="#faf6f0" text-anchor="middle">(hiponatremia, TGI, confusão)</text>
+</g>
+<text x="320" y="195" fill="#faf6f0" font-size="11" text-anchor="middle">O contexto epidemiológico é tão importante quanto o quadro clínico para direcionar a terapia empírica</text>
+</svg>
+`],
+['clinica','Quadro Clínico — típico x atípico', `
+<div class="ac-h">Pneumonia "típica"</div>
+<div class="ac-p">Início <b>agudo</b>, febre alta com calafrios, tosse produtiva com <b>escarro purulento</b>, dor torácica <b>pleurítica</b> (piora com inspiração/tosse), e ao exame físico sinais de consolidação: <b>estertores crepitantes</b>, <b>broncofonia/egofonia</b>, aumento do frêmito toracovocal, submacicez à percussão. É o padrão clássico do pneumococo.</div>
+<div class="ac-h" style="margin-top:14px">Pneumonia "atípica"</div>
+<div class="ac-p">Início mais <b>insidioso</b>, tosse <b>seca</b> ou pouco produtiva, sintomas extrapulmonares proeminentes (cefaleia, mialgia, mal-estar, por vezes sintomas gastrointestinais), e um achado clássico de prova: <b>dissociação clínico-radiológica</b> — poucos achados ao exame físico pulmonar apesar de infiltrado significativo na radiografia. É o padrão de <i>Mycoplasma</i>, <i>Chlamydophila</i> e <i>Legionella</i> (embora Legionella costume ser mais grave que as outras "atípicas").</div>
+<div class="ac-warn"><b>PEGADINHA DE PROVA — Legionella não é uma atípica "leve"</b><br>Apesar de classificada entre os agentes atípicos, a Legionella frequentemente causa doença <b>grave</b>, com febre alta, <b>bradicardia relativa</b> (frequência cardíaca desproporcionalmente baixa para o grau de febre), <b>hiponatremia</b>, elevação de transaminases, sintomas gastrointestinais (diarreia) e confusão mental — e ocorre tipicamente em <b>surtos</b> associados a sistemas de água contaminada (torres de resfriamento, ar-condicionado, chuveiros, hotéis, cruzeiros).</div>
+`],
+['diagnostico','Diagnóstico', `
+<div class="ac-h">Confirmando o diagnóstico e buscando o agente</div>
+<div class="ac-p">O diagnóstico de PAC é feito pela combinação de <b>quadro clínico compatível</b> + <b>infiltrado novo na radiografia de tórax</b> (ou tomografia, mais sensível). Na ausência de imagem, o diagnóstico é apenas presuntivo.</div>
+<table class="ac-tbl"><tr><th>Exame</th><th>Quando solicitar</th><th>Observação</th></tr>
+<tr><td>Radiografia de tórax</td><td>Todo caso suspeito</td><td>Padrão de consolidação lobar (típica) vs infiltrado intersticial/broncopneumônico (atípica) — mas não substitui a correlação clínica</td></tr>
+<tr><td>Gram e cultura de escarro</td><td>Pacientes hospitalizados, especialmente graves</td><td>Rendimento variável (amostra de má qualidade é comum); útil para direcionar terapia se boa amostra</td></tr>
+<tr><td>Hemoculturas</td><td>PAC grave / hospitalizada</td><td>Positivas em minoria dos casos, mas ajudam a guiar/descalonar terapia</td></tr>
+<tr><td>Antígeno urinário para pneumococo</td><td>PAC grave</td><td>Sensibilidade moderada, especificidade alta; pode continuar positivo por semanas mesmo após tratamento</td></tr>
+<tr><td>Antígeno urinário para Legionella</td><td>PAC grave, suspeita epidemiológica (surto, viagem, exposição a água contaminada)</td><td>Detecta principalmente o sorogrupo 1 (a maioria dos casos, mas não todos)</td></tr>
+<tr><td>PCR multiplex respiratório</td><td>Disponibilidade variável</td><td>Detecta vírus e bactérias atípicas rapidamente, cada vez mais usado</td></tr>
+</table>
+`],
+['gravidade','Avaliação de Gravidade — CURB-65 e PSI', `
+<div class="ac-h">Por que estratificar gravidade</div>
+<div class="ac-p">A decisão sobre <b>onde tratar</b> o paciente (ambulatório, enfermaria ou UTI) é uma das perguntas mais cobradas em prova, e é sistematizada por escores de gravidade. Veja a explicação completa e o exemplo resolvido na aba "Escores/Critérios".</div>
+<div class="ac-warn"><b>CAI NA PROVA — critérios de PAC grave (indicação de UTI)</b><br>Segundo os critérios ATS/IDSA, um <b>critério maior</b> (necessidade de ventilação mecânica invasiva OU choque séptico com necessidade de vasopressor) já indica UTI. Na ausência de critério maior, a presença de <b>≥3 critérios menores</b> também indica UTI: FR ≥30irpm, relação PaO2/FiO2 ≤250, infiltrado multilobar, confusão mental, ureia elevada, leucopenia &lt;4.000, plaquetopenia &lt;100.000, hipotermia &lt;36°C, hipotensão exigindo reposição volêmica agressiva.</div>
+`],
+['tratamento','Tratamento Empírico', `
+<div class="ac-h">Escolha guiada pelo local de tratamento</div>
+<table class="ac-tbl"><tr><th>Cenário</th><th>Esquema empírico</th><th>Racional</th></tr>
+<tr><td>Ambulatorial, hígido, sem comorbidades</td><td><b>Amoxicilina</b> VO (alternativa: doxiciclina)</td><td>No Brasil, evita-se macrolídeo em monoterapia pela alta resistência pneumocócica; cobre o agente mais provável (pneumococo)</td></tr>
+<tr><td>Ambulatorial, com comorbidades (DPOC, diabetes, cardiopatia, etc.) ou uso recente de antibiótico</td><td><b>Amoxicilina-clavulanato + macrolídeo</b> (azitromicina/claritromicina), OU <b>fluoroquinolona respiratória</b> isolada (levofloxacino/moxifloxacino)</td><td>Amplia cobertura para H. influenzae, M. catarrhalis e atípicos</td></tr>
+<tr><td>Internação em enfermaria</td><td><b>Betalactâmico IV</b> (ceftriaxona ou ampicilina-sulbactam) <b>+ macrolídeo</b>, OU <b>fluoroquinolona respiratória</b> isolada</td><td>Cobertura ampla para pneumococo, H. influenzae e atípicos (incluindo Legionella)</td></tr>
+<tr><td>UTI / PAC grave</td><td><b>Betalactâmico IV + macrolídeo</b> (combinação preferida — o macrolídeo tem efeito imunomodulador adicional), OU <b>betalactâmico + fluoroquinolona respiratória</b></td><td>Betalactâmico isolado NÃO cobre Legionella nem outros atípicos — combinação é obrigatória na PAC grave</td></tr>
+</table>
+<div class="ac-call"><b>CONCEITO-CHAVE — por que sempre associar algo que cubra atípicos na PAC grave</b><br>Betalactâmicos (penicilinas, cefalosporinas) não têm atividade contra bactérias atípicas intracelulares (Mycoplasma, Chlamydophila, Legionella), pois estas não possuem parede celular clássica (Mycoplasma) ou vivem intracelularmente. Por isso, mesmo quando o agente não é conhecido, associa-se um macrolídeo ou usa-se uma fluoroquinolona respiratória, que têm essa cobertura.</div>
+<div class="ac-h" style="margin-top:14px">Cobertura adicional em situações especiais</div>
+<div class="ac-p">Adicionar cobertura para <b>MRSA</b> (vancomicina ou linezolida) se: pneumonia necrosante/cavitária pós-influenza, isolamento prévio de MRSA, ou fatores de risco importantes. Adicionar cobertura antipseudomonas (piperacilina-tazobactam, cefepima) se: doença estrutural pulmonar grave (bronquiectasias, fibrose cística), uso recente de antibióticos de amplo espectro, ou isolamento prévio de Pseudomonas.</div>
+<div class="ac-p"><b>Duração</b>: mínimo de 5 dias, com decisão de suspensão baseada em <b>estabilidade clínica</b> (afebril por 48-72h, sem instabilidade hemodinâmica, sem necessidade de O2 suplementar) — não apenas em um número fixo de dias.</div>
+<div class="ac-tip"><b>MACETE</b><br>Legionella é tratada com <b>macrolídeo ou fluoroquinolona</b> — nunca com betalactâmico isolado, que não tem nenhuma atividade contra ela.</div>
+`],
+['complicacoes','Complicações', `
+<div class="ac-h">Derrame parapneumônico e empiema</div>
+<div class="ac-p">Todo paciente com PAC e derrame pleural associado deve ter o líquido avaliado por <b>toracocentese diagnóstica</b>. Critérios que indicam necessidade de <b>drenagem</b> (empiema ou derrame parapneumônico complicado): líquido purulento (empiema franco), <b>pH &lt;7,2</b>, glicose muito baixa, <b>Gram ou cultura positivos</b>, ou derrame volumoso/loculado.</div>
+<div class="ac-h" style="margin-top:14px">Abscesso pulmonar</div>
+<div class="ac-p">Mais associado a aspiração (anaeróbios da flora oral) ou a <i>Klebsiella pneumoniae</i> em etilistas — este último classicamente descrito com <b>escarro em "geleia de framboesa/groselha"</b> e sinal radiológico de <b>abaulamento de cissura</b> pelo volume da consolidação. O tratamento costuma exigir antibioticoterapia prolongada (semanas).</div>
+<div class="ac-h" style="margin-top:14px">Prevenção</div>
+<div class="ac-p">Vacinação pneumocócica (conjugada e/ou polissacarídica, conforme idade e comorbidades) e vacinação anual contra influenza reduzem a incidência de PAC e de suas complicações, especialmente em idosos e imunossuprimidos.</div>
+`]
+],
+};
+
+Object.assign(C['bacterias|6'], {
+escores:`
+<div class="ac-h">CURB-65 — explicado item a item</div>
+<div class="ac-p">Um ponto para cada item presente (0 a 5 pontos):</div>
+<table class="ac-tbl"><tr><th>Letra</th><th>Critério</th></tr>
+<tr><td><b>C</b>onfusão</td><td>Novo rebaixamento do nível de consciência/desorientação</td></tr>
+<tr><td><b>U</b>reia</td><td>&gt;50 mg/dL (ou &gt;7 mmol/L)</td></tr>
+<tr><td><b>R</b>espiratory rate</td><td>Frequência respiratória ≥30 irpm</td></tr>
+<tr><td><b>B</b>lood pressure</td><td>PAS &lt;90 mmHg ou PAD ≤60 mmHg</td></tr>
+<tr><td><b>65</b></td><td>Idade ≥65 anos</td></tr>
+</table>
+<table class="ac-tbl"><tr><th>Pontuação</th><th>Interpretação</th><th>Conduta sugerida</th></tr>
+<tr><td>0-1</td><td>Baixo risco de óbito</td><td>Tratamento ambulatorial</td></tr>
+<tr><td>2</td><td>Risco intermediário</td><td>Considerar internação (enfermaria)</td></tr>
+<tr><td>≥3</td><td>Alto risco de óbito</td><td>Internação, considerar UTI</td></tr>
+</table>
+<div class="ac-p"><b>Exemplo resolvido:</b> paciente de 70 anos (1 ponto: idade), confuso (1 ponto), com FR de 32 (1 ponto), PA 100x70 (0 pontos) e ureia normal (0 pontos) = <b>CURB-65 = 3</b> → alto risco, indicação de internação e considerar UTI.</div>
+<div class="ac-h" style="margin-top:16px">PSI/PORT — mais sensível, porém mais complexo</div>
+<div class="ac-p">O Pneumonia Severity Index (PSI) soma pontos de idade, sexo, comorbidades (neoplasia, hepatopatia, ICC, doença cerebrovascular, nefropatia), achados de exame físico (alteração do estado mental, FR, PA, temperatura, FC) e exames laboratoriais/radiológicos (pH, ureia, sódio, glicose, hematócrito, PaO2, derrame pleural), classificando o paciente em <b>5 classes de risco</b> (I a V). É mais sensível para identificar pacientes de <b>baixo risco</b> que podem ser tratados ambulatorialmente (classes I-II), mas é mais trabalhoso de aplicar à beira-leito que o CURB-65, que é mais usado na prática por sua simplicidade.</div>
+<div class="ac-warn"><b>PEGADINHA DE PROVA</b><br>Escores de gravidade são <b>ferramentas de apoio</b>, não substituem o julgamento clínico: fatores sociais (falta de suporte em casa, impossibilidade de retorno, uso de substâncias), hipoxemia (SpO2 baixa) e comorbidades descompensadas podem justificar internação mesmo com CURB-65 baixo.</div>
+`,
+dif:`
+<div class="ac-h">Diagnóstico Diferencial</div>
+<table class="ac-tbl"><tr><th>Condição</th><th>O que diferencia</th></tr>
+<tr><td>Tuberculose pulmonar</td><td>Evolução mais arrastada (semanas), tosse crônica, febre vespertina, sudorese noturna, cavitação apical; TRM-TB confirma</td></tr>
+<tr><td>Embolia pulmonar</td><td>Dor pleurítica e dispneia súbitas, sem febre proeminente na maioria dos casos; fatores de risco para TEV; angio-TC confirma</td></tr>
+<tr><td>Insuficiência cardíaca descompensada / edema pulmonar</td><td>Infiltrado bilateral simétrico, história de cardiopatia, BNP elevado, ausência de febre/leucocitose típica de infecção</td></tr>
+<tr><td>COVID-19 / pneumonia viral</td><td>Padrão de vidro fosco bilateral periférico à TC, contexto epidemiológico, PCR/teste antigênico específico</td></tr>
+<tr><td>Neoplasia pulmonar com pneumonia obstrutiva</td><td>Pneumonia recorrente no mesmo local, sem resolução completa após tratamento adequado — investigar com broncoscopia</td></tr>
+</table>
+`,
+mapa:`
+<div class="mm">
+<div class="mm-card"><h5>Agente mais comum</h5><ul><li>S. pneumoniae (sempre o mais provável)</li></ul></div>
+<div class="mm-card"><h5>Pistas de contexto</h5><ul><li>DPOC: Haemophilus/Moraxella</li><li>Etilismo/aspiração: Klebsiella</li><li>Pós-influenza: S. aureus</li><li>Surto/água: Legionella</li></ul></div>
+<div class="mm-card"><h5>Típica x atípica</h5><ul><li>Típica: consolidação, escarro purulento</li><li>Atípica: dissociação clínico-radiológica</li></ul></div>
+<div class="mm-card"><h5>Gravidade</h5><ul><li>CURB-65 (0-1 amb / ≥3 grave)</li><li>PSI: mais sensível, 5 classes</li><li>Critérios ATS/IDSA de UTI</li></ul></div>
+<div class="mm-card"><h5>Tratamento ambulatorial</h5><ul><li>Amoxicilina (sem comorbidade)</li><li>Amoxi-clav+macrolídeo ou FQ respiratória (com comorbidade)</li></ul></div>
+<div class="mm-card"><h5>Tratamento internado/UTI</h5><ul><li>Betalactâmico + macrolídeo</li><li>Ou betalactâmico + FQ respiratória</li><li>Sempre cobrir atípicos na grave</li></ul></div>
+<div class="mm-card"><h5>Complicações</h5><ul><li>Derrame parapneumônico/empiema</li><li>Abscesso pulmonar (Klebsiella)</li></ul></div>
+<div class="mm-card"><h5>Prevenção</h5><ul><li>Vacina pneumocócica</li><li>Vacina influenza anual</li></ul></div>
+</div>
+`,
+fluxo_dx:`
+<div class="fx">
+<div class="fx-node start">Febre + tosse + dispneia/dor pleurítica</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Radiografia de tórax com infiltrado novo?</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">Sim → PAC confirmada</div>
+<div class="fx-node">Não, mas suspeita forte → considerar TC de tórax</div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Calcular CURB-65 (± PSI) para definir local de tratamento</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Se grave/internado: cultura de escarro, hemoculturas, antígenos urinários (pneumococo/Legionella)</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Iniciar antibiótico empírico conforme gravidade e reavaliar em 48-72h</div>
+</div>
+`,
+fluxo_cond:`
+<div class="fx">
+<div class="fx-node start">PAC confirmada e classificada por gravidade</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">CURB-65 0-1, sem comorbidade → amoxicilina VO ambulatorial</div>
+<div class="fx-node">CURB-65 2 ou comorbidade → amoxi-clav+macrolídeo ou FQ respiratória</div>
+<div class="fx-node">CURB-65 ≥3 ou critério ATS/IDSA maior/≥3 menores → UTI, betalactâmico+macrolídeo IV</div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Investigar risco de MRSA (necrosante pós-influenza) e Pseudomonas (bronquiectasia, ATB recente) → ampliar cobertura se presente</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Reavaliar em 48-72h: melhora clínica? Descalonar conforme cultura</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Suspender antibiótico com estabilidade clínica (mínimo 5 dias, afebril 48-72h)</div>
+</div>
+`,
+vespera:`
+<div class="ac-h">Revisão de véspera — Pneumonias Bacterianas</div>
+<div class="ac-p"><b>Agente mais comum sempre:</b> S. pneumoniae. Pistas de contexto: DPOC (Haemophilus/Moraxella), etilismo/aspiração (Klebsiella — escarro geleia de framboesa, abaulamento de cissura), pós-influenza (S. aureus), surto/água (Legionella).</div>
+<div class="ac-p"><b>Típica x atípica:</b> típica = consolidação + escarro purulento + dor pleurítica. Atípica = dissociação clínico-radiológica, tosse seca, sintomas extrapulmonares. Legionella é atípica mas GRAVE (bradicardia relativa, hiponatremia, TGI, confusão).</div>
+<div class="ac-p"><b>Gravidade:</b> CURB-65 (Confusão, Ureia, FR≥30, PA baixa, idade≥65) — 0-1 ambulatorial, ≥3 grave/UTI. Critérios ATS/IDSA: 1 maior (VM ou choque com vasopressor) ou ≥3 menores = UTI.</div>
+<div class="ac-p"><b>Tratamento:</b> ambulatorial sem comorbidade = amoxicilina. Com comorbidade/internado = betalactâmico+macrolídeo ou FQ respiratória isolada. Betalactâmico sozinho NUNCA cobre atípicos/Legionella — sempre associar na PAC grave.</div>
+<div class="ac-p"><b>Complicações:</b> derrame parapneumônico (drenar se pH&lt;7,2, purulento, Gram/cultura +); abscesso pulmonar (Klebsiella/anaeróbios).</div>
+`,
+dicas:`
+<div class="ac-warn"><b>Erro comum 1</b><br>Tratar PAC grave com betalactâmico isolado. Betalactâmicos não cobrem atípicos (Mycoplasma, Chlamydophila, Legionella) — sempre associar macrolídeo ou usar fluoroquinolona respiratória isolada.</div>
+<div class="ac-warn"><b>Erro comum 2</b><br>Usar macrolídeo em monoterapia no Brasil para PAC ambulatorial. A alta resistência pneumocócica a macrolídeos no país torna a amoxicilina a escolha preferencial em pacientes hígidos.</div>
+<div class="ac-warn"><b>Erro comum 3</b><br>Confiar cegamente no CURB-65 baixo para liberar o paciente. Fatores sociais, hipoxemia e comorbidades descompensadas podem justificar internação independentemente do escore.</div>
+<div class="ac-tip"><b>Dica de prova</b><br>Escarro "geleia de framboesa/groselha" + etilista + abaulamento de cissura na radiografia = Klebsiella pneumoniae.</div>
+`,
+checklist:[
+'Sei que S. pneumoniae é o agente mais comum em qualquer contexto de PAC',
+'Associo corretamente cada pista de contexto ao agente etiológico mais provável (DPOC, etilismo, pós-influenza, surto)',
+'Diferencio pneumonia típica de atípica pela clínica e pela dissociação clínico-radiológica',
+'Sei que Legionella é atípica mas frequentemente grave, com achados extrapulmonares característicos',
+'Calculo o CURB-65 e interpreto corretamente a conduta por faixa de pontuação',
+'Conheço os critérios ATS/IDSA (maior/menor) para indicação de UTI',
+'Sei escolher o esquema antibiótico empírico correto por local de tratamento',
+'Entendo por que sempre associar cobertura para atípicos na PAC grave',
+'Sei quando ampliar cobertura para MRSA e para Pseudomonas',
+'Reconheço os critérios para drenagem de derrame parapneumônico/empiema',
+'Associo Klebsiella pneumoniae ao abscesso pulmonar em etilistas com os achados clássicos',
+'Conheço as medidas de prevenção (vacina pneumocócica e vacina influenza)',
+],
+});
+
+Object.assign(C['bacterias|6'], {
+questoes:[
+{stem:'Homem, 68 anos, DPOC, procura pronto-socorro com febre, tosse produtiva e dispneia. Ao exame: confuso, FR 34 irpm, PA 85x55 mmHg. Radiografia mostra consolidação em lobo inferior direito. Qual a classificação de gravidade pelo CURB-65 e a conduta mais apropriada?',
+opts:['CURB-65 = 1; tratamento ambulatorial com amoxicilina','CURB-65 = 4; internação com consideração de UTI e antibioticoterapia combinada IV','CURB-65 = 2; observação em unidade de curta permanência sem antibiótico','CURB-65 não se aplica a pacientes com DPOC'],
+correct:1,
+expl:'O paciente pontua: confusão (1) + FR≥30 (1) + PA<90x60 (1) + idade≥65 (1) = CURB-65 de 4, indicando alto risco e necessidade de internação, com avaliação para UTI e antibioticoterapia combinada intravenosa cobrindo típicos e atípicos.'},
+{stem:'Paciente etilista crônico é internado com pneumonia em lobo superior direito, com abaulamento da cissura à radiografia e escarro descrito como "geleia de framboesa". Qual o agente etiológico mais provável?',
+opts:['Streptococcus pneumoniae','Klebsiella pneumoniae','Mycoplasma pneumoniae','Legionella pneumophila'],
+correct:1,
+expl:'O escarro em "geleia de framboesa/groselha" associado a abaulamento de cissura em paciente etilista é classicamente descrito na pneumonia por Klebsiella pneumoniae, que causa consolidação volumosa e necrosante.'},
+{stem:'Paciente com PAC grave internado em UTI recebe ceftriaxona isoladamente. Após 3 dias, mantém febre alta, hiponatremia importante, elevação de transaminases e diarreia. Qual é a explicação mais provável e a conduta correta?',
+opts:['Reação adversa à ceftriaxona; trocar por outro betalactâmico','Provável Legionella não coberta pela ceftriaxona isolada; associar macrolídeo ou fluoroquinolona respiratória','Evolução esperada da doença; manter conduta e aguardar','Sinal de resposta inflamatória sistêmica sem necessidade de mudança terapêutica'],
+correct:1,
+expl:'Hiponatremia, elevação de transaminases, sintomas gastrointestinais e febre alta persistente sugerem Legionella, que não é coberta por betalactâmicos isolados (organismo intracelular sem parede celular sensível a essa classe). É necessário associar macrolídeo ou usar fluoroquinolona respiratória.'},
+{stem:'Segundo os critérios ATS/IDSA para PAC grave, qual achado isolado já indica necessidade de UTI, independentemente de outros critérios?',
+opts:['Frequência respiratória de 28 irpm','Necessidade de ventilação mecânica invasiva ou choque séptico com necessidade de vasopressor','Confusão mental isolada','Leucopenia de 3.800/mm³ isolada'],
+correct:1,
+expl:'A necessidade de ventilação mecânica invasiva ou de choque séptico com necessidade de vasopressor constitui critério MAIOR isoladamente suficiente para indicar UTI, sem necessidade de outros critérios associados.'},
+{stem:'Mulher, 30 anos, sem comorbidades, com quadro de 10 dias de tosse seca persistente, febre baixa e cefaleia, com poucos achados à ausculta pulmonar apesar de infiltrado intersticial difuso na radiografia. Qual o quadro mais provável e a classe de antibiótico de escolha?',
+opts:['Pneumonia típica por pneumococo; amoxicilina','Pneumonia atípica por Mycoplasma pneumoniae; macrolídeo','Pneumonia por Klebsiella; carbapenêmico','Tuberculose pulmonar; esquema RIPE'],
+correct:1,
+expl:'O quadro arrastado, com tosse seca, sintomas extrapulmonares e dissociação clínico-radiológica (poucos achados ao exame físico apesar do infiltrado radiológico), é característico de pneumonia atípica por Mycoplasma pneumoniae, tratada com macrolídeo (ou fluoroquinolona/doxiciclina como alternativas).'},
+{stem:'Paciente com PAC e derrame pleural associado é submetido a toracocentese, que revela líquido com pH 6,9 e aspecto turvo. Qual a conduta mais apropriada?',
+opts:['Apenas antibioticoterapia, sem necessidade de intervenção sobre o derrame','Drenagem torácica do derrame, além da antibioticoterapia','Observação clínica, repetindo a toracocentese em 7 dias','Pleurodese química imediata sem drenagem prévia'],
+correct:1,
+expl:'Um derrame parapneumônico com pH muito baixo (<7,2) e aspecto turvo/purulento caracteriza um derrame complicado/empiema, com indicação de drenagem torácica associada à antibioticoterapia.'},
+],
+flashcards:[
+{front:'Agente mais comum de PAC em qualquer contexto.',back:'Streptococcus pneumoniae.',type:'basic'},
+{front:'Agente de PAC em paciente com DPOC/tabagista.',back:'Haemophilus influenzae e Moraxella catarrhalis.',type:'basic'},
+{front:'Agente de PAC em etilista/aspiração, com escarro em "geleia de framboesa".',back:'Klebsiella pneumoniae.',type:'basic'},
+{front:'Agente de PAC pós-influenza, podendo causar pneumonia necrosante.',back:'Staphylococcus aureus.',type:'basic'},
+{front:'Agente de PAC em surto associado a torres de resfriamento/ar-condicionado, com hiponatremia e sintomas gastrointestinais.',back:'Legionella pneumophila.',type:'basic'},
+{front:'{{Dissociação clínico-radiológica}} é o achado clássico das pneumonias atípicas: poucos achados ao exame físico apesar de infiltrado radiológico significativo.',back:'Dissociação clínico-radiológica',type:'cloze'},
+{front:'Componentes do CURB-65.',back:'Confusão, Ureia >50mg/dL, Respiratory rate ≥30, Blood pressure <90x60, idade ≥65 (1 ponto cada).',type:'basic'},
+{front:'Interpretação do CURB-65 por faixa.',back:'0-1: ambulatorial. 2: considerar internação. ≥3: alto risco, considerar UTI.',type:'basic'},
+{front:'Critério MAIOR isolado que já indica UTI (ATS/IDSA).',back:'Necessidade de ventilação mecânica invasiva OU choque séptico com necessidade de vasopressor.',type:'basic'},
+{front:'Por que betalactâmico isolado não trata PAC grave adequadamente?',back:'Não cobre agentes atípicos intracelulares (Mycoplasma, Chlamydophila, Legionella) — sempre associar macrolídeo ou usar fluoroquinolona respiratória.',type:'basic'},
+{front:'Esquema ambulatorial para paciente hígido sem comorbidades no Brasil.',back:'Amoxicilina VO (evita-se macrolídeo isolado pela alta resistência pneumocócica no país).',type:'basic'},
+{front:'Critérios para drenagem de derrame parapneumônico.',back:'Líquido purulento (empiema), pH <7,2, glicose muito baixa, ou Gram/cultura positivos.',type:'basic'},
+{front:'Duração mínima de tratamento e critério para suspender antibiótico.',back:'Mínimo 5 dias, suspender com estabilidade clínica: afebril por 48-72h e sem instabilidade hemodinâmica/necessidade de O2.',type:'basic'},
+],
+casos:[
+{t:'Caso 1 — Decidindo o local de tratamento',
+stem:'Homem, 55 anos, hipertenso, com febre, tosse produtiva e dor pleurítica há 2 dias. FR 22irpm, PA 130x85mmHg, sem confusão, ureia normal.',
+passos:[
+{h:'1. Calcular CURB-65',p:'Nenhum critério presente além de possivelmente comorbidade → CURB-65 = 0.'},
+{h:'2. Decidir o local',p:'Baixo risco → tratamento ambulatorial, mas com comorbidade (HAS) associar cobertura mais ampla.'},
+{h:'3. Escolher o esquema',p:'Amoxicilina-clavulanato + macrolídeo, ou fluoroquinolona respiratória isolada (levofloxacino).'},
+{h:'Lição de prova',p:'CURB-65 baixo não significa "amoxicilina simples sempre" — comorbidades justificam ampliar a cobertura.'}]},
+{t:'Caso 2 — A pista escondida no exame físico',
+stem:'Paciente com PAC internada em enfermaria mantém frequência cardíaca de 78bpm apesar de febre de 39,5°C, além de diarreia e sódio sérico de 128 mEq/L.',
+passos:[
+{h:'1. Notar a bradicardia relativa',p:'FC desproporcionalmente baixa para o grau de febre é uma pista clássica de Legionella.'},
+{h:'2. Somar os outros achados',p:'Hiponatremia + sintomas gastrointestinais reforçam a suspeita.'},
+{h:'3. Ajustar o tratamento',p:'Garantir que o esquema inclua macrolídeo ou fluoroquinolona respiratória — nunca betalactâmico isolado.'},
+{h:'Lição de prova',p:'Bradicardia relativa + hiponatremia + TGI em paciente com pneumonia = pensar em Legionella.'}]},
+],
+});
+
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+<script>/* ============================================================
+   InfectoAtlas — Conteúdo Infecções de Pele e Partes Moles (bacterias|7). Aditivo.
+   Não altera nenhum outro C[...] existente.
+   ============================================================ */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+C['bacterias|7'] = {
+name:'Infecções de Pele e Partes Moles',
+intro:'Espectro que vai do impetigo superficial autolimitado até a fasciite necrosante, uma das poucas verdadeiras emergências cirúrgicas em infectologia. A chave de prova é classificar corretamente pela PROFUNDIDADE do acometimento — isso define agente provável, gravidade e conduta.',
+sub:[
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">Pensando por camadas da pele</div>
+<div class="ac-p">O raciocínio mais útil para toda essa família de infecções é imaginar a pele em camadas e perguntar: <b>até onde a infecção chegou?</b></div>
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif" width="100%" style="max-width:640px;display:block;margin:10px auto">
+<rect width="640" height="300" rx="16" fill="#241420"/>
+<text x="320" y="24" fill="#f59f0a" font-size="15" font-weight="700" text-anchor="middle">Profundidade do acometimento</text>
+<rect x="180" y="40" width="280" height="28" fill="#3ddc84" fill-opacity="0.25" stroke="#3ddc84"/>
+<text x="470" y="59" fill="#3ddc84" font-size="11" text-anchor="start">Epiderme</text>
+<text x="60" y="59" fill="#faf6f0" font-size="11" text-anchor="end">Impetigo</text>
+<rect x="180" y="68" width="280" height="38" fill="#f59f0a" fill-opacity="0.2" stroke="#f59f0a"/>
+<text x="470" y="91" fill="#f59f0a" font-size="11" text-anchor="start">Derme superficial + linfáticos</text>
+<text x="60" y="91" fill="#faf6f0" font-size="11" text-anchor="end">Erisipela</text>
+<rect x="180" y="106" width="280" height="46" fill="#6db3f2" fill-opacity="0.2" stroke="#6db3f2"/>
+<text x="470" y="133" fill="#6db3f2" font-size="11" text-anchor="start">Derme profunda + subcutâneo</text>
+<text x="60" y="133" fill="#faf6f0" font-size="11" text-anchor="end">Celulite</text>
+<rect x="180" y="152" width="280" height="40" fill="#b76e79" fill-opacity="0.25" stroke="#b76e79"/>
+<text x="470" y="176" fill="#b76e79" font-size="11" text-anchor="start">Coleção purulenta focal</text>
+<text x="60" y="176" fill="#faf6f0" font-size="11" text-anchor="end">Abscesso</text>
+<rect x="180" y="192" width="280" height="46" fill="#e94b6f" fill-opacity="0.25" stroke="#e94b6f"/>
+<text x="470" y="219" fill="#e94b6f" font-size="11" text-anchor="start">Fáscia profunda + necrose</text>
+<text x="60" y="219" fill="#faf6f0" font-size="11" text-anchor="end">Fasciite necrosante</text>
+<text x="320" y="270" fill="#faf6f0" font-size="11" text-anchor="middle">Quanto mais profundo, maior a gravidade e mais urgente a intervenção (a fasciite é emergência cirúrgica)</text>
+</svg>
+<div class="ac-call"><b>CONCEITO-CHAVE</b><br>Os dois agentes centrais de quase toda essa família são o <i>Streptococcus pyogenes</i> (estreptococo beta-hemolítico do grupo A) e o <i>Staphylococcus aureus</i>. Saber qual predomina em cada entidade (e reconhecer quando pensar em infecção polimicrobiana ou por outros agentes) é o que resolve a maioria das questões.</div>
+`],
+['impetigo','Impetigo e Erisipela', `
+<div class="ac-h">Impetigo — só na epiderme</div>
+<div class="ac-p">Infecção superficial, mais comum em crianças, com duas formas: <b>não bolhoso</b> (mais comum, causado por S. aureus e/ou S. pyogenes, lesões com <b>crosta melicérica</b> — cor de mel) e <b>bolhoso</b> (causado por S. aureus produtor de toxina esfoliativa, bolhas flácidas que se rompem facilmente). Tratamento: mupirocina tópica em casos localizados; antibiótico oral (cefalexina) em casos extensos.</div>
+<div class="ac-h" style="margin-top:16px">Erisipela — a infecção de bordas bem definidas</div>
+<div class="ac-p">Acomete a <b>derme superficial e os vasos linfáticos superficiais</b>. Classicamente causada por <b>Streptococcus pyogenes</b>. Apresenta-se com placa eritematosa, <b>brilhante</b>, <b>quente</b>, dolorosa, com <b>bordas bem delimitadas e elevadas</b> (o que a diferencia da celulite) — a elevação da borda reflete o acometimento linfático superficial. Início geralmente <b>abrupto</b>, com febre podendo preceder a lesão cutânea. Locais mais comuns: face e membros inferiores.</div>
+<div class="ac-warn"><b>PEGADINHA DE PROVA — erisipela x celulite</b>
+<table class="ac-tbl"><tr><th></th><th>Erisipela</th><th>Celulite</th></tr>
+<tr><td>Profundidade</td><td>Derme superficial + linfáticos</td><td>Derme profunda + subcutâneo</td></tr>
+<tr><td>Bordas</td><td>Bem definidas, elevadas</td><td>Mal definidas, planas</td></tr>
+<tr><td>Agente típico</td><td>Streptococcus pyogenes</td><td>S. pyogenes e/ou S. aureus</td></tr>
+<tr><td>Início</td><td>Abrupto, febre pode preceder</td><td>Mais insidioso</td></tr>
+</table>
+<div class="ac-p"><b>Fatores de risco</b> compartilhados por erisipela e celulite: linfedema/insuficiência venosa crônica, obesidade, diabetes, porta de entrada cutânea (tinea pedis interdigital é uma causa clássica e recorrente de porta de entrada em membros inferiores — tratar a micose reduz recorrência), trauma/ferida prévia, imunossupressão.</div>
+`],
+['celulite','Celulite e Abscesso', `
+<div class="ac-h">Celulite — acometimento mais profundo e difuso</div>
+<div class="ac-p">Envolve derme profunda e tecido subcutâneo, com eritema de <b>bordas mal definidas</b>, edema, calor e dor, sem elevação nítida da borda. Pode ser causada por S. pyogenes ou S. aureus (incluindo cepas de <i>S. aureus resistente à meticilina adquirido na comunidade</i>, MRSA-CA).</div>
+<div class="ac-h" style="margin-top:14px">Celulite purulenta x não purulenta — a distinção que muda o antibiótico</div>
+<div class="ac-p">Essa é uma das classificações mais cobradas na prática: celulite <b>não purulenta</b> (sem drenagem, sem abscesso associado) tem o estreptococo como principal suspeito e não exige cobertura para MRSA de rotina; celulite <b>purulenta</b> (com drenagem purulenta ou abscesso associado) deve ser tratada como possível infecção estafilocócica, incluindo cobertura para MRSA-CA.</div>
+<div class="ac-h" style="margin-top:14px">Abscesso cutâneo</div>
+<div class="ac-p">Coleção purulenta localizada, geralmente por <i>S. aureus</i>. O tratamento primário é a <b>incisão e drenagem (I&amp;D)</b> — na maioria dos abscessos pequenos e sem sinais sistêmicos, a drenagem isolada já é suficiente. Antibiótico sistêmico é adicionado quando há: celulite associada extensa, sinais de toxicidade sistêmica (febre alta, taquicardia), imunossupressão, extremos de idade, localização de difícil drenagem (face, mãos, genitália), ou múltiplos sítios/falha de I&amp;D isolada.</div>
+<div class="ac-tip"><b>MACETE</b><br>Abscesso trata-se principalmente com <b>bisturi, não com antibiótico</b>: a drenagem é o tratamento definitivo; o antibiótico é coadjuvante nas situações acima.</div>
+`],
+['fasciite','Fasciite Necrosante', `
+<div class="ac-h">A grande emergência cirúrgica desta família</div>
+<div class="ac-p">Infecção que se espalha rapidamente ao longo da <b>fáscia profunda</b>, causando trombose de pequenos vasos e necrose progressiva do tecido subcutâneo e da própria fáscia, com toxicidade sistêmica desproporcional aos achados cutâneos iniciais.</div>
+<div class="ac-warn"><b>CAI NA PROVA — o sinal mais valorizado é a dor desproporcional</b><br><b>Dor intensa, fora de proporção com os achados visíveis ao exame da pele</b>, é o sinal de alarme mais citado nas bancas. Outros sinais de alerta: progressão muito rápida (piora perceptível em horas), <b>ausência de melhora após 48h de antibiótico</b> bem escolhido, edema que ultrapassa o eritema visível, <b>bolhas hemorrágicas</b>, áreas de necrose/equimose cutânea, <b>crepitação</b> (sugere gás produzido por anaeróbios/Clostridium), anestesia da pele acometida (por destruição de nervos superficiais) e toxicidade sistêmica (hipotensão, taquicardia, confusão).</div>
+<div class="ac-h" style="margin-top:14px">Classificação microbiológica</div>
+<table class="ac-tbl"><tr><th>Tipo</th><th>Etiologia</th><th>Contexto típico</th></tr>
+<tr><td>Tipo I</td><td><b>Polimicrobiana</b> (aeróbios + anaeróbios)</td><td>Mais comum; diabéticos, pós-cirúrgico (abdominal/perineal), doença vascular periférica</td></tr>
+<tr><td>Tipo II</td><td><b>Monomicrobiana</b> — Streptococcus pyogenes (± S. aureus)</td><td>Pode acometer jovens hígidos; associada a síndrome do choque tóxico estreptocócico</td></tr>
+<tr><td>Tipo III</td><td><i>Vibrio vulnificus</i> (exposição a água salgada/marisco, cirróticos) ou <i>Clostridium</i> spp. (gangrena gasosa)</td><td>Contexto de exposição específico; evolução fulminante</td></tr>
+</table>
+<div class="ac-p">O diagnóstico definitivo é <b>cirúrgico</b>: exploração da ferida mostrando fáscia edemaciada, acinzentada, com <b>ausência de sangramento</b> à incisão, secreção de aspecto de <b>"água de lavagem de louça" (dishwater pus)</b>, e <b>dissecção fácil do tecido subcutâneo ao toque com instrumento rombo</b> ("teste do dedo" positivo — o tecido se separa da fáscia com o mínimo de força, sem a resistência normal).</div>
+`],
+['tratamento','Tratamento', `
+<div class="ac-h">Esquema por entidade</div>
+<table class="ac-tbl"><tr><th>Quadro</th><th>Esquema</th></tr>
+<tr><td>Impetigo localizado</td><td>Mupirocina tópica</td></tr>
+<tr><td>Impetigo extenso / erisipela / celulite NÃO purulenta leve</td><td>Cefalexina ou amoxicilina-clavulanato VO (cobertura para estreptococo ± estafilococo sensível)</td></tr>
+<tr><td>Erisipela/celulite não purulenta com toxicidade sistêmica</td><td>Penicilina cristalina IV ou ceftriaxona IV/oxacilina IV</td></tr>
+<tr><td>Celulite purulenta / abscesso com indicação de antibiótico</td><td><b>I&amp;D</b> + cobertura para MRSA-CA: sulfametoxazol-trimetoprima, doxiciclina ou clindamicina VO</td></tr>
+<tr><td>Infecção grave/sistêmica sem excluir necrosante</td><td><b>Vancomicina + piperacilina-tazobactam</b> IV (amplo espectro: MRSA + Gram-negativos + anaeróbios)</td></tr>
+<tr><td>Fasciite necrosante</td><td><b>Desbridamento cirúrgico de emergência</b> + antibiótico de amplo espectro (vancomicina/linezolida + piperacilina-tazobactam ou carbapenêmico) <b>+ clindamicina</b></td></tr>
+</table>
+<div class="ac-call"><b>CONCEITO-CHAVE — por que associar clindamicina na fasciite/infecção estreptocócica grave</b><br>A clindamicina inibe a síntese proteica ribossomal, reduzindo a produção de <b>exotoxinas</b> bacterianas (como as superantígenos do S. pyogenes envolvidos na síndrome do choque tóxico) — esse efeito antitoxina é independente da carga bacteriana e por isso a clindamicina é associada mesmo quando o organismo é sensível a betalactâmicos, especificamente nas infecções graves por estreptococo/estafilococo com componente toxigênico.</div>
+<div class="ac-warn"><b>PEGADINHA DE PROVA</b><br>Na fasciite necrosante, <b>a cirurgia não pode esperar exames de imagem</b>. Diante de suspeita clínica forte, a exploração cirúrgica deve ser imediata — atrasar a cirurgia para "confirmar" com TC/RM aumenta a mortalidade. Reabordagens cirúrgicas a cada 24-48h costumam ser necessárias até controle completo da necrose.</div>
+`]
+],
+};
+
+Object.assign(C['bacterias|7'], {
+escores:`
+<div class="ac-h">LRINEC — Laboratory Risk Indicator for Necrotizing Fasciitis</div>
+<div class="ac-p">Escore laboratorial criado para auxiliar a triagem de fasciite necrosante entre pacientes com celulite/infecção de partes moles, somando pontos de 6 variáveis:</div>
+<table class="ac-tbl"><tr><th>Variável</th><th>Pontuação</th></tr>
+<tr><td>Proteína C-reativa (mg/L)</td><td>&lt;150: 0 · ≥150: 4</td></tr>
+<tr><td>Leucócitos (/mm³)</td><td>&lt;15.000: 0 · 15-25.000: 1 · &gt;25.000: 2</td></tr>
+<tr><td>Hemoglobina (g/dL)</td><td>&gt;13,5: 0 · 11-13,5: 1 · &lt;11: 2</td></tr>
+<tr><td>Sódio (mEq/L)</td><td>≥135: 0 · &lt;135: 2</td></tr>
+<tr><td>Creatinina (mg/dL)</td><td>≤1,6: 0 · &gt;1,6: 2</td></tr>
+<tr><td>Glicose (mg/dL)</td><td>≤180: 0 · &gt;180: 1</td></tr>
+</table>
+<table class="ac-tbl"><tr><th>Pontuação total</th><th>Interpretação</th></tr>
+<tr><td>≤5</td><td>Baixo risco</td></tr>
+<tr><td>6-7</td><td>Risco intermediário</td></tr>
+<tr><td>≥8</td><td>Alto risco de fasciite necrosante</td></tr>
+</table>
+<div class="ac-warn"><b>PEGADINHA DE PROVA — o LRINEC NÃO exclui o diagnóstico</b><br>Estudos mostram que a sensibilidade do LRINEC é imperfeita (não ultrapassa cerca de 90% mesmo nos pontos de corte mais usados) — ou seja, um escore baixo <b>não descarta</b> fasciite necrosante. O escore deve ser usado como ferramenta <b>adjuvante</b> para reforçar a suspeita, nunca para excluir o diagnóstico diante de uma clínica muito sugestiva (dor desproporcional, progressão rápida, toxicidade sistêmica). Nesses casos, a conduta é a <b>exploração cirúrgica</b>, não esperar o resultado do escore.</div>
+<div class="ac-p"><b>Exemplo resolvido:</b> paciente com celulite de perna, PCR 180 mg/L (4 pontos), leucócitos 22.000 (1 ponto), Hb 10,5 (2 pontos), Na 132 (2 pontos), creatinina 1,2 (0 pontos), glicose 150 (0 pontos) = <b>LRINEC = 9</b> → alto risco, reforça indicação de avaliação cirúrgica urgente.</div>
+`,
+dif:`
+<div class="ac-h">Diagnóstico Diferencial</div>
+<table class="ac-tbl"><tr><th>Condição</th><th>O que diferencia</th></tr>
+<tr><td>Trombose venosa profunda</td><td>Dor e edema unilateral, sem eritema tão quente/brilhante, sem febre proeminente; Doppler confirma</td></tr>
+<tr><td>Dermatite de estase / lipodermatoesclerose</td><td>Crônica, bilateral, associada a insuficiência venosa, sem febre nem toxicidade sistêmica</td></tr>
+<tr><td>Reação alérgica/dermatite de contato</td><td>Prurido proeminente, sem febre, sem dor desproporcional</td></tr>
+<tr><td>Gota/artrite séptica adjacente à pele</td><td>Dor articular localizada, líquido sinovial guia o diagnóstico</td></tr>
+<tr><td>Eritema nodoso</td><td>Nódulos dolorosos simétricos em face anterior das pernas, sem sinais de infecção aguda de pele</td></tr>
+<tr><td>Erisipeloide</td><td>Associado a manuseio de peixe/carne crua (Erysipelothrix), lesão violácea bem delimitada, geralmente nas mãos</td></tr>
+</table>
+`,
+mapa:`
+<div class="mm">
+<div class="mm-card"><h5>Por profundidade</h5><ul><li>Impetigo: epiderme</li><li>Erisipela: derme superficial+linfático</li><li>Celulite: derme profunda+subcutâneo</li><li>Fasciite: fáscia profunda</li></ul></div>
+<div class="mm-card"><h5>Agentes principais</h5><ul><li>S. pyogenes (erisipela clássica)</li><li>S. aureus (abscesso, impetigo bolhoso)</li><li>Polimicrobiana (fasciite tipo I)</li></ul></div>
+<div class="mm-card"><h5>Erisipela x celulite</h5><ul><li>Bordas bem def./elevadas x mal definidas</li><li>Mais superficial x mais profunda</li></ul></div>
+<div class="mm-card"><h5>Abscesso</h5><ul><li>Tratamento = incisão e drenagem</li><li>ATB só em situações específicas</li></ul></div>
+<div class="mm-card"><h5>Fasciite necrosante</h5><ul><li>Dor desproporcional = sinal-chave</li><li>Diagnóstico definitivo = cirúrgico</li><li>LRINEC não exclui</li></ul></div>
+<div class="mm-card"><h5>Tratamento grave</h5><ul><li>Vancomicina+piperacilina-tazobactam</li><li>+ clindamicina (antitoxina)</li><li>+ desbridamento de emergência</li></ul></div>
+</div>
+`,
+fluxo_dx:`
+<div class="fx">
+<div class="fx-node start">Eritema, edema, dor em pele/partes moles + febre?</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Bordas bem definidas/elevadas (erisipela) ou mal definidas (celulite)? Há coleção purulenta (abscesso)?</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">Dor desproporcional, progressão rápida, bolhas hemorrágicas, crepitação, toxicidade sistêmica → SUSPEITAR FASCIITE</div>
+<div class="fx-node end">Sem sinais de alarme → tratar como erisipela/celulite/abscesso conforme o caso</div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Suspeita de fasciite: LRINEC pode reforçar suspeita, mas NÃO exclui se score baixo</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Exploração cirúrgica de emergência é o diagnóstico definitivo — não atrasar por exame de imagem</div>
+</div>
+`,
+fluxo_cond:`
+<div class="fx">
+<div class="fx-node start">Definido o tipo de infecção de pele/partes moles</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">Impetigo/erisipela/celulite não purulenta leve → ATB oral (cefalexina/amoxi-clav)</div>
+<div class="fx-node">Abscesso → incisão e drenagem ± ATB com cobertura MRSA se indicado</div>
+<div class="fx-node">Toxicidade sistêmica/não exclui necrosante → vancomicina + piperacilina-tazobactam IV</div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Suspeita de fasciite necrosante → desbridamento cirúrgico de emergência + antibiótico amplo + clindamicina</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Reabordagem cirúrgica em 24-48h se fasciite, até controle da necrose; tratar porta de entrada (ex.: tinea pedis) para prevenir recorrência</div>
+</div>
+`,
+vespera:`
+<div class="ac-h">Revisão de véspera — Infecções de Pele e Partes Moles</div>
+<div class="ac-p"><b>Por profundidade:</b> impetigo (epiderme) → erisipela (derme superficial+linfático, S. pyogenes, bordas bem definidas/elevadas) → celulite (derme profunda+subcutâneo, bordas mal definidas) → abscesso (coleção purulenta focal, S. aureus) → fasciite necrosante (fáscia profunda, emergência cirúrgica).</div>
+<div class="ac-p"><b>Celulite purulenta x não purulenta:</b> purulenta = cobrir MRSA-CA (SMX-TMP/doxiciclina/clindamicina); não purulenta = cobrir estreptococo (cefalexina/amoxi-clav).</div>
+<div class="ac-p"><b>Abscesso:</b> tratamento primário é incisão e drenagem; ATB é coadjuvante em situações específicas.</div>
+<div class="ac-p"><b>Fasciite necrosante:</b> sinal-chave = dor desproporcional ao exame. LRINEC não exclui se baixo. Diagnóstico definitivo é cirúrgico (fáscia acinzentada, sem sangramento, "dishwater pus", teste do dedo positivo).</div>
+<div class="ac-p"><b>Tratamento da fasciite:</b> desbridamento de emergência (não espera imagem) + vancomicina/linezolida + piperacilina-tazobactam/carbapenêmico + clindamicina (efeito antitoxina).</div>
+<div class="ac-p"><b>Tipos de fasciite:</b> I = polimicrobiana (mais comum, diabéticos); II = monomicrobiana (S. pyogenes, pode acometer jovens hígidos, choque tóxico); III = Vibrio vulnificus/Clostridium.</div>
+`,
+dicas:`
+<div class="ac-warn"><b>Erro comum 1</b><br>Tratar abscesso apenas com antibiótico, sem drenagem. A drenagem é o tratamento definitivo do abscesso; o antibiótico isolado tem eficácia limitada em coleções purulentas.</div>
+<div class="ac-warn"><b>Erro comum 2</b><br>Descartar fasciite necrosante porque o LRINEC deu baixo. O escore tem sensibilidade imperfeita — clínica muito sugestiva (dor desproporcional) exige exploração cirúrgica independentemente do escore.</div>
+<div class="ac-warn"><b>Erro comum 3</b><br>Esperar exame de imagem para operar quando a suspeita de fasciite necrosante é alta. Isso atrasa o desbridamento e aumenta mortalidade — a decisão cirúrgica é clínica.</div>
+<div class="ac-tip"><b>Dica de prova</b><br>Bordas bem definidas e elevadas = erisipela (mais superficial); bordas mal definidas = celulite (mais profunda).</div>
+`,
+checklist:[
+'Classifico corretamente as infecções de pele por profundidade de acometimento',
+'Diferencio erisipela de celulite pelas características das bordas e pelo agente típico',
+'Sei quando tratar celulite como purulenta (cobrir MRSA) versus não purulenta (cobrir estreptococo)',
+'Entendo por que o abscesso é tratado primariamente com drenagem, e quando associar antibiótico',
+'Reconheço os sinais de alarme para fasciite necrosante, especialmente a dor desproporcional',
+'Sei explicar o LRINEC (variáveis e pontuação) e por que ele não exclui o diagnóstico se baixo',
+'Descrevo os achados cirúrgicos que confirmam fasciite necrosante',
+'Conheço os 3 tipos microbiológicos de fasciite necrosante e seus contextos típicos',
+'Sei o esquema antibiótico correto para infecção grave/possível fasciite, incluindo o papel da clindamicina',
+'Entendo por que a cirurgia não deve ser adiada por exames de imagem na suspeita de fasciite',
+'Reconheço fatores de risco compartilhados (linfedema, diabetes, tinea pedis como porta de entrada)',
+],
+});
+
+Object.assign(C['bacterias|7'], {
+questoes:[
+{stem:'Paciente apresenta placa eritematosa brilhante, quente, dolorosa, com bordas bem definidas e elevadas na perna, com febre que precedeu o aparecimento da lesão em algumas horas. Qual o diagnóstico e o agente mais provável?',
+opts:['Celulite por Staphylococcus aureus','Erisipela por Streptococcus pyogenes','Fasciite necrosante por Clostridium','Impetigo bolhoso por Staphylococcus aureus'],
+correct:1,
+expl:'Bordas bem definidas e elevadas, com aspecto brilhante e início abrupto (febre precedendo a lesão) são características clássicas da erisipela, tipicamente causada por Streptococcus pyogenes, que acomete a derme superficial e os linfáticos.'},
+{stem:'Paciente com abscesso cutâneo de 2 cm em coxa, afebril, sem sinais de toxicidade sistêmica, imunocompetente. Qual a conduta mais apropriada?',
+opts:['Antibioticoterapia oral isolada, sem necessidade de procedimento','Incisão e drenagem, sem necessidade obrigatória de antibiótico associado','Antibioticoterapia intravenosa em regime de internação','Aguardar resolução espontânea sem qualquer intervenção'],
+correct:1,
+expl:'Para abscessos pequenos, sem celulite extensa associada e sem sinais de toxicidade sistêmica em paciente imunocompetente, a incisão e drenagem isoladamente costuma ser suficiente, sendo o tratamento definitivo dessa condição.'},
+{stem:'Paciente diabético evolui com celulite em perna, dor descrita como muito mais intensa do que o esperado pelos achados visíveis na pele, progressão perceptível em poucas horas e ausência de melhora após 48h de antibiótico adequado. LRINEC calculado é de 4 pontos. Qual a conduta mais apropriada?',
+opts:['Descartar fasciite necrosante pelo LRINEC baixo e manter antibiótico oral','Solicitar ressonância magnética e aguardar resultado antes de qualquer decisão','Manter alta suspeita clínica de fasciite necrosante e indicar exploração cirúrgica de emergência, independentemente do LRINEC','Trocar apenas o antibiótico para um espectro mais amplo e reavaliar em 5 dias'],
+correct:2,
+expl:'O LRINEC tem sensibilidade imperfeita e um valor baixo NÃO exclui fasciite necrosante. Diante de sinais clínicos de alarme (dor desproporcional, progressão rápida, falha terapêutica), a conduta correta é a exploração cirúrgica de emergência, sem aguardar exames de imagem.'},
+{stem:'Em relação à antibioticoterapia da fasciite necrosante grave, por que se associa clindamicina ao esquema de amplo espectro?',
+opts:['Porque a clindamicina tem o mais amplo espectro contra bacilos Gram-negativos','Porque a clindamicina inibe a síntese proteica bacteriana e reduz a produção de exotoxinas, com efeito antitoxina independente da carga bacteriana','Porque a clindamicina é a única droga ativa contra Clostridium','Porque a clindamicina substitui a necessidade de desbridamento cirúrgico'],
+correct:1,
+expl:'A clindamicina inibe a síntese proteica ribossomal bacteriana, reduzindo a produção de exotoxinas (como os superantígenos do Streptococcus pyogenes), efeito que é independente da atividade bactericida e por isso valioso nas infecções graves com componente toxigênico, como a fasciite necrosante e a síndrome do choque tóxico.'},
+{stem:'Qual achado cirúrgico é mais característico e confirmatório de fasciite necrosante durante exploração da ferida?',
+opts:['Tecido subcutâneo bem vascularizado com sangramento abundante à incisão','Fáscia edemaciada e acinzentada, com secreção semelhante a "água de lavagem de louça" e fácil dissecção do tecido ao toque com instrumento rombo','Presença de tecido de granulação saudável circundando a lesão','Ausência completa de qualquer alteração macroscópica do tecido'],
+correct:1,
+expl:'Os achados cirúrgicos clássicos da fasciite necrosante incluem fáscia edemaciada e acinzentada, ausência de sangramento à incisão, secreção com aspecto de "água de lavagem de louça" (dishwater pus), e dissecção fácil do tecido subcutâneo da fáscia com instrumento rombo (teste do dedo positivo) — achados muito diferentes do tecido normal, bem vascularizado.'},
+],
+flashcards:[
+{front:'Diferença de bordas entre erisipela e celulite.',back:'Erisipela: bordas bem definidas e elevadas (mais superficial, linfáticos). Celulite: bordas mal definidas (mais profunda).',type:'basic'},
+{front:'Agente clássico da erisipela.',back:'Streptococcus pyogenes (estreptococo beta-hemolítico do grupo A).',type:'basic'},
+{front:'Tratamento primário do abscesso cutâneo.',back:'Incisão e drenagem (I&amp;D) — antibiótico é coadjuvante em situações específicas (toxicidade sistêmica, imunossupressão, celulite extensa associada, falha de I&amp;D isolada).',type:'basic'},
+{front:'Celulite purulenta x não purulenta — qual cobertura antibiótica?',back:'Purulenta: cobrir MRSA-CA (SMX-TMP, doxiciclina, clindamicina). Não purulenta: cobrir estreptococo (cefalexina, amoxi-clavulanato).',type:'basic'},
+{front:'{{Dor desproporcional}} aos achados cutâneos visíveis é o sinal de alarme mais valorizado para fasciite necrosante.',back:'Dor desproporcional',type:'cloze'},
+{front:'Diagnóstico definitivo da fasciite necrosante.',back:'Cirúrgico: exploração da ferida (fáscia acinzentada, sem sangramento, "dishwater pus", teste do dedo positivo) — não deve ser atrasado por exames de imagem.',type:'basic'},
+{front:'Tipos microbiológicos de fasciite necrosante.',back:'Tipo I: polimicrobiana (mais comum, diabéticos). Tipo II: monomicrobiana (S. pyogenes ± S. aureus). Tipo III: Vibrio vulnificus (água salgada, cirróticos) ou Clostridium (gangrena gasosa).',type:'basic'},
+{front:'Por que o LRINEC baixo não exclui fasciite necrosante?',back:'A sensibilidade do escore é imperfeita (não ultrapassa cerca de 90%); um escore baixo não descarta o diagnóstico diante de clínica muito sugestiva.',type:'basic'},
+{front:'Por que associar clindamicina no tratamento de infecção estreptocócica/estafilocócica grave com componente toxigênico?',back:'Inibe a síntese proteica ribossomal, reduzindo a produção de exotoxinas — efeito antitoxina independente da carga bacteriana.',type:'basic'},
+{front:'Esquema antibiótico empírico para infecção grave de pele/partes moles quando não se pode excluir fasciite.',back:'Vancomicina (ou linezolida) + piperacilina-tazobactam (ou carbapenêmico) + clindamicina, associado a desbridamento cirúrgico de emergência.',type:'basic'},
+{front:'Porta de entrada clássica e recorrente de erisipela/celulite de membros inferiores.',back:'Tinea pedis interdigital — tratar a micose reduz recorrência.',type:'basic'},
+],
+casos:[
+{t:'Caso 1 — A borda que conta a história',
+stem:'Mulher, 60 anos, diabética, com placa eritematosa na face, de bordas bem definidas e nitidamente elevadas, dolorosa, com febre que começou algumas horas antes da lesão.',
+passos:[
+{h:'1. Reconhecer o padrão',p:'Bordas bem definidas e elevadas + início abrupto com febre precedente = <b>erisipela</b>.'},
+{h:'2. Pensar no agente',p:'Streptococcus pyogenes é o agente clássico.'},
+{h:'3. Tratar',p:'Sem sinais de toxicidade sistêmica grave → antibiótico oral com boa cobertura para estreptococo (cefalexina/amoxi-clavulanato) ou IV se toxicidade importante.'},
+{h:'Lição de prova',p:'Bordas bem definidas/elevadas apontam para acometimento mais superficial (erisipela), diferente da celulite.'}]},
+{t:'Caso 2 — A dor que não bate com o exame',
+stem:'Homem, 55 anos, diabético, com celulite em perna tratada com antibiótico oral adequado há 2 dias, retorna com dor muito mais intensa do que o esperado pelo aspecto da pele, além de bolha hemorrágica local.',
+passos:[
+{h:'1. Notar o sinal de alarme',p:'Dor desproporcional + bolha hemorrágica + falha de melhora com antibiótico adequado = suspeitar de <b>fasciite necrosante</b>.'},
+{h:'2. Não esperar exame',p:'Solicitar avaliação cirúrgica de emergência — não aguardar TC/RM para decidir.'},
+{h:'3. Ampliar antibiótico',p:'Iniciar vancomicina + piperacilina-tazobactam + clindamicina enquanto se organiza a cirurgia.'},
+{h:'Lição de prova',p:'Dor desproporcional em paciente com infecção de pele que não melhora = emergência cirúrgica até prova em contrário.'}]},
+],
+});
+
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
 <script>/* InfectoAtlas — Conteúdo Sepse (bases|1). Aditivo. */
 (function(){
 "use strict";
