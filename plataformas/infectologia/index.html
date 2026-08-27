@@ -5534,6 +5534,638 @@ passos:[
 try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
 })();
 </script>
+<script>/* ============================================================
+   InfectoAtlas — Conteúdo Candidíase (fungos|0). Aditivo.
+   Não altera nenhum outro C[...] existente.
+   ============================================================ */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+C['fungos|0'] = {
+name:'Candidíase',
+intro:'A Candida é um fungo comensal do trato gastrointestinal e da pele que se torna patogênico quando as defesas do hospedeiro falham — seja localmente (mucosas) ou de forma sistêmica (candidemia). A prova cobra sobretudo o reconhecimento de quando pensar em candidíase invasiva e a escolha correta do antifúngico de primeira linha.',
+sub:[
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">Do comensalismo à doença invasiva</div>
+<div class="ac-p"><i>Candida</i> spp. fazem parte da microbiota normal de pele, mucosa oral, trato gastrointestinal e vagina. A doença surge quando há uma <b>ruptura do equilíbrio</b>: destruição da flora bacteriana competidora (antibióticos de amplo espectro), quebra de barreiras físicas (cateter venoso central, cirurgia abdominal com perfuração), ou queda da imunidade (neutropenia, imunossupressão, diabetes descompensado).</div>
+<div class="ac-call"><b>CONCEITO-CHAVE — pense em dois mundos separados</b><br>Divida sempre a candidíase em dois grandes grupos, pois a gravidade, o diagnóstico e o tratamento são completamente diferentes: <b>(1) candidíase mucocutânea</b> (oral, esofágica, vulvovaginal, cutânea) — geralmente localizada, menos grave, associada a fatores de risco locais/imunológicos específicos; e <b>(2) candidíase invasiva/sistêmica</b> (candidemia e infecções profundas) — potencialmente fatal, associada a dispositivos invasivos, antibioticoterapia prévia e ambiente de UTI.</div>
+<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif" width="100%" style="max-width:640px;display:block;margin:10px auto">
+<rect width="640" height="220" rx="16" fill="#241420"/>
+<text x="320" y="24" fill="#f59f0a" font-size="15" font-weight="700" text-anchor="middle">Espécies de Candida — pistas de resistência</text>
+<g font-size="10.5">
+<rect x="20" y="45" width="185" height="60" rx="8" fill="#2d1b2e" stroke="#3ddc84"/>
+<text x="112" y="65" fill="#3ddc84" font-weight="700" text-anchor="middle">C. albicans</text>
+<text x="112" y="82" fill="#faf6f0" text-anchor="middle">Mais comum</text>
+<text x="112" y="97" fill="#faf6f0" text-anchor="middle">Geralmente sensível a azólicos</text>
+<rect x="225" y="45" width="185" height="60" rx="8" fill="#2d1b2e" stroke="#f59f0a"/>
+<text x="317" y="65" fill="#f59f0a" font-weight="700" text-anchor="middle">C. glabrata</text>
+<text x="317" y="82" fill="#faf6f0" text-anchor="middle">Sensibilidade reduzida/</text>
+<text x="317" y="97" fill="#faf6f0" text-anchor="middle">dose-dependente a fluconazol</text>
+<rect x="430" y="45" width="190" height="60" rx="8" fill="#2d1b2e" stroke="#e94b6f"/>
+<text x="525" y="65" fill="#e94b6f" font-weight="700" text-anchor="middle">C. krusei</text>
+<text x="525" y="82" fill="#faf6f0" text-anchor="middle">Resistência INTRÍNSECA</text>
+<text x="525" y="97" fill="#faf6f0" text-anchor="middle">ao fluconazol</text>
+<rect x="20" y="115" width="290" height="60" rx="8" fill="#2d1b2e" stroke="#6db3f2"/>
+<text x="165" y="135" fill="#6db3f2" font-weight="700" text-anchor="middle">C. parapsilosis</text>
+<text x="165" y="152" fill="#faf6f0" text-anchor="middle">Associada a cateteres/biofilme;</text>
+<text x="165" y="167" fill="#faf6f0" text-anchor="middle">CIM mais alta p/ equinocandina (mas geral. sensível)</text>
+<rect x="325" y="115" width="295" height="60" rx="8" fill="#2d1b2e" stroke="#b76e79"/>
+<text x="472" y="135" fill="#b76e79" font-weight="700" text-anchor="middle">C. auris (emergente)</text>
+<text x="472" y="152" fill="#faf6f0" text-anchor="middle">Multirresistente, surtos hospitalares,</text>
+<text x="472" y="167" fill="#faf6f0" text-anchor="middle">precaução de contato obrigatória</text>
+</g>
+</svg>
+`],
+['mucocutanea','Candidíase Mucocutânea', `
+<div class="ac-h">Candidíase oral (orofaríngea)</div>
+<div class="ac-p">Placas <b>brancas removíveis</b> ("nata de leite") sobre mucosa oral eritematosa, deixando superfície sangrante ao raspar. Ocorre em extremos de idade, uso de corticoide inalatório sem higiene oral adequada, próteses dentárias mal ajustadas, e sobretudo em <b>imunossupressão</b> (é uma das infecções oportunistas definidoras de aids quando associada a queda importante de CD4).</div>
+<div class="ac-h" style="margin-top:14px">Candidíase esofágica</div>
+<div class="ac-p">Manifesta-se com <b>odinofagia/disfagia</b>, geralmente em paciente já com candidíase oral e imunossupressão significativa (CD4 baixo em HIV, por exemplo) — é uma condição definidora de aids. O diagnóstico costuma ser <b>presuntivo</b> nesse contexto, com resposta terapêutica ao tratamento empírico confirmando a suspeita; endoscopia com biópsia é reservada para falha terapêutica.</div>
+<div class="ac-h" style="margin-top:14px">Candidíase vulvovaginal</div>
+<div class="ac-p">Extremamente comum na população geral (não é sinônimo de imunossupressão): corrimento esbranquiçado tipo "leite coalhado", prurido vulvar intenso, hiperemia. Fatores predisponentes: gravidez, diabetes, uso recente de antibiótico, contraceptivos com estrogênio.</div>
+<div class="ac-tip"><b>MACETE</b><br>Candidíase oral/esofágica em adulto sem causa local óbvia (sem corticoide inalatório, prótese, etc.) deve sempre levantar a suspeita de <b>investigar imunossupressão</b>, especialmente HIV.</div>
+`],
+['invasiva','Candidíase Invasiva e Candidemia', `
+<div class="ac-h">Quando suspeitar de doença sistêmica</div>
+<div class="ac-p">Suspeitar de candidemia em paciente com <b>febre persistente apesar de antibioticoterapia de amplo espectro</b>, especialmente na presença de fatores de risco: <b>cateter venoso central</b>, nutrição parenteral total, cirurgia abdominal recente (sobretudo com perfuração/deiscência), neutropenia, internação prolongada em UTI, uso prévio de múltiplos antibióticos.</div>
+<div class="ac-warn"><b>CAI NA PROVA — todo paciente com candidemia precisa de exame oftalmológico</b><br>A <b>endoftalmite por Candida</b> é uma complicação da candidemia que pode ser assintomática nas fases iniciais e levar à cegueira se não tratada — por isso, <b>todo paciente com candidemia confirmada deve ser submetido a fundoscopia dilatada</b> dentro da primeira semana de tratamento, mesmo sem sintomas oculares.</div>
+<div class="ac-p">Outras formas de doença profunda: <b>endocardite por Candida</b> (mais comum em prótese valvar, usuários de drogas injetáveis), <b>candidíase hepatoesplênica</b> (em pacientes neutropênicos, tipicamente ao se recuperarem da neutropenia — múltiplos pequenos abscessos hepáticos/esplênicos visíveis à imagem), <b>osteomielite/artrite por Candida</b>.</div>
+`],
+['diagnostico','Diagnóstico', `
+<div class="ac-h">Confirmando a candidíase invasiva</div>
+<table class="ac-tbl"><tr><th>Método</th><th>Observação</th></tr>
+<tr><td>Hemocultura</td><td>Padrão de referência, mas sensibilidade limitada (cerca de 50-75%) — hemocultura negativa NÃO exclui candidíase invasiva profunda</td></tr>
+<tr><td>Beta-D-glucana sérica</td><td>Marcador de parede fúngica, sensível mas pouco específico (positivo em vários fungos, não só Candida) — útil como triagem</td></tr>
+<tr><td>Teste de suscetibilidade (BrCAST/EUCAST)</td><td>Indicado em toda candidemia para guiar terapia definitiva e eventual desescalonamento</td></tr>
+<tr><td>Fundoscopia dilatada</td><td>Obrigatória em todo caso de candidemia, para rastrear endoftalmite</td></tr>
+</table>
+`],
+['tratamento','Tratamento', `
+<div class="ac-h">Candidemia — equinocandina é a primeira escolha</div>
+<div class="ac-call"><b>CONCEITO-CHAVE — por que equinocandina e não fluconazol de cara</b><br>As equinocandinas (<b>caspofungina, micafungina, anidulafungina</b>) são hoje a <b>primeira linha</b> para candidemia em praticamente todo paciente, independentemente da gravidade, por terem atividade fungicida rápida, boa cobertura para espécies com sensibilidade reduzida ao fluconazol (C. glabrata, C. krusei) e menor toxicidade que a anfotericina B. O fluconazol fica reservado para o <b>"step-down"</b> (descalonamento): após <b>5-7 dias de equinocandina</b>, em paciente <b>clinicamente estável</b>, com isolado <b>comprovadamente sensível</b> ao fluconazol pelo teste de suscetibilidade, e <b>sem complicações metastáticas</b> (endoftalmite, endocardite).</div>
+<table class="ac-tbl"><tr><th>Situação</th><th>Conduta</th></tr>
+<tr><td>Candidemia, tratamento inicial</td><td>Equinocandina IV</td></tr>
+<tr><td>Estável após 5-7 dias + isolado sensível + sem complicação</td><td>Descalonar para fluconazol VO</td></tr>
+<tr><td>Cateter venoso central</td><td>Remover em 24-48h após o diagnóstico, se possível (fonte comum de infecção)</td></tr>
+<tr><td>Duração — candidemia sem complicação</td><td>14 dias a partir da primeira hemocultura negativa</td></tr>
+<tr><td>Endocardite por Candida</td><td>6 semanas (geralmente com cirurgia associada)</td></tr>
+<tr><td>Endoftalmite</td><td>4-6 semanas</td></tr>
+<tr><td>Osteomielite</td><td>Cerca de 6 meses, com reavaliação clínica</td></tr>
+</table>
+<div class="ac-h" style="margin-top:14px">Candidíase mucocutânea</div>
+<div class="ac-p">Oral/esofágica: <b>fluconazol oral</b> é a primeira escolha (a esofágica sempre exige tratamento sistêmico, não apenas tópico). Vulvovaginal não complicada: <b>fluconazol oral em dose única</b> ou antifúngico tópico (azólico vaginal).</div>
+<div class="ac-warn"><b>PEGADINHA DE PROVA — Candida auris</b><br>Espécie emergente, frequentemente <b>multirresistente</b> (inclusive a equinocandinas em alguns casos), associada a surtos em ambiente hospitalar. Exige <b>precaução de contato</b> rigorosa e teste de suscetibilidade obrigatório para guiar a terapia, já que a resposta a antifúngicos de primeira linha não pode ser assumida.</div>
+`]
+],
+};
+
+Object.assign(C['fungos|0'], {
+escores:`
+<div class="ac-h">Não há escore clínico validado universal — a decisão é guiada por fatores de risco + teste de suscetibilidade</div>
+<div class="ac-p">Historicamente, escores de risco (como o "Candida score") foram propostos para identificar pacientes de UTI com alto risco de candidíase invasiva e orientar terapia antifúngica empírica precoce, combinando fatores como nutrição parenteral, cirurgia, colonização multifocal por Candida e sepse grave. Na prática atual, porém, o racional mais cobrado em prova é: <b>reconhecer os fatores de risco</b> (cateter, antibiótico de amplo espectro, cirurgia abdominal, neutropenia, UTI prolongada) e <b>testar a suscetibilidade do isolado</b> (BrCAST/EUCAST) assim que a Candida é identificada, para guiar a escolha entre manter equinocandina ou descalonar para fluconazol.</div>
+`,
+dif:`
+<div class="ac-h">Diagnóstico Diferencial</div>
+<table class="ac-tbl"><tr><th>Condição</th><th>O que diferencia</th></tr>
+<tr><td>Leucoplasia oral</td><td>Placa branca que NÃO se remove à raspagem (ao contrário da candidíase oral)</td></tr>
+<tr><td>Esofagite por CMV ou herpética (em imunossuprimidos)</td><td>Úlceras mais profundas/lineares à endoscopia, biópsia com inclusões virais características</td></tr>
+<tr><td>Vaginose bacteriana</td><td>Corrimento acinzentado com odor característico (aminas), teste das aminas positivo, sem prurido intenso típico da candidíase</td></tr>
+<tr><td>Sepse bacteriana persistente</td><td>Hemoculturas bacterianas positivas, sem fatores de risco fúngicos específicos</td></tr>
+</table>
+`,
+mapa:`
+<div class="mm">
+<div class="mm-card"><h5>Dois mundos</h5><ul><li>Mucocutânea (local)</li><li>Invasiva/sistêmica (grave)</li></ul></div>
+<div class="mm-card"><h5>Espécies-chave</h5><ul><li>C. krusei: resistência intrínseca a fluconazol</li><li>C. glabrata: sensibilidade reduzida</li><li>C. auris: multirresistente, surtos</li></ul></div>
+<div class="mm-card"><h5>Fatores de risco invasiva</h5><ul><li>Cateter, NPT, cirurgia abdominal</li><li>Neutropenia, UTI prolongada</li></ul></div>
+<div class="mm-card"><h5>Diagnóstico</h5><ul><li>Hemocultura (sensibilidade limitada)</li><li>Fundoscopia obrigatória</li></ul></div>
+<div class="mm-card"><h5>Tratamento inicial</h5><ul><li>Equinocandina IV</li><li>Remover cateter em 24-48h</li></ul></div>
+<div class="mm-card"><h5>Descalonamento</h5><ul><li>Fluconazol após 5-7 dias</li><li>Se estável + sensível + sem complicação</li></ul></div>
+</div>
+`,
+fluxo_dx:`
+<div class="fx">
+<div class="fx-node start">Febre persistente apesar de antibiótico de amplo espectro + fator de risco (cateter, NPT, cirurgia, neutropenia)</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Colher hemoculturas (± beta-D-glucana)</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Candida isolada → testar suscetibilidade (BrCAST/EUCAST)</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Fundoscopia dilatada obrigatória (rastrear endoftalmite) + avaliar endocardite/foco profundo se persistência da fungemia</div>
+</div>
+`,
+fluxo_cond:`
+<div class="fx">
+<div class="fx-node start">Candidemia confirmada</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Iniciar equinocandina IV + remover cateter venoso central em 24-48h se possível</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Após 5-7 dias: paciente estável? Isolado sensível ao fluconazol? Sem complicação metastática?</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">Sim a tudo → descalonar para fluconazol VO</div>
+<div class="fx-node">Não → manter equinocandina, investigar/tratar foco profundo</div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Duração: 14 dias (sem complicação) a 6 meses (osteomielite), conforme o foco</div>
+</div>
+`,
+vespera:`
+<div class="ac-h">Revisão de véspera — Candidíase</div>
+<div class="ac-p"><b>Dois mundos:</b> mucocutânea (oral, esofágica, vulvovaginal — local) x invasiva (candidemia, endoftalmite, endocardite, hepatoesplênica — grave).</div>
+<div class="ac-p"><b>Espécies:</b> C. krusei = resistência intrínseca a fluconazol. C. glabrata = sensibilidade reduzida. C. auris = multirresistente, surtos, precaução de contato.</div>
+<div class="ac-p"><b>Candidíase esofágica</b> = condição definidora de aids; suspeitar de imunossupressão em candidíase oral/esofágica sem causa local.</div>
+<div class="ac-p"><b>Candidemia:</b> equinocandina IV primeira escolha SEMPRE; descalonar para fluconazol após 5-7 dias se estável+sensível+sem complicação. Remover cateter em 24-48h. Fundoscopia obrigatória em TODO caso. Duração: 14 dias sem complicação; 6 semanas endocardite; 4-6 semanas endoftalmite; 6 meses osteomielite.</div>
+`,
+dicas:`
+<div class="ac-warn"><b>Erro comum 1</b><br>Iniciar fluconazol como primeira escolha em candidemia. A primeira escolha atual é sempre equinocandina; fluconazol é só para descalonamento em critérios específicos.</div>
+<div class="ac-warn"><b>Erro comum 2</b><br>Não solicitar fundoscopia em paciente com candidemia assintomático dos olhos. O exame é obrigatório mesmo sem sintomas, pela possibilidade de endoftalmite silenciosa.</div>
+<div class="ac-warn"><b>Erro comum 3</b><br>Manter o cateter venoso central "só mais um pouco" em paciente com candidemia. A remoção precoce (24-48h) é parte central do tratamento quando o cateter é fonte suspeita.</div>
+<div class="ac-tip"><b>Dica de prova</b><br>C. krusei = resistência INTRÍNSECA ao fluconazol — nunca escolher fluconazol empiricamente se esse for o agente suspeito/isolado.</div>
+`,
+checklist:[
+'Diferencio candidíase mucocutânea de candidíase invasiva/sistêmica',
+'Associo cada espécie de Candida ao seu perfil de sensibilidade a antifúngicos (albicans, glabrata, krusei, parapsilosis, auris)',
+'Reconheço os fatores de risco para candidíase invasiva',
+'Sei por que a candidíase esofágica é condição definidora de aids',
+'Entendo por que toda candidemia exige fundoscopia dilatada',
+'Sei que a equinocandina é a primeira escolha para candidemia, não o fluconazol',
+'Conheço os critérios para descalonar de equinocandina para fluconazol',
+'Sei o momento correto de remover o cateter venoso central',
+'Conheço a duração do tratamento por tipo de foco (não complicado, endocardite, endoftalmite, osteomielite)',
+'Reconheço a Candida auris como espécie emergente multirresistente que exige precaução de contato',
+],
+});
+
+Object.assign(C['fungos|0'], {
+questoes:[
+{stem:'Paciente em UTI, com cateter venoso central há 10 dias, em uso de antibioticoterapia de amplo espectro há 2 semanas, evolui com febre persistente. Hemocultura identifica Candida albicans. Qual a conduta terapêutica inicial mais apropriada?',
+opts:['Fluconazol oral em dose única','Equinocandina intravenosa (caspofungina, micafungina ou anidulafungina)','Anfotericina B desoxicolato como primeira escolha obrigatória','Aguardar teste de suscetibilidade antes de iniciar qualquer antifúngico'],
+correct:1,
+expl:'A equinocandina intravenosa é a primeira escolha para o tratamento inicial de candidemia em praticamente todos os cenários, incluindo pacientes de UTI, por sua atividade fungicida rápida e boa cobertura mesmo antes do resultado do teste de suscetibilidade.'},
+{stem:'Após 6 dias de tratamento com equinocandina para candidemia por Candida albicans, o paciente está clinicamente estável, sem sinais de endoftalmite ao exame oftalmológico, e o teste de suscetibilidade confirma sensibilidade ao fluconazol. Qual a conduta mais apropriada?',
+opts:['Manter equinocandina obrigatoriamente até completar 6 semanas','Descalonar para fluconazol oral, mantendo o tratamento pelo tempo total recomendado','Suspender todo tratamento antifúngico, pois a estabilidade clínica indica cura','Trocar para anfotericina B lipossomal por maior potência'],
+correct:1,
+expl:'Reunindo os três critérios para descalonamento — estabilidade clínica, isolado sensível ao fluconazol e ausência de complicação metastática (endoftalmite excluída) — após pelo menos 5-7 dias de equinocandina, é apropriado descalonar para fluconazol oral, completando a duração total do tratamento.'},
+{stem:'Qual espécie de Candida apresenta resistência INTRÍNSECA ao fluconazol, não devendo esse antifúngico ser escolhido empiricamente quando ela é suspeita ou identificada?',
+opts:['Candida albicans','Candida parapsilosis','Candida krusei','Candida tropicalis'],
+correct:2,
+expl:'Candida krusei apresenta resistência intrínseca ao fluconazol, sendo uma pista clássica de prova: diante da suspeita ou identificação dessa espécie, o fluconazol não deve ser escolhido empiricamente.'},
+{stem:'Paciente com candidemia confirmada é assintomático do ponto de vista oftalmológico. Qual a conduta em relação à avaliação oftalmológica?',
+opts:['Dispensável, pois a ausência de sintomas exclui endoftalmite','Fundoscopia dilatada deve ser realizada em todo paciente com candidemia, mesmo assintomático, dentro da primeira semana de tratamento','Indicada apenas se houver diabetes associado','Substituível por exame de acuidade visual isolado'],
+correct:1,
+expl:'A endoftalmite por Candida pode ser assintomática em fases iniciais e evoluir para cegueira se não tratada. Por isso, a fundoscopia dilatada é obrigatória em todo paciente com candidemia, independentemente de sintomas oculares.'},
+],
+flashcards:[
+{front:'Dois grandes grupos de candidíase.',back:'Mucocutânea (oral, esofágica, vulvovaginal — local) e invasiva/sistêmica (candidemia, endoftalmite, endocardite, hepatoesplênica — grave).',type:'basic'},
+{front:'{{Candida krusei}} apresenta resistência intrínseca ao fluconazol.',back:'Candida krusei',type:'cloze'},
+{front:'Espécie de Candida com sensibilidade reduzida/dose-dependente ao fluconazol.',back:'Candida glabrata.',type:'basic'},
+{front:'Espécie emergente de Candida frequentemente multirresistente, associada a surtos hospitalares.',back:'Candida auris — exige precaução de contato e teste de suscetibilidade obrigatório.',type:'basic'},
+{front:'Por que a candidíase esofágica é condição definidora de aids?',back:'Ocorre em imunossupressão significativa (CD4 baixo), geralmente após candidíase oral, manifestando-se com odinofagia/disfagia.',type:'basic'},
+{front:'Primeira escolha para tratamento inicial de candidemia.',back:'Equinocandina IV (caspofungina, micafungina ou anidulafungina) — independente da gravidade.',type:'basic'},
+{front:'Critérios para descalonar de equinocandina para fluconazol.',back:'Após 5-7 dias, paciente clinicamente estável + isolado sensível ao fluconazol + sem complicação metastática (endoftalmite/endocardite).',type:'basic'},
+{front:'Conduta em relação ao cateter venoso central na candidemia.',back:'Remover em 24-48h após o diagnóstico, se possível, quando suspeito como fonte da infecção.',type:'basic'},
+{front:'Duração do tratamento de candidemia sem complicação.',back:'14 dias a partir da primeira hemocultura negativa.',type:'basic'},
+{front:'Exame obrigatório em todo paciente com candidemia, mesmo assintomático.',back:'Fundoscopia dilatada, para rastrear endoftalmite por Candida.',type:'basic'},
+],
+casos:[
+{t:'Caso 1 — Escolhendo o antifúngico certo',
+stem:'Paciente neutropênico com febre persistente há 5 dias apesar de antibioticoterapia de amplo espectro. Hemocultura positiva para leveduras, identificação em andamento.',
+passos:[
+{h:'1. Suspeitar de candidemia',p:'Febre persistente apesar de antibiótico + neutropenia + hemocultura com leveduras = candidemia até prova em contrário.'},
+{h:'2. Não esperar identificação da espécie',p:'Iniciar equinocandina IV empiricamente, pois cobre a maioria das espécies relevantes, incluindo as com sensibilidade reduzida a azólicos.'},
+{h:'3. Providenciar avaliação',p:'Solicitar teste de suscetibilidade assim que a espécie for identificada, e agendar fundoscopia dilatada.'},
+{h:'Lição de prova',p:'Equinocandina é a escolha inicial segura mesmo antes da identificação completa da espécie.'}]},
+],
+});
+
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+<script>/* ============================================================
+   InfectoAtlas — Conteúdo Histoplasmose (fungos|2). Aditivo.
+   Não altera nenhum outro C[...] existente.
+   ============================================================ */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+C['fungos|2'] = {
+name:'Histoplasmose',
+intro:'Micose sistêmica endêmica causada por um fungo dimórfico que se esconde em solo contaminado por fezes de aves e morcegos. O espectro clínico depende quase inteiramente de dois fatores: o tamanho do inóculo inalado e o estado imunológico do hospedeiro — entender essa dupla resolve a maior parte das questões de prova.',
+sub:[
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">O fungo, o hábitat e a porta de entrada</div>
+<div class="ac-p"><i>Histoplasma capsulatum</i> é um <b>fungo dimórfico</b>: cresce como <b>mofo/bolor (mícelio)</b> no ambiente (temperatura ambiente) e se transforma em <b>levedura</b> dentro do hospedeiro (37°C). Vive no solo enriquecido por <b>fezes de aves e morcegos</b> — por isso é classicamente associado a <b>cavernas</b> (a "doença do espeleólogo"), galinheiros, demolições de construções antigas e limpeza de sótãos/celeiros abandonados.</div>
+<div class="ac-p">A infecção ocorre por <b>inalação de microconídios</b> presentes na poeira do solo contaminado, que se depositam nos alvéolos e se transformam em leveduras, sendo fagocitados por macrófagos — mas sobrevivendo e se multiplicando dentro deles (patógeno intracelular facultativo), até que a imunidade celular (linfócitos T) consiga controlar a infecção.</div>
+<div class="ac-call"><b>CONCEITO-CHAVE — dois eixos que definem toda a apresentação clínica</b><br>(1) <b>Tamanho do inóculo</b>: exposição maciça (ex.: espeleologia, demolição) causa doença aguda sintomática mesmo em hospedeiro saudável; exposição pequena costuma ser assintomática. (2) <b>Estado imunológico</b>: hospedeiro imunocompetente tende a formas autolimitadas ou pulmonares; hospedeiro imunossuprimido (HIV com CD4 baixo, uso de anti-TNF, transplantado) tem risco de <b>doença disseminada progressiva</b>, potencialmente fatal.</div>
+<svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif" width="100%" style="max-width:640px;display:block;margin:10px auto">
+<rect width="640" height="250" rx="16" fill="#241420"/>
+<text x="320" y="24" fill="#f59f0a" font-size="15" font-weight="700" text-anchor="middle">Dois eixos → forma clínica</text>
+<line x1="80" y1="200" x2="80" y2="50" stroke="#faf6f0" stroke-width="2"/>
+<line x1="80" y1="200" x2="580" y2="200" stroke="#faf6f0" stroke-width="2"/>
+<text x="45" y="60" fill="#faf6f0" font-size="10" text-anchor="middle">Imuno-</text>
+<text x="45" y="72" fill="#faf6f0" font-size="10" text-anchor="middle">suprimido</text>
+<text x="45" y="195" fill="#faf6f0" font-size="10" text-anchor="middle">Imuno-</text>
+<text x="45" y="207" fill="#faf6f0" font-size="10" text-anchor="middle">competente</text>
+<text x="150" y="222" fill="#faf6f0" font-size="10" text-anchor="middle">Inóculo baixo</text>
+<text x="500" y="222" fill="#faf6f0" font-size="10" text-anchor="middle">Inóculo alto</text>
+<rect x="100" y="150" width="180" height="42" rx="6" fill="#2d1b2e" stroke="#3ddc84"/>
+<text x="190" y="175" fill="#3ddc84" font-size="10.5" text-anchor="middle">Assintomático / incidental</text>
+<rect x="380" y="150" width="180" height="42" rx="6" fill="#2d1b2e" stroke="#f59f0a"/>
+<text x="470" y="169" fill="#f59f0a" font-size="10.5" text-anchor="middle">Aguda sintomática</text>
+<text x="470" y="183" fill="#faf6f0" font-size="9.5" text-anchor="middle">(± eritema nodoso)</text>
+<rect x="100" y="60" width="180" height="42" rx="6" fill="#2d1b2e" stroke="#6db3f2"/>
+<text x="190" y="79" fill="#6db3f2" font-size="10.5" text-anchor="middle">Crônica cavitária</text>
+<text x="190" y="93" fill="#faf6f0" font-size="9.5" text-anchor="middle">(mimetiza TB)</text>
+<rect x="380" y="60" width="180" height="42" rx="6" fill="#2d1b2e" stroke="#e94b6f"/>
+<text x="470" y="79" fill="#e94b6f" font-size="10.5" font-weight="700" text-anchor="middle">DISSEMINADA GRAVE</text>
+<text x="470" y="93" fill="#faf6f0" font-size="9.5" text-anchor="middle">(risco de vida)</text>
+</svg>
+`],
+['clinica','Quadro Clínico', `
+<div class="ac-h">Histoplasmose pulmonar aguda</div>
+<div class="ac-p">Na maioria dos imunocompetentes expostos, a infecção é <b>assintomática ou oligossintomática</b> (achado incidental de nódulo calcificado pulmonar/linfonodo hilar calcificado em radiografia de rotina, anos depois). Em exposições com <b>inóculo alto</b> (grupo espeleológico, trabalhadores em galinheiro), pode causar síndrome gripal com febre, tosse, dor torácica, e por vezes manifestações imunomediadas como <b>eritema nodoso</b> ou <b>eritema multiforme</b> — achados que sugerem boa resposta imune do hospedeiro, e não necessariamente gravidade.</div>
+<div class="ac-h" style="margin-top:14px">Histoplasmose pulmonar crônica</div>
+<div class="ac-p">Ocorre tipicamente em pacientes com <b>doença pulmonar estrutural prévia</b> (DPOC/enfisema), com quadro semelhante à tuberculose: tosse crônica, perda de peso, sudorese noturna, cavitação em <b>lobos superiores</b> à radiografia — um diagnóstico diferencial clássico de TB que não responde ao esquema RIPE.</div>
+<div class="ac-h" style="margin-top:14px">Histoplasmose disseminada progressiva</div>
+<div class="ac-warn"><b>CAI NA PROVA — histoplasmose disseminada em imunossuprimido</b><br>Ocorre predominantemente em pacientes com <b>imunossupressão celular importante</b> (HIV com CD4 &lt;150, uso de inibidores de TNF-alfa, transplantados, neoplasias hematológicas). Quadro sistêmico grave: febre prolongada, emagrecimento importante, <b>hepatoesplenomegalia</b>, <b>pancitopenia</b> (por infiltração de medula óssea), lesões mucocutâneas (podem mimetizar molusco contagioso em pacientes com HIV avançado), e <b>insuficiência adrenal</b> (as adrenais são um sítio comumente acometido, podendo levar a doença de Addison secundária) — sempre rastrear função adrenal em casos disseminados com hipotensão/hiponatremia/hipercalemia inexplicadas.</div>
+`],
+['diagnostico','Diagnóstico', `
+<div class="ac-h">Como confirmar</div>
+<table class="ac-tbl"><tr><th>Método</th><th>Observação</th></tr>
+<tr><td><b>Antígeno de Histoplasma</b> (urina e/ou soro)</td><td>Método mais sensível, especialmente na <b>doença disseminada</b> e em imunossuprimidos — costuma ser o primeiro exame positivo e o mais usado para monitorar resposta ao tratamento</td></tr>
+<tr><td>Cultura</td><td>Padrão-ouro para confirmação definitiva, mas de <b>crescimento lento</b> (semanas) — pouco útil para decisão terapêutica imediata</td></tr>
+<tr><td>Histopatologia</td><td>Leveduras pequenas intracelulares dentro de macrófagos, coloração de prata (Grocott) — sugestivo mas precisa de correlação</td></tr>
+<tr><td>Sorologia (anticorpos)</td><td>Útil em formas subagudas/crônicas em imunocompetentes; menos sensível na doença aguda muito precoce ou em imunossuprimidos (resposta de anticorpos prejudicada)</td></tr>
+</table>
+<div class="ac-warn"><b>PEGADINHA DE PROVA</b><br>Histoplasmose pulmonar crônica cavitária pode ser confundida com tuberculose pela clínica e pela imagem — mas <b>não responde ao esquema RIPE</b>. Sempre pensar em diagnóstico diferencial fúngico quando a "TB" não melhora com tratamento antituberculoso adequado e a baciloscopia/TRM-TB são repetidamente negativos.</div>
+`],
+['tratamento','Tratamento', `
+<div class="ac-h">Depende da gravidade e da forma clínica</div>
+<table class="ac-tbl"><tr><th>Forma</th><th>Conduta</th></tr>
+<tr><td>Pulmonar aguda leve, sintomas &lt;4 semanas</td><td>Geralmente autolimitada — observação, sem necessidade de antifúngico</td></tr>
+<tr><td>Pulmonar aguda com sintomas persistentes (&gt;4 semanas) ou moderada</td><td><b>Itraconazol</b> VO, por 6-12 semanas</td></tr>
+<tr><td>Pulmonar crônica cavitária</td><td>Itraconazol VO por período prolongado (ao menos 1 ano)</td></tr>
+<tr><td>Grave/disseminada/acometimento de SNC/imunossuprimido grave</td><td><b>Anfotericina B (preferencialmente lipossomal)</b> por 1-2 semanas de indução, seguida de <b>itraconazol</b> de manutenção/consolidação por pelo menos 12 meses</td></tr>
+</table>
+<div class="ac-call"><b>CONCEITO-CHAVE — cuidados farmacológicos com o itraconazol</b><br>O itraconazol tem <b>absorção variável</b> (melhor com alimento e em ambiente ácido gástrico — evitar uso concomitante com inibidores de bomba de prótons/antiácidos sem orientação) e diversas <b>interações medicamentosas</b> (inibidor do CYP3A4, semelhante ao que ocorre com outros azólicos). Recomenda-se monitorar <b>níveis séricos</b> do fármaco durante o tratamento prolongado para garantir eficácia e segurança.</div>
+<div class="ac-p">Em pacientes com HIV e histoplasmose disseminada, além do tratamento antifúngico, é fundamental <b>iniciar/otimizar a terapia antirretroviral</b> para reconstituição imunológica — em alguns casos, manutenção antifúngica supressiva prolongada é indicada até reconstituição imune adequada (CD4 estável acima de 150 por período sustentado).</div>
+`],
+['prevencao','Prevenção', `
+<div class="ac-h">Evitar exposição e profilaxia em grupos de risco</div>
+<div class="ac-p">Evitar exposição a poeira em locais de risco (cavernas, galinheiros, demolições) sem proteção respiratória adequada (máscaras N95) é a principal medida preventiva. Em pacientes com <b>HIV e CD4 muito baixo</b> (&lt;150) residentes em áreas de alta endemicidade com exposição ocupacional relevante, pode-se considerar <b>profilaxia primária com itraconazol</b> — embora a estratégia mais eficaz e sustentável seja garantir a terapia antirretroviral e a reconstituição imunológica.</div>
+`]
+],
+};
+
+Object.assign(C['fungos|2'], {
+escores:`
+<div class="ac-h">Não há escore clínico validado específico — o raciocínio central é a combinação inóculo + imunidade</div>
+<div class="ac-p">A avaliação de gravidade e a decisão terapêutica em histoplasmose são guiadas pela combinação entre: <b>magnitude da exposição</b> (inóculo alto = mais sintomas mesmo em hospedeiro saudável), <b>duração dos sintomas</b> (persistência além de 4 semanas indica necessidade de tratamento), e <b>status imunológico do hospedeiro</b> (imunossupressão importante = risco de forma disseminada grave, exigindo tratamento mais agressivo desde o início).</div>
+<div class="ac-p"><b>Exemplo resolvido:</b> paciente HIV positivo, CD4 de 40 células/mm³, com febre há 3 semanas, hepatoesplenomegalia, pancitopenia e antígeno urinário de Histoplasma fortemente positivo = <b>histoplasmose disseminada grave</b> → indicação de anfotericina B lipossomal de indução, seguida de itraconazol de manutenção prolongada, associado a otimização da TARV.</div>
+`,
+dif:`
+<div class="ac-h">Diagnóstico Diferencial</div>
+<table class="ac-tbl"><tr><th>Condição</th><th>O que diferencia</th></tr>
+<tr><td>Tuberculose pulmonar (forma crônica cavitária)</td><td>TRM-TB/cultura para BAAR positivos; histoplasmose não responde ao esquema RIPE</td></tr>
+<tr><td>Sarcoidose</td><td>Pode causar linfadenopatia hilar e nódulos calcificados semelhantes; biópsia com granulomas não caseosos, sem organismo fúngico identificável</td></tr>
+<tr><td>Paracoccidioidomicose</td><td>Outra micose endêmica sul-americana, mais associada a lesões mucosas orofaríngeas ulceradas ("estomatite moriforme") e à zona rural/atividade agrícola</td></tr>
+<tr><td>Linfoma / neoplasia hematológica</td><td>Pode mimetizar histoplasmose disseminada (febre, hepatoesplenomegalia, pancitopenia); biópsia de medula/linfonodo diferencia</td></tr>
+<tr><td>Leishmaniose visceral</td><td>Também causa hepatoesplenomegalia + pancitopenia + febre prolongada; contexto epidemiológico e sorologia/parasitológico diferenciam</td></tr>
+</table>
+`,
+mapa:`
+<div class="mm">
+<div class="mm-card"><h5>Agente</h5><ul><li>Histoplasma capsulatum</li><li>Dimórfico: mofo no ambiente, levedura no hospedeiro</li></ul></div>
+<div class="mm-card"><h5>Hábitat/exposição</h5><ul><li>Solo com fezes de aves/morcegos</li><li>Cavernas, galinheiros, demolições</li></ul></div>
+<div class="mm-card"><h5>Dois eixos clínicos</h5><ul><li>Tamanho do inóculo</li><li>Estado imunológico do hospedeiro</li></ul></div>
+<div class="mm-card"><h5>Formas clínicas</h5><ul><li>Aguda (autolimitada/eritema nodoso)</li><li>Crônica cavitária (mimetiza TB)</li><li>Disseminada (imunossuprimido)</li></ul></div>
+<div class="mm-card"><h5>Disseminada</h5><ul><li>Hepatoesplenomegalia, pancitopenia</li><li>Insuficiência adrenal</li></ul></div>
+<div class="mm-card"><h5>Diagnóstico</h5><ul><li>Antígeno urinário/sérico (mais sensível)</li><li>Cultura = padrão-ouro, lenta</li></ul></div>
+<div class="mm-card"><h5>Tratamento</h5><ul><li>Leve: observação</li><li>Moderada/crônica: itraconazol</li><li>Grave/disseminada: anfotericina B → itraconazol</li></ul></div>
+</div>
+`,
+fluxo_dx:`
+<div class="fx">
+<div class="fx-node start">Síndrome febril/pulmonar após exposição a caverna, galinheiro, demolição — ou quadro sistêmico em imunossuprimido</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Solicitar antígeno de Histoplasma (urina/soro) — método mais sensível, especialmente se disseminada</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Complementar com cultura (confirmação, mas lenta) e histopatologia se material de biópsia disponível</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Em imunossuprimido com quadro disseminado: avaliar função adrenal, hemograma completo, hepatoesplenomegalia à imagem</div>
+</div>
+`,
+fluxo_cond:`
+<div class="fx">
+<div class="fx-node start">Histoplasmose confirmada</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">Aguda leve, &lt;4 semanas → observação</div>
+<div class="fx-node">Persistente/moderada/crônica → itraconazol VO</div>
+<div class="fx-node">Grave/disseminada/SNC → anfotericina B lipossomal de indução</div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Após indução com anfotericina: descalonar para itraconazol de manutenção (≥12 meses)</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Se HIV: otimizar/iniciar TARV para reconstituição imune</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Monitorar níveis séricos de itraconazol e resposta pelo antígeno urinário seriado</div>
+</div>
+`,
+vespera:`
+<div class="ac-h">Revisão de véspera — Histoplasmose</div>
+<div class="ac-p"><b>Agente:</b> Histoplasma capsulatum, dimórfico, solo com fezes de aves/morcegos (cavernas, galinheiros, demolições).</div>
+<div class="ac-p"><b>Dois eixos:</b> tamanho do inóculo (alto = sintomas mesmo em hígido) + estado imunológico (imunossuprimido = risco de disseminada grave).</div>
+<div class="ac-p"><b>Formas:</b> aguda (autolimitada, pode ter eritema nodoso), crônica cavitária (mimetiza TB, não responde a RIPE), disseminada (imunossuprimido: hepatoesplenomegalia, pancitopenia, insuficiência adrenal).</div>
+<div class="ac-p"><b>Diagnóstico:</b> antígeno urinário/sérico = mais sensível, especialmente disseminada. Cultura = padrão-ouro mas lenta.</div>
+<div class="ac-p"><b>Tratamento:</b> leve/&lt;4 sem = observação. Moderada/crônica = itraconazol. Grave/disseminada = anfotericina B lipossomal → itraconazol de manutenção ≥12 meses. Monitorar níveis de itraconazol.</div>
+`,
+dicas:`
+<div class="ac-warn"><b>Erro comum 1</b><br>Tratar suspeita de "TB cavitária que não melhora" apenas ajustando o esquema antituberculoso, sem considerar histoplasmose crônica como diagnóstico alternativo.</div>
+<div class="ac-warn"><b>Erro comum 2</b><br>Não investigar função adrenal em paciente com histoplasmose disseminada e hipotensão/hiponatremia inexplicadas — as adrenais são sítio comum de acometimento.</div>
+<div class="ac-warn"><b>Erro comum 3</b><br>Tratar toda histoplasmose pulmonar aguda com antifúngico. Casos leves com menos de 4 semanas de sintomas costumam ser autolimitados.</div>
+<div class="ac-tip"><b>Dica de prova</b><br>Febre + hepatoesplenomegalia + pancitopenia em paciente HIV com CD4 muito baixo = pensar em histoplasmose disseminada (e também leishmaniose visceral, conforme a epidemiologia).</div>
+`,
+checklist:[
+'Explico o dimorfismo do Histoplasma e seu hábitat típico',
+'Reconheço os dois eixos que definem a apresentação clínica: inóculo e imunidade',
+'Diferencio as formas aguda, crônica cavitária e disseminada',
+'Sei por que a forma crônica cavitária mimetiza tuberculose e não responde ao RIPE',
+'Reconheço os achados da forma disseminada, incluindo a insuficiência adrenal',
+'Conheço o método diagnóstico mais sensível (antígeno urinário/sérico) e suas limitações',
+'Sei quando tratar (>4 semanas, moderada/grave) e quando apenas observar',
+'Conheço o esquema de indução (anfotericina B) e manutenção (itraconazol) na forma grave/disseminada',
+'Entendo a necessidade de monitorar níveis séricos de itraconazol',
+'Sei o papel da TARV na histoplasmose disseminada associada ao HIV',
+],
+});
+
+Object.assign(C['fungos|2'], {
+questoes:[
+{stem:'Grupo de espeleólogos visita caverna com grande quantidade de guano de morcego. Uma semana depois, vários apresentam febre, tosse e dor torácica, e um deles desenvolve lesões dolorosas em pele pré-tibial compatíveis com eritema nodoso. Qual a interpretação mais apropriada desse achado cutâneo?',
+opts:['Sinal de gravidade extrema, indicando disseminação fúngica maciça','Manifestação imunomediada que reflete resposta imune ativa do hospedeiro, não necessariamente indicando doença grave','Reação alérgica ao repelente de insetos, sem relação com a histoplasmose','Sinal patognomônico de histoplasmose disseminada crônica'],
+correct:1,
+expl:'O eritema nodoso (e o eritema multiforme) na histoplasmose pulmonar aguda são manifestações imunomediadas que refletem uma resposta imune ativa e geralmente eficaz do hospedeiro, não indicando necessariamente maior gravidade da doença.'},
+{stem:'Paciente com HIV, CD4 de 50 células/mm³, apresenta febre prolongada, hepatoesplenomegalia, pancitopenia e lesões cutâneas papulares. Qual exame apresenta a maior sensibilidade para o diagnóstico nesse cenário?',
+opts:['Sorologia por fixação de complemento','Antígeno de Histoplasma na urina e/ou soro','Radiografia de tórax isolada','Prova tuberculínica (PPD)'],
+correct:1,
+expl:'O antígeno de Histoplasma (pesquisado na urina e/ou soro) é o método mais sensível para o diagnóstico de histoplasmose, especialmente na forma disseminada em pacientes imunossuprimidos, sendo geralmente o primeiro exame a se tornar positivo.'},
+{stem:'Paciente com histoplasmose disseminada grave associada a comprometimento do sistema nervoso central. Qual o esquema terapêutico inicial mais apropriado?',
+opts:['Itraconazol oral isolado desde o início','Anfotericina B (preferencialmente lipossomal) como indução, seguida de itraconazol de manutenção prolongada','Fluconazol em dose única','Observação clínica sem tratamento antifúngico'],
+correct:1,
+expl:'Nas formas graves, disseminadas ou com acometimento do sistema nervoso central, o tratamento inicial deve ser com anfotericina B (preferencialmente lipossomal, por menor toxicidade) por 1-2 semanas de indução, seguida de itraconazol de manutenção por período prolongado (pelo menos 12 meses).'},
+{stem:'Paciente tratado com esquema antituberculoso padrão para suposta tuberculose pulmonar cavitária apresenta ausência de melhora clínica após 2 meses, com baciloscopias e TRM-TB repetidamente negativos. Qual diagnóstico diferencial fúngico deve ser fortemente considerado?',
+opts:['Aspergilose broncopulmonar alérgica','Histoplasmose pulmonar crônica','Candidíase pulmonar invasiva','Criptococose pulmonar assintomática'],
+correct:1,
+expl:'A histoplasmose pulmonar crônica cavitária (mais comum em pacientes com doença pulmonar estrutural prévia) pode mimetizar clínica e radiologicamente a tuberculose, mas não responde ao esquema RIPE — a falha terapêutica com exames micobacteriológicos negativos deve levantar essa suspeita.'},
+],
+flashcards:[
+{front:'Hábitat típico do Histoplasma capsulatum.',back:'Solo enriquecido por fezes de aves e morcegos — cavernas, galinheiros, demolições de construções antigas.',type:'basic'},
+{front:'Os dois eixos que determinam a apresentação clínica da histoplasmose.',back:'Tamanho do inóculo inalado e estado imunológico do hospedeiro.',type:'basic'},
+{front:'{{Eritema nodoso}} na histoplasmose pulmonar aguda reflete resposta imune ativa, não necessariamente gravidade.',back:'Eritema nodoso',type:'cloze'},
+{front:'Grupo de maior risco para histoplasmose disseminada progressiva.',back:'Imunossupressão celular importante: HIV com CD4 <150, uso de anti-TNF-alfa, transplantados, neoplasia hematológica.',type:'basic'},
+{front:'Achados típicos da histoplasmose disseminada.',back:'Febre prolongada, hepatoesplenomegalia, pancitopenia, lesões mucocutâneas, insuficiência adrenal.',type:'basic'},
+{front:'Método diagnóstico mais sensível para histoplasmose, especialmente na forma disseminada.',back:'Antígeno de Histoplasma na urina e/ou soro.',type:'basic'},
+{front:'Por que a histoplasmose pulmonar crônica cavitária é um diagnóstico diferencial importante de tuberculose?',back:'Apresenta quadro clínico e radiológico semelhante (cavitação em lobos superiores), mas não responde ao esquema RIPE.',type:'basic'},
+{front:'Esquema terapêutico para forma grave/disseminada.',back:'Anfotericina B (preferencialmente lipossomal) de indução, seguida de itraconazol de manutenção por pelo menos 12 meses.',type:'basic'},
+{front:'Cuidados farmacológicos com o itraconazol.',back:'Absorção melhor com alimento e ambiente ácido gástrico; inibidor do CYP3A4 (múltiplas interações); monitorar níveis séricos no tratamento prolongado.',type:'basic'},
+],
+casos:[
+{t:'Caso 1 — A pista escondida na adrenal',
+stem:'Paciente com HIV avançado (CD4 30) apresenta febre prolongada, hipotensão, hiponatremia e hipercalemia, além de hepatoesplenomegalia.',
+passos:[
+{h:'1. Suspeitar de disseminação',p:'Febre prolongada + hepatoesplenomegalia em imunossupressão grave sugere histoplasmose disseminada.'},
+{h:'2. Não esquecer a adrenal',p:'Hipotensão + hiponatremia + hipercalemia sugerem insuficiência adrenal — investigar função adrenal, já que as adrenais são sítio comum de acometimento na forma disseminada.'},
+{h:'3. Confirmar e tratar',p:'Solicitar antígeno de Histoplasma; se disseminada grave, iniciar anfotericina B lipossomal de indução.'},
+{h:'Lição de prova',p:'Sempre pensar em acometimento adrenal na histoplasmose disseminada com sinais de insuficiência adrenal.'}]},
+],
+});
+
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
+<script>/* ============================================================
+   InfectoAtlas — Conteúdo Aspergilose (fungos|3). Aditivo.
+   Não altera nenhum outro C[...] existente.
+   ============================================================ */
+(function(){
+"use strict";
+var C = (window.CONTENT = window.CONTENT || {});
+
+C['fungos|3'] = {
+name:'Aspergilose',
+intro:'O Aspergillus é um fungo ambiental ubíquo, e a doença que ele causa depende quase inteiramente de COMO o sistema imune e o pulmão do hospedeiro reagem a ele — o mesmo fungo pode causar uma bola fúngica inofensiva numa cavidade antiga, uma reação alérgica exuberante, ou uma infecção invasiva fatal em neutropênico. Essa lógica de "três formas, três hospedeiros" é o que mais cai em prova.',
+sub:[
+['entendendo','Entendendo do Zero', `
+<div class="ac-h">Um fungo, três doenças — depende do hospedeiro</div>
+<div class="ac-p"><i>Aspergillus fumigatus</i> (a espécie mais comum) é onipresente no ambiente — está no ar que respiramos, em matéria orgânica em decomposição, solo, plantas. A maioria das pessoas inala seus esporos (conídios) diariamente sem qualquer consequência. A doença só aparece quando há uma "brecha" específica, e o TIPO de brecha determina qual das três grandes formas de aspergilose vai se manifestar.</div>
+<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" font-family="Inter,Arial,sans-serif" width="100%" style="max-width:640px;display:block;margin:10px auto">
+<rect width="640" height="260" rx="16" fill="#241420"/>
+<text x="320" y="24" fill="#f59f0a" font-size="15" font-weight="700" text-anchor="middle">Três formas, três hospedeiros</text>
+<rect x="20" y="45" width="190" height="90" rx="8" fill="#2d1b2e" stroke="#3ddc84" stroke-width="2"/>
+<text x="115" y="66" fill="#3ddc84" font-size="12" font-weight="700" text-anchor="middle">ASPERGILOMA</text>
+<text x="115" y="85" fill="#faf6f0" font-size="10" text-anchor="middle">Cavidade pulmonar</text>
+<text x="115" y="99" fill="#faf6f0" font-size="10" text-anchor="middle">pré-existente</text>
+<text x="115" y="113" fill="#faf6f0" font-size="10" text-anchor="middle">(TB antiga, sarcoidose)</text>
+<text x="115" y="127" fill="#b76e79" font-size="9.5" text-anchor="middle">Colonização, não invasão</text>
+<rect x="225" y="45" width="190" height="90" rx="8" fill="#2d1b2e" stroke="#6db3f2" stroke-width="2"/>
+<text x="320" y="66" fill="#6db3f2" font-size="12" font-weight="700" text-anchor="middle">ABPA</text>
+<text x="320" y="85" fill="#faf6f0" font-size="10" text-anchor="middle">Reação de HIPERSENSI-</text>
+<text x="320" y="99" fill="#faf6f0" font-size="10" text-anchor="middle">BILIDADE (não invasão)</text>
+<text x="320" y="113" fill="#faf6f0" font-size="10" text-anchor="middle">Asma / fibrose cística</text>
+<text x="320" y="127" fill="#b76e79" font-size="9.5" text-anchor="middle">Imunológico, IgE elevada</text>
+<rect x="430" y="45" width="190" height="90" rx="8" fill="#2d1b2e" stroke="#e94b6f" stroke-width="2"/>
+<text x="525" y="66" fill="#e94b6f" font-size="12" font-weight="700" text-anchor="middle">INVASIVA</text>
+<text x="525" y="85" fill="#faf6f0" font-size="10" text-anchor="middle">Neutropenia grave/</text>
+<text x="525" y="99" fill="#faf6f0" font-size="10" text-anchor="middle">prolongada, transplante,</text>
+<text x="525" y="113" fill="#faf6f0" font-size="10" text-anchor="middle">corticoide em alta dose</text>
+<text x="525" y="127" fill="#b76e79" font-size="9.5" text-anchor="middle">Emergência — alta mortalidade</text>
+<text x="320" y="165" fill="#faf6f0" font-size="11" text-anchor="middle">Aspergiloma: cavidade anatômica facilita colonização sem invasão</text>
+<text x="320" y="185" fill="#faf6f0" font-size="11" text-anchor="middle">ABPA: sistema imune reage de forma exagerada, sem invasão tecidual</text>
+<text x="320" y="205" fill="#faf6f0" font-size="11" text-anchor="middle">Invasiva: ausência de neutrófilos funcionantes permite invasão vascular direta</text>
+</svg>
+`],
+['aspergiloma','Aspergiloma (Bola Fúngica)', `
+<div class="ac-h">Colonização de uma cavidade pré-existente</div>
+<div class="ac-p">Ocorre quando esporos de <i>Aspergillus</i> colonizam uma <b>cavidade pulmonar pré-existente</b> (sequela de tuberculose, sarcoidose, bronquiectasias, abscesso pulmonar cicatrizado), formando uma massa de hifas fúngicas entrelaçadas com debris — visível na radiografia/TC como uma <b>massa móvel dentro da cavidade</b>, classicamente com o <b>"sinal do crescente de ar"</b> (halo radiotransparente entre a bola fúngica e a parede da cavidade, que muda de posição conforme o decúbito do paciente).</div>
+<div class="ac-p">A maioria dos pacientes é <b>assintomática</b> ou tem sintomas leves, mas o achado mais temido e mais cobrado é a <b>hemoptise</b>, que pode ser maciça e potencialmente fatal, mesmo sem invasão tecidual — atribuída à erosão de vasos brônquicos adjacentes.</div>
+<div class="ac-p"><b>Conduta</b>: observação em casos assintomáticos; embolização arterial brônquica ou ressecção cirúrgica em casos de hemoptise significativa; antifúngico sistêmico tem papel limitado (a bola fúngica é pouco vascularizada, dificultando a penetração da droga).</div>
+`],
+['abpa','Aspergilose Broncopulmonar Alérgica (ABPA)', `
+<div class="ac-h">Uma reação de hipersensibilidade, não uma infecção invasiva</div>
+<div class="ac-p">A ABPA ocorre em pacientes com <b>asma</b> ou <b>fibrose cística</b>, nos quais a colonização das vias aéreas por <i>Aspergillus</i> desencadeia uma <b>reação de hipersensibilidade tipos I e III</b> (mediada por IgE e imunocomplexos), causando inflamação brônquica intensa, broncoespasmo e <b>bronquiectasias centrais</b> características.</div>
+<div class="ac-warn"><b>CAI NA PROVA — critérios diagnósticos da ABPA</b><br>Pense na combinação: <b>asma de difícil controle</b> ou fibrose cística com piora + <b>IgE total sérica muito elevada</b> (tipicamente &gt;1000 UI/mL) + <b>IgE e/ou IgG específicas para Aspergillus</b> positivas + <b>eosinofilia periférica</b> + infiltrados pulmonares migratórios/fugazes + <b>bronquiectasias centrais</b> à tomografia — essa combinação fecha o diagnóstico na maioria dos casos, sem necessidade de demonstrar invasão tecidual (que não ocorre na ABPA).</div>
+<div class="ac-p"><b>Tratamento:</b> <b>corticoide sistêmico</b> é a base do tratamento (controla a inflamação imunomediada), associado a <b>itraconazol</b> como agente antifúngico poupador de corticoide (reduz a carga fúngica que sustenta a resposta imune, permitindo reduzir a dose e o tempo de corticoide).</div>
+`],
+['invasiva','Aspergilose Invasiva', `
+<div class="ac-h">A grande emergência micológica</div>
+<div class="ac-p">A forma mais grave, ocorrendo predominantemente em pacientes com <b>neutropenia grave e prolongada</b> (quimioterapia para leucemia, transplante de células-tronco hematopoiéticas), uso de <b>corticoide sistêmico em alta dose por tempo prolongado</b>, ou outras imunossupressões celulares importantes (transplante de órgão sólido, uso de inibidores de calcineurina). O fungo invade diretamente os <b>vasos sanguíneos</b> (angioinvasão), causando trombose, infarto tecidual e disseminação hematogênica para outros órgãos (SNC, pele, rins).</div>
+<div class="ac-warn"><b>CAI NA PROVA — o "sinal do halo" na tomografia</b><br>Na aspergilose pulmonar invasiva, a TC de tórax pode mostrar o <b>sinal do halo</b> (halo de vidro fosco ao redor de um nódulo pulmonar, representando hemorragia perilesional por angioinvasão) — achado precoce e muito valorizado, mais visível nas fases iniciais da neutropenia. Mais tardiamente, à medida que os neutrófilos se recuperam, pode aparecer o <b>sinal do crescente de ar</b> (diferente do aspergiloma — aqui reflete necrose e retração do tecido infartado, não uma bola fúngica móvel).</div>
+<div class="ac-p">Clinicamente: febre persistente refratária a antibióticos de amplo espectro em paciente neutropênico, tosse, dor torácica pleurítica, hemoptise — e em caso de disseminação, sintomas neurológicos focais (abscesso cerebral fúngico) ou lesões cutâneas necróticas.</div>
+`],
+['diagnostico','Diagnóstico', `
+<div class="ac-h">Ferramentas por forma clínica</div>
+<table class="ac-tbl"><tr><th>Método</th><th>Uso principal</th></tr>
+<tr><td>Galactomanana (soro e/ou lavado broncoalveolar)</td><td>Marcador de parede celular do Aspergillus; útil sobretudo na <b>aspergilose invasiva</b> em pacientes neutropênicos/transplantados — monitorização seriada auxilia diagnóstico precoce e resposta ao tratamento</td></tr>
+<tr><td>Beta-D-glucana sérica</td><td>Sensível mas inespecífica (positiva em vários fungos), complementar à galactomanana</td></tr>
+<tr><td>TC de tórax de alta resolução</td><td>Sinal do halo (precoce) e sinal do crescente de ar (tardio) na forma invasiva; cavidade com massa móvel no aspergiloma</td></tr>
+<tr><td>IgE total e específica para Aspergillus, eosinófilos</td><td>Centrais para o diagnóstico de ABPA</td></tr>
+<tr><td>Cultura/histopatologia (biópsia)</td><td>Confirmação definitiva quando possível, mostrando hifas septadas com ramificação em ângulo agudo (~45°) características do Aspergillus</td></tr>
+</table>
+`],
+['tratamento','Tratamento', `
+<div class="ac-h">Antifúngicos por forma clínica</div>
+<table class="ac-tbl"><tr><th>Forma</th><th>Tratamento</th></tr>
+<tr><td>Aspergiloma assintomático</td><td>Observação; antifúngico sistêmico tem papel limitado</td></tr>
+<tr><td>Aspergiloma com hemoptise significativa</td><td>Embolização arterial brônquica ou cirurgia (ressecção)</td></tr>
+<tr><td>ABPA</td><td>Corticoide sistêmico + itraconazol como poupador de corticoide</td></tr>
+<tr><td>Aspergilose invasiva</td><td><b>Voriconazol</b> — primeira linha</td></tr>
+<tr><td>Aspergilose invasiva, alternativa</td><td><b>Isavuconazol</b> (eficácia semelhante ao voriconazol, com perfil de interação/toxicidade em alguns aspectos mais favorável) ou anfotericina B lipossomal</td></tr>
+</table>
+<div class="ac-call"><b>CONCEITO-CHAVE — por que voriconazol é a primeira escolha na forma invasiva</b><br>Estudos comparativos demonstraram superioridade do voriconazol sobre a anfotericina B convencional em termos de resposta e sobrevida no tratamento da aspergilose invasiva, consolidando-o como primeira linha. É importante lembrar que o voriconazol tem <b>farmacocinética não linear</b> e múltiplas <b>interações medicamentosas</b> relevantes (metabolismo hepático via CYP2C19/CYP3A4), sendo recomendado o <b>monitoramento de níveis séricos</b> para otimizar eficácia e reduzir toxicidade (incluindo neurotoxicidade e alterações visuais transitórias, efeitos adversos característicos).</div>
+<div class="ac-h" style="margin-top:14px">Profilaxia em pacientes de alto risco</div>
+<div class="ac-p">Pacientes com neutropenia prolongada esperada (ex.: indução de leucemia mieloide aguda, transplante alogênico de células-tronco hematopoiéticas) frequentemente recebem <b>profilaxia antifúngica</b> (posaconazol é uma opção validada nesse contexto) durante o período de maior risco.</div>
+`]
+],
+};
+
+Object.assign(C['fungos|3'], {
+escores:`
+<div class="ac-h">Não há um escore numérico clássico — o raciocínio central é "qual forma, em qual hospedeiro"</div>
+<div class="ac-p">A "régua" de gravidade e a decisão terapêutica em aspergilose dependem do reconhecimento correto da forma clínica a partir do contexto do hospedeiro:</div>
+<table class="ac-tbl"><tr><th>Hospedeiro/contexto</th><th>Forma provável</th></tr>
+<tr><td>Cavidade pulmonar antiga (TB prévia, sarcoidose), sem imunossupressão relevante</td><td>Aspergiloma</td></tr>
+<tr><td>Asma de difícil controle ou fibrose cística, com IgE elevada e eosinofilia</td><td>ABPA</td></tr>
+<tr><td>Neutropenia grave/prolongada, transplante, corticoide em alta dose</td><td>Aspergilose invasiva</td></tr>
+</table>
+<div class="ac-p"><b>Exemplo resolvido:</b> paciente em quimioterapia de indução para leucemia mieloide aguda, neutropênico há 12 dias, com febre refratária a antibiótico de amplo espectro e TC de tórax mostrando nódulo com halo de vidro fosco ao redor = <b>alta probabilidade de aspergilose pulmonar invasiva</b> → solicitar galactomanana sérica/BAL e iniciar voriconazol empiricamente, sem aguardar confirmação microbiológica definitiva dado o risco de vida.</div>
+`,
+dif:`
+<div class="ac-h">Diagnóstico Diferencial</div>
+<table class="ac-tbl"><tr><th>Condição</th><th>O que diferencia</th></tr>
+<tr><td>Tuberculose cavitária ativa</td><td>BAAR/TRM-TB positivos; a cavidade tuberculosa pode, inclusive, ser o local onde um aspergiloma se instala secundariamente</td></tr>
+<tr><td>Carcinoma pulmonar cavitado</td><td>Massa mais irregular, sem mobilidade características do aspergiloma; biópsia diferencia</td></tr>
+<tr><td>Pneumonia bacteriana em neutropênico</td><td>Hemoculturas/cultura de escarro bacteriana positivas; ausência do sinal do halo</td></tr>
+<tr><td>Mucormicose (outro fungo angioinvasivo)</td><td>Hifas não septadas com ramificação em ângulo reto (~90°) na histopatologia, ao contrário das hifas septadas em ângulo agudo do Aspergillus; contexto de diabetes descompensado/cetoacidose é mais típico</td></tr>
+<tr><td>Asma não complicada</td><td>Sem IgE específica para Aspergillus elevada, sem bronquiectasias centrais</td></tr>
+</table>
+`,
+mapa:`
+<div class="mm">
+<div class="mm-card"><h5>Três formas</h5><ul><li>Aspergiloma: cavidade prévia</li><li>ABPA: hipersensibilidade (asma/FC)</li><li>Invasiva: neutropenia/imunossupressão</li></ul></div>
+<div class="mm-card"><h5>Aspergiloma</h5><ul><li>Massa móvel na cavidade</li><li>Risco: hemoptise</li></ul></div>
+<div class="mm-card"><h5>ABPA</h5><ul><li>IgE total muito alta + específica +</li><li>Eosinofilia, bronquiectasias centrais</li></ul></div>
+<div class="mm-card"><h5>Invasiva</h5><ul><li>Sinal do halo (precoce)</li><li>Angioinvasão → disseminação</li></ul></div>
+<div class="mm-card"><h5>Diagnóstico</h5><ul><li>Galactomanana (invasiva)</li><li>IgE/eosinófilos (ABPA)</li></ul></div>
+<div class="mm-card"><h5>Tratamento</h5><ul><li>Aspergiloma: observar/hemoptise→embolizar</li><li>ABPA: corticoide+itraconazol</li><li>Invasiva: voriconazol</li></ul></div>
+</div>
+`,
+fluxo_dx:`
+<div class="fx">
+<div class="fx-node start">Qual o contexto do hospedeiro?</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">Cavidade pulmonar prévia → TC (massa móvel, crescente de ar) → aspergiloma</div>
+<div class="fx-node">Asma/fibrose cística com piora → IgE total/específica, eosinófilos → ABPA</div>
+<div class="fx-node">Neutropenia/imunossupressão + febre refratária → galactomanana + TC (sinal do halo) → invasiva</div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Confirmar com cultura/histopatologia quando possível, sem atrasar tratamento empírico na forma invasiva</div>
+</div>
+`,
+fluxo_cond:`
+<div class="fx">
+<div class="fx-node start">Forma de aspergilose definida</div>
+<div class="fx-arrow"></div>
+<div class="fx-row">
+<div class="fx-node">Aspergiloma assintomático → observar</div>
+<div class="fx-node">Aspergiloma + hemoptise → embolização/cirurgia</div>
+<div class="fx-node">ABPA → corticoide + itraconazol</div>
+</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Invasiva: iniciar voriconazol empírico (ou isavuconazol/anfotericina B lipossomal) sem atrasar</div>
+<div class="fx-arrow"></div>
+<div class="fx-node">Monitorar níveis séricos de voriconazol; reavaliar imagem e galactomanana seriada</div>
+<div class="fx-arrow"></div>
+<div class="fx-node end">Considerar profilaxia (posaconazol) em pacientes de alto risco para episódios futuros</div>
+</div>
+`,
+vespera:`
+<div class="ac-h">Revisão de véspera — Aspergilose</div>
+<div class="ac-p"><b>Três formas, três hospedeiros:</b> aspergiloma (cavidade prévia, colonização, risco de hemoptise), ABPA (hipersensibilidade em asma/FC, sem invasão), invasiva (neutropenia/imunossupressão, angioinvasão, emergência).</div>
+<div class="ac-p"><b>Aspergiloma:</b> massa móvel na cavidade, sinal do crescente de ar; tratar hemoptise com embolização/cirurgia, não com antifúngico isolado.</div>
+<div class="ac-p"><b>ABPA:</b> asma difícil controle + IgE total muito alta + IgE/IgG específica + eosinofilia + bronquiectasias centrais → corticoide + itraconazol poupador.</div>
+<div class="ac-p"><b>Invasiva:</b> sinal do halo (precoce, vidro fosco perilesional) → sinal do crescente de ar (tardio). Febre refratária em neutropênico. Diagnóstico: galactomanana. Tratamento: voriconazol primeira linha (monitorar níveis); isavuconazol/anfotericina B lipossomal alternativas.</div>
+<div class="ac-p"><b>Profilaxia:</b> posaconazol em neutropenia prolongada de alto risco (ex.: indução de LMA, TCTH alogênico).</div>
+`,
+dicas:`
+<div class="ac-warn"><b>Erro comum 1</b><br>Tratar aspergiloma assintomático com antifúngico sistêmico de rotina. A bola fúngica é pouco vascularizada — o antifúngico tem papel limitado; a conduta em hemoptise é embolização/cirurgia.</div>
+<div class="ac-warn"><b>Erro comum 2</b><br>Buscar invasão tecidual para diagnosticar ABPA. A ABPA é uma reação de hipersensibilidade, sem invasão — o diagnóstico é pela combinação de IgE, eosinofilia e imagem.</div>
+<div class="ac-warn"><b>Erro comum 3</b><br>Esperar confirmação microbiológica definitiva antes de tratar aspergilose invasiva suspeita em neutropênico febril. O tratamento empírico deve ser iniciado prontamente dado o risco de vida.</div>
+<div class="ac-tip"><b>Dica de prova</b><br>Sinal do halo na TC de tórax em paciente neutropênico febril = pensar em aspergilose pulmonar invasiva.</div>
+`,
+checklist:[
+'Diferencio as três formas de aspergilose (aspergiloma, ABPA, invasiva) pelo contexto do hospedeiro',
+'Reconheço o aspergiloma pela imagem (massa móvel, crescente de ar) e sei que o risco principal é hemoptise',
+'Conheço os critérios diagnósticos da ABPA (IgE total/específica, eosinofilia, bronquiectasias centrais)',
+'Reconheço o sinal do halo e o sinal do crescente de ar na aspergilose invasiva e sei diferenciar seu significado',
+'Sei por que a aspergilose invasiva ocorre predominantemente em neutropênicos/imunossuprimidos graves',
+'Conheço o papel da galactomanana no diagnóstico da forma invasiva',
+'Sei que o voriconazol é a primeira escolha na forma invasiva, com necessidade de monitorar níveis séricos',
+'Conheço o tratamento específico de cada forma (observação/embolização, corticoide+itraconazol, voriconazol)',
+'Sei quando indicar profilaxia antifúngica em pacientes de alto risco',
+'Diferencio a histopatologia do Aspergillus (hifas septadas, ângulo agudo) da mucormicose (hifas não septadas, ângulo reto)',
+],
+});
+
+Object.assign(C['fungos|3'], {
+questoes:[
+{stem:'Paciente com sequela de tuberculose (cavidade apical residual) apresenta hemoptise volumosa. TC de tórax mostra massa móvel dentro da cavidade, com halo de ar entre a massa e a parede cavitária. Qual a conduta mais apropriada?',
+opts:['Antifúngico sistêmico isolado (voriconazol) como tratamento definitivo','Embolização arterial brônquica ou ressecção cirúrgica, dado o risco de hemoptise maciça','Corticoide sistêmico em altas doses','Observação clínica sem qualquer intervenção, mesmo com hemoptise volumosa'],
+correct:1,
+expl:'O achado de massa móvel em cavidade pulmonar com sinal do crescente de ar é característico de aspergiloma. Diante de hemoptise significativa, a conduta é embolização arterial brônquica ou ressecção cirúrgica — o antifúngico sistêmico tem papel limitado, pois a bola fúngica é pouco vascularizada.'},
+{stem:'Paciente com asma de difícil controle apresenta IgE total sérica de 1500 UI/mL, IgE específica para Aspergillus fumigatus positiva, eosinofilia periférica e bronquiectasias centrais à tomografia. Qual o diagnóstico mais provável e o tratamento de escolha?',
+opts:['Aspergilose invasiva; voriconazol IV imediato','Aspergiloma; embolização arterial','Aspergilose broncopulmonar alérgica (ABPA); corticoide sistêmico associado a itraconazol','Pneumonia eosinofílica idiopática; corticoide isolado, sem necessidade de antifúngico'],
+correct:2,
+expl:'A combinação de asma de difícil controle, IgE total muito elevada, IgE específica para Aspergillus positiva, eosinofilia e bronquiectasias centrais é diagnóstica de ABPA — uma reação de hipersensibilidade, não uma infecção invasiva. O tratamento de escolha é corticoide sistêmico associado a itraconazol como poupador de corticoide.'},
+{stem:'Paciente neutropênico há 10 dias (quimioterapia para leucemia mieloide aguda) mantém febre refratária a antibióticos de amplo espectro. TC de tórax mostra nódulo pulmonar com halo de vidro fosco ao redor. Qual a conduta mais apropriada?',
+opts:['Aguardar cultura de escarro definitiva antes de qualquer intervenção antifúngica','Solicitar galactomanana e iniciar voriconazol empiricamente, sem atrasar o tratamento','Iniciar apenas mais um curso de antibiótico de amplo espectro','Solicitar biópsia pulmonar aberta antes de qualquer tratamento, mesmo em paciente instável'],
+correct:1,
+expl:'O sinal do halo em paciente neutropênico febril refratário a antibióticos é altamente sugestivo de aspergilose pulmonar invasiva. Dado o risco de vida associado ao atraso terapêutico, deve-se solicitar galactomanana e iniciar voriconazol empiricamente, sem aguardar confirmação microbiológica definitiva.'},
+{stem:'Qual achado histopatológico ajuda a diferenciar Aspergillus de Mucorales (mucormicose) em uma biópsia de tecido invadido?',
+opts:['Aspergillus apresenta hifas não septadas com ângulo reto; Mucorales apresenta hifas septadas em ângulo agudo','Aspergillus apresenta hifas septadas com ramificação em ângulo agudo (~45°); Mucorales apresenta hifas não septadas com ramificação em ângulo reto (~90°)','Ambos apresentam leveduras intracelulares indistinguíveis à histopatologia','Apenas a cultura consegue diferenciar os dois gêneros, sendo a histopatologia inútil'],
+correct:1,
+expl:'O Aspergillus caracteristicamente apresenta hifas septadas com ramificação em ângulo agudo (cerca de 45°), enquanto os Mucorales (causadores da mucormicose) apresentam hifas não septadas (cenocíticas) com ramificação em ângulo reto (cerca de 90°) — uma diferenciação histopatológica clássica e cobrada em prova.'},
+],
+flashcards:[
+{front:'As três formas clínicas de aspergilose e seus hospedeiros típicos.',back:'Aspergiloma (cavidade pulmonar prévia), ABPA (asma/fibrose cística, hipersensibilidade), aspergilose invasiva (neutropenia grave/imunossupressão).',type:'basic'},
+{front:'Achado radiológico clássico do aspergiloma.',back:'Massa móvel dentro de cavidade pulmonar, com sinal do crescente de ar (halo radiotransparente entre a massa e a parede).',type:'basic'},
+{front:'Principal risco/complicação do aspergiloma.',back:'Hemoptise, que pode ser maciça, mesmo sem invasão tecidual — tratada com embolização ou cirurgia.',type:'basic'},
+{front:'Critérios diagnósticos centrais da ABPA.',back:'Asma/FC + IgE total muito elevada (>1000 UI/mL) + IgE/IgG específicas para Aspergillus + eosinofilia + bronquiectasias centrais.',type:'basic'},
+{front:'{{Sinal do halo}} na TC de tórax (vidro fosco perilesional) é achado precoce de aspergilose pulmonar invasiva por angioinvasão.',back:'Sinal do halo',type:'cloze'},
+{front:'Grupo de maior risco para aspergilose invasiva.',back:'Neutropenia grave e prolongada (quimioterapia, TCTH), corticoide em alta dose prolongado, outras imunossupressões celulares importantes.',type:'basic'},
+{front:'Melhor marcador diagnóstico na aspergilose invasiva.',back:'Galactomanana (sérica e/ou lavado broncoalveolar).',type:'basic'},
+{front:'Primeira escolha terapêutica na aspergilose invasiva.',back:'Voriconazol — necessário monitorar níveis séricos pela farmacocinética não linear e interações medicamentosas.',type:'basic'},
+{front:'Tratamento da ABPA.',back:'Corticoide sistêmico (base do tratamento) + itraconazol como poupador de corticoide.',type:'basic'},
+{front:'Profilaxia antifúngica em neutropenia prolongada de alto risco.',back:'Posaconazol, usado durante o período de maior risco (ex.: indução de LMA, TCTH alogênico).',type:'basic'},
+],
+casos:[
+{t:'Caso 1 — Reconhecendo a forma pela pergunta certa',
+stem:'Três pacientes diferentes apresentam achados relacionados a Aspergillus: (A) paciente com sarcoidose e cavidade pulmonar residual, assintomático, com massa móvel na TC; (B) paciente asmático com piora do controle, IgE muito elevada; (C) paciente neutropênico há 2 semanas com febre refratária.',
+passos:[
+{h:'1. Identificar o hospedeiro de cada caso',p:'A: cavidade prévia sem imunossupressão. B: asma com hipersensibilidade. C: neutropenia grave.'},
+{h:'2. Associar à forma correta',p:'A = aspergiloma (observar, pois assintomático). B = ABPA (corticoide + itraconazol). C = aspergilose invasiva (investigar galactomanana/TC, tratar com voriconazol).'},
+{h:'3. Lembrar a lógica central',p:'O mesmo fungo, três apresentações completamente diferentes, definidas pelo terreno do hospedeiro.'},
+{h:'Lição de prova',p:'Sempre perguntar primeiro "qual é o contexto do hospedeiro" antes de pensar na forma de aspergilose.'}]},
+],
+});
+
+try{ if(typeof route!=='undefined' && route && (route.view==='module'||route.view==='modules'||route.view==='daily'||route.view==='srs')) renderRoute(); }catch(e){}
+})();
+</script>
 <script>/* InfectoAtlas — Conteúdo Sepse (bases|1). Aditivo. */
 (function(){
 "use strict";
