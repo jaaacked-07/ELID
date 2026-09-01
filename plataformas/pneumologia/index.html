@@ -4310,7 +4310,7 @@ document.addEventListener("click",e=>{ const sp=$("#searchPop"); if(sp&&!e.targe
 .pdf-block{margin:0 0 22px}
 .pdf-mod-cat{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#c9633c;margin-bottom:4px;font-weight:700}
 .pdf-mod-title{font-size:2.3rem;color:#2d1b2e;margin:0 0 22px;border-bottom:3px solid #ffd9c4;padding-bottom:14px;font-weight:800}
-.pdf-sec-h{font-size:1.95rem;color:#c9633c;border-bottom:2px solid #e4d9cd;padding-bottom:10px;margin:44px 0 18px;font-weight:800;letter-spacing:.01em}
+.pdf-sec-h{font-size:1.4rem;color:#c9633c;border-bottom:2px solid #e4d9cd;padding-bottom:10px;margin:44px 0 18px;font-weight:800;letter-spacing:.01em}
 .pdf-sub{margin:0}
 .pdf-sub-h{font-size:1.18rem;font-weight:700;color:#c9633c;margin:4px 0 12px;padding-bottom:4px;border-bottom:1.5px solid #ffd9c4}
 .pdf-sub-h2{font-size:.94rem;color:#c9633c;margin:0 0 6px;font-weight:700}
@@ -4702,13 +4702,41 @@ function pdfFreezeAnimatedImages(area){
   return Promise.all(tasks);
 }
 
+function pdfWaitOneImage(img){
+  return new Promise(function(resolve){
+    var done=false;
+    function finish(){ if(!done){ done=true; resolve(); } }
+    var t=setTimeout(finish, 5000);
+    if(img.decode){
+      img.decode().then(function(){ clearTimeout(t); finish(); }).catch(function(){ clearTimeout(t); finish(); });
+    } else if(img.complete){
+      clearTimeout(t); finish();
+    } else {
+      img.addEventListener('load', function(){ clearTimeout(t); finish(); }, {once:true});
+      img.addEventListener('error', function(){ clearTimeout(t); finish(); }, {once:true});
+    }
+  });
+}
+function pdfWaitImages(container){
+  var imgs=container.querySelectorAll('img');
+  if(!imgs.length) return Promise.resolve();
+  var tasks=[];
+  for(var i=0;i<imgs.length;i++) tasks.push(pdfWaitOneImage(imgs[i]));
+  return Promise.all(tasks);
+}
+
 function pdfRenderPages(blocks, area, pdf, total, onProgress){
   /* Paginacao dinamica orientada por MEDICAO REAL do DOM (nao por estimativa
      previa): cada bloco (um "assunto" -- uma sub-secao de teoria, um caso
      clinico, um grupo de flashcards etc.) so entra na pagina atual se, apos
-     ser de fato inserido no DOM, a altura real acumulada ainda couber em
-     CONTENT_H_PX. Se nao couber, o bloco e removido e devolvido inteiro para
-     a proxima pagina -- nunca fica "sobrando" cortado ao meio. Um bloco
+     ser de fato inserido no DOM -- e com TODAS as suas imagens/SVGs ja
+     congelados e carregados/decodificados -- a altura real acumulada ainda
+     couber em CONTENT_H_PX. Se nao couber, o bloco e removido e devolvido
+     inteiro para a proxima pagina -- nunca fica "sobrando" cortado ao meio.
+     Esperar a imagem carregar ANTES de medir e o que evita cortar fotos e
+     diagramas ao meio: uma imagem ainda carregando reporta altura menor do
+     que a real, o bloco "cabe" na conta errada, e so cresce para o tamanho
+     verdadeiro depois que a pagina ja foi fechada e capturada. Um bloco
      unico maior que uma pagina inteira (caso raro) continua sendo dividido
      de forma segura via pdfCollectCutCandidates/pdfSliceAndAddPages, usando
      as bordas reais dos elementos internos como pontos de corte -- nunca um
@@ -4716,33 +4744,46 @@ function pdfRenderPages(blocks, area, pdf, total, onProgress){
      sobreposto porque nenhuma pagina ultrapassa CONTENT_H_PX. */
   var queue=[]; for(var i=0;i<blocks.length;i++) queue.push(i);
   var pagesAdded=0;
-  function next(){
-    if(!queue.length) return Promise.resolve();
+  function fillPage(){
     area.innerHTML='';
     area.style.width=CONTENT_W_PX+'px';
-    var wrappers=[], placed=0;
-    while(queue.length){
+    var wrappers=[];
+    function tryAdd(){
+      if(!queue.length) return Promise.resolve();
       var bi=queue[0];
-      if(placed>0 && blocks[bi].forceNewPage) break;
+      if(wrappers.length>0 && blocks[bi].forceNewPage) return Promise.resolve();
       var w=document.createElement('div');
       w.className='pdf-block'+(blocks[bi].cls?' '+blocks[bi].cls:'');
       w.innerHTML=blocks[bi].html;
       area.appendChild(w);
-      void area.offsetHeight;
-      var h=pdfDeepHeight(area);
-      if(placed>0 && h>CONTENT_H_PX){ area.removeChild(w); break; }
-      wrappers.push(w); placed++; queue.shift();
+      return pdfFreezeAnimatedImages(w).then(function(){
+        return pdfWaitImages(w);
+      }).then(function(){
+        void area.offsetHeight;
+        var h=pdfDeepHeight(area);
+        if(wrappers.length>0 && h>CONTENT_H_PX){
+          area.removeChild(w);
+          return;
+        }
+        wrappers.push(w);
+        queue.shift();
+        return tryAdd();
+      });
     }
-    var _pdfSvgs=area.querySelectorAll('svg');
-    for(var _si=0;_si<_pdfSvgs.length;_si++){ try{ _pdfSvgs[_si].pauseAnimations(); _pdfSvgs[_si].setCurrentTime(0); }catch(_e){} }
-    var cutCandidates=(wrappers.length===1)?pdfCollectCutCandidates(wrappers[0]):null;
-    var isDocFirst=(pagesAdded===0);
-    return pdfFreezeAnimatedImages(area).then(function(){
-      return window.html2canvas(area, {scale:RENDER_SCALE, useCORS:true, backgroundColor:'#faf6f0', logging:false});
-    }).then(function(canvas){
-      pagesAdded+=pdfSliceAndAddPages(pdf, canvas, cutCandidates, isDocFirst);
-      if(onProgress) onProgress(pagesAdded, total);
-      return next();
+    return tryAdd().then(function(){ return wrappers; });
+  }
+  function next(){
+    if(!queue.length) return Promise.resolve();
+    return fillPage().then(function(wrappers){
+      var _pdfSvgs=area.querySelectorAll('svg');
+      for(var _si=0;_si<_pdfSvgs.length;_si++){ try{ _pdfSvgs[_si].pauseAnimations(); _pdfSvgs[_si].setCurrentTime(0); }catch(_e){} }
+      var cutCandidates=(wrappers.length===1)?pdfCollectCutCandidates(wrappers[0]):null;
+      var isDocFirst=(pagesAdded===0);
+      return window.html2canvas(area, {scale:RENDER_SCALE, useCORS:true, backgroundColor:'#faf6f0', logging:false}).then(function(canvas){
+        pagesAdded+=pdfSliceAndAddPages(pdf, canvas, cutCandidates, isDocFirst);
+        if(onProgress) onProgress(pagesAdded, total);
+        return next();
+      });
     });
   }
   return next();
