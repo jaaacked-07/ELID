@@ -17936,30 +17936,46 @@ function pdfFreezeAnimatedImages(area){
   return Promise.all(tasks);
 }
 
-function pdfRenderPages(blocks, pages, area, pdf, onProgress){
-  var idx=0, pagesAdded=0;
+function pdfRenderPages(blocks, area, pdf, total, onProgress){
+  /* Paginacao dinamica orientada por MEDICAO REAL do DOM (nao por estimativa
+     previa): cada bloco (um "assunto" -- uma sub-secao de teoria, um caso
+     clinico, um grupo de flashcards etc.) so entra na pagina atual se, apos
+     ser de fato inserido no DOM, a altura real acumulada ainda couber em
+     CONTENT_H_PX. Se nao couber, o bloco e removido e devolvido inteiro para
+     a proxima pagina -- nunca fica "sobrando" cortado ao meio. Um bloco
+     unico maior que uma pagina inteira (caso raro) continua sendo dividido
+     de forma segura via pdfCollectCutCandidates/pdfSliceAndAddPages, usando
+     as bordas reais dos elementos internos como pontos de corte -- nunca um
+     corte cego no meio de uma linha/paragrafo. O rodape nunca fica
+     sobreposto porque nenhuma pagina ultrapassa CONTENT_H_PX. */
+  var queue=[]; for(var i=0;i<blocks.length;i++) queue.push(i);
+  var pagesAdded=0;
   function next(){
-    if(idx>=pages.length) return Promise.resolve();
-    var pageBlockIdxs=pages[idx];
+    if(!queue.length) return Promise.resolve();
     area.innerHTML='';
     area.style.width=CONTENT_W_PX+'px';
-    var wrappers=pageBlockIdxs.map(function(bi){
+    var wrappers=[], placed=0;
+    while(queue.length){
+      var bi=queue[0];
+      if(placed>0 && blocks[bi].forceNewPage) break;
       var w=document.createElement('div');
       w.className='pdf-block'+(blocks[bi].cls?' '+blocks[bi].cls:'');
       w.innerHTML=blocks[bi].html;
       area.appendChild(w);
-      return w;
-    });
-    void area.offsetHeight;
+      void area.offsetHeight;
+      var h=pdfDeepHeight(area);
+      if(placed>0 && h>CONTENT_H_PX){ area.removeChild(w); break; }
+      wrappers.push(w); placed++; queue.shift();
+    }
     var _pdfSvgs=area.querySelectorAll('svg');
     for(var _si=0;_si<_pdfSvgs.length;_si++){ try{ _pdfSvgs[_si].pauseAnimations(); _pdfSvgs[_si].setCurrentTime(0); }catch(_e){} }
-    if(onProgress) onProgress(idx+1, pages.length);
     var cutCandidates=(wrappers.length===1)?pdfCollectCutCandidates(wrappers[0]):null;
+    var isDocFirst=(pagesAdded===0);
     return pdfFreezeAnimatedImages(area).then(function(){
       return window.html2canvas(area, {scale:RENDER_SCALE, useCORS:true, backgroundColor:'#faf6f0', logging:false});
     }).then(function(canvas){
-      pagesAdded+=pdfSliceAndAddPages(pdf, canvas, cutCandidates, pagesAdded===0);
-      idx++;
+      pagesAdded+=pdfSliceAndAddPages(pdf, canvas, cutCandidates, isDocFirst);
+      if(onProgress) onProgress(pagesAdded, total);
       return next();
     });
   }
@@ -17984,9 +18000,9 @@ function pdfGenerate(blocks, filenameHint, btnEl){
   pdfLoadLibs().then(function(){ return fontsReady; }).then(function(){
     var jsPDFCtor=window.jspdf.jsPDF;
     var pdf=new jsPDFCtor({unit:'mm', format:'a4', orientation:'portrait'});
-    var pages=pdfMeasureAndPack(blocks, area);
+    var __pdfTotalEstimate=(pdfMeasureAndPack(blocks, area).length)||1;
     var subEl=document.getElementById('pdf-gen-sub');
-    return pdfRenderPages(blocks, pages, area, pdf, function(done,total){
+    return pdfRenderPages(blocks, area, pdf, __pdfTotalEstimate, function(done,total){
       if(subEl) subEl.textContent=done+' / '+total+' páginas';
     }).then(function(){
       pdfFooterEveryPage(pdf);
