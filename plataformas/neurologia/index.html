@@ -7689,6 +7689,21 @@ function pdfFreezeSvgImg(imgEl){
     var done=false;
     function finish(){ if(!done){ done=true; resolve(); } }
     try{
+      /* tamanho ALVO da imagem congelada: o espaco que a <img> JA ocupa
+         na pagina (layout real, calculado pelo CSS) -- nao o viewBox/
+         width/height declarados dentro do proprio SVG. Usar as
+         dimensoes do SVG fonte (frequentemente um viewBox quadrado tipo
+         "0 0 24 24" para um icone, ou ausente) para gerar o canvas
+         congelado produzia uma proporcao diferente da caixa onde a
+         imagem realmente aparece; o navegador entao esticava/cortava a
+         imagem final para caber, deixando-a descentralizada e cortada
+         na ponta. Ao gerar o PNG congelado com a MESMA proporcao da
+         caixa exibida, ele ocupa exatamente o mesmo espaco de antes. */
+      var dispRect=imgEl.getBoundingClientRect();
+      var w=680, h=300;
+      if(dispRect.width>1 && dispRect.height>1){
+        w=dispRect.width; h=dispRect.height;
+      }
       var src=imgEl.getAttribute('src')||'';
       var payload=null, isBase64=false;
       var mParams=/^data:image\/svg\+xml;([^,]*),([\s\S]*)$/i.exec(src);
@@ -7727,14 +7742,15 @@ function pdfFreezeSvgImg(imgEl){
           if(pv) allEls[ei].style.setProperty(animProps[pi], pv, 'important');
         }
       }
-      var w=680, h=300;
-      var vb=svgEl.getAttribute('viewBox');
-      if(vb){
-        var parts=vb.trim().split(/[\s,]+/).map(Number);
-        if(parts.length===4 && parts[2]>0 && parts[3]>0){ w=parts[2]; h=parts[3]; }
-      } else {
-        var wa=parseFloat(svgEl.getAttribute('width')), ha=parseFloat(svgEl.getAttribute('height'));
-        if(wa>0 && ha>0){ w=wa; h=ha; }
+      if(!(dispRect.width>1 && dispRect.height>1)){
+        var vb=svgEl.getAttribute('viewBox');
+        if(vb){
+          var parts=vb.trim().split(/[\s,]+/).map(Number);
+          if(parts.length===4 && parts[2]>0 && parts[3]>0){ w=parts[2]; h=parts[3]; }
+        } else {
+          var wa=parseFloat(svgEl.getAttribute('width')), ha=parseFloat(svgEl.getAttribute('height'));
+          if(wa>0 && ha>0){ w=wa; h=ha; }
+        }
       }
       var serialized=new XMLSerializer().serializeToString(svgEl);
       document.body.removeChild(holder);
@@ -7750,7 +7766,15 @@ function pdfFreezeSvgImg(imgEl){
           canvas.width=Math.max(1, Math.round(w*scale));
           canvas.height=Math.max(1, Math.round(h*scale));
           var ctx=canvas.getContext('2d');
-          ctx.drawImage(frozenImg, 0, 0, canvas.width, canvas.height);
+          /* desenha preservando a proporcao intrinseca do SVG DENTRO do
+             canvas-alvo (letterbox se necessario) em vez de esticar --
+             assim a arte nunca fica distorcida mesmo se a caixa exibida
+             tiver uma proporcao um pouco diferente da arte original. */
+          var natW=frozenImg.naturalWidth||canvas.width, natH=frozenImg.naturalHeight||canvas.height;
+          var s=Math.min(canvas.width/natW, canvas.height/natH);
+          var dw=natW*s, dh=natH*s;
+          var dx=(canvas.width-dw)/2, dy=(canvas.height-dh)/2;
+          ctx.drawImage(frozenImg, dx, dy, dw, dh);
           imgEl.src=canvas.toDataURL('image/png');
         }catch(e){}
         if(imgEl.decode){ imgEl.decode().then(finish).catch(finish); } else { finish(); }
