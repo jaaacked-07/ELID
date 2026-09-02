@@ -610,35 +610,65 @@ function pdfMeasureAndPack(blocks, area){
 }
 
 function pdfCollectCutCandidates(wrapperEl){
+  /* pontos de corte usados quando um UNICO bloco e maior que uma pagina
+     inteira (raro -- pdfRenderPages so cai aqui quando o bloco nao cabe
+     nem sozinho numa pagina vazia): preferimos cortar na borda de um
+     elemento de bloco (paragrafo, titulo, item de lista, linha de
+     tabela, figura) para nunca partir uma frase/imagem ao meio; so
+     caimos para a borda de um elemento inline (b, i, span) se nenhuma
+     borda de bloco existir na faixa permitida. */
   var top=wrapperEl.getBoundingClientRect().top;
-  var out=[];
+  var BLOCK_TAGS={P:1,DIV:1,H1:1,H2:1,H3:1,H4:1,H5:1,H6:1,UL:1,OL:1,LI:1,TABLE:1,THEAD:1,TBODY:1,TR:1,SECTION:1,ARTICLE:1,BLOCKQUOTE:1,FIGURE:1,IMG:1,SVG:1,HR:1};
+  var block=[], any=[];
   var all=wrapperEl.querySelectorAll('*');
   for(var i=0;i<all.length;i++){
     var y=all[i].getBoundingClientRect().top-top;
-    if(y>0) out.push(y);
+    if(y<=0) continue;
+    any.push(y);
+    if(BLOCK_TAGS[all[i].tagName]) block.push(y);
   }
-  out.sort(function(a,b){ return a-b; });
-  return out;
+  block.sort(function(a,b){ return a-b; });
+  any.sort(function(a,b){ return a-b; });
+  return {block:block, any:any};
 }
 
-function pdfSliceAndAddPages(pdf, canvas, cutCandidatesPx, isDocFirst){
+function pdfSliceAndAddPages(pdf, canvas, cutCandidates, isDocFirst){
+  /* fatia um canvas mais alto que uma pagina em N paginas, preferindo
+     cortar em borda de bloco (ver pdfCollectCutCandidates). Nunca deixa
+     uma fatia invadir a margem do rodape: se por algum motivo uma
+     fatia sair mais alta que a area util da pagina, ela e encolhida
+     mantendo a proporcao (nunca cortada, nunca sobrepondo o rodape). */
   var maxSlicePx=Math.floor(CONTENT_H_PX*RENDER_SCALE);
   var totalPx=canvas.height;
+  function place(sh, srcCanvas){
+    var imgData=srcCanvas.toDataURL('image/png');
+    var imgHmm=sh*(CONTENT_W_MM/canvas.width);
+    var drawW=CONTENT_W_MM, drawH=imgHmm;
+    if(drawH>CONTENT_H_MM){
+      var shrink=CONTENT_H_MM/drawH;
+      drawH=CONTENT_H_MM; drawW=CONTENT_W_MM*shrink;
+    }
+    var drawX=MARGIN_L_MM+(CONTENT_W_MM-drawW)/2;
+    return {imgData:imgData, drawX:drawX, drawW:drawW, drawH:drawH};
+  }
   if(totalPx<=maxSlicePx){
-    var imgData=canvas.toDataURL('image/png');
-    var imgHmm=totalPx*(CONTENT_W_MM/canvas.width);
+    var d0=place(totalPx, canvas);
     if(!isDocFirst) pdf.addPage();
-    pdf.addImage(imgData, 'PNG', MARGIN_L_MM, MARGIN_T_MM, CONTENT_W_MM, imgHmm, undefined, 'FAST');
+    pdf.addImage(d0.imgData, 'PNG', d0.drawX, MARGIN_T_MM, d0.drawW, d0.drawH, undefined, 'FAST');
     return 1;
   }
-  var scaled=(cutCandidatesPx||[]).map(function(v){ return v*RENDER_SCALE; }).filter(function(v){ return v>0 && v<totalPx; });
+  var blockPx=((cutCandidates&&cutCandidates.block)||[]).map(function(v){ return v*RENDER_SCALE; }).filter(function(v){ return v>0 && v<totalPx; });
+  var anyPx=((cutCandidates&&cutCandidates.any)||[]).map(function(v){ return v*RENDER_SCALE; }).filter(function(v){ return v>0 && v<totalPx; });
   var count=0, sy=0;
   while(sy<totalPx-0.5){
     var limit=Math.min(sy+maxSlicePx, totalPx);
     var cut=limit;
     if(limit<totalPx){
-      var best=-1;
-      for(var i=0;i<scaled.length;i++){ if(scaled[i]>sy+4 && scaled[i]<=limit) best=scaled[i]; }
+      var best=-1, i;
+      for(i=0;i<blockPx.length;i++){ if(blockPx[i]>sy+4 && blockPx[i]<=limit) best=blockPx[i]; }
+      if(best<=sy){
+        for(i=0;i<anyPx.length;i++){ if(anyPx[i]>sy+4 && anyPx[i]<=limit) best=anyPx[i]; }
+      }
       if(best>sy) cut=best;
     }
     var sh=Math.max(1, cut-sy);
@@ -646,10 +676,9 @@ function pdfSliceAndAddPages(pdf, canvas, cutCandidatesPx, isDocFirst){
     sliceCanvas.width=canvas.width;
     sliceCanvas.height=sh;
     sliceCanvas.getContext('2d').drawImage(canvas, 0, sy, canvas.width, sh, 0, 0, canvas.width, sh);
-    var imgData=sliceCanvas.toDataURL('image/png');
-    var imgHmm=sh*(CONTENT_W_MM/canvas.width);
+    var d=place(sh, sliceCanvas);
     if(!(isDocFirst && count===0)) pdf.addPage();
-    pdf.addImage(imgData, 'PNG', MARGIN_L_MM, MARGIN_T_MM, CONTENT_W_MM, imgHmm, undefined, 'FAST');
+    pdf.addImage(d.imgData, 'PNG', d.drawX, MARGIN_T_MM, d.drawW, d.drawH, undefined, 'FAST');
     count++;
     sy=cut;
   }
@@ -674,7 +703,31 @@ function pdfFreezeSvgImg(imgEl){
       document.body.appendChild(holder);
       var svgEl=holder.querySelector('svg');
       if(!svgEl){ document.body.removeChild(holder); return finish(); }
-      try{ svgEl.pauseAnimations(); svgEl.setCurrentTime(0); }catch(e){}
+      /* congela SMIL (<animate>/<animateMotion>) no quadro FINAL -- nao
+         no inicio: setCurrentTime(0) mostrava uma curva "se desenhando"
+         pela metade, com a parte ainda nao desenhada aparecendo preta. */
+      try{ svgEl.pauseAnimations(); svgEl.setCurrentTime(9999); }catch(e){}
+      /* congela animacoes/transicoes CSS no estado final (fill-mode
+         forwards mantem o ultimo quadro em vez de voltar ao estado
+         base) e IMPRIME o valor computado como estilo inline em cada
+         elemento -- serializar o SVG nao capta estado computado/CSS
+         animado, entao sem isso a <img> recriada a partir do texto
+         reiniciaria a animacao do zero e a captura pegaria um quadro no
+         meio do desenho (causa raiz do "congelou pela metade, resto
+         preto"). */
+      var freezeStyle=document.createElement('style');
+      freezeStyle.textContent='*,*::before,*::after{animation-delay:-999999s !important;animation-play-state:paused !important;animation-iteration-count:1 !important;animation-fill-mode:forwards !important;transition:none !important}';
+      svgEl.insertBefore(freezeStyle, svgEl.firstChild);
+      void holder.offsetHeight;
+      var animProps=['opacity','stroke-dashoffset','stroke-dasharray','transform','fill','stroke','stroke-width','stroke-opacity','fill-opacity'];
+      var allEls=svgEl.querySelectorAll('*');
+      for(var ei=0;ei<allEls.length;ei++){
+        var cs=getComputedStyle(allEls[ei]);
+        for(var pi=0;pi<animProps.length;pi++){
+          var pv=cs.getPropertyValue(animProps[pi]);
+          if(pv) allEls[ei].style.setProperty(animProps[pi], pv, 'important');
+        }
+      }
       var w=680, h=300;
       var vb=svgEl.getAttribute('viewBox');
       if(vb){
@@ -688,7 +741,9 @@ function pdfFreezeSvgImg(imgEl){
       document.body.removeChild(holder);
       var frozenImg=new Image();
       var timeoutId=setTimeout(finish, 4000);
-      frozenImg.onload=function(){
+      var drawn=false;
+      function drawAndFinish(){
+        if(drawn) return; drawn=true;
         clearTimeout(timeoutId);
         try{
           var scale=2;
@@ -700,9 +755,11 @@ function pdfFreezeSvgImg(imgEl){
           imgEl.src=canvas.toDataURL('image/png');
         }catch(e){}
         if(imgEl.decode){ imgEl.decode().then(finish).catch(finish); } else { finish(); }
-      };
+      }
+      frozenImg.onload=drawAndFinish;
       frozenImg.onerror=function(){ clearTimeout(timeoutId); finish(); };
       frozenImg.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(serialized);
+      if(frozenImg.decode){ frozenImg.decode().then(drawAndFinish, function(){}); }
     }catch(e){ finish(); }
   });
 }
