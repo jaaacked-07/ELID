@@ -4931,5 +4931,65 @@ window.pdfExportModule=function(modId, btnEl){
 })();
 </script>
 
+
+<!-- ===== ELID MOBILE (versao celular: proporcoes e conteudo) ===== -->
+<style id="elid-mobile-css">
+@media (max-width:760px){
+  html,body{overflow-x:hidden;max-width:100%}
+  .tabs,.subtabs,.tabbar,.subnav{flex-wrap:nowrap!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tabs::-webkit-scrollbar,.subtabs::-webkit-scrollbar,.tabbar::-webkit-scrollbar,.subnav::-webkit-scrollbar{display:none}
+  .tabs>*,.subtabs>*,.tabbar>*,.subnav>*{flex:0 0 auto!important;white-space:nowrap!important}
+  .prose table,.teach table,.view table,.page table,main table{display:block!important;overflow-x:auto!important;max-width:100%;-webkit-overflow-scrolling:touch}
+  .prose th,.prose td,.teach th,.teach td,.view th,.view td,.page th,.page td,main th,main td{min-width:92px}
+  img,video,canvas{max-width:100%}
+  main svg,.view svg,.page svg,.prose svg,.teach svg{max-width:100%;height:auto}
+  .elid-zoomable{cursor:zoom-in}
+  #elid-tip{position:fixed;left:14px;right:14px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:300;padding:12px 14px;border-radius:14px;background:rgba(20,10,22,.94);color:#f7e7ce;border:1px solid rgba(247,231,206,.25);font:400 13.5px/1.4 Inter,system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.35);animation:fade .3s ease both}
+}
+#elid-zoom{position:fixed;inset:0;z-index:10000;background:rgba(12,6,14,.94);display:none;flex-direction:column}
+#elid-zoom.on{display:flex}
+#elid-zoom .ez-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;color:#f7e7ce;font:500 13px Inter,system-ui,sans-serif}
+#elid-zoom .ez-close{width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,231,206,.4);background:transparent;color:#f7e7ce;font-size:22px;line-height:1;cursor:pointer}
+#elid-zoom .ez-body{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom;padding:10px}
+#elid-zoom .ez-body svg{display:block;width:max(760px,190vw);height:auto;max-width:none}
+@media (orientation:landscape){#elid-zoom .ez-body svg{width:max(760px,100vw)}}
+</style>
+<div id="elid-zoom" role="dialog" aria-label="Imagem ampliada"><div class="ez-bar"><span>Arraste para navegar · gire o celular para ver maior</span><button class="ez-close" type="button" aria-label="Fechar">&times;</button></div><div class="ez-body"></div></div>
+<script id="elid-mobile-js">
+(function(){
+  var mq=window.matchMedia('(max-width:760px)'), root=document.documentElement;
+  function close(){}
+  function isMob(){return mq.matches;}
+  /* zoom das ilustracoes */
+  var zb=document.getElementById('elid-zoom'), zbody=zb.querySelector('.ez-body');
+  function zoomClose(){zb.classList.remove('on');zbody.innerHTML='';}
+  zb.querySelector('.ez-close').addEventListener('click',zoomClose);
+  function bigSvg(svg){
+    if(window.ELID_NO_ZOOM) return false;
+    if(!svg||svg.closest('#elid-zoom,button,a,.nav-item,.tab,.subtab,.topbar,.sidebar,nav,header,[onclick]')) return false;
+    var vb=svg.viewBox&&svg.viewBox.baseVal; if(!vb||vb.width<400) return false;
+    return svg.getBoundingClientRect().width < vb.width*0.85;
+  }
+  document.addEventListener('click',function(e){
+    if(!isMob()||window.ELID_NO_ZOOM) return;
+    var svg=e.target.closest&&e.target.closest('svg'); while(svg&&svg.ownerSVGElement) svg=svg.ownerSVGElement;
+    if(!bigSvg(svg)) return;
+    if(window.getSelection&&String(window.getSelection())) return;
+    zbody.innerHTML=''; var c=svg.cloneNode(true); c.removeAttribute('width'); c.removeAttribute('height'); c.style.cssText='';
+    zbody.appendChild(c); zb.classList.add('on'); zbody.scrollLeft=0; zbody.scrollTop=0;
+  });
+  /* marca as ilustracoes ampliaveis e centraliza a aba ativa */
+  var pend=false;
+  function tidy(){pend=false; if(!isMob()) return; if(window.ELID_NO_ZOOM){document.querySelectorAll('.tabs>.active,.subtabs>.active,.tabbar>.active,.subnav>.active').length;}
+    document.querySelectorAll('main svg,.view svg,.page svg,.prose svg,.teach svg,#main svg').forEach(function(s){if(!s.ownerSVGElement&&!s.classList.contains('elid-zoomable')&&bigSvg(s))s.classList.add('elid-zoomable');});
+    tipOnce();
+    document.querySelectorAll('.tabs>.active,.subtabs>.active,.tabbar>.active,.subnav>.active').forEach(function(a){var p=a.parentElement;if(p&&p.scrollWidth>p.clientWidth){var l=a.offsetLeft-(p.clientWidth-a.offsetWidth)/2;p.scrollLeft=Math.max(0,l);}});
+  }
+  function tipOnce(){try{if(localStorage.getItem('elid_tip_zoom'))return;if(!document.querySelector('.elid-zoomable'))return;localStorage.setItem('elid_tip_zoom','1');}catch(e){return;}
+    var d=document.createElement('div');d.id='elid-tip';d.textContent='Dica: toque nas ilustrações para ampliar e ler os detalhes.';document.body.appendChild(d);d.addEventListener('click',function(){d.remove();});setTimeout(function(){d.remove();},6000);}
+  var main=document.body;
+  new MutationObserver(function(){if(!pend){pend=true;requestAnimationFrame(tidy);}}).observe(main,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>
