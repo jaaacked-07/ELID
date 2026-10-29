@@ -334,6 +334,17 @@ body.light .sidebar{background:rgba(255,255,255,.5)}
 
 .page-foot{margin-top:50px;padding-top:22px;border-top:1px solid var(--line);text-align:center}
 </style>
+
+<!-- ELID PWA (app instalavel) -->
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#2d1b2e">
+<link rel="icon" type="image/png" href="../../icons/favicon-32.png">
+<link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ELID">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../../sw.js',{scope:'../../'}).catch(function(){});});}</script>
 </head>
 <body>
 <div class="bgart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M255.00 38.00 C264.33 39.00 277.17 50.67 283.00 58.00 C288.83 65.33 290.50 73.67 290.00 82.00 C289.50 90.33 283.83 100.67 280.00 108.00 C276.17 115.33 267.33 119.33 267.00 126.00 C266.67 132.67 275.33 139.67 278.00 148.00 C280.67 156.33 281.00 167.00 283.00 176.00 C285.00 185.00 285.17 193.67 290.00 202.00 C294.83 210.33 305.67 217.67 312.00 226.00 C318.33 234.33 328.00 243.33 328.00 252.00 C328.00 260.67 318.00 269.67 312.00 278.00 C306.00 286.33 298.33 294.67 292.00 302.00 C285.67 309.33 278.50 312.33 274.00 322.00 C269.50 331.67 267.67 347.00 265.00 360.00 C262.33 373.00 260.50 387.33 258.00 400.00 C255.50 412.67 247.83 427.33 250.00 436.00 C252.17 444.67 266.17 447.67 271.00 452.00 C275.83 456.33 280.33 458.67 279.00 462.00 C277.67 465.33 271.33 471.33 263.00 472.00 C254.67 472.67 233.67 470.33 229.00 466.00 C224.33 461.67 235.17 455.33 235.00 446.00 C234.83 436.67 230.17 422.33 228.00 410.00 C225.83 397.67 223.00 385.33 222.00 372.00 C221.00 358.67 224.00 343.00 222.00 330.00 C220.00 317.00 211.33 307.00 210.00 294.00 C208.67 281.00 212.67 266.00 214.00 252.00 C215.33 238.00 216.83 222.67 218.00 210.00 C219.17 197.33 219.67 186.00 221.00 176.00 C222.33 166.00 226.67 159.67 226.00 150.00 C225.33 140.33 218.83 129.33 217.00 118.00 C215.17 106.67 213.33 93.00 215.00 82.00 C216.67 71.00 220.33 59.33 227.00 52.00 C233.67 44.67 245.67 37.00 255.00 38.00 Z"/></svg></div>

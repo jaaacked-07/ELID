@@ -1,0 +1,18 @@
+{
+  "name": "ELID — Residência Médica",
+  "short_name": "ELID",
+  "description": "Plataforma de estudos ELID para a Residência Médica",
+  "lang": "pt-BR",
+  "id": "./",
+  "start_url": "./landing-page/",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#2d1b2e",
+  "theme_color": "#2d1b2e",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

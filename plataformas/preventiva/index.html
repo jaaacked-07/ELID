@@ -575,6 +575,17 @@ textarea.notes{width:100%;min-height:200px;padding:16px;border-radius:14px;borde
   .srs-front{font-size:17px}
 }
 </style>
+
+<!-- ELID PWA (app instalavel) -->
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#2d1b2e">
+<link rel="icon" type="image/png" href="../../icons/favicon-32.png">
+<link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ELID">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../../sw.js',{scope:'../../'}).catch(function(){});});}</script>
 </head>
 <body>
 <div class="mesh"></div>

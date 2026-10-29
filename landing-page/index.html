@@ -77,6 +77,17 @@
 
     #auth-view { transition: opacity 0.4s ease, transform 0.4s ease; }
   </style>
+
+<!-- ELID PWA (app instalavel) -->
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#2d1b2e">
+<link rel="icon" type="image/png" href="../icons/favicon-32.png">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ELID">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js',{scope:'../'}).catch(function(){});});}</script>
 </head>
 <body class="h-full overflow-auto" style="background: var(--deep-plum);">
   <canvas id="bg-canvas"></canvas>
@@ -337,5 +348,29 @@
 
     lucide.createIcons();
   </script>
+
+<!-- ELID PWA: botao Instalar app -->
+<style>
+#elid-install{position:fixed;right:16px;bottom:16px;z-index:9999;display:none;align-items:center;gap:8px;padding:10px 16px;border:1px solid #b76e79;border-radius:999px;background:rgba(45,27,46,.92);color:#f7e7ce;font:500 14px Raleway,system-ui,sans-serif;letter-spacing:.02em;box-shadow:0 6px 20px rgba(0,0,0,.25);cursor:pointer;backdrop-filter:blur(6px)}
+#elid-install:hover{background:#b76e79;color:#fff}
+#elid-ios-tip{position:fixed;left:16px;right:16px;bottom:72px;z-index:9999;display:none;padding:14px 16px;border-radius:14px;background:rgba(45,27,46,.96);color:#f7e7ce;border:1px solid #b76e79;font:400 14px/1.45 Raleway,system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+</style>
+<button id="elid-install" type="button" aria-label="Instalar o ELID como aplicativo">&#8681; Instalar app</button>
+<div id="elid-ios-tip" role="dialog">Para instalar no iPhone/iPad: toque em <b>Compartilhar</b> (quadrado com seta) e depois em <b>Adicionar à Tela de Início</b>.</div>
+<script>
+(function(){
+  var btn=document.getElementById('elid-install'), tip=document.getElementById('elid-ios-tip'), ev=null;
+  var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone;
+  if(standalone) return;
+  var ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();ev=e;btn.style.display='flex';});
+  window.addEventListener('appinstalled',function(){btn.style.display='none';});
+  if(ios) btn.style.display='flex';
+  btn.addEventListener('click',function(){
+    if(ev){ev.prompt();ev.userChoice.then(function(){ev=null;btn.style.display='none';});}
+    else if(ios){tip.style.display=tip.style.display==='block'?'none':'block';}
+  });
+})();
+</script>
 </body>
 </html>
